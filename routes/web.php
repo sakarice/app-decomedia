@@ -23,6 +23,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home/mypage', 'App\Http\Controllers\MypageController@view');
 
-Route::get('/home/mypage/maketrack', 'App\Http\Controllers\MakeTrackController@index');
+Route::get('/home/mypage/createtrack', 'App\Http\Controllers\createTrackController@index');
 
-Route::post('/home/mypage/maketrack', 'App\Http\Controllers\MakeTrackController@uploadfile');
+Route::post('/home/mypage/createtrack', 'App\Http\Controllers\createTrackController@uploadfile');
+
+Route::get('/home/mypage/tracks', 'App\Http\Controllers\TracksController@view');
+
+Route::post('/home/mypage/tracks', 'App\Http\Controllers\TracksController@deleteTrack');

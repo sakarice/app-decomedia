@@ -46,7 +46,7 @@
   justify-content: center;
 }
 
-.track-create-wrapper, .track-show-wrapper {
+.track-make-wrapper, .track-show-wrapper {
   width: 50%;
   font-size: 40px;
   margin: auto 0;
@@ -56,13 +56,13 @@
   width: 50px;
   height: 50px;
   border: 70px solid;
-  border-color: yellow;
+  border-color:chartreuse;
   border-radius: 50%;
   box-shadow: 2px 2px 1px 1px #aaaaaa;
   margin-bottom: 5px;
 }
 
-.create-contents {
+.make-contents {
   text-align: center;  
 }
 
@@ -76,17 +76,30 @@
   font-family: "Yu Gothic";
 }
 
-.preview_track {
+.preview-track {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   font-family: 'Yu Mincho';
 }
 
-.preview_img {
+.preview-img {
   width: 100px;
   height: 100px;
   border: 2px #aaaaaa solid;
   border-radius: 50%;
   margin-right: 20px;
+}
+
+.track-select {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.delete-button {
+  width: 100px;
+  height: 50px;
+  font-size: 30px;
+  margin-bottom: 20px;
 }

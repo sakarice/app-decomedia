@@ -8,24 +8,35 @@
   <title>Mypage</title>
 </head>
 <body>
-  <div class="contents_wrapper">
-    <div class="header">マイページ</div><br>
-    <div class="contents">
-      <div class="profile_img_wrapper">
-        <img class="profile_img" src="{{asset('profile_img/user-solid.svg')}}" alt="">
-      </div><br>
-      <div class=profile>
-        {{$comment}}<br>
-        id:{{$login_user_record->id}}<br>
-        ユーザー名:{{$login_user_record->name}}<br>
-        mail:{{$login_user_record->email}}<br>
-      </div><br>
-      <div class="make-contents" style="text-align: center">
-        <div class="toMakeTrack">
-          <a href="mypage/maketrack" style="font-size: 40px">track作成</a>
+  <div class="profile-img-wrapper">
+    <img class="profile-img" src="{{asset('profile_img/user-solid.svg')}}" alt="">
+  </div><br>
+  <div class="page-title">マイページ</div><br>
+
+  <div class="contents-wrapper">
+    <div class="track-wrapper"> 
+      <div class="track-create-wrapper">
+        {{-- トラック作成 --}}
+        <div class="create-contents">
+          <div class="linkTo-createTrack">
+            <a href="mypage/createtrack">
+              <div class="disk"></div>
+              <p style="font-size: 50px">track作成</p>
+            </a>
+          </div>
         </div>
       </div>
-
+      {{-- 作成済みトラック一覧 --}}
+      <div class="track-show-wrapper">
+        <h3 class="preview-track-title">作成済みトラック</h3>
+        @foreach($trackUrlAndTitles as $trackUrlAndTitle)
+        <div class="preview_track">
+          <img class="preview_img" src={{$trackUrlAndTitle['url']}} alt="">
+          {{$trackUrlAndTitle['title']}}
+        </div>
+        @endforeach
+        <a href="mypage/tracks">all tracks⇒</a>
+      </div>
     </div>
   </div>
 </body>

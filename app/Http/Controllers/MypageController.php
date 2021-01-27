@@ -5,18 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Track;
+use Storage;
 
 class MypageController extends Controller
 {
-    //test用メソッドを定義
     public function view(){
 
-        // a.ビュー変数を準備
+        // トラックのタイトルと画像表示用のURLを連想配列として格納
+        // プレビューなので5トラックくらいで十分。全量はtracksページで表示。
+        $authenticated_userId = Auth::user()->id;
+        $tracks = Track::limit(5)->where('user_id', $authenticated_userId)->get();
+        $trackUrlAndTitles = array();
+        foreach($tracks as $track){
+            $trackUrlAndTitle = array(
+                'url' => Storage::disk('s3')->url($track->img_name),
+                'title' => $track->title
+            );
+
+            $trackUrlAndTitles[] = $trackUrlAndTitle;
+        }
+
         $data = [
-            'comment' => 'mypageテスト',
-            'login_user_record' => User::find(Auth::id())
+            'login_user_record' => User::find(Auth::id()),
+            'trackUrlAndTitles' => $trackUrlAndTitles
         ];
-        // b.テンプレートを呼び出す
+
         return view('mypage.view', $data);
     }
 }
