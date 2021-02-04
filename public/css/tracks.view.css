@@ -46,9 +46,8 @@
   justify-content: center;
 }
 
-.track-make-wrapper, .track-show-wrapper {
+.track-show-wrapper {
   width: 50%;
-  font-size: 40px;
   margin: auto 0;
 }
 
@@ -81,6 +80,12 @@
   align-items: center;
   margin-bottom: 20px;
   font-family: 'Yu Mincho';
+  font-size: 40px;
+}
+
+.link-to-update-track {
+  display: flex;
+  align-items: center;
 }
 
 .preview-img {
@@ -97,9 +102,46 @@
   margin-right: 20px;
 }
 
-.delete-button {
-  width: 100px;
+.button {
+  /* width: 100px; */
   height: 50px;
   font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.track_id_disp {
+  width: 50px;
+  margin: 0 20px 0px 10px;
+  color: blue;
+  opacity: 50%;
+}
+
+.selected-seq {
+  width: 50px;
+  margin: 0 20px 0px 10px;
+  color: green;
+  opacity: 50%;
+}
+
+.button-wrapper {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* width: 50%; */
+  
+}
+
+.create-room {
+  /* display: inline-block; */
+}
+
+.room-create-button , .create-room {
+  display: block;
+}
+
+.input-room-title {
+  height: 50px;
+  font-size: 40px;
   margin-bottom: 20px;
 }

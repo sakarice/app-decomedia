@@ -36,7 +36,7 @@
   justify-content: center;
 }
 
-.track-wrapper {
+.track-wrapper, .room-wrapper{
   /* background-color: grey; */
   box-shadow: 1px 1px 2px 1px grey;
   width: 70%;
@@ -76,17 +76,68 @@
   font-family: "Yu Gothic";
 }
 
-.preview_track {
+.preview-track {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
   font-family: 'Yu Mincho';
 }
 
-.preview_img {
+.preview-img {
   width: 100px;
   height: 100px;
   border: 2px #aaaaaa solid;
   border-radius: 50%;
   margin-right: 20px;
+}
+
+.preview-room {
+  position: relative;
+  text-align: center;
+  font-size: 50px;
+  margin: 30px;
+  width: 300px;
+  height: 400px;
+
+}
+
+.room-title {
+  text-align: center;
+  font-size: 50px;
+  margin: 0 0;
+  font-family: 'Yu Mincho';
+}
+
+.room-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 400px;
+}
+
+.cover-menu {
+  position: relative;
+  opacity: 0%;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  display: flex;
+}
+
+.cover-menu-link {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.del-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
 }

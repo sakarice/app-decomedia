@@ -21,21 +21,21 @@
   </div>
 
   @yield('msg')
-  {{-- {{$msg}} --}}
 
-  <form class="upload-form" method="POST" action="createtrack" enctype="multipart/form-data">
+  <form class="upload-form" method="POST" action= @yield('form-action') enctype="multipart/form-data">
     <div class="upload-wrapper">
       {{-- アップロード：ドラッグ・ドロップ --}}
       {{-- サムネイル表示 --}}
       <div id="preview_wrapper" class="preview_wrapper">
         <div id="drop-zone" class="drop-zone">
-          <div>画像or音声ファイル<br>ドラッグ&ドロップ</div>
+          {{-- <div>画像or音声ファイル<br>ドラッグ&ドロップ</div> --}}
+          @yield('inner-display')
         </div>
         <div id="sound-preview">
           <form action="" id="sound-title-form">
             <p id="sound-title">
               <i class="fas fa-music"></i><span>Trackタイトル</span>
-              <input id="sound-title-in" form="sound-title-form">
+              <input id="sound-title-in" form="sound-title-form" value= "@yield('track-title')">
               <input type="hidden" id="sound-title-in-hidden" name="sound-title-in-hidden">
             </p>
           </form>
@@ -52,7 +52,7 @@
               <i class="fas fa-image fa-2x" style="margin-right: 15px"></i>
               <span>背景画像</span>
             </div>
-            <input id="imgfile"  class="form-control" type="file" accept="image/*" name="img">
+            <input id="imgfile" class="form-control" type="file" accept="image/*" name="img">
           </div>
         </div>
   
@@ -74,9 +74,9 @@
             Track @yield('createOrUpdate')
           </button>
         </div>
+
       </div>
     </div>
-    
   </form>
 
   {{-- javascript source link --}}

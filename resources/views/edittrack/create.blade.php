@@ -4,7 +4,11 @@
   {{ asset('/css/createtrack.css')}}
 @endsection
 
-@section('createOrUpdate', 'create')
+@section('createOrUpdate', '作成')
+
+@section('form-action', 'createtrack')
+
+@section('track_id', "")
 
 @section('msg')
   {{$msg}}

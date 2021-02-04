@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Lib\EditTrack;
 use App\Models\User;
 use App\Models\Track;
 use Storage;
@@ -25,30 +26,31 @@ class CreateTrackController extends Controller
     }
 
 
-    public function uploadfile(Request $request) {
-        
-        // tracksテーブルへデータを保存
-        $tracks = new Track();
-        $tracks->user_id = Auth::user()->id;
-        $tracks->title = $request->input('sound-title-in-hidden');
-        $tracks->sound_name = $this->saveFileInS3($request, 'audio');
-        $tracks->img_name = $this->saveFileInS3($request, 'img');
+    public function createTrack(Request $request) {
 
-        $tracks->save();
+        $imgfile = $request->file('img');
+        $audiofile = $request->file('audio');
 
-        return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_name)]);
+        // ファイルのMIMEタイプを確認
+        // $mimeFront1 = EditTrack::judgeMimetypeFront($imgfile);
+        // $mimeFront2 = EditTrack::judgeMimetypeFront($audiofile);
+
+        // DBへ登録するトラック情報を取得
+        $user_id = Auth::user()->id;
+        $title = $request->input('sound-title-in-hidden');
+        $img_path = EditTrack::saveTrackInS3($imgfile);
+        $sound_path = EditTrack::saveTrackInS3($audiofile);
+
+        $trackInfo = array(
+            'user_id' => $user_id,
+            'title' => $title,
+            'img_path' => $img_path,
+            'sound_path' => $sound_path
+        );
+
+        EditTrack::saveTrackInfoInDB($trackInfo);
+
+        return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_path)]);
     }
-    
-    private function saveFileInS3($request, $fileType){
-        $file = $request->file($fileType);
-        $fileName = $file->getClientOriginalName();
-
-        // AWSのS3へファイルを保存
-        $path = Storage::disk('s3')->putFile('track/'.$fileType, $file, 'public');        
-
-        // AWSへ保存したファイル名を返す
-        return $path;
-    }
-
 
 }
