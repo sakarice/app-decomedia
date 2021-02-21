@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTracksTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateTracksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
             $table->string('title', 191);
-            $table->string('sound_path', 191);
-            $table->string('img_path', 191);
+            $table->string('thumbnail_url', 191);
+            $table->string('thumbnail_path', 191);
+            $table->string('description', 191)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateTracksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tracks');
+        Schema::dropIfExists('rooms');
     }
 }

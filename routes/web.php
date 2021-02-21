@@ -27,9 +27,9 @@ Route::get('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackControll
 
 Route::post('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackController@createTrack');
 
-Route::get('/home/mypage/tracks', 'App\Http\Controllers\TracksController@view');
+Route::get('/home/mypage/tracks', 'App\Http\Controllers\TrackController@view');
 
-Route::post('/home/mypage/tracks', 'App\Http\Controllers\TracksController@deleteTrack');
+Route::post('/home/mypage/tracks', 'App\Http\Controllers\TrackController@deleteTrack');
 
 Route::post('/home/mypage/updatetrack', 'App\Http\Controllers\UpdateTrackController@view');
 
@@ -39,3 +39,5 @@ Route::post('/home/mypage/createroom', 'App\Http\Controllers\RoomController@crea
 
 Route::post('/home/mypage/deleteroom', 'App\Http\Controllers\RoomController@deleteRoom');
 
+// テスト用（後で消すこと）
+Route::get('/home/mypage/test', 'App\Http\Controllers\RoomController@testSoundPlay');

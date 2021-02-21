@@ -13,10 +13,10 @@ class CreateRoomTrackTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_track', function (Blueprint $table) {
+        Schema::create('room_tracks', function (Blueprint $table) {
             $table->id();
-            $table->string('room_id', 191);
-            $table->string('track_id', 191);
+            $table->integer('room_id');
+            $table->integer('track_id');
             $table->integer('track_seq');
         });
     }
@@ -28,6 +28,6 @@ class CreateRoomTrackTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room_track');
+        Schema::dropIfExists('room_tracks');
     }
 }

@@ -22,5 +22,6 @@
 </div>
 @endsection
 <div class="toMypage" style="margin: 50px 0; font-size: 30px">
-    <a href="http://localhost:8000/home/mypage">マイページへ</a>
+    {{-- <a href="http://localhost:8000/home/mypage">マイページへ</a> --}}
+    <a href="home/mypage">マイページへ</a>
 </div>

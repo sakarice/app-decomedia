@@ -11,7 +11,7 @@ use App\Models\User;
 use App\Models\Track;
 // use App\Models\EditTrack;
 
-class TracksController extends Controller
+class TrackController extends Controller
 {
     public function view(){
         // トラックの情報(id,画像URL,タイトル)を連想配列でビューに渡す

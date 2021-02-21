@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Track;
 use App\Models\Room;
 use App\Models\RoomTrack;
+use Session;
 
 
 class RoomController extends Controller
@@ -35,9 +36,9 @@ class RoomController extends Controller
         $room->thumbnail_url = $thumbnail_url;
         $room->save();
         
-        $room_id = $room->id; // room_trackテーブルへ登録するroom_idを取得しておく
+        $room_id = $room->id; // room_tracksテーブルへ登録するroom_idを取得しておく
         
-        // room_trackテーブルへデータ登録
+        // room_tracksテーブルへデータ登録
         foreach($track_ids as $index => $track_id){
             $room_tracks = new RoomTrack();
             $room_tracks->room_id = $room_id;
@@ -92,9 +93,5 @@ class RoomController extends Controller
 
 
     }
-
-
-
-
 
 }
