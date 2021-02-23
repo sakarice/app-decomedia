@@ -1,0 +1,146 @@
+
+.header {
+  width: 100%;
+  text-align: center;
+  /* color: aquamarine; */
+  font-weight:bold;
+  font-size: 50px;
+  margin: 50px 0;
+}
+
+.page-title {
+  width: 100%;
+  text-align: center;
+  /* color: aquamarine; */
+  font-weight:bold;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+
+.profile-img-wrapper {
+  width: 100%;
+  text-align: right;
+  /* margin: 20px 0; */
+  /* padding: 10px 30px; */
+}
+
+.profile-img {
+  width: 70px;
+  height: 70px;
+  margin: 15px 20px;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.track-wrapper, .room-wrapper{
+  /* background-color: grey; */
+  box-shadow: 1px 1px 2px 1px grey;
+  width: 70%;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.track-create-wrapper, .track-show-wrapper {
+  width: 50%;
+  font-size: 40px;
+  margin: auto 0;
+}
+
+.disk {
+  width: 50px;
+  height: 50px;
+  border: 70px solid;
+  border-color: yellow;
+  border-radius: 50%;
+  box-shadow: 2px 2px 1px 1px #aaaaaa;
+  margin-bottom: 5px;
+}
+
+.create-contents {
+  text-align: center;  
+}
+
+.linkTo-createTrack {
+  display: inline-block;
+}
+
+.preview-track-title {
+  /* font-size: 1.5em;
+  font-weight: bold; */
+  font-family: "Yu Gothic";
+}
+
+.preview-track {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: 'Yu Mincho';
+}
+
+.preview-img {
+  width: 100px;
+  height: 100px;
+  border: 2px #aaaaaa solid;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.preview-room {
+  position: relative;
+  text-align: center;
+  font-size: 50px;
+  margin: 30px;
+  width: 300px;
+  height: 400px;
+
+}
+
+.room-title {
+  text-align: center;
+  font-size: 50px;
+  margin: 0 0;
+  font-family: 'Yu Mincho';
+}
+
+.room-thumbnail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 400px;
+}
+
+.cover-menu {
+  position: relative;
+  opacity: 0%;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  display: flex;
+}
+
+.cover-menu-link {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: aqua;
+  font-size: 50px;
+}
+
+.del-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+}

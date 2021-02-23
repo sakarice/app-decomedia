@@ -1,0 +1,147 @@
+
+.header {
+  width: 100%;
+  text-align: center;
+  /* color: aquamarine; */
+  font-weight:bold;
+  font-size: 50px;
+  margin: 50px 0;
+}
+
+.page-title {
+  width: 100%;
+  text-align: center;
+  /* color: aquamarine; */
+  font-weight:bold;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+
+.profile-img-wrapper {
+  width: 100%;
+  text-align: right;
+  /* margin: 20px 0; */
+  /* padding: 10px 30px; */
+}
+
+.profile-img {
+  width: 70px;
+  height: 70px;
+  margin: 15px 20px;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+}
+
+.track-wrapper {
+  /* background-color: grey; */
+  box-shadow: 1px 1px 2px 1px grey;
+  width: 70%;
+  margin: 0 auto;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.track-show-wrapper {
+  width: 50%;
+  margin: auto 0;
+}
+
+.disk {
+  width: 50px;
+  height: 50px;
+  border: 70px solid;
+  border-color:chartreuse;
+  border-radius: 50%;
+  box-shadow: 2px 2px 1px 1px #aaaaaa;
+  margin-bottom: 5px;
+}
+
+.make-contents {
+  text-align: center;  
+}
+
+.linkTo-createTrack {
+  display: inline-block;
+}
+
+.preview-track-title {
+  /* font-size: 1.5em;
+  font-weight: bold; */
+  font-family: "Yu Gothic";
+}
+
+.preview-track {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-family: 'Yu Mincho';
+  font-size: 40px;
+}
+
+.link-to-update-track {
+  display: flex;
+  align-items: center;
+}
+
+.preview-img {
+  width: 100px;
+  height: 100px;
+  border: 2px #aaaaaa solid;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.track-select {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.button {
+  /* width: 100px; */
+  height: 50px;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.track_id_disp {
+  width: 50px;
+  margin: 0 20px 0px 10px;
+  color: blue;
+  opacity: 50%;
+}
+
+.selected-seq {
+  width: 50px;
+  margin: 0 20px 0px 10px;
+  color: green;
+  opacity: 50%;
+}
+
+.button-wrapper {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* width: 50%; */
+  
+}
+
+.create-room {
+  /* display: inline-block; */
+}
+
+.room-create-button , .create-room {
+  display: block;
+}
+
+.input-room-title {
+  height: 50px;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
