@@ -1,62 +1,66 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+■自作アプリ「Room」の環境構築～起動手順
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+①下記リポジトリをローカルに持ってくる。(zipでダウンロードしてから解凍がおすすめ）
+https://github.com/sakarice/docker-for-app-Room
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+②ローカルに落としたフォルダに入り、「docker-compose.yml」ファイルがある階層(=一番上の階層)でターミナルを開く。
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+③下記コマンドを実行してコンテナ起動。
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+docker-compose up -d --build
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+④コンテナの状態確認のため下記コマンド実行。
+　アプリ,WEB,DBの3つのコンテナのStateがupになっていればOK。
+[コマンド]
+docker-compose ps
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[実行結果]
+          Name                         Command               State                 Ports
+------------------------------------------------------------------------------------------------------
+docker-for-app-room_app_1   docker-php-entrypoint php-fpm    Up      9000/tcp
+docker-for-app-room_db_1    docker-entrypoint.sh mysqld      Up      0.0.0.0:3314->3306/tcp, 33060/tcp
+docker-for-app-room_web_1   /docker-entrypoint.sh ngin ...   Up      0.0.0.0:10080->80/tcp
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+【補足】
+　1行目　docker-for-app-room_app_1	…アプリコンテナ(phpとcomposerインスト済み。laravelは後で追加する)
+　2行目　docker-for-app-room_db_1	…DBコンテナ(MySQLインスト済み)
+　3行目　docker-for-app-room_web_1	…WEBサーバーコンテナ(nginxインスト済み)
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+④下記リポジトリをzipでダウンロード。
+https://github.com/sakarice/app-Room-on-docker
 
-## Contributing
+⑤ダウンロードしたzipを①の手順で落としたdocker-for-app-Room\backend配下に解凍。
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+⑥backend配下のapp-Room-on-dockerフォルダをRoomにリネーム。
+⇒下記ディレクトリ構成となる。
+docker-for-app-Room
+ |--backend
+     |--Room
+         |--app
+         |--bootstrap
+         |--・・・
 
-## Code of Conduct
+⑦〇〇で渡した.envをdocker-for-app-Room\backend\Room直下に配置。
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+⑧Laravel含めたパッケージをインストールするため、ターミナルで下記コマンドを実行。(時間かかるのでしばらく放置)
+docker-compose exec app bash
+composer install
+php artisan -V
+⇒laravelの8系バージョンが表示されればOK
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+⑨下記コマンドでデータベースをミグレーション
+php artisan migrate
 
-## License
+⇒Migration table created successfully.　と表示されること。
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+⑩ブラウザで下記にアクセスし、Laravelのウェルカム画面が表示されること。
+http://127.0.0.1:10080
+
+
+
+
