@@ -1,4 +1,9 @@
 
+// プロフィール画像がクリックされたらプロフィール画面へ遷移
+$("#profile-img").on("click", function(){
+  window.location.href = "mypage/profile";
+})
+
 // ルーム画像にホバー時にメニューを表示
 $(function(){
   $(".preview-room").hover(

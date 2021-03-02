@@ -23,6 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home/mypage', 'App\Http\Controllers\MypageController@view');
 
+Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profile');
+
 Route::get('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackController@index');
 
 Route::post('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackController@createTrack');
@@ -40,3 +42,14 @@ Route::post('/home/mypage/createroom', 'App\Http\Controllers\RoomController@crea
 Route::post('/home/mypage/deleteroom', 'App\Http\Controllers\RoomController@deleteRoom');
 
 Route::post('/home/mypage/showroom', 'App\Http\Controllers\RoomController@showRoom');
+
+Route::post('/home/mypage/showroom/getTrackInfo', 'App\Http\Controllers\RoomController@getTrackInfo');
+
+Route::post('/home/mypage/showroom/updateRoom', 'App\Http\Controllers\RoomController@updateRoom');
+
+Route::post('/home/searchResult', 'App\Http\Controllers\SearchController@searchRooms');
+
+Route::post('/home/enterRoom', 'App\Http\Controllers\RoomController@enterRoom');
+
+Route::post('/home/enterRoom/getTrackInfo', 'App\Http\Controllers\RoomController@getTrackInfo');
+

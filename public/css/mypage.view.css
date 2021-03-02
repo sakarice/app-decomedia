@@ -18,14 +18,16 @@
 }
 
 
-.profile-img-wrapper {
+.header-wrapper {
   width: 100%;
-  text-align: right;
+  display: flex;
+  justify-content: space-between;
+  /* text-align: right; */
   /* margin: 20px 0; */
   /* padding: 10px 30px; */
 }
 
-.profile-img {
+#profile-img {
   width: 70px;
   height: 70px;
   margin: 15px 20px;

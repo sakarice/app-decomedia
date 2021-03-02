@@ -1,0 +1,21 @@
+#room-list-wrapper {
+  width: 80%;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.room-list {
+  position: relative;
+  list-style: none;
+  margin: 20px;
+}
+
+.room-id {
+  display: none;
+}
+
+.room-img {
+  width: 200px;
+  height: 250px;
+}

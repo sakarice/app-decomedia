@@ -13,7 +13,7 @@ class EditRoom
 {
   
   // Room情報を取得(id,title,サムネ画像のurl)
-  public static function getUserRoomInfo($limit=10){
+  public static function getMyRooms($limit=10){
       // Room情報を取得
       $authenticated_userId = Auth::user()->id;
       $rooms = Room::limit($limit)->where('user_id', $authenticated_userId)->get();
@@ -28,6 +28,11 @@ class EditRoom
       }
       
       return($roomInfos);
+  }
+
+  // 1Roomの情報を取得
+  public static function getMyRoomAndTrackInfo($room_id){
+
   }
 
 

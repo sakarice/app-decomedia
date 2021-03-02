@@ -65,7 +65,7 @@ class RoomController extends Controller
         Room::where('user_id', $user_id)->where('id', $room_id)->delete();
 
         $trackUrlAndTitles = EditTrack::getUserTrackData(5);
-        $roomInfos = EditRoom::getUserRoomInfo(3); // id,title,サムネ画像urlを取得
+        $roomInfos = EditRoom::getMyRooms(3); // id,title,サムネ画像urlを取得
         $data = [
             'login_user_record' => User::find(Auth::id()),
             'trackUrlAndTitles' => $trackUrlAndTitles,
@@ -80,29 +80,89 @@ class RoomController extends Controller
         $user_id = Auth::user()->id;
         $room_id = $_POST['room_id'];
 
-        // (※後で追加して)セキュリティ強化のため,sessionに保存したuserかつroom_idと一致するかチェック
+        // (※後で追加する)セキュリティ強化のため,sessionに保存したuserかつroom_idと一致するかチェック
 
-        // Room情報を取得 user_idとroom_idでroomのモデル取得
+        // Room情報を取得
         $room = Room::where('user_id', $user_id)->where('id', $room_id)->first();
-        // Roomモデルから、必要な情報を取得
         $room_title = $room->title;
-        $thumbnail_url = $room -> thumbnail_url;
-
-        // RoomのTrack情報を取得
-        // Track情報のモデルを取得
-        $tracks = $room->tracks;
+        $room_tracks = $room->tracks;
+        $my_tracks = Track::where('user_id', $user_id)->get();
 
         $data = [
-            'user_id'       => $user_id,
             'room_id'       => $room_id,
             'room_title'    => $room_title,
-            'thumbnail_url' => $thumbnail_url,
-            'tracks'        => $tracks
+            'room_tracks'   => $room_tracks, //roomのtrack情報をモデルごと渡す
+            'my_tracks'     => $my_tracks   // ユーザのtrack情報をモデルごと渡す
                 ];
         // Room情報とTrack情報をviewに渡す
         return view('rooms.view', $data);
+    }
 
+    // 自分のRoomを更新
+    public function updateRoom(Request $request){
+        $user_id = Auth::user()->id;
+        $room_id = $request->input('room_id');
+        $room_title = $request->input('room_title');
+        $track_ids = $request->input('track_ids');
+
+        // Roomタイトルを更新
+        Room::where('user_id', $user_id)
+            ->where('id', $room_id)
+            ->update(['title' => $room_title]);
+
+        // room_tracksテーブルから対象Roomのレコードを削除
+        RoomTrack::where('room_id', $room_id)->delete();
+
+        // room_tracksテーブルに新しいTrack情報を追加
+        foreach($track_ids as $index => $track_id){
+            $room_tracks = new RoomTrack();
+            $room_tracks->room_id = $room_id;
+            $room_tracks->track_id = $track_id;
+            $room_tracks->track_seq = $index + 1;
+            \Log::info($track_id);
+            $room_tracks->save();
+        }
+
+        return response(true);
 
     }
+
+    // ajaxで受け取ったtrack_idに紐づくトラックのURLを返す
+    public function getTrackInfo(Request $request){
+        $user_id = Auth::user()->id;
+        $track = Track::where('user_id', $user_id)
+                        ->where('id', $request->input('track_id'))
+                        ->first();
+        $img_url = $track->img_url;
+        $sound_url = $track->sound_url;
+
+        // return response($track);
+        return response()->json([
+            'img_url'=>$img_url,
+            'sound_url'=>$sound_url
+            ]);
+    }
+
+    // 誰かのRoomに入る
+    public function enterRoom(Request $request){
+        $room_id = $_POST['room_id'];
+
+        // (※後で追加する)セキュリティ強化のため,sessionに保存したuserかつroom_idと一致するかチェック
+
+        // Room情報を取得
+        $room = Room::where('id', $room_id)->first();
+        $room_title = $room->title;
+        $room_tracks = $room->tracks;
+
+        $data = [
+            'room_id'       => $room_id,
+            'room_title'    => $room_title,
+            'room_tracks'   => $room_tracks, //roomのtrack情報をモデルごと渡す
+                ];
+        // Room情報とTrack情報をviewに渡す
+        return view('rooms.enter', $data);
+    }
+
+
 
 }

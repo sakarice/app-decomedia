@@ -10,8 +10,9 @@
   <title>Mypage</title>
 </head>
 <body>
-  <div class="profile-img-wrapper">
-    <img class="profile-img" src="{{asset('profile_img/user-solid.svg')}}" alt="">
+  <div class="header-wrapper">
+    <a href="{{ asset('home') }}">ホーム画面へ</a>
+    <img id="profile-img" src="{{asset('profile_img/user-solid.svg')}}" alt="">
   </div><br>
   <div class="page-title">マイページ</div><br>
 

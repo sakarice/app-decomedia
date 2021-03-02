@@ -1,0 +1,45 @@
+#contents-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto;
+}
+
+#profile-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 30px;
+  background-color: thistle;
+}
+
+
+.wrapper {
+  margin-bottom: 10px;
+}
+
+#profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.profile-text-wrapper {
+  width: 300px;
+  min-height: 50px;
+  border-color: slategrey;
+  border: solid;
+  border-width: thin;
+  padding: 5px;
+}
+
+#link-wrapper {
+  display: flex;
+}
+
+.link {
+  margin: 5px 10px;
+}

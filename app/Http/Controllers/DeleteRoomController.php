@@ -26,7 +26,7 @@ class DeleteRoomController extends Controller
         Room::where('user_id', $user_id)->where('id', $room_id)->delete();
 
         $trackUrlAndTitles = EditTrack::getUserTrackData(5);
-        $roomInfos = EditRoom::getUserRoomInfo(3); // id,title,サムネ画像urlを取得
+        $roomInfos = EditRoom::getMyRooms(3); // id,title,サムネ画像urlを取得
         $data = [
             'login_user_record' => User::find(Auth::id()),
             'trackUrlAndTitles' => $trackUrlAndTitles,
