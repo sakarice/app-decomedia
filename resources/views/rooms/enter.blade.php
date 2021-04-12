@@ -16,6 +16,7 @@
     <div id="first-play-confirm">
       <p style="margin-bottom: 5px">再生を開始してもよろしいですか？</p>
       <p style="margin: 0 0 15px 0">よろしければ下の▶アイコンをクリックして下さい。</p>
+      <p style="margin: 0 0 15px 0">※音量にご注意下さい。</p>
       <img id="start-play-img" class="confirm-contents" src="{{ asset('icon/play_track.svg')}}" alt="">
     </div>
   </div>

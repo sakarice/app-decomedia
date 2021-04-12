@@ -22,7 +22,7 @@ class MypageController extends Controller
 
         $trackUrlAndTitles = EditTrack::getUserTrackData(5);
 
-        $roomInfos = EditRoom::getMyRooms(3); // id,title,サムネ画像urlを取得
+        $roomInfos = EditRoom::getMyRooms(6); // id,title,サムネ画像urlを取得
 
         $data = [
             'login_user_record' => User::find(Auth::id()),
@@ -40,7 +40,7 @@ class MypageController extends Controller
         $data = [
             'user' => $user
         ];
-        return view ('mypage.profile', $data);
+        return view ('profile.view', $data);
 
     }
 }

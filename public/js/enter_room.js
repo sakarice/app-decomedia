@@ -91,46 +91,4 @@ $(function(){
   })
 
 
-
-
-
-// // 再生トラック入れ替え
-//   $(".room-and-track-wrapper").on("click", ".track-title", function(){
-//     var track_id = $(this).siblings('.track-id').html();
-//     // var track_title = $(this).text();
-
-//     getTrackUrlByAjax(track_id);
-//   })
-
-
-  // // 指定したidのトラック情報をajaxで取得
-  // function getTrackUrlByAjax(track_id){
-  //   $.ajax({
-  //     headers: {
-  //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  //     },
-  //     type: 'POST',
-  //     url: location.href + '/getTrackInfo',
-  //     datatype: 'json',
-  //     data: {
-  //       'track_id': track_id,
-  //     }
-  //   }).done(function (track){
-  //     // room画像、音楽、トラック名を入れ替え 
-  //     $("#room-img").attr('src', track.img_url);
-  //     $("#track-player").children('source').attr('src', track.sound_url);
-  //     $("#play-track-title").html(track.title);
-  //     track_player.load();
-  //     // 再生可能になったら自動再生
-  //     track_player.addEventListener("loadeddata", ()=>{
-  //       track_player.play();
-  //     })
-
-  //   }).fail(function(){
-  //     alert('(ajax)track情報取得失敗');
-  //   })
-  // }
-
-
-
 })

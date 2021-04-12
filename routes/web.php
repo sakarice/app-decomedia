@@ -53,3 +53,13 @@ Route::post('/home/enterRoom', 'App\Http\Controllers\RoomController@enterRoom');
 
 Route::post('/home/enterRoom/getTrackInfo', 'App\Http\Controllers\RoomController@getTrackInfo');
 
+Route::get('/home/chat', 'App\Http\Controllers\RoomController@chat');
+
+Route::get('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@index');
+
+Route::post('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@create');
+
+// phpinfo確認用 後で消す
+Route::get('/home/phpinfo', function () {
+    return view('phpinfo');
+});

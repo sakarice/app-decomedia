@@ -163,6 +163,11 @@ class RoomController extends Controller
         return view('rooms.enter', $data);
     }
 
+    // ★チャット機能実装テスト用。
+    public function chat(){
+        return view('chat.view');
+    }
+
 
 
 }
