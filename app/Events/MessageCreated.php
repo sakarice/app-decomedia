@@ -25,7 +25,6 @@ class MessageCreated implements ShouldBroadcast
     {
         //
         $this->message = $message;
-        \Log::info($message);
     }
 
     /**

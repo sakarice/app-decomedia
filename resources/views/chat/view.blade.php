@@ -10,8 +10,9 @@
 </head>
 <body>
   <div id="app">
-    <header-component></header-component>
-    <example-component></example-component>
+    <test-parent-component></test-parent-component>
+    <test-component v-model="message"></test-component>
+    {{-- <button v-on:click="showModal()">画像を選択します</button> --}}
     <textarea v-model="message"></textarea>
     <button v-on:click="send()">送信</button>
     <div v-for="m in messages">

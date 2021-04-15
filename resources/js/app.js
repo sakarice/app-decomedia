@@ -25,6 +25,10 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('test-component', require('./components/TestComponent.vue').default);
+Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
+Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,51 +38,54 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 
 const app = new Vue({
     el : '#app',
-    data : {
-        message : 'Hello',
-        messages : []
-    },
-    
-    methods : {
-        clicked(){
-            this.counter += 1;
+        data : {
+            message : 'Hello',
+            messages : [],
+            isShowModal : false,
         },
-        send() {
-            alert('ajax start: send message');
-            const url = '/ajax/chat';
-            const params = { 
-                message: this.message 
-            };
-            axios.post(url, params)
+        
+        methods : {
+            showModal() {
+                this.isShowModal = true;
+            },
+            closeModal() {
+                this.isShowModal = false;
+            },
+            send() {
+                alert('ajax start: send message');
+                const url = '/ajax/chat';
+                const params = { 
+                    message: this.message 
+                };
+                axios.post(url, params)
+                    .then((response) => {
+                        alert('finish');
+                        // 成功したらメッセージをクリア
+                        this.message = '';
+                    });
+            },
+            getMessages() {
+                const url = '/ajax/chat';
+                axios.get(url)
                 .then((response) => {
-                    alert('finish');
-                    // 成功したらメッセージをクリア
-                    this.message = '';
-                });
+                    this.messages = response.data;
+                })
+            }
+        
         },
-        getMessages() {
-            const url = '/ajax/chat';
-            axios.get(url)
-            .then((response) => {
-                this.messages = response.data;
-            })
+    
+        created : function(){
+            console.log('created')
+            console.log(this.$el)
+        },
+        mounted(){
+            this.getMessages();
+    
+            window.Echo.channel('chat')
+                .listen('MessageCreated', (e) => {
+                    alert('retake all messages');
+                    this.getMessages(); // 全メッセージを再読込
+                });
         }
     
-    },
-
-    created : function(){
-        console.log('created')
-        console.log(this.$el)
-    },
-    mounted(){
-        this.getMessages();
-
-        window.Echo.channel('chat')
-            .listen('MessageCreated', (e) => {
-                alert('retake all messages');
-                this.getMessages(); // 全メッセージを再読込
-            });
-    }
-
-
 });
