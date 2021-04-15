@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class MessagesTableSeeder extends Seeder
+class ChatsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class MessagesTableSeeder extends Seeder
     public function run()
     {
         //
-        for($i = 1; $i <= 10; $i ++){
-            \App\Models\Message::create([
-                'user_id' => 1,
+        for($i = 1; $i <= 3; $i ++){
+            \App\Models\Chat::create([
+                'user_id' => $i,
                 'room_id' => 1,
                 'message' => $i.'番目のテキスト'
             ]);

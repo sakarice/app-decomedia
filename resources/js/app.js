@@ -83,8 +83,8 @@ const app = new Vue({
     
             window.Echo.channel('chat')
                 .listen('MessageCreated', (e) => {
-                    alert('retake all messages');
                     this.getMessages(); // 全メッセージを再読込
+                    alert('retake all messages');
                 });
         }
     

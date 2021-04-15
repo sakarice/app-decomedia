@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTracksTable extends Migration
+class CreateUserOwnBgmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTracksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tracks', function (Blueprint $table) {
+        Schema::create('user_own_bgms', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('title', 191);
-            $table->string('sound_path', 191);
-            $table->string('img_path', 191);
-            $table->string('sound_url', 191);
-            $table->string('img_url', 191);
+            $table->string('name', 191);
+            $table->string('audio_path', 191);
+            $table->string('audio_url', 191);
+            $table->string('thumbnail_path', 191);
+            $table->string('thumbnail_url', 191);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateTracksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tracks');
+        Schema::dropIfExists('user_own_bgms');
     }
 }
