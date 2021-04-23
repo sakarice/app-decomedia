@@ -15,7 +15,7 @@ class CreateUserOwnImgsTable extends Migration
     {
         Schema::create('user_own_imgs', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('owner_user_id');
             $table->string('name', 191);
             $table->string('img_path', 191);
             $table->string('img_url', 191);

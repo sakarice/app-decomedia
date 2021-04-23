@@ -15,7 +15,7 @@ class CreateUserOwnBgmsTable extends Migration
     {
         Schema::create('user_own_bgms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('owner_user_id');
             $table->string('name', 191);
             $table->string('audio_path', 191);
             $table->string('audio_url', 191);

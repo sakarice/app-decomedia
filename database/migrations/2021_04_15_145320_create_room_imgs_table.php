@@ -17,7 +17,7 @@ class CreateRoomImgsTable extends Migration
             $table->id();
             $table->integer('room_id');
             $table->integer('img_id');
-            $table->integer('user_id');
+            $table->integer('owner_user_id')->nullable();
             $table->timestamps();
         });
     }

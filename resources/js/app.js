@@ -28,6 +28,7 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 Vue.component('test-component', require('./components/TestComponent.vue').default);
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
 Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
+Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
 
 
 /**

@@ -18,7 +18,7 @@ class CreateRoomBgmsTable extends Migration
             $table->integer('room_id');
             $table->integer('audio_id');
             $table->integer('audio_order_seq');
-            $table->integer('user_id');
+            $table->integer('owner_user_id')->nullable();
             $table->timestamps();
         });
     }

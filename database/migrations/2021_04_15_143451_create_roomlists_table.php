@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoomPlaylistsTable extends Migration
+class CreateRoomlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateRoomPlaylistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_playlists', function (Blueprint $table) {
+        Schema::create('roomlists', function (Blueprint $table) {
             $table->id();
-            $table->integer('playlist_id');
-            $table->integer('room_id');
-            $table->integer('room_order_seq');
+            $table->string('name', 191);
+            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ class CreateRoomPlaylistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('room_playlists');
+        Schema::dropIfExists('roomlists');
     }
 }

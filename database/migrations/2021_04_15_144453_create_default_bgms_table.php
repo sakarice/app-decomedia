@@ -15,7 +15,7 @@ class CreateDefaultBgmsTable extends Migration
     {
         Schema::create('default_bgms', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->default(NULL);
+            $table->integer('owner_user_id')->default(NULL)->nullable();
             $table->string('name', 191);
             $table->string('audio_path', 191);
             $table->string('audio_url', 191);

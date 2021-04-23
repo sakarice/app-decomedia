@@ -15,7 +15,7 @@ class CreateDefaultImgsTable extends Migration
     {
         Schema::create('default_imgs', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->default(NULL);
+            $table->integer('owner_user_id')->default(NULL)->nullable();
             $table->string('name', 191);
             $table->string('img_path', 191);
             $table->string('img_url', 191);

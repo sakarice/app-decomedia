@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Room extends Model
+class UserOwnBgm extends Model
 {
     use HasFactory;
-
-    public function rooms(){
-        return $this->belongsToMany('App\Models\RoomList', 'room_roomlists');
-    }
-
 }
