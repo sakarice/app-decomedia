@@ -61,11 +61,16 @@ Route::post('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@create');
 
 Route::get('/home/mypage/createroom2', 'App\Http\Controllers\CreateRoom2Controller@index');
 
-Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\CreateRoom2Controller@getImgFileUrls');
+Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\CreateRoom2Controller@getUserOwnImgs');
+
+Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\CreateRoom2Controller@getDefaultImgs');
 
 Route::post('/ajax/uploadImg', 'App\Http\Controllers\CreateRoom2Controller@saveImgFile');
 
 Route::post('/ajax/deleteImg', 'App\Http\Controllers\CreateRoom2Controller@deleteImgFile');
+
+// defaultImgアップロード用 後で消す
+Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo確認用 後で消す
 Route::get('/home/phpinfo', function () {

@@ -2,9 +2,9 @@
   <transition name="right-slide">
     <div id="select-modal">
       <div class="close-icon-wrapper">
-        <i v-on:click="clickEvent()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
+        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
       </div>
-      <div id="all-wrapper">
+      <div id="area-wrapper">
         <div id="drop-zone" 
         :class="{show: isDragEnter, hidden: !(isDragEnter)}"
         @dragleave = "dragLeave"
@@ -13,23 +13,44 @@
         </div>
         <div id="contents-wrapper"
         @dragenter = "dragEnter">
-          <div id="header-icons-wrapper">
-            <div id="loading-icon"></div>
-            <label id="upload-label" for="upload-input">
+          <div id="toggle-wrapper">
+            <button id="file-category-toggle" tabindex=1 @click="changeFileCategory" :class="{isDefault: isDefault, isUpload: !(isDefault)}">
+              <div id="toggle-state-icon"></div>
+            </button>
+            <div id="category-type"><span>{{fileCategory}}</span></div>
+          </div>          
+          <div id="upload-input-wrapper">
+            <!-- <div id="loading-icon"></div> -->
+            <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
               <span>アップロード</span>
-              <input id="upload-input" style="display: none" v-on:change="selectedFile" type="file" accept="image/*" name="img">
+              <input id="upload-input" style="display: none" @change="selectedFile" type="file" accept="image/*" name="img">
             </label>
+            <div id="loading-display-wrapper" v-show="isLoading">
+              <p class="loading-message">{{loadingMessage}}</p>
+              <div id="uploading-dot" :class="{'copy-to-right': isLoading}"></div>
+            </div>
           </div>
           <ul id="img-wrapper">
-            <li class="img-list" v-for="imgFileUrl in imgFileUrls" :key="imgFileUrl.id">
+            <!-- uploads -->
+            <li v-show="!(isDefault)" class="img-list" v-for="imgFileUrl in imgFileUrls" :key="imgFileUrl.id">
               <img class="user-own-img" :src="imgFileUrl" :alt="imgFileUrl" />
-              <div class="icon-cover">
+              <div class="icon-cover" v-on:click="sendImgFileUrl">
                 <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i>
                 <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
               </div>
             </li>
+            <!-- default -->
+            <li v-show="isDefault" class="img-list" v-for="defaultImgUrl in defaultImgUrls" :key="defaultImgUrl.id">
+              <img class="user-own-img" :src="defaultImgUrl" :alt="defaultImgUrl" />
+              <div class="icon-cover" v-on:click="sendImgFileUrl">
+                <!-- <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i> -->
+                <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
+              </div>
+            </li>
+
           </ul>
+
         </div>
       </div>
     </div>
@@ -41,14 +62,24 @@ export default {
   data : () => {
     return {
       popMessage : 'メッセージです',
+      isDefault : true,
+      fileCategory : "default",
       isDragEnter : false,
       uploadFile : "",
-      imgFileUrls : []
+      isLoading : false,
+      loadingMessage : "",
+      imgFileUrls : [],
+      defaultImgUrls : []
     }
   },
   methods : {
-    resizeAction(){
-      alert('resized');
+    changeFileCategory(){
+      this.isDefault = !(this.isDefault);
+      if(this.isDefault == true){
+        this.fileCategory = "default";
+      } else {
+        this.fileCategory = "uploads";
+      }
     },
     getUserOwnImgs(){
       const url = '/ajax/getUserOwnImgs';
@@ -63,17 +94,36 @@ export default {
           alert('画像取得失敗');
         })
     },
+    getDefaultImgs(){
+      const url = '/ajax/getDefaultImgs';
+      axios.get(url)
+        .then(response => {
+          // alert(response.data.urls[0]);
+          response.data.urls.forEach(url => {            
+            this.defaultImgUrls.unshift(url);
+          });
+        })
+        .catch(error => {
+          alert('画像取得失敗');
+        })
+    },
     dragEnter: function() {
-      console.log('dragenter');
       this.isDragEnter = true;
     },
     dragLeave: function() {
-      console.log('dragleave');
       this.isDragEnter = false;
     },
     // 右上の×ボタンクリック時のイベント
-    clickEvent() {
-      this.$emit('from-child');
+    closeModal() {
+      this.$emit('close-modal');
+    },
+    sendImgFileUrl: function(event){
+      let imgUrl = event.target.previousElementSibling.getAttribute('src');
+      this.$emit('set-img-url', imgUrl);
+    },
+    startInput(event){
+      let target = document.getElementById('upload-input');
+      target.click();
     },
     // アップロードされたファイルをdataに保存する
     selectedFile: function(e) {
@@ -92,15 +142,19 @@ export default {
       const url = '/ajax/uploadImg';
       let formData = new FormData();
       formData.append('img', this.uploadFile);
+      this.loadingMessage = 'アップロード中'
+      this.isLoading = true;
       // アイコンを回転させてローディング中であることを表現
-      const loading_icon = document.getElementById('loading-icon');
-      loading_icon.classList.add('rotate');
+      // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
       axios.post(url, formData)
         .then(response => {
           this.imgFileUrls.unshift(response.data.url);
           alert(response.data.url);
           this.uploadFile = "";
-          loading_icon.classList.remove('rotate');
+          this.loadingMessage = ''
+          this.isLoading = false;
+          // loading_icon.classList.remove('rotate');
           this.dragLeave();
         })
         .catch(error => {
@@ -114,8 +168,10 @@ export default {
       const params = {
         'imgUrl' : imgUrl
       }
-      const loading_icon = document.getElementById('loading-icon');
-      loading_icon.classList.add('rotate');
+      this.loadingMessage = '削除中'
+      this.isLoading = true;
+      // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
       // alert(imgUrl);
       axios.post(url, params)
         .then(response => {
@@ -129,7 +185,11 @@ export default {
           });
           // 配列から削除
           this.imgFileUrls.splice(index,1);
-          loading_icon.classList.remove('rotate');
+          this.loadingMessage = ''
+          this.isLoading = false;
+          // loading_icon.classList.remove('rotate');
+          // Room画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+          this.$emit('img-del-notice', imgUrl);
         })
         .catch(error => {
           alert('画像削除失敗');
@@ -140,7 +200,8 @@ export default {
 
   },
   mounted() {
-    this.getUserOwnImgs()
+    this.getUserOwnImgs();
+    this.getDefaultImgs();
   }
 
 }
@@ -164,36 +225,82 @@ export default {
 
   }
 
-  #header-icons-wrapper {
-    width: 100%;
-    margin: 5px 0;
-    padding: 0 10px;
+  #toggle-wrapper {
     display: flex;
-    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  #file-category-toggle {
+    width: 50px;
+    height: 24px;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    padding: 2px 2px;
+    background-color: plum;
+  }
+  #file-category-toggle:focus {
+    box-shadow: 0 0 0 1px grey;
+  }
+
+  #category-type {
+    width: 60px;
+    margin-left: 10px;
+    color: grey;
+    display: flex;
     align-items: center;
   }
 
-  #loading-icon {
-    width: 20px; 
-    height: 20px;
-    margin-right: 10px;
-    background: linear-gradient(#05FBFF, #FF33aa);
-    border-radius: 50%;
+  .isUpload {
+    animation-name: change-toggle-left-to-right;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards; 
+  }
+  @keyframes change-toggle-left-to-right{
+    0% {
+      background-color: plum;
+      padding-left: 2px;
+    }    
+    100% {
+      background-color:paleturquoise;
+      padding-left: 28px;
+    }
+  }
+  
+  .isDefault {
+    animation-name: change-toggle-right-to-left;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+  @keyframes change-toggle-right-to-left{
+    0% {
+      background-color:paleturquoise;
+      padding-left: 28px;
+    }
+    100% {
+      background-color: plum;
+      padding-left: 2px;
+    }    
   }
 
-  .rotate {
-    animation: rotate-anime 2s linear infinite;
+  #toggle-state-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+
+    pointer-events: none;
   }
-  @keyframes rotate-anime {
-  0%  {transform: rotate(0);}
-  100%  {transform: rotate(360deg);}
-  }
+
 
   .close-icon-wrapper{
     padding: 10px;
     border-top-left-radius: 50%;
     border-bottom-left-radius: 50%;
     background-color: white;
+    box-shadow: 1px 1px 1px 1px grey;
   }
 
   #close-modal-icon {
@@ -203,11 +310,12 @@ export default {
     cursor: pointer;
   }
   
-  #all-wrapper {
+  #area-wrapper {
     position: relative;
     width: 90%;
     height: 100%;
     background-color: white;
+    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
 
     /* モーダル内の要素の配置 */
     display: flex;
@@ -245,6 +353,66 @@ export default {
 
   }
 
+
+  #upload-input-wrapper {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #loading-display-wrapper {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .loading-message {
+    font-size: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  #uploading-dot {
+    margin-left: 3px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    /* background-color: black; */
+  }
+
+  .copy-to-right {
+    animation-name: dot-copy-to-right;
+    animation-duration: 3s;
+    animation-timing-function: steps(3, start);
+    animation-iteration-count: infinite;
+  }
+  @keyframes dot-copy-to-right {
+    /* ドットを右にコピーして増やしていく(影でコピーを表現) */
+    33%   {box-shadow: 5px 0 0 0 black}
+    66%   {box-shadow: 10px 0 0 0 black}
+    100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}
+  }
+
+  #loading-icon {
+    width: 20px; 
+    height: 20px;
+    margin-right: 10px;
+    background: linear-gradient(#05FBFF, #FF33aa);
+    border-radius: 50%;
+  }
+
+  .rotate {
+    animation: rotate-anime 2s linear infinite;
+  }
+  @keyframes rotate-anime {
+    0%  {transform: rotate(0);}
+    100%  {transform: rotate(360deg);}
+  }
+
   #upload-label {
     padding: 5px 30px;
     background-color: rgba(100, 200, 250, 0.4);
@@ -254,7 +422,6 @@ export default {
   #upload-label:hover {
     cursor: pointer;
     background-color: rgba(100, 200, 250, 0.8);
-    /* opacity: 0.7; */
   }
 
   #img-wrapper {
@@ -266,8 +433,8 @@ export default {
     justify-content: space-between;
 
     width: 92%;
-    height: 85vh;
-    margin-top: 20px;
+    height: 80vh;
+    /* margin-top: 20px; */
     padding-left: 0;
     overflow-y: scroll;
   }
@@ -321,6 +488,7 @@ export default {
 
   #add-img-icon {
     color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
   }
 
 

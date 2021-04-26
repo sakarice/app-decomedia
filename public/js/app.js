@@ -1853,6 +1853,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1861,7 +1869,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       button_text: "画像選択",
-      isShowModal: false
+      isShowModal: false,
+      roomImgUrl: ""
     };
   },
   methods: {
@@ -1870,6 +1879,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeModal: function closeModal() {
       this.isShowModal = false;
+    },
+    setRoomImgUrl: function setRoomImgUrl(url) {
+      this.roomImgUrl = url;
+    },
+    judgeDelImg: function judgeDelImg(url) {
+      if (this.roomImgUrl == url) {
+        this.roomImgUrl = "";
+      }
     }
   }
 });
@@ -1991,18 +2008,50 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       popMessage: 'メッセージです',
+      isDefault: true,
+      fileCategory: "default",
       isDragEnter: false,
       uploadFile: "",
-      imgFileUrls: []
+      isLoading: false,
+      loadingMessage: "",
+      imgFileUrls: [],
+      defaultImgUrls: []
     };
   },
   methods: {
-    resizeAction: function resizeAction() {
-      alert('resized');
+    changeFileCategory: function changeFileCategory() {
+      this.isDefault = !this.isDefault;
+
+      if (this.isDefault == true) {
+        this.fileCategory = "default";
+      } else {
+        this.fileCategory = "uploads";
+      }
     },
     getUserOwnImgs: function getUserOwnImgs() {
       var _this = this;
@@ -2017,17 +2066,36 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         alert('画像取得失敗');
       });
     },
+    getDefaultImgs: function getDefaultImgs() {
+      var _this2 = this;
+
+      var url = '/ajax/getDefaultImgs';
+      axios.get(url).then(function (response) {
+        // alert(response.data.urls[0]);
+        response.data.urls.forEach(function (url) {
+          _this2.defaultImgUrls.unshift(url);
+        });
+      })["catch"](function (error) {
+        alert('画像取得失敗');
+      });
+    },
     dragEnter: function dragEnter() {
-      console.log('dragenter');
       this.isDragEnter = true;
     },
     dragLeave: function dragLeave() {
-      console.log('dragleave');
       this.isDragEnter = false;
     },
     // 右上の×ボタンクリック時のイベント
-    clickEvent: function clickEvent() {
-      this.$emit('from-child');
+    closeModal: function closeModal() {
+      this.$emit('close-modal');
+    },
+    sendImgFileUrl: function sendImgFileUrl(event) {
+      var imgUrl = event.target.previousElementSibling.getAttribute('src');
+      this.$emit('set-img-url', imgUrl);
+    },
+    startInput: function startInput(event) {
+      var target = document.getElementById('upload-input');
+      target.click();
     },
     // アップロードされたファイルをdataに保存する
     selectedFile: function selectedFile(e) {
@@ -2043,43 +2111,48 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     // ajaxで画像ファイルを送る
     uploadImg: function uploadImg() {
-      var _this2 = this;
+      var _this3 = this;
 
       var url = '/ajax/uploadImg';
       var formData = new FormData();
-      formData.append('img', this.uploadFile); // アイコンを回転させてローディング中であることを表現
+      formData.append('img', this.uploadFile);
+      this.loadingMessage = 'アップロード中';
+      this.isLoading = true; // アイコンを回転させてローディング中であることを表現
+      // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
 
-      var loading_icon = document.getElementById('loading-icon');
-      loading_icon.classList.add('rotate');
       axios.post(url, formData).then(function (response) {
-        _this2.imgFileUrls.unshift(response.data.url);
+        _this3.imgFileUrls.unshift(response.data.url);
 
         alert(response.data.url);
-        _this2.uploadFile = "";
-        loading_icon.classList.remove('rotate');
+        _this3.uploadFile = "";
+        _this3.loadingMessage = '';
+        _this3.isLoading = false; // loading_icon.classList.remove('rotate');
 
-        _this2.dragLeave();
+        _this3.dragLeave();
       })["catch"](function (error) {
         alert('アップロード失敗');
       });
     },
     // 画像ファイルを削除する
     deleteImg: function deleteImg(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = '/ajax/deleteImg';
       var imgUrl = event.target.parentNode.previousElementSibling.getAttribute('src');
       var params = {
         'imgUrl': imgUrl
       };
-      var loading_icon = document.getElementById('loading-icon');
-      loading_icon.classList.add('rotate'); // alert(imgUrl);
+      this.loadingMessage = '削除中';
+      this.isLoading = true; // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
+      // alert(imgUrl);
 
       axios.post(url, params).then(function (response) {
         alert(response.data); // 画面に即自反映するため、画像URLをdataから削除
         // 削除対象URLが入っている配列のインデックスを取得
 
-        var index = _this3.imgFileUrls.some(function (v, i) {
+        var index = _this4.imgFileUrls.some(function (v, i) {
           if (v == imgUrl) {
             return i;
           }
@@ -2088,9 +2161,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }); // 配列から削除
 
 
-        _this3.imgFileUrls.splice(index, 1);
+        _this4.imgFileUrls.splice(index, 1);
 
-        loading_icon.classList.remove('rotate');
+        _this4.loadingMessage = '';
+        _this4.isLoading = false; // loading_icon.classList.remove('rotate');
+        // Room画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+
+        _this4.$emit('img-del-notice', imgUrl);
       })["catch"](function (error) {
         alert('画像削除失敗');
       });
@@ -2098,6 +2175,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   mounted: function mounted() {
     this.getUserOwnImgs();
+    this.getDefaultImgs();
   }
 });
 
@@ -6776,7 +6854,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  /* padding :1em; */\n  background-color:aquamarine; \n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.room-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  /* padding :1em; */\n  background-color:white; \n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#room-img-frame {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 400px;\n  height: 400px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n#room-img {\n  width: 400px;\n  height: 400px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6800,7 +6878,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#header-icons-wrapper {\n  width: 100%;\n  margin: 5px 0;\n  padding: 0 10px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#all-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n  /* opacity: 0.7; */\n}\n#img-wrapper {\n  /* モーダル内の画像サムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 85vh;\n  margin-top: 20px;\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.img-list {\n  position: relative;\n  width: 49.5%;\n  height: 140px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  background-color: grey;\n}\n.img-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover {\n  z-index: 2;\n  background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#delete-img-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  margin-left: 5px;\n  margin-top: 5px;\n  color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon {\n  color: rgba(255, 255, 255, 0.7);\n}\n.user-own-img {\n  width: 100%;\n  height: 140px;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#img-wrapper {\n  /* モーダル内の画像サムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.img-list {\n  position: relative;\n  width: 49.5%;\n  height: 140px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  background-color: grey;\n}\n.img-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover {\n  z-index: 2;\n  background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#delete-img-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  margin-left: 5px;\n  margin-top: 5px;\n  color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.user-own-img {\n  width: 100%;\n  height: 140px;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44865,14 +44943,45 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "room-img",
+          attrs: { id: "room-img-frame" },
           on: {
             click: function($event) {
               return _vm.showModal()
             }
           }
         },
-        [_c("p", [_vm._v("画像を選択")])]
+        [
+          _c(
+            "p",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.roomImgUrl,
+                  expression: "!(roomImgUrl)"
+                }
+              ]
+            },
+            [_vm._v("画像を選択")]
+          ),
+          _vm._v(" "),
+          _c("img", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.roomImgUrl,
+                expression: "roomImgUrl"
+              }
+            ],
+            attrs: {
+              id: "room-img",
+              src: _vm.roomImgUrl,
+              alt: "画像が選択されていません"
+            }
+          })
+        ]
       ),
       _vm._v(" "),
       _c("img-select-component", {
@@ -44884,7 +44993,11 @@ var render = function() {
             expression: "isShowModal"
           }
         ],
-        on: { "from-child": _vm.closeModal }
+        on: {
+          "close-modal": _vm.closeModal,
+          "set-img-url": _vm.setRoomImgUrl,
+          "img-del-notice": _vm.judgeDelImg
+        }
       })
     ],
     1
@@ -45007,13 +45120,13 @@ var render = function() {
           attrs: { id: "close-modal-icon" },
           on: {
             click: function($event) {
-              return _vm.clickEvent()
+              return _vm.closeModal()
             }
           }
         })
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "all-wrapper" } }, [
+      _c("div", { attrs: { id: "area-wrapper" } }, [
         _c("div", {
           class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
           attrs: { id: "drop-zone" },
@@ -45036,12 +45149,51 @@ var render = function() {
             on: { dragenter: _vm.dragEnter }
           },
           [
-            _c("div", { attrs: { id: "header-icons-wrapper" } }, [
-              _c("div", { attrs: { id: "loading-icon" } }),
+            _c("div", { attrs: { id: "toggle-wrapper" } }, [
+              _c(
+                "button",
+                {
+                  class: { isDefault: _vm.isDefault, isUpload: !_vm.isDefault },
+                  attrs: { id: "file-category-toggle", tabindex: "1" },
+                  on: { click: _vm.changeFileCategory }
+                },
+                [_c("div", { attrs: { id: "toggle-state-icon" } })]
+              ),
               _vm._v(" "),
+              _c("div", { attrs: { id: "category-type" } }, [
+                _c("span", [_vm._v(_vm._s(_vm.fileCategory))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "upload-input-wrapper" } }, [
               _c(
                 "label",
-                { attrs: { id: "upload-label", for: "upload-input" } },
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.isDefault,
+                      expression: "!(isDefault)"
+                    }
+                  ],
+                  attrs: {
+                    id: "upload-label",
+                    for: "upload-input",
+                    tabindex: "2"
+                  },
+                  on: {
+                    keydown: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.startInput($event)
+                    }
+                  }
+                },
                 [
                   _c("i", {
                     staticClass: "fas fa-upload",
@@ -45061,38 +45213,121 @@ var render = function() {
                     on: { change: _vm.selectedFile }
                   })
                 ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isLoading,
+                      expression: "isLoading"
+                    }
+                  ],
+                  attrs: { id: "loading-display-wrapper" }
+                },
+                [
+                  _c("p", { staticClass: "loading-message" }, [
+                    _vm._v(_vm._s(_vm.loadingMessage))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    class: { "copy-to-right": _vm.isLoading },
+                    attrs: { id: "uploading-dot" }
+                  })
+                ]
               )
             ]),
             _vm._v(" "),
             _c(
               "ul",
               { attrs: { id: "img-wrapper" } },
-              _vm._l(_vm.imgFileUrls, function(imgFileUrl) {
-                return _c(
-                  "li",
-                  { key: imgFileUrl.id, staticClass: "img-list" },
-                  [
-                    _c("img", {
-                      staticClass: "user-own-img",
-                      attrs: { src: imgFileUrl, alt: imgFileUrl }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "icon-cover" }, [
-                      _c("i", {
-                        staticClass: "fas fa-times fa-2x",
-                        attrs: { id: "delete-img-icon" },
-                        on: { click: _vm.deleteImg }
+              [
+                _vm._l(_vm.imgFileUrls, function(imgFileUrl) {
+                  return _c(
+                    "li",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isDefault,
+                          expression: "!(isDefault)"
+                        }
+                      ],
+                      key: imgFileUrl.id,
+                      staticClass: "img-list"
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-own-img",
+                        attrs: { src: imgFileUrl, alt: imgFileUrl }
                       }),
                       _vm._v(" "),
-                      _c("i", {
-                        staticClass: "fas fa-plus fa-2x",
-                        attrs: { id: "add-img-icon" }
-                      })
-                    ])
-                  ]
-                )
-              }),
-              0
+                      _c(
+                        "div",
+                        {
+                          staticClass: "icon-cover",
+                          on: { click: _vm.sendImgFileUrl }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-times fa-2x",
+                            attrs: { id: "delete-img-icon" },
+                            on: { click: _vm.deleteImg }
+                          }),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-2x",
+                            attrs: { id: "add-img-icon" }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.defaultImgUrls, function(defaultImgUrl) {
+                  return _c(
+                    "li",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isDefault,
+                          expression: "isDefault"
+                        }
+                      ],
+                      key: defaultImgUrl.id,
+                      staticClass: "img-list"
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-own-img",
+                        attrs: { src: defaultImgUrl, alt: defaultImgUrl }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "icon-cover",
+                          on: { click: _vm.sendImgFileUrl }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-2x",
+                            attrs: { id: "add-img-icon" }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
             )
           ]
         )

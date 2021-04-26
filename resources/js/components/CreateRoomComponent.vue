@@ -1,7 +1,15 @@
 <template>
   <div id="field" v-on:click.self="closeModal()">
-    <div class="room-img" v-on:click="showModal()"><p>画像を選択</p> </div>
-    <img-select-component v-show="isShowModal" v-on:from-child="closeModal"></img-select-component>
+    <div id="room-img-frame" v-on:click="showModal()">
+      <p v-show="!(roomImgUrl)">画像を選択</p>
+      <img id="room-img" :src="roomImgUrl" v-show="roomImgUrl" alt="画像が選択されていません">
+    </div>
+    <img-select-component 
+    v-show="isShowModal" 
+    v-on:close-modal="closeModal" 
+    v-on:set-img-url="setRoomImgUrl"
+    v-on:img-del-notice="judgeDelImg">
+    </img-select-component>
   </div>
 </template>
 
@@ -14,7 +22,8 @@ export default {
   data : () => {
     return {
       button_text : "画像選択",
-      isShowModal : false
+      isShowModal : false,
+      roomImgUrl : ""
     }
   },
   methods : {
@@ -23,6 +32,14 @@ export default {
     },
     closeModal() {
       this.isShowModal = false;
+    },
+    setRoomImgUrl(url) {
+      this.roomImgUrl = url;
+    },
+    judgeDelImg(url) {
+      if(this.roomImgUrl == url){
+        this.roomImgUrl = "";
+      }
     }
   }
 
@@ -38,7 +55,7 @@ export default {
     width: 100%;
     height: 100%;
     /* padding :1em; */
-    background-color:aquamarine; 
+    background-color:white; 
 
     /* モーダル内の要素の配置 */
     display: flex;
@@ -46,15 +63,20 @@ export default {
     justify-content: center;
   }
 
-  .room-img {
+  #room-img-frame {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 350px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     border: 2px;
     border-style: dotted;
     border-color: cadetblue;
+  }
+
+  #room-img {
+    width: 400px;
+    height: 400px;
   }
 
 </style>

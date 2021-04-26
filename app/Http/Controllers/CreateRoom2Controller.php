@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
+use App\Models\DefaultImg;
+use App\Models\DefaultBgm;
+
 
 use Storage;
 
@@ -30,7 +33,7 @@ class CreateRoom2Controller extends Controller
     }
 
 
-    public function getImgFileUrls(){
+    public function getUserOwnImgs(){
         $owner_user_id = Auth::user()->id;
         $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
         $img_file_urls = array();
@@ -42,6 +45,19 @@ class CreateRoom2Controller extends Controller
         return ['urls' => $img_file_urls];
 
     }
+
+    public function getDefaultImgs(){
+        $owner_user_id = Auth::user()->id;
+        $default_imgs = DefaultImg::get();
+        $img_file_urls = array();
+        
+        foreach($default_imgs as $default_img){
+            $img_file_urls[] = $default_img->img_url;
+        };
+
+        return ['urls' => $img_file_urls];
+    }
+
 
 
     public function saveImgFile(Request $request) {
@@ -57,10 +73,28 @@ class CreateRoom2Controller extends Controller
             'img_path' => $imgfile_save_path,
             'img_url' => $imgfile_save_url
         );
-        saveFile::saveUserOwnImgDataInDB($fileData);
+        saveFile::saveImgDataInDB($fileData);
 
         return ['url' => $imgfile_save_url];
     }
+
+    public function saveDBTest() {
+        $user_id = NULL;
+        $imgfile_name = 'rail.jpg';
+        $imgfile_save_path = 'img/room/rail.jpg';
+        $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
+
+        $fileData = array (
+            'owner_user_id' => $user_id,
+            'name' => $imgfile_name,
+            'img_path' => $imgfile_save_path,
+            'img_url' => $imgfile_save_url
+        );
+        saveFile::saveImgDataInDB($fileData);
+
+        return ['url' => $imgfile_save_url];
+    }
+
 
 
     public function deleteImgFile(Request $request){
