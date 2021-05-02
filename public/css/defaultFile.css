@@ -1,0 +1,31 @@
+.upload-wrapper {
+  display: flex;
+  margin-bottom: 50px;
+}
+
+.img-upload-wrapper,
+.audio-upload-wrapper {
+  width: 50%;
+}
+
+.img-upload-wrapper {
+  background-color: aquamarine;
+}
+.audio-upload-wrapper {
+  background-color: bisque;
+}
+
+.img-file-upload-wrapper,
+.audio-file-upload-wrapper,
+.audio-thumbnail-upload-wrapper {
+  margin-bottom: 50px;
+  margin-left: 20px;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+
+.button-wrapper {
+  text-align: center;
+}
