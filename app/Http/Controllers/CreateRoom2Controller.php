@@ -67,13 +67,13 @@ class CreateRoom2Controller extends Controller
         $imgfile_save_path = saveFile::saveFileInS3($user_id, $imgfile);
         $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
 
-        $fileData = array (
+        $fileDatas = array (
             'owner_user_id' => $user_id,
             'name' => $imgfile_name,
             'img_path' => $imgfile_save_path,
             'img_url' => $imgfile_save_url
         );
-        saveFile::saveImgDataInDB($fileData);
+        saveFile::saveImgDataInDB($fileDatas);
 
         return ['url' => $imgfile_save_url];
     }
@@ -84,13 +84,13 @@ class CreateRoom2Controller extends Controller
         $imgfile_save_path = 'img/room/rail.jpg';
         $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
 
-        $fileData = array (
+        $fileDatas = array (
             'owner_user_id' => $user_id,
             'name' => $imgfile_name,
             'img_path' => $imgfile_save_path,
             'img_url' => $imgfile_save_url
         );
-        saveFile::saveImgDataInDB($fileData);
+        saveFile::saveImgDataInDB($fileDatas);
 
         return ['url' => $imgfile_save_url];
     }

@@ -12,7 +12,7 @@ use App\Models\DefaultBgm;
 use App\Models\Room;
 use Storage;
 
-class saveFile
+class SaveFile
 {
 
   public static function saveFileInS3($user_id, $file){
@@ -32,34 +32,71 @@ class saveFile
   }
 
 
-  public static function saveDefaultImgFileInS3($file){
-    $directry = "img/room";
-    // S3へファイル保存 & DBへ登録する保存先パスを取得
+  public static function saveDefaultFileInS3($req, $tag){
+    $directry = "default/room/";
+    // ファイルの内容に応じた保存先ディレクトリを指定
+    switch($tag){
+      case 'img':
+        $directry .= "img";
+        break;
+      case 'audio':
+        $directry .= "audio/audio_file";
+        break;
+        case 'audio-thumbnail':
+        $directry .= "/audio/thumbnail";
+        break;
+    }
+    
+    // S3へファイル保存 & 保存先パスを返す
+    $file = $req->file($tag);
     $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
     return $filePath;
 
   }
 
 
-  public static function saveImgDataInDB($fileData){
-    $owner_user_id = $fileData['owner_user_id'];
-    $targetModel;
+  // 画像ファイルの情報をDBに保存
+  public static function saveImgDataInDB($fileDatas){
+    $owner_user_id = $fileDatas['owner_user_id'];
 
-    // user_idに応じて保存先DBを振り分け
+    // 保存先DBを振り分け
+    $targetModel;
     if($owner_user_id == NULL){
-      $targetModel = new DefaultImg();
+        $targetModel = new DefaultImg();
     } else {
-      $targetModel = new UserOwnImg();
+        $targetModel = new UserOwnImg();
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = $fileData['name'];
-    $targetModel->img_path = $fileData['img_path'];
-    $targetModel->img_url = $fileData['img_url'];
+    $targetModel->name = $fileDatas['name'];
+    $targetModel->img_path = $fileDatas['path'];
+    $targetModel->img_url = $fileDatas['url'];
 
     $targetModel->save();
   }
 
+  // オーディオファイルの情報をDBに保存
+  // (サムネイルの情報も保存するので、カラムが画像の保存より多い)
+  public static function saveAudioDataInDB($fileDatas){
+    $owner_user_id = $fileDatas['owner_user_id'];
+
+    // 保存先DBを振り分け
+    $targetModel;
+    if($owner_user_id == NULL){
+        $targetModel = new DefaultBgm();
+    } else {
+        $targetModel = new UserOwnBgm();
+    }
+
+    $targetModel->owner_user_id = $owner_user_id;
+    $targetModel->name = $fileDatas['name'];
+    $targetModel->audio_path = $fileDatas['path'];
+    $targetModel->audio_url = $fileDatas['url'];
+    $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];
+    $targetModel->thumbnail_url = $fileDatas['thumbnail_url'];
+
+    $targetModel->save();
+  }
 
           
 

@@ -70,6 +70,10 @@ Route::post('/ajax/uploadImg', 'App\Http\Controllers\CreateRoom2Controller@saveI
 Route::post('/ajax/deleteImg', 'App\Http\Controllers\CreateRoom2Controller@deleteImgFile');
 
 // defaultImgアップロード用 後で消す
+Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');
+
+Route::post('/home/submit', 'App\Http\Controllers\Functions@uploadFile');
+
 Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo確認用 後で消す
