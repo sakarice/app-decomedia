@@ -67,12 +67,24 @@ Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\CreateRoom2Controller@g
 
 Route::post('/ajax/uploadImg', 'App\Http\Controllers\CreateRoom2Controller@saveImgFile');
 
+Route::post('/ajax/uploadAudio', 'App\Http\Controllers\CreateRoom2Controller@saveAudioFile');
+
 Route::post('/ajax/deleteImg', 'App\Http\Controllers\CreateRoom2Controller@deleteImgFile');
+
+Route::post('/ajax/deleteAudio', 'App\Http\Controllers\CreateRoom2Controller@deleteAudio');
+
+Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\CreateRoom2Controller@getUserOwnAudioThumbnails');
+
+Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\CreateRoom2Controller@getDefaultAudioThumbnails');
+
+Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\CreateRoom2Controller@getDefaultAudios');
+
+Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\CreateRoom2Controller@getUserOwnAudios');
 
 // defaultImgアップロード用 後で消す
 Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');
 
-Route::post('/home/submit', 'App\Http\Controllers\Functions@uploadFile');
+Route::post('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@uploadFile');
 
 Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 

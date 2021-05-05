@@ -1834,6 +1834,244 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      popMessage: 'メッセージです',
+      isDefault: true,
+      fileCategory: "default",
+      isDragEnter: false,
+      uploadFile: "",
+      isLoading: false,
+      loadingMessage: "",
+      userOwnAudios: [],
+      // thumbnail_url, audio_name
+      defaultAudios: [],
+      userOwnAudioThumbnailUrls: [],
+      defaultAudioThumbnailUrls: []
+    };
+  },
+  methods: {
+    changeFileCategory: function changeFileCategory() {
+      this.isDefault = !this.isDefault;
+
+      if (this.isDefault == true) {
+        this.fileCategory = "default";
+      } else {
+        this.fileCategory = "uploads";
+      }
+    },
+    getUserOwnAudios: function getUserOwnAudios() {
+      var _this = this;
+
+      var url = '/ajax/getUserOwnAudios';
+      axios.get(url).then(function (response) {
+        // alert(response.data.urls[0]);
+        response.data.audios.forEach(function (audio) {
+          _this.userOwnAudios.unshift(audio);
+        });
+      })["catch"](function (error) {
+        alert('オーディオサムネイル取得失敗');
+      });
+    },
+    getDefaultAudios: function getDefaultAudios() {
+      var _this2 = this;
+
+      var url = '/ajax/getDefaultAudios';
+      axios.get(url).then(function (response) {
+        // alert(response.data.urls[0]);
+        response.data.audios.forEach(function (audio) {
+          _this2.defaultAudios.unshift(audio);
+        });
+      })["catch"](function (error) {
+        alert('オーディオサムネイル取得失敗');
+      });
+    },
+    dragEnter: function dragEnter() {
+      this.isDragEnter = true;
+    },
+    dragLeave: function dragLeave() {
+      this.isDragEnter = false;
+    },
+    // 右上の×ボタンクリック時のイベント
+    closeModal: function closeModal() {
+      this.$emit('close-modal');
+    },
+    sendUserOwnAudioThumbnailUrl: function sendUserOwnAudioThumbnailUrl(event) {
+      var imgUrl = event.target.previousElementSibling.getAttribute('src');
+      this.$emit('set-audio-thumbnail-url', imgUrl);
+    },
+    startInput: function startInput(event) {
+      var target = document.getElementById('upload-input');
+      target.click();
+    },
+    // アップロードされたファイルをdataに保存する
+    selectedFile: function selectedFile(e) {
+      e.preventDefault();
+      var files = e.target.files;
+      this.uploadFile = files[0];
+      this.uploadAudio();
+    },
+    dropFile: function dropFile() {
+      this.uploadFile = _toConsumableArray(event.dataTransfer.files)[0];
+      this.uploadAudio();
+      this.isDragEnter = false;
+    },
+    // ajaxでオーディオファイルを送る
+    uploadAudio: function uploadAudio() {
+      var _this3 = this;
+
+      var url = '/ajax/uploadAudio';
+      var formData = new FormData();
+      formData.append('audio', this.uploadFile);
+      this.loadingMessage = 'アップロード中';
+      this.isLoading = true; // アイコンを回転させてローディング中であることを表現
+      // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
+
+      axios.post(url, formData).then(function (response) {
+        _this3.userOwnAudios.unshift(response.data.audios); // alert(this.userOwnAudios['audio_name']);
+
+
+        _this3.uploadFile = "";
+        _this3.loadingMessage = '';
+        _this3.isLoading = false; // loading_icon.classList.remove('rotate');
+
+        _this3.dragLeave();
+      })["catch"](function (error) {
+        alert('アップロード失敗');
+      });
+    },
+    // オーディオファイルを削除する
+    deleteaudio: function deleteaudio(event) {
+      var _this4 = this;
+
+      var url = '/ajax/deleteAudio';
+      var audioUrl = event.target.previousElementSibling.getAttribute('id');
+      var params = {
+        'audioUrl': audioUrl
+      };
+      this.loadingMessage = '削除中';
+      this.isLoading = true; // const loading_icon = document.getElementById('loading-icon');
+      // loading_icon.classList.add('rotate');
+      // alert(audioUrl);
+
+      axios.post(url, params).then(function (response) {
+        alert(response.data); // 画面に即自反映するため、オーディオURLをdataから削除
+        // 削除対象URLが入っている配列のインデックスを取得
+
+        var index = _this4.userOwnAudios.some(function (v, i) {
+          if (v['audio_url'] == audioUrl) {
+            return i;
+          }
+
+          ;
+        }); // 配列から削除
+
+
+        _this4.userOwnAudios.splice(index, 1);
+
+        _this4.loadingMessage = '';
+        _this4.isLoading = false; // loading_icon.classList.remove('rotate');
+        // Roomオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
+        // this.$emit('audio-thumbnail-del-notice', audioUrl);
+      })["catch"](function (error) {
+        alert('オーディオ削除失敗');
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getUserOwnAudios();
+    this.getDefaultAudios();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js& ***!
@@ -1846,6 +2084,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue");
+/* harmony import */ var _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1862,23 +2120,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ImgSelect: _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    ImgSelect: _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    AudioSelect: _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
     return {
       button_text: "画像選択",
-      isShowModal: false,
-      roomImgUrl: ""
+      isShowImg: false,
+      isShowAudio: false,
+      roomImgUrl: "",
+      roomAudioUrls: [],
+      roomAudioThumbnailUrls: []
     };
   },
   methods: {
-    showModal: function showModal() {
-      this.isShowModal = true;
+    showImgModal: function showImgModal() {
+      this.isShowAudio = false;
+      this.isShowImg = true;
+    },
+    showAudioModal: function showAudioModal() {
+      this.isShowImg = false;
+      this.isShowAudio = true;
     },
     closeModal: function closeModal() {
-      this.isShowModal = false;
+      this.isShowImg = false;
+      this.isShowAudio = false;
     },
     setRoomImgUrl: function setRoomImgUrl(url) {
       this.roomImgUrl = url;
@@ -1886,6 +2155,12 @@ __webpack_require__.r(__webpack_exports__);
     judgeDelImg: function judgeDelImg(url) {
       if (this.roomImgUrl == url) {
         this.roomImgUrl = "";
+      }
+    },
+    judgeDelAudio: function judgeDelAudio(url) {
+      if (this.roomAudioUrl == url) {
+        this.roomAudioUrl = "";
+        this.roomAudioThumbnailUrl = "";
       }
     }
   }
@@ -2298,6 +2573,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue").default);
 Vue.component('test-component', __webpack_require__(/*! ./components/TestComponent.vue */ "./resources/js/components/TestComponent.vue").default);
 Vue.component('img-select-component', __webpack_require__(/*! ./components/ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue").default);
+Vue.component('audio-select-component', __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue").default);
 Vue.component('test-parent-component', __webpack_require__(/*! ./components/TestParentComponent.vue */ "./resources/js/components/TestParentComponent.vue").default);
 Vue.component('create-room-component', __webpack_require__(/*! ./components/CreateRoomComponent.vue */ "./resources/js/components/CreateRoomComponent.vue").default);
 /**
@@ -6837,6 +7113,30 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#audio-thumbnail-wrapper {\n  /* モーダル内のオーディオサムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.audio-list {\n  position: relative;\n  width: 100%;\n  height: 30px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  /* background-color: grey; */\n\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.audio-info {\n  position: absolute;\n  top: 0;\n  left: 12px;\n  z-index: -1;\n  color: rgba(255, 0, 0, 0);\n}\n.delete-audio {\n  position: absolute;\n  top: 0;\n  right: 0;\n  margin-right: 5px;\n  color: rgba(255, 0, 0, 0);\n  z-index: -1;\n}\n.audio-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio {\n  z-index: 2;\n  color: rgba(255, 0, 0, 0.8);\n}\n.audio-list:hover .audio-info {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail {\n  z-index: -1;\n  opacity: 0.3;\n}\n.audio_name {\n  margin-left: 7px;\n  white-space: nowrap;\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#add-audio-thumbnail-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.audio-thumbnail {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -6854,7 +7154,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n  /* padding :1em; */\n  background-color:white; \n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#room-img-frame {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 400px;\n  height: 400px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n#room-img {\n  width: 400px;\n  height: 400px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n}\n.audio-wrapper {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 1px dashed;\n\n  margin: 20px 10px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44012,6 +44312,36 @@ runtime.setup(pusher_Pusher);
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AudioSelectComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -44411,6 +44741,47 @@ module.exports = function (list, options) {
 
 /***/ }),
 
+/***/ "./resources/js/components/AudioSelectComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/AudioSelectComponent.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AudioSelectComponent.vue?vue&type=template&id=187987d4& */ "./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4&");
+/* harmony import */ var _AudioSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AudioSelectComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AudioSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AudioSelectComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _AudioSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__.render,
+  _AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AudioSelectComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateRoomComponent.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/CreateRoomComponent.vue ***!
@@ -44656,6 +45027,22 @@ component.options.__file = "resources/js/components/TestParentComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AudioSelectComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js& ***!
@@ -44756,6 +45143,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AudioSelectComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css&":
 /*!******************************************************************************************!*\
   !*** ./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -44804,6 +45204,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TestParentComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TestParentComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestParentComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AudioSelectComponent_vue_vue_type_template_id_187987d4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./AudioSelectComponent.vue?vue&type=template&id=187987d4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4&");
 
 
 /***/ }),
@@ -44910,6 +45327,270 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/AudioSelectComponent.vue?vue&type=template&id=187987d4& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "right-slide" } }, [
+    _c("div", { attrs: { id: "select-modal" } }, [
+      _c("div", { staticClass: "close-icon-wrapper" }, [
+        _c("i", {
+          staticClass: "fas fa-chevron-circle-right fa-3x",
+          attrs: { id: "close-modal-icon" },
+          on: {
+            click: function($event) {
+              return _vm.closeModal()
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "area-wrapper" } }, [
+        _c("div", {
+          class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
+          attrs: { id: "drop-zone" },
+          on: {
+            dragleave: _vm.dragLeave,
+            dragover: function($event) {
+              $event.preventDefault()
+            },
+            drop: function($event) {
+              $event.preventDefault()
+              return _vm.dropFile($event)
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            attrs: { id: "contents-wrapper" },
+            on: { dragenter: _vm.dragEnter }
+          },
+          [
+            _c("div", { attrs: { id: "toggle-wrapper" } }, [
+              _c(
+                "button",
+                {
+                  class: { isDefault: _vm.isDefault, isUpload: !_vm.isDefault },
+                  attrs: { id: "file-category-toggle", tabindex: "1" },
+                  on: { click: _vm.changeFileCategory }
+                },
+                [_c("div", { attrs: { id: "toggle-state-icon" } })]
+              ),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "category-type" } }, [
+                _c("span", [_vm._v(_vm._s(_vm.fileCategory))])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { id: "upload-input-wrapper" } }, [
+              _c(
+                "label",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.isDefault,
+                      expression: "!(isDefault)"
+                    }
+                  ],
+                  attrs: {
+                    id: "upload-label",
+                    for: "upload-audio-input",
+                    tabindex: "2"
+                  },
+                  on: {
+                    keydown: function($event) {
+                      if (
+                        !$event.type.indexOf("key") &&
+                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                      ) {
+                        return null
+                      }
+                      return _vm.startInput($event)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fas fa-upload",
+                    staticStyle: { "margin-right": "5px" }
+                  }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("アップロード")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticStyle: { display: "none" },
+                    attrs: {
+                      id: "upload-audio-input",
+                      type: "file",
+                      accept: "audio/*",
+                      name: "audio"
+                    },
+                    on: { change: _vm.selectedFile }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isLoading,
+                      expression: "isLoading"
+                    }
+                  ],
+                  attrs: { id: "loading-display-wrapper" }
+                },
+                [
+                  _c("p", { staticClass: "loading-message" }, [
+                    _vm._v(_vm._s(_vm.loadingMessage))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    class: { "copy-to-right": _vm.isLoading },
+                    attrs: { id: "uploading-dot" }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              { attrs: { id: "audio-thumbnail-wrapper" } },
+              [
+                _vm._l(_vm.userOwnAudios, function(userOwnAudio) {
+                  return _c(
+                    "li",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.isDefault,
+                          expression: "!(isDefault)"
+                        }
+                      ],
+                      key: userOwnAudio.id,
+                      staticClass: "audio-list"
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "audio-thumbnail",
+                        attrs: {
+                          src: userOwnAudio["thumbnail_url"],
+                          alt: userOwnAudio["thumbnail_url"]
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "audio_name" }, [
+                        _vm._v(_vm._s(userOwnAudio["audio_name"]))
+                      ]),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "audio-info fas fa-caret-right fa-2x",
+                        attrs: { id: userOwnAudio["audio_url"] }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        staticClass: "delete-audio fas fa-times fa-2x",
+                        on: { click: _vm.deleteaudio }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "icon-cover",
+                          on: { click: _vm.sendUserOwnAudioThumbnailUrl }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-2x",
+                            attrs: { id: "add-audio-thumbnail-icon" }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                _vm._v(" "),
+                _vm._l(_vm.defaultAudios, function(defaultAudio) {
+                  return _c(
+                    "li",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isDefault,
+                          expression: "isDefault"
+                        }
+                      ],
+                      key: defaultAudio.id,
+                      staticClass: "audio-list"
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "audio-thumbnail",
+                        attrs: {
+                          src: defaultAudio["thumbnail_url"],
+                          alt: defaultAudio["thumbnail_url"]
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "audio_name" }, [
+                        _vm._v(_vm._s(defaultAudio["audio_name"]))
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "icon-cover",
+                          on: { click: _vm.sendUserOwnAudioThumbnailUrl }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-2x",
+                            attrs: { id: "add-audio-thumbnail-icon" }
+                          })
+                        ]
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa& ***!
@@ -44946,7 +45627,7 @@ var render = function() {
           attrs: { id: "room-img-frame" },
           on: {
             click: function($event) {
-              return _vm.showModal()
+              return _vm.showImgModal()
             }
           }
         },
@@ -44984,19 +45665,120 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
+      _c(
+        "div",
+        {
+          attrs: { id: "room-audio-frame" },
+          on: {
+            click: function($event) {
+              return _vm.showAudioModal()
+            }
+          }
+        },
+        [
+          _c("ul", { attrs: { id: "audios" } }, [
+            _c("li", { staticClass: "audio-wrapper" }, [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.roomAudioThumbnailUrls[0],
+                    expression: "roomAudioThumbnailUrls[0]"
+                  }
+                ],
+                attrs: { src: _vm.roomAudioThumbnailUrls[0], alt: "1" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "audio-wrapper" }, [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.roomAudioThumbnailUrls[1],
+                    expression: "roomAudioThumbnailUrls[1]"
+                  }
+                ],
+                attrs: { src: _vm.roomAudioThumbnailUrls[1], alt: "2" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "audio-wrapper" }, [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.roomAudioThumbnailUrls[2],
+                    expression: "roomAudioThumbnailUrls[2]"
+                  }
+                ],
+                attrs: { src: _vm.roomAudioThumbnailUrls[2], alt: "3" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "audio-wrapper" }, [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.roomAudioThumbnailUrls[3],
+                    expression: "roomAudioThumbnailUrls[3]"
+                  }
+                ],
+                attrs: { src: _vm.roomAudioThumbnailUrls[3], alt: "4" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "audio-wrapper" }, [
+              _c("img", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.roomAudioThumbnailUrls[4],
+                    expression: "roomAudioThumbnailUrls[4]"
+                  }
+                ],
+                attrs: { src: _vm.roomAudioThumbnailUrls[4], alt: "5" }
+              })
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
       _c("img-select-component", {
         directives: [
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowModal,
-            expression: "isShowModal"
+            value: _vm.isShowImg,
+            expression: "isShowImg"
           }
         ],
         on: {
           "close-modal": _vm.closeModal,
           "set-img-url": _vm.setRoomImgUrl,
           "img-del-notice": _vm.judgeDelImg
+        }
+      }),
+      _vm._v(" "),
+      _c("audio-select-component", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShowAudio,
+            expression: "isShowAudio"
+          }
+        ],
+        on: {
+          "close-modal": _vm.closeModal,
+          "set-audio-url": _vm.setRoomAudioUrl,
+          "audio-del-notice": _vm.judgeDelAudio
         }
       })
     ],

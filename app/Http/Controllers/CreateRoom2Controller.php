@@ -46,6 +46,54 @@ class CreateRoom2Controller extends Controller
 
     }
 
+    public function getUserOwnAudioThumbnails(){
+        $owner_user_id = Auth::user()->id;
+        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
+        $audio_thumbnail_file_urls = array();
+        foreach($user_own_audios as $user_own_audio){
+            $audio_thumbnail_file_urls[] = $user_own_audio->thumbnail_url;
+        };
+
+        return ['urls' => $audio_thumbnail_file_urls];
+    }
+
+    public function getDefaultAudioThumbnails(){
+        $default_audios = DefaultBgm::get();
+        $audio_thumbnail_file_urls = array();
+        foreach($default_audios as $default_audio){
+            $audio_thumbnail_file_urls[] = $default_audio->thumbnail_url;
+        };
+
+        return ['urls' => $audio_thumbnail_file_urls];
+    }
+
+    public function getUserOwnAudios(){
+        $owner_user_id = Auth::user()->id;
+        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
+        $audios = array();
+        foreach($user_own_audios as $index => $user_own_audio){
+            $tmpAudios = array();
+            $tmpAudios += array('audio_name' => $user_own_audio->name);
+            $tmpAudios += array('audio_url' => $user_own_audio->audio_url);
+            $tmpAudios += array('thumbnail_url' => $user_own_audio->thumbnail_url);
+            $audios[$index] = $tmpAudios;
+        };
+        return ['audios' => $audios];
+    }
+
+    public function getDefaultAudios(){
+        $default_audios = DefaultBgm::get();
+        $audios = array();
+        foreach($default_audios as $index => $default_audio){
+            $tmpAudios = array();
+            $tmpAudios += array('audio_name' => $default_audio->name);
+            $tmpAudios += array('audio_url' => $default_audio->audio_url);
+            $tmpAudios += array('thumbnail_url' => $default_audio->thumbnail_url);
+            $audios[$index] = $tmpAudios;
+        };
+        return ['audios' => $audios];
+    }
+
     public function getDefaultImgs(){
         $owner_user_id = Auth::user()->id;
         $default_imgs = DefaultImg::get();
@@ -76,6 +124,35 @@ class CreateRoom2Controller extends Controller
         saveFile::saveImgDataInDB($fileDatas);
 
         return ['url' => $imgfile_save_url];
+    }
+
+    public function saveAudioFile(Request $request) {
+        $user_id = Auth::user()->id;
+        $audio_file = $request->file('audio');
+        $audio_name = $audio_file->getClientOriginalName();
+        $audio_save_path = saveFile::saveFileInS3($user_id, $audio_file);
+        $audio_save_url= Storage::disk('s3')->url($audio_save_path);
+        // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
+        $thumbnail_save_path = 'default/room/audio/thumbnail/8分音符アイコン 1.png';
+        $thumbnail_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/default/room/audio/thumbnail/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3+1.png';
+
+        $fileDatas = array (
+            'owner_user_id' => $user_id,
+            'name' => $audio_name,
+            'path' => $audio_save_path,
+            'url' => $audio_save_url,
+            'thumbnail_path' => $thumbnail_save_path,
+            'thumbnail_url' => $thumbnail_save_url
+        );
+        saveFile::saveAudioDataInDB($fileDatas);
+
+        $audios = array(
+            'audio_name' => $audio_name,
+            'audio_url' => $audio_save_url,
+            'thumnbail_url' => $thumbnail_save_url
+        );
+
+        return ['audios' => $audios];
     }
 
     public function saveDBTest() {
@@ -111,6 +188,20 @@ class CreateRoom2Controller extends Controller
         return ['削除完了しました'];
     }
 
+    public function deleteAudio(Request $request){
+        $owner_user_id = Auth::user()->id;
+        $del_audio_url = $request->audioUrl;
+        // S3からファイルを削除
+        Storage::disk('s3')->delete($del_audio_url);
+        // DBからレコード削除
+        \Log::info($del_audio_url);
+        UserOwnBgm::where('owner_user_id', $owner_user_id)
+                    ->where('audio_url', $del_audio_url)
+                    ->first()
+                    ->delete();
+
+        return ['削除完了しました'];
+    }
 
 
     public function createTrack(Request $request) {

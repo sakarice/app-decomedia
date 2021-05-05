@@ -43,7 +43,7 @@ class SaveFile
         $directry .= "audio/audio_file";
         break;
         case 'audio-thumbnail':
-        $directry .= "/audio/thumbnail";
+        $directry .= "audio/thumbnail";
         break;
     }
     
