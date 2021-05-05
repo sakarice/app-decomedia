@@ -22,7 +22,7 @@ use Storage;
 class Functions extends Controller
 {
 
-    // デフォルトファイルアップロード用viewを表示
+    // ★routingの遷移先
     public function view() {
       $fileNames = [
         'imgFileUrl' => "",
@@ -33,6 +33,7 @@ class Functions extends Controller
       return view('upload.defaultFile', $fileNames);
     }
   
+    // ★routingの遷移先
     public function uploadFile(Request $request){
       $imgFileName = "";
       $audioFileName = "";
@@ -40,6 +41,7 @@ class Functions extends Controller
       
       // ファイルのバリデーションチェック
       function checkFile($req, $filetag){
+        \Log::info('checkFile function called');
         $isFileExist = $req->hasFile($filetag);
         if($isFileExist){
           $isUploaded = $req->file($filetag)->isValid();
@@ -53,7 +55,9 @@ class Functions extends Controller
         }
       };
 
+      // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
+        \Log::info('storeFileAndcreateDataForDb  function called');
         $fileName = $request->file($type)->getClientOriginalName();
         $filePath = SaveFile::saveDefaultFileInS3($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
@@ -85,13 +89,6 @@ class Functions extends Controller
         }
         saveFile::saveAudioDataInDB($audioFileDatas);
       }
-
-
-      // $fileNames = [
-      //   // 'imgFileUrl' => $imgFileDatas['url'],
-      //   // 'audioFileName' => $audioFileName,
-      //   // 'audioThumbnailFileName' => $audioThumbnailFileName
-      // ];
 
       return view('upload.defaultFile');
     }
