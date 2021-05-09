@@ -5,12 +5,13 @@
       <img id="room-img" :src="roomImgUrl" v-show="roomImgUrl" alt="画像が選択されていません">
     </div>
     <div id="room-audio-frame" v-on:click="showAudioModal()">
+
       <ul id="audios">
-        <li class="audio-wrapper"><img :src="roomAudioThumbnailUrls[0]" v-show="roomAudioThumbnailUrls[0]" alt="1"></li>
-        <li class="audio-wrapper"><img :src="roomAudioThumbnailUrls[1]" v-show="roomAudioThumbnailUrls[1]" alt="2"></li>
-        <li class="audio-wrapper"><img :src="roomAudioThumbnailUrls[2]" v-show="roomAudioThumbnailUrls[2]" alt="3"></li>
-        <li class="audio-wrapper"><img :src="roomAudioThumbnailUrls[3]" v-show="roomAudioThumbnailUrls[3]" alt="4"></li>
-        <li class="audio-wrapper"><img :src="roomAudioThumbnailUrls[4]" v-show="roomAudioThumbnailUrls[4]" alt="5"></li>
+        <li class="audio-wrapper" :id="index" v-for="(roomAudio, index) in roomAudios" :key="roomAudio.id">
+          <img class="room-audio-thumbnail" src="" v-show="roomAudio" :alt="index">
+        </li>
+        <li class="audio-wrapper-copy" v-for="n in 5" :key="n" v-show="!(roomAudios[n-1])">
+        </li>
       </ul>
     </div>
 
@@ -26,7 +27,7 @@
     <audio-select-component 
     v-show="isShowAudio" 
     v-on:close-modal="closeModal" 
-    v-on:set-audio-url="setRoomAudioUrl"
+    v-on:add-audio="addAudio"
     v-on:audio-del-notice="judgeDelAudio">
     </audio-select-component>
   </div>
@@ -46,8 +47,11 @@ export default {
       isShowImg : false,
       isShowAudio : false,
       roomImgUrl : "",
-      roomAudioUrls : [],
-      roomAudioThumbnailUrls : []
+      maxAudioNum : 5,
+      roomAudios : [],
+      audioPlayers : [],
+      // roomAudioUrls : [],
+      // roomAudioThumbnailUrls : []
     }
   },
   methods : {
@@ -70,6 +74,33 @@ export default {
       if(this.roomImgUrl == url){
         this.roomImgUrl = "";
       }
+    },
+    addAudio(audio) {
+      let audioNum = this.roomAudios.length;
+      // オーディオは1ルームに5つまで。
+      // 既に5つある場合は一つ消してから追加。
+      if(audioNum == this.maxAudioNum){
+        this.roomAudios.splice(0, 1);
+      }
+      this.roomAudios.push(audio);
+
+      // オーディオの更新
+      this.$nextTick(function () { // DOMの更新を待つ
+        let audioDoms = document.getElementsByClassName('audio-wrapper');
+        let audioNum = audioDoms.length;
+        for(let i = 0; i < audioNum; i++){
+          // オーディオのサムネイル表示&更新
+          let audioThumbnail = audioDoms[i].firstChild;
+          let targetAudio = this.roomAudios[i];
+          audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
+
+
+        }
+      });
+
+      // // オーディオプレイヤーの作成
+      // let audioplayer = new Audio();
+      // audioplayer.src = ""
     },
     judgeDelAudio(url) {
       if(this.roomAudioUrl == url){
@@ -124,9 +155,11 @@ export default {
 /* audio */
 #audios{
   display: flex;
+  padding-left: 0;
 }
 
-.audio-wrapper {
+.audio-wrapper,
+.audio-wrapper-copy {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -138,6 +171,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.room-audio-thumbnail {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
 }
 
 </style>

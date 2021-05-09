@@ -33,22 +33,37 @@
           </div>
           <ul id="audio-thumbnail-wrapper">
             <!-- uploads -->
-            <li v-show="!(isDefault)" class="audio-list" v-for="userOwnAudio in userOwnAudios" :key="userOwnAudio.id">
+            <li v-show="!(isDefault)" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
-              <span class="audio_name">{{userOwnAudio['audio_name']}}</span>
-              <i class="audio-info fas fa-caret-right fa-2x" :id="userOwnAudio['audio_url']"></i>
+              <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToRoom('user-own', index)">
+                {{userOwnAudio['audio_name']}}
+              </span>
+              <i class="audio-play-icon fas fa-caret-right fa-2x"
+               v-show="!(userOwnAudio['isPlay'])"
+               v-on:click="playAudio('user-own', index)"></i>
+              <i class="audio-pause-icon fas fa-pause fa-lg"
+               v-show="userOwnAudio['isPlay']"
+               v-on:click="pauseAudio('user-own', index)"></i>
               <i class="delete-audio fas fa-times fa-2x" v-on:click="deleteaudio"></i>
-              <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
+              <!-- <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
                 <i id="add-audio-thumbnail-icon" class="fas fa-plus fa-2x"></i>
-              </div>
+              </div> -->
             </li>
             <!-- default -->
-            <li v-show="isDefault" class="audio-list" v-for="defaultAudio in defaultAudios" :key="defaultAudio.id">
+            <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
-              <span class="audio_name">{{defaultAudio['audio_name']}}</span>
-              <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
+              <span class="audio_name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToRoom('default', index)">
+                {{defaultAudio['audio_name']}}
+              </span>
+              <i class="audio-play-icon fas fa-caret-right fa-2x"
+              v-show="!(defaultAudio['isPlay'])"
+              v-on:click="playAudio('default', index)"></i>
+              <i class="audio-pause-icon fas fa-pause fa-lg"
+               v-show="defaultAudio['isPlay']"
+               v-on:click="pauseAudio('default', index)"></i>
+              <!-- <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
                 <i id="add-audio-thumbnail-icon" class="fas fa-plus fa-2x"></i>
-              </div>
+              </div> -->
             </li>
 
           </ul>
@@ -72,8 +87,13 @@ export default {
       loadingMessage : "",
       userOwnAudios : [],   // thumbnail_url, audio_name
       defaultAudios : [],
-      userOwnAudioThumbnailUrls : [],
-      defaultAudioThumbnailUrls : []
+      audioPlayer : new Audio(),
+      playAudioType : '',
+      playAudioIndex : -1,
+      playAudioUrl : "",
+      isPlay : false,
+      // userOwnAudioThumbnailUrls : [],
+      // defaultAudioThumbnailUrls : []
     }
   },
   methods : {
@@ -89,8 +109,8 @@ export default {
       const url = '/ajax/getUserOwnAudios';
       axios.get(url)
         .then(response => {
-          // alert(response.data.urls[0]);
-          response.data.audios.forEach(audio => {            
+          response.data.audios.forEach(audio => {
+            audio['isPlay'] = false;
             this.userOwnAudios.unshift(audio);
           });
         })
@@ -102,14 +122,72 @@ export default {
       const url = '/ajax/getDefaultAudios';
       axios.get(url)
         .then(response => {
-          // alert(response.data.urls[0]);
-          response.data.audios.forEach(audio => {            
+          response.data.audios.forEach(audio => {
+            audio['isPlay'] = false;
             this.defaultAudios.unshift(audio);
           });
         })
         .catch(error => {
           alert('オーディオサムネイル取得失敗');
         })
+    },
+    testClick(){
+      alert('clicked');
+    },
+    playAudio : function(type, index){
+      // 選択したオーディオを再生
+      let playTargetAudio;
+      if(type == 'user-own'){
+        playTargetAudio = this.userOwnAudios[index];
+      } else if (type == 'default'){
+        playTargetAudio = this.defaultAudios[index];
+      }
+      this.audioPlayer.src = playTargetAudio['audio_url'];
+      this.audioPlayer.play();
+      this.isPlay = true;
+      playTargetAudio['isPlay'] = true;
+
+      // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
+      let stopTargetAudio;
+      if(this.playAudioType !== ""){
+        if(this.playAudioType == 'user-own'){
+          stopTargetAudio = this.userOwnAudios[this.playAudioIndex];
+        } else if(this.playAudioType == 'default'){
+          stopTargetAudio = this.defaultAudios[this.playAudioIndex];
+        }
+        stopTargetAudio['isPlay'] = false;
+      }
+
+      // 再生中のオーディオ種別とインデックスを更新
+      this.playAudioType = type;
+      this.playAudioIndex = index;
+    },
+    pauseAudio : function(type, index){
+      // オーディオを再生停止
+      this.audioPlayer.pause();
+      this.isPlay = false;
+
+      // 対象オーディオの再生フラグを折る
+      let targetAudio;
+      if(type == 'user-own'){
+        targetAudio = this.userOwnAudios[index];
+      } else if (type == 'default'){
+        targetAudio = this.defaultAudios[index];
+      }
+      targetAudio['isPlay'] = false;
+
+      // 再生中のオーディオ種別とインデックスを更新(再生オーディオなし)
+      this.playAudioType = "";
+      this.playAudioIndex = -1;
+    },
+    addAudioToRoom : function(type, index) {
+      let audio;
+      if(type == 'user-own'){
+        audio = this.userOwnAudios[index];
+      } else if (type == 'default'){
+        audio = this.defaultAudios[index];
+      }
+      this.$emit('add-audio', audio);
     },
     
     dragEnter: function() {
@@ -123,8 +201,8 @@ export default {
       this.$emit('close-modal');
     },
     sendUserOwnAudioThumbnailUrl: function(event){
-      let imgUrl = event.target.previousElementSibling.getAttribute('src');
-      this.$emit('set-audio-thumbnail-url', imgUrl);
+      let thumbnailUrl = event.target.previousElementSibling.getAttribute('src');
+      this.$emit('set-audio-thumbnail-url', thumbnailUrl);
     },
     startInput(event){
       let target = document.getElementById('upload-input');
@@ -459,12 +537,25 @@ export default {
     align-items: center;
   }
 
-  .audio-info {
+  .audio-play-icon,
+  .audio-pause-icon {
     position: absolute;
-    top: 0;
-    left: 12px;
     z-index: -1;
     color: rgba(255, 0, 0, 0);
+  }
+
+  .audio-play-icon {
+    top: 0;
+    left: 12px;
+  }
+
+  .audio-pause-icon {
+    top: 8px;
+    left: 7px;
+  }
+
+  .now-play {
+    color : rgb(0, 255, 0);
   }
 
   .delete-audio {
@@ -486,7 +577,12 @@ export default {
     color: rgba(255, 0, 0, 0.8);
   }
 
-  .audio-list:hover .audio-info {
+  .audio-list:hover .audio-play-icon {
+    z-index: 2;
+    color: rgba(0, 255, 0, 0.8);
+  }
+
+  .audio-list:hover .audio-pause-icon {
     z-index: 2;
     color: rgba(0, 255, 0, 0.8);
   }
@@ -529,6 +625,7 @@ export default {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    background-color: darkgray;
   }
 
 

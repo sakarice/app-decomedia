@@ -1918,6 +1918,21 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -1931,8 +1946,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       userOwnAudios: [],
       // thumbnail_url, audio_name
       defaultAudios: [],
-      userOwnAudioThumbnailUrls: [],
-      defaultAudioThumbnailUrls: []
+      audioPlayer: new Audio(),
+      playAudioType: '',
+      playAudioIndex: -1,
+      playAudioUrl: "",
+      isPlay: false // userOwnAudioThumbnailUrls : [],
+      // defaultAudioThumbnailUrls : []
+
     };
   },
   methods: {
@@ -1950,8 +1970,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var url = '/ajax/getUserOwnAudios';
       axios.get(url).then(function (response) {
-        // alert(response.data.urls[0]);
         response.data.audios.forEach(function (audio) {
+          audio['isPlay'] = false;
+
           _this.userOwnAudios.unshift(audio);
         });
       })["catch"](function (error) {
@@ -1963,13 +1984,77 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var url = '/ajax/getDefaultAudios';
       axios.get(url).then(function (response) {
-        // alert(response.data.urls[0]);
         response.data.audios.forEach(function (audio) {
+          audio['isPlay'] = false;
+
           _this2.defaultAudios.unshift(audio);
         });
       })["catch"](function (error) {
         alert('オーディオサムネイル取得失敗');
       });
+    },
+    testClick: function testClick() {
+      alert('clicked');
+    },
+    playAudio: function playAudio(type, index) {
+      // 選択したオーディオを再生
+      var playTargetAudio;
+
+      if (type == 'user-own') {
+        playTargetAudio = this.userOwnAudios[index];
+      } else if (type == 'default') {
+        playTargetAudio = this.defaultAudios[index];
+      }
+
+      this.audioPlayer.src = playTargetAudio['audio_url'];
+      this.audioPlayer.play();
+      this.isPlay = true;
+      playTargetAudio['isPlay'] = true; // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
+
+      var stopTargetAudio;
+
+      if (this.playAudioType !== "") {
+        if (this.playAudioType == 'user-own') {
+          stopTargetAudio = this.userOwnAudios[this.playAudioIndex];
+        } else if (this.playAudioType == 'default') {
+          stopTargetAudio = this.defaultAudios[this.playAudioIndex];
+        }
+
+        stopTargetAudio['isPlay'] = false;
+      } // 再生中のオーディオ種別とインデックスを更新
+
+
+      this.playAudioType = type;
+      this.playAudioIndex = index;
+    },
+    pauseAudio: function pauseAudio(type, index) {
+      // オーディオを再生停止
+      this.audioPlayer.pause();
+      this.isPlay = false; // 対象オーディオの再生フラグを折る
+
+      var targetAudio;
+
+      if (type == 'user-own') {
+        targetAudio = this.userOwnAudios[index];
+      } else if (type == 'default') {
+        targetAudio = this.defaultAudios[index];
+      }
+
+      targetAudio['isPlay'] = false; // 再生中のオーディオ種別とインデックスを更新(再生オーディオなし)
+
+      this.playAudioType = "";
+      this.playAudioIndex = -1;
+    },
+    addAudioToRoom: function addAudioToRoom(type, index) {
+      var audio;
+
+      if (type == 'user-own') {
+        audio = this.userOwnAudios[index];
+      } else if (type == 'default') {
+        audio = this.defaultAudios[index];
+      }
+
+      this.$emit('add-audio', audio);
     },
     dragEnter: function dragEnter() {
       this.isDragEnter = true;
@@ -1982,8 +2067,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.$emit('close-modal');
     },
     sendUserOwnAudioThumbnailUrl: function sendUserOwnAudioThumbnailUrl(event) {
-      var imgUrl = event.target.previousElementSibling.getAttribute('src');
-      this.$emit('set-audio-thumbnail-url', imgUrl);
+      var thumbnailUrl = event.target.previousElementSibling.getAttribute('src');
+      this.$emit('set-audio-thumbnail-url', thumbnailUrl);
     },
     startInput: function startInput(event) {
       var target = document.getElementById('upload-input');
@@ -2119,6 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2132,8 +2218,11 @@ __webpack_require__.r(__webpack_exports__);
       isShowImg: false,
       isShowAudio: false,
       roomImgUrl: "",
-      roomAudioUrls: [],
-      roomAudioThumbnailUrls: []
+      maxAudioNum: 5,
+      roomAudios: [],
+      audioPlayers: [] // roomAudioUrls : [],
+      // roomAudioThumbnailUrls : []
+
     };
   },
   methods: {
@@ -2156,6 +2245,31 @@ __webpack_require__.r(__webpack_exports__);
       if (this.roomImgUrl == url) {
         this.roomImgUrl = "";
       }
+    },
+    addAudio: function addAudio(audio) {
+      var audioNum = this.roomAudios.length; // オーディオは1ルームに5つまで。
+      // 既に5つある場合は一つ消してから追加。
+
+      if (audioNum == this.maxAudioNum) {
+        this.roomAudios.splice(0, 1);
+      }
+
+      this.roomAudios.push(audio); // オーディオの更新
+
+      this.$nextTick(function () {
+        // DOMの更新を待つ
+        var audioDoms = document.getElementsByClassName('audio-wrapper');
+        var audioNum = audioDoms.length;
+
+        for (var i = 0; i < audioNum; i++) {
+          // オーディオのサムネイル表示&更新
+          var audioThumbnail = audioDoms[i].firstChild;
+          var targetAudio = this.roomAudios[i];
+          audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
+        }
+      }); // // オーディオプレイヤーの作成
+      // let audioplayer = new Audio();
+      // audioplayer.src = ""
     },
     judgeDelAudio: function judgeDelAudio(url) {
       if (this.roomAudioUrl == url) {
@@ -7130,7 +7244,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#audio-thumbnail-wrapper {\n  /* モーダル内のオーディオサムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.audio-list {\n  position: relative;\n  width: 100%;\n  height: 30px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  /* background-color: grey; */\n\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.audio-info {\n  position: absolute;\n  top: 0;\n  left: 12px;\n  z-index: -1;\n  color: rgba(255, 0, 0, 0);\n}\n.delete-audio {\n  position: absolute;\n  top: 0;\n  right: 0;\n  margin-right: 5px;\n  color: rgba(255, 0, 0, 0);\n  z-index: -1;\n}\n.audio-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio {\n  z-index: 2;\n  color: rgba(255, 0, 0, 0.8);\n}\n.audio-list:hover .audio-info {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail {\n  z-index: -1;\n  opacity: 0.3;\n}\n.audio_name {\n  margin-left: 7px;\n  white-space: nowrap;\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#add-audio-thumbnail-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.audio-thumbnail {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#audio-thumbnail-wrapper {\n  /* モーダル内のオーディオサムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.audio-list {\n  position: relative;\n  width: 100%;\n  height: 30px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  /* background-color: grey; */\n\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.audio-play-icon,\n.audio-pause-icon {\n  position: absolute;\n  z-index: -1;\n  color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon {\n  top: 0;\n  left: 12px;\n}\n.audio-pause-icon {\n  top: 8px;\n  left: 7px;\n}\n.now-play {\n  color : rgb(0, 255, 0);\n}\n.delete-audio {\n  position: absolute;\n  top: 0;\n  right: 0;\n  margin-right: 5px;\n  color: rgba(255, 0, 0, 0);\n  z-index: -1;\n}\n.audio-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio {\n  z-index: 2;\n  color: rgba(255, 0, 0, 0.8);\n}\n.audio-list:hover .audio-play-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail {\n  z-index: -1;\n  opacity: 0.3;\n}\n.audio_name {\n  margin-left: 7px;\n  white-space: nowrap;\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#add-audio-thumbnail-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.audio-thumbnail {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background-color: darkgray;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7154,7 +7268,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n}\n.audio-wrapper {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 1px dashed;\n\n  margin: 20px 10px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n  padding-left: 0;\n}\n.audio-wrapper,\n.audio-wrapper-copy {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 1px dashed;\n\n  margin: 20px 10px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45476,7 +45590,7 @@ var render = function() {
               "ul",
               { attrs: { id: "audio-thumbnail-wrapper" } },
               [
-                _vm._l(_vm.userOwnAudios, function(userOwnAudio) {
+                _vm._l(_vm.userOwnAudios, function(userOwnAudio, index) {
                   return _c(
                     "li",
                     {
@@ -45500,38 +45614,69 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("span", { staticClass: "audio_name" }, [
-                        _vm._v(_vm._s(userOwnAudio["audio_name"]))
-                      ]),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "audio_name",
+                          class: { "now-play": userOwnAudio["isPlay"] },
+                          on: {
+                            click: function($event) {
+                              return _vm.addAudioToRoom("user-own", index)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(userOwnAudio["audio_name"]) +
+                              "\n            "
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("i", {
-                        staticClass: "audio-info fas fa-caret-right fa-2x",
-                        attrs: { id: userOwnAudio["audio_url"] }
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !userOwnAudio["isPlay"],
+                            expression: "!(userOwnAudio['isPlay'])"
+                          }
+                        ],
+                        staticClass: "audio-play-icon fas fa-caret-right fa-2x",
+                        on: {
+                          click: function($event) {
+                            return _vm.playAudio("user-own", index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: userOwnAudio["isPlay"],
+                            expression: "userOwnAudio['isPlay']"
+                          }
+                        ],
+                        staticClass: "audio-pause-icon fas fa-pause fa-lg",
+                        on: {
+                          click: function($event) {
+                            return _vm.pauseAudio("user-own", index)
+                          }
+                        }
                       }),
                       _vm._v(" "),
                       _c("i", {
                         staticClass: "delete-audio fas fa-times fa-2x",
                         on: { click: _vm.deleteaudio }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "icon-cover",
-                          on: { click: _vm.sendUserOwnAudioThumbnailUrl }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-plus fa-2x",
-                            attrs: { id: "add-audio-thumbnail-icon" }
-                          })
-                        ]
-                      )
+                      })
                     ]
                   )
                 }),
                 _vm._v(" "),
-                _vm._l(_vm.defaultAudios, function(defaultAudio) {
+                _vm._l(_vm.defaultAudios, function(defaultAudio, index) {
                   return _c(
                     "li",
                     {
@@ -45555,23 +45700,59 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("span", { staticClass: "audio_name" }, [
-                        _vm._v(_vm._s(defaultAudio["audio_name"]))
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "div",
+                        "span",
                         {
-                          staticClass: "icon-cover",
-                          on: { click: _vm.sendUserOwnAudioThumbnailUrl }
+                          staticClass: "audio_name",
+                          class: { "now-play": defaultAudio["isPlay"] },
+                          on: {
+                            click: function($event) {
+                              return _vm.addAudioToRoom("default", index)
+                            }
+                          }
                         },
                         [
-                          _c("i", {
-                            staticClass: "fas fa-plus fa-2x",
-                            attrs: { id: "add-audio-thumbnail-icon" }
-                          })
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(defaultAudio["audio_name"]) +
+                              "\n            "
+                          )
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !defaultAudio["isPlay"],
+                            expression: "!(defaultAudio['isPlay'])"
+                          }
+                        ],
+                        staticClass: "audio-play-icon fas fa-caret-right fa-2x",
+                        on: {
+                          click: function($event) {
+                            return _vm.playAudio("default", index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: defaultAudio["isPlay"],
+                            expression: "defaultAudio['isPlay']"
+                          }
+                        ],
+                        staticClass: "audio-pause-icon fas fa-pause fa-lg",
+                        on: {
+                          click: function($event) {
+                            return _vm.pauseAudio("default", index)
+                          }
+                        }
+                      })
                     ]
                   )
                 })
@@ -45676,77 +45857,52 @@ var render = function() {
           }
         },
         [
-          _c("ul", { attrs: { id: "audios" } }, [
-            _c("li", { staticClass: "audio-wrapper" }, [
-              _c("img", {
-                directives: [
+          _c(
+            "ul",
+            { attrs: { id: "audios" } },
+            [
+              _vm._l(_vm.roomAudios, function(roomAudio, index) {
+                return _c(
+                  "li",
                   {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.roomAudioThumbnailUrls[0],
-                    expression: "roomAudioThumbnailUrls[0]"
-                  }
-                ],
-                attrs: { src: _vm.roomAudioThumbnailUrls[0], alt: "1" }
+                    key: roomAudio.id,
+                    staticClass: "audio-wrapper",
+                    attrs: { id: index }
+                  },
+                  [
+                    _c("img", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: roomAudio,
+                          expression: "roomAudio"
+                        }
+                      ],
+                      staticClass: "room-audio-thumbnail",
+                      attrs: { src: "", alt: index }
+                    })
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _vm._l(5, function(n) {
+                return _c("li", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.roomAudios[n - 1],
+                      expression: "!(roomAudios[n-1])"
+                    }
+                  ],
+                  key: n,
+                  staticClass: "audio-wrapper-copy"
+                })
               })
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "audio-wrapper" }, [
-              _c("img", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.roomAudioThumbnailUrls[1],
-                    expression: "roomAudioThumbnailUrls[1]"
-                  }
-                ],
-                attrs: { src: _vm.roomAudioThumbnailUrls[1], alt: "2" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "audio-wrapper" }, [
-              _c("img", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.roomAudioThumbnailUrls[2],
-                    expression: "roomAudioThumbnailUrls[2]"
-                  }
-                ],
-                attrs: { src: _vm.roomAudioThumbnailUrls[2], alt: "3" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "audio-wrapper" }, [
-              _c("img", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.roomAudioThumbnailUrls[3],
-                    expression: "roomAudioThumbnailUrls[3]"
-                  }
-                ],
-                attrs: { src: _vm.roomAudioThumbnailUrls[3], alt: "4" }
-              })
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "audio-wrapper" }, [
-              _c("img", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.roomAudioThumbnailUrls[4],
-                    expression: "roomAudioThumbnailUrls[4]"
-                  }
-                ],
-                attrs: { src: _vm.roomAudioThumbnailUrls[4], alt: "5" }
-              })
-            ])
-          ])
+            ],
+            2
+          )
         ]
       ),
       _vm._v(" "),
@@ -45777,7 +45933,7 @@ var render = function() {
         ],
         on: {
           "close-modal": _vm.closeModal,
-          "set-audio-url": _vm.setRoomAudioUrl,
+          "add-audio": _vm.addAudio,
           "audio-del-notice": _vm.judgeDelAudio
         }
       })
