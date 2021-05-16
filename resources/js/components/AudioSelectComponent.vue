@@ -18,9 +18,13 @@
               <div id="toggle-state-icon"></div>
             </button>
             <div id="category-type"><span>{{fileCategory}}</span></div>
-          </div>          
+
+            <!-- 再生を強制終了する　※後で消す -->
+            <button id="finishPlay" @click="finishPlay">再生終了</button>
+          </div>
+
+          <!-- アップロードエリア -->
           <div id="upload-input-wrapper">
-            <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-audio-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
               <span>アップロード</span>
@@ -31,7 +35,10 @@
               <div id="uploading-dot" :class="{'copy-to-right': isLoading}"></div>
             </div>
           </div>
+
+          <!-- オーディオのリスト表示 -->
           <ul id="audio-thumbnail-wrapper">
+
             <!-- uploads -->
             <li v-show="!(isDefault)" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
@@ -45,10 +52,8 @@
                v-show="userOwnAudio['isPlay']"
                v-on:click="pauseAudio('user-own', index)"></i>
               <i class="delete-audio fas fa-times fa-2x" v-on:click="deleteaudio"></i>
-              <!-- <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
-                <i id="add-audio-thumbnail-icon" class="fas fa-plus fa-2x"></i>
-              </div> -->
             </li>
+
             <!-- default -->
             <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
@@ -59,15 +64,11 @@
               v-show="!(defaultAudio['isPlay'])"
               v-on:click="playAudio('default', index)"></i>
               <i class="audio-pause-icon fas fa-pause fa-lg"
-               v-show="defaultAudio['isPlay']"
-               v-on:click="pauseAudio('default', index)"></i>
-              <!-- <div class="icon-cover" v-on:click="sendUserOwnAudioThumbnailUrl">
-                <i id="add-audio-thumbnail-icon" class="fas fa-plus fa-2x"></i>
-              </div> -->
+              v-show="defaultAudio['isPlay']"
+              v-on:click="pauseAudio('default', index)"></i>
             </li>
 
           </ul>
-
         </div>
       </div>
     </div>
@@ -88,7 +89,7 @@ export default {
       userOwnAudios : [],   // thumbnail_url, audio_name
       defaultAudios : [],
       audioPlayer : new Audio(),
-      playAudioType : '',
+      playAudioType : "",
       playAudioIndex : -1,
       playAudioUrl : "",
       isPlay : false,
@@ -97,6 +98,10 @@ export default {
     }
   },
   methods : {
+    finishPlay(){
+      let audioDuration = this.audioPlayer.duration;
+      this.audioPlayer.currentTime = audioDuration - 1;
+    },
     changeFileCategory(){
       this.isDefault = !(this.isDefault);
       if(this.isDefault == true){
@@ -131,9 +136,6 @@ export default {
           alert('オーディオサムネイル取得失敗');
         })
     },
-    testClick(){
-      alert('clicked');
-    },
     playAudio : function(type, index){
       // 選択したオーディオを再生
       let playTargetAudio;
@@ -142,6 +144,12 @@ export default {
       } else if (type == 'default'){
         playTargetAudio = this.defaultAudios[index];
       }
+
+      // テスト用　後で消す
+      // let audio = document.getElementById('audio');
+      // audio.src = playTargetAudio['audio_url'];
+      // audio.play();
+
       this.audioPlayer.src = playTargetAudio['audio_url'];
       this.audioPlayer.play();
       this.isPlay = true;
@@ -161,6 +169,16 @@ export default {
       // 再生中のオーディオ種別とインデックスを更新
       this.playAudioType = type;
       this.playAudioIndex = index;
+
+
+      // ★後で消す
+      console.log(this.audioPlayer.ended);
+    },
+
+    // ★後で消す
+    finishAudio: function(event){
+      let isFinish = event.target.ended;
+      alert(isFinish);
     },
     pauseAudio : function(type, index){
       // オーディオを再生停止
@@ -181,12 +199,31 @@ export default {
       this.playAudioIndex = -1;
     },
     addAudioToRoom : function(type, index) {
-      let audio;
+      // こちらのコンポーネントの配列をそのまま渡すと、
+      // 参照渡しとなり、コンポーネント間で配列が同期され予期せぬ同差をしてしまう
+      // 配列の内容だけを、新しい配列にコピーして、room側に渡す。
+      let tmpAudio;
       if(type == 'user-own'){
-        audio = this.userOwnAudios[index];
+        tmpAudio = this.userOwnAudios[index];
       } else if (type == 'default'){
-        audio = this.defaultAudios[index];
+        tmpAudio = this.defaultAudios[index];
       }
+
+      // 新しい連想配列を用意　
+      let audio = {};
+      audio['audio_name'] = tmpAudio['audio_name'];
+      audio['audio_url'] = tmpAudio['audio_url'];
+      audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
+      audio['isPlay'] = false;
+
+      // 後で消す
+      // console.log(
+      //   audio['audio_name'],
+      //   audio['audio_url'],
+      //   audio['thumbnail_url'],
+      //   audio['isPlay'] = false
+      // );
+
       this.$emit('add-audio', audio);
     },
     
@@ -278,14 +315,27 @@ export default {
           alert('オーディオ削除失敗');
         })
 
-    }
-
+    },
+    finishAudio(){
+      this.isPlay = false;
+      if(this.playAudioType == 'user-own'){
+        this.userOwnAudios[this.playAudioIndex]['isPlay'] = false;
+      } else if(this.playAudioType == 'default'){
+        this.defaultAudios[this.playAudioIndex]['isPlay'] = false;
+      }
+      this.isPlay = false;
+      this.playAudioType = "";
+      this.playAudioIndex = -1;
+    },
 
   },
-  mounted() {
+  mounted : function() {
     this.getUserOwnAudios();
     this.getDefaultAudios();
-  }
+
+    let audio = this.audioPlayer;
+    audio.onended = this.finishAudio.bind(this);
+  },
 
 }
 </script>
@@ -563,7 +613,7 @@ export default {
     top: 0;
     right: 0;
     margin-right: 5px;
-    color: rgba(255, 0, 0, 0);
+    color: rgba(180, 50, 50, 0);
     z-index: -1;
   }
 
@@ -574,7 +624,7 @@ export default {
 
   .audio-list:hover .delete-audio {
     z-index: 2;
-    color: rgba(255, 0, 0, 0.8);
+    color: rgba(180, 50, 50, 0.4);
   }
 
   .audio-list:hover .audio-play-icon {
@@ -596,6 +646,10 @@ export default {
   .audio_name {
     margin-left: 7px;
     white-space: nowrap;
+  }
+
+  .audio_name:hover {
+    text-decoration: underline;
   }
 
 
