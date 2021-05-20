@@ -2284,6 +2284,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2299,21 +2313,25 @@ __webpack_require__.r(__webpack_exports__);
       roomImgUrl: "",
       maxAudioNum: 5,
       roomAudios: [],
-      audioPlayers: [] // roomAudioUrls : [],
+      audioPlayers: [],
+      ytPlayer: "",
+      isShowYoutube: false,
+      isLoopYoutube: false,
+      youtubeVideoId: '' // roomAudioUrls : [],
       // roomAudioThumbnailUrls : []
 
     };
   },
   methods: {
     finishPlayAudio: function finishPlayAudio() {
+      // let roomAudioNum = this.roomAudios.length;
+      // for(let i=0; i < roomAudioNum; i++){
+      //   console.log('loop:', i);
+      // };
       this.audioPlayers.forEach(function (audioPlayer) {
         var audioDuration = audioPlayer.duration;
         audioPlayer.currentTime = audioDuration;
         console.log(audioDuration);
-      });
-      this.roomAudios.forEach(function (roomAudio) {
-        console.log('aaabbb');
-        roomAudio['isPlay'] = false;
       });
     },
     showImgModal: function showImgModal() {
@@ -2423,6 +2441,15 @@ __webpack_require__.r(__webpack_exports__);
 
       this.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
     },
+    loopYoutube: function loopYoutube() {
+      if (this.isLoopYoutube == false) {
+        this.isLoopYoutube = true;
+      } else {
+        this.isLoopYoutube = false;
+      }
+
+      alert(this.isLoopYoutube);
+    },
     // updateAudioPlayers() {
     //   const audioSrcs = [];
     //   this.roomAudios.forEach(function(roomAudio){;
@@ -2449,62 +2476,115 @@ __webpack_require__.r(__webpack_exports__);
       var playerIndex = this.roomAudios[audioIndex]['player_index'];
       this.audioPlayers[playerIndex].pause();
       this.roomAudios[audioIndex]['isPlay'] = false;
+    },
+    finishAudio: function finishAudio(i) {
+      var roomAudioNum = this.roomAudios.length;
+
+      for (var j = 0; j < roomAudioNum; j++) {
+        var roomAudio = this.roomAudios[j];
+
+        if (roomAudio['player_index'] == i && roomAudio['isLoop'] == false) {
+          this.roomAudios[j]['isPlay'] = false;
+        }
+      }
+    },
+    createYtPlayer: function createYtPlayer(videoId) {
+      this.ytPlayer = new YT.Player('player', {
+        height: '320',
+        width: '500',
+        videoId: videoId,
+        playerVars: {
+          'autoplay': 0,
+          'loop': false,
+          'controls': true,
+          'modestbranding': 1,
+          'fs': false
+        },
+        events: {
+          'onReady': this.onPlayReady(),
+          'onStateChange': this.onPlayerStateChange.bind(this)
+        }
+      });
+    },
+    onPlayReady: function onPlayReady() {
+      this.isShowYoutube = true;
+      console.log(this.isShowYoutube); // this.ytPlayer.loadVideoById(this.youtubeVideoId);
+    },
+    onPlayerStateChange: function onPlayerStateChange(event) {
+      if (event.data == 0 && this.isLoopYoutube == true) {
+        this.ytPlayer.seekTo(0);
+        event.target.playVideo(); // console.log('stateChange called!', event.data);
+      }
+    },
+    submitYoutubeUrl: function submitYoutubeUrl(event) {
+      var url = event.target.previousElementSibling.value; // console.log(url);
+
+      var pattern = /v=.*/;
+      var matchText = url.match(pattern); // object型で返ってくる
+
+      matchText = matchText.toString(); // object⇒stringへ変換
+
+      var videoId = matchText.substring(2, 13); // videoID部分を切りだし
+
+      this.youtubeVideoId = videoId;
+      alert(this.ytPlayer);
+
+      if (this.ytPlayer == "") {
+        this.createYtPlayer(this.youtubeVideoId);
+      } else if (this.ytPlayer != "") {
+        this.ytPlayer.cueVideoById(this.youtubeVideoId);
+        this.onPlayReady();
+      } // alert(this.youtubeVideoId);
+
+    },
+    hideYoutube: function hideYoutube() {
+      this.isShowYoutube = false;
     }
   },
-  finishAudio: function finishAudio() {
-    alert('finish');
+  created: function created() {
+    // youtubeplayer
+    var tag = window.document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.async = true;
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function () {
+      console.log('get youtube ready'); // alert('get youtube ready');
+    }; // // 4. The API will call this function when the video player is ready.
+    // function onPlayerReady(event) {
+    //   event.target.playVideo();
+    // }
+    // // 5. The API calls this function when the player's state changes.
+    // //    The function indicates that when playing a video (state=1),
+    // //    the player should play for six seconds and then stop.
+    // var done = false;
+    // function onPlayerStateChange(event) {
+    //   if (event.data == YT.PlayerState.PLAYING && !done) {
+    //     setTimeout(stopVideo, 6000);
+    //     done = true;
+    //   }
+    // }
+    // function stopVideo() {
+    //   player.stopVideo();
+    // }
+
   },
   mounted: function mounted() {
     for (var i = 0; i < this.maxAudioNum; i++) {
-      var audioPlayer = new Audio(); // audioPlayer.src = "";
-
+      var audioPlayer = new Audio();
       this.audioPlayers.push(audioPlayer);
     } // オーディオの再生終了を監視
 
 
-    this.roomAudios.forEach(function (roomAudio) {
-      roomAudio.onended = this.finishAudio();
-    }); // youtubeplayer
-
-    var tag = window.document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    var player;
-
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '360',
-        width: '640',
-        videoId: 'M7lc1UVf-VE',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      });
-      alert('get youtube ready');
-    } // 4. The API will call this function when the video player is ready.
-
-
-    function onPlayerReady(event) {
-      event.target.playVideo();
-    } // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-
-
-    var done = false;
-
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
-      }
+    for (var _i = 0; _i < this.maxAudioNum; _i++) {
+      this.audioPlayers[_i].onended = this.finishAudio.bind(this, _i);
     }
 
-    function stopVideo() {
-      player.stopVideo();
-    }
+    ; // // youtube playerのエラー検知
+    // this.ytPlayer.onError = function(errorCode){
+    //   alert(errorCode);
+    // };
   }
 });
 
@@ -7496,7 +7576,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n  padding-left: 0;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 20px 10px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  background-color: ghostwhite;\n}\n.icon-wrapper {\n  padding: 20px;\n}\n#disp-img-modal-wrapper {\n  background-color:hotpink;\n}\n#disp-audio-modal-wrapper {\n  background-color: gold;\n}\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color:  rgba(50,50,180,0.4);\n  /* opacity: 0; */\n  display: none;\n}\n.audio-wrapper:hover\n.room-audio-play-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  color:  rgba(180,50,50,0.4);\n}\n.audio-wrapper:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,0.8);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n.isLoop {\n  display: inline-block;\n  color:  rgba(10,10,255,0.6);\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n  padding-left: 0;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 20px 10px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  background-color: ghostwhite;\n}\n.icon-wrapper {\n  padding: 20px;\n}\n#disp-img-modal-wrapper {\n  background-color:hotpink;\n}\n#disp-audio-modal-wrapper {\n  background-color: gold;\n}\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color:  rgba(50,50,180,0.4);\n  /* opacity: 0; */\n  display: none;\n}\n.audio-wrapper:hover\n.room-audio-play-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  color:  rgba(180,50,50,0.4);\n}\n.audio-wrapper:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,0.8);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n.isLoop {\n  display: inline-block;\n  color:  rgba(10,10,255,0.6);\n}\n.yt-form-wrapper {\n}\n#youtube-url-form{\n  margin: 20px;\n}\n.youtube-url-description {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.room-yt-loop-icon {\n  margin: 10px;\n}\n.hidden {\n  display: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -46039,12 +46119,20 @@ var render = function() {
       _c(
         "button",
         { attrs: { id: "finish-button" }, on: { click: _vm.finishPlayAudio } },
-        [_vm._v("再生終了")]
+        [_vm._v("オーディオ再生終了")]
       ),
       _vm._v(" "),
       _c(
         "div",
         {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.isShowYoutube,
+              expression: "!(isShowYoutube)"
+            }
+          ],
           attrs: { id: "room-img-frame" },
           on: {
             click: function($event) {
@@ -46082,7 +46170,64 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("div", { attrs: { id: "player" } }),
+      _c("div", { attrs: { id: "youtube-url-form" } }, [
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowYoutube,
+                expression: "isShowYoutube"
+              }
+            ],
+            attrs: { id: "yt-player-wrapper" }
+          },
+          [
+            _c("div", { attrs: { id: "player" } }),
+            _vm._v(" "),
+            _c("p", { staticClass: "youtube-url-description" }, [
+              _vm._v(
+                "youtube動画を設定する場合は、動画ページのURLを入力してください。"
+              )
+            ])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "yt-form-wrapper" }, [
+        _c("input", {
+          attrs: {
+            type: "text",
+            id: "youtube-url-input",
+            size: "70",
+            placeholder: "youtube movie URL"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          { attrs: { type: "submit" }, on: { click: _vm.submitYoutubeUrl } },
+          [_vm._v("確定")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { attrs: { type: "submit" }, on: { click: _vm.hideYoutube } },
+          [_vm._v("画像を使用")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "yt-setting-wrapper" }, [
+        _c("i", {
+          staticClass: "room-yt-loop-icon fas fa-undo-alt fa-2x",
+          class: { isLoop: _vm.isLoopYoutube },
+          on: { click: _vm.loopYoutube }
+        }),
+        _vm._v(" "),
+        _c("p", [_vm._v("ループ")])
+      ]),
       _vm._v(" "),
       _c("div", { attrs: { id: "room-audio-frame" } }, [
         _c(

@@ -2,16 +2,30 @@
   <div id="field" v-on:click.self="closeModal()">
 
     <!-- オーディオ再生終了 -->
-    <button id="finish-button" @click="finishPlayAudio">再生終了</button>
+    <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button>
 
     <!-- Room画像 -->
-    <div id="room-img-frame" v-on:click="showImgModal()">
+    <div id="room-img-frame" v-on:click="showImgModal()" v-show="!(isShowYoutube)">
       <p v-show="!(roomImgUrl)"></p>
       <img id="room-img" :src="roomImgUrl" v-show="roomImgUrl" alt="画像が選択されていません">
     </div>
 
     <!-- youtube -->
-    <div id='player'></div>
+    <div id="youtube-url-form">
+    <div id="yt-player-wrapper" v-show="isShowYoutube">
+      <div id='player'></div>
+        <p class="youtube-url-description">youtube動画を設定する場合は、動画ページのURLを入力してください。</p>
+      </div>
+    </div>
+    <div class="yt-form-wrapper">
+      <input type="text" id="youtube-url-input" size=70 placeholder="youtube movie URL">
+      <button type="submit" @click="submitYoutubeUrl">確定</button>
+      <button type="submit" @click="hideYoutube">画像を使用</button>
+    </div>
+    <div class="yt-setting-wrapper">
+      <i class="room-yt-loop-icon fas fa-undo-alt fa-2x" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}"></i>
+      <p>ループ</p>
+    </div>
 
     <!-- Roomオーディオ -->
     <div id="room-audio-frame">
@@ -84,21 +98,28 @@ export default {
       maxAudioNum : 5,
       roomAudios : [],
       audioPlayers : [],
+      ytPlayer : "",
+      isShowYoutube : false,
+      isLoopYoutube : false,
+      youtubeVideoId : '',
       // roomAudioUrls : [],
       // roomAudioThumbnailUrls : []
     }
   },
   methods : {
     finishPlayAudio(){
+      
+      // let roomAudioNum = this.roomAudios.length;
+      // for(let i=0; i < roomAudioNum; i++){
+      //   console.log('loop:', i);
+      // };
+
       this.audioPlayers.forEach(function(audioPlayer){
         let audioDuration = audioPlayer.duration;
         audioPlayer.currentTime = audioDuration;
         console.log(audioDuration);
       });
-      this.roomAudios.forEach(function(roomAudio){
-        console.log('aaabbb');
-        roomAudio['isPlay'] = false;
-      });
+
     },
     showImgModal() {
       this.isShowAudio = false;
@@ -207,6 +228,14 @@ export default {
       }
       this.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
     },
+    loopYoutube(){
+      if(this.isLoopYoutube == false){
+        this.isLoopYoutube = true;
+      } else {
+        this.isLoopYoutube = false;
+      }
+      alert(this.isLoopYoutube);
+    },
     // updateAudioPlayers() {
     //   const audioSrcs = [];
     //   this.roomAudios.forEach(function(roomAudio){;
@@ -234,62 +263,119 @@ export default {
       this.audioPlayers[playerIndex].pause();
       this.roomAudios[audioIndex]['isPlay'] = false;
     },
+    finishAudio : function(i){
+      let roomAudioNum = this.roomAudios.length;
+      for(let j=0; j < roomAudioNum; j++){
+        let roomAudio = this.roomAudios[j];
+        if(roomAudio['player_index'] == i && roomAudio['isLoop'] == false){
+          this.roomAudios[j]['isPlay'] = false;
+        }
+      }
+    },
+    createYtPlayer(videoId){
+      this.ytPlayer = new YT.Player('player', {
+        height: '320',
+        width: '500',
+        videoId: videoId,
+        playerVars: {
+          'autoplay' : 0,
+          'loop' : false,
+          'controls' : true,
+          'modestbranding' : 1,
+          'fs' : false,
+        },
+        events: {
+          'onReady': this.onPlayReady(),
+          'onStateChange': this.onPlayerStateChange.bind(this),
+        }
+
+      });
+
+    },
+    onPlayReady() {
+      this.isShowYoutube = true;
+      console.log(this.isShowYoutube);
+      // this.ytPlayer.loadVideoById(this.youtubeVideoId);
+    },
+    onPlayerStateChange(event) {
+
+      if(event.data == 0 && this.isLoopYoutube == true){
+        this.ytPlayer.seekTo(0);
+        event.target.playVideo();
+        // console.log('stateChange called!', event.data);
+      }
+    },
+    submitYoutubeUrl(event) {
+      let url = event.target.previousElementSibling.value;
+      // console.log(url);
+      let pattern = /v=.*/;
+      let matchText = url.match(pattern); // object型で返ってくる
+      matchText = matchText.toString(); // object⇒stringへ変換
+      let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
+      this.youtubeVideoId = videoId;
+      alert(this.ytPlayer);
+      if(this.ytPlayer == ""){
+        this.createYtPlayer(this.youtubeVideoId);
+      } else if(this.ytPlayer != ""){
+        this.ytPlayer.cueVideoById(this.youtubeVideoId);
+        this.onPlayReady();
+      }
+      // alert(this.youtubeVideoId);
+    },
+    hideYoutube() {
+      this.isShowYoutube = false;
+    }
     
   },
-  finishAudio(){
-    alert('finish');
+  created() {
+    // youtubeplayer
+    const tag = window.document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.async = true;
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      console.log('get youtube ready');
+      // alert('get youtube ready');
+    }
+
+    // // 4. The API will call this function when the video player is ready.
+    // function onPlayerReady(event) {
+    //   event.target.playVideo();
+    // }
+
+    // // 5. The API calls this function when the player's state changes.
+    // //    The function indicates that when playing a video (state=1),
+    // //    the player should play for six seconds and then stop.
+    // var done = false;
+    // function onPlayerStateChange(event) {
+    //   if (event.data == YT.PlayerState.PLAYING && !done) {
+    //     setTimeout(stopVideo, 6000);
+    //     done = true;
+    //   }
+    // }
+    // function stopVideo() {
+    //   player.stopVideo();
+    // }
+
   },
-  mounted() {
+  mounted : function() {
     for(let i = 0; i < this.maxAudioNum; i++){
       let audioPlayer = new Audio();
-      // audioPlayer.src = "";
       this.audioPlayers.push(audioPlayer);
     }
 
     // オーディオの再生終了を監視
-    this.roomAudios.forEach(function(roomAudio){
-      roomAudio.onended = this.finishAudio();
-    });
+    for(let i=0; i < this.maxAudioNum; i++){
+      this.audioPlayers[i].onended = this.finishAudio.bind(this,i);
+    };
 
-    // youtubeplayer
-    var tag = window.document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    var player;
-    function onYouTubeIframeAPIReady() {
-      player = new YT.Player('player', {
-        height: '360',
-        width: '640',
-        videoId: 'M7lc1UVf-VE',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      })
-      alert('get youtube ready');
-    }
-
-    // 4. The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      event.target.playVideo();
-    }
-
-    // 5. The API calls this function when the player's state changes.
-    //    The function indicates that when playing a video (state=1),
-    //    the player should play for six seconds and then stop.
-    var done = false;
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        setTimeout(stopVideo, 6000);
-        done = true;
-      }
-    }
-    function stopVideo() {
-      player.stopVideo();
-    }
-
+    // // youtube playerのエラー検知
+    // this.ytPlayer.onError = function(errorCode){
+    //   alert(errorCode);
+    // };
 
   }
 
@@ -470,6 +556,27 @@ export default {
 .isLoop {
   display: inline-block;
   color:  rgba(10,10,255,0.6);
+}
+
+.yt-form-wrapper {
+
+}
+
+#youtube-url-form{
+  margin: 20px;
+}
+
+.youtube-url-description {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.room-yt-loop-icon {
+  margin: 10px;
+}
+
+.hidden {
+  display: none;
 }
 
 </style>
