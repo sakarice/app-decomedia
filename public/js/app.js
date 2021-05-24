@@ -2077,14 +2077,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       audio['audio_name'] = tmpAudio['audio_name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
-      audio['isPlay'] = false; // 後で消す
-      // console.log(
-      //   audio['audio_name'],
-      //   audio['audio_url'],
-      //   audio['thumbnail_url'],
-      //   audio['isPlay'] = false
-      // );
-
+      audio['isPlay'] = false;
       this.$emit('add-audio', audio);
     },
     dragEnter: function dragEnter() {
@@ -2093,7 +2086,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     dragLeave: function dragLeave() {
       this.isDragEnter = false;
     },
-    // 右上の×ボタンクリック時のイベント
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -2215,6 +2207,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue");
 /* harmony import */ var _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
+/* harmony import */ var _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
+/* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
+/* harmony import */ var _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue");
+/* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
+/* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 //
 //
 //
@@ -2298,53 +2295,75 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
+
+
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     ImgSelect: _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
-    AudioSelect: _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
+    AudioSelect: _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+    MovieSetting: _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    RoomSetting: _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default
   },
   data: function data() {
     return {
+      roomBackgroundColor: "#ffffff",
+      // 黒
       button_text: "画像選択",
-      isShowImg: false,
-      isShowAudio: false,
+      isShow: {
+        'imgModal': false,
+        'audioModal': false,
+        'movieModal': false,
+        'roomSettingModal': false
+      },
       roomImgUrl: "",
       maxAudioNum: 5,
       roomAudios: [],
-      audioPlayers: [],
-      ytPlayer: "",
       isShowYoutube: false,
-      isLoopYoutube: false,
-      youtubeVideoId: '' // roomAudioUrls : [],
-      // roomAudioThumbnailUrls : []
-
+      youtubePlayerVars: {
+        'videoId': "",
+        'width': "500",
+        'height': "320"
+      },
+      youtubePlaySettings: {},
+      isLoopYoutube: false
     };
   },
   methods: {
-    finishPlayAudio: function finishPlayAudio() {
-      // let roomAudioNum = this.roomAudios.length;
-      // for(let i=0; i < roomAudioNum; i++){
-      //   console.log('loop:', i);
-      // };
-      this.audioPlayers.forEach(function (audioPlayer) {
-        var audioDuration = audioPlayer.duration;
-        audioPlayer.currentTime = audioDuration;
-        console.log(audioDuration);
-      });
-    },
     showImgModal: function showImgModal() {
-      this.isShowAudio = false;
-      this.isShowImg = true;
+      this.showModal('imgModal');
     },
     showAudioModal: function showAudioModal() {
-      this.isShowImg = false;
-      this.isShowAudio = true;
+      this.showModal('audioModal');
+    },
+    showMovieModal: function showMovieModal() {
+      this.showModal('movieModal');
+    },
+    showRoomSettingModal: function showRoomSettingModal() {
+      this.showModal('roomSettingModal');
+    },
+    showModal: function showModal(target) {
+      for (var key in this.isShow) {
+        if (key != target) {
+          this.isShow[key] = false;
+        } else if (key == target) {
+          this.isShow[key] = true;
+        }
+      }
     },
     closeModal: function closeModal() {
-      this.isShowImg = false;
-      this.isShowAudio = false;
+      for (var key in this.isShow) {
+        this.isShow[key] = false;
+      }
     },
     setRoomImgUrl: function setRoomImgUrl(url) {
       this.roomImgUrl = url;
@@ -2355,237 +2374,18 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addAudio: function addAudio(audio) {
-      audio['isPlay'] = false;
-      audio['isLoop'] = false;
-      var beforeAudioNum = this.roomAudios.length; // オーディオは1ルームに5つまで。
-      // 既に5つある場合は一つ消してから追加。
-
-      if (beforeAudioNum == this.maxAudioNum) {
-        // プレイヤーの初期化
-        var resetPlayerIndex = this.roomAudios[0]['player_index'];
-        this.audioPlayers[resetPlayerIndex].pause();
-        var newAudio = new Audio();
-        this.audioPlayers.splice(resetPlayerIndex, 1, newAudio); // オーディオの入れ替え
-
-        this.roomAudios.splice(0, 1);
-      }
-
-      this.roomAudios.push(audio); // 追加されたオーディオの情報を取得
-
-      var addedAudioIndex = this.roomAudios.length - 1;
-      var addedAudio = this.roomAudios[addedAudioIndex];
-      var addedAudioUrl = addedAudio['audio_url']; // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
-
-      var emptyPlayerIndex;
-      this.audioPlayers.some(function (audioPlayer, index) {
-        emptyPlayerIndex = index; // console.log(index, audioPlayer.src);
-
-        if (audioPlayer.src == "") {
-          return true;
-        }
-
-        ;
-      });
-      this.audioPlayers[emptyPlayerIndex].src = addedAudioUrl;
-      console.log('ループ再生フラグ', this.audioPlayers[emptyPlayerIndex].loop); // プレイヤーのインデックスをaudioに設定
-
-      addedAudio['player_index'] = emptyPlayerIndex; // オーディオサムネイルの更新
-
-      this.$nextTick(function () {
-        // DOMの更新を待つ
-        this.updateAudioThumbnail(); // this.updateAudioPlayers();
-      });
+      this.$refs.roomAudio.addAudio(audio);
     },
-    deleteAudio: function deleteAudio(event) {
-      var audioIndex = event.target.parentNode.getAttribute('id');
-      var playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
-
-      var newAudioPlayer = new Audio(); // 新しいplayerを用意して、
-
-      this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
-      // デバッグ用後で消す
-
-      for (var i = 0; i < 5; i++) {
-        console.log(i, this.audioPlayers[i].src);
-      }
-
-      this.roomAudios.splice(audioIndex, 1); // オーディオの更新
-
-      this.$nextTick(function () {
-        // DOMの更新を待つ
-        this.updateAudioThumbnail(); // this.updateAudioPlayers();
-      });
-    },
-    updateAudioThumbnail: function updateAudioThumbnail() {
-      var audioDoms = document.getElementsByClassName('audio-wrapper');
-      var audioNum = audioDoms.length;
-
-      for (var i = 0; i < audioNum; i++) {
-        // オーディオのサムネイル表示&更新
-        var audioThumbnail = audioDoms[i].firstChild;
-        var targetAudio = this.roomAudios[i];
-        audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
-      }
-    },
-    loopAudio: function loopAudio(event) {
-      var audioIndex = event.target.parentNode.getAttribute('id');
-      var playerIndex = this.roomAudios[audioIndex]['player_index'];
-      var audioPlayer = this.audioPlayers[playerIndex];
-
-      if (audioPlayer.loop == false) {
-        audioPlayer.loop = true;
-      } else if (audioPlayer.loop == true) {
-        audioPlayer.loop = false;
-      }
-
-      this.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
-    },
-    loopYoutube: function loopYoutube() {
-      if (this.isLoopYoutube == false) {
-        this.isLoopYoutube = true;
-      } else {
-        this.isLoopYoutube = false;
-      }
-
-      alert(this.isLoopYoutube);
-    },
-    // updateAudioPlayers() {
-    //   const audioSrcs = [];
-    //   this.roomAudios.forEach(function(roomAudio){;
-    //     audioSrcs.push(roomAudio['audio_url']);
-    //   });
-    //   this.audioPlayers.forEach(function(audioPlayer, index){
-    //     audioPlayer.src = audioSrcs[index];
-    //   });
-    // },
     judgeDelAudio: function judgeDelAudio(url) {
-      if (this.roomAudioUrl == url) {
-        this.roomAudioUrl = "";
-        this.roomAudioThumbnailUrl = "";
-      }
+      this.$refs.roomAudio.judgeDelAudio(url);
     },
-    playRoomAudio: function playRoomAudio(event) {
-      var audioIndex = event.target.parentNode.getAttribute('id');
-      var playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].play();
-      this.roomAudios[audioIndex]['isPlay'] = true;
-    },
-    pauseRoomAudio: function pauseRoomAudio(event) {
-      var audioIndex = event.target.parentNode.getAttribute('id');
-      var playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].pause();
-      this.roomAudios[audioIndex]['isPlay'] = false;
-    },
-    finishAudio: function finishAudio(i) {
-      var roomAudioNum = this.roomAudios.length;
-
-      for (var j = 0; j < roomAudioNum; j++) {
-        var roomAudio = this.roomAudios[j];
-
-        if (roomAudio['player_index'] == i && roomAudio['isLoop'] == false) {
-          this.roomAudios[j]['isPlay'] = false;
-        }
-      }
-    },
-    createYtPlayer: function createYtPlayer(videoId) {
-      this.ytPlayer = new YT.Player('player', {
-        height: '320',
-        width: '500',
-        videoId: videoId,
-        playerVars: {
-          'autoplay': 0,
-          'loop': false,
-          'controls': true,
-          'modestbranding': 1,
-          'fs': false
-        },
-        events: {
-          'onReady': this.onPlayReady(),
-          'onStateChange': this.onPlayerStateChange.bind(this)
-        }
-      });
-    },
-    onPlayReady: function onPlayReady() {
-      this.isShowYoutube = true;
-      console.log(this.isShowYoutube); // this.ytPlayer.loadVideoById(this.youtubeVideoId);
-    },
-    onPlayerStateChange: function onPlayerStateChange(event) {
-      if (event.data == 0 && this.isLoopYoutube == true) {
-        this.ytPlayer.seekTo(0);
-        event.target.playVideo(); // console.log('stateChange called!', event.data);
-      }
-    },
-    submitYoutubeUrl: function submitYoutubeUrl(event) {
-      var url = event.target.previousElementSibling.value; // console.log(url);
-
-      var pattern = /v=.*/;
-      var matchText = url.match(pattern); // object型で返ってくる
-
-      matchText = matchText.toString(); // object⇒stringへ変換
-
-      var videoId = matchText.substring(2, 13); // videoID部分を切りだし
-
-      this.youtubeVideoId = videoId;
-      alert(this.ytPlayer);
-
-      if (this.ytPlayer == "") {
-        this.createYtPlayer(this.youtubeVideoId);
-      } else if (this.ytPlayer != "") {
-        this.ytPlayer.cueVideoById(this.youtubeVideoId);
-        this.onPlayReady();
-      } // alert(this.youtubeVideoId);
-
-    },
-    hideYoutube: function hideYoutube() {
-      this.isShowYoutube = false;
+    createMovieFrame: function createMovieFrame() {
+      var vars = this.youtubePlayerVars;
+      this.$refs.roomMovie.createYtPlayer(vars);
     }
   },
-  created: function created() {
-    // youtubeplayer
-    var tag = window.document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    tag.async = true;
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = function () {
-      console.log('get youtube ready'); // alert('get youtube ready');
-    }; // // 4. The API will call this function when the video player is ready.
-    // function onPlayerReady(event) {
-    //   event.target.playVideo();
-    // }
-    // // 5. The API calls this function when the player's state changes.
-    // //    The function indicates that when playing a video (state=1),
-    // //    the player should play for six seconds and then stop.
-    // var done = false;
-    // function onPlayerStateChange(event) {
-    //   if (event.data == YT.PlayerState.PLAYING && !done) {
-    //     setTimeout(stopVideo, 6000);
-    //     done = true;
-    //   }
-    // }
-    // function stopVideo() {
-    //   player.stopVideo();
-    // }
-
-  },
-  mounted: function mounted() {
-    for (var i = 0; i < this.maxAudioNum; i++) {
-      var audioPlayer = new Audio();
-      this.audioPlayers.push(audioPlayer);
-    } // オーディオの再生終了を監視
-
-
-    for (var _i = 0; _i < this.maxAudioNum; _i++) {
-      this.audioPlayers[_i].onended = this.finishAudio.bind(this, _i);
-    }
-
-    ; // // youtube playerのエラー検知
-    // this.ytPlayer.onError = function(errorCode){
-    //   alert(errorCode);
-    // };
-  }
+  created: function created() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -2878,6 +2678,504 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // props : ['youtubePlayerVars'],
+  data: function data() {
+    return {
+      youtubeUrl: '',
+      movieFrameWidth: 500,
+      movieFrameHeight: 320,
+      isLoopYoutube: false
+    };
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.$emit('close-modal');
+    },
+    extractVideoIdFromUrl: function extractVideoIdFromUrl() {
+      var url = this.youtubeUrl;
+      var pattern = /v=.*/;
+      var matchText = url.match(pattern); // object型で返ってくる
+
+      matchText = matchText.toString(); // object⇒stringへ変換
+
+      var videoId = matchText.substring(2, 13); // videoID部分を切りだし
+
+      return videoId;
+    },
+    setParentYoutubePlayerVars: function setParentYoutubePlayerVars() {
+      // this.$parent.youtubePlayerVars.videoId = this.videoId;
+      // this.$parent.youtubePlayerVars.width = this.movieFrameWidth;
+      // this.$parent.youtubePlayerVars.height = this.movieFrameHeight;
+      this.$parent.youtubePlayerVars['videoId'] = this.extractVideoIdFromUrl();
+      this.$parent.youtubePlayerVars['width'] = this.movieFrameWidth;
+      this.$parent.youtubePlayerVars['height'] = this.movieFrameHeight; // 親コンポーネントの動画フレーム作成メソッドを実行
+
+      this.$emit('create-movie-frame'); // alert('send youtube player vars');
+    },
+    loopYoutube: function loopYoutube() {
+      if (this.isLoopYoutube == false) {
+        this.isLoopYoutube = true;
+      } else {
+        this.isLoopYoutube = false;
+      }
+    }
+  },
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['roomAudios'],
+  data: function data() {
+    return {
+      maxAudioNum: 5,
+      // roomAudios : [],
+      audioPlayers: []
+    };
+  },
+  methods: {
+    playRoomAudio: function playRoomAudio(event) {
+      var audioIndex = event.target.parentNode.getAttribute('id');
+      var playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+      this.audioPlayers[playerIndex].play();
+      this.$parent.roomAudios[audioIndex]['isPlay'] = true;
+    },
+    pauseRoomAudio: function pauseRoomAudio(event) {
+      var audioIndex = event.target.parentNode.getAttribute('id');
+      var playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+      this.audioPlayers[playerIndex].pause();
+      this.$parent.roomAudios[audioIndex]['isPlay'] = false;
+    },
+    onFinishAudio: function onFinishAudio(i) {
+      var roomAudioNum = this.$parent.roomAudios.length;
+
+      for (var j = 0; j < roomAudioNum; j++) {
+        var roomAudio = this.$parent.roomAudios[j];
+
+        if (roomAudio['player_index'] == i && roomAudio['isLoop'] == false) {
+          this.$parent.roomAudios[j]['isPlay'] = false;
+        }
+      }
+    },
+    finishPlayAudio: function finishPlayAudio() {
+      this.audioPlayers.forEach(function (audioPlayer) {
+        var audioDuration = audioPlayer.duration;
+        audioPlayer.currentTime = audioDuration;
+        console.log(audioDuration);
+      });
+    },
+    addAudio: function addAudio(audio) {
+      audio['isPlay'] = false;
+      audio['isLoop'] = false;
+      var beforeAudioNum = this.$parent.roomAudios.length; // オーディオは1ルームに5つまで。
+      // 既に5つある場合は一つ消してから追加。
+
+      if (beforeAudioNum == this.maxAudioNum) {
+        // プレイヤーの初期化
+        var resetPlayerIndex = this.$parent.roomAudios[0]['player_index'];
+        this.audioPlayers[resetPlayerIndex].pause();
+        var newAudio = new Audio();
+        this.audioPlayers.splice(resetPlayerIndex, 1, newAudio); // オーディオの入れ替え
+
+        this.$parent.roomAudios.splice(0, 1);
+      }
+
+      this.$parent.roomAudios.push(audio); // 追加されたオーディオの情報を取得
+
+      var addedAudioIndex = this.$parent.roomAudios.length - 1;
+      var addedAudio = this.$parent.roomAudios[addedAudioIndex];
+      var addedAudioUrl = addedAudio['audio_url']; // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
+
+      var emptyPlayerIndex;
+      this.audioPlayers.some(function (audioPlayer, index) {
+        emptyPlayerIndex = index; // console.log(index, audioPlayer.src);
+
+        if (audioPlayer.src == "") {
+          return true;
+        }
+
+        ;
+      });
+      this.audioPlayers[emptyPlayerIndex].src = addedAudioUrl;
+      console.log('ループ再生フラグ', this.audioPlayers[emptyPlayerIndex].loop); // プレイヤーのインデックスをaudioに設定
+
+      addedAudio['player_index'] = emptyPlayerIndex; // オーディオサムネイルの更新
+
+      this.$nextTick(function () {
+        // DOMの更新を待つ
+        this.updateAudioThumbnail();
+      });
+    },
+    updateAudioThumbnail: function updateAudioThumbnail() {
+      var audioDoms = document.getElementsByClassName('audio-wrapper');
+      var audioNum = audioDoms.length;
+
+      for (var i = 0; i < audioNum; i++) {
+        // オーディオのサムネイル表示&更新
+        var audioThumbnail = audioDoms[i].firstChild;
+        var targetAudio = this.$parent.roomAudios[i];
+        audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
+      }
+    },
+    judgeDelAudio: function judgeDelAudio(url) {
+      if (this.roomAudioUrl == url) {
+        this.roomAudioUrl = "";
+        this.roomAudioThumbnailUrl = "";
+      }
+    },
+    deleteAudio: function deleteAudio(event) {
+      var audioIndex = event.target.parentNode.getAttribute('id');
+      var playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+      this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
+
+      var newAudioPlayer = new Audio(); // 新しいplayerを用意して、
+
+      this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
+      // デバッグ用後で消す
+
+      for (var i = 0; i < 5; i++) {
+        console.log(i, this.audioPlayers[i].src);
+      }
+
+      this.$parent.roomAudios.splice(audioIndex, 1); // オーディオの更新
+
+      this.$nextTick(function () {
+        // DOMの更新を待つ
+        this.updateAudioThumbnail(); // this.updateAudioPlayers();
+      });
+    },
+    setAudioLoop: function setAudioLoop(event) {
+      var audioIndex = event.target.parentNode.getAttribute('id');
+      var playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+      var audioPlayer = this.audioPlayers[playerIndex];
+
+      if (audioPlayer.loop == false) {
+        audioPlayer.loop = true;
+      } else if (audioPlayer.loop == true) {
+        audioPlayer.loop = false;
+      }
+
+      this.$parent.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
+    },
+    setAudioVolume: function setAudioVolume(event) {
+      console.log('called setAudioVolume', event.target.getAttribute('class'));
+    }
+  },
+  mounted: function mounted() {
+    for (var i = 0; i < this.maxAudioNum; i++) {
+      var audioPlayer = new Audio();
+      this.audioPlayers.push(audioPlayer);
+    } // オーディオの再生終了を監視
+
+
+    for (var _i = 0; _i < this.maxAudioNum; _i++) {
+      this.audioPlayers[_i].onended = this.onFinishAudio.bind(this, _i);
+    }
+
+    ;
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['roomImgUrl', 'isShowYoutube'],
+  data: function data() {
+    return {};
+  },
+  methods: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['isShowYoutube' // 'youtubePlayerVars'
+  ],
+  data: function data() {
+    return {
+      ytPlayer: "",
+      isLoopYoutube: false,
+      playerVars: {} // youtubeVideoId : '',
+      // movieFrameWidth : 320,
+      // movieFrameHeight : 500,
+
+    };
+  },
+  methods: {
+    loopYoutube: function loopYoutube() {
+      if (this.isLoopYoutube == false) {
+        this.isLoopYoutube = true;
+      } else {
+        this.isLoopYoutube = false;
+      }
+    },
+    createYtPlayer: function createYtPlayer(vars) {
+      this.ytPlayer = new YT.Player('player', {
+        height: vars['height'],
+        width: vars['width'],
+        videoId: vars['videoId'],
+        playerVars: {
+          // 'autoplay' : 0,
+          // 'loop' : false,
+          // 'controls' : true,
+          'modestbranding': 1 // 'fs' : false,
+
+        },
+        events: {
+          'onReady': this.onPlayReady(),
+          'onStateChange': this.onPlayerStateChange.bind(this)
+        }
+      });
+    },
+    onPlayReady: function onPlayReady() {
+      this.$parent.isShowYoutube = true;
+      console.log(this.$parent.isShowYoutube); // this.ytPlayer.loadVideoById(this.youtubeVideoId);
+    },
+    onPlayerStateChange: function onPlayerStateChange(event) {
+      if (event.data == 0 && this.isLoopYoutube == true) {
+        this.ytPlayer.seekTo(0);
+        event.target.playVideo();
+      }
+    },
+    submitYoutubeUrl: function submitYoutubeUrl(event) {// let url = event.target.previousElementSibling.value;
+      // // console.log(url);
+      // let pattern = /v=.*/;
+      // let matchText = url.match(pattern); // object型で返ってくる
+      // matchText = matchText.toString(); // object⇒stringへ変換
+      // let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
+      // this.youtubeVideoId = videoId;
+      // if(this.ytPlayer == ""){
+      //   this.createYtPlayer(this.youtubeVideoId);
+      // } else if(this.ytPlayer != ""){
+      //   this.ytPlayer.cueVideoById(this.youtubeVideoId);
+      //   this.onPlayReady();
+      // }
+    },
+    deleteYoutube: function deleteYoutube() {
+      this.ytPlayer = "";
+      this.initPlayerDom();
+      this.$parent.isShowYoutube = false;
+    },
+    initPlayerDom: function initPlayerDom() {
+      // 初期状態に戻す(現在の再生プレイヤーを削除し、playerのdivタグを配置)
+      // 1.プレイヤー削除
+      var target = document.getElementById('player');
+      var clone = target.cloneNode(false);
+      target.parentNode.replaceChild(clone, target); // 2.divタグ配置
+
+      var parent = document.getElementById('yt-player-wrapper');
+      parent.innerHTML = '<div id="player"><div>';
+    }
+  },
+  created: function created() {
+    // youtubeplayer
+    var tag = window.document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    tag.async = true;
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = function () {
+      console.log('get youtube ready');
+    };
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['roomBackgroundColor'],
+  data: function data() {
+    return {// roomBackgroundColor : "",
+    };
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.$emit('close-modal');
+    }
+  },
+  mounted: function mounted() {},
+  watch: {
+    // カラーピッカーの変更に、Room背景色を同期させて即反映
+    roomBackgroundColor: function roomBackgroundColor(newColor) {
+      this.$parent.roomBackgroundColor = newColor;
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=script&lang=js& ***!
@@ -2995,7 +3293,12 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('header-component', __webpack_require__(/*! ./components/HeaderComponent.vue */ "./resources/js/components/HeaderComponent.vue").default);
 Vue.component('test-component', __webpack_require__(/*! ./components/TestComponent.vue */ "./resources/js/components/TestComponent.vue").default);
 Vue.component('img-select-component', __webpack_require__(/*! ./components/ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue").default);
+Vue.component('movie-setting-component', __webpack_require__(/*! ./components/MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue").default);
 Vue.component('audio-select-component', __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue").default);
+Vue.component('room-setting-component', __webpack_require__(/*! ./components/RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue").default);
+Vue.component('room-audio-component', __webpack_require__(/*! ./components/RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue").default);
+Vue.component('room-img-component', __webpack_require__(/*! ./components/RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue").default);
+Vue.component('room-movie-component', __webpack_require__(/*! ./components/RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue").default);
 Vue.component('test-parent-component', __webpack_require__(/*! ./components/TestParentComponent.vue */ "./resources/js/components/TestParentComponent.vue").default);
 Vue.component('create-room-component', __webpack_require__(/*! ./components/CreateRoomComponent.vue */ "./resources/js/components/CreateRoomComponent.vue").default);
 /**
@@ -7576,7 +7879,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 2;\n    width: 100%;\n    height: 100%;\n    /* padding :1em; */\n    background-color:white; \n\n    /* モーダル内の要素の配置 */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n}\n\n\n/* img */\n#room-img-frame {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 400px;\n    height: 400px;\n    border: 2px;\n    border-style: dotted;\n    border-color: cadetblue;\n}\n#room-img {\n    width: 400px;\n    height: 400px;\n}\n\n\n\n/* audio */\n#audios{\n  display: flex;\n  padding-left: 0;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 20px 10px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  background-color: ghostwhite;\n}\n.icon-wrapper {\n  padding: 20px;\n}\n#disp-img-modal-wrapper {\n  background-color:hotpink;\n}\n#disp-audio-modal-wrapper {\n  background-color: gold;\n}\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color: rgba(0,255,0,0);\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -2;\n  color:  rgba(50,50,180,0.4);\n  /* opacity: 0; */\n  display: none;\n}\n.audio-wrapper:hover\n.room-audio-play-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  color:  rgba(0,255,0,1);\n}\n.audio-wrapper:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  color:  rgba(180,50,50,0.4);\n}\n.audio-wrapper:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,0.8);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n.isLoop {\n  display: inline-block;\n  color:  rgba(10,10,255,0.6);\n}\n.yt-form-wrapper {\n}\n#youtube-url-form{\n  margin: 20px;\n}\n.youtube-url-description {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.room-yt-loop-icon {\n  margin: 10px;\n}\n.hidden {\n  display: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n\n  height: 100%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  background-color: ghostwhite;\n  box-shadow: -1px 1px 5px lightgrey;\n}\n.icon-wrapper {\n  padding: 20px;\n}\n#disp-img-modal-wrapper {\n  background-color:lightseagreen;\n}\n#disp-movie-modal-wrapper {\n  color: orangered;\n}\n#disp-audio-modal-wrapper {\n  background-color: gold;\n}\n#disp-room-setting-modal-wrapper {\n  background-color: lightslategray;\n  color: white;\n}\n.hidden {\n  display: none;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7601,6 +7904,126 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#img-wrapper {\n  /* モーダル内の画像サムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.img-list {\n  position: relative;\n  width: 49.5%;\n  height: 140px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  background-color: grey;\n}\n.img-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover {\n  z-index: 2;\n  background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#delete-img-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  margin-left: 5px;\n  margin-top: 5px;\n  color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.user-own-img {\n  width: 100%;\n  height: 140px;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* コンテンツのCSS */\n#setting-wrapper {\n  margin: 20px 0;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.yt-setting-wrapper {\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n}\n\n/* #player-setting-title, */\n#youtube-url-input,\n#set-movie-frame-width,\n#set-movie-frame-height {\n  margin-bottom: 7px;\n}\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* audio */\n#room-Audio-wrapper {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 100%;\n  background-color: black;\n}\n#audios{\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 15px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon {\n  position: absolute;\n  right: -40px;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-wrapper:hover {\n  opacity: 1;\n}\n.audio-wrapper:hover\n.room-audio-play-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-wrapper:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-wrapper:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-wrapper:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-wrapper:hover\n.room-audio-vol-icon {\n  z-index: 2;\n  display: inline-block;\n}\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n\n\n/* 再生関連 */\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* img */\n#room-img-frame {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 400px;\n  height: 400px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n#room-img {\n  width: 400px;\n  height: 400px;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n#youtube-url-form{\n  margin: 20px;\n}\n.youtube-url-description {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.room-yt-loop-icon {\n  margin: 10px;\n}\n\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* コンテンツのCSS */\n#setting-wrapper {\n  margin: 20px 0;\n  width: 80%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7648,7 +8071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 60%;\n  height: 80%;\n  padding :1em;\n  background-color:aquamarine; \n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.room-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44824,6 +45247,156 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MovieSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomAudioComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -45367,6 +45940,211 @@ component.options.__file = "resources/js/components/ImgSelectComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/MovieSettingComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/MovieSettingComponent.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MovieSettingComponent.vue?vue&type=template&id=112e17fc& */ "./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&");
+/* harmony import */ var _MovieSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MovieSettingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MovieSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MovieSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _MovieSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MovieSettingComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomAudioComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/RoomAudioComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomAudioComponent.vue?vue&type=template&id=30d91c2d& */ "./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d&");
+/* harmony import */ var _RoomAudioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomAudioComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RoomAudioComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomAudioComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _RoomAudioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RoomAudioComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomImgComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/RoomImgComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=template&id=323124e0& */ "./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&");
+/* harmony import */ var _RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RoomImgComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RoomImgComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomMovieComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/RoomMovieComponent.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=template&id=e56789da& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&");
+/* harmony import */ var _RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RoomMovieComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RoomMovieComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomSettingComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/RoomSettingComponent.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=template&id=016b6473& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&");
+/* harmony import */ var _RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.render,
+  _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/RoomSettingComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/TestComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/TestComponent.vue ***!
@@ -45533,6 +46311,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MovieSettingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomAudioComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/TestComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/TestComponent.vue?vue&type=script&lang=js& ***!
@@ -45600,6 +46458,71 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgSelectComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgSelectComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImgSelectComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MovieSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomAudioComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -45711,6 +46634,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgSelectComponent_vue_vue_type_template_id_3ae44fc9___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgSelectComponent_vue_vue_type_template_id_3ae44fc9___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgSelectComponent.vue?vue&type=template&id=3ae44fc9& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ImgSelectComponent.vue?vue&type=template&id=3ae44fc9&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MovieSettingComponent_vue_vue_type_template_id_112e17fc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MovieSettingComponent.vue?vue&type=template&id=112e17fc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomAudioComponent_vue_vue_type_template_id_30d91c2d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomAudioComponent.vue?vue&type=template&id=30d91c2d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=template&id=323124e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=template&id=e56789da& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=template&id=016b6473& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&");
 
 
 /***/ }),
@@ -46105,6 +47113,7 @@ var render = function() {
   return _c(
     "div",
     {
+      style: { "background-color": _vm.roomBackgroundColor },
       attrs: { id: "field" },
       on: {
         click: function($event) {
@@ -46116,206 +47125,31 @@ var render = function() {
       }
     },
     [
-      _c(
-        "button",
-        { attrs: { id: "finish-button" }, on: { click: _vm.finishPlayAudio } },
-        [_vm._v("オーディオ再生終了")]
-      ),
+      _c("room-img-component", {
+        attrs: { roomImgUrl: _vm.roomImgUrl, isShowYoutube: _vm.isShowYoutube },
+        on: { "parent-action": _vm.showImgModal }
+      }),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isShowYoutube,
-              expression: "!(isShowYoutube)"
-            }
-          ],
-          attrs: { id: "room-img-frame" },
-          on: {
-            click: function($event) {
-              return _vm.showImgModal()
-            }
-          }
-        },
-        [
-          _c("p", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.roomImgUrl,
-                expression: "!(roomImgUrl)"
-              }
-            ]
-          }),
-          _vm._v(" "),
-          _c("img", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.roomImgUrl,
-                expression: "roomImgUrl"
-              }
-            ],
-            attrs: {
-              id: "room-img",
-              src: _vm.roomImgUrl,
-              alt: "画像が選択されていません"
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "youtube-url-form" } }, [
-        _c(
-          "div",
+      _c("room-movie-component", {
+        directives: [
           {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isShowYoutube,
-                expression: "isShowYoutube"
-              }
-            ],
-            attrs: { id: "yt-player-wrapper" }
-          },
-          [
-            _c("div", { attrs: { id: "player" } }),
-            _vm._v(" "),
-            _c("p", { staticClass: "youtube-url-description" }, [
-              _vm._v(
-                "youtube動画を設定する場合は、動画ページのURLを入力してください。"
-              )
-            ])
-          ]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "yt-form-wrapper" }, [
-        _c("input", {
-          attrs: {
-            type: "text",
-            id: "youtube-url-input",
-            size: "70",
-            placeholder: "youtube movie URL"
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShowYoutube,
+            expression: "isShowYoutube"
           }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "submit" }, on: { click: _vm.submitYoutubeUrl } },
-          [_vm._v("確定")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          { attrs: { type: "submit" }, on: { click: _vm.hideYoutube } },
-          [_vm._v("画像を使用")]
-        )
-      ]),
+        ],
+        ref: "roomMovie",
+        attrs: {
+          isShowYoutube: _vm.isShowYoutube,
+          youtubePlayerVars: _vm.youtubePlayerVars
+        }
+      }),
       _vm._v(" "),
-      _c("div", { staticClass: "yt-setting-wrapper" }, [
-        _c("i", {
-          staticClass: "room-yt-loop-icon fas fa-undo-alt fa-2x",
-          class: { isLoop: _vm.isLoopYoutube },
-          on: { click: _vm.loopYoutube }
-        }),
-        _vm._v(" "),
-        _c("p", [_vm._v("ループ")])
-      ]),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "room-audio-frame" } }, [
-        _c(
-          "ul",
-          { attrs: { id: "audios" } },
-          [
-            _vm._l(_vm.roomAudios, function(roomAudio, index) {
-              return _c(
-                "li",
-                {
-                  key: roomAudio.id,
-                  staticClass: "audio-wrapper",
-                  class: { isPlay: roomAudio["isPlay"] },
-                  attrs: { id: index }
-                },
-                [
-                  _c("img", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: roomAudio,
-                        expression: "roomAudio"
-                      }
-                    ],
-                    staticClass: "room-audio-thumbnail",
-                    attrs: { src: "", alt: index }
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !roomAudio["isPlay"],
-                        expression: "!(roomAudio['isPlay'])"
-                      }
-                    ],
-                    staticClass:
-                      "room-audio-play-icon fas fa-caret-right fa-4x",
-                    on: { click: _vm.playRoomAudio }
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: roomAudio["isPlay"],
-                        expression: "roomAudio['isPlay']"
-                      }
-                    ],
-                    staticClass: "room-audio-pause-icon fas fa-pause fa-3x",
-                    on: { click: _vm.pauseRoomAudio }
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "room-audio-delete-icon fas fa-times fa-2x",
-                    on: { click: _vm.deleteAudio }
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "room-audio-loop-icon fas fa-undo-alt fa-2x",
-                    class: { isLoop: roomAudio["isLoop"] },
-                    on: { click: _vm.loopAudio }
-                  })
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm._l(5, function(n) {
-              return _c("li", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: !_vm.roomAudios[n - 1],
-                    expression: "!(roomAudios[n-1])"
-                  }
-                ],
-                key: n,
-                staticClass: "non-audio-frame"
-              })
-            })
-          ],
-          2
-        )
-      ]),
+      _c("room-audio-component", {
+        ref: "roomAudio",
+        attrs: { roomAudios: _vm.roomAudios }
+      }),
       _vm._v(" "),
       _c("div", { attrs: { id: "disp-modal-zone" } }, [
         _c("div", { attrs: { id: "disp-modal-wrapper" } }, [
@@ -46337,6 +47171,20 @@ var render = function() {
             "div",
             {
               staticClass: "icon-wrapper",
+              attrs: { id: "disp-movie-modal-wrapper" },
+              on: {
+                click: function($event) {
+                  return _vm.showMovieModal()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fab fa-youtube fa-2x" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "icon-wrapper",
               attrs: { id: "disp-audio-modal-wrapper" },
               on: {
                 click: function($event) {
@@ -46345,6 +47193,20 @@ var render = function() {
               }
             },
             [_c("i", { staticClass: "fas fa-music fa-2x" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "icon-wrapper",
+              attrs: { id: "disp-room-setting-modal-wrapper" },
+              on: {
+                click: function($event) {
+                  return _vm.showRoomSettingModal()
+                }
+              }
+            },
+            [_c("i", { staticClass: "fas fa-cog fa-2x" })]
           )
         ])
       ]),
@@ -46354,8 +47216,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowImg,
-            expression: "isShowImg"
+            value: _vm.isShow["imgModal"],
+            expression: "isShow['imgModal']"
           }
         ],
         on: {
@@ -46365,13 +47227,28 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("movie-setting-component", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShow["movieModal"],
+            expression: "isShow['movieModal']"
+          }
+        ],
+        on: {
+          "close-modal": _vm.closeModal,
+          "create-movie-frame": _vm.createMovieFrame
+        }
+      }),
+      _vm._v(" "),
       _c("audio-select-component", {
         directives: [
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowAudio,
-            expression: "isShowAudio"
+            value: _vm.isShow["audioModal"],
+            expression: "isShow['audioModal']"
           }
         ],
         on: {
@@ -46379,6 +47256,19 @@ var render = function() {
           "add-audio": _vm.addAudio,
           "audio-del-notice": _vm.judgeDelAudio
         }
+      }),
+      _vm._v(" "),
+      _c("room-setting-component", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShow["roomSettingModal"],
+            expression: "isShow['roomSettingModal']"
+          }
+        ],
+        attrs: { roomBackgroundColor: _vm.roomBackgroundColor },
+        on: { "close-modal": _vm.closeModal }
       })
     ],
     1
@@ -46712,6 +47602,467 @@ var render = function() {
             )
           ]
         )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "right-slide" } }, [
+    _c("div", { attrs: { id: "select-modal" } }, [
+      _c("div", { staticClass: "close-icon-wrapper" }, [
+        _c("i", {
+          staticClass: "fas fa-chevron-circle-right fa-3x",
+          attrs: { id: "close-modal-icon" },
+          on: {
+            click: function($event) {
+              return _vm.closeModal()
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "area-wrapper" } }, [
+        _c("div", { attrs: { id: "setting-wrapper" } }, [
+          _c("p", { attrs: { id: "player-setting-title" } }, [
+            _vm._v("動画Player設定")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "yt-form-wrapper" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.youtubeUrl,
+                  expression: "youtubeUrl"
+                }
+              ],
+              attrs: {
+                type: "text",
+                id: "youtube-url-input",
+                size: "30",
+                placeholder: "youtube movie URL"
+              },
+              domProps: { value: _vm.youtubeUrl },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.youtubeUrl = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "yt-setting-wrapper" }, [
+            _c("div", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.movieFrameWidth,
+                    expression: "movieFrameWidth"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  id: "set-movie-frame-width",
+                  size: "5",
+                  placeholder: "横幅"
+                },
+                domProps: { value: _vm.movieFrameWidth },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.movieFrameWidth = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("横幅")])
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.movieFrameHeight,
+                    expression: "movieFrameHeight"
+                  }
+                ],
+                attrs: {
+                  type: "text",
+                  id: "set-movie-frame-height",
+                  size: "5",
+                  placeholder: "縦幅"
+                },
+                domProps: { value: _vm.movieFrameHeight },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.movieFrameHeight = $event.target.value
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("縦幅")])
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                attrs: { type: "submit" },
+                on: { click: _vm.setParentYoutubePlayerVars }
+              },
+              [_vm._v("再生プレイヤー作成")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "room-yt-loop-icon fas fa-undo-alt fa-2x",
+            class: { isLoop: _vm.isLoopYoutube },
+            on: { click: _vm.loopYoutube }
+          })
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomAudioComponent.vue?vue&type=template&id=30d91c2d& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "room-Audio-wrapper" } }, [
+    _c(
+      "button",
+      { attrs: { id: "finish-button" }, on: { click: _vm.finishPlayAudio } },
+      [_vm._v("オーディオ再生終了")]
+    ),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "room-audio-frame" } }, [
+      _c(
+        "ul",
+        { attrs: { id: "audios" } },
+        [
+          _vm._l(_vm.roomAudios, function(roomAudio, index) {
+            return _c(
+              "li",
+              {
+                key: roomAudio.id,
+                staticClass: "audio-wrapper",
+                class: { isPlay: roomAudio["isPlay"] },
+                attrs: { id: index }
+              },
+              [
+                _c("img", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: roomAudio,
+                      expression: "roomAudio"
+                    }
+                  ],
+                  staticClass: "room-audio-thumbnail",
+                  attrs: { src: "", alt: index }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !roomAudio["isPlay"],
+                      expression: "!(roomAudio['isPlay'])"
+                    }
+                  ],
+                  staticClass: "room-audio-play-icon fas fa-caret-right fa-4x",
+                  on: { click: _vm.playRoomAudio }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: roomAudio["isPlay"],
+                      expression: "roomAudio['isPlay']"
+                    }
+                  ],
+                  staticClass: "room-audio-pause-icon fas fa-pause fa-3x",
+                  on: { click: _vm.pauseRoomAudio }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "room-audio-delete-icon fas fa-times fa-2x",
+                  on: { click: _vm.deleteAudio }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "room-audio-loop-icon fas fa-undo-alt fa-2x",
+                  class: { isLoop: roomAudio["isLoop"] },
+                  on: { click: _vm.setAudioLoop }
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  staticClass: "room-audio-vol-icon fas fa-volume-off fa-2x",
+                  on: { click: _vm.setAudioVolume }
+                })
+              ]
+            )
+          }),
+          _vm._v(" "),
+          _vm._l(5, function(n) {
+            return _c("li", {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.roomAudios[n - 1],
+                  expression: "!(roomAudios[n-1])"
+                }
+              ],
+              key: n,
+              staticClass: "non-audio-frame"
+            })
+          })
+        ],
+        2
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "room-img-wrapper" } }, [
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.isShowYoutube,
+            expression: "!(isShowYoutube)"
+          }
+        ],
+        attrs: { id: "room-img-frame" },
+        on: {
+          click: function($event) {
+            return _vm.$emit("parent-action")
+          }
+        }
+      },
+      [
+        _c("p", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.roomImgUrl,
+              expression: "!(roomImgUrl)"
+            }
+          ]
+        }),
+        _vm._v(" "),
+        _c("img", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.roomImgUrl,
+              expression: "roomImgUrl"
+            }
+          ],
+          attrs: {
+            id: "room-img",
+            src: _vm.roomImgUrl,
+            alt: "画像が選択されていません"
+          }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "room-movie-wrapper" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "button",
+      { attrs: { type: "submit" }, on: { click: _vm.deleteYoutube } },
+      [_vm._v("削除")]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "youtube-url-form" } }, [
+      _c("div", { attrs: { id: "yt-player-wrapper" } }, [
+        _c("div", { attrs: { id: "player" } })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: "right-slide" } }, [
+    _c("div", { attrs: { id: "select-modal" } }, [
+      _c("div", { staticClass: "close-icon-wrapper" }, [
+        _c("i", {
+          staticClass: "fas fa-chevron-circle-right fa-3x",
+          attrs: { id: "close-modal-icon" },
+          on: {
+            click: function($event) {
+              return _vm.closeModal()
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "area-wrapper" } }, [
+        _c("div", { attrs: { id: "setting-wrapper" } }, [
+          _c("p", [_vm._v("Room設定")]),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "" } }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.roomBackgroundColor,
+                  expression: "roomBackgroundColor"
+                }
+              ],
+              attrs: { type: "color", id: "room-bg-color" },
+              domProps: { value: _vm.roomBackgroundColor },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.roomBackgroundColor = $event.target.value
+                }
+              }
+            }),
+            _vm._v("\n          Room背景色\n        ")
+          ])
+        ])
       ])
     ])
   ])

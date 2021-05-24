@@ -216,13 +216,6 @@ export default {
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
 
-      // 後で消す
-      // console.log(
-      //   audio['audio_name'],
-      //   audio['audio_url'],
-      //   audio['thumbnail_url'],
-      //   audio['isPlay'] = false
-      // );
 
       this.$emit('add-audio', audio);
     },
@@ -233,7 +226,6 @@ export default {
     dragLeave: function() {
       this.isDragEnter = false;
     },
-    // 右上の×ボタンクリック時のイベント
     closeModal() {
       this.$emit('close-modal');
     },

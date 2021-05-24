@@ -32,21 +32,6 @@ export default {
 </script>
 
 <style>
-  #field {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    width: 60%;
-    height: 80%;
-    padding :1em;
-    background-color:aquamarine; 
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
 
   .room-img {
     display: flex;

@@ -1,49 +1,29 @@
 <template>
-  <div id="field" v-on:click.self="closeModal()">
+  <div id="field"
+   v-on:click.self="closeModal()"
+   :style="{'background-color' : roomBackgroundColor}">
 
-    <!-- オーディオ再生終了 -->
-    <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button>
+    <!-- Room画像コンポーネント -->
+    <room-img-component
+     :roomImgUrl="roomImgUrl"
+     :isShowYoutube="isShowYoutube"
+      v-on:parent-action="showImgModal">
+    </room-img-component>
 
-    <!-- Room画像 -->
-    <div id="room-img-frame" v-on:click="showImgModal()" v-show="!(isShowYoutube)">
-      <p v-show="!(roomImgUrl)"></p>
-      <img id="room-img" :src="roomImgUrl" v-show="roomImgUrl" alt="画像が選択されていません">
-    </div>
+    <!-- Room動画(=youtube)コンポーネント -->
+    <room-movie-component
+    v-show="isShowYoutube"
+    :isShowYoutube="isShowYoutube"
+    :youtubePlayerVars="youtubePlayerVars"
+     ref="roomMovie">
+    </room-movie-component>
 
-    <!-- youtube -->
-    <div id="youtube-url-form">
-    <div id="yt-player-wrapper" v-show="isShowYoutube">
-      <div id='player'></div>
-        <p class="youtube-url-description">youtube動画を設定する場合は、動画ページのURLを入力してください。</p>
-      </div>
-    </div>
-    <div class="yt-form-wrapper">
-      <input type="text" id="youtube-url-input" size=70 placeholder="youtube movie URL">
-      <button type="submit" @click="submitYoutubeUrl">確定</button>
-      <button type="submit" @click="hideYoutube">画像を使用</button>
-    </div>
-    <div class="yt-setting-wrapper">
-      <i class="room-yt-loop-icon fas fa-undo-alt fa-2x" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}"></i>
-      <p>ループ</p>
-    </div>
+    <!-- Roomオーディオコンポーネント -->
+    <room-audio-component
+     :roomAudios="roomAudios"
+     ref="roomAudio">
+    </room-audio-component>
 
-    <!-- Roomオーディオ -->
-    <div id="room-audio-frame">
-
-      <ul id="audios">
-        <li class="audio-wrapper" :class="{'isPlay' : roomAudio['isPlay']}" :id="index" v-for="(roomAudio, index) in roomAudios" :key="roomAudio.id">
-          <img class="room-audio-thumbnail"
-          src="" v-show="roomAudio"
-          :alt="index">
-          <i class="room-audio-play-icon fas fa-caret-right fa-4x" v-on:click="playRoomAudio" v-show="!(roomAudio['isPlay'])"></i>
-          <i class="room-audio-pause-icon fas fa-pause fa-3x" v-on:click="pauseRoomAudio" v-show="roomAudio['isPlay']"></i>
-          <i class="room-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio"></i>
-          <i class="room-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="loopAudio" :class="{'isLoop' : roomAudio['isLoop']}"></i>
-        </li>
-        <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(roomAudios[n-1])">
-        </li>
-      </ul>
-    </div>
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
     <div id="disp-modal-zone">
@@ -53,85 +33,123 @@
         <div id="disp-img-modal-wrapper" class="icon-wrapper" v-on:click="showImgModal()">
           <i class="fas fa-image fa-2x"></i>
         </div>
+        <!-- 動画 -->
+        <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click="showMovieModal()">
+          <i class="fab fa-youtube fa-2x"></i>
+        </div>
         <!-- オーディオ -->
         <div id="disp-audio-modal-wrapper" class="icon-wrapper" v-on:click="showAudioModal()">
           <i class="fas fa-music fa-2x"></i>
         </div>
-
+        <!-- Room設定 -->
+        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click="showRoomSettingModal()">
+          <i class="fas fa-cog fa-2x"></i>
+        </div>
       </div>
     </div>
 
 
-
     <!-- 画像選択コンポーネント -->
     <img-select-component 
-    v-show="isShowImg" 
+    v-show="isShow['imgModal']" 
     v-on:close-modal="closeModal" 
     v-on:set-img-url="setRoomImgUrl"
     v-on:img-del-notice="judgeDelImg">
     </img-select-component>
 
+    <!-- 動画設定コンポーネント -->
+    <movie-setting-component
+    v-show="isShow['movieModal']"
+    v-on:close-modal="closeModal"
+    v-on:create-movie-frame="createMovieFrame">
+    </movie-setting-component>
+
     <!-- オーディオ選択コンポーネント -->
     <audio-select-component 
-    v-show="isShowAudio" 
+    v-show="isShow['audioModal']" 
     v-on:close-modal="closeModal" 
     v-on:add-audio="addAudio"
     v-on:audio-del-notice="judgeDelAudio">
     </audio-select-component>
+
+    <!-- Room設定コンポーネント -->
+    <room-setting-component
+    v-show="isShow['roomSettingModal']"
+    v-on:close-modal="closeModal"
+    :roomBackgroundColor="roomBackgroundColor">
+    </room-setting-component>
+
+
   </div>
 </template>
 
 <script>
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
+import MovieSetting from './MovieSettingComponent.vue';
+import RoomAudio from './RoomAudioComponent.vue';
+import RoomSetting from './RoomSettingComponent.vue';
+import RoomImg from './RoomImgComponent.vue';
+import RoomMovie from './RoomMovieComponent.vue';
 export default {
   components : {
     ImgSelect,
-    AudioSelect
+    AudioSelect,
+    MovieSetting,
+    RoomAudio,
+    RoomSetting,
+    RoomImg,
+    RoomMovie,
   },
   data : () => {
     return {
+      roomBackgroundColor : "#ffffff", // 黒
       button_text : "画像選択",
-      isShowImg : false,
-      isShowAudio : false,
+      isShow : {
+        'imgModal' : false,
+        'audioModal' : false,
+        'movieModal' : false,
+        'roomSettingModal' : false,
+      },
       roomImgUrl : "",
       maxAudioNum : 5,
       roomAudios : [],
-      audioPlayers : [],
-      ytPlayer : "",
       isShowYoutube : false,
+      youtubePlayerVars : {
+        'videoId' : "",
+        'width' : "500",
+        'height' : "320",
+      },
+      youtubePlaySettings : {},
       isLoopYoutube : false,
-      youtubeVideoId : '',
-      // roomAudioUrls : [],
-      // roomAudioThumbnailUrls : []
     }
   },
   methods : {
-    finishPlayAudio(){
-      
-      // let roomAudioNum = this.roomAudios.length;
-      // for(let i=0; i < roomAudioNum; i++){
-      //   console.log('loop:', i);
-      // };
-
-      this.audioPlayers.forEach(function(audioPlayer){
-        let audioDuration = audioPlayer.duration;
-        audioPlayer.currentTime = audioDuration;
-        console.log(audioDuration);
-      });
-
-    },
     showImgModal() {
-      this.isShowAudio = false;
-      this.isShowImg = true;
+      this.showModal('imgModal');
     },
     showAudioModal() {
-      this.isShowImg = false;
-      this.isShowAudio = true;
+      this.showModal('audioModal');
+    },
+    showMovieModal() {
+      this.showModal('movieModal');
+    },
+    showRoomSettingModal() {
+      this.showModal('roomSettingModal');
+    },
+    showModal(target){
+      for(let key in this.isShow){
+        if(key != target){
+          this.isShow[key] = false;
+        } else if( key == target){
+          this.isShow[key] = true;
+        }
+      }
     },
     closeModal() {
-      this.isShowImg = false;
-      this.isShowAudio = false;
+      for(let key in this.isShow){
+        this.isShow[key] = false;
+      }
     },
     setRoomImgUrl(url) {
       this.roomImgUrl = url;
@@ -142,242 +160,19 @@ export default {
       }
     },
     addAudio(audio) {
-      audio['isPlay'] = false;
-      audio['isLoop'] = false;
-      let beforeAudioNum = this.roomAudios.length;
-      // オーディオは1ルームに5つまで。
-      // 既に5つある場合は一つ消してから追加。
-      if(beforeAudioNum == this.maxAudioNum){
-        // プレイヤーの初期化
-        let resetPlayerIndex = this.roomAudios[0]['player_index'];
-        this.audioPlayers[resetPlayerIndex].pause();
-        let newAudio = new Audio();
-        this.audioPlayers.splice(resetPlayerIndex, 1, newAudio);
-
-        // オーディオの入れ替え
-        this.roomAudios.splice(0, 1);
-      }
-      this.roomAudios.push(audio);
-
-      // 追加されたオーディオの情報を取得
-      let addedAudioIndex = this.roomAudios.length - 1;
-      let addedAudio = this.roomAudios[addedAudioIndex];
-      let addedAudioUrl = addedAudio['audio_url'];
-      
-      // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
-      let emptyPlayerIndex;
-      this.audioPlayers.some(function(audioPlayer, index){
-        emptyPlayerIndex = index;
-        // console.log(index, audioPlayer.src);
-        if(audioPlayer.src == ""){
-          return true;
-        };
-      });
-      this.audioPlayers[emptyPlayerIndex].src = addedAudioUrl;
-
-      console.log('ループ再生フラグ', this.audioPlayers[emptyPlayerIndex].loop);
-
-      // プレイヤーのインデックスをaudioに設定
-      addedAudio['player_index'] = emptyPlayerIndex;
-
-      // オーディオサムネイルの更新
-      this.$nextTick(function () { // DOMの更新を待つ
-        this.updateAudioThumbnail();
-        // this.updateAudioPlayers();
-      });
-
+      this.$refs.roomAudio.addAudio(audio);
     },
-    deleteAudio: function(event) {
-      let audioIndex = event.target.parentNode.getAttribute('id');
-      let playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
-      let newAudioPlayer = new Audio(); // 新しいplayerを用意して、
-      this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
-
-      // デバッグ用後で消す
-      for(let i=0; i < 5; i++){
-        console.log(i, this.audioPlayers[i].src);
-      }
-
-      this.roomAudios.splice(audioIndex, 1);
-
-      // オーディオの更新
-      this.$nextTick(function(){ // DOMの更新を待つ
-        this.updateAudioThumbnail();
-        // this.updateAudioPlayers();
-      });
-    },
-    updateAudioThumbnail() {
-      let audioDoms = document.getElementsByClassName('audio-wrapper');
-      let audioNum = audioDoms.length;
-      for(let i = 0; i < audioNum; i++){
-        // オーディオのサムネイル表示&更新
-        let audioThumbnail = audioDoms[i].firstChild;
-        let targetAudio = this.roomAudios[i];
-        audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
-      }
-    },
-    loopAudio: function(event){
-      let audioIndex = event.target.parentNode.getAttribute('id');
-      let playerIndex = this.roomAudios[audioIndex]['player_index'];
-      let audioPlayer = this.audioPlayers[playerIndex];
-      if(audioPlayer.loop == false){
-        audioPlayer.loop = true;
-      } else if(audioPlayer.loop == true){
-        audioPlayer.loop = false;
-      }
-      this.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
-    },
-    loopYoutube(){
-      if(this.isLoopYoutube == false){
-        this.isLoopYoutube = true;
-      } else {
-        this.isLoopYoutube = false;
-      }
-      alert(this.isLoopYoutube);
-    },
-    // updateAudioPlayers() {
-    //   const audioSrcs = [];
-    //   this.roomAudios.forEach(function(roomAudio){;
-    //     audioSrcs.push(roomAudio['audio_url']);
-    //   });
-    //   this.audioPlayers.forEach(function(audioPlayer, index){
-    //     audioPlayer.src = audioSrcs[index];
-    //   });
-    // },
     judgeDelAudio(url) {
-      if(this.roomAudioUrl == url){
-        this.roomAudioUrl = "";
-        this.roomAudioThumbnailUrl = "";
-      }
+      this.$refs.roomAudio.judgeDelAudio(url);
     },
-    playRoomAudio: function(event) {
-      let audioIndex = event.target.parentNode.getAttribute('id');
-      let playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].play();
-      this.roomAudios[audioIndex]['isPlay'] = true;
-    },
-    pauseRoomAudio: function(event) {
-      let audioIndex = event.target.parentNode.getAttribute('id');
-      let playerIndex = this.roomAudios[audioIndex]['player_index'];
-      this.audioPlayers[playerIndex].pause();
-      this.roomAudios[audioIndex]['isPlay'] = false;
-    },
-    finishAudio : function(i){
-      let roomAudioNum = this.roomAudios.length;
-      for(let j=0; j < roomAudioNum; j++){
-        let roomAudio = this.roomAudios[j];
-        if(roomAudio['player_index'] == i && roomAudio['isLoop'] == false){
-          this.roomAudios[j]['isPlay'] = false;
-        }
-      }
-    },
-    createYtPlayer(videoId){
-      this.ytPlayer = new YT.Player('player', {
-        height: '320',
-        width: '500',
-        videoId: videoId,
-        playerVars: {
-          'autoplay' : 0,
-          'loop' : false,
-          'controls' : true,
-          'modestbranding' : 1,
-          'fs' : false,
-        },
-        events: {
-          'onReady': this.onPlayReady(),
-          'onStateChange': this.onPlayerStateChange.bind(this),
-        }
-
-      });
-
-    },
-    onPlayReady() {
-      this.isShowYoutube = true;
-      console.log(this.isShowYoutube);
-      // this.ytPlayer.loadVideoById(this.youtubeVideoId);
-    },
-    onPlayerStateChange(event) {
-
-      if(event.data == 0 && this.isLoopYoutube == true){
-        this.ytPlayer.seekTo(0);
-        event.target.playVideo();
-        // console.log('stateChange called!', event.data);
-      }
-    },
-    submitYoutubeUrl(event) {
-      let url = event.target.previousElementSibling.value;
-      // console.log(url);
-      let pattern = /v=.*/;
-      let matchText = url.match(pattern); // object型で返ってくる
-      matchText = matchText.toString(); // object⇒stringへ変換
-      let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
-      this.youtubeVideoId = videoId;
-      alert(this.ytPlayer);
-      if(this.ytPlayer == ""){
-        this.createYtPlayer(this.youtubeVideoId);
-      } else if(this.ytPlayer != ""){
-        this.ytPlayer.cueVideoById(this.youtubeVideoId);
-        this.onPlayReady();
-      }
-      // alert(this.youtubeVideoId);
-    },
-    hideYoutube() {
-      this.isShowYoutube = false;
+    createMovieFrame(){
+      let vars = this.youtubePlayerVars;
+      this.$refs.roomMovie.createYtPlayer(vars);
     }
     
   },
-  created() {
-    // youtubeplayer
-    const tag = window.document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    tag.async = true;
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = () => {
-      console.log('get youtube ready');
-      // alert('get youtube ready');
-    }
-
-    // // 4. The API will call this function when the video player is ready.
-    // function onPlayerReady(event) {
-    //   event.target.playVideo();
-    // }
-
-    // // 5. The API calls this function when the player's state changes.
-    // //    The function indicates that when playing a video (state=1),
-    // //    the player should play for six seconds and then stop.
-    // var done = false;
-    // function onPlayerStateChange(event) {
-    //   if (event.data == YT.PlayerState.PLAYING && !done) {
-    //     setTimeout(stopVideo, 6000);
-    //     done = true;
-    //   }
-    // }
-    // function stopVideo() {
-    //   player.stopVideo();
-    // }
-
-  },
-  mounted : function() {
-    for(let i = 0; i < this.maxAudioNum; i++){
-      let audioPlayer = new Audio();
-      this.audioPlayers.push(audioPlayer);
-    }
-
-    // オーディオの再生終了を監視
-    for(let i=0; i < this.maxAudioNum; i++){
-      this.audioPlayers[i].onended = this.finishAudio.bind(this,i);
-    };
-
-
-    // // youtube playerのエラー検知
-    // this.ytPlayer.onError = function(errorCode){
-    //   alert(errorCode);
-    // };
-
-  }
+  created() {},
+  mounted() {},
 
 }
 </script>
@@ -390,8 +185,6 @@ export default {
     z-index: 2;
     width: 100%;
     height: 100%;
-    /* padding :1em; */
-    background-color:white; 
 
     /* モーダル内の要素の配置 */
     display: flex;
@@ -400,183 +193,48 @@ export default {
     flex-direction: column;
   }
 
+  #disp-modal-zone {
+    position: absolute;
+    top: 0;
+    right: 0;
 
-/* img */
-  #room-img-frame {
+    height: 100%;
+
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 400px;
-    border: 2px;
-    border-style: dotted;
-    border-color: cadetblue;
+    justify-content: center;
+
   }
 
-  #room-img {
-    width: 400px;
-    height: 400px;
+  #disp-modal-wrapper {
+    background-color: ghostwhite;
+    box-shadow: -1px 1px 5px lightgrey;
   }
 
+  .icon-wrapper {
+    padding: 20px;
+  }
 
+  #disp-img-modal-wrapper {
+    background-color:lightseagreen;
+  }
 
-/* audio */
-#audios{
-  display: flex;
-  padding-left: 0;
-}
+  #disp-movie-modal-wrapper {
+    color: orangered;
+  }
 
-.audio-wrapper,
-.non-audio-frame {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  /* background-color: cornflowerblue; */
-  border: 2px dotted lightgrey;
+  #disp-audio-modal-wrapper {
+    background-color: gold;
+  }
 
-  margin: 20px 10px;
+  #disp-room-setting-modal-wrapper {
+    background-color: lightslategray;
+    color: white;
+  }
 
-  position: relative;
-
-  opacity: 0.7;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.room-audio-thumbnail {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-}
-
-
-#disp-modal-zone {
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#disp-modal-wrapper {
-  background-color: ghostwhite;
-}
-
-.icon-wrapper {
-  padding: 20px;
-}
-
-#disp-img-modal-wrapper {
-  background-color:hotpink;
-}
-
-#disp-audio-modal-wrapper {
-  background-color: gold;
-}
-
-.isPlay {
-  border-color: green;
-  opacity: 1;
-}
-
-.room-audio-play-icon,
-.room-audio-pause-icon {
-  position: absolute;
-  top: 5;
-  z-index: -2;
-  color: rgba(0,255,0,0);
-}
-
-.room-audio-play-icon {
-  left: 28px;
-}
-
-.room-audio-pause-icon {
-  left: 16px;
-}
-
-.room-audio-delete-icon {
-  position: absolute;
-  left: 0;
-  margin-bottom: 60px;
-  z-index: -2;
-  color: rgba(0,255,0,0);
-}
-
-.room-audio-loop-icon {
-  position: absolute;
-  right: 0;
-  margin-bottom: 60px;
-  z-index: -2;
-  color:  rgba(50,50,180,0.4);
-  /* opacity: 0; */
-  display: none;
-}
-
-
-.audio-wrapper:hover
-.room-audio-play-icon {
-  z-index: 2;
-  color:  rgba(0,255,0,1);
-}
-
-.audio-wrapper:hover
-.room-audio-pause-icon {
-  z-index: 2;
-  color:  rgba(0,255,0,1);
-}
-
-.audio-wrapper:hover
-.room-audio-delete-icon {
-  z-index: 2;
-  color:  rgba(180,50,50,0.4);
-}
-
-.audio-wrapper:hover
-.room-audio-loop-icon {
-  z-index: 2;
-  display: inline-block;
-}
-
-.room-audio-delete-icon:hover {
-  color:  rgba(255,10,10,0.8);
-}
-
-.room-audio-loop-icon:hover {
-  color:  rgba(10,10,255,1);
-}
-
-.isLoop {
-  display: inline-block;
-  color:  rgba(10,10,255,0.6);
-}
-
-.yt-form-wrapper {
-
-}
-
-#youtube-url-form{
-  margin: 20px;
-}
-
-.youtube-url-description {
-  margin-bottom: 5px;
-  font-size: 12px;
-}
-
-.room-yt-loop-icon {
-  margin: 10px;
-}
-
-.hidden {
-  display: none;
-}
+  .hidden {
+    display: none;
+  }
 
 </style>

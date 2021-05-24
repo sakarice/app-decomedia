@@ -27,7 +27,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('test-component', require('./components/TestComponent.vue').default);
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
+Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
+Vue.component('room-setting-component', require('./components/RoomSettingComponent.vue').default);
+Vue.component('room-audio-component', require('./components/RoomAudioComponent.vue').default);
+Vue.component('room-img-component', require('./components/RoomImgComponent.vue').default);
+Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
 Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
 Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
 
