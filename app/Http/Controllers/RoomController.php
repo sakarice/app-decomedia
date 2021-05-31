@@ -3,171 +3,247 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Session;
-use Storage;
 use App\Lib\EditTrack;
-use App\Lib\EditRoom;
+use App\Lib\saveFile;
 use App\Models\User;
-use App\Models\Track;
 use App\Models\Room;
-use App\Models\RoomTrack;
-
+use App\Models\UserOwnImg;
+use App\Models\UserOwnBgm;
+use App\Models\DefaultImg;
+use App\Models\DefaultBgm;
+use Storage;
 
 class RoomController extends Controller
 {
-    // Roomを作成する
-    public function createRoom(Request $request){
-        // 選択されたトラックIDを取得
-        $title = $_POST['room-title'];
-        $track_ids = $_POST['selected-track-ids'];
-        $user_id = Auth::user()->id;
 
-        // Roomテーブルへデータ登録
-        $thumbnail_path = Track::where('id', $track_ids[0])->first()->img_path; // 最初に選ばれたトラックの画像をサムネに
-        $thumbnail_url = Storage::disk('s3')->url($thumbnail_path);
-
-        $room = new Room();
-        $room->user_id = $user_id;
-        $room->title = $title;
-        $room->thumbnail_path = $thumbnail_path;
-        $room->thumbnail_url = $thumbnail_url;
-        $room->save();
-        
-        $room_id = $room->id; // room_tracksテーブルへ登録するroom_idを取得しておく
-        
-        // room_tracksテーブルへデータ登録
-        foreach($track_ids as $index => $track_id){
-            $room_tracks = new RoomTrack();
-            $room_tracks->room_id = $room_id;
-            $room_tracks->track_id = $track_id;
-            $room_tracks->track_seq = $index;
-            \Log::info($track_id);
-            $room_tracks->save();
+    public function index() {
+        if(Auth::check()){
+            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
+            $data = [
+                'msg' => $checked,
+            ];
+            return view('rooms.create', $data);
+        } else {
+            return view('auth.login');
+            // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
         }
-
-        $data = [
-            'trackDatas' => EditTrack::getUserTrackData()
-        ];
-        return view('tracks.view', $data);
-    }
-    
-
-    // Roomを削除する
-    public function deleteRoom(Request $request){
-        $user_id = Auth::user()->id;
-        $room_id = $_POST['room_id'];
-        // room_tracksテーブルから対象Roomのデータを削除
-        DB::select('delete rt from room_tracks rt inner join rooms r on rt.room_id = r.id where r.user_id = '.$user_id.' and r.id = '.$room_id);
-        // roomsテーブルから対象Roomのデータを削除
-        Room::where('user_id', $user_id)->where('id', $room_id)->delete();
-
-        $trackUrlAndTitles = EditTrack::getUserTrackData(5);
-        $roomInfos = EditRoom::getMyRooms(3); // id,title,サムネ画像urlを取得
-        $data = [
-            'login_user_record' => User::find(Auth::id()),
-            'trackUrlAndTitles' => $trackUrlAndTitles,
-            'roomInfos' => $roomInfos
-        ];
-
-        return view('mypage.view', $data);
     }
 
-    // 自分のRoomに入る
-    public function showRoom(Request $request){
-        $user_id = Auth::user()->id;
-        $room_id = $_POST['room_id'];
-
-        // (※後で追加する)セキュリティ強化のため,sessionに保存したuserかつroom_idと一致するかチェック
-
-        // Room情報を取得
-        $room = Room::where('user_id', $user_id)->where('id', $room_id)->first();
-        $room_title = $room->title;
-        $room_tracks = $room->tracks;
-        $my_tracks = Track::where('user_id', $user_id)->get();
-
-        $data = [
-            'room_id'       => $room_id,
-            'room_title'    => $room_title,
-            'room_tracks'   => $room_tracks, //roomのtrack情報をモデルごと渡す
-            'my_tracks'     => $my_tracks   // ユーザのtrack情報をモデルごと渡す
-                ];
-        // Room情報とTrack情報をviewに渡す
-        return view('rooms.view', $data);
-    }
-
-    // 自分のRoomを更新
-    public function updateRoom(Request $request){
-        $user_id = Auth::user()->id;
-        $room_id = $request->input('room_id');
-        $room_title = $request->input('room_title');
-        $track_ids = $request->input('track_ids');
-
-        // Roomタイトルを更新
-        Room::where('user_id', $user_id)
-            ->where('id', $room_id)
-            ->update(['title' => $room_title]);
-
-        // room_tracksテーブルから対象Roomのレコードを削除
-        RoomTrack::where('room_id', $room_id)->delete();
-
-        // room_tracksテーブルに新しいTrack情報を追加
-        foreach($track_ids as $index => $track_id){
-            $room_tracks = new RoomTrack();
-            $room_tracks->room_id = $room_id;
-            $room_tracks->track_id = $track_id;
-            $room_tracks->track_seq = $index + 1;
-            \Log::info($track_id);
-            $room_tracks->save();
+    public function create() {
+        if(Auth::check()){
+            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
+            $data = [
+                'msg' => $checked,
+            ];
+            return view('rooms.create', $data);
+        } else {
+            return view('auth.login');
         }
+    }
 
-        return response(true);
+
+
+    public function getUserOwnImgs(){
+        $owner_user_id = Auth::user()->id;
+        $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
+        $img_file_urls = array();
+        
+        foreach($user_own_imgs as $user_own_img){
+            $img_file_urls[] = $user_own_img->img_url;
+        };
+
+        return ['urls' => $img_file_urls];
 
     }
 
-    // ajaxで受け取ったtrack_idに紐づくトラックのURLを返す
-    public function getTrackInfo(Request $request){
+    public function getUserOwnAudioThumbnails(){
+        $owner_user_id = Auth::user()->id;
+        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
+        $audio_thumbnail_file_urls = array();
+        foreach($user_own_audios as $user_own_audio){
+            $audio_thumbnail_file_urls[] = $user_own_audio->thumbnail_url;
+        };
+
+        return ['urls' => $audio_thumbnail_file_urls];
+    }
+
+    public function getDefaultAudioThumbnails(){
+        $default_audios = DefaultBgm::get();
+        $audio_thumbnail_file_urls = array();
+        foreach($default_audios as $default_audio){
+            $audio_thumbnail_file_urls[] = $default_audio->thumbnail_url;
+        };
+
+        return ['urls' => $audio_thumbnail_file_urls];
+    }
+
+    public function getUserOwnAudios(){
+        $owner_user_id = Auth::user()->id;
+        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
+        $audios = array();
+        foreach($user_own_audios as $index => $user_own_audio){
+            $tmpAudios = array();
+            $tmpAudios += array('audio_name' => $user_own_audio->name);
+            $tmpAudios += array('audio_url' => $user_own_audio->audio_url);
+            $tmpAudios += array('thumbnail_url' => $user_own_audio->thumbnail_url);
+            $audios[$index] = $tmpAudios;
+        };
+        return ['audios' => $audios];
+    }
+
+    public function getDefaultAudios(){
+        $default_audios = DefaultBgm::get();
+        $audios = array();
+        foreach($default_audios as $index => $default_audio){
+            $tmpAudios = array();
+            $tmpAudios += array('audio_name' => $default_audio->name);
+            $tmpAudios += array('audio_url' => $default_audio->audio_url);
+            $tmpAudios += array('thumbnail_url' => $default_audio->thumbnail_url);
+            $audios[$index] = $tmpAudios;
+        };
+        return ['audios' => $audios];
+    }
+
+    public function getDefaultImgs(){
+        $owner_user_id = Auth::user()->id;
+        $default_imgs = DefaultImg::get();
+        $img_file_urls = array();
+        
+        foreach($default_imgs as $default_img){
+            $img_file_urls[] = $default_img->img_url;
+        };
+
+        return ['urls' => $img_file_urls];
+    }
+
+
+
+    public function saveImgFile(Request $request) {
         $user_id = Auth::user()->id;
-        $track = Track::where('user_id', $user_id)
-                        ->where('id', $request->input('track_id'))
-                        ->first();
-        $img_url = $track->img_url;
-        $sound_url = $track->sound_url;
+        $imgfile = $request->file('img');
+        $imgfile_name = $imgfile->getClientOriginalName();
+        $imgfile_save_path = saveFile::saveFileInS3($user_id, $imgfile);
+        $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
 
-        // return response($track);
-        return response()->json([
-            'img_url'=>$img_url,
-            'sound_url'=>$sound_url
-            ]);
+        $fileDatas = array (
+            'owner_user_id' => $user_id,
+            'name' => $imgfile_name,
+            'img_path' => $imgfile_save_path,
+            'img_url' => $imgfile_save_url
+        );
+        saveFile::saveImgDataInDB($fileDatas);
+
+        return ['url' => $imgfile_save_url];
     }
 
-    // 誰かのRoomに入る
-    public function enterRoom(Request $request){
-        $room_id = $_POST['room_id'];
+    public function saveAudioFile(Request $request) {
+        $user_id = Auth::user()->id;
+        $audio_file = $request->file('audio');
+        $audio_name = $audio_file->getClientOriginalName();
+        $audio_save_path = saveFile::saveFileInS3($user_id, $audio_file);
+        $audio_save_url= Storage::disk('s3')->url($audio_save_path);
+        // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
+        $thumbnail_save_path = 'default/room/audio/thumbnail/8分音符アイコン 1.png';
+        $thumbnail_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/default/room/audio/thumbnail/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3+1.png';
 
-        // (※後で追加する)セキュリティ強化のため,sessionに保存したuserかつroom_idと一致するかチェック
+        $fileDatas = array (
+            'owner_user_id' => $user_id,
+            'name' => $audio_name,
+            'path' => $audio_save_path,
+            'url' => $audio_save_url,
+            'thumbnail_path' => $thumbnail_save_path,
+            'thumbnail_url' => $thumbnail_save_url
+        );
+        saveFile::saveAudioDataInDB($fileDatas);
 
-        // Room情報を取得
-        $room = Room::where('id', $room_id)->first();
-        $room_title = $room->title;
-        $room_tracks = $room->tracks;
+        $audios = array(
+            'audio_name' => $audio_name,
+            'audio_url' => $audio_save_url,
+            'thumnbail_url' => $thumbnail_save_url
+        );
 
-        $data = [
-            'room_id'       => $room_id,
-            'room_title'    => $room_title,
-            'room_tracks'   => $room_tracks, //roomのtrack情報をモデルごと渡す
-                ];
-        // Room情報とTrack情報をviewに渡す
-        return view('rooms.enter', $data);
+        return ['audios' => $audios];
     }
 
-    // ★チャット機能実装テスト用。
-    public function chat(){
-        return view('chat.view');
+    public function saveDBTest() {
+        $user_id = NULL;
+        $imgfile_name = 'rail.jpg';
+        $imgfile_save_path = 'img/room/rail.jpg';
+        $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
+
+        $fileDatas = array (
+            'owner_user_id' => $user_id,
+            'name' => $imgfile_name,
+            'img_path' => $imgfile_save_path,
+            'img_url' => $imgfile_save_url
+        );
+        saveFile::saveImgDataInDB($fileDatas);
+
+        return ['url' => $imgfile_save_url];
     }
 
 
+
+    public function deleteImgFile(Request $request){
+        $owner_user_id = Auth::user()->id;
+        $del_imgfile_url = $request->imgUrl;
+        // S3からファイルを削除
+        Storage::disk('s3')->delete($del_imgfile_url);
+        // DBからレコード削除
+        UserOwnImg::where('owner_user_id', $owner_user_id)
+                    ->where('img_url', $del_imgfile_url)
+                    ->first()
+                    ->delete();
+
+        return ['削除完了しました'];
+    }
+
+    public function deleteAudio(Request $request){
+        $owner_user_id = Auth::user()->id;
+        $del_audio_url = $request->audioUrl;
+        // S3からファイルを削除
+        Storage::disk('s3')->delete($del_audio_url);
+        // DBからレコード削除
+        \Log::info($del_audio_url);
+        UserOwnBgm::where('owner_user_id', $owner_user_id)
+                    ->where('audio_url', $del_audio_url)
+                    ->first()
+                    ->delete();
+
+        return ['削除完了しました'];
+    }
+
+
+    public function createTrack(Request $request) {
+
+        $imgfile = $request->file('img');
+        $audiofile = $request->file('audio');
+
+        // ファイルのMIMEタイプを確認
+        // $mimeFront1 = EditTrack::judgeMimetypeFront($imgfile);
+        // $mimeFront2 = EditTrack::judgeMimetypeFront($audiofile);
+
+        // DBへ登録するトラック情報を取得
+        $user_id = Auth::user()->id;
+        $title = $request->input('sound-title-in-hidden');
+        $img_path = EditTrack::saveTrackInS3($imgfile);
+        $sound_path = EditTrack::saveTrackInS3($audiofile);
+        $img_url = Storage::disk('s3')->url($img_path);
+        $sound_url = Storage::disk('s3')->url($sound_path);
+
+        $trackInfo = array(
+            'user_id' => $user_id,
+            'title' => $title,
+            'img_path' => $img_path,
+            'sound_path' => $sound_path,
+            'img_url' => $img_url,
+            'sound_url' => $sound_url
+        );
+
+        EditTrack::saveTrackInfoInDB($trackInfo);
+
+        return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_path)]);
+    }
 
 }

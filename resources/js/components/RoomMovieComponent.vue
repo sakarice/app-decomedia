@@ -1,16 +1,15 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Room Movie-->
-  <div id="room-movie-wrapper">
+  <div id="room-movie-wrapper"
+  v-bind:style="{'z-index' : roomMovieLayer}">
 
     <!-- youtube -->
-    <div id="youtube-url-form">
-      <div id="yt-player-wrapper">
-        <div id='player'></div>
-          <!-- <p class="youtube-url-description">youtube動画を設定する場合は、動画ページのURLを入力してください。</p> -->
-        </div>
-      </div>
-    <button type="submit" @click="deleteYoutube">削除</button>
+    <div id="yt-player-wrapper">
+      <div id='player'></div>
+    </div>
+
+    <div id="youtube-url-form"></div>
 
   </div>
   <!-- </transition> -->
@@ -20,26 +19,22 @@
   export default {
     props : [
       'isShowYoutube',
-      // 'youtubePlayerVars'
+      'isLoopYoutube',
+      'roomMovieLayer'
     ],
 
     data : () => {
       return {
         ytPlayer : "",
-        isLoopYoutube : false,
         playerVars : {},
-        // youtubeVideoId : '',
-        // movieFrameWidth : 320,
-        // movieFrameHeight : 500,
-    
       }
     },
     methods : {
       loopYoutube(){
         if(this.isLoopYoutube == false){
-          this.isLoopYoutube = true;
+          this.$parent.isLoopYoutube = true;
         } else {
-          this.isLoopYoutube = false;
+          this.$parent.isLoopYoutube = false;
         }
       },
       createYtPlayer(vars){
@@ -63,8 +58,8 @@
 
       },
       onPlayReady() {
-        this.$parent.isShowYoutube = true;
-        console.log(this.$parent.isShowYoutube);
+        // this.$parent.isShowYoutube = true;
+        // console.log(this.$parent.isShowYoutube);
         // this.ytPlayer.loadVideoById(this.youtubeVideoId);
       },
       onPlayerStateChange(event) {
@@ -88,10 +83,9 @@
         //   this.onPlayReady();
         // }
       },
-      deleteYoutube() {
+      deleteYtPlayer() {
         this.ytPlayer = "";
         this.initPlayerDom();
-        this.$parent.isShowYoutube = false;
       },
       initPlayerDom() {
         // 初期状態に戻す(現在の再生プレイヤーを削除し、playerのdivタグを配置)
@@ -129,8 +123,12 @@
 
 
 <style>
-  #youtube-url-form{
+  /* #youtube-url-form{
     margin: 20px;
+  } */
+  #room-movie-wrapper {
+    position : absolute;
+
   }
 
   .youtube-url-description {

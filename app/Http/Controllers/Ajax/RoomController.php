@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ajax;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\EditTrack;
@@ -12,11 +13,9 @@ use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
 use App\Models\DefaultImg;
 use App\Models\DefaultBgm;
-
-
 use Storage;
 
-class CreateRoom2Controller extends Controller
+class RoomController extends Controller
 {
     //
     public function index() {

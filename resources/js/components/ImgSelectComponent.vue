@@ -1,5 +1,5 @@
 <template>
-  <transition name="right-slide">
+  <transition :name="transitionName">
     <div id="select-modal">
       <div class="close-icon-wrapper">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
@@ -59,6 +59,7 @@
 
 <script>
 export default {
+  props : ['transitionName'],
   data : () => {
     return {
       popMessage : 'メッセージです',
@@ -195,14 +196,13 @@ export default {
           alert('画像削除失敗');
         })
 
-    }
-
-
+    },
+    
   },
   mounted() {
     this.getUserOwnImgs();
     this.getDefaultImgs();
-  }
+  },
 
 }
 </script>

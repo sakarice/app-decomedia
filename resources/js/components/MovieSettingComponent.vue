@@ -1,5 +1,5 @@
 <template>
-  <transition name="right-slide">
+  <transition :name="transitionName">
     <div id="select-modal">
       <div class="close-icon-wrapper">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
@@ -14,14 +14,15 @@
           <div class="yt-setting-wrapper">
             <div>
               <input v-model="movieFrameWidth" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
-              <span>横幅</span>
+              <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             </div>
             <div>
               <input v-model="movieFrameHeight" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
-              <span>縦幅</span>
+              <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span>
             </div>
             <button type="submit" @click="setParentYoutubePlayerVars">再生プレイヤー作成</button>
-            <!-- <p>ループ</p> -->
+            <button type="submit" @click="deleteMovieFrame">削除</button>
+
           </div>
           <i class="room-yt-loop-icon fas fa-undo-alt fa-2x" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}"></i>
         </div>
@@ -33,13 +34,14 @@
 
 <script>
 export default {
-  // props : ['youtubePlayerVars'],
+  props : ['transitionName','isLoopYoutube'],
   data : () => {
     return {
       youtubeUrl : '',
       movieFrameWidth : 500,
       movieFrameHeight : 320,
-      isLoopYoutube : false,
+      window_width : 0,
+      window_height : 0,
     }
   },
   methods : {
@@ -55,29 +57,28 @@ export default {
       return videoId;
     },
     setParentYoutubePlayerVars() {
-      // this.$parent.youtubePlayerVars.videoId = this.videoId;
-      // this.$parent.youtubePlayerVars.width = this.movieFrameWidth;
-      // this.$parent.youtubePlayerVars.height = this.movieFrameHeight;
-
       this.$parent.youtubePlayerVars['videoId'] = this.extractVideoIdFromUrl();
       this.$parent.youtubePlayerVars['width'] = this.movieFrameWidth;
       this.$parent.youtubePlayerVars['height'] = this.movieFrameHeight;
 
       // 親コンポーネントの動画フレーム作成メソッドを実行
       this.$emit('create-movie-frame');
-      // alert('send youtube player vars');
 
+    },
+    deleteMovieFrame(){
+      this.$emit('delete-movie-frame');
     },
     loopYoutube(){
       if(this.isLoopYoutube == false){
-        this.isLoopYoutube = true;
+        this.$parent.isLoopYoutube = true;
       } else {
-        this.isLoopYoutube = false;
+        this.$parent.isLoopYoutube = false;
       }
     },
   },
   mounted : function() {
-
+    this.window_width = window.innerWidth;
+    this.window_height = window.innerHeight;
   },
 
 }

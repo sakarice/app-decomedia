@@ -1,5 +1,5 @@
 <template>
-  <transition name="right-slide">
+  <transition :name="transitionName">
     <div id="select-modal">
       <div class="close-icon-wrapper">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
@@ -19,7 +19,7 @@
             </button>
             <div id="category-type"><span>{{fileCategory}}</span></div>
 
-            <!-- 再生を強制終了する　※後で消す -->
+            <!-- 再生を強制終了する ※後で消す -->
             <button id="finishPlay" @click="finishPlay">再生終了</button>
           </div>
 
@@ -40,7 +40,7 @@
           <ul id="audio-thumbnail-wrapper">
 
             <!-- uploads -->
-            <li v-show="!(isDefault)" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
+            <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
               <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToRoom('user-own', index)">
                 {{userOwnAudio['audio_name']}}
@@ -77,6 +77,7 @@
 
 <script>
 export default {
+  props : ['transitionName'],
   data : () => {
     return {
       popMessage : 'メッセージです',
@@ -209,13 +210,12 @@ export default {
         tmpAudio = this.defaultAudios[index];
       }
 
-      // 新しい連想配列を用意　
+      // 新しい連想配列を用意
       let audio = {};
       audio['audio_name'] = tmpAudio['audio_name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
-
 
       this.$emit('add-audio', audio);
     },
@@ -276,7 +276,8 @@ export default {
     // オーディオファイルを削除する
     deleteaudio:function(event) {
       const url = '/ajax/deleteAudio'
-      let audioUrl = event.target.previousElementSibling.getAttribute('id');
+      let audioId = event.target.parentNode.getAttribute('id');
+      let audioUrl = this.userOwnAudios[audioId]['audio_url'];
       const params = {
         'audioUrl' : audioUrl
       }
@@ -342,6 +343,7 @@ export default {
     z-index: 2;
     width: 400px;
     height: 100vh;
+    margin-right : 70px;
 
     /* モーダル内の要素の配置 */
     display: flex;
