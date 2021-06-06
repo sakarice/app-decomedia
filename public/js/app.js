@@ -2009,11 +2009,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         playTargetAudio = this.userOwnAudios[index];
       } else if (type == 'default') {
         playTargetAudio = this.defaultAudios[index];
-      } // テスト用　後で消す
-      // let audio = document.getElementById('audio');
-      // audio.src = playTargetAudio['audio_url'];
-      // audio.play();
-
+      }
 
       this.audioPlayer.src = playTargetAudio['audio_url'];
       this.audioPlayer.play();
@@ -2034,11 +2030,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
       this.playAudioType = type;
-      this.playAudioIndex = index; // ★後で消す
-
-      console.log(this.audioPlayer.ended);
+      this.playAudioIndex = index;
     },
-    // ★後で消す
     finishAudio: function finishAudio(event) {
       var isFinish = event.target.ended;
       alert(isFinish);
@@ -2316,6 +2309,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2335,8 +2330,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      roomBackgroundColor: "#ffffff",
-      // 黒
       transitionName: 'right-slide',
       isShowModal: {
         'imgModal': false,
@@ -2344,48 +2337,34 @@ __webpack_require__.r(__webpack_exports__);
         'movieModal': false,
         'roomSettingModal': false
       },
-      isShowContent: {
-        'roomImg': true,
-        'roomMovie': false
+      roomSetting: {
+        'name': "",
+        'roomBackgroundColor': "#333333",
+        // 黒
+        'isShowImg': true,
+        'isShowMovie': false,
+        'imgLayer': 0,
+        'movieLayer': 1,
+        'maxAudioNum': 5
       },
-      roomImgUrl: "",
-      roomImgWidth: "300",
-      // 画像コンポーネントに渡す際、単位[px]を付与
-      roomImgHeight: "300",
-      // 画像コンポーネントに渡す際、単位[px]を付与
       roomImg: {
         'url': "",
-        'width': "500px",
-        'height': "400px"
+        'width': 500,
+        'height': 500
       },
-      maxAudioNum: 5,
-      roomAudios: [],
-      isShowYoutube: false,
-      youtubePlayerVars: {
+      moviePlayerSettings: {
         'videoId': "",
         'width': "500",
-        'height': "420"
+        'height': "420",
+        'isLoop': false
       },
-      youtubePlaySettings: {},
-      isLoopYoutube: false,
-      roomImgLayer: 1,
-      roomMovieLayer: 2
+      // maxAudioNum : 5,
+      roomAudios: []
     };
   },
   methods: {
-    showImgModal: function showImgModal() {
-      this.showModal('imgModal');
-    },
-    showAudioModal: function showAudioModal() {
-      this.showModal('audioModal');
-    },
-    showMovieModal: function showMovieModal() {
-      this.showModal('movieModal');
-    },
-    showRoomSettingModal: function showRoomSettingModal() {
-      this.showModal('roomSettingModal');
-    },
     showModal: function showModal(target) {
+      // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for (var key in this.isShowModal) {
         if (key != target) {
           this.isShowModal[key] = false;
@@ -2405,19 +2384,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     setRoomImgUrl: function setRoomImgUrl(url) {
       this.roomImg['url'] = url;
-      this.isShowContent['roomImg'] = true;
+      this.roomSetting['isShowImg'] = true;
     },
     judgeDelImg: function judgeDelImg(url) {
       if (this.roomImg['url'] == url) {
         this.roomImg['url'] = "";
-      }
-    },
-    toggleRoomImg: function toggleRoomImg() {
-      // room画像の表示/非表示を切り替え
-      if (this.isShowContent['roomImg']) {
-        this.isShowContent['roomImg'] = false;
-      } else if (!this.isShowContent['roomImg']) {
-        this.isShowContent['roomImg'] = true;
       }
     },
     addAudio: function addAudio(audio) {
@@ -2427,13 +2398,17 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.roomAudio.judgeDelAudio(url);
     },
     createMovieFrame: function createMovieFrame() {
-      var vars = this.youtubePlayerVars;
+      var vars = {
+        'videoId': this.moviePlayerSettings['videoId'],
+        'width': this.moviePlayerSettings['width'],
+        'height': this.moviePlayerSettings['height']
+      };
       this.$refs.roomMovie.createYtPlayer(vars);
-      this.isShowYoutube = true;
+      this.roomSetting['isShowMovie'] = true;
     },
     deleteMovieFrame: function deleteMovieFrame() {
       this.$refs.roomMovie.deleteYtPlayer();
-      this.isShowYoutube = false;
+      this.roomSetting['isShowMovie'] = false;
     }
   },
   created: function created() {},
@@ -2803,9 +2778,9 @@ __webpack_require__.r(__webpack_exports__);
       return videoId;
     },
     setParentYoutubePlayerVars: function setParentYoutubePlayerVars() {
-      this.$parent.youtubePlayerVars['videoId'] = this.extractVideoIdFromUrl();
-      this.$parent.youtubePlayerVars['width'] = this.movieFrameWidth;
-      this.$parent.youtubePlayerVars['height'] = this.movieFrameHeight; // 親コンポーネントの動画フレーム作成メソッドを実行
+      this.$parent.moviePlayerSettings['videoId'] = this.extractVideoIdFromUrl();
+      this.$parent.moviePlayerSettings['width'] = this.movieFrameWidth;
+      this.$parent.moviePlayerSettings['height'] = this.movieFrameHeight; // 親コンポーネントの動画フレーム作成メソッドを実行
 
       this.$emit('create-movie-frame');
     },
@@ -2814,9 +2789,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     loopYoutube: function loopYoutube() {
       if (this.isLoopYoutube == false) {
-        this.$parent.isLoopYoutube = true;
+        this.$parent.moviePlayerSettings['isLoop'] = true;
       } else {
-        this.$parent.isLoopYoutube = false;
+        this.$parent.moviePlayerSettings['isLoop'] = false;
       }
     }
   },
@@ -2875,11 +2850,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['roomAudios'],
+  props: ['maxAudioNum', 'roomAudios'],
   data: function data() {
     return {
-      maxAudioNum: 5,
-      // roomAudios : [],
       audioPlayers: []
     };
   },
@@ -2971,7 +2944,6 @@ __webpack_require__.r(__webpack_exports__);
     judgeDelAudio: function judgeDelAudio(url) {
       if (this.roomAudioUrl == url) {
         this.roomAudioUrl = "";
-        this.roomAudioThumbnailUrl = "";
       }
     },
     deleteAudio: function deleteAudio(event) {
@@ -3069,8 +3041,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['roomImgUrl', 'roomImgWidth', 'roomImgHeight', 'roomImgLayer', 'isShowRoomImg'],
   data: function data() {
@@ -3081,14 +3051,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  methods: {
-    setFrameSize: function setFrameSize() {// console.log(this.roomImgWidth);
-      // this.frameSize.width = this.roomImgWidth;
-      // this.frameSize['height']=this.roomImgHeight;
-    }
-  },
-  mounted: function mounted() {// this.setFrameSize();
-  }
+  methods: {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -3122,7 +3086,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['isShowYoutube', 'isLoopYoutube', 'roomMovieLayer'],
+  props: [// 'isShowYoutube',
+  'isLoopYoutube', 'roomMovieLayer'],
   data: function data() {
     return {
       ytPlayer: "",
@@ -3132,9 +3097,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     loopYoutube: function loopYoutube() {
       if (this.isLoopYoutube == false) {
-        this.$parent.isLoopYoutube = true;
+        this.$parent.moviePlayerSettings['isLoop'] = true;
       } else {
-        this.$parent.isLoopYoutube = false;
+        this.$parent.moviePlayerSettings['isLoop'] = false;
       }
     },
     createYtPlayer: function createYtPlayer(vars) {
@@ -3258,42 +3223,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['transitionName', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight'],
+  props: ['transitionName', 'roomName', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight'],
   data: function data() {
     return {
       window_width: "",
-      window_height: "" // roomBackgroundColor : "",
-
+      window_height: ""
     };
   },
   methods: {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
-    resizeImg: function resizeImg() {
-      this.$emit('resize-img');
+    updateRoomName: function updateRoomName(event) {
+      this.$parent.roomSetting['name'] = event.target.value;
+    },
+    resizeImg: function resizeImg(event) {
+      var value = event.target.value; // 横幅、高さの値
+
+      var type = event.target.dataset.inputType; // widthかheightか
+
+      if (type == 'width') {
+        this.$parent.roomImg['width'] = value;
+      } else if (type == 'height') {
+        this.$parent.roomImg['height'] = value;
+      } // this.$emit('resize-img', value, type);
+
+    },
+    updateRoomBgColor: function updateRoomBgColor(event) {
+      // カラーピッカーの変更に、Room背景色を同期させて即反映
+      var value = event.target.value;
+      this.$parent.roomSetting['roomBackgroundColor'] = value;
     },
     toggleRoomImg: function toggleRoomImg() {
-      this.$emit('toggle-room-img'); // room画像を削除(=URLを空に)
+      // room画像の表示/非表示を切り替え
+      if (this.isShowRoomImg) {
+        this.$parent.roomSetting['isShowImg'] = false;
+      } else if (!this.isShowRoomImg) {
+        this.$parent.roomSetting['isShowImg'] = true;
+      }
     }
   },
   mounted: function mounted() {
     this.window_width = window.innerWidth;
     this.window_height = window.innerHeight;
   },
-  watch: {
-    // カラーピッカーの変更に、Room背景色を同期させて即反映
-    roomBackgroundColor: function roomBackgroundColor(newColor) {
-      this.$parent.roomBackgroundColor = newColor;
-    },
-    roomImgWidth: function roomImgWidth(newWidth) {
-      this.$parent.roomImgWidth = newWidth;
-    },
-    roomImgHeight: function roomImgHeight(newHeight) {
-      this.$parent.roomImgHeight = newHeight;
-    }
-  }
+  watch: {}
 });
 
 /***/ }),
@@ -7977,7 +7960,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n  margin-right : 70px;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#audio-thumbnail-wrapper {\n  /* モーダル内のオーディオサムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.audio-list {\n  position: relative;\n  width: 100%;\n  height: 30px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  /* background-color: grey; */\n\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.audio-play-icon,\n.audio-pause-icon {\n  position: absolute;\n  z-index: -1;\n  color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon {\n  top: 0;\n  left: 12px;\n}\n.audio-pause-icon {\n  top: 8px;\n  left: 7px;\n}\n.now-play {\n  color : rgb(0, 255, 0);\n}\n.delete-audio {\n  position: absolute;\n  top: 0;\n  right: 0;\n  margin-right: 5px;\n  color: rgba(180, 50, 50, 0);\n  z-index: -1;\n}\n.audio-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio {\n  z-index: 2;\n  color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail {\n  z-index: -1;\n  opacity: 0.3;\n}\n.audio_name {\n  margin-left: 7px;\n  white-space: nowrap;\n}\n.audio_name:hover {\n  text-decoration: underline;\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#add-audio-thumbnail-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.audio-thumbnail {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background-color: darkgray;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n\n/* #contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n\n} */\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#audio-thumbnail-wrapper {\n  /* モーダル内のオーディオサムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.audio-list {\n  position: relative;\n  width: 100%;\n  height: 30px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  /* background-color: grey; */\n\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n.audio-play-icon,\n.audio-pause-icon {\n  position: absolute;\n  z-index: -1;\n  color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon {\n  top: 0;\n  left: 12px;\n}\n.audio-pause-icon {\n  top: 8px;\n  left: 7px;\n}\n.now-play {\n  color : rgb(0, 255, 0);\n}\n.delete-audio {\n  position: absolute;\n  top: 0;\n  right: 0;\n  margin-right: 5px;\n  color: rgba(180, 50, 50, 0);\n  z-index: -1;\n}\n.audio-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio {\n  z-index: 2;\n  color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon {\n  z-index: 2;\n  color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail {\n  z-index: -1;\n  opacity: 0.3;\n}\n.audio_name {\n  margin-left: 7px;\n  white-space: nowrap;\n}\n.audio_name:hover {\n  text-decoration: underline;\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#add-audio-thumbnail-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.audio-thumbnail {\n  width: 30px;\n  height: 30px;\n  border-radius: 50%;\n  background-color: darkgray;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8001,7 +7984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 3;\n  height: 100%;\n  background-color:aliceblue;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  background-color: ghostwhite;\n  box-shadow: -1px 1px 5px lightgrey;\n}\n.icon-wrapper {\n  padding: 20px;\n}\n#disp-img-modal-wrapper {\n  background-color:lightseagreen;\n}\n#disp-movie-modal-wrapper {\n  color: orangered;\n}\n#disp-audio-modal-wrapper {\n  background-color: gold;\n}\n#disp-room-setting-modal-wrapper {\n  background-color: lightslategray;\n  color: white;\n}\n.hidden {\n  display: none;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#field {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 100%;\n  height: 100%;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: column;\n}\n#disp-modal-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 3;\n  height: 100%;\n  background-color:black;\n\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#disp-modal-wrapper {\n  z-index: 1;\n  /* background-color: ghostwhite;\n  box-shadow: -1px 1px 5px lightgrey; */\n}\n.icon-wrapper {\n  padding: 12px;\n}\n.icon-wrapper:hover {\n  background-color: rgba(255,255,255,0.2);\n}\n#disp-img-modal-wrapper {\n  color:lightseagreen;\n}\n#disp-movie-modal-wrapper {\n  color: orangered;\n}\n#disp-audio-modal-wrapper {\n  color: gold;\n}\n#disp-room-setting-modal-wrapper {\n  color: lightgray;\n}\n.hidden {\n  display: none;\n}\n.action-button-wrapper {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n.room-create-button {\n  position: absolute;\n  top : 50px;\n  right: 60px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8025,7 +8008,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 400px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#img-wrapper {\n  /* モーダル内の画像サムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.img-list {\n  position: relative;\n  width: 49.5%;\n  height: 140px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  background-color: grey;\n}\n.img-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover {\n  z-index: 2;\n  background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#delete-img-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  margin-left: 5px;\n  margin-top: 5px;\n  color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.user-own-img {\n  width: 100%;\n  height: 140px;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#select-modal {\n  position: fixed;\n  top: 0;\n  right: 0;\n  z-index: 2;\n  width: 470px;\n  height: 100vh;\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: row;\n}\n#toggle-wrapper {\n  display: flex;\n  margin-bottom: 20px;\n}\n#file-category-toggle {\n  width: 50px;\n  height: 24px;\n  outline: none;\n  border: none;\n  border-radius: 50px;\n  padding: 2px 2px;\n  background-color: plum;\n}\n#file-category-toggle:focus {\n  box-shadow: 0 0 0 1px grey;\n}\n#category-type {\n  width: 60px;\n  margin-left: 10px;\n  color: grey;\n  display: flex;\n  align-items: center;\n}\n.isUpload {\n  -webkit-animation-name: change-toggle-left-to-right;\n          animation-name: change-toggle-left-to-right;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n@keyframes change-toggle-left-to-right{\n0% {\n    background-color: plum;\n    padding-left: 2px;\n}\n100% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n}\n.isDefault {\n  -webkit-animation-name: change-toggle-right-to-left;\n          animation-name: change-toggle-right-to-left;\n  -webkit-animation-duration: 0.2s;\n          animation-duration: 0.2s;\n  -webkit-animation-timing-function: ease-out;\n          animation-timing-function: ease-out;\n  -webkit-animation-fill-mode: forwards;\n          animation-fill-mode: forwards;\n}\n@-webkit-keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n@keyframes change-toggle-right-to-left{\n0% {\n    background-color:paleturquoise;\n    padding-left: 28px;\n}\n100% {\n    background-color: plum;\n    padding-left: 2px;\n}\n}\n#toggle-state-icon {\n  width: 20px;\n  height: 20px;\n  border-radius: 50%;\n  background-color: white;\n\n  pointer-events: none;\n}\n.close-icon-wrapper{\n  padding: 10px;\n  border-top-left-radius: 50%;\n  border-bottom-left-radius: 50%;\n  background-color: white;\n  box-shadow: 1px 1px 1px 1px grey;\n}\n#close-modal-icon {\n  /* position: absolute;\n  top: 200px;\n  left: -20px; */\n  cursor: pointer;\n}\n#area-wrapper {\n  position: relative;\n  width: 90%;\n  height: 100%;\n  background-color: white;\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\n\n  /* モーダル内の要素の配置 */\n  display: flex;\n  align-items: center;\n  flex-flow: column;\n}\n#drop-zone {\n  position: absolute;\n  top: 0;\n  right: 0;\n  width: 100%;\n  height: 100%;\n  background-color: blue;\n}\n.show {\n  z-index: 3;\n  opacity: 0.3;\n}\n.hidden {\n  z-index: -3;\n}\n#contents-wrapper {\n  z-index: 2;\n  width: 100%;\n  height: auto;\n  padding: 10px 50px 10px 10px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n#upload-input-wrapper {\n  width: 100%;\n  height: 50px;\n  margin-bottom: 5px;\n  padding: 0 10px;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n#loading-display-wrapper {\n  display: flex;\n  align-items: center;\n  margin-left: 10px;\n}\n.loading-message {\n  font-size: 0.5rem;\n  margin-bottom: 0;\n}\n#uploading-dot {\n  margin-left: 3px;\n  width: 2px;\n  height: 2px;\n  border-radius: 50%;\n  /* background-color: black; */\n}\n.copy-to-right {\n  -webkit-animation-name: dot-copy-to-right;\n          animation-name: dot-copy-to-right;\n  -webkit-animation-duration: 3s;\n          animation-duration: 3s;\n  -webkit-animation-timing-function: steps(3, start);\n          animation-timing-function: steps(3, start);\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n@-webkit-keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n@keyframes dot-copy-to-right {\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\n33%   {box-shadow: 5px 0 0 0 black}\n66%   {box-shadow: 10px 0 0 0 black}\n100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\n}\n#loading-icon {\n  width: 20px; \n  height: 20px;\n  margin-right: 10px;\n  background: linear-gradient(#05FBFF, #FF33aa);\n  border-radius: 50%;\n}\n.rotate {\n  -webkit-animation: rotate-anime 2s linear infinite;\n          animation: rotate-anime 2s linear infinite;\n}\n@-webkit-keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n@keyframes rotate-anime {\n0%  {transform: rotate(0);}\n100%  {transform: rotate(360deg);}\n}\n#upload-label {\n  padding: 5px 30px;\n  background-color: rgba(100, 200, 250, 0.4);\n  border-radius: 20px;\n  margin-bottom: 0;\n}\n#upload-label:hover {\n  cursor: pointer;\n  background-color: rgba(100, 200, 250, 0.8);\n}\n#img-wrapper {\n  /* モーダル内の画像サムネの配置 */\n  display: flex;\n  flex-wrap: wrap;\n  align-content: flex-start;\n  align-items: center;\n  justify-content: space-between;\n\n  width: 92%;\n  height: 80vh;\n  /* margin-top: 20px; */\n  padding-left: 0;\n  overflow-y: scroll;\n}\n.img-list {\n  position: relative;\n  width: 49.5%;\n  height: 140px;\n  margin-bottom: 2px;\n  border-radius: 5px;\n  list-style: none;\n  transition: transform 0.3s;\n  background-color: grey;\n}\n.img-list:hover {\n  cursor: pointer;\n  transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover {\n  z-index: 2;\n  background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover {\n  position: absolute ;\n  top: 0;\n  left: 0;\n  z-index: -1;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(130, 130, 130, 0);\n\n  /* 要素の配置 */\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#delete-img-icon {\n  position: absolute;\n  top: 0;\n  left: 0;\n  margin-left: 5px;\n  margin-top: 5px;\n  color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon {\n  color: rgba(255, 255, 255, 0.7);\n  pointer-events: none;\n}\n.user-own-img {\n  width: 100%;\n  height: 140px;\n}\n\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 500ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8073,7 +8056,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* audio */\n#room-Audio-wrapper {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 150px;\n  height: 100%;\n  padding: 10px;\n  background-color: black;\n}\n#audios{\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n}\n.audio-area {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 15px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-vol-wrapper {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* audio */\n#room-Audio-wrapper {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 150px;\n  height: 100%;\n  padding: 10px;\n  background-color: black;\n}\n#audios{\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n}\n.audio-area {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper,\n.non-audio-frame {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 15px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n.room-audio-play-icon,\n.room-audio-pause-icon {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon {\n  left: 28px;\n}\n.room-audio-pause-icon {\n  left: 16px;\n}\n.room-audio-delete-icon {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-vol-wrapper {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8097,7 +8080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* img */\n#room-img-frame {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n#room-img {\n  /* width: 400px; */\n  /* height: 400px; */\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* img */\n#room-img-frame {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8145,7 +8128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* コンテンツのCSS */\n#setting-wrapper {\n  margin: 20px 0;\n  width: 80%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.setting {\n  margin-bottom : 30px;\n}\n.message-label {\n  font-size: 10px;\n}\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 400ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* コンテンツのCSS */\n#setting-wrapper {\n  margin: 20px 0;\n  width: 80%;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n}\n.setting {\n  margin-bottom : 30px;\n}\n.message-label {\n  font-size: 10px;\n}\n.setting-title {\n  margin-bottom: 5px;\n  font-weight: bold;\n}\n.img-size-input {\n  margin-bottom : 5px;\n}\n\n\n/* アニメーション */\n\n/* .right-slide-enter-to, .right-slide-leave {\n  transform: translate(0px, 0px);\n} */\n.right-slide-enter-active, .right-slide-leave-active {\n  transform: translate(0px, 0px);\n  transition: all 400ms\n  /* cubic-bezier(0, 0, 0.2, 1) 0ms; */\n}\n.right-slide-enter, .right-slide-leave-to {\n  transform: translateX(100vw)\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47236,7 +47219,7 @@ var render = function() {
   return _c(
     "div",
     {
-      style: { "background-color": _vm.roomBackgroundColor },
+      style: { "background-color": _vm.roomSetting["roomBackgroundColor"] },
       attrs: { id: "field" },
       on: {
         click: function($event) {
@@ -47252,17 +47235,22 @@ var render = function() {
         ref: "roomImg",
         attrs: {
           roomImgUrl: _vm.roomImg["url"],
-          roomImgWidth: _vm.roomImgWidth + "px",
-          roomImgHeight: _vm.roomImgHeight + "px",
-          roomImgLayer: _vm.roomImgLayer,
-          isShowRoomImg: _vm.isShowContent["roomImg"]
+          roomImgWidth: _vm.roomImg["width"] + "px",
+          roomImgHeight: _vm.roomImg["height"] + "px",
+          roomImgLayer: _vm.roomSetting["imgLayer"],
+          isShowRoomImg: _vm.roomSetting["isShowImg"]
         },
-        on: { "parent-action": _vm.showImgModal }
+        on: { "parent-action": _vm.showModal }
       }),
+      _vm._v(" "),
+      _vm._m(0),
       _vm._v(" "),
       _c("room-audio-component", {
         ref: "roomAudio",
-        attrs: { roomAudios: _vm.roomAudios }
+        attrs: {
+          maxAudioNum: _vm.roomSetting["maxAudioNum"],
+          roomAudios: _vm.roomAudios
+        }
       }),
       _vm._v(" "),
       _c("room-movie-component", {
@@ -47270,78 +47258,84 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowYoutube,
-            expression: "isShowYoutube"
+            value: _vm.roomSetting["isShowMovie"],
+            expression: "roomSetting['isShowMovie']"
           }
         ],
         ref: "roomMovie",
         attrs: {
-          isShowYoutube: _vm.isShowYoutube,
-          isLoopYoutube: _vm.isLoopYoutube,
-          youtubePlayerVars: _vm.youtubePlayerVars,
-          roomMovieLayer: _vm.roomMovieLayer
+          isLoopYoutube: _vm.moviePlayerSettings["isLoop"],
+          roomMovieLayer: _vm.roomSetting["movieLayer"]
         }
       }),
       _vm._v(" "),
-      _c("div", { attrs: { id: "disp-modal-zone" } }, [
-        _c("div", { attrs: { id: "disp-modal-wrapper" } }, [
-          _c(
-            "div",
-            {
-              staticClass: "icon-wrapper",
-              attrs: { id: "disp-img-modal-wrapper" },
-              on: {
-                click: function($event) {
-                  return _vm.showImgModal()
+      _c(
+        "div",
+        { attrs: { id: "disp-modal-zone" }, on: { click: _vm.closeModal } },
+        [
+          _c("div", { attrs: { id: "disp-modal-wrapper" } }, [
+            _c(
+              "div",
+              {
+                staticClass: "icon-wrapper",
+                attrs: { id: "disp-img-modal-wrapper" },
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.showModal("imgModal")
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fas fa-image fa-2x" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "icon-wrapper",
-              attrs: { id: "disp-audio-modal-wrapper" },
-              on: {
-                click: function($event) {
-                  return _vm.showAudioModal()
+              },
+              [_c("i", { staticClass: "fas fa-image fa-2x" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "icon-wrapper",
+                attrs: { id: "disp-audio-modal-wrapper" },
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.showModal("audioModal")
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fas fa-music fa-2x" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "icon-wrapper",
-              attrs: { id: "disp-movie-modal-wrapper" },
-              on: {
-                click: function($event) {
-                  return _vm.showMovieModal()
+              },
+              [_c("i", { staticClass: "fas fa-music fa-2x" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "icon-wrapper",
+                attrs: { id: "disp-movie-modal-wrapper" },
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.showModal("movieModal")
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fab fa-youtube fa-2x" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "icon-wrapper",
-              attrs: { id: "disp-room-setting-modal-wrapper" },
-              on: {
-                click: function($event) {
-                  return _vm.showRoomSettingModal()
+              },
+              [_c("i", { staticClass: "fab fa-youtube fa-2x" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "icon-wrapper",
+                attrs: { id: "disp-room-setting-modal-wrapper" },
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    return _vm.showModal("roomSettingModal")
+                  }
                 }
-              }
-            },
-            [_c("i", { staticClass: "fas fa-cog fa-2x" })]
-          )
-        ])
-      ]),
+              },
+              [_c("i", { staticClass: "fas fa-cog fa-2x" })]
+            )
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("img-select-component", {
         directives: [
@@ -47388,7 +47382,7 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          isLoopYoutube: _vm.isLoopYoutube
+          isLoopYoutube: _vm.moviePlayerSettings["isLoop"]
         },
         on: {
           "close-modal": _vm.closeModal,
@@ -47408,21 +47402,28 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          roomBackgroundColor: _vm.roomBackgroundColor,
-          isShowRoomImg: _vm.isShowContent["roomImg"],
-          roomImgWidth: _vm.roomImgWidth,
-          roomImgHeight: _vm.roomImgHeight
+          roomName: _vm.roomSetting["name"],
+          roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
+          isShowRoomImg: _vm.roomSetting["isShowImg"],
+          roomImgWidth: _vm.roomImg["width"],
+          roomImgHeight: _vm.roomImg["height"]
         },
-        on: {
-          "close-modal": _vm.closeModal,
-          "toggle-room-img": _vm.toggleRoomImg
-        }
+        on: { "close-modal": _vm.closeModal }
       })
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "action-button-wrapper" }, [
+      _c("button", { staticClass: "room-create-button" }, [_vm._v("作成")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48115,7 +48116,7 @@ var render = function() {
           attrs: { id: "room-img-frame" },
           on: {
             click: function($event) {
-              return _vm.$emit("parent-action")
+              return _vm.$emit("parent-action", "imgModal")
             }
           }
         },
@@ -48234,30 +48235,32 @@ var render = function() {
         _c("div", { attrs: { id: "setting-wrapper" } }, [
           _c(
             "div",
-            { staticClass: "setting", attrs: { id: "room-bg-color-wraper" } },
+            { staticClass: "setting", attrs: { id: "room-name-wraper" } },
             [
-              _c("p", [_vm._v("Room設定")]),
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room名")]),
               _vm._v(" "),
               _c("label", { attrs: { for: "" } }, [
                 _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.roomBackgroundColor,
-                      expression: "roomBackgroundColor"
-                    }
-                  ],
+                  attrs: { type: "text", id: "room-name" },
+                  domProps: { value: _vm.roomName },
+                  on: { input: _vm.updateRoomName }
+                }),
+                _vm._v("\n            Room名\n          ")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "setting", attrs: { id: "room-bg-color-wraper" } },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room背景")]),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [
+                _c("input", {
                   attrs: { type: "color", id: "room-bg-color" },
                   domProps: { value: _vm.roomBackgroundColor },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.roomBackgroundColor = $event.target.value
-                    }
-                  }
+                  on: { input: _vm.updateRoomBgColor }
                 }),
                 _vm._v("\n            Room背景色\n          ")
               ])
@@ -48271,27 +48274,18 @@ var render = function() {
               attrs: { id: "room-img-setting-wrapper" }
             },
             [
-              _c("p", [_vm._v("Room画像")]),
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room画像")]),
               _vm._v(" "),
               _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.roomImgWidth,
-                    expression: "roomImgWidth"
-                  }
-                ],
-                attrs: { type: "text", size: "5", placeholder: "横幅" },
+                staticClass: "img-size-input",
+                attrs: {
+                  "data-input-type": "width",
+                  type: "text",
+                  size: "5",
+                  placeholder: "横幅"
+                },
                 domProps: { value: _vm.roomImgWidth },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.roomImgWidth = $event.target.value
-                  }
-                }
+                on: { input: _vm.resizeImg }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("[px] 横幅")]),
@@ -48301,24 +48295,15 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.roomImgHeight,
-                    expression: "roomImgHeight"
-                  }
-                ],
-                attrs: { type: "text", size: "5", placeholder: "縦幅" },
+                staticClass: "img-size-input",
+                attrs: {
+                  "data-input-type": "height",
+                  type: "text",
+                  size: "5",
+                  placeholder: "縦幅"
+                },
                 domProps: { value: _vm.roomImgHeight },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.roomImgHeight = $event.target.value
-                  }
-                }
+                on: { input: _vm.resizeImg }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("[px] 縦幅")]),

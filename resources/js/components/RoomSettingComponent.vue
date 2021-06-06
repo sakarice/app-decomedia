@@ -8,19 +8,27 @@
 
         <div id="setting-wrapper">
 
-          <div id="room-bg-color-wraper" class="setting">
-            <p>Room設定</p>
+          <div id="room-name-wraper" class="setting">
+            <p class="setting-title">Room名</p>
             <label for="">
-              <input v-model="roomBackgroundColor" type="color" id="room-bg-color">
+              <input :value="roomName" @input="updateRoomName" type="text" id="room-name">
+              Room名
+            </label>
+          </div>
+
+          <div id="room-bg-color-wraper" class="setting">
+            <p class="setting-title">Room背景</p>
+            <label for="">
+              <input :value="roomBackgroundColor" @input="updateRoomBgColor" type="color" id="room-bg-color">
               Room背景色
             </label>
           </div>
 
           <div id="room-img-setting-wrapper" class="setting">
-            <p>Room画像</p>
-            <input v-model="roomImgWidth" type="text" size="5" placeholder="横幅">
+            <p class="setting-title">Room画像</p>
+            <input data-input-type="width" class="img-size-input" :value="roomImgWidth" @input="resizeImg" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input v-model="roomImgHeight" type="text" size="5" placeholder="縦幅">
+            <input data-input-type="height" class="img-size-input" :value="roomImgHeight" @input="resizeImg" type="text" size="5" placeholder="縦幅">
             <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
             <button v-on:click="toggleRoomImg">
               <span v-show="isShowRoomImg">非表示</span>
@@ -39,6 +47,7 @@
 export default {
   props : [
     'transitionName',
+    'roomName',
     'roomBackgroundColor',
     'isShowRoomImg',
     'roomImgWidth',
@@ -48,18 +57,35 @@ export default {
     return {
       window_width : "",
       window_height : "",
-      // roomBackgroundColor : "",
     }
   },
   methods : {
     closeModal() {
       this.$emit('close-modal');
     },
-    resizeImg(){
-      this.$emit('resize-img');
+    updateRoomName(event) {
+      this.$parent.roomSetting['name'] = event.target.value;
     },
-    toggleRoomImg() {
-      this.$emit('toggle-room-img');  // room画像を削除(=URLを空に)
+    resizeImg(event){
+      let value = event.target.value; // 横幅、高さの値
+      let type = event.target.dataset.inputType; // widthかheightか
+      if(type == 'width'){
+        this.$parent.roomImg['width'] = value;
+      } else if(type == 'height'){
+        this.$parent.roomImg['height'] = value;
+      }
+      // this.$emit('resize-img', value, type);
+    },
+    updateRoomBgColor(event){ // カラーピッカーの変更に、Room背景色を同期させて即反映
+      let value = event.target.value;
+      this.$parent.roomSetting['roomBackgroundColor'] = value;
+    },
+    toggleRoomImg() { // room画像の表示/非表示を切り替え
+      if(this.isShowRoomImg){
+        this.$parent.roomSetting['isShowImg'] = false;
+      } else if(!(this.isShowRoomImg)){
+        this.$parent.roomSetting['isShowImg'] = true;
+      }
     },
 
   },
@@ -68,17 +94,6 @@ export default {
     this.window_height = window.innerHeight;
   },
   watch : {
-    // カラーピッカーの変更に、Room背景色を同期させて即反映
-    roomBackgroundColor : function(newColor){
-      this.$parent.roomBackgroundColor = newColor;
-    },
-    roomImgWidth : function(newWidth){
-      this.$parent.roomImgWidth = newWidth;
-    },
-    roomImgHeight : function(newHeight){
-      this.$parent.roomImgHeight = newHeight;
-    }
-
   }
 
 }
@@ -103,6 +118,15 @@ export default {
 
   .message-label {
     font-size: 10px;
+  }
+
+  .setting-title {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .img-size-input {
+    margin-bottom : 5px;
   }
 
 

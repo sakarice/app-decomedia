@@ -18,7 +18,7 @@
 <script>
   export default {
     props : [
-      'isShowYoutube',
+      // 'isShowYoutube',
       'isLoopYoutube',
       'roomMovieLayer'
     ],
@@ -32,9 +32,9 @@
     methods : {
       loopYoutube(){
         if(this.isLoopYoutube == false){
-          this.$parent.isLoopYoutube = true;
+          this.$parent.moviePlayerSettings['isLoop'] = true;
         } else {
-          this.$parent.isLoopYoutube = false;
+          this.$parent.moviePlayerSettings['isLoop'] = false;
         }
       },
       createYtPlayer(vars){

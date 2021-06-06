@@ -215,7 +215,7 @@ export default {
     top: 0;
     right: 0;
     z-index: 2;
-    width: 400px;
+    width: 470px;
     height: 100vh;
 
     /* モーダル内の要素の配置 */
@@ -344,8 +344,8 @@ export default {
     z-index: 2;
     width: 100%;
     height: auto;
-    padding: 10px;
-  
+    padding: 10px 50px 10px 10px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;

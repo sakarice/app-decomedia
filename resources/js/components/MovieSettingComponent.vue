@@ -57,9 +57,9 @@ export default {
       return videoId;
     },
     setParentYoutubePlayerVars() {
-      this.$parent.youtubePlayerVars['videoId'] = this.extractVideoIdFromUrl();
-      this.$parent.youtubePlayerVars['width'] = this.movieFrameWidth;
-      this.$parent.youtubePlayerVars['height'] = this.movieFrameHeight;
+      this.$parent.moviePlayerSettings['videoId'] = this.extractVideoIdFromUrl();
+      this.$parent.moviePlayerSettings['width'] = this.movieFrameWidth;
+      this.$parent.moviePlayerSettings['height'] = this.movieFrameHeight;
 
       // 親コンポーネントの動画フレーム作成メソッドを実行
       this.$emit('create-movie-frame');
@@ -70,9 +70,9 @@ export default {
     },
     loopYoutube(){
       if(this.isLoopYoutube == false){
-        this.$parent.isLoopYoutube = true;
+        this.$parent.moviePlayerSettings['isLoop'] = true;
       } else {
-        this.$parent.isLoopYoutube = false;
+        this.$parent.moviePlayerSettings['isLoop'] = false;
       }
     },
   },

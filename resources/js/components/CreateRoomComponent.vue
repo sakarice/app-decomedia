@@ -1,53 +1,56 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : roomBackgroundColor}">
+   :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
     <!-- Room画像コンポーネント -->
     <room-img-component
      :roomImgUrl="roomImg['url']"
-     :roomImgWidth="roomImgWidth + 'px'"
-     :roomImgHeight="roomImgHeight + 'px'"
-     :roomImgLayer="roomImgLayer"
-     :isShowRoomImg="isShowContent['roomImg']"
-      v-on:parent-action="showImgModal"
+     :roomImgWidth="roomImg['width'] + 'px'"
+     :roomImgHeight="roomImg['height'] + 'px'"
+     :roomImgLayer="roomSetting['imgLayer']"
+     :isShowRoomImg="roomSetting['isShowImg']"
+      v-on:parent-action="showModal"
       ref="roomImg">
     </room-img-component>
 
+    <div class="action-button-wrapper">
+      <button class="room-create-button">作成</button>
+    </div>
+
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
+     :maxAudioNum="roomSetting['maxAudioNum']"
      :roomAudios="roomAudios"
      ref="roomAudio">
     </room-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
-    v-show="isShowYoutube"
-    :isShowYoutube="isShowYoutube"
-    :isLoopYoutube="isLoopYoutube"
-    :youtubePlayerVars="youtubePlayerVars"
-    :roomMovieLayer="roomMovieLayer"
+    v-show="roomSetting['isShowMovie']"
+    :isLoopYoutube="moviePlayerSettings['isLoop']"
+    :roomMovieLayer="roomSetting['movieLayer']"
      ref="roomMovie">
     </room-movie-component>
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
-    <div id="disp-modal-zone">
+    <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
 
         <!-- 画像 -->
-        <div id="disp-img-modal-wrapper" class="icon-wrapper" v-on:click="showImgModal()">
+        <div id="disp-img-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('imgModal')">
           <i class="fas fa-image fa-2x"></i>
         </div>
         <!-- オーディオ -->
-        <div id="disp-audio-modal-wrapper" class="icon-wrapper" v-on:click="showAudioModal()">
+        <div id="disp-audio-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('audioModal')">
           <i class="fas fa-music fa-2x"></i>
         </div>
         <!-- 動画 -->
-        <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click="showMovieModal()">
+        <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('movieModal')">
           <i class="fab fa-youtube fa-2x"></i>
         </div>
         <!-- Room設定 -->
-        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click="showRoomSettingModal()">
+        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomSettingModal')">
           <i class="fas fa-cog fa-2x"></i>
         </div>
       </div>
@@ -62,7 +65,6 @@
     v-on:set-img-url="setRoomImgUrl"
     v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
-
     </img-select-component>
 
     <!-- オーディオ選択コンポーネント -->
@@ -81,19 +83,19 @@
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
     :transitionName="transitionName"
-    :isLoopYoutube="isLoopYoutube">
+    :isLoopYoutube="moviePlayerSettings['isLoop']">
     </movie-setting-component>
 
     <!-- Room設定コンポーネント -->
     <room-setting-component
     v-show="isShowModal['roomSettingModal']"
     v-on:close-modal="closeModal"
-    v-on:toggle-room-img="toggleRoomImg"
     :transitionName="transitionName"
-    :roomBackgroundColor="roomBackgroundColor"
-    :isShowRoomImg="isShowContent['roomImg']"
-    :roomImgWidth="roomImgWidth"
-    :roomImgHeight="roomImgHeight">
+    :roomName="roomSetting['name']"
+    :roomBackgroundColor="roomSetting['roomBackgroundColor']"
+    :isShowRoomImg="roomSetting['isShowImg']"
+    :roomImgWidth="roomImg['width']"
+    :roomImgHeight="roomImg['height']">
     </room-setting-component>
 
 
@@ -120,7 +122,6 @@ export default {
   },
   data : () => {
     return {
-      roomBackgroundColor : "#ffffff", // 黒
       transitionName : 'right-slide',
       isShowModal : {
         'imgModal' : false,
@@ -128,47 +129,35 @@ export default {
         'movieModal' : false,
         'roomSettingModal' : false,
       },
-      isShowContent : {
-        'roomImg' : true,
-        'roomMovie' : false,
+      roomSetting : {
+        'name' : "",
+        'roomBackgroundColor' : "#333333", // 黒
+        'isShowImg' : true,
+        'isShowMovie' : false,
+        'imgLayer' : 0,
+        'movieLayer' : 1,
+        'maxAudioNum' : 5,
       },
-      roomImgUrl : "",
-      roomImgWidth : "300", // 画像コンポーネントに渡す際、単位[px]を付与
-      roomImgHeight : "300", // 画像コンポーネントに渡す際、単位[px]を付与
       roomImg : {
         'url' : "",
-        'width' : "500px",
-        'height' : "400px",
+        'width' : 500,
+        'height' : 500,
       },
-      maxAudioNum : 5,
-      roomAudios : [],
-      isShowYoutube : false,
-      youtubePlayerVars : {
+      moviePlayerSettings : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
+        'isLoop' : false,
       },
-      youtubePlaySettings : {},
-      isLoopYoutube : false,
-      roomImgLayer : 1,
-      roomMovieLayer : 2,
+      // maxAudioNum : 5,
+      roomAudios : [],
+
 
     }
   },
   methods : {
-    showImgModal() {
-      this.showModal('imgModal');
-    },
-    showAudioModal() {
-      this.showModal('audioModal');
-    },
-    showMovieModal() {
-      this.showModal('movieModal');
-    },
-    showRoomSettingModal() {
-      this.showModal('roomSettingModal');
-    },
     showModal(target){
+      // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for(let key in this.isShowModal){
         if(key != target){
           this.isShowModal[key] = false;
@@ -186,18 +175,11 @@ export default {
     },
     setRoomImgUrl(url) {
       this.roomImg['url'] = url;
-      this.isShowContent['roomImg'] = true;
+      this.roomSetting['isShowImg'] = true;
     },
     judgeDelImg(url) {
       if(this.roomImg['url'] == url){
         this.roomImg['url'] = "";
-      }
-    },
-    toggleRoomImg(){ // room画像の表示/非表示を切り替え
-      if(this.isShowContent['roomImg']){
-        this.isShowContent['roomImg'] = false;
-      } else if(!(this.isShowContent['roomImg'])){
-        this.isShowContent['roomImg'] = true;
       }
     },
     addAudio(audio) {
@@ -207,14 +189,18 @@ export default {
       this.$refs.roomAudio.judgeDelAudio(url);
     },
     createMovieFrame(){
-      let vars = this.youtubePlayerVars;
+      let vars = {
+        'videoId' : this.moviePlayerSettings['videoId'],
+        'width' : this.moviePlayerSettings['width'],
+        'height' : this.moviePlayerSettings['height'],
+      };
       this.$refs.roomMovie.createYtPlayer(vars);
-      this.isShowYoutube = true;
+      this.roomSetting['isShowMovie'] = true;
     },
     deleteMovieFrame(){
       this.$refs.roomMovie.deleteYtPlayer();
-      this.isShowYoutube = false;
-    }
+      this.roomSetting['isShowMovie'] = false;
+    },
     
   },
   created() {},
@@ -245,7 +231,7 @@ export default {
     right: 0;
     z-index: 3;
     height: 100%;
-    background-color:aliceblue;
+    background-color:black;
 
     display: flex;
     flex-direction: column;
@@ -255,33 +241,45 @@ export default {
   }
 
   #disp-modal-wrapper {
-    background-color: ghostwhite;
-    box-shadow: -1px 1px 5px lightgrey;
+    z-index: 1;
+    /* background-color: ghostwhite;
+    box-shadow: -1px 1px 5px lightgrey; */
   }
 
   .icon-wrapper {
-    padding: 20px;
+    padding: 12px;
+  }
+  .icon-wrapper:hover {
+    background-color: rgba(255,255,255,0.2);
   }
 
   #disp-img-modal-wrapper {
-    background-color:lightseagreen;
+    color:lightseagreen;
   }
-
   #disp-movie-modal-wrapper {
     color: orangered;
   }
-
   #disp-audio-modal-wrapper {
-    background-color: gold;
+    color: gold;
   }
-
   #disp-room-setting-modal-wrapper {
-    background-color: lightslategray;
-    color: white;
+    color: lightgray;
   }
 
   .hidden {
     display: none;
+  }
+
+  .action-button-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  .room-create-button {
+    position: absolute;
+    top : 50px;
+    right: 60px;
   }
 
 </style>

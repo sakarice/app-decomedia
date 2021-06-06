@@ -35,12 +35,10 @@
 
 <script>
   export default {
-    props : ['roomAudios'],
+    props : ['maxAudioNum', 'roomAudios'],
 
     data : () => {
       return {
-        maxAudioNum : 5,
-        // roomAudios : [],
         audioPlayers : [],
       }
     },
@@ -131,7 +129,6 @@
       judgeDelAudio(url) {
         if(this.roomAudioUrl == url){
           this.roomAudioUrl = "";
-          this.roomAudioThumbnailUrl = "";
         }
       },
       deleteAudio: function(event) {

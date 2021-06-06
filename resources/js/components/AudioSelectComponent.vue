@@ -146,11 +146,6 @@ export default {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      // テスト用　後で消す
-      // let audio = document.getElementById('audio');
-      // audio.src = playTargetAudio['audio_url'];
-      // audio.play();
-
       this.audioPlayer.src = playTargetAudio['audio_url'];
       this.audioPlayer.play();
       this.isPlay = true;
@@ -171,12 +166,8 @@ export default {
       this.playAudioType = type;
       this.playAudioIndex = index;
 
-
-      // ★後で消す
-      console.log(this.audioPlayer.ended);
     },
 
-    // ★後で消す
     finishAudio: function(event){
       let isFinish = event.target.ended;
       alert(isFinish);
@@ -336,21 +327,6 @@ export default {
 
 <style>
 
-  #select-modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    width: 400px;
-    height: 100vh;
-    margin-right : 70px;
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    flex-flow: row;
-
-  }
 
   #toggle-wrapper {
     display: flex;
@@ -467,7 +443,7 @@ export default {
     z-index: -3;
   }
 
-  #contents-wrapper {
+  /* #contents-wrapper {
     z-index: 2;
     width: 100%;
     height: auto;
@@ -478,7 +454,7 @@ export default {
     justify-content: center;
     align-items: center;
 
-  }
+  } */
 
 
   #upload-input-wrapper {
