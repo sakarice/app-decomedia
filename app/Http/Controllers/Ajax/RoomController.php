@@ -32,18 +32,48 @@ class RoomController extends Controller
     }
 
 
+    // public function getUserOwnImgs(){
+    //     $owner_user_id = Auth::user()->id;
+    //     $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
+    //     $img_file_urls = array();
+        
+    //     foreach($user_own_imgs as $user_own_img){
+    //         $img_file_urls[] = $user_own_img->img_url;
+    //     };
+
+    //     return ['urls' => $img_file_urls];
+    // }
+
     public function getUserOwnImgs(){
         $owner_user_id = Auth::user()->id;
         $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
-        $img_file_urls = array();
+        $img_file_datas = array();
         
-        foreach($user_own_imgs as $user_own_img){
-            $img_file_urls[] = $user_own_img->img_url;
+        foreach($user_own_imgs as $index => $user_own_img){
+            $tmp_img_file_datas = array();
+            $tmp_img_file_datas += array('id' => $user_own_img->id);
+            $tmp_img_file_datas += array('url'=> $user_own_img->img_url);
+            $img_file_datas[$index] = $tmp_img_file_datas;
         };
 
-        return ['urls' => $img_file_urls];
-
+        return ['file_datas' => $img_file_datas];
     }
+
+    public function getDefaultImgs(){
+        $owner_user_id = Auth::user()->id;
+        $default_imgs = DefaultImg::get();
+        $img_file_datas = array();
+        
+        foreach($default_imgs as $index => $default_img){
+            $tmp_img_file_datas = array();
+            $tmp_img_file_datas += array('id' => $default_img->id);
+            $tmp_img_file_datas += array('url' => $default_img->img_url);
+            $img_file_datas[$index] = $tmp_img_file_datas;
+        };
+
+        return ['file_datas' => $img_file_datas];
+    }
+
 
     public function getUserOwnAudioThumbnails(){
         $owner_user_id = Auth::user()->id;
@@ -72,8 +102,9 @@ class RoomController extends Controller
         $audios = array();
         foreach($user_own_audios as $index => $user_own_audio){
             $tmpAudios = array();
-            $tmpAudios += array('audio_name' => $user_own_audio->name);
-            $tmpAudios += array('audio_url' => $user_own_audio->audio_url);
+            // $tmpAudios += array('id' => $user_own_audio->id);
+            $tmpAudios += array('name' => $user_own_audio->name);
+            $tmpAudios += array('url' => $user_own_audio->audio_url);
             $tmpAudios += array('thumbnail_url' => $user_own_audio->thumbnail_url);
             $audios[$index] = $tmpAudios;
         };
@@ -85,26 +116,14 @@ class RoomController extends Controller
         $audios = array();
         foreach($default_audios as $index => $default_audio){
             $tmpAudios = array();
-            $tmpAudios += array('audio_name' => $default_audio->name);
-            $tmpAudios += array('audio_url' => $default_audio->audio_url);
+            // $tmpAudios += array('id' => $default_audio->id);
+            $tmpAudios += array('name' => $default_audio->name);
+            $tmpAudios += array('url' => $default_audio->audio_url);
             $tmpAudios += array('thumbnail_url' => $default_audio->thumbnail_url);
             $audios[$index] = $tmpAudios;
         };
         return ['audios' => $audios];
     }
-
-    public function getDefaultImgs(){
-        $owner_user_id = Auth::user()->id;
-        $default_imgs = DefaultImg::get();
-        $img_file_urls = array();
-        
-        foreach($default_imgs as $default_img){
-            $img_file_urls[] = $default_img->img_url;
-        };
-
-        return ['urls' => $img_file_urls];
-    }
-
 
 
     public function saveImgFile(Request $request) {
@@ -113,6 +132,7 @@ class RoomController extends Controller
         $imgfile_name = $imgfile->getClientOriginalName();
         $imgfile_save_path = saveFile::saveFileInS3($user_id, $imgfile);
         $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
+        \Log::info($imgfile_save_url);
 
         $fileDatas = array (
             'owner_user_id' => $user_id,
@@ -120,9 +140,15 @@ class RoomController extends Controller
             'img_path' => $imgfile_save_path,
             'img_url' => $imgfile_save_url
         );
-        saveFile::saveImgDataInDB($fileDatas);
+        $id = saveFile::saveImgDataInDB($fileDatas);
+        // $img_file_info = array();
+        $img_file_info = array('id' => $id);
+        $img_file_info += array('url'=> $imgfile_save_url);
 
-        return ['url' => $imgfile_save_url];
+
+        return [
+            'img_file_info' => $img_file_info 
+        ];
     }
 
     public function saveAudioFile(Request $request) {
@@ -146,8 +172,9 @@ class RoomController extends Controller
         saveFile::saveAudioDataInDB($fileDatas);
 
         $audios = array(
-            'audio_name' => $audio_name,
-            'audio_url' => $audio_save_url,
+            // 'id' => $id,
+            'name' => $audio_name,
+            'url' => $audio_save_url,
             'thumnbail_url' => $thumbnail_save_url
         );
 
@@ -179,10 +206,16 @@ class RoomController extends Controller
         // S3からファイルを削除
         Storage::disk('s3')->delete($del_imgfile_url);
         // DBからレコード削除
+        // UserOwnImg::where('owner_user_id', $owner_user_id)
+        //             ->where('img_url', $del_imgfile_url)
+        //             ->first()
+        //             ->delete();
+
+        $del_imgfile_id = $request->imgId;
         UserOwnImg::where('owner_user_id', $owner_user_id)
-                    ->where('img_url', $del_imgfile_url)
-                    ->first()
-                    ->delete();
+        ->where('img_url', $del_imgfile_url)
+        ->first()
+        ->delete();
 
         return ['削除完了しました'];
     }
@@ -233,5 +266,10 @@ class RoomController extends Controller
 
         return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_path)]);
     }
+
+    public function createRoom(Request $request){
+        return ['message' => $request->img['url']];
+    }
+
 
 }

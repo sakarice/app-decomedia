@@ -16,6 +16,7 @@ class CreateRoomBgmsTable extends Migration
         Schema::create('room_bgms', function (Blueprint $table) {
             $table->id();
             $table->integer('room_id');
+            $table->integer('audio_type'); // default or userOwn
             $table->integer('audio_id');
             $table->integer('audio_order_seq');
             $table->integer('owner_user_id')->nullable();

@@ -1,0 +1,213 @@
+#select-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  width: 470px;
+  height: 100vh;
+
+  /* モーダル内の要素の配置 */
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+
+}
+
+#toggle-wrapper {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#file-category-toggle {
+  width: 50px;
+  height: 24px;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  padding: 2px 2px;
+  background-color: plum;
+}
+#file-category-toggle:focus {
+  box-shadow: 0 0 0 1px grey;
+}
+
+#category-type {
+  width: 60px;
+  margin-left: 10px;
+  color: grey;
+  display: flex;
+  align-items: center;
+}
+
+.isUpload {
+  animation-name: change-toggle-left-to-right;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards; 
+}
+@keyframes change-toggle-left-to-right{
+  0% {
+    background-color: plum;
+    padding-left: 2px;
+  }    
+  100% {
+    background-color:paleturquoise;
+    padding-left: 28px;
+  }
+}
+
+.isDefault {
+  animation-name: change-toggle-right-to-left;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+@keyframes change-toggle-right-to-left{
+  0% {
+    background-color:paleturquoise;
+    padding-left: 28px;
+  }
+  100% {
+    background-color: plum;
+    padding-left: 2px;
+  }    
+}
+
+#toggle-state-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+
+  pointer-events: none;
+}
+
+
+.close-icon-wrapper{
+  padding: 10px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px grey;
+}
+
+#close-modal-icon {
+  /* position: absolute;
+  top: 200px;
+  left: -20px; */
+  cursor: pointer;
+}
+
+#area-wrapper {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
+
+  /* モーダル内の要素の配置 */
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}
+
+#drop-zone {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+}
+
+.show {
+  z-index: 3;
+  opacity: 0.3;
+}
+.hidden {
+  z-index: -3;
+}
+
+#contents-wrapper {
+  z-index: 2;
+  width: 100%;
+  height: auto;
+  padding: 10px 50px 10px 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+#upload-input-wrapper {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#loading-display-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.loading-message {
+  font-size: 0.5rem;
+  margin-bottom: 0;
+}
+
+#uploading-dot {
+  margin-left: 3px;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  /* background-color: black; */
+}
+
+.copy-to-right {
+  animation-name: dot-copy-to-right;
+  animation-duration: 3s;
+  animation-timing-function: steps(3, start);
+  animation-iteration-count: infinite;
+}
+@keyframes dot-copy-to-right {
+  /* ドットを右にコピーして増やしていく(影でコピーを表現) */
+  33%   {box-shadow: 5px 0 0 0 black}
+  66%   {box-shadow: 10px 0 0 0 black}
+  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}
+}
+
+#loading-icon {
+  width: 20px; 
+  height: 20px;
+  margin-right: 10px;
+  background: linear-gradient(#05FBFF, #FF33aa);
+  border-radius: 50%;
+}
+
+.rotate {
+  animation: rotate-anime 2s linear infinite;
+}
+@keyframes rotate-anime {
+  0%  {transform: rotate(0);}
+  100%  {transform: rotate(360deg);}
+}
+
+#upload-label {
+  padding: 5px 30px;
+  background-color: rgba(100, 200, 250, 0.4);
+  border-radius: 20px;
+  margin-bottom: 0;
+}
+#upload-label:hover {
+  cursor: pointer;
+  background-color: rgba(100, 200, 250, 0.8);
+}

@@ -69,10 +69,18 @@ class SaveFile
 
     $targetModel->owner_user_id = $owner_user_id;
     $targetModel->name = $fileDatas['name'];
-    $targetModel->img_path = $fileDatas['path'];
-    $targetModel->img_url = $fileDatas['url'];
+    $targetModel->img_path = $fileDatas['img_path'];
+    $targetModel->img_url = $fileDatas['img_url'];
 
     $targetModel->save();
+
+    // 保存したレコードのidを取得
+    $id = $targetModel->where('owner_user_id', $owner_user_id)
+                      ->where('img_url', $fileDatas['img_url'])
+                      ->first()
+                      ->id;
+
+    return $id;
   }
 
   // オーディオファイルの情報をDBに保存
@@ -96,6 +104,14 @@ class SaveFile
     $targetModel->thumbnail_url = $fileDatas['thumbnail_url'];
 
     $targetModel->save();
+
+    // 保存したレコードのidを取得
+    $id = $targetModel->where('owner_user_id', $owner_user_id)
+                      ->where('audio_url', $fileDatas['url'])
+                      ->first()
+                      ->id;
+
+    return $id;
   }
 
           

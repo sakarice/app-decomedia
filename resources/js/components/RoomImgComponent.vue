@@ -44,7 +44,7 @@
 
 
 
-<style>
+<style scoped>
   /* img */
   #room-img-frame {
     display: flex;

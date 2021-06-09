@@ -33,17 +33,17 @@
           </div>
           <ul id="img-wrapper">
             <!-- uploads -->
-            <li v-show="!(isDefault)" class="img-list" v-for="imgFileUrl in imgFileUrls" :key="imgFileUrl.id">
-              <img class="user-own-img" :src="imgFileUrl" :alt="imgFileUrl" />
-              <div class="icon-cover" v-on:click="sendImgFileUrl">
-                <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i>
+            <li :id="index" v-show="!(isDefault)" class="img-list" v-for="(userOwnImg, index) in userOwnImgs" :key="userOwnImg.id">
+              <img class="user-own-img" :src="userOwnImg['url']" :alt="userOwnImg['url']" />
+              <div class="icon-cover" v-on:click="setRoomImg">
+                <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click.stop="deleteImg"></i>
                 <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
               </div>
             </li>
             <!-- default -->
-            <li v-show="isDefault" class="img-list" v-for="defaultImgUrl in defaultImgUrls" :key="defaultImgUrl.id">
-              <img class="user-own-img" :src="defaultImgUrl" :alt="defaultImgUrl" />
-              <div class="icon-cover" v-on:click="sendImgFileUrl">
+            <li :id="index" v-show="isDefault" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.id">
+              <img class="default-img" :src="defaultImg['url']" :alt="defaultImg['url']" />
+              <div class="icon-cover" v-on:click="setRoomImg">
                 <!-- <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i> -->
                 <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
               </div>
@@ -69,8 +69,10 @@ export default {
       uploadFile : "",
       isLoading : false,
       loadingMessage : "",
-      imgFileUrls : [],
-      defaultImgUrls : []
+      userOwnImgs : [],
+      // imgFileUrls : [],
+      defaultImgs : []
+      // defaultImgUrls : []
     }
   },
   methods : {
@@ -87,8 +89,8 @@ export default {
       axios.get(url)
         .then(response => {
           // alert(response.data.urls[0]);
-          response.data.urls.forEach(url => {            
-            this.imgFileUrls.unshift(url);
+          response.data.file_datas.forEach(file_data => {            
+            this.userOwnImgs.unshift(file_data);
           });
         })
         .catch(error => {
@@ -100,8 +102,8 @@ export default {
       axios.get(url)
         .then(response => {
           // alert(response.data.urls[0]);
-          response.data.urls.forEach(url => {            
-            this.defaultImgUrls.unshift(url);
+          response.data.file_datas.forEach(file_data => {            
+            this.defaultImgs.unshift(file_data);
           });
         })
         .catch(error => {
@@ -118,9 +120,32 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    sendImgFileUrl: function(event){
+    setRoomImg: function(event){
       let imgUrl = event.target.previousElementSibling.getAttribute('src');
-      this.$emit('set-img-url', imgUrl);
+      let imgType = event.target.previousElementSibling.getAttribute('class');
+      let imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
+      
+      this.$emit('set-room-img', imgType, imgId, imgUrl);
+    },
+    findImgIdTiedUpWithUrl(imgType, imgUrl){
+      let targetModel;  // 検索対象のVueモデル
+      switch(imgType){ // 指定されたタイプに応じてVueモデルを決定
+        case 'user-own-img':
+          targetModel = this.userOwnImgs;
+          break;
+        case 'default-img':
+          targetModel = this.defaultImgs;
+          break;
+      }
+      let imgNum = targetModel.length; // =検索ループ回数
+      let imgId;
+      for(let i=0; i < imgNum; i++){
+        if(targetModel[i]['url'] == imgUrl){
+          imgId = targetModel[i]['id'];
+        }
+      }
+
+      return imgId;
     },
     startInput(event){
       let target = document.getElementById('upload-input');
@@ -150,50 +175,46 @@ export default {
       // loading_icon.classList.add('rotate');
       axios.post(url, formData)
         .then(response => {
-          this.imgFileUrls.unshift(response.data.url);
-          alert(response.data.url);
+          this.userOwnImgs.unshift(response.data.img_file_info);
           this.uploadFile = "";
-          this.loadingMessage = ''
+          this.loadingMessage = '';
           this.isLoading = false;
           // loading_icon.classList.remove('rotate');
           this.dragLeave();
         })
         .catch(error => {
           alert('アップロード失敗');
+          this.loadingMessage = ''
+          this.isLoading = false;  
         });
     },
     // 画像ファイルを削除する
     deleteImg:function(event) {
+      let index = event.target.parentNode.parentNode.getAttribute('id');
+      let imgUrl = this.userOwnImgs[index]['url'];
+      let imgId = this.findImgIdTiedUpWithUrl('user-own-img', imgUrl);
       const url = '/ajax/deleteImg'
-      let imgUrl = event.target.parentNode.previousElementSibling.getAttribute('src');
       const params = {
+        'imgId' : +imgId, // +を付けて文字列⇒数値に型変換
         'imgUrl' : imgUrl
       }
       this.loadingMessage = '削除中'
       this.isLoading = true;
-      // const loading_icon = document.getElementById('loading-icon');
-      // loading_icon.classList.add('rotate');
-      // alert(imgUrl);
       axios.post(url, params)
         .then(response => {
           alert(response.data);
           // 画面に即自反映するため、画像URLをdataから削除
-          // 削除対象URLが入っている配列のインデックスを取得
-          let index = this.imgFileUrls.some(function(v, i){
-            if(v==imgUrl) {
-              return (i);
-            };
-          });
-          // 配列から削除
-          this.imgFileUrls.splice(index,1);
+          this.userOwnImgs.splice(index,1);
           this.loadingMessage = ''
           this.isLoading = false;
-          // loading_icon.classList.remove('rotate');
           // Room画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
           this.$emit('img-del-notice', imgUrl);
         })
         .catch(error => {
           alert('画像削除失敗');
+          this.loadingMessage = ''
+          this.isLoading = false;
+
         })
 
     },
@@ -208,221 +229,9 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
-  #select-modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 2;
-    width: 470px;
-    height: 100vh;
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    flex-flow: row;
-
-  }
-
-  #toggle-wrapper {
-    display: flex;
-    margin-bottom: 20px;
-  }
-
-  #file-category-toggle {
-    width: 50px;
-    height: 24px;
-    outline: none;
-    border: none;
-    border-radius: 50px;
-    padding: 2px 2px;
-    background-color: plum;
-  }
-  #file-category-toggle:focus {
-    box-shadow: 0 0 0 1px grey;
-  }
-
-  #category-type {
-    width: 60px;
-    margin-left: 10px;
-    color: grey;
-    display: flex;
-    align-items: center;
-  }
-
-  .isUpload {
-    animation-name: change-toggle-left-to-right;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards; 
-  }
-  @keyframes change-toggle-left-to-right{
-    0% {
-      background-color: plum;
-      padding-left: 2px;
-    }    
-    100% {
-      background-color:paleturquoise;
-      padding-left: 28px;
-    }
-  }
-  
-  .isDefault {
-    animation-name: change-toggle-right-to-left;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-  }
-  @keyframes change-toggle-right-to-left{
-    0% {
-      background-color:paleturquoise;
-      padding-left: 28px;
-    }
-    100% {
-      background-color: plum;
-      padding-left: 2px;
-    }    
-  }
-
-  #toggle-state-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: white;
-
-    pointer-events: none;
-  }
-
-
-  .close-icon-wrapper{
-    padding: 10px;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    background-color: white;
-    box-shadow: 1px 1px 1px 1px grey;
-  }
-
-  #close-modal-icon {
-    /* position: absolute;
-    top: 200px;
-    left: -20px; */
-    cursor: pointer;
-  }
-  
-  #area-wrapper {
-    position: relative;
-    width: 90%;
-    height: 100%;
-    background-color: white;
-    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-  }
-
-  #drop-zone {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: blue;
-  }
-
-  .show {
-    z-index: 3;
-    opacity: 0.3;
-  }
-  .hidden {
-    z-index: -3;
-  }
-
-  #contents-wrapper {
-    z-index: 2;
-    width: 100%;
-    height: auto;
-    padding: 10px 50px 10px 10px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-  }
-
-
-  #upload-input-wrapper {
-    width: 100%;
-    height: 50px;
-    margin-bottom: 5px;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  #loading-display-wrapper {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-  }
-
-  .loading-message {
-    font-size: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  #uploading-dot {
-    margin-left: 3px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    /* background-color: black; */
-  }
-
-  .copy-to-right {
-    animation-name: dot-copy-to-right;
-    animation-duration: 3s;
-    animation-timing-function: steps(3, start);
-    animation-iteration-count: infinite;
-  }
-  @keyframes dot-copy-to-right {
-    /* ドットを右にコピーして増やしていく(影でコピーを表現) */
-    33%   {box-shadow: 5px 0 0 0 black}
-    66%   {box-shadow: 10px 0 0 0 black}
-    100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}
-  }
-
-  #loading-icon {
-    width: 20px; 
-    height: 20px;
-    margin-right: 10px;
-    background: linear-gradient(#05FBFF, #FF33aa);
-    border-radius: 50%;
-  }
-
-  .rotate {
-    animation: rotate-anime 2s linear infinite;
-  }
-  @keyframes rotate-anime {
-    0%  {transform: rotate(0);}
-    100%  {transform: rotate(360deg);}
-  }
-
-  #upload-label {
-    padding: 5px 30px;
-    background-color: rgba(100, 200, 250, 0.4);
-    border-radius: 20px;
-    margin-bottom: 0;
-  }
-  #upload-label:hover {
-    cursor: pointer;
-    background-color: rgba(100, 200, 250, 0.8);
-  }
+@import "../../css/roomEditModals.css";
 
   #img-wrapper {
     /* モーダル内の画像サムネの配置 */
@@ -491,28 +300,10 @@ export default {
     pointer-events: none;
   }
 
-
-  .user-own-img {
+  .user-own-img,.default-img{
     width: 100%;
     height: 140px;
   }
 
-
-
-  /* アニメーション */
-
-  /* .right-slide-enter-to, .right-slide-leave {
-    transform: translate(0px, 0px);
-  } */
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 500ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
-  }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
-  }
 
 </style>

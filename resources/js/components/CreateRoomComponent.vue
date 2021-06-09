@@ -8,15 +8,11 @@
      :roomImgUrl="roomImg['url']"
      :roomImgWidth="roomImg['width'] + 'px'"
      :roomImgHeight="roomImg['height'] + 'px'"
-     :roomImgLayer="roomSetting['imgLayer']"
+     :roomImgLayer="roomImg['layer']"
      :isShowRoomImg="roomSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="roomImg">
     </room-img-component>
-
-    <div class="action-button-wrapper">
-      <button class="room-create-button">作成</button>
-    </div>
 
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
@@ -29,9 +25,18 @@
     <room-movie-component
     v-show="roomSetting['isShowMovie']"
     :isLoopYoutube="moviePlayerSettings['isLoop']"
-    :roomMovieLayer="roomSetting['movieLayer']"
+    :roomMovieLayer="moviePlayerSettings['layer']"
      ref="roomMovie">
     </room-movie-component>
+
+    <room-create-button
+    :roomImg="roomImg"
+    :roomAudios="roomAudios"
+    :moviePlayerSettings="moviePlayerSettings"
+    :roomSetting="roomSetting">
+    </room-create-button>
+
+
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
@@ -62,7 +67,7 @@
     <img-select-component 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
-    v-on:set-img-url="setRoomImgUrl"
+    v-on:set-room-img="setRoomImgUrl"
     v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
     </img-select-component>
@@ -110,6 +115,8 @@ import RoomAudio from './RoomAudioComponent.vue';
 import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
+import RoomCreateButton from './RoomCreateButtonComponent.vue';
+
 export default {
   components : {
     ImgSelect,
@@ -119,6 +126,7 @@ export default {
     RoomSetting,
     RoomImg,
     RoomMovie,
+    RoomCreateButton,
   },
   data : () => {
     return {
@@ -134,20 +142,22 @@ export default {
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
-        'imgLayer' : 0,
-        'movieLayer' : 1,
         'maxAudioNum' : 5,
       },
       roomImg : {
+        'type' : "",
+        'id' : "",
         'url' : "",
         'width' : 500,
         'height' : 500,
+        'layer' : 0,
       },
       moviePlayerSettings : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
         'isLoop' : false,
+        'layer' : 1,
       },
       // maxAudioNum : 5,
       roomAudios : [],
@@ -173,12 +183,16 @@ export default {
         this.isShowModal[key] = false;
       }
     },
-    setRoomImgUrl(url) {
+    setRoomImgUrl(type, id, url) {
+      this.roomImg['type'] = type;
+      this.roomImg['id'] = id;
       this.roomImg['url'] = url;
       this.roomSetting['isShowImg'] = true;
     },
     judgeDelImg(url) {
       if(this.roomImg['url'] == url){
+        this.roomImg['type'] = "";
+        this.roomImg['id'] = "";
         this.roomImg['url'] = "";
       }
     },
@@ -270,16 +284,23 @@ export default {
     display: none;
   }
 
-  .action-button-wrapper {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+  
+  /* Modal表示アニメーション */
+
+  /* .right-slide-enter-to, .right-slide-leave {
+    transform: translate(0px, 0px);
+  } */
+
+  .right-slide-enter-active, .right-slide-leave-active {
+    transform: translate(0px, 0px);
+    transition: all 500ms
+    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
   }
 
-  .room-create-button {
-    position: absolute;
-    top : 50px;
-    right: 60px;
+  .right-slide-enter, .right-slide-leave-to {
+    transform: translateX(100vw) 
   }
+
+
 
 </style>

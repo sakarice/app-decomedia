@@ -102,6 +102,8 @@ export default {
 
 <style>
 
+@import "../../css/roomEditModals.css";
+
   /* コンテンツのCSS */
   #setting-wrapper {
     margin: 20px 0;
@@ -129,21 +131,5 @@ export default {
     margin-bottom : 5px;
   }
 
-
-  /* アニメーション */
-
-  /* .right-slide-enter-to, .right-slide-leave {
-    transform: translate(0px, 0px);
-  } */
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 400ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
-  }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
-  }
 
 </style>

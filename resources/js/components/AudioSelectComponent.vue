@@ -43,7 +43,7 @@
             <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
               <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToRoom('user-own', index)">
-                {{userOwnAudio['audio_name']}}
+                {{userOwnAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
                v-show="!(userOwnAudio['isPlay'])"
@@ -58,7 +58,7 @@
             <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
               <span class="audio_name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToRoom('default', index)">
-                {{defaultAudio['audio_name']}}
+                {{defaultAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
               v-show="!(defaultAudio['isPlay'])"
@@ -121,7 +121,7 @@ export default {
           });
         })
         .catch(error => {
-          alert('オーディオサムネイル取得失敗');
+          alert('オーディオ取得失敗');
         })
     },
     getDefaultAudios(){
@@ -134,7 +134,7 @@ export default {
           });
         })
         .catch(error => {
-          alert('オーディオサムネイル取得失敗');
+          alert('オーディオ取得失敗');
         })
     },
     playAudio : function(type, index){
@@ -146,7 +146,7 @@ export default {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['audio_url'];
+      this.audioPlayer.src = playTargetAudio['url'];
       this.audioPlayer.play();
       this.isPlay = true;
       playTargetAudio['isPlay'] = true;
@@ -203,8 +203,9 @@ export default {
 
       // 新しい連想配列を用意
       let audio = {};
-      audio['audio_name'] = tmpAudio['audio_name'];
-      audio['audio_url'] = tmpAudio['audio_url'];
+      // audio['id'] = tmpAudio['id'];
+      audio['name'] = tmpAudio['name'];
+      audio['url'] = tmpAudio['url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
 
@@ -268,7 +269,7 @@ export default {
     deleteaudio:function(event) {
       const url = '/ajax/deleteAudio'
       let audioId = event.target.parentNode.getAttribute('id');
-      let audioUrl = this.userOwnAudios[audioId]['audio_url'];
+      let audioUrl = this.userOwnAudios[audioId]['url'];
       const params = {
         'audioUrl' : audioUrl
       }
@@ -283,7 +284,7 @@ export default {
           // 画面に即自反映するため、オーディオURLをdataから削除
           // 削除対象URLが入っている配列のインデックスを取得
           let index = this.userOwnAudios.some(function(v, i){
-            if(v['audio_url']==audioUrl) {
+            if(v['url']==audioUrl) {
               return (i);
             };
           });
@@ -297,6 +298,9 @@ export default {
         })
         .catch(error => {
           alert('オーディオ削除失敗');
+          this.loadingMessage = '';
+          this.isLoading = false;
+
         })
 
     },
@@ -325,197 +329,10 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
-
-  #toggle-wrapper {
-    display: flex;
-    margin-bottom: 20px;
-  }
-
-  #file-category-toggle {
-    width: 50px;
-    height: 24px;
-    outline: none;
-    border: none;
-    border-radius: 50px;
-    padding: 2px 2px;
-    background-color: plum;
-  }
-  #file-category-toggle:focus {
-    box-shadow: 0 0 0 1px grey;
-  }
-
-  #category-type {
-    width: 60px;
-    margin-left: 10px;
-    color: grey;
-    display: flex;
-    align-items: center;
-  }
-
-  .isUpload {
-    animation-name: change-toggle-left-to-right;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards; 
-  }
-  @keyframes change-toggle-left-to-right{
-    0% {
-      background-color: plum;
-      padding-left: 2px;
-    }    
-    100% {
-      background-color:paleturquoise;
-      padding-left: 28px;
-    }
-  }
+@import "../../css/roomEditModals.css";
   
-  .isDefault {
-    animation-name: change-toggle-right-to-left;
-    animation-duration: 0.2s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-  }
-  @keyframes change-toggle-right-to-left{
-    0% {
-      background-color:paleturquoise;
-      padding-left: 28px;
-    }
-    100% {
-      background-color: plum;
-      padding-left: 2px;
-    }    
-  }
-
-  #toggle-state-icon {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: white;
-
-    pointer-events: none;
-  }
-
-
-  .close-icon-wrapper{
-    padding: 10px;
-    border-top-left-radius: 50%;
-    border-bottom-left-radius: 50%;
-    background-color: white;
-    box-shadow: 1px 1px 1px 1px grey;
-  }
-
-  #close-modal-icon {
-    /* position: absolute;
-    top: 200px;
-    left: -20px; */
-    cursor: pointer;
-  }
-  
-  #area-wrapper {
-    position: relative;
-    width: 90%;
-    height: 100%;
-    background-color: white;
-    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    flex-flow: column;
-  }
-
-  #drop-zone {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-color: blue;
-  }
-
-  .show {
-    z-index: 3;
-    opacity: 0.3;
-  }
-  .hidden {
-    z-index: -3;
-  }
-
-  /* #contents-wrapper {
-    z-index: 2;
-    width: 100%;
-    height: auto;
-    padding: 10px;
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-  } */
-
-
-  #upload-input-wrapper {
-    width: 100%;
-    height: 50px;
-    margin-bottom: 5px;
-    padding: 0 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-  #loading-display-wrapper {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-  }
-
-  .loading-message {
-    font-size: 0.5rem;
-    margin-bottom: 0;
-  }
-
-  #uploading-dot {
-    margin-left: 3px;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    /* background-color: black; */
-  }
-
-  .copy-to-right {
-    animation-name: dot-copy-to-right;
-    animation-duration: 3s;
-    animation-timing-function: steps(3, start);
-    animation-iteration-count: infinite;
-  }
-  @keyframes dot-copy-to-right {
-    /* ドットを右にコピーして増やしていく(影でコピーを表現) */
-    33%   {box-shadow: 5px 0 0 0 black}
-    66%   {box-shadow: 10px 0 0 0 black}
-    100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}
-  }
-
-  #loading-icon {
-    width: 20px; 
-    height: 20px;
-    margin-right: 10px;
-    background: linear-gradient(#05FBFF, #FF33aa);
-    border-radius: 50%;
-  }
-
-  .rotate {
-    animation: rotate-anime 2s linear infinite;
-  }
-  @keyframes rotate-anime {
-    0%  {transform: rotate(0);}
-    100%  {transform: rotate(360deg);}
-  }
-
   #upload-label {
     padding: 5px 30px;
     background-color: rgba(100, 200, 250, 0.4);
@@ -623,22 +440,6 @@ export default {
   }
 
 
-  .icon-cover {
-    position: absolute ;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(130, 130, 130, 0);
-
-    /* 要素の配置 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-  }
-
   #add-audio-thumbnail-icon {
     color: rgba(255, 255, 255, 0.7);
     pointer-events: none;
@@ -652,22 +453,5 @@ export default {
     background-color: darkgray;
   }
 
-
-
-  /* アニメーション */
-
-  /* .right-slide-enter-to, .right-slide-leave {
-    transform: translate(0px, 0px);
-  } */
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 500ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
-  }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
-  }
 
 </style>

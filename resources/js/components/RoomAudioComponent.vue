@@ -8,7 +8,7 @@
     <div id="room-audio-frame">
       <ul id="audios">
         <li class="audio-area" :id="index" v-for="(roomAudio, index) in roomAudios" :key="roomAudio.id">
-          <div class="audio-wrapper" :class="{'isPlay' : roomAudio['isPlay']}">            
+          <div class="audio-wrapper" :class="{'isPlay' : roomAudio['isPlay']}">
             <img class="room-audio-thumbnail"
             src="" v-show="roomAudio"
             :alt="index">
@@ -93,7 +93,7 @@
         // 追加されたオーディオの情報を取得
         let addedAudioIndex = this.$parent.roomAudios.length - 1;
         let addedAudio = this.$parent.roomAudios[addedAudioIndex];
-        let addedAudioUrl = addedAudio['audio_url'];
+        let addedAudioUrl = addedAudio['url'];
         
         // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
         let emptyPlayerIndex;
@@ -151,7 +151,7 @@
           // this.updateAudioPlayers();
         });
       },
-      setAudioLoop: function(event){
+      setAudioLoop: function(event){  
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
         let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
         let audioPlayer = this.audioPlayers[playerIndex];
@@ -197,7 +197,7 @@
 
 
 
-<style>
+<style scoped>
 
   /* audio */
   #room-Audio-wrapper {

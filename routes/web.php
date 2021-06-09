@@ -63,6 +63,7 @@ Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomCon
 Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');
 Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudios');
 Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudios');
+Route::post('/ajax/room/create', 'App\Http\Controllers\Ajax\RoomController@createRoom');
 
 
 // defaultImgアップロード(開発用、後で消す)

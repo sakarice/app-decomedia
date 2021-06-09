@@ -35,6 +35,7 @@ Vue.component('room-img-component', require('./components/RoomImgComponent.vue')
 Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
 Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
 Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
+Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
 
 
 /**

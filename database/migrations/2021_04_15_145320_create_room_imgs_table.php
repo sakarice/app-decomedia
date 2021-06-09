@@ -16,8 +16,10 @@ class CreateRoomImgsTable extends Migration
         Schema::create('room_imgs', function (Blueprint $table) {
             $table->id();
             $table->integer('room_id');
+            $table->integer('img_type'); // default or userOwn
             $table->integer('img_id');
             $table->integer('owner_user_id')->nullable();
+            $table->integer('img_layer');
             $table->timestamps();
         });
     }

@@ -122,7 +122,7 @@
 
 
 
-<style>
+<style scoped>
   /* #youtube-url-form{
     margin: 20px;
   } */
