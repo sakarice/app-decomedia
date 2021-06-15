@@ -29,11 +29,7 @@
      ref="roomMovie">
     </room-movie-component>
 
-    <room-create-button
-    :roomImg="roomImg"
-    :roomAudios="roomAudios"
-    :moviePlayerSettings="moviePlayerSettings"
-    :roomSetting="roomSetting">
+    <room-create-button>
     </room-create-button>
 
 
