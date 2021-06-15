@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Lib\EditTrack;
 use App\Lib\saveFile;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
 use App\Models\DefaultImg;
 use App\Models\DefaultBgm;
+use App\Models\Room;
+use App\Models\RoomImg;
+use App\Models\RoomBgm;
+use App\Models\RoomMovie;
+use App\Models\RoomSetting;
+
 use Storage;
 
 class RoomController extends Controller
@@ -268,6 +273,87 @@ class RoomController extends Controller
     }
 
     public function createRoom(Request $request){
+        $user_id = Auth::user()->id;
+
+        // ★デバッグ用ログ出力 DBに保存する情報が取得できているか確認
+        // room
+        \Log::info('ユーザID：'.$user_id);
+        
+        // room保存
+        $room = new Room();
+        $room->user_id = $user_id;
+        $room->name = $request->setting['name'];
+        $room->save();
+
+        // 保存したroomのidを取得
+        $room_id = Room::latest()->first()->id;
+
+        // room画像
+        $roomImg = new RoomImg();
+        $roomImg->room_id = $room_id;
+        $room_img_type;
+        if($request->img['type'] == 'default-img'){
+            $room_img_type = 1; // default
+        } else if($request->img['type'] == 'user-own-img'){
+            $room_img_type = 2; // userOwn
+        }
+        $roomImg->img_type = $room_img_type;
+        $roomImg->img_id = $request->img['id'];
+        // $roomImg->img_url = $request->img['url'];
+        $roomImg->img_width = $request->img['width'];
+        $roomImg->img_height = $request->img['height'];
+        $roomImg->owner_user_id = $user_id;
+        $roomImg->img_layer = $request->img['layer'];
+        $roomImg->save();
+
+        // room動画
+        $roomMovie = new RoomMovie();
+        $roomMovie->user_id = $user_id;
+        $roomMovie->room_id = $room_id;
+        $roomMovie->video_id = $request->movie['videoId'];
+        $roomMovie->width = $request->movie['width'];
+        $roomMovie->height = $request->movie['height'];
+        $roomMovie->isLoop = $request->movie['isLoop'];
+        $roomMovie->movie_layer = $request->movie['layer'];
+        $roomMovie->save();
+
+        // room音楽
+        $roomAudios = $request->audios;
+        foreach($roomAudios as $index => $roomAudio){
+            $roomBgm = new RoomBgm();
+            $audio_id;
+            if($roomAudio['type'] == 1){
+                $audio_id = DefaultBgm::where('audio_url', $roomAudio['url'])
+                                        ->first()
+                                        ->id;
+            } else if ($roomAudio['type'] == 2){
+                $audio_id = UserOwnBgm::where('audio_url', $roomAudio['url'])
+                                        ->first()
+                                        ->id;
+            }
+
+            $roomBgm->room_id = $room_id;
+            $roomBgm->audio_type = $roomAudio['type'];
+            $roomBgm->audio_id = $audio_id;
+            $roomBgm->audio_order_seq = $index + 1;
+            if($roomAudio['type'] == 2){ //2:ユーザのアップロードした音楽
+                $roomBgm->owner_user_id = $user_id;
+            } // 2以外はdefaultのオーディオ(=ユーザのものでない）ので、NULLで良い
+            $roomBgm->save();
+        }
+
+        // room設定
+        $roomSetting = new RoomSetting();
+        $roomSetting->room_id = $room_id;
+        $roomSetting->name = $request->setting['name'];
+        $roomSetting->is_show_img = $request->setting['isShowImg'];
+        $roomSetting->is_show_movie = $request->setting['isShowMovie'];
+        $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
+        // $roomSetting->background_type = $request->setting['roomBackgroundType'];
+        $roomSetting->background_color = $request->setting['roomBackgroundColor'];
+        $roomSetting->save();
+
+
         return ['message' => $request->img['url']];
     }
 

@@ -195,15 +195,19 @@ export default {
       // 参照渡しとなり、コンポーネント間で配列が同期され予期せぬ同差をしてしまう
       // 配列の内容だけを、新しい配列にコピーして、room側に渡す。
       let tmpAudio;
+      let audio_type;
       if(type == 'user-own'){
         tmpAudio = this.userOwnAudios[index];
+        audio_type = 2;
       } else if (type == 'default'){
         tmpAudio = this.defaultAudios[index];
+        audio_type = 1;
       }
 
       // 新しい連想配列を用意
       let audio = {};
       // audio['id'] = tmpAudio['id'];
+      audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
       audio['url'] = tmpAudio['url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];

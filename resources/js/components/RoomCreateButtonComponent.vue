@@ -4,7 +4,9 @@
       <button class="room-create-button" @click="createRoom">
         作成
       </button>
-      {{createRoomMessage}}
+      <p>
+        {{createRoomMessage}}
+      </p>
     </div>
 
 
@@ -12,15 +14,10 @@
 
 <script>
   export default {
-    props : [
-      'roomImg',
-      'roomAudios',
-      'moviePlayerSettings',
-      'roomSetting'
-    ],
+    props : [],
     data : () => {
       return {
-        'createRoomMessage' : "",
+        'createRoomMessage' : "a",
       }
     },
 
@@ -28,11 +25,12 @@
       createRoom() {
         const url = '/ajax/room/create';
         let room_datas = {
-          'img' : this.roomImg,
-          'audios' : this.roomAudios,
-          'movie' : this.moviePlayerSettings,
-          'setting' : this.roomSetting,
+          'img' : this.$parent.roomImg,
+          'audios' : this.$parent.roomAudios,
+          'movie' : this.$parent.moviePlayerSettings,
+          'setting' : this.$parent.roomSetting,
         }
+        this.createRoomMessage = "room情報を保存中です...";
         axios.post(url, room_datas)
           .then(response =>{
             alert(response.data.message);
@@ -41,8 +39,7 @@
             
             alert('failed!');
           })
-
-        // alert(room_datas['img']['url']);
+        this.createRoomMessage = "";
 
       }
 
@@ -70,6 +67,10 @@
     right: 60px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
+  }
+
+  .room-create-button:hover {
+    background-color: aqua;
   }
 
 </style>

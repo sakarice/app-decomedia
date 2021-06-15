@@ -28,8 +28,7 @@ class EditRoom
       foreach($rooms as $room){
           $roomInfo = array(
               'id' => $room->id,
-              'title' => $room->title,
-              'url' => $room->thumbnail_url
+              'name' => $room->name,
           );
           $roomInfos[] = $roomInfo;
       }

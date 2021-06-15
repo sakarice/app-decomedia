@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\Roomlist;
 use App\Lib\EditRoom;
-use App\Lib\EditRoomlist;
 
 use Storage;
 
@@ -20,14 +19,12 @@ class MypageController extends Controller
         // プレビューなので5トラックくらいで十分。全量はroomsページで表示。
         $authenticated_userId = Auth::user()->id;
 
-        $roomUrlAndNames = EditRoom::getUserRoomData(5);
+        // $roomUrlAndNames = EditRoom::getUserRoomData(5);
 
-        $roomListInfos = EditRoomList::getMyRooms(6); // id,title,サムネ画像urlを取得
+        $roomInfos = EditRoom::getMyRooms(6); // id,title,サムネ画像urlを取得
 
         $data = [
-            'login_user_record' => User::find(Auth::id()),
-            'trackUrlAndTitles' => $roomUrlAndNames,
-            'roomInfos' => $roomListInfos
+            'roomInfos' => $roomInfos
         ];
 
         return view('mypage.view', $data);

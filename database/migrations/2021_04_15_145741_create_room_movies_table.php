@@ -17,7 +17,10 @@ class CreateRoomMoviesTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('room_id');
-            $table->string('movie_url', 191);
+            $table->string('video_id', 191);
+            $table->integer('width');
+            $table->integer('height');
+            $table->integer('isLoop');
             $table->integer('movie_layer');
             $table->timestamps();
         });

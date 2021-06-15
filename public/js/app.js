@@ -2059,16 +2059,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       // 参照渡しとなり、コンポーネント間で配列が同期され予期せぬ同差をしてしまう
       // 配列の内容だけを、新しい配列にコピーして、room側に渡す。
       var tmpAudio;
+      var audio_type;
 
       if (type == 'user-own') {
         tmpAudio = this.userOwnAudios[index];
+        audio_type = 2;
       } else if (type == 'default') {
         tmpAudio = this.defaultAudios[index];
+        audio_type = 1;
       } // 新しい連想配列を用意
 
 
       var audio = {}; // audio['id'] = tmpAudio['id'];
 
+      audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
       audio['url'] = tmpAudio['url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
@@ -2316,10 +2320,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2354,8 +2354,6 @@ __webpack_require__.r(__webpack_exports__);
         // 黒
         'isShowImg': true,
         'isShowMovie': false,
-        'imgLayer': 0,
-        'movieLayer': 1,
         'maxAudioNum': 5
       },
       roomImg: {
@@ -2363,13 +2361,15 @@ __webpack_require__.r(__webpack_exports__);
         'id': "",
         'url': "",
         'width': 500,
-        'height': 500
+        'height': 500,
+        'layer': 0
       },
       moviePlayerSettings: {
         'videoId': "",
         'width': "500",
         'height': "420",
-        'isLoop': false
+        'isLoop': false,
+        'layer': 1
       },
       // maxAudioNum : 5,
       roomAudios: []
@@ -3074,27 +3074,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['roomImg', 'roomAudios', 'moviePlayerSettings', 'roomSetting'],
+  props: [],
   data: function data() {
     return {
-      'createRoomMessage': ""
+      'createRoomMessage': "a"
     };
   },
   methods: {
     createRoom: function createRoom() {
       var url = '/ajax/room/create';
       var room_datas = {
-        'img': this.roomImg,
-        'audios': this.roomAudios,
-        'movie': this.moviePlayerSettings,
-        'setting': this.roomSetting
+        'img': this.$parent.roomImg,
+        'audios': this.$parent.roomAudios,
+        'movie': this.$parent.moviePlayerSettings,
+        'setting': this.$parent.roomSetting
       };
+      this.createRoomMessage = "room情報を保存中です...";
       axios.post(url, room_datas).then(function (response) {
         alert(response.data.message);
       })["catch"](function (error) {
         alert('failed!');
-      }); // alert(room_datas['img']['url']);
+      });
+      this.createRoomMessage = "";
     }
   }
 });
@@ -8180,7 +8184,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-5e8c3959] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-create-button[data-v-5e8c3959] {\n  position: absolute;\n  top : 50px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-5e8c3959] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-create-button[data-v-5e8c3959] {\n  position: absolute;\n  top : 50px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n}\n.room-create-button[data-v-5e8c3959]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -47505,7 +47509,7 @@ var render = function() {
           roomImgUrl: _vm.roomImg["url"],
           roomImgWidth: _vm.roomImg["width"] + "px",
           roomImgHeight: _vm.roomImg["height"] + "px",
-          roomImgLayer: _vm.roomSetting["imgLayer"],
+          roomImgLayer: _vm.roomImg["layer"],
           isShowRoomImg: _vm.roomSetting["isShowImg"]
         },
         on: { "parent-action": _vm.showModal }
@@ -47531,18 +47535,11 @@ var render = function() {
         ref: "roomMovie",
         attrs: {
           isLoopYoutube: _vm.moviePlayerSettings["isLoop"],
-          roomMovieLayer: _vm.roomSetting["movieLayer"]
+          roomMovieLayer: _vm.moviePlayerSettings["layer"]
         }
       }),
       _vm._v(" "),
-      _c("room-create-button", {
-        attrs: {
-          roomImg: _vm.roomImg,
-          roomAudios: _vm.roomAudios,
-          moviePlayerSettings: _vm.moviePlayerSettings,
-          roomSetting: _vm.roomSetting
-        }
-      }),
+      _c("room-create-button"),
       _vm._v(" "),
       _c(
         "div",
@@ -48379,7 +48376,8 @@ var render = function() {
       { staticClass: "room-create-button", on: { click: _vm.createRoom } },
       [_vm._v("\n    作成\n  ")]
     ),
-    _vm._v("\n  " + _vm._s(_vm.createRoomMessage) + "\n")
+    _vm._v(" "),
+    _c("p", [_vm._v("\n    " + _vm._s(_vm.createRoomMessage) + "\n  ")])
   ])
 }
 var staticRenderFns = []

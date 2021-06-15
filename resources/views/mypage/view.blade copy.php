@@ -29,8 +29,7 @@
           </div>
         </div>
       </div>
-
-      {{-- 作成済みトラック一覧
+      {{-- 作成済みトラック一覧 --}}
       <div class="track-show-wrapper">
         <h3 class="preview-track-title">作成済みトラック</h3>
         @foreach($trackUrlAndTitles as $trackUrlAndTitle)
@@ -40,8 +39,7 @@
         </div>
         @endforeach
         <a href="mypage/tracks">all tracks⇒</a>
-      </div> --}}
-
+      </div>
     </div>
 
     {{-- Room一覧 --}}
@@ -53,13 +51,13 @@
     <div class="room-wrapper">
       @foreach($roomInfos as $roomInfo)
       <div class="preview-room" id={{$roomInfo['id']}}>
-        {{-- <img class="room-thumbnail" src={{$roomInfo['url']}} alt=""> --}}
+        <img class="room-thumbnail" src={{$roomInfo['url']}} alt="">
         <div class="cover-menu">
           <input class="cover-menu-link" form="post-form" type="submit" value="show">
           <input class="cover-menu-link" form="post-form" type="submit" value="edit">
           <img class="del-icon" src="{{ asset('icon/ゴミ箱アイコン.svg') }}" alt="">
         </div>
-        <p class="room-title">{{$roomInfo['name']}}</p>
+        <p class="room-title">{{$roomInfo['title']}}</p>
       </div>
       @endforeach
     </div>
