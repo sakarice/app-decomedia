@@ -17,7 +17,7 @@
       <li class="room-list">
         <p class="room-id">{{$room->id}}</p>
         <img class="room-img" src={{$room->thumbnail_url}} alt="">
-        <p>{{$room->title}}</p>
+        <p>{{$room->name}}</p>
       </li>
     @endforeach
   </ul>

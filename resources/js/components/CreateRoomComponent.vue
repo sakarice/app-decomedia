@@ -24,14 +24,15 @@
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
     v-show="roomSetting['isShowMovie']"
-    :isLoopYoutube="moviePlayerSettings['isLoop']"
-    :roomMovieLayer="moviePlayerSettings['layer']"
+    :isLoopYoutube="roomMovie['isLoop']"
+    :roomMovieLayer="roomMovie['layer']"
      ref="roomMovie">
     </room-movie-component>
 
     <room-create-button>
     </room-create-button>
 
+    <cancel-button></cancel-button>
 
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
@@ -84,7 +85,7 @@
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
     :transitionName="transitionName"
-    :isLoopYoutube="moviePlayerSettings['isLoop']">
+    :isLoopYoutube="roomMovie['isLoop']">
     </movie-setting-component>
 
     <!-- Room設定コンポーネント -->
@@ -112,6 +113,7 @@ import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import RoomCreateButton from './RoomCreateButtonComponent.vue';
+import CancelButton from './CancelButtonComponent.vue';
 
 export default {
   components : {
@@ -123,6 +125,7 @@ export default {
     RoomImg,
     RoomMovie,
     RoomCreateButton,
+    CancelButton,
   },
   data : () => {
     return {
@@ -148,7 +151,7 @@ export default {
         'height' : 500,
         'layer' : 0,
       },
-      moviePlayerSettings : {
+      roomMovie : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
@@ -200,9 +203,9 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.moviePlayerSettings['videoId'],
-        'width' : this.moviePlayerSettings['width'],
-        'height' : this.moviePlayerSettings['height'],
+        'videoId' : this.roomMovie['videoId'],
+        'width' : this.roomMovie['width'],
+        'height' : this.roomMovie['height'],
       };
       this.$refs.roomMovie.createYtPlayer(vars);
       this.roomSetting['isShowMovie'] = true;

@@ -24,21 +24,32 @@ class EditRoom
       // Room情報を取得
       $authenticated_userId = Auth::user()->id;
       $rooms = Room::limit($limit)->where('user_id', $authenticated_userId)->get();
+
+    //   $room_imgs = $rooms->first()->room_imgs;
+    //   \Log::info($room_imgs->first()->id);
       $roomInfos = array();
       foreach($rooms as $room){
+          $room_id = $room->id;
+          $room_img_id = RoomImg::where('room_id', $room_id)->first()->img_id;
+          $room_img_type = RoomImg::where('room_id', $room_id)->first()->img_type;
+          $room_img;
+          if($room_img_type == 1){
+            $room_img = DefaultImg::where('id', $room_img_id)->first();
+          } else if ($room_img_type == 2){
+            $room_img = UserOwnImg::where('id', $room_img_id)->first();
+          }
+          $room_img_url = $room_img->img_url;
+
           $roomInfo = array(
               'id' => $room->id,
               'name' => $room->name,
+              'img_url' => $room_img_url,
           );
+
           $roomInfos[] = $roomInfo;
       }
       
       return($roomInfos);
-  }
-
-  // 1Roomの情報を取得
-  public static function getMyRoomAndTrackInfo($room_id){
-
   }
 
 

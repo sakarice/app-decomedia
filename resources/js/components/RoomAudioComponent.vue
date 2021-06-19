@@ -71,6 +71,14 @@
           console.log(audioDuration);
         });
       },
+      setPlayerInfo(){ // 親コンポーネントのroomAudiosから再生情報を取得
+        let audioNum = this.$parent.roomAudios.length;
+        for(let i=0; i < audioNum; i++){
+          let audioPlayerIndex = this.roomAudios[i]['player_index'];
+          this.audioPlayers[audioPlayerIndex].src = this.roomAudios[i]['audio_url'];
+          this.audioPlayers[audioPlayerIndex].volume = this.roomAudios[i]['volume'];
+        }
+      },
       addAudio(audio) {
         audio['isPlay'] = false;
         audio['isLoop'] = false;
@@ -186,7 +194,7 @@
       // オーディオの再生終了を監視
       for(let i=0; i < this.maxAudioNum; i++){
         this.audioPlayers[i].onended = this.onFinishAudio.bind(this,i);
-      };    
+      };
     
     },
 

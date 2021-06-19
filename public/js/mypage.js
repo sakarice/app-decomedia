@@ -4,18 +4,6 @@ $("#profile-img").on("click", function(){
   window.location.href = "mypage/profile";
 })
 
-// ルーム画像にホバー時にメニューを表示
-$(function(){
-  $(".preview-room").hover(
-    function(e){
-      $(this).children('.cover-menu').css({'opacity':'90%' , 'z-index':1 });
-    },
-    function(e){
-      $(this).children('.cover-menu').css({'opacity':'0%' , 'z-index':-10 });
-    }
-  );
-});
-
 // showかeditがクリックされた時、roomIdを送信して画面遷移
 $(function(){
   $(".cover-menu-link").on("click",function(){
@@ -24,9 +12,10 @@ $(function(){
     input.val(room_id);
 
     if($(this).val() == "show"){
-      $("#post-form").attr('action', "mypage/showroom");
+      // $("#post-form").attr('action', "mypage/showroom");
+      $("#post-form").attr('action', "/home/room/"+room_id);
     } else {
-      $("#post-form").attr('action', "mypage/editroom");
+      $("#post-form").attr('action', "  ");
     }
     
   })
@@ -43,7 +32,7 @@ $(function(){
       headers: {
         'X-CSRF-TOKEN': $('meta[id="csrf-token"]').attr('content')
       },
-      url: '/home/mypage/deleteroom',
+      url: '/ajax/room/delete',
       type: 'POST',
       data: {
         'room_id' : room_id

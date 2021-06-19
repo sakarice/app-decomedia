@@ -15,11 +15,7 @@ class MypageController extends Controller
 {
     public function view(){
 
-        // トラックのタイトルと画像表示用のURLを連想配列として格納
-        // プレビューなので5トラックくらいで十分。全量はroomsページで表示。
         $authenticated_userId = Auth::user()->id;
-
-        // $roomUrlAndNames = EditRoom::getUserRoomData(5);
 
         $roomInfos = EditRoom::getMyRooms(6); // id,title,サムネ画像urlを取得
 

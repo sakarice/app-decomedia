@@ -95,8 +95,14 @@
 
 .room-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
+}
+
+.room-wrapper::after {
+  display: block;
+  content:"";
+  width: 200px;
 }
 
 .preview-room {
@@ -104,9 +110,18 @@
   text-align: center;
   font-size: 50px;
   margin: 30px;
-  width: 300px;
-  height: 400px;
+  width: 200px;
+  height: 200px;
+}
 
+.preview-room:hover .cover-menu {
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.preview-room:hover .del-icon {
+  opacity: 0.5;
+  z-index: 2;
 }
 
 
@@ -135,21 +150,42 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+  /* background-color: rgba(100, 100, 100, 0.5); */
+  background-color: seashell;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.link-title {
+  font-size: 25px;
+}
+
+.cover-menu-link:hover {
+  /* background-color: rgba(100, 100, 100, 0.8); */
+  opacity: 0.8;
+}
+
+.cover-menu-link:hover .link-title {
   color: aqua;
-  font-size: 50px;
 }
 
 .del-icon {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 30px;
-  height: 30px;
+  opacity: 0%;
+  z-index: -10;
+  font-size: 0.5em;
+}
+
+.del-icon:hover {
+  color: red;
+  opacity: 0.8;
 }
 
 .room-title {
   text-align: center;
-  font-size: 50px;
+  font-size: 25px;
   margin: 0 0;
   font-family: 'Yu Mincho';
 }

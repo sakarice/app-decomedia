@@ -26,6 +26,9 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('test-component', require('./components/TestComponent.vue').default);
+Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
+
+// ★room作成用コンポーネント
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
 Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
@@ -33,9 +36,14 @@ Vue.component('room-setting-component', require('./components/RoomSettingCompone
 Vue.component('room-audio-component', require('./components/RoomAudioComponent.vue').default);
 Vue.component('room-img-component', require('./components/RoomImgComponent.vue').default);
 Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
-Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
 Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
 Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
+Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
+
+// ★マイページ用コンポーネント
+
+// ★room閲覧用コンポーネント
+Vue.component('room-component', require('./components/RoomComponent.vue').default);
 
 
 /**

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RoomImg extends Model
 {
     use HasFactory;
+
+    public function rooms(){
+        return $this->belongsToMany(
+            'App\Models\Room'
+        );
+     }
+
 }

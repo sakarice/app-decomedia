@@ -16,7 +16,6 @@ class CreateRoomSettingsTable extends Migration
         Schema::create('room_settings', function (Blueprint $table) {
             $table->id();
             $table->integer('room_id');
-            $table->string('name');
             $table->boolean('is_show_img');
             $table->boolean('is_show_movie');
             $table->integer('max_audio_num');

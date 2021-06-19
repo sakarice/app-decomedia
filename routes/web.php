@@ -46,6 +46,7 @@ Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profil
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\RoomController@create');
+Route::get('/home/room/{id}', 'App\Http\Controllers\RoomController@show');
 
 // Chat
 Route::get('/home/chat', 'App\Http\Controllers\Room2Controller@chat');
@@ -64,6 +65,7 @@ Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomCon
 Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudios');
 Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudios');
 Route::post('/ajax/room/create', 'App\Http\Controllers\Ajax\RoomController@createRoom');
+Route::post('/ajax/room/delete', 'App\Http\Controllers\Ajax\RoomController@deleteRoom');
 
 
 // defaultImgアップロード(開発用、後で消す)

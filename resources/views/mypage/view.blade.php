@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta id="csrf-token" content="{{ csrf_token() }}">
+  {{-- <meta id="csrf-token" content="{{ csrf_token() }}"> --}}
   <link rel="stylesheet" href="{{ asset('css/mypage.view.css') }}">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> {{-- jquery --}}
   <title>Mypage</title>
 </head>
@@ -17,50 +18,42 @@
   <div class="page-title">マイページ</div><br>
 
   <div class="contents-wrapper">
-    <div class="track-wrapper">
-      <div class="track-create-wrapper">
-        {{-- トラック作成 --}}
-        <div class="create-contents">
-          <div class="linkTo-createTrack">
-            <a href="mypage/createtrack">
-              <div class="disk"></div>
-              <p style="font-size: 50px">track作成</p>
-            </a>
-          </div>
+    {{-- Room作成 --}}
+    <div class="room-create-wrapper">
+      <div class="create-contents">
+        <div class="linkTo-createRoom">
+          <a href="room/create">
+            {{-- <div class="disk"></div> --}}
+            <p style="font-size: 50px">Room作成</p>
+          </a>
         </div>
       </div>
-
-      {{-- 作成済みトラック一覧
-      <div class="track-show-wrapper">
-        <h3 class="preview-track-title">作成済みトラック</h3>
-        @foreach($trackUrlAndTitles as $trackUrlAndTitle)
-        <div class="preview-track">
-          <img class="preview-img" src={{$trackUrlAndTitle['url']}} alt="">
-          {{$trackUrlAndTitle['title']}}
-        </div>
-        @endforeach
-        <a href="mypage/tracks">all tracks⇒</a>
-      </div> --}}
-
     </div>
 
+
     {{-- Room一覧 --}}
-    <form method="POST" class="post-form" id="post-form" action="">
-      @csrf
+    {{-- <form method="GET" class="post-form" id="post-form" action="">
       <input type="hidden" id="room-post-input" name="room_id" value="">
-    </form>
+    </form> --}}
 
     <div class="room-wrapper">
       @foreach($roomInfos as $roomInfo)
       <div class="preview-room" id={{$roomInfo['id']}}>
-        {{-- <img class="room-thumbnail" src={{$roomInfo['url']}} alt=""> --}}
+        <img class="room-thumbnail" src={{$roomInfo['img_url']}} alt="">
         <div class="cover-menu">
-          <input class="cover-menu-link" form="post-form" type="submit" value="show">
-          <input class="cover-menu-link" form="post-form" type="submit" value="edit">
-          <img class="del-icon" src="{{ asset('icon/ゴミ箱アイコン.svg') }}" alt="">
+          <a href="/home/room/{{$roomInfo['id']}}" class="cover-menu-link">
+            <span class="link-title">閲覧</span>
+          </a>
+          <a href="mypage/editroom" class="cover-menu-link">
+            <span class="link-title">編集</span>
+          </a>
+          {{-- <input class="cover-menu-link" form="post-form" type="submit" value="show"> --}}
+          {{-- <input class="cover-menu-link" form="post-form" type="submit" value="edit"> --}}
         </div>
+        <i class="fas fa-trash del-icon"></i>
+        {{-- <img class="del-icon" src="{{ asset('icon/ゴミ箱アイコン.svg') }}" alt=""> --}}
         <p class="room-title">{{$roomInfo['name']}}</p>
-      </div>
+      </div>  
       @endforeach
     </div>
   </div>

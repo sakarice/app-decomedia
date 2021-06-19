@@ -6,12 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\EditTrack;
 use App\Lib\saveFile;
+use App\Http\Controllers\ImgController;
+use App\Http\Controllers\AudioController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
 use App\Models\DefaultImg;
 use App\Models\DefaultBgm;
+use App\Models\RoomImg;
+use App\Models\RoomBgm;
+use App\Models\RoomMovie;
+use App\Models\RoomSetting;
 use Storage;
 
 class RoomController extends Controller
@@ -40,6 +48,34 @@ class RoomController extends Controller
         } else {
             return view('auth.login');
         }
+    }
+
+    public function show($room_id) {
+        
+        // room画像情報をDBから取得
+        $room_img_data = ImgController::getRoomImgData($room_id);
+        \Log::info($room_img_data['url']);
+
+        // room音楽情報をDBから取得
+        $room_audios_data = AudioController::getRoomAudiosData($room_id);
+        \Log::info($room_audios_data[0]['thumbnail_url']);
+
+        // room動画情報をDBから取得
+        $room_movie_data = MovieController::getRoomMovieData($room_id);
+        \Log::info($room_movie_data['videoId']);
+
+        // room設定情報をDBから取得
+        $room_setting_data = RoomSettingController::getRoomSettingData($room_id);
+        \Log::info($room_setting_data['background_color']);
+
+        $data = [
+            'room_img' => $room_img_data,
+            'room_audios' => $room_audios_data,
+            'room_movie' => $room_movie_data,
+            'room_setting' => $room_setting_data,
+        ];
+        
+        return view('rooms.show', $data);
     }
 
 

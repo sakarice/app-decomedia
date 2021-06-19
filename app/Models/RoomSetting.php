@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class RoomSetting extends Model
 {
     use HasFactory;
+        
+    public function rooms(){
+        return $this->belongsToMany(
+            'App\Models\Room'
+        );
+     }
+
 }
