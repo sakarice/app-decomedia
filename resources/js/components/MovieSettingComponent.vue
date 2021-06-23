@@ -9,18 +9,18 @@
         <div id="setting-wrapper">
           <p id="player-setting-title">動画Player設定</p>
           <div class="yt-form-wrapper">
-            <input v-model="youtubeUrl" type="text" id="youtube-url-input" size=30 placeholder="youtube movie URL">
+            <input :value="youtubeUrl" @input="updateVideoId" type="text" id="youtube-url-input" size=30 placeholder="youtube movie URL">
           </div>
           <div class="yt-setting-wrapper">
             <div>
-              <input v-model="movieFrameWidth" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
+              <input :value="movieFrameWidth" @input="updateVideoWidth" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
               <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             </div>
             <div>
-              <input v-model="movieFrameHeight" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
+              <input :value="movieFrameHeight" @input="updateVideoHeight" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
               <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span>
             </div>
-            <button type="submit" @click="setParentYoutubePlayerVars">再生プレイヤー作成</button>
+            <button type="submit" @click="createMovieFrame">再生プレイヤー作成</button>
             <button type="submit" @click="deleteMovieFrame">削除</button>
 
           </div>
@@ -34,12 +34,15 @@
 
 <script>
 export default {
-  props : ['transitionName','isLoopYoutube'],
+  props : [
+    'transitionName',
+    'movieFrameWidth',
+    'movieFrameHeight',
+    'isLoopYoutube'
+    ],
   data : () => {
     return {
       youtubeUrl : '',
-      movieFrameWidth : 500,
-      movieFrameHeight : 320,
       window_width : 0,
       window_height : 0,
     }
@@ -48,31 +51,35 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    extractVideoIdFromUrl() {
-      let url = this.youtubeUrl;
+    extractVideoIdFromUrl(url) {
       let pattern = /v=.*/;
       let matchText = url.match(pattern); // object型で返ってくる
       matchText = matchText.toString(); // object⇒stringへ変換
       let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
       return videoId;
     },
-    setParentYoutubePlayerVars() {
-      this.$parent.moviePlayerSettings['videoId'] = this.extractVideoIdFromUrl();
-      this.$parent.moviePlayerSettings['width'] = this.movieFrameWidth;
-      this.$parent.moviePlayerSettings['height'] = this.movieFrameHeight;
-
+    updateVideoId(event){
+      let youtubeUrl = event.target.value;
+      this.$parent.roomMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
+    },
+    updateVideoWidth(event){
+      this.$parent.roomMovie['width'] = event.target.value;
+    },
+    updateVideoHeight(event){
+      this.$parent.roomMovie['height'] = event.target.value;
+    },
+    createMovieFrame() {
       // 親コンポーネントの動画フレーム作成メソッドを実行
       this.$emit('create-movie-frame');
-
     },
     deleteMovieFrame(){
       this.$emit('delete-movie-frame');
     },
     loopYoutube(){
       if(this.isLoopYoutube == false){
-        this.$parent.moviePlayerSettings['isLoop'] = true;
+        this.$parent.roomMovie['isLoop'] = true;
       } else {
-        this.$parent.moviePlayerSettings['isLoop'] = false;
+        this.$parent.roomMovie['isLoop'] = false;
       }
     },
   },

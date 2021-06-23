@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  {{-- <meta id="csrf-token" content="{{ csrf_token() }}"> --}}
+  <meta id="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/mypage.view.css') }}">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> {{-- jquery --}}
@@ -36,27 +36,34 @@
       <input type="hidden" id="room-post-input" name="room_id" value="">
     </form> --}}
 
-    <div class="room-wrapper">
-      @foreach($roomInfos as $roomInfo)
-      <div class="preview-room" id={{$roomInfo['id']}}>
-        <img class="room-thumbnail" src={{$roomInfo['img_url']}} alt="">
+    {{-- <div class="room-wrapper">
+      @foreach($roomPreviewInfos as $roomPreviewInfo)
+      <div class="preview-room" id={{$roomPreviewInfo['id']}}>
+        <img class="room-thumbnail" src={{$roomPreviewInfo['preview_img_url']}} alt="">
         <div class="cover-menu">
-          <a href="/home/room/{{$roomInfo['id']}}" class="cover-menu-link">
+          <a href="/home/room/{{$roomPreviewInfo['id']}}" class="cover-menu-link">
             <span class="link-title">閲覧</span>
           </a>
           <a href="mypage/editroom" class="cover-menu-link">
             <span class="link-title">編集</span>
           </a>
-          {{-- <input class="cover-menu-link" form="post-form" type="submit" value="show"> --}}
-          {{-- <input class="cover-menu-link" form="post-form" type="submit" value="edit"> --}}
         </div>
         <i class="fas fa-trash del-icon"></i>
-        {{-- <img class="del-icon" src="{{ asset('icon/ゴミ箱アイコン.svg') }}" alt=""> --}}
-        <p class="room-title">{{$roomInfo['name']}}</p>
+        <p class="room-title">{{$roomPreviewInfo['name']}}</p>
       </div>  
       @endforeach
+    </div> --}}
+
+    <div id="app">
+        <room-list-component
+        :room-preview-infos=@json($roomPreviewInfos)
+        :is-show-cover="true">
+        </room-list-component>
     </div>
+
   </div>
   <script src="{{ asset('js/mypage.js') }}"></script>
+  <script src="{{ mix('/js/app.js') }}"></script>
+
 </body>
 </html>

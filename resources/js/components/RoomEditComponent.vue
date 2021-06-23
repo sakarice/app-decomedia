@@ -29,8 +29,8 @@
      ref="roomMovie">
     </room-movie-component>
 
-    <room-create-button>
-    </room-create-button>
+    <room-update-button>
+    </room-update-button>
 
     <cancel-button></cancel-button>
 
@@ -114,7 +114,7 @@ import RoomAudio from './RoomAudioComponent.vue';
 import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
-import RoomCreateButton from './RoomCreateButtonComponent.vue';
+import RoomUpdateButton from './RoomUpdateButtonComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
 
 export default {
@@ -126,7 +126,7 @@ export default {
     RoomSetting,
     RoomImg,
     RoomMovie,
-    RoomCreateButton,
+    RoomUpdateButton,
     CancelButton,
   },
   props: [
@@ -146,13 +146,6 @@ export default {
         'movieModal' : false,
         'roomSettingModal' : false,
       },
-      roomSetting : {
-        'name' : "",
-        'roomBackgroundColor' : "#333333", // 黒
-        'isShowImg' : true,
-        'isShowMovie' : false,
-        'maxAudioNum' : 5,
-      },
       roomImg : {
         'type' : "",
         'id' : "",
@@ -168,13 +161,72 @@ export default {
         'isLoop' : false,
         'layer' : 1,
       },
-      // maxAudioNum : 5,
       roomAudios : [],
+
+      roomSetting : {
+        'id' : 0,
+        'name' : "",
+        'roomBackgroundColor' : "#333333", // 黒
+        'isShowImg' : true,
+        'isShowMovie' : false,
+        'maxAudioNum' : 5,
+      },
 
 
     }
   },
   methods : {
+    // ●Room読み込み時の初期化処理
+
+    initImg(){
+      // this.roomImg['url'] = this.roomImgData.url;
+      let tmpImgData = JSON.parse(this.roomImgData);
+      this.roomImg['type'] = tmpImgData.type;
+      this.roomImg['id'] = tmpImgData.id;
+      this.roomImg['url'] = tmpImgData.url;
+      this.roomImg['width'] = tmpImgData.width;
+      this.roomImg['height'] = tmpImgData.height;
+      this.roomImg['layer'] = tmpImgData.layer;
+    },
+    initMovie(){
+      let tmpMovieData = JSON.parse(this.roomMovieData);
+      this.roomMovie['videoId'] = tmpMovieData.videoId;
+      this.roomMovie['width'] = tmpMovieData.width;
+      this.roomMovie['height'] = tmpMovieData.height;
+      this.roomMovie['isLoop'] = tmpMovieData.isLoop;
+      this.roomMovie['layer'] = tmpMovieData.layer;
+    },
+    initAudio(){
+      let tmpRoomAudios = JSON.parse(this.roomAudiosData);
+      let audioNum = tmpRoomAudios.length;
+      for(let i=0; i < audioNum; i++){
+        tmpRoomAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
+        tmpRoomAudios[i]['isPlay'] = false;
+        this.roomAudios.push(tmpRoomAudios[i]);
+      }      
+    },
+    initSetting(){
+      let tmpSettingData = JSON.parse(this.roomSettingData);
+      this.roomSetting['id'] = tmpSettingData.id;
+      this.roomSetting['name'] = tmpSettingData.name;
+      this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
+      this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
+      this.roomSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+    },
+    setAudioThumbnail(){
+      this.$refs.roomAudio.updateAudioThumbnail();
+    },
+    createMovieFrame(){
+      let vars = {
+        'videoId' : this.roomMovie['videoId'],
+        'width' : this.roomMovie['width'],
+        'height' : this.roomMovie['height'],
+      };
+      this.$refs.roomMovie.createYtPlayer(vars);
+    },
+    
+    // ●Room作成用の処理
     showModal(target){
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for(let key in this.isShowModal){
@@ -227,7 +279,31 @@ export default {
     
   },
   created() {},
-  mounted() {},
+  mounted() {
+    this.initImg();
+    this.initMovie();
+    this.initAudio();
+    this.initSetting();
+
+    // 全ての子コンポーネントが描画されてから実行する処理
+    this.$nextTick(function(){
+      this.$refs.roomAudio.setPlayerInfo();
+      this.$refs.roomAudio.updateAudioThumbnail();
+      window.onYouTubeIframeAPIReady = () => {
+        this.getReadyCreateMovieFrame = true;
+      }
+    });
+  },
+  watch : {
+    getReadyCreateMovieFrame : function(newVal){
+      if(this.roomSetting['isShowMovie'] == true 
+      && this.roomMovie['videoId'] != ""
+      && newVal == true){
+        this.createMovieFrame();
+      }
+    },
+  }
+
 
 }
 </script>

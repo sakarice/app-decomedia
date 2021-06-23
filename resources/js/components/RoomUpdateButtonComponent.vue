@@ -1,11 +1,11 @@
 <template>
 
     <div class="action-button-wrapper">
-      <button class="room-create-button" @click="createRoom">
-        作成
+      <button class="room-create-button" @click="updateRoom">
+        更新
       </button>
       <p>
-        {{createRoomMessage}}
+        {{message}}
       </p>
     </div>
 
@@ -17,28 +17,28 @@
     props : [],
     data : () => {
       return {
-        'createRoomMessage' : "a",
+        'message' : "a",
       }
     },
 
     methods : {
-      createRoom() {
-        const url = '/ajax/room/create';
+      updateRoom() {
+        const url = '/ajax/room/update';
         let room_datas = {
           'img' : this.$parent.roomImg,
           'audios' : this.$parent.roomAudios,
           'movie' : this.$parent.roomMovie,
           'setting' : this.$parent.roomSetting,
         }
-        this.createRoomMessage = "room情報を保存中です...";
+        this.message = "room情報を更新中です...";
         axios.post(url, room_datas)
           .then(response =>{
             alert(response.data.message);
-            this.createRoomMessage = "";
+            this.message = "";
           })
           .catch(error => {            
             alert('failed!');
-            this.createRoomMessage = "";
+            this.message = "";
           })
 
       }

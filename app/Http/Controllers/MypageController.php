@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\RoomController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\Roomlist;
@@ -14,13 +15,18 @@ use Storage;
 class MypageController extends Controller
 {
     public function view(){
+        $authenticated_userId;
+        if(Auth::check()){
+            $authenticated_userId = Auth::user()->id;
+        } else {
+            return view('auth.login');
+        }
 
-        $authenticated_userId = Auth::user()->id;
-
-        $roomInfos = EditRoom::getMyRooms(6); // id,title,サムネ画像urlを取得
+        $rooms = Room::limit(6)->where('user_id', $authenticated_userId)->get();
+        $roomPreviewInfos = RoomController::getRoomPreviewInfos($rooms);
 
         $data = [
-            'roomInfos' => $roomInfos
+            'roomPreviewInfos' => $roomPreviewInfos
         ];
 
         return view('mypage.view', $data);

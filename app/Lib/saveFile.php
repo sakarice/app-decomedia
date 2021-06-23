@@ -69,14 +69,14 @@ class SaveFile
 
     $targetModel->owner_user_id = $owner_user_id;
     $targetModel->name = $fileDatas['name'];
-    $targetModel->img_path = $fileDatas['img_path'];
-    $targetModel->img_url = $fileDatas['img_url'];
+    $targetModel->img_path = $fileDatas['path'];
+    $targetModel->img_url = $fileDatas['url'];
 
     $targetModel->save();
 
     // 保存したレコードのidを取得
     $id = $targetModel->where('owner_user_id', $owner_user_id)
-                      ->where('img_url', $fileDatas['img_url'])
+                      ->where('img_url', $fileDatas['url'])
                       ->first()
                       ->id;
 

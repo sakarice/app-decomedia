@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
+use App\Http\Controllers\RoomController;
 use App\Lib\EditTrack;
 use App\Lib\EditRoom;
 use App\Models\User;
@@ -19,15 +20,18 @@ class SearchController extends Controller
     public function searchRooms(Request $request){
         $user_id = Auth::user()->id;
         $keyword = $request->input('keyword');
+        $rooms;
         if(!empty($keyword)){
-            $rooms = Room::where('title', 'LIKE', "%$keyword%")->get();
+            $rooms = Room::where('name', 'LIKE', "%$keyword%")->get();
         }
+        $roomPreviewInfos = RoomController::getRoomPreviewInfos($rooms);
+
         $data = [
             'keyword' => $keyword,
-            'rooms' => $rooms
+            'roomPreviewInfos' => $roomPreviewInfos
         ];
 
 
-        return view('searchresult.view', $data);
+        return view('searchResult.view', $data);
     }
 }

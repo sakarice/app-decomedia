@@ -38,12 +38,19 @@ Vue.component('room-img-component', require('./components/RoomImgComponent.vue')
 Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
 Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
 Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
+Vue.component('room-update-button-component', require('./components/RoomUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
 
 // ★マイページ用コンポーネント
 
-// ★room閲覧用コンポーネント
+// room一覧表示用コンポーネント
+Vue.component('room-list-component', require('./components/RoomListComponent.vue').default);
+
+// room閲覧用コンポーネント
 Vue.component('room-component', require('./components/RoomComponent.vue').default);
+
+// room編集用コンポーネント
+Vue.component('room-edit-component', require('./components/RoomEditComponent.vue').default);
 
 
 /**

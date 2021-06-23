@@ -15,7 +15,7 @@
     <create-room-component></create-room-component>
   </div>
 
-  <script src="{{ asset('/js/createroom3.js')}}"></script>
+  {{-- <script src="{{ asset('/js/roomContentsDragAndDrop.js')}}"></script> --}}
   <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

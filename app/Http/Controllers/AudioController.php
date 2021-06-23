@@ -17,23 +17,24 @@ class AudioController extends Controller
 {
     // room画像の情報をDBから取得し、配列を返す。
     public static function getRoomAudiosData($room_id){
-        $room_bgms = RoomBgm::where('room_id', $room_id)->get();
         $room_bgm_id;
         $room_bgm_type;
         $room_bgm_audio_url;
         $room_bgm_thumbnail_url;
-
         $room_bgms_data = array();
-        
-        foreach($room_bgms as $room_bgm){
-            $room_bgm_id = $room_bgm->audio_id;
-            $room_bgm_type = $room_bgm->audio_type;
-            if($room_bgm_type == 1){
-                $room_bgm_audio_url = DefaultBgm::where('id', $room_bgm_id)->first()->audio_url;
-                $room_bgm_thumbnail_url = DefaultBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
-            }else if($room_bgm_type == 2){
-                $room_bgm_audio_url = UserOwnBgm::where('id', $room_bgm_id)->first()->audio_url;
-                $room_bgm_thumbnail_url = UserOwnBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
+
+        if(RoomBgm::where('room_id', $room_id)->exists()){
+            $room_bgms = RoomBgm::where('room_id', $room_id)->get();
+            foreach($room_bgms as $room_bgm){
+                $room_bgm_id = $room_bgm->audio_id;
+                $room_bgm_type = $room_bgm->audio_type;
+                if($room_bgm_type == 1){
+                    $room_bgm_audio_url = DefaultBgm::where('id', $room_bgm_id)->first()->audio_url;
+                    $room_bgm_thumbnail_url = DefaultBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
+                }else if($room_bgm_type == 2){
+                    $room_bgm_audio_url = UserOwnBgm::where('id', $room_bgm_id)->first()->audio_url;
+                    $room_bgm_thumbnail_url = UserOwnBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
+                }
             }
 
             $room_bgm_data = [
@@ -44,8 +45,9 @@ class AudioController extends Controller
                 'volume' => $room_bgm->volume,
                 'isLoop' => $room_bgm->isLoop,
             ];
-
+    
             $room_bgms_data[] = $room_bgm_data;
+        
         }
 
         return $room_bgms_data;

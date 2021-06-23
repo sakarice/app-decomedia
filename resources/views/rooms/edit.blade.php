@@ -15,20 +15,15 @@
 <body>
 
   {{-- ボタン --}}
-  <div class="buttons">
-    <button><a href="javascript:history.back()">戻る</a></button>
-    <button id="update-button">更新</button>
-    <button>公開</button>
-  </div>
 
   <div id="app">
-    <room-component
+    <room-edit-component
     room-img-data=@json($room_img)
     room-audios-data=@json($room_audios)
     room-movie-data=@json($room_movie)
     room-setting-data=@json($room_setting)
     >
-    </room-component>
+    </room-edit-component>
   </div>
 
   

@@ -18,6 +18,7 @@ class RoomSettingController extends Controller
 
         // room画像情報を格納した連想配列を作成
         $room_setting_data = [
+            'id' => $room_id,
             'name' => $room_setting->name,
             'is_show_img' => $room_setting->is_show_img,
             'is_show_movie' => $room_setting->is_show_movie,

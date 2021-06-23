@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\EditTrack;
 use App\Lib\saveFile;
+use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
@@ -273,100 +274,17 @@ class RoomController extends Controller
         return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_path)]);
     }
 
+
+    // room作成
     public function createRoom(Request $request){
-        
         // ★デバッグ用ログ出力 DBに保存する情報が取得できているか確認
-        // room
-        $user_id = Auth::user()->id;
-        \Log::info('ユーザID：'.$user_id);
+        // $user_id = Auth::user()->id;
+        // \Log::info('ユーザID：'.$user_id);
         $returnMsg;
         
         DB::beginTransaction();
         try{
-            // room保存
-            $room = new Room();
-            $room->user_id = $user_id;
-            if(isset($request->setting['name'])){
-                $room->name = $request->setting['name'];
-            }else {
-                $room->name = 'room';
-            }
-            $room->save();
-
-    
-            // 保存したroomのidを取得
-            $room_id = Room::latest()->first()->id;
-    
-            // room画像
-            $roomImg = new RoomImg();
-            $roomImg->room_id = $room_id;
-            $room_img_type;
-            if($request->img['type'] == 'default-img'){
-                $room_img_type = 1; // default
-            } else if($request->img['type'] == 'user-own-img'){
-                $room_img_type = 2; // userOwn
-            }
-            $roomImg->img_type = $room_img_type;
-            $roomImg->img_id = $request->img['id'];
-            // $roomImg->img_url = $request->img['url'];
-            $roomImg->width = $request->img['width'];
-            $roomImg->height = $request->img['height'];
-            $roomImg->owner_user_id = $user_id;
-            $roomImg->img_layer = $request->img['layer'];
-            $roomImg->save();
-
-
-    
-            // room動画
-            $roomMovie = new RoomMovie();
-            $roomMovie->user_id = $user_id;
-            $roomMovie->room_id = $room_id;
-            $roomMovie->video_id = $request->movie['videoId'];
-            $roomMovie->width = $request->movie['width'];
-            $roomMovie->height = $request->movie['height'];
-            $roomMovie->isLoop = $request->movie['isLoop'];
-            $roomMovie->movie_layer = $request->movie['layer'];
-            $roomMovie->save();
-    
-
-            // room音楽
-            $roomAudios = $request->audios;
-            foreach($roomAudios as $index => $roomAudio){
-                $roomBgm = new RoomBgm();
-                $audio_id;
-                if($roomAudio['type'] == 1){
-                    $audio_id = DefaultBgm::where('audio_url', $roomAudio['url'])
-                                            ->first()
-                                            ->id;
-                } else if ($roomAudio['type'] == 2){
-                    $audio_id = UserOwnBgm::where('audio_url', $roomAudio['url'])
-                                            ->first()
-                                            ->id;
-                }
-    
-                $roomBgm->room_id = $room_id;
-                $roomBgm->audio_type = $roomAudio['type'];
-                $roomBgm->audio_id = $audio_id;
-                $roomBgm->order_seq = $index + 1;
-                $roomBgm->volume = $roomAudio['volume'];
-                $roomBgm->isLoop = $roomAudio['isLoop'];
-                if($roomAudio['type'] == 2){ //2:ユーザのアップロードした音楽
-                    $roomBgm->owner_user_id = $user_id;
-                } // 2以外はdefaultのオーディオ(=ユーザのものでない）ので、NULLで良い
-                $roomBgm->save();
-
-            }
-    
-            // room設定
-            $roomSetting = new RoomSetting();
-            $roomSetting->room_id = $room_id;
-            $roomSetting->is_show_img = $request->setting['isShowImg'];
-            $roomSetting->is_show_movie = $request->setting['isShowMovie'];
-            $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
-            // $roomSetting->background_type = $request->setting['roomBackgroundType'];
-            $roomSetting->background_color = $request->setting['roomBackgroundColor'];
-            $roomSetting->save();
-
+            RoomUtil::saveRoomDataInDB($request);
             DB::commit();
             $returnMsg = 'roomを保存しました';
         } catch(\Exception $e){
@@ -378,41 +296,43 @@ class RoomController extends Controller
     }
 
 
+    // room削除
     public function deleteRoom (Request $request){
         $room_id = $request->room_id;
-        $user_id = Auth::user()->id;
+        // $user_id = Auth::user()->id;
         $returnMsg;
         
         DB::beginTransaction();
         try{
-            // Room
-            Room::where('id', $room_id)
-                ->where('user_id', $user_id)
-                ->first()
-                ->delete();
-    
-            // Room画像
-            RoomImg::where('room_id', $room_id)->first()->delete();
-    
-            // Room音楽
-            RoomBgm::where('room_id', $room_id)->delete();
-    
-            // Room動画
-            RoomMovie::where('room_id', $room_id)->first()->delete();
-    
-            // Room設定
-            RoomSetting::where('room_id', $room_id)->first()->delete();
-
+            RoomUtil::deleteRoomDataFromDB($room_id);
             DB::commit();
             $returnMsg = 'roomを削除しました';
         } catch(\Exception $e){
             DB::rollback();
             $returnMsg = 'roomの削除に失敗しました';
-
         }
 
         return['message' => $returnMsg];
+    }
 
+
+    // room更新
+    public function updateRoom(Request $request){
+        $room_id = $request->setting['id'];
+        $returnMsg;
+
+        DB::beginTransaction(); // 更新は、削除と作成のセットで実現
+        try{
+            RoomUtil::deleteRoomDataFromDB($room_id);
+            RoomUtil::saveRoomDataInDB($request);
+            DB::commit();
+            $returnMsg = 'roomを更新しました';
+        } catch(\Exception $e){
+            DB::rollback();
+            $returnMsg = 'roomの更新に失敗しました';
+        }
+
+        return['message' => $returnMsg];
     }
 
 

@@ -32,9 +32,9 @@
     methods : {
       loopYoutube(){
         if(this.isLoopYoutube == false){
-          this.$parent.moviePlayerSettings['isLoop'] = true;
+          this.$parent.roomMovie['isLoop'] = true;
         } else {
-          this.$parent.moviePlayerSettings['isLoop'] = false;
+          this.$parent.roomMovie['isLoop'] = false;
         }
       },
       createYtPlayer(vars){
@@ -50,17 +50,20 @@
             // 'fs' : false,
           },
           events: {
-            'onReady': this.onPlayReady(),
+            'onReady': this.onPlayReady.bind(this),
             'onStateChange': this.onPlayerStateChange.bind(this),
           }
+          
 
         });
 
       },
-      onPlayReady() {
-        // this.$parent.isShowYoutube = true;
-        // console.log(this.$parent.isShowYoutube);
-        // this.ytPlayer.loadVideoById(this.youtubeVideoId);
+      onPlayReady(event) { // 再生準備完了
+        this.$parent.getReadyPlayMovie = true;
+        // this.ytPlayer.playVideo();
+          if(this.$parent.autoPlay == true){
+            event.target.playVideo();
+          }
       },
       onPlayerStateChange(event) {
         if(event.data == 0 && this.isLoopYoutube == true){

@@ -29,9 +29,6 @@
 
     <cancel-button></cancel-button>
 
-    <button v-on:click="createMovieFrame()">test</button>
-
-
   </div>
 </template>
 
@@ -58,7 +55,10 @@ export default {
   ],
   data : () => {
     return {
-      getReadyMovie : false,
+      getReadyCreateMovieFrame : false,
+      getReadyPlayAudio : false,
+      getReadyPlayMovie : false,
+      autoPlay : true,
 
       roomImg : {
         'type' : "",
@@ -75,10 +75,10 @@ export default {
         'isLoop' : false,
         'layer' : 1,
       },
-      // maxAudioNum : 5,
       roomAudios : [],
 
       roomSetting : {
+        'id' : 0,
         'name' : "",
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
@@ -119,6 +119,7 @@ export default {
     },
     initSetting(){
       let tmpSettingData = JSON.parse(this.roomSettingData);
+      this.roomSetting['id'] = tmpSettingData.id;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
@@ -151,18 +152,21 @@ export default {
       this.$refs.roomAudio.setPlayerInfo();
       this.$refs.roomAudio.updateAudioThumbnail();
       window.onYouTubeIframeAPIReady = () => {
-        this.getReadyMovie = true;
+        this.getReadyCreateMovieFrame = true;
       }
-
-      
     });
 
   },
   watch : {
-    getReadyMovie : function(newVal){
-      if(this.roomSetting['isShowMovie'] = true && newVal == true){
+    getReadyCreateMovieFrame : function(newVal){
+      if(this.roomSetting['isShowMovie'] == true 
+      && this.roomMovie['videoId'] != ""
+      && newVal == true){
         this.createMovieFrame();
       }
+    },
+    getReadyPlayMovie : function(newVal){
+      
     }
   },
 
@@ -187,27 +191,6 @@ export default {
     flex-direction: column;
   }
 
-  #disp-modal-zone {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 3;
-    height: 100%;
-    background-color:black;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  #disp-modal-wrapper {
-    z-index: 1;
-    /* background-color: ghostwhite;
-    box-shadow: -1px 1px 5px lightgrey; */
-  }
-
   .icon-wrapper {
     padding: 12px;
   }
@@ -215,38 +198,8 @@ export default {
     background-color: rgba(255,255,255,0.2);
   }
 
-  #disp-img-modal-wrapper {
-    color:lightseagreen;
-  }
-  #disp-movie-modal-wrapper {
-    color: orangered;
-  }
-  #disp-audio-modal-wrapper {
-    color: gold;
-  }
-  #disp-room-setting-modal-wrapper {
-    color: lightgray;
-  }
-
   .hidden {
     display: none;
-  }
-
-  
-  /* Modal表示アニメーション */
-
-  /* .right-slide-enter-to, .right-slide-leave {
-    transform: translate(0px, 0px);
-  } */
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 500ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
-  }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
   }
 
 

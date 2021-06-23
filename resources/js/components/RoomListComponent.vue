@@ -1,0 +1,183 @@
+<template>
+  <ul class="room-wrapper">
+    <li v-for="roomPreviewInfo in roomPreviewInfos" :key="roomPreviewInfo.id">
+      <div class="preview-room" :id="roomPreviewInfo['id']">
+        <a :href="roomShowLink(roomPreviewInfo['id'])">
+          <img class="room-thumbnail" :src="roomPreviewInfo['preview_img_url']" alt="">
+        </a>
+
+        <div class="cover-menu" v-show="isShowCover">
+          <a :href="roomShowLink(roomPreviewInfo['id'])" class="cover-menu-link">
+            <span class="link-title">閲覧</span>
+          </a>
+          <a :href="roomEditLink(roomPreviewInfo['id'])" class="cover-menu-link">
+            <span class="link-title">編集</span>
+          </a>
+        </div>
+        <i class="fas fa-trash del-icon" @click="deleteRoom(roomPreviewInfo['id'])" v-show="isShowCover"></i>
+        <p class="room-title">{{roomPreviewInfo['name']}}</p>
+      </div>
+    </li>
+  </ul>
+</template>
+
+<script>
+export default {
+  props : [
+    'roomPreviewInfos',
+    'isShowCover',
+  ],
+  data : () => {
+    return {}
+  },
+  methods : {
+    closeModal() {
+      this.$emit('close-modal');
+    },
+    roomShowLink : function(id) {
+      return "/home/room/" + id;
+    },
+    roomEditLink : function(id) {
+      return "/home/room/" + id + "/edit";
+    },
+    deleteRoom(room_id){
+      let room_data = {
+        'room_id' : room_id,
+      }
+      const url = '/ajax/room/delete';
+      axios.post(url, room_data)
+      .then(response => {
+        alert(response.data.message);
+        location.reload();
+      })
+      .catch(error => {
+        alert('room削除に失敗しました。');
+      })
+    }
+
+  },
+  mounted : function(){
+
+  },
+  watch : {
+  },
+  computed : {
+
+  }
+
+}
+</script>
+
+
+<style scoped>
+
+.room-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.room-wrapper::after {
+  display: block;
+  content:"";
+  width: 200px;
+}
+
+li {
+  list-style: none;
+}
+
+.preview-room {
+  position: relative;
+  text-align: center;
+  font-size: 50px;
+  margin: 30px;
+  width: 200px;
+  height: 200px;
+  opacity: 0.8;
+}
+
+.preview-room:hover {
+  opacity: 1;
+  transform: scale(0.98,0.98);
+
+}
+
+.preview-room:hover .cover-menu {
+  opacity: 0.7;
+  z-index: 1;
+}
+
+.preview-room:hover .del-icon {
+  opacity: 0.5;
+  z-index: 2;
+}
+
+
+.room-thumbnail {
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.cover-menu {
+  position: relative;
+  opacity: 0%;
+  z-index: -10;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+  display: flex;
+}
+
+.cover-menu-link {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* background-color: rgba(100, 100, 100, 0.5); */
+  background-color: seashell;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.link-title {
+  font-size: 25px;
+}
+
+.cover-menu-link:hover {
+  /* background-color: rgba(100, 100, 100, 0.8); */
+  opacity: 0.8;
+}
+
+.cover-menu-link:hover .link-title {
+  color: aqua;
+}
+
+.del-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0%;
+  z-index: -10;
+  font-size: 0.5em;
+}
+
+.del-icon:hover {
+  color: red;
+  opacity: 0.8;
+}
+
+.room-title {
+  text-align: center;
+  font-size: 25px;
+  margin: 0 0;
+  font-family: 'Yu Mincho';
+}
+
+
+</style>

@@ -11,16 +11,34 @@
   <title>Document</title>
 </head>
 <body>
+
+  <div class="action-button-wrapper">
+    <a href="#" onclick="javascript:window.history.back(-1); return false;">
+      <button class="cancel-button">
+        戻る
+      </button>
+    </a>
+  </div>
+
   <h2>キーワード"{{$keyword}}"での検索結果</h2>
+
+  <div id="app">
+    <room-list-component
+    :room-preview-infos=@json($roomPreviewInfos)
+    :is-show-cover="false">
+    </room-list-component>
+  </div>
+
+{{-- 
   <ul id="room-list-wrapper">
-    @foreach($rooms as $room)
+    @foreach($roomPreviewInfos as $roomPreviewInfo)
       <li class="room-list">
-        <p class="room-id">{{$room->id}}</p>
-        <img class="room-img" src={{$room->thumbnail_url}} alt="">
-        <p>{{$room->name}}</p>
+        <p class="room-id">{{$roomPreviewInfo['id']}}</p>
+        <img class="room-img" src={{$roomPreviewInfo['preview_img_url']}} alt="">
+        <p>{{$roomPreviewInfo['name']}}</p>
       </li>
     @endforeach
-  </ul>
+  </ul> --}}
 
   <form id="room-id-form" method="POST" action="{{asset('/home/enterRoom')}}">
     @csrf
@@ -28,6 +46,8 @@
   </form>
 
   <script src="{{ asset('js/search_result.js') }}"></script>
+  <script src="{{ mix('/js/app.js') }}"></script>
+
 
 </body>
 </html>
