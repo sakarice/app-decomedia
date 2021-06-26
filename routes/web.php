@@ -20,12 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 // 前の仕様(trackとroomで分けている時)
-Route::get('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackController@index');
-Route::post('/home/mypage/createtrack', 'App\Http\Controllers\CreateTrackController@createTrack');
-Route::get('/home/mypage/tracks', 'App\Http\Controllers\TracksController@view');
-Route::post('/home/mypage/tracks', 'App\Http\Controllers\TracksController@deleteTrack');
-Route::post('/home/mypage/updatetrack', 'App\Http\Controllers\UpdateTrackController@view');
-Route::post('/home/mypage/trackupdating', 'App\Http\Controllers\UpdateTrackController@update');
 Route::post('/home/mypage/createroom', 'App\Http\Controllers\Room2Controller@createRoom');
 Route::post('/home/mypage/deleteroom', 'App\Http\Controllers\Room2Controller@deleteRoom');
 Route::post('/home/mypage/showroom', 'App\Http\Controllers\Room2Controller@showRoom');

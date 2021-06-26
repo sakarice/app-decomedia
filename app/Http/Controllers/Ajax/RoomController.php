@@ -41,54 +41,22 @@ class RoomController extends Controller
 
 
 
-    public function saveDBTest() {
-        $user_id = NULL;
-        $imgfile_name = 'rail.jpg';
-        $imgfile_save_path = 'img/room/rail.jpg';
-        $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
+    // public function saveDBTest() {
+    //     $user_id = NULL;
+    //     $imgfile_name = 'rail.jpg';
+    //     $imgfile_save_path = 'img/room/rail.jpg';
+    //     $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
 
-        $fileDatas = array (
-            'owner_user_id' => $user_id,
-            'name' => $imgfile_name,
-            'img_path' => $imgfile_save_path,
-            'img_url' => $imgfile_save_url
-        );
-        saveDataInDB::img($fileDatas);
+    //     $fileDatas = array (
+    //         'owner_user_id' => $user_id,
+    //         'name' => $imgfile_name,
+    //         'img_path' => $imgfile_save_path,
+    //         'img_url' => $imgfile_save_url
+    //     );
+    //     saveDataInDB::img($fileDatas);
 
-        return ['url' => $imgfile_save_url];
-    }
-
-
-    public function createTrack(Request $request) {
-
-        $imgfile = $request->file('img');
-        $audiofile = $request->file('audio');
-
-        // ファイルのMIMEタイプを確認
-        // $mimeFront1 = EditTrack::judgeMimetypeFront($imgfile);
-        // $mimeFront2 = EditTrack::judgeMimetypeFront($audiofile);
-
-        // DBへ登録するトラック情報を取得
-        $user_id = Auth::user()->id;
-        $title = $request->input('sound-title-in-hidden');
-        $img_path = EditTrack::saveTrackInS3($imgfile);
-        $sound_path = EditTrack::saveTrackInS3($audiofile);
-        $img_url = Storage::disk('s3')->url($img_path);
-        $sound_url = Storage::disk('s3')->url($sound_path);
-
-        $trackInfo = array(
-            'user_id' => $user_id,
-            'title' => $title,
-            'img_path' => $img_path,
-            'sound_path' => $sound_path,
-            'img_url' => $img_url,
-            'sound_url' => $sound_url
-        );
-
-        EditTrack::saveTrackInfoInDB($trackInfo);
-
-        return view('edittrack.create', ['msg'=> Storage::disk('s3')->url(Track::latest()->first()->img_path)]);
-    }
+    //     return ['url' => $imgfile_save_url];
+    // }
 
 
     // room作成
