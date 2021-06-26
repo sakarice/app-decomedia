@@ -59,13 +59,13 @@ Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\Img\UserOwnImgControlle
 Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\Img\DefaultImgController@index');
 Route::post('/ajax/uploadImg', 'App\Http\Controllers\Img\ImgController@store');
 Route::post('/ajax/deleteImg', 'App\Http\Controllers\Img\UserOwnImgController@destroy');
+Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Audio\DefaultAudioController@index');
+Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Audio\UserOwnAudioController@index');
+Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Audio\AudioController@store');
+Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioController@destroy');
 
-Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Ajax\RoomController@saveAudioFile');
-Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Ajax\RoomController@deleteAudio');
-Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudioThumbnails');
-Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');
-Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudios');
-Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudios');
+// Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudioThumbnails');
+// Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');
 Route::post('/ajax/room/create', 'App\Http\Controllers\Ajax\RoomController@createRoom');
 Route::post('/ajax/room/delete', 'App\Http\Controllers\Ajax\RoomController@deleteRoom');
 Route::post('/ajax/room/update', 'App\Http\Controllers\Ajax\RoomController@updateRoom');

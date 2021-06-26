@@ -26,7 +26,7 @@ use Storage;
 
 class RoomController extends Controller
 {
-
+    // 1. index
     public function index() {
         if(Auth::check()){
             $checked = "ユーザー：".Auth::user()->name."は認証済みです";
@@ -40,7 +40,7 @@ class RoomController extends Controller
         }
     }
 
-    // room作成メソッド
+    // 2. create
     public function create() {
         if(Auth::check()){
             $checked = "ユーザー：".Auth::user()->name."は認証済みです";
@@ -53,152 +53,29 @@ class RoomController extends Controller
         }
     }
 
-    // room閲覧メソッド
+    // 3. store
+    public function store(){}
+
+    // 4. show
     public function show($room_id) {
         $room_data = RoomUtil::getRoomDatas($room_id);
         return view('rooms.show', $room_data);
     }
 
-    // room編集メソッド
+    // 5. edit
     public function edit($room_id){
         $room_data = RoomUtil::getRoomDatas($room_id);
         return view('rooms.edit', $room_data);
     }
 
+    // 6. update
+    public function update($room_id){}
 
-    // Roomのプレビュー表示に必要な情報を取得(id,title,サムネ画像のurl)
-    public static function getRoomPreviewInfos($rooms){
-        $roomInfos = array();
-        foreach($rooms as $room){
-            $room_id = $room->id;
-
-            if(RoomImg::where('room_id', $room_id)->exists()){
-                $room_img_id = RoomImg::where('room_id', $room_id)->first()->img_id;
-                $room_img_type = RoomImg::where('room_id', $room_id)->first()->img_type;
-                $room_img;
-                if($room_img_type == 1){
-                $room_img = DefaultImg::where('id', $room_img_id)->first();
-                } else if ($room_img_type == 2){
-                $room_img = UserOwnImg::where('id', $room_img_id)->first();
-                }
-                $room_img_url = $room_img->img_url;
-            } else if(RoomMovie::where('room_id', $room_id)->exists()) {
-                // youtubeアイコンの画像URLをセット
-                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
-            } else if(RoomBgm::where('room_id', $room_id)->exists()){
-                // 音符アイコンの画像をセット
-                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
-            } else {
-                // empty画像をセット
-                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"; 
-            }
-
-            $roomInfo = array(
-                'id' => $room->id,
-                'name' => $room->name,
-                'preview_img_url' => $room_img_url,
-            );
-            \Log::info($roomInfo['id']);
-            \Log::info($roomInfo['name']);
-            \Log::info($roomInfo['preview_img_url']);
-
-            $roomInfos[] = $roomInfo;
-        }
-        
-        return($roomInfos);
-    }
+    // 7. destroy
+    public function destroy($room_id){}
 
 
 
-    // public function getUserOwnImgs(){
-    //     $owner_user_id = Auth::user()->id;
-    //     $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
-    //     $img_file_urls = array();
-        
-    //     foreach($user_own_imgs as $user_own_img){
-    //         $img_file_urls[] = $user_own_img->img_url;
-    //     };
-
-    //     return ['urls' => $img_file_urls];
-    // }
-
-    public function getUserOwnAudioThumbnails(){
-        $owner_user_id = Auth::user()->id;
-        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
-        $audio_thumbnail_file_urls = array();
-        foreach($user_own_audios as $user_own_audio){
-            $audio_thumbnail_file_urls[] = $user_own_audio->thumbnail_url;
-        };
-
-        return ['urls' => $audio_thumbnail_file_urls];
-    }
-
-    public function getDefaultAudioThumbnails(){
-        $default_audios = DefaultBgm::get();
-        $audio_thumbnail_file_urls = array();
-        foreach($default_audios as $default_audio){
-            $audio_thumbnail_file_urls[] = $default_audio->thumbnail_url;
-        };
-
-        return ['urls' => $audio_thumbnail_file_urls];
-    }
-
-    public function getUserOwnAudios(){
-        $owner_user_id = Auth::user()->id;
-        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
-        $audios = array();
-        foreach($user_own_audios as $index => $user_own_audio){
-            $tmpAudios = array();
-            $tmpAudios += array('audio_name' => $user_own_audio->name);
-            $tmpAudios += array('audio_url' => $user_own_audio->audio_url);
-            $tmpAudios += array('thumbnail_url' => $user_own_audio->thumbnail_url);
-            $audios[$index] = $tmpAudios;
-        };
-        return ['audios' => $audios];
-    }
-
-    public function getDefaultAudios(){
-        $default_audios = DefaultBgm::get();
-        $audios = array();
-        foreach($default_audios as $index => $default_audio){
-            $tmpAudios = array();
-            $tmpAudios += array('audio_name' => $default_audio->name);
-            $tmpAudios += array('audio_url' => $default_audio->audio_url);
-            $tmpAudios += array('thumbnail_url' => $default_audio->thumbnail_url);
-            $audios[$index] = $tmpAudios;
-        };
-        return ['audios' => $audios];
-    }
-
-
-    public function saveAudioFile(Request $request) {
-        $user_id = Auth::user()->id;
-        $audio_file = $request->file('audio');
-        $audio_name = $audio_file->getClientOriginalName();
-        $audio_save_path = StoreFileInS3::userOwnFile($user_id, $audio_file);
-        $audio_save_url= Storage::disk('s3')->url($audio_save_path);
-        // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
-        $thumbnail_save_path = 'default/room/audio/thumbnail/8分音符アイコン 1.png';
-        $thumbnail_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/default/room/audio/thumbnail/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3+1.png';
-
-        $fileDatas = array (
-            'owner_user_id' => $user_id,
-            'name' => $audio_name,
-            'path' => $audio_save_path,
-            'url' => $audio_save_url,
-            'thumbnail_path' => $thumbnail_save_path,
-            'thumbnail_url' => $thumbnail_save_url
-        );
-        StoreFileInS3::saveAudioDataInDB($fileDatas);
-
-        $audios = array(
-            'audio_name' => $audio_name,
-            'audio_url' => $audio_save_url,
-            'thumnbail_url' => $thumbnail_save_url
-        );
-
-        return ['audios' => $audios];
-    }
 
     public function saveDBTest() {
         $user_id = NULL;
@@ -215,22 +92,6 @@ class RoomController extends Controller
         saveDataInDB::img($fileDatas);
 
         return ['url' => $imgfile_save_url];
-    }
-
-
-    public function deleteAudio(Request $request){
-        $owner_user_id = Auth::user()->id;
-        $del_audio_url = $request->audioUrl;
-        // S3からファイルを削除
-        Storage::disk('s3')->delete($del_audio_url);
-        // DBからレコード削除
-        \Log::info($del_audio_url);
-        UserOwnBgm::where('owner_user_id', $owner_user_id)
-                    ->where('audio_url', $del_audio_url)
-                    ->first()
-                    ->delete();
-
-        return ['削除完了しました'];
     }
 
 

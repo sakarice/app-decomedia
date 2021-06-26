@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Lib\ImgUtil;
 use App\Lib\StoreFileInS3;
 use App\Http\Controllers\Img\ImgController;
+use App\Http\Controllers\RoomAudio\RoomAudioController;
 use App\Http\Controllers\AudioController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RoomSettingController;
@@ -32,7 +33,7 @@ class RoomUtil
     $room_img_data = ImgUtil::getRoomImgData($room_id);
 
     // room音楽情報をDBから取得
-    $room_audios_data = AudioController::getRoomAudiosData($room_id);
+    $room_audios_data = RoomAudioController::show($room_id);
 
     // room動画情報をDBから取得
     $room_movie_data = MovieController::getRoomMovieData($room_id);
@@ -51,6 +52,50 @@ class RoomUtil
 
   }
 
+
+    // Roomのプレビュー表示に必要な情報を取得(id,title,サムネ画像のurl)
+    public static function getRoomPreviewInfos($rooms){
+        $roomInfos = array();
+        foreach($rooms as $room){
+            $room_id = $room->id;
+
+            if(RoomImg::where('room_id', $room_id)->exists()){
+                $room_img_id = RoomImg::where('room_id', $room_id)->first()->img_id;
+                $room_img_type = RoomImg::where('room_id', $room_id)->first()->img_type;
+                $room_img;
+                if($room_img_type == 1){
+                $room_img = DefaultImg::where('id', $room_img_id)->first();
+                } else if ($room_img_type == 2){
+                $room_img = UserOwnImg::where('id', $room_img_id)->first();
+                }
+                $room_img_url = $room_img->img_url;
+            } else if(RoomMovie::where('room_id', $room_id)->exists()) {
+                // youtubeアイコンの画像URLをセット
+                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
+            } else if(RoomBgm::where('room_id', $room_id)->exists()){
+                // 音符アイコンの画像をセット
+                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
+            } else {
+                // empty画像をセット
+                $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"; 
+            }
+
+            $roomInfo = array(
+                'id' => $room->id,
+                'name' => $room->name,
+                'preview_img_url' => $room_img_url,
+            );
+            \Log::info($roomInfo['id']);
+            \Log::info($roomInfo['name']);
+            \Log::info($roomInfo['preview_img_url']);
+
+            $roomInfos[] = $roomInfo;
+        }
+        
+        return($roomInfos);
+    }
+    
+    
   // room情報をDBから削除
   public static function deleteRoomDataFromDB($room_id){
     $user_id = Auth::user()->id;

@@ -9,6 +9,7 @@ use Session;
 use App\Http\Controllers\Room\RoomController;
 use App\Lib\EditTrack;
 use App\Lib\EditRoom;
+use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\Track;
 use App\Models\Room;
@@ -24,7 +25,7 @@ class SearchController extends Controller
         if(!empty($keyword)){
             $rooms = Room::where('name', 'LIKE', "%$keyword%")->get();
         }
-        $roomPreviewInfos = RoomController::getRoomPreviewInfos($rooms);
+        $roomPreviewInfos = RoomUtil::getRoomPreviewInfos($rooms);
 
         $data = [
             'keyword' => $keyword,

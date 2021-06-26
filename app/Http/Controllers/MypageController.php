@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\Roomlist;
 use App\Lib\EditRoom;
+use App\Lib\RoomUtil;
 
 use Storage;
 
@@ -23,7 +24,7 @@ class MypageController extends Controller
         }
 
         $rooms = Room::limit(6)->where('user_id', $authenticated_userId)->get();
-        $roomPreviewInfos = RoomController::getRoomPreviewInfos($rooms);
+        $roomPreviewInfos = RoomUtil::getRoomPreviewInfos($rooms);
 
         $data = [
             'roomPreviewInfos' => $roomPreviewInfos
