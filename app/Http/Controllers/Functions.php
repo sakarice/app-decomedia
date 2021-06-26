@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Lib\saveDataInDB;
 use App\Models\User;
 use App\Models\DefaultBgm;
 use App\Models\DefaultImg;
@@ -15,7 +16,7 @@ use App\Models\RoomBgm;
 use App\Models\RoomImg;
 use App\Models\Roomlist;
 use App\Models\RoomRoomlist;
-use App\Lib\SaveFile;
+use App\Lib\StoreFileInS3;
 
 use Storage;
 
@@ -59,7 +60,7 @@ class Functions extends Controller
       function storeFileAndcreateDataForDb($request, $type){
         \Log::info('storeFileAndcreateDataForDb  function called');
         $fileName = $request->file($type)->getClientOriginalName();
-        $filePath = SaveFile::saveDefaultFileInS3($request, $type);
+        $filePath = StoreFileInS3::DefaultFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
         
         $fileDatas = array (
@@ -74,7 +75,7 @@ class Functions extends Controller
       // 画像ファイルの保存とDB登録
       if(checkFile($request, 'img')){
         $imgFileDatas = storeFileAndcreateDataForDb($request ,'img');
-        saveFile::saveImgDataInDB($imgFileDatas);
+        saveDataInDB::img($imgFileDatas);
       }
       
       // オーディオファイルの保存とDB登録
@@ -87,7 +88,7 @@ class Functions extends Controller
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        saveFile::saveAudioDataInDB($audioFileDatas);
+        StoreFileInS3::saveAudioDataInDB($audioFileDatas);
       }
 
       return view('upload.defaultFile');

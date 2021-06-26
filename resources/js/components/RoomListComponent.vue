@@ -123,11 +123,12 @@ li {
 }
 
 .cover-menu {
-  position: relative;
-  opacity: 0%;
+  position: absolute;
+  top : 0;
   z-index: -10;
   width: 100%;
   height: 100%;
+  opacity: 0%;
   background-color: grey;
   display: flex;
 }

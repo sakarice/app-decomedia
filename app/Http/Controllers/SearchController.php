@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Http\Controllers\RoomController;
+use App\Http\Controllers\Room\RoomController;
 use App\Lib\EditTrack;
 use App\Lib\EditRoom;
 use App\Models\User;

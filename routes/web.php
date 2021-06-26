@@ -45,9 +45,9 @@ Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profil
 
 
 // ★今の仕様
-Route::get('/home/room/create', 'App\Http\Controllers\RoomController@create');
-Route::get('/home/room/{id}', 'App\Http\Controllers\RoomController@show');
-Route::get('/home/room/{id}/edit', 'App\Http\Controllers\RoomController@edit');
+Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
+Route::get('/home/room/{id}', 'App\Http\Controllers\Room\RoomController@show');
+Route::get('/home/room/{id}/edit', 'App\Http\Controllers\Room\RoomController@edit');
 
 // Chat
 Route::get('/home/chat', 'App\Http\Controllers\Room2Controller@chat');
@@ -55,11 +55,12 @@ Route::get('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@index');
 Route::post('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@create');
 
 // Ajax
-Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\Ajax\RoomController@getUserOwnImgs');
-Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\Ajax\RoomController@getDefaultImgs');
-Route::post('/ajax/uploadImg', 'App\Http\Controllers\Ajax\RoomController@saveImgFile');
+Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\Img\UserOwnImgController@index');
+Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\Img\DefaultImgController@index');
+Route::post('/ajax/uploadImg', 'App\Http\Controllers\Img\ImgController@store');
+Route::post('/ajax/deleteImg', 'App\Http\Controllers\Img\UserOwnImgController@destroy');
+
 Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Ajax\RoomController@saveAudioFile');
-Route::post('/ajax/deleteImg', 'App\Http\Controllers\Ajax\RoomController@deleteImgFile');
 Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Ajax\RoomController@deleteAudio');
 Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudioThumbnails');
 Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');

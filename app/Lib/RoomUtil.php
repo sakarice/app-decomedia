@@ -5,9 +5,9 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
-use App\Lib\saveFile;
-use App\Http\Controllers\ImgController;
+use App\Lib\ImgUtil;
+use App\Lib\StoreFileInS3;
+use App\Http\Controllers\Img\ImgController;
 use App\Http\Controllers\AudioController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RoomSettingController;
@@ -29,7 +29,7 @@ class RoomUtil
   // 指定のroom情報を取得
   public static function getRoomDatas($room_id){
     // room画像情報をDBから取得
-    $room_img_data = ImgController::getRoomImgData($room_id);
+    $room_img_data = ImgUtil::getRoomImgData($room_id);
 
     // room音楽情報をDBから取得
     $room_audios_data = AudioController::getRoomAudiosData($room_id);
@@ -150,7 +150,7 @@ class RoomUtil
           $roomMovie->isLoop = $request->movie['isLoop'];
           $roomMovie->movie_layer = $request->movie['layer'];
           $roomMovie->save();
-      }
+      } 
       \Log::info('動画ID'.$request->movie['videoId']);
   
   

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Lib\saveFile;
+use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomSetting;

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\EditTrack;
-use App\Lib\saveFile;
+use App\Lib\StoreFileInS3;
+use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
@@ -38,48 +39,6 @@ class RoomController extends Controller
         }
     }
 
-
-    // public function getUserOwnImgs(){
-    //     $owner_user_id = Auth::user()->id;
-    //     $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
-    //     $img_file_urls = array();
-        
-    //     foreach($user_own_imgs as $user_own_img){
-    //         $img_file_urls[] = $user_own_img->img_url;
-    //     };
-
-    //     return ['urls' => $img_file_urls];
-    // }
-
-    public function getUserOwnImgs(){
-        $owner_user_id = Auth::user()->id;
-        $user_own_imgs = UserOwnImg::where('owner_user_id', $owner_user_id)->get();
-        $img_file_datas = array();
-        
-        foreach($user_own_imgs as $index => $user_own_img){
-            $tmp_img_file_datas = array();
-            $tmp_img_file_datas += array('id' => $user_own_img->id);
-            $tmp_img_file_datas += array('url'=> $user_own_img->img_url);
-            $img_file_datas[$index] = $tmp_img_file_datas;
-        };
-
-        return ['file_datas' => $img_file_datas];
-    }
-
-    public function getDefaultImgs(){
-        $owner_user_id = Auth::user()->id;
-        $default_imgs = DefaultImg::get();
-        $img_file_datas = array();
-        
-        foreach($default_imgs as $index => $default_img){
-            $tmp_img_file_datas = array();
-            $tmp_img_file_datas += array('id' => $default_img->id);
-            $tmp_img_file_datas += array('url' => $default_img->img_url);
-            $img_file_datas[$index] = $tmp_img_file_datas;
-        };
-
-        return ['file_datas' => $img_file_datas];
-    }
 
 
     public function getUserOwnAudioThumbnails(){
@@ -133,36 +92,11 @@ class RoomController extends Controller
     }
 
 
-    public function saveImgFile(Request $request) {
-        $user_id = Auth::user()->id;
-        $imgfile = $request->file('img');
-        $imgfile_name = $imgfile->getClientOriginalName();
-        $imgfile_save_path = saveFile::saveFileInS3($user_id, $imgfile);
-        $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
-        \Log::info($imgfile_save_url);
-
-        $fileDatas = array (
-            'owner_user_id' => $user_id,
-            'name' => $imgfile_name,
-            'img_path' => $imgfile_save_path,
-            'img_url' => $imgfile_save_url
-        );
-        $id = saveFile::saveImgDataInDB($fileDatas);
-        // $img_file_info = array();
-        $img_file_info = array('id' => $id);
-        $img_file_info += array('url'=> $imgfile_save_url);
-
-
-        return [
-            'img_file_info' => $img_file_info 
-        ];
-    }
-
     public function saveAudioFile(Request $request) {
         $user_id = Auth::user()->id;
         $audio_file = $request->file('audio');
         $audio_name = $audio_file->getClientOriginalName();
-        $audio_save_path = saveFile::saveFileInS3($user_id, $audio_file);
+        $audio_save_path = StoreFileInS3::userOwnFile($user_id, $audio_file);
         $audio_save_url= Storage::disk('s3')->url($audio_save_path);
         // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
         $thumbnail_save_path = 'default/room/audio/thumbnail/8分音符アイコン 1.png';
@@ -176,7 +110,7 @@ class RoomController extends Controller
             'thumbnail_path' => $thumbnail_save_path,
             'thumbnail_url' => $thumbnail_save_url
         );
-        saveFile::saveAudioDataInDB($fileDatas);
+        StoreFileInS3::saveAudioDataInDB($fileDatas);
 
         $audios = array(
             // 'id' => $id,
@@ -200,32 +134,11 @@ class RoomController extends Controller
             'img_path' => $imgfile_save_path,
             'img_url' => $imgfile_save_url
         );
-        saveFile::saveImgDataInDB($fileDatas);
+        saveDataInDB::img($fileDatas);
 
         return ['url' => $imgfile_save_url];
     }
 
-
-
-    public function deleteImgFile(Request $request){
-        $owner_user_id = Auth::user()->id;
-        $del_imgfile_url = $request->imgUrl;
-        // S3からファイルを削除
-        Storage::disk('s3')->delete($del_imgfile_url);
-        // DBからレコード削除
-        // UserOwnImg::where('owner_user_id', $owner_user_id)
-        //             ->where('img_url', $del_imgfile_url)
-        //             ->first()
-        //             ->delete();
-
-        $del_imgfile_id = $request->imgId;
-        UserOwnImg::where('owner_user_id', $owner_user_id)
-        ->where('img_url', $del_imgfile_url)
-        ->first()
-        ->delete();
-
-        return ['削除完了しました'];
-    }
 
     public function deleteAudio(Request $request){
         $owner_user_id = Auth::user()->id;
