@@ -23,7 +23,7 @@ class UserOwnAudioController extends Controller
         foreach($user_own_audios as $index => $user_own_audio){
             $tmpAudios = array();
             $tmpAudios += array('name' => $user_own_audio->name);
-            $tmpAudios += array('url' => $user_own_audio->audio_url);
+            $tmpAudios += array('audio_url' => $user_own_audio->audio_url);
             $tmpAudios += array('thumbnail_url' => $user_own_audio->thumbnail_url);
             $audios[$index] = $tmpAudios;
         };

@@ -1,37 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Lib;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
 use App\Http\Controllers\Room\RoomController;
-use App\Lib\EditTrack;
 use App\Lib\EditRoom;
 use App\Lib\RoomUtil;
 use App\Models\User;
-use App\Models\Track;
 use App\Models\Room;
-use App\Models\RoomTrack;
+use App\Models\RoomSetting;
 
-class SearchController extends Controller
+class SearchUtil
 {
     //
-    public function searchRooms(Request $request){
+    public static function searchRooms(Request $request){
         $user_id = Auth::user()->id;
         $keyword = $request->input('keyword');
         $rooms;
+        $roomPreviewInfos = array();
         if(!empty($keyword)){
-            $rooms = Room::where('name', 'LIKE', "%$keyword%")->get();
+            $room_settings = RoomSetting::where('name', 'LIKE', "%$keyword%")->get();
         }
-        $roomPreviewInfos = RoomUtil::getRoomPreviewInfos($rooms);
+        foreach($room_settings as $room_setting){
+            $room_id = $room_setting->room_id;
+            $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+        }
 
         $data = [
             'keyword' => $keyword,
             'roomPreviewInfos' => $roomPreviewInfos
         ];
-
 
         return view('searchResult.view', $data);
     }

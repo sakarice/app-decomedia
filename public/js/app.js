@@ -2011,7 +2011,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['url'];
+      this.audioPlayer.src = playTargetAudio['audio_url'];
       this.audioPlayer.play();
       this.isPlay = true;
       playTargetAudio['isPlay'] = true; // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
@@ -2074,7 +2074,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
-      audio['url'] = tmpAudio['url'];
+      audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
       this.$emit('add-audio', audio);
@@ -2139,7 +2139,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var url = '/ajax/deleteAudio';
       var audioId = event.target.parentNode.getAttribute('id');
-      var audioUrl = this.userOwnAudios[audioId]['url'];
+      var audioUrl = this.userOwnAudios[audioId]['audio_url'];
       var params = {
         'audioUrl': audioUrl
       };
@@ -2153,7 +2153,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         // 削除対象URLが入っている配列のインデックスを取得
 
         var index = _this4.userOwnAudios.some(function (v, i) {
-          if (v['url'] == audioUrl) {
+          if (v['audio_url'] == audioUrl) {
             return i;
           }
 
@@ -2681,7 +2681,15 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     setRoomImg: function setRoomImg(event) {
       var imgUrl = event.target.previousElementSibling.getAttribute('src');
-      var imgType = event.target.previousElementSibling.getAttribute('class');
+      var imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
+      var imgType;
+
+      if (imgTypeLabel == 'default-img') {
+        imgType = 1;
+      } else if (imgTypeLabel == 'user-own-img') {
+        imgType = 2;
+      }
+
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
       this.$emit('set-room-img', imgType, imgId, imgUrl);
     },
@@ -2690,12 +2698,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       switch (imgType) {
         // 指定されたタイプに応じてVueモデルを決定
-        case 'user-own-img':
-          targetModel = this.userOwnImgs;
+        case 1:
+          targetModel = this.defaultImgs;
           break;
 
-        case 'default-img':
-          targetModel = this.defaultImgs;
+        case 2:
+          targetModel = this.userOwnImgs;
           break;
       }
 
@@ -2759,7 +2767,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var index = event.target.parentNode.parentNode.getAttribute('id');
       var imgUrl = this.userOwnImgs[index]['url'];
-      var imgId = this.findImgIdTiedUpWithUrl('user-own-img', imgUrl);
+      var imgId = this.findImgIdTiedUpWithUrl('1', imgUrl);
       var url = '/ajax/deleteImg';
       var params = {
         'imgId': +imgId,
@@ -3008,7 +3016,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var addedAudioIndex = this.$parent.roomAudios.length - 1;
       var addedAudio = this.$parent.roomAudios[addedAudioIndex];
-      var addedAudioUrl = addedAudio['url']; // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
+      var addedAudioUrl = addedAudio['audio_url']; // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
 
       var emptyPlayerIndex;
       this.audioPlayers.some(function (audioPlayer, index) {
@@ -3325,7 +3333,7 @@ __webpack_require__.r(__webpack_exports__);
     createRoom: function createRoom() {
       var _this = this;
 
-      var url = '/ajax/room/create';
+      var url = '/home/room/store';
       var room_datas = {
         'img': this.$parent.roomImg,
         'audios': this.$parent.roomAudios,
@@ -3768,7 +3776,7 @@ __webpack_require__.r(__webpack_exports__);
       var room_data = {
         'room_id': room_id
       };
-      var url = '/ajax/room/delete';
+      var url = '/home/room/delete';
       axios.post(url, room_data).then(function (response) {
         alert(response.data.message);
         location.reload();
@@ -4041,14 +4049,14 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {
-      'message': "a"
+      'message': ""
     };
   },
   methods: {
     updateRoom: function updateRoom() {
       var _this = this;
 
-      var url = '/ajax/room/update';
+      var url = '/home/room/update';
       var room_datas = {
         'img': this.$parent.roomImg,
         'audios': this.$parent.roomAudios,
@@ -8888,7 +8896,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 150px;\n  height: 100%;\n  padding: 10px;\n  background-color: black;\n}\n#audios[data-v-30d91c2d]{\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n}\n.audio-area[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n.non-audio-frame[data-v-30d91c2d] {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 15px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n.room-audio-pause-icon[data-v-30d91c2d] {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n  left: 28px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n  left: 16px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 170px;\n  height: 100%;\n  padding: 10px;\n  background-color: black;\n}\n#audios[data-v-30d91c2d]{\n  display: flex;\n  flex-direction: column;\n  padding-left: 0;\n}\n.audio-area[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n.non-audio-frame[data-v-30d91c2d] {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 5px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n  width: 60px;\n  height: 60px;\n  border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n.room-audio-pause-icon[data-v-30d91c2d] {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n  left: 28px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n  left: 16px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49400,7 +49408,7 @@ var render = function() {
                           expression: "!(isDefault)"
                         }
                       ],
-                      key: userOwnImg.id,
+                      key: userOwnImg.url,
                       staticClass: "img-list",
                       attrs: { id: index }
                     },
@@ -49453,7 +49461,7 @@ var render = function() {
                           expression: "isDefault"
                         }
                       ],
-                      key: defaultImg.id,
+                      key: defaultImg.url,
                       staticClass: "img-list",
                       attrs: { id: index }
                     },
@@ -49653,7 +49661,7 @@ var render = function() {
             return _c(
               "li",
               {
-                key: roomAudio.id,
+                key: roomAudio.audio_url,
                 staticClass: "audio-area",
                 attrs: { id: index }
               },

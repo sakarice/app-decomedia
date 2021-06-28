@@ -39,85 +39,25 @@ class RoomController extends Controller
         }
     }
 
+    
+    // // room更新
+    // public function updateRoom(Request $request){
+    //     $room_id = $request->setting['id'];
+    //     $returnMsg;
 
+    //     DB::beginTransaction(); // 更新は、削除と作成のセットで実現
+    //     try{
+    //         RoomUtil::deleteRoomDataFromDB($room_id);
+    //         RoomUtil::saveRoomDataInDB($request);
+    //         DB::commit();
+    //         $returnMsg = 'roomを更新しました';
+    //     } catch(\Exception $e){
+    //         DB::rollback();
+    //         $returnMsg = 'roomの更新に失敗しました';
+    //     }
 
-    // public function saveDBTest() {
-    //     $user_id = NULL;
-    //     $imgfile_name = 'rail.jpg';
-    //     $imgfile_save_path = 'img/room/rail.jpg';
-    //     $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
-
-    //     $fileDatas = array (
-    //         'owner_user_id' => $user_id,
-    //         'name' => $imgfile_name,
-    //         'img_path' => $imgfile_save_path,
-    //         'img_url' => $imgfile_save_url
-    //     );
-    //     saveDataInDB::img($fileDatas);
-
-    //     return ['url' => $imgfile_save_url];
+    //     return['message' => $returnMsg];
     // }
-
-
-    // room作成
-    public function createRoom(Request $request){
-        // ★デバッグ用ログ出力 DBに保存する情報が取得できているか確認
-        // $user_id = Auth::user()->id;
-        // \Log::info('ユーザID：'.$user_id);
-        $returnMsg;
-        
-        DB::beginTransaction();
-        try{
-            RoomUtil::saveRoomDataInDB($request);
-            DB::commit();
-            $returnMsg = 'roomを保存しました';
-        } catch(\Exception $e){
-            DB::rollback();
-            $returnMsg = 'roomの保存に失敗しました';
-        }
-
-        return ['message' => $returnMsg];
-    }
-
-
-    // room削除
-    public function deleteRoom (Request $request){
-        $room_id = $request->room_id;
-        // $user_id = Auth::user()->id;
-        $returnMsg;
-        
-        DB::beginTransaction();
-        try{
-            RoomUtil::deleteRoomDataFromDB($room_id);
-            DB::commit();
-            $returnMsg = 'roomを削除しました';
-        } catch(\Exception $e){
-            DB::rollback();
-            $returnMsg = 'roomの削除に失敗しました';
-        }
-
-        return['message' => $returnMsg];
-    }
-
-
-    // room更新
-    public function updateRoom(Request $request){
-        $room_id = $request->setting['id'];
-        $returnMsg;
-
-        DB::beginTransaction(); // 更新は、削除と作成のセットで実現
-        try{
-            RoomUtil::deleteRoomDataFromDB($room_id);
-            RoomUtil::saveRoomDataInDB($request);
-            DB::commit();
-            $returnMsg = 'roomを更新しました';
-        } catch(\Exception $e){
-            DB::rollback();
-            $returnMsg = 'roomの更新に失敗しました';
-        }
-
-        return['message' => $returnMsg];
-    }
 
 
 }

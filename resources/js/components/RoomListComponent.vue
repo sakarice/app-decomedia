@@ -44,7 +44,7 @@ export default {
       let room_data = {
         'room_id' : room_id,
       }
-      const url = '/ajax/room/delete';
+      const url = '/home/room/delete';
       axios.post(url, room_data)
       .then(response => {
         alert(response.data.message);
@@ -56,9 +56,7 @@ export default {
     }
 
   },
-  mounted : function(){
-
-  },
+  mounted : function(){},
   watch : {
   },
   computed : {

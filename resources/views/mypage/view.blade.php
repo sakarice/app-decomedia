@@ -55,8 +55,9 @@
     </div> --}}
 
     <div id="app">
-        <room-list-component
-        :room-preview-infos=@json($roomPreviewInfos)
+      <cancel-button></cancel-button>
+      <room-list-component
+        :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
         :is-show-cover="true">
         </room-list-component>
     </div>

@@ -33,7 +33,7 @@
           </div>
           <ul id="img-wrapper">
             <!-- uploads -->
-            <li :id="index" v-show="!(isDefault)" class="img-list" v-for="(userOwnImg, index) in userOwnImgs" :key="userOwnImg.id">
+            <li :id="index" v-show="!(isDefault)" class="img-list" v-for="(userOwnImg, index) in userOwnImgs" :key="userOwnImg.url">
               <img class="user-own-img" :src="userOwnImg['url']" :alt="userOwnImg['url']" />
               <div class="icon-cover" v-on:click="setRoomImg">
                 <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click.stop="deleteImg"></i>
@@ -41,7 +41,7 @@
               </div>
             </li>
             <!-- default -->
-            <li :id="index" v-show="isDefault" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.id">
+            <li :id="index" v-show="isDefault" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.url">
               <img class="default-img" :src="defaultImg['url']" :alt="defaultImg['url']" />
               <div class="icon-cover" v-on:click="setRoomImg">
                 <!-- <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i> -->
@@ -122,7 +122,13 @@ export default {
     },
     setRoomImg: function(event){
       let imgUrl = event.target.previousElementSibling.getAttribute('src');
-      let imgType = event.target.previousElementSibling.getAttribute('class');
+      let imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
+      let imgType;
+      if(imgTypeLabel == 'default-img'){
+        imgType = 1;
+      } else if(imgTypeLabel == 'user-own-img'){
+        imgType = 2;
+      }
       let imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
       
       this.$emit('set-room-img', imgType, imgId, imgUrl);
@@ -130,11 +136,11 @@ export default {
     findImgIdTiedUpWithUrl(imgType, imgUrl){
       let targetModel;  // 検索対象のVueモデル
       switch(imgType){ // 指定されたタイプに応じてVueモデルを決定
-        case 'user-own-img':
-          targetModel = this.userOwnImgs;
-          break;
-        case 'default-img':
+        case 1:
           targetModel = this.defaultImgs;
+          break;
+        case 2:
+          targetModel = this.userOwnImgs;
           break;
       }
       let imgNum = targetModel.length; // =検索ループ回数
@@ -192,7 +198,7 @@ export default {
     deleteImg:function(event) {
       let index = event.target.parentNode.parentNode.getAttribute('id');
       let imgUrl = this.userOwnImgs[index]['url'];
-      let imgId = this.findImgIdTiedUpWithUrl('user-own-img', imgUrl);
+      let imgId = this.findImgIdTiedUpWithUrl('1', imgUrl);
       const url = '/ajax/deleteImg'
       const params = {
         'imgId' : +imgId, // +を付けて文字列⇒数値に型変換

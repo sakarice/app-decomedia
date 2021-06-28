@@ -22,7 +22,7 @@ class DefaultAudioController extends Controller
         foreach($default_audios as $index => $default_audio){
             $tmpAudios = array();
             $tmpAudios += array('name' => $default_audio->name);
-            $tmpAudios += array('url' => $default_audio->audio_url);
+            $tmpAudios += array('audio_url' => $default_audio->audio_url);
             $tmpAudios += array('thumbnail_url' => $default_audio->thumbnail_url);
             $audios[$index] = $tmpAudios;
         };

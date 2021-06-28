@@ -146,7 +146,7 @@ export default {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['url'];
+      this.audioPlayer.src = playTargetAudio['audio_url'];
       this.audioPlayer.play();
       this.isPlay = true;
       playTargetAudio['isPlay'] = true;
@@ -209,7 +209,7 @@ export default {
       // audio['id'] = tmpAudio['id'];
       audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
-      audio['url'] = tmpAudio['url'];
+      audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
 
@@ -273,7 +273,7 @@ export default {
     deleteaudio:function(event) {
       const url = '/ajax/deleteAudio'
       let audioId = event.target.parentNode.getAttribute('id');
-      let audioUrl = this.userOwnAudios[audioId]['url'];
+      let audioUrl = this.userOwnAudios[audioId]['audio_url'];
       const params = {
         'audioUrl' : audioUrl
       }
@@ -288,7 +288,7 @@ export default {
           // 画面に即自反映するため、オーディオURLをdataから削除
           // 削除対象URLが入っている配列のインデックスを取得
           let index = this.userOwnAudios.some(function(v, i){
-            if(v['url']==audioUrl) {
+            if(v['audio_url']==audioUrl) {
               return (i);
             };
           });

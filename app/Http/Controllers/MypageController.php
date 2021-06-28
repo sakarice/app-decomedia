@@ -23,11 +23,15 @@ class MypageController extends Controller
             return view('auth.login');
         }
 
+        $roomPreviewInfos = array();
         $rooms = Room::limit(6)->where('user_id', $authenticated_userId)->get();
-        $roomPreviewInfos = RoomUtil::getRoomPreviewInfos($rooms);
-
+        foreach($rooms as $index => $room){
+            $room_id = $room->id;
+            $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+        }
+        
         $data = [
-            'roomPreviewInfos' => $roomPreviewInfos
+            'roomPreviewInfos' => ($roomPreviewInfos)
         ];
 
         return view('mypage.view', $data);

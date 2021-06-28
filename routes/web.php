@@ -25,7 +25,7 @@ Route::post('/home/mypage/deleteroom', 'App\Http\Controllers\Room2Controller@del
 Route::post('/home/mypage/showroom', 'App\Http\Controllers\Room2Controller@showRoom');
 Route::post('/home/mypage/showroom/getTrackInfo', 'App\Http\Controllers\Room2Controller@getTrackInfo');
 Route::post('/home/mypage/showroom/updateRoom', 'App\Http\Controllers\Room2Controller@updateRoom');
-Route::post('/home/searchResult', 'App\Http\Controllers\SearchController@searchRooms');
+Route::post('/home/searchResult', 'App\Lib\SearchUtil@searchRooms');
 Route::post('/home/enterRoom', 'App\Http\Controllers\Room2Controller@enterRoom');
 Route::post('/home/enterRoom/getTrackInfo', 'App\Http\Controllers\Room2Controller@getTrackInfo');
 
@@ -40,8 +40,11 @@ Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profil
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
+Route::post('home/room/store', 'App\Http\Controllers\Room\RoomController@store');
 Route::get('/home/room/{id}', 'App\Http\Controllers\Room\RoomController@show');
 Route::get('/home/room/{id}/edit', 'App\Http\Controllers\Room\RoomController@edit');
+Route::post('/home/room/update', 'App\Http\Controllers\Room\RoomController@update');
+Route::post('/home/room/delete', 'App\Http\Controllers\Room\RoomController@destroy');
 
 // Chat
 Route::get('/home/chat', 'App\Http\Controllers\Room2Controller@chat');
@@ -60,9 +63,6 @@ Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioControl
 
 // Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudioThumbnails');
 // Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');
-Route::post('/ajax/room/create', 'App\Http\Controllers\Ajax\RoomController@createRoom');
-Route::post('/ajax/room/delete', 'App\Http\Controllers\Ajax\RoomController@deleteRoom');
-Route::post('/ajax/room/update', 'App\Http\Controllers\Ajax\RoomController@updateRoom');
 
 
 // defaultImgアップロード(開発用、後で消す)

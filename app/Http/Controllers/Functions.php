@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\saveDataInDB;
+use App\Lib\SaveDataInDB;
+use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\DefaultBgm;
 use App\Models\DefaultImg;
@@ -16,7 +17,6 @@ use App\Models\RoomBgm;
 use App\Models\RoomImg;
 use App\Models\Roomlist;
 use App\Models\RoomRoomlist;
-use App\Lib\StoreFileInS3;
 
 use Storage;
 
@@ -88,7 +88,7 @@ class Functions extends Controller
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        StoreFileInS3::saveAudioDataInDB($audioFileDatas);
+        SaveDataInDB::audio($audioFileDatas);
       }
 
       return view('upload.defaultFile');

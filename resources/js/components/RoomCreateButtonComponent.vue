@@ -23,7 +23,7 @@
 
     methods : {
       createRoom() {
-        const url = '/ajax/room/create';
+        const url = '/home/room/store';
         let room_datas = {
           'img' : this.$parent.roomImg,
           'audios' : this.$parent.roomAudios,

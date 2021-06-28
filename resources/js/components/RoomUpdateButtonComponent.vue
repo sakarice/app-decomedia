@@ -17,13 +17,13 @@
     props : [],
     data : () => {
       return {
-        'message' : "a",
+        'message' : "",
       }
     },
 
     methods : {
       updateRoom() {
-        const url = '/ajax/room/update';
+        const url = '/home/room/update';
         let room_datas = {
           'img' : this.$parent.roomImg,
           'audios' : this.$parent.roomAudios,
