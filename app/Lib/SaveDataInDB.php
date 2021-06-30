@@ -59,8 +59,8 @@ class SaveDataInDB
 
     $targetModel->owner_user_id = $owner_user_id;
     $targetModel->name = $fileDatas['name'];
-    $targetModel->audio_path = $fileDatas['path'];
-    $targetModel->audio_url = $fileDatas['url'];
+    $targetModel->audio_path = $fileDatas['audio_path'];
+    $targetModel->audio_url = $fileDatas['audio_url'];
     $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];
     $targetModel->thumbnail_url = $fileDatas['thumbnail_url'];
 
@@ -68,7 +68,7 @@ class SaveDataInDB
 
     // 保存したレコードのidを取得
     $id = $targetModel->where('owner_user_id', $owner_user_id)
-                      ->where('audio_url', $fileDatas['url'])
+                      ->where('audio_url', $fileDatas['audio_url'])
                       ->first()
                       ->id;
 
