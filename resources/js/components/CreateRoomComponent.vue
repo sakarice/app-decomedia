@@ -9,6 +9,7 @@
      :roomImgWidth="roomImg['width'] + 'px'"
      :roomImgHeight="roomImg['height'] + 'px'"
      :roomImgLayer="roomImg['layer']"
+     :roomImgOpacity="roomImg['opacity']"
      :isShowRoomImg="roomSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="roomImg">
@@ -99,7 +100,8 @@
     :roomBackgroundColor="roomSetting['roomBackgroundColor']"
     :isShowRoomImg="roomSetting['isShowImg']"
     :roomImgWidth="roomImg['width']"
-    :roomImgHeight="roomImg['height']">
+    :roomImgHeight="roomImg['height']"
+    :roomImgOpacity="roomImg['opacity']">
     </room-setting-component>
 
 
@@ -159,6 +161,7 @@ export default {
         'url' : "",
         'width' : 500,
         'height' : 500,
+        'opacity' : 1,
         'layer' : 0,
       },
       roomMovie : {

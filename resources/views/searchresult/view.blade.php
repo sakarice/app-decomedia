@@ -12,33 +12,35 @@
 </head>
 <body>
 
-  <div class="action-button-wrapper">
+  {{-- <div class="action-button-wrapper">
     <a href="#" onclick="javascript:window.history.back(-1); return false;">
       <button class="cancel-button">
         戻る
       </button>
     </a>
-  </div>
+  </div> --}}
 
-  <h2>キーワード"{{$keyword}}"での検索結果</h2>
 
   <div id="app">
-    <room-list-component
-    :room-preview-infos=@json($roomPreviewInfos)
-    :is-show-cover="false">
-    </room-list-component>
+    {{-- ヘッダー --}}
+    <header-component
+    :is-show-login="true"
+    :is-show-signup="true"
+    :is-show-profile-icon="false">
+    </header-component>
+    
+    {{-- 検索結果一覧 --}}
+    <section class="search-result">
+      <h2 class="search-result-message">キーワード"{{$keyword}}"での検索結果</h2>
+  
+      <room-list-component
+      :room-preview-infos=@json($roomPreviewInfos)
+      :is-show-cover="false">
+      </room-list-component>
+    </section>
+  
   </div>
 
-{{-- 
-  <ul id="room-list-wrapper">
-    @foreach($roomPreviewInfos as $roomPreviewInfo)
-      <li class="room-list">
-        <p class="room-id">{{$roomPreviewInfo['id']}}</p>
-        <img class="room-img" src={{$roomPreviewInfo['preview_img_url']}} alt="">
-        <p>{{$roomPreviewInfo['name']}}</p>
-      </li>
-    @endforeach
-  </ul> --}}
 
   <form id="room-id-form" method="POST" action="{{asset('/home/enterRoom')}}">
     @csrf

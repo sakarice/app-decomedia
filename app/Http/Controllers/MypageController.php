@@ -31,7 +31,7 @@ class MypageController extends Controller
         }
         
         $data = [
-            'roomPreviewInfos' => ($roomPreviewInfos)
+            'roomPreviewInfos' => $roomPreviewInfos
         ];
 
         return view('mypage.view', $data);

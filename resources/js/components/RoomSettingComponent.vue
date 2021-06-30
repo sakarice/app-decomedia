@@ -26,10 +26,12 @@
 
           <div id="room-img-setting-wrapper" class="setting">
             <p class="setting-title">Room画像</p>
-            <input data-input-type="width" class="img-size-input" :value="roomImgWidth" @input="resizeImg" type="text" size="5" placeholder="横幅">
+            <input data-input-type="width" class="img-size-input" :value="roomImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input data-input-type="height" class="img-size-input" :value="roomImgHeight" @input="resizeImg" type="text" size="5" placeholder="縦幅">
+            <input data-input-type="height" class="img-size-input" :value="roomImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
             <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
+            <input data-input-type="opacity" class="img-opacity-input" :value="roomImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
+            <span>透明度(0～1)</span><br>
             <button v-on:click="toggleRoomImg">
               <span v-show="isShowRoomImg">非表示</span>
               <span v-show="!(isShowRoomImg)">表示</span>
@@ -52,6 +54,7 @@ export default {
     'isShowRoomImg',
     'roomImgWidth',
     'roomImgHeight',
+    'roomImgOpacity',
   ],
   data : () => {
     return {
@@ -66,13 +69,15 @@ export default {
     updateRoomName(event) {
       this.$parent.roomSetting['name'] = event.target.value;
     },
-    resizeImg(event){
-      let value = event.target.value; // 横幅、高さの値
-      let type = event.target.dataset.inputType; // widthかheightか
+    updateImg(event){
+      let value = event.target.value; // 横幅、高さ、透過度の値
+      let type = event.target.dataset.inputType; // widthかheightかopacity
       if(type == 'width'){
         this.$parent.roomImg['width'] = value;
       } else if(type == 'height'){
         this.$parent.roomImg['height'] = value;
+      } else if(type == 'opacity'){
+        this.$parent.roomImg['opacity'] = value;
       }
       // this.$emit('resize-img', value, type);
     },

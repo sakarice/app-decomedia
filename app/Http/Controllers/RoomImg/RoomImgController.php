@@ -26,11 +26,12 @@ class RoomImgController extends Controller
         $roomImg = new RoomImg();
         $roomImg->room_id = $room_id;
         $room_img_type = $request->img['type'];
-        \Log::info($room_img_type);
         $roomImg->img_type = $room_img_type;
         $roomImg->img_id = $request->img['id'];
         $roomImg->width = $request->img['width'];
         $roomImg->height = $request->img['height'];
+        $roomImg->opacity = $request->img['opacity'];
+        \Log::info($request->img['opacity']);
         $roomImg->owner_user_id = $user_id;
         $roomImg->img_layer = $request->img['layer'];
         $roomImg->save();
@@ -53,6 +54,7 @@ class RoomImgController extends Controller
             }
             $room_img_width = $room_img->width;
             $room_img_height = $room_img->height;
+            $room_img_opacity = $room_img->opacity;
             $room_img_layer = $room_img->img_layer;
         // × room画像が設定されていない場合⇒デフォルト値をセット
         } else {            
@@ -62,6 +64,7 @@ class RoomImgController extends Controller
             = $room_img_height
             = $room_img_layer
             = 0;
+            $room_img_opacity = 1;
             $room_img_url = "";
         }
 
@@ -72,6 +75,7 @@ class RoomImgController extends Controller
             'url' => $room_img_url,
             'width' => $room_img_width,
             'height' => $room_img_height,
+            'opacity' => $room_img_opacity,
             'layer' => $room_img_layer,
         ];
 

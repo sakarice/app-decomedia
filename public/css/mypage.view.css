@@ -1,11 +1,5 @@
-
-.header {
-  width: 100%;
-  text-align: center;
-  /* color: aquamarine; */
-  font-weight:bold;
-  font-size: 50px;
-  margin: 50px 0;
+body {
+  margin: 0;
 }
 
 .page-title {
@@ -22,67 +16,39 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  /* text-align: right; */
-  /* margin: 20px 0; */
-  /* padding: 10px 30px; */
 }
 
-#profile-img {
-  width: 70px;
-  height: 70px;
-  margin: 15px 20px;
+.created-room-list {
+  margin: 100px 0;
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 800px;
 }
 
-.profile {
-  display: flex;
-  justify-content: center;
-}
 
-.track-wrapper, .room-wrapper{
-  /* background-color: grey; */
-  box-shadow: 1px 1px 2px 1px grey;
-  width: 70%;
-  margin: 0 auto;
-  padding: 40px;
-  display: flex;
-  justify-content: center;
-}
-
-.track-create-wrapper, .track-show-wrapper {
-  width: 50%;
-  font-size: 40px;
-  margin: auto 0;
-}
-
-.disk {
-  width: 50px;
-  height: 50px;
-  border: 70px solid;
-  border-color: yellow;
-  border-radius: 50%;
-  box-shadow: 2px 2px 1px 1px #aaaaaa;
-  margin-bottom: 5px;
-}
-
-.create-contents {
-  text-align: center;  
-}
-
-.linkTo-createTrack {
+.section-title {
   display: inline-block;
+  margin-right: 20px;
 }
 
-.preview-track-title {
-  /* font-size: 1.5em;
-  font-weight: bold; */
-  font-family: "Yu Gothic";
+.room-create-wrapper {
+  display: inline-block;
+  margin: 5px 20px;
 }
 
-.preview-track {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  font-family: 'Yu Mincho';
+.linkTo-createRoom {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  background-color: rgba(240, 240, 240, 0.7);
+  padding: 3px 20px;
+  border-radius: 3px;
+  box-shadow: 0.5px 0.5px 3px grey;
+}
+
+.linkTo-createRoom:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .preview-img {

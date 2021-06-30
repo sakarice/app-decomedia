@@ -71,15 +71,18 @@ export default {
 
 .room-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
 }
 
-.room-wrapper::after {
+/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
+/* .room-wrapper::after {
   display: block;
   content:"";
   width: 200px;
-}
+} */
 
 li {
   list-style: none;
@@ -88,8 +91,8 @@ li {
 .preview-room {
   position: relative;
   text-align: center;
-  font-size: 50px;
-  margin: 30px;
+  /* font-size: 50px; */
+  margin-right: 40px;
   width: 200px;
   height: 200px;
   opacity: 0.8;
@@ -163,7 +166,7 @@ li {
   right: 10px;
   opacity: 0%;
   z-index: -10;
-  font-size: 0.5em;
+  font-size: 1.5em;
 }
 
 .del-icon:hover {

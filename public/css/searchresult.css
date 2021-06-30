@@ -1,8 +1,16 @@
+body {
+  margin: 0;
+}
+
 #room-list-wrapper {
   width: 80%;
   display: flex;
   justify-content: left;
   flex-wrap: wrap;
+}
+
+.search-result {
+  margin: 100px 0;
 }
 
 .room-list {

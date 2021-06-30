@@ -7,6 +7,7 @@
      :roomImgUrl="roomImg['url']"
      :roomImgWidth="roomImg['width'] + 'px'"
      :roomImgHeight="roomImg['height'] + 'px'"
+     :roomImgOpacity="roomImg['opacity']"
      :roomImgLayer="roomImg['layer']"
      :isShowRoomImg="roomSetting['isShowImg']"
       ref="roomImg">
@@ -66,6 +67,7 @@ export default {
         'url' : "",
         'width' : 500,
         'height' : 500,
+        'opacity' : 1,
         'layer' : 0,
       },
       roomMovie : {
@@ -98,6 +100,7 @@ export default {
       this.roomImg['url'] = tmpImgData.url;
       this.roomImg['width'] = tmpImgData.width;
       this.roomImg['height'] = tmpImgData.height;
+      this.roomImg['opacity'] = tmpImgData.opacity;
       this.roomImg['layer'] = tmpImgData.layer;
     },
     initMovie(){

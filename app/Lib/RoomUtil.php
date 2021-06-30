@@ -83,7 +83,7 @@ class RoomUtil
           'name' => $room_name,
           'preview_img_url' => $room_img_url,
       );
-      return (($roomInfo));
+      return $roomInfo;
     }
     
 
@@ -97,7 +97,7 @@ class RoomUtil
       $room = new Room(); 
       $room->user_id = $user_id;
       $room->save();
-  
+      
       // 保存したroomのidを取得
       $room_id = Room::latest()->first()->id;
       \Log::info($room_id);
