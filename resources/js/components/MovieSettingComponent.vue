@@ -8,23 +8,26 @@
 
         <div id="setting-wrapper">
           <p id="player-setting-title">動画Player設定</p>
-          <div class="yt-form-wrapper">
+          <div class="yt-form-wrapper setting-content">
             <input :value="youtubeUrl" @input="updateVideoId" type="text" id="youtube-url-input" size=30 placeholder="youtube movie URL">
           </div>
           <div class="yt-setting-wrapper">
-            <div>
+            <div class="setting-content">
               <input :value="movieFrameWidth" @input="updateVideoWidth" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
               <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             </div>
-            <div>
+            <div class="setting-content">
               <input :value="movieFrameHeight" @input="updateVideoHeight" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
               <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span>
             </div>
-            <button type="submit" @click="createMovieFrame">再生プレイヤー作成</button>
-            <button type="submit" @click="deleteMovieFrame">削除</button>
+            <button  class="setting-content" type="submit" @click="createMovieFrame">再生プレイヤー作成</button>
+            <button  class="setting-content" type="submit" @click="deleteMovieFrame">削除</button>
 
           </div>
-          <i class="room-yt-loop-icon fas fa-undo-alt fa-2x" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}"></i>
+          <div class="setting-loop setting-content" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}">
+            <i class="room-yt-loop-icon fas fa-undo-alt fa-2x"></i>
+            <span style="margin-left:10px">ループ</span>
+          </div>
         </div>
 
       </div>
@@ -105,17 +108,26 @@ export default {
     align-items: flex-start;
   }
 
+  #player-setting-title {
+    font-weight: bold;
+  }
+
   .yt-setting-wrapper {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  /* #player-setting-title, */
-  #youtube-url-input,
-  #set-movie-frame-width,
-  #set-movie-frame-height {
+  .setting-content {
     margin-bottom: 7px;
+  }
+
+  .setting-loop{
+    display: flex;
+    align-items: center;
+  }
+  .setting-loop:hover {
+    cursor: pointer;
   }
 
   .isLoop {

@@ -2881,6 +2881,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName', 'movieFrameWidth', 'movieFrameHeight', 'isLoopYoutube'],
   data: function data() {
@@ -8942,7 +8945,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper[data-v-112e17fc] {\r\n    margin: 20px 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.yt-setting-wrapper[data-v-112e17fc] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\r\n\r\n  /* #player-setting-title, */\n#youtube-url-input[data-v-112e17fc],\r\n  #set-movie-frame-width[data-v-112e17fc],\r\n  #set-movie-frame-height[data-v-112e17fc] {\r\n    margin-bottom: 7px;\n}\n.isLoop[data-v-112e17fc] {\r\n    color: blue;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper[data-v-112e17fc] {\r\n    margin: 20px 0;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#player-setting-title[data-v-112e17fc] {\r\n    font-weight: bold;\n}\n.yt-setting-wrapper[data-v-112e17fc] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.setting-content[data-v-112e17fc] {\r\n    margin-bottom: 7px;\n}\n.setting-loop[data-v-112e17fc]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-112e17fc]:hover {\r\n    cursor: pointer;\n}\n.isLoop[data-v-112e17fc] {\r\n    color: blue;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49730,7 +49733,7 @@ var render = function() {
             _vm._v("動画Player設定")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "yt-form-wrapper" }, [
+          _c("div", { staticClass: "yt-form-wrapper setting-content" }, [
             _c("input", {
               attrs: {
                 type: "text",
@@ -49744,7 +49747,7 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "yt-setting-wrapper" }, [
-            _c("div", [
+            _c("div", { staticClass: "setting-content" }, [
               _c("input", {
                 attrs: {
                   type: "text",
@@ -49763,7 +49766,7 @@ var render = function() {
               _c("br")
             ]),
             _vm._v(" "),
-            _c("div", [
+            _c("div", { staticClass: "setting-content" }, [
               _c("input", {
                 attrs: {
                   type: "text",
@@ -49784,6 +49787,7 @@ var render = function() {
             _c(
               "button",
               {
+                staticClass: "setting-content",
                 attrs: { type: "submit" },
                 on: { click: _vm.createMovieFrame }
               },
@@ -49793,6 +49797,7 @@ var render = function() {
             _c(
               "button",
               {
+                staticClass: "setting-content",
                 attrs: { type: "submit" },
                 on: { click: _vm.deleteMovieFrame }
               },
@@ -49800,11 +49805,23 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("i", {
-            staticClass: "room-yt-loop-icon fas fa-undo-alt fa-2x",
-            class: { isLoop: _vm.isLoopYoutube },
-            on: { click: _vm.loopYoutube }
-          })
+          _c(
+            "div",
+            {
+              staticClass: "setting-loop setting-content",
+              class: { isLoop: _vm.isLoopYoutube },
+              on: { click: _vm.loopYoutube }
+            },
+            [
+              _c("i", {
+                staticClass: "room-yt-loop-icon fas fa-undo-alt fa-2x"
+              }),
+              _vm._v(" "),
+              _c("span", { staticStyle: { "margin-left": "10px" } }, [
+                _vm._v("ループ")
+              ])
+            ]
+          )
         ])
       ])
     ])
