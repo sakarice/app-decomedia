@@ -118,6 +118,10 @@ export default {
     margin-bottom: 7px;
   }
 
+  .isLoop {
+    color: blue;
+  }
+
 
 
 </style>

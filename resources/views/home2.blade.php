@@ -15,8 +15,8 @@
 
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
-            <h2 class="top-message">デジタルの箱庭に浸ろう</h2>
-            <p style="text-align: center">音楽、画像、動画によって作られるRoomを探索してみましょう。</p>
+            <h2 class="top-message">Find your place</h2>
+            <p style="text-align: center">音楽×画像×動画=Room。今日はどのRoomで過ごそう。</p>
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
