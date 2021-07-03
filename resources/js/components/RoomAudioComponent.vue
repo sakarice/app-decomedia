@@ -66,9 +66,13 @@
         }
       },
       playAllAudio(){
-        this.audioPlayers.forEach(function(audioPlayer){
+        this.audioPlayers.forEach(function(audioPlayer, index){
           audioPlayer.play();
         });
+        let audioNum = this.$parent.roomAudios.length;
+        for(let i = 0; i < audioNum; i++){
+          this.$parent.roomAudios[i]['isPlay'] = true;
+        }
       },
       finishPlayAudio(){
         this.audioPlayers.forEach(function(audioPlayer){

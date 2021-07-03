@@ -157,6 +157,8 @@ export default {
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
       }
+      // 全オーディオの再生開始
+      this.$refs.roomAudio.playAllAudio();
     });
 
   },
