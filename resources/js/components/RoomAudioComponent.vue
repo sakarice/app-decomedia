@@ -3,6 +3,7 @@
     <!-- Roomオーディオ -->
   <div id="room-Audio-wrapper">
     <!-- オーディオ再生終了 -->
+    <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button>
     <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button>
 
     <div id="room-audio-frame">
@@ -64,11 +65,15 @@
           }
         }
       },
+      playAllAudio(){
+        this.audioPlayers.forEach(function(audioPlayer){
+          audioPlayer.play();
+        });
+      },
       finishPlayAudio(){
         this.audioPlayers.forEach(function(audioPlayer){
           let audioDuration = audioPlayer.duration;
           audioPlayer.currentTime = audioDuration;
-          console.log(audioDuration);
         });
       },
       setPlayerInfo(){ // 親コンポーネントのroomAudiosから再生情報を取得
