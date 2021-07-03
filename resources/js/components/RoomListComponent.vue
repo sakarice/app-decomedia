@@ -93,6 +93,7 @@ li {
   text-align: center;
   /* font-size: 50px; */
   margin-right: 40px;
+  margin-bottom: 80px;
   width: 200px;
   height: 200px;
   opacity: 0.8;

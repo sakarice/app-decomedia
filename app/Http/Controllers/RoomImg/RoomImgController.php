@@ -31,9 +31,12 @@ class RoomImgController extends Controller
         $roomImg->width = $request->img['width'];
         $roomImg->height = $request->img['height'];
         $roomImg->opacity = $request->img['opacity'];
-        \Log::info($request->img['opacity']);
         $roomImg->owner_user_id = $user_id;
         $roomImg->img_layer = $request->img['layer'];
+        \Log::info($request->img['opacity']);
+        \Log::info(gettype($request->img['opacity']));
+        \Log::info($roomImg->opacity);
+        \Log::info(gettype($roomImg->opacity));
         $roomImg->save();
     
         \Log::info('img保存完了');

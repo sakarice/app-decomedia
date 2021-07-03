@@ -20,7 +20,7 @@ class CreateRoomImgsTable extends Migration
             $table->integer('img_id');
             $table->integer('width');
             $table->integer('height');
-            $table->float('opacity', 2, 2);
+            $table->float('opacity', 3, 2);
             $table->integer('owner_user_id')->nullable();
             $table->integer('img_layer');
             $table->timestamps();

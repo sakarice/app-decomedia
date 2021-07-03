@@ -51,9 +51,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px;
+    /* border: 2px;
     border-style: dotted;
-    border-color: cadetblue;
+    border-color: cadetblue; */
   }
 
 </style>
