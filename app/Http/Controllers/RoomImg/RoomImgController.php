@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
+use App\Lib\ImgUtil;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
@@ -33,10 +34,7 @@ class RoomImgController extends Controller
         $roomImg->opacity = $request->img['opacity'];
         $roomImg->owner_user_id = $user_id;
         $roomImg->img_layer = $request->img['layer'];
-        \Log::info($request->img['opacity']);
-        \Log::info(gettype($request->img['opacity']));
-        \Log::info($roomImg->opacity);
-        \Log::info(gettype($roomImg->opacity));
+        \Log::info($request->img);
         $roomImg->save();
     
         \Log::info('img保存完了');
@@ -49,12 +47,7 @@ class RoomImgController extends Controller
             $room_img = RoomImg::where('room_id', $room_id)->first();
             $room_img_id = $room_img->img_id;
             $room_img_type = $room_img->img_type;
-            $room_img_url;
-            if($room_img_type == 1){
-                $room_img_url = DefaultImg::where('id', $room_img_id)->first()->img_url;
-            }else if($room_img_type == 2){
-                $room_img_url = UserOwnImg::where('id', $room_img_id)->first()->img_url;
-            }
+            $room_img_url = ImgUtil::getRoomImgUrlByType($room_id, $room_img_type);
             $room_img_width = $room_img->width;
             $room_img_height = $room_img->height;
             $room_img_opacity = $room_img->opacity;

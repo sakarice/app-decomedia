@@ -40,15 +40,15 @@ body {
   font-size: 18px;
   text-decoration: none;
   color: black;
-  background-color: rgba(240, 240, 240, 0.7);
+  background-color: aquamarine;
   padding: 3px 20px;
   border-radius: 3px;
   box-shadow: 0.5px 0.5px 3px grey;
 }
 
 .linkTo-createRoom:hover {
-  color: white;
-  background-color: rgb(168, 146, 146);
+  color:aquamarine;
+  background-color: black;
 }
 
 .preview-img {
