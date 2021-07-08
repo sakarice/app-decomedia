@@ -15,7 +15,7 @@ class RoomControllerTest extends TestCase
      */
     public function test_example()
     {
-        $response = $this->get('/');
+        $response = $this->get('/home/room/create');
 
         $response->assertStatus(200);
     }
