@@ -31,6 +31,7 @@ class MypageController extends Controller
         }
         
         $data = [
+            'userId' => $authenticated_userId,
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 

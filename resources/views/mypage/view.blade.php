@@ -18,6 +18,7 @@
     <div id="app">
       {{-- ヘッダー --}}
       <header-component
+      :user-id={{$userId}}
       :is-show-login="false"
       :is-show-signup="false"
       :is-show-profile-icon="true">

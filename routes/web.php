@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/home/mypage', 'App\Http\Controllers\MypageController@view');
 Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profile');
 
+// ユーザプロフィール
+Route::resource('users', 'App\Http\Controllers\UserController');
+// ->except([
+//     'index' // 複数ユーザのプロフィール一覧を表示することはない
+// ]);
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
