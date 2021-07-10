@@ -2561,11 +2561,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['isShowLogin', 'isShowSignup', 'isShowProfileIcon'],
+  props: ['userId', 'isShowLogin', 'isShowSignup', 'isShowProfileIcon'],
   data: function data() {
     return {};
   },
-  methods: {}
+  methods: {
+    toUserProfile: function toUserProfile() {
+      console.log("/users/" + this.userId);
+      return "/users/" + this.userId;
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -49408,7 +49414,21 @@ var render = function() {
           ],
           staticClass: "header-content"
         },
-        [_vm._m(1)]
+        [
+          _c(
+            "a",
+            { staticClass: "user-icon", attrs: { href: _vm.toUserProfile() } },
+            [
+              _c("img", {
+                attrs: {
+                  id: "profile-img",
+                  src: "/profile_img/user-solid.svg",
+                  alt: ""
+                }
+              })
+            ]
+          )
+        ]
       )
     ])
   ])
@@ -49425,24 +49445,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "user-icon", attrs: { href: "/mypage/profile" } },
-      [
-        _c("img", {
-          attrs: {
-            id: "profile-img",
-            src: "/profile_img/user-solid.svg",
-            alt: ""
-          }
-        })
-      ]
-    )
   }
 ]
 render._withStripped = true

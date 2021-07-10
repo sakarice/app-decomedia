@@ -18,7 +18,7 @@
             </div>
             <!-- ユーザプロフィールアイコン(ログイン済みの場合表示) -->
             <div class="header-content" v-show="isShowProfileIcon">
-                <a class="user-icon" href="/mypage/profile">
+                <a class="user-icon" :href="toUserProfile()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
             </div>
@@ -32,6 +32,7 @@
 <script>
 export default {
     props : [
+        'userId',
         'isShowLogin',
         'isShowSignup',
         'isShowProfileIcon',
@@ -42,8 +43,12 @@ export default {
         }
     },
     methods : {
-
-    }
+        toUserProfile : function(){
+            console.log("/users/"+this.userId);
+            return "/users/" + this.userId;
+        },
+    },
+    mounted(){}
 }
 
 </script>

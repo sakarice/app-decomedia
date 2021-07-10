@@ -34,7 +34,7 @@
     {{-- リンク --}}
     <div id="link-wrapper">
       <a id="back-link link" class="link" href="javascript:history.back()">戻る</a>
-      <a id="edit-link link" class="link" href="profile/edit">編集</a>
+      <a id="edit-link link" class="link" href="{{$user->id}}/edit">編集</a>
     </div>
 
   </div>
