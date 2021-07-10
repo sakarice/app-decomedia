@@ -1,0 +1,12 @@
+version: 2
+
+jobs:
+  test:
+    docker:
+      - image: circleci/php:7.3.0-node-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Run test
+          command: 'echo Hello World'
