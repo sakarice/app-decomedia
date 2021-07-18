@@ -18,7 +18,7 @@
     <div id="app">
       {{-- ヘッダー --}}
       <header-component
-      :user-id={{$userId}}
+      :user-info='@json($userInfo,JSON_UNESCAPED_SLASHES)'
       :is-show-login="false"
       :is-show-signup="false"
       :is-show-profile-icon="true">

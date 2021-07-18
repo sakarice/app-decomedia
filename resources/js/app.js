@@ -43,6 +43,9 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 
 // ★マイページ用コンポーネント
 
+// ★ユーザプロフィールコンポーネント
+Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
+
 // room一覧表示用コンポーネント
 Vue.component('room-list-component', require('./components/RoomListComponent.vue').default);
 

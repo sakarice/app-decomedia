@@ -17,11 +17,22 @@
                 <a class="signup" href="/register">アカウント作成</a>
             </div>
             <!-- ユーザプロフィールアイコン(ログイン済みの場合表示) -->
-            <div class="header-content" v-show="isShowProfileIcon">
+            <!-- <div class="header-content" v-show="isShowProfileIcon">
                 <a class="user-icon" :href="toUserProfile()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
+            </div> -->
+            <div class="header-content" v-show="isShowProfileIcon">
+                <a class="user-icon" v-on:click="openProfileModal()">
+                    <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
+                </a>
             </div>
+            <!-- ユーザプロフィール -->
+            <profile-component
+            v-show="isShowProfile"
+            :user-info="userInfo">
+            </profile-component>
+
         </div>
     </div>
         
@@ -30,23 +41,34 @@
 
 
 <script>
+import Profile from './ProfileComponent.vue';
+
+
+
 export default {
+    components : {
+        Profile,
+    },
     props : [
-        'userId',
+        'userInfo',
         'isShowLogin',
         'isShowSignup',
         'isShowProfileIcon',
     ],
     data : () => {
         return {
-
+            isShowProfile : false,
         }
     },
     methods : {
         toUserProfile : function(){
-            console.log("/users/"+this.userId);
-            return "/users/" + this.userId;
+            console.log("/users/"+this.userInfo['userId']);
+            return "/users/" + this.userInfo['userId'];
         },
+        openProfileModal(){
+            this.isShowProfile = true;
+        },
+        
     },
     mounted(){}
 }

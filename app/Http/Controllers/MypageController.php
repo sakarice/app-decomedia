@@ -23,6 +23,14 @@ class MypageController extends Controller
             return view('auth.login');
         }
 
+        $user = User::find($authenticated_userId);
+        $userInfo = array(
+            'userId' => $authenticated_userId,
+            'name' => $user->name,
+            'profile_img_url' => $user->profile_img_url,
+            'profile' => $user->profile,
+        );
+
         $roomPreviewInfos = array();
         $rooms = Room::limit(6)->where('user_id', $authenticated_userId)->get();
         foreach($rooms as $index => $room){
@@ -31,7 +39,7 @@ class MypageController extends Controller
         }
         
         $data = [
-            'userId' => $authenticated_userId,
+            'userInfo' => $userInfo,
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 

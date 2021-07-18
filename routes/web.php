@@ -44,6 +44,8 @@ Route::resource('users', 'App\Http\Controllers\UserController');
 // ->except([
 //     'index' // 複数ユーザのプロフィール一覧を表示することはない
 // ]);
+Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
+
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
