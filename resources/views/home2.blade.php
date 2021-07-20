@@ -35,7 +35,7 @@
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
             <span class="link-message">自分のRoomを作成する。</span>
-            <a class="link-to-mypage" href="home/mypage">go Mypage</a>
+            <a class="link-to-mypage" href="home/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
         </div>
 
