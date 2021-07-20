@@ -36,8 +36,10 @@ class HomeController extends Controller
             $room_id = $room->id;
             $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
         }
-        
+
+        // ログイン、ログアウト、サインアップの表示/非表示      
         $data = [
+            'isLogin' => Auth::check(),
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 

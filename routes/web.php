@@ -46,6 +46,8 @@ Route::resource('users', 'App\Http\Controllers\UserController');
 // ]);
 Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
 
+// プロフィールに表示するユーザ情報を取得
+Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
@@ -77,7 +79,7 @@ Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioControl
 // defaultImgアップロード(開発用、後で消す)
 Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');
 Route::post('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@uploadFile');
-Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
+// Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo(確認用、後で消す)
 Route::get('/home/phpinfo', function () {
