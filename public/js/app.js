@@ -2572,22 +2572,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     Profile: _ProfileComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['userInfo', 'isShowLogin', 'isShowSignup', 'isShowProfileIcon'],
+  props: ['csrf', 'isLogin'],
   data: function data() {
     return {
       isShowProfile: false
     };
   },
   methods: {
-    toUserProfile: function toUserProfile() {
-      console.log("/users/" + this.userInfo['userId']);
-      return "/users/" + this.userInfo['userId'];
-    },
+    // toUserProfile : function(){
+    //     console.log("/users/"+this.userInfo['userId']);
+    //     return "/users/" + this.userInfo['userId'];
+    // },
     openProfileModal: function openProfileModal() {
       this.isShowProfile = true;
     }
@@ -3013,60 +3023,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['userInfo'],
+  props: [],
   data: function data() {
     return {
-      'userNameInit': "",
-      'profileInit': "",
-      'userName': "",
-      'profile': "",
+      userId: 0,
+      // プロフィールの初期値(編集前の状態)
+      userProfileInit: {
+        'name': "",
+        'profile_img_url': null,
+        'aboutMe': ""
+      },
+      userProfile: {
+        'name': "",
+        'profile_img_url': null,
+        'aboutMe': ""
+      },
       'message': ""
     };
   },
   methods: {
     closeProfileModal: function closeProfileModal() {
       // プロフィールを最初の状態に戻す
-      this.name = this.userNameInit;
-      this.profile = this.profileInit;
+      this.userProfile['name'] = this.userProfileInit['name'];
+      this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
       this.$parent.isShowProfile = false;
     },
     stopEvent: function stopEvent() {
       event.stopPropagation();
     },
-    updateProfile: function updateProfile() {
+    getProfile: function getProfile() {
       var _this = this;
 
-      var userId = this.userInfo['userId'];
+      // DBからログイン中ユーザのidとプロフィール情報を取得
+      var url = '/user/getProfile';
+      axios.get(url).then(function (res) {
+        _this.userId = res.data.id;
+        _this.userProfileInit['name'] = res.data.name;
+        _this.userProfileInit['aboutMe'] = res.data.aboutMe;
+      })["catch"](function (error) {
+        alert('ユーザプロフィール情報を取得できませんでした。');
+      });
+    },
+    updateProfile: function updateProfile() {
+      var _this2 = this;
+
+      // 入力したデータでプロフィールを更新
+      var userId = this.userId;
       var url = '/user/' + userId;
       var profileDatas = {
         'id': userId,
-        'name': this.userName,
-        'profile': this.profile
+        'name': this.userProfile['name'],
+        'profile': this.userProfile['aboutMe']
       };
       this.message = "更新中...";
       axios.put(url, profileDatas).then(function (response) {
         alert('更新完了');
         var newName = response.data.name;
-        var newProfile = response.data.profile;
-        _this.userNameInit = newName;
-        _this.profileInit = newProfile;
-        _this.$parent.userInfo['name'] = newName;
-        _this.$parent.userInfo['profile'] = newProfile;
-        _this.message = "";
+        var newAboutMe = response.data.profile;
+        _this2.userProfileInit['name'] = _this2.userProfile['name'] = newName;
+        _this2.userProfileInit['aboutMe'] = _this2.userProfile['aboutMe'] = newAboutMe;
+        _this2.message = "";
       })["catch"](function (error) {
         alert('更新失敗');
-        _this.message = "";
+        _this2.message = "";
       });
     }
   },
-  mounted: function mounted() {},
   created: function created() {
-    // プロフィールの初期値を取得
-    this.userNameInit = this.userInfo['name'];
-    this.profileInit = this.userInfo['profile'];
-    this.userName = this.userNameInit;
-    this.profile = this.profileInit;
-  }
+    if (this.$parent.isLogin) {
+      this.getProfile(); // プロフィールの初期値を取得
+
+      this.userProfile['name'] = this.userProfileInit['name'];
+      this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
+    }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -9115,7 +9146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay[data-v-a8276c82] {\r\n  z-index: 10;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0,0,0,0.5);\r\n\r\n  /* flex設定 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n#frame[data-v-a8276c82] {\r\n  z-index: 20;\r\n  width: 200px;\r\n  height: 300px;\r\n  border-radius: 5px;\r\n  padding: 50px;\r\n  background-color: white;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.nav-menu[data-v-a8276c82] {\r\n  list-style: none;\r\n  padding: 0;\r\n\r\n  display: flex;\n}\n.account-modal-profile[data-v-a8276c82]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.avatar-wrapper[data-v-a8276c82], .name[data-v-a8276c82], .profile[data-v-a8276c82] {\r\n  margin-bottom: 20px;\n}\n.avatar-wrapper[data-v-a8276c82] {\r\n  width: 60px;\r\n  height: 60px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-a8276c82] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.update-buttom[data-v-a8276c82]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n/* モーダル表示アニメーション */\n.flowup-enter-active[data-v-a8276c82], .flowup-leave-active[data-v-a8276c82] {\r\n  opacity: 1;\r\n  transform: translate(0px, 0px);\r\n  transition: all 150ms;\n}\n.flowup-enter[data-v-a8276c82], .flowup-leave-to[data-v-a8276c82] {\r\n  opacity: 0;\r\n  transform: translateY(20px);\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay[data-v-a8276c82] {\r\n  z-index: 10;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0,0,0,0.5);\r\n\r\n  /* flex設定 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n#frame[data-v-a8276c82] {\r\n  z-index: 20;\r\n  width: 200px;\r\n  height: 300px;\r\n  border-radius: 5px;\r\n  padding: 50px;\r\n  background-color: white;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.nav-menu[data-v-a8276c82] {\r\n  list-style: none;\r\n  padding: 0;\r\n\r\n  display: flex;\n}\n.account-modal-profile[data-v-a8276c82]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.avatar-wrapper[data-v-a8276c82], .name[data-v-a8276c82], .about-me[data-v-a8276c82] {\r\n  margin-bottom: 20px;\n}\n.avatar-wrapper[data-v-a8276c82] {\r\n  width: 60px;\r\n  height: 60px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-a8276c82] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.update-buttom[data-v-a8276c82]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n/* モーダル表示アニメーション */\n.flowup-enter-active[data-v-a8276c82], .flowup-leave-active[data-v-a8276c82] {\r\n  opacity: 1;\r\n  transform: translate(0px, 0px);\r\n  transition: all 150ms;\n}\n.flowup-enter[data-v-a8276c82], .flowup-leave-to[data-v-a8276c82] {\r\n  opacity: 0;\r\n  transform: translateY(20px);\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49639,8 +49670,8 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.isShowLogin,
-                expression: "isShowLogin"
+                value: !_vm.isLogin,
+                expression: "!(isLogin)"
               }
             ],
             staticClass: "header-content"
@@ -49659,8 +49690,8 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.isShowSignup,
-                expression: "isShowSignup"
+                value: !_vm.isLogin,
+                expression: "!(isLogin)"
               }
             ],
             staticClass: "header-content"
@@ -49679,8 +49710,51 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.isShowProfileIcon,
-                expression: "isShowProfileIcon"
+                value: _vm.isLogin,
+                expression: "isLogin"
+              }
+            ],
+            staticClass: "header-content"
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "logout",
+                attrs: {
+                  href: "/logout",
+                  onclick:
+                    "event.preventDefault();\n            document.getElementById('logout-form').submit();"
+                }
+              },
+              [_vm._v("ログアウト\n            ")]
+            ),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "d-none",
+                attrs: { id: "logout-form", action: "/logout", method: "POST" }
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token" },
+                  domProps: { value: _vm.csrf }
+                })
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isLogin,
+                expression: "isLogin"
               }
             ],
             staticClass: "header-content"
@@ -49717,8 +49791,7 @@ var render = function() {
               value: _vm.isShowProfile,
               expression: "isShowProfile"
             }
-          ],
-          attrs: { "user-info": _vm.userInfo }
+          ]
         })
       ],
       1
@@ -50178,11 +50251,11 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "account-modal-profile" }, [
             _c("div", { staticClass: "avatar-wrapper" }, [
-              _vm.userInfo["profile_img_url"] !== null
+              _vm.userProfile["profile_img_url"] !== null
                 ? _c("img", {
                     staticClass: "avatar",
                     attrs: {
-                      src: _vm.userInfo["profile_img_url"],
+                      src: _vm.userProfile["profile_img_url"],
                       alt:
                         "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
                     }
@@ -50203,47 +50276,47 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.userName,
-                    expression: "userName"
+                    value: _vm.userProfile["name"],
+                    expression: "userProfile['name']"
                   }
                 ],
                 attrs: { type: "text", placeholder: "ユーザ名" },
-                domProps: { value: _vm.userName },
+                domProps: { value: _vm.userProfile["name"] },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.userName = $event.target.value
+                    _vm.$set(_vm.userProfile, "name", $event.target.value)
                   }
                 }
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "profile" }, [
+            _c("div", { staticClass: "about-me" }, [
               _c("textarea", {
                 directives: [
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.profile,
-                    expression: "profile"
+                    value: _vm.userProfile["aboutMe"],
+                    expression: "userProfile['aboutMe']"
                   }
                 ],
                 attrs: {
-                  name: "profile",
-                  id: "profile",
+                  name: "about-me",
+                  id: "about-me",
                   cols: "30",
                   rows: "5",
                   placeholder: "プロフィール"
                 },
-                domProps: { value: _vm.profile },
+                domProps: { value: _vm.userProfile["aboutMe"] },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.profile = $event.target.value
+                    _vm.$set(_vm.userProfile, "aboutMe", $event.target.value)
                   }
                 }
               })

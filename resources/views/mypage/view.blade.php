@@ -18,10 +18,9 @@
     <div id="app">
       {{-- ヘッダー --}}
       <header-component
-      :user-info='@json($userInfo,JSON_UNESCAPED_SLASHES)'
-      :is-show-login="false"
-      :is-show-signup="false"
-      :is-show-profile-icon="true">
+      :csrf="{{json_encode(csrf_token())}}"
+      :is-login="true"
+      >
       </header-component>
 
       <section class="created-room-list">

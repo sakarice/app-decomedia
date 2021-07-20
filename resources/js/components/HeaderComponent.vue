@@ -9,28 +9,38 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ログイン -->
-            <div class="header-content" v-show="isShowLogin">
+            <div class="header-content" v-show="!(isLogin)">
                 <a class="login" href="/login">ログイン</a>
             </div>
             <!-- アカウント作成 -->
-            <div class="header-content" v-show="isShowSignup">
+            <div class="header-content" v-show="!(isLogin)">
                 <a class="signup" href="/register">アカウント作成</a>
             </div>
+            <!-- ログアウト -->
+            <div class="header-content" v-show="isLogin">
+                <a class="logout" href="/logout"
+                onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">ログアウト
+                </a>
+                <form id="logout-form" action="/logout" method="POST" class="d-none">
+                    <input type="hidden" name="_token" v-bind:value="csrf">
+                </form>
+            </div>
+
             <!-- ユーザプロフィールアイコン(ログイン済みの場合表示) -->
             <!-- <div class="header-content" v-show="isShowProfileIcon">
                 <a class="user-icon" :href="toUserProfile()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
             </div> -->
-            <div class="header-content" v-show="isShowProfileIcon">
+            <div class="header-content" v-show="isLogin">
                 <a class="user-icon" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
             </div>
             <!-- ユーザプロフィール -->
             <profile-component
-            v-show="isShowProfile"
-            :user-info="userInfo">
+            v-show="isShowProfile">
             </profile-component>
 
         </div>
@@ -50,10 +60,8 @@ export default {
         Profile,
     },
     props : [
-        'userInfo',
-        'isShowLogin',
-        'isShowSignup',
-        'isShowProfileIcon',
+        'csrf',
+        'isLogin',
     ],
     data : () => {
         return {
@@ -61,10 +69,10 @@ export default {
         }
     },
     methods : {
-        toUserProfile : function(){
-            console.log("/users/"+this.userInfo['userId']);
-            return "/users/" + this.userInfo['userId'];
-        },
+        // toUserProfile : function(){
+        //     console.log("/users/"+this.userInfo['userId']);
+        //     return "/users/" + this.userInfo['userId'];
+        // },
         openProfileModal(){
             this.isShowProfile = true;
         },

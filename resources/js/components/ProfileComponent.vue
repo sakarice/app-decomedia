@@ -12,14 +12,14 @@
         <!-- プロフィール -->
         <div class="account-modal-profile">
           <div class="avatar-wrapper">
-              <img class="avatar" v-if="userInfo['profile_img_url'] !== null" :src="userInfo['profile_img_url']" alt="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
+              <img class="avatar" v-if="userProfile['profile_img_url'] !== null" :src="userProfile['profile_img_url']" alt="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
               <img class="avatar" v-else src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg" alt="">
           </div>
           <div class="name">
-            <input type="text" v-model="userName" placeholder="ユーザ名">
+            <input type="text" v-model="userProfile['name']" placeholder="ユーザ名">
           </div>
-          <div class="profile">
-            <textarea v-model="profile" name="profile" id="profile" cols="30" rows="5" placeholder="プロフィール"></textarea>
+          <div class="about-me">
+            <textarea v-model="userProfile['aboutMe']" name="about-me" id="about-me" cols="30" rows="5" placeholder="プロフィール"></textarea>
           </div>
         </div>
 
@@ -35,47 +35,62 @@
 <script>
 
   export default {
-    props : [
-      'userInfo',
-    ],
-
+    props : [],
     data : () => {
       return {
-        'userNameInit' : "",
-        'profileInit' : "",
-        'userName' : "",
-        'profile' : "",
+        userId : 0,
+        // プロフィールの初期値(編集前の状態)
+        userProfileInit : {
+          'name' : "",
+          'profile_img_url' : null,
+          'aboutMe' : "",
+        },
+        userProfile : {
+          'name' : "",
+          'profile_img_url' : null,
+          'aboutMe' : "",
+        },
         'message' : "",
       }
     },
     methods : {
       closeProfileModal(){
         // プロフィールを最初の状態に戻す
-        this.name = this.userNameInit;
-        this.profile = this.profileInit;
+        this.userProfile['name'] = this.userProfileInit['name'];
+        this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
         this.$parent.isShowProfile = false;
       },
       stopEvent: function(){
         event.stopPropagation();
       },
-      updateProfile() {
-        const userId = this.userInfo['userId'];
-        const url = '/user/'+userId;
+      getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
+        let url = '/user/getProfile';
+        axios.get(url)
+        .then(res => {
+          this.userId = res.data.id;
+          this.userProfileInit['name'] = res.data.name;
+          this.userProfileInit['aboutMe'] = res.data.aboutMe;
+        })
+        .catch(error => {
+          alert('ユーザプロフィール情報を取得できませんでした。');
+        })
+      },
+      updateProfile() { // 入力したデータでプロフィールを更新
+        const userId = this.userId;
+        let url = '/user/'+userId;
         let profileDatas = {
           'id' : userId,
-          'name' : this.userName,
-          'profile' : this.profile,
+          'name' : this.userProfile['name'],
+          'profile' : this.userProfile['aboutMe'],
         }
         this.message = "更新中...";
         axios.put(url, profileDatas)
         .then(response => {
           alert('更新完了');
           let newName = response.data.name;
-          let newProfile = response.data.profile;
-          this.userNameInit = newName;
-          this.profileInit = newProfile;
-          this.$parent.userInfo['name'] = newName;
-          this.$parent.userInfo['profile'] = newProfile;
+          let newAboutMe = response.data.profile;
+          this.userProfileInit['name']    = this.userProfile['name']    = newName;
+          this.userProfileInit['aboutMe'] = this.userProfile['aboutMe'] = newAboutMe;
           this.message = "";
         })
         .catch(error => {
@@ -84,15 +99,16 @@
         })
       },
     },
-    mounted: function(){
-    },
     created(){
-      // プロフィールの初期値を取得
-      this.userNameInit = this.userInfo['name'];
-      this.profileInit = this.userInfo['profile'];
-      this.userName = this.userNameInit;
-      this.profile = this.profileInit;
-    }
+      if(this.$parent.isLogin){
+        this.getProfile(); // プロフィールの初期値を取得
+        this.userProfile['name'] = this.userProfileInit['name'];
+        this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
+      }
+    },
+    mounted: function(){
+
+    },
 
   }
 
@@ -144,7 +160,7 @@
   align-items: center;
 }
 
-.avatar-wrapper, .name, .profile {
+.avatar-wrapper, .name, .about-me {
   margin-bottom: 20px;
 }
 
