@@ -16,8 +16,8 @@
 
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
-            <h2 class="top-message">Find your place</h2>
-            <p style="text-align: center">音楽×画像×動画=Room。今日はどのRoomで過ごそう。</p>
+            <h2 class="top-message">デジタル空間をシェアする</h2>
+            <p style="text-align: center">音楽や動画で好みのRoomを作り、公開してみましょう。</p>
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
