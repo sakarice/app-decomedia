@@ -21,6 +21,7 @@ class ImgUtil
 
     // 画像タイプに応じたテーブルからRoom画像のURLを取得
     public static function getRoomImgUrlByType($room_img_id, $img_type){
+        \Log::info($room_img_id);
         switch ($img_type) {
             case 1: // Default画像
                 $room_img_url = DefaultImg::where('id', $room_img_id)->first()->img_url;                

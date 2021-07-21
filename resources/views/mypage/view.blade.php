@@ -18,10 +18,9 @@
     <div id="app">
       {{-- ヘッダー --}}
       <header-component
-      :user-id={{$userId}}
-      :is-show-login="false"
-      :is-show-signup="false"
-      :is-show-profile-icon="true">
+      :csrf="{{json_encode(csrf_token())}}"
+      :is-login="true"
+      >
       </header-component>
 
       <section class="created-room-list">

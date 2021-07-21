@@ -47,7 +47,7 @@ class RoomImgController extends Controller
             $room_img = RoomImg::where('room_id', $room_id)->first();
             $room_img_id = $room_img->img_id;
             $room_img_type = $room_img->img_type;
-            $room_img_url = ImgUtil::getRoomImgUrlByType($room_id, $room_img_type);
+            $room_img_url = ImgUtil::getRoomImgUrlByType($room_img_id, $room_img_type);
             $room_img_width = $room_img->width;
             $room_img_height = $room_img->height;
             $room_img_opacity = $room_img->opacity;

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <title>Home</title>
@@ -15,8 +16,8 @@
 
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
-            <h2 class="top-message">Find your place</h2>
-            <p style="text-align: center">音楽×画像×動画=Room。今日はどのRoomで過ごそう。</p>
+            <h2 class="top-message">デジタル空間をシェアする</h2>
+            <p style="text-align: center">音楽や動画で好みのRoomを作り、公開してみましょう。</p>
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
@@ -34,20 +35,32 @@
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
             <span class="link-message">自分のRoomを作成する。</span>
-            <a class="link-to-mypage" href="home/mypage">ログイン</a>
+            <a class="link-to-mypage" href="home/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
         </div>
 
     </div>
 
+    {{-- logout form --}}
+    {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{{ route('logout') }}"
+           onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+            {{ __('Logout') }}
+        </a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+            @csrf
+        </form>
+    </div> --}}
 
 
     <div id="app">
         {{-- ヘッダー --}}
         <header-component
-        :is-show-login="true"
-        :is-show-signup="true"
-        :is-show-profile-icon="false">
+        :csrf="{{json_encode(csrf_token())}}"
+        :is-login=@json($isLogin)>
+        {{-- :is-show-profile-icon="false" --}}
         </header-component>
 
         {{-- Roomの一覧を表示 --}}
