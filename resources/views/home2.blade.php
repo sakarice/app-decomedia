@@ -16,7 +16,7 @@
 
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
-            <h2 class="top-message">デジタル空間をシェアする</h2>
+            <h2 class="top-message">聴いて、観て、繋がる</h2>
             <p style="text-align: center">音楽や動画で好みのRoomを作り、公開してみましょう。</p>
         </div>
 
