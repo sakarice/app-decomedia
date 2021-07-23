@@ -2398,8 +2398,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       roomSetting: {
         'name': "",
-        'roomBackgroundColor': "#333333",
-        // 黒
+        'roomBackgroundColor': "#F0F0F0",
+        // ほぼ白
         'isShowImg': true,
         'isShowMovie': false,
         'maxAudioNum': 5
