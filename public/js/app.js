@@ -2398,7 +2398,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       roomSetting: {
         'name': "",
-        'roomBackgroundColor': "#F0F0F0",
+        'roomBackgroundColor': "#F7F7F7",
         // ほぼ白
         'isShowImg': true,
         'isShowMovie': false,
@@ -9040,7 +9040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-0a05e236] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.cancel-button[data-v-0a05e236] {\n  position: absolute;\n  top : 100px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n}\n.cancel-button[data-v-0a05e236]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-0a05e236] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.cancel-button[data-v-0a05e236] {\n  position: absolute;\n  top : 20px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.cancel-button[data-v-0a05e236]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9238,7 +9238,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-5e8c3959] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-create-button[data-v-5e8c3959] {\n  position: absolute;\n  top : 50px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n}\n.room-create-button[data-v-5e8c3959]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-5e8c3959] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-create-button[data-v-5e8c3959] {\n  position: absolute;\n  top : 20px;\n  right: 150px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.room-create-button[data-v-5e8c3959]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

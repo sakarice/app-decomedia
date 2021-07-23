@@ -43,10 +43,13 @@
 
   .cancel-button {
     position: absolute;
-    top : 100px;
+    top : 20px;
     right: 60px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
+    border-radius: 4px;
+    border: solid 1px grey;
+    box-shadow: 0.5px 0.5px 1px lightslategrey;
   }
 
   .cancel-button:hover {
