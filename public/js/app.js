@@ -4197,7 +4197,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName', 'roomName', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
   data: function data() {
@@ -9347,7 +9346,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 80%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.setting {\r\n    margin-bottom : 30px;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-size-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 80%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.setting {\r\n    margin-bottom : 30px;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51110,11 +51109,14 @@ var render = function() {
               _vm._v(" "),
               _c("label", { attrs: { for: "" } }, [
                 _c("input", {
-                  attrs: { type: "text", id: "room-name" },
+                  attrs: {
+                    type: "text",
+                    id: "room-name",
+                    placeholder: "Room名"
+                  },
                   domProps: { value: _vm.roomName },
                   on: { input: _vm.updateRoomName }
-                }),
-                _vm._v("\n            Room名\n          ")
+                })
               ])
             ]
           ),
@@ -51146,7 +51148,7 @@ var render = function() {
               _c("p", { staticClass: "setting-title" }, [_vm._v("Room画像")]),
               _vm._v(" "),
               _c("input", {
-                staticClass: "img-size-input",
+                staticClass: "img-config-input",
                 attrs: {
                   "data-input-type": "width",
                   type: "text",
@@ -51164,7 +51166,7 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("input", {
-                staticClass: "img-size-input",
+                staticClass: "img-config-input",
                 attrs: {
                   "data-input-type": "height",
                   type: "text",
@@ -51182,7 +51184,7 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("input", {
-                staticClass: "img-opacity-input",
+                staticClass: "img-config-input",
                 attrs: {
                   "data-input-type": "opacity",
                   type: "text",
