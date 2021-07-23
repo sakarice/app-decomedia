@@ -18,10 +18,10 @@
 
   <div id="app">
     <room-edit-component
-    room-img-data=@json($room_img)
-    room-audios-data=@json($room_audios)
-    room-movie-data=@json($room_movie)
-    room-setting-data=@json($room_setting)
+    room-img-data='@json($room_img)'
+    room-audios-data='@json($room_audios)'
+    room-movie-data='@json($room_movie)'
+    room-setting-data='@json($room_setting)'
     >
     </room-edit-component>
   </div>
