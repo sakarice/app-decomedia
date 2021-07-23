@@ -17,7 +17,7 @@
     props : [],
     data : () => {
       return {
-        'createRoomMessage' : "a",
+        'createRoomMessage' : "",
       }
     },
 

@@ -3058,8 +3058,8 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/user/getProfile';
       axios.get(url).then(function (res) {
         _this.userId = res.data.id;
-        _this.userProfileInit['name'] = res.data.name;
-        _this.userProfileInit['aboutMe'] = res.data.aboutMe;
+        _this.userProfileInit['name'] = _this.userProfile['name'] = res.data.name;
+        _this.userProfileInit['aboutMe'] = _this.userProfile['aboutMe'] = res.data.aboutMe;
       })["catch"](function (error) {
         alert('ユーザプロフィール情報を取得できませんでした。');
       });
@@ -3089,15 +3089,21 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {
-    if (this.$parent.isLogin) {
-      this.getProfile(); // プロフィールの初期値を取得
+  created: function created() {},
+  mounted: function mounted() {
+    var _this3 = this;
 
-      this.userProfile['name'] = this.userProfileInit['name'];
-      this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
+    if (this.$parent.isLogin) {
+      var promise = new Promise(function (resolve, reject) {
+        _this3.getProfile(); // プロフィールの初期値を取得
+
+
+        resolve();
+      });
+      promise.then(function () {// getProfile()が完了してから実行する
+      });
     }
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -3543,7 +3549,7 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {
-      'createRoomMessage': "a"
+      'createRoomMessage': ""
     };
   },
   methods: {
