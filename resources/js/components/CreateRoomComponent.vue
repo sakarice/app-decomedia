@@ -150,7 +150,7 @@ export default {
       },
       roomSetting : {
         'name' : "",
-        'roomBackgroundColor' : "#333333", // 黒
+        'roomBackgroundColor' : "#F7F7F7", // ほぼ白
         'isShowImg' : true,
         'isShowMovie' : false,
         'maxAudioNum' : 5,

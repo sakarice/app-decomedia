@@ -11,8 +11,7 @@
           <div id="room-name-wraper" class="setting">
             <p class="setting-title">Room名</p>
             <label for="">
-              <input :value="roomName" @input="updateRoomName" type="text" id="room-name">
-              Room名
+              <input :value="roomName" @input="updateRoomName" type="text" id="room-name" placeholder="Room名">
             </label>
           </div>
 
@@ -26,11 +25,11 @@
 
           <div id="room-img-setting-wrapper" class="setting">
             <p class="setting-title">Room画像</p>
-            <input data-input-type="width" class="img-size-input" :value="roomImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
+            <input data-input-type="width" class="img-config-input" :value="roomImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input data-input-type="height" class="img-size-input" :value="roomImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
+            <input data-input-type="height" class="img-config-input" :value="roomImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
             <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
-            <input data-input-type="opacity" class="img-opacity-input" :value="roomImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
+            <input data-input-type="opacity" class="img-config-input" :value="roomImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
             <span>透明度(0～1)</span><br>
             <button v-on:click="toggleRoomImg">
               <span v-show="isShowRoomImg">非表示</span>
@@ -132,7 +131,7 @@ export default {
     font-weight: bold;
   }
 
-  .img-size-input {
+  .img-config-input {
     margin-bottom : 5px;
   }
 

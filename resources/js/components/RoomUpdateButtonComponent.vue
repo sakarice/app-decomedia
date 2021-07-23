@@ -1,7 +1,7 @@
 <template>
 
     <div class="action-button-wrapper">
-      <button class="room-create-button" @click="updateRoom">
+      <button class="room-update-button" @click="updateRoom">
         更新
       </button>
       <p>
@@ -61,15 +61,18 @@
     right: 0;
   }
 
-  .room-create-button {
+  .room-update-button {
     position: absolute;
-    top : 50px;
-    right: 60px;
+    top : 20px;
+    right: 150px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
+    border-radius: 4px;
+    border: solid 1px grey;
+    box-shadow: 0.5px 0.5px 1px lightslategrey;
   }
 
-  .room-create-button:hover {
+  .room-update-button:hover {
     background-color: aqua;
   }
 

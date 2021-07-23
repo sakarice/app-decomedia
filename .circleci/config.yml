@@ -63,7 +63,7 @@ jobs:
       - add_ssh_keys: 
       - run: ssh ubuntu@35.73.109.33 'cd /usr/local/src/app/Room/docker-for-app-Room/backend/Room'
       - run: ssh ubuntu@35.73.109.33 'cd /usr/local/src/app/Room/docker-for-app-Room/backend/Room && pwd'
-      - run: ssh ubuntu@35.73.109.33 'cd /usr/local/src/app/Room/docker-for-app-Room/backend/Room && git pull origin master'
+      - run: ssh ubuntu@35.73.109.33 'cd /usr/local/src/app/Room/docker-for-app-Room/backend/Room && sudo git pull origin master'
 
 workflows:
   version: 2 

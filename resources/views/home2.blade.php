@@ -68,7 +68,7 @@
             <h3 class="section-title">最近の投稿</h3>
             <div class="room-list-wrapper">
                 <room-list-component
-                :room-preview-infos=@json($roomPreviewInfos)
+                :room-preview-infos='@json($roomPreviewInfos)'
                 :is-show-cover="false">
                 </room-list-component>
             </div>

@@ -3,8 +3,23 @@
     <!-- Roomオーディオ -->
   <div id="room-Audio-wrapper">
     <!-- オーディオ再生終了 -->
-    <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button>
-    <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button>
+    <div class="all-audio-controll-wrapper">
+      <div class="all-audio-controller all-audio-play-wrapper">
+        <!-- <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button> -->
+        <div class="size-Adjust-box">
+          <i id="play-all-icon" class="fas fa-caret-right fa-3x" @click="playAllAudio"></i>
+        </div>
+        <span style="color:grey">play all</span>
+      </div>
+
+      <div class="all-audio-controller all-audio-finish-wrapper">
+        <div class="size-Adjust-box">
+          <!-- <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button> -->
+          <i id="finish-all-icon" class="fas fa-pause fa-2x" @click="finishPlayAudio"></i>
+        </div>
+        <span style="color:grey">stop all</span>
+      </div>
+    </div>
 
     <div id="room-audio-frame">
       <ul id="audios">
@@ -216,15 +231,58 @@
 
 <style scoped>
 
+  /* 全オーディオの再生停止コントローラー */
+  .all-audio-controll-wrapper {
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+    border-bottom: double 2px grey;
+    width: 90px;
+
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .size-Adjust-box {
+    opacity: 0.85;
+    height: 33px;
+    display: flex;
+    justify-content: center;
+  }
+  .size-Adjust-box:hover{
+    opacity: 1;
+  }
+
+  .all-audio-controller {
+    color: ghostwhite;
+    height: 50px;
+    font-size: 11px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #play-all-icon {
+    color: green;
+  }
+  #finish-all-icon {
+    color: lightgrey;
+    margin-top: 5px;
+  }
+
   /* audio */
   #room-Audio-wrapper {
     position: absolute;
     top: 0;
     left: 0;
-    width: 170px;
+    width: 120px;
     height: 100%;
-    padding: 10px;
+    padding: 20px 5px;
     background-color: black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   #audios{
@@ -346,7 +404,8 @@
   }
 
   .audio-vol-wrapper {
-    position: relative;
+    position: absolute;
+    left: 70px;
     display: flex;
     align-items: center;
   }

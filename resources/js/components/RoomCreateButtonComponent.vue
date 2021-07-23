@@ -17,7 +17,7 @@
     props : [],
     data : () => {
       return {
-        'createRoomMessage' : "a",
+        'createRoomMessage' : "",
       }
     },
 
@@ -63,10 +63,13 @@
 
   .room-create-button {
     position: absolute;
-    top : 50px;
-    right: 60px;
+    top : 20px;
+    right: 150px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
+    border-radius: 4px;
+    border: solid 1px grey;
+    box-shadow: 0.5px 0.5px 1px lightslategrey;
   }
 
   .room-create-button:hover {

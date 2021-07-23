@@ -68,8 +68,8 @@
         axios.get(url)
         .then(res => {
           this.userId = res.data.id;
-          this.userProfileInit['name'] = res.data.name;
-          this.userProfileInit['aboutMe'] = res.data.aboutMe;
+          this.userProfileInit['name'] = this.userProfile['name'] = res.data.name;
+          this.userProfileInit['aboutMe'] = this.userProfile['aboutMe'] = res.data.aboutMe;
         })
         .catch(error => {
           alert('ユーザプロフィール情報を取得できませんでした。');
@@ -99,15 +99,16 @@
         })
       },
     },
-    created(){
-      if(this.$parent.isLogin){
-        this.getProfile(); // プロフィールの初期値を取得
-        this.userProfile['name'] = this.userProfileInit['name'];
-        this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
-      }
-    },
+    created(){},
     mounted: function(){
-
+      if(this.$parent.isLogin){
+        let promise = new Promise((resolve, reject) => {
+          this.getProfile(); // プロフィールの初期値を取得
+          resolve();
+        });
+        promise.then(function(){ // getProfile()が完了してから実行する
+        })
+      }
     },
 
   }
