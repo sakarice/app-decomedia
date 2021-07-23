@@ -20,17 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// 前の仕様(trackとroomで分けている時)
-Route::post('/home/mypage/createroom', 'App\Http\Controllers\Room2Controller@createRoom');
-Route::post('/home/mypage/deleteroom', 'App\Http\Controllers\Room2Controller@deleteRoom');
-Route::post('/home/mypage/showroom', 'App\Http\Controllers\Room2Controller@showRoom');
-Route::post('/home/mypage/showroom/getTrackInfo', 'App\Http\Controllers\Room2Controller@getTrackInfo');
-Route::post('/home/mypage/showroom/updateRoom', 'App\Http\Controllers\Room2Controller@updateRoom');
-Route::post('/home/searchResult', 'App\Lib\SearchUtil@searchRooms');
-Route::post('/home/enterRoom', 'App\Http\Controllers\Room2Controller@enterRoom');
-Route::post('/home/enterRoom/getTrackInfo', 'App\Http\Controllers\Room2Controller@getTrackInfo');
-
-
 // Home
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
