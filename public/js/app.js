@@ -9385,7 +9385,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-67bcec6c] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-create-button[data-v-67bcec6c] {\n  position: absolute;\n  top : 50px;\n  right: 60px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n}\n.room-create-button[data-v-67bcec6c]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-67bcec6c] {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n.room-update-button[data-v-67bcec6c] {\n  position: absolute;\n  top : 20px;\n  right: 150px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.room-update-button[data-v-67bcec6c]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51299,7 +51299,7 @@ var render = function() {
   return _c("div", { staticClass: "action-button-wrapper" }, [
     _c(
       "button",
-      { staticClass: "room-create-button", on: { click: _vm.updateRoom } },
+      { staticClass: "room-update-button", on: { click: _vm.updateRoom } },
       [_vm._v("\n    更新\n  ")]
     ),
     _vm._v(" "),
