@@ -104,7 +104,9 @@ class RoomUtil
   
       // room画像
       if(isset($request->img['id'])){
-        RoomImgController::store($room_id, $request);
+        if($request->img['id'] !== ""){
+          RoomImgController::store($room_id, $request);
+        }
       }
   
       // room動画

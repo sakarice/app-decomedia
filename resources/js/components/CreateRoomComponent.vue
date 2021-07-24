@@ -230,7 +230,11 @@ export default {
     
   },
   created() {},
-  mounted() {},
+  mounted() {
+    this.$nextTick(function(){ // roomAudioを編集モードに設定
+      this.$refs.roomAudio.validEditMode();
+    });
+  },
 
 }
 </script>
