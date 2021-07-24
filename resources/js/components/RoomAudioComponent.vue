@@ -108,6 +108,7 @@
           let audioPlayerIndex = this.roomAudios[i]['player_index'];
           this.audioPlayers[audioPlayerIndex].src = this.roomAudios[i]['audio_url'];
           this.audioPlayers[audioPlayerIndex].volume = this.roomAudios[i]['volume'];
+          this.audioPlayers[audioPlayerIndex].loop = this.roomAudios[i]['isLoop'];
         }
       },
       addAudio(audio) {
