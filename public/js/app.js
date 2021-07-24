@@ -50502,11 +50502,27 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isEditMode,
+                          expression: "isEditMode"
+                        }
+                      ],
                       staticClass: "room-audio-delete-icon fas fa-times fa-2x",
                       on: { click: _vm.deleteAudio }
                     }),
                     _vm._v(" "),
                     _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.isEditMode,
+                          expression: "isEditMode"
+                        }
+                      ],
                       staticClass: "room-audio-loop-icon fas fa-undo-alt fa-2x",
                       class: { isLoop: roomAudio["isLoop"] },
                       on: { click: _vm.setAudioLoop }

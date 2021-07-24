@@ -30,8 +30,8 @@
             :alt="index">
             <i class="room-audio-play-icon fas fa-caret-right fa-4x" v-on:click="playRoomAudio" v-show="!(roomAudio['isPlay'])"></i>
             <i class="room-audio-pause-icon fas fa-pause fa-3x" v-on:click="pauseRoomAudio" v-show="roomAudio['isPlay']"></i>
-            <i class="room-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio"></i>
-            <i class="room-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" :class="{'isLoop' : roomAudio['isLoop']}"></i>
+            <i class="room-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
+            <i class="room-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : roomAudio['isLoop']}"></i>
           </div>
           <div class="audio-vol-wrapper">
             <i class="room-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
