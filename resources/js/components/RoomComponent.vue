@@ -107,6 +107,7 @@ export default {
       roomSetting : {
         'id' : 0,
         'name' : "",
+        'description' : "",
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,

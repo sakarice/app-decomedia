@@ -2363,6 +2363,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2398,6 +2399,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       roomSetting: {
         'name': "",
+        'description': "",
         'roomBackgroundColor': "#F7F7F7",
         // ほぼ白
         'isShowImg': true,
@@ -3479,6 +3481,7 @@ __webpack_require__.r(__webpack_exports__);
       roomSetting: {
         'id': 0,
         'name': "",
+        'description': "",
         'roomBackgroundColor': "#333333",
         // 黒
         'isShowImg': true,
@@ -3782,6 +3785,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3835,6 +3839,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       roomSetting: {
         'id': 0,
         'name': "",
+        'description': "",
         'roomBackgroundColor': "#333333",
         // 黒
         'isShowImg': true,
@@ -4311,8 +4316,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['transitionName', 'roomName', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
+  props: ['transitionName', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
   data: function data() {
     return {
       window_width: "",
@@ -4325,6 +4337,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateRoomName: function updateRoomName(event) {
       this.$parent.roomSetting['name'] = event.target.value;
+    },
+    updateRoomDescription: function updateRoomDescription(event) {
+      this.$parent.roomSetting['description'] = event.target.value;
     },
     updateImg: function updateImg(event) {
       var value = event.target.value; // 横幅、高さ、透過度の値
@@ -49837,6 +49852,7 @@ var render = function() {
         attrs: {
           transitionName: _vm.transitionName,
           roomName: _vm.roomSetting["name"],
+          roomDescription: _vm.roomSetting["description"],
           roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
           isShowRoomImg: _vm.roomSetting["isShowImg"],
           roomImgWidth: _vm.roomImg["width"],
@@ -51170,6 +51186,7 @@ var render = function() {
         attrs: {
           transitionName: _vm.transitionName,
           roomName: _vm.roomSetting["name"],
+          roomDescription: _vm.roomSetting["description"],
           roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
           isShowRoomImg: _vm.roomSetting["isShowImg"],
           roomImgWidth: _vm.roomImg["width"],
@@ -51516,6 +51533,32 @@ var render = function() {
                   },
                   domProps: { value: _vm.roomName },
                   on: { input: _vm.updateRoomName }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "setting",
+              attrs: { id: "room-description-wrapper" }
+            },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("説明")]),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [
+                _c("textarea", {
+                  attrs: {
+                    type: "text",
+                    id: "room-description",
+                    rows: "4",
+                    cols: "30",
+                    maxlength: "120",
+                    placeholder: "説明文"
+                  },
+                  domProps: { value: _vm.roomDescription },
+                  on: { input: _vm.updateRoomDescription }
                 })
               ])
             ]

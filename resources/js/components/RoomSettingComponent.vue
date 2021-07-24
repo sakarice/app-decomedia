@@ -15,6 +15,13 @@
             </label>
           </div>
 
+          <div id="room-description-wrapper" class="setting">
+            <p class="setting-title">説明</p>
+            <label for="">
+              <textarea :value="roomDescription" @input="updateRoomDescription" type="text" id="room-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
+            </label>
+          </div>
+
           <div id="room-bg-color-wraper" class="setting">
             <p class="setting-title">Room背景</p>
             <label for="">
@@ -49,6 +56,7 @@ export default {
   props : [
     'transitionName',
     'roomName',
+    'roomDescription',
     'roomBackgroundColor',
     'isShowRoomImg',
     'roomImgWidth',
@@ -67,6 +75,9 @@ export default {
     },
     updateRoomName(event) {
       this.$parent.roomSetting['name'] = event.target.value;
+    },
+    updateRoomDescription(event) {
+      this.$parent.roomSetting['description'] = event.target.value;
     },
     updateImg(event){
       let value = event.target.value; // 横幅、高さ、透過度の値

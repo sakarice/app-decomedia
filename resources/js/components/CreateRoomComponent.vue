@@ -97,6 +97,7 @@
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
     :roomName="roomSetting['name']"
+    :roomDescription="roomSetting['description']"
     :roomBackgroundColor="roomSetting['roomBackgroundColor']"
     :isShowRoomImg="roomSetting['isShowImg']"
     :roomImgWidth="roomImg['width']"
@@ -150,6 +151,7 @@ export default {
       },
       roomSetting : {
         'name' : "",
+        'description' : "",
         'roomBackgroundColor' : "#F7F7F7", // ほぼ白
         'isShowImg' : true,
         'isShowMovie' : false,
