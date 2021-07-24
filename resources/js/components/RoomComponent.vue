@@ -1,5 +1,6 @@
 <template>
   <div id="field"
+   v-on:click.self="closeModal()"
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
     <!-- Room画像コンポーネント -->
@@ -30,6 +31,24 @@
 
     <cancel-button></cancel-button>
 
+        <!-- 選択モーダル表示ボタン -->
+    <div id="disp-modal-zone" @click="closeModal">
+      <div id="disp-modal-wrapper">
+        <!-- Room情報 -->
+        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
+          <i class="fas fa-file-alt fa-2x"></i>
+        </div>
+      </div>
+    </div>
+
+    <room-info-component
+    v-show="isShowModal['roomInfoModal']"
+    v-on:close-modal="closeModal"
+    :transitionName="transitionName">
+
+    </room-info-component>
+
+
   </div>
 </template>
 
@@ -39,6 +58,7 @@ import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
+import RoomInfo from './RoomInfoComponent.vue';
 
 export default {
   components : {
@@ -47,6 +67,7 @@ export default {
     RoomImg,
     RoomMovie,
     CancelButton,
+    RoomInfo,
   },
   props: [
     'roomImgData',
@@ -61,6 +82,10 @@ export default {
       getReadyPlayMovie : false,
       autoPlay : true,
 
+      transitionName : 'right-slide',
+      isShowModal : {
+        'roomInfoModal' : false,
+      },
       roomImg : {
         'type' : "",
         'id' : "",
@@ -92,6 +117,23 @@ export default {
     }
   },
   methods : {
+    showModal(target){
+      // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
+      for(let key in this.isShowModal){
+        if(key != target){
+          this.isShowModal[key] = false;
+        } else if( key == target){
+          this.isShowModal[key] = true;
+        }
+      }
+      this.transitionName = '';
+    },
+    closeModal() {
+      this.transitionName = 'right-slide';
+      for(let key in this.isShowModal){
+        this.isShowModal[key] = false;
+      }
+    },
     initImg(){
       // this.roomImg['url'] = this.roomImgData.url;
       let tmpImgData = JSON.parse(this.roomImgData);
@@ -196,6 +238,29 @@ export default {
     flex-direction: column;
   }
 
+  #disp-modal-zone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 3;
+    height: 100%;
+    background-color:black;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  #disp-modal-wrapper {
+    z-index: 1;
+  }
+
+  #disp-img-modal-wrapper {
+    color:lightseagreen;
+  }
+
   .icon-wrapper {
     padding: 12px;
   }
@@ -207,6 +272,19 @@ export default {
     display: none;
   }
 
+
+  
+  /* Modal表示アニメーション */
+
+  .right-slide-enter-active, .right-slide-leave-active {
+    transform: translate(0px, 0px);
+    transition: all 500ms
+    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
+  }
+
+  .right-slide-enter, .right-slide-leave-to {
+    transform: translateX(100vw) 
+  }
 
 
 </style>
