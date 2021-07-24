@@ -3,7 +3,7 @@
     <!-- Roomオーディオ -->
   <div id="room-Audio-wrapper">
     <!-- オーディオ再生終了 -->
-    <div class="all-audio-controll-wrapper">
+    <div v-show="isEditMode" class="all-audio-controll-wrapper">
       <div class="all-audio-controller all-audio-play-wrapper">
         <!-- <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button> -->
         <div class="size-Adjust-box">
@@ -51,14 +51,21 @@
 
 <script>
   export default {
-    props : ['maxAudioNum', 'roomAudios'],
+    props : [
+      'maxAudioNum',
+      'roomAudios',
+    ],
 
     data : () => {
       return {
         audioPlayers : [],
+        isEditMode : false,
       }
     },
     methods : {
+      validEditMode(){ // 親コンポーネントから実行される
+        this.isEditMode = true;
+      },
       playRoomAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
         let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];

@@ -293,6 +293,7 @@ export default {
     this.$nextTick(function(){
       this.$refs.roomAudio.setPlayerInfo();
       this.$refs.roomAudio.updateAudioThumbnail();
+      this.$refs.roomAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
       }
