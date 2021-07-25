@@ -2364,6 +2364,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2398,6 +2399,8 @@ __webpack_require__.r(__webpack_exports__);
         'roomSettingModal': false
       },
       roomSetting: {
+        'isPublic': true,
+        // 公開/非公開 デフォルトは公開
         'name': "",
         'description': "",
         'roomBackgroundColor': "#F7F7F7",
@@ -3480,6 +3483,8 @@ __webpack_require__.r(__webpack_exports__);
       roomAudios: [],
       roomSetting: {
         'id': 0,
+        'isPublic': true,
+        // 公開/非公開 デフォルトは公開
         'name': "",
         'description': "",
         'roomBackgroundColor': "#333333",
@@ -3543,6 +3548,7 @@ __webpack_require__.r(__webpack_exports__);
     initSetting: function initSetting() {
       var tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
+      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
@@ -3787,6 +3793,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3839,6 +3846,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       roomAudios: [],
       roomSetting: {
         'id': 0,
+        'isPublic': true,
+        // 公開/非公開 デフォルトは公開
         'name': "",
         'description': "",
         'roomBackgroundColor': "#333333",
@@ -3884,6 +3893,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     initSetting: function initSetting() {
       var tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
+      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
@@ -4326,8 +4336,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['transitionName', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
+  props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
   data: function data() {
     return {
       window_width: "",
@@ -4370,11 +4387,27 @@ __webpack_require__.r(__webpack_exports__);
       } else if (!this.isShowRoomImg) {
         this.$parent.roomSetting['isShowImg'] = true;
       }
+    },
+    changePublicState: function changePublicState() {
+      if (this.isPublic) {
+        this.$parent.roomSetting['isPublic'] = false;
+      } else if (!this.isPublic) {
+        this.$parent.roomSetting['isPublic'] = true;
+      }
     }
   },
   mounted: function mounted() {
     this.window_width = window.innerWidth;
     this.window_height = window.innerHeight;
+  },
+  computed: {
+    showPublicState: function showPublicState() {
+      if (this.isPublic) {
+        return '公開（他のユーザも検索・閲覧できます）';
+      } else if (!this.isPublic) {
+        return '非公開（他のユーザは検索・閲覧できません）';
+      }
+    }
   },
   watch: {}
 });
@@ -9506,7 +9539,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 80%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.setting {\r\n    margin-bottom : 30px;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 75%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\n}\n.setting {\r\n    margin-bottom : 20px;\n}\n.state-description {\r\n    font-size: 12px;\n}\n.public-state-icon {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon:hover {\r\n    opacity: 1;\n}\n.open-icon {\r\n    color: lawngreen;\n}\n.lock-icon {\r\n    color: yellow;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49854,6 +49887,7 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
+          isPublic: _vm.roomSetting["isPublic"],
           roomName: _vm.roomSetting["name"],
           roomDescription: _vm.roomSetting["description"],
           roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
@@ -51188,6 +51222,7 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
+          isPublic: _vm.roomSetting["isPublic"],
           roomName: _vm.roomSetting["name"],
           roomDescription: _vm.roomSetting["description"],
           roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
@@ -51521,6 +51556,47 @@ var render = function() {
       _vm._v(" "),
       _c("div", { attrs: { id: "area-wrapper" } }, [
         _c("div", { attrs: { id: "setting-wrapper" } }, [
+          _c(
+            "div",
+            { staticClass: "setting", attrs: { id: "room-is-public-wraper" } },
+            [
+              _c("p", { staticClass: "setting-title" }, [
+                _vm._v("公開/非公開")
+              ]),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isPublic,
+                    expression: "isPublic"
+                  }
+                ],
+                staticClass:
+                  "fas fa-door-open fa-lg public-state-icon open-icon",
+                on: { click: _vm.changePublicState }
+              }),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isPublic,
+                    expression: "!(isPublic)"
+                  }
+                ],
+                staticClass: "fas fa-lock fa-lg public-state-icon lock-icon",
+                on: { click: _vm.changePublicState }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "state-description" }, [
+                _vm._v(_vm._s(_vm.showPublicState))
+              ])
+            ]
+          ),
+          _vm._v(" "),
           _c(
             "div",
             { staticClass: "setting", attrs: { id: "room-name-wraper" } },

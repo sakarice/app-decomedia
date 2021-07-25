@@ -106,6 +106,7 @@ export default {
 
       roomSetting : {
         'id' : 0,
+        'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
         'description' : "",
         'roomBackgroundColor' : "#333333", // 黒
@@ -166,6 +167,7 @@ export default {
     initSetting(){
       let tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
+      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;

@@ -8,6 +8,13 @@
 
         <div id="setting-wrapper">
 
+          <div id="room-is-public-wraper" class="setting">
+            <p class="setting-title">公開/非公開</p>
+            <i v-show="isPublic" @click="changePublicState" class="fas fa-door-open fa-lg public-state-icon open-icon"></i>
+            <i v-show="!(isPublic)" @click="changePublicState" class="fas fa-lock fa-lg public-state-icon lock-icon"></i>
+            <span class="state-description">{{showPublicState}}</span>
+          </div>
+
           <div id="room-name-wraper" class="setting">
             <p class="setting-title">Room名</p>
             <label for="">
@@ -56,6 +63,7 @@
 export default {
   props : [
     'transitionName',
+    'isPublic',
     'roomName',
     'roomDescription',
     'roomBackgroundColor',
@@ -103,11 +111,27 @@ export default {
         this.$parent.roomSetting['isShowImg'] = true;
       }
     },
+    changePublicState() {
+      if(this.isPublic){
+        this.$parent.roomSetting['isPublic'] = false;
+      } else if(!(this.isPublic)){
+        this.$parent.roomSetting['isPublic'] = true;
+      }
+    }
 
   },
   mounted : function() {
     this.window_width = window.innerWidth;
     this.window_height = window.innerHeight;
+  },
+  computed :  {
+    showPublicState : function(){
+      if(this.isPublic){
+        return '公開（他のユーザも検索・閲覧できます）'
+      } else if(!(this.isPublic)){
+        return '非公開（他のユーザは検索・閲覧できません）'
+      }
+    }
   },
   watch : {
   }
@@ -123,16 +147,36 @@ export default {
   /* コンテンツのCSS */
   #setting-wrapper {
     margin: 20px 0;
-    width: 80%;
+    width: 75%;
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    overflow-y: scroll;
   }
 
   .setting {
-    margin-bottom : 30px;
+    margin-bottom : 20px;
   }
+
+  .state-description {
+    font-size: 12px;
+  }
+
+  .public-state-icon {
+    margin-right: 5px;
+    opacity: 0.5;
+  }
+  .public-state-icon:hover {
+    opacity: 1;
+  }
+  .open-icon {
+    color: lawngreen;
+  }
+  .lock-icon {
+    color: yellow;
+  }
+  
 
   .message-label {
     font-size: 10px;

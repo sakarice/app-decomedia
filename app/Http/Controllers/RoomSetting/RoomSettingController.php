@@ -24,6 +24,7 @@ class RoomSettingController extends Controller
         $user_id = Auth::user()->id;
         $roomSetting = new RoomSetting();
         $roomSetting->room_id = $room_id;
+        $roomSetting->open_state = $request->setting['isPublic'];
         if(isset($request->setting['name'])){
           $roomSetting->name = $request->setting['name'];
         }else {
@@ -54,7 +55,7 @@ class RoomSettingController extends Controller
             'background_type' => $room_setting->background_type,
             'background_color' => $room_setting->background_color,
             'chat_valid_flag' => $room_setting->chat_valid_flag,
-            'open_state' => $room_setting->open_state,
+            'isPublic' => $room_setting->open_state,
             'enter_limit' => $room_setting->enter_limit,
         ];
         return $room_setting_data;

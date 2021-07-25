@@ -96,6 +96,7 @@
     v-show="isShowModal['roomSettingModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
+    :isPublic="roomSetting['isPublic']"
     :roomName="roomSetting['name']"
     :roomDescription="roomSetting['description']"
     :roomBackgroundColor="roomSetting['roomBackgroundColor']"
@@ -150,6 +151,7 @@ export default {
         'roomSettingModal' : false,
       },
       roomSetting : {
+        'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
         'description' : "",
         'roomBackgroundColor' : "#F7F7F7", // ほぼ白
