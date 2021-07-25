@@ -3544,6 +3544,7 @@ __webpack_require__.r(__webpack_exports__);
       var tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
       this.roomSetting['name'] = tmpSettingData.name;
+      this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
@@ -3884,6 +3885,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
       this.roomSetting['name'] = tmpSettingData.name;
+      this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
@@ -4270,6 +4272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+//
 //
 //
 //

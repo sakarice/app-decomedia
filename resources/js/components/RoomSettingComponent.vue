@@ -18,6 +18,7 @@
           <div id="room-description-wrapper" class="setting">
             <p class="setting-title">説明</p>
             <label for="">
+              <!-- <input :value="roomDescription" @input="updateRoomDescription" type="text"> -->
               <textarea :value="roomDescription" @input="updateRoomDescription" type="text" id="room-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
             </label>
           </div>

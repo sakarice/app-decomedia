@@ -215,6 +215,7 @@ export default {
       let tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
       this.roomSetting['name'] = tmpSettingData.name;
+      this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;

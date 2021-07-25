@@ -17,6 +17,7 @@ class RoomSettingController extends Controller
     public function index(){}
     // 2.create
     public function create(Request $request){}
+
     // 3.store
     public static function store($room_id, $request){
         \Log::info('Room設定保存開始');
@@ -28,6 +29,7 @@ class RoomSettingController extends Controller
         }else {
           $roomSetting->name = 'room';
         }
+        $roomSetting->description = $request->setting['description'];
         $roomSetting->is_show_img = $request->setting['isShowImg'];
         $roomSetting->is_show_movie = $request->setting['isShowMovie'];
         $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
@@ -45,6 +47,7 @@ class RoomSettingController extends Controller
         $room_setting_data = [
             'id' => $room_id,
             'name' => $room_setting->name,
+            'description' => $room_setting->description,
             'is_show_img' => $room_setting->is_show_img,
             'is_show_movie' => $room_setting->is_show_movie,
             'max_audio_num' => $room_setting->max_audio_num,
