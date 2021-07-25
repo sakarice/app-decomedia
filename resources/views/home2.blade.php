@@ -17,7 +17,8 @@
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
             <h2 class="top-message">聴いて、観て、繋がる</h2>
-            <p style="text-align: center">音楽や動画で好みのRoomを作り、公開してみましょう。</p>
+            <p style="text-align: center">音楽や動画を組み合わせてRoomを作り、
+            <br>公開して同じ感性の人々と繋がりましょう</p>
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}

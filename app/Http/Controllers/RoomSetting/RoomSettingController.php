@@ -17,17 +17,20 @@ class RoomSettingController extends Controller
     public function index(){}
     // 2.create
     public function create(Request $request){}
+
     // 3.store
     public static function store($room_id, $request){
         \Log::info('Room設定保存開始');
         $user_id = Auth::user()->id;
         $roomSetting = new RoomSetting();
         $roomSetting->room_id = $room_id;
+        $roomSetting->open_state = $request->setting['isPublic'];
         if(isset($request->setting['name'])){
           $roomSetting->name = $request->setting['name'];
         }else {
           $roomSetting->name = 'room';
         }
+        $roomSetting->description = $request->setting['description'];
         $roomSetting->is_show_img = $request->setting['isShowImg'];
         $roomSetting->is_show_movie = $request->setting['isShowMovie'];
         $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
@@ -45,13 +48,14 @@ class RoomSettingController extends Controller
         $room_setting_data = [
             'id' => $room_id,
             'name' => $room_setting->name,
+            'description' => $room_setting->description,
             'is_show_img' => $room_setting->is_show_img,
             'is_show_movie' => $room_setting->is_show_movie,
             'max_audio_num' => $room_setting->max_audio_num,
             'background_type' => $room_setting->background_type,
             'background_color' => $room_setting->background_color,
             'chat_valid_flag' => $room_setting->chat_valid_flag,
-            'open_state' => $room_setting->open_state,
+            'isPublic' => $room_setting->open_state,
             'enter_limit' => $room_setting->enter_limit,
         ];
         return $room_setting_data;

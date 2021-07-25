@@ -96,7 +96,9 @@
     v-show="isShowModal['roomSettingModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
+    :isPublic="roomSetting['isPublic']"
     :roomName="roomSetting['name']"
+    :roomDescription="roomSetting['description']"
     :roomBackgroundColor="roomSetting['roomBackgroundColor']"
     :isShowRoomImg="roomSetting['isShowImg']"
     :roomImgWidth="roomImg['width']"
@@ -168,7 +170,9 @@ export default {
 
       roomSetting : {
         'id' : 0,
+        'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
+        'description' : "",
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
@@ -212,7 +216,9 @@ export default {
     initSetting(){
       let tmpSettingData = JSON.parse(this.roomSettingData);
       this.roomSetting['id'] = tmpSettingData.id;
+      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
+      this.roomSetting['description'] = tmpSettingData.description;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;

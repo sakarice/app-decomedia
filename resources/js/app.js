@@ -51,6 +51,7 @@ Vue.component('room-list-component', require('./components/RoomListComponent.vue
 
 // room閲覧用コンポーネント
 Vue.component('room-component', require('./components/RoomComponent.vue').default);
+Vue.component('room-info-component', require('./components/RoomInfoComponent.vue').default);
 
 // room編集用コンポーネント
 Vue.component('room-edit-component', require('./components/RoomEditComponent.vue').default);
