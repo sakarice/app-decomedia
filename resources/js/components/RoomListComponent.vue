@@ -74,14 +74,14 @@ export default {
   justify-content:flex-start;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
 /* .room-wrapper::after {
   display: block;
   content:"";
-  width: 200px;
+  width: 180px;
 } */
 
 li {
@@ -94,8 +94,8 @@ li {
   /* font-size: 50px; */
   margin-right: 40px;
   margin-bottom: 80px;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   opacity: 0.8;
 }
 
