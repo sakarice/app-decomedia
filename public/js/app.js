@@ -2912,7 +2912,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     changeLikeStateOfViewAndDB: function changeLikeStateOfViewAndDB() {
       // dataのいいね情報を更新が完了してから、DBも更新する
-      // 下記Promise内はthisのスコープから外れてしまうため、変数に収める
+      // 下記Promise内はthisのスコープから外れてしまうため、thisを変数に収める
       var tmpThis = this;
       var firstMethod = new Promise(function (resolve, reject) {
         tmpThis.changeLikeState();

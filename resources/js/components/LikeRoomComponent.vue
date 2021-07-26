@@ -18,7 +18,7 @@ export default{
   methods : {
     changeLikeStateOfViewAndDB(){
       // dataのいいね情報を更新が完了してから、DBも更新する
-      // 下記Promise内はthisのスコープから外れてしまうため、変数に収める
+      // 下記Promise内はthisのスコープから外れてしまうため、thisを変数に収める
       let tmpThis = this;
 
       var firstMethod = new Promise(function(resolve, reject){
