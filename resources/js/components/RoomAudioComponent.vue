@@ -293,10 +293,17 @@
     align-items: center;
   }
 
+  #room-audio-frame {
+    height: 100%;
+  }
+
   #audios{
-    display: flex;
-    flex-direction: column;
     padding-left: 0;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-around;
 
   }
 

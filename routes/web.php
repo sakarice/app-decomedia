@@ -37,6 +37,11 @@ Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
 
 // プロフィールに表示するユーザ情報を取得
 Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
+// roomの作成者情報を表示
+Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerInfo');
+
+// Roomへ「いいね」する
+Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');

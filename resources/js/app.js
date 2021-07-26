@@ -46,6 +46,13 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 // ★ユーザプロフィールコンポーネント
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
 
+// ★room所有者(＝作成者)情報コンポーネント
+Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);
+
+// ★Roomへのいいねアイコンコンポーネント
+Vue.component('like-room-component', require('./components/LikeRoomComponent.vue').default);
+
+
 // room一覧表示用コンポーネント
 Vue.component('room-list-component', require('./components/RoomListComponent.vue').default);
 
