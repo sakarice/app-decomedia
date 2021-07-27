@@ -90,6 +90,7 @@
   border-radius: 5px;
   padding: 10px;
   background-color: white;
+  color: black;
 
   display: flex;
   flex-direction: column;
