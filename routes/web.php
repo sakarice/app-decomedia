@@ -37,6 +37,18 @@ Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
 
 // プロフィールに表示するユーザ情報を取得
 Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
+// roomの作成者情報を表示
+Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerInfo');
+
+// 入ったroomが自分の作成したroomか判別する
+Route::get('/judgeIsMyRoom/{room_id}', 'App\Lib\RoomUtil@judgeIsMyRoom');
+
+// Roomへ「いいね」する
+Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
+
+// 検索結果
+Route::post('/searchResult', 'App\Lib\SearchUtil@searchRooms');
+
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');
@@ -60,9 +72,6 @@ Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Audio\DefaultAudioCon
 Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Audio\UserOwnAudioController@index');
 Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Audio\AudioController@store');
 Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioController@destroy');
-
-// Route::get('/ajax/getUserOwnAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getUserOwnAudioThumbnails');
-// Route::get('/ajax/getDefaultAudioThumbnails', 'App\Http\Controllers\Ajax\RoomController@getDefaultAudioThumbnails');
 
 
 // defaultImgアップロード(開発用、後で消す)

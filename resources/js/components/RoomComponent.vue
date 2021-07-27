@@ -34,6 +34,21 @@
         <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
+        <!-- いいねアイコン -->
+        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
+          <like-room-component>
+          </like-room-component>
+        </div>
+
+        <!-- Room作成者情報 -->
+        <div id="disp-room-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomOwnerInfo')">
+          <i class="fas fa-user-circle fa-2x"></i>
+          <!-- ユーザプロフィール -->
+          <room-owner-info-component
+          v-show="isShowModal['roomOwnerInfo']"
+          :roomId="roomSetting['id']">
+          </room-owner-info-component>
+        </div>
         <!-- Room情報 -->
         <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
           <i class="fas fa-file-alt fa-2x"></i>
@@ -41,11 +56,14 @@
       </div>
     </div>
 
+
+    
     <room-info-component
     v-show="isShowModal['roomInfoModal']"
     v-on:close-modal="closeModal"
-    :transitionName="transitionName">
-
+    :transitionName="transitionName"
+    :name="roomSetting['name']"
+    :description="roomSetting['description']">
     </room-info-component>
 
 
@@ -59,6 +77,9 @@ import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
 import RoomInfo from './RoomInfoComponent.vue';
+import RoomOwnerInfo from './RoomOwnerInfoComponent.vue';
+import LikeRoom from './LikeRoomComponent.vue';
+
 
 export default {
   components : {
@@ -68,6 +89,8 @@ export default {
     RoomMovie,
     CancelButton,
     RoomInfo,
+    RoomOwnerInfo,
+    LikeRoom
   },
   props: [
     'roomImgData',
@@ -77,6 +100,7 @@ export default {
   ],
   data : () => {
     return {
+      isMyRoom : true,
       getReadyCreateMovieFrame : false,
       getReadyPlayAudio : false,
       getReadyPlayMovie : false,
@@ -84,6 +108,7 @@ export default {
 
       transitionName : 'right-slide',
       isShowModal : {
+        'roomOwnerInfo' : false,
         'roomInfoModal' : false,
       },
       roomImg : {
@@ -119,6 +144,17 @@ export default {
     }
   },
   methods : {
+    judgeIsMyRoom(){
+      let room_id = JSON.parse(this.roomSettingData).id;
+      let url = '/judgeIsMyRoom/' + room_id;
+      axios.get(url)
+        .then(response =>{
+          this.isMyRoom = response.data.isMyRoom;
+        })
+        .catch(error => {
+          console.log('あなたがroom作成者か判別できませんでした');
+        })
+    },
     showModal(target){
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for(let key in this.isShowModal){
@@ -162,7 +198,7 @@ export default {
         tmpRoomAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
         tmpRoomAudios[i]['isPlay'] = false;
         this.roomAudios.push(tmpRoomAudios[i]);
-      }      
+      }
     },
     initSetting(){
       let tmpSettingData = JSON.parse(this.roomSettingData);
@@ -191,6 +227,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.judgeIsMyRoom();
     this.initImg();
     this.initMovie();
     this.initAudio();
@@ -265,8 +302,16 @@ export default {
     color:lightseagreen;
   }
 
+  #disp-room-owner-modal-wrapper {
+    color: white;
+  }
+
   .icon-wrapper {
     padding: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .icon-wrapper:hover {
     background-color: rgba(255,255,255,0.2);

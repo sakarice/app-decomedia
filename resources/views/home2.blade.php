@@ -25,7 +25,7 @@
         <div class="search-wrapper">
             {{-- 検索フォーム --}}
             <div class="search-window">
-                <form method="POST" action="home/searchResult">
+                <form method="POST" action="/searchResult">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
                     <i class="fas fa-search search-icon"></i>
