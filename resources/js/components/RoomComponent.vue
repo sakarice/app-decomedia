@@ -35,14 +35,19 @@
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-room-like-modal-wrapper" class="icon-wrapper">
-          <like-room-component>          
+        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
+          <like-room-component>
           </like-room-component>
         </div>
 
         <!-- Room作成者情報 -->
         <div id="disp-room-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomOwnerInfo')">
           <i class="fas fa-user-circle fa-2x"></i>
+          <!-- ユーザプロフィール -->
+          <room-owner-info-component
+          v-show="isShowModal['roomOwnerInfo']"
+          :roomId="roomSetting['id']">
+          </room-owner-info-component>
         </div>
         <!-- Room情報 -->
         <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
@@ -52,11 +57,6 @@
     </div>
 
 
-    <!-- ユーザプロフィール -->
-    <room-owner-info-component
-    v-show="isShowModal['roomOwnerInfo']"
-    :roomId="roomSetting['id']">
-    </room-owner-info-component>
     
     <room-info-component
     v-show="isShowModal['roomInfoModal']"
@@ -100,6 +100,7 @@ export default {
   ],
   data : () => {
     return {
+      isMyRoom : true,
       getReadyCreateMovieFrame : false,
       getReadyPlayAudio : false,
       getReadyPlayMovie : false,
@@ -143,6 +144,17 @@ export default {
     }
   },
   methods : {
+    judgeIsMyRoom(){
+      let room_id = JSON.parse(this.roomSettingData).id;
+      let url = '/judgeIsMyRoom/' + room_id;
+      axios.get(url)
+        .then(response =>{
+          this.isMyRoom = response.data.isMyRoom;
+        })
+        .catch(error => {
+          console.log('あなたがroom作成者か判別できませんでした');
+        })
+    },
     showModal(target){
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for(let key in this.isShowModal){
@@ -215,6 +227,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.judgeIsMyRoom();
     this.initImg();
     this.initMovie();
     this.initAudio();

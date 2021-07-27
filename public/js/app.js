@@ -3548,6 +3548,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
   data: function data() {
     return {
+      isMyRoom: true,
       getReadyCreateMovieFrame: false,
       getReadyPlayAudio: false,
       getReadyPlayMovie: false,
@@ -3589,6 +3590,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    judgeIsMyRoom: function judgeIsMyRoom() {
+      var _this = this;
+
+      var room_id = JSON.parse(this.roomSettingData).id;
+      var url = '/judgeIsMyRoom/' + room_id;
+      axios.get(url).then(function (response) {
+        _this.isMyRoom = response.data.isMyRoom;
+      })["catch"](function (error) {
+        console.log('あなたがroom作成者か判別できませんでした');
+      });
+    },
     showModal: function showModal(target) {
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for (var key in this.isShowModal) {
@@ -3663,19 +3675,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
+    this.judgeIsMyRoom();
     this.initImg();
     this.initMovie();
     this.initAudio();
     this.initSetting(); // 全ての子コンポーネントが描画されてから実行する処理
 
     this.$nextTick(function () {
-      var _this = this;
+      var _this2 = this;
 
       this.$refs.roomAudio.setPlayerInfo();
       this.$refs.roomAudio.updateAudioThumbnail();
 
       window.onYouTubeIframeAPIReady = function () {
-        _this.getReadyCreateMovieFrame = true;
+        _this2.getReadyCreateMovieFrame = true;
       }; // 全オーディオの再生開始
 
 
@@ -4399,11 +4412,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -9774,7 +9782,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#overlay[data-v-0a59c4e2] {\r\n  z-index: 10;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: rgba(0,0,0,0.5);\r\n\r\n  /* flex設定 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n#frame[data-v-0a59c4e2] {\r\n  z-index: 20;\r\n  width: 200px;\r\n  height: 300px;\r\n  border-radius: 5px;\r\n  padding: 10px;\r\n  background-color: white;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.nav-menu[data-v-0a59c4e2] {\r\n  list-style: none;\r\n  padding: 0;\r\n\r\n  display: flex;\n}\n.account-modal-profile[data-v-0a59c4e2]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.avatar-wrapper[data-v-0a59c4e2], .name-wrapper[data-v-0a59c4e2], .about-me[data-v-0a59c4e2] {\r\n  margin-bottom: 20px;\n}\n.name[data-v-0a59c4e2] {\r\n  margin: 0;\n}\n.avatar-wrapper[data-v-0a59c4e2] {\r\n  width: 60px;\r\n  height: 60px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n  color: white;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-0a59c4e2] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.update-buttom[data-v-0a59c4e2]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n/* モーダル表示アニメーション */\n.flowup-enter-active[data-v-0a59c4e2], .flowup-leave-active[data-v-0a59c4e2] {\r\n  opacity: 1;\r\n  transform: translate(0px, 0px);\r\n  transition: all 150ms;\n}\n.flowup-enter[data-v-0a59c4e2], .flowup-leave-to[data-v-0a59c4e2] {\r\n  opacity: 0;\r\n  transform: translateY(20px);\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#frame[data-v-0a59c4e2] {\r\n  position: absolute;\r\n  right: 49px;\r\n  box-shadow: 1px 1px 6px grey;\r\n  z-index: 20;\r\n  width: 200px;\r\n  height: 300px;\r\n  border-radius: 5px;\r\n  padding: 10px;\r\n  background-color: white;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.nav-menu[data-v-0a59c4e2] {\r\n  list-style: none;\r\n  padding: 0;\r\n  display: flex;\n}\n.account-modal-profile[data-v-0a59c4e2]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.avatar-wrapper[data-v-0a59c4e2], .name-wrapper[data-v-0a59c4e2], .about-me[data-v-0a59c4e2] {\r\n  margin-bottom: 20px;\n}\n.name[data-v-0a59c4e2] {\r\n  margin: 0;\n}\n.avatar-wrapper[data-v-0a59c4e2] {\r\n  width: 60px;\r\n  height: 60px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n  color: white;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-0a59c4e2] {\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.update-buttom[data-v-0a59c4e2]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n/* モーダル表示アニメーション */\n.flowup-enter-active[data-v-0a59c4e2], .flowup-leave-active[data-v-0a59c4e2] {\r\n  opacity: 0.85;\r\n  transform: translate(0px, 0px);\r\n  transition: all 150ms;\n}\n.flowup-enter[data-v-0a59c4e2], .flowup-leave-to[data-v-0a59c4e2] {\r\n  opacity: 0;\r\n  transform: translateX(5px);\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51499,6 +51507,14 @@ var render = function() {
             _c(
               "div",
               {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isMyRoom,
+                    expression: "!isMyRoom"
+                  }
+                ],
                 staticClass: "icon-wrapper",
                 attrs: { id: "disp-room-like-modal-wrapper" }
               },
@@ -51518,7 +51534,22 @@ var render = function() {
                   }
                 }
               },
-              [_c("i", { staticClass: "fas fa-user-circle fa-2x" })]
+              [
+                _c("i", { staticClass: "fas fa-user-circle fa-2x" }),
+                _vm._v(" "),
+                _c("room-owner-info-component", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isShowModal["roomOwnerInfo"],
+                      expression: "isShowModal['roomOwnerInfo']"
+                    }
+                  ],
+                  attrs: { roomId: _vm.roomSetting["id"] }
+                })
+              ],
+              1
             ),
             _vm._v(" "),
             _c(
@@ -51538,18 +51569,6 @@ var render = function() {
           ])
         ]
       ),
-      _vm._v(" "),
-      _c("room-owner-info-component", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isShowModal["roomOwnerInfo"],
-            expression: "isShowModal['roomOwnerInfo']"
-          }
-        ],
-        attrs: { roomId: _vm.roomSetting["id"] }
-      }),
       _vm._v(" "),
       _c("room-info-component", {
         directives: [
@@ -52171,83 +52190,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "flowup" } }, [
-    _c(
-      "div",
-      {
-        attrs: { id: "overlay" },
-        on: {
-          click: function($event) {
-            return _vm.closeProfileModal()
-          }
-        }
-      },
-      [
-        _c("div", { attrs: { id: "frame" }, on: { click: _vm.stopEvent } }, [
-          _c("nav", [
-            _c("ul", { staticClass: "nav-menu" }, [
-              _c("li", [_vm._v("作成者")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "account-modal-profile" }, [
-            _c("div", { staticClass: "avatar-wrapper" }, [
-              _vm.roomOwnerInfo["profile_img_url"] !== null
-                ? _c("img", {
-                    staticClass: "avatar",
-                    attrs: {
-                      src: _vm.roomOwnerInfo["profile_img_url"],
-                      alt:
-                        "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
-                    }
-                  })
-                : _c("img", {
-                    staticClass: "avatar",
-                    attrs: {
-                      src:
-                        "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
-                      alt: ""
-                    }
-                  })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "name-wrapper" }, [
-              _c("p", { staticClass: "name" }, [
-                _vm._v(_vm._s(_vm.roomOwnerInfo["name"]))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "about-me" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.roomOwnerInfo["aboutMe"],
-                    expression: "roomOwnerInfo['aboutMe']"
-                  }
-                ],
+    _c("div", { attrs: { id: "frame" }, on: { click: _vm.stopEvent } }, [
+      _c("nav", [
+        _c("ul", { staticClass: "nav-menu" }, [_c("li", [_vm._v("作成者")])])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "account-modal-profile" }, [
+        _c("div", { staticClass: "avatar-wrapper" }, [
+          _vm.roomOwnerInfo["profile_img_url"] !== null
+            ? _c("img", {
+                staticClass: "avatar",
                 attrs: {
-                  name: "about-me",
-                  id: "about-me",
-                  cols: "20",
-                  rows: "4",
-                  readonly: ""
-                },
-                domProps: { value: _vm.roomOwnerInfo["aboutMe"] },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.roomOwnerInfo, "aboutMe", $event.target.value)
-                  }
+                  src: _vm.roomOwnerInfo["profile_img_url"],
+                  alt:
+                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
                 }
               })
-            ])
+            : _c("img", {
+                staticClass: "avatar",
+                attrs: {
+                  src:
+                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
+                  alt: ""
+                }
+              })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "name-wrapper" }, [
+          _c("p", { staticClass: "name" }, [
+            _vm._v(_vm._s(_vm.roomOwnerInfo["name"]))
           ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "about-me" }, [
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.roomOwnerInfo["aboutMe"],
+                expression: "roomOwnerInfo['aboutMe']"
+              }
+            ],
+            attrs: {
+              name: "about-me",
+              id: "about-me",
+              cols: "20",
+              rows: "4",
+              readonly: ""
+            },
+            domProps: { value: _vm.roomOwnerInfo["aboutMe"] },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.roomOwnerInfo, "aboutMe", $event.target.value)
+              }
+            }
+          })
         ])
-      ]
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []

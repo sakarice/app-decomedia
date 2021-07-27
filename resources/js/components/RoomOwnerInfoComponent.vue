@@ -1,31 +1,26 @@
 <template>
   <transition name="flowup">
-
-    <div id="overlay" v-on:click="closeProfileModal()">
-      <div id="frame" v-on:click="stopEvent">
-        <!-- ナビゲーションタブ -->
-        <nav>
-          <ul class="nav-menu">
-            <li>作成者</li>
-          </ul>
-        </nav>
-        <!-- プロフィール -->
-        <div class="account-modal-profile">
-          <div class="avatar-wrapper">
-              <img class="avatar" v-if="roomOwnerInfo['profile_img_url'] !== null" :src="roomOwnerInfo['profile_img_url']" alt="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
-              <img class="avatar" v-else src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg" alt="">
-          </div>
-          <div class="name-wrapper">
-            <!-- <input type="text" v-model="roomOwnerInfo['name']" placeholder="ユーザ名"> -->
-            <p class="name">{{roomOwnerInfo['name']}}</p>
-          </div>
-          <div class="about-me">
-            <textarea v-model="roomOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
-          </div>
+    <div id="frame" v-on:click="stopEvent">
+      <!-- ナビゲーションタブ -->
+      <nav>
+        <ul class="nav-menu">
+          <li>作成者</li>
+        </ul>
+      </nav>
+      <!-- プロフィール -->
+      <div class="account-modal-profile">
+        <div class="avatar-wrapper">
+            <img class="avatar" v-if="roomOwnerInfo['profile_img_url'] !== null" :src="roomOwnerInfo['profile_img_url']" alt="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
+            <img class="avatar" v-else src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg" alt="">
         </div>
-        
+        <div class="name-wrapper">
+          <!-- <input type="text" v-model="roomOwnerInfo['name']" placeholder="ユーザ名"> -->
+          <p class="name">{{roomOwnerInfo['name']}}</p>
+        </div>
+        <div class="about-me">
+          <textarea v-model="roomOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
+        </div>
       </div>
-
     </div>
   </transition>
 </template>
@@ -85,22 +80,10 @@
 
 <style scoped>
 
-#overlay {
-  z-index: 10;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-
-  /* flex設定 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 #frame {
+  position: absolute;
+  right: 49px;
+  box-shadow: 1px 1px 6px grey;
   z-index: 20;
   width: 200px;
   height: 300px;
@@ -111,13 +94,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .nav-menu {
   list-style: none;
   padding: 0;
-
   display: flex;  
 }
 
@@ -160,14 +141,14 @@
 
 /* モーダル表示アニメーション */
 .flowup-enter-active, .flowup-leave-active {
-  opacity: 1;
+  opacity: 0.85;
   transform: translate(0px, 0px);
   transition: all 150ms;
 }
 
 .flowup-enter, .flowup-leave-to {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateX(5px);
 }
 
 

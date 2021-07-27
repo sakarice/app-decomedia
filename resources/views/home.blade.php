@@ -16,7 +16,7 @@
 
     {{-- 検索フォーム --}}
     <div class="search-window">
-        <form method="POST" action="home/searchResult">
+        <form method="POST" action="/searchResult">
             @csrf
             <input type="text" name="keyword" placeholder="検索ワード">
         </form>
