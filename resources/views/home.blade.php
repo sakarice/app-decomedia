@@ -11,7 +11,7 @@
 <body>
     {{-- マイページへのリンク --}}
     <div class="toMypage" style="margin: 50px 0; font-size: 30px">
-        <a href="home/mypage">マイページへ</a>
+        <a href="/home/mypage">マイページへ</a>
     </div>
 
     {{-- 検索フォーム --}}

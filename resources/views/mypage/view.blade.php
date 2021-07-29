@@ -19,9 +19,12 @@
       {{-- ヘッダー --}}
       <header-component
       :csrf="{{json_encode(csrf_token())}}"
-      :is-login="true"
-      >
+      :is-login="true">
       </header-component>
+
+      <left-bar-component
+      :csrf="{{json_encode(csrf_token())}}">
+      </left-bar-component>
 
       <section class="created-room-list">
         <div class="section-top-wrapper">

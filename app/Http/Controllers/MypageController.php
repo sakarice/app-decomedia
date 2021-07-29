@@ -32,7 +32,7 @@ class MypageController extends Controller
         );
 
         $roomPreviewInfos = array();
-        $rooms = Room::limit(6)->where('user_id', $authenticated_userId)->get();
+        $rooms = Room::limit(3)->where('user_id', $authenticated_userId)->get();
         foreach($rooms as $index => $room){
             $room_id = $room->id;
             $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);

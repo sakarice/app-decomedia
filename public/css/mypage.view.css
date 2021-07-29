@@ -20,7 +20,7 @@ body {
 
 .created-room-list {
   margin: 100px 0;
-  padding: 20px 20px;
+  padding: 20px 20px 20px 100px;
   width: 100%;
   max-width: 1200px;
 }
