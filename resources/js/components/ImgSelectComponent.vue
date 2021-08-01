@@ -1,9 +1,6 @@
 <template>
   <transition :name="transitionName">
     <div id="select-modal">
-      <div class="close-icon-wrapper">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
-      </div>
       <div id="area-wrapper">
         <div id="drop-zone" 
         :class="{show: isDragEnter, hidden: !(isDragEnter)}"
@@ -52,6 +49,9 @@
           </ul>
 
         </div>
+      </div>
+      <div class="close-icon-wrapper">
+        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
       </div>
     </div>
   </transition>

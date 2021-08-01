@@ -261,7 +261,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #field {
     /* opacity : 0.2; */
 

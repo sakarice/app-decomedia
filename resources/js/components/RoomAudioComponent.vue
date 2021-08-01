@@ -282,7 +282,8 @@
   #room-Audio-wrapper {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
+    z-index: 5;
     width: 120px;
     height: 100%;
     padding: 20px 5px;

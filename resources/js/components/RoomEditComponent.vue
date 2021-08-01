@@ -319,11 +319,11 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   #field {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 2;
     width: 100%;
     height: 100%;
@@ -338,10 +338,11 @@ export default {
   #disp-modal-zone {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 3;
+    width: 7%;
     height: 100%;
-    background-color:black;
+    /* background-color:black; */
 
     display: flex;
     flex-direction: column;
@@ -352,6 +353,14 @@ export default {
 
   #disp-modal-wrapper {
     z-index: 1;
+    background-color:black;
+    padding: 20px 0;
+    border-radius: 30px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     /* background-color: ghostwhite;
     box-shadow: -1px 1px 5px lightgrey; */
   }
@@ -394,7 +403,7 @@ export default {
   }
 
   .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
+    transform: translateX(-100vw) 
   }
 
 
