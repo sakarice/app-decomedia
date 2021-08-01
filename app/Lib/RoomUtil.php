@@ -54,6 +54,35 @@ class RoomUtil
   }
 
 
+  // 自分がいいねしたroomのmodelを返す
+  public static function getLikedRoomModel($user_id, $record_num){
+    $sql = <<< SQL
+      SELECT * FROM rooms r
+        INNER JOIN user_like_rooms ulr
+        ON ulr.room_id = r.id
+        WHERE ulr.user_id = $user_id
+        LIMIT $record_num
+    SQL;
+
+    $rooms = DB::select($sql);
+    return $rooms;  
+  }
+
+  // 公開中のroomのmodelを返す
+  public static function getOpenRoomModel($record_num){
+    $sql = <<< SQL
+      SELECT * FROM rooms r
+        INNER JOIN room_settings rs
+        ON rs.room_id = r.id
+        WHERE rs.open_state = 1
+        LIMIT $record_num
+    SQL;
+    
+    $rooms = DB::select($sql);
+    return $rooms;
+  }
+
+
     // Roomのプレビュー表示に必要な情報を取得(id,title,サムネ画像のurl)
     public static function getRoomPreviewInfo($room_id){
       $room_name = RoomSetting::where('room_id', $room_id)->first()->name;

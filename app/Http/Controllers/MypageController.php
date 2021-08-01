@@ -31,16 +31,26 @@ class MypageController extends Controller
             'profile' => $user->profile,
         );
 
-        $roomPreviewInfos = array();
-        $rooms = Room::limit(3)->where('user_id', $authenticated_userId)->get();
+        // 作成済みroomのプレビュー情報を取得
+        $createdRoomPreviewInfos = array();
+        $rooms = Room::limit(5)->where('user_id', $authenticated_userId)->get();
         foreach($rooms as $index => $room){
             $room_id = $room->id;
-            $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+            $createdRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
         }
-        
+
+        // いいねしたroomのプレビュー情報を取得
+        $likedRoomPreviewInfos = array();
+        $rooms = RoomUtil::getLikedRoomModel($authenticated_userId, 5);
+        foreach($rooms as $index => $room){
+            $room_id = $room->room_id; // ※idではなくroom_idで指定する
+            $likedRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+        }
+
         $data = [
             'userInfo' => $userInfo,
-            'roomPreviewInfos' => $roomPreviewInfos
+            'createdRoomPreviewInfos' => $createdRoomPreviewInfos,
+            'likedRoomPreviewInfos' => $likedRoomPreviewInfos,
         ];
 
         return view('mypage.view', $data);
