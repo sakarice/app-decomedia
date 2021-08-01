@@ -82,7 +82,7 @@
 
 #frame {
   position: absolute;
-  right: 49px;
+  left: 49px;
   box-shadow: 1px 1px 6px grey;
   z-index: 20;
   width: 200px;
@@ -149,7 +149,7 @@
 
 .flowup-enter, .flowup-leave-to {
   opacity: 0;
-  transform: translateX(5px);
+  transform: translateX(-5px);
 }
 
 

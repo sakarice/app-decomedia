@@ -51,7 +51,7 @@
         </div>
         <!-- Room情報 -->
         <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
-          <i class="fas fa-file-alt fa-2x"></i>
+          <i class="fas fa-file-alt fa-2x setting-icon"></i>
         </div>
       </div>
     </div>
@@ -263,11 +263,9 @@ export default {
 
 <style scoped>
   #field {
-    /* opacity : 0.2; */
-
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 2;
     width: 100%;
     height: 100%;
@@ -282,8 +280,9 @@ export default {
   #disp-modal-zone {
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 3;
+    width: 7%;
     height: 100%;
     background-color:black;
 
@@ -317,6 +316,10 @@ export default {
     background-color: rgba(255,255,255,0.2);
   }
 
+  .setting-icon {
+    color : lightgrey;
+  }
+
   .hidden {
     display: none;
   }
@@ -332,7 +335,7 @@ export default {
   }
 
   .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(100vw) 
+    transform: translateX(-100vw)
   }
 
 

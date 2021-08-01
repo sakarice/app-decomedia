@@ -38,13 +38,13 @@
     height: 50%;
     position: absolute;
     top: 0;
-    right: 0;
+    left: 0;
   }
 
   .cancel-button {
     position: absolute;
     top : 20px;
-    right: 60px;
+    left: 70px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
     border-radius: 4px;
