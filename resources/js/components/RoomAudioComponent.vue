@@ -421,7 +421,8 @@
 
   .audio-vol-wrapper {
     position: absolute;
-    left: 70px;
+    right: 70px;
+    transform: rotate(180deg);
     display: flex;
     align-items: center;
   }
