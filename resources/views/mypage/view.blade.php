@@ -28,37 +28,10 @@
 
       <section style="height:100px"></section>
 
-      <section class="mypage-section created-room-list">
-        <div class="section-top-wrapper">
-          <h3 class="section-title">作成済みRoom</h3>
-          {{-- Room作成 --}}
-          <div class="room-create-wrapper">
-            <a class="linkTo-createRoom" href="room/create">Room作成</a>
-          </div>
-          <a href="/mypage/myRoomList">もっと見る</a>
-        </div>
-  
-        {{-- 作成済みroom一覧 --}}
-        <room-list-component
-          :room-preview-infos='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
-          :is-show-cover="true">
-        </room-list-component>
-        
-      </section>
-
-      <section class="mypage-section liked-room-list">
-        <div class="section-top-wrapper">
-          <h3 class="section-title">いいねしたRoom</h3>
-          <a href="/mypage/likedRoomList">もっと見る</a>
-        </div>
-        {{-- いいねしたroom一覧 --}}
-        <room-list-component
-          :room-preview-infos='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
-          :is-show-cover="false">
-        </room-list-component>
-
-      </section>
-      
+      <mypage-component
+        :created-room-preview-infos='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+        :liked-room-preview-infos='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'>
+      </mypage-component>
 
     </div>
 
