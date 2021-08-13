@@ -49,6 +49,10 @@ Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
 // 検索結果
 Route::post('/searchResult', 'App\Lib\SearchUtil@searchRooms');
 
+// マイページで、作成済みRoomをもっと見る
+Route::get('/addCreatedRoomPreviewInfos', 'App\Lib\RoomUtil@getCreatedRoomPreviewInfos');
+Route::get('/addLikedRoomPreviewInfos', 'App\Lib\RoomUtil@getLikedRoomPreviewInfos');
+
 
 // ★今の仕様
 Route::get('/home/room/create', 'App\Http\Controllers\Room\RoomController@create');

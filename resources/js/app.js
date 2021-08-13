@@ -25,6 +25,8 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
+
 Vue.component('test-component', require('./components/TestComponent.vue').default);
 Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
 
@@ -43,8 +45,13 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 
 // ★マイページ用コンポーネント
 
+// ★マイページコンポーネント
+Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
+
 // ★ユーザプロフィールコンポーネント
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
+
+
 
 // ★room所有者(＝作成者)情報コンポーネント
 Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);

@@ -8,10 +8,9 @@
   <link rel="stylesheet" href="{{ asset('css/mypage.view.css') }}">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> {{-- jquery --}}
-  <title>Mypage</title>
+  <title>MyRoomList</title>
 </head>
 <body>
-  {{-- <div class="header-wrapper"></div><br> --}}
 
   <div class="contents-wrapper">
 
@@ -22,16 +21,25 @@
       :is-login="true">
       </header-component>
 
-      {{-- <left-bar-component
+      <left-bar-component
       :csrf="{{json_encode(csrf_token())}}">
-      </left-bar-component> --}}
+      </left-bar-component>
 
-      <section style="height:100px"></section>
-
-      <mypage-component
-        :created-room-preview-infos-from-parent='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
-        :liked-room-preview-infos-from-parent='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'>
-      </mypage-component>
+      <section class="created-room-list">
+        <div class="section-top-wrapper">
+          <h3 class="section-title">作成済みRoom</h3>
+          {{-- Room作成 --}}
+          <div class="room-create-wrapper">
+            <a class="linkTo-createRoom" href="room/create">Room作成</a>
+          </div>
+        </div>
+  
+        {{-- 作成済みroom一覧 --}}
+        <room-list-component
+          :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+          :is-show-cover="true">
+        </room-list-component>    
+      </section>
 
     </div>
 

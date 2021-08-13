@@ -53,6 +53,60 @@ class RoomUtil
 
   }
 
+  // 作成済みroomのプレビュー情報を取得
+  public static function getCreatedRoomPreviewInfos($record_num=100){
+    $authenticated_userId = Auth::user()->id;
+    $createdRoomPreviewInfos = array();
+    $rooms = Room::limit($record_num)->where('user_id', $authenticated_userId)->get();
+    foreach($rooms as $index => $room){
+        $room_id = $room->id;
+        $createdRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+    }
+
+    return ['createdRoomPreviewInfos' => $createdRoomPreviewInfos];
+  }
+
+  // いいねしたroomのプレビュー情報を取得
+  public static function getLikedRoomPreviewInfos($record_num=100){
+    $authenticated_userId = Auth::user()->id;
+    $likedRoomPreviewInfos = array();
+    $rooms = RoomUtil::getLikedRoomModel($authenticated_userId, $record_num);
+    foreach($rooms as $index => $room){
+        $room_id = $room->room_id; // ※idではなくroom_idで指定する
+        $likedRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+    }
+    return ['likedRoomPreviewInfos' => $likedRoomPreviewInfos];
+  }
+  
+
+  // 自分がいいねしたroomのmodelを返す
+  public static function getLikedRoomModel($user_id, $record_num){
+    $sql = <<< SQL
+      SELECT * FROM rooms r
+        INNER JOIN user_like_rooms ulr
+        ON ulr.room_id = r.id
+        WHERE ulr.user_id = $user_id
+        LIMIT $record_num
+    SQL;
+
+    $rooms = DB::select($sql);
+    return $rooms;  
+  }
+
+  // 公開中のroomのmodelを返す
+  public static function getOpenRoomModel($record_num){
+    $sql = <<< SQL
+      SELECT * FROM rooms r
+        INNER JOIN room_settings rs
+        ON rs.room_id = r.id
+        WHERE rs.open_state = 1
+        LIMIT $record_num
+    SQL;
+
+    $rooms = DB::select($sql);
+    return $rooms;
+  }
+
 
     // Roomのプレビュー表示に必要な情報を取得(id,title,サムネ画像のurl)
     public static function getRoomPreviewInfo($room_id){
@@ -66,7 +120,8 @@ class RoomUtil
           } else if ($room_img_type == 2){
           $room_img = UserOwnImg::where('id', $room_img_id)->first();
           }
-          $room_img_url = $room_img->img_url;
+          // $room_img_url = $room_img->img_url;
+          $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"; 
       } else if(RoomMovie::where('room_id', $room_id)->exists()) {
           // youtubeアイコンの画像URLをセット
           $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";

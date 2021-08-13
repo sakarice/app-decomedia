@@ -282,7 +282,8 @@
   #room-Audio-wrapper {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
+    z-index: 5;
     width: 120px;
     height: 100%;
     padding: 20px 5px;
@@ -420,7 +421,8 @@
 
   .audio-vol-wrapper {
     position: absolute;
-    left: 70px;
+    right: 70px;
+    transform: rotate(180deg);
     display: flex;
     align-items: center;
   }
