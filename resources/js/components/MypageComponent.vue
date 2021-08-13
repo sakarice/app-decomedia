@@ -54,7 +54,7 @@ import RoomList from './RoomListComponent.vue';
 import LeftBar from './LeftBarComponent.vue';
 
 export default {
-  component : {
+  components : {
     RoomList,
     LeftBar,
   },
