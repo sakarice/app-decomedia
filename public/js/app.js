@@ -2931,11 +2931,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
-  props: ['csrf'],
+  props: [// 'csrf',
+  ],
   data: function data() {
     return {};
   },
-  methods: {},
+  methods: {
+    switchToMypageDefault: function switchToMypageDefault() {
+      this.$parent.isShowCreatedRoomPreview = true;
+      this.$parent.isShowLikedRoomPreview = true;
+    },
+    switchToCreatedRoomPreview: function switchToCreatedRoomPreview() {
+      this.$parent.isShowCreatedRoomPreview = true;
+      this.$parent.isShowLikedRoomPreview = false;
+    },
+    switchToLikedRoomPreview: function switchToLikedRoomPreview() {
+      this.$parent.isShowCreatedRoomPreview = false;
+      this.$parent.isShowLikedRoomPreview = true;
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -3125,6 +3139,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _RoomListComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomListComponent.vue */ "./resources/js/components/RoomListComponent.vue");
+/* harmony import */ var _LeftBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftBarComponent.vue */ "./resources/js/components/LeftBarComponent.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3169,24 +3192,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   component: {
-    RoomList: _RoomListComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
+    RoomList: _RoomListComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+    LeftBar: _LeftBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  props: ['createdRoomPreviewInfos', 'likedRoomPreviewInfos'],
+  props: ['createdRoomPreviewInfosFromParent', 'likedRoomPreviewInfosFromParent'],
   data: function data() {
-    return {// 'isShowCover' : true
+    return {
+      'createdRoomPreviewInfos': "",
+      'likedRoomPreviewInfos': "",
+      'isShowCoverOnCreateRoom': true,
+      'isShowCoverOnLikeRoom': false,
+      'isShowCreatedRoomPreview': true,
+      'isShowLikedRoomPreview': true,
+      'isUpdateCreatedRoomPreviewInfo': false,
+      'isUpdateLikedRoomPreviewInfo': false
     };
   },
   methods: {
-    closeModal: function closeModal() {
-      this.$emit('close-modal');
-    },
-    roomShowLink: function roomShowLink(id) {
-      return "/home/room/" + id;
-    },
     roomEditLink: function roomEditLink(id) {
       return "/home/room/" + id + "/edit";
+    },
+    addCreatedRoomPreviewInfos: function addCreatedRoomPreviewInfos() {
+      var url = '/addCreatedRoomPreviewInfos';
+      var tmpThis = this;
+      axios.get(url).then(function (response) {
+        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.isUpdateCreatedRoomPreviewInfo = true;
+      })["catch"](function (error) {
+        alert('room情報の取得に失敗しました');
+      });
+    },
+    addLikedRoomPreviewInfos: function addLikedRoomPreviewInfos() {
+      var url = '/addLikedRoomPreviewInfos';
+      var tmpThis = this;
+      axios.get(url).then(function (response) {
+        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.isUpdateLikedRoomPreviewInfo = true;
+      })["catch"](function (error) {
+        alert('room情報の取得に失敗しました');
+      });
     },
     deleteRoom: function deleteRoom(room_id) {
       var room_data = {
@@ -3201,7 +3248,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  mounted: function mounted() {},
+  created: function created() {},
+  mounted: function mounted() {
+    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
+    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+  },
   watch: {},
   computed: {}
 });
@@ -9743,7 +9794,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-section[data-v-74b0df32] {\r\n  margin-left: 50px;\r\n  padding: 10px 10px 10px 50px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-right: 20px;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 5px 20px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-section[data-v-74b0df32] {\r\n  margin-left: 50px;\r\n  padding: 10px 10px 10px 50px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-right: 20px;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 5px 20px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51352,36 +51403,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "left-bar" }, [
-      _c("div", { staticClass: "my-page-top" }, [
-        _c("div", { staticClass: "content" }, [
-          _c("a", { staticClass: "logo", attrs: { href: "/home/mypage" } }, [
-            _c("i", { staticClass: "fas fa-door-open" })
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "created-rooms" }, [
-        _c("div", { staticClass: "content" }, [
-          _c("i", { staticClass: "fas fa-clone" })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "liked-rooms" }, [
-        _c("div", { staticClass: "content" }, [
-          _c("i", { staticClass: "far fa-heart" })
-        ])
+  return _c("div", { staticClass: "left-bar" }, [
+    _c("div", { staticClass: "my-page-top" }, [
+      _c("div", { staticClass: "content" }, [
+        _c("i", {
+          staticClass: "fas fa-door-open",
+          on: { click: _vm.switchToMypageDefault }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "created-rooms" }, [
+      _c("div", { staticClass: "content" }, [
+        _c("i", {
+          staticClass: "fas fa-clone",
+          on: { click: _vm.switchToCreatedRoomPreview }
+        })
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "liked-rooms" }, [
+      _c("div", { staticClass: "content" }, [
+        _c("i", {
+          staticClass: "far fa-heart",
+          on: { click: _vm.switchToLikedRoomPreview }
+        })
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -51600,69 +51651,105 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "section",
-      { staticClass: "mypage-section created-room-list" },
-      [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("room-list-component", {
-          attrs: {
-            "room-preview-infos": _vm.createdRoomPreviewInfos,
-            "is-show-cover": true
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "section",
-      { staticClass: "mypage-section liked-room-list" },
-      [
-        _vm._m(1),
-        _vm._v(" "),
-        _c("room-list-component", {
-          attrs: {
-            "room-preview-infos": _vm.likedRoomPreviewInfos,
-            "is-show-cover": false
-          }
-        })
-      ],
-      1
-    )
-  ])
+  return _c(
+    "div",
+    [
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isShowCreatedRoomPreview,
+              expression: "isShowCreatedRoomPreview"
+            }
+          ],
+          staticClass: "mypage-section created-room-list"
+        },
+        [
+          _c("div", { staticClass: "section-top-wrapper" }, [
+            _c("h3", { staticClass: "section-title" }, [
+              _vm._v("作成済みRoom")
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "view-more",
+                on: { click: _vm.addCreatedRoomPreviewInfos }
+              },
+              [_vm._v("\n        もっと見る\n      ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("room-list-component", {
+            attrs: {
+              "room-preview-infos": _vm.createdRoomPreviewInfos,
+              "is-show-cover": _vm.isShowCoverOnCreateRoom
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isShowLikedRoomPreview,
+              expression: "isShowLikedRoomPreview"
+            }
+          ],
+          staticClass: "mypage-section liked-room-list"
+        },
+        [
+          _c("div", { staticClass: "section-top-wrapper" }, [
+            _c("h3", { staticClass: "section-title" }, [
+              _vm._v("いいねしたRoom")
+            ]),
+            _vm._v(" "),
+            _c(
+              "span",
+              {
+                staticClass: "view-more",
+                on: { click: _vm.addLikedRoomPreviewInfos }
+              },
+              [_vm._v("\n        もっと見る\n      ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("room-list-component", {
+            attrs: {
+              "room-preview-infos": _vm.likedRoomPreviewInfos,
+              "is-show-cover": _vm.isShowCoverOnLikeRoom
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("left-bar-component")
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section-top-wrapper" }, [
-      _c("h3", { staticClass: "section-title" }, [_vm._v("作成済みRoom")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "room-create-wrapper" }, [
-        _c(
-          "a",
-          { staticClass: "linkTo-createRoom", attrs: { href: "room/create" } },
-          [_vm._v("Room作成")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/mypage/myRoomList" } }, [_vm._v("もっと見る")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "section-top-wrapper" }, [
-      _c("h3", { staticClass: "section-title" }, [_vm._v("いいねしたRoom")]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/mypage/likedRoomList" } }, [
-        _vm._v("もっと見る")
-      ])
+    return _c("div", { staticClass: "room-create-wrapper" }, [
+      _c(
+        "a",
+        { staticClass: "linkTo-createRoom", attrs: { href: "room/create" } },
+        [_vm._v("Room作成")]
+      )
     ])
   }
 ]

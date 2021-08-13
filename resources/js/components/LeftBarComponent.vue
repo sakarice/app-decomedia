@@ -3,9 +3,9 @@
         <!-- マイページトップ -->
         <div class="my-page-top">
             <div class="content">
-                <a class="logo" href="/home/mypage">
-                    <i class="fas fa-door-open"></i>
-                </a>
+                <!-- <a class="logo" href="/home/mypage"> -->
+                <i @click="switchToMypageDefault" class="fas fa-door-open"></i>
+                <!-- </a> -->
             </div>
         </div>
 
@@ -14,7 +14,7 @@
             <div class="content">
                 <!-- <a class="logo" href="/home/createdRoom"> -->
                     <!-- <i class="fas fa-hammer"></i> -->
-                    <i class="fas fa-clone"></i>
+                    <i @click="switchToCreatedRoomPreview" class="fas fa-clone"></i>
                 <!-- </a> -->
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="liked-rooms">
             <div class="content">
                 <!-- <a class="logo" href="/home/createdRoom"> -->
-                    <i class="far fa-heart"></i>
+                    <i @click="switchToLikedRoomPreview" class="far fa-heart"></i>
                 <!-- </a> -->
             </div>
         </div>
@@ -38,13 +38,25 @@
 export default {
     components : {},
     props : [
-        'csrf',
+        // 'csrf',
     ],
     data : () => {
         return {
         }
     },
     methods : {
+        switchToMypageDefault(){
+            this.$parent.isShowCreatedRoomPreview = true;
+            this.$parent.isShowLikedRoomPreview = true;
+        },
+        switchToCreatedRoomPreview(){
+            this.$parent.isShowCreatedRoomPreview = true;
+            this.$parent.isShowLikedRoomPreview = false;
+        },
+        switchToLikedRoomPreview(){
+            this.$parent.isShowCreatedRoomPreview = false;
+            this.$parent.isShowLikedRoomPreview = true;
+        },
         
     },
     mounted(){}

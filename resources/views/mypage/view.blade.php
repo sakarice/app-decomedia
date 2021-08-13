@@ -22,15 +22,15 @@
       :is-login="true">
       </header-component>
 
-      <left-bar-component
+      {{-- <left-bar-component
       :csrf="{{json_encode(csrf_token())}}">
-      </left-bar-component>
+      </left-bar-component> --}}
 
       <section style="height:100px"></section>
 
       <mypage-component
-        :created-room-preview-infos='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
-        :liked-room-preview-infos='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'>
+        :created-room-preview-infos-from-parent='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+        :liked-room-preview-infos-from-parent='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'>
       </mypage-component>
 
     </div>

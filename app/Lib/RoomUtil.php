@@ -53,6 +53,31 @@ class RoomUtil
 
   }
 
+  // 作成済みroomのプレビュー情報を取得
+  public static function getCreatedRoomPreviewInfos($record_num=100){
+    $authenticated_userId = Auth::user()->id;
+    $createdRoomPreviewInfos = array();
+    $rooms = Room::limit($record_num)->where('user_id', $authenticated_userId)->get();
+    foreach($rooms as $index => $room){
+        $room_id = $room->id;
+        $createdRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+    }
+
+    return ['createdRoomPreviewInfos' => $createdRoomPreviewInfos];
+  }
+
+  // いいねしたroomのプレビュー情報を取得
+  public static function getLikedRoomPreviewInfos($record_num=100){
+    $authenticated_userId = Auth::user()->id;
+    $likedRoomPreviewInfos = array();
+    $rooms = RoomUtil::getLikedRoomModel($authenticated_userId, $record_num);
+    foreach($rooms as $index => $room){
+        $room_id = $room->room_id; // ※idではなくroom_idで指定する
+        $likedRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+    }
+    return ['likedRoomPreviewInfos' => $likedRoomPreviewInfos];
+  }
+  
 
   // 自分がいいねしたroomのmodelを返す
   public static function getLikedRoomModel($user_id, $record_num){
@@ -77,7 +102,7 @@ class RoomUtil
         WHERE rs.open_state = 1
         LIMIT $record_num
     SQL;
-    
+
     $rooms = DB::select($sql);
     return $rooms;
   }
