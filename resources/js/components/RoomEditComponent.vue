@@ -30,7 +30,8 @@
      ref="roomMovie">
     </room-movie-component>
 
-    <room-update-button>
+    <room-update-button
+    @getFinishTime="getFinishTime">
     </room-update-button>
 
     <cancel-button></cancel-button>
@@ -173,6 +174,7 @@ export default {
         'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
         'description' : "",
+        'finish_time' : 0,
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
@@ -219,6 +221,7 @@ export default {
       this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['description'] = tmpSettingData.description;
+      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
@@ -285,6 +288,13 @@ export default {
     deleteMovieFrame(){
       this.$refs.roomMovie.deleteYtPlayer();
       this.roomSetting['isShowMovie'] = false;
+    },
+    getFinishTime(){
+      if(this.roomMovie['videoId'] != ""){
+        this.$refs.roomMovie.setMovieDurationToFinishTime();
+      } else {
+        this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
+      }
     },
     
   },

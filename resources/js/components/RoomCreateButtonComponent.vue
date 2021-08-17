@@ -23,6 +23,7 @@
 
     methods : {
       createRoom() {
+        this.$emit('getFinishTime');
         const url = '/home/room/store';
         let room_datas = {
           'img' : this.$parent.roomImg,

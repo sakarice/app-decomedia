@@ -31,6 +31,7 @@ class RoomSettingController extends Controller
           $roomSetting->name = 'room';
         }
         $roomSetting->description = $request->setting['description'];
+        $roomSetting->finish_time = $request->setting['finish_time'];
         $roomSetting->is_show_img = $request->setting['isShowImg'];
         $roomSetting->is_show_movie = $request->setting['isShowMovie'];
         $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
@@ -49,6 +50,7 @@ class RoomSettingController extends Controller
             'id' => $room_id,
             'name' => $room_setting->name,
             'description' => $room_setting->description,
+            'finish_time' => $room_setting->finish_time,
             'is_show_img' => $room_setting->is_show_img,
             'is_show_movie' => $room_setting->is_show_movie,
             'max_audio_num' => $room_setting->max_audio_num,

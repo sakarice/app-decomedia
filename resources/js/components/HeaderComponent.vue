@@ -2,9 +2,7 @@
     <div class="header">
         <!-- 左側 -->
         <div class="header-left">
-            <div class="header-content">
-                <a class="logo" href="/home">Room</a>
-            </div>
+            <home-link-component></home-link-component>
         </div>
         <!-- 右側 -->
         <div class="header-right">
@@ -26,13 +24,6 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-
-            <!-- ユーザプロフィールアイコン(ログイン済みの場合表示) -->
-            <!-- <div class="header-content" v-show="isShowProfileIcon">
-                <a class="user-icon" :href="toUserProfile()">
-                    <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
-                </a>
-            </div> -->
             <div class="header-content" v-show="isLogin">
                 <a class="user-icon" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
@@ -52,11 +43,11 @@
 
 <script>
 import Profile from './ProfileComponent.vue';
-
-
+import HomeLink from './HomeLinkComponent.vue';
 
 export default {
     components : {
+        HomeLink,
         Profile,
     },
     props : [

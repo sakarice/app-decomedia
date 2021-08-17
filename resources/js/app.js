@@ -25,6 +25,7 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
 Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
 
 Vue.component('test-component', require('./components/TestComponent.vue').default);

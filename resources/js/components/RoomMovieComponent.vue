@@ -65,6 +65,11 @@
             event.target.playVideo();
           }
       },
+      // ★動画の長さ取得
+      setMovieDurationToFinishTime(){
+        let movieDuration = this.ytPlayer.getDuration();
+        this.$parent.roomSetting['finish_time'] = movieDuration;
+      },
       onPlayerStateChange(event) {
         if(event.data == 0 && this.isLoopYoutube == true){
           this.ytPlayer.seekTo(0);
@@ -88,6 +93,7 @@
       },
       deleteYtPlayer() {
         this.ytPlayer = "";
+        this.$parent.roomMovie['videoId'] = "";
         this.initPlayerDom();
       },
       initPlayerDom() {
