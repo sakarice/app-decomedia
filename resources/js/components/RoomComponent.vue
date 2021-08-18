@@ -147,7 +147,7 @@ export default {
   methods : {
     judgeIsMyRoom(){
       let room_id = JSON.parse(this.roomSettingData).id;
-      let url = '/judgeIsMyRoom/' + room_id;
+      let url = '/ajax/judgeIsMyRoom/' + room_id;
       axios.get(url)
         .then(response =>{
           this.isMyRoom = response.data.isMyRoom;

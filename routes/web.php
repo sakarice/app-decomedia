@@ -40,9 +40,6 @@ Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
 // roomの作成者情報を表示
 Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerInfo');
 
-// 入ったroomが自分の作成したroomか判別する
-Route::get('/judgeIsMyRoom/{room_id}', 'App\Lib\RoomUtil@judgeIsMyRoom');
-
 // Roomへ「いいね」する
 Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
 
@@ -76,6 +73,8 @@ Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\Audio\DefaultAudioCon
 Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\Audio\UserOwnAudioController@index');
 Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Audio\AudioController@store');
 Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioController@destroy');
+// 入ったroomが自分の作成したroomか判別する
+Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\RoomController@judgeIsMyRoom');
 
 
 // defaultImgアップロード(開発用、後で消す)

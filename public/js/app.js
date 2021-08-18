@@ -3840,7 +3840,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var room_id = JSON.parse(this.roomSettingData).id;
-      var url = '/judgeIsMyRoom/' + room_id;
+      var url = '/ajax/judgeIsMyRoom/' + room_id;
       axios.get(url).then(function (response) {
         _this.isMyRoom = response.data.isMyRoom;
       })["catch"](function (error) {
