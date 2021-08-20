@@ -1,6 +1,15 @@
 <template>
   <div>
 
+    <div class="select-mode-wrapper">
+      <button id="change-select-mode" @click="toggleSelectMode">
+        {{selectModeButtonMessage}}
+      </button>
+      <button v-show="isSelectMode" @click="unCheckAllRoom">
+        全ての選択を解除
+      </button>
+    </div>
+
     <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
       <div class="section-top-wrapper">
         <h3 class="section-title">作成済みRoom</h3>
@@ -16,7 +25,10 @@
       <!-- {{-- 作成済みroom一覧 --}} -->
       <room-list-component
         :room-preview-infos="createdRoomPreviewInfos"
-        :is-show-cover="isShowCoverOnCreateRoom">
+        :is-show-cover="isShowCoverOnCreateRoom"
+        :is-select-mode="isSelectMode"
+        @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
+        ref="createdRoomPreview">
       </room-list-component>
       
     </section>
@@ -32,7 +44,10 @@
 
       <room-list-component
         :room-preview-infos="likedRoomPreviewInfos"
-        :is-show-cover="isShowCoverOnLikeRoom">
+        :is-show-cover="isShowCoverOnLikeRoom"
+        :is-select-mode="isSelectMode"
+        @changeIsCheckedRoom="changeIsCheckedLikedRoom"
+        ref="likedRoomPreview">
       </room-list-component>
 
     </section>
@@ -66,15 +81,21 @@ export default {
     return {
       'createdRoomPreviewInfos' : "",
       'likedRoomPreviewInfos' : "",
+      'isSelectMode' : false,
       'isShowCoverOnCreateRoom' : true,
       'isShowCoverOnLikeRoom' : false,
       'isShowCreatedRoomPreview' : true,
       'isShowLikedRoomPreview' : true,
       'isUpdateCreatedRoomPreviewInfo' : false,
       'isUpdateLikedRoomPreviewInfo' : false,
+      'totalSelectedCount' : 0,
     }
   },
   methods : {
+    toggleSelectMode(){
+      this.isShowCoverOnCreateRoom = this.isSelectMode
+      this.isSelectMode = !this.isSelectMode;
+    },
     roomEditLink : function(id) {
       return "/home/room/" + id + "/edit";
     },
@@ -115,6 +136,56 @@ export default {
       .catch(error => {
         alert('room削除に失敗しました。');
       })
+    },
+    changeIsCheckedCreatedRoom(isChecked, index){
+      if(isChecked == true){
+        this.increaseCreatedRoomSelectedCount(index);
+      } else if(isChecked == false){
+        let unSelectedOrderNum = this.createdRoomPreviewInfos[index]['selectedOrderNum'];
+        this.createdRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        this.decreseRoomSelectedCount(unSelectedOrderNum);
+      }
+    },
+    changeIsCheckedLikedRoom(isChecked, index){
+      if(isChecked == true){
+        this.increaseLikedRoomSelectedCount(index);
+      } else if(isChecked == false){
+        let unSelectedOrderNum = this.likedRoomPreviewInfos[index]['selectedOrderNum'];
+        this.likedRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        this.decreseRoomSelectedCount(unSelectedOrderNum);
+      }
+    },
+    increaseCreatedRoomSelectedCount(index){
+      this.createdRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
+      this.totalSelectedCount ++;
+    },
+    increaseLikedRoomSelectedCount(index){
+      this.likedRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
+      this.totalSelectedCount ++;
+    },
+    decreseRoomSelectedCount(unSelectedOrderNum){
+      for(let i=0; i < this.createdRoomPreviewInfos.length; i++){
+        if(this.createdRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
+          this.createdRoomPreviewInfos[i]['selectedOrderNum'] --;
+        }
+      }
+      for(let i=0; i < this.likedRoomPreviewInfos.length; i++){
+        if(this.likedRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
+          this.likedRoomPreviewInfos[i]['selectedOrderNum'] --;
+        }
+      }
+      this.totalSelectedCount --;
+    },
+    unCheckAllRoom(){
+      this.$refs.createdRoomPreview.unCheckAllRoom();
+      this.$refs.likedRoomPreview.unCheckAllRoom();
+      for(let i=0; i < this.createdRoomPreviewInfos.length; i++){
+        this.createdRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      }
+      for(let i=0; i < this.likedRoomPreviewInfos.length; i++){
+        this.likedRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      }
+      this.totalSelectedCount = 0;
     }
 
   },
@@ -127,7 +198,13 @@ export default {
   watch : {
   },
   computed : {
-
+    selectModeButtonMessage : function(){
+      if(this.isSelectMode){
+        return '選択モードを解除';
+      } else {
+        return 'Roomを複数選択する';
+      }
+    }
   }
 
 }
@@ -135,6 +212,10 @@ export default {
 
 
 <style scoped>
+
+.select-mode-wrapper {
+  margin-left: 100px;
+}
 
 .mypage-section {
   margin-left: 50px;

@@ -3218,6 +3218,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3230,15 +3245,21 @@ __webpack_require__.r(__webpack_exports__);
     return {
       'createdRoomPreviewInfos': "",
       'likedRoomPreviewInfos': "",
+      'isSelectMode': false,
       'isShowCoverOnCreateRoom': true,
       'isShowCoverOnLikeRoom': false,
       'isShowCreatedRoomPreview': true,
       'isShowLikedRoomPreview': true,
       'isUpdateCreatedRoomPreviewInfo': false,
-      'isUpdateLikedRoomPreviewInfo': false
+      'isUpdateLikedRoomPreviewInfo': false,
+      'totalSelectedCount': 0
     };
   },
   methods: {
+    toggleSelectMode: function toggleSelectMode() {
+      this.isShowCoverOnCreateRoom = this.isSelectMode;
+      this.isSelectMode = !this.isSelectMode;
+    },
     roomEditLink: function roomEditLink(id) {
       return "/home/room/" + id + "/edit";
     },
@@ -3273,6 +3294,61 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert('room削除に失敗しました。');
       });
+    },
+    changeIsCheckedCreatedRoom: function changeIsCheckedCreatedRoom(isChecked, index) {
+      if (isChecked == true) {
+        this.increaseCreatedRoomSelectedCount(index);
+      } else if (isChecked == false) {
+        var unSelectedOrderNum = this.createdRoomPreviewInfos[index]['selectedOrderNum'];
+        this.createdRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        this.decreseRoomSelectedCount(unSelectedOrderNum);
+      }
+    },
+    changeIsCheckedLikedRoom: function changeIsCheckedLikedRoom(isChecked, index) {
+      if (isChecked == true) {
+        this.increaseLikedRoomSelectedCount(index);
+      } else if (isChecked == false) {
+        var unSelectedOrderNum = this.likedRoomPreviewInfos[index]['selectedOrderNum'];
+        this.likedRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        this.decreseRoomSelectedCount(unSelectedOrderNum);
+      }
+    },
+    increaseCreatedRoomSelectedCount: function increaseCreatedRoomSelectedCount(index) {
+      this.createdRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
+      this.totalSelectedCount++;
+    },
+    increaseLikedRoomSelectedCount: function increaseLikedRoomSelectedCount(index) {
+      this.likedRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
+      this.totalSelectedCount++;
+    },
+    decreseRoomSelectedCount: function decreseRoomSelectedCount(unSelectedOrderNum) {
+      for (var i = 0; i < this.createdRoomPreviewInfos.length; i++) {
+        if (this.createdRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum) {
+          this.createdRoomPreviewInfos[i]['selectedOrderNum']--;
+        }
+      }
+
+      for (var _i = 0; _i < this.likedRoomPreviewInfos.length; _i++) {
+        if (this.likedRoomPreviewInfos[_i]['selectedOrderNum'] > unSelectedOrderNum) {
+          this.likedRoomPreviewInfos[_i]['selectedOrderNum']--;
+        }
+      }
+
+      this.totalSelectedCount--;
+    },
+    unCheckAllRoom: function unCheckAllRoom() {
+      this.$refs.createdRoomPreview.unCheckAllRoom();
+      this.$refs.likedRoomPreview.unCheckAllRoom();
+
+      for (var i = 0; i < this.createdRoomPreviewInfos.length; i++) {
+        this.createdRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      }
+
+      for (var _i2 = 0; _i2 < this.likedRoomPreviewInfos.length; _i2++) {
+        this.likedRoomPreviewInfos[_i2]['selectedOrderNum'] = 0;
+      }
+
+      this.totalSelectedCount = 0;
     }
   },
   created: function created() {},
@@ -3281,7 +3357,15 @@ __webpack_require__.r(__webpack_exports__);
     this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
   },
   watch: {},
-  computed: {}
+  computed: {
+    selectModeButtonMessage: function selectModeButtonMessage() {
+      if (this.isSelectMode) {
+        return '選択モードを解除';
+      } else {
+        return 'Roomを複数選択する';
+      }
+    }
+  }
 });
 
 /***/ }),
@@ -4501,10 +4585,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['roomPreviewInfos', 'isShowCover'],
+  props: ['roomPreviewInfos', 'isShowCover', 'isSelectMode'],
   data: function data() {
-    return {};
+    return {
+      'isShowSelectedOrderNum': false
+    };
   },
   methods: {
     closeModal: function closeModal() {
@@ -4527,6 +4625,22 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert('room削除に失敗しました。');
       });
+    },
+    changeIsCheckedRoom: function changeIsCheckedRoom(event, index) {
+      var isChecked = event.target.checked;
+      this.$emit('changeIsCheckedRoom', isChecked, index);
+    },
+    unCheckAllRoom: function unCheckAllRoom() {
+      var checkBoxList = document.querySelectorAll(".room-select-check");
+
+      for (var i = 0; i < checkBoxList.length; i++) {
+        checkBoxList[i].checked = false;
+      }
+    },
+    judgeIsChecked: function judgeIsChecked(roomPreviewInfo) {
+      if (roomPreviewInfo['selectedOrderNum'] > 0) {
+        return true;
+      }
     }
   },
   mounted: function mounted() {},
@@ -9879,7 +9993,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-section[data-v-74b0df32] {\r\n  margin-left: 50px;\r\n  padding: 10px 10px 10px 50px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-right: 20px;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 5px 20px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.select-mode-wrapper[data-v-74b0df32] {\r\n  margin-left: 100px;\n}\n.mypage-section[data-v-74b0df32] {\r\n  margin-left: 50px;\r\n  padding: 10px 10px 10px 50px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-right: 20px;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 5px 20px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10074,7 +10188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-df1977ee] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-df1977ee] {\r\n  list-style: none;\n}\n.preview-room[data-v-df1977ee] {\r\n  position: relative;\r\n  text-align: center;\r\n  /* font-size: 50px; */\r\n  margin-right: 40px;\r\n  margin-bottom: 80px;\r\n  width: 180px;\r\n  height: 180px;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-df1977ee]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-df1977ee] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-df1977ee] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail[data-v-df1977ee] {\r\n  /* position: absolute; */\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.cover-menu[data-v-df1977ee] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-df1977ee] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-df1977ee] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-df1977ee]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-df1977ee] {\r\n  color: aqua;\n}\n.del-icon[data-v-df1977ee] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-df1977ee]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.room-title[data-v-df1977ee] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-df1977ee] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-df1977ee] {\r\n  list-style: none;\n}\n.preview-room[data-v-df1977ee] {\r\n  position: relative;\r\n  text-align: center;\r\n  /* font-size: 50px; */\r\n  margin-right: 40px;\r\n  margin-bottom: 80px;\r\n  width: 180px;\r\n  height: 180px;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-df1977ee]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-df1977ee] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-df1977ee] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail[data-v-df1977ee] {\r\n  /* position: absolute; */\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.cover-menu[data-v-df1977ee] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-df1977ee] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-df1977ee] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-df1977ee]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-df1977ee] {\r\n  color: aqua;\n}\n.del-icon[data-v-df1977ee] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-df1977ee]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-df1977ee] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-df1977ee]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-df1977ee] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-df1977ee] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-df1977ee]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-df1977ee] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -51879,6 +51993,33 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", { staticClass: "select-mode-wrapper" }, [
+        _c(
+          "button",
+          {
+            attrs: { id: "change-select-mode" },
+            on: { click: _vm.toggleSelectMode }
+          },
+          [_vm._v("\n      " + _vm._s(_vm.selectModeButtonMessage) + "\n    ")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isSelectMode,
+                expression: "isSelectMode"
+              }
+            ],
+            on: { click: _vm.unCheckAllRoom }
+          },
+          [_vm._v("\n      全ての選択を解除\n    ")]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "section",
         {
@@ -51911,10 +52052,13 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("room-list-component", {
+            ref: "createdRoomPreview",
             attrs: {
               "room-preview-infos": _vm.createdRoomPreviewInfos,
-              "is-show-cover": _vm.isShowCoverOnCreateRoom
-            }
+              "is-show-cover": _vm.isShowCoverOnCreateRoom,
+              "is-select-mode": _vm.isSelectMode
+            },
+            on: { changeIsCheckedRoom: _vm.changeIsCheckedCreatedRoom }
           })
         ],
         1
@@ -51950,10 +52094,13 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("room-list-component", {
+            ref: "likedRoomPreview",
             attrs: {
               "room-preview-infos": _vm.likedRoomPreviewInfos,
-              "is-show-cover": _vm.isShowCoverOnLikeRoom
-            }
+              "is-show-cover": _vm.isShowCoverOnLikeRoom,
+              "is-select-mode": _vm.isSelectMode
+            },
+            on: { changeIsCheckedRoom: _vm.changeIsCheckedLikedRoom }
           })
         ],
         1
@@ -52937,7 +53084,7 @@ var render = function() {
   return _c(
     "ul",
     { staticClass: "room-wrapper" },
-    _vm._l(_vm.roomPreviewInfos, function(roomPreviewInfo) {
+    _vm._l(_vm.roomPreviewInfos, function(roomPreviewInfo, index) {
       return _c("li", { key: roomPreviewInfo.id }, [
         _c(
           "div",
@@ -53004,6 +53151,55 @@ var render = function() {
                 }
               }
             }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isSelectMode,
+                    expression: "isSelectMode"
+                  }
+                ],
+                staticClass: "check-box-cover"
+              },
+              [
+                _c("input", {
+                  staticClass: "room-select-check",
+                  attrs: { type: "checkbox", name: "" },
+                  on: {
+                    change: function($event) {
+                      return _vm.changeIsCheckedRoom($event, index)
+                    }
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value:
+                      _vm.isSelectMode &&
+                      roomPreviewInfo["selectedOrderNum"] > 0,
+                    expression:
+                      "isSelectMode && roomPreviewInfo['selectedOrderNum'] > 0"
+                  }
+                ],
+                staticClass: "selected-order-num-wrapper"
+              },
+              [
+                _c("span", { staticClass: "selected-order-num" }, [
+                  _vm._v(_vm._s(roomPreviewInfo["selectedOrderNum"]))
+                ])
+              ]
+            ),
             _vm._v(" "),
             _c("p", { staticClass: "room-title" }, [
               _vm._v(_vm._s(roomPreviewInfo["name"]))

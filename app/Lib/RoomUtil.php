@@ -137,6 +137,7 @@ class RoomUtil
           'id' => $room_id,
           'name' => $room_name,
           'preview_img_url' => $room_img_url,
+          'selectedOrderNum' => 0,
       );
       return $roomInfo;
     }
