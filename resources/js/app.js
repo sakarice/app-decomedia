@@ -44,6 +44,9 @@ Vue.component('room-create-button-component', require('./components/RoomCreateBu
 Vue.component('room-update-button-component', require('./components/RoomUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
 
+// roomリスト作成用コンポーネント
+Vue.component('room-list-create-button-component', require('./components/RoomListCreateButtonComponent.vue').default);
+
 // ★マイページ用コンポーネント
 
 // ★マイページコンポーネント

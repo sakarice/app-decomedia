@@ -2,12 +2,16 @@
   <div>
 
     <div class="select-mode-wrapper">
-      <button id="change-select-mode" @click="toggleSelectMode">
+      <button id="change-select-mode" class="select-mode-item" @click="toggleSelectMode">
         {{selectModeButtonMessage}}
       </button>
-      <button v-show="isSelectMode" @click="unCheckAllRoom">
+      <button class="select-mode-item" v-show="isSelectMode" @click="unCheckAllRoom">
         全ての選択を解除
       </button>
+      <room-list-create-button-component
+      class="select-mode-item"
+      v-show="isSelectMode">
+      </room-list-create-button-component>
     </div>
 
     <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
@@ -67,11 +71,13 @@
 <script>
 import RoomList from './RoomListComponent.vue';
 import LeftBar from './LeftBarComponent.vue';
+import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 
 export default {
   components : {
     RoomList,
     LeftBar,
+    RoomListCreateButton,
   },
   props : [
     'createdRoomPreviewInfosFromParent',
@@ -215,6 +221,12 @@ export default {
 
 .select-mode-wrapper {
   margin-left: 100px;
+  display: flex;
+  height: 25px;
+}
+
+.select-mode-item {
+  margin-right: 10px;
 }
 
 .mypage-section {
