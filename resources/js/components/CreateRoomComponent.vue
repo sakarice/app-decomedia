@@ -30,11 +30,11 @@
      ref="roomMovie">
     </room-movie-component>
 
-    <room-create-button>
+    <room-create-button
+    @getFinishTime="getFinishTime">
     </room-create-button>
 
     <cancel-button></cancel-button>
-
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
@@ -154,6 +154,7 @@ export default {
         'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
         'description' : "",
+        'finish_time' : 0,
         'roomBackgroundColor' : "#F7F7F7", // ほぼ白
         'isShowImg' : true,
         'isShowMovie' : false,
@@ -231,7 +232,14 @@ export default {
       this.$refs.roomMovie.deleteYtPlayer();
       this.roomSetting['isShowMovie'] = false;
     },
-    
+    getFinishTime(){
+      if(this.roomMovie['videoId'] != ""){
+        this.$refs.roomMovie.setMovieDurationToFinishTime();
+      } else {
+        this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
+      }
+    },
+
   },
   created() {},
   mounted() {

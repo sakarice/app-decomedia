@@ -25,6 +25,7 @@ window.Vue = require('vue').default;
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
 Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
 
 Vue.component('test-component', require('./components/TestComponent.vue').default);
@@ -42,6 +43,9 @@ Vue.component('create-room-component', require('./components/CreateRoomComponent
 Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
 Vue.component('room-update-button-component', require('./components/RoomUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
+
+// roomリスト作成用コンポーネント
+Vue.component('room-list-create-button-component', require('./components/RoomListCreateButtonComponent.vue').default);
 
 // ★マイページ用コンポーネント
 

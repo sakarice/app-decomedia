@@ -23,6 +23,7 @@
 
     methods : {
       updateRoom() {
+        this.$emit('getFinishTime');
         const url = '/home/room/update';
         let room_datas = {
           'img' : this.$parent.roomImg,

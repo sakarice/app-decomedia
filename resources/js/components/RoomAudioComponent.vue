@@ -2,6 +2,7 @@
   <!-- <transition name="right-slide"> -->
     <!-- Roomオーディオ -->
   <div id="room-Audio-wrapper">
+
     <!-- オーディオ再生終了 -->
     <div v-show="isEditMode" class="all-audio-controll-wrapper">
       <div class="all-audio-controller all-audio-play-wrapper">
@@ -145,9 +146,7 @@
           };
         });
         this.audioPlayers[emptyPlayerIndex].src = addedAudioUrl;
-
         console.log('ループ再生フラグ', this.audioPlayers[emptyPlayerIndex].loop);
-
         // プレイヤーのインデックスをaudioに設定
         addedAudio['player_index'] = emptyPlayerIndex;
 
@@ -155,6 +154,17 @@
         this.$nextTick(function () { // DOMの更新を待つ
           this.updateAudioThumbnail();
         });
+      },
+      // ★最も再生時間が長いオーディオの再生時間を取得
+      setLongestAudioDurationToFinishTime(){
+        let longestAudioDuration = 0;
+        for(let i=0; i<this.maxAudioNum; i++){
+          if(longestAudioDuration < this.audioPlayers[i].duration){
+            longestAudioDuration = this.audioPlayers[i].duration
+          }
+        }
+        console.log(longestAudioDuration);
+        this.$parent.roomSetting['finish_time'] = longestAudioDuration;
       },
       updateAudioThumbnail() {
         let audioDoms = document.getElementsByClassName('audio-wrapper');

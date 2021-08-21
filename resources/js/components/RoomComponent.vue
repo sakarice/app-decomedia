@@ -134,6 +134,7 @@ export default {
         'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
         'description' : "",
+        'finish_time' : 0,
         'roomBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
@@ -146,7 +147,7 @@ export default {
   methods : {
     judgeIsMyRoom(){
       let room_id = JSON.parse(this.roomSettingData).id;
-      let url = '/judgeIsMyRoom/' + room_id;
+      let url = '/ajax/judgeIsMyRoom/' + room_id;
       axios.get(url)
         .then(response =>{
           this.isMyRoom = response.data.isMyRoom;
@@ -206,6 +207,7 @@ export default {
       this.roomSetting['isPublic'] = tmpSettingData.isPublic;
       this.roomSetting['name'] = tmpSettingData.name;
       this.roomSetting['description'] = tmpSettingData.description;
+      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
       this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
       this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;

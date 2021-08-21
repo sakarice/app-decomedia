@@ -1,6 +1,6 @@
 <template>
   <ul class="room-wrapper">
-    <li v-for="roomPreviewInfo in roomPreviewInfos" :key="roomPreviewInfo.id">
+    <li v-for="(roomPreviewInfo,index) in roomPreviewInfos" :key="roomPreviewInfo.id">
       <div class="preview-room" :id="roomPreviewInfo['id']">
         <a :href="roomShowLink(roomPreviewInfo['id'])">
           <img class="room-thumbnail" :src="roomPreviewInfo['preview_img_url']" alt="">
@@ -15,6 +15,18 @@
           </a>
         </div>
         <i class="fas fa-trash del-icon" @click="deleteRoom(roomPreviewInfo['id'])" v-show="isShowCover"></i>
+
+        <!-- Room選択用チェックボックス -->
+        <div class="check-box-cover" v-show="isSelectMode">
+          <input type="checkbox" class="room-select-check" name="" @change="changeIsCheckedRoom($event, index)">
+        </div>
+
+        <!-- 選択順 -->
+        <div class="selected-order-num-wrapper"
+        v-show="isSelectMode && roomPreviewInfo['selectedOrderNum'] > 0">
+          <span class="selected-order-num">{{roomPreviewInfo['selectedOrderNum']}}</span>
+        </div>
+
         <p class="room-title">{{roomPreviewInfo['name']}}</p>
       </div>
     </li>
@@ -26,9 +38,12 @@ export default {
   props : [
     'roomPreviewInfos',
     'isShowCover',
+    'isSelectMode',
   ],
   data : () => {
-    return {}
+    return {
+      'isShowSelectedOrderNum' : false,
+    }
   },
   methods : {
     closeModal() {
@@ -53,7 +68,22 @@ export default {
       .catch(error => {
         alert('room削除に失敗しました。');
       })
-    }
+    },
+    changeIsCheckedRoom(event, index){
+      let isChecked = event.target.checked;
+      this.$emit('changeIsCheckedRoom', isChecked, index);
+    },
+    unCheckAllRoom(){
+      let checkBoxList = document.querySelectorAll(".room-select-check");
+      for(let i=0; i < checkBoxList.length; i++){
+        checkBoxList[i].checked = false;
+      }
+    },
+    judgeIsChecked(roomPreviewInfo){
+      if(roomPreviewInfo['selectedOrderNum'] > 0){
+        return true;
+      }
+    },
 
   },
   mounted : function(){},
@@ -173,6 +203,47 @@ li {
 .del-icon:hover {
   color: red;
   opacity: 0.8;
+}
+
+.check-box-cover {
+  position: absolute;
+  top : 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-color: grey;
+  display: flex;  
+}
+.check-box-cover:hover{
+  opacity: 0.8;
+}
+
+.room-select-check {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  transform: scale(3);
+}
+
+.selected-order-num-wrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.selected-order-num{
+  font-size: 80px;
+  color: aquamarine;
 }
 
 .room-title {
