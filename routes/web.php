@@ -75,6 +75,8 @@ Route::post('/ajax/uploadAudio', 'App\Http\Controllers\Audio\AudioController@sto
 Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioController@destroy');
 // 入ったroomが自分の作成したroomか判別する
 Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\RoomController@judgeIsMyRoom');
+// マイページからRoomを選択し、手早くRoomリストを作成する
+Route::post('/ajax/roomlist/store', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@quickStore');
 
 
 // defaultImgアップロード(開発用、後で消す)
