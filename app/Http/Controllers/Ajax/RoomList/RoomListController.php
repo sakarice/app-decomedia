@@ -16,6 +16,8 @@ use App\Models\UserOwnBgm;
 use App\Models\DefaultImg;
 use App\Models\DefaultBgm;
 use App\Models\Room;
+use App\Models\Roomlist;
+use App\Models\RoomRoomlist;
 use App\Models\RoomImg;
 use App\Models\RoomBgm;
 use App\Models\RoomMovie;
@@ -35,9 +37,38 @@ class RoomListController extends Controller
         }
     }
 
-    public function quickCreate($request){
+    // マイページからRoomを選択して手早くRoomリストを作成する処理
+    // Roomリスト名などの細かい設定は省略
+    public static function quickStore(Request $request){
         $user_id = Auth::user()->id;
+        $selectedRoomIds = $request->selectedRoomIds;
 
+        \Log::info($selectedRoomIds[1]);
+
+        // Roomリストを保存 細かい設定はなにも無し
+        $roomlist = new RoomList();
+        $roomlist->user_id = $user_id;
+        $roomlist->name = 'Roomリスト'.(RoomList::max('id')+1);
+        // $roomlist->description = NULL;
+        $roomlist->save();
+
+        // Room - Roomlistテーブル(中間テーブル)にも保存
+        $roomlistId = RoomList::latest()->first()->id;
+        foreach($selectedRoomIds as $index => $selectedRoomId){
+            $roomRoomlist = new RoomRoomlist();
+            $roomRoomlist->roomlist_id = $roomlistId;
+            $roomRoomlist->room_id = $selectedRoomId;
+            $roomRoomlist->room_order_seq = $index + 1;
+            $roomRoomlist->save();
+        }
+        DB::beginTransaction();
+        try{
+            DB::commit();
+        } catch(\Exception $e){
+            DB::rollback();
+        }
+
+        return ['message' => 'succeess!!!!!'];
     }
 
 

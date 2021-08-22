@@ -4728,7 +4728,7 @@ __webpack_require__.r(__webpack_exports__);
       var roomInfo = {
         'selectedRoomIds': selectedRoomIds
       };
-      var url = '/roomlist/store'; // this.createRoomListMessage = "roomリスト情報を保存中です...";
+      var url = '/ajax/roomlist/store'; // this.createRoomListMessage = "roomリスト情報を保存中です...";
 
       axios.post(url, roomInfo).then(function (response) {
         alert(response.data.message);
