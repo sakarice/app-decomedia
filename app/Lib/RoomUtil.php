@@ -120,8 +120,8 @@ class RoomUtil
           } else if ($room_img_type == 2){
           $room_img = UserOwnImg::where('id', $room_img_id)->first();
           }
-          // $room_img_url = $room_img->img_url;
-          $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"; 
+          $room_img_url = $room_img->img_url;
+          // $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"; 
       } else if(RoomMovie::where('room_id', $room_id)->exists()) {
           // youtubeアイコンの画像URLをセット
           $room_img_url = "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";

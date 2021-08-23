@@ -43,12 +43,22 @@ class RoomListController extends Controller
         $user_id = Auth::user()->id;
         $selectedRoomIds = $request->selectedRoomIds;
 
-        \Log::info($selectedRoomIds[1]);
 
         // Roomリストを保存 細かい設定はなにも無し
         $roomlist = new RoomList();
         $roomlist->user_id = $user_id;
         $roomlist->name = 'Roomリスト'.(RoomList::max('id')+1);
+        $firstRoomImgType = RoomImg::where('room_id', $selectedRoomIds[0])->first()->img_type;
+        $firstRoomImgId = RoomImg::where('room_id', $selectedRoomIds[0])->first()->img_id;
+
+        $firstRoomImgUrl;
+        if($firstRoomImgType == 1){
+            $firstRoomImgUrl = DefaultImg::find($firstRoomImgId)->img_url;
+        } else if ($firstRoomImgType == 2){
+            $firstRoomImgUrl = UserOwnImg::find($firstRoomImgId)->img_url;
+        }
+
+        $roomlist->thumbnail_img_url = $firstRoomImgUrl;
         // $roomlist->description = NULL;
         $roomlist->save();
 
