@@ -24,12 +24,45 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('header-component', require('./components/HeaderComponent.vue').default);
-Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
-Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
-
 Vue.component('test-component', require('./components/TestComponent.vue').default);
 Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
+
+
+
+// ■ホーム画面用
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
+
+// ■Roomパーツ
+Vue.component('room-header-component', require('./components/RoomHeaderComponent.vue').default);
+
+
+// ■マイページ用
+Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
+// マイページ
+Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
+// ユーザプロフィール
+Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
+
+// room一覧表示用コンポーネント
+Vue.component('room-preview-component', require('./components/RoomPreviewComponent.vue').default);
+// roomリスト一覧表示用コンポーネント
+Vue.component('room-list-preview-component', require('./components/RoomListPreviewComponent.vue').default);
+
+// room閲覧用コンポーネント
+Vue.component('room-component', require('./components/RoomComponent.vue').default);
+Vue.component('room-info-component', require('./components/RoomInfoComponent.vue').default);
+
+// room編集用コンポーネント
+Vue.component('room-edit-component', require('./components/RoomEditComponent.vue').default);
+
+
+// room所有者(＝作成者)情報
+Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);
+// Roomへのいいねアイコンコンポーネント
+Vue.component('like-room-component', require('./components/LikeRoomComponent.vue').default);
+
+
 
 // ★room作成用コンポーネント
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
@@ -46,33 +79,6 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 
 // roomリスト作成用コンポーネント
 Vue.component('room-list-create-button-component', require('./components/RoomListCreateButtonComponent.vue').default);
-
-// ★マイページ用コンポーネント
-
-// ★マイページコンポーネント
-Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
-
-// ★ユーザプロフィールコンポーネント
-Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
-
-
-
-// ★room所有者(＝作成者)情報コンポーネント
-Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);
-
-// ★Roomへのいいねアイコンコンポーネント
-Vue.component('like-room-component', require('./components/LikeRoomComponent.vue').default);
-
-
-// room一覧表示用コンポーネント
-Vue.component('room-list-component', require('./components/RoomListComponent.vue').default);
-
-// room閲覧用コンポーネント
-Vue.component('room-component', require('./components/RoomComponent.vue').default);
-Vue.component('room-info-component', require('./components/RoomInfoComponent.vue').default);
-
-// room編集用コンポーネント
-Vue.component('room-edit-component', require('./components/RoomEditComponent.vue').default);
 
 
 /**

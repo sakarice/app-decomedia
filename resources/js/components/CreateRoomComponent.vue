@@ -3,6 +3,12 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
+    <!-- Roomヘッダ -->
+    <room-header-component
+    :isShowCreateButton=true
+    @getFinishTime="getFinishTime">
+    </room-header-component>
+
     <!-- Room画像コンポーネント -->
     <room-img-component
      :roomImgUrl="roomImg['url']"
@@ -30,11 +36,6 @@
      ref="roomMovie">
     </room-movie-component>
 
-    <room-create-button
-    @getFinishTime="getFinishTime">
-    </room-create-button>
-
-    <cancel-button></cancel-button>
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
@@ -111,6 +112,7 @@
 </template>
 
 <script>
+import RoomHeader from './RoomHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
@@ -119,10 +121,10 @@ import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import RoomCreateButton from './RoomCreateButtonComponent.vue';
-import CancelButton from './CancelButtonComponent.vue';
 
 export default {
   components : {
+    RoomHeader,
     ImgSelect,
     AudioSelect,
     MovieSetting,
@@ -131,7 +133,6 @@ export default {
     RoomImg,
     RoomMovie,
     RoomCreateButton,
-    CancelButton,
   },
   props: [
     'roomImgData',

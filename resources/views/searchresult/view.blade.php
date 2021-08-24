@@ -33,10 +33,10 @@
     <section class="search-result">
       <h2 class="search-result-message">キーワード"{{$keyword}}"での検索結果</h2>
   
-      <room-list-component
+      <room-preview-component
       :room-preview-infos=@json($roomPreviewInfos)
       :is-show-cover="false">
-      </room-list-component>
+      </room-preview-component>
     </section>
   
   </div>

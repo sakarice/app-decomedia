@@ -82,7 +82,7 @@
 
 #frame {
   position: absolute;
-  left: 49px;
+  left: 62px;
   box-shadow: 1px 1px 6px grey;
   z-index: 20;
   width: 200px;

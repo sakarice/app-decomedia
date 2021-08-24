@@ -296,12 +296,13 @@
     z-index: 5;
     width: 120px;
     height: 100%;
-    padding: 20px 5px;
+    padding: 55px 20px 5px;
     background-color: black;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow-y: scroll;
   }
 
   #room-audio-frame {

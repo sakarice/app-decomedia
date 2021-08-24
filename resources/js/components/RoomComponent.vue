@@ -3,6 +3,9 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
+    <!-- Roomヘッダ -->
+    <room-header-component></room-header-component>
+
     <!-- Room画像コンポーネント -->
     <room-img-component
      :roomImgUrl="roomImg['url']"
@@ -28,8 +31,6 @@
     :roomMovieLayer="roomMovie['layer']"
      ref="roomMovie">
     </room-movie-component>
-
-    <cancel-button></cancel-button>
 
         <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
@@ -71,11 +72,11 @@
 </template>
 
 <script>
+import RoomHeader from './RoomHeaderComponent.vue';
 import RoomAudio from './RoomAudioComponent.vue';
 import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
-import CancelButton from './CancelButtonComponent.vue';
 import RoomInfo from './RoomInfoComponent.vue';
 import RoomOwnerInfo from './RoomOwnerInfoComponent.vue';
 import LikeRoom from './LikeRoomComponent.vue';
@@ -83,11 +84,11 @@ import LikeRoom from './LikeRoomComponent.vue';
 
 export default {
   components : {
+    RoomHeader,
     RoomAudio,
     RoomSetting,
     RoomImg,
     RoomMovie,
-    CancelButton,
     RoomInfo,
     RoomOwnerInfo,
     LikeRoom

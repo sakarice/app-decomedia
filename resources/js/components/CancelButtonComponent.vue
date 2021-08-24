@@ -18,12 +18,7 @@
       return {}
     },
 
-    methods : {
-      // sendToLink() {
-      //   window.location.href = this.linkUrl;
-      // },
-
-    },
+    methods : {},
 
   }
 
@@ -33,16 +28,10 @@
 
 <style scoped>
 
-  .action-button-wrapper {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+  .action-button-wrapper {}
 
   .cancel-button {
-    position: absolute;
+    /* position: absolute; */
     top : 20px;
     left: 70px;
     z-index: 1;

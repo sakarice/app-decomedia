@@ -67,11 +67,11 @@
         {{-- Roomの一覧を表示 --}}
         <section class="recently-posted-rooms">
             <h3 class="section-title">最近の投稿</h3>
-            <div class="room-list-wrapper">
-                <room-list-component
+            <div class="room-preview-wrapper">
+                <room-preview-component
                 :room-preview-infos='@json($roomPreviewInfos)'
                 :is-show-cover="false">
-                </room-list-component>
+                </room-preview-component>
             </div>
         </section>
     </div>
