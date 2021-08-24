@@ -1,6 +1,6 @@
 #select-modal {
   position: fixed;
-  top: 0;
+  top: 55px;
   left: 0;
   z-index: 2;
   width: 470px;

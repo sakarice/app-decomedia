@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-#room-list-wrapper {
+#room-preview-wrapper {
   width: 80%;
   display: flex;
   justify-content: left;

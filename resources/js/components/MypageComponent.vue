@@ -1,6 +1,8 @@
 <template>
   <div>
 
+    <!-- Room -->
+    <!-- Roomの選択モード -->
     <div class="select-mode-wrapper">
       <button id="change-select-mode" class="select-mode-item" @click="toggleSelectMode">
         {{selectModeButtonMessage}}
@@ -14,7 +16,10 @@
       </room-list-create-button-component>
     </div>
 
+
+    <!-- 作成済みRoomのプレビュー -->
     <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
+      <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
@@ -25,19 +30,19 @@
           もっと見る
         </span>
       </div>
-
       <!-- {{-- 作成済みroom一覧 --}} -->
-      <room-list-component
+      <room-preview-component
         :room-preview-infos="createdRoomPreviewInfos"
         :is-show-cover="isShowCoverOnCreateRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
         ref="createdRoomPreview">
-      </room-list-component>
-      
+      </room-preview-component>
     </section>
 
+    <!-- いいねしたRoomのプレビュー -->
     <section v-show="isShowLikedRoomPreview" class="mypage-section liked-room-list">
+      <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">いいねしたRoom</h3>
         <span class="view-more" @click="addLikedRoomPreviewInfos">
@@ -45,16 +50,34 @@
         </span>
       </div>
       <!-- いいねしたroom一覧 -->
-
-      <room-list-component
+      <room-preview-component
         :room-preview-infos="likedRoomPreviewInfos"
         :is-show-cover="isShowCoverOnLikeRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedLikedRoom"
         ref="likedRoomPreview">
-      </room-list-component>
-
+      </room-preview-component>
     </section>
+
+    <!-- Roomリスト -->
+    <!-- 作成済みRoomリストのプレビュー -->
+    <section v-show="isShowCreatedRoomListPreview" class="mypage-section created-room-list">
+      <!-- 説明やもっと見るの表示 -->
+      <div class="section-top-wrapper">
+        <h3 class="section-title">作成済みRoomリスト</h3>
+        <span class="view-more" @click="addCreatedRoomListPreviewInfos">
+          もっと見る
+        </span>
+      </div>
+      <!-- {{-- 作成済みroom一覧 --}} -->
+      <room-list-preview-component
+        :first-preview-num="3"
+        :is-show-cover="isShowCoverOnCreateRoomList"
+        :is-select-mode="isSelectMode"
+        ref="createdRoomListPreview">
+      </room-list-preview-component>
+    </section>
+
       
 
     <left-bar-component>
@@ -69,13 +92,15 @@
 </template>
 
 <script>
-import RoomList from './RoomListComponent.vue';
+import RoomPreview from './RoomPreviewComponent.vue';
+import RoomListPreview from './RoomListPreviewComponent.vue';
 import LeftBar from './LeftBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 
 export default {
   components : {
-    RoomList,
+    RoomPreview,
+    RoomListPreview,
     LeftBar,
     RoomListCreateButton,
   },
@@ -88,8 +113,10 @@ export default {
       'createdRoomPreviewInfos' : "",
       'likedRoomPreviewInfos' : "",
       'isSelectMode' : false,
+      'isShowCoverOnCreateRoomList' : true,
       'isShowCoverOnCreateRoom' : true,
       'isShowCoverOnLikeRoom' : false,
+      'isShowCreatedRoomListPreview' : true,
       'isShowCreatedRoomPreview' : true,
       'isShowLikedRoomPreview' : true,
       'isUpdateCreatedRoomPreviewInfo' : false,
@@ -128,6 +155,9 @@ export default {
       .catch(error => {
         alert('room情報の取得に失敗しました')
       })
+    },
+    addCreatedRoomListPreviewInfos(){
+      this.$refs.createdRoomListPreview.addCreatedRoomListPreviewInfos(300);
     },
     deleteRoom(room_id){
       let room_data = {

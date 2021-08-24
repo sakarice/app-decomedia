@@ -35,10 +35,10 @@
         </div>
   
         {{-- 作成済みroom一覧 --}}
-        <room-list-component
+        <room-preview-component
           :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
           :is-show-cover="true">
-        </room-list-component>    
+        </room-preview-component>    
       </section>
 
     </div>

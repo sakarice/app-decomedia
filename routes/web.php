@@ -78,6 +78,14 @@ Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\Room
 // マイページからRoomを選択し、手早くRoomリストを作成する
 Route::post('/ajax/roomlist/store', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@quickStore');
 
+// 作成したRoomリストのプレビュー情報を取得
+Route::get('/ajax/addCreatedRoomListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@getRoomListPreviewInfos');
+
+// 作成したRoomリストを削除
+Route::post('/ajax/roomList/delete', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@destroy');
+
+
+
 
 // defaultImgアップロード(開発用、後で消す)
 Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');

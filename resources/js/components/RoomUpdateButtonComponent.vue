@@ -4,7 +4,7 @@
       <button class="room-update-button" @click="updateRoom">
         更新
       </button>
-      <p>
+      <p v-show="message != ''">
         {{message}}
       </p>
     </div>
@@ -55,17 +55,10 @@
 <style scoped>
 
   .action-button-wrapper {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
+    margin: 0 5px;
   }
 
   .room-update-button {
-    position: absolute;
-    top : 20px;
-    right: 150px;
     z-index: 1;
     font-family: Inter,Noto Sans JP;
     border-radius: 4px;

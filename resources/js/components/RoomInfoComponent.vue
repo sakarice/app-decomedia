@@ -1,9 +1,7 @@
 <template>
   <transition :name="transitionName">
     <div id="select-modal">
-      <div class="close-icon-wrapper">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-right fa-3x"></i>
-      </div>
+
       <div id="area-wrapper">
         <div class="room-info-wrapper">
           <div id="room-name-wraper" class="room-info">
@@ -18,9 +16,12 @@
             <textarea :value="description" type="text" id="room-description" rows="4" cols="30" readonly></textarea>
           </div>
         </div>
-
-
       </div>
+
+      <div class="close-icon-wrapper">
+        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
+      </div>
+
     </div>
   </transition>
 </template>
@@ -63,7 +64,7 @@ export default{
 
 
 
-<style>
+<style scoped>
 
 @import "../../css/roomEditModals.css";
 
@@ -88,6 +89,10 @@ export default{
 #room-name {
   margin: 0;
 }
+
+/* #close-modal-icon {
+  transform:rotate(180deg);
+} */
 
 
 

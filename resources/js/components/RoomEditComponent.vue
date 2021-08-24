@@ -3,6 +3,12 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
+    <!-- Roomヘッダ -->
+    <room-header-component
+    :isShowUpdateButton=true
+    @getFinishTime="getFinishTime">
+    </room-header-component>
+
     <!-- Room画像コンポーネント -->
     <room-img-component
      :roomImgUrl="roomImg['url']"
@@ -29,12 +35,6 @@
     :roomMovieLayer="roomMovie['layer']"
      ref="roomMovie">
     </room-movie-component>
-
-    <room-update-button
-    @getFinishTime="getFinishTime">
-    </room-update-button>
-
-    <cancel-button></cancel-button>
 
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
@@ -112,6 +112,7 @@
 </template>
 
 <script>
+import RoomHeader from './RoomHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
@@ -119,11 +120,10 @@ import RoomAudio from './RoomAudioComponent.vue';
 import RoomSetting from './RoomSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
-import RoomUpdateButton from './RoomUpdateButtonComponent.vue';
-import CancelButton from './CancelButtonComponent.vue';
 
 export default {
   components : {
+    RoomHeader,
     ImgSelect,
     AudioSelect,
     MovieSetting,
@@ -131,8 +131,6 @@ export default {
     RoomSetting,
     RoomImg,
     RoomMovie,
-    RoomUpdateButton,
-    CancelButton,
   },
   props: [
     'roomImgData',

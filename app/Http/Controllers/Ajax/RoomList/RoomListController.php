@@ -10,6 +10,8 @@ use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
 use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
+use App\Lib\RoomListUtil;
+use App\Lib\RoomRoomListUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
 use App\Models\UserOwnBgm;
@@ -27,14 +29,17 @@ use Storage;
 
 class RoomListController extends Controller
 {
-    //
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
+
+    // Roomリストのプレビュー情報を取得
+    public static function getRoomListPreviewInfos($num){
+        $user_id = Auth::user()->id;
+        $room_lists = Roomlist::limit($num)->where('user_id', $user_id)->get();
+        $roomListPreviewInfos = array();
+        foreach($room_lists as $index => $room_list){
+            $room_list_id = $room_list->id;
+            $roomListPreviewInfos[] = RoomListUtil::getRoomListPreviewInfo($room_list_id);
         }
+        return ['roomListPreviewInfos' => $roomListPreviewInfos];
     }
 
     // マイページからRoomを選択して手早くRoomリストを作成する処理
@@ -82,40 +87,22 @@ class RoomListController extends Controller
     }
 
 
-    // 入ったroomが自分の作成したroomか判別する
-    public static function judgeIsMyRoom($room_id){
-        $enter_user_id = Auth::user()->id;
-        $room_owner_user_id = Room::find($room_id)->user_id;
-        $isMyRoom;
-
-        if($enter_user_id == $room_owner_user_id){
-        $isMyRoom = true;
-        } else {
-        $isMyRoom = false;
+    public static function destroy(Request $request){
+        $room_list_id = $request->roomList_id;
+        $returnMsg;
+        DB::beginTransaction();
+        try {
+            RoomListUtil::deleteRoomListDataFromDB($room_list_id);
+            RoomRoomListUtil::deleteRoomRoomListDataFromDB($room_list_id);
+            DB::commit();
+            $returnMsg = 'roomリストを削除しました';
+        } catch(\Exception $e){
+            DB::rollback();
+            $returnMsg = 'roomリストの削除に失敗しました';
         }
-
-        return ['isMyRoom' => $isMyRoom];
+        return ['message' => $returnMsg];
     }
 
-    
-    // // room更新
-    // public function updateRoom(Request $request){
-    //     $room_id = $request->setting['id'];
-    //     $returnMsg;
-
-    //     DB::beginTransaction(); // 更新は、削除と作成のセットで実現
-    //     try{
-    //         RoomUtil::deleteRoomDataFromDB($room_id);
-    //         RoomUtil::saveRoomDataInDB($request);
-    //         DB::commit();
-    //         $returnMsg = 'roomを更新しました';
-    //     } catch(\Exception $e){
-    //         DB::rollback();
-    //         $returnMsg = 'roomの更新に失敗しました';
-    //     }
-
-    //     return['message' => $returnMsg];
-    // }
 
 
 }
