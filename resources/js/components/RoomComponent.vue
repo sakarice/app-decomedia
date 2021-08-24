@@ -285,7 +285,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 3;
-    width: 7%;
+    width: 55px;
     height: 100%;
     background-color:black;
 
