@@ -28,7 +28,7 @@ class SaveDataInDB
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = $fileDatas['name'];
+    $targetModel->name = pathinfo($fileDatas['name'], PATHINFO_FILENAME);
     $targetModel->img_path = $fileDatas['path'];
     $targetModel->img_url = $fileDatas['url'];
 
@@ -58,7 +58,7 @@ class SaveDataInDB
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = $fileDatas['name'];
+    $targetModel->name = pathinfo($fileDatas['name'],PATHINFO_FILENAME);
     $targetModel->audio_path = $fileDatas['audio_path'];
     $targetModel->audio_url = $fileDatas['audio_url'];
     $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];
