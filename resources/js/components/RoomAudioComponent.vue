@@ -25,6 +25,7 @@
     <div id="room-audio-frame">
       <ul id="audios">
         <li class="audio-area" :id="index" v-for="(roomAudio, index) in roomAudios" :key="roomAudio.audio_url">
+          <!-- オーディオのサムネと各種アイコン -->
           <div class="audio-wrapper" :class="{'isPlay' : roomAudio['isPlay']}">
             <img class="room-audio-thumbnail"
             src="" v-show="roomAudio"
@@ -34,12 +35,20 @@
             <i class="room-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
             <i class="room-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : roomAudio['isLoop']}"></i>
           </div>
+          <!-- オーディオ名 -->
+          <div v-if="roomAudio" class="room-audio-name-wrapper">
+            <span class="room-audio-name">
+              {{roomAudio['name']}}
+            </span>
+          </div>
+          <!-- ボリューム -->
           <div class="audio-vol-wrapper">
             <i class="room-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
             <div class="vol-bar-wrapper">
               <input type="range" :id="index" class="audio-vol-range" v-on:input="updateAudioVol" min="0" max="1" step="0.01">
             </div>
           </div>
+
         </li>
         <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(roomAudios[n-1])">
         </li>
@@ -146,7 +155,6 @@
           };
         });
         this.audioPlayers[emptyPlayerIndex].src = addedAudioUrl;
-        console.log('ループ再生フラグ', this.audioPlayers[emptyPlayerIndex].loop);
         // プレイヤーのインデックスをaudioに設定
         addedAudio['player_index'] = emptyPlayerIndex;
 
@@ -294,14 +302,14 @@
     top: 0;
     right: 0;
     z-index: 5;
-    width: 120px;
+    width: 200px;
     height: 100%;
-    padding: 55px 20px 5px;
+    padding: 55px 8px 10px 8px;
     background-color: black;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     overflow-y: scroll;
   }
 
@@ -430,10 +438,16 @@
     display: inline-block;
   }
 
+  .room-audio-name {
+    color : white;
+    font-size: 0.7rem;
+  }
+
   .audio-vol-wrapper {
     position: absolute;
-    right: 70px;
-    transform: rotate(180deg);
+    top: 50px;
+    left: 80px;
+    /* transform: rotate(180deg); */
     display: flex;
     align-items: center;
   }

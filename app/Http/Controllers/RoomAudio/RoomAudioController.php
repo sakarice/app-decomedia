@@ -62,6 +62,7 @@ class RoomAudioController extends Controller
         public static function show($room_id){
             $room_bgm_id;
             $room_bgm_type;
+            $room_bgm_name;
             $room_bgm_audio_url;
             $room_bgm_thumbnail_url;
             $room_bgm_data = array();
@@ -70,14 +71,13 @@ class RoomAudioController extends Controller
                 $room_bgms = RoomBgm::where('room_id', $room_id)->get();
                 foreach($room_bgms as $room_bgm){
                     $room_bgm_id = $room_bgm->audio_id;
-
-                    \Log::info($room_bgm_id);
-
                     $room_bgm_type = $room_bgm->audio_type;
                     if($room_bgm_type == 1){
+                        $room_bgm_name = DefaultBgm::where('id', $room_bgm_id)->first()->name;
                         $room_bgm_audio_url = DefaultBgm::where('id', $room_bgm_id)->first()->audio_url;
                         $room_bgm_thumbnail_url = DefaultBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
                     }else if($room_bgm_type == 2){
+                        $room_bgm_name = UserOwnBgm::where('id', $room_bgm_id)->first()->name;
                         $room_bgm_audio_url = UserOwnBgm::where('id', $room_bgm_id)->first()->audio_url;
                         $room_bgm_thumbnail_url = UserOwnBgm::where('id', $room_bgm_id)->first()->thumbnail_url;
                     }
@@ -85,6 +85,7 @@ class RoomAudioController extends Controller
                     $tmp_room_bgm_data = [
                         'id' => $room_bgm_id,
                         'type' => $room_bgm_type,
+                        'name' => $room_bgm_name,
                         'audio_url' => $room_bgm_audio_url,
                         'thumbnail_url' => $room_bgm_thumbnail_url,
                         'volume' => $room_bgm->volume,
