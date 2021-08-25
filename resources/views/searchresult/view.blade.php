@@ -24,9 +24,8 @@
   <div id="app">
     {{-- ヘッダー --}}
     <header-component
-    :is-show-login="true"
-    :is-show-signup="true"
-    :is-show-profile-icon="false">
+    :csrf="{{json_encode(csrf_token())}}"
+    :is-login=@json($isLogin)>
     </header-component>
     
     {{-- 検索結果一覧 --}}

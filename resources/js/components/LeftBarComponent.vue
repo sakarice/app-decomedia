@@ -48,14 +48,18 @@ export default {
         switchToMypageDefault(){
             this.$parent.isShowCreatedRoomPreview = true;
             this.$parent.isShowLikedRoomPreview = true;
+            this.$parent.isShowCreatedRoomListPreview = true;
+        
         },
         switchToCreatedRoomPreview(){
             this.$parent.isShowCreatedRoomPreview = true;
             this.$parent.isShowLikedRoomPreview = false;
+            this.$parent.isShowCreatedRoomListPreview = true;
         },
         switchToLikedRoomPreview(){
             this.$parent.isShowCreatedRoomPreview = false;
             this.$parent.isShowLikedRoomPreview = true;
+            this.$parent.isShowCreatedRoomListPreview = false;
         },
         
     },
@@ -72,7 +76,7 @@ export default {
   z-index: 1;
   width: 40px;
   height: 100%;
-  padding: 50px 10px 10px 10px;
+  padding: 50px 0;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
 
@@ -86,12 +90,14 @@ export default {
     justify-content: center;
     align-items: center;
     color: white;
-    margin: 20px 5px;
+    margin: 7px 0;
+    padding: 10px;
     opacity: 0.9;
 }
 
 .content:hover {
   opacity: 1;
+  background-color: grey;
 }
 
 /* aタグ全体の設定 */

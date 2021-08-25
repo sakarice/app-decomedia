@@ -30,6 +30,7 @@ class SearchUtil
         }
 
         $data = [
+            'isLogin' => Auth::check(),
             'keyword' => $keyword,
             'roomPreviewInfos' => $roomPreviewInfos
         ];
