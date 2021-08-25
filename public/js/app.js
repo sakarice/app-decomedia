@@ -2965,14 +2965,17 @@ __webpack_require__.r(__webpack_exports__);
     switchToMypageDefault: function switchToMypageDefault() {
       this.$parent.isShowCreatedRoomPreview = true;
       this.$parent.isShowLikedRoomPreview = true;
+      this.$parent.isShowCreatedRoomListPreview = true;
     },
     switchToCreatedRoomPreview: function switchToCreatedRoomPreview() {
       this.$parent.isShowCreatedRoomPreview = true;
       this.$parent.isShowLikedRoomPreview = false;
+      this.$parent.isShowCreatedRoomListPreview = true;
     },
     switchToLikedRoomPreview: function switchToLikedRoomPreview() {
       this.$parent.isShowCreatedRoomPreview = false;
       this.$parent.isShowLikedRoomPreview = true;
+      this.$parent.isShowCreatedRoomListPreview = false;
     }
   },
   mounted: function mounted() {}
@@ -10229,7 +10232,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.left-bar[data-v-5a8409bc] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 1;\r\n  width: 40px;\r\n  height: 100%;\r\n  padding: 50px 10px 10px 10px;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.content[data-v-5a8409bc] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 20px 5px;\r\n    opacity: 0.9;\n}\n.content[data-v-5a8409bc]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-5a8409bc] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-5a8409bc]:hover {\r\n    color: aquamarine;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.left-bar[data-v-5a8409bc] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 1;\r\n  width: 40px;\r\n  height: 100%;\r\n  padding: 50px 0;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.content[data-v-5a8409bc] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 7px 0;\r\n    padding: 10px;\r\n    opacity: 0.9;\n}\n.content[data-v-5a8409bc]:hover {\r\n  opacity: 1;\r\n  background-color: grey;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-5a8409bc] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-5a8409bc]:hover {\r\n    color: aquamarine;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
