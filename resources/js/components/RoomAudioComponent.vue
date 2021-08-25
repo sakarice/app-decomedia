@@ -438,19 +438,15 @@
     display: inline-block;
   }
 
-  .room-audio-name-wrapper {
-    position: absolute;
-    top: 35px;
-    left: 83px;    
-  }
   .room-audio-name {
     color : white;
+    font-size: 0.7rem;
   }
 
   .audio-vol-wrapper {
     position: absolute;
-    top: 55px;
-    left: 70px;
+    top: 50px;
+    left: 80px;
     /* transform: rotate(180deg); */
     display: flex;
     align-items: center;
