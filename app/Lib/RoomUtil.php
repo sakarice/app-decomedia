@@ -189,14 +189,11 @@ class RoomUtil
   public static function deleteRoomDataFromDB($room_id){
     $user_id = Auth::user()->id;
     $returnMsg;
-    
     DB::beginTransaction();
     try{
-        // Room
         Room::where('id', $room_id)
             ->where('user_id', $user_id)
-            ->first()
-            ->delete();
+            ->first()->delete();
             // Room画像
         if(RoomImg::where('room_id', $room_id)->exists()){
             RoomImgController::destroy($room_id);

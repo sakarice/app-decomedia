@@ -79,6 +79,8 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 
 // roomリスト作成用コンポーネント
 Vue.component('room-list-create-button-component', require('./components/RoomListCreateButtonComponent.vue').default);
+// roomリスト作成用コンポーネント
+Vue.component('selected-room-delete-button-component', require('./components/SelectedRoomDeleteButtonComponent.vue').default);
 
 
 /**

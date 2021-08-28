@@ -39,6 +39,18 @@ class RoomController extends Controller
         }
     }
 
+    // destroy
+    public static function destroy(Request $request){
+        $user_id = Auth::user()->id;
+        $selected_room_ids = $request->selectedRoomIds;
+        $own_rooms = Room::whereIn('id', $selected_room_ids)->where('user_id', $user_id)->get()->all();
+        // 選択されたRoomから、自分のRoomだけに絞る(=他ユーザのRoomを除外)
+        foreach($own_rooms as $own_room){
+            RoomUtil::deleteRoomDataFromDB($own_room->id);
+        }
+        return['message' => '選択した自分のroomを削除しました。'];
+    }
+
     
     // 入ったroomが自分の作成したroomか判別する
     public static function judgeIsMyRoom($room_id){

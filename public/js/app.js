@@ -3170,6 +3170,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RoomListPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomListPreviewComponent.vue */ "./resources/js/components/RoomListPreviewComponent.vue");
 /* harmony import */ var _LeftBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LeftBarComponent.vue */ "./resources/js/components/LeftBarComponent.vue");
 /* harmony import */ var _RoomListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomListCreateButtonComponent.vue */ "./resources/js/components/RoomListCreateButtonComponent.vue");
+/* harmony import */ var _SelectedRoomDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectedRoomDeleteButtonComponent.vue */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue");
 //
 //
 //
@@ -3263,6 +3264,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3272,7 +3282,8 @@ __webpack_require__.r(__webpack_exports__);
     RoomPreview: _RoomPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     RoomListPreview: _RoomListPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     LeftBar: _LeftBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    RoomListCreateButton: _RoomListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default
+    RoomListCreateButton: _RoomListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    SelectedRoomDeleteButton: _SelectedRoomDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default
   },
   props: ['createdRoomPreviewInfosFromParent', 'likedRoomPreviewInfosFromParent'],
   data: function data() {
@@ -4856,7 +4867,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos; // alert(tmpThis.roomListPreviewInfos[0]['preview_img_url']);
       })["catch"](function (error) {
-        alert('roomリスト情報の取得に失敗しました');
+        console.log('roomリスト情報の取得に失敗しました');
       });
     }
   },
@@ -5382,6 +5393,92 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: [],
+  data: function data() {
+    return {
+      'deleteSelectedRoomMessage': ""
+    };
+  },
+  methods: {
+    getSelectedRoomId: function getSelectedRoomId() {
+      // 作成したRoomといいねしたRoomを結合
+      var allRoomInfos = [];
+
+      for (var i = 0; i < this.$parent.createdRoomPreviewInfos.length; i++) {
+        allRoomInfos.push(this.$parent.createdRoomPreviewInfos[i]);
+      }
+
+      for (var _i = 0; _i < this.$parent.likedRoomPreviewInfos.length; _i++) {
+        allRoomInfos.push(this.$parent.likedRoomPreviewInfos[_i]);
+      } // 選択されたRoomのみ抽出
+
+
+      var selectedRoomInfos = allRoomInfos.filter(function (roomInfo) {
+        return roomInfo['selectedOrderNum'] > 0;
+      }); // 選択された順番(昇順)で並べ替え
+
+      selectedRoomInfos.sort(function (a, b) {
+        if (a.selectedOrderNum < b.selectedOrderNum) return -1;
+        if (a.selectedOrderNum > b.selectedOrderNum) return 1;
+        return 0;
+      }); // RoomIdを抽出した配列を作成
+      // [id1, id2, id3,...] (一つ前の処理で選択順にsort済み)
+
+      var selectedRoomIds = selectedRoomInfos.map(function (selectedRoomInfo) {
+        return selectedRoomInfo.id;
+      });
+      return selectedRoomIds;
+    },
+    deleteSelectedRoom: function deleteSelectedRoom() {
+      var _this = this;
+
+      var selectedRoomIds = this.getSelectedRoomId();
+      selectedRoomIds.forEach(function (selectedRoomId) {
+        alert(selectedRoomId);
+      });
+      var roomInfo = {
+        'selectedRoomIds': selectedRoomIds
+      };
+      var url = '/ajax/selectedRoom/destroy';
+      axios.post(url, roomInfo).then(function (response) {
+        alert(response.data.message);
+        _this.deleteSelectedRoomMessage = "";
+        location.reload();
+      })["catch"](function (error) {
+        alert('failed!');
+        _this.deleteSelectedRoomMessage = "";
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=script&lang=js& ***!
@@ -5535,7 +5632,9 @@ Vue.component('room-create-button-component', __webpack_require__(/*! ./componen
 Vue.component('room-update-button-component', __webpack_require__(/*! ./components/RoomUpdateButtonComponent.vue */ "./resources/js/components/RoomUpdateButtonComponent.vue").default);
 Vue.component('cancel-button-component', __webpack_require__(/*! ./components/CancelButtonComponent.vue */ "./resources/js/components/CancelButtonComponent.vue").default); // roomリスト作成用コンポーネント
 
-Vue.component('room-list-create-button-component', __webpack_require__(/*! ./components/RoomListCreateButtonComponent.vue */ "./resources/js/components/RoomListCreateButtonComponent.vue").default);
+Vue.component('room-list-create-button-component', __webpack_require__(/*! ./components/RoomListCreateButtonComponent.vue */ "./resources/js/components/RoomListCreateButtonComponent.vue").default); // roomリスト作成用コンポーネント
+
+Vue.component('selected-room-delete-button-component', __webpack_require__(/*! ./components/SelectedRoomDeleteButtonComponent.vue */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue").default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -10366,7 +10465,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-30d91c2d] {\n  padding-bottom: 7px;\n  margin-bottom: 10px;\n  border-bottom: double 2px grey;\n  width: 90px;\n\n  display: flex;\n  justify-content: space-between;\n}\n.size-Adjust-box[data-v-30d91c2d] {\n  opacity: 0.85;\n  height: 33px;\n  display: flex;\n  justify-content: center;\n}\n.size-Adjust-box[data-v-30d91c2d]:hover{\n  opacity: 1;\n}\n.all-audio-controller[data-v-30d91c2d] {\n  color: ghostwhite;\n  height: 50px;\n  font-size: 11px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#play-all-icon[data-v-30d91c2d] {\n  color: green;\n}\n#finish-all-icon[data-v-30d91c2d] {\n  color: lightgrey;\n  margin-top: 5px;\n}\n\n/* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 5;\n  width: 200px;\n  height: 100%;\n  padding: 55px 8px 10px 8px;\n  background-color: black;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  overflow-y: scroll;\n}\n#room-audio-frame[data-v-30d91c2d] {\n  height: 100%;\n}\n#audios[data-v-30d91c2d]{\n  padding-left: 0;\n  height: 100%;\n\n  display: flex;\n  flex-flow: column;\n  justify-content: space-around;\n}\n.audio-area[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n.non-audio-frame[data-v-30d91c2d] {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 5px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n  width: 60px;\n  height: 60px;\n  border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n.room-audio-pause-icon[data-v-30d91c2d] {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n  left: 28px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n  left: 16px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-name[data-v-30d91c2d] {\n  color : white;\n  font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 50px;\n  left: 80px;\n  /* transform: rotate(180deg); */\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-30d91c2d] {\n  padding-bottom: 7px;\n  margin-bottom: 10px;\n  border-bottom: double 2px grey;\n  width: 90px;\n\n  display: flex;\n  justify-content: space-between;\n}\n.size-Adjust-box[data-v-30d91c2d] {\n  opacity: 0.85;\n  height: 33px;\n  display: flex;\n  justify-content: center;\n}\n.size-Adjust-box[data-v-30d91c2d]:hover{\n  opacity: 1;\n}\n.all-audio-controller[data-v-30d91c2d] {\n  color: ghostwhite;\n  height: 50px;\n  font-size: 11px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#play-all-icon[data-v-30d91c2d] {\n  color: green;\n}\n#finish-all-icon[data-v-30d91c2d] {\n  color: lightgrey;\n  margin-top: 5px;\n}\n\n/* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 0;\n  right: 0;\n  z-index: 5;\n  width: 200px;\n  height: 100%;\n  padding: 55px 8px 10px 8px;\n  background-color: black;\n\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  overflow-y: scroll;\n}\n#room-audio-frame[data-v-30d91c2d] {\n  height: 100%;\n}\n#audios[data-v-30d91c2d]{\n  padding-left: 0;\n  height: 100%;\n\n  display: flex;\n  flex-flow: column;\n  justify-content: space-around;\n}\n.audio-area[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n.non-audio-frame[data-v-30d91c2d] {\n  width: 70px;\n  height: 70px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 2px dotted lightgrey;\n\n  margin: 10px 5px;\n\n  position: relative;\n\n  opacity: 0.7;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n  width: 60px;\n  height: 60px;\n  border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n.room-audio-pause-icon[data-v-30d91c2d] {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n  left: 28px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n  left: 16px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n  position: absolute;\n  left: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n  position: absolute;\n  right: 0;\n  margin-bottom: 60px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-name[data-v-30d91c2d] {\n  color : white;\n  font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 63px;\n  left: 35px;\n  /* transform: rotate(180deg); */\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n\n\n/* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10685,6 +10784,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-67bcec6c] {\n  margin: 0 5px;\n}\n.room-update-button[data-v-67bcec6c] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.room-update-button[data-v-67bcec6c]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selected-room-delete-button[data-v-3f252a6f] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.selected-room-delete-button[data-v-3f252a6f]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48592,6 +48715,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_style_index_0_id_3f252a6f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_style_index_0_id_3f252a6f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_style_index_0_id_3f252a6f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=style&index=0&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/TestComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -49995,6 +50148,47 @@ component.options.__file = "resources/js/components/RoomUpdateButtonComponent.vu
 
 /***/ }),
 
+/***/ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue":
+/*!***********************************************************************!*\
+  !*** ./resources/js/components/SelectedRoomDeleteButtonComponent.vue ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true& */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true&");
+/* harmony import */ var _SelectedRoomDeleteButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SelectedRoomDeleteButtonComponent_vue_vue_type_style_index_0_id_3f252a6f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _SelectedRoomDeleteButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "3f252a6f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SelectedRoomDeleteButtonComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/TestComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/TestComponent.vue ***!
@@ -50493,6 +50687,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************!*\
+  !*** ./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/TestComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/TestComponent.vue?vue&type=script&lang=js& ***!
@@ -50846,6 +51056,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomUpdateButtonComponent_vue_vue_type_style_index_0_id_67bcec6c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&":
+/*!********************************************************************************************************************************!*\
+  !*** ./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_style_index_0_id_3f252a6f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=style&index=0&id=3f252a6f&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -51314,6 +51537,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomUpdateButtonComponent_vue_vue_type_template_id_67bcec6c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomUpdateButtonComponent_vue_vue_type_template_id_67bcec6c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomUpdateButtonComponent.vue?vue&type=template&id=67bcec6c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=template&id=67bcec6c&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true& ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SelectedRoomDeleteButtonComponent_vue_vue_type_template_id_3f252a6f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true&");
 
 
 /***/ }),
@@ -52778,6 +53018,18 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("room-list-create-button-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isSelectMode,
+                expression: "isSelectMode"
+              }
+            ],
+            staticClass: "select-mode-item"
+          }),
+          _vm._v(" "),
+          _c("selected-room-delete-button-component", {
             directives: [
               {
                 name: "show",
@@ -54720,6 +54972,42 @@ var render = function() {
       },
       [_vm._v("\n    " + _vm._s(_vm.message) + "\n  ")]
     )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/SelectedRoomDeleteButtonComponent.vue?vue&type=template&id=3f252a6f&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "action-button-wrapper" }, [
+    _c(
+      "button",
+      {
+        staticClass: "selected-room-delete-button",
+        on: { click: _vm.deleteSelectedRoom }
+      },
+      [_vm._v("\n    選択したRoomを削除する\n  ")]
+    ),
+    _vm._v(" "),
+    _c("p", [_vm._v("\n    " + _vm._s(_vm.deleteSelectedRoomMessage) + "\n  ")])
   ])
 }
 var staticRenderFns = []

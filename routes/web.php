@@ -77,6 +77,8 @@ Route::post('/ajax/deleteAudio', 'App\Http\Controllers\Audio\UserOwnAudioControl
 Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\RoomController@judgeIsMyRoom');
 // マイページからRoomを選択し、手早くRoomリストを作成する
 Route::post('/ajax/roomlist/store', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@quickStore');
+// マイページから選択したRoomを削除する
+Route::post('/ajax/selectedRoom/destroy', 'App\Http\Controllers\Ajax\Room\RoomController@destroy');
 
 // 作成したRoomリストのプレビュー情報を取得
 Route::get('/ajax/addCreatedRoomListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@getRoomListPreviewInfos');
