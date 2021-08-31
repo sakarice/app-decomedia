@@ -6,7 +6,7 @@
     <!-- Roomヘッダ -->
     <room-header-component
     :isShowUpdateButton=true
-    @getFinishTime="getFinishTime">
+    @update-room="updateRoom">
     </room-header-component>
 
     <!-- Room画像コンポーネント -->
@@ -293,6 +293,26 @@ export default {
       } else {
         this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
       }
+    },
+    updateRoom() {
+      this.getFinishTime();
+      const url = '/home/room/update';
+      let room_datas = {
+        'img' : this.roomImg,
+        'audios' : this.roomAudios,
+        'movie' : this.roomMovie,
+        'setting' : this.roomSetting,
+      }
+      this.message = "room情報を更新中です...";
+      axios.post(url, room_datas)
+        .then(response =>{
+          alert(response.data.message);
+          this.message = "";
+        })
+        .catch(error => {            
+          alert('failed!');
+          this.message = "";
+        })
     },
     
   },

@@ -2363,6 +2363,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2409,8 +2410,8 @@ __webpack_require__.r(__webpack_exports__);
         'maxAudioNum': 5
       },
       roomImg: {
-        'type': "",
-        'id': "",
+        'type': 0,
+        'id': 0,
         'url': "",
         'width': 500,
         'height': 500,
@@ -2456,10 +2457,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     judgeDelImg: function judgeDelImg(url) {
       if (this.roomImg['url'] == url) {
-        this.roomImg['type'] = "";
-        this.roomImg['id'] = "";
+        this.roomImg['type'] = 0;
+        this.roomImg['id'] = 0;
         this.roomImg['url'] = "";
       }
+    },
+    deleteRoomImg: function deleteRoomImg() {
+      this.roomImg['type'] = 0;
+      this.roomImg['id'] = 0;
+      this.roomImg['url'] = "";
     },
     addAudio: function addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -2486,6 +2492,27 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
       }
+    },
+    createRoom: function createRoom() {
+      var _this = this;
+
+      this.getFinishTime();
+      var url = '/home/room/store';
+      var tmpThis = this;
+      var room_datas = {
+        'img': this.roomImg,
+        'audios': this.roomAudios,
+        'movie': this.roomMovie,
+        'setting': this.roomSetting
+      };
+      this.message = "room情報を保存中です...";
+      axios.post(url, room_datas).then(function (response) {
+        alert(response.data.message);
+        _this.message = "";
+      })["catch"](function (error) {
+        alert('failed!');
+        _this.message = "";
+      });
     }
   },
   created: function created() {},
@@ -4131,24 +4158,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     createRoom: function createRoom() {
-      var _this = this;
-
-      this.$emit('getFinishTime');
-      var url = '/home/room/store';
-      var room_datas = {
-        'img': this.$parent.roomImg,
-        'audios': this.$parent.roomAudios,
-        'movie': this.$parent.roomMovie,
-        'setting': this.$parent.roomSetting
-      };
-      this.message = "room情報を保存中です...";
-      axios.post(url, room_datas).then(function (response) {
-        alert(response.data.message);
-        _this.message = "";
-      })["catch"](function (error) {
-        alert('failed!');
-        _this.message = "";
-      });
+      this.$emit('create-room');
     }
   }
 });
@@ -4465,6 +4475,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     } else {
       this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
     }
+  }), _defineProperty(_methods, "updateRoom", function updateRoom() {
+    var _this = this;
+
+    this.getFinishTime();
+    var url = '/home/room/update';
+    var room_datas = {
+      'img': this.roomImg,
+      'audios': this.roomAudios,
+      'movie': this.roomMovie,
+      'setting': this.roomSetting
+    };
+    this.message = "room情報を更新中です...";
+    axios.post(url, room_datas).then(function (response) {
+      alert(response.data.message);
+      _this.message = "";
+    })["catch"](function (error) {
+      alert('failed!');
+      _this.message = "";
+    });
   }), _methods),
   created: function created() {},
   mounted: function mounted() {
@@ -4474,14 +4503,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.initSetting(); // 全ての子コンポーネントが描画されてから実行する処理
 
     this.$nextTick(function () {
-      var _this = this;
+      var _this2 = this;
 
       this.$refs.roomAudio.setPlayerInfo();
       this.$refs.roomAudio.updateAudioThumbnail();
       this.$refs.roomAudio.validEditMode();
 
       window.onYouTubeIframeAPIReady = function () {
-        _this.getReadyCreateMovieFrame = true;
+        _this2.getReadyCreateMovieFrame = true;
       };
     });
   },
@@ -4545,6 +4574,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4563,6 +4593,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getFinishTime: function getFinishTime() {
       this.$emit('getFinishTime');
+    },
+    createRoom: function createRoom() {
+      this.$emit('create-room');
+    },
+    updateRoom: function updateRoom() {
+      this.$emit('update-room');
     }
   },
   mounted: function mounted() {}
@@ -5264,6 +5300,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
   data: function data() {
@@ -5308,6 +5347,9 @@ __webpack_require__.r(__webpack_exports__);
       } else if (!this.isShowRoomImg) {
         this.$parent.roomSetting['isShowImg'] = true;
       }
+    },
+    deleteRoomImg: function deleteRoomImg() {
+      this.$emit('delete-room-img');
     },
     changePublicState: function changePublicState() {
       if (this.isPublic) {
@@ -5369,24 +5411,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateRoom: function updateRoom() {
-      var _this = this;
-
-      this.$emit('getFinishTime');
-      var url = '/home/room/update';
-      var room_datas = {
-        'img': this.$parent.roomImg,
-        'audios': this.$parent.roomAudios,
-        'movie': this.$parent.roomMovie,
-        'setting': this.$parent.roomSetting
-      };
-      this.message = "room情報を更新中です...";
-      axios.post(url, room_datas).then(function (response) {
-        alert(response.data.message);
-        _this.message = "";
-      })["catch"](function (error) {
-        alert('failed!');
-        _this.message = "";
-      });
+      this.$emit('update-room'); // this.$emit('getFinishTime');
+      // const url = '/home/room/update';
+      // let room_datas = {
+      //   'img' : this.$parent.roomImg,
+      //   'audios' : this.$parent.roomAudios,
+      //   'movie' : this.$parent.roomMovie,
+      //   'setting' : this.$parent.roomSetting,
+      // }
+      // this.message = "room情報を更新中です...";
+      // axios.post(url, room_datas)
+      //   .then(response =>{
+      //     alert(response.data.message);
+      //     this.message = "";
+      //   })
+      //   .catch(error => {            
+      //     alert('failed!');
+      //     this.message = "";
+      //   })
     }
   }
 });
@@ -10879,7 +10921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  top: 55px;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 470px;\r\n  height: 100vh;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: row;\r\n\r\n}\r\n\r\n#toggle-wrapper {\r\n  display: flex;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: grey;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 10px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 1px 1px grey;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  width: 90%;\r\n  height: 100%;\r\n  padding-left: 50px;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: column;\r\n}\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: auto;\r\n  padding: 10px 10px 10px 10px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  height: 50px;\r\n  margin-bottom: 5px;\r\n  padding: 0 10px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  top: 55px;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 470px;\r\n  height: 90vh;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: row;\r\n\r\n}\r\n\r\n#toggle-wrapper {\r\n  display: flex;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: grey;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 10px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 1px 1px grey;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  width: 90%;\r\n  height: 100%;\r\n  padding-left: 50px;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: column;\r\n}\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: auto;\r\n  padding: 10px 10px 10px 10px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  height: 50px;\r\n  margin-bottom: 5px;\r\n  padding: 0 10px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52010,7 +52052,7 @@ var render = function() {
     [
       _c("room-header-component", {
         attrs: { isShowCreateButton: true },
-        on: { getFinishTime: _vm.getFinishTime }
+        on: { "create-room": _vm.createRoom }
       }),
       _vm._v(" "),
       _c("room-img-component", {
@@ -52194,7 +52236,10 @@ var render = function() {
           roomImgHeight: _vm.roomImg["height"],
           roomImgOpacity: _vm.roomImg["opacity"]
         },
-        on: { "close-modal": _vm.closeModal }
+        on: {
+          "close-modal": _vm.closeModal,
+          "delete-room-img": _vm.deleteRoomImg
+        }
       })
     ],
     1
@@ -53790,7 +53835,7 @@ var render = function() {
     [
       _c("room-header-component", {
         attrs: { isShowUpdateButton: true },
-        on: { getFinishTime: _vm.getFinishTime }
+        on: { "update-room": _vm.updateRoom }
       }),
       _vm._v(" "),
       _c("room-img-component", {
@@ -54018,15 +54063,11 @@ var render = function() {
         _c("cancel-button"),
         _vm._v(" "),
         _vm.isShowCreateButton
-          ? _c("room-create-button", {
-              on: { getFinishTime: _vm.getFinishTime }
-            })
+          ? _c("room-create-button", { on: { "create-room": _vm.createRoom } })
           : _vm._e(),
         _vm._v(" "),
         _vm.isShowUpdateButton
-          ? _c("room-update-button", {
-              on: { getFinishTime: _vm.getFinishTime }
-            })
+          ? _c("room-update-button", { on: { "update-room": _vm.updateRoom } })
           : _vm._e()
       ],
       1
@@ -54908,6 +54949,10 @@ var render = function() {
                   },
                   [_vm._v("表示")]
                 )
+              ]),
+              _vm._v(" "),
+              _c("button", { on: { click: _vm.deleteRoomImg } }, [
+                _c("span", [_vm._v("削除")])
               ])
             ]
           )

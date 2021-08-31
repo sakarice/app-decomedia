@@ -23,25 +23,25 @@
 
     methods : {
       updateRoom() {
-        this.$emit('getFinishTime');
-        const url = '/home/room/update';
-        let room_datas = {
-          'img' : this.$parent.roomImg,
-          'audios' : this.$parent.roomAudios,
-          'movie' : this.$parent.roomMovie,
-          'setting' : this.$parent.roomSetting,
-        }
-        this.message = "room情報を更新中です...";
-        axios.post(url, room_datas)
-          .then(response =>{
-            alert(response.data.message);
-            this.message = "";
-          })
-          .catch(error => {            
-            alert('failed!');
-            this.message = "";
-          })
-
+        this.$emit('update-room');
+        // this.$emit('getFinishTime');
+        // const url = '/home/room/update';
+        // let room_datas = {
+        //   'img' : this.$parent.roomImg,
+        //   'audios' : this.$parent.roomAudios,
+        //   'movie' : this.$parent.roomMovie,
+        //   'setting' : this.$parent.roomSetting,
+        // }
+        // this.message = "room情報を更新中です...";
+        // axios.post(url, room_datas)
+        //   .then(response =>{
+        //     alert(response.data.message);
+        //     this.message = "";
+        //   })
+        //   .catch(error => {            
+        //     alert('failed!');
+        //     this.message = "";
+        //   })
       }
 
     },

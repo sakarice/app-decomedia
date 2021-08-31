@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\ImgUtil;
+use App\Lib\DefaultImgUtil;
+use App\Lib\UserOwnImgUtil;
 use App\Lib\StoreFileInS3;
 use App\Http\Controllers\Img\ImgController;
 use App\Http\Controllers\Audio\AudioController;
@@ -148,19 +150,20 @@ class RoomUtil
   public static function saveRoomDataInDB($request){
     DB::beginTransaction();
     try{
-      $user_id = Auth::user()->id;
       // room保存
       $room = new Room(); 
-      $room->user_id = $user_id;
+      $room->user_id = Auth::user()->id;
       $room->save();
       
       // 保存したroomのidを取得
       $room_id = Room::latest()->first()->id;
-      \Log::info($room_id);
   
       // room画像
       if(isset($request->img['id'])){
-        if($request->img['id'] !== ""){
+        $img_id = $request->img['id'];
+        $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
+        $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
+        if($isOwnImg || $isDefaultImg){
           RoomImgController::store($room_id, $request);
         }
       }
@@ -194,10 +197,8 @@ class RoomUtil
         Room::where('id', $room_id)
             ->where('user_id', $user_id)
             ->first()->delete();
-            // Room画像
-        if(RoomImg::where('room_id', $room_id)->exists()){
-            RoomImgController::destroy($room_id);
-        }
+        // Room画像
+        RoomImgController::destroy($room_id);
         // Room音楽
         if(RoomBgm::where('room_id', $room_id)->exists()){                
             RoomAudioController::destroy($room_id);

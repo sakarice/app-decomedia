@@ -75,7 +75,7 @@ class Functions extends Controller
       // 画像ファイルの保存とDB登録
       if(checkFile($request, 'img')){
         $imgFileDatas = storeFileAndcreateDataForDb($request ,'img');
-        saveDataInDB::img($imgFileDatas);
+        saveDataInDB::saveImg($imgFileDatas);
       }
       
       // オーディオファイルの保存とDB登録
@@ -88,7 +88,7 @@ class Functions extends Controller
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        SaveDataInDB::audio($audioFileDatas);
+        SaveDataInDB::saveAudio($audioFileDatas);
       }
 
       return view('upload.defaultFile');

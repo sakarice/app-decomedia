@@ -39,7 +39,7 @@ class AudioController extends Controller
                         'thumbnail_path' => $thumbnail_save_path,
                         'thumbnail_url' => $thumbnail_save_url
                 );
-                SaveDataInDB::audio($fileDatas);
+                SaveDataInDB::saveAudio($fileDatas);
 
                 $audios = array(
                         // 'id' => $id,

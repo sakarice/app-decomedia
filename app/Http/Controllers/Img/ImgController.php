@@ -37,7 +37,7 @@ class ImgController extends Controller
             'path' => $imgfile_save_path,
             'url' => $imgfile_save_url
         );
-        $img_id = SaveDataInDB::img($fileDatas);
+        $img_id = SaveDataInDB::saveImg($fileDatas);
         $img_file_info = array('id' => $img_id);
         $img_file_info += array('url'=> $imgfile_save_url);
 

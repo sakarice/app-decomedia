@@ -47,6 +47,9 @@
               <span v-show="isShowRoomImg">非表示</span>
               <span v-show="!(isShowRoomImg)">表示</span>
             </button>
+            <button v-on:click="deleteRoomImg">
+              <span>削除</span>
+            </button>
           </div>
 
         </div>
@@ -110,6 +113,9 @@ export default {
       } else if(!(this.isShowRoomImg)){
         this.$parent.roomSetting['isShowImg'] = true;
       }
+    },
+    deleteRoomImg(){
+      this.$emit('delete-room-img');
     },
     changePublicState() {
       if(this.isPublic){

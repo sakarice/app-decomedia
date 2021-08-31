@@ -131,7 +131,7 @@ class RoomController extends Controller
     //         'img_path' => $imgfile_save_path,
     //         'img_url' => $imgfile_save_url
     //     );
-    //     saveDataInDB::img($fileDatas);
+    //     saveDataInDB::saveImg($fileDatas);
 
     //     return ['url' => $imgfile_save_url];
     // }

@@ -6,7 +6,7 @@
     <!-- Roomヘッダ -->
     <room-header-component
     :isShowCreateButton=true
-    @getFinishTime="getFinishTime">
+    @create-room="createRoom">
     </room-header-component>
 
     <!-- Room画像コンポーネント -->
@@ -96,6 +96,7 @@
     <room-setting-component
     v-show="isShowModal['roomSettingModal']"
     v-on:close-modal="closeModal"
+    v-on:delete-room-img="deleteRoomImg"
     :transitionName="transitionName"
     :isPublic="roomSetting['isPublic']"
     :roomName="roomSetting['name']"
@@ -162,8 +163,8 @@ export default {
         'maxAudioNum' : 5,
       },
       roomImg : {
-        'type' : "",
-        'id' : "",
+        'type' : 0,
+        'id' : 0,
         'url' : "",
         'width' : 500,
         'height' : 500,
@@ -209,10 +210,15 @@ export default {
     },
     judgeDelImg(url) {
       if(this.roomImg['url'] == url){
-        this.roomImg['type'] = "";
-        this.roomImg['id'] = "";
+        this.roomImg['type'] = 0;
+        this.roomImg['id'] = 0;
         this.roomImg['url'] = "";
       }
+    },
+    deleteRoomImg(){
+      this.roomImg['type'] = 0;
+      this.roomImg['id'] = 0;
+      this.roomImg['url'] = "";
     },
     addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -240,6 +246,28 @@ export default {
         this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
       }
     },
+    createRoom() {
+      this.getFinishTime();
+      const url = '/home/room/store';
+      const tmpThis = this;
+      let room_datas = {
+        'img' : this.roomImg,
+        'audios' : this.roomAudios,
+        'movie' : this.roomMovie,
+        'setting' : this.roomSetting,
+      }
+      this.message = "room情報を保存中です...";
+      axios.post(url, room_datas)
+        .then(response =>{
+          alert(response.data.message);
+          this.message = "";
+        })
+        .catch(error => {            
+          alert('failed!');
+          this.message = "";
+        })
+
+    }
 
   },
   created() {},

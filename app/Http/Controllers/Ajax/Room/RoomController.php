@@ -27,16 +27,17 @@ class RoomController extends Controller
 {
     //
     public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-            // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
-        }
+        // if(Auth::check()){
+        //     $checked = "ユーザー：".Auth::user()->name."は認証済みです";
+        //     $data = [
+        //         'msg' => $checked,
+        //     ];
+        //     return view('rooms.create', $data);
+        // } else {
+        //     return view('auth.login');
+        //     // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
+        // }
+        return view('rooms.create', $data);
     }
 
     // destroy

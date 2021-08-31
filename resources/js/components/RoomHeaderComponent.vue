@@ -10,11 +10,12 @@
             <cancel-button></cancel-button>
 
             <room-create-button v-if="isShowCreateButton"
-            @getFinishTime="getFinishTime">
+            @create-room="createRoom">
+
             </room-create-button>
 
             <room-update-button v-if="isShowUpdateButton"
-            @getFinishTime="getFinishTime">
+            @update-room="updateRoom">
             </room-update-button>
         </div>
 
@@ -59,6 +60,12 @@ export default {
         getFinishTime(){
             this.$emit('getFinishTime');
         },
+        createRoom(){
+            this.$emit('create-room');
+        },
+        updateRoom(){
+            this.$emit('update-room');
+        }
     },
     mounted(){}
 }
