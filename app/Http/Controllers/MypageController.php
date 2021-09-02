@@ -16,13 +16,7 @@ use Storage;
 class MypageController extends Controller
 {
     public function view(){
-        $authenticated_userId;
-        if(Auth::check()){
-            $authenticated_userId = Auth::user()->id;
-        } else {
-            return view('auth.login');
-        }
-
+        $authenticated_userId = Auth::user()->id;
         $user = User::find($authenticated_userId);
         $userInfo = array(
             'userId' => $authenticated_userId,

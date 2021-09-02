@@ -28,14 +28,7 @@ use Storage;
 class RoomListController extends Controller
 {
     // 1. index
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-        }
-    }
+    public function index() {}
 
     // 2. create
     public function create(){}

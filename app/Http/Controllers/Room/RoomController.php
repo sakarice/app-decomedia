@@ -29,36 +29,11 @@ use Storage;
 class RoomController extends Controller
 {
     // 1. index
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-            // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
-        }
-    }
+    public function index() {}
 
     // 2. create
     public function create() {
-        // if(Auth::check()){
-        //     $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-        //     $data = [
-        //         'msg' => $checked,
-        //     ];
-        //     return view('rooms.create', $data);
-        // } else {
-        //     return view('auth.login');
-        // }
-        $data = [
-            'msg' => 'testLoginMiddle',
-        ];
-
-        return view('rooms.create', $data);
-
+        return view('rooms.create');
     }
 
     // 3. store
