@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
-use App\Lib\SaveDataInDB;
+use App\Lib\AudioUtil;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnBgm;
@@ -39,7 +39,7 @@ class AudioController extends Controller
                         'thumbnail_path' => $thumbnail_save_path,
                         'thumbnail_url' => $thumbnail_save_url
                 );
-                SaveDataInDB::saveAudio($fileDatas);
+                AudioUtil::saveAudioData($fileDatas);
 
                 $audios = array(
                         // 'id' => $id,

@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
-use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
@@ -27,24 +25,17 @@ class RoomController extends Controller
 {
     //
     public function index() {
-        // if(Auth::check()){
-        //     $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-        //     $data = [
-        //         'msg' => $checked,
-        //     ];
-        //     return view('rooms.create', $data);
-        // } else {
-        //     return view('auth.login');
-        //     // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
-        // }
         return view('rooms.create', $data);
     }
 
     // destroy
-    public static function destroy(Request $request){
+    public static function deleteSelectedOwnRooms(Request $request){
         $user_id = Auth::user()->id;
         $selected_room_ids = $request->selectedRoomIds;
-        $own_rooms = Room::whereIn('id', $selected_room_ids)->where('user_id', $user_id)->get()->all();
+        $own_rooms = Room::whereIn('id', $selected_room_ids)
+                    ->where('user_id', $user_id)
+                    ->get()
+                    ->all();
         // 選択されたRoomから、自分のRoomだけに絞る(=他ユーザのRoomを除外)
         foreach($own_rooms as $own_room){
             RoomUtil::deleteRoomDataFromDB($own_room->id);

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Ajax;
+namespace App\Http\Controllers\Ajax\Chat;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;

@@ -27,7 +27,6 @@ class DefaultImgController extends Controller
             $tmp_img_file_datas += array('url' => $default_img->img_url);
             $img_file_datas[$index] = $tmp_img_file_datas;
         };
-        \Log::info($img_file_datas);
 
         return ['file_datas' => $img_file_datas];
     }

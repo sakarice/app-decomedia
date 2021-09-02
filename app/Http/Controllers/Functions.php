@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\SaveDataInDB;
+use App\Lib\ImgUtil;
+use App\Lib\AudioUtil;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\DefaultBgm;
@@ -75,7 +76,7 @@ class Functions extends Controller
       // 画像ファイルの保存とDB登録
       if(checkFile($request, 'img')){
         $imgFileDatas = storeFileAndcreateDataForDb($request ,'img');
-        saveDataInDB::saveImg($imgFileDatas);
+        ImgUtil::saveImgData($imgFileDatas);
       }
       
       // オーディオファイルの保存とDB登録
@@ -88,7 +89,7 @@ class Functions extends Controller
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        SaveDataInDB::saveAudio($audioFileDatas);
+        AudioUtil::saveAudio($audioFileDatas);
       }
 
       return view('upload.defaultFile');

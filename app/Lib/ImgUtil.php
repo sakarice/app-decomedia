@@ -13,26 +13,37 @@ use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\DefaultImg;
 use App\Models\RoomImg;
-use App\Models\RoomSetting;
 use Storage;
 
 class ImgUtil
 {
 
-    // 画像タイプに応じたテーブルからRoom画像のURLを取得
-    public static function getRoomImgUrlByType($room_img_id, $img_type){
-        \Log::info($room_img_id);
-        switch ($img_type) {
-            case 1: // Default画像
-                $room_img_url = DefaultImg::where('id', $room_img_id)->first()->img_url;                
-                break;
-            case 2: // ユーザアップロードした画像
-                $room_img_url = UserOwnImg::where('id', $room_img_id)->first()->img_url;
-                break;
-        }
+  // 画像ファイルの情報をDBに保存
+  public static function saveImgData($fileDatas){
+    $owner_user_id = $fileDatas['owner_user_id'];
 
-        return $room_img_url;
+    // 保存先DBを振り分け
+    $targetModel;
+    if($owner_user_id == NULL){
+        $targetModel = new DefaultImg();
+    } else {
+        $targetModel = new UserOwnImg();
     }
+
+    // モデルに値をセットして保存
+    $targetModel->owner_user_id = $owner_user_id;
+    $targetModel->name = pathinfo($fileDatas['name'], PATHINFO_FILENAME);
+    $targetModel->img_path = $fileDatas['path'];
+    $targetModel->img_url = $fileDatas['url'];
+    $targetModel->save();
+
+    // 保存したレコードのidを取得
+    $id = $targetModel->where('owner_user_id', $owner_user_id)
+                      ->where('img_url', $fileDatas['url'])
+                      ->first()
+                      ->id;
+    return $id;
+  }
 
 
 

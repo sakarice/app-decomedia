@@ -5,18 +5,14 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\ImgUtil;
-use App\Lib\StoreFileInS3;
 use App\Http\Controllers\Img\ImgController;
 use App\Http\Controllers\RoomImg\RoomImgController;
-use App\Http\Controllers\RoomSetting\RoomSettingController;
+use App\Lib\ImgUtil;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\DefaultImg;
 use App\Models\RoomImg;
-use App\Models\RoomSetting;
-use Storage;
 
 class RoomImgUtil
 {
@@ -35,19 +31,36 @@ class RoomImgUtil
     $roomImg->save();
   }
 
-  // 4.show   // Room画像情報の連想配列を返す
+  // 4.show 
+  // Room画像の情報を取得(Room作成、編集、閲覧時に使用)
   public static function getRoomImgData($room_id){
     $room_img = RoomImg::where('room_id', $room_id)->first();
     $room_img_data = [
         'id' => $room_img->img_id,
         'type' => $room_img->img_type,
-        'url' => ImgUtil::getRoomImgUrlByType($room_img->img_id, $room_img->img_type),
+        'url' => RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url,
         'width' => $room_img->width,
         'height' => $room_img->height,
         'opacity' => $room_img->opacity,
         'layer' => $room_img->img_layer,
     ];
     return $room_img_data;
+  }
+
+
+  // Room画像のModelを取得
+  // タイプに応じて取得先DBを選択
+  public static function getRoomImgModel($img_id, $img_type){
+    $room_img_model;
+    switch ($img_type){
+      case 1: // デフォルト画像
+        $room_img_model = DefaultImg::where('id', $img_id)->first();
+        break;
+      case 2: // ユーザがアップロードした画像
+        $room_img_model = UserOwnImg::where('id', $img_id)->first();
+        break;
+    }
+    return $room_img_model;
   }
 
 

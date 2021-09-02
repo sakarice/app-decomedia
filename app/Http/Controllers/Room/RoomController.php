@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
 use App\Lib\RoomUtil;
 use App\Http\Controllers\Img\ImgController;
@@ -45,24 +44,26 @@ class RoomController extends Controller
 
     // 2. create
     public function create() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-        }
+        // if(Auth::check()){
+        //     $checked = "ユーザー：".Auth::user()->name."は認証済みです";
+        //     $data = [
+        //         'msg' => $checked,
+        //     ];
+        //     return view('rooms.create', $data);
+        // } else {
+        //     return view('auth.login');
+        // }
+        $data = [
+            'msg' => 'testLoginMiddle',
+        ];
+
+        return view('rooms.create', $data);
+
     }
 
     // 3. store
     public function store(Request $request){
-        // ★デバッグ用ログ出力 DBに保存する情報が取得できているか確認
-        // $user_id = Auth::user()->id;
-        // \Log::info('ユーザID：'.$user_id);
         $returnMsg;
-        
         DB::beginTransaction();
         try{
             RoomUtil::saveRoomDataInDB($request);
@@ -115,26 +116,5 @@ class RoomController extends Controller
         $returnMsg = RoomUtil::deleteRoomDataFromDB($room_id);
         return['message' => $returnMsg];
     }
-
-
-
-
-    // public function saveDBTest() {
-    //     $user_id = NULL;
-    //     $imgfile_name = 'rail.jpg';
-    //     $imgfile_save_path = 'img/room/rail.jpg';
-    //     $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
-
-    //     $fileDatas = array (
-    //         'owner_user_id' => $user_id,
-    //         'name' => $imgfile_name,
-    //         'img_path' => $imgfile_save_path,
-    //         'img_url' => $imgfile_save_url
-    //     );
-    //     saveDataInDB::saveImg($fileDatas);
-
-    //     return ['url' => $imgfile_save_url];
-    // }
-
 
 }

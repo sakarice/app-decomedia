@@ -29,11 +29,11 @@ Route::get('/home/mypage', 'App\Http\Controllers\MypageController@view');
 Route::get('/home/mypage/profile', 'App\Http\Controllers\MypageController@profile');
 
 // ユーザプロフィール
-Route::resource('users', 'App\Http\Controllers\UserController');
+Route::resource('users', 'App\Http\Controllers\User\UserController');
 // ->except([
 //     'index' // 複数ユーザのプロフィール一覧を表示することはない
 // ]);
-Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
+Route::put('/user/{id}', 'App\Http\Controllers\User\UserController@update');
 
 // プロフィールに表示するユーザ情報を取得
 Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
@@ -60,9 +60,9 @@ Route::post('/home/room/update', 'App\Http\Controllers\Room\RoomController@updat
 Route::post('/home/room/delete', 'App\Http\Controllers\Room\RoomController@destroy');
 
 // Chat
-Route::get('/home/chat', 'App\Http\Controllers\Room2Controller@chat');
-Route::get('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@index');
-Route::post('ajax/chat', 'App\Http\Controllers\Ajax\ChatController@create');
+Route::get('/home/chat', 'App\Http\Controllers\Chat\ChatController@index');
+Route::get('ajax/chat', 'App\Http\Controllers\Ajax\Chat\ChatController@index');
+Route::post('ajax/chat', 'App\Http\Controllers\Ajax\Chat\ChatController@create');
 
 // Ajax
 Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\Img\UserOwnImgController@index');
@@ -78,7 +78,7 @@ Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\Room
 // マイページからRoomを選択し、手早くRoomリストを作成する
 Route::post('/ajax/roomlist/store', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@quickStore');
 // マイページから選択したRoomを削除する
-Route::post('/ajax/selectedRoom/destroy', 'App\Http\Controllers\Ajax\Room\RoomController@destroy');
+Route::post('/ajax/selectedRoom/destroy', 'App\Http\Controllers\Ajax\Room\RoomController@deleteSelectedOwnRooms');
 
 // 作成したRoomリストのプレビュー情報を取得
 Route::get('/ajax/addCreatedRoomListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\Roomlist\RoomListController@getRoomListPreviewInfos');
