@@ -15,7 +15,6 @@ class UserUtil
   public static function getProfile(){
       $user_id = Auth::user()->id;
       $user = User::find($user_id);
-
       $user_name = $user->name;
       $about_me = $user->profile;
       

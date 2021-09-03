@@ -80,28 +80,28 @@ Route::middleware('auth')->group(function(){
 
 // ★ログイン認証不要ページ
 // Home
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // 検索結果
-Route::post('/searchResult', 'App\Lib\SearchUtil@searchRooms');
+    Route::post('/searchResult', 'App\Lib\SearchUtil@searchRooms');
 
 // Room閲覧
-Route::get('/home/room/{id}', 'App\Http\Controllers\Room\RoomController@show');
+    Route::get('/home/room/{id}', 'App\Http\Controllers\Room\RoomController@show');
 // 入ったroomが自分の作成したroomか判別する
-Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\RoomController@judgeIsMyRoom');
+    Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Room\RoomController@judgeIsMyRoom');
 // プロフィールに表示するユーザ情報を取得
-Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
+    Route::get('/user/getProfile', 'App\Lib\UserUtil@getProfile');
 // roomの作成者情報を表示
-Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerInfo');
+    Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerInfo');
 // defaultImgアップロード(開発用、後で消す)
-Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');
-Route::post('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@uploadFile');
+    Route::get('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@view');
+    Route::post('/home/uploadDefaultFiles', 'App\Http\Controllers\Functions@uploadFile');
 // Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo(確認用、後で消す)
-Route::get('/home/phpinfo', function () {
-    return view('phpinfo');
-});
+    Route::get('/home/phpinfo', function () {
+        return view('phpinfo');
+    });
 
 
 

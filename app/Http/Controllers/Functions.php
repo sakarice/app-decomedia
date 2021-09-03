@@ -24,7 +24,6 @@ use Storage;
 class Functions extends Controller
 {
 
-    // ★routingの遷移先
     public function view() {
       $fileNames = [
         'imgFileUrl' => "",
@@ -35,7 +34,7 @@ class Functions extends Controller
       return view('upload.defaultFile', $fileNames);
     }
   
-    // ★routingの遷移先
+    
     public function uploadFile(Request $request){
       $imgFileName = "";
       $audioFileName = "";
