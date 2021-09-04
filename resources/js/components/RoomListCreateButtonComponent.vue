@@ -65,7 +65,7 @@
             this.createRoomListMessage = "";
           })
           .catch(error => {
-            alert('failed!');
+            alert('roomリストの作成に失敗しました');
             this.createRoomListMessage = "";
           })
       }

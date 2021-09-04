@@ -94,6 +94,7 @@ export default {
     LikeRoom
   },
   props: [
+    'isLogin',
     'roomImgData',
     'roomAudiosData',
     'roomMovieData',
@@ -230,7 +231,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.judgeIsMyRoom();
+    if(this.isLogin){ this.judgeIsMyRoom(); }
     this.initImg();
     this.initMovie();
     this.initAudio();

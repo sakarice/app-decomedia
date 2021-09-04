@@ -82,7 +82,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Lib\RoomUtilAjax@judgeIsMyRoom');
 
 // roomの作成者情報を表示
-    Route::get('/user/getRoomOwnerInfo/{room_id}', 'App\Lib\UserUtil@getRoomOwnerData');
+    Route::get('/user/roomOwner/profile/show/{room_id}', 'App\Lib\UserUtil@getRoomOwnerData');
 // defaultImgアップロード(開発用、後で消す)
     Route::get('/uploadDefaultFiles', 'App\Http\Lib\Common\Functions@view');
     Route::post('/uploadDefaultFiles', 'App\Http\Lib\Common\Functions@uploadFile');

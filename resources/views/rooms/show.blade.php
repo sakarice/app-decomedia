@@ -23,11 +23,11 @@
 
   <div id="app">
     <room-component
+    is-login='{{$isLogin}}'
     room-img-data='@json($room_img)'
     room-audios-data='@json($room_audios)'
     room-movie-data='@json($room_movie)'
-    room-setting-data='@json($room_setting)'
-    >
+    room-setting-data='@json($room_setting)'>
     </room-component>
   </div>
 

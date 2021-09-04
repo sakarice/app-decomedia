@@ -28,7 +28,6 @@ class UserUtil
   
   // (ログイン中の)ユーザ情報を取得(id,ユーザ名,プロフィール文)
   public static function getUserData($user_id){
-    $user_id = Auth::user()->id;
     $user = User::find($user_id);
     $user_data = [
       'id' => $user_id,

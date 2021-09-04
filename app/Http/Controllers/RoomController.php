@@ -55,7 +55,8 @@ class RoomController extends Controller
     // 4. show
     public function show($room_id) {
         $room_data = RoomUtil::getRoomDatas($room_id);
-        return view('rooms.show', $room_data);
+        $data = $room_data + array('isLogin' => Auth::check());
+        return view('rooms.show', $data);
     }
 
     // 5. edit

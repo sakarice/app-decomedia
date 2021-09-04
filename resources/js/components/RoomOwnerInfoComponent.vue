@@ -50,7 +50,7 @@
         event.stopPropagation();
       },
       getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
-        let url = '/user/getRoomOwnerInfo/' + this.roomId;
+        let url = '/user/roomOwner/profile/show/' + this.roomId;
         axios.get(url)
         .then(res => {
           this.roomOwnerInfo['name'] = res.data.name;
