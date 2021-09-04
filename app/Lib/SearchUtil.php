@@ -17,7 +17,6 @@ class SearchUtil
 {
     //
     public static function searchRooms(Request $request){
-        $user_id = Auth::user()->id;
         $keyword = $request->input('keyword');
         $rooms;
         $roomPreviewInfos = array();

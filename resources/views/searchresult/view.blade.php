@@ -33,7 +33,8 @@
       <h2 class="search-result-message">キーワード"{{$keyword}}"での検索結果</h2>
   
       <room-preview-component
-      :room-preview-infos=@json($roomPreviewInfos)
+      :csrf="{{json_encode(csrf_token())}}"
+      :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
       :is-show-cover="false">
       </room-preview-component>
     </section>

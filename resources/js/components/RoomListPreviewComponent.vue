@@ -92,7 +92,6 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos;
-        // alert(tmpThis.roomListPreviewInfos[0]['preview_img_url']);
       })
       .catch(error => {
         console.log('roomリスト情報の取得に失敗しました')

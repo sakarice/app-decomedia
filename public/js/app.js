@@ -3960,7 +3960,7 @@ __webpack_require__.r(__webpack_exports__);
     RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
+  props: ['isLogin', 'roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
   data: function data() {
     return {
       isMyRoom: true,
@@ -4092,7 +4092,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    this.judgeIsMyRoom();
+    if (this.isLogin) {
+      this.judgeIsMyRoom();
+    }
+
     this.initImg();
     this.initMovie();
     this.initAudio();
@@ -4795,7 +4798,7 @@ __webpack_require__.r(__webpack_exports__);
         alert(response.data.message);
         _this.createRoomListMessage = "";
       })["catch"](function (error) {
-        alert('failed!');
+        alert('roomリストの作成に失敗しました');
         _this.createRoomListMessage = "";
       });
     }
@@ -4901,7 +4904,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/ajax/addCreatedRoomListPreviewInfos/' + $num;
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos; // alert(tmpThis.roomListPreviewInfos[0]['preview_img_url']);
+        tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos;
       })["catch"](function (error) {
         console.log('roomリスト情報の取得に失敗しました');
       });
@@ -5106,7 +5109,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // DBからログイン中ユーザのidとプロフィール情報を取得
-      var url = '/user/getRoomOwnerInfo/' + this.roomId;
+      var url = '/user/roomOwner/profile/show/' + this.roomId;
       axios.get(url).then(function (res) {
         _this.roomOwnerInfo['name'] = res.data.name;
         _this.roomOwnerInfo['aboutMe'] = res.data.aboutMe;

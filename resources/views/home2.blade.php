@@ -69,7 +69,8 @@
             <h3 class="section-title">最近の投稿</h3>
             <div class="room-preview-wrapper">
                 <room-preview-component
-                :room-preview-infos='@json($roomPreviewInfos)'
+                :csrf="{{json_encode(csrf_token())}}"
+                :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
                 :is-show-cover="false">
                 </room-preview-component>
             </div>
