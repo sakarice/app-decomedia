@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        // $this->middleware('auth' , ['except' => 'index']);
     }
 
     /**
@@ -31,7 +31,8 @@ class HomeController extends Controller
     public function index()
     {
         $roomPreviewInfos = array();
-        $rooms = Room::inRandomOrder()->take(20)->get();
+        $getNum = 20; // 取得するRoomプレビュー情報件数
+        $rooms = Room::inRandomOrder()->take($getNum)->get();
         foreach($rooms as $index => $room){
             $room_id = $room->id;
             $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);

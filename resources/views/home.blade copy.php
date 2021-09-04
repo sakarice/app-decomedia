@@ -22,5 +22,5 @@
 </div>
 @endsection
 <div class="toMypage" style="margin: 50px 0; font-size: 30px">
-    <a href="home/mypage">マイページへ</a>
+    <a href="/mypage">マイページへ</a>
 </div>

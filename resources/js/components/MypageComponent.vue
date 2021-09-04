@@ -4,16 +4,24 @@
     <!-- Room -->
     <!-- Roomの選択モード -->
     <div class="select-mode-wrapper">
+      <!-- 〇選択モードの切り替えボタン -->
       <button id="change-select-mode" class="select-mode-item" @click="toggleSelectMode">
         {{selectModeButtonMessage}}
       </button>
+      <!-- 〇選択をすべて解除するボタン -->
       <button class="select-mode-item" v-show="isSelectMode" @click="unCheckAllRoom">
         全ての選択を解除
       </button>
+      <!-- 〇選択したRoomからRoomリストを作成するボタン -->
       <room-list-create-button-component
       class="select-mode-item"
       v-show="isSelectMode">
       </room-list-create-button-component>
+      <!-- 〇選択したRoom削除ボタン -->
+      <selected-room-delete-button-component
+      class="select-mode-item"
+      v-show="isSelectMode">
+      </selected-room-delete-button-component>
     </div>
 
 
@@ -24,7 +32,7 @@
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
         <div class="room-create-wrapper">
-          <a class="linkTo-createRoom" href="room/create">Room作成</a>
+          <a class="linkTo-createRoom" href="/room/create">Room作成</a>
         </div>
         <span class="view-more" @click="addCreatedRoomPreviewInfos">
           もっと見る
@@ -96,6 +104,7 @@ import RoomPreview from './RoomPreviewComponent.vue';
 import RoomListPreview from './RoomListPreviewComponent.vue';
 import LeftBar from './LeftBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
+import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
 
 export default {
   components : {
@@ -103,6 +112,7 @@ export default {
     RoomListPreview,
     LeftBar,
     RoomListCreateButton,
+    SelectedRoomDeleteButton,
   },
   props : [
     'createdRoomPreviewInfosFromParent',
@@ -130,7 +140,7 @@ export default {
       this.isSelectMode = !this.isSelectMode;
     },
     roomEditLink : function(id) {
-      return "/home/room/" + id + "/edit";
+      return "/room/" + id + "/edit";
     },
     addCreatedRoomPreviewInfos(){
       let url = '/addCreatedRoomPreviewInfos';
@@ -163,7 +173,7 @@ export default {
       let room_data = {
         'room_id' : room_id,
       }
-      const url = '/home/room/delete';
+      const url = '/room/delete';
       axios.post(url, room_data)
       .then(response => {
         alert(response.data.message);

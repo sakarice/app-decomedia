@@ -72,7 +72,7 @@ $(function(){
         headers: {
           'X-CSRF-TOKEN': $('meta[id="csrf-token"]').attr('content')
         },
-        url: '/home/mypage/createroom',
+        url: '/mypage/createroom',
         type: 'POST',
         data: {
           'room-title' : room_title,

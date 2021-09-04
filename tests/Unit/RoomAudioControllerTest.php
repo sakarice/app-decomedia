@@ -13,7 +13,7 @@ use App\Models\Room;
 use App\Models\RoomBgm;
 use App\Models\DefaultBgm;
 use App\Models\UserOwnBgm;
-use App\Http\Controllers\RoomAudio\RoomAudioController;
+use App\Http\Controllers\RoomAudioController;
 
 class RoomAudioControllerTest extends TestCase
 {

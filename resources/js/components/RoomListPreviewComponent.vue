@@ -60,7 +60,7 @@ export default {
       let roomList_data = {
         'roomList_id' : roomList_id,
       }
-      const url = '/ajax/roomList/delete';
+      const url = '/roomLists/delete';
       axios.post(url, roomList_data)
       .then(response => {
         alert(response.data.message);
@@ -95,7 +95,7 @@ export default {
         // alert(tmpThis.roomListPreviewInfos[0]['preview_img_url']);
       })
       .catch(error => {
-        alert('roomリスト情報の取得に失敗しました')
+        console.log('roomリスト情報の取得に失敗しました')
       })
     },
 

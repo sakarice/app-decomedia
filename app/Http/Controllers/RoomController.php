@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Room;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImgController;
+use App\Http\Controllers\AudioController;
+use App\Http\Controllers\RoomImgController;
+use App\Http\Controllers\RoomAudioController;
+use App\Http\Controllers\RoomMovieController;
+use App\Http\Controllers\RoomSettingController;
 use App\Lib\StoreFileInS3;
 use App\Lib\RoomUtil;
-use App\Http\Controllers\Img\ImgController;
-use App\Http\Controllers\Audio\AudioController;
-use App\Http\Controllers\RoomImg\RoomImgController;
-use App\Http\Controllers\RoomAudio\RoomAudioController;
-use App\Http\Controllers\RoomMovie\RoomMovieController;
-use App\Http\Controllers\RoomSetting\RoomSettingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
@@ -30,39 +29,16 @@ use Storage;
 class RoomController extends Controller
 {
     // 1. index
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-            // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
-        }
-    }
+    public function index() {}
 
     // 2. create
     public function create() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-        }
+        return view('rooms.create');
     }
 
     // 3. store
     public function store(Request $request){
-        // ★デバッグ用ログ出力 DBに保存する情報が取得できているか確認
-        // $user_id = Auth::user()->id;
-        // \Log::info('ユーザID：'.$user_id);
         $returnMsg;
-        
         DB::beginTransaction();
         try{
             RoomUtil::saveRoomDataInDB($request);
@@ -115,26 +91,5 @@ class RoomController extends Controller
         $returnMsg = RoomUtil::deleteRoomDataFromDB($room_id);
         return['message' => $returnMsg];
     }
-
-
-
-
-    // public function saveDBTest() {
-    //     $user_id = NULL;
-    //     $imgfile_name = 'rail.jpg';
-    //     $imgfile_save_path = 'img/room/rail.jpg';
-    //     $imgfile_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/img/room/rail.jpg';
-
-    //     $fileDatas = array (
-    //         'owner_user_id' => $user_id,
-    //         'name' => $imgfile_name,
-    //         'img_path' => $imgfile_save_path,
-    //         'img_url' => $imgfile_save_url
-    //     );
-    //     saveDataInDB::img($fileDatas);
-
-    //     return ['url' => $imgfile_save_url];
-    // }
-
 
 }

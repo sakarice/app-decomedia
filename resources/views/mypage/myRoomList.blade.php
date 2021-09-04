@@ -30,7 +30,7 @@
           <h3 class="section-title">作成済みRoom</h3>
           {{-- Room作成 --}}
           <div class="room-create-wrapper">
-            <a class="linkTo-createRoom" href="room/create">Room作成</a>
+            <a class="linkTo-createRoom" href="/room/create">Room作成</a>
           </div>
         </div>
   

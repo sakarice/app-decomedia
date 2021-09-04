@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Lib\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\SaveDataInDB;
+use App\Lib\ImgUtil;
+use App\Lib\AudioUtil;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\DefaultBgm;
@@ -23,7 +24,6 @@ use Storage;
 class Functions extends Controller
 {
 
-    // ★routingの遷移先
     public function view() {
       $fileNames = [
         'imgFileUrl' => "",
@@ -34,7 +34,7 @@ class Functions extends Controller
       return view('upload.defaultFile', $fileNames);
     }
   
-    // ★routingの遷移先
+    
     public function uploadFile(Request $request){
       $imgFileName = "";
       $audioFileName = "";
@@ -42,7 +42,6 @@ class Functions extends Controller
       
       // ファイルのバリデーションチェック
       function checkFile($req, $filetag){
-        \Log::info('checkFile function called');
         $isFileExist = $req->hasFile($filetag);
         if($isFileExist){
           $isUploaded = $req->file($filetag)->isValid();
@@ -58,7 +57,6 @@ class Functions extends Controller
 
       // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
-        \Log::info('storeFileAndcreateDataForDb  function called');
         $fileName = $request->file($type)->getClientOriginalName();
         $filePath = StoreFileInS3::DefaultFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
@@ -75,7 +73,7 @@ class Functions extends Controller
       // 画像ファイルの保存とDB登録
       if(checkFile($request, 'img')){
         $imgFileDatas = storeFileAndcreateDataForDb($request ,'img');
-        saveDataInDB::img($imgFileDatas);
+        ImgUtil::saveImgData($imgFileDatas);
       }
       
       // オーディオファイルの保存とDB登録
@@ -88,7 +86,7 @@ class Functions extends Controller
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        SaveDataInDB::audio($audioFileDatas);
+        AudioUtil::saveAudio($audioFileDatas);
       }
 
       return view('upload.defaultFile');

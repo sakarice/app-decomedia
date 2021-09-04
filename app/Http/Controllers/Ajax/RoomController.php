@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Ajax\Room;
+namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
-use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
@@ -25,36 +23,22 @@ use Storage;
 
 class RoomController extends Controller
 {
-    //
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-            return view('rooms.create', $data);
-        } else {
-            return view('auth.login');
-            // $checked = "ユーザー：".Auth::user()->name."は認証されていません";
+    // destroy // ※!!自分のRoomのみ
+    public static function destroy(Request $request){
+        $user_id = Auth::user()->id;
+        $selected_room_ids = $request->selectedRoomIds;
+        // 選択されたRoomから、自分のRoomだけに絞る(=他ユーザのRoomを除外)
+        $own_rooms = Room::whereIn('id', $selected_room_ids)
+                    ->where('user_id', $user_id)
+                    ->get()
+                    ->all();
+        foreach($own_rooms as $own_room){
+            RoomUtil::deleteRoomDataFromDB($own_room->id);
         }
+        return['message' => '選択した自分のroomを削除しました。'];
     }
 
     
-    // 入ったroomが自分の作成したroomか判別する
-    public static function judgeIsMyRoom($room_id){
-        $enter_user_id = Auth::user()->id;
-        $room_owner_user_id = Room::find($room_id)->user_id;
-        $isMyRoom;
-
-        if($enter_user_id == $room_owner_user_id){
-        $isMyRoom = true;
-        } else {
-        $isMyRoom = false;
-        }
-
-        return ['isMyRoom' => $isMyRoom];
-    }
-
     
     // // room更新
     // public function updateRoom(Request $request){

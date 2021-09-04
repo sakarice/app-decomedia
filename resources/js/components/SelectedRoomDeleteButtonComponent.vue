@@ -1,11 +1,11 @@
 <template>
 
     <div class="action-button-wrapper">
-      <button class="roomlist-create-button" @click="createRoomList">
-        Roomリストを作成
+      <button class="selected-room-delete-button" @click="deleteSelectedRoom">
+        選択したRoomを削除する
       </button>
       <p>
-        {{createRoomListMessage}}
+        {{deleteSelectedRoomMessage}}
       </p>
     </div>
 
@@ -16,7 +16,7 @@
     props : [],
     data : () => {
       return {
-        'createRoomListMessage' : "",
+        'deleteSelectedRoomMessage' : "",
       }
     },
 
@@ -49,24 +49,24 @@
         
         return selectedRoomIds;
       },
-      createRoomList() {
-        let selectedRoomIds = this.getSelectedRoomId();
+      deleteSelectedRoom() {
+        const selectedRoomIds = this.getSelectedRoomId();
         selectedRoomIds.forEach(selectedRoomId => {
           alert(selectedRoomId);
         });
         const roomInfo = {
           'selectedRoomIds' : selectedRoomIds,
         }
-        const url = '/roomlists/store';
-        // this.createRoomListMessage = "roomリスト情報を保存中です...";
+        const url = '/rooms/destroy';
         axios.post(url, roomInfo)
           .then(response =>{
             alert(response.data.message);
-            this.createRoomListMessage = "";
+            this.deleteSelectedRoomMessage = "";
+            location.reload();
           })
           .catch(error => {
             alert('failed!');
-            this.createRoomListMessage = "";
+            this.deleteSelectedRoomMessage = "";
           })
       }
 
@@ -80,18 +80,7 @@
 
 <style scoped>
 
-  /* .action-button-wrapper {
-    width: 50%;
-    height: 50%;
-    position: absolute;
-    top: 0;
-    right: 0;
-  } */
-
-  .roomlist-create-button {
-    /* position: absolute;
-    top : 20px;
-    right: 150px; */
+  .selected-room-delete-button {
     z-index: 1;
     font-family: Inter,Noto Sans JP;
     border-radius: 4px;
@@ -99,7 +88,7 @@
     box-shadow: 0.5px 0.5px 1px lightslategrey;
   }
 
-  .roomlist-create-button:hover {
+  .selected-room-delete-button:hover {
     background-color: aqua;
   }
 

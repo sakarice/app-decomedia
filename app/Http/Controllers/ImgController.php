@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Img;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
-use App\Lib\SaveDataInDB;
+use App\Lib\ImgUtil;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
@@ -29,7 +29,6 @@ class ImgController extends Controller
         $imgfile_name = $imgfile->getClientOriginalName();
         $imgfile_save_path = StoreFileInS3::userOwnFile($user_id, $imgfile);
         $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
-        \Log::info($imgfile_save_url);
 
         $fileDatas = array (
             'owner_user_id' => $user_id,
@@ -37,7 +36,7 @@ class ImgController extends Controller
             'path' => $imgfile_save_path,
             'url' => $imgfile_save_url
         );
-        $img_id = SaveDataInDB::img($fileDatas);
+        $img_id = ImgUtil::saveImgData($fileDatas);
         $img_file_info = array('id' => $img_id);
         $img_file_info += array('url'=> $imgfile_save_url);
 

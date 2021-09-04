@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\RoomList;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
-use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
 use App\Lib\RoomListUtil;
 use App\Lib\RoomRoomListUtil;
@@ -30,14 +28,7 @@ use Storage;
 class RoomListController extends Controller
 {
     // 1. index
-    public function index() {
-        if(Auth::check()){
-            $checked = "ユーザー：".Auth::user()->name."は認証済みです";
-            $data = [
-                'msg' => $checked,
-            ];
-        }
-    }
+    public function index() {}
 
     // 2. create
     public function create(){}

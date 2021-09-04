@@ -16,39 +16,7 @@ use Storage;
 class MypageController extends Controller
 {
     public function view(){
-        $authenticated_userId;
-        if(Auth::check()){
-            $authenticated_userId = Auth::user()->id;
-        } else {
-            return view('auth.login');
-        }
-
-        $user = User::find($authenticated_userId);
-        $userInfo = array(
-            'userId' => $authenticated_userId,
-            'name' => $user->name,
-            'profile_img_url' => $user->profile_img_url,
-            'profile' => $user->profile,
-        );
-
-        // // 作成済みroomのプレビュー情報を取得
-        // $createdRoomPreviewInfos = array();
-        // $rooms = Room::limit(5)->where('user_id', $authenticated_userId)->get();
-        // foreach($rooms as $index => $room){
-        //     $room_id = $room->id;
-        //     $createdRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
-        // }
-
-        // // いいねしたroomのプレビュー情報を取得
-        // $likedRoomPreviewInfos = array();
-        // $rooms = RoomUtil::getLikedRoomModel($authenticated_userId, 5);
-        // foreach($rooms as $index => $room){
-        //     $room_id = $room->room_id; // ※idではなくroom_idで指定する
-        //     $likedRoomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
-        // }
-
         $data = [
-            'userInfo' => $userInfo,
             'createdRoomPreviewInfos' => RoomUtil::getCreatedRoomPreviewInfos(3)['createdRoomPreviewInfos'],
             'likedRoomPreviewInfos' => RoomUtil::getLikedRoomPreviewInfos(3)['likedRoomPreviewInfos'],
         ];
@@ -56,14 +24,14 @@ class MypageController extends Controller
         return view('mypage.view', $data);
     }
 
-    // プロフィール画面へユーザ情報を渡す
-    public function profile(Request $request){
-        $user_id = Auth::user()->id;
-        $user = User::find($user_id);
-        $data = [
-            'user' => $user
-        ];
-        return view ('profile.view', $data);
+    // // プロフィール画面へユーザ情報を渡す
+    // public function profile(Request $request){
+    //     $user_id = Auth::user()->id;
+    //     $user = User::find($user_id);
+    //     $data = [
+    //         'user' => $user
+    //     ];
+    //     return view ('profile.view', $data);
+    // }
 
-    }
 }

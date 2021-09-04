@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Ajax\RoomList;
+namespace App\Http\Controllers\Ajax;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Lib\EditTrack;
 use App\Lib\StoreFileInS3;
-use App\Lib\saveDataInDB;
 use App\Lib\RoomUtil;
 use App\Lib\RoomListUtil;
 use App\Lib\RoomRoomListUtil;

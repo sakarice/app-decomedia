@@ -3,9 +3,6 @@
   display: inline-block;
 }
 
-.room-and-track-wrapper {
-  display: flex;
-}
 
 .room-wrapper {
   position: relative;
@@ -14,75 +11,10 @@
   background-color:azure;
 }
 
-.room-tracks-wrapper {
-  position: absolute ;
-  right: 0;
-  z-index: 3;
-  display: flex;
-}
-
-.room-track-list-cover {
-  width: 100%;
-  height: 100%;
-  opacity: 0.5;
-  background-color: white;
-  z-index: -2;
-  position: absolute;
-}
-
-.room-track-list {
-  z-index: 1;
-  margin: 0 0 0 auto;
-  padding: 5px;
-  /* background-color: white; */
-  display: inline-block;
-  list-style: none;
-}
-
-.room-track-list > li {
-  width: auto;
-}
-
-.track-title:hover:hover {
-  color:royalblue;
-}
 
 .room-img {
   width: 100%;
   height: 480px;
-}
-
-
-
-#track-title {
-  font-size: 20px;
-}
-
-.my-tracks-wrapper {
-  margin-left: 20px;
-}
-
-.my-track-list {
-  list-style: none;
-}
-
-
-.track-info {
-  position: relative;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-
-.track-info-cover {
-  position: absolute;
-  opacity: 0;
-  z-index: -1;
-  background-color:white;
-  width: 100%;
-  height: 100%;
 }
 
 .icon-and-index {
@@ -95,33 +27,6 @@
   margin-right: 25px;
   padding: 0 10px 0 10px;
 }
-
-.track-index {
-  /* margin-right:10px; */
-  /* display: none; */
-}
-
-.track-img-small {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-
-.track-add-icon, .track-remove-icon{
-  width: 25px;
-  height: 25px;
-  margin-right: 15px;
-}
-
-.track-remove-icon {
-  position: absolute;
-  left: 3px;
-  opacity: 0;
-  z-index: 3;
-  margin: 0;
-}
-
 
 .buttons {
   font-size: 15px;
