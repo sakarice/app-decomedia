@@ -57,7 +57,7 @@
         const roomInfo = {
           'selectedRoomIds' : selectedRoomIds,
         }
-        const url = '/ajax/roomlist/store';
+        const url = '/roomlists/store';
         // this.createRoomListMessage = "roomリスト情報を保存中です...";
         axios.post(url, roomInfo)
           .then(response =>{

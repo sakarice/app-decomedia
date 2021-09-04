@@ -13,7 +13,7 @@ $("#profile-img").on("click", function(){
 
 //     if($(this).val() == "show"){
 //       // $("#post-form").attr('action', "mypage/showroom");
-//       $("#post-form").attr('action', "/home/room/"+room_id);
+//       $("#post-form").attr('action', "/room/"+room_id);
 //     } else {
 //       $("#post-form").attr('action', "  ");
 //     }

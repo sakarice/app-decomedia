@@ -25,7 +25,7 @@
       updateRoom() {
         this.$emit('update-room');
         // this.$emit('getFinishTime');
-        // const url = '/home/room/update';
+        // const url = '/room/update';
         // let room_datas = {
         //   'img' : this.$parent.roomImg,
         //   'audios' : this.$parent.roomAudios,

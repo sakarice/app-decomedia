@@ -10,7 +10,7 @@
 </head>
 <body>
   <section id="upload">
-    <form id="upload-form" action="uploadDefaultFiles" method="POST" enctype="multipart/form-data">
+    <form id="upload-form" action="/uploadDefaultFiles" method="POST" enctype="multipart/form-data">
 
       <div class="upload-wrapper">
         <div class="img-upload-wrapper">

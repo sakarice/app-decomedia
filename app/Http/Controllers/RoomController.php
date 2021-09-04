@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Room;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ImgController;
+use App\Http\Controllers\AudioController;
+use App\Http\Controllers\RoomImgController;
+use App\Http\Controllers\RoomAudioController;
+use App\Http\Controllers\RoomMovieController;
+use App\Http\Controllers\RoomSettingController;
 use App\Lib\StoreFileInS3;
 use App\Lib\RoomUtil;
-use App\Http\Controllers\Img\ImgController;
-use App\Http\Controllers\Audio\AudioController;
-use App\Http\Controllers\RoomImg\RoomImgController;
-use App\Http\Controllers\RoomAudio\RoomAudioController;
-use App\Http\Controllers\RoomMovie\RoomMovieController;
-use App\Http\Controllers\RoomSetting\RoomSettingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;

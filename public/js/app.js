@@ -2497,7 +2497,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.getFinishTime();
-      var url = '/home/room/store';
+      var url = '/room/store';
       var tmpThis = this;
       var room_datas = {
         'img': this.roomImg,
@@ -3335,7 +3335,7 @@ __webpack_require__.r(__webpack_exports__);
       this.isSelectMode = !this.isSelectMode;
     },
     roomEditLink: function roomEditLink(id) {
-      return "/home/room/" + id + "/edit";
+      return "/room/" + id + "/edit";
     },
     addCreatedRoomPreviewInfos: function addCreatedRoomPreviewInfos() {
       var url = '/addCreatedRoomPreviewInfos';
@@ -3364,7 +3364,7 @@ __webpack_require__.r(__webpack_exports__);
       var room_data = {
         'room_id': room_id
       };
-      var url = '/home/room/delete';
+      var url = '/room/delete';
       axios.post(url, room_data).then(function (response) {
         alert(response.data.message);
         location.reload();
@@ -3525,7 +3525,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       // DBからログイン中ユーザのidとプロフィール情報を取得
-      var url = '/user/getProfile';
+      var url = '/user/getOwnProfile';
       axios.get(url).then(function (res) {
         _this.userId = res.data.id;
         _this.userProfileInit['name'] = _this.userProfile['name'] = res.data.name;
@@ -4479,7 +4479,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     this.getFinishTime();
-    var url = '/home/room/update';
+    var url = '/room/update';
     var room_datas = {
       'img': this.roomImg,
       'audios': this.roomAudios,
@@ -4789,7 +4789,7 @@ __webpack_require__.r(__webpack_exports__);
       var roomInfo = {
         'selectedRoomIds': selectedRoomIds
       };
-      var url = '/ajax/roomlist/store'; // this.createRoomListMessage = "roomリスト情報を保存中です...";
+      var url = '/roomlists/store'; // this.createRoomListMessage = "roomリスト情報を保存中です...";
 
       axios.post(url, roomInfo).then(function (response) {
         alert(response.data.message);
@@ -4872,7 +4872,7 @@ __webpack_require__.r(__webpack_exports__);
       var roomList_data = {
         'roomList_id': roomList_id
       };
-      var url = '/ajax/roomList/delete';
+      var url = '/roomLists/delete';
       axios.post(url, roomList_data).then(function (response) {
         alert(response.data.message);
         location.reload();
@@ -5187,16 +5187,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('close-modal');
     },
     roomShowLink: function roomShowLink(id) {
-      return "/home/room/" + id;
+      return "/room/" + id;
     },
     roomEditLink: function roomEditLink(id) {
-      return "/home/room/" + id + "/edit";
+      return "/room/" + id + "/edit";
     },
     deleteRoom: function deleteRoom(room_id) {
       var room_data = {
         'room_id': room_id
       };
-      var url = '/home/room/delete';
+      var url = '/room/delete';
       axios.post(url, room_data).then(function (response) {
         alert(response.data.message);
         location.reload();
@@ -5412,7 +5412,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     updateRoom: function updateRoom() {
       this.$emit('update-room'); // this.$emit('getFinishTime');
-      // const url = '/home/room/update';
+      // const url = '/room/update';
       // let room_datas = {
       //   'img' : this.$parent.roomImg,
       //   'audios' : this.$parent.roomAudios,
@@ -5506,7 +5506,7 @@ __webpack_require__.r(__webpack_exports__);
       var roomInfo = {
         'selectedRoomIds': selectedRoomIds
       };
-      var url = '/ajax/selectedRoom/destroy';
+      var url = '/rooms/destroy';
       axios.post(url, roomInfo).then(function (response) {
         alert(response.data.message);
         _this.deleteSelectedRoomMessage = "";
@@ -53229,7 +53229,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "room-create-wrapper" }, [
       _c(
         "a",
-        { staticClass: "linkTo-createRoom", attrs: { href: "room/create" } },
+        { staticClass: "linkTo-createRoom", attrs: { href: "/room/create" } },
         [_vm._v("Room作成")]
       )
     ])

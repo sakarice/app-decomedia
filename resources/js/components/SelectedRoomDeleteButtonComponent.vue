@@ -57,7 +57,7 @@
         const roomInfo = {
           'selectedRoomIds' : selectedRoomIds,
         }
-        const url = '/ajax/selectedRoom/destroy';
+        const url = '/rooms/destroy';
         axios.post(url, roomInfo)
           .then(response =>{
             alert(response.data.message);

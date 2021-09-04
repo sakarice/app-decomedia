@@ -296,7 +296,7 @@ export default {
     },
     updateRoom() {
       this.getFinishTime();
-      const url = '/home/room/update';
+      const url = '/room/update';
       let room_datas = {
         'img' : this.roomImg,
         'audios' : this.roomAudios,

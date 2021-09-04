@@ -248,7 +248,7 @@ export default {
     },
     createRoom() {
       this.getFinishTime();
-      const url = '/home/room/store';
+      const url = '/room/store';
       const tmpThis = this;
       let room_datas = {
         'img' : this.roomImg,

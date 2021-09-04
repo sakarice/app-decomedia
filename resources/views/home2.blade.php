@@ -25,7 +25,7 @@
         <div class="search-wrapper">
             {{-- 検索フォーム --}}
             <div class="search-window">
-                <form method="POST" action="/searchResult">
+                <form method="POST" action="/room/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
                     <i class="fas fa-search search-icon"></i>
@@ -36,7 +36,7 @@
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
             <span class="link-message">自分のRoomを作成する。</span>
-            <a class="link-to-mypage" href="/home/mypage">マイページへ</a>
+            <a class="link-to-mypage" href="/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
         </div>
 

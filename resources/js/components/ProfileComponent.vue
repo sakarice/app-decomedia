@@ -64,7 +64,7 @@
         event.stopPropagation();
       },
       getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
-        let url = '/user/getProfile';
+        let url = '/user/getOwnProfile';
         axios.get(url)
         .then(res => {
           this.userId = res.data.id;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Lib\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +42,6 @@ class Functions extends Controller
       
       // ファイルのバリデーションチェック
       function checkFile($req, $filetag){
-        \Log::info('checkFile function called');
         $isFileExist = $req->hasFile($filetag);
         if($isFileExist){
           $isUploaded = $req->file($filetag)->isValid();
@@ -58,7 +57,6 @@ class Functions extends Controller
 
       // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
-        \Log::info('storeFileAndcreateDataForDb  function called');
         $fileName = $request->file($type)->getClientOriginalName();
         $filePath = StoreFileInS3::DefaultFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);

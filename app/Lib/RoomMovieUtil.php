@@ -5,7 +5,7 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\RoomImg\RoomMovieController;
+use App\Http\Controllers\RoomMovieController;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;

@@ -50,16 +50,16 @@ export default {
       this.$emit('close-modal');
     },
     roomShowLink : function(id) {
-      return "/home/room/" + id;
+      return "/room/" + id;
     },
     roomEditLink : function(id) {
-      return "/home/room/" + id + "/edit";
+      return "/room/" + id + "/edit";
     },
     deleteRoom(room_id){
       let room_data = {
         'room_id' : room_id,
       }
-      const url = '/home/room/delete';
+      const url = '/room/delete';
       axios.post(url, room_data)
       .then(response => {
         alert(response.data.message);

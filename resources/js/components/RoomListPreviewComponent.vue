@@ -60,7 +60,7 @@ export default {
       let roomList_data = {
         'roomList_id' : roomList_id,
       }
-      const url = '/ajax/roomList/delete';
+      const url = '/roomLists/delete';
       axios.post(url, roomList_data)
       .then(response => {
         alert(response.data.message);

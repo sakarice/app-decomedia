@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Audio;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Storage;

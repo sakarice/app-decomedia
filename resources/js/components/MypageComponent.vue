@@ -32,7 +32,7 @@
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
         <div class="room-create-wrapper">
-          <a class="linkTo-createRoom" href="room/create">Room作成</a>
+          <a class="linkTo-createRoom" href="/room/create">Room作成</a>
         </div>
         <span class="view-more" @click="addCreatedRoomPreviewInfos">
           もっと見る
@@ -140,7 +140,7 @@ export default {
       this.isSelectMode = !this.isSelectMode;
     },
     roomEditLink : function(id) {
-      return "/home/room/" + id + "/edit";
+      return "/room/" + id + "/edit";
     },
     addCreatedRoomPreviewInfos(){
       let url = '/addCreatedRoomPreviewInfos';
@@ -173,7 +173,7 @@ export default {
       let room_data = {
         'room_id' : room_id,
       }
-      const url = '/home/room/delete';
+      const url = '/room/delete';
       axios.post(url, room_data)
       .then(response => {
         alert(response.data.message);

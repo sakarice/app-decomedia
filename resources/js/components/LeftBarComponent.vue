@@ -3,7 +3,7 @@
         <!-- マイページトップ -->
         <div class="my-page-top">
             <div class="content">
-                <!-- <a class="logo" href="/home/mypage"> -->
+                <!-- <a class="logo" href="/mypage"> -->
                 <i @click="switchToMypageDefault" class="fas fa-door-open"></i>
                 <!-- </a> -->
             </div>

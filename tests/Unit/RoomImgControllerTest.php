@@ -14,7 +14,7 @@ use App\Models\RoomImg;
 use App\Models\DefaultImg;
 use App\Models\UserOwnImg;
 
-use App\Http\Controllers\RoomImg\RoomImgController;
+use App\Http\Controllers\RoomImgController;
 
 class RoomImgControllerTest extends TestCase
 {

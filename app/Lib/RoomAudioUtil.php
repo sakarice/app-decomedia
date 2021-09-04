@@ -5,7 +5,7 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\RoomAudio\RooAudioController;
+use App\Http\Controllers\RooAudioController;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
