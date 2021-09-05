@@ -33,13 +33,6 @@
   
   </div>
 
-
-  {{-- <form id="room-id-form" method="POST" action="{{asset('/home/enterRoom')}}">
-    @csrf
-    <input id="room-id-input" type="hidden" name="room_id" value="">
-  </form> --}}
-
-  <script src="{{ asset('js/search_result.js') }}"></script>
   <script src="{{ mix('/js/app.js') }}"></script>
 
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Http\Controllers\Room\RoomController;
+use App\Http\Controllers\RoomController;
 use App\Lib\EditRoom;
 use App\Lib\RoomUtil;
 use App\Models\User;
@@ -18,7 +18,6 @@ class SearchUtil
     //
     public static function searchRooms(Request $request){
         $keyword = $request->input('keyword');
-        $rooms;
         $roomPreviewInfos = array();
         if(!empty($keyword)){
             $room_settings = RoomSetting::where('name', 'LIKE', "%$keyword%")->get();
@@ -34,6 +33,6 @@ class SearchUtil
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 
-        return view('searchResult.view', $data);
+        return view('search.view', $data);
     }
 }
