@@ -33,6 +33,6 @@ class SearchUtil
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 
-        return view('searchResult.view', $data);
+        return view('search.view', $data);
     }
 }
