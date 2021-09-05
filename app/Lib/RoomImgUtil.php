@@ -31,20 +31,43 @@ class RoomImgUtil
     $roomImg->save();
   }
 
+  public static function saveTentativeRoomImgData($room_id){
+    
+  }
+
   // 4.show 
   // Room画像の情報を取得(Room作成、編集、閲覧時に使用)
   public static function getRoomImgData($room_id){
-    $room_img = RoomImg::where('room_id', $room_id)->first();
-    $room_img_data = [
-        'id' => $room_img->img_id,
-        'type' => $room_img->img_type,
-        'url' => RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url,
-        'width' => $room_img->width,
-        'height' => $room_img->height,
-        'opacity' => $room_img->opacity,
-        'layer' => $room_img->img_layer,
-    ];
+    $room_img_data;
+    if(RoomImg::where('room_id', $room_id)->exists()){
+      $room_img = RoomImg::where('room_id', $room_id)->first();
+      $room_img_data = [
+          'id' => $room_img->img_id,
+          'type' => $room_img->img_type,
+          'url' => RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url,
+          'width' => $room_img->width,
+          'height' => $room_img->height,
+          'opacity' => $room_img->opacity,
+          'layer' => $room_img->img_layer,
+      ];
+    } else {
+      $room_img_data = RoomImgUtil::getEmptyRoomImgData();
+    };
     return $room_img_data;
+  }
+
+  // 仮のRoom画像情報を作成
+  public static function getEmptyRoomImgData(){
+    $room_img_data = [
+      'id' => "",
+      'type' => 0,
+      'url' => "",
+      'width' => 500,
+      'height' => 500,
+      'opacity' => 1,
+      'layer' => 1,
+    ];
+    return $room_img_data;  
   }
 
 
