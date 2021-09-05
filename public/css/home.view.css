@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-.home-top {
+#home-top {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,6 +11,52 @@ body {
   background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg);
 }
 
+#about-app {
+  margin: 30px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#about-app-header {
+  display: flex;
+  justify-content: center;
+}
+.about-app-description {
+  width: 70%;
+  text-align: center;
+}
+
+.about-app-wrapper {
+  display: flex;
+  justify-content: center;
+
+  margin: 10px;
+  padding: 10px;
+}
+
+.about-app {
+  /* background-color: azure; */
+  width: 40%;
+  margin: 0px 10px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-app-img {
+  width: 300px;
+  height: 250px;
+}
+
+.watch-description,
+.create-description {
+  width: 70%;
+}
 
 /* トップ */
 .top-message-wrapper {

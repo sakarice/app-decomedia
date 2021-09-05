@@ -44,6 +44,6 @@ class HomeController extends Controller
             'roomPreviewInfos' => $roomPreviewInfos
         ];
 
-        return view('home2', $data);
+        return view('home', $data);
     }
 }
