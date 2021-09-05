@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Lib\Common;
+namespace App\Lib\Common;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,7 @@ use App\Models\RoomRoomlist;
 
 use Storage;
 
-class Functions extends Controller
+class Functions
 {
 
     public function view() {

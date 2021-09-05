@@ -179,6 +179,8 @@ class RoomUtil
         if($isOwnImg || $isDefaultImg){
           RoomImgController::store($room_id, $request);
         }
+      } else {
+        
       }
   
       // room動画

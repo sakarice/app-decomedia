@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app') --}}
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -6,45 +6,118 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <title>Home</title>
 </head>
 <body>
-    {{-- マイページへのリンク --}}
-    <div class="toMypage" style="margin: 50px 0; font-size: 30px">
-        <a href="/mypage">マイページへ</a>
+    <section id="home-top">
+        {{-- タイトルコピー --}}
+        <div class="top-message-wrapper">
+            <h2 class="top-message">聴いて、観て、繋がる</h2>
+            <p style="text-align: center">音楽や動画を組み合わせてRoomを作り、
+            <br>公開して同じ感性の人々と繋がりましょう</p>
+        </div>
+
+        {{-- 検索ウィンドウとマイページへのリンク --}}
+        <div class="search-wrapper">
+            {{-- 検索フォーム --}}
+            <div class="search-window">
+                <form method="POST" action="/room/show/search/result">
+                    @csrf
+                    <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
+                    <i class="fas fa-search search-icon"></i>
+                </form>
+            </div>
+            <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p>
+        </div>
+        {{-- マイページへのリンク --}}
+        <div class="link-wrapper">
+            <span class="link-message">自分のRoomを作成する。</span>
+            <a class="link-to-mypage" href="/mypage">マイページへ</a>
+            {{-- <button class="link-to-mypage-button"></button> --}}
+        </div>
+    </section>
+
+    <section id="about-app">
+        <h2 id="about-app-header">
+            使い方
+        </h2>
+        <p class="about-app-description">
+            Roomは、音楽、動画、画像を組み合わせて作る空間です。<br>
+            誰かの作ったRoomを視聴したり、<br>
+            オリジナルのRoomを作って公開することができます。<br>
+            お気に入りの動画にBGMを付け加えたり、<br>
+            音楽に背景を付けて簡易MVにしたり、<br>
+            楽しみ方はあなた次第です。
+        </p>
+        {{-- <p class="about-app-description">誰かの作ったRoomを視聴したり、オリジナルのRoomを作って公開して楽しむことができます。</p> --}}
+
+        <div class="about-app-wrapper">
+            <div class="about-app about-watch left">
+                <h3>視聴</h3>
+                <p class="watch-description">多種多様なRoomから好みのRoomを見つけて視聴してみましょう</p>
+                <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_watch.png" alt="">
+            </div>
+            <div class="about-app about-create right">
+                <h3>作成</h3>
+                <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
+                <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <div id="app">
+        {{-- ヘッダー --}}
+        <header-component
+        :csrf="{{json_encode(csrf_token())}}"
+        :is-login=@json($isLogin)>
+        {{-- :is-show-profile-icon="false" --}}
+        </header-component>
+
+        {{-- Roomの一覧を表示 --}}
+        <section class="recently-posted-rooms">
+            <h3 class="section-title">最近の投稿</h3>
+            <div class="room-preview-wrapper">
+                <room-preview-component
+                :csrf="{{json_encode(csrf_token())}}"
+                :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+                :is-show-cover="false">
+                </room-preview-component>
+            </div>
+        </section>
     </div>
+ 
 
-    {{-- 検索フォーム --}}
-    <div class="search-window">
-        <form method="POST" action="/room/show/search/result">
-            @csrf
-            <input type="text" name="keyword" placeholder="検索ワード">
-        </form>
-    </div>
+    {{-- @section('content')
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">{{ __('Dashboard') }}</div>
 
+                    <div class="card-body">
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                        {{ __('You are logged in!') }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection --}}
 
+{{-- <script src="{{ asset('js/search_result.js') }}"></script> --}}
+<script src="{{ mix('/js/app.js') }}"></script>
 
     
 </body>

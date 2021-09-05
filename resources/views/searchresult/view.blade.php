@@ -12,14 +12,6 @@
 </head>
 <body>
 
-  {{-- <div class="action-button-wrapper">
-    <a href="#" onclick="javascript:window.history.back(-1); return false;">
-      <button class="cancel-button">
-        戻る
-      </button>
-    </a>
-  </div> --}}
-
 
   <div id="app">
     {{-- ヘッダー --}}
@@ -42,10 +34,10 @@
   </div>
 
 
-  <form id="room-id-form" method="POST" action="{{asset('/home/enterRoom')}}">
+  {{-- <form id="room-id-form" method="POST" action="{{asset('/home/enterRoom')}}">
     @csrf
     <input id="room-id-input" type="hidden" name="room_id" value="">
-  </form>
+  </form> --}}
 
   <script src="{{ asset('js/search_result.js') }}"></script>
   <script src="{{ mix('/js/app.js') }}"></script>
