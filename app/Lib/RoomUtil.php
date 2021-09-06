@@ -129,13 +129,14 @@ class RoomUtil
   public static function getRoomPreviewImgUrl($room_id){
     $room_img_url;
     $imgPattern = 0;
-    if(RoomImg::where('room_id', $room_id)->exists()){
+    if(RoomImg::where('room_id', $room_id)->exists() && RoomImg::where('room_id', $room_id)->first()->img_id != 0){
       $imgPattern = 1;
     } else if(RoomMovie::where('room_id', $room_id)->exists()){
       $imgPattern = 2;
     } else if(RoomBgm::where('room_id', $room_id)->exists()){
       $imgPattern = 3;
     }
+    \Log::info($imgPattern);
 
     switch ($imgPattern){
       case 1:
@@ -173,14 +174,16 @@ class RoomUtil
   
       // room画像
       if(isset($request->img['id'])){
-        $img_id = $request->img['id'];
-        $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
-        $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
-        if($isOwnImg || $isDefaultImg){
-          RoomImgController::store($room_id, $request);
+        if($request->img['id'] != 0){
+          $img_id = $request->img['id'];
+          $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
+          $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
+          if($isOwnImg || $isDefaultImg){
+            RoomImgController::store($room_id, $request);
+          }
+        } else if($request->img['id'] == 0){ // room画像が設定されていなければ、仮情報を保存
+          RoomImgUtil::saveTentativeRoomImgData($room_id);        
         }
-      } else {
-        
       }
   
       // room動画

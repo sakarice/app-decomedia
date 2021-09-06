@@ -96,6 +96,7 @@
     <room-setting-component
     v-show="isShowModal['roomSettingModal']"
     v-on:close-modal="closeModal"
+    v-on:delete-room-img="deleteRoomImg"
     :transitionName="transitionName"
     :isPublic="roomSetting['isPublic']"
     :roomName="roomSetting['name']"
@@ -267,6 +268,11 @@ export default {
         this.roomImg['id'] = "";
         this.roomImg['url'] = "";
       }
+    }, 
+    deleteRoomImg(){
+      this.roomImg['type'] = 0;
+      this.roomImg['id'] = 0;
+      this.roomImg['url'] = "";
     },
     addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);

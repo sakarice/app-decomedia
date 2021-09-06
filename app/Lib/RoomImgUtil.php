@@ -32,6 +32,16 @@ class RoomImgUtil
   }
 
   public static function saveTentativeRoomImgData($room_id){
+    $roomImg = new RoomImg();
+    $roomImg->room_id = $room_id;
+    $roomImg->owner_user_id = Auth::user()->id;
+    $roomImg->img_id = 0;
+    $roomImg->img_type = 0;
+    $roomImg->width = 500;
+    $roomImg->height = 500;
+    $roomImg->opacity = 1;
+    $roomImg->img_layer = 1;
+    $roomImg->save();
     
   }
 
@@ -41,10 +51,16 @@ class RoomImgUtil
     $room_img_data;
     if(RoomImg::where('room_id', $room_id)->exists()){
       $room_img = RoomImg::where('room_id', $room_id)->first();
+      $img_url;
+      if($room_img->img_id != 0){
+        $img_url = RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url;
+      } else {
+        $img_url = "";
+      };
       $room_img_data = [
           'id' => $room_img->img_id,
           'type' => $room_img->img_type,
-          'url' => RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url,
+          'url' => $img_url,
           'width' => $room_img->width,
           'height' => $room_img->height,
           'opacity' => $room_img->opacity,

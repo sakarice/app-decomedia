@@ -17,8 +17,8 @@ class MypageController extends Controller
 {
     public function view(){
         $data = [
-            'createdRoomPreviewInfos' => RoomUtil::getCreatedRoomPreviewInfos(3)['createdRoomPreviewInfos'],
-            'likedRoomPreviewInfos' => RoomUtil::getLikedRoomPreviewInfos(3)['likedRoomPreviewInfos'],
+            'createdRoomPreviewInfos' => RoomUtil::getCreatedRoomPreviewInfos(5)['createdRoomPreviewInfos'],
+            'likedRoomPreviewInfos' => RoomUtil::getLikedRoomPreviewInfos(5)['likedRoomPreviewInfos'],
         ];
 
         return view('mypage.view', $data);

@@ -4304,6 +4304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -4454,6 +4455,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.roomImg['id'] = "";
         this.roomImg['url'] = "";
       }
+    },
+    deleteRoomImg: function deleteRoomImg() {
+      this.roomImg['type'] = 0;
+      this.roomImg['id'] = 0;
+      this.roomImg['url'] = "";
     },
     addAudio: function addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -54022,7 +54028,10 @@ var render = function() {
           roomImgHeight: _vm.roomImg["height"],
           roomImgOpacity: _vm.roomImg["opacity"]
         },
-        on: { "close-modal": _vm.closeModal }
+        on: {
+          "close-modal": _vm.closeModal,
+          "delete-room-img": _vm.deleteRoomImg
+        }
       })
     ],
     1
