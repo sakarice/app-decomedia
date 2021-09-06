@@ -86,7 +86,7 @@ class Functions
           $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
           $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
         }
-        AudioUtil::saveAudio($audioFileDatas);
+        AudioUtil::saveAudioData($audioFileDatas);
       }
 
       return view('upload.defaultFile');
