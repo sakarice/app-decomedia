@@ -73,8 +73,9 @@ class RoomController extends Controller
         DB::beginTransaction(); // 更新は、削除と作成のセットで実現
         try{
             // $this->destroy($room_id);
-            RoomUtil::deleteRoomDataFromDB($room_id);
-            RoomUtil::saveRoomDataInDB($request);
+            // RoomUtil::deleteRoomDataFromDB($room_id);
+            // RoomUtil::saveRoomDataInDB($request);
+            RoomUtil::updateRoomData($room_id, $request);
             DB::commit();
             $returnMsg = 'roomを更新しました';
         } catch(\Exception $e){

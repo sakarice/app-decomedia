@@ -15,9 +15,9 @@ use Storage;
 class RoomSettingController extends Controller
 {
     // 1.index
-    public function index(){}
+    public static function index(){}
     // 2.create
-    public function create(Request $request){}
+    public static function create(Request $request){}
 
     // 3.store
     public static function store($room_id, $request){
@@ -31,9 +31,11 @@ class RoomSettingController extends Controller
     }
 
     // 5.edit
-    public function edit($id){}
+    public static function edit($id){}
     // 6.update
-    public function update($id){}
+    public static function update($room_id, $request){
+      RoomSettingUtil::updateRoomSettingData($room_id, $request);
+    }
     // 7.destroy
     public static function destroy($room_id){
       RoomSetting::where('room_id', $room_id)->first()->delete();

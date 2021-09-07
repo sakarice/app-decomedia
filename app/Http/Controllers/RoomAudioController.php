@@ -18,9 +18,9 @@ use Storage;
 class RoomAudioController extends Controller
 {
         // 1.index
-        public function index(){}
+        public static function index(){}
         // 2.create
-        public function create(Request $request){}
+        public static function create(Request $request){}
         // 3.store
         public static function store($room_id, $request){
             RoomAudioUtil::saveRoomAudioData($room_id, $request);
@@ -33,9 +33,11 @@ class RoomAudioController extends Controller
         }
 
         // 5.edit
-        public function edit($room_id){}
+        public static function edit($room_id){}
         // 6.update
-        public function update($room_id){}
+        public static function update($room_id, $request){
+            RoomAudioUtil::updateRoomAudioData($room_id, $request);
+        }
         // 7.destroy
         public static function destroy($room_id){
             RoomBgm::where('room_id', $room_id)->delete();

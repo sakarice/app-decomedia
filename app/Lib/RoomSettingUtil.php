@@ -56,5 +56,24 @@ class RoomSettingUtil
     return $room_setting_data;
   }
 
+  // 6.update
+  public static function updateRoomSettingData($room_id, $request){
+    $roomSetting = RoomSetting::where('room_id', $room_id)->first();
+    $roomSetting->open_state = $request->setting['isPublic'];
+    if(isset($request->setting['name'])){
+      $roomSetting->name = $request->setting['name'];
+    }else {
+      $roomSetting->name = 'room';
+    }
+    $roomSetting->description = $request->setting['description'];
+    $roomSetting->finish_time = $request->setting['finish_time'];
+    $roomSetting->is_show_img = $request->setting['isShowImg'];
+    $roomSetting->is_show_movie = $request->setting['isShowMovie'];
+    $roomSetting->max_audio_num = $request->setting['maxAudioNum'];
+    // $roomSetting->background_type = $request->setting['roomBackgroundType'];
+    $roomSetting->background_color = $request->setting['roomBackgroundColor'];
+    $roomSetting->save();
+  }
+
 
 }

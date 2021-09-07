@@ -206,6 +206,42 @@ class RoomUtil
     }
   }
 
+  // room情報を更新
+  public static function updateRoomData($room_id, $request){
+    DB::beginTransaction();
+    try{
+
+      // room画像
+      if(isset($request->img['id'])){
+        if($request->img['id'] != 0){
+          $img_id = $request->img['id'];
+          $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
+          $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
+          if($isOwnImg || $isDefaultImg){
+            RoomImgController::update($room_id, $request);
+          }
+        } else if($request->img['id'] == 0){ // room画像が設定されていなければ、仮情報を保存
+          RoomImgUtil::updateRoomImgDataToTentative($room_id);        
+        }
+      }
+      // room動画
+      if(isset($request->movie['videoId'])){
+        RoomMovieController::update($room_id, $request);
+      }
+      // room音楽
+      if(isset($request->audios[0])){
+        RoomAudioController::update($room_id, $request);
+      }
+      // room設定
+      RoomSettingController::update($room_id, $request);      
+
+      DB::commit();
+    } catch(\Exception $e){
+      DB::rollback();
+    }
+
+  }
+
 
   // room情報をDBから削除
   public static function deleteRoomDataFromDB($room_id){
