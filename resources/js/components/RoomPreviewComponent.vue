@@ -2,8 +2,10 @@
   <ul class="room-wrapper">
     <li v-for="(roomPreviewInfo,index) in roomPreviewInfos" :key="roomPreviewInfo.id">
       <div class="preview-room" :id="roomPreviewInfo['id']">
-        <a :href="roomShowLink(roomPreviewInfo['id'])">
-          <img class="room-thumbnail" :src="roomPreviewInfo['preview_img_url']" alt="">
+        <a class="room-link" :href="roomShowLink(roomPreviewInfo['id'])">
+          <div class="room-thumbnail-wrapper">
+            <img class="room-thumbnail" :src="roomPreviewInfo['preview_img_url']" alt="">
+          </div>
         </a>
 
         <div class="cover-menu" v-show="isShowCover">
@@ -116,16 +118,15 @@ export default {
 
 li {
   list-style: none;
+  width: 20%;
+  padding: 5px;
 }
 
 .preview-room {
   position: relative;
   text-align: center;
-  /* font-size: 50px; */
   margin-right: 40px;
   margin-bottom: 80px;
-  width: 180px;
-  height: 180px;
   opacity: 0.8;
 }
 
@@ -145,13 +146,20 @@ li {
   z-index: 2;
 }
 
+.room-thumbnail-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0px;
+  padding: 0 0 100%;
+}
 
 .room-thumbnail {
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .cover-menu {
@@ -252,6 +260,22 @@ li {
   margin: 0 0;
   font-family: 'Yu Mincho';
 }
+
+@media screen and (max-width: 780px) {
+  li {
+    width: 31%;
+    padding: 2px;
+  }
+  .preview-room {
+    margin-right: 5px;
+  }
+  .room-title {
+    font-size: 18px;
+  }
+  
+}
+
+
 
 
 </style>
