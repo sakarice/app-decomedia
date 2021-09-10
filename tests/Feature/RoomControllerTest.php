@@ -24,12 +24,12 @@ class RoomControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    // 5. edit
-    public function testEdit(){
-        $user = User::factory()->create();
-        $this->actingAs($user);
-        $response = $this->get('/room/1/edit');
-        $response->assertStatus(200);
-    }
+    // // 5. edit
+    // public function testEdit(){
+    //     $user = User::factory()->create();
+    //     $this->actingAs($user);
+    //     $response = $this->get('/room/1/edit');
+    //     $response->assertStatus(200);
+    // }
 
 }
