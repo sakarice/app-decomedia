@@ -53,6 +53,24 @@ class RoomMovieUtil
       return $room_movie_data;
   }
 
+  // 6.update
+  public static function updateRoomMovieData($room_id, $request){
+    $roomMovie;
+    if(RoomMovie::where('room_id', $room_id)->exists()){
+      $roomMovie = RoomMovie::where('room_id', $room_id)->first();
+    } else {
+      $roomMovie = new RoomMovie;
+      $roomMovie->user_id = Auth::user()->id;
+      $roomMovie->room_id = $room_id;
+    }
+    $roomMovie->video_id = $request->movie['videoId'];
+    $roomMovie->width = $request->movie['width'];
+    $roomMovie->height = $request->movie['height'];
+    $roomMovie->isLoop = $request->movie['isLoop'];
+    $roomMovie->movie_layer = $request->movie['layer'];
+    $roomMovie->save();
+  }
+
 
 
 

@@ -35,7 +35,9 @@ class RoomImgController extends Controller
     // 5.edit
     public function edit($room_id){}
     // 6.update
-    public function update($room_id){}
+    public static function update($room_id, $request){
+        RoomImgUtil::updateRoomImgData($room_id, $request);
+    }
     // 7.destroy
     public static function destroy($room_id){
         RoomImg::where('room_id', $room_id)->first()->delete();

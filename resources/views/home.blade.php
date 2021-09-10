@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{-- <meta name="viewport" content="width=480px, initial-scale=1.0"> --}}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
@@ -23,8 +24,8 @@
         {{-- 検索ウィンドウとマイページへのリンク --}}
         <div class="search-wrapper">
             {{-- 検索フォーム --}}
-            <div class="search-window">
-                <form method="POST" action="/room/show/search/result">
+            <div class="search-form-wrapper">
+                <form method="POST" class="search-form" action="/room/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
                     <i class="fas fa-search search-icon"></i>

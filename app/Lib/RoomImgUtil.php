@@ -72,6 +72,30 @@ class RoomImgUtil
     return $room_img_data;
   }
 
+  // 6.update
+  public static function updateRoomImgData($room_id, $request){
+    $roomImg = RoomImg::where('room_id', $room_id)->first();
+    $roomImg->img_id = $request->img['id'];
+    $roomImg->img_type = $request->img['type'];
+    $roomImg->width = $request->img['width'];
+    $roomImg->height = $request->img['height'];
+    $roomImg->opacity = $request->img['opacity'];
+    $roomImg->img_layer = $request->img['layer'];
+    $roomImg->save();
+  }
+
+  public static function updateRoomImgDataToTentative($room_id){
+    $roomImg = RoomImg::where('room_id', $room_id)->first();
+    $roomImg->img_id = 0;
+    $roomImg->img_type = 0;
+    $roomImg->width = 500;
+    $roomImg->height = 500;
+    $roomImg->opacity = 1;
+    $roomImg->img_layer = 1;
+    $roomImg->save(); 
+  }
+
+
   // 仮のRoom画像情報を作成
   public static function getEmptyRoomImgData(){
     $room_img_data = [

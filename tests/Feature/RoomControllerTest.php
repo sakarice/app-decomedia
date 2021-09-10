@@ -15,15 +15,21 @@ class RoomControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
-    {
-        // 認証済みユーザを作成
-        // $user = factory(User::class)->create();
+
+    // 2. create
+    public function testCreate(){
         $user = User::factory()->create();
         $this->actingAs($user);
-
         $response = $this->get('/room/create');
-
         $response->assertStatus(200);
     }
+
+    // // 5. edit
+    // public function testEdit(){
+    //     $user = User::factory()->create();
+    //     $this->actingAs($user);
+    //     $response = $this->get('/room/1/edit');
+    //     $response->assertStatus(200);
+    // }
+
 }
