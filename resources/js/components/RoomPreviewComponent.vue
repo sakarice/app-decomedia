@@ -125,8 +125,7 @@ li {
 .preview-room {
   position: relative;
   text-align: center;
-  margin-right: 40px;
-  margin-bottom: 80px;
+  margin: 0 30px 30px 0;
   opacity: 0.8;
 }
 
@@ -261,19 +260,30 @@ li {
   font-family: 'Yu Mincho';
 }
 
+
+/* タブレット、スマホ */
 @media screen and (max-width: 780px) {
   li {
     width: 31%;
     padding: 2px;
   }
   .preview-room {
-    margin-right: 5px;
+    margin: 0 5px 10px 0;
   }
   .room-title {
     font-size: 18px;
+    overflow-wrap: break-word;
   }
   
 }
+
+/* スマホのみ */
+@media screen and (max-width: 420px) {
+  .room-title {
+    font-size: 15px;
+  }
+}
+
 
 
 
