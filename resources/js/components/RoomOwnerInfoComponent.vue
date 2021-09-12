@@ -82,7 +82,7 @@
 
 #frame {
   position: absolute;
-  left: 62px;
+  /* left: 62px; */
   box-shadow: 1px 1px 6px grey;
   z-index: 20;
   width: 200px;
@@ -149,7 +149,29 @@
 
 .flowup-enter, .flowup-leave-to {
   opacity: 0;
+  /* transform: translateX(-5px); */
+}
+
+
+/* タブレット */
+@media screen and (min-width: 481px) {
+  #frame {
+    left: 62px;
+  }
+  .flowup-enter, .flowup-leave-to {
   transform: translateX(-5px);
+  }
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  #frame {
+    right: 62px;
+  }
+  .flowup-enter, .flowup-leave-to {
+  transform: translateX(5px);
+  }
+
 }
 
 

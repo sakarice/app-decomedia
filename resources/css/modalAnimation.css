@@ -1,0 +1,34 @@
+
+/* Modal表示アニメーション */
+.slide-in-enter-active, .slide-in-leave-active {
+  transform: translate(0px, 0px);
+  transition: all 400ms
+}
+
+.slide-in-enter, .slide-in-leave-to {
+  transform: translateX(-100vw)
+}
+
+
+
+
+/* スマホ以外 */
+@media screen and (min-width: 481px) {
+  #select-modal {
+    left: 0;
+  }
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  /* #select-modal {
+    right: 0;
+  }
+  .slide-in-enter, .slide-in-leave-to {
+    transform: translateX(100vw)
+  } */
+}
+
+
+
+  

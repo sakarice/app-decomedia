@@ -53,6 +53,18 @@ p {
   flex-wrap: wrap;
 }
 
+#quick-use-and-warning {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.use-and-warning-message {
+  color: red;
+  width: 80%;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
 .about-app {
   /* background-color: azure; */
   width: 40%;
@@ -188,6 +200,13 @@ p {
 }
 
 
+/* タブレットサイズ */
+@media screen and (max-width: 780px) {
+  #about-app {
+    display: none;
+  }  
+}
+
 /* スマホサイズ */
 @media screen and (max-width: 480px) {
   html, body {
@@ -207,9 +226,6 @@ p {
   .link-wrapper {
     /* 縦積みに */
     flex-direction: column;
-  }
-  #about-app {
-    margin: 10px;
   }
   .about-app {
     width: 90%;

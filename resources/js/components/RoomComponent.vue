@@ -54,11 +54,13 @@
         <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
           <i class="fas fa-file-alt fa-2x setting-icon"></i>
         </div>
+        <!-- 音楽 -->
+        <!-- <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomAudio')">
+          <i class="fas fa-music fa-2x setting-icon"></i>
+        </div> -->
       </div>
     </div>
 
-
-    
     <room-info-component
     v-show="isShowModal['roomInfoModal']"
     v-on:close-modal="closeModal"
@@ -108,7 +110,7 @@ export default {
       getReadyPlayMovie : false,
       autoPlay : true,
 
-      transitionName : 'right-slide',
+      transitionName : 'slide-in',
       isShowModal : {
         'roomOwnerInfo' : false,
         'roomInfoModal' : false,
@@ -170,7 +172,7 @@ export default {
       this.transitionName = '';
     },
     closeModal() {
-      this.transitionName = 'right-slide';
+      this.transitionName = 'slide-in';
       for(let key in this.isShowModal){
         this.isShowModal[key] = false;
       }
@@ -246,6 +248,8 @@ export default {
       }
       // 全オーディオの再生開始
       this.$refs.roomAudio.playAllAudio();
+      // オーディオを非表示に
+      this.$refs.roomAudio.hideAudio();
     });
 
   },
@@ -266,44 +270,12 @@ export default {
 </script>
 
 <style scoped>
-  #field {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
 
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+@import "../../css/roomCommon.css";
+@import "../../css/roomModals.css";
+@import "../../css/modalAnimation.css";
 
-  #disp-modal-zone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    width: 55px;
-    height: 100%;
-    background-color:black;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  #disp-modal-wrapper {
-    z-index: 1;
-  }
-
-  #disp-img-modal-wrapper {
-    color:lightseagreen;
-  }
 
   #disp-room-owner-modal-wrapper {
     color: white;
@@ -316,31 +288,27 @@ export default {
     justify-content: center;
     align-items: center;
   }
-  .icon-wrapper:hover {
-    background-color: rgba(255,255,255,0.2);
-  }
 
   .setting-icon {
     color : lightgrey;
   }
+ 
 
-  .hidden {
-    display: none;
+
+
+@media screen and (min-width: 481px) {
+  #disp-modal-zone {
+    left: 0;
   }
-
-
   
-  /* Modal表示アニメーション */
+}
 
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 500ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
+@media screen and (max-width: 480px) {
+  #disp-modal-zone {
+    right: 0;
   }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(-100vw)
-  }
+  
+}
 
 
 </style>
