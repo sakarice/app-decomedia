@@ -3224,7 +3224,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -3365,7 +3364,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.isSelectMode) {
         return '選択モードを解除';
       } else {
-        return 'Roomを複数選択する';
+        return 'Roomを選択する';
       }
     }
   }
@@ -10459,7 +10458,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.select-mode-wrapper[data-v-74b0df32] {\r\n  margin-left: 100px;\r\n  display: flex;\r\n  height: 25px;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin-right: 10px;\n}\n.mypage-section[data-v-74b0df32] {\r\n  margin-left: 50px;\r\n  padding: 10px 10px 10px 50px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-right: 20px;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 5px 20px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 0 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 10px 10px 10px 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.select-mode-wrapper[data-v-74b0df32] {\r\n    width: 95%;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    width: 45%;\r\n    margin: 0 10px 10px 0;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10483,7 +10482,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-manu-bar[data-v-74c0e7af] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 1;\r\n  width: 40px;\r\n  height: 100%;\r\n  padding: 50px 0;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.content[data-v-74c0e7af] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 7px 0;\r\n    padding: 10px;\r\n    opacity: 0.9;\n}\n.content[data-v-74c0e7af]:hover {\r\n  opacity: 1;\r\n  background-color: grey;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-74c0e7af] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-74c0e7af]:hover {\r\n    color: aquamarine;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-manu-bar[data-v-74c0e7af] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 1;\r\n  width: 40px;\r\n  height: 100%;\r\n  padding: 50px 0;\r\n  background-color: rgba(0, 0, 0, 0.8);\r\n  display: flex;\r\n\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.content[data-v-74c0e7af] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 7px 0;\r\n    padding: 10px;\r\n    opacity: 0.9;\n}\n.content[data-v-74c0e7af]:hover {\r\n  opacity: 1;\r\n  background-color: grey;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-74c0e7af] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-74c0e7af]:hover {\r\n    color: aquamarine;\n}\n@media screen and (min-width: 481px) {\n.mypage-manu-bar[data-v-74c0e7af] {\r\n        left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n.mypage-manu-bar[data-v-74c0e7af] {\r\n        right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10813,7 +10812,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 30px 30px 0;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 2px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 10px 0;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 15px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 30px 30px 0;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 2px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 10px 0;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 85%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 15px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53095,7 +53094,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "mypage-content-wrapper" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "select-mode-wrapper" },
@@ -53176,8 +53178,6 @@ var render = function() {
             _c("h3", { staticClass: "section-title" }, [
               _vm._v("作成済みRoom")
             ]),
-            _vm._v(" "),
-            _vm._m(0),
             _vm._v(" "),
             _c(
               "span",
@@ -55256,7 +55256,7 @@ var render = function() {
         staticClass: "selected-room-delete-button",
         on: { click: _vm.deleteSelectedRoom }
       },
-      [_vm._v("\n    選択したRoomを削除する\n  ")]
+      [_vm._v("\n    選択したRoomを削除\n  ")]
     ),
     _vm._v(" "),
     _c("p", [_vm._v("\n    " + _vm._s(_vm.deleteSelectedRoomMessage) + "\n  ")])

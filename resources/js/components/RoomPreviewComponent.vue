@@ -102,11 +102,12 @@ export default {
 <style scoped>
 
 .room-wrapper {
+  width: 100%;
+  padding-left: 0;
+  max-width: 1200px;
   display: flex;
   justify-content:flex-start;
   flex-wrap: wrap;
-  width: 100%;
-  max-width: 1200px;
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
@@ -279,6 +280,9 @@ li {
 
 /* スマホのみ */
 @media screen and (max-width: 420px) {
+  .room-wrapper {
+    width: 85%;
+  }
   .room-title {
     font-size: 15px;
   }

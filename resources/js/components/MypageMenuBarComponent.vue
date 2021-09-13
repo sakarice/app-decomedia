@@ -109,4 +109,17 @@ a:hover {
     color: aquamarine;
 }
 
+@media screen and (min-width: 481px) {
+    .mypage-manu-bar {
+        left: 0;
+    }    
+}
+
+@media screen and (max-width: 480px) {
+    .mypage-manu-bar {
+        right: 0;
+    }
+}
+
+
 </style>
