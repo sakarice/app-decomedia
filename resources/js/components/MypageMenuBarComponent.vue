@@ -1,5 +1,5 @@
 <template>
-    <div class="left-bar">
+    <div class="mypage-manu-bar">
         <!-- マイページトップ -->
         <div class="my-page-top">
             <div class="content">
@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 
-.left-bar {
+.mypage-manu-bar {
   position: fixed;
   top: 0;
   z-index: 1;

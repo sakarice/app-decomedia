@@ -88,8 +88,8 @@
 
       
 
-    <left-bar-component>
-    </left-bar-component>
+    <mypage-menu-bar-component>
+    </mypage-menu-bar-component>
 
 
   </div>
@@ -102,7 +102,7 @@
 <script>
 import RoomPreview from './RoomPreviewComponent.vue';
 import RoomListPreview from './RoomListPreviewComponent.vue';
-import LeftBar from './LeftBarComponent.vue';
+import MypageMenuBar from './MypageMenuBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
 
@@ -110,7 +110,7 @@ export default {
   components : {
     RoomPreview,
     RoomListPreview,
-    LeftBar,
+    MypageMenuBar,
     RoomListCreateButton,
     SelectedRoomDeleteButton,
   },

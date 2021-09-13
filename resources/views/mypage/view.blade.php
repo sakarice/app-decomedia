@@ -22,9 +22,9 @@
       :is-login="true">
       </header-component>
 
-      {{-- <left-bar-component
+      {{-- <mypage-menu-bar-component
       :csrf="{{json_encode(csrf_token())}}">
-      </left-bar-component> --}}
+      </mypage-menu-bar-component> --}}
 
       <section style="height:100px"></section>
 
