@@ -13,12 +13,12 @@
 
           <div id="room-description-wrapper" class="room-info">
             <p class="info-title">説明</p>
-            <textarea :value="description" type="text" id="room-description" rows="4" cols="30" readonly></textarea>
+            <textarea :value="description" type="text" id="room-description" readonly></textarea>
           </div>
         </div>
       </div>
 
-      <div class="close-icon-wrapper">
+      <div class="close-icon-wrapper for-pc-tablet">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
       </div>
 
@@ -37,26 +37,13 @@ export default{
   ],
   data : () => {
     return {
-      // roomName : "",
-      // roomDescription : "",
     }
   },
   methods : {
     closeModal() {
       this.$emit('close-modal');
     },
-    // getRoomNameFromParent(){
-    //   this.roomName = this.$parent.roomSetting['name'];
-    // },
-    // getRoomDescriptionFromParent(){
-    //   this.roomDescription = this.$parent.roomSetting['description'];
-    // },
   },
-  // mounted : function() {
-  //   this.getRoomNameFromParent();
-  //   this.getRoomDescriptionFromParent();
-  // }
-  
 
 }
 
@@ -90,10 +77,9 @@ export default{
   margin: 0;
 }
 
-/* #close-modal-icon {
-  transform:rotate(180deg);
-} */
-
+#room-description {
+  width: 100%;
+}
 
 
 </style>

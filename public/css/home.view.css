@@ -2,20 +2,31 @@ html, body {
   width: 100%;
   /* margin: 0; */
 }
+p {
+  color: #090909;
+}
 
 #home-top {
   height: 100vh;
   width: 100%;
+  color: white;
+  text-align: center;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   background-color: black;
 }
+
+.sub-message {
+  color: white
+;}
 
 #about-app {
   margin: 5px;
@@ -25,33 +36,50 @@ html, body {
   align-items: center;
 }
 
-#about-app-header {
-  display: flex;
-  justify-content: center;
+#about-app-header,
+#how-to-use-header {
 }
 .about-app-description {
-  width: 70%;
+  width: 80%;
   text-align: center;
+  font-size: 0.9rem;
+  margin: 0 10px 50px 10px;
 }
 
 .about-app-wrapper {
-  margin: 10px;
+  margin: 0 10px 10px 10px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+#quick-use-and-warning {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.use-and-warning-message {
+  color: red;
+  width: 80%;
+  font-size: 0.7rem;
+  text-align: center;
 }
 
 .about-app {
   /* background-color: azure; */
   width: 40%;
   min-width: 280px;
-  margin: 5px;
-  padding: 5px;
+  margin: 0 5px 50px 5px;
+  padding: 0 5px 5px 5px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.about-app-title {
+  margin-top: 0;
 }
 
 .about-app-img {
@@ -62,7 +90,8 @@ html, body {
 .watch-description,
 .create-description {
   text-align: center;
-  margin: 0;
+  font-size: 0.8rem;
+  margin: 0 10px 10px 10px;
 }
 
 /* トップ */
@@ -171,11 +200,19 @@ html, body {
 }
 
 
+/* タブレットサイズ */
+@media screen and (max-width: 780px) {
+  #about-app {
+    display: none;
+  }  
+}
+
 /* スマホサイズ */
 @media screen and (max-width: 480px) {
   html, body {
-    width: 100%;
+    /* width: 100%; */
     margin: 0;
+    font-size: 15px;
   }
   .top-message-wrapper {
     /* max-width: 400px; */
@@ -189,9 +226,6 @@ html, body {
   .link-wrapper {
     /* 縦積みに */
     flex-direction: column;
-  }
-  #about-app {
-    margin: 10px;
   }
   .about-app {
     width: 90%;

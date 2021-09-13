@@ -1,5 +1,5 @@
 <template>
-    <div class="left-bar">
+    <div class="mypage-manu-bar">
         <!-- マイページトップ -->
         <div class="my-page-top">
             <div class="content">
@@ -70,7 +70,7 @@ export default {
 
 <style scoped>
 
-.left-bar {
+.mypage-manu-bar {
   position: fixed;
   top: 0;
   z-index: 1;
@@ -108,5 +108,18 @@ a {
 a:hover {
     color: aquamarine;
 }
+
+@media screen and (min-width: 481px) {
+    .mypage-manu-bar {
+        left: 0;
+    }    
+}
+
+@media screen and (max-width: 480px) {
+    .mypage-manu-bar {
+        right: 0;
+    }
+}
+
 
 </style>

@@ -21,9 +21,9 @@
       :is-login="true">
       </header-component>
 
-      <left-bar-component
+      <mypage-menu-bar-component
       :csrf="{{json_encode(csrf_token())}}">
-      </left-bar-component>
+      </mypage-menu-bar-component>
 
       <section class="created-room-list">
         <div class="section-top-wrapper">

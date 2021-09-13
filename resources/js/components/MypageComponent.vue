@@ -1,8 +1,10 @@
 <template>
-  <div>
-
+  <div class="mypage-content-wrapper">
     <!-- Room -->
     <!-- Roomの選択モード -->
+    <div class="room-create-wrapper">
+      <a class="linkTo-createRoom" href="/room/create">Room作成</a>
+    </div>
     <div class="select-mode-wrapper">
       <!-- 〇選択モードの切り替えボタン -->
       <button id="change-select-mode" class="select-mode-item" @click="toggleSelectMode">
@@ -24,16 +26,13 @@
       </selected-room-delete-button-component>
     </div>
 
-
     <!-- 作成済みRoomのプレビュー -->
     <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
-        <div class="room-create-wrapper">
-          <a class="linkTo-createRoom" href="/room/create">Room作成</a>
-        </div>
+
         <span class="view-more" @click="addCreatedRoomPreviewInfos">
           もっと見る
         </span>
@@ -88,8 +87,8 @@
 
       
 
-    <left-bar-component>
-    </left-bar-component>
+    <mypage-menu-bar-component>
+    </mypage-menu-bar-component>
 
 
   </div>
@@ -102,7 +101,7 @@
 <script>
 import RoomPreview from './RoomPreviewComponent.vue';
 import RoomListPreview from './RoomListPreviewComponent.vue';
-import LeftBar from './LeftBarComponent.vue';
+import MypageMenuBar from './MypageMenuBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
 
@@ -110,7 +109,7 @@ export default {
   components : {
     RoomPreview,
     RoomListPreview,
-    LeftBar,
+    MypageMenuBar,
     RoomListCreateButton,
     SelectedRoomDeleteButton,
   },
@@ -248,7 +247,7 @@ export default {
       if(this.isSelectMode){
         return '選択モードを解除';
       } else {
-        return 'Roomを複数選択する';
+        return 'Roomを選択する';
       }
     }
   }
@@ -259,33 +258,41 @@ export default {
 
 <style scoped>
 
+.mypage-content-wrapper {
+  margin-left: 70px;
+}
+
 .select-mode-wrapper {
-  margin-left: 100px;
   display: flex;
-  height: 25px;
+  flex-wrap: wrap;
 }
 
 .select-mode-item {
-  margin-right: 10px;
+  margin: 0 10px 0 0;
 }
 
 .mypage-section {
-  margin-left: 50px;
-  padding: 10px 10px 10px 50px;
+  padding: 10px 10px 10px 20px;
   width: 100%;
   max-width: 1200px;
 }
 
+.section-top-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 90%
+}
 
 .section-title {
   display: inline-block;
-  margin-right: 20px;
+  margin: 0 20px 0 0;
 }
 
 
 .room-create-wrapper {
   display: inline-block;
-  margin: 5px 20px;
+  margin-bottom: 25px;
 }
 
 .linkTo-createRoom {
@@ -321,5 +328,27 @@ export default {
 }
 
 
+/* スマホ以外 */
+@media screen and (min-width: 481px) {
+}
+
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  .select-mode-wrapper {
+    width: 95%;
+  }
+  .select-mode-item {
+    width: 45%;
+    margin: 0 10px 10px 0;
+  }
+  .mypage-content-wrapper {
+    margin-left: 20px;
+  }
+  .mypage-section {
+      margin-left: 0;
+      padding: 5px;
+    }  
+}
 
 </style>

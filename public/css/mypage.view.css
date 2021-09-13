@@ -18,38 +18,6 @@ body {
   justify-content: space-between;
 }
 
-.mypage-section {
-  margin-left: 50px;
-  padding: 10px 10px 10px 50px;
-  width: 100%;
-  max-width: 1200px;
-}
-
-
-.section-title {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.room-create-wrapper {
-  display: inline-block;
-  margin: 5px 20px;
-}
-
-.linkTo-createRoom {
-  font-size: 18px;
-  text-decoration: none;
-  color: black;
-  background-color: aquamarine;
-  padding: 3px 20px;
-  border-radius: 3px;
-  box-shadow: 0.5px 0.5px 3px grey;
-}
-
-.linkTo-createRoom:hover {
-  color:aquamarine;
-  background-color: black;
-}
 
 .preview-img {
   width: 100px;

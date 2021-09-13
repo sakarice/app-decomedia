@@ -14,13 +14,6 @@
 </head>
 <body>
 
-  {{-- ボタン --}}
-  <div class="buttons">
-    <button><a href="javascript:history.back()">戻る</a></button>
-    <button id="update-button">更新</button>
-    <button>公開</button>
-  </div>
-
   <div id="app">
     <room-component
     is-login='{{$isLogin}}'

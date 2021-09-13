@@ -1,0 +1,50 @@
+#select-modal {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  height: 90vh;
+  z-index: 2;
+
+  /* モーダル内の要素の配置 */
+  display: flex;
+  align-items: center;
+  flex-flow: row;
+}
+
+#area-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
+
+  /* モーダル内の要素の配置 */
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+}
+
+
+
+/* スマホ以外 */
+@media screen and (min-width: 481px) {
+  #select-modal {
+    width: 470px;
+  }
+
+  #area-wrapper {
+    width: 90%;
+    padding-left: 50px;
+  }
+
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  #select-modal {
+    width: 85%;
+  }
+  /* .slide-in-enter, .slide-in-leave-to {
+    transform: translateX(100vw)
+  } */
+}

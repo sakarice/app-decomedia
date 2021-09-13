@@ -7,16 +7,16 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ログイン -->
-            <div class="header-content" v-show="!(isLogin)">
-                <a class="login" href="/login">ログイン</a>
+            <div class="header-content-wrapper" v-show="!(isLogin)">
+                <a class="login header-content" href="/login">ログイン</a>
             </div>
             <!-- アカウント作成 -->
-            <div class="header-content" v-show="!(isLogin)">
-                <a class="signup" href="/register">アカウント作成</a>
+            <div class="header-content-wrapper" v-show="!(isLogin)">
+                <a class="signup header-content" href="/register">アカウント作成</a>
             </div>
             <!-- ログアウト -->
-            <div class="header-content" v-show="isLogin">
-                <a class="logout" href="/logout"
+            <div class="header-content-wrapper" v-show="isLogin">
+                <a class="logout header-content" href="/logout"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">ログアウト
                 </a>
@@ -24,8 +24,8 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <div class="header-content" v-show="isLogin">
-                <a class="user-icon" v-on:click="openProfileModal()">
+            <div class="header-content-wrapper" v-show="isLogin">
+                <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
             </div>
@@ -94,7 +94,7 @@ export default {
   justify-content: space-around;
 }
 
-.header-content {
+.header-content-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -102,10 +102,10 @@ export default {
     margin: 5px 20px;
     opacity: 0.9;
 }
-
-.header-content:hover {
+.header-content-wrapper:hover {
   opacity: 1;
 }
+
 
 /* aタグ全体の設定 */
 a {
@@ -132,6 +132,13 @@ a:hover {
     height: 30px;
     color: white;
 }
+
+@media screen and (max-width: 400px){
+    .header-content {
+        font-size: 0.8rem;
+    }    
+}
+
 
 
 

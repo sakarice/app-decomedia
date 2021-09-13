@@ -17,8 +17,10 @@
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
             <h2 class="top-message">聴いて、観て、繋がる</h2>
-            <p style="text-align: center">音楽や動画を組み合わせてRoomを作り、
-            <br>公開して同じ感性の人々と繋がりましょう</p>
+            <p class="sub-message">
+                音楽や動画を組み合わせてRoomを作り、<br>
+                公開して同じ感性の人々と繋がりましょう
+            </p>
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
@@ -41,32 +43,41 @@
         </div>
     </section>
 
+    <section id="quick-use-and-warning">
+        <p class="use-and-warning-message">
+            ルームのサムネイル画像をタップすると、<br>
+            ルームに入れます。<br><br>
+            ※!ルームに移動すると音楽・動画が流れます!<br>
+            イヤホンやヘッドフォンを付け、<br>
+            音量に注意してお楽しみください。
+        </p>
+    </section>
     <section id="about-app">
         <h2 id="about-app-header">
-            使い方
+            Roomとは?
         </h2>
         <p class="about-app-description">
-            Roomは、音楽、動画、画像を組み合わせて作る空間です。<br>
+            音楽、動画、画像を組み合わせて作る疑似空間です。<br>
             誰かの作ったRoomを視聴したり、<br>
             オリジナルのRoomを作って公開することができます。<br>
             お気に入りの動画にBGMを付け加えたり、<br>
             音楽に背景を付けて簡易MVにしたり、<br>
             楽しみ方はあなた次第です。
         </p>
-        {{-- <p class="about-app-description">誰かの作ったRoomを視聴したり、オリジナルのRoomを作って公開して楽しむことができます。</p> --}}
-
+        <h2 id="how-to-use-header">
+            使い方
+        </h2>
         <div class="about-app-wrapper">
             <div class="about-app about-watch left">
-                <h3>視聴</h3>
+                <h3 class="about-app-title">視聴</h3>
                 <p class="watch-description">多種多様なRoomから好みのRoomを見つけて視聴してみましょう</p>
                 <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_watch.png" alt="">
             </div>
             <div class="about-app about-create right">
-                <h3>作成</h3>
+                <h3 class="about-app-title">作成</h3>
                 <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
                 <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
             </div>
-
         </div>
 
 

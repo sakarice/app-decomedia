@@ -102,11 +102,12 @@ export default {
 <style scoped>
 
 .room-wrapper {
+  width: 100%;
+  padding-left: 0;
+  max-width: 1200px;
   display: flex;
   justify-content:flex-start;
   flex-wrap: wrap;
-  width: 100%;
-  max-width: 1200px;
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
@@ -125,8 +126,7 @@ li {
 .preview-room {
   position: relative;
   text-align: center;
-  margin-right: 40px;
-  margin-bottom: 80px;
+  margin: 0 30px 30px 0;
   opacity: 0.8;
 }
 
@@ -261,19 +261,33 @@ li {
   font-family: 'Yu Mincho';
 }
 
+
+/* タブレット、スマホ */
 @media screen and (max-width: 780px) {
   li {
     width: 31%;
     padding: 2px;
   }
   .preview-room {
-    margin-right: 5px;
+    margin: 0 5px 10px 0;
   }
   .room-title {
     font-size: 18px;
+    overflow-wrap: break-word;
   }
   
 }
+
+/* スマホのみ */
+@media screen and (max-width: 420px) {
+  .room-wrapper {
+    width: 85%;
+  }
+  .room-title {
+    font-size: 15px;
+  }
+}
+
 
 
 

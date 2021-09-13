@@ -38,7 +38,7 @@ Vue.component('room-header-component', require('./components/RoomHeaderComponent
 
 
 // ■マイページ用
-Vue.component('left-bar-component', require('./components/LeftBarComponent.vue').default);
+Vue.component('mypage-menu-bar-component', require('./components/MypageMenuBarComponent.vue').default);
 // マイページ
 Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
 // ユーザプロフィール

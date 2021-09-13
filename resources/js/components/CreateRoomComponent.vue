@@ -109,6 +109,7 @@
     </room-setting-component>
 
 
+
   </div>
 </template>
 
@@ -145,7 +146,7 @@ export default {
     return {
       getReadyCreateMovieFrame : false,
       autoPlay : false,
-      transitionName : 'right-slide',
+      transitionName : 'slide-in',
       isShowModal : {
         'imgModal' : false,
         'audioModal' : false,
@@ -197,7 +198,7 @@ export default {
       this.transitionName = '';
     },
     closeModal() {
-      this.transitionName = 'right-slide';
+      this.transitionName = 'slide-in';
       for(let key in this.isShowModal){
         this.isShowModal[key] = false;
       }
@@ -281,92 +282,7 @@ export default {
 </script>
 
 <style scoped>
-  #field {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 100%;
-
-    /* モーダル内の要素の配置 */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  #disp-modal-zone {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 3;
-    width: 55px;
-    height: 100%;
-    /* background-color:black; */
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-  }
-
-  #disp-modal-wrapper {
-    z-index: 1;
-    background-color:black;
-    padding: 20px 0;
-    border-radius: 30px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* background-color: ghostwhite;
-    box-shadow: -1px 1px 5px lightgrey; */
-  }
-
-  .icon-wrapper {
-    padding: 12px;
-  }
-  .icon-wrapper:hover {
-    background-color: rgba(255,255,255,0.2);
-  }
-
-  #disp-img-modal-wrapper {
-    color:lightseagreen;
-  }
-  #disp-movie-modal-wrapper {
-    color: orangered;
-  }
-  #disp-audio-modal-wrapper {
-    color: gold;
-  }
-  #disp-room-setting-modal-wrapper {
-    color: lightgray;
-  }
-
-  .hidden {
-    display: none;
-  }
-
-  
-  /* Modal表示アニメーション */
-
-  /* .right-slide-enter-to, .right-slide-leave {
-    transform: translate(0px, 0px);
-  } */
-
-  .right-slide-enter-active, .right-slide-leave-active {
-    transform: translate(0px, 0px);
-    transition: all 500ms
-    /* cubic-bezier(0, 0, 0.2, 1) 0ms; */
-  }
-
-  .right-slide-enter, .right-slide-leave-to {
-    transform: translateX(-100vw)
-  }
-
-
+@import "../../css/roomCommon.css";
+@import "../../css/roomModals.css";
 
 </style>
