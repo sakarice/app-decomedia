@@ -47,6 +47,9 @@
 
 <style scoped>
   /* img */
+  #room-img-wrapper {
+    pointer-events: none;
+  }
   #room-img-frame {
     display: flex;
     justify-content: center;

@@ -1,8 +1,8 @@
 #select-modal {
   position: fixed;
-  top: 55px;
+  top: 60px;
   left: 0;
-  height: 90vh;
+  height: 88vh;
   z-index: 10;
 
   /* モーダル内の要素の配置 */
@@ -13,7 +13,7 @@
 
 #area-wrapper {
   position: relative;
-  height: 90%;
+  height: 100%;
   width: 100%;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
