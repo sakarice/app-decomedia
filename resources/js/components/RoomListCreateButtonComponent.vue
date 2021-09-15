@@ -1,14 +1,12 @@
 <template>
-
-    <div class="action-button-wrapper">
-      <button class="roomlist-create-button" @click="createRoomList">
-        Roomリストを作成
-      </button>
-      <p>
-        {{createRoomListMessage}}
-      </p>
-    </div>
-
+  <div class="action-button-wrapper">
+    <button class="roomlist-create-button" @click="createRoomList">
+      Roomリストを作成
+    </button>
+    <p v-show="createRoomListMessage">
+      {{createRoomListMessage}}
+    </p>
+  </div>
 </template>
 
 <script>

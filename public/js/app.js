@@ -2219,7 +2219,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -3124,6 +3123,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MypageMenuBarComponent.vue */ "./resources/js/components/MypageMenuBarComponent.vue");
 /* harmony import */ var _RoomListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomListCreateButtonComponent.vue */ "./resources/js/components/RoomListCreateButtonComponent.vue");
 /* harmony import */ var _SelectedRoomDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectedRoomDeleteButtonComponent.vue */ "./resources/js/components/SelectedRoomDeleteButtonComponent.vue");
+//
+//
+//
+//
 //
 //
 //
@@ -4719,6 +4722,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName', 'name', 'description'],
   data: function data() {
@@ -4744,8 +4748,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -5463,8 +5465,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -10275,7 +10275,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-0a05e236] {}\n.cancel-button[data-v-0a05e236] {\n  /* position: absolute; */\n  top : 20px;\n  left: 70px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.cancel-button[data-v-0a05e236]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cancel-button[data-v-0a05e236] {\n  /* position: absolute; */\n  top : 20px;\n  left: 70px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.cancel-button[data-v-0a05e236]:hover {\n  background-color: aqua;\n}\n@media screen and (max-width: 480px) {\n.action-button-wrapper[data-v-0a05e236] {\n    display: none;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10380,7 +10380,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-3ae44fc9] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-3ae44fc9] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    height: 140px;\r\n    margin-bottom: 2px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-3ae44fc9]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-3ae44fc9] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.icon-cover[data-v-3ae44fc9] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-3ae44fc9] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-3ae44fc9] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.user-own-img[data-v-3ae44fc9],.default-img[data-v-3ae44fc9]{\r\n    width: 100%;\r\n    height: 140px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-3ae44fc9] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-3ae44fc9] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-3ae44fc9]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-3ae44fc9]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-3ae44fc9] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-3ae44fc9],.default-img[data-v-3ae44fc9]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-3ae44fc9] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-3ae44fc9] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-3ae44fc9] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10458,7 +10458,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 0 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 10px 10px 10px 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 18px;\r\n  text-decoration: none;\r\n  color: black;\r\n  background-color: aquamarine;\r\n  padding: 3px 20px;\r\n  border-radius: 3px;\r\n  box-shadow: 0.5px 0.5px 3px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  color:aquamarine;\r\n  background-color: black;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.select-mode-wrapper[data-v-74b0df32] {\r\n    width: 95%;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    width: 45%;\r\n    margin: 0 10px 10px 0;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  margin-bottom: 25px;\n}\n.mypage-button[data-v-74b0df32] {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.mypage-button[data-v-74b0df32]:hover {\r\n  background-color: aqua;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-74b0df32]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.select-mode-wrapper[data-v-74b0df32] {\r\n    width: 85%;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    width: 45%;\r\n    margin: 0 10px 10px 0;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 14px;\r\n  padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10530,7 +10530,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-30d91c2d] {\n  padding-bottom: 7px;\n  margin-bottom: 10px;\n  border-bottom: double 2px grey;\n  width: 90px;\n\n  display: flex;\n  justify-content: space-between;\n}\n.size-Adjust-box[data-v-30d91c2d] {\n  opacity: 0.85;\n  height: 33px;\n  display: flex;\n  justify-content: center;\n}\n.size-Adjust-box[data-v-30d91c2d]:hover{\n  opacity: 1;\n}\n.all-audio-controller[data-v-30d91c2d] {\n  color: ghostwhite;\n  height: 50px;\n  font-size: 11px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n}\n#play-all-icon[data-v-30d91c2d] {\n  color: green;\n}\n#finish-all-icon[data-v-30d91c2d] {\n  color: lightgrey;\n  margin-top: 5px;\n}\n\n/* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n  display: flex;\n  flex-direction: column;\n  position: absolute;\n  bottom: 20px;\n  right: 0;\n  z-index: 5;\n  width: 180px;\n  height: auto;\n  padding-top: 5px;\n  border-top-left-radius: 10px;\n  border-bottom-left-radius: 10px;\n}\n.is-black[data-v-30d91c2d] {\n  background-color: black;\n}\n.room-audio-controller-zone[data-v-30d91c2d]{\n  padding-left: 15px;\n  display: flex;\n  flex-direction: column;\n  align-items: flex-start;\n  overflow-y: scroll;\n}\n#room-audio-frame[data-v-30d91c2d] {\n  height: 100%;\n}\n#audios[data-v-30d91c2d]{\n  height: 100%;\n  margin: 0;\n  padding-left: 0;\n\n  display: flex;\n  flex-flow: column;\n  justify-content: space-around;\n}\n.audio-area[data-v-30d91c2d] {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n.non-audio-frame[data-v-30d91c2d] {\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n  /* background-color: cornflowerblue; */\n  border: 1.5px dotted lightgrey;\n  margin: 10px 5px;\n  position: relative;\n  opacity: 0.7;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n  width: 53px;\n  height: 53px;\n  border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n.room-audio-pause-icon[data-v-30d91c2d] {\n  position: absolute;\n  top: 5;\n  z-index: -1;\n  color: rgba(0,255,0,0.7);\n  display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n  left: 18px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n  left: 11px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n  position: absolute;\n  left: -15px;\n  top: -15px;\n  z-index: -1;\n  color:  rgba(220,50,50,0.8);\n  display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n  position: absolute;\n  right: -15px;\n  top: -15px;\n  z-index: -1;\n  color:  rgba(20,20,250,0.8);\n  display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n  /* position: absolute;\n  top: 37px;\n  right: 30px; */\n  margin-right: 3px;\n  z-index: -1;\n  color:  rgba(255,255,255,0.8);\n  display: none;\n}\n\n/* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n  opacity: 1;\n}\n.audio-area:hover\n.room-audio-play-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-pause-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-delete-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-loop-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.audio-area:hover\n.room-audio-vol-icon[data-v-30d91c2d] {\n  z-index: 2;\n  display: inline-block;\n}\n.room-audio-name[data-v-30d91c2d] {\n  color : white;\n  font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n  position: absolute;\n  top: 43px;\n  left: 40px;\n  /* transform: rotate(180deg); */\n  display: flex;\n  align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: flex;\n  align-items: center;\n  display: none;\n}\n.audio-vol-wrapper:hover\n.vol-bar-wrapper[data-v-30d91c2d] {\n  display: inline-block;\n}\n\n\n/* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n  color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n  color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n  color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n  -webkit-appearance: none;\n  -moz-appearance: none;\n       appearance: none;\n  cursor: pointer;\n  /* background: #8acdff; */\n  height: 2px;\n  width: 50px;\n  margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-30d91c2d] {\n  /* background-color: grey; */\n  width: 100%;\n  height: auto;\n  margin: 3px 0;\n\n  display: flex;\n  justify-content: flex-end;\n  align-items: center;\n}\n.is-reverse[data-v-30d91c2d]{\n  transform: scale(-1, 1);\n}\n.change-disp-audio[data-v-30d91c2d] {\n  color: lightseagreen;\n  margin: 14px;\n}\n\n\n/* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n  border-color: green;\n  opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n  color:  rgba(0,0,255,1);\n  display: inline-block;\n  z-index: 2;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-30d91c2d] {\n    padding-bottom: 7px;\n    margin-bottom: 10px;\n    border-bottom: double 2px grey;\n    width: 90px;\n\n    display: flex;\n    justify-content: space-between;\n}\n.size-Adjust-box[data-v-30d91c2d] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-30d91c2d]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-30d91c2d] {\n    color: ghostwhite;\n    height: 50px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-30d91c2d] {\n    color: green;\n}\n#finish-all-icon[data-v-30d91c2d] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n\n  /* audio */\n#room-Audio-wrapper[data-v-30d91c2d] {\n    display: flex;\n    flex-direction: column;\n    position: absolute;\n    bottom: 20px;\n    right: 0;\n    z-index: 5;\n    width: 180px;\n    height: auto;\n    padding-top: 5px;\n    border-top-left-radius: 10px;\n    border-bottom-left-radius: 10px;\n}\n.is-black[data-v-30d91c2d] {\n    background-color: rgba(0,0,0,0.8);\n}\n.room-audio-controller-zone[data-v-30d91c2d]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#room-audio-frame[data-v-30d91c2d] {\n    height: 100%;\n}\n#audios[data-v-30d91c2d]{\n    height: 100%;\n    margin: 0;\n    padding-left: 0;\n\n    display: flex;\n    flex-flow: column;\n    justify-content: space-around;\n}\n.audio-area[data-v-30d91c2d] {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.audio-wrapper[data-v-30d91c2d],\n  .non-audio-frame[data-v-30d91c2d] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    /* background-color: cornflowerblue; */\n    border: 1.5px dotted lightgrey;\n    margin: 10px 5px;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.room-audio-thumbnail[data-v-30d91c2d] {\n    width: 53px;\n    height: 53px;\n    border-radius: 50%;\n}\n.room-audio-play-icon[data-v-30d91c2d],\n  .room-audio-pause-icon[data-v-30d91c2d] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.room-audio-play-icon[data-v-30d91c2d] {\n    left: 18px;\n}\n.room-audio-pause-icon[data-v-30d91c2d] {\n    left: 11px;\n}\n.room-audio-delete-icon[data-v-30d91c2d] {\n    position: absolute;\n    left: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.room-audio-loop-icon[data-v-30d91c2d] {\n    position: absolute;\n    right: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.room-audio-vol-icon[data-v-30d91c2d] {\n    /* position: absolute;\n    top: 37px;\n    right: 30px; */\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-30d91c2d]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .room-audio-play-icon[data-v-30d91c2d] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .room-audio-pause-icon[data-v-30d91c2d] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .room-audio-delete-icon[data-v-30d91c2d] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .room-audio-loop-icon[data-v-30d91c2d] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .room-audio-vol-icon[data-v-30d91c2d] {\n    z-index: 2;\n    display: inline-block;\n}\n.room-audio-name[data-v-30d91c2d] {\n    color : white;\n    font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-30d91c2d] {\n    position: absolute;\n    top: 43px;\n    left: 40px;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-30d91c2d] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-30d91c2d] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.room-audio-play-icon[data-v-30d91c2d]:hover {\n    color:  rgba(0,255,0,1);\n}\n.room-audio-pause-icon[data-v-30d91c2d]:hover {\n    color:  rgba(0,255,0,1);\n}\n.room-audio-delete-icon[data-v-30d91c2d]:hover {\n    color:  rgba(255,10,10,1);\n}\n.room-audio-loop-icon[data-v-30d91c2d]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-30d91c2d] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-30d91c2d] {\n    /* background-color: grey; */\n    width: 100%;\n    height: auto;\n    margin: 3px 0;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.is-reverse[data-v-30d91c2d]{\n    transform: scale(-1, 1);\n}\n.change-disp-audio[data-v-30d91c2d] {\n    color: lightgrey;\n    margin: 14px;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-30d91c2d]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n  /* 再生関連 */\n.isPlay[data-v-30d91c2d] {\n    border-color: green;\n    opacity: 1;\n}\n.isLoop[data-v-30d91c2d] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n@media screen and (max-width:480px) {\n.change-disp-audio[data-v-30d91c2d] {\n    padding: 10px;\n}\n.fa-times[data-v-30d91c2d] {\n    padding: 10px 15px;\n}\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10716,7 +10716,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .action-button-wrapper {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n} */\n.roomlist-create-button[data-v-504d6d5b] {\n  /* position: absolute;\n  top : 20px;\n  right: 150px; */\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.roomlist-create-button[data-v-504d6d5b]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .action-button-wrapper {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n} */\n.roomlist-create-button[data-v-504d6d5b] {\n  /* position: absolute;\n  top : 20px;\n  right: 150px; */\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.roomlist-create-button[data-v-504d6d5b]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10812,7 +10812,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 30px 30px 0;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 2px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 10px 0;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 85%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 15px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 30px 30px 0;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 2px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 10px 0;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 85%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 15px;\n}\n.link-title[data-v-63cb9c0a] {\r\n    font-size: 17px;\n}\n.del-icon[data-v-63cb9c0a] {\r\n    top: -8px;\r\n    right: -5px;\r\n    font-size: 1.2em;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11007,7 +11007,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: grey;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 10px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 1px 1px grey;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: auto;\r\n  padding: 10px 10px 10px 10px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  height: 50px;\r\n  margin-bottom: 5px;\r\n  padding: 0 10px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: grey;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 10px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 1px 1px grey;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  bottom: 20px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  margin: 14px;\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: auto;\r\n  padding: 10px 10px 10px 10px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }  \r\n  \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11031,7 +11031,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  top: 55px;\r\n  left: 0;\r\n  height: 90vh;\r\n  z-index: 2;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: row;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    width: 470px;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 90%;\r\n    padding-left: 50px;\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    width: 85%;\r\n  }\r\n  /* .slide-in-enter, .slide-in-leave-to {\r\n    transform: translateX(100vw)\r\n  } */\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  top: 55px;\r\n  left: 0;\r\n  height: 90vh;\r\n  z-index: 10;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: row;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 90%;\r\n  width: 100%;\r\n  border-top-right-radius: 5px;\r\n  border-bottom-right-radius: 5px;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    width: 470px;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 90%;\r\n    padding-left: 50px;\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    width: 75%;\r\n  }\r\n  /* .slide-in-enter, .slide-in-leave-to {\r\n    transform: translateX(100vw)\r\n  } */\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52116,7 +52116,7 @@ var staticRenderFns = [
         },
         [
           _c("button", { staticClass: "cancel-button" }, [
-            _vm._v("\n      キャンセル\n    ")
+            _vm._v("\n      戻る\n    ")
           ])
         ]
       )
@@ -53102,36 +53102,42 @@ var render = function() {
         "div",
         { staticClass: "select-mode-wrapper" },
         [
-          _c(
-            "button",
-            {
-              staticClass: "select-mode-item",
-              attrs: { id: "change-select-mode" },
-              on: { click: _vm.toggleSelectMode }
-            },
-            [
-              _vm._v(
-                "\n      " + _vm._s(_vm.selectModeButtonMessage) + "\n    "
-              )
-            ]
-          ),
+          _c("div", { staticClass: "select-mode-item" }, [
+            _c(
+              "button",
+              {
+                staticClass: "mypage-button",
+                attrs: { id: "change-select-mode" },
+                on: { click: _vm.toggleSelectMode }
+              },
+              [
+                _vm._v(
+                  "\n        " +
+                    _vm._s(_vm.selectModeButtonMessage) +
+                    "\n      "
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _c(
-            "button",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isSelectMode,
-                  expression: "isSelectMode"
-                }
-              ],
-              staticClass: "select-mode-item",
-              on: { click: _vm.unCheckAllRoom }
-            },
-            [_vm._v("\n      全ての選択を解除\n    ")]
-          ),
+          _c("div", { staticClass: "select-mode-item" }, [
+            _c(
+              "button",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isSelectMode,
+                    expression: "isSelectMode"
+                  }
+                ],
+                staticClass: "mypage-button",
+                on: { click: _vm.unCheckAllRoom }
+              },
+              [_vm._v("\n        全ての選択を解除\n      ")]
+            )
+          ]),
           _vm._v(" "),
           _c("room-list-create-button-component", {
             directives: [
@@ -53741,7 +53747,7 @@ var render = function() {
       _c("div", { staticClass: "change-disp-audio-wrapper" }, [
         _c("i", {
           staticClass:
-            "fas fa-chevron-circle-left fa-3x change-disp-audio for-pc-tablet",
+            "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
           class: { "is-reverse": _vm.isShowAudio },
           on: {
             click: function($event) {
@@ -53776,7 +53782,7 @@ var render = function() {
               expression: "isShowAudio"
             }
           ],
-          staticClass: "fas fa-times-circle fa-2x change-disp-audio for-mobile",
+          staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
           on: {
             click: function($event) {
               _vm.isShowAudio = !_vm.isShowAudio
@@ -54433,6 +54439,16 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c("i", {
+        staticClass: "fas fa-times-circle fa-2x for-mobile",
+        attrs: { id: "change-disp-modal" },
+        on: {
+          click: function($event) {
+            return _vm.closeModal()
+          }
+        }
+      }),
+      _vm._v(" "),
       _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
         _c("i", {
           staticClass: "fas fa-chevron-circle-left fa-3x",
@@ -54480,7 +54496,20 @@ var render = function() {
       [_vm._v("\n    Roomリストを作成\n  ")]
     ),
     _vm._v(" "),
-    _c("p", [_vm._v("\n    " + _vm._s(_vm.createRoomListMessage) + "\n  ")])
+    _c(
+      "p",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.createRoomListMessage,
+            expression: "createRoomListMessage"
+          }
+        ]
+      },
+      [_vm._v("\n    " + _vm._s(_vm.createRoomListMessage) + "\n  ")]
+    )
   ])
 }
 var staticRenderFns = []
@@ -54923,13 +54952,13 @@ var render = function() {
                   _vm._v(_vm._s(roomPreviewInfo["selectedOrderNum"]))
                 ])
               ]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "room-title" }, [
-              _vm._v(_vm._s(roomPreviewInfo["name"]))
-            ])
+            )
           ]
-        )
+        ),
+        _vm._v(" "),
+        _c("p", { staticClass: "room-title" }, [
+          _vm._v(_vm._s(roomPreviewInfo["name"]))
+        ])
       ])
     }),
     0
@@ -55259,7 +55288,20 @@ var render = function() {
       [_vm._v("\n    選択したRoomを削除\n  ")]
     ),
     _vm._v(" "),
-    _c("p", [_vm._v("\n    " + _vm._s(_vm.deleteSelectedRoomMessage) + "\n  ")])
+    _c(
+      "p",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.deleteSelectedRoomMessage,
+            expression: "deleteSelectedRoomMessage"
+          }
+        ]
+      },
+      [_vm._v("\n    " + _vm._s(_vm.deleteSelectedRoomMessage) + "\n  ")]
+    )
   ])
 }
 var staticRenderFns = []

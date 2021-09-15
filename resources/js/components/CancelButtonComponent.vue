@@ -3,11 +3,10 @@
     <div class="action-button-wrapper">
       <a href="#" onclick="javascript:window.history.back(-1); return false;">
         <button class="cancel-button">
-          キャンセル
+          戻る
         </button>
       </a>
     </div>
-
 
 </template>
 
@@ -28,8 +27,6 @@
 
 <style scoped>
 
-  .action-button-wrapper {}
-
   .cancel-button {
     /* position: absolute; */
     top : 20px;
@@ -43,6 +40,12 @@
 
   .cancel-button:hover {
     background-color: aqua;
+  }
+
+  @media screen and (max-width: 480px) {
+    .action-button-wrapper {
+      display: none;
+    }
   }
 
 </style>

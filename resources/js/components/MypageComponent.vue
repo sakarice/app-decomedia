@@ -7,13 +7,17 @@
     </div>
     <div class="select-mode-wrapper">
       <!-- 〇選択モードの切り替えボタン -->
-      <button id="change-select-mode" class="select-mode-item" @click="toggleSelectMode">
-        {{selectModeButtonMessage}}
-      </button>
+      <div class="select-mode-item">
+        <button id="change-select-mode" class="mypage-button" @click="toggleSelectMode">
+          {{selectModeButtonMessage}}
+        </button>
+      </div>
       <!-- 〇選択をすべて解除するボタン -->
-      <button class="select-mode-item" v-show="isSelectMode" @click="unCheckAllRoom">
-        全ての選択を解除
-      </button>
+      <div class="select-mode-item">
+        <button class="mypage-button" v-show="isSelectMode" @click="unCheckAllRoom">
+          全ての選択を解除
+        </button>
+      </div>
       <!-- 〇選択したRoomからRoomリストを作成するボタン -->
       <room-list-create-button-component
       class="select-mode-item"
@@ -265,14 +269,26 @@ export default {
 .select-mode-wrapper {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.mypage-button {
+  z-index: 1;
+  font-family: Inter,Noto Sans JP;
+  border-radius: 4px;
+  border: solid 1px grey;
+  box-shadow: 0.5px 0.5px 1px lightslategrey;
+}
+.mypage-button:hover {
+  background-color: aqua;
 }
 
 .select-mode-item {
-  margin: 0 10px 0 0;
+  margin: 0 10px 10px 0;
 }
 
 .mypage-section {
-  padding: 10px 10px 10px 20px;
+  padding: 5px;
   width: 100%;
   max-width: 1200px;
 }
@@ -294,20 +310,26 @@ export default {
   display: inline-block;
   margin-bottom: 25px;
 }
+.room-create-wrapper:hover {
+  transform: translate(0.7px, 0.5px);
+}
 
 .linkTo-createRoom {
-  font-size: 18px;
   text-decoration: none;
-  color: black;
-  background-color: aquamarine;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Meiryo";
+  color: white;
+  background-color: rgb(25,95,150);
   padding: 3px 20px;
-  border-radius: 3px;
-  box-shadow: 0.5px 0.5px 3px grey;
+  border-radius: 4px;
+  box-shadow: 2px 2px 4px grey;
 }
 
 .linkTo-createRoom:hover {
-  color:aquamarine;
-  background-color: black;
+  background-color: rgb(245,50,110);
+  box-shadow: 1.5px 1.5px 3px darkgrey;
+
 }
 
 .preview-img {
@@ -336,7 +358,7 @@ export default {
 /* スマホ */
 @media screen and (max-width: 480px) {
   .select-mode-wrapper {
-    width: 95%;
+    width: 85%;
   }
   .select-mode-item {
     width: 45%;
@@ -348,7 +370,12 @@ export default {
   .mypage-section {
       margin-left: 0;
       padding: 5px;
-    }  
+  }
+.linkTo-createRoom {
+  font-size: 14px;
+  padding: 6px 18px;
+}
+  
 }
 
 </style>
