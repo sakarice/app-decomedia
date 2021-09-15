@@ -561,6 +561,10 @@
   .fa-times {
     padding: 10px 15px;
   }
+  .room-audio-delete-icon {
+    left: -25px;
+    top: -25px;
+  }
   
 }
 

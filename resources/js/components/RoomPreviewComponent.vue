@@ -266,7 +266,7 @@ li {
 @media screen and (max-width: 780px) {
   li {
     width: 31%;
-    padding: 2px;
+    padding: 0 0.5px 10px 0.5px;
   }
   .preview-room {
     margin: 0 5px 2px 5px;
@@ -281,10 +281,11 @@ li {
 /* スマホのみ */
 @media screen and (max-width: 420px) {
   .room-wrapper {
-    width: 85%;
+    width: 95%;
   }
   .room-title {
-    font-size: 15px;
+    font-size: 13px;
+    color: rgba(100,100,100,1);
   }
   .link-title {
     font-size: 17px;
@@ -293,6 +294,14 @@ li {
     top: -8px;
     right: -5px;
     font-size: 1.2em;
+  }
+  .room-select-check {
+    top: 3px;
+    left: 3px;
+    transform: scale(2);
+  }
+  .selected-order-num{
+    font-size: 30px;
   }
 }
 
