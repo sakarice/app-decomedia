@@ -257,12 +257,17 @@ export default {
   .img-list {
     position: relative;
     width: 49.5%;
-    height: 140px;
+    /* height: 140px; */
     margin-bottom: 2px;
     border-radius: 5px;
     list-style: none;
     transition: transform 0.3s;
     background-color: grey;
+  }
+  .img-list:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
   }
 
   .img-list:hover {
@@ -273,6 +278,16 @@ export default {
   .img-list:hover .icon-cover {
     z-index: 2;
     background-color: rgba(130, 130, 130, 0.6);
+  }
+
+  .user-own-img,.default-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    object-fit: cover;
   }
 
 
@@ -306,10 +321,6 @@ export default {
     pointer-events: none;
   }
 
-  .user-own-img,.default-img{
-    width: 100%;
-    height: 140px;
-  }
 
 
 </style>

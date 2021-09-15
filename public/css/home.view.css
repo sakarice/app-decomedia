@@ -122,10 +122,22 @@ p {
 
 .search-form {
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-icon-wrapper {
+  background-color: unset;
+  border: none;
 }
 
 .search-icon {
   color: white;
+  font-size: 20px;
+}
+.search-icon:hover {
+  cursor: pointer;
 }
 
 .search-input {
@@ -134,7 +146,6 @@ p {
   width: 75%;
   font-size: 15px;
   padding : 5px 10px;
-  margin-right: 10px;
 }
 
 .sample-keywords {

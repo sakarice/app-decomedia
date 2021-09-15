@@ -59,9 +59,9 @@
 
     <!-- オーディオの表示・非表示切り替え -->
     <div class="change-disp-audio-wrapper">
-        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-circle-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
-        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times-circle fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
     </div>
 
   </div>
@@ -324,7 +324,7 @@
     border-bottom-left-radius: 10px;
   }
   .is-black {
-    background-color: black;
+    background-color: rgba(0,0,0,0.8);
   }
 
   .room-audio-controller-zone{
@@ -527,10 +527,16 @@
     transform: scale(-1, 1);
   }
   .change-disp-audio {
-    color: lightseagreen;
+    color: lightgrey;
     margin: 14px;
+    padding: 10px 19px 10px 15px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0, 0.5);
   }
-
+  .change-disp-audio:hover {
+    background-color: rgba(0,110,110, 0.5);
+    cursor: pointer;
+  }
 
   /* 再生関連 */
   .isPlay {
@@ -543,6 +549,16 @@
     display: inline-block;
     z-index: 2;
   }
+
+@media screen and (max-width:480px) {
+  .change-disp-audio {
+    padding: 10px;
+  }
+  .fa-times {
+    padding: 10px 15px;
+  }
+  
+}
 
 
 </style>

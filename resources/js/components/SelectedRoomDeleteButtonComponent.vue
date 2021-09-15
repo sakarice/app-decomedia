@@ -1,14 +1,12 @@
 <template>
-
-    <div class="action-button-wrapper">
-      <button class="selected-room-delete-button" @click="deleteSelectedRoom">
-        選択したRoomを削除
-      </button>
-      <p>
-        {{deleteSelectedRoomMessage}}
-      </p>
-    </div>
-
+  <div class="action-button-wrapper">
+    <button class="selected-room-delete-button" @click="deleteSelectedRoom">
+      選択したRoomを削除
+    </button>
+    <p v-show="deleteSelectedRoomMessage">
+      {{deleteSelectedRoomMessage}}
+    </p>
+  </div>
 </template>
 
 <script>

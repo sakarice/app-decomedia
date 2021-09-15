@@ -29,8 +29,8 @@
           <span class="selected-order-num">{{roomPreviewInfo['selectedOrderNum']}}</span>
         </div>
 
-        <p class="room-title">{{roomPreviewInfo['name']}}</p>
       </div>
+      <p class="room-title">{{roomPreviewInfo['name']}}</p>
     </li>
   </ul>
 </template>
@@ -126,7 +126,7 @@ li {
 .preview-room {
   position: relative;
   text-align: center;
-  margin: 0 30px 30px 0;
+  margin: 0 10px 5px 10px;
   opacity: 0.8;
 }
 
@@ -269,7 +269,7 @@ li {
     padding: 2px;
   }
   .preview-room {
-    margin: 0 5px 10px 0;
+    margin: 0 5px 2px 5px;
   }
   .room-title {
     font-size: 18px;
@@ -285,6 +285,14 @@ li {
   }
   .room-title {
     font-size: 15px;
+  }
+  .link-title {
+    font-size: 17px;
+  }
+  .del-icon {
+    top: -8px;
+    right: -5px;
+    font-size: 1.2em;
   }
 }
 
