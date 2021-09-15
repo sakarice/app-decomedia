@@ -16,12 +16,10 @@
 
 #disp-modal-zone {
   position: absolute;
-  top: 0;
+  top: 30%;
   /* left: 0; */
-  z-index: 3;
+  z-index: 10;
   width: 55px;
-  height: 100%;
-  /* background-color:black; */
 
   display: flex;
   flex-direction: column;

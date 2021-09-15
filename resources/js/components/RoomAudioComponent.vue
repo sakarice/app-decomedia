@@ -1,7 +1,14 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Roomオーディオ -->
-  <div id="room-Audio-wrapper" v-bind:class="{'is-black': isShowAudio}">
+  <div id="room-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
+    <!-- オーディオの表示・非表示切り替え -->
+    <div class="change-disp-audio-wrapper">
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
+    </div>
+
     <div v-show="isShowAudio" class="room-audio-controller-zone">
       <!-- オーディオ再生・停止 -->
       <div v-show="isEditMode" class="all-audio-controll-wrapper">
@@ -57,12 +64,7 @@
       </div>
     </div>
 
-    <!-- オーディオの表示・非表示切り替え -->
-    <div class="change-disp-audio-wrapper">
-        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
-        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
-        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
-    </div>
+
 
   </div>
   <!-- </transition> -->
@@ -272,8 +274,8 @@
 
   /* 全オーディオの再生停止コントローラー */
   .all-audio-controll-wrapper {
-    padding-bottom: 7px;
-    margin-bottom: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
     border-bottom: double 2px grey;
     width: 90px;
 
@@ -310,21 +312,23 @@
   }
 
   /* audio */
-  #room-Audio-wrapper {
-    display: flex;
-    flex-direction: column;
+  #room-audio-wrapper {
     position: absolute;
-    bottom: 20px;
+    top:55px;
+    bottom: 10px;
     right: 0;
-    z-index: 5;
     width: 180px;
-    height: auto;
-    padding-top: 5px;
+    padding: 5px 0 60px 0;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    /* overflow-y: scroll; */
   }
-  .is-black {
+  .is-show {
     background-color: rgba(0,0,0,0.8);
+    z-index: 15;
   }
 
   .room-audio-controller-zone{
@@ -513,10 +517,10 @@
   }
 
   .change-disp-audio-wrapper {
-    /* background-color: grey; */
+    position: absolute;
+    bottom: 0px;
     width: 100%;
     height: auto;
-    margin: 3px 0;
 
     display: flex;
     justify-content: flex-end;
@@ -528,7 +532,7 @@
   }
   .change-disp-audio {
     color: lightgrey;
-    margin: 14px;
+    margin: 0 10px 10px 0;
     padding: 10px 19px 10px 15px;
     border-radius: 50%;
     background-color: rgba(0,0,0, 0.5);
@@ -552,7 +556,7 @@
 
 @media screen and (max-width:480px) {
   .change-disp-audio {
-    padding: 10px;
+    padding: 10px 12px 10px 8px;
   }
   .fa-times {
     padding: 10px 15px;
