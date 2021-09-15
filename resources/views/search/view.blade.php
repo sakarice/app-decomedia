@@ -22,7 +22,7 @@
     
     {{-- 検索結果一覧 --}}
     <section class="search-result">
-      <h2 class="search-result-message">キーワード"{{$keyword}}"での検索結果</h2>
+      <h2 class="search-result-message">"{{$keyword}}"の検索結果</h2>
   
       <room-preview-component
       :csrf="{{json_encode(csrf_token())}}"

@@ -30,7 +30,9 @@
                 <form method="POST" class="search-form" action="/room/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
-                    <i class="fas fa-search search-icon"></i>
+                    <button type="submit" class="search-icon-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                    </button>
                 </form>
             </div>
             <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p>

@@ -126,7 +126,7 @@ li {
 .preview-room {
   position: relative;
   text-align: center;
-  margin: 0 30px 30px 0;
+  margin: 0 10px 5px 10px;
   opacity: 0.8;
 }
 
@@ -269,7 +269,7 @@ li {
     padding: 2px;
   }
   .preview-room {
-    margin: 0 5px 10px 0;
+    margin: 0 5px 2px 5px;
   }
   .room-title {
     font-size: 18px;

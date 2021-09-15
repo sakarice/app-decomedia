@@ -303,6 +303,7 @@ export default {
 .section-title {
   display: inline-block;
   margin: 0 20px 0 0;
+  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
 }
 
 
