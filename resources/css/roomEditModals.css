@@ -85,7 +85,7 @@
 
 #change-disp-modal {
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   right: -5px;
   color: lightseagreen;
   margin: 14px;

@@ -15,9 +15,6 @@
               <div id="toggle-state-icon"></div>
             </button>
             <div id="category-type"><span>{{fileCategory}}</span></div>
-
-            <!-- 再生を強制終了する ※後で消す -->
-            <button id="finishPlay" @click="finishPlay">再生終了</button>
           </div>
 
           <!-- アップロードエリア -->
@@ -337,17 +334,6 @@ export default {
 
 @import "../../css/roomEditModals.css";
   
-  #upload-label {
-    padding: 5px 30px;
-    background-color: rgba(100, 200, 250, 0.4);
-    border-radius: 20px;
-    margin-bottom: 0;
-  }
-  #upload-label:hover {
-    cursor: pointer;
-    background-color: rgba(100, 200, 250, 0.8);
-  }
-
   #audio-thumbnail-wrapper {
     /* モーダル内のオーディオサムネの配置 */
     display: flex;
