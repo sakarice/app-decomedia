@@ -260,9 +260,7 @@
       for(let i=0; i < this.maxAudioNum; i++){
         this.audioPlayers[i].onended = this.onFinishAudio.bind(this,i);
       };
-    
     },
-
 
   }
 
@@ -530,6 +528,7 @@
   .is-reverse{
     transform: scale(-1, 1);
   }
+
   .change-disp-audio {
     color: lightgrey;
     margin: 0 10px 10px 0;
@@ -541,6 +540,7 @@
     background-color: rgba(0,110,110, 0.5);
     cursor: pointer;
   }
+
 
   /* 再生関連 */
   .isPlay {

@@ -4,7 +4,9 @@
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
     <!-- Roomヘッダ -->
-    <room-header-component></room-header-component>
+    <room-header-component
+    :roomName="roomSetting['name']">
+    </room-header-component>
 
     <!-- Room画像コンポーネント -->
     <room-img-component
