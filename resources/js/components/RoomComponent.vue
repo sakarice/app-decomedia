@@ -4,7 +4,9 @@
    :style="{'background-color' : roomSetting['roomBackgroundColor']}">
 
     <!-- Roomヘッダ -->
-    <room-header-component></room-header-component>
+    <room-header-component
+    :roomName="roomSetting['name']">
+    </room-header-component>
 
     <!-- Room画像コンポーネント -->
     <room-img-component
@@ -248,8 +250,6 @@ export default {
       }
       // 全オーディオの再生開始
       this.$refs.roomAudio.playAllAudio();
-      // オーディオを非表示に
-      this.$refs.roomAudio.hideAudio();
     });
 
   },

@@ -21,6 +21,7 @@
 
         <!-- 右側 -->
         <div class="header-block header-right">
+            <span :v-if="roomName" class="header-content room-name">{{roomName}}</span>
             <!-- ログイン -->
             <!-- <div class="header-content" v-show="!(isLogin)">
                 <a class="login" href="/login">ログイン</a>
@@ -51,6 +52,7 @@ export default {
         'csrf',
         'isShowCreateButton',
         'isShowUpdateButton',
+        'roomName',
     ],
     data : () => {
         return {
@@ -67,7 +69,12 @@ export default {
             this.$emit('update-room');
         }
     },
-    mounted(){}
+    mounted(){},
+    // watch : {
+    //     roomName : function(){
+
+    //     },
+    // },
 }
 
 </script>

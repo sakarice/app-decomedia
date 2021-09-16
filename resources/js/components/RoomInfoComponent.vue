@@ -80,6 +80,7 @@ export default{
 
 #room-description {
   width: 100%;
+  height: 150px;
 }
 
 

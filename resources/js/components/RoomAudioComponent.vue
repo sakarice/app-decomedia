@@ -4,6 +4,7 @@
   <div id="room-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
     <!-- オーディオの表示・非表示切り替え -->
     <div class="change-disp-audio-wrapper">
+      <span v-if="isEditMode" class="room-audio-num">{{roomAudioNum}}</span>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
@@ -80,8 +81,9 @@
     data : () => {
       return {
         audioPlayers : [],
-        isShowAudio : true,
+        isShowAudio : false,
         isEditMode : false,
+        roomAudioNum : 0,
       }
     },
     methods : {
@@ -260,9 +262,12 @@
       for(let i=0; i < this.maxAudioNum; i++){
         this.audioPlayers[i].onended = this.onFinishAudio.bind(this,i);
       };
-    
     },
-
+    watch : {
+      roomAudios : function(){
+        this.roomAudioNum = this.$parent.roomAudios.length;
+      }
+    }
 
   }
 
@@ -530,6 +535,18 @@
   .is-reverse{
     transform: scale(-1, 1);
   }
+
+  .room-audio-num {
+    z-index: 1;
+    background-color: rgba(50, 110, 110, 0.7);
+    color: white;
+    padding: 0 8px;
+    border-radius: 50%;
+    margin-right: -20px;
+    margin-top: -60px;
+    font-size: 16px;
+  }
+
   .change-disp-audio {
     color: lightgrey;
     margin: 0 10px 10px 0;
@@ -541,6 +558,7 @@
     background-color: rgba(0,110,110, 0.5);
     cursor: pointer;
   }
+
 
   /* 再生関連 */
   .isPlay {
@@ -565,7 +583,12 @@
     left: -25px;
     top: -25px;
   }
-  
+  .room-audio-num {
+    padding: 0 6px;
+    margin-right: -14px;
+    margin-top: -50px;
+    font-size: 13px;    
+  }  
 }
 
 
