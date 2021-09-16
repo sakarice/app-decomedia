@@ -53139,18 +53139,6 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("room-list-create-button-component", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isSelectMode,
-                expression: "isSelectMode"
-              }
-            ],
-            staticClass: "select-mode-item"
-          }),
-          _vm._v(" "),
           _c("selected-room-delete-button-component", {
             directives: [
               {
@@ -53245,47 +53233,6 @@ var render = function() {
               "is-select-mode": _vm.isSelectMode
             },
             on: { changeIsCheckedRoom: _vm.changeIsCheckedLikedRoom }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "section",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowCreatedRoomListPreview,
-              expression: "isShowCreatedRoomListPreview"
-            }
-          ],
-          staticClass: "mypage-section created-room-list"
-        },
-        [
-          _c("div", { staticClass: "section-top-wrapper" }, [
-            _c("h3", { staticClass: "section-title" }, [
-              _vm._v("作成済みRoomリスト")
-            ]),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass: "view-more",
-                on: { click: _vm.addCreatedRoomListPreviewInfos }
-              },
-              [_vm._v("\n        もっと見る\n      ")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("room-list-preview-component", {
-            ref: "createdRoomListPreview",
-            attrs: {
-              "first-preview-num": 3,
-              "is-show-cover": _vm.isShowCoverOnCreateRoomList,
-              "is-select-mode": _vm.isSelectMode
-            }
           })
         ],
         1

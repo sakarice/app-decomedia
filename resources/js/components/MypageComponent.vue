@@ -19,10 +19,10 @@
         </button>
       </div>
       <!-- 〇選択したRoomからRoomリストを作成するボタン -->
-      <room-list-create-button-component
+      <!-- <room-list-create-button-component
       class="select-mode-item"
       v-show="isSelectMode">
-      </room-list-create-button-component>
+      </room-list-create-button-component> -->
       <!-- 〇選択したRoom削除ボタン -->
       <selected-room-delete-button-component
       class="select-mode-item"
@@ -72,22 +72,22 @@
 
     <!-- Roomリスト -->
     <!-- 作成済みRoomリストのプレビュー -->
-    <section v-show="isShowCreatedRoomListPreview" class="mypage-section created-room-list">
+    <!-- <section v-show="isShowCreatedRoomListPreview" class="mypage-section created-room-list"> -->
       <!-- 説明やもっと見るの表示 -->
-      <div class="section-top-wrapper">
+      <!-- <div class="section-top-wrapper">
         <h3 class="section-title">作成済みRoomリスト</h3>
         <span class="view-more" @click="addCreatedRoomListPreviewInfos">
           もっと見る
         </span>
-      </div>
+      </div> -->
       <!-- {{-- 作成済みroom一覧 --}} -->
-      <room-list-preview-component
+      <!-- <room-list-preview-component
         :first-preview-num="3"
         :is-show-cover="isShowCoverOnCreateRoomList"
         :is-select-mode="isSelectMode"
         ref="createdRoomListPreview">
       </room-list-preview-component>
-    </section>
+    </section> -->
 
       
 
