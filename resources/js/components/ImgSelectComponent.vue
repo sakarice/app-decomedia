@@ -50,7 +50,8 @@
 
         </div>
       </div>
-      <div class="close-icon-wrapper">
+      <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
+      <div class="close-icon-wrapper for-pc-tablet">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
       </div>
     </div>
