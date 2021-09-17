@@ -19,8 +19,18 @@ class SearchUtil
     public static function searchRooms(Request $request){
         $keyword = $request->input('keyword');
         $roomPreviewInfos = array();
+        $getNum = 20; // 取得するRoomプレビュー情報件数
         if(!empty($keyword)){
-            $room_settings = RoomSetting::where('name', 'LIKE', "%$keyword%")->get();
+            $room_settings
+             = RoomSetting::where('open_state', true)
+                ->where('name', 'LIKE', "%$keyword%")
+                ->take($getNum)
+                ->get();
+        } else {
+            $room_settings = RoomSetting::where('open_state', true)
+                ->inRandomOrder()
+                ->take($getNum)
+                ->get();
         }
         foreach($room_settings as $room_setting){
             $room_id = $room_setting->room_id;
