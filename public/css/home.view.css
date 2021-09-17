@@ -9,12 +9,13 @@ p {
 #home-top {
   height: 100vh;
   width: 100%;
+  padding-bottom: 80px;
   color: white;
   text-align: center;
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 
   /* background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg); */
@@ -99,6 +100,7 @@ p {
 .top-message-wrapper {
   color: white;
   text-shadow: 2px 2px 5px grey;
+  margin-bottom: 210px;
 }
 
 .top-message {
@@ -109,7 +111,6 @@ p {
 
 
 .search-wrapper {
-  margin: 45px 0; 
   font-size: 20px;
 }
 
