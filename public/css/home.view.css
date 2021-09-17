@@ -17,11 +17,12 @@ p {
   justify-content: center;
   align-items: center;
 
-  background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg);
+  /* background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg); */
+  background-image: url(https://cdn.pixabay.com/photo/2020/06/06/16/09/caricature-5267148_1280.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  background-color: black;
+  background-color: rgb(8,8,8);
 }
 
 .sub-message {
