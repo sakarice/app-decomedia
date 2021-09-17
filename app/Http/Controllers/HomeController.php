@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Room\RoomController;
 use App\Models\User;
 use App\Models\Room;
+use App\Models\RoomSetting;
 use App\Models\Roomlist;
 use App\Lib\EditRoom;
 use App\Lib\RoomUtil;
@@ -32,9 +33,11 @@ class HomeController extends Controller
     {
         $roomPreviewInfos = array();
         $getNum = 20; // 取得するRoomプレビュー情報件数
-        $rooms = Room::inRandomOrder()->take($getNum)->get();
-        foreach($rooms as $index => $room){
-            $room_id = $room->id;
+        // 公開中のRoomのみ取得
+        $openRoomSettings = RoomSetting::where('open_state', true)->inRandomOrder()->take($getNum)->get();
+        // $rooms = Room::inRandomOrder()->take($getNum)->get();
+        foreach($openRoomSettings as $index => $openRoomSetting){
+            $room_id = $openRoomSetting->room_id;
             $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
         }
 
