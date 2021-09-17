@@ -3227,6 +3227,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -5480,6 +5482,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -10473,7 +10477,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  margin-bottom: 25px;\n}\n.mypage-button[data-v-74b0df32] {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.mypage-button[data-v-74b0df32]:hover {\r\n  background-color: aqua;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-74b0df32]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.select-mode-wrapper[data-v-74b0df32] {\r\n    width: 85%;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    width: 45%;\r\n    margin: 0 10px 10px 0;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  font-size: 14px;\r\n  padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-description[data-v-74b0df32] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-button[data-v-74b0df32] {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.mypage-button[data-v-74b0df32]:hover {\r\n  background-color: aqua;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-74b0df32]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    margin: 12px 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    margin: 2px 15px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-74b0df32] {\r\n    background-color: black;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n    font-size: 14px;\r\n    padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10902,7 +10906,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selected-room-delete-button[data-v-3f252a6f] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.selected-room-delete-button[data-v-3f252a6f]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.selected-room-delete-button[data-v-3f252a6f] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.selected-room-delete-button[data-v-3f252a6f]:hover {\n  background-color: aqua;\n}\n.select-mode-description[data-v-3f252a6f] {\n  font-size: 10px;\n  margin-top: 7px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53137,46 +53141,60 @@ var render = function() {
     [
       _vm._m(0),
       _vm._v(" "),
+      _c("div", { staticClass: "select-mode-switch" }, [
+        _c(
+          "button",
+          {
+            staticClass: "mypage-button",
+            attrs: { id: "change-select-mode" },
+            on: { click: _vm.toggleSelectMode }
+          },
+          [_vm._v("\n      " + _vm._s(_vm.selectModeButtonMessage) + "\n    ")]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "select-mode-wrapper" },
+        {
+          staticClass: "select-mode-item-wrapper",
+          class: { "is-black": _vm.isSelectMode }
+        },
         [
-          _c("div", { staticClass: "select-mode-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "mypage-button",
-                attrs: { id: "change-select-mode" },
-                on: { click: _vm.toggleSelectMode }
-              },
-              [
-                _vm._v(
-                  "\n        " +
-                    _vm._s(_vm.selectModeButtonMessage) +
-                    "\n      "
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "select-mode-item" }, [
-            _c(
-              "button",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.isSelectMode,
-                    expression: "isSelectMode"
-                  }
-                ],
-                staticClass: "mypage-button",
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isSelectMode,
+                  expression: "isSelectMode"
+                }
+              ],
+              staticClass: "select-mode-item"
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "mypage-button for-pc-tablet",
+                  on: { click: _vm.unCheckAllRoom }
+                },
+                [_vm._v("\n        全ての選択を解除\n      ")]
+              ),
+              _vm._v(" "),
+              _c("i", {
+                staticClass: "far fa-square fa-2x for-mobile",
                 on: { click: _vm.unCheckAllRoom }
-              },
-              [_vm._v("\n        全ての選択を解除\n      ")]
-            )
-          ]),
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "select-mode-description for-mobile" },
+                [_vm._v("リセット")]
+              )
+            ]
+          ),
           _vm._v(" "),
           _c("selected-room-delete-button-component", {
             directives: [
@@ -55295,11 +55313,20 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "selected-room-delete-button",
+        staticClass: "selected-room-delete-button for-pc-tablet",
         on: { click: _vm.deleteSelectedRoom }
       },
       [_vm._v("\n    選択したRoomを削除\n  ")]
     ),
+    _vm._v(" "),
+    _c("i", {
+      staticClass: "fas fa-trash fa-2x for-mobile",
+      on: { click: _vm.deleteSelectedRoom }
+    }),
+    _vm._v(" "),
+    _c("span", { staticClass: "select-mode-description for-mobile" }, [
+      _vm._v("削除")
+    ]),
     _vm._v(" "),
     _c(
       "p",
