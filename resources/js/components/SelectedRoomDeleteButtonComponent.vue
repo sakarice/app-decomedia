@@ -1,8 +1,10 @@
 <template>
   <div class="action-button-wrapper">
-    <button class="selected-room-delete-button" @click="deleteSelectedRoom">
+    <button class="selected-room-delete-button for-pc-tablet" @click="deleteSelectedRoom">
       選択したRoomを削除
     </button>
+    <i class="fas fa-trash fa-2x for-mobile" @click="deleteSelectedRoom"></i>
+    <span class="select-mode-description for-mobile">削除</span>
     <p v-show="deleteSelectedRoomMessage">
       {{deleteSelectedRoomMessage}}
     </p>
@@ -88,6 +90,11 @@
 
   .selected-room-delete-button:hover {
     background-color: aqua;
+  }
+
+  .select-mode-description {
+    font-size: 10px;
+    margin-top: 7px;
   }
 
 </style>

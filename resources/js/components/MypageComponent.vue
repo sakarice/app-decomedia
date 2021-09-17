@@ -5,18 +5,20 @@
     <div class="room-create-wrapper">
       <a class="linkTo-createRoom" href="/room/create">Room作成</a>
     </div>
-    <div class="select-mode-wrapper">
-      <!-- 〇選択モードの切り替えボタン -->
-      <div class="select-mode-item">
-        <button id="change-select-mode" class="mypage-button" @click="toggleSelectMode">
-          {{selectModeButtonMessage}}
-        </button>
-      </div>
+    <!-- 〇選択モードの切り替えボタン -->
+    <div class="select-mode-switch">
+      <button id="change-select-mode" class="mypage-button" @click="toggleSelectMode">
+        {{selectModeButtonMessage}}
+      </button>
+    </div>
+    <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
       <!-- 〇選択をすべて解除するボタン -->
-      <div class="select-mode-item">
-        <button class="mypage-button" v-show="isSelectMode" @click="unCheckAllRoom">
+      <div class="select-mode-item" v-show="isSelectMode">
+        <button class="mypage-button for-pc-tablet" @click="unCheckAllRoom">
           全ての選択を解除
         </button>
+        <i class="far fa-square fa-2x for-mobile" @click="unCheckAllRoom"></i>
+        <span class="select-mode-description for-mobile">リセット</span>
       </div>
       <!-- 〇選択したRoomからRoomリストを作成するボタン -->
       <!-- <room-list-create-button-component
@@ -266,10 +268,14 @@ export default {
   margin-left: 70px;
 }
 
-.select-mode-wrapper {
+.select-mode-item-wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 25px;
+}
+
+.select-mode-description {
+  font-size: 10px;
+  margin-top: 7px;
 }
 
 .mypage-button {
@@ -353,17 +359,39 @@ export default {
 
 /* スマホ以外 */
 @media screen and (min-width: 481px) {
+  .for-mobile {
+    display: none;
+  }
+  .select-mode-item-wrapper {
+    margin: 12px 0;
+  }
+ 
 }
 
 
 /* スマホ */
 @media screen and (max-width: 480px) {
-  .select-mode-wrapper {
-    width: 85%;
+  .for-pc-tablet {
+    display: none;
+  }
+  .select-mode-item-wrapper {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-left: -20px;
+    padding: 10px 0;
+    background-color: black;
+    color: white;
+    z-index: 15;
+
+    justify-content: center;
   }
   .select-mode-item {
-    width: 45%;
-    margin: 0 10px 10px 0;
+    margin: 2px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .mypage-content-wrapper {
     margin-left: 20px;
@@ -372,10 +400,13 @@ export default {
       margin-left: 0;
       padding: 5px;
   }
-.linkTo-createRoom {
-  font-size: 14px;
-  padding: 6px 18px;
-}
+  .is-black {
+    background-color: black;
+  }
+  .linkTo-createRoom {
+    font-size: 14px;
+    padding: 6px 18px;
+  }
   
 }
 
