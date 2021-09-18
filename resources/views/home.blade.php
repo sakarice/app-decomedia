@@ -47,9 +47,9 @@
 
     <section id="quick-use-and-warning">
         <p class="use-and-warning-message">
-            ルームのサムネイル画像をタップすると、<br>
-            ルームに入れます。<br><br>
-            ※!ルームに移動すると音楽・動画が流れます!<br>
+            <span style="color:red">
+                ※ルームに移動すると音楽・動画が流れます!<br>
+            </span>
             イヤホンやヘッドフォンを付け、<br>
             音量に注意してお楽しみください。
         </p>
@@ -66,7 +66,7 @@
             音楽に背景を付けて簡易MVにしたり、<br>
             楽しみ方はあなた次第です。
         </p>
-        <h2 id="how-to-use-header">
+        {{-- <h2 id="how-to-use-header">
             使い方
         </h2>
         <div class="about-app-wrapper">
@@ -80,11 +80,8 @@
                 <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
                 <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
             </div>
-        </div>
-
-
+        </div> --}}
     </section>
-
 
     <div id="app">
         {{-- ヘッダー --}}
@@ -96,7 +93,10 @@
 
         {{-- Roomの一覧を表示 --}}
         <section class="recently-posted-rooms">
-            <h3 class="section-title">最近の投稿</h3>
+            <h3 class="section-title recently-posted-title">最近の投稿</h3>
+            <span class="recently-posted-supplement-info">
+                (サムネイルをタップするとルームに移動します)
+            </span>
             <div class="room-preview-wrapper">
                 <room-preview-component
                 :csrf="{{json_encode(csrf_token())}}"
