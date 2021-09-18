@@ -6,6 +6,8 @@
     <!-- Roomヘッダ -->
     <room-header-component
     :isShowUpdateButton=true
+    :isShowLinkToShow=true
+    :roomId="roomSetting['id']"
     @update-room="updateRoom">
     </room-header-component>
 

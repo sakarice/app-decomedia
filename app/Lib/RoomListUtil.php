@@ -138,8 +138,7 @@ class RoomListUtil
       
       // 保存したroomのidを取得
       $room_id = Room::latest()->first()->id;
-      \Log::info($room_id);
-  
+
       // room画像
       if(isset($request->img['id'])){
         if($request->img['id'] !== ""){

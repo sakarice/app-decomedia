@@ -11,12 +11,23 @@
 
             <room-create-button v-if="isShowCreateButton"
             @create-room="createRoom">
-
             </room-create-button>
 
             <room-update-button v-if="isShowUpdateButton"
             @update-room="updateRoom">
             </room-update-button>
+
+            <a v-if="isShowLinkToShow" :href="roomShowLink(roomId)" class="action-button-wrapper link-to-show-room">
+                <button class="action-button">
+                    閲覧画面へ
+                </button>
+            </a>
+            <a v-if="isShowLinkToEdit" :href="roomEditLink(roomId)" class="action-button-wrapper link-to-edit-room">
+                <button class="action-button">
+                    編集画面へ
+                </button>
+            </a>
+
         </div>
 
         <!-- 右側 -->
@@ -52,6 +63,9 @@ export default {
         'csrf',
         'isShowCreateButton',
         'isShowUpdateButton',
+        'isShowLinkToShow',
+        'isShowLinkToEdit',
+        'roomId',
         'roomName',
     ],
     data : () => {
@@ -67,7 +81,13 @@ export default {
         },
         updateRoom(){
             this.$emit('update-room');
-        }
+        },
+        roomShowLink : function(id) {
+            return "/room/" + id;
+        },
+        roomEditLink : function(id) {
+            return "/room/" + id + "/edit";
+        },
     },
     mounted(){},
     // watch : {
@@ -80,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+
+/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
+@import "../../css/button.css";
 
 .header {
   position: fixed;

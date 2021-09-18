@@ -1,6 +1,6 @@
 <template>
   <div class="action-button-wrapper">
-    <button class="selected-room-delete-button for-pc-tablet" @click="deleteSelectedRoom">
+    <button class="action-button selected-room-delete-button for-pc-tablet" @click="deleteSelectedRoom">
       選択したRoomを削除
     </button>
     <i class="fas fa-trash fa-2x for-mobile" @click="deleteSelectedRoom"></i>
@@ -80,17 +80,8 @@
 
 <style scoped>
 
-  .selected-room-delete-button {
-    z-index: 1;
-    font-family: Inter,Noto Sans JP;
-    border-radius: 4px;
-    border: solid 1px grey;
-    box-shadow: 0.5px 0.5px 1px lightslategrey;
-  }
-
-  .selected-room-delete-button:hover {
-    background-color: aqua;
-  }
+/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
+@import "../../css/button.css";
 
   .select-mode-description {
     font-size: 10px;

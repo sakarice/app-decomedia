@@ -9,10 +9,10 @@
         </a>
 
         <div class="cover-menu" v-show="isShowCover">
-          <a :href="roomShowLink(roomPreviewInfo['id'])" class="cover-menu-link">
+          <a :href="roomShowLink(roomPreviewInfo['id'])" class="cover-menu-link show-room">
             <span class="link-title">閲覧</span>
           </a>
-          <a :href="roomEditLink(roomPreviewInfo['id'])" class="cover-menu-link">
+          <a :href="roomEditLink(roomPreviewInfo['id'])" class="cover-menu-link edit-room">
             <span class="link-title">編集</span>
           </a>
         </div>
@@ -290,6 +290,13 @@ li {
   .link-title {
     font-size: 17px;
   }
+  .show-room {
+    display: none;
+  }
+  .edit-room {
+    width: 100%;
+  }
+
   .del-icon {
     top: -8px;
     right: -5px;

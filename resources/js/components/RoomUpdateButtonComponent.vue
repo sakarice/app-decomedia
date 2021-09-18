@@ -1,7 +1,7 @@
 <template>
 
     <div class="action-button-wrapper">
-      <button class="room-update-button" @click="updateRoom">
+      <button class="action-button room-update-button" @click="updateRoom">
         更新
       </button>
       <p v-show="message != ''">
@@ -54,20 +54,7 @@
 
 <style scoped>
 
-  .action-button-wrapper {
-    margin: 0 5px;
-  }
-
-  .room-update-button {
-    z-index: 1;
-    font-family: Inter,Noto Sans JP;
-    border-radius: 4px;
-    border: solid 1px grey;
-    box-shadow: 0.5px 0.5px 1px lightslategrey;
-  }
-
-  .room-update-button:hover {
-    background-color: aqua;
-  }
+/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
+@import "../../css/button.css";
 
 </style>

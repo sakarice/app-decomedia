@@ -5,6 +5,8 @@
 
     <!-- Roomヘッダ -->
     <room-header-component
+    :isShowLinkToEdit="isMyRoom"
+    :roomId="roomSetting['id']"
     :roomName="roomSetting['name']">
     </room-header-component>
 
@@ -106,7 +108,7 @@ export default {
   ],
   data : () => {
     return {
-      isMyRoom : true,
+      isMyRoom : false,
       getReadyCreateMovieFrame : false,
       getReadyPlayAudio : false,
       getReadyPlayMovie : false,

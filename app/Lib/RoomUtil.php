@@ -136,7 +136,6 @@ class RoomUtil
     } else if(RoomBgm::where('room_id', $room_id)->exists()){
       $imgPattern = 3;
     }
-    \Log::info($imgPattern);
 
     switch ($imgPattern){
       case 1:
