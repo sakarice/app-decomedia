@@ -7,29 +7,31 @@
     </div>
     <!-- 〇選択モードの切り替えボタン -->
     <div class="select-mode-switch">
-      <button id="change-select-mode" class="mypage-button" @click="toggleSelectMode">
+      <button id="change-select-mode" class="action-button mypage-button" @click="toggleSelectMode">
         {{selectModeButtonMessage}}
       </button>
     </div>
     <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
-      <!-- 〇選択をすべて解除するボタン -->
-      <div class="select-mode-item" v-show="isSelectMode">
-        <button class="mypage-button for-pc-tablet" @click="unCheckAllRoom">
-          全ての選択を解除
-        </button>
-        <i class="far fa-square fa-2x for-mobile" @click="unCheckAllRoom"></i>
-        <span class="select-mode-description for-mobile">リセット</span>
-      </div>
-      <!-- 〇選択したRoomからRoomリストを作成するボタン -->
-      <!-- <room-list-create-button-component
-      class="select-mode-item"
-      v-show="isSelectMode">
-      </room-list-create-button-component> -->
       <!-- 〇選択したRoom削除ボタン -->
       <selected-room-delete-button-component
       class="select-mode-item"
       v-show="isSelectMode">
       </selected-room-delete-button-component>
+
+      <!-- 〇選択をすべて解除するボタン -->
+      <div class="select-mode-item" v-show="isSelectMode">
+        <button class="action-button mypage-button for-pc-tablet" @click="unCheckAllRoom">
+          全ての選択を解除
+        </button>
+        <i class="far fa-square fa-2x for-mobile" @click="unCheckAllRoom"></i>
+        <span class="select-mode-description for-mobile">リセット</span>
+      </div>
+
+      <!-- 〇選択したRoomからRoomリストを作成するボタン -->
+      <!-- <room-list-create-button-component
+      class="select-mode-item"
+      v-show="isSelectMode">
+      </room-list-create-button-component> -->
     </div>
 
     <!-- 作成済みRoomのプレビュー -->
@@ -264,6 +266,10 @@ export default {
 
 <style scoped>
 
+/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
+@import "../../css/button.css";
+
+
 .mypage-content-wrapper {
   margin-left: 70px;
 }
@@ -276,17 +282,6 @@ export default {
 .select-mode-description {
   font-size: 10px;
   margin-top: 7px;
-}
-
-.mypage-button {
-  z-index: 1;
-  font-family: Inter,Noto Sans JP;
-  border-radius: 4px;
-  border: solid 1px grey;
-  box-shadow: 0.5px 0.5px 1px lightslategrey;
-}
-.mypage-button:hover {
-  background-color: aqua;
 }
 
 .select-mode-item {

@@ -3229,6 +3229,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3973,6 +3975,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -3995,7 +3999,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['isLogin', 'roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
   data: function data() {
     return {
-      isMyRoom: true,
+      isMyRoom: false,
       getReadyCreateMovieFrame: false,
       getReadyPlayAudio: false,
       getReadyPlayMovie: false,
@@ -4223,6 +4227,8 @@ var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -4617,6 +4623,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4628,7 +4645,7 @@ __webpack_require__.r(__webpack_exports__);
     RoomCreateButton: _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     RoomUpdateButton: _RoomUpdateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default
   },
-  props: ['csrf', 'isShowCreateButton', 'isShowUpdateButton', 'roomName'],
+  props: ['csrf', 'isShowCreateButton', 'isShowUpdateButton', 'isShowLinkToShow', 'isShowLinkToEdit', 'roomId', 'roomName'],
   data: function data() {
     return {};
   },
@@ -4641,6 +4658,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateRoom: function updateRoom() {
       this.$emit('update-room');
+    },
+    roomShowLink: function roomShowLink(id) {
+      return "/room/" + id;
+    },
+    roomEditLink: function roomEditLink(id) {
+      return "/room/" + id + "/edit";
     }
   },
   mounted: function mounted() {} // watch : {
@@ -10290,11 +10313,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cancel-button[data-v-0a05e236] {\n  /* position: absolute; */\n  top : 20px;\n  left: 70px;\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.cancel-button[data-v-0a05e236]:hover {\n  background-color: aqua;\n}\n@media screen and (max-width: 480px) {\n.action-button-wrapper[data-v-0a05e236] {\n    display: none;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n@media screen and (max-width: 480px) {\n.action-button-wrapper[data-v-0a05e236] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10473,11 +10499,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-description[data-v-74b0df32] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-button[data-v-74b0df32] {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.mypage-button[data-v-74b0df32]:hover {\r\n  background-color: aqua;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-74b0df32]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    margin: 12px 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    margin: 2px 15px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-74b0df32] {\r\n    background-color: black;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n    font-size: 14px;\r\n    padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-74b0df32] {\r\n  margin-left: 70px;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-description[data-v-74b0df32] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.select-mode-item[data-v-74b0df32] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-74b0df32] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-74b0df32] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-74b0df32] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-74b0df32]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-74b0df32]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-74b0df32] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-74b0df32] {\r\n  color: blue;\n}\n.view-more[data-v-74b0df32]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    margin: 12px 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-74b0df32] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-74b0df32] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-74b0df32] {\r\n    margin: 2px 15px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.mypage-content-wrapper[data-v-74b0df32] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-74b0df32] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-74b0df32] {\r\n    background-color: black;\n}\n.linkTo-createRoom[data-v-74b0df32] {\r\n    font-size: 14px;\r\n    padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10602,11 +10631,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-5e8c3959] {\n  margin: 0 5px;\n}\n.room-create-button[data-v-5e8c3959] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.room-create-button[data-v-5e8c3959]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10656,11 +10688,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  padding: 10px 0;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  padding: 10px 0;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10831,7 +10866,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 10px 5px 10px;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 0 0.5px 10px 0.5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 2px 5px;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 95%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 13px;\r\n    color: rgba(100,100,100,1);\n}\n.link-title[data-v-63cb9c0a] {\r\n    font-size: 17px;\n}\n.del-icon[data-v-63cb9c0a] {\r\n    top: -8px;\r\n    right: -5px;\r\n    font-size: 1.2em;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n    top: 3px;\r\n    left: 3px;\r\n    transform: scale(2);\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n    font-size: 30px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 10px 5px 10px;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 0 0.5px 10px 0.5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 2px 5px;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 95%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 13px;\r\n    color: rgba(100,100,100,1);\n}\n.link-title[data-v-63cb9c0a] {\r\n    font-size: 17px;\n}\n.show-room[data-v-63cb9c0a] {\r\n    display: none;\n}\n.edit-room[data-v-63cb9c0a] {\r\n    width: 100%;\n}\n.del-icon[data-v-63cb9c0a] {\r\n    top: -8px;\r\n    right: -5px;\r\n    font-size: 1.2em;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n    top: 3px;\r\n    left: 3px;\r\n    transform: scale(2);\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n    font-size: 30px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10878,11 +10913,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.action-button-wrapper[data-v-67bcec6c] {\n  margin: 0 5px;\n}\n.room-update-button[data-v-67bcec6c] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.room-update-button[data-v-67bcec6c]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10902,11 +10940,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.selected-room-delete-button[data-v-3f252a6f] {\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.selected-room-delete-button[data-v-3f252a6f]:hover {\n  background-color: aqua;\n}\n.select-mode-description[data-v-3f252a6f] {\n  font-size: 10px;\n  margin-top: 7px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.select-mode-description[data-v-3f252a6f] {\r\n    font-size: 10px;\r\n    margin-top: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10955,6 +10996,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.room-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/button.css ***!
+  \************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -52138,7 +52203,7 @@ var staticRenderFns = [
           }
         },
         [
-          _c("button", { staticClass: "cancel-button" }, [
+          _c("button", { staticClass: "action-button cancel-button" }, [
             _vm._v("\n      戻る\n    ")
           ])
         ]
@@ -53145,7 +53210,7 @@ var render = function() {
         _c(
           "button",
           {
-            staticClass: "mypage-button",
+            staticClass: "action-button mypage-button",
             attrs: { id: "change-select-mode" },
             on: { click: _vm.toggleSelectMode }
           },
@@ -53160,6 +53225,18 @@ var render = function() {
           class: { "is-black": _vm.isSelectMode }
         },
         [
+          _c("selected-room-delete-button-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isSelectMode,
+                expression: "isSelectMode"
+              }
+            ],
+            staticClass: "select-mode-item"
+          }),
+          _vm._v(" "),
           _c(
             "div",
             {
@@ -53177,7 +53254,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "mypage-button for-pc-tablet",
+                  staticClass: "action-button mypage-button for-pc-tablet",
                   on: { click: _vm.unCheckAllRoom }
                 },
                 [_vm._v("\n        全ての選択を解除\n      ")]
@@ -53194,19 +53271,7 @@ var render = function() {
                 [_vm._v("リセット")]
               )
             ]
-          ),
-          _vm._v(" "),
-          _c("selected-room-delete-button-component", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isSelectMode,
-                expression: "isSelectMode"
-              }
-            ],
-            staticClass: "select-mode-item"
-          })
+          )
         ],
         1
       ),
@@ -53842,7 +53907,11 @@ var render = function() {
     },
     [
       _c("room-header-component", {
-        attrs: { roomName: _vm.roomSetting["name"] }
+        attrs: {
+          isShowLinkToEdit: _vm.isMyRoom,
+          roomId: _vm.roomSetting["id"],
+          roomName: _vm.roomSetting["name"]
+        }
       }),
       _vm._v(" "),
       _c("room-img-component", {
@@ -53998,7 +54067,10 @@ var render = function() {
   return _c("div", { staticClass: "action-button-wrapper" }, [
     _c(
       "button",
-      { staticClass: "room-create-button", on: { click: _vm.createRoom } },
+      {
+        staticClass: "action-button room-create-button",
+        on: { click: _vm.createRoom }
+      },
       [_vm._v("\n    作成\n  ")]
     ),
     _vm._v(" "),
@@ -54057,7 +54129,11 @@ var render = function() {
     },
     [
       _c("room-header-component", {
-        attrs: { isShowUpdateButton: true },
+        attrs: {
+          isShowUpdateButton: true,
+          isShowLinkToShow: true,
+          roomId: _vm.roomSetting["id"]
+        },
         on: { "update-room": _vm.updateRoom }
       }),
       _vm._v(" "),
@@ -54294,6 +54370,36 @@ var render = function() {
         _vm._v(" "),
         _vm.isShowUpdateButton
           ? _c("room-update-button", { on: { "update-room": _vm.updateRoom } })
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.isShowLinkToShow
+          ? _c(
+              "a",
+              {
+                staticClass: "action-button-wrapper link-to-show-room",
+                attrs: { href: _vm.roomShowLink(_vm.roomId) }
+              },
+              [
+                _c("button", { staticClass: "action-button" }, [
+                  _vm._v("\n                閲覧画面へ\n            ")
+                ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.isShowLinkToEdit
+          ? _c(
+              "a",
+              {
+                staticClass: "action-button-wrapper link-to-edit-room",
+                attrs: { href: _vm.roomEditLink(_vm.roomId) }
+              },
+              [
+                _c("button", { staticClass: "action-button" }, [
+                  _vm._v("\n                編集画面へ\n            ")
+                ])
+              ]
+            )
           : _vm._e()
       ],
       1
@@ -54892,7 +54998,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "cover-menu-link",
+                    staticClass: "cover-menu-link show-room",
                     attrs: { href: _vm.roomShowLink(roomPreviewInfo["id"]) }
                   },
                   [_c("span", { staticClass: "link-title" }, [_vm._v("閲覧")])]
@@ -54901,7 +55007,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "cover-menu-link",
+                    staticClass: "cover-menu-link edit-room",
                     attrs: { href: _vm.roomEditLink(roomPreviewInfo["id"]) }
                   },
                   [_c("span", { staticClass: "link-title" }, [_vm._v("編集")])]
@@ -55266,7 +55372,10 @@ var render = function() {
   return _c("div", { staticClass: "action-button-wrapper" }, [
     _c(
       "button",
-      { staticClass: "room-update-button", on: { click: _vm.updateRoom } },
+      {
+        staticClass: "action-button room-update-button",
+        on: { click: _vm.updateRoom }
+      },
       [_vm._v("\n    更新\n  ")]
     ),
     _vm._v(" "),
@@ -55313,7 +55422,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "selected-room-delete-button for-pc-tablet",
+        staticClass: "action-button selected-room-delete-button for-pc-tablet",
         on: { click: _vm.deleteSelectedRoom }
       },
       [_vm._v("\n    選択したRoomを削除\n  ")]

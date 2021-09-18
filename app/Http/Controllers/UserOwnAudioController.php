@@ -48,7 +48,6 @@ class UserOwnAudioController extends Controller
         // S3からファイルを削除
         Storage::disk('s3')->delete($del_audio_url);
         // DBからレコード削除
-        \Log::info($del_audio_url);
         UserOwnBgm::where('owner_user_id', $owner_user_id)
                     ->where('audio_url', $del_audio_url)
                     ->first()

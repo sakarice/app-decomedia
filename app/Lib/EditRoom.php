@@ -24,9 +24,6 @@ class EditRoom
       // Room情報を取得
       $authenticated_userId = Auth::user()->id;
       $rooms = Room::limit($limit)->where('user_id', $authenticated_userId)->get();
-
-    //   $room_imgs = $rooms->first()->room_imgs;
-    //   \Log::info($room_imgs->first()->id);
       $roomInfos = array();
       foreach($rooms as $room){
           $room_id = $room->id;

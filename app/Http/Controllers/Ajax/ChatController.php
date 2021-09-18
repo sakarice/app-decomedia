@@ -18,15 +18,11 @@ class ChatController extends Controller
 
     // メッセージを登録
     public function create(Request $request){
-        // デバッグ用ログ出力 後で消す
-        \Log::info('called create');
-
         $message = Chat::create([
             'user_id' => Auth::user()->id,
             'room_id' => 1, 
             'message' => $request->message
         ]);
-        \Log::info($message);
         event(new MessageCreated($message));
     }
 
