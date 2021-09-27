@@ -274,6 +274,10 @@ export default {
   margin-left: 70px;
 }
 
+.select-mode-switch {
+  margin-bottom: 30px;
+}
+
 .select-mode-item-wrapper {
   display: flex;
   flex-wrap: wrap;

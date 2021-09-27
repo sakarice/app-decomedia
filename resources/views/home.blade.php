@@ -48,14 +48,14 @@
     <section id="quick-use-and-warning">
         <p class="use-and-warning-message">
             <span style="color:red">
-                ※ルームに移動すると音楽・動画が流れます!<br>
+                ※ルームに移動すると音楽・動画が再生されます。<br>
             </span>
             イヤホンやヘッドフォンを付け、<br>
             音量に注意してお楽しみください。
         </p>
     </section>
     <section id="about-app">
-        <h2 id="about-app-header">
+        {{-- <h2 id="about-app-header">
             Roomとは?
         </h2>
         <p class="about-app-description">
@@ -65,7 +65,7 @@
             お気に入りの動画にBGMを付け加えたり、<br>
             音楽に背景を付けて簡易MVにしたり、<br>
             楽しみ方はあなた次第です。
-        </p>
+        </p> --}}
         {{-- <h2 id="how-to-use-header">
             使い方
         </h2>

@@ -175,8 +175,8 @@ class RoomUtil
       if(isset($request->img['id'])){
         if($request->img['id'] != 0){
           $img_id = $request->img['id'];
-          $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
-          $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
+          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+          $isDefaultImg = DefaultImg::where('id', $img_id)->exists();
           if($isOwnImg || $isDefaultImg){
             RoomImgController::store($room_id, $request);
           }
@@ -214,8 +214,8 @@ class RoomUtil
       if(isset($request->img['id'])){
         if($request->img['id'] != 0){
           $img_id = $request->img['id'];
-          $isOwnImg = UserOwnImgUtil::judgeIsOwnImg($img_id);
-          $isDefaultImg = DefaultImgUtil::judgeIsDefaultImg($img_id);
+          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+          $isDefaultImg = DefaultImg::where('id', $img_id)->exists();
           if($isOwnImg || $isDefaultImg){
             RoomImgController::update($room_id, $request);
           }
