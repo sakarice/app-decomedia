@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
 use App\Http\Controllers\RoomController;
-use App\Lib\EditRoom;
 use App\Lib\RoomUtil;
 use App\Models\User;
 use App\Models\Room;
@@ -15,21 +14,26 @@ use App\Models\RoomSetting;
 
 class SearchUtil
 {
-    //
+    // 検索結果に表示するroomの最大数
+    private static $maxGetNum = 20;
+
     public static function searchRooms(Request $request){
         $keyword = $request->input('keyword');
+        \Log::info($request);
+        \Log::info($request->has('input'));
+        \Log::info($request->has('keyword'));
+        \Log::info($keyword);
         $roomPreviewInfos = array();
-        $getNum = 20; // 取得するRoomプレビュー情報件数
         if(!empty($keyword)){
             $room_settings
              = RoomSetting::where('open_state', true)
                 ->where('name', 'LIKE', "%$keyword%")
-                ->take($getNum)
+                ->take(self::$maxGetNum)
                 ->get();
         } else {
             $room_settings = RoomSetting::where('open_state', true)
                 ->inRandomOrder()
-                ->take($getNum)
+                ->take(self::$maxGetNum)
                 ->get();
         }
         foreach($room_settings as $room_setting){
