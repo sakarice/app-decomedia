@@ -49,14 +49,12 @@ class RoomImgUtil
   // Room画像の情報を取得(Room作成、編集、閲覧時に使用)
   public static function getRoomImgData($room_id){
     $room_img_data;
-    if(RoomImg::where('room_id', $room_id)->exists()){
-      $room_img = RoomImg::where('room_id', $room_id)->first();
-      $img_url;
-      if($room_img->img_id != 0){
-        $img_url = RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url;
-      } else {
-        $img_url = "";
-      };
+    $img_url = "";
+    $room_img = RoomImg::where('room_id', $room_id)->first();
+    if($room_img->img_id == 0){
+      $room_img_data = RoomImgUtil::getEmptyRoomImgData();
+    } else {
+      $img_url = RoomImgUtil::getRoomImgModel($room_img->img_id, $room_img->img_type)->img_url;
       $room_img_data = [
           'id' => $room_img->img_id,
           'type' => $room_img->img_type,
@@ -66,11 +64,10 @@ class RoomImgUtil
           'opacity' => $room_img->opacity,
           'layer' => $room_img->img_layer,
       ];
-    } else {
-      $room_img_data = RoomImgUtil::getEmptyRoomImgData();
     };
     return $room_img_data;
-  }
+}
+
 
   // 6.update
   public static function updateRoomImgData($room_id, $request){

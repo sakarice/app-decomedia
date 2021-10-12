@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <title>Home</title>
+    <title>Decomedia</title>
 </head>
 <body>
     <section id="home-top">
@@ -18,7 +18,7 @@
         <div class="top-message-wrapper">
             <h2 class="top-message">聴いて、観て、繋がる</h2>
             <p class="sub-message">
-                好みの音楽や動画で構成されたRoomを通して<br>
+                好みの音楽や動画であなただけのルームを作り<br>
                 同じ感性の人々と繋がりましょう
             </p>
         </div>
@@ -39,7 +39,7 @@
         </div>
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
-            <span class="link-message">自分のRoomを作成する。</span>
+            <span class="link-message">自分のルームを作成する。</span>
             <a class="link-to-mypage" href="/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
         </div>
@@ -48,14 +48,14 @@
     <section id="quick-use-and-warning">
         <p class="use-and-warning-message">
             <span style="color:red">
-                ※ルームに移動すると音楽・動画が流れます!<br>
+                ※ルームに移動すると音楽・動画が再生されます。<br>
             </span>
             イヤホンやヘッドフォンを付け、<br>
             音量に注意してお楽しみください。
         </p>
     </section>
     <section id="about-app">
-        <h2 id="about-app-header">
+        {{-- <h2 id="about-app-header">
             Roomとは?
         </h2>
         <p class="about-app-description">
@@ -65,7 +65,7 @@
             お気に入りの動画にBGMを付け加えたり、<br>
             音楽に背景を付けて簡易MVにしたり、<br>
             楽しみ方はあなた次第です。
-        </p>
+        </p> --}}
         {{-- <h2 id="how-to-use-header">
             使い方
         </h2>

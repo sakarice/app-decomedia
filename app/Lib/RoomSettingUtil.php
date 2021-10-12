@@ -17,7 +17,7 @@ class RoomSettingUtil
 
   // 3.store // Room設定情報をDBに保存
   public static function saveRoomSettingData($room_id, $request){
-    $user_id = Auth::user()->id;
+    // $user_id = Auth::user()->id;
     $roomSetting = new RoomSetting();
     $roomSetting->room_id = $room_id;
     $roomSetting->open_state = $request->setting['isPublic'];

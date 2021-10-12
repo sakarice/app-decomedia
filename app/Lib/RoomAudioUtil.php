@@ -67,34 +67,34 @@ class RoomAudioUtil
     return $room_bgm_data;
   }
 
-  // 6.update
-  public static function updateRoomAudioData($room_id, $request){
-    
-    // 【関数】RoomAudioのレコード数をリクエストのAudio数と同じにする
-    function equalizeNumOfRoomAudioDataWithRequest($room_id, $request_num){
-      // 更新前のAudio数とリクエストされたAudio数を比較
-      $audioNumBeforeUpdate = RoomBgm::where('room_id', $room_id)->count();
-      $audioNumDiff = $request_num - $audioNumBeforeUpdate;
-      if($audioNumDiff > 0){
-        // 足りない分だけ空のレコードを追加
-        for($i=0; $i<$audioNumDiff; $i++){
-          RoomAudioUtil::addEmptyRoomAudioData($room_id);
-        }
-      } else if($audioNumDiff < 0){
-        // 多い分だけレコードを削除
-        for($i=0; $i<abs($audioNumDiff); $i++){
-          RoomBgm::where('room_id', $room_id)->orderBy('id', 'desc')->first()->delete();
-        }
+  // 【関数】RoomAudioのレコード数をリクエストのAudio数と同じにする
+  public static function equalizeNumOfRoomAudioDataWithRequest($room_id, $request_num){
+    // 更新前のAudio数とリクエストされたAudio数を比較
+    $audioNumBeforeUpdate = RoomBgm::where('room_id', $room_id)->count();
+    $audioNumDiff = $request_num - $audioNumBeforeUpdate;
+    if($audioNumDiff > 0){
+      // 足りない分だけ空のレコードを追加
+      for($i=0; $i<$audioNumDiff; $i++){
+        RoomAudioUtil::addEmptyRoomAudioData($room_id);
+      }
+    } else if($audioNumDiff < 0){
+      // 多い分だけレコードを削除
+      for($i=0; $i<abs($audioNumDiff); $i++){
+        RoomBgm::where('room_id', $room_id)->orderBy('id', 'desc')->first()->delete();
       }
     }
+  }
 
+
+  // 6.update
+  public static function updateRoomAudioData($room_id, $request){
     $roomAudios;
     $requestAudioNum;
     if(isset($request->audios[0])){ // リクエストにaudioがセットされている場合
       $roomAudios = $request->audios;
       $requestAudioNum = count($roomAudios);
       // DBのレコード数をリクエストのAudio数と同じにする
-      equalizeNumOfRoomAudioDataWithRequest($room_id, $requestAudioNum);
+      RoomAudioUtil::equalizeNumOfRoomAudioDataWithRequest($room_id, $requestAudioNum);
       // レコードを更新
       $roomBgms = RoomBgm::where('room_id', $room_id)->orderBy('id')->get();
       foreach($roomAudios as $index => $roomAudio){
@@ -103,15 +103,17 @@ class RoomAudioUtil
         $roomBgms[$index]->order_seq = $index + 1;
         $roomBgms[$index]->volume = $roomAudio['volume'];
         $roomBgms[$index]->isLoop = $roomAudio['isLoop'];
-        if($roomAudio['type'] == 2){ //2:ユーザのアップロードした音楽
-            $roomBgms[$index]->owner_user_id = Auth::user()->id;
-        } // 2以外はdefaultのオーディオ(=ユーザのものでない）ので、NULLで良い
+        if($roomAudio['type'] == 1){ //1:デフォルト 2:ユーザのアップロードしたもの
+          $roomBgms[$index]->owner_user_id = NULL;
+        } else if($roomAudio['type'] == 2){
+          $roomBgms[$index]->owner_user_id = Auth::user()->id;
+        }
         $roomBgms[$index]->save();
       }
     } else { // セットされていなかった場合
       $requestAudioNum = 0;
       // DBのRoomAudioのレコードを削除。更新処理は行わない。
-      equalizeNumOfRoomAudioDataWithRequest($room_id, $requestAudioNum);
+      RoomAudioUtil::equalizeNumOfRoomAudioDataWithRequest($room_id, $requestAudioNum);
     }
 
   }
