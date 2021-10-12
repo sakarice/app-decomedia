@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-    <title>Home</title>
+    <title>Decomedia</title>
 </head>
 <body>
     <section id="home-top">
@@ -18,7 +18,7 @@
         <div class="top-message-wrapper">
             <h2 class="top-message">聴いて、観て、繋がる</h2>
             <p class="sub-message">
-                好みの音楽や動画で構成されたRoomを通して<br>
+                好みの音楽や動画であなただけのルームを作り<br>
                 同じ感性の人々と繋がりましょう
             </p>
         </div>
@@ -39,7 +39,7 @@
         </div>
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
-            <span class="link-message">自分のRoomを作成する。</span>
+            <span class="link-message">自分のルームを作成する。</span>
             <a class="link-to-mypage" href="/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
         </div>
