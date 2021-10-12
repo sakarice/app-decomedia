@@ -1,7 +1,7 @@
 <template>
     <!-- HOME画面へのリンク付きロゴ -->
     <div class="header-content">
-        <a class="logo" href="/home">Room</a>
+        <a class="logo" href="/home">Decomedia</a>
     </div>
 </template>
 
