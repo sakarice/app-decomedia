@@ -50,7 +50,7 @@ class RoomUtilTest extends TestCase
 
         // $default_img = DefaultImg::factory()->create();
         // パターン3：Room画像も動画も設定されてなくて、Room音楽が設定されている
-        $room_id = Room::factory()->create()->id;
+        $room = Room::factory()->create();
         DefaultBgm::factory()->create();
         RoomBgm::factory()->create();
         $room_id = RoomImg::max('room_id');
@@ -63,6 +63,14 @@ class RoomUtilTest extends TestCase
             "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"
         );
 
+        // パターン2：Room画像が設定されてなくて、Room動画が設定されている
+        RoomMovie::factory()->create();
+        $room_id = RoomMovie::max('room_id');
+        $room_img_url = RoomUtil::getRoomPreviewImgUrl($room_id);
+        $this->assertEquals(
+            $room_img_url,
+            "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"
+        );
 
     }
 
