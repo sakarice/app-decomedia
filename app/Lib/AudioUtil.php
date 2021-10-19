@@ -32,7 +32,7 @@ class AudioUtil
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = pathinfo($fileDatas['name'],PATHINFO_FILENAME);
+    $targetModel->name = pathinfo($fileDatas['name'],PATHINFO_FILENAME); // 拡張子を除いたファイル名のみ取得
     $targetModel->audio_path = $fileDatas['path'];
     $targetModel->audio_url = $fileDatas['url'];
     $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];

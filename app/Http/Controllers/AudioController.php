@@ -34,8 +34,8 @@ class AudioController extends Controller
                 $fileDatas = array (
                         'owner_user_id' => $user_id,
                         'name' => $audio_name,
-                        'audio_path' => $audio_save_path,
-                        'audio_url' => $audio_save_url,
+                        'path' => $audio_save_path,
+                        'url' => $audio_save_url,
                         'thumbnail_path' => $thumbnail_save_path,
                         'thumbnail_url' => $thumbnail_save_url
                 );
