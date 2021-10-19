@@ -52698,7 +52698,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "header-content" }, [
       _c("a", { staticClass: "logo", attrs: { href: "/home" } }, [
-        _vm._v("Room")
+        _vm._v("Decomedia")
       ])
     ])
   }
