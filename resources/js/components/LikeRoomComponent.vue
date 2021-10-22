@@ -9,6 +9,7 @@
 <script>
 export default{
   props: [
+    'roomId',
   ],
   data : () => {
     return {
@@ -16,6 +17,14 @@ export default{
     }
   },
   methods : {
+    getLikeState(){
+      let url = '/user/likeState/'+this.roomId;
+      axios.get(url)
+      .then(response => {
+        this.isLikeRoom = response.data.isLikeRoom;
+      })
+      .catch(error => {})
+    },
     changeLikeStateOfViewAndDB(){
       // dataのいいね情報を更新が完了してから、DBも更新する
       // 下記Promise内はthisのスコープから外れてしまうため、thisを変数に収める
@@ -31,12 +40,7 @@ export default{
       })
     },
     changeLikeState() {
-      if(this.isLikeRoom){
-        this.isLikeRoom = false;
-      } else if(!this.isLikeRoom){
-        this.isLikeRoom = true;
-      }
-      console.log('changeLikeState');
+        this.isLikeRoom = !(this.isLikeRoom);
     },
     updateLikeStateInDB(){
       let url = '/room/like';
@@ -57,8 +61,14 @@ export default{
 
   },
   mounted : function() {
-  }
-  
+  },
+  watch : {
+    roomId: function(newVal,oldVal){ // 親コンポーネントのroomOwnerIdがdataにセットされるのを待つ
+      if(newVal > 0){
+        this.getLikeState();
+      }
+    }
+  },  
 
 }
 

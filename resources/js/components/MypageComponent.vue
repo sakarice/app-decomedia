@@ -3,7 +3,10 @@
     <!-- Room -->
     <!-- Roomの選択モード -->
     <div class="room-create-wrapper">
-      <a class="linkTo-createRoom" href="/room/create">Room作成</a>
+      <a class="linkTo-createRoom" href="/room/create">
+        <i class="fas fa-plus fa-3x room-create-icon"></i>
+      </a>
+      <span style="font-size:13px; color:darkslategrey">Room作成</span>
     </div>
     <!-- 〇選択モードの切り替えボタン -->
     <div class="select-mode-switch">
@@ -313,30 +316,31 @@ export default {
 
 
 .room-create-wrapper {
-  display: inline-block;
-  margin-bottom: 25px;
-}
-.room-create-wrapper:hover {
-  transform: translate(0.7px, 0.5px);
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
 }
 
 .linkTo-createRoom {
+  color: black;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Meiryo";
-  color: white;
-  background-color: rgb(25,95,150);
-  padding: 3px 20px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 4px grey;
 }
 
-.linkTo-createRoom:hover {
-  background-color: rgb(245,50,110);
-  box-shadow: 1.5px 1.5px 3px darkgrey;
-
+.room-create-icon {
+  color:white;
+  background-color: aquamarine;
+  margin-right: 10px;
+  padding: 6px 8px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px grey;
+  transition: 0.2s;
 }
+.room-create-icon:hover {
+  background-color: darkturquoise;
+  transform: scale(1.01);
+  box-shadow: 2px 2px 7px grey;
+}
+
 
 .preview-img {
   width: 100px;

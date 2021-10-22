@@ -40,10 +40,12 @@
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
-          <like-room-component>
+        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-if="isLogin && !(isMyRoom)">
+          <like-room-component
+          :roomId="roomSetting['id']">
           </like-room-component>
         </div>
+
 
         <!-- Room作成者情報 -->
         <div id="disp-room-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomOwnerInfo')">
@@ -51,6 +53,7 @@
           <!-- ユーザプロフィール -->
           <room-owner-info-component
           v-show="isShowModal['roomOwnerInfo']"
+          :isLogin="isLogin"
           :roomId="roomSetting['id']">
           </room-owner-info-component>
         </div>
@@ -97,7 +100,7 @@ export default {
     RoomMovie,
     RoomInfo,
     RoomOwnerInfo,
-    LikeRoom
+    LikeRoom,
   },
   props: [
     'isLogin',
@@ -156,6 +159,7 @@ export default {
     judgeIsMyRoom(){
       let room_id = JSON.parse(this.roomSettingData).id;
       let url = '/ajax/judgeIsMyRoom/' + room_id;
+      console.log(url);
       axios.get(url)
         .then(response =>{
           this.isMyRoom = response.data.isMyRoom;
@@ -235,9 +239,10 @@ export default {
     },
 
   },
-  created() {},
-  mounted() {
+  created() {
     if(this.isLogin){ this.judgeIsMyRoom(); }
+  },
+  mounted() {
     this.initImg();
     this.initMovie();
     this.initAudio();

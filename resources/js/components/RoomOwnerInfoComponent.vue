@@ -7,6 +7,7 @@
           <li>作成者</li>
         </ul>
       </nav>
+
       <!-- プロフィール -->
       <div class="account-modal-profile">
         <div class="avatar-wrapper">
@@ -21,20 +22,38 @@
           <textarea v-model="roomOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
         </div>
       </div>
+
+      <!-- フォローアイコン -->
+      <div id="disp-follow-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
+        <follow-component
+        v-if="isLogin && !(isMyRoom)"
+        :room-owner-id="roomOwnerInfo['id']">
+        </follow-component>
+      </div>
+
     </div>
   </transition>
 </template>
 
 <script>
 
+import Follow from './FollowComponent.vue';
+
   export default {
+    components : {
+      Follow,
+    },
     props : [
-      'roomId'
+      'roomId',
+      'isLogin',
     ],
     data : () => {
       return {
+        // isLogin : false,
+        isMyRoom : false,
         userId : 0,
         roomOwnerInfo : {
+          'id' : 0,
           'name' : "",
           'profile_img_url' : null,
           'aboutMe' : "",
@@ -43,6 +62,20 @@
       }
     },
     methods : {
+      checkIsLogin(){
+        axios.get('/checkIsLogin')
+        .then(res =>{
+          this.isLogin = res.data.isLogin;
+        }).catch(error=>{})
+      },
+      checkIsMyRoom(){
+        let url = '/ajax/judgeIsMyRoom/' + this.roomId;
+        axios.get(url)
+          .then(response =>{
+            this.isMyRoom = response.data.isMyRoom;
+          })
+          .catch(error => {})
+      },
       closeProfileModal(){
         this.$parent.isShowModal['roomOwnerInfo'] = false;
       },
@@ -53,6 +86,7 @@
         let url = '/user/roomOwner/profile/show/' + this.roomId;
         axios.get(url)
         .then(res => {
+          this.roomOwnerInfo['id'] = res.data.id;
           this.roomOwnerInfo['name'] = res.data.name;
           this.roomOwnerInfo['aboutMe'] = res.data.aboutMe;
         })
@@ -62,12 +96,15 @@
       },
 
     },
-    created(){},
+    created(){
+      // this.checkIsLogin();
+    },
     mounted: function(){},
     watch : {
       roomId: function(newVal,oldVal){ // 親コンポーネントのroomIdがdataにセットされるのを待つ
         if(newVal > 0){
           this.getProfile();
+          if(this.isLogin){this.checkIsMyRoom()};
         }
       }
     }
@@ -86,7 +123,7 @@
   box-shadow: 1px 1px 6px grey;
   z-index: 20;
   width: 200px;
-  height: 300px;
+  /* height: 350px; */
   border-radius: 5px;
   padding: 10px;
   background-color: white;
