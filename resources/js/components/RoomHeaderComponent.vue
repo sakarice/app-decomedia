@@ -109,7 +109,6 @@ export default {
   top: 0;
   z-index: 10;
   width: 100%;
-  padding: 10px 0;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
 
