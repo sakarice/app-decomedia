@@ -47,15 +47,12 @@
   color: white;
 }
 .room-create-trigger {
-  background-color: greenyellow;
   padding: 9px 10px;
   border-radius: 50%;
-  box-shadow: 1px 1px 3px green;
   transition: 0.13s;
 }
 .room-create-trigger:hover {
-  background-color: aquamarine;
-  color: black;
+  color: darkorange;
   cursor: pointer;
 }
 
