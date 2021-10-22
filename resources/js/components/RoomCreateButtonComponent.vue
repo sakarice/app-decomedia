@@ -43,7 +43,7 @@
 .room-create-trigger-wrapper {
   display: flex;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 20px;
   color: white;
 }
 .room-create-trigger {

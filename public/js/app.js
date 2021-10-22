@@ -2216,7 +2216,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -10710,7 +10709,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n@media screen and (max-width: 480px) {\n.action-button-wrapper[data-v-0a05e236] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.back-icon-wrapper[data-v-0a05e236] {\r\n    display: flex;\r\n    align-items: center;\r\n    margin: 0 20px;\r\n    color: white;\n}\n.back-icon[data-v-0a05e236] {\r\n    color: white;\n}\n.back-icon[data-v-0a05e236]:hover {\r\n    color: deepskyblue;\n}\n.back-icon-subtitle[data-v-0a05e236] {\r\n    font-size:12px;\r\n    color: grey;\r\n    margin-right: 7px;\n}\n@media screen and (max-width: 480px) {\n.back-icon-wrapper[data-v-0a05e236] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11082,7 +11081,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.room-create-trigger-wrapper[data-v-5e8c3959] {\r\n  display: flex;\r\n  align-items: center;\r\n  margin: 0 10px;\r\n  color: white;\n}\n.room-create-trigger[data-v-5e8c3959] {\r\n  background-color: greenyellow;\r\n  padding: 9px 10px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px green;\r\n  transition: 0.13s;\n}\n.room-create-trigger[data-v-5e8c3959]:hover {\r\n  background-color: aquamarine;\r\n  color: black;\r\n  cursor: pointer;\n}\n.create-trigger-subtitle[data-v-5e8c3959] {\r\n  font-size:12px;\r\n  color: grey;\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.room-create-trigger-wrapper[data-v-5e8c3959] {\r\n  display: flex;\r\n  align-items: center;\r\n  margin: 0 20px;\r\n  color: white;\n}\n.room-create-trigger[data-v-5e8c3959] {\r\n  background-color: greenyellow;\r\n  padding: 9px 10px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px green;\r\n  transition: 0.13s;\n}\n.room-create-trigger[data-v-5e8c3959]:hover {\r\n  background-color: aquamarine;\r\n  color: black;\r\n  cursor: pointer;\n}\n.create-trigger-subtitle[data-v-5e8c3959] {\r\n  font-size:12px;\r\n  color: grey;\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53015,7 +53014,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action-button-wrapper" }, [
+    return _c("div", { staticClass: "back-icon-wrapper" }, [
+      _c("span", { staticClass: "back-icon-subtitle" }, [_vm._v("戻る")]),
+      _vm._v(" "),
       _c(
         "a",
         {
@@ -53024,11 +53025,7 @@ var staticRenderFns = [
             onclick: "javascript:window.history.back(-1); return false;"
           }
         },
-        [
-          _c("button", { staticClass: "action-button cancel-button" }, [
-            _vm._v("\n      戻る\n    ")
-          ])
-        ]
+        [_c("i", { staticClass: "fas fa-long-arrow-alt-left fa-3x back-icon" })]
       )
     ])
   }
