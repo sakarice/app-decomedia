@@ -1,10 +1,11 @@
 <template>
 
-    <div class="room-create-trigger-wrapper">
-      <div class="room-create-trigger" @click="createRoom">
+    <div class="action-trigger-wrapper">
+      <div class="action-trigger create-icon-wrapper" @click="createRoom">
         <i class="fas fa-check fa-2x create-icon"></i>
       </div>
-      <span class="create-trigger-subtitle">作成</span>
+      <span class="action-trigger-subtitle">作成</span>
+
       <p v-show="message != ''">
         {{message}}
       </p>
@@ -26,9 +27,7 @@
       createRoom() {
         this.$emit('create-room');
       }
-
     },
-
   }
 
 
@@ -40,25 +39,11 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
 
-.room-create-trigger-wrapper {
-  display: flex;
-  align-items: center;
-  margin: 0 20px;
-  color: white;
-}
-.room-create-trigger {
-  padding: 9px 10px;
-  border-radius: 50%;
-  transition: 0.13s;
-}
-.room-create-trigger:hover {
+.create-icon-wrapper:hover {
   color: darkorange;
-  cursor: pointer;
 }
 
-.create-trigger-subtitle {
-  font-size:12px;
-  color: grey;
+.action-trigger-subtitle {
   margin-left: 7px;
 }
 

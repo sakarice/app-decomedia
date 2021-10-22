@@ -17,15 +17,17 @@
             @update-room="updateRoom">
             </room-update-button>
 
-            <a v-if="isShowLinkToShow" :href="roomShowLink(roomId)" class="action-button-wrapper link-to-show-room">
-                <button class="action-button">
-                    閲覧画面へ
-                </button>
+            <a v-if="isShowLinkToShow" :href="roomShowLink(roomId)" class="action-trigger-wrapper link-to-show-room">
+                <div class="action-trigger goto-show-room-icon-wrapper">
+                    <i class="fas fa-door-open fa-2x goto-show-room-icon "></i>
+                </div>
+                <span class="action-trigger-subtitle">閲覧画面へ</span>
             </a>
-            <a v-if="isShowLinkToEdit" :href="roomEditLink(roomId)" class="action-button-wrapper link-to-edit-room">
-                <button class="action-button">
-                    編集画面へ
-                </button>
+            <a v-if="isShowLinkToEdit" :href="roomEditLink(roomId)" class="action-trigger-wrapper link-to-edit-room">
+                <div class="action-trigger goto-edit-room-icon-wrapper">
+                    <i class="fas fa-pen fa-2x goto-edit-room-icon "></i>
+                </div>
+                <span class="action-trigger-subtitle">編集画面へ</span>
             </a>
 
         </div>
@@ -89,12 +91,7 @@ export default {
             return "/room/" + id + "/edit";
         },
     },
-    mounted(){},
-    // watch : {
-    //     roomName : function(){
 
-    //     },
-    // },
 }
 
 </script>
@@ -107,6 +104,7 @@ export default {
 .header {
   position: fixed;
   top: 0;
+  padding: 5px 0;
   z-index: 10;
   width: 100%;
   background-color: rgba(0, 0, 0, 1);
@@ -172,6 +170,11 @@ a:hover {
     color: white;
 }
 
+@media screen and (max-width:480px){
+    .header-content {
+        margin: 5px 0px;
+    }
+}
 
 
 </style>

@@ -4411,6 +4411,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -4857,6 +4858,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -4888,12 +4891,7 @@ __webpack_require__.r(__webpack_exports__);
     roomEditLink: function roomEditLink(id) {
       return "/room/" + id + "/edit";
     }
-  },
-  mounted: function mounted() {} // watch : {
-  //     roomName : function(){
-  //     },
-  // },
-
+  }
 });
 
 /***/ }),
@@ -5725,6 +5723,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -5734,24 +5734,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     updateRoom: function updateRoom() {
-      this.$emit('update-room'); // this.$emit('getFinishTime');
-      // const url = '/room/update';
-      // let room_datas = {
-      //   'img' : this.$parent.roomImg,
-      //   'audios' : this.$parent.roomAudios,
-      //   'movie' : this.$parent.roomMovie,
-      //   'setting' : this.$parent.roomSetting,
-      // }
-      // this.message = "room情報を更新中です...";
-      // axios.post(url, room_datas)
-      //   .then(response =>{
-      //     alert(response.data.message);
-      //     this.message = "";
-      //   })
-      //   .catch(error => {            
-      //     alert('failed!');
-      //     this.message = "";
-      //   })
+      this.$emit('update-room');
     }
   }
 });
@@ -10709,7 +10692,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.back-icon-wrapper[data-v-0a05e236] {\r\n    display: flex;\r\n    align-items: center;\r\n    margin: 0 20px;\r\n    color: white;\n}\n.back-icon[data-v-0a05e236] {\r\n    color: white;\n}\n.back-icon[data-v-0a05e236]:hover {\r\n    color: deepskyblue;\n}\n.back-icon-subtitle[data-v-0a05e236] {\r\n    font-size:12px;\r\n    color: grey;\r\n    margin-right: 7px;\n}\n@media screen and (max-width: 480px) {\n.back-icon-wrapper[data-v-0a05e236] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.back-icon[data-v-0a05e236] {\r\n    color: white;\n}\n.back-icon[data-v-0a05e236]:hover {\r\n    color: deepskyblue;\n}\n@media screen and (max-width: 480px) {\n.back-icon-wrapper[data-v-0a05e236] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10817,7 +10800,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-153bfd55] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-right[data-v-153bfd55] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-content-wrapper[data-v-153bfd55] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content-wrapper[data-v-153bfd55]:hover {\r\n  opacity: 1;\n}\r\n\r\n\r\n/* aタグ全体の設定 */\na[data-v-153bfd55] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-153bfd55]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-153bfd55] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-153bfd55] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width: 400px){\n.header-content[data-v-153bfd55] {\r\n        font-size: 0.8rem;\n}\n}\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.header[data-v-153bfd55] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 10px;\r\n  z-index: 2;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-right[data-v-153bfd55] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-content-wrapper[data-v-153bfd55] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content-wrapper[data-v-153bfd55]:hover {\r\n  opacity: 1;\n}\r\n\r\n\r\n/* aタグ全体の設定 */\na[data-v-153bfd55] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-153bfd55]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-153bfd55] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-153bfd55] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width: 400px){\n.header-content[data-v-153bfd55] {\r\n        font-size: 0.8rem;\n}\n}\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10841,7 +10824,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.header-content[data-v-befea2ae] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-befea2ae]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-befea2ae] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-befea2ae]:hover {\r\n    color: aquamarine;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.logo-wrapper[data-v-befea2ae]{\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.logo-wrapper[data-v-befea2ae]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-befea2ae] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-befea2ae]:hover {\r\n    color: aquamarine;\n}\n@media screen and (max-width:480px){\n.logo-wrapper[data-v-befea2ae] {\r\n        margin: 5px 0px;\n}\n.logo[data-v-befea2ae] {\r\n        font-size: 11px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11081,7 +11064,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.room-create-trigger-wrapper[data-v-5e8c3959] {\r\n  display: flex;\r\n  align-items: center;\r\n  margin: 0 20px;\r\n  color: white;\n}\n.room-create-trigger[data-v-5e8c3959] {\r\n  padding: 9px 10px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\n}\n.room-create-trigger[data-v-5e8c3959]:hover {\r\n  color: darkorange;\r\n  cursor: pointer;\n}\n.create-trigger-subtitle[data-v-5e8c3959] {\r\n  font-size:12px;\r\n  color: grey;\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-5e8c3959]:hover {\r\n  color: darkorange;\n}\n.action-trigger-subtitle[data-v-5e8c3959] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11138,7 +11121,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-7b30f9fa] {\r\n        margin: 5px 0px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11309,7 +11292,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 10px 5px 10px;\r\n  opacity: 0.8;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 0 0.5px 10px 0.5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 2px 5px;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 95%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 13px;\r\n    color: rgba(100,100,100,1);\n}\n.link-title[data-v-63cb9c0a] {\r\n    font-size: 17px;\n}\n.show-room[data-v-63cb9c0a] {\r\n    display: none;\n}\n.edit-room[data-v-63cb9c0a] {\r\n    width: 100%;\n}\n.del-icon[data-v-63cb9c0a] {\r\n    top: -8px;\r\n    right: -5px;\r\n    font-size: 1.2em;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n    top: 3px;\r\n    left: 3px;\r\n    transform: scale(2);\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n    font-size: 30px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n  width: 100%;\r\n  padding-left: 0;\r\n  max-width: 1200px;\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-63cb9c0a] {\r\n  list-style: none;\r\n  width: 20%;\r\n  padding: 5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n  position: relative;\r\n  text-align: center;\r\n  margin: 0 10px 5px 10px;\r\n  opacity: 0.8;\r\n  transition: 0.2s;\n}\n.preview-room[data-v-63cb9c0a]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room:hover .cover-menu[data-v-63cb9c0a] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room:hover .del-icon[data-v-63cb9c0a] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-thumbnail-wrapper[data-v-63cb9c0a] {\r\n  position: relative;\r\n  width: 100%;\r\n  height: 0px;\r\n  padding: 0 0 100%;\n}\n.room-thumbnail[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  -o-object-fit: cover;\r\n     object-fit: cover;\n}\n.cover-menu[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-63cb9c0a] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-63cb9c0a] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-63cb9c0a]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-63cb9c0a] {\r\n  color: aqua;\n}\n.del-icon[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-63cb9c0a]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-63cb9c0a]:hover{\r\n  opacity: 0.8;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-63cb9c0a] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-title[data-v-63cb9c0a] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n/* タブレット、スマホ */\n@media screen and (max-width: 780px) {\nli[data-v-63cb9c0a] {\r\n    width: 31%;\r\n    padding: 0 0.5px 10px 0.5px;\n}\n.preview-room[data-v-63cb9c0a] {\r\n    margin: 0 5px 2px 5px;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 18px;\r\n    overflow-wrap: break-word;\n}\n}\r\n\r\n/* スマホのみ */\n@media screen and (max-width: 420px) {\n.room-wrapper[data-v-63cb9c0a] {\r\n    width: 95%;\n}\n.room-title[data-v-63cb9c0a] {\r\n    font-size: 13px;\r\n    color: rgba(100,100,100,1);\n}\n.link-title[data-v-63cb9c0a] {\r\n    font-size: 17px;\n}\n.show-room[data-v-63cb9c0a] {\r\n    display: none;\n}\n.edit-room[data-v-63cb9c0a] {\r\n    width: 100%;\n}\n.del-icon[data-v-63cb9c0a] {\r\n    top: -8px;\r\n    right: -5px;\r\n    font-size: 1.2em;\n}\n.room-select-check[data-v-63cb9c0a] {\r\n    top: 3px;\r\n    left: 3px;\r\n    transform: scale(2);\n}\n.selected-order-num[data-v-63cb9c0a]{\r\n    font-size: 30px;\n}\n}\r\n\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11363,7 +11346,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-67bcec6c]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-67bcec6c] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11489,7 +11472,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin: 0 20px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:12px;\r\n  color: grey;\r\n  margin: 0 7px;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53014,20 +52997,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "back-icon-wrapper" }, [
-      _c("span", { staticClass: "back-icon-subtitle" }, [_vm._v("戻る")]),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          attrs: {
-            href: "#",
-            onclick: "javascript:window.history.back(-1); return false;"
-          }
-        },
-        [_c("i", { staticClass: "fas fa-long-arrow-alt-left fa-3x back-icon" })]
-      )
-    ])
+    return _c(
+      "div",
+      { staticClass: "action-trigger-wrapper back-icon-wrapper" },
+      [
+        _c(
+          "a",
+          {
+            staticClass: "action-trigger",
+            attrs: {
+              href: "#",
+              onclick: "javascript:window.history.back(-1); return false;"
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fas fa-long-arrow-alt-left fa-2x back-icon"
+            })
+          ]
+        ),
+        _vm._v(" "),
+        _c("span", { staticClass: "action-trigger-subtitle" }, [_vm._v("戻る")])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -53669,7 +53661,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header-content" }, [
+    return _c("div", { staticClass: "header-content logo-wrapper" }, [
       _c("a", { staticClass: "logo", attrs: { href: "/home" } }, [
         _vm._v("Decomedia")
       ])
@@ -55041,14 +55033,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "room-create-trigger-wrapper" }, [
+  return _c("div", { staticClass: "action-trigger-wrapper" }, [
     _c(
       "div",
-      { staticClass: "room-create-trigger", on: { click: _vm.createRoom } },
+      {
+        staticClass: "action-trigger create-icon-wrapper",
+        on: { click: _vm.createRoom }
+      },
       [_c("i", { staticClass: "fas fa-check fa-2x create-icon" })]
     ),
     _vm._v(" "),
-    _c("span", { staticClass: "create-trigger-subtitle" }, [_vm._v("作成")]),
+    _c("span", { staticClass: "action-trigger-subtitle" }, [_vm._v("作成")]),
     _vm._v(" "),
     _c(
       "p",
@@ -55352,12 +55347,14 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "action-button-wrapper link-to-show-room",
+                staticClass: "action-trigger-wrapper link-to-show-room",
                 attrs: { href: _vm.roomShowLink(_vm.roomId) }
               },
               [
-                _c("button", { staticClass: "action-button" }, [
-                  _vm._v("\n                閲覧画面へ\n            ")
+                _vm._m(0),
+                _vm._v(" "),
+                _c("span", { staticClass: "action-trigger-subtitle" }, [
+                  _vm._v("閲覧画面へ")
                 ])
               ]
             )
@@ -55367,12 +55364,14 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "action-button-wrapper link-to-edit-room",
+                staticClass: "action-trigger-wrapper link-to-edit-room",
                 attrs: { href: _vm.roomEditLink(_vm.roomId) }
               },
               [
-                _c("button", { staticClass: "action-button" }, [
-                  _vm._v("\n                編集画面へ\n            ")
+                _vm._m(1),
+                _vm._v(" "),
+                _c("span", { staticClass: "action-trigger-subtitle" }, [
+                  _vm._v("編集画面へ")
                 ])
               ]
             )
@@ -55393,7 +55392,28 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "action-trigger goto-show-room-icon-wrapper" },
+      [_c("i", { staticClass: "fas fa-door-open fa-2x goto-show-room-icon " })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "action-trigger goto-edit-room-icon-wrapper" },
+      [_c("i", { staticClass: "fas fa-pen fa-2x goto-edit-room-icon " })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -56369,15 +56389,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "action-button-wrapper" }, [
+  return _c("div", { staticClass: "action-trigger-wrapper" }, [
     _c(
-      "button",
+      "div",
       {
-        staticClass: "action-button room-update-button",
+        staticClass: "action-trigger update-icon-wrapper",
         on: { click: _vm.updateRoom }
       },
-      [_vm._v("\n    更新\n  ")]
+      [_c("i", { staticClass: "fas fa-check fa-2x update-icon" })]
     ),
+    _vm._v(" "),
+    _c("span", { staticClass: "action-trigger-subtitle" }, [_vm._v("更新")]),
     _vm._v(" "),
     _c(
       "p",
