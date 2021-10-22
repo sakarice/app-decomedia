@@ -1,40 +1,34 @@
 <template>
   <div class="mypage-content-wrapper">
     <!-- Room -->
-    <!-- Roomの選択モード -->
-    <div class="room-create-wrapper">
-      <a class="linkTo-createRoom" href="/room/create">
-        <i class="fas fa-plus fa-3x room-create-icon"></i>
-      </a>
-      <span style="font-size:13px; color:darkslategrey">Room作成</span>
-    </div>
-    <!-- 〇選択モードの切り替えボタン -->
-    <div class="select-mode-switch">
-      <button id="change-select-mode" class="action-button mypage-button" @click="toggleSelectMode">
-        {{selectModeButtonMessage}}
-      </button>
-    </div>
-    <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
-      <!-- 〇選択したRoom削除ボタン -->
-      <selected-room-delete-button-component
-      class="select-mode-item"
-      v-show="isSelectMode">
-      </selected-room-delete-button-component>
-
-      <!-- 〇選択をすべて解除するボタン -->
-      <div class="select-mode-item" v-show="isSelectMode">
-        <button class="action-button mypage-button for-pc-tablet" @click="unCheckAllRoom">
-          全ての選択を解除
-        </button>
-        <i class="far fa-square fa-2x for-mobile" @click="unCheckAllRoom"></i>
-        <span class="select-mode-description for-mobile">リセット</span>
+    <div class="mypage-action-menu">
+      <!-- Room作成 -->
+      <div class="mypage-action-item room-create-wrapper">
+        <a class="linkTo-createRoom" href="/room/create">
+          <i class="fas fa-plus fa-3x room-create-icon"></i>
+        </a>
+        <span class="action-item-subtitle">Room作成</span>
       </div>
+      <!-- Roomの選択モード -->
+      <!-- 〇選択モードの切り替えボタン -->
+      <div class="mypage-action-item select-mode-switch">
+        <i id="change-select-mode" class="fas fa-hand-point-up fa-3x" @click="toggleSelectMode"></i>
+        <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+      </div>
+      <!-- 〇選択したRoom削除ボタン -->
+      <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
+        <selected-room-delete-button-component
+        class="mypage-action-item select-mode-item"
+        v-show="isSelectMode">
+        </selected-room-delete-button-component>
 
-      <!-- 〇選択したRoomからRoomリストを作成するボタン -->
-      <!-- <room-list-create-button-component
-      class="select-mode-item"
-      v-show="isSelectMode">
-      </room-list-create-button-component> -->
+        <!-- 〇選択をすべて解除するボタン -->
+        <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
+          <i class="far fa-square fa-2x select-uncheck-icon" @click="unCheckAllRoom"></i>
+          <span class="action-item-subtitle">リセット</span>
+        </div>
+      </div>
+      
     </div>
 
     <!-- 作成済みRoomのプレビュー -->
@@ -75,28 +69,7 @@
         @changeIsCheckedRoom="changeIsCheckedLikedRoom"
         ref="likedRoomPreview">
       </room-preview-component>
-    </section>
-
-    <!-- Roomリスト -->
-    <!-- 作成済みRoomリストのプレビュー -->
-    <!-- <section v-show="isShowCreatedRoomListPreview" class="mypage-section created-room-list"> -->
-      <!-- 説明やもっと見るの表示 -->
-      <!-- <div class="section-top-wrapper">
-        <h3 class="section-title">作成済みRoomリスト</h3>
-        <span class="view-more" @click="addCreatedRoomListPreviewInfos">
-          もっと見る
-        </span>
-      </div> -->
-      <!-- {{-- 作成済みroom一覧 --}} -->
-      <!-- <room-list-preview-component
-        :first-preview-num="3"
-        :is-show-cover="isShowCoverOnCreateRoomList"
-        :is-select-mode="isSelectMode"
-        ref="createdRoomListPreview">
-      </room-list-preview-component>
-    </section> -->
-
-      
+    </section>      
 
     <mypage-menu-bar-component>
     </mypage-menu-bar-component>
@@ -272,27 +245,43 @@ export default {
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
 
-
 .mypage-content-wrapper {
   margin-left: 70px;
 }
 
-.select-mode-switch {
+.mypage-action-menu {
+  display: flex;
+  align-items: flex-end;
   margin-bottom: 30px;
+}
+
+.mypage-action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 30px;
+}
+.mypage-action-item:hover {
+  cursor: pointer;
+}
+
+#change-select-mode {
+  color: darkgrey;
+  transition: 0.2s;
+}
+#change-select-mode:hover {
+  color: black;
 }
 
 .select-mode-item-wrapper {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 
 .select-mode-description {
   font-size: 10px;
   margin-top: 7px;
-}
-
-.select-mode-item {
-  margin: 0 10px 10px 0;
 }
 
 .mypage-section {
@@ -314,22 +303,16 @@ export default {
   font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
 }
 
-
-.room-create-wrapper {
-  display: flex;
-  align-items: center;
-  margin-bottom: 35px;
-}
-
-.linkTo-createRoom {
+.select-uncheck-icon {
   color: black;
-  text-decoration: none;
+}
+.select-uncheck-icon:hover {
+  color: blue;
 }
 
 .room-create-icon {
   color:white;
   background-color: aquamarine;
-  margin-right: 10px;
   padding: 6px 8px;
   border-radius: 50%;
   box-shadow: 1px 1px 3px grey;
@@ -339,6 +322,11 @@ export default {
   background-color: darkturquoise;
   transform: scale(1.01);
   box-shadow: 2px 2px 7px grey;
+}
+.action-item-subtitle {
+  margin-top: 5px;
+  font-size:11px;
+  color:dimgrey;
 }
 
 
@@ -364,9 +352,6 @@ export default {
 @media screen and (min-width: 481px) {
   .for-mobile {
     display: none;
-  }
-  .select-mode-item-wrapper {
-    margin: 12px 0;
   }
  
 }
@@ -396,6 +381,7 @@ export default {
     justify-content: center;
     align-items: center;
   }
+
   .mypage-content-wrapper {
     margin-left: 20px;
   }
@@ -406,11 +392,10 @@ export default {
   .is-black {
     background-color: black;
   }
-  .linkTo-createRoom {
-    font-size: 14px;
-    padding: 6px 18px;
-  }
-  
+  .select-uncheck-icon {
+    color: white;
+  }  
+
 }
 
 </style>
