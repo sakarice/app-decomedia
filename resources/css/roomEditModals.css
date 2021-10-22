@@ -69,11 +69,9 @@
 
 
 .close-icon-wrapper{
-  padding: 10px;
+  padding: 5px;
   border-top-right-radius: 50%;
   border-bottom-right-radius: 50%;
-  background-color: white;
-  box-shadow: 1px 1px 1px 1px grey;
 }
 
 #close-modal-icon {

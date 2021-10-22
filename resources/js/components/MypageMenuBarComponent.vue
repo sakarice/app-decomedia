@@ -49,7 +49,6 @@ export default {
             this.$parent.isShowCreatedRoomPreview = true;
             this.$parent.isShowLikedRoomPreview = true;
             this.$parent.isShowCreatedRoomListPreview = true;
-        
         },
         switchToCreatedRoomPreview(){
             this.$parent.isShowCreatedRoomPreview = true;

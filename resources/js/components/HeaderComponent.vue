@@ -79,9 +79,9 @@ export default {
 .header {
   position: fixed;
   top: 0;
+  padding: 10px;
   z-index: 2;
   width: 100%;
-  padding: 10px 0;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
 

@@ -128,6 +128,7 @@ li {
   text-align: center;
   margin: 0 10px 5px 10px;
   opacity: 0.8;
+  transition: 0.2s;
 }
 
 .preview-room:hover {

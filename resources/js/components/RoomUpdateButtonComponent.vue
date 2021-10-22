@@ -1,9 +1,11 @@
 <template>
 
-    <div class="action-button-wrapper">
-      <button class="action-button room-update-button" @click="updateRoom">
-        更新
-      </button>
+    <div class="action-trigger-wrapper">
+      <div class="action-trigger update-icon-wrapper" @click="updateRoom">
+        <i class="fas fa-check fa-2x update-icon"></i>
+      </div>
+      <span class="action-trigger-subtitle">更新</span>
+      
       <p v-show="message != ''">
         {{message}}
       </p>
@@ -24,24 +26,6 @@
     methods : {
       updateRoom() {
         this.$emit('update-room');
-        // this.$emit('getFinishTime');
-        // const url = '/room/update';
-        // let room_datas = {
-        //   'img' : this.$parent.roomImg,
-        //   'audios' : this.$parent.roomAudios,
-        //   'movie' : this.$parent.roomMovie,
-        //   'setting' : this.$parent.roomSetting,
-        // }
-        // this.message = "room情報を更新中です...";
-        // axios.post(url, room_datas)
-        //   .then(response =>{
-        //     alert(response.data.message);
-        //     this.message = "";
-        //   })
-        //   .catch(error => {            
-        //     alert('failed!');
-        //     this.message = "";
-        //   })
       }
 
     },
@@ -56,5 +40,13 @@
 
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
+
+.update-icon-wrapper:hover {
+  color: darkorange;
+}
+
+.update-trigger-subtitle {
+  margin-left: 7px;
+}
 
 </style>

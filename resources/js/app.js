@@ -41,6 +41,11 @@ Vue.component('room-header-component', require('./components/RoomHeaderComponent
 Vue.component('mypage-menu-bar-component', require('./components/MypageMenuBarComponent.vue').default);
 // マイページ
 Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
+// ユーザページ
+Vue.component('user-page-component', require('./components/UserPageComponent.vue').default);
+// フォロー/フォロワー一覧
+Vue.component('follow-and-follower-component', require('./components/FollowAndFollowerComponent.vue').default);
+
 // ユーザプロフィール
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
 
@@ -61,6 +66,8 @@ Vue.component('room-edit-component', require('./components/RoomEditComponent.vue
 Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);
 // Roomへのいいねアイコンコンポーネント
 Vue.component('like-room-component', require('./components/LikeRoomComponent.vue').default);
+// Room作成者フォローコンポーネント
+Vue.component('follow-component', require('./components/FollowComponent.vue').default);
 
 
 

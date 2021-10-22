@@ -1,11 +1,10 @@
 <template>
 
-  <div class="action-button-wrapper">
-    <a href="#" onclick="javascript:window.history.back(-1); return false;">
-      <button class="action-button cancel-button">
-        戻る
-      </button>
+  <div class="action-trigger-wrapper back-icon-wrapper">
+    <a class="action-trigger" href="#" onclick="javascript:window.history.back(-1); return false;">
+      <i class="fas fa-long-arrow-alt-left fa-2x back-icon"></i>
     </a>
+    <span class="action-trigger-subtitle">戻る</span>
   </div>
 
 </template>
@@ -18,7 +17,6 @@
     },
 
     methods : {},
-
   }
 
 </script>
@@ -29,8 +27,16 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
 
+  .back-icon {
+    color: white;
+  }
+  .back-icon:hover {
+    color: deepskyblue;
+  }
+
+
   @media screen and (max-width: 480px) {
-    .action-button-wrapper {
+    .back-icon-wrapper {
       display: none;
     }
   }

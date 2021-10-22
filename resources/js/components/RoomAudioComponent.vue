@@ -311,9 +311,15 @@
   #play-all-icon {
     color: green;
   }
+  #play-all-icon:hover {
+    cursor: pointer;
+  }
   #finish-all-icon {
     color: lightgrey;
     margin-top: 5px;
+  }
+  #finish-all-icon:hover {
+    cursor: pointer;
   }
 
   /* audio */

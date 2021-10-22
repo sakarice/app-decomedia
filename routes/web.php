@@ -24,6 +24,8 @@ Auth::routes();
 // ★ログイン認証必須ページ
 // ミドルウェアによるログインチェックをかませる
 Route::middleware('auth')->group(function(){
+    // 入っているRoomが自分のRoomかチェック
+        Route::post('/checkIsMyRoom', 'App\Http\Controllers\Ajax\Lib\RoomUtilAjax@judgeIsMyRoom');
     // マイページ
         Route::get('/mypage', 'App\Http\Controllers\MypageController@view');
         Route::get('/mypage/profile', 'App\Http\Controllers\MypageController@profile');
@@ -49,8 +51,14 @@ Route::middleware('auth')->group(function(){
         Route::get('/room/{id}/edit', 'App\Http\Controllers\RoomController@edit');
         Route::post('/room/update', 'App\Http\Controllers\RoomController@update');
         Route::post('/room/delete', 'App\Http\Controllers\RoomController@destroy');
-    // Roomへ「いいね」する
+    // 入ったRoomをいいねしているかチェックする
+        Route::get('/user/likeState/{room_id}', 'App\Lib\LikeRoomUtil@getLikeState');
+    // Roomへ、いいね/いいね解除する
         Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
+    // 自分が入ったRoomの作成者をフォローしているかチェックする
+        Route::get('/user/followState/{room_owner_id}', 'App\Lib\FollowUtil@getFollowState');
+    // ルーム作成者をフォロー/フォロー解除する
+        Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
 
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');
@@ -70,6 +78,12 @@ Route::middleware('auth')->group(function(){
 });
 
 // ★ログイン認証不要ページ
+// ユーザがログインしているかチェック
+    Route::get('/checkIsLogin', function(){
+        return ['isLogin' => Auth::check()];
+    });
+
+
 // Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -1,6 +1,6 @@
 <template>
     <!-- HOME画面へのリンク付きロゴ -->
-    <div class="header-content">
+    <div class="header-content logo-wrapper">
         <a class="logo" href="/home">Decomedia</a>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 
 <style scoped>
 
-.header-content {
+.logo-wrapper{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +25,7 @@ export default {
     opacity: 0.9;
 }
 
-.header-content:hover {
+.logo-wrapper:hover {
   opacity: 1;
 }
 
@@ -36,6 +36,16 @@ a {
 }
 a:hover {
     color: aquamarine;
+}
+
+@media screen and (max-width:480px){
+    .logo-wrapper {
+        margin: 5px 0px;
+    }
+    .logo {
+        font-size: 11px;
+    }
+    
 }
 
 

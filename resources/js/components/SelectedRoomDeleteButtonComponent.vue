@@ -1,10 +1,7 @@
 <template>
   <div class="action-button-wrapper">
-    <button class="action-button selected-room-delete-button for-pc-tablet" @click="deleteSelectedRoom">
-      選択したRoomを削除
-    </button>
-    <i class="fas fa-trash fa-2x for-mobile" @click="deleteSelectedRoom"></i>
-    <span class="select-mode-description for-mobile">削除</span>
+    <i class="fas fa-trash fa-2x room-delete-icon" @click="deleteSelectedRoom"></i>
+    <span class="action-item-subtitle">削除</span>
     <p v-show="deleteSelectedRoomMessage">
       {{deleteSelectedRoomMessage}}
     </p>
@@ -83,9 +80,14 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
 
-  .select-mode-description {
-    font-size: 10px;
-    margin-top: 7px;
-  }
+.room-delete-icon:hover {
+  color: red;
+}
+
+.action-item-subtitle {
+  margin-top: 5px;
+  font-size:11px;
+  color:dimgrey;  
+}
 
 </style>

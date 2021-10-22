@@ -12,6 +12,15 @@ use App\Models\UserLikeRoom;
 class LikeRoomUtil
 {
   
+    // 自分が入ったRoomの作成者をフォローしているか確認する。
+    public static function getLikeState($room_id){
+      $user_id = Auth::user()->id;
+      $isLike = UserLikeRoom::where('user_id',$user_id)->where('room_id',$room_id)->exists();
+      return [
+        'isLike' => $isLike,
+      ];
+    }
+
   // (ログイン中の)ユーザ情報を取得(id,ユーザ名,プロフィール文)
   public static function updateLikeState(Request $request){
       $isLike = $request->isLike;
