@@ -24,7 +24,7 @@
 
         <!-- 〇選択をすべて解除するボタン -->
         <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
-          <i class="far fa-square fa-2x select-uncheck-icon" @click="unCheckAllRoom"></i>
+          <i class="far fa-square fa-3x select-uncheck-icon" @click="unCheckAllRoom"></i>
           <span class="action-item-subtitle">リセット</span>
         </div>
       </div>
@@ -375,11 +375,15 @@ export default {
     justify-content: center;
   }
   .select-mode-item {
-    margin: 2px 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
+
+  .mypage-action-menu {
+    margin-bottom: 15px;
+  }
+
+  .mypage-action-item {
+    margin-right: 15px;
+    transform: scale(0.7);
   }
 
   .mypage-content-wrapper {

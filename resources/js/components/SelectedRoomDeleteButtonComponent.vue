@@ -1,6 +1,6 @@
 <template>
   <div class="action-button-wrapper">
-    <i class="fas fa-trash fa-2x room-delete-icon" @click="deleteSelectedRoom"></i>
+    <i class="fas fa-trash fa-3x room-delete-icon" @click="deleteSelectedRoom"></i>
     <span class="action-item-subtitle">削除</span>
     <p v-show="deleteSelectedRoomMessage">
       {{deleteSelectedRoomMessage}}
