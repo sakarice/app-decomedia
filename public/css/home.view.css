@@ -67,7 +67,7 @@ p {
   width: auto;
   padding: 2% 8%;
   background-color: rgba(247,247,247,0.2);
-  box-shadow: 0 0 50px lightgrey;
+  box-shadow: 0 0 8px lightgrey;
 }
 
 .about-app {

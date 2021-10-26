@@ -120,6 +120,7 @@ export default {
 li {
   list-style: none;
   width: 24%;
+  margin-bottom: 20px;
 }
 
 .preview-room {
@@ -257,6 +258,7 @@ li {
 .room-title {
   text-align: center;
   font-size: 25px;
+  line-height: 1rem;
   margin: 0 0;
   font-family: 'Yu Mincho';
 }
@@ -265,8 +267,8 @@ li {
 /* タブレット、スマホ */
 @media screen and (max-width: 780px) {
   li {
-    width: 32%;
-    padding: 0 0.5px 10px 0.5px;
+    width: 33%;
+    margin-bottom: 10px;
   }
   .preview-room {
     margin: 0 2px 2px 2px;
