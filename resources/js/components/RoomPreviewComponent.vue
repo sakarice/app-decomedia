@@ -119,14 +119,14 @@ export default {
 
 li {
   list-style: none;
-  width: 20%;
-  padding: 5px;
+  width: 24%;
+  margin-bottom: 20px;
 }
 
 .preview-room {
   position: relative;
   text-align: center;
-  margin: 0 10px 5px 10px;
+  margin: 0 3px 5px 3px;
   opacity: 0.8;
   transition: 0.2s;
 }
@@ -258,6 +258,7 @@ li {
 .room-title {
   text-align: center;
   font-size: 25px;
+  line-height: 1rem;
   margin: 0 0;
   font-family: 'Yu Mincho';
 }
@@ -266,11 +267,11 @@ li {
 /* タブレット、スマホ */
 @media screen and (max-width: 780px) {
   li {
-    width: 31%;
-    padding: 0 0.5px 10px 0.5px;
+    width: 33%;
+    margin-bottom: 10px;
   }
   .preview-room {
-    margin: 0 5px 2px 5px;
+    margin: 0 2px 2px 2px;
   }
   .room-title {
     font-size: 18px;
