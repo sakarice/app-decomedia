@@ -26,7 +26,7 @@
       :csrf="{{json_encode(csrf_token())}}">
       </mypage-menu-bar-component> --}}
 
-      <section style="height:100px"></section>
+      <section style="height:90px"></section>
 
       <mypage-component
         :created-room-preview-infos-from-parent='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'

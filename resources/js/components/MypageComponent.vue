@@ -1,5 +1,8 @@
 <template>
   <div class="mypage-content-wrapper">
+    <!-- profile -->
+    <user-page-profile></user-page-profile>
+
     <!-- Room -->
     <div class="mypage-action-menu">
       <!-- Room作成 -->
@@ -24,7 +27,7 @@
 
         <!-- 〇選択をすべて解除するボタン -->
         <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
-          <i class="far fa-square fa-2x select-uncheck-icon" @click="unCheckAllRoom"></i>
+          <i class="far fa-square fa-3x select-uncheck-icon" @click="unCheckAllRoom"></i>
           <span class="action-item-subtitle">リセット</span>
         </div>
       </div>
@@ -88,6 +91,7 @@ import RoomListPreview from './RoomListPreviewComponent.vue';
 import MypageMenuBar from './MypageMenuBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
+import UserPageProfile from './UserPageProfileComponent.vue';
 
 export default {
   components : {
@@ -96,6 +100,7 @@ export default {
     MypageMenuBar,
     RoomListCreateButton,
     SelectedRoomDeleteButton,
+    UserPageProfile,
   },
   props : [
     'createdRoomPreviewInfosFromParent',
@@ -247,6 +252,8 @@ export default {
 
 .mypage-content-wrapper {
   margin-left: 70px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .mypage-action-menu {
@@ -375,11 +382,15 @@ export default {
     justify-content: center;
   }
   .select-mode-item {
-    margin: 2px 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  }
+
+  .mypage-action-menu {
+    margin-bottom: 15px;
+  }
+
+  .mypage-action-item {
+    margin-right: 15px;
+    transform: scale(0.7);
   }
 
   .mypage-content-wrapper {
