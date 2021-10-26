@@ -1,5 +1,8 @@
 <template>
   <div class="mypage-content-wrapper">
+    <!-- profile -->
+    <user-page-profile></user-page-profile>
+
     <!-- Room -->
     <div class="mypage-action-menu">
       <!-- Room作成 -->
@@ -88,6 +91,7 @@ import RoomListPreview from './RoomListPreviewComponent.vue';
 import MypageMenuBar from './MypageMenuBarComponent.vue';
 import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
 import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
+import UserPageProfile from './UserPageProfileComponent.vue';
 
 export default {
   components : {
@@ -96,6 +100,7 @@ export default {
     MypageMenuBar,
     RoomListCreateButton,
     SelectedRoomDeleteButton,
+    UserPageProfile,
   },
   props : [
     'createdRoomPreviewInfosFromParent',
@@ -247,6 +252,8 @@ export default {
 
 .mypage-content-wrapper {
   margin-left: 70px;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .mypage-action-menu {

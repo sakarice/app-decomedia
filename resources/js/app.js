@@ -48,6 +48,9 @@ Vue.component('follow-and-follower-component', require('./components/FollowAndFo
 
 // ユーザプロフィール
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
+// ユーザプロフィール(ユーザページ表示用)
+Vue.component('user-page-profile-component', require('./components/UserPageProfileComponent.vue').default);
+
 
 // room一覧表示用コンポーネント
 Vue.component('room-preview-component', require('./components/RoomPreviewComponent.vue').default);
