@@ -32,7 +32,8 @@
       </div>
       <p class="room-title">{{roomPreviewInfo['name']}}</p>
     </li>
-  </ul>
+  </ul>  
+
 </template>
 
 <script>
@@ -86,9 +87,15 @@ export default {
         return true;
       }
     },
+    getMessageFromVuex(){
+      // return this.$store.state.storeA.message;
+      return this.$store.getters.getMessage;
+    }
 
   },
-  mounted : function(){},
+  mounted : function(){
+    console.log(this.getMessageFromVuex());
+  },
   watch : {
   },
   computed : {
@@ -257,10 +264,11 @@ li {
 
 .room-title {
   text-align: center;
-  font-size: 25px;
-  line-height: 1rem;
+  font-size: 18px;
+  line-height: 1.4rem;
   margin: 0 0;
   font-family: 'Yu Mincho';
+  overflow-wrap: break-word;
 }
 
 
@@ -275,7 +283,6 @@ li {
   }
   .room-title {
     font-size: 18px;
-    overflow-wrap: break-word;
   }
   
 }

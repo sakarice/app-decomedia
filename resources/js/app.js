@@ -4,11 +4,16 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import Vue from 'vue';
+import store from './store/index';
+
+
 const { default: axios } = require('axios');
 const { default: Echo } = require('laravel-echo');
 const { functionsIn } = require('lodash');
 
 require('./bootstrap');
+
 
 window.Vue = require('vue').default;
 
@@ -101,6 +106,7 @@ Vue.component('selected-room-delete-button-component', require('./components/Sel
 
 const app = new Vue({
     el : '#app',
+    store,
         data : {
             message : 'Hello',
             messages : [],
