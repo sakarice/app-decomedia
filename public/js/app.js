@@ -2838,7 +2838,7 @@ __webpack_require__.r(__webpack_exports__);
     HomeLink: _HomeLinkComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     Profile: _ProfileComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['csrf', 'isLogin'],
+  props: ['csrf'],
   data: function data() {
     return {
       isShowProfile: false
@@ -5530,25 +5530,11 @@ __webpack_require__.r(__webpack_exports__);
       if (roomPreviewInfo['selectedOrderNum'] > 0) {
         return true;
       }
-    },
-    getLoginStateFromVuex: function getLoginStateFromVuex() {
-      // return this.$store.state.storeA.message;
-      return this.$store.getters.getIsLogin;
     }
   },
-  mounted: function mounted() {
-    console.log(this.login_state_message); // console.log(this.getLoginStateFromVuex());
-  },
+  mounted: function mounted() {},
   watch: {},
-  computed: {
-    login_state_message: function login_state_message() {
-      if (this.$store.getters.getIsLogin) {
-        return 'ログイン中';
-      } else {
-        return 'ログインしていません';
-      }
-    }
-  }
+  computed: {}
 });
 
 /***/ }),
@@ -6382,16 +6368,6 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
 
 /***/ }),
 
-/***/ "./resources/js/store/actions.js":
-/*!***************************************!*\
-  !*** ./resources/js/store/actions.js ***!
-  \***************************************/
-/***/ (() => {
-
-
-
-/***/ }),
-
 /***/ "./resources/js/store/index.js":
 /*!*************************************!*\
   !*** ./resources/js/store/index.js ***!
@@ -6407,11 +6383,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./actions */ "./resources/js/store/actions.js");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_actions__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modules_storeA_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/storeA.js */ "./resources/js/store/modules/storeA.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_storeA_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/storeA.js */ "./resources/js/store/modules/storeA.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -6422,20 +6396,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_4__.default.use(vuex__WEBPACK_IMPORTED_MODULE_5__.default);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_5__.default.Store({
+vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.default);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
   state: {
     isLogin: false,
-    text: 'abcde',
-    storeA: _modules_storeA_js__WEBPACK_IMPORTED_MODULE_3__.default
+    storeA: _modules_storeA_js__WEBPACK_IMPORTED_MODULE_2__.default
   },
   getters: {
     getIsLogin: function getIsLogin(state) {
       return state.isLogin;
-    },
-    getMessage: function getMessage(state) {
-      return state.storeA.message;
     }
   },
   mutations: {
@@ -54658,30 +54627,66 @@ var render = function() {
       "div",
       { staticClass: "header-right" },
       [
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.isLogin,
-                expression: "!(isLogin)"
-              }
-            ],
-            staticClass: "header-content-wrapper"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "login header-content",
-                attrs: { href: "/login" }
-              },
-              [_vm._v("ログイン")]
-            )
-          ]
-        ),
+        !_vm.$store.getters.getIsLogin
+          ? _c("div", { staticClass: "header-content-wrapper" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "login header-content",
+                  attrs: { href: "/login" }
+                },
+                [_vm._v("ログイン")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        !_vm.$store.getters.getIsLogin
+          ? _c("div", { staticClass: "header-content-wrapper" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "signup header-content",
+                  attrs: { href: "/register" }
+                },
+                [_vm._v("アカウント作成")]
+              )
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.$store.getters.getIsLogin
+          ? _c("div", { staticClass: "header-content-wrapper" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "logout header-content",
+                  attrs: {
+                    href: "/logout",
+                    onclick:
+                      "event.preventDefault();\n            document.getElementById('logout-form').submit();"
+                  }
+                },
+                [_vm._v("ログアウト\n            ")]
+              ),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  staticClass: "d-none",
+                  attrs: {
+                    id: "logout-form",
+                    action: "/logout",
+                    method: "POST"
+                  }
+                },
+                [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf }
+                  })
+                ]
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
@@ -54690,76 +54695,8 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: !_vm.isLogin,
-                expression: "!(isLogin)"
-              }
-            ],
-            staticClass: "header-content-wrapper"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "signup header-content",
-                attrs: { href: "/register" }
-              },
-              [_vm._v("アカウント作成")]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isLogin,
-                expression: "isLogin"
-              }
-            ],
-            staticClass: "header-content-wrapper"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "logout header-content",
-                attrs: {
-                  href: "/logout",
-                  onclick:
-                    "event.preventDefault();\n            document.getElementById('logout-form').submit();"
-                }
-              },
-              [_vm._v("ログアウト\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "d-none",
-                attrs: { id: "logout-form", action: "/logout", method: "POST" }
-              },
-              [
-                _c("input", {
-                  attrs: { type: "hidden", name: "_token" },
-                  domProps: { value: _vm.csrf }
-                })
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.isLogin,
-                expression: "isLogin"
+                value: this.$store.getters.getIsLogin,
+                expression: "this.$store.getters.getIsLogin"
               }
             ],
             staticClass: "header-content-wrapper"

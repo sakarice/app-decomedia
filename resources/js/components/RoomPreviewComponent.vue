@@ -87,28 +87,12 @@ export default {
         return true;
       }
     },
-    getLoginStateFromVuex(){
-      // return this.$store.state.storeA.message;
-      return this.$store.getters.getIsLogin;
-    }
 
   },
-  mounted : function(){
-    console.log(this.login_state_message);
-    // console.log(this.getLoginStateFromVuex());
-  },
+  mounted : function(){},
   watch : {
   },
-  computed : {
-    login_state_message : function(){
-      if(this.$store.getters.getIsLogin){
-        return 'ログイン中';
-      } else {
-        return 'ログインしていません';
-      }
-    }
-
-  }
+  computed : {}
 
 }
 </script>
