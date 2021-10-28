@@ -104,57 +104,64 @@ Vue.component('selected-room-delete-button-component', require('./components/Sel
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el : '#app',
-    store,
-        data : {
-            message : 'Hello',
-            messages : [],
-            isShowModal : false,
-        },
-        
-        methods : {
-            showModal() {
-                this.isShowModal = true;
+// ログインチェック後にvueアプリを生成するため、起動処理をcreateApp関数にまとめ、最後に呼び出し
+const createApp = async() => {
+    await store.dispatch('checkIsLogin');
+
+    new Vue({
+        el : '#app',
+        store,
+            data : {
+                message : 'Hello',
+                messages : [],
+                isShowModal : false,
             },
-            closeModal() {
-                this.isShowModal = false;
-            },
-            send() {
-                alert('ajax start: send message');
-                const url = '/ajax/chat';
-                const params = { 
-                    message: this.message 
-                };
-                axios.post(url, params)
+            
+            methods : {
+                showModal() {
+                    this.isShowModal = true;
+                },
+                closeModal() {
+                    this.isShowModal = false;
+                },
+                send() {
+                    alert('ajax start: send message');
+                    const url = '/ajax/chat';
+                    const params = { 
+                        message: this.message 
+                    };
+                    axios.post(url, params)
+                        .then((response) => {
+                            alert('finish');
+                            // 成功したらメッセージをクリア
+                            this.message = '';
+                        });
+                },
+                getMessages() {
+                    const url = '/ajax/chat';
+                    axios.get(url)
                     .then((response) => {
-                        alert('finish');
-                        // 成功したらメッセージをクリア
-                        this.message = '';
-                    });
+                        this.messages = response.data;
+                    })
+                }
+            
             },
-            getMessages() {
-                const url = '/ajax/chat';
-                axios.get(url)
-                .then((response) => {
-                    this.messages = response.data;
-                })
+        
+            created : function(){
+                console.log('created')
+                console.log(this.$el)
+            },
+            mounted(){
+                this.getMessages();
+        
+                window.Echo.channel('chat')
+                    .listen('MessageCreated', (e) => {
+                        this.getMessages(); // 全メッセージを再読込
+                        alert('retake all messages');
+                    });
             }
         
-        },
-    
-        created : function(){
-            console.log('created')
-            console.log(this.$el)
-        },
-        mounted(){
-            this.getMessages();
-    
-            window.Echo.channel('chat')
-                .listen('MessageCreated', (e) => {
-                    this.getMessages(); // 全メッセージを再読込
-                    alert('retake all messages');
-                });
-        }
-    
-});
+    });
+}
+
+createApp();
