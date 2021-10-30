@@ -101,7 +101,7 @@
     },
     created(){},
     mounted: function(){
-      if(this.$parent.isLogin){
+      if(this.$store.getters.getIsLogin){
         let promise = new Promise((resolve, reject) => {
           this.getProfile(); // プロフィールの初期値を取得
           resolve();

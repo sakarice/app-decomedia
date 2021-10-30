@@ -40,7 +40,7 @@
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-if="isLogin && !(isMyRoom)">
+        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-if="$store.getters.getIsLogin && !(isMyRoom)">
           <like-room-component
           :roomId="roomSetting['id']">
           </like-room-component>
@@ -53,7 +53,6 @@
           <!-- ユーザプロフィール -->
           <room-owner-info-component
           v-show="isShowModal['roomOwnerInfo']"
-          :isLogin="isLogin"
           :roomId="roomSetting['id']">
           </room-owner-info-component>
         </div>
@@ -103,7 +102,6 @@ export default {
     LikeRoom,
   },
   props: [
-    'isLogin',
     'roomImgData',
     'roomAudiosData',
     'roomMovieData',
@@ -235,12 +233,11 @@ export default {
         'height' : this.roomMovie['height'],
       };
       this.$refs.roomMovie.createYtPlayer(vars);
-      
     },
 
   },
   created() {
-    if(this.isLogin){ this.judgeIsMyRoom(); }
+    if(this.$store.getters.getIsLogin){ this.judgeIsMyRoom(); }
   },
   mounted() {
     this.initImg();

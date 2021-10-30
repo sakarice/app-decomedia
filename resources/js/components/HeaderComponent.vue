@@ -24,7 +24,7 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <div class="header-content-wrapper" v-show="this.$store.getters.getIsLogin">
+            <div class="header-content-wrapper" v-if="$store.getters.getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>

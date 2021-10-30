@@ -26,7 +26,7 @@
       <!-- フォローアイコン -->
       <div id="disp-follow-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
         <follow-component
-        v-if="isLogin && !(isMyRoom)"
+        v-if="isShowFollow"
         :room-owner-id="roomOwnerInfo['id']">
         </follow-component>
       </div>
@@ -45,11 +45,9 @@ import Follow from './FollowComponent.vue';
     },
     props : [
       'roomId',
-      'isLogin',
     ],
     data : () => {
       return {
-        // isLogin : false,
         isMyRoom : false,
         userId : 0,
         roomOwnerInfo : {
@@ -62,12 +60,6 @@ import Follow from './FollowComponent.vue';
       }
     },
     methods : {
-      checkIsLogin(){
-        axios.get('/checkIsLogin')
-        .then(res =>{
-          this.isLogin = res.data.isLogin;
-        }).catch(error=>{})
-      },
       checkIsMyRoom(){
         let url = '/ajax/judgeIsMyRoom/' + this.roomId;
         axios.get(url)
@@ -96,17 +88,16 @@ import Follow from './FollowComponent.vue';
       },
 
     },
-    created(){
-      // this.checkIsLogin();
+    created(){},
+    mounted: function(){
+      this.checkIsMyRoom();
     },
-    mounted: function(){},
-    watch : {
-      roomId: function(newVal,oldVal){ // 親コンポーネントのroomIdがdataにセットされるのを待つ
-        if(newVal > 0){
-          this.getProfile();
-          if(this.isLogin){this.checkIsMyRoom()};
-        }
-      }
+    watch : {},
+    computed : {
+      isShowFollow: function(){
+        // ログインしていて自分のルームでなければフォローアイコンを表示
+        return this.$store.getters.getIsLogin && !(this.isMyRoom);
+      },
     }
 
   }

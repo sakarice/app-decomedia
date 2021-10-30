@@ -3778,7 +3778,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this3 = this;
 
-    if (this.$parent.isLogin) {
+    if (this.$store.getters.getIsLogin) {
       var promise = new Promise(function (resolve, reject) {
         _this3.getProfile(); // プロフィールの初期値を取得
 
@@ -4187,7 +4187,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -4207,7 +4206,7 @@ __webpack_require__.r(__webpack_exports__);
     RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['isLogin', 'roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
+  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
   data: function data() {
     return {
       isMyRoom: false,
@@ -4339,7 +4338,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    if (this.isLogin) {
+    if (this.$store.getters.getIsLogin) {
       this.judgeIsMyRoom();
     }
   },
@@ -4801,11 +4800,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CancelButtonComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CancelButtonComponent.vue */ "./resources/js/components/CancelButtonComponent.vue");
 /* harmony import */ var _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue");
 /* harmony import */ var _RoomUpdateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomUpdateButtonComponent.vue */ "./resources/js/components/RoomUpdateButtonComponent.vue");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5365,10 +5359,9 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Follow: _FollowComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['roomId', 'isLogin'],
+  props: ['roomId'],
   data: function data() {
     return {
-      // isLogin : false,
       isMyRoom: false,
       userId: 0,
       roomOwnerInfo: {
@@ -5381,19 +5374,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    checkIsLogin: function checkIsLogin() {
-      var _this = this;
-
-      axios.get('/checkIsLogin').then(function (res) {
-        _this.isLogin = res.data.isLogin;
-      })["catch"](function (error) {});
-    },
     checkIsMyRoom: function checkIsMyRoom() {
-      var _this2 = this;
+      var _this = this;
 
       var url = '/ajax/judgeIsMyRoom/' + this.roomId;
       axios.get(url).then(function (response) {
-        _this2.isMyRoom = response.data.isMyRoom;
+        _this.isMyRoom = response.data.isMyRoom;
       })["catch"](function (error) {});
     },
     closeProfileModal: function closeProfileModal() {
@@ -5403,34 +5389,28 @@ __webpack_require__.r(__webpack_exports__);
       event.stopPropagation();
     },
     getProfile: function getProfile() {
-      var _this3 = this;
+      var _this2 = this;
 
       // DBからログイン中ユーザのidとプロフィール情報を取得
       var url = '/user/roomOwner/profile/show/' + this.roomId;
       axios.get(url).then(function (res) {
-        _this3.roomOwnerInfo['id'] = res.data.id;
-        _this3.roomOwnerInfo['name'] = res.data.name;
-        _this3.roomOwnerInfo['aboutMe'] = res.data.aboutMe;
+        _this2.roomOwnerInfo['id'] = res.data.id;
+        _this2.roomOwnerInfo['name'] = res.data.name;
+        _this2.roomOwnerInfo['aboutMe'] = res.data.aboutMe;
       })["catch"](function (error) {
         alert('Room作成者を取得できませんでした。');
       });
     }
   },
-  created: function created() {// this.checkIsLogin();
+  created: function created() {},
+  mounted: function mounted() {
+    this.checkIsMyRoom();
   },
-  mounted: function mounted() {},
-  watch: {
-    roomId: function roomId(newVal, oldVal) {
-      // 親コンポーネントのroomIdがdataにセットされるのを待つ
-      if (newVal > 0) {
-        this.getProfile();
-
-        if (this.isLogin) {
-          this.checkIsMyRoom();
-        }
-
-        ;
-      }
+  watch: {},
+  computed: {
+    isShowFollow: function isShowFollow() {
+      // ログインしていて自分のルームでなければフォローアイコンを表示
+      return this.$store.getters.getIsLogin && !this.isMyRoom;
     }
   }
 });
@@ -11363,7 +11343,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-7b30f9fa] {\r\n        margin: 5px 0px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-7b30f9fa] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-7b30f9fa] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-7b30f9fa] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-7b30f9fa] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-7b30f9fa] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-7b30f9fa] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-7b30f9fa]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-7b30f9fa] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-7b30f9fa]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-7b30f9fa] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-7b30f9fa] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-7b30f9fa] {\r\n        margin: 5px 0px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -54688,42 +54668,30 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "div",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: this.$store.getters.getIsLogin,
-                expression: "this.$store.getters.getIsLogin"
-              }
-            ],
-            staticClass: "header-content-wrapper"
-          },
-          [
-            _c(
-              "a",
-              {
-                staticClass: "user-icon header-content",
-                on: {
-                  click: function($event) {
-                    return _vm.openProfileModal()
+        _vm.$store.getters.getIsLogin
+          ? _c("div", { staticClass: "header-content-wrapper" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "user-icon header-content",
+                  on: {
+                    click: function($event) {
+                      return _vm.openProfileModal()
+                    }
                   }
-                }
-              },
-              [
-                _c("img", {
-                  attrs: {
-                    id: "profile-img",
-                    src: "/profile_img/user-solid.svg",
-                    alt: ""
-                  }
-                })
-              ]
-            )
-          ]
-        ),
+                },
+                [
+                  _c("img", {
+                    attrs: {
+                      id: "profile-img",
+                      src: "/profile_img/user-solid.svg",
+                      alt: ""
+                    }
+                  })
+                ]
+              )
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("profile-component", {
           directives: [
@@ -56030,7 +55998,7 @@ var render = function() {
         { attrs: { id: "disp-modal-zone" }, on: { click: _vm.closeModal } },
         [
           _c("div", { attrs: { id: "disp-modal-wrapper" } }, [
-            _vm.isLogin && !_vm.isMyRoom
+            _vm.$store.getters.getIsLogin && !_vm.isMyRoom
               ? _c(
                   "div",
                   {
@@ -56070,7 +56038,7 @@ var render = function() {
                       expression: "isShowModal['roomOwnerInfo']"
                     }
                   ],
-                  attrs: { isLogin: _vm.isLogin, roomId: _vm.roomSetting["id"] }
+                  attrs: { roomId: _vm.roomSetting["id"] }
                 })
               ],
               1
@@ -57046,7 +57014,7 @@ var render = function() {
           attrs: { id: "disp-follow-modal-wrapper" }
         },
         [
-          _vm.isLogin && !_vm.isMyRoom
+          _vm.isShowFollow
             ? _c("follow-component", {
                 attrs: { "room-owner-id": _vm.roomOwnerInfo["id"] }
               })

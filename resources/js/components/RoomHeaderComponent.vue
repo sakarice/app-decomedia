@@ -35,11 +35,6 @@
         <!-- 右側 -->
         <div class="header-block header-right">
             <span :v-if="roomName" class="header-content room-name">{{roomName}}</span>
-            <!-- ログイン -->
-            <!-- <div class="header-content" v-show="!(isLogin)">
-                <a class="login" href="/login">ログイン</a>
-            </div> -->
-
         </div>
     </div>
         
