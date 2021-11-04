@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
+use App\Lib\Common\StringProcessing;
 use App\Http\Controllers\Img\ImgController;
 use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
@@ -32,7 +33,7 @@ class ImgUtil
 
     // モデルに値をセットして保存
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = pathinfo($fileDatas['name'], PATHINFO_FILENAME);
+    $targetModel->name = StringProcessing::getFilenameExceptExt($fileDatas['name']); // 拡張子を除いたファイル名のみ取得
     $targetModel->img_path = $fileDatas['path'];
     $targetModel->img_url = $fileDatas['url'];
     $targetModel->save();
