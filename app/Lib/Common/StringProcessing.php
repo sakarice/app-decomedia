@@ -54,7 +54,7 @@ class StringProcessing
       // 引き数で渡した拡張子が画像、音楽、動画の拡張子であるかをチェックする
       function checkContentsExt($ext){
         // チェック対象拡張子を配列で定義。
-        $imgExt = array('jpg', 'jpeg', 'png');
+        $imgExt = array('jpg', 'jpeg', 'png', 'gif');
         $audioExt = array('mp3', 'wav', 'aac', 'flac', 'aiff');
         $movieExt = array('mp4', 'avi', 'mpeg', 'wmv');
         $contentsExt = array_merge($imgExt, $audioExt, $movieExt);
