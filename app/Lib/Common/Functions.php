@@ -57,13 +57,16 @@ class Functions
 
       // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
+
         $fileName = $request->file($type)->getClientOriginalName();
         $filePath = StoreFileInS3::DefaultFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
+
         
         $fileDatas = array (
           'owner_user_id' => NULL,
           'name' => $fileName,
+          // 'name' => $convertedText,
           'path' => $filePath,
           'url' => $fileUrl
         );
@@ -81,10 +84,8 @@ class Functions
         $audioFileDatas = storeFileAndcreateDataForDb($request ,'audio');
         if(checkFile($request, 'audio-thumbnail')){
           $audioThumbnailFileDatas = storeFileAndcreateDataForDb($request ,'audio-thumbnail');
-          $thumbnailPath = $audioThumbnailFileDatas['path'];
-          $thumbnailUrl = $audioThumbnailFileDatas['url'];
-          $audioFileDatas += array('thumbnail_path' => $thumbnailPath);
-          $audioFileDatas += array('thumbnail_url' => $thumbnailUrl);
+          $audioFileDatas += array('thumbnail_path' => $audioThumbnailFileDatas['path']);
+          $audioFileDatas += array('thumbnail_url' => $audioThumbnailFileDatas['url']);
         }
         AudioUtil::saveAudioData($audioFileDatas);
       }

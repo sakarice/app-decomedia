@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
+use App\Lib\Common\StringProcessing;
 use App\Http\Controllers\Bgm\AudioController;
 use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
@@ -32,7 +33,7 @@ class AudioUtil
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = pathinfo($fileDatas['name'],PATHINFO_FILENAME); // 拡張子を除いたファイル名のみ取得
+    $targetModel->name = StringProcessing::getFilenameExceptExt($fileDatas['name']); // 拡張子を除いたファイル名のみ取得
     $targetModel->audio_path = $fileDatas['path'];
     $targetModel->audio_url = $fileDatas['url'];
     $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];
