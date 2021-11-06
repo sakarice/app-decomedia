@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PublicAudio extends Model
 {
     use HasFactory;
+
+    protected $table = 'public_audios';
 }

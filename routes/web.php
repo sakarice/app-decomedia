@@ -98,8 +98,8 @@ Route::middleware('auth')->group(function(){
 // roomの作成者情報を表示
     Route::get('/user/roomOwner/profile/show/{room_id}', 'App\Lib\UserUtil@getRoomOwnerData');
 // defaultImgアップロード(開発用、後で消す)
-    Route::get('/uploadDefaultFiles', 'App\Lib\Common\Functions@view');
-    Route::post('/uploadDefaultFiles', 'App\Lib\Common\Functions@uploadFile');
+    Route::get('/uploadPublicFiles', 'App\Lib\Common\Functions@view');
+    Route::post('/uploadPublicFiles', 'App\Lib\Common\Functions@uploadFile');
 // Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo(確認用、後で消す)

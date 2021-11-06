@@ -31,32 +31,9 @@ class StoreFileInS3
     return $filePath;
   }
 
-  
-
-  // public static function DefaultFile($request, $fileType){
-  //   $directry = "default/room/";
-  //   // ファイルの内容に応じた保存先ディレクトリを指定
-  //   switch($fileType){
-  //     case 'img':
-  //       $directry .= "img";
-  //       break;
-  //     case 'audio':
-  //       $directry .= "audio/audio_file";
-  //       break;
-  //     case 'audio-thumbnail':
-  //       $directry .= "audio/thumbnail";
-  //       break;
-  //   }
-    
-  //   // S3へファイル保存 & 保存先パスを返す
-  //   $file = $request->file($fileType);
-  //   $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
-  //   return $filePath;
-
-  // }
 
 
-  public static function DefaultFile($request, $fileType){
+  public static function PublicFile($request, $fileType){
     // ファイルの内容に応じた保存先ディレクトリを指定
     switch($fileType){
       case 'img':

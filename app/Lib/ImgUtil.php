@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
 use App\Models\DefaultImg;
+use App\Models\PublicImg;
 use App\Models\RoomImg;
 use Storage;
 
@@ -26,7 +27,7 @@ class ImgUtil
     // 保存先DBを振り分け
     $targetModel;
     if($owner_user_id == NULL){
-        $targetModel = new DefaultImg();
+        $targetModel = new PublicImg();
     } else {
         $targetModel = new UserOwnImg();
     }

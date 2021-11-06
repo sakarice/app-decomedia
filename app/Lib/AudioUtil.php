@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnBgm;
 use App\Models\DefaultBgm;
+use App\Models\PublicAudio;
 use App\Models\RoomBgm;
 use Storage;
 
@@ -27,7 +28,7 @@ class AudioUtil
     // 保存先DBを振り分け
     $targetModel;
     if($owner_user_id == NULL){
-        $targetModel = new DefaultBgm();
+        $targetModel = new PublicAudio();
     } else {
         $targetModel = new UserOwnBgm();
     }

@@ -31,7 +31,7 @@ class Functions
         'audioThumbnailFileUrl' => ""
       ];
 
-      return view('upload.defaultFile', $fileNames);
+      return view('upload.publicFile', $fileNames);
     }
   
     
@@ -59,7 +59,7 @@ class Functions
       function storeFileAndcreateDataForDb($request, $type){
 
         $fileName = $request->file($type)->getClientOriginalName();
-        $filePath = StoreFileInS3::DefaultFile($request, $type);
+        $filePath = StoreFileInS3::PublicFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
 
         
@@ -89,7 +89,7 @@ class Functions
         AudioUtil::saveAudioData($audioFileDatas);
       }
 
-      return view('upload.defaultFile');
+      return view('upload.publicFile');
     }
 
 }
