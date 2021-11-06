@@ -66,7 +66,6 @@ class Functions
         $fileDatas = array (
           'owner_user_id' => NULL,
           'name' => $fileName,
-          // 'name' => $convertedText,
           'path' => $filePath,
           'url' => $fileUrl
         );
