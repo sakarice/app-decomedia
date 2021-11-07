@@ -15,7 +15,7 @@ class CreatePublicAudioThumbnailsTable extends Migration
     {
         Schema::create('public_audio_thumbnails', function (Blueprint $table) {
             $table->id();
-            $table->integer('owner_user_id');
+            $table->integer('owner_user_id')->default(NULL)->nullable();
             $table->string('name', 191);
             $table->string('img_path', 191);
             $table->string('img_url', 191);

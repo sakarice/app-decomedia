@@ -24,12 +24,14 @@
         <div class="audio-upload-wrapper">
           <div class="audio-file-upload-wrapper">
             {{csrf_field()}}
-            <h2>デフォルトBGMをアップロード</h2>
+            <h2>オーディオファイルをアップロード</h2>
+            <span>※↓のサムネをアップロードしない場合はデフォルトの♬(音符)サムネが割り当てられます</span>
             <input form="upload-form" class="audio-upload"  type="file" accept="audio/*" name="audio">
           </div>
           <div class="audio-thumbnail-upload-wrapper">
             {{csrf_field()}}
-            <h2>デフォルトBGMのサムネイル画像をアップロード</h2>
+            <h2>オーディオのサムネイル画像をアップロード</h2>
+            <span>※サムネだけのアップロードはできません。</span>
             <input form="upload-form" class="audio-thumbnail-upload"  type="file" accept="image/*" name="audio-thumbnail">
           </div>
         </div>

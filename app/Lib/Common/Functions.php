@@ -8,8 +8,12 @@ use Illuminate\Support\Facades\DB;
 use App\Lib\ImgUtil;
 use App\Lib\AudioUtil;
 use App\Lib\StoreFileInS3;
+use App\Lib\Common\StringProcessing;
 use App\Models\User;
 use App\Models\DefaultBgm;
+use App\Models\PublicAudio;
+use App\Models\PublicAudioThumbnail;
+use App\Models\PublicAudioAudioThumbnail;
 use App\Models\DefaultImg;
 use App\Models\UserOwnBgm;
 use App\Models\UserOwnImg;
@@ -58,7 +62,11 @@ class Functions
       // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
 
-        $fileName = $request->file($type)->getClientOriginalName();
+        // ファイル名から拡張子を除外する
+        $originalFilename = $request->file($type)->getClientOriginalName();
+        $extExceptedFilename = StringProcessing::getFilenameExceptExt($originalFilename);
+
+        $fileName = $extExceptedFilename;
         $filePath = StoreFileInS3::PublicFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
 
@@ -73,20 +81,31 @@ class Functions
       }
 
       // 画像ファイルの保存とDB登録
-      if(checkFile($request, 'img')){
+      if($isExistsImg = checkFile($request, 'img')){
         $imgFileDatas = storeFileAndcreateDataForDb($request ,'img');
         ImgUtil::saveImgData($imgFileDatas);
       }
-      
       // オーディオファイルの保存とDB登録
-      if(checkFile($request, 'audio')){
+      if($isExistsAudio = checkFile($request, 'audio')){
         $audioFileDatas = storeFileAndcreateDataForDb($request ,'audio');
-        if(checkFile($request, 'audio-thumbnail')){
+        
+        // ※★↓サムネは中間テーブルに移行したため、動作検証後に消すこと
+        $audioFileDatas += array('thumbnail_path' => "");
+        $audioFileDatas += array('thumbnail_url' => "");
+
+        $audio_id = AudioUtil::saveAudioData($audioFileDatas);
+        // オーディオとサムネイルの中間テーブルにもデータを保存
+        $public_audio_audio_thumbnail = new PublicAudioAudioThumbnail;
+        $public_audio_audio_thumbnail->audio_id = $audio_id;
+        $public_audio_audio_thumbnail->save();
+
+        // オーディオサムネの保存とDB登録
+        if($isExistsAudioThumbnail = checkFile($request, 'audio-thumbnail')){
           $audioThumbnailFileDatas = storeFileAndcreateDataForDb($request ,'audio-thumbnail');
-          $audioFileDatas += array('thumbnail_path' => $audioThumbnailFileDatas['path']);
-          $audioFileDatas += array('thumbnail_url' => $audioThumbnailFileDatas['url']);
+          $audio_thumbnail_id = AudioUtil::saveAudioThumbnailData($audioThumbnailFileDatas);
+          // オーディオとサムネイルの中間テーブルにもデータを保存
+          PublicAudioAudioThumbnail::where('audio_id', $audio_id)->audio_thumbnail_id = $audio_thumbnail_id;
         }
-        AudioUtil::saveAudioData($audioFileDatas);
       }
 
       return view('upload.publicFile');

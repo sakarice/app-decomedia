@@ -23,9 +23,9 @@ class StringProcessing
       $replace = ''; 
 
       // チェック処理
-      $replacedFilename = preg_replace($targetExt, $replace, $lowerFilename);
-      \Log::info('ファイル名の拡張子削除処理結果：'.$filename." ⇒ ".$replacedFilename);
-      return $replacedFilename;
+      $extExceptedFilename = preg_replace($targetExt, $replace, $lowerFilename);
+      \Log::info('ファイル名の拡張子削除処理結果：'.$filename." ⇒ ".$extExceptedFilename);
+      return $extExceptedFilename;
 
     }
 

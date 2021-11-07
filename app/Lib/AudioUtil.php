@@ -6,14 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
-use App\Lib\Common\StringProcessing;
 use App\Http\Controllers\Bgm\AudioController;
 use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\UserOwnBgm;
 use App\Models\DefaultBgm;
+use App\Models\UserOwnAudio;
+use App\Models\UserOwnAudioThumbnail;
+use App\Models\UserOwnAudioAudioThumbnail;
 use App\Models\PublicAudio;
+use App\Models\PublicAudioThumbnail;
+use App\Models\PublicAudioAudioThumbnail;
+use App\Models\Room;
 use App\Models\RoomBgm;
 use Storage;
 
@@ -34,7 +38,7 @@ class AudioUtil
     }
 
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = StringProcessing::getFilenameExceptExt($fileDatas['name']); // 拡張子を除いたファイル名のみ取得
+    $targetModel->name = $fileDatas['name'];
     $targetModel->audio_path = $fileDatas['path'];
     $targetModel->audio_url = $fileDatas['url'];
     $targetModel->thumbnail_path = $fileDatas['thumbnail_path'];
@@ -48,6 +52,33 @@ class AudioUtil
                       ->first()
                       ->id;
     return $id;
+  }
+
+
+  public static function saveAudioThumbnailData($fileDatas){
+    $owner_user_id = $fileDatas['owner_user_id'];
+
+    // 保存先DBを振り分け
+    $targetModel;
+    if($owner_user_id == NULL){
+        $targetModel = new PublicAudioThumbnail();
+    } else {
+        $targetModel = new UserOwnAudioThumbnail();
+    }
+
+    $targetModel->owner_user_id = $owner_user_id;
+    $targetModel->name = $fileDatas['name'];
+    $targetModel->img_path = $fileDatas['path'];
+    $targetModel->img_url = $fileDatas['url'];
+    $targetModel->save();
+
+    // 保存したレコードのidを取得
+    $id = $targetModel->where('owner_user_id', $owner_user_id)
+                      ->where('img_url', $fileDatas['url'])
+                      ->first()
+                      ->id;
+    return $id;
+
   }
 
 }

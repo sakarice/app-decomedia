@@ -16,7 +16,7 @@ class CreatePublicAudioAudioThumbnailsTable extends Migration
         Schema::create('public_audio_audio_thumbnails', function (Blueprint $table) {
             $table->id();
             $table->integer('audio_id');
-            $table->integer('audio_thumbnail_id');
+            $table->integer('audio_thumbnail_id')->defaut(NULL)->nullable();
             $table->timestamps();
         });
     }
