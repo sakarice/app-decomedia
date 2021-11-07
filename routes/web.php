@@ -65,7 +65,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\DefaultImgController@index');
         Route::post('/ajax/uploadImg', 'App\Http\Controllers\ImgController@store');
         Route::post('/ajax/deleteImg', 'App\Http\Controllers\UserOwnImgController@destroy');
-        Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\DefaultAudioController@index');
+        Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\PublicAudioController@index');
         Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\UserOwnAudioController@index');
         Route::post('/ajax/uploadAudio', 'App\Http\Controllers\AudioController@store');
         Route::post('/ajax/deleteAudio', 'App\Http\Controllers\UserOwnAudioController@destroy');
