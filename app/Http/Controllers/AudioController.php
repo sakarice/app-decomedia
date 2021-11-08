@@ -25,11 +25,11 @@ class AudioController extends Controller
                 $user_id = Auth::user()->id;
                 $audio_file = $request->file('audio');
                 $audio_name = $audio_file->getClientOriginalName();
-                $audio_save_path = StoreFileInS3::userOwnFile($user_id, $audio_file);
+                $audio_save_path = StoreFileInS3::userOwnMediaFile($user_id, $audio_file);
                 $audio_save_url= Storage::disk('s3')->url($audio_save_path);
                 // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
-                $thumbnail_save_path = 'default/room/audio/thumbnail/8分音符アイコン 1.png';
-                $thumbnail_save_url = 'https://hirosaka-testapp-room.s3-ap-northeast-1.amazonaws.com/default/room/audio/thumbnail/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3+1.png';
+                $thumbnail_save_path = 'public/img/audio_thumbnail/default/8分音符のアイコン素材 2.png';
+                $thumbnail_save_url = 'https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/public/img/audio_thumbnail/default/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E7%B4%A0%E6%9D%90+2.png';
 
                 $fileDatas = array (
                         'owner_user_id' => $user_id,
@@ -39,7 +39,12 @@ class AudioController extends Controller
                         'thumbnail_path' => $thumbnail_save_path,
                         'thumbnail_url' => $thumbnail_save_url
                 );
-                AudioUtil::saveAudioData($fileDatas);
+                $audio_id = AudioUtil::saveAudioData($fileDatas);
+                
+                // オーディオとサムネイルの中間テーブルにもデータを保存
+                $public_audio_audio_thumbnail = new UserOwnAudioAudioThumbnail;
+                $public_audio_audio_thumbnail->audio_id = $audio_id;
+                $public_audio_audio_thumbnail->save();
 
                 $audios = array(
                         // 'id' => $id,

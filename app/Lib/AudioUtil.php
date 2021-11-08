@@ -34,7 +34,7 @@ class AudioUtil
     if($owner_user_id == NULL){
         $targetModel = new PublicAudio();
     } else {
-        $targetModel = new UserOwnBgm();
+        $targetModel = new UserOwnAudio();
     }
 
     $targetModel->owner_user_id = $owner_user_id;

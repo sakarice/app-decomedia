@@ -34,7 +34,7 @@ class ImgUtil
 
     // モデルに値をセットして保存
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = StringProcessing::getFilenameExceptExt($fileDatas['name']); // 拡張子を除いたファイル名のみ取得
+    $targetModel->name = $fileDatas['name']; // 拡張子を除いたファイル名のみ取得
     $targetModel->img_path = $fileDatas['path'];
     $targetModel->img_url = $fileDatas['url'];
     $targetModel->save();

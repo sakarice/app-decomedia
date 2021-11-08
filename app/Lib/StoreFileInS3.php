@@ -15,15 +15,16 @@ use Storage;
 class StoreFileInS3
 {
 
-  public static function userOwnFile($user_id, $file){
+  public static function userOwnMediaFile($user_id, $file){
     // ファイルタイプに応じたS3の保存先ディレクトリを設定
     $directry;
+    \Log::info('start userOwnMediaFile');
     switch(true){
       case preg_match('/^image/', $file->getMimeType()):
-        $directry = "user/".$user_id."/files/img";
+        $directry = "users/".$user_id."/img/media";
         break;
       case preg_match('/^audio/', $file->getMimeType()): 
-        $directry = "user/".$user_id."/files/audio";
+        $directry = "users/".$user_id."/audio/media";
         break;
     }
     // S3へファイル保存 & DBへ登録する保存先パスを取得
@@ -33,7 +34,7 @@ class StoreFileInS3
 
 
 
-  public static function PublicFile($request, $fileType){
+  public static function PublicMediaFile($request, $fileType){
     // ファイルの内容に応じた保存先ディレクトリを指定
     switch($fileType){
       case 'img':

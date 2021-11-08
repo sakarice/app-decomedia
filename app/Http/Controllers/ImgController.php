@@ -27,7 +27,7 @@ class ImgController extends Controller
         $user_id = Auth::user()->id;
         $imgfile = $request->file('img');
         $imgfile_name = $imgfile->getClientOriginalName();
-        $imgfile_save_path = StoreFileInS3::userOwnFile($user_id, $imgfile);
+        $imgfile_save_path = StoreFileInS3::userOwnMediaFile($user_id, $imgfile);
         $imgfile_save_url = Storage::disk('s3')->url($imgfile_save_path);
 
         $fileDatas = array (

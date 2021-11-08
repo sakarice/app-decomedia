@@ -15,7 +15,7 @@ class StringProcessing
 
       // 削除対象の拡張子を定義
       $imgExt = '\.jpg$|\.jpeg$|\.png$|\.gif$'; // 画像ファイルの拡張子を定義
-      $audioExt = '\.wave$|\.aiff$|\.mp3$|\.aac$|\.flac$'; // 音楽ファイルの拡張子を定義
+      $audioExt = '\.wave$|\.aiff$|\.mp3$|\.m4a$|\.aac$|\.flac$'; // 音楽ファイルの拡張子を定義
       $movieExt = '\.mp4$|\.avi$|\.mov$|\.flv$'; // 動画ファイルの拡張子を定義
       $targetExt = '/'.$imgExt.'|'.$audioExt.'|'.$movieExt.'/i'; // 拡張子をまとめて検索用の正規表現にする
       

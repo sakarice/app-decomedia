@@ -27,7 +27,6 @@ class PublicAudioController extends Controller
             $tmpAudios += array('name' => $default_audio->name);
             $tmpAudios += array('audio_url' => $default_audio->audio_url);
             $audio_thumbnail_id = PublicAudioAudioThumbnail::where('audio_id',$default_audio->id)->get()->first()->audio_thumbnail_id;
-            \Log::info($audio_thumbnail_id);
             if($audio_thumbnail_id){
                 $tmpAudios += array('thumbnail_url' => PublicAudioThumbnail::find($audio_thumbnail_id)->img_url);
             } else {

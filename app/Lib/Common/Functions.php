@@ -67,7 +67,7 @@ class Functions
         $extExceptedFilename = StringProcessing::getFilenameExceptExt($originalFilename);
 
         $fileName = $extExceptedFilename;
-        $filePath = StoreFileInS3::PublicFile($request, $type);
+        $filePath = StoreFileInS3::PublicMediaFile($request, $type);
         $fileUrl = Storage::disk('s3')->url($filePath);
 
         
@@ -79,6 +79,12 @@ class Functions
         );
         return $fileDatas;
       }
+
+      // 下記処理で参照する変数を宣言しておく
+      $isExistsImg = false;
+      $isExistsAudio = false;
+      $isExistsAudioThumbnail = false;
+      $audio_id;
 
       // 画像ファイルの保存とDB登録
       if($isExistsImg = checkFile($request, 'img')){
@@ -94,18 +100,21 @@ class Functions
         $audioFileDatas += array('thumbnail_url' => "");
 
         $audio_id = AudioUtil::saveAudioData($audioFileDatas);
+
         // オーディオとサムネイルの中間テーブルにもデータを保存
         $public_audio_audio_thumbnail = new PublicAudioAudioThumbnail;
         $public_audio_audio_thumbnail->audio_id = $audio_id;
         $public_audio_audio_thumbnail->save();
+      }
 
-        // オーディオサムネの保存とDB登録
-        if($isExistsAudioThumbnail = checkFile($request, 'audio-thumbnail')){
-          $audioThumbnailFileDatas = storeFileAndcreateDataForDb($request ,'audio-thumbnail');
-          $audio_thumbnail_id = AudioUtil::saveAudioThumbnailData($audioThumbnailFileDatas);
-          // オーディオとサムネイルの中間テーブルにもデータを保存
-          PublicAudioAudioThumbnail::where('audio_id', $audio_id)->audio_thumbnail_id = $audio_thumbnail_id;
-        }
+      // オーディオサムネの保存とDB登録
+      if($isExistsAudio && $isExistsAudioThumbnail = checkFile($request, 'audio-thumbnail')){
+        $audioThumbnailFileDatas = storeFileAndcreateDataForDb($request ,'audio-thumbnail');
+        $audio_thumbnail_id = AudioUtil::saveAudioThumbnailData($audioThumbnailFileDatas);
+        // オーディオとサムネイルの中間テーブルにもデータを保存
+        $public_audio_audio_thumbnail = PublicAudioAudioThumbnail::where('audio_id', $audio_id)->first();
+        $public_audio_audio_thumbnail->audio_thumbnail_id = $audio_thumbnail_id;
+        $public_audio_audio_thumbnail->save();
       }
 
       return view('upload.publicFile');
