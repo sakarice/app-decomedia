@@ -10,16 +10,16 @@
     </room-header-component>
 
     <!-- Room画像コンポーネント -->
-    <room-img-component
-     :roomImgUrl="roomImg['url']"
-     :roomImgWidth="roomImg['width'] + 'px'"
-     :roomImgHeight="roomImg['height'] + 'px'"
-     :roomImgLayer="roomImg['layer']"
-     :roomImgOpacity="roomImg['opacity']"
-     :isShowRoomImg="mediaSetting['isShowImg']"
+    <media-img-component
+     :mediaImgUrl="mediaImg['url']"
+     :mediaImgWidth="mediaImg['width'] + 'px'"
+     :mediaImgHeight="mediaImg['height'] + 'px'"
+     :mediaImgLayer="mediaImg['layer']"
+     :mediaImgOpacity="mediaImg['opacity']"
+     :isShowMediaImg="mediaSetting['isShowImg']"
       v-on:parent-action="showModal"
-      ref="roomImg">
-    </room-img-component>
+      ref="mediaImg">
+    </media-img-component>
 
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
@@ -66,7 +66,7 @@
     <img-select-component 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
-    v-on:set-room-img="setRoomImgUrl"
+    v-on:set-media-img="setMediaImgUrl"
     v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
     </img-select-component>
@@ -96,16 +96,16 @@
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
-    v-on:delete-room-img="deleteRoomImg"
+    v-on:delete-media-img="deleteMediaImg"
     :transitionName="transitionName"
     :isPublic="mediaSetting['isPublic']"
     :roomName="mediaSetting['name']"
     :roomDescription="mediaSetting['description']"
     :roomBackgroundColor="mediaSetting['roomBackgroundColor']"
-    :isShowRoomImg="mediaSetting['isShowImg']"
-    :roomImgWidth="roomImg['width']"
-    :roomImgHeight="roomImg['height']"
-    :roomImgOpacity="roomImg['opacity']">
+    :isShowMediaImg="mediaSetting['isShowImg']"
+    :mediaImgWidth="mediaImg['width']"
+    :mediaImgHeight="mediaImg['height']"
+    :mediaImgOpacity="mediaImg['opacity']">
     </media-setting-component>
 
 
@@ -120,7 +120,7 @@ import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
 import RoomAudio from './RoomAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
-import RoomImg from './RoomImgComponent.vue';
+import MediaImg from './MediaImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import RoomCreateButton from './RoomCreateButtonComponent.vue';
 
@@ -132,12 +132,12 @@ export default {
     MovieSetting,
     RoomAudio,
     MediaSetting,
-    RoomImg,
+    MediaImg,
     RoomMovie,
     RoomCreateButton,
   },
   props: [
-    'roomImgData',
+    'mediaImgData',
     'roomAudiosData',
     'roomMovieData',
     'mediaSettingData',
@@ -163,7 +163,7 @@ export default {
         'isShowMovie' : false,
         'maxAudioNum' : 5,
       },
-      roomImg : {
+      mediaImg : {
         'type' : 0,
         'id' : 0,
         'url' : "",
@@ -203,23 +203,23 @@ export default {
         this.isShowModal[key] = false;
       }
     },
-    setRoomImgUrl(type, id, url) {
-      this.roomImg['type'] = type;
-      this.roomImg['id'] = id;
-      this.roomImg['url'] = url;
+    setMediaImgUrl(type, id, url) {
+      this.mediaImg['type'] = type;
+      this.mediaImg['id'] = id;
+      this.mediaImg['url'] = url;
       this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg(url) {
-      if(this.roomImg['url'] == url){
-        this.roomImg['type'] = 0;
-        this.roomImg['id'] = 0;
-        this.roomImg['url'] = "";
+      if(this.mediaImg['url'] == url){
+        this.mediaImg['type'] = 0;
+        this.mediaImg['id'] = 0;
+        this.mediaImg['url'] = "";
       }
     },
-    deleteRoomImg(){
-      this.roomImg['type'] = 0;
-      this.roomImg['id'] = 0;
-      this.roomImg['url'] = "";
+    deleteMediaImg(){
+      this.mediaImg['type'] = 0;
+      this.mediaImg['id'] = 0;
+      this.mediaImg['url'] = "";
     },
     addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -252,7 +252,7 @@ export default {
       const url = '/room/store';
       const tmpThis = this;
       let room_datas = {
-        'img' : this.roomImg,
+        'img' : this.mediaImg,
         'audios' : this.roomAudios,
         'movie' : this.roomMovie,
         'setting' : this.mediaSetting,

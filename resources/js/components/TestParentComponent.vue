@@ -1,7 +1,7 @@
 <template>
   <div id="field" v-on:click.self="closeModal()">
     <!-- <button class="button" v-on:click="showModal()">{{button_text}}</button> -->
-    <div class="room-img" v-on:click="showModal()"><p>画像を選択</p> </div>
+    <div class="media-img" v-on:click="showModal()"><p>画像を選択</p> </div>
     <img-select-component v-show="isShowModal" v-on:from-child="closeModal"></img-select-component>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
 
 <style>
 
-  .room-img {
+  .media-img {
     display: flex;
     justify-content: center;
     align-items: center;

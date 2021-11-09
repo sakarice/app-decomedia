@@ -36,8 +36,8 @@
         </ul>
       </div>
       {{-- track画像 --}}
-      <div class="room-img-wrapper">
-        <img id="room-img" class="room-img" src="{{$room_tracks[0]->img_url}}" alt="room-image">
+      <div class="media-img-wrapper">
+        <img id="media-img" class="media-img" src="{{$room_tracks[0]->img_url}}" alt="room-image">
       </div>
 
       {{-- trackの再生プレイヤー --}}

@@ -82,7 +82,7 @@ $(function(){
       }
     }).done(function (track){
       // room画像、音楽、トラック名を入れ替え 
-      $("#room-img").attr('src', track.img_url);
+      $("#media-img").attr('src', track.img_url);
       $("#track-player").children('source').attr('src', track.sound_url);
       $("#play-track-title").html(track_title);
       track_player.load();
@@ -186,10 +186,10 @@ $(function(){
 
     switch(e.keyCode){
       case 70: // f
-        $(".room-img").css({"width":"1080px", "height":"720px"});
+        $(".media-img").css({"width":"1080px", "height":"720px"});
         break;
       case 27: // ESC
-        $(".room-img").css({"width":"100%", "height":"480px"});
+        $(".media-img").css({"width":"100%", "height":"480px"});
         break;
     }
 

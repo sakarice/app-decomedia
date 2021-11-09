@@ -32,7 +32,7 @@
             <!-- uploads -->
             <li :id="index" v-show="!(isDefault)" class="img-list" v-for="(userOwnImg, index) in userOwnImgs" :key="userOwnImg.url">
               <img class="user-own-img" :src="userOwnImg['url']" :alt="userOwnImg['url']" />
-              <div class="icon-cover" v-on:click="setRoomImg">
+              <div class="icon-cover" v-on:click="setMediaImg">
                 <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click.stop="deleteImg"></i>
                 <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
               </div>
@@ -40,7 +40,7 @@
             <!-- default -->
             <li :id="index" v-show="isDefault" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.url">
               <img class="default-img" :src="defaultImg['url']" :alt="defaultImg['url']" />
-              <div class="icon-cover" v-on:click="setRoomImg">
+              <div class="icon-cover" v-on:click="setMediaImg">
                 <!-- <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i> -->
                 <i id="add-img-icon" class="fas fa-plus fa-2x"></i>
               </div>
@@ -121,7 +121,7 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    setRoomImg: function(event){
+    setMediaImg: function(event){
       let imgUrl = event.target.previousElementSibling.getAttribute('src');
       let imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
       let imgType;
@@ -132,7 +132,7 @@ export default {
       }
       let imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
       
-      this.$emit('set-room-img', imgType, imgId, imgUrl);
+      this.$emit('set-media-img', imgType, imgId, imgUrl);
     },
     findImgIdTiedUpWithUrl(imgType, imgUrl){
       let targetModel;  // 検索対象のVueモデル

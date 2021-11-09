@@ -9,14 +9,14 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\Room;
-use App\Models\RoomImg;
+use App\Models\Media;
+use App\Models\MediaImg;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
-use App\Http\Controllers\RoomImgController;
+use App\Http\Controllers\MediaImgController;
 
-class RoomImgControllerTest extends TestCase
+class MediaImgControllerTest extends TestCase
 {
     // DBをクリア（各テスト毎にクリア）
     use RefreshDatabase;
@@ -46,26 +46,26 @@ class RoomImgControllerTest extends TestCase
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
-        $room_img_id = mt_rand(1, 2147483647);
-        $room_img_data = array(
+        $media_img_id = mt_rand(1, 2147483647);
+        $media_img_data = array(
             'type' => 1,
-            'id' => $room_img_id,
+            'id' => $media_img_id,
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
             'layer' => 1,
         );
         $request = new \stdClass(); //key:value形式のリクエスト
-        $request->img = $room_img_data;
-        $room_id = mt_rand(1, 2147483647); // 適当なルームID
+        $request->img = $media_img_data;
+        $media_id = mt_rand(1, 2147483647); // 適当なルームID
 
         // 2. 登録
         //    requestのデータを指定したルームIDに紐づくルーム画像情報として保存
-        RoomImgController::store($room_id, $request);
+        MediaImgController::store($media_id, $request);
 
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック
-        $this->assertDatabaseHas('room_imgs',[
+        $this->assertDatabaseHas('media_imgs',[
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
@@ -79,19 +79,19 @@ class RoomImgControllerTest extends TestCase
     public function test_show(){
         // 1. 取得対象データ登録
         //    ダミーデータ登録
-        $room = Room::factory()->create();
+        $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
-        $room_img = RoomImg::factory()->create();
-        $room_id = RoomImg::max('room_id');
+        $media_img = MediaImg::factory()->create();
+        $media_id = MediaImg::max('media_id');
 
         // 2. 取得
         //    作成したダミーデータを取得
-        $room_img_data = RoomImgController::show($room_id);
+        $media_img_data = MediaImgController::show($media_id);
 
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
-        $this->assertDatabaseHas('room_imgs', [
-            'img_id' => $room_img_data['id'],
+        $this->assertDatabaseHas('media_imgs', [
+            'img_id' => $media_img_data['id'],
         ]);
     }
 
@@ -101,32 +101,32 @@ class RoomImgControllerTest extends TestCase
     public function test_update() {
         // 1. 更新対象データ登録
         //    ダミーデータ登録
-        $room = Room::factory()->create();
+        $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
-        $room_img = RoomImg::factory()->create();
-        $room_id = RoomImg::max('room_id');
+        $media_img = MediaImg::factory()->create();
+        $media_id = MediaImg::max('media_id');
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        $room_img_id = mt_rand(1, 2147483647);
-        $room_img_data = array(
+        $media_img_id = mt_rand(1, 2147483647);
+        $media_img_data = array(
             'type' => 2,
-            'id' => $room_img_id,
+            'id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
             'layer' => 1.1,
         );
         $request = new \stdClass(); // key:value形式のリクエストを用意
-        $request->img = $room_img_data;
+        $request->img = $media_img_data;
 
         // 3. 更新
         //    指定したルームIDのレコードをrequestの値で更新する
-        RoomImgController::update($room_id, $request);
+        MediaImgController::update($media_id, $request);
 
         // 4. 検証
         //    DBのデータが更新用データと一致すること
-        $this->assertDatabaseHas('room_imgs',[
+        $this->assertDatabaseHas('media_imgs',[
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
@@ -139,19 +139,19 @@ class RoomImgControllerTest extends TestCase
     public function test_destroy(){
         // 1. 削除対象データ登録
         //    ダミーデータ作成
-        $room = Room::factory()->create();
+        $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
-        $room_img = RoomImg::factory()->create();
-        $room_id = RoomImg::max('room_id');
+        $media_img = MediaImg::factory()->create();
+        $media_id = MediaImg::max('media_id');
 
         // 2. 削除
         //    指定したルームIDのデータを削除
-        RoomImgController::destroy($room_id);
+        MediaImgController::destroy($media_id);
 
         // 3. 検証
         //    削除対象データがDBに存在しないこと
-        $this->assertDatabaseMissing('room_imgs', [
-            'room_id' => $room_id,
+        $this->assertDatabaseMissing('media_imgs', [
+            'media_id' => $media_id,
         ]);
     }
 }

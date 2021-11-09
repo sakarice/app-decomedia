@@ -1,17 +1,17 @@
 <template>
-  <!-- Room画像-->
-  <div id="room-img-wrapper"
-  v-bind:style="{'z-index' : roomImgLayer}">
+  <!-- Media画像-->
+  <div id="media-img-wrapper"
+  v-bind:style="{'z-index' : mediaImgLayer}">
 
-    <div id="room-img-frame"
+    <div id="media-img-frame"
      v-on:click="$emit('parent-action', 'imgModal')"
-     v-show="isShowRoomImg"
-     v-bind:style="{width: roomImgWidth, height: roomImgHeight, opacity: roomImgOpacity}">
-      <p v-show="!(roomImgUrl)"></p>
-      <img id="room-img"
-       :src="roomImgUrl"
-       v-show="roomImgUrl" alt="画像が選択されていません"
-       v-bind:style="{width: roomImgWidth, height: roomImgHeight, opacity: roomImgOpacity}">
+     v-show="isShowMediaImg"
+     v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: mediaImgOpacity}">
+      <p v-show="!(mediaImgUrl)"></p>
+      <img id="media-img"
+       :src="mediaImgUrl"
+       v-show="mediaImgUrl" alt="画像が選択されていません"
+       v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: mediaImgOpacity}">
     </div>
 
   </div>
@@ -20,12 +20,12 @@
 <script>
   export default {
     props : [
-      'roomImgUrl',
-      'roomImgWidth',
-      'roomImgHeight',
-      'roomImgLayer',
-      'roomImgOpacity',
-      'isShowRoomImg'
+      'mediaImgUrl',
+      'mediaImgWidth',
+      'mediaImgHeight',
+      'mediaImgLayer',
+      'mediaImgOpacity',
+      'isShowMediaImg'
     ],
 
     data : () => {
@@ -47,10 +47,10 @@
 
 <style scoped>
   /* img */
-  #room-img-wrapper {
+  #media-img-wrapper {
     pointer-events: none;
   }
-  #room-img-frame {
+  #media-img-frame {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -7,66 +7,66 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
-use App\Lib\RoomListUtil;
-use App\Lib\RoomRoomListUtil;
+use App\Lib\MediaListUtil;
+use App\Lib\MediaMediaListUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
 use App\Models\PublicImg;
-use App\Models\Room;
-use App\Models\Roomlist;
-use App\Models\RoomRoomlist;
-use App\Models\RoomImg;
+use App\Models\Media;
+use App\Models\Medialist;
+use App\Models\MediaMedialist;
+use App\Models\MediaImg;
 
 use Storage;
 
-class RoomListController extends Controller
+class MediaListController extends Controller
 {
 
-    // Roomリストのプレビュー情報を取得
-    public static function getRoomListPreviewInfos($num){
+    // Mediaリストのプレビュー情報を取得
+    public static function getMediaListPreviewInfos($num){
         $user_id = Auth::user()->id;
-        $room_lists = Roomlist::limit($num)->where('user_id', $user_id)->get();
-        $roomListPreviewInfos = array();
-        foreach($room_lists as $index => $room_list){
-            $room_list_id = $room_list->id;
-            $roomListPreviewInfos[] = RoomListUtil::getRoomListPreviewInfo($room_list_id);
+        $media_lists = Medialist::limit($num)->where('user_id', $user_id)->get();
+        $mediaListPreviewInfos = array();
+        foreach($media_lists as $index => $media_list){
+            $media_list_id = $media_list->id;
+            $mediaListPreviewInfos[] = MediaListUtil::getMediaListPreviewInfo($media_list_id);
         }
-        return ['roomListPreviewInfos' => $roomListPreviewInfos];
+        return ['mediaListPreviewInfos' => $mediaListPreviewInfos];
     }
 
-    // マイページからRoomを選択して手早くRoomリストを作成する処理
-    // Roomリスト名などの細かい設定は省略
+    // マイページからMediaを選択して手早くMediaリストを作成する処理
+    // Mediaリスト名などの細かい設定は省略
     public static function quickStore(Request $request){
         $user_id = Auth::user()->id;
-        $selectedRoomIds = $request->selectedRoomIds;
+        $selectedMediaIds = $request->selectedMediaIds;
 
 
-        // Roomリストを保存 細かい設定はなにも無し
-        $roomlist = new RoomList();
-        $roomlist->user_id = $user_id;
-        $roomlist->name = 'Roomリスト'.(RoomList::max('id')+1);
-        $firstRoomImgType = RoomImg::where('room_id', $selectedRoomIds[0])->first()->img_type;
-        $firstRoomImgId = RoomImg::where('room_id', $selectedRoomIds[0])->first()->img_id;
+        // Mediaリストを保存 細かい設定はなにも無し
+        $medialist = new MediaList();
+        $medialist->user_id = $user_id;
+        $medialist->name = 'Mediaリスト'.(MediaList::max('id')+1);
+        $firstMediaImgType = MediaImg::where('media_id', $selectedMediaIds[0])->first()->img_type;
+        $firstMediaImgId = MediaImg::where('media_id', $selectedMediaIds[0])->first()->img_id;
 
-        $firstRoomImgUrl;
-        if($firstRoomImgType == 1){
-            $firstRoomImgUrl = PublicImg::find($firstRoomImgId)->img_url;
-        } else if ($firstRoomImgType == 2){
-            $firstRoomImgUrl = UserOwnImg::find($firstRoomImgId)->img_url;
+        $firstMediaImgUrl;
+        if($firstMediaImgType == 1){
+            $firstMediaImgUrl = PublicImg::find($firstMediaImgId)->img_url;
+        } else if ($firstMediaImgType == 2){
+            $firstMediaImgUrl = UserOwnImg::find($firstMediaImgId)->img_url;
         }
 
-        $roomlist->thumbnail_img_url = $firstRoomImgUrl;
-        // $roomlist->description = NULL;
-        $roomlist->save();
+        $medialist->thumbnail_img_url = $firstMediaImgUrl;
+        // $medialist->description = NULL;
+        $medialist->save();
 
-        // Room - Roomlistテーブル(中間テーブル)にも保存
-        $roomlistId = RoomList::latest()->first()->id;
-        foreach($selectedRoomIds as $index => $selectedRoomId){
-            $roomRoomlist = new RoomRoomlist();
-            $roomRoomlist->roomlist_id = $roomlistId;
-            $roomRoomlist->room_id = $selectedRoomId;
-            $roomRoomlist->room_order_seq = $index + 1;
-            $roomRoomlist->save();
+        // Media - Medialistテーブル(中間テーブル)にも保存
+        $medialistId = MediaList::latest()->first()->id;
+        foreach($selectedMediaIds as $index => $selectedMediaId){
+            $mediaMedialist = new MediaMedialist();
+            $mediaMedialist->medialist_id = $medialistId;
+            $mediaMedialist->media_id = $selectedMediaId;
+            $mediaMedialist->media_order_seq = $index + 1;
+            $mediaMedialist->save();
         }
         DB::beginTransaction();
         try{
@@ -80,17 +80,17 @@ class RoomListController extends Controller
 
 
     public static function destroy(Request $request){
-        $room_list_id = $request->roomList_id;
+        $media_list_id = $request->mediaList_id;
         $returnMsg;
         DB::beginTransaction();
         try {
-            RoomListUtil::deleteRoomListDataFromDB($room_list_id);
-            RoomRoomListUtil::deleteRoomRoomListDataFromDB($room_list_id);
+            MediaListUtil::deleteMediaListDataFromDB($media_list_id);
+            MediaMediaListUtil::deleteMediaMediaListDataFromDB($media_list_id);
             DB::commit();
-            $returnMsg = 'roomリストを削除しました';
+            $returnMsg = 'mediaリストを削除しました';
         } catch(\Exception $e){
             DB::rollback();
-            $returnMsg = 'roomリストの削除に失敗しました';
+            $returnMsg = 'mediaリストの削除に失敗しました';
         }
         return ['message' => $returnMsg];
     }

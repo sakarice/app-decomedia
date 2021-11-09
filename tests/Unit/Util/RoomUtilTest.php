@@ -10,10 +10,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\PublicAudio;
-use App\Models\Room;
-use App\Models\RoomImg;
-use App\Models\RoomAudio;
-use App\Models\RoomMovie;
+use App\Models\Media;
+use App\Models\MediaImg;
+use App\Models\MediaAudio;
+use App\Models\MediaMovie;
 use App\Models\MediaSetting;
 
 use App\Lib\MediaUtil;
@@ -41,34 +41,34 @@ class MediaUtilTest extends TestCase
 
     // 3.store
     // 引数として渡したルームIDと動画情報がDB保存されること。
-    public function test_getRoomPreviewImgUrl(){
+    public function test_getMediaPreviewImgUrl(){
         // 3パターンある テストしやすいので、パターン3からテストする。
-        // パターン1：Room画像が設定されている
-        // パターン2：Room画像が設定されてなくて、Room動画が設定されている
-        // パターン3：Room画像も動画も設定されてなくて、Room音楽が設定されている
+        // パターン1：Media画像が設定されている
+        // パターン2：Media画像が設定されてなくて、Media動画が設定されている
+        // パターン3：Media画像も動画も設定されてなくて、Media音楽が設定されている
         // 0. 【準備】登録用データ作成
 
-        // パターン3：Room画像も動画も設定されてなくて、Room音楽が設定されている
-        $room = Room::factory()->create();
+        // パターン3：Media画像も動画も設定されてなくて、Media音楽が設定されている
+        $media = Media::factory()->create();
         PublicAudio::factory()->create();
-        RoomAudio::factory()->create();
-        $room_id = RoomImg::max('room_id');
+        MediaAudio::factory()->create();
+        $media_id = MediaImg::max('media_id');
 
         // テスト
-        $room_img_url = MediaUtil::getRoomPreviewImgUrl($room_id);
+        $media_img_url = MediaUtil::getMediaPreviewImgUrl($media_id);
 
         $this->assertEquals(
-            $room_img_url,
-            "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"
+            $media_img_url,
+            "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/media/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"
         );
 
-        // パターン2：Room画像が設定されてなくて、Room動画が設定されている
-        RoomMovie::factory()->create();
-        $room_id = RoomMovie::max('room_id');
-        $room_img_url = MediaUtil::getRoomPreviewImgUrl($room_id);
+        // パターン2：Media画像が設定されてなくて、Media動画が設定されている
+        MediaMovie::factory()->create();
+        $media_id = MediaMovie::max('media_id');
+        $media_img_url = MediaUtil::getMediaPreviewImgUrl($media_id);
         $this->assertEquals(
-            $room_img_url,
-            "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"
+            $media_img_url,
+            "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/media/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"
         );
 
     }

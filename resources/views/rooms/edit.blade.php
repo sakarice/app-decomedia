@@ -17,13 +17,13 @@
   {{-- ボタン --}}
 
   <div id="app">
-    <room-edit-component
-    room-img-data='@json($room_img)'
-    room-audios-data='@json($room_audios)'
-    room-movie-data='@json($room_movie)'
-    room-setting-data='@json($room_setting)'
+    <media-edit-component
+    media-img-data='@json($media_img)'
+    media-audios-data='@json($media_audios)'
+    media-movie-data='@json($media_movie)'
+    media-setting-data='@json($media_setting)'
     >
-    </room-edit-component>
+    </media-edit-component>
   </div>
 
   

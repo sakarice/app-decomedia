@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomImg;
 use App\Models\UserOwnImg;
 
 class UserOwnImgController extends Controller

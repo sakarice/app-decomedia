@@ -68,7 +68,7 @@ $(function(){
   // 【関数】曲を入れ替える
   function changeTrack(index){
     audio.src = track_sound_urls[index];
-    $("#room-img").attr("src", track_img_urls[index]);
+    $("#media-img").attr("src", track_img_urls[index]);
     $("#playing-track-title").text(track_titles[index]);
     $(".track-info").css("color", "slategray");
     $(".track-info").eq(index).css("color", "dodgerblue");

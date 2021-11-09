@@ -2254,7 +2254,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
-/* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 /* harmony import */ var _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue");
 //
@@ -2389,11 +2389,11 @@ __webpack_require__.r(__webpack_exports__);
     MovieSetting: _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
-    RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default,
     RoomCreateButton: _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_8__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -2417,7 +2417,7 @@ __webpack_require__.r(__webpack_exports__);
         'isShowMovie': false,
         'maxAudioNum': 5
       },
-      roomImg: {
+      mediaImg: {
         'type': 0,
         'id': 0,
         'url': "",
@@ -2457,23 +2457,23 @@ __webpack_require__.r(__webpack_exports__);
         this.isShowModal[key] = false;
       }
     },
-    setRoomImgUrl: function setRoomImgUrl(type, id, url) {
-      this.roomImg['type'] = type;
-      this.roomImg['id'] = id;
-      this.roomImg['url'] = url;
+    setMediaImgUrl: function setMediaImgUrl(type, id, url) {
+      this.mediaImg['type'] = type;
+      this.mediaImg['id'] = id;
+      this.mediaImg['url'] = url;
       this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg: function judgeDelImg(url) {
-      if (this.roomImg['url'] == url) {
-        this.roomImg['type'] = 0;
-        this.roomImg['id'] = 0;
-        this.roomImg['url'] = "";
+      if (this.mediaImg['url'] == url) {
+        this.mediaImg['type'] = 0;
+        this.mediaImg['id'] = 0;
+        this.mediaImg['url'] = "";
       }
     },
-    deleteRoomImg: function deleteRoomImg() {
-      this.roomImg['type'] = 0;
-      this.roomImg['id'] = 0;
-      this.roomImg['url'] = "";
+    deleteMediaImg: function deleteMediaImg() {
+      this.mediaImg['type'] = 0;
+      this.mediaImg['id'] = 0;
+      this.mediaImg['url'] = "";
     },
     addAudio: function addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -2508,7 +2508,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/room/store';
       var tmpThis = this;
       var room_datas = {
-        'img': this.roomImg,
+        'img': this.mediaImg,
         'audios': this.roomAudios,
         'movie': this.roomMovie,
         'setting': this.mediaSetting
@@ -3029,7 +3029,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
-    setRoomImg: function setRoomImg(event) {
+    setMediaImg: function setMediaImg(event) {
       var imgUrl = event.target.previousElementSibling.getAttribute('src');
       var imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
       var imgType;
@@ -3041,7 +3041,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
-      this.$emit('set-room-img', imgType, imgId, imgUrl);
+      this.$emit('set-media-img', imgType, imgId, imgUrl);
     },
     findImgIdTiedUpWithUrl: function findImgIdTiedUpWithUrl(imgType, imgUrl) {
       var targetModel; // 検索対象のVueモデル
@@ -3305,7 +3305,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
+  props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowMediaImg', 'mediaImgWidth', 'mediaImgHeight', 'mediaImgOpacity'],
   data: function data() {
     return {
       window_width: "",
@@ -3328,11 +3328,11 @@ __webpack_require__.r(__webpack_exports__);
       var type = event.target.dataset.inputType; // widthかheightかopacity
 
       if (type == 'width') {
-        this.$parent.roomImg['width'] = value;
+        this.$parent.mediaImg['width'] = value;
       } else if (type == 'height') {
-        this.$parent.roomImg['height'] = value;
+        this.$parent.mediaImg['height'] = value;
       } else if (type == 'opacity') {
-        this.$parent.roomImg['opacity'] = value;
+        this.$parent.mediaImg['opacity'] = value;
       } // this.$emit('resize-img', value, type);
 
     },
@@ -3341,16 +3341,16 @@ __webpack_require__.r(__webpack_exports__);
       var value = event.target.value;
       this.$parent.mediaSetting['roomBackgroundColor'] = value;
     },
-    toggleRoomImg: function toggleRoomImg() {
+    toggleMediaImg: function toggleMediaImg() {
       // room画像の表示/非表示を切り替え
-      if (this.isShowRoomImg) {
+      if (this.isShowMediaImg) {
         this.$parent.mediaSetting['isShowImg'] = false;
-      } else if (!this.isShowRoomImg) {
+      } else if (!this.isShowMediaImg) {
         this.$parent.mediaSetting['isShowImg'] = true;
       }
     },
-    deleteRoomImg: function deleteRoomImg() {
-      this.$emit('delete-room-img');
+    deleteMediaImg: function deleteMediaImg() {
+      this.$emit('delete-media-img');
     },
     changePublicState: function changePublicState() {
       if (this.isPublic) {
@@ -4251,7 +4251,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RoomHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomHeaderComponent.vue */ "./resources/js/components/RoomHeaderComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
-/* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 /* harmony import */ var _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomInfoComponent.vue */ "./resources/js/components/RoomInfoComponent.vue");
 /* harmony import */ var _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomOwnerInfoComponent.vue */ "./resources/js/components/RoomOwnerInfoComponent.vue");
@@ -4350,13 +4350,13 @@ __webpack_require__.r(__webpack_exports__);
     RoomHeader: _RoomHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default,
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
-    RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     RoomInfo: _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       isMyRoom: false,
@@ -4369,7 +4369,7 @@ __webpack_require__.r(__webpack_exports__);
         'roomOwnerInfo': false,
         'roomInfoModal': false
       },
-      roomImg: {
+      mediaImg: {
         'type': "",
         'id': "",
         'url': "",
@@ -4434,15 +4434,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initImg: function initImg() {
-      // this.roomImg['url'] = this.roomImgData.url;
-      var tmpImgData = JSON.parse(this.roomImgData);
-      this.roomImg['type'] = tmpImgData.type;
-      this.roomImg['id'] = tmpImgData.id;
-      this.roomImg['url'] = tmpImgData.url;
-      this.roomImg['width'] = tmpImgData.width;
-      this.roomImg['height'] = tmpImgData.height;
-      this.roomImg['opacity'] = tmpImgData.opacity;
-      this.roomImg['layer'] = tmpImgData.layer;
+      // this.mediaImg['url'] = this.mediaImgData.url;
+      var tmpImgData = JSON.parse(this.mediaImgData);
+      this.mediaImg['type'] = tmpImgData.type;
+      this.mediaImg['id'] = tmpImgData.id;
+      this.mediaImg['url'] = tmpImgData.url;
+      this.mediaImg['width'] = tmpImgData.width;
+      this.mediaImg['height'] = tmpImgData.height;
+      this.mediaImg['opacity'] = tmpImgData.opacity;
+      this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie: function initMovie() {
       var tmpMovieData = JSON.parse(this.roomMovieData);
@@ -4584,7 +4584,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
-/* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 var _methods;
 
@@ -4722,10 +4722,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     MovieSetting: _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
-    RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
+    MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -4737,7 +4737,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'movieModal': false,
         'mediaSettingModal': false
       },
-      roomImg: {
+      mediaImg: {
         'type': "",
         'id': "",
         'url': "",
@@ -4772,15 +4772,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: (_methods = {
     // ●Room読み込み時の初期化処理
     initImg: function initImg() {
-      // this.roomImg['url'] = this.roomImgData.url;
-      var tmpImgData = JSON.parse(this.roomImgData);
-      this.roomImg['type'] = tmpImgData.type;
-      this.roomImg['id'] = tmpImgData.id;
-      this.roomImg['url'] = tmpImgData.url;
-      this.roomImg['width'] = tmpImgData.width;
-      this.roomImg['height'] = tmpImgData.height;
-      this.roomImg['opacity'] = tmpImgData.opacity;
-      this.roomImg['layer'] = tmpImgData.layer;
+      // this.mediaImg['url'] = this.mediaImgData.url;
+      var tmpImgData = JSON.parse(this.mediaImgData);
+      this.mediaImg['type'] = tmpImgData.type;
+      this.mediaImg['id'] = tmpImgData.id;
+      this.mediaImg['url'] = tmpImgData.url;
+      this.mediaImg['width'] = tmpImgData.width;
+      this.mediaImg['height'] = tmpImgData.height;
+      this.mediaImg['opacity'] = tmpImgData.opacity;
+      this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie: function initMovie() {
       var tmpMovieData = JSON.parse(this.roomMovieData);
@@ -4844,23 +4844,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.isShowModal[key] = false;
       }
     },
-    setRoomImgUrl: function setRoomImgUrl(type, id, url) {
-      this.roomImg['type'] = type;
-      this.roomImg['id'] = id;
-      this.roomImg['url'] = url;
+    setMediaImgUrl: function setMediaImgUrl(type, id, url) {
+      this.mediaImg['type'] = type;
+      this.mediaImg['id'] = id;
+      this.mediaImg['url'] = url;
       this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg: function judgeDelImg(url) {
-      if (this.roomImg['url'] == url) {
-        this.roomImg['type'] = "";
-        this.roomImg['id'] = "";
-        this.roomImg['url'] = "";
+      if (this.mediaImg['url'] == url) {
+        this.mediaImg['type'] = "";
+        this.mediaImg['id'] = "";
+        this.mediaImg['url'] = "";
       }
     },
-    deleteRoomImg: function deleteRoomImg() {
-      this.roomImg['type'] = 0;
-      this.roomImg['id'] = 0;
-      this.roomImg['url'] = "";
+    deleteMediaImg: function deleteMediaImg() {
+      this.mediaImg['type'] = 0;
+      this.mediaImg['id'] = 0;
+      this.mediaImg['url'] = "";
     },
     addAudio: function addAudio(audio) {
       this.$refs.roomAudio.addAudio(audio);
@@ -4891,7 +4891,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getFinishTime();
     var url = '/room/update';
     var room_datas = {
-      'img': this.roomImg,
+      'img': this.mediaImg,
       'audios': this.roomAudios,
       'movie': this.roomMovie,
       'setting': this.mediaSetting
@@ -5026,51 +5026,6 @@ __webpack_require__.r(__webpack_exports__);
       return "/room/" + id + "/edit";
     }
   }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['roomImgUrl', 'roomImgWidth', 'roomImgHeight', 'roomImgLayer', 'roomImgOpacity', 'isShowRoomImg'],
-  data: function data() {
-    return {// frameSize : {
-      //   width : "300px",
-      //   height : "300px"
-      // },
-    };
-  },
-  methods: {},
-  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -6201,7 +6156,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.component('movie-setting-component', __
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('audio-select-component', __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-setting-component', __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-audio-component', __webpack_require__(/*! ./components/RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-img-component', __webpack_require__(/*! ./components/RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-img-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-movie-component', __webpack_require__(/*! ./components/RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('create-media-component', __webpack_require__(/*! ./components/CreateMediaComponent.vue */ "./resources/js/components/CreateMediaComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-create-button-component', __webpack_require__(/*! ./components/RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue").default);
@@ -11377,30 +11332,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&":
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* img */\n#room-img-wrapper[data-v-323124e0] {\n  pointer-events: none;\n}\n#room-img-frame[data-v-323124e0] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  /* border: 2px;\n  border-style: dotted;\n  border-color: cadetblue; */\n}\n\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomInfoComponent.vue?vue&type=style&index=0&id=0cd5a9f9&scoped=true&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomInfoComponent.vue?vue&type=style&index=0&id=0cd5a9f9&scoped=true&lang=css& ***!
@@ -11643,7 +11574,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.media-img {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  width: 350px;\n  height: 300px;\n  border: 2px;\n  border-style: dotted;\n  border-color: cadetblue;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50228,36 +50159,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_id_323124e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_id_323124e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_id_323124e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomInfoComponent.vue?vue&type=style&index=0&id=0cd5a9f9&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomInfoComponent.vue?vue&type=style&index=0&id=0cd5a9f9&scoped=true&lang=css& ***!
@@ -51715,47 +51616,6 @@ component.options.__file = "resources/js/components/RoomHeaderComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomImgComponent.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/RoomImgComponent.vue ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true& */ "./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true&");
-/* harmony import */ var _RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _RoomImgComponent_vue_vue_type_style_index_0_id_323124e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& */ "./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "323124e0",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/RoomImgComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomInfoComponent.vue":
 /*!*******************************************************!*\
   !*** ./resources/js/components/RoomInfoComponent.vue ***!
@@ -52568,22 +52428,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomInfoComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************!*\
   !*** ./resources/js/components/RoomInfoComponent.vue?vue&type=script&lang=js& ***!
@@ -53019,19 +52863,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomHeaderComponent_vue_vue_type_style_index_0_id_7b30f9fa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomHeaderComponent.vue?vue&type=style&index=0&id=7b30f9fa&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomHeaderComponent.vue?vue&type=style&index=0&id=7b30f9fa&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&":
-/*!***************************************************************************************************************!*\
-  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& ***!
-  \***************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_style_index_0_id_323124e0_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=style&index=0&id=323124e0&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -53528,23 +53359,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomHeaderComponent_vue_vue_type_template_id_7b30f9fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomHeaderComponent_vue_vue_type_template_id_7b30f9fa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomHeaderComponent.vue?vue&type=template&id=7b30f9fa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomHeaderComponent.vue?vue&type=template&id=7b30f9fa&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true& ***!
-  \*************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomImgComponent_vue_vue_type_template_id_323124e0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true&");
 
 
 /***/ }),
@@ -54185,15 +53999,15 @@ var render = function() {
         on: { "create-room": _vm.createRoom }
       }),
       _vm._v(" "),
-      _c("room-img-component", {
-        ref: "roomImg",
+      _c("media-img-component", {
+        ref: "mediaImg",
         attrs: {
-          roomImgUrl: _vm.roomImg["url"],
-          roomImgWidth: _vm.roomImg["width"] + "px",
-          roomImgHeight: _vm.roomImg["height"] + "px",
-          roomImgLayer: _vm.roomImg["layer"],
-          roomImgOpacity: _vm.roomImg["opacity"],
-          isShowRoomImg: _vm.mediaSetting["isShowImg"]
+          mediaImgUrl: _vm.mediaImg["url"],
+          mediaImgWidth: _vm.mediaImg["width"] + "px",
+          mediaImgHeight: _vm.mediaImg["height"] + "px",
+          mediaImgLayer: _vm.mediaImg["layer"],
+          mediaImgOpacity: _vm.mediaImg["opacity"],
+          isShowMediaImg: _vm.mediaSetting["isShowImg"]
         },
         on: { "parent-action": _vm.showModal }
       }),
@@ -54302,7 +54116,7 @@ var render = function() {
         attrs: { transitionName: _vm.transitionName },
         on: {
           "close-modal": _vm.closeModal,
-          "set-room-img": _vm.setRoomImgUrl,
+          "set-media-img": _vm.setMediaImgUrl,
           "img-del-notice": _vm.judgeDelImg
         }
       }),
@@ -54361,14 +54175,14 @@ var render = function() {
           roomName: _vm.mediaSetting["name"],
           roomDescription: _vm.mediaSetting["description"],
           roomBackgroundColor: _vm.mediaSetting["roomBackgroundColor"],
-          isShowRoomImg: _vm.mediaSetting["isShowImg"],
-          roomImgWidth: _vm.roomImg["width"],
-          roomImgHeight: _vm.roomImg["height"],
-          roomImgOpacity: _vm.roomImg["opacity"]
+          isShowMediaImg: _vm.mediaSetting["isShowImg"],
+          mediaImgWidth: _vm.mediaImg["width"],
+          mediaImgHeight: _vm.mediaImg["height"],
+          mediaImgOpacity: _vm.mediaImg["opacity"]
         },
         on: {
           "close-modal": _vm.closeModal,
-          "delete-room-img": _vm.deleteRoomImg
+          "delete-media-img": _vm.deleteMediaImg
         }
       })
     ],
@@ -54917,7 +54731,7 @@ var render = function() {
                         "div",
                         {
                           staticClass: "icon-cover",
-                          on: { click: _vm.setRoomImg }
+                          on: { click: _vm.setMediaImg }
                         },
                         [
                           _c("i", {
@@ -54970,7 +54784,7 @@ var render = function() {
                         "div",
                         {
                           staticClass: "icon-cover",
-                          on: { click: _vm.setRoomImg }
+                          on: { click: _vm.setMediaImg }
                         },
                         [
                           _c("i", {
@@ -55207,7 +55021,7 @@ var render = function() {
             "div",
             {
               staticClass: "setting",
-              attrs: { id: "room-img-setting-wrapper" }
+              attrs: { id: "media-img-setting-wrapper" }
             },
             [
               _c("p", { staticClass: "setting-title" }, [_vm._v("Room画像")]),
@@ -55220,7 +55034,7 @@ var render = function() {
                   size: "5",
                   placeholder: "横幅"
                 },
-                domProps: { value: _vm.roomImgWidth },
+                domProps: { value: _vm.mediaImgWidth },
                 on: { input: _vm.updateImg }
               }),
               _vm._v(" "),
@@ -55238,7 +55052,7 @@ var render = function() {
                   size: "5",
                   placeholder: "縦幅"
                 },
-                domProps: { value: _vm.roomImgHeight },
+                domProps: { value: _vm.mediaImgHeight },
                 on: { input: _vm.updateImg }
               }),
               _vm._v(" "),
@@ -55256,14 +55070,14 @@ var render = function() {
                   size: "5",
                   placeholder: "透明度"
                 },
-                domProps: { value: _vm.roomImgOpacity },
+                domProps: { value: _vm.mediaImgOpacity },
                 on: { input: _vm.updateImg }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("透明度(0～1)")]),
               _c("br"),
               _vm._v(" "),
-              _c("button", { on: { click: _vm.toggleRoomImg } }, [
+              _c("button", { on: { click: _vm.toggleMediaImg } }, [
                 _c(
                   "span",
                   {
@@ -55271,8 +55085,8 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: _vm.isShowRoomImg,
-                        expression: "isShowRoomImg"
+                        value: _vm.isShowMediaImg,
+                        expression: "isShowMediaImg"
                       }
                     ]
                   },
@@ -55286,8 +55100,8 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: !_vm.isShowRoomImg,
-                        expression: "!(isShowRoomImg)"
+                        value: !_vm.isShowMediaImg,
+                        expression: "!(isShowMediaImg)"
                       }
                     ]
                   },
@@ -55295,7 +55109,7 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("button", { on: { click: _vm.deleteRoomImg } }, [
+              _c("button", { on: { click: _vm.deleteMediaImg } }, [
                 _c("span", [_vm._v("削除")])
               ])
             ]
@@ -56212,15 +56026,15 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-img-component", {
-        ref: "roomImg",
+      _c("media-img-component", {
+        ref: "mediaImg",
         attrs: {
-          roomImgUrl: _vm.roomImg["url"],
-          roomImgWidth: _vm.roomImg["width"] + "px",
-          roomImgHeight: _vm.roomImg["height"] + "px",
-          roomImgOpacity: _vm.roomImg["opacity"],
-          roomImgLayer: _vm.roomImg["layer"],
-          isShowRoomImg: _vm.mediaSetting["isShowImg"]
+          mediaImgUrl: _vm.mediaImg["url"],
+          mediaImgWidth: _vm.mediaImg["width"] + "px",
+          mediaImgHeight: _vm.mediaImg["height"] + "px",
+          mediaImgOpacity: _vm.mediaImg["opacity"],
+          mediaImgLayer: _vm.mediaImg["layer"],
+          isShowMediaImg: _vm.mediaSetting["isShowImg"]
         }
       }),
       _vm._v(" "),
@@ -56435,15 +56249,15 @@ var render = function() {
         on: { "update-room": _vm.updateRoom }
       }),
       _vm._v(" "),
-      _c("room-img-component", {
-        ref: "roomImg",
+      _c("media-img-component", {
+        ref: "mediaImg",
         attrs: {
-          roomImgUrl: _vm.roomImg["url"],
-          roomImgWidth: _vm.roomImg["width"] + "px",
-          roomImgHeight: _vm.roomImg["height"] + "px",
-          roomImgOpacity: _vm.roomImg["opacity"],
-          roomImgLayer: _vm.roomImg["layer"],
-          isShowRoomImg: _vm.mediaSetting["isShowImg"]
+          mediaImgUrl: _vm.mediaImg["url"],
+          mediaImgWidth: _vm.mediaImg["width"] + "px",
+          mediaImgHeight: _vm.mediaImg["height"] + "px",
+          mediaImgOpacity: _vm.mediaImg["opacity"],
+          mediaImgLayer: _vm.mediaImg["layer"],
+          isShowMediaImg: _vm.mediaSetting["isShowImg"]
         },
         on: { "parent-action": _vm.showModal }
       }),
@@ -56552,7 +56366,7 @@ var render = function() {
         attrs: { transitionName: _vm.transitionName },
         on: {
           "close-modal": _vm.closeModal,
-          "set-room-img": _vm.setRoomImgUrl,
+          "set-media-img": _vm.setMediaImgUrl,
           "img-del-notice": _vm.judgeDelImg
         }
       }),
@@ -56611,14 +56425,14 @@ var render = function() {
           roomName: _vm.mediaSetting["name"],
           roomDescription: _vm.mediaSetting["description"],
           roomBackgroundColor: _vm.mediaSetting["roomBackgroundColor"],
-          isShowRoomImg: _vm.mediaSetting["isShowImg"],
-          roomImgWidth: _vm.roomImg["width"],
-          roomImgHeight: _vm.roomImg["height"],
-          roomImgOpacity: _vm.roomImg["opacity"]
+          isShowMediaImg: _vm.mediaSetting["isShowImg"],
+          mediaImgWidth: _vm.mediaImg["width"],
+          mediaImgHeight: _vm.mediaImg["height"],
+          mediaImgOpacity: _vm.mediaImg["opacity"]
         },
         on: {
           "close-modal": _vm.closeModal,
-          "delete-room-img": _vm.deleteRoomImg
+          "delete-media-img": _vm.deleteMediaImg
         }
       })
     ],
@@ -56741,96 +56555,6 @@ var staticRenderFns = [
     )
   }
 ]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomImgComponent.vue?vue&type=template&id=323124e0&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* binding */ render,
-/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      style: { "z-index": _vm.roomImgLayer },
-      attrs: { id: "room-img-wrapper" }
-    },
-    [
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowRoomImg,
-              expression: "isShowRoomImg"
-            }
-          ],
-          style: {
-            width: _vm.roomImgWidth,
-            height: _vm.roomImgHeight,
-            opacity: _vm.roomImgOpacity
-          },
-          attrs: { id: "room-img-frame" },
-          on: {
-            click: function($event) {
-              return _vm.$emit("parent-action", "imgModal")
-            }
-          }
-        },
-        [
-          _c("p", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.roomImgUrl,
-                expression: "!(roomImgUrl)"
-              }
-            ]
-          }),
-          _vm._v(" "),
-          _c("img", {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.roomImgUrl,
-                expression: "roomImgUrl"
-              }
-            ],
-            style: {
-              width: _vm.roomImgWidth,
-              height: _vm.roomImgHeight,
-              opacity: _vm.roomImgOpacity
-            },
-            attrs: {
-              id: "room-img",
-              src: _vm.roomImgUrl,
-              alt: "画像が選択されていません"
-            }
-          })
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = []
 render._withStripped = true
 
 
@@ -57601,7 +57325,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "room-img",
+          staticClass: "media-img",
           on: {
             click: function($event) {
               return _vm.showModal()

@@ -35,19 +35,19 @@
             </label>
           </div>
 
-          <div id="room-img-setting-wrapper" class="setting">
+          <div id="media-img-setting-wrapper" class="setting">
             <p class="setting-title">Room画像</p>
-            <input data-input-type="width" class="img-config-input" :value="roomImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
+            <input data-input-type="width" class="img-config-input" :value="mediaImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input data-input-type="height" class="img-config-input" :value="roomImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
+            <input data-input-type="height" class="img-config-input" :value="mediaImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
             <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
-            <input data-input-type="opacity" class="img-config-input" :value="roomImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
+            <input data-input-type="opacity" class="img-config-input" :value="mediaImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
             <span>透明度(0～1)</span><br>
-            <button v-on:click="toggleRoomImg">
-              <span v-show="isShowRoomImg">非表示</span>
-              <span v-show="!(isShowRoomImg)">表示</span>
+            <button v-on:click="toggleMediaImg">
+              <span v-show="isShowMediaImg">非表示</span>
+              <span v-show="!(isShowMediaImg)">表示</span>
             </button>
-            <button v-on:click="deleteRoomImg">
+            <button v-on:click="deleteMediaImg">
               <span>削除</span>
             </button>
           </div>
@@ -71,10 +71,10 @@ export default {
     'roomName',
     'roomDescription',
     'roomBackgroundColor',
-    'isShowRoomImg',
-    'roomImgWidth',
-    'roomImgHeight',
-    'roomImgOpacity',
+    'isShowMediaImg',
+    'mediaImgWidth',
+    'mediaImgHeight',
+    'mediaImgOpacity',
   ],
   data : () => {
     return {
@@ -96,11 +96,11 @@ export default {
       let value = event.target.value; // 横幅、高さ、透過度の値
       let type = event.target.dataset.inputType; // widthかheightかopacity
       if(type == 'width'){
-        this.$parent.roomImg['width'] = value;
+        this.$parent.mediaImg['width'] = value;
       } else if(type == 'height'){
-        this.$parent.roomImg['height'] = value;
+        this.$parent.mediaImg['height'] = value;
       } else if(type == 'opacity'){
-        this.$parent.roomImg['opacity'] = value;
+        this.$parent.mediaImg['opacity'] = value;
       }
       // this.$emit('resize-img', value, type);
     },
@@ -108,15 +108,15 @@ export default {
       let value = event.target.value;
       this.$parent.mediaSetting['roomBackgroundColor'] = value;
     },
-    toggleRoomImg() { // room画像の表示/非表示を切り替え
-      if(this.isShowRoomImg){
+    toggleMediaImg() { // room画像の表示/非表示を切り替え
+      if(this.isShowMediaImg){
         this.$parent.mediaSetting['isShowImg'] = false;
-      } else if(!(this.isShowRoomImg)){
+      } else if(!(this.isShowMediaImg)){
         this.$parent.mediaSetting['isShowImg'] = true;
       }
     },
-    deleteRoomImg(){
-      this.$emit('delete-room-img');
+    deleteMediaImg(){
+      this.$emit('delete-media-img');
     },
     changePublicState() {
       if(this.isPublic){

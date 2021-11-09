@@ -11,15 +11,15 @@
     </room-header-component>
 
     <!-- Room画像コンポーネント -->
-    <room-img-component
-     :roomImgUrl="roomImg['url']"
-     :roomImgWidth="roomImg['width'] + 'px'"
-     :roomImgHeight="roomImg['height'] + 'px'"
-     :roomImgOpacity="roomImg['opacity']"
-     :roomImgLayer="roomImg['layer']"
-     :isShowRoomImg="mediaSetting['isShowImg']"
-      ref="roomImg">
-    </room-img-component>
+    <media-img-component
+     :mediaImgUrl="mediaImg['url']"
+     :mediaImgWidth="mediaImg['width'] + 'px'"
+     :mediaImgHeight="mediaImg['height'] + 'px'"
+     :mediaImgOpacity="mediaImg['opacity']"
+     :mediaImgLayer="mediaImg['layer']"
+     :isShowMediaImg="mediaSetting['isShowImg']"
+      ref="mediaImg">
+    </media-img-component>
 
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
@@ -83,7 +83,7 @@
 import RoomHeader from './RoomHeaderComponent.vue';
 import RoomAudio from './RoomAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
-import RoomImg from './RoomImgComponent.vue';
+import MediaImg from './MediaImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import RoomInfo from './RoomInfoComponent.vue';
 import RoomOwnerInfo from './RoomOwnerInfoComponent.vue';
@@ -95,14 +95,14 @@ export default {
     RoomHeader,
     RoomAudio,
     MediaSetting,
-    RoomImg,
+    MediaImg,
     RoomMovie,
     RoomInfo,
     RoomOwnerInfo,
     LikeRoom,
   },
   props: [
-    'roomImgData',
+    'mediaImgData',
     'roomAudiosData',
     'roomMovieData',
     'mediaSettingData',
@@ -120,7 +120,7 @@ export default {
         'roomOwnerInfo' : false,
         'roomInfoModal' : false,
       },
-      roomImg : {
+      mediaImg : {
         'type' : "",
         'id' : "",
         'url' : "",
@@ -184,15 +184,15 @@ export default {
       }
     },
     initImg(){
-      // this.roomImg['url'] = this.roomImgData.url;
-      let tmpImgData = JSON.parse(this.roomImgData);
-      this.roomImg['type'] = tmpImgData.type;
-      this.roomImg['id'] = tmpImgData.id;
-      this.roomImg['url'] = tmpImgData.url;
-      this.roomImg['width'] = tmpImgData.width;
-      this.roomImg['height'] = tmpImgData.height;
-      this.roomImg['opacity'] = tmpImgData.opacity;
-      this.roomImg['layer'] = tmpImgData.layer;
+      // this.mediaImg['url'] = this.mediaImgData.url;
+      let tmpImgData = JSON.parse(this.mediaImgData);
+      this.mediaImg['type'] = tmpImgData.type;
+      this.mediaImg['id'] = tmpImgData.id;
+      this.mediaImg['url'] = tmpImgData.url;
+      this.mediaImg['width'] = tmpImgData.width;
+      this.mediaImg['height'] = tmpImgData.height;
+      this.mediaImg['opacity'] = tmpImgData.opacity;
+      this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie(){
       let tmpMovieData = JSON.parse(this.roomMovieData);
