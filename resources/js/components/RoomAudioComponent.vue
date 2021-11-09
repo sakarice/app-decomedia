@@ -1,16 +1,16 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Roomオーディオ -->
-  <div id="room-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
+  <div id="media-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
     <!-- オーディオの表示・非表示切り替え -->
     <div class="change-disp-audio-wrapper">
-      <span v-if="isEditMode" class="room-audio-num">{{roomAudioNum}}</span>
+      <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
         <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
     </div>
 
-    <div v-show="isShowAudio" class="room-audio-controller-zone">
+    <div v-show="isShowAudio" class="media-audio-controller-zone">
       <!-- オーディオ再生・停止 -->
       <div v-show="isEditMode" class="all-audio-controll-wrapper">
         <div class="all-audio-controller all-audio-play-wrapper">
@@ -31,35 +31,35 @@
       </div>
 
       <!-- 選択したオーディオ一覧 -->
-      <div id="room-audio-frame">
+      <div id="media-audio-frame">
         <ul id="audios">
-          <li class="audio-area" :id="index" v-for="(roomAudio, index) in roomAudios" :key="roomAudio.audio_url">
+          <li class="audio-area" :id="index" v-for="(mediaAudio, index) in mediaAudios" :key="mediaAudio.audio_url">
             <!-- オーディオのサムネと各種アイコン -->
-            <div class="audio-wrapper" :class="{'isPlay' : roomAudio['isPlay']}">
-              <img class="room-audio-thumbnail"
-              src="" v-show="roomAudio"
+            <div class="audio-wrapper" :class="{'isPlay' : mediaAudio['isPlay']}">
+              <img class="media-audio-thumbnail"
+              src="" v-show="mediaAudio"
               :alt="index">
-              <i class="room-audio-play-icon fas fa-caret-right fa-4x" v-on:click="playRoomAudio" v-show="!(roomAudio['isPlay'])"></i>
-              <i class="room-audio-pause-icon fas fa-pause fa-2x" v-on:click="pauseRoomAudio" v-show="roomAudio['isPlay']"></i>
-              <i class="room-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
-              <i class="room-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : roomAudio['isLoop']}"></i>
+              <i class="media-audio-play-icon fas fa-caret-right fa-4x" v-on:click="playMediaAudio" v-show="!(mediaAudio['isPlay'])"></i>
+              <i class="media-audio-pause-icon fas fa-pause fa-2x" v-on:click="pauseMediaAudio" v-show="mediaAudio['isPlay']"></i>
+              <i class="media-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
+              <i class="media-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
             </div>
             <!-- オーディオ名 -->
-            <div v-if="roomAudio" class="room-audio-name-wrapper">
-              <span class="room-audio-name">
-                {{roomAudio['name']}}
+            <div v-if="mediaAudio" class="media-audio-name-wrapper">
+              <span class="media-audio-name">
+                {{mediaAudio['name']}}
               </span>
             </div>
             <!-- ボリューム -->
             <div class="audio-vol-wrapper">
-              <i class="room-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
+              <i class="media-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
               <div class="vol-bar-wrapper">
                 <input type="range" :id="index" class="audio-vol-range" v-on:input="updateAudioVol" min="0" max="1" step="0.01">
               </div>
             </div>
 
           </li>
-          <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(roomAudios[n-1])">
+          <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(mediaAudios[n-1])">
           </li>
         </ul>
       </div>
@@ -75,7 +75,7 @@
   export default {
     props : [
       'maxAudioNum',
-      'roomAudios',
+      'mediaAudios',
     ],
 
     data : () => {
@@ -83,7 +83,7 @@
         audioPlayers : [],
         isShowAudio : false,
         isEditMode : false,
-        roomAudioNum : 0,
+        mediaAudioNum : 0,
       }
     },
     methods : {
@@ -93,24 +93,24 @@
       validEditMode(){ // 親コンポーネントから実行される
         this.isEditMode = true;
       },
-      playRoomAudio: function(event) {
+      playMediaAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].play();
-        this.$parent.roomAudios[audioIndex]['isPlay'] = true;
+        this.$parent.mediaAudios[audioIndex]['isPlay'] = true;
       },
-      pauseRoomAudio: function(event) {
+      pauseMediaAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].pause();
-        this.$parent.roomAudios[audioIndex]['isPlay'] = false;
+        this.$parent.mediaAudios[audioIndex]['isPlay'] = false;
       },
       onFinishAudio : function(i){
-        let roomAudioNum = this.$parent.roomAudios.length;
-        for(let j=0; j < roomAudioNum; j++){
-          let roomAudio = this.$parent.roomAudios[j];
-          if(roomAudio['player_index'] == i && roomAudio['isLoop'] == false){
-            this.$parent.roomAudios[j]['isPlay'] = false;
+        let mediaAudioNum = this.$parent.mediaAudios.length;
+        for(let j=0; j < mediaAudioNum; j++){
+          let mediaAudio = this.$parent.mediaAudios[j];
+          if(mediaAudio['player_index'] == i && mediaAudio['isLoop'] == false){
+            this.$parent.mediaAudios[j]['isPlay'] = false;
           }
         }
       },
@@ -118,9 +118,9 @@
         this.audioPlayers.forEach(function(audioPlayer, index){
           audioPlayer.play();
         });
-        let audioNum = this.$parent.roomAudios.length;
+        let audioNum = this.$parent.mediaAudios.length;
         for(let i = 0; i < audioNum; i++){
-          this.$parent.roomAudios[i]['isPlay'] = true;
+          this.$parent.mediaAudios[i]['isPlay'] = true;
         }
       },
       finishPlayAudio(){
@@ -129,37 +129,37 @@
           audioPlayer.currentTime = audioDuration;
         });
       },
-      setPlayerInfo(){ // 親コンポーネントのroomAudiosから再生情報を取得
-        let audioNum = this.$parent.roomAudios.length;
+      setPlayerInfo(){ // 親コンポーネントのmediaAudiosから再生情報を取得
+        let audioNum = this.$parent.mediaAudios.length;
         for(let i=0; i < audioNum; i++){
-          let audioPlayerIndex = this.roomAudios[i]['player_index'];
-          this.audioPlayers[audioPlayerIndex].src = this.roomAudios[i]['audio_url'];
-          this.audioPlayers[audioPlayerIndex].volume = this.roomAudios[i]['volume'];
-          this.audioPlayers[audioPlayerIndex].loop = this.roomAudios[i]['isLoop'];
+          let audioPlayerIndex = this.mediaAudios[i]['player_index'];
+          this.audioPlayers[audioPlayerIndex].src = this.mediaAudios[i]['audio_url'];
+          this.audioPlayers[audioPlayerIndex].volume = this.mediaAudios[i]['volume'];
+          this.audioPlayers[audioPlayerIndex].loop = this.mediaAudios[i]['isLoop'];
         }
       },
       addAudio(audio) {
         audio['isPlay'] = false;
         audio['isLoop'] = false;
         audio['volume'] = 0.5;
-        let beforeAudioNum = this.$parent.roomAudios.length;
+        let beforeAudioNum = this.$parent.mediaAudios.length;
         // オーディオは1ルームに5つまで。
         // 既に5つある場合は一つ消してから追加。
         if(beforeAudioNum == this.maxAudioNum){
           // プレイヤーの初期化
-          let resetPlayerIndex = this.$parent.roomAudios[0]['player_index'];
+          let resetPlayerIndex = this.$parent.mediaAudios[0]['player_index'];
           this.audioPlayers[resetPlayerIndex].pause();
           let newAudio = new Audio();
           this.audioPlayers.splice(resetPlayerIndex, 1, newAudio);
 
           // オーディオの入れ替え
-          this.$parent.roomAudios.splice(0, 1);
+          this.$parent.mediaAudios.splice(0, 1);
         }
-        this.$parent.roomAudios.push(audio);
+        this.$parent.mediaAudios.push(audio);
 
         // 追加されたオーディオの情報を取得
-        let addedAudioIndex = this.$parent.roomAudios.length - 1;
-        let addedAudio = this.$parent.roomAudios[addedAudioIndex];
+        let addedAudioIndex = this.$parent.mediaAudios.length - 1;
+        let addedAudio = this.$parent.mediaAudios[addedAudioIndex];
         let addedAudioUrl = addedAudio['audio_url'];
         
         // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
@@ -197,18 +197,18 @@
         for(let i = 0; i < audioNum; i++){
           // オーディオのサムネイル表示&更新
           let audioThumbnail = audioDoms[i].firstChild;
-          let targetAudio = this.$parent.roomAudios[i];
+          let targetAudio = this.$parent.mediaAudios[i];
           audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
         }
       },
       judgeDelAudio(url) {
-        if(this.roomAudioUrl == url){
-          this.roomAudioUrl = "";
+        if(this.mediaAudioUrl == url){
+          this.mediaAudioUrl = "";
         }
       },
       deleteAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
         let newAudioPlayer = new Audio(); // 新しいplayerを用意して、
         this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
@@ -218,7 +218,7 @@
           console.log(i, this.audioPlayers[i].src);
         }
 
-        this.$parent.roomAudios.splice(audioIndex, 1);
+        this.$parent.mediaAudios.splice(audioIndex, 1);
 
         // オーディオの更新
         this.$nextTick(function(){ // DOMの更新を待つ
@@ -228,14 +228,14 @@
       },
       setAudioLoop: function(event){  
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.$parent.roomAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         let audioPlayer = this.audioPlayers[playerIndex];
         if(audioPlayer.loop == false){
           audioPlayer.loop = true;
         } else if(audioPlayer.loop == true){
           audioPlayer.loop = false;
         }
-        this.$parent.roomAudios[audioIndex]['isLoop'] = audioPlayer.loop;
+        this.$parent.mediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
       },
       setAudioVolume: function(event) {
         console.log('called setAudioVolume', event.target.getAttribute('class'));
@@ -245,9 +245,9 @@
       },
       updateAudioVol(event){
         let audioIndex = event.target.getAttribute('id');
-        let audioPlayerIndex = this.roomAudios[audioIndex]['player_index'];
+        let audioPlayerIndex = this.mediaAudios[audioIndex]['player_index'];
         let audioVolume = event.target.value;
-        this.roomAudios[audioIndex]['volume'] = audioVolume;
+        this.mediaAudios[audioIndex]['volume'] = audioVolume;
         this.audioPlayers[audioPlayerIndex].volume = audioVolume;
       }
 
@@ -264,8 +264,8 @@
       };
     },
     watch : {
-      roomAudios : function(){
-        this.roomAudioNum = this.$parent.roomAudios.length;
+      mediaAudios : function(){
+        this.mediaAudioNum = this.$parent.mediaAudios.length;
       }
     }
 
@@ -323,7 +323,7 @@
   }
 
   /* audio */
-  #room-audio-wrapper {
+  #media-audio-wrapper {
     position: absolute;
     top:55px;
     bottom: 10px;
@@ -342,7 +342,7 @@
     z-index: 15;
   }
 
-  .room-audio-controller-zone{
+  .media-audio-controller-zone{
     padding-left: 15px;
     display: flex;
     flex-direction: column;
@@ -350,7 +350,7 @@
     overflow-y: scroll;
   }
 
-  #room-audio-frame {
+  #media-audio-frame {
     height: 100%;
   }
 
@@ -386,14 +386,14 @@
     align-items: center;
   }
 
-  .room-audio-thumbnail {
+  .media-audio-thumbnail {
     width: 53px;
     height: 53px;
     border-radius: 50%;
   }
 
-  .room-audio-play-icon,
-  .room-audio-pause-icon {
+  .media-audio-play-icon,
+  .media-audio-pause-icon {
     position: absolute;
     top: 5;
     z-index: -1;
@@ -401,15 +401,15 @@
     display: none;
   }
 
-  .room-audio-play-icon {
+  .media-audio-play-icon {
     left: 18px;
   }
 
-  .room-audio-pause-icon {
+  .media-audio-pause-icon {
     left: 11px;
   }
 
-  .room-audio-delete-icon {
+  .media-audio-delete-icon {
     position: absolute;
     left: -15px;
     top: -15px;
@@ -418,7 +418,7 @@
     display: none;
   }
 
-  .room-audio-loop-icon {
+  .media-audio-loop-icon {
     position: absolute;
     right: -15px;
     top: -15px;
@@ -427,7 +427,7 @@
     display: none;
   }
 
-  .room-audio-vol-icon {
+  .media-audio-vol-icon {
     /* position: absolute;
     top: 37px;
     right: 30px; */
@@ -443,36 +443,36 @@
   }
 
   .audio-area:hover
-  .room-audio-play-icon {
+  .media-audio-play-icon {
     z-index: 2;
     display: inline-block;
   }
 
   .audio-area:hover
-  .room-audio-pause-icon {
+  .media-audio-pause-icon {
     z-index: 2;
     display: inline-block;
   }
 
   .audio-area:hover
-  .room-audio-delete-icon {
+  .media-audio-delete-icon {
     z-index: 2;
     display: inline-block;
   }
 
   .audio-area:hover
-  .room-audio-loop-icon {
+  .media-audio-loop-icon {
     z-index: 2;
     display: inline-block;
   }
 
   .audio-area:hover
-  .room-audio-vol-icon {
+  .media-audio-vol-icon {
     z-index: 2;
     display: inline-block;
   }
 
-  .room-audio-name {
+  .media-audio-name {
     color : white;
     font-size: 0.7rem;
   }
@@ -501,19 +501,19 @@
 
 
   /* hover設定(各アイコン) */
-  .room-audio-play-icon:hover {
+  .media-audio-play-icon:hover {
     color:  rgba(0,255,0,1);
   }
 
-  .room-audio-pause-icon:hover {
+  .media-audio-pause-icon:hover {
     color:  rgba(0,255,0,1);
   }
 
-  .room-audio-delete-icon:hover {
+  .media-audio-delete-icon:hover {
     color:  rgba(255,10,10,1);
   }
 
-  .room-audio-loop-icon:hover {
+  .media-audio-loop-icon:hover {
     color:  rgba(10,10,255,1);
   }
 
@@ -542,7 +542,7 @@
     transform: scale(-1, 1);
   }
 
-  .room-audio-num {
+  .media-audio-num {
     z-index: 1;
     background-color: rgba(50, 110, 110, 0.7);
     color: white;
@@ -585,11 +585,11 @@
   .fa-times {
     padding: 10px 15px;
   }
-  .room-audio-delete-icon {
+  .media-audio-delete-icon {
     left: -25px;
     top: -25px;
   }
-  .room-audio-num {
+  .media-audio-num {
     padding: 0 6px;
     margin-right: -14px;
     margin-top: -50px;

@@ -10,7 +10,7 @@ class Room extends Model
     use HasFactory;
 
     public function settings(){
-        return $this->hasOne('App\Models\MediaSetting');
+        return $this->hasOne('App\Models\RoomSetting');
     }
 
     public function room_roomlists(){

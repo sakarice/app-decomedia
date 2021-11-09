@@ -22,11 +22,11 @@
     </media-img-component>
 
     <!-- Roomオーディオコンポーネント -->
-    <room-audio-component
+    <media-audio-component
      :maxAudioNum="mediaSetting['maxAudioNum']"
-     :roomAudios="roomAudios"
-     ref="roomAudio">
-    </room-audio-component>
+     :mediaAudios="mediaAudios"
+     ref="mediaAudio">
+    </media-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
@@ -118,7 +118,7 @@ import RoomHeader from './RoomHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
-import RoomAudio from './RoomAudioComponent.vue';
+import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
@@ -130,7 +130,7 @@ export default {
     ImgSelect,
     AudioSelect,
     MovieSetting,
-    RoomAudio,
+    MediaAudio,
     MediaSetting,
     MediaImg,
     RoomMovie,
@@ -138,7 +138,7 @@ export default {
   },
   props: [
     'mediaImgData',
-    'roomAudiosData',
+    'mediaAudiosData',
     'roomMovieData',
     'mediaSettingData',
   ],
@@ -180,7 +180,7 @@ export default {
         'layer' : 1,
       },
       // maxAudioNum : 5,
-      roomAudios : [],
+      mediaAudios : [],
 
 
     }
@@ -222,10 +222,10 @@ export default {
       this.mediaImg['url'] = "";
     },
     addAudio(audio) {
-      this.$refs.roomAudio.addAudio(audio);
+      this.$refs.mediaAudio.addAudio(audio);
     },
     judgeDelAudio(url) {
-      this.$refs.roomAudio.judgeDelAudio(url);
+      this.$refs.mediaAudio.judgeDelAudio(url);
     },
     createMovieFrame(){
       let vars = {
@@ -244,21 +244,21 @@ export default {
       if(this.roomMovie['videoId'] != ""){
         this.$refs.roomMovie.setMovieDurationToFinishTime();
       } else {
-        this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
+        this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
     },
     createRoom() {
       this.getFinishTime();
       const url = '/room/store';
       const tmpThis = this;
-      let room_datas = {
+      let media_datas = {
         'img' : this.mediaImg,
-        'audios' : this.roomAudios,
+        'audios' : this.mediaAudios,
         'movie' : this.roomMovie,
         'setting' : this.mediaSetting,
       }
       this.message = "room情報を保存中です...";
-      axios.post(url, room_datas)
+      axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
           this.message = "";
@@ -273,8 +273,8 @@ export default {
   },
   created() {},
   mounted() {
-    this.$nextTick(function(){ // roomAudioを編集モードに設定
-      this.$refs.roomAudio.validEditMode();
+    this.$nextTick(function(){ // mediaAudioを編集モードに設定
+      this.$refs.mediaAudio.validEditMode();
     });
   },
 

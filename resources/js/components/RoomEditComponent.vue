@@ -24,11 +24,11 @@
     </media-img-component>
 
     <!-- Roomオーディオコンポーネント -->
-    <room-audio-component
+    <media-audio-component
      :maxAudioNum="mediaSetting['maxAudioNum']"
-     :roomAudios="roomAudios"
-     ref="roomAudio">
-    </room-audio-component>
+     :mediaAudios="mediaAudios"
+     ref="mediaAudio">
+    </media-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
@@ -119,7 +119,7 @@ import RoomHeader from './RoomHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
-import RoomAudio from './RoomAudioComponent.vue';
+import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
@@ -130,14 +130,14 @@ export default {
     ImgSelect,
     AudioSelect,
     MovieSetting,
-    RoomAudio,
+    MediaAudio,
     MediaSetting,
     MediaImg,
     RoomMovie,
   },
   props: [
     'mediaImgData',
-    'roomAudiosData',
+    'mediaAudiosData',
     'roomMovieData',
     'mediaSettingData',
   ],
@@ -168,7 +168,7 @@ export default {
         'isLoop' : false,
         'layer' : 1,
       },
-      roomAudios : [],
+      mediaAudios : [],
 
       mediaSetting : {
         'id' : 0,
@@ -208,12 +208,12 @@ export default {
       this.roomMovie['layer'] = tmpMovieData.layer;
     },
     initAudio(){
-      let tmpRoomAudios = JSON.parse(this.roomAudiosData);
-      let audioNum = tmpRoomAudios.length;
+      let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
+      let audioNum = tmpMediaAudios.length;
       for(let i=0; i < audioNum; i++){
-        tmpRoomAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
-        tmpRoomAudios[i]['isPlay'] = false;
-        this.roomAudios.push(tmpRoomAudios[i]);
+        tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
+        tmpMediaAudios[i]['isPlay'] = false;
+        this.mediaAudios.push(tmpMediaAudios[i]);
       }      
     },
     initSetting(){
@@ -229,7 +229,7 @@ export default {
       this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
     },
     setAudioThumbnail(){
-      this.$refs.roomAudio.updateAudioThumbnail();
+      this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame(){
       let vars = {
@@ -277,10 +277,10 @@ export default {
       this.mediaImg['url'] = "";
     },
     addAudio(audio) {
-      this.$refs.roomAudio.addAudio(audio);
+      this.$refs.mediaAudio.addAudio(audio);
     },
     judgeDelAudio(url) {
-      this.$refs.roomAudio.judgeDelAudio(url);
+      this.$refs.mediaAudio.judgeDelAudio(url);
     },
     createMovieFrame(){
       let vars = {
@@ -299,7 +299,7 @@ export default {
       if(this.roomMovie['videoId'] != ""){
         this.$refs.roomMovie.setMovieDurationToFinishTime();
       } else {
-        this.$refs.roomAudio.setLongestAudioDurationToFinishTime();
+        this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
     },
     updateRoom() {
@@ -307,7 +307,7 @@ export default {
       const url = '/room/update';
       let room_datas = {
         'img' : this.mediaImg,
-        'audios' : this.roomAudios,
+        'audios' : this.mediaAudios,
         'movie' : this.roomMovie,
         'setting' : this.mediaSetting,
       }
@@ -333,9 +333,9 @@ export default {
 
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
-      this.$refs.roomAudio.setPlayerInfo();
-      this.$refs.roomAudio.updateAudioThumbnail();
-      this.$refs.roomAudio.validEditMode();
+      this.$refs.mediaAudio.setPlayerInfo();
+      this.$refs.mediaAudio.updateAudioThumbnail();
+      this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
       }

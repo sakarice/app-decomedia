@@ -84,7 +84,7 @@ Vue.component('img-select-component', require('./components/ImgSelectComponent.v
 Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
 Vue.component('media-setting-component', require('./components/MediaSettingComponent.vue').default);
-Vue.component('room-audio-component', require('./components/RoomAudioComponent.vue').default);
+Vue.component('media-audio-component', require('./components/MediaAudioComponent.vue').default);
 Vue.component('media-img-component', require('./components/MediaImgComponent.vue').default);
 Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);

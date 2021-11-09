@@ -3,20 +3,20 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use App\Models\Room;
-use App\Models\RoomAudio;
+use App\Models\Media;
+use App\Models\MediaAudio;
 use App\Models\PublicAudio;
 use App\Models\UserOwnAudio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomAudioFactory extends Factory
+class MediaAudioFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RoomAudio::class;
+    protected $model = MediaAudio::class;
 
     /**
      * Define the model's default state.
@@ -24,10 +24,10 @@ class RoomAudioFactory extends Factory
      * @return array
      */
     public function definition(){
-        $room_id = Room::max('id');
+        $room_id = Media::max('id');
         $owner_user_id = User::max('id');
         $default_bgm_id = PublicAudio::max('id');
-        $room_audio_data = [
+        $media_audio_data = [
             'room_id' => $room_id,
             'audio_type' => 1,  // UserOwn
             'audio_id' => $default_bgm_id,
@@ -36,7 +36,7 @@ class RoomAudioFactory extends Factory
             'isLoop' => true,
             'owner_user_id' => $owner_user_id,
         ];
-        return $room_audio_data;
+        return $media_audio_data;
     }
 
 
