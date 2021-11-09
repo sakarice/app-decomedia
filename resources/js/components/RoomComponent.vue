@@ -29,12 +29,12 @@
     </media-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
-    <room-movie-component
+    <media-movie-component
     v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="roomMovie['isLoop']"
-    :roomMovieLayer="roomMovie['layer']"
-     ref="roomMovie">
-    </room-movie-component>
+    :isLoopYoutube="mediaMovie['isLoop']"
+    :mediaMovieLayer="mediaMovie['layer']"
+     ref="mediaMovie">
+    </media-movie-component>
 
         <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
@@ -84,7 +84,7 @@ import RoomHeader from './RoomHeaderComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
-import RoomMovie from './RoomMovieComponent.vue';
+import MediaMovie from './MediaMovieComponent.vue';
 import RoomInfo from './RoomInfoComponent.vue';
 import RoomOwnerInfo from './RoomOwnerInfoComponent.vue';
 import LikeRoom from './LikeRoomComponent.vue';
@@ -96,7 +96,7 @@ export default {
     MediaAudio,
     MediaSetting,
     MediaImg,
-    RoomMovie,
+    MediaMovie,
     RoomInfo,
     RoomOwnerInfo,
     LikeRoom,
@@ -104,7 +104,7 @@ export default {
   props: [
     'mediaImgData',
     'mediaAudiosData',
-    'roomMovieData',
+    'mediaMovieData',
     'mediaSettingData',
   ],
   data : () => {
@@ -129,7 +129,7 @@ export default {
         'opacity' : 1,
         'layer' : 0,
       },
-      roomMovie : {
+      mediaMovie : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
@@ -195,12 +195,12 @@ export default {
       this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie(){
-      let tmpMovieData = JSON.parse(this.roomMovieData);
-      this.roomMovie['videoId'] = tmpMovieData.videoId;
-      this.roomMovie['width'] = tmpMovieData.width;
-      this.roomMovie['height'] = tmpMovieData.height;
-      this.roomMovie['isLoop'] = tmpMovieData.isLoop;
-      this.roomMovie['layer'] = tmpMovieData.layer;
+      let tmpMovieData = JSON.parse(this.mediaMovieData);
+      this.mediaMovie['videoId'] = tmpMovieData.videoId;
+      this.mediaMovie['width'] = tmpMovieData.width;
+      this.mediaMovie['height'] = tmpMovieData.height;
+      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
+      this.mediaMovie['layer'] = tmpMovieData.layer;
     },
     initAudio(){
       let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -228,11 +228,11 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.roomMovie['videoId'],
-        'width' : this.roomMovie['width'],
-        'height' : this.roomMovie['height'],
+        'videoId' : this.mediaMovie['videoId'],
+        'width' : this.mediaMovie['width'],
+        'height' : this.mediaMovie['height'],
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
     },
 
   },
@@ -260,7 +260,7 @@ export default {
   watch : {
     getReadyCreateMovieFrame : function(newVal){
       if(this.mediaSetting['isShowMovie'] == true 
-      && this.roomMovie['videoId'] != ""
+      && this.mediaMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();
       }

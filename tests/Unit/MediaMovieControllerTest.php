@@ -9,12 +9,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\Room;
-use App\Models\RoomMovie;
+use App\Models\Media;
+use App\Models\MediaMovie;
 
-use App\Http\Controllers\RoomMovieController;
+use App\Http\Controllers\MediaMovieController;
 
-class RoomMovieControllerTest extends TestCase
+class MediaMovieControllerTest extends TestCase
 {
     // DBをクリア（各テスト毎にクリア）
     use RefreshDatabase;
@@ -44,7 +44,7 @@ class RoomMovieControllerTest extends TestCase
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
-        $room_movie_data = array(
+        $media_movie_data = array(
             'videoId' => 1,
             'width' => 1000,
             'height' => 1000,
@@ -52,12 +52,12 @@ class RoomMovieControllerTest extends TestCase
             'layer' => 1,
         );
         $request = new \stdClass(); //key:value形式のリクエスト
-        $request->movie = $room_movie_data;
-        $room_id = mt_rand(1, 2147483647); // 適当なルームID
+        $request->movie = $media_movie_data;
+        $media_id = mt_rand(1, 2147483647); // 適当なルームID
 
         // 2. 登録
         //    requestのデータを指定したルームIDに紐づくルーム画像情報として保存
-        RoomMovieController::store($room_id, $request);
+        MediaMovieController::store($media_id, $request);
 
         // 3. 検証
     }
@@ -67,14 +67,14 @@ class RoomMovieControllerTest extends TestCase
     public function test_show(){
         // 1. 取得対象データ登録
         //    ダミーデータ登録
-        $room = Room::factory()->create();
-        $room_movie = RoomMovie::factory()->create();
-        $room_id = $room_movie->room_id;
-        \Log::info($room_id);
+        $media = Media::factory()->create();
+        $media_movie = MediaMovie::factory()->create();
+        $media_id = $media_movie->media_id;
+        \Log::info($media_id);
 
         // 2. 取得
         //    作成したダミーデータを取得
-        $room_movie_data = RoomMovieController::show($room_id);
+        $media_movie_data = MediaMovieController::show($media_id);
 
         // 3. 検証
 

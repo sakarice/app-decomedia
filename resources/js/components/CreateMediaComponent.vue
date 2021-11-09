@@ -29,12 +29,12 @@
     </media-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
-    <room-movie-component
+    <media-movie-component
     v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="roomMovie['isLoop']"
-    :roomMovieLayer="roomMovie['layer']"
-     ref="roomMovie">
-    </room-movie-component>
+    :isLoopYoutube="mediaMovie['isLoop']"
+    :mediaMovieLayer="mediaMovie['layer']"
+     ref="mediaMovie">
+    </media-movie-component>
 
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
@@ -87,9 +87,9 @@
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
     :transitionName="transitionName"
-    :movieFrameWidth="roomMovie['width']"
-    :movieFrameHeight="roomMovie['height']"
-    :isLoopYoutube="roomMovie['isLoop']">
+    :movieFrameWidth="mediaMovie['width']"
+    :movieFrameHeight="mediaMovie['height']"
+    :isLoopYoutube="mediaMovie['isLoop']">
     </movie-setting-component>
 
     <!-- Room設定コンポーネント -->
@@ -121,7 +121,7 @@ import MovieSetting from './MovieSettingComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
-import RoomMovie from './RoomMovieComponent.vue';
+import MediaMovie from './MediaMovieComponent.vue';
 import RoomCreateButton from './RoomCreateButtonComponent.vue';
 
 export default {
@@ -133,13 +133,13 @@ export default {
     MediaAudio,
     MediaSetting,
     MediaImg,
-    RoomMovie,
+    MediaMovie,
     RoomCreateButton,
   },
   props: [
     'mediaImgData',
     'mediaAudiosData',
-    'roomMovieData',
+    'mediaMovieData',
     'mediaSettingData',
   ],
   data : () => {
@@ -172,7 +172,7 @@ export default {
         'opacity' : 1,
         'layer' : 0,
       },
-      roomMovie : {
+      mediaMovie : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
@@ -229,20 +229,20 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.roomMovie['videoId'],
-        'width' : this.roomMovie['width'],
-        'height' : this.roomMovie['height'],
+        'videoId' : this.mediaMovie['videoId'],
+        'width' : this.mediaMovie['width'],
+        'height' : this.mediaMovie['height'],
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
       this.mediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame(){
-      this.$refs.roomMovie.deleteYtPlayer();
+      this.$refs.mediaMovie.deleteYtPlayer();
       this.mediaSetting['isShowMovie'] = false;
     },
     getFinishTime(){
-      if(this.roomMovie['videoId'] != ""){
-        this.$refs.roomMovie.setMovieDurationToFinishTime();
+      if(this.mediaMovie['videoId'] != ""){
+        this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } else {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
@@ -254,7 +254,7 @@ export default {
       let media_datas = {
         'img' : this.mediaImg,
         'audios' : this.mediaAudios,
-        'movie' : this.roomMovie,
+        'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,
       }
       this.message = "room情報を保存中です...";

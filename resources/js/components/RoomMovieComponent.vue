@@ -1,8 +1,8 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Room Movie-->
-  <div id="room-movie-wrapper"
-  v-bind:style="{'z-index' : roomMovieLayer}">
+  <div id="media-movie-wrapper"
+  v-bind:style="{'z-index' : mediaMovieLayer}">
 
     <!-- youtube -->
     <div id="yt-player-wrapper">
@@ -20,7 +20,7 @@
     props : [
       // 'isShowYoutube',
       'isLoopYoutube',
-      'roomMovieLayer'
+      'mediaMovieLayer'
     ],
 
     data : () => {
@@ -32,9 +32,9 @@
     methods : {
       loopYoutube(){
         if(this.isLoopYoutube == false){
-          this.$parent.roomMovie['isLoop'] = true;
+          this.$parent.mediaMovie['isLoop'] = true;
         } else {
-          this.$parent.roomMovie['isLoop'] = false;
+          this.$parent.mediaMovie['isLoop'] = false;
         }
       },
       createYtPlayer(vars){
@@ -93,7 +93,7 @@
       },
       deleteYtPlayer() {
         this.ytPlayer = "";
-        this.$parent.roomMovie['videoId'] = "";
+        this.$parent.mediaMovie['videoId'] = "";
         this.initPlayerDom();
       },
       initPlayerDom() {
@@ -135,7 +135,7 @@
   /* #youtube-url-form{
     margin: 20px;
   } */
-  #room-movie-wrapper {
+  #media-movie-wrapper {
     position : absolute;
 
   }

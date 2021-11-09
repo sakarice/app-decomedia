@@ -2255,8 +2255,8 @@ __webpack_require__.r(__webpack_exports__);
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
-/* harmony import */ var _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue");
 //
 //
 //
@@ -2390,10 +2390,10 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     MediaAudio: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-    RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
-    RoomCreateButton: _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
+    MediaMovie: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+    RoomCreateButton: _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default
   },
-  props: ['mediaImgData', 'mediaAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'mediaAudiosData', 'mediaMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -2426,7 +2426,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
         'opacity': 1,
         'layer': 0
       },
-      roomMovie: {
+      mediaMovie: {
         'videoId': "",
         'width': "500",
         'height': "420",
@@ -2483,20 +2483,20 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     },
     createMovieFrame: function createMovieFrame() {
       var vars = {
-        'videoId': this.roomMovie['videoId'],
-        'width': this.roomMovie['width'],
-        'height': this.roomMovie['height']
+        'videoId': this.mediaMovie['videoId'],
+        'width': this.mediaMovie['width'],
+        'height': this.mediaMovie['height']
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
       this.mediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame: function deleteMovieFrame() {
-      this.$refs.roomMovie.deleteYtPlayer();
+      this.$refs.mediaMovie.deleteYtPlayer();
       this.mediaSetting['isShowMovie'] = false;
     },
     getFinishTime: function getFinishTime() {
-      if (this.roomMovie['videoId'] != "") {
-        this.$refs.roomMovie.setMovieDurationToFinishTime();
+      if (this.mediaMovie['videoId'] != "") {
+        this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } else {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
@@ -2510,7 +2510,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
       var media_datas = {
         'img': this.mediaImg,
         'audios': this.mediaAudios,
-        'movie': this.roomMovie,
+        'movie': this.mediaMovie,
         'setting': this.mediaSetting
       };
       this.message = "room情報を保存中です...";
@@ -3452,13 +3452,13 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateVideoId: function updateVideoId(event) {
       var youtubeUrl = event.target.value;
-      this.$parent.roomMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
+      this.$parent.mediaMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
     },
     updateVideoWidth: function updateVideoWidth(event) {
-      this.$parent.roomMovie['width'] = event.target.value;
+      this.$parent.mediaMovie['width'] = event.target.value;
     },
     updateVideoHeight: function updateVideoHeight(event) {
-      this.$parent.roomMovie['height'] = event.target.value;
+      this.$parent.mediaMovie['height'] = event.target.value;
     },
     createMovieFrame: function createMovieFrame() {
       // 親コンポーネントの動画フレーム作成メソッドを実行
@@ -3469,9 +3469,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     loopYoutube: function loopYoutube() {
       if (this.isLoopYoutube == false) {
-        this.$parent.roomMovie['isLoop'] = true;
+        this.$parent.mediaMovie['isLoop'] = true;
       } else {
-        this.$parent.roomMovie['isLoop'] = false;
+        this.$parent.mediaMovie['isLoop'] = false;
       }
     }
   },
@@ -3958,10 +3958,10 @@ __webpack_require__.r(__webpack_exports__);
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
-/* harmony import */ var _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomInfoComponent.vue */ "./resources/js/components/RoomInfoComponent.vue");
-/* harmony import */ var _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomOwnerInfoComponent.vue */ "./resources/js/components/RoomOwnerInfoComponent.vue");
-/* harmony import */ var _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./LikeRoomComponent.vue */ "./resources/js/components/LikeRoomComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+/* harmony import */ var _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomInfoComponent.vue */ "./resources/js/components/RoomInfoComponent.vue");
+/* harmony import */ var _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomOwnerInfoComponent.vue */ "./resources/js/components/RoomOwnerInfoComponent.vue");
+/* harmony import */ var _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./LikeRoomComponent.vue */ "./resources/js/components/LikeRoomComponent.vue");
 //
 //
 //
@@ -4057,12 +4057,12 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     MediaAudio: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-    RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
-    RoomInfo: _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
-    LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default
+    MediaMovie: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+    RoomInfo: _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+    RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
+    LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default
   },
-  props: ['mediaImgData', 'mediaAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'mediaAudiosData', 'mediaMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       isMyRoom: false,
@@ -4084,7 +4084,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
         'opacity': 1,
         'layer': 0
       },
-      roomMovie: {
+      mediaMovie: {
         'videoId': "",
         'width': "500",
         'height': "420",
@@ -4151,12 +4151,12 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
       this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie: function initMovie() {
-      var tmpMovieData = JSON.parse(this.roomMovieData);
-      this.roomMovie['videoId'] = tmpMovieData.videoId;
-      this.roomMovie['width'] = tmpMovieData.width;
-      this.roomMovie['height'] = tmpMovieData.height;
-      this.roomMovie['isLoop'] = tmpMovieData.isLoop;
-      this.roomMovie['layer'] = tmpMovieData.layer;
+      var tmpMovieData = JSON.parse(this.mediaMovieData);
+      this.mediaMovie['videoId'] = tmpMovieData.videoId;
+      this.mediaMovie['width'] = tmpMovieData.width;
+      this.mediaMovie['height'] = tmpMovieData.height;
+      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
+      this.mediaMovie['layer'] = tmpMovieData.layer;
     },
     initAudio: function initAudio() {
       var tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -4186,11 +4186,11 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
     },
     createMovieFrame: function createMovieFrame() {
       var vars = {
-        'videoId': this.roomMovie['videoId'],
-        'width': this.roomMovie['width'],
-        'height': this.roomMovie['height']
+        'videoId': this.mediaMovie['videoId'],
+        'width': this.mediaMovie['width'],
+        'height': this.mediaMovie['height']
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
     }
   },
   created: function created() {
@@ -4220,7 +4220,7 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
   },
   watch: {
     getReadyCreateMovieFrame: function getReadyCreateMovieFrame(newVal) {
-      if (this.mediaSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
+      if (this.mediaSetting['isShowMovie'] == true && this.mediaMovie['videoId'] != "" && newVal == true) {
         this.createMovieFrame();
       }
     },
@@ -4291,7 +4291,7 @@ __webpack_require__.r(__webpack_exports__);
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4429,9 +4429,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     MediaAudio: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
     MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     MediaImg: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
-    RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default
+    MediaMovie: Object(function webpackMissingModule() { var e = new Error("Cannot find module './MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
   },
-  props: ['mediaImgData', 'mediaAudiosData', 'roomMovieData', 'mediaSettingData'],
+  props: ['mediaImgData', 'mediaAudiosData', 'mediaMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -4452,7 +4452,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'opacity': 1,
         'layer': 0
       },
-      roomMovie: {
+      mediaMovie: {
         'videoId': "",
         'width': "500",
         'height': "420",
@@ -4489,12 +4489,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie: function initMovie() {
-      var tmpMovieData = JSON.parse(this.roomMovieData);
-      this.roomMovie['videoId'] = tmpMovieData.videoId;
-      this.roomMovie['width'] = tmpMovieData.width;
-      this.roomMovie['height'] = tmpMovieData.height;
-      this.roomMovie['isLoop'] = tmpMovieData.isLoop;
-      this.roomMovie['layer'] = tmpMovieData.layer;
+      var tmpMovieData = JSON.parse(this.mediaMovieData);
+      this.mediaMovie['videoId'] = tmpMovieData.videoId;
+      this.mediaMovie['width'] = tmpMovieData.width;
+      this.mediaMovie['height'] = tmpMovieData.height;
+      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
+      this.mediaMovie['layer'] = tmpMovieData.layer;
     },
     initAudio: function initAudio() {
       var tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -4524,11 +4524,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     createMovieFrame: function createMovieFrame() {
       var vars = {
-        'videoId': this.roomMovie['videoId'],
-        'width': this.roomMovie['width'],
-        'height': this.roomMovie['height']
+        'videoId': this.mediaMovie['videoId'],
+        'width': this.mediaMovie['width'],
+        'height': this.mediaMovie['height']
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
     },
     // ●Room作成用の処理
     showModal: function showModal(target) {
@@ -4576,18 +4576,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, _defineProperty(_methods, "createMovieFrame", function createMovieFrame() {
     var vars = {
-      'videoId': this.roomMovie['videoId'],
-      'width': this.roomMovie['width'],
-      'height': this.roomMovie['height']
+      'videoId': this.mediaMovie['videoId'],
+      'width': this.mediaMovie['width'],
+      'height': this.mediaMovie['height']
     };
-    this.$refs.roomMovie.createYtPlayer(vars);
+    this.$refs.mediaMovie.createYtPlayer(vars);
     this.mediaSetting['isShowMovie'] = true;
   }), _defineProperty(_methods, "deleteMovieFrame", function deleteMovieFrame() {
-    this.$refs.roomMovie.deleteYtPlayer();
+    this.$refs.mediaMovie.deleteYtPlayer();
     this.mediaSetting['isShowMovie'] = false;
   }), _defineProperty(_methods, "getFinishTime", function getFinishTime() {
-    if (this.roomMovie['videoId'] != "") {
-      this.$refs.roomMovie.setMovieDurationToFinishTime();
+    if (this.mediaMovie['videoId'] != "") {
+      this.$refs.mediaMovie.setMovieDurationToFinishTime();
     } else {
       this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
     }
@@ -4599,7 +4599,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var room_datas = {
       'img': this.mediaImg,
       'audios': this.mediaAudios,
-      'movie': this.roomMovie,
+      'movie': this.mediaMovie,
       'setting': this.mediaSetting
     };
     this.message = "room情報を更新中です...";
@@ -4632,7 +4632,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     getReadyCreateMovieFrame: function getReadyCreateMovieFrame(newVal) {
-      if (this.mediaSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
+      if (this.mediaSetting['isShowMovie'] == true && this.mediaMovie['videoId'] != "" && newVal == true) {
         this.createMovieFrame();
       }
     }
@@ -4984,134 +4984,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {},
   computed: {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: [// 'isShowYoutube',
-  'isLoopYoutube', 'roomMovieLayer'],
-  data: function data() {
-    return {
-      ytPlayer: "",
-      playerVars: {}
-    };
-  },
-  methods: {
-    loopYoutube: function loopYoutube() {
-      if (this.isLoopYoutube == false) {
-        this.$parent.roomMovie['isLoop'] = true;
-      } else {
-        this.$parent.roomMovie['isLoop'] = false;
-      }
-    },
-    createYtPlayer: function createYtPlayer(vars) {
-      this.ytPlayer = new YT.Player('player', {
-        height: vars['height'],
-        width: vars['width'],
-        videoId: vars['videoId'],
-        playerVars: {
-          // 'autoplay' : 0,
-          // 'loop' : false,
-          // 'controls' : true,
-          'modestbranding': 1 // 'fs' : false,
-
-        },
-        events: {
-          'onReady': this.onPlayReady.bind(this),
-          'onStateChange': this.onPlayerStateChange.bind(this)
-        }
-      });
-    },
-    onPlayReady: function onPlayReady(event) {
-      // 再生準備完了
-      this.$parent.getReadyPlayMovie = true; // this.ytPlayer.playVideo();
-
-      if (this.$parent.autoPlay == true) {
-        event.target.playVideo();
-      }
-    },
-    // ★動画の長さ取得
-    setMovieDurationToFinishTime: function setMovieDurationToFinishTime() {
-      var movieDuration = this.ytPlayer.getDuration();
-      this.$parent.mediaSetting['finish_time'] = movieDuration;
-    },
-    onPlayerStateChange: function onPlayerStateChange(event) {
-      if (event.data == 0 && this.isLoopYoutube == true) {
-        this.ytPlayer.seekTo(0);
-        event.target.playVideo();
-      }
-    },
-    submitYoutubeUrl: function submitYoutubeUrl(event) {// let url = event.target.previousElementSibling.value;
-      // // console.log(url);
-      // let pattern = /v=.*/;
-      // let matchText = url.match(pattern); // object型で返ってくる
-      // matchText = matchText.toString(); // object⇒stringへ変換
-      // let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
-      // this.youtubeVideoId = videoId;
-      // if(this.ytPlayer == ""){
-      //   this.createYtPlayer(this.youtubeVideoId);
-      // } else if(this.ytPlayer != ""){
-      //   this.ytPlayer.cueVideoById(this.youtubeVideoId);
-      //   this.onPlayReady();
-      // }
-    },
-    deleteYtPlayer: function deleteYtPlayer() {
-      this.ytPlayer = "";
-      this.$parent.roomMovie['videoId'] = "";
-      this.initPlayerDom();
-    },
-    initPlayerDom: function initPlayerDom() {
-      // 初期状態に戻す(現在の再生プレイヤーを削除し、playerのdivタグを配置)
-      // 1.プレイヤー削除
-      var target = document.getElementById('player');
-      var clone = target.cloneNode(false);
-      target.parentNode.replaceChild(clone, target); // 2.divタグ配置
-
-      var parent = document.getElementById('yt-player-wrapper');
-      parent.innerHTML = '<div id="player"><div>';
-    }
-  },
-  created: function created() {
-    // youtubeplayer
-    var tag = window.document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    tag.async = true;
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    window.onYouTubeIframeAPIReady = function () {
-      console.log('get youtube ready');
-    };
-  }
 });
 
 /***/ }),
@@ -5863,7 +5735,7 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.component('audio-select-component', __w
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-setting-component', __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-audio-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/MediaAudioComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-img-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/MediaImgComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default);
-vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-movie-component', __webpack_require__(/*! ./components/RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-movie-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/MediaMovieComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('create-media-component', __webpack_require__(/*! ./components/CreateMediaComponent.vue */ "./resources/js/components/CreateMediaComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-create-button-component', __webpack_require__(/*! ./components/RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-update-button-component', __webpack_require__(/*! ./components/RoomUpdateButtonComponent.vue */ "./resources/js/components/RoomUpdateButtonComponent.vue").default);
@@ -11083,30 +10955,6 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.room-list-wrapper[data-v-26f5f68e] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-list-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-26f5f68e] {\r\n  list-style: none;\n}\n.preview-room-list[data-v-26f5f68e] {\r\n  position: relative;\r\n  text-align: center;\r\n  /* font-size: 50px; */\r\n  margin-right: 40px;\r\n  margin-bottom: 80px;\r\n  width: 180px;\r\n  height: 180px;\r\n  opacity: 0.8;\n}\n.preview-room-list[data-v-26f5f68e]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room-list:hover .cover-menu[data-v-26f5f68e] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room-list:hover .del-icon[data-v-26f5f68e] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-list-thumbnail[data-v-26f5f68e] {\r\n  /* position: absolute; */\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.cover-menu[data-v-26f5f68e] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-26f5f68e] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-26f5f68e] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-26f5f68e]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-26f5f68e] {\r\n  color: aqua;\n}\n.del-icon[data-v-26f5f68e] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-26f5f68e]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-26f5f68e] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-26f5f68e]:hover{\r\n  opacity: 0.8;\n}\n.room-list-select-check[data-v-26f5f68e] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-26f5f68e] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-26f5f68e]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-list-title[data-v-26f5f68e] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#room-movie-wrapper[data-v-e56789da] {\n  position : absolute;\n}\n.youtube-url-description[data-v-e56789da] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.room-yt-loop-icon[data-v-e56789da] {\n  margin: 10px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49901,36 +49749,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_id_e56789da_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_id_e56789da_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_id_e56789da_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomOwnerInfoComponent.vue?vue&type=style&index=0&id=0a59c4e2&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomOwnerInfoComponent.vue?vue&type=style&index=0&id=0a59c4e2&scoped=true&lang=css& ***!
@@ -51350,47 +51168,6 @@ component.options.__file = "resources/js/components/RoomListPreviewComponent.vue
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomMovieComponent.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/RoomMovieComponent.vue ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true&");
-/* harmony import */ var _RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _RoomMovieComponent_vue_vue_type_style_index_0_id_e56789da_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& */ "./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "e56789da",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/RoomMovieComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomOwnerInfoComponent.vue":
 /*!************************************************************!*\
   !*** ./resources/js/components/RoomOwnerInfoComponent.vue ***!
@@ -52071,22 +51848,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomOwnerInfoComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/RoomOwnerInfoComponent.vue?vue&type=script&lang=js& ***!
@@ -52484,19 +52245,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomListPreviewComponent_vue_vue_type_style_index_0_id_26f5f68e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomListPreviewComponent.vue?vue&type=style&index=0&id=26f5f68e&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomListPreviewComponent.vue?vue&type=style&index=0&id=26f5f68e&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&":
-/*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_style_index_0_id_e56789da_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=style&index=0&id=e56789da&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -52975,23 +52723,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomListPreviewComponent_vue_vue_type_template_id_26f5f68e_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomListPreviewComponent_vue_vue_type_template_id_26f5f68e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomListPreviewComponent.vue?vue&type=template&id=26f5f68e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomListPreviewComponent.vue?vue&type=template&id=26f5f68e&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true& ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomMovieComponent_vue_vue_type_template_id_e56789da_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true&");
 
 
 /***/ }),
@@ -53585,7 +53316,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-movie-component", {
+      _c("media-movie-component", {
         directives: [
           {
             name: "show",
@@ -53594,10 +53325,10 @@ var render = function() {
             expression: "mediaSetting['isShowMovie']"
           }
         ],
-        ref: "roomMovie",
+        ref: "mediaMovie",
         attrs: {
-          isLoopYoutube: _vm.roomMovie["isLoop"],
-          roomMovieLayer: _vm.roomMovie["layer"]
+          isLoopYoutube: _vm.mediaMovie["isLoop"],
+          mediaMovieLayer: _vm.mediaMovie["layer"]
         }
       }),
       _vm._v(" "),
@@ -53714,9 +53445,9 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          movieFrameWidth: _vm.roomMovie["width"],
-          movieFrameHeight: _vm.roomMovie["height"],
-          isLoopYoutube: _vm.roomMovie["isLoop"]
+          movieFrameWidth: _vm.mediaMovie["width"],
+          movieFrameHeight: _vm.mediaMovie["height"],
+          isLoopYoutube: _vm.mediaMovie["isLoop"]
         },
         on: {
           "close-modal": _vm.closeModal,
@@ -55303,7 +55034,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-movie-component", {
+      _c("media-movie-component", {
         directives: [
           {
             name: "show",
@@ -55312,10 +55043,10 @@ var render = function() {
             expression: "mediaSetting['isShowMovie']"
           }
         ],
-        ref: "roomMovie",
+        ref: "mediaMovie",
         attrs: {
-          isLoopYoutube: _vm.roomMovie["isLoop"],
-          roomMovieLayer: _vm.roomMovie["layer"]
+          isLoopYoutube: _vm.mediaMovie["isLoop"],
+          mediaMovieLayer: _vm.mediaMovie["layer"]
         }
       }),
       _vm._v(" "),
@@ -55527,7 +55258,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-movie-component", {
+      _c("media-movie-component", {
         directives: [
           {
             name: "show",
@@ -55536,10 +55267,10 @@ var render = function() {
             expression: "mediaSetting['isShowMovie']"
           }
         ],
-        ref: "roomMovie",
+        ref: "mediaMovie",
         attrs: {
-          isLoopYoutube: _vm.roomMovie["isLoop"],
-          roomMovieLayer: _vm.roomMovie["layer"]
+          isLoopYoutube: _vm.mediaMovie["isLoop"],
+          mediaMovieLayer: _vm.mediaMovie["layer"]
         }
       }),
       _vm._v(" "),
@@ -55656,9 +55387,9 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          movieFrameWidth: _vm.roomMovie["width"],
-          movieFrameHeight: _vm.roomMovie["height"],
-          isLoopYoutube: _vm.roomMovie["isLoop"]
+          movieFrameWidth: _vm.mediaMovie["width"],
+          movieFrameHeight: _vm.mediaMovie["height"],
+          isLoopYoutube: _vm.mediaMovie["isLoop"]
         },
         on: {
           "close-modal": _vm.closeModal,
@@ -56109,47 +55840,6 @@ var render = function() {
   )
 }
 var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomMovieComponent.vue?vue&type=template&id=e56789da&scoped=true& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* binding */ render,
-/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      style: { "z-index": _vm.roomMovieLayer },
-      attrs: { id: "room-movie-wrapper" }
-    },
-    [_vm._m(0), _vm._v(" "), _c("div", { attrs: { id: "youtube-url-form" } })]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { attrs: { id: "yt-player-wrapper" } }, [
-      _c("div", { attrs: { id: "player" } })
-    ])
-  }
-]
 render._withStripped = true
 
 

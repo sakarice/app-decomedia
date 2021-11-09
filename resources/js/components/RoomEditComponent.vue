@@ -31,12 +31,12 @@
     </media-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
-    <room-movie-component
+    <media-movie-component
     v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="roomMovie['isLoop']"
-    :roomMovieLayer="roomMovie['layer']"
-     ref="roomMovie">
-    </room-movie-component>
+    :isLoopYoutube="mediaMovie['isLoop']"
+    :mediaMovieLayer="mediaMovie['layer']"
+     ref="mediaMovie">
+    </media-movie-component>
 
 
     <!-- 画像&オーディオ 選択モーダル表示ボタン -->
@@ -89,9 +89,9 @@
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
     :transitionName="transitionName"
-    :movieFrameWidth="roomMovie['width']"
-    :movieFrameHeight="roomMovie['height']"
-    :isLoopYoutube="roomMovie['isLoop']">
+    :movieFrameWidth="mediaMovie['width']"
+    :movieFrameHeight="mediaMovie['height']"
+    :isLoopYoutube="mediaMovie['isLoop']">
     </movie-setting-component>
 
     <!-- Room設定コンポーネント -->
@@ -122,7 +122,7 @@ import MovieSetting from './MovieSettingComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
-import RoomMovie from './RoomMovieComponent.vue';
+import MediaMovie from './MediaMovieComponent.vue';
 
 export default {
   components : {
@@ -133,12 +133,12 @@ export default {
     MediaAudio,
     MediaSetting,
     MediaImg,
-    RoomMovie,
+    MediaMovie,
   },
   props: [
     'mediaImgData',
     'mediaAudiosData',
-    'roomMovieData',
+    'mediaMovieData',
     'mediaSettingData',
   ],
   data : () => {
@@ -161,7 +161,7 @@ export default {
         'opacity' : 1,
         'layer' : 0,
       },
-      roomMovie : {
+      mediaMovie : {
         'videoId' : "",
         'width' : "500",
         'height' : "420",
@@ -200,12 +200,12 @@ export default {
       this.mediaImg['layer'] = tmpImgData.layer;
     },
     initMovie(){
-      let tmpMovieData = JSON.parse(this.roomMovieData);
-      this.roomMovie['videoId'] = tmpMovieData.videoId;
-      this.roomMovie['width'] = tmpMovieData.width;
-      this.roomMovie['height'] = tmpMovieData.height;
-      this.roomMovie['isLoop'] = tmpMovieData.isLoop;
-      this.roomMovie['layer'] = tmpMovieData.layer;
+      let tmpMovieData = JSON.parse(this.mediaMovieData);
+      this.mediaMovie['videoId'] = tmpMovieData.videoId;
+      this.mediaMovie['width'] = tmpMovieData.width;
+      this.mediaMovie['height'] = tmpMovieData.height;
+      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
+      this.mediaMovie['layer'] = tmpMovieData.layer;
     },
     initAudio(){
       let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -233,11 +233,11 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.roomMovie['videoId'],
-        'width' : this.roomMovie['width'],
-        'height' : this.roomMovie['height'],
+        'videoId' : this.mediaMovie['videoId'],
+        'width' : this.mediaMovie['width'],
+        'height' : this.mediaMovie['height'],
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
     },
     
     // ●Room作成用の処理
@@ -284,20 +284,20 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.roomMovie['videoId'],
-        'width' : this.roomMovie['width'],
-        'height' : this.roomMovie['height'],
+        'videoId' : this.mediaMovie['videoId'],
+        'width' : this.mediaMovie['width'],
+        'height' : this.mediaMovie['height'],
       };
-      this.$refs.roomMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer(vars);
       this.mediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame(){
-      this.$refs.roomMovie.deleteYtPlayer();
+      this.$refs.mediaMovie.deleteYtPlayer();
       this.mediaSetting['isShowMovie'] = false;
     },
     getFinishTime(){
-      if(this.roomMovie['videoId'] != ""){
-        this.$refs.roomMovie.setMovieDurationToFinishTime();
+      if(this.mediaMovie['videoId'] != ""){
+        this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } else {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
@@ -308,7 +308,7 @@ export default {
       let room_datas = {
         'img' : this.mediaImg,
         'audios' : this.mediaAudios,
-        'movie' : this.roomMovie,
+        'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,
       }
       this.message = "room情報を更新中です...";
@@ -344,7 +344,7 @@ export default {
   watch : {
     getReadyCreateMovieFrame : function(newVal){
       if(this.mediaSetting['isShowMovie'] == true 
-      && this.roomMovie['videoId'] != ""
+      && this.mediaMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();
       }
