@@ -9,10 +9,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\DefaultBgm;
+use App\Models\PublicAudio;
 use App\Models\Room;
 use App\Models\RoomImg;
-use App\Models\RoomBgm;
+use App\Models\RoomAudio;
 use App\Models\RoomMovie;
 use App\Models\RoomSetting;
 
@@ -48,11 +48,10 @@ class RoomUtilTest extends TestCase
         // パターン3：Room画像も動画も設定されてなくて、Room音楽が設定されている
         // 0. 【準備】登録用データ作成
 
-        // $default_img = DefaultImg::factory()->create();
         // パターン3：Room画像も動画も設定されてなくて、Room音楽が設定されている
         $room = Room::factory()->create();
-        DefaultBgm::factory()->create();
-        RoomBgm::factory()->create();
+        PublicAudio::factory()->create();
+        RoomAudio::factory()->create();
         $room_id = RoomImg::max('room_id');
 
         // テスト

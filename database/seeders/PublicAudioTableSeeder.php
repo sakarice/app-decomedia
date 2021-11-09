@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DefaultBgmTableSeeder extends Seeder
+class PublicAudioTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class DefaultBgmTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\DefaultBgm::create([
+        \App\Models\PublicAudio::create([
             'owner_user_id' => NULL,
             'name' => 'test_audio',
             'audio_path' => 'test_audio_path',

@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
 use App\Http\Controllers\RoomImgController;
@@ -80,7 +80,7 @@ class RoomImgControllerTest extends TestCase
         // 1. 取得対象データ登録
         //    ダミーデータ登録
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $room_img = RoomImg::factory()->create();
         $room_id = RoomImg::max('room_id');
 
@@ -102,7 +102,7 @@ class RoomImgControllerTest extends TestCase
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $room_img = RoomImg::factory()->create();
         $room_id = RoomImg::max('room_id');
 
@@ -140,7 +140,7 @@ class RoomImgControllerTest extends TestCase
         // 1. 削除対象データ登録
         //    ダミーデータ作成
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $room_img = RoomImg::factory()->create();
         $room_id = RoomImg::max('room_id');
 

@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\RoomImg;
 use App\Models\Room;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,7 +26,7 @@ class RoomImgFactory extends Factory
     {
         $room_id = Room::max('id');
         $img_type = 1;
-        $img_id = DefaultImg::max('id');
+        $img_id = PublicImg::max('id');
 
         $room_img_data = [
             'room_id' => $room_id,

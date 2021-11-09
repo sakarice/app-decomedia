@@ -10,21 +10,21 @@ use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 
-class DefaultImgController extends Controller
+class PublicImgController extends Controller
 {
     // 1.index
     // Room作成・編集画面で使用。デフォルト画像を取得
     public function index(){
         $owner_user_id = Auth::user()->id;
-        $default_imgs = DefaultImg::get();
+        $public_imgs = PublicImg::get();
         $img_file_datas = array();
         
-        foreach($default_imgs as $index => $default_img){
+        foreach($public_imgs as $index => $public_img){
             $tmp_img_file_datas = array();
-            $tmp_img_file_datas += array('id' => $default_img->id);
-            $tmp_img_file_datas += array('url' => $default_img->img_url);
+            $tmp_img_file_datas += array('id' => $public_img->id);
+            $tmp_img_file_datas += array('url' => $public_img->img_url);
             $img_file_datas[$index] = $tmp_img_file_datas;
         };
 

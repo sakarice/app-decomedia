@@ -9,8 +9,6 @@ use App\Lib\StoreFileInS3;
 use App\Http\Controllers\Bgm\AudioController;
 use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultBgm;
 use App\Models\UserOwnAudio;
 use App\Models\UserOwnAudioThumbnail;
 use App\Models\UserOwnAudioAudioThumbnail;
@@ -18,7 +16,6 @@ use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
 use App\Models\Room;
-use App\Models\RoomBgm;
 use Storage;
 
 class AudioUtil

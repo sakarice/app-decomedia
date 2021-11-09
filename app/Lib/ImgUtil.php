@@ -12,7 +12,6 @@ use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
 use App\Models\PublicImg;
 use App\Models\RoomImg;
 use Storage;

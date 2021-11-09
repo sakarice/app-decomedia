@@ -62,10 +62,10 @@ Route::middleware('auth')->group(function(){
 
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');
-        Route::get('/ajax/getDefaultImgs', 'App\Http\Controllers\DefaultImgController@index');
+        Route::get('/ajax/getPublicImgs', 'App\Http\Controllers\PublicImgController@index');
         Route::post('/ajax/uploadImg', 'App\Http\Controllers\ImgController@store');
         Route::post('/ajax/deleteImg', 'App\Http\Controllers\UserOwnImgController@destroy');
-        Route::get('/ajax/getDefaultAudios', 'App\Http\Controllers\PublicAudioController@index');
+        Route::get('/ajax/getPublicAudios', 'App\Http\Controllers\PublicAudioController@index');
         Route::get('/ajax/getUserOwnAudios', 'App\Http\Controllers\UserOwnAudioController@index');
         Route::post('/ajax/uploadAudio', 'App\Http\Controllers\AudioController@store');
         Route::post('/ajax/deleteAudio', 'App\Http\Controllers\UserOwnAudioController@destroy');
@@ -97,10 +97,9 @@ Route::middleware('auth')->group(function(){
 
 // roomの作成者情報を表示
     Route::get('/user/roomOwner/profile/show/{room_id}', 'App\Lib\UserUtil@getRoomOwnerData');
-// defaultImgアップロード(開発用、後で消す)
+// publicImgアップロード(開発用、後で消す)
     Route::get('/uploadPublicFiles', 'App\Lib\Common\Functions@view');
     Route::post('/uploadPublicFiles', 'App\Lib\Common\Functions@uploadFile');
-// Route::post('/ajax/uploadDefaultImg', 'App\Http\Controllers\CreateRoom2Controller@saveDefaultImgFile');
 
 // phpinfo(確認用、後で消す)
     Route::get('/home/phpinfo', function () {

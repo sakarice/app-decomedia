@@ -5,10 +5,6 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultBgm;
 use App\Models\Room;
 use Storage;
 
@@ -23,10 +19,6 @@ class StoreFileInS3
       case preg_match('/^image/', $file->getMimeType()):
         $directry = "users/".$user_id."/img/media";
         break;
-      case preg_match('/^audio/', $file->getMimeType()): 
-        $directry = "users/".$user_id."/audio/media";
-        break;
-    }
     // S3へファイル保存 & DBへ登録する保存先パスを取得
     $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
     return $filePath;
@@ -44,11 +36,7 @@ class StoreFileInS3
         $directry = "public/audio/media";
         break;
       case 'audio-thumbnail':
-        $directry = "public/img/audio_thumbnail";
-        break;
-    }
-    
-    // S3へファイル保存 & 保存先パスを返す
+        $directry = "publ 保存先パスを返す
     $file = $request->file($fileType);
     $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
     return $filePath;

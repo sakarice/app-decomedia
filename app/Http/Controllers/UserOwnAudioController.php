@@ -9,16 +9,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\UserOwnBgm;
+use App\Models\RoomAudio;
+use App\Models\UserOwnAudio;
 
 class UserOwnAudioController extends Controller
 {
     // 1.index
-    // Room作成・編集画面で使用。デフォルトBGMを取得
+    // Room作成・編集画面で使用。デフォルトAudioを取得
     public function index(){
         $owner_user_id = Auth::user()->id;
-        $user_own_audios = UserOwnBgm::where('owner_user_id', $owner_user_id)->get();
+        $user_own_audios = UserOwnAudio::where('owner_user_id', $owner_user_id)->get();
         $audios = array();
         foreach($user_own_audios as $index => $user_own_audio){
             $tmpAudios = array();
@@ -48,7 +48,7 @@ class UserOwnAudioController extends Controller
         // S3からファイルを削除
         Storage::disk('s3')->delete($del_audio_url);
         // DBからレコード削除
-        UserOwnBgm::where('owner_user_id', $owner_user_id)
+        UserOwnAudio::where('owner_user_id', $owner_user_id)
                     ->where('audio_url', $del_audio_url)
                     ->first()
                     ->delete();

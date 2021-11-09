@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class DefaultImgTableSeeder extends Seeder
+class PublicImgTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class DefaultImgTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\DefaultImg::create([
+        \App\Models\PublicImg::create([
             'owner_user_id' => NULL,
             'name' => 'test_img',
             'img_path' => 'test_img_path',

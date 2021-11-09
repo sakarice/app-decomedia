@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RoomBgmTableSeeder extends Seeder
+class RoomAudioTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,14 @@ class RoomBgmTableSeeder extends Seeder
     public function run()
     {
         // ユーザがアップロードした音源ファイルを登録
-        \App\Models\RoomBgm::create([
+        \App\Models\RoomAudio::create([
             'room_id' => 1,
             'audio_id' => 1,
             'audio_order_seq' => 1,
             'owner_user_id' => 1
         ]);
         // デフォルトの音源ファイルを登録
-        \App\Models\RoomBgm::create([
+        \App\Models\RoomAudio::create([
             'room_id' => 1,
             'audio_id' => 1,
             'audio_order_seq' => 2,

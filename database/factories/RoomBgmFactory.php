@@ -4,19 +4,19 @@ namespace Database\Factories;
 
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\DefaultBgm;
-use App\Models\UserOwnBgm;
+use App\Models\RoomAudio;
+use App\Models\PublicAudio;
+use App\Models\UserOwnAudio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomBgmFactory extends Factory
+class RoomAudioFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RoomBgm::class;
+    protected $model = RoomAudio::class;
 
     /**
      * Define the model's default state.
@@ -26,7 +26,7 @@ class RoomBgmFactory extends Factory
     public function definition(){
         $room_id = Room::max('id');
         $owner_user_id = User::max('id');
-        $default_bgm_id = DefaultBgm::max('id');
+        $default_bgm_id = PublicAudio::max('id');
         $room_audio_data = [
             'room_id' => $room_id,
             'audio_type' => 1,  // UserOwn
@@ -50,8 +50,8 @@ class RoomBgmFactory extends Factory
     {
         return $this->state(function(){
             return [
-                'audio_type' => 1,  // Default
-                'audio_id' => DefaultBgm::max('id'),
+                'audio_type' => 1,  // Public
+                'audio_id' => PublicAudio::max('id'),
             ];
         });
     }
@@ -62,7 +62,7 @@ class RoomBgmFactory extends Factory
         return $this->state(function() {
             return [
                 'audio_type' => 2,  // userOwn
-                'audio_id' => UserOwnBgm::max('id'),
+                'audio_id' => UserOwnAudio::max('id'),
             ];
         });
     }

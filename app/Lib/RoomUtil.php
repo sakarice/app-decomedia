@@ -13,17 +13,15 @@ use App\Http\Controllers\RoomMovieController;
 use App\Http\Controllers\RoomSettingController;
 use App\Lib\ImgUtil;
 use App\Lib\RoomImgUtil;
-use App\Lib\DefaultImgUtil;
+use App\Lib\PublicImgUtil;
 use App\Lib\UserOwnImgUtil;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultImg;
-use App\Models\DefaultBgm;
+use App\Models\PublicImg;
 use App\Models\RoomImg;
-use App\Models\RoomBgm;
+use App\Models\RoomAudio;
 use App\Models\RoomMovie;
 use App\Models\RoomSetting;
 use Storage;
@@ -133,7 +131,7 @@ class RoomUtil
       $imgPattern = 1;
     } else if(RoomMovie::where('room_id', $room_id)->exists()){
       $imgPattern = 2;
-    } else if(RoomBgm::where('room_id', $room_id)->exists()){
+    } else if(RoomAudio::where('room_id', $room_id)->exists()){
       $imgPattern = 3;
     }
 
@@ -176,8 +174,8 @@ class RoomUtil
         if($request->img['id'] != 0){
           $img_id = $request->img['id'];
           $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isDefaultImg = DefaultImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isDefaultImg){
+          $isPublicImg = PublicImg::where('id', $img_id)->exists();
+          if($isOwnImg || $isPublicImg){
             RoomImgController::store($room_id, $request);
           }
         } else if($request->img['id'] == 0){ // room画像が設定されていなければ、仮情報を保存
@@ -215,8 +213,8 @@ class RoomUtil
         if($request->img['id'] != 0){
           $img_id = $request->img['id'];
           $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isDefaultImg = DefaultImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isDefaultImg){
+          $isPublicImg = PublicImg::where('id', $img_id)->exists();
+          if($isOwnImg || $isPublicImg){
             RoomImgController::update($room_id, $request);
           }
         } else if($request->img['id'] == 0){ // room画像が設定されていなければ、仮情報を保存
@@ -254,7 +252,7 @@ class RoomUtil
         // Room画像
         RoomImgController::destroy($room_id);
         // Room音楽
-        if(RoomBgm::where('room_id', $room_id)->exists()){                
+        if(RoomAudio::where('room_id', $room_id)->exists()){                
             RoomAudioController::destroy($room_id);
         }
         // Room動画

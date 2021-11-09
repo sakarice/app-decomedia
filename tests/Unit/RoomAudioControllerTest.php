@@ -10,9 +10,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\DefaultBgm;
-use App\Models\UserOwnBgm;
+use App\Models\RoomAudio;
+use App\Models\DefaultAudio;
+use App\Models\UserOwnAudio;
 use App\Http\Controllers\RoomAudioController;
 
 class RoomAudioControllerTest extends TestCase

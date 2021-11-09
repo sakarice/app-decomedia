@@ -1996,10 +1996,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         alert('オーディオ取得失敗');
       });
     },
-    getDefaultAudios: function getDefaultAudios() {
+    getPublicAudios: function getPublicAudios() {
       var _this2 = this;
 
-      var url = '/ajax/getDefaultAudios';
+      var url = '/ajax/getPublicAudios';
       axios.get(url).then(function (response) {
         response.data.audios.forEach(function (audio) {
           audio['isPlay'] = false;
@@ -2197,7 +2197,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }),
   mounted: function mounted() {
     this.getUserOwnAudios();
-    this.getDefaultAudios();
+    this.getPublicAudios();
     var audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
   }
@@ -3009,7 +3009,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     getDefaultImgs: function getDefaultImgs() {
       var _this2 = this;
 
-      var url = '/ajax/getDefaultImgs';
+      var url = '/ajax/getPublicImgs';
       axios.get(url).then(function (response) {
         // alert(response.data.urls[0]);
         response.data.file_datas.forEach(function (file_data) {

@@ -9,8 +9,6 @@ use App\Lib\StoreFileInS3;
 use App\Lib\ImgUtil;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
 use App\Models\RoomImg;
 use Storage;
 

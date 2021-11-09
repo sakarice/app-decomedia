@@ -12,16 +12,11 @@ use App\Lib\RoomListUtil;
 use App\Lib\RoomRoomListUtil;
 use App\Models\User;
 use App\Models\UserOwnImg;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultImg;
-use App\Models\DefaultBgm;
+use App\Models\PublicImg;
 use App\Models\Room;
 use App\Models\Roomlist;
 use App\Models\RoomRoomlist;
 use App\Models\RoomImg;
-use App\Models\RoomBgm;
-use App\Models\RoomMovie;
-use App\Models\RoomSetting;
 
 use Storage;
 
@@ -56,7 +51,7 @@ class RoomListController extends Controller
 
         $firstRoomImgUrl;
         if($firstRoomImgType == 1){
-            $firstRoomImgUrl = DefaultImg::find($firstRoomImgId)->img_url;
+            $firstRoomImgUrl = PublicImg::find($firstRoomImgId)->img_url;
         } else if ($firstRoomImgType == 2){
             $firstRoomImgUrl = UserOwnImg::find($firstRoomImgId)->img_url;
         }

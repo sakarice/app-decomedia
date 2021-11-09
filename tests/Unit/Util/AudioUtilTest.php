@@ -7,12 +7,8 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
-use App\Models\User;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultBgm;
-
 use App\Lib\AudioUtil;
+use App\Models\User;
 
 class AudioUtilTest extends TestCase
 {

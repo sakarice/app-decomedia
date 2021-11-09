@@ -10,7 +10,7 @@ use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Storage;
 
@@ -114,7 +114,7 @@ class RoomImgUtil
     $room_img_model;
     switch ($img_type){
       case 1: // デフォルト画像
-        $room_img_model = DefaultImg::where('id', $img_id)->first();
+        $room_img_model = PublicImg::where('id', $img_id)->first();
         break;
       case 2: // ユーザがアップロードした画像
         $room_img_model = UserOwnImg::where('id', $img_id)->first();

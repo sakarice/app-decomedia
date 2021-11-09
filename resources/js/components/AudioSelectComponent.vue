@@ -122,8 +122,8 @@ export default {
           alert('オーディオ取得失敗');
         })
     },
-    getDefaultAudios(){
-      const url = '/ajax/getDefaultAudios';
+    getPublicAudios(){
+      const url = '/ajax/getPublicAudios';
       axios.get(url)
         .then(response => {
           response.data.audios.forEach(audio => {
@@ -321,7 +321,7 @@ export default {
   },
   mounted : function() {
     this.getUserOwnAudios();
-    this.getDefaultAudios();
+    this.getPublicAudios();
 
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);

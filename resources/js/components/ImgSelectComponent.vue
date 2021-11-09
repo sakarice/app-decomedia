@@ -99,7 +99,7 @@ export default {
         })
     },
     getDefaultImgs(){
-      const url = '/ajax/getDefaultImgs';
+      const url = '/ajax/getPublicImgs';
       axios.get(url)
         .then(response => {
           // alert(response.data.urls[0]);

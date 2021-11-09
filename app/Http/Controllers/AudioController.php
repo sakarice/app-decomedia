@@ -6,12 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
+use App\Lib\Common\StringProcessing;
 use App\Lib\AudioUtil;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultBgm;
-use App\Models\RoomBgm;
+use App\Models\UserOwnAudioAudioThumbnail;
 use Storage;
 
 class AudioController extends Controller
@@ -24,7 +23,7 @@ class AudioController extends Controller
         public function store(Request $request){
                 $user_id = Auth::user()->id;
                 $audio_file = $request->file('audio');
-                $audio_name = $audio_file->getClientOriginalName();
+                $audio_name = StringProcessing::getFilenameExceptExt($audio_file->getClientOriginalName());
                 $audio_save_path = StoreFileInS3::userOwnMediaFile($user_id, $audio_file);
                 $audio_save_url= Storage::disk('s3')->url($audio_save_path);
                 // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する

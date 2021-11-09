@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\DefaultBgm;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;

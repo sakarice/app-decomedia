@@ -9,9 +9,7 @@ use App\Lib\RoomAudioUtil;
 use App\Lib\storeFileInS3;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\UserOwnBgm;
-use App\Models\DefaultBgm;
-use App\Models\RoomBgm;
+use App\Models\RoomAudio;
 use Storage;
 
 
@@ -28,8 +26,8 @@ class RoomAudioController extends Controller
 
         // 4.show
         public static function show($room_id){
-            $room_bgm_data = RoomAudioUtil::getRoomAudioData($room_id);    
-            return $room_bgm_data;
+            $room_audio_data = RoomAudioUtil::getRoomAudioData($room_id);    
+            return $room_audio_data;
         }
 
         // 5.edit
@@ -40,7 +38,7 @@ class RoomAudioController extends Controller
         }
         // 7.destroy
         public static function destroy($room_id){
-            RoomBgm::where('room_id', $room_id)->delete();
+            RoomAudio::where('room_id', $room_id)->delete();
         }
     
 }

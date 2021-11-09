@@ -10,18 +10,10 @@ use App\Lib\AudioUtil;
 use App\Lib\StoreFileInS3;
 use App\Lib\Common\StringProcessing;
 use App\Models\User;
-use App\Models\DefaultBgm;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
-use App\Models\DefaultImg;
-use App\Models\UserOwnBgm;
-use App\Models\UserOwnImg;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\RoomImg;
-use App\Models\Roomlist;
-use App\Models\RoomRoomlist;
 
 use Storage;
 

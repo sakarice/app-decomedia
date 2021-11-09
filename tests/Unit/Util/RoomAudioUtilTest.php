@@ -10,9 +10,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomBgm;
-use App\Models\DefaultBgm;
-use App\Models\UserOwnBgm;
+use App\Models\RoomAudio;
+use App\Models\PublicAudio;
+use App\Models\UserOwnAudio;
 
 use App\Lib\RoomAudioUtil;
 
@@ -42,8 +42,8 @@ class RoomAudioUtilTest extends TestCase
     public function test_saveRoomAudioData(){
         // 0. 【準備】音楽情報を登録
         Room::factory()->create();
-        DefaultBgm::factory()->create();
-        UserOwnBgm::factory()->create();
+        PublicAudio::factory()->create();
+        UserOwnAudio::factory()->create();
 
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
@@ -58,11 +58,11 @@ class RoomAudioUtilTest extends TestCase
             switch ($i) {
                 case 1:
                     $tmp_room_audio['audio_url']
-                     = DefaultBgm::latest()->first()->audio_url;
+                     = PublicAudio::latest()->first()->audio_url;
                     break;
                 case 2:
                     $tmp_room_audio['audio_url']
-                     = UserOwnBgm::latest()->first()->audio_url;
+                     = UserOwnAudio::latest()->first()->audio_url;
                     break;
             }
             $room_audio_datas[] = $tmp_room_audio;
@@ -92,11 +92,11 @@ class RoomAudioUtilTest extends TestCase
     public function test_getRoomAudioData(){
         // 0. 【準備】音楽情報を登録
         Room::factory()->create();
-        DefaultBgm::factory()->create();
-        UserOwnBgm::factory()->create();
+        PublicAudio::factory()->create();
+        UserOwnAudio::factory()->create();
         $sample_room_audio_datas = array();
-        $sample_room_audio_datas[] = RoomBgm::factory()->default()->create();
-        $sample_room_audio_datas[] = RoomBgm::factory()->userown()->create(['order_seq'=>2]);
+        $sample_room_audio_datas[] = RoomAudio::factory()->default()->create();
+        $sample_room_audio_datas[] = RoomAudio::factory()->userown()->create(['order_seq'=>2]);
         $room_id = $sample_room_audio_datas[0]->room_id;
         $room_audio_datas = RoomAudioUtil::getRoomAudioData($room_id);
 
@@ -115,20 +115,20 @@ class RoomAudioUtilTest extends TestCase
     public function test_equalizeNumOfRoomAudioDataWithRequest(){
         // 0.【準備】roomAudioを2つ作成
         Room::factory()->create();
-        DefaultBgm::factory()->create();
-        UserOwnBgm::factory()->create();
-        RoomBgm::factory()->default()->create();
-        RoomBgm::factory()->userown()->create(['order_seq'=>2]);
-        $room_id = RoomBgm::max('room_id');
+        PublicAudio::factory()->create();
+        UserOwnAudio::factory()->create();
+        RoomAudio::factory()->default()->create();
+        RoomAudio::factory()->userown()->create(['order_seq'=>2]);
+        $room_id = RoomAudio::max('room_id');
 
         // パターン1:roomAudioが減る場合(2つ⇒1つ)
         RoomAudioUtil::equalizeNumOfRoomAudioDataWithRequest($room_id, 1);
-        $room_audio_num = RoomBgm::where('room_id', $room_id)->count();
+        $room_audio_num = RoomAudio::where('room_id', $room_id)->count();
         $this->assertEquals($room_audio_num, 1);
 
         // パターン2:roomAudioが増える場合(1つ⇒3つ)
         RoomAudioUtil::equalizeNumOfRoomAudioDataWithRequest($room_id, 3);
-        $room_audio_num = RoomBgm::where('room_id', $room_id)->count();
+        $room_audio_num = RoomAudio::where('room_id', $room_id)->count();
         $this->assertEquals($room_audio_num, 3);
     }
 
@@ -136,11 +136,11 @@ class RoomAudioUtilTest extends TestCase
     public function test_updateRoomAudioData(){
         // 0.【準備】更新対象のroomAudioを作成
         Room::factory()->create();
-        DefaultBgm::factory()->create();
-        UserOwnBgm::factory()->create();
-        RoomBgm::factory()->default()->create();
-        RoomBgm::factory()->userown()->create(['order_seq'=>2]);
-        $room_id = RoomBgm::max('room_id');
+        PublicAudio::factory()->create();
+        UserOwnAudio::factory()->create();
+        RoomAudio::factory()->default()->create();
+        RoomAudio::factory()->userown()->create(['order_seq'=>2]);
+        $room_id = RoomAudio::max('room_id');
 
         // パターン1:requestのroomAudioが更新前より少ない(更新前:2つ 更新後:1つ)
         $room_audio_datas = array();
@@ -148,7 +148,7 @@ class RoomAudioUtilTest extends TestCase
             'type' => 1,
             'volume' => 0.1,
             'isLoop' => false,
-            'audio_url' => DefaultBgm::latest()->first()->audio_url,
+            'audio_url' => PublicAudio::latest()->first()->audio_url,
         );
         $room_audio_datas[] = $tmp_room_audio;        
         $request1 = new \stdClass(); //key:value形式のリクエスト
@@ -159,7 +159,7 @@ class RoomAudioUtilTest extends TestCase
 
         // 3. 【検証】
         // roomAudioの数が1つになっていること
-        $room_audio_num = RoomBgm::where('room_id', $room_id)->count();
+        $room_audio_num = RoomAudio::where('room_id', $room_id)->count();
         $this->assertEquals($room_audio_num, 1);
         $this->assertDatabaseHas('room_bgms', [
             'audio_type' => 1,
@@ -182,7 +182,7 @@ class RoomAudioUtilTest extends TestCase
 
         // 3. 【検証】
         // roomAudioの数が2つになっていること
-        $room_audio_num = RoomBgm::where('room_id', $room_id)->count();
+        $room_audio_num = RoomAudio::where('room_id', $room_id)->count();
         $this->assertEquals($room_audio_num, 2);
         $this->assertDatabasehas('room_bgms', [
             'audio_type' => 1,
@@ -205,7 +205,7 @@ class RoomAudioUtilTest extends TestCase
 
         // 3. 【検証】
         // roomAudioがDBに存在しないこと
-        $room_audio_num = RoomBgm::where('room_id', $room_id)->count();
+        $room_audio_num = RoomAudio::where('room_id', $room_id)->count();
         $this->assertEquals($room_audio_num, 0);
     }
 
@@ -226,14 +226,14 @@ class RoomAudioUtilTest extends TestCase
 
     public function test_getAudioId(){
         // パターン1:デフォルト音楽
-        $default_bgm = DefaultBgm::factory()->create();
-        $default_bgm_url = $default_bgm->audio_url;        
-        $expected_audio_id = $default_bgm->id;
-        $actual_audio_id = RoomAudioUtil::getAudioId(1, $default_bgm_url);
+        $public_bgm = PublicAudio::factory()->create();
+        $public_bgm_url = $public_bgm->audio_url;        
+        $expected_audio_id = $public_bgm->id;
+        $actual_audio_id = RoomAudioUtil::getAudioId(1, $public_bgm_url);
         $this->assertEquals($expected_audio_id, $actual_audio_id);
 
         // パターン2:ユーザがアップロードした音楽
-        $user_own_bgm = UserOwnBgm::factory()->create();
+        $user_own_bgm = UserOwnAudio::factory()->create();
         $user_own_bgm_url = $user_own_bgm->audio_url;
         $expected_audio_id = $user_own_bgm->id;
         $actual_audio_id = RoomAudioUtil::getAudioId(2, $user_own_bgm_url);

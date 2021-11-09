@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 
 use App\Lib\ImgUtil;
 
@@ -49,7 +49,7 @@ class ImgUtilTest extends TestCase
         // パターン1 デフォルト画像
         // 1. 保存
         $saved_img_id = ImgUtil::saveImgData($fileDatas);
-        // 2. 検証：保存したレコードがDefaultImgテーブルに存在すること
+        // 2. 検証：保存したレコードがPublicImgテーブルに存在すること
         $this->assertDatabaseHas('default_imgs',[
             'id' => $saved_img_id,
             'owner_user_id' => NULL,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserOwnAudioAudioThumbnailsTable extends Migration
+class CreateRoomAudiosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,15 @@ class CreateUserOwnAudioAudioThumbnailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_own_audio_audio_thumbnails', function (Blueprint $table) {
+        Schema::create('room_audios', function (Blueprint $table) {
             $table->id();
+            $table->integer('room_id');
+            $table->integer('audio_type'); // default or userOwn
             $table->integer('audio_id');
-            $table->integer('audio_thumbnail_id')->defaut(NULL)->nullable();
+            $table->integer('order_seq');
+            $table->double('volume', 3, 2);
+            $table->boolean('isLoop');
+            $table->integer('owner_user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +33,6 @@ class CreateUserOwnAudioAudioThumbnailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_own_audio_audio_thumbnails');
+        Schema::dropIfExists('room_audios');
     }
 }

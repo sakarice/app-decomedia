@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
 use App\Lib\RoomImgUtil;
@@ -95,7 +95,7 @@ class RoomImgUtilTest extends TestCase
     public function test_getRoomImgData(){
         // 準備：対象のルーム、ルームと紐づける画像データ作成
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
 
         // パターン1 ルーム画像未設定のためDBにはデフォルト値が保存されている
         // 1. ルームID取得（※ルーム画像のimg_idを0に設定）
@@ -126,7 +126,7 @@ class RoomImgUtilTest extends TestCase
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $room_img = RoomImg::factory()->create();
         $room_id = RoomImg::max('room_id');
 
@@ -163,7 +163,7 @@ class RoomImgUtilTest extends TestCase
     public function test_updateRoomImgDataToTentative() {
         // 1. 更新対象データ登録
         $room = Room::factory()->create();
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $room_img = RoomImg::factory()->create();
         $room_id = RoomImg::max('room_id');
 
@@ -199,7 +199,7 @@ class RoomImgUtilTest extends TestCase
     // Room画像のModelを取得:タイプに応じて取得先DBを選択
     public function test_getRoomImgModel(){
         //  準備：デフォルト画像とユーザアップロード画像をDBに登録
-        $default_img = DefaultImg::factory()->create();
+        $default_img = PublicImg::factory()->create();
         $user_own_img = UserOwnImg::factory()->create();
 
         // パターン1 デフォルト画像
