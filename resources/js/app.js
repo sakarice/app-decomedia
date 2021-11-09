@@ -83,11 +83,11 @@ Vue.component('follow-component', require('./components/FollowComponent.vue').de
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
 Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
-Vue.component('room-setting-component', require('./components/RoomSettingComponent.vue').default);
+Vue.component('media-setting-component', require('./components/MediaSettingComponent.vue').default);
 Vue.component('room-audio-component', require('./components/RoomAudioComponent.vue').default);
 Vue.component('room-img-component', require('./components/RoomImgComponent.vue').default);
 Vue.component('room-movie-component', require('./components/RoomMovieComponent.vue').default);
-Vue.component('create-room-component', require('./components/CreateRoomComponent.vue').default);
+Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);
 Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
 Vue.component('room-update-button-component', require('./components/RoomUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);

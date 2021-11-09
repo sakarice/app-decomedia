@@ -6,45 +6,45 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Session;
-use App\Http\Controllers\RoomController;
-use App\Lib\RoomUtil;
+use App\Http\Controllers\MediaController;
+use App\Lib\MediaUtil;
 use App\Models\User;
-use App\Models\Room;
-use App\Models\RoomSetting;
+use App\Models\Media;
+use App\Models\MediaSetting;
 
 class SearchUtil
 {
-    // 検索結果に表示するroomの最大数
+    // 検索結果に表示するmediaの最大数
     private static $maxGetNum = 20;
 
-    public static function searchRooms(Request $request){
+    public static function searchMedias(Request $request){
         $keyword = $request->input('keyword');
         \Log::info($request);
         \Log::info($request->has('input'));
         \Log::info($request->has('keyword'));
         \Log::info($keyword);
-        $roomPreviewInfos = array();
+        $mediaPreviewInfos = array();
         if(!empty($keyword)){
-            $room_settings
-             = RoomSetting::where('open_state', true)
+            $media_settings
+             = MediaSetting::where('open_state', true)
                 ->where('name', 'LIKE', "%$keyword%")
                 ->take(self::$maxGetNum)
                 ->get();
         } else {
-            $room_settings = RoomSetting::where('open_state', true)
+            $media_settings = MediaSetting::where('open_state', true)
                 ->inRandomOrder()
                 ->take(self::$maxGetNum)
                 ->get();
         }
-        foreach($room_settings as $room_setting){
-            $room_id = $room_setting->room_id;
-            $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+        foreach($media_settings as $media_setting){
+            $media_id = $media_setting->media_id;
+            $mediaPreviewInfos[] = MediaUtil::getMediaPreviewInfo($media_id);
         }
 
         $data = [
             'isLogin' => Auth::check(),
             'keyword' => $keyword,
-            'roomPreviewInfos' => $roomPreviewInfos
+            'mediaPreviewInfos' => $mediaPreviewInfos
         ];
 
         return view('search.view', $data);

@@ -14,11 +14,11 @@ use App\Models\Room;
 use App\Models\RoomImg;
 use App\Models\RoomAudio;
 use App\Models\RoomMovie;
-use App\Models\RoomSetting;
+use App\Models\MediaSetting;
 
-use App\Lib\RoomUtil;
+use App\Lib\MediaUtil;
 
-class RoomUtilTest extends TestCase
+class MediaUtilTest extends TestCase
 {
     // DBをクリア（各テスト毎にクリア）
     use RefreshDatabase;
@@ -55,7 +55,7 @@ class RoomUtilTest extends TestCase
         $room_id = RoomImg::max('room_id');
 
         // テスト
-        $room_img_url = RoomUtil::getRoomPreviewImgUrl($room_id);
+        $room_img_url = MediaUtil::getRoomPreviewImgUrl($room_id);
 
         $this->assertEquals(
             $room_img_url,
@@ -65,7 +65,7 @@ class RoomUtilTest extends TestCase
         // パターン2：Room画像が設定されてなくて、Room動画が設定されている
         RoomMovie::factory()->create();
         $room_id = RoomMovie::max('room_id');
-        $room_img_url = RoomUtil::getRoomPreviewImgUrl($room_id);
+        $room_img_url = MediaUtil::getRoomPreviewImgUrl($room_id);
         $this->assertEquals(
             $room_img_url,
             "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/room/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"

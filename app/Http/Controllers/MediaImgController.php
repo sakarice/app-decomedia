@@ -9,11 +9,10 @@ use App\Lib\StoreFileInS3;
 use App\Lib\ImgUtil;
 use App\Lib\MediaImgUtil;
 use App\Models\User;
-use App\Models\Room;
-use App\Models\RoomImg;
+use App\Models\MediaImg;
 use Storage;
 
-class RoomImgController extends Controller
+class MediaImgController extends Controller
 {
     // 1.index
     public function index(){}
@@ -21,12 +20,12 @@ class RoomImgController extends Controller
     public function create(Request $request){}
     // 3.store
     public static function store($room_id, $request){
-        MediaImgUtil::saveRoomImgData($room_id, $request);
+        MediaImgUtil::saveMediaImgData($room_id, $request);
     }
 
-    // 4.show   // Room画像情報の連想配列を返す
+    // 4.show   // Media画像情報の連想配列を返す
     public static function show($room_id){
-        $media_img_data = MediaImgUtil::getRoomImgData($room_id);
+        $media_img_data = MediaImgUtil::getMediaImgData($room_id);
         return $media_img_data;
     }
     
@@ -34,11 +33,11 @@ class RoomImgController extends Controller
     public function edit($room_id){}
     // 6.update
     public static function update($room_id, $request){
-        MediaImgUtil::updateRoomImgData($room_id, $request);
+        MediaImgUtil::updateMediaImgData($room_id, $request);
     }
     // 7.destroy
     public static function destroy($room_id){
-        RoomImg::where('room_id', $room_id)->first()->delete();
+        MediaImg::where('room_id', $room_id)->first()->delete();
     }
     
 }

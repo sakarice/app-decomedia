@@ -1,13 +1,13 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : roomSetting['roomBackgroundColor']}">
+   :style="{'background-color' : mediaSetting['roomBackgroundColor']}">
 
     <!-- Roomヘッダ -->
     <room-header-component
     :isShowLinkToEdit="isMyRoom"
-    :roomId="roomSetting['id']"
-    :roomName="roomSetting['name']">
+    :roomId="mediaSetting['id']"
+    :roomName="mediaSetting['name']">
     </room-header-component>
 
     <!-- Room画像コンポーネント -->
@@ -17,20 +17,20 @@
      :roomImgHeight="roomImg['height'] + 'px'"
      :roomImgOpacity="roomImg['opacity']"
      :roomImgLayer="roomImg['layer']"
-     :isShowRoomImg="roomSetting['isShowImg']"
+     :isShowRoomImg="mediaSetting['isShowImg']"
       ref="roomImg">
     </room-img-component>
 
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
-     :maxAudioNum="roomSetting['maxAudioNum']"
+     :maxAudioNum="mediaSetting['maxAudioNum']"
      :roomAudios="roomAudios"
      ref="roomAudio">
     </room-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
-    v-show="roomSetting['isShowMovie']"
+    v-show="mediaSetting['isShowMovie']"
     :isLoopYoutube="roomMovie['isLoop']"
     :roomMovieLayer="roomMovie['layer']"
      ref="roomMovie">
@@ -42,7 +42,7 @@
         <!-- いいねアイコン -->
         <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-if="$store.getters.getIsLogin && !(isMyRoom)">
           <like-room-component
-          :roomId="roomSetting['id']">
+          :roomId="mediaSetting['id']">
           </like-room-component>
         </div>
 
@@ -53,15 +53,15 @@
           <!-- ユーザプロフィール -->
           <room-owner-info-component
           v-show="isShowModal['roomOwnerInfo']"
-          :roomId="roomSetting['id']">
+          :roomId="mediaSetting['id']">
           </room-owner-info-component>
         </div>
         <!-- Room情報 -->
-        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
+        <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
           <i class="fas fa-file-alt fa-2x setting-icon"></i>
         </div>
         <!-- 音楽 -->
-        <!-- <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomAudio')">
+        <!-- <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomAudio')">
           <i class="fas fa-music fa-2x setting-icon"></i>
         </div> -->
       </div>
@@ -71,8 +71,8 @@
     v-show="isShowModal['roomInfoModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
-    :name="roomSetting['name']"
-    :description="roomSetting['description']">
+    :name="mediaSetting['name']"
+    :description="mediaSetting['description']">
     </room-info-component>
 
 
@@ -82,7 +82,7 @@
 <script>
 import RoomHeader from './RoomHeaderComponent.vue';
 import RoomAudio from './RoomAudioComponent.vue';
-import RoomSetting from './RoomSettingComponent.vue';
+import MediaSetting from './MediaSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 import RoomInfo from './RoomInfoComponent.vue';
@@ -94,7 +94,7 @@ export default {
   components : {
     RoomHeader,
     RoomAudio,
-    RoomSetting,
+    MediaSetting,
     RoomImg,
     RoomMovie,
     RoomInfo,
@@ -105,7 +105,7 @@ export default {
     'roomImgData',
     'roomAudiosData',
     'roomMovieData',
-    'roomSettingData',
+    'mediaSettingData',
   ],
   data : () => {
     return {
@@ -138,7 +138,7 @@ export default {
       },
       roomAudios : [],
 
-      roomSetting : {
+      mediaSetting : {
         'id' : 0,
         'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
@@ -155,7 +155,7 @@ export default {
   },
   methods : {
     judgeIsMyRoom(){
-      let room_id = JSON.parse(this.roomSettingData).id;
+      let room_id = JSON.parse(this.mediaSettingData).id;
       let url = '/ajax/judgeIsMyRoom/' + room_id;
       console.log(url);
       axios.get(url)
@@ -212,16 +212,16 @@ export default {
       }
     },
     initSetting(){
-      let tmpSettingData = JSON.parse(this.roomSettingData);
-      this.roomSetting['id'] = tmpSettingData.id;
-      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
-      this.roomSetting['name'] = tmpSettingData.name;
-      this.roomSetting['description'] = tmpSettingData.description;
-      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
-      this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
-      this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.roomSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+      let tmpSettingData = JSON.parse(this.mediaSettingData);
+      this.mediaSetting['id'] = tmpSettingData.id;
+      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
+      this.mediaSetting['name'] = tmpSettingData.name;
+      this.mediaSetting['description'] = tmpSettingData.description;
+      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
+      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
+      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
+      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
     },
     setAudioThumbnail(){
       this.$refs.roomAudio.updateAudioThumbnail();
@@ -259,7 +259,7 @@ export default {
   },
   watch : {
     getReadyCreateMovieFrame : function(newVal){
-      if(this.roomSetting['isShowMovie'] == true 
+      if(this.mediaSetting['isShowMovie'] == true 
       && this.roomMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();

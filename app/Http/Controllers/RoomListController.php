@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
-use App\Lib\RoomUtil;
 use App\Lib\RoomListUtil;
 use App\Lib\RoomRoomListUtil;
 use App\Models\User;

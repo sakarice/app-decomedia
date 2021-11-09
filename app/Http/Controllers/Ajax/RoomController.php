@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
-use App\Lib\RoomUtil;
+use App\Lib\MediaUtil;
 use App\Models\User;
 use App\Models\Room;
 
@@ -25,7 +25,7 @@ class RoomController extends Controller
                     ->get()
                     ->all();
         foreach($own_rooms as $own_room){
-            RoomUtil::deleteRoomDataFromDB($own_room->id);
+            MediaUtil::deleteRoomDataFromDB($own_room->id);
         }
         return['message' => '選択した自分のroomを削除しました。'];
     }
@@ -39,8 +39,8 @@ class RoomController extends Controller
 
     //     DB::beginTransaction(); // 更新は、削除と作成のセットで実現
     //     try{
-    //         RoomUtil::deleteRoomDataFromDB($room_id);
-    //         RoomUtil::saveRoomDataInDB($request);
+    //         MediaUtil::deleteRoomDataFromDB($room_id);
+    //         MediaUtil::saveRoomDataInDB($request);
     //         DB::commit();
     //         $returnMsg = 'roomを更新しました';
     //     } catch(\Exception $e){

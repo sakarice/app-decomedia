@@ -21,11 +21,11 @@
       getSelectedRoomId(){
         // 作成したRoomといいねしたRoomを結合
         let allRoomInfos = [];
-        for(let i=0;i < this.$parent.createdRoomPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.createdRoomPreviewInfos[i]);
+        for(let i=0;i < this.$parent.createdMediaPreviewInfos.length; i++){
+          allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
         }
-        for(let i=0;i < this.$parent.likedRoomPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.likedRoomPreviewInfos[i]);
+        for(let i=0;i < this.$parent.likedMediaPreviewInfos.length; i++){
+          allRoomInfos.push(this.$parent.likedMediaPreviewInfos[i]);
         }
         // 選択されたRoomのみ抽出
         let selectedRoomInfos = allRoomInfos.filter(function(roomInfo){

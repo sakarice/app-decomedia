@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
 use App\Http\Controllers\Bgm\AudioController;
-use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
 use App\Models\UserOwnAudio;
 use App\Models\UserOwnAudioThumbnail;

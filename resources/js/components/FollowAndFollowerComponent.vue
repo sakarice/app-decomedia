@@ -8,18 +8,18 @@
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
 
-        <span class="view-more" @click="addCreatedRoomPreviewInfos">
+        <span class="view-more" @click="addCreatedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
       <!-- {{-- 作成済みroom一覧 --}} -->
-      <room-preview-component
-        :room-preview-infos="createdRoomPreviewInfos"
+      <media-preview-component
+        :media-preview-infos="createdMediaPreviewInfos"
         :is-show-cover="isShowCoverOnCreateRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
         ref="createdRoomPreview">
-      </room-preview-component>
+      </media-preview-component>
     </section>
 
     <!-- いいねしたRoomのプレビュー -->
@@ -27,18 +27,18 @@
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">いいねしたRoom</h3>
-        <span class="view-more" @click="addLikedRoomPreviewInfos">
+        <span class="view-more" @click="addLikedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
       <!-- いいねしたroom一覧 -->
-      <room-preview-component
-        :room-preview-infos="likedRoomPreviewInfos"
+      <media-preview-component
+        :media-preview-infos="likedMediaPreviewInfos"
         :is-show-cover="isShowCoverOnLikeRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedLikedRoom"
         ref="likedRoomPreview">
-      </room-preview-component>
+      </media-preview-component>
     </section>
     
     <mypage-menu-bar-component>
@@ -60,13 +60,13 @@ export default {
     MypageMenuBar,
   },
   props : [
-    'createdRoomPreviewInfosFromParent',
-    'likedRoomPreviewInfosFromParent',
+    'createdMediaPreviewInfosFromParent',
+    'likedMediaPreviewInfosFromParent',
   ],
   data : () => {
     return {
-      'createdRoomPreviewInfos' : "",
-      'likedRoomPreviewInfos' : "",
+      'createdMediaPreviewInfos' : "",
+      'likedMediaPreviewInfos' : "",
       'isShowCoverOnCreateRoom' : true,
       'isShowCoverOnLikeRoom' : false,
       'isShowCreatedRoomPreview' : true,
@@ -77,24 +77,24 @@ export default {
     }
   },
   methods : {
-    addCreatedRoomPreviewInfos(){
-      let url = '/addCreatedRoomPreviewInfos';
+    addCreatedMediaPreviewInfos(){
+      let url = '/addCreatedMediaPreviewInfos';
       let tmpThis = this;
       axios.get(url)
       .then(response => {
-        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
         tmpThis.isUpdateCreatedRoomPreviewInfo = true;
       })
       .catch(error => {
         alert('room情報の取得に失敗しました')
       })
     },
-    addLikedRoomPreviewInfos(){
-      let url = '/addLikedRoomPreviewInfos';
+    addLikedMediaPreviewInfos(){
+      let url = '/addLikedMediaPreviewInfos';
       let tmpThis = this;
       axios.get(url)
       .then(response => {
-        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
         tmpThis.isUpdateLikedRoomPreviewInfo = true;
       })
       .catch(error => {
@@ -105,8 +105,8 @@ export default {
   },
   created() {},
   mounted() {
-    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
-    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+    this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
+    this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch : {},
   computed : {}

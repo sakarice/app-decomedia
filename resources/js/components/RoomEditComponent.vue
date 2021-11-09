@@ -1,13 +1,13 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : roomSetting['roomBackgroundColor']}">
+   :style="{'background-color' : mediaSetting['roomBackgroundColor']}">
 
     <!-- Roomヘッダ -->
     <room-header-component
     :isShowUpdateButton=true
     :isShowLinkToShow=true
-    :roomId="roomSetting['id']"
+    :roomId="mediaSetting['id']"
     @update-room="updateRoom">
     </room-header-component>
 
@@ -18,21 +18,21 @@
      :roomImgHeight="roomImg['height'] + 'px'"
      :roomImgOpacity="roomImg['opacity']"
      :roomImgLayer="roomImg['layer']"
-     :isShowRoomImg="roomSetting['isShowImg']"
+     :isShowRoomImg="mediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="roomImg">
     </room-img-component>
 
     <!-- Roomオーディオコンポーネント -->
     <room-audio-component
-     :maxAudioNum="roomSetting['maxAudioNum']"
+     :maxAudioNum="mediaSetting['maxAudioNum']"
      :roomAudios="roomAudios"
      ref="roomAudio">
     </room-audio-component>
 
     <!-- Room動画(=youtube)コンポーネント -->
     <room-movie-component
-    v-show="roomSetting['isShowMovie']"
+    v-show="mediaSetting['isShowMovie']"
     :isLoopYoutube="roomMovie['isLoop']"
     :roomMovieLayer="roomMovie['layer']"
      ref="roomMovie">
@@ -56,7 +56,7 @@
           <i class="fab fa-youtube fa-2x"></i>
         </div>
         <!-- Room設定 -->
-        <div id="disp-room-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomSettingModal')">
+        <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaSettingModal')">
           <i class="fas fa-cog fa-2x"></i>
         </div>
       </div>
@@ -95,20 +95,20 @@
     </movie-setting-component>
 
     <!-- Room設定コンポーネント -->
-    <room-setting-component
-    v-show="isShowModal['roomSettingModal']"
+    <media-setting-component
+    v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
     v-on:delete-room-img="deleteRoomImg"
     :transitionName="transitionName"
-    :isPublic="roomSetting['isPublic']"
-    :roomName="roomSetting['name']"
-    :roomDescription="roomSetting['description']"
-    :roomBackgroundColor="roomSetting['roomBackgroundColor']"
-    :isShowRoomImg="roomSetting['isShowImg']"
+    :isPublic="mediaSetting['isPublic']"
+    :roomName="mediaSetting['name']"
+    :roomDescription="mediaSetting['description']"
+    :roomBackgroundColor="mediaSetting['roomBackgroundColor']"
+    :isShowRoomImg="mediaSetting['isShowImg']"
     :roomImgWidth="roomImg['width']"
     :roomImgHeight="roomImg['height']"
     :roomImgOpacity="roomImg['opacity']">
-    </room-setting-component>
+    </media-setting-component>
 
 
   </div>
@@ -120,7 +120,7 @@ import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
 import RoomAudio from './RoomAudioComponent.vue';
-import RoomSetting from './RoomSettingComponent.vue';
+import MediaSetting from './MediaSettingComponent.vue';
 import RoomImg from './RoomImgComponent.vue';
 import RoomMovie from './RoomMovieComponent.vue';
 
@@ -131,7 +131,7 @@ export default {
     AudioSelect,
     MovieSetting,
     RoomAudio,
-    RoomSetting,
+    MediaSetting,
     RoomImg,
     RoomMovie,
   },
@@ -139,7 +139,7 @@ export default {
     'roomImgData',
     'roomAudiosData',
     'roomMovieData',
-    'roomSettingData',
+    'mediaSettingData',
   ],
   data : () => {
     return {
@@ -150,7 +150,7 @@ export default {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
-        'roomSettingModal' : false,
+        'mediaSettingModal' : false,
       },
       roomImg : {
         'type' : "",
@@ -170,7 +170,7 @@ export default {
       },
       roomAudios : [],
 
-      roomSetting : {
+      mediaSetting : {
         'id' : 0,
         'isPublic' : true,  // 公開/非公開 デフォルトは公開
         'name' : "",
@@ -217,16 +217,16 @@ export default {
       }      
     },
     initSetting(){
-      let tmpSettingData = JSON.parse(this.roomSettingData);
-      this.roomSetting['id'] = tmpSettingData.id;
-      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
-      this.roomSetting['name'] = tmpSettingData.name;
-      this.roomSetting['description'] = tmpSettingData.description;
-      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
-      this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
-      this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.roomSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+      let tmpSettingData = JSON.parse(this.mediaSettingData);
+      this.mediaSetting['id'] = tmpSettingData.id;
+      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
+      this.mediaSetting['name'] = tmpSettingData.name;
+      this.mediaSetting['description'] = tmpSettingData.description;
+      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
+      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
+      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
+      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
     },
     setAudioThumbnail(){
       this.$refs.roomAudio.updateAudioThumbnail();
@@ -262,7 +262,7 @@ export default {
       this.roomImg['type'] = type;
       this.roomImg['id'] = id;
       this.roomImg['url'] = url;
-      this.roomSetting['isShowImg'] = true;
+      this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg(url) {
       if(this.roomImg['url'] == url){
@@ -289,11 +289,11 @@ export default {
         'height' : this.roomMovie['height'],
       };
       this.$refs.roomMovie.createYtPlayer(vars);
-      this.roomSetting['isShowMovie'] = true;
+      this.mediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame(){
       this.$refs.roomMovie.deleteYtPlayer();
-      this.roomSetting['isShowMovie'] = false;
+      this.mediaSetting['isShowMovie'] = false;
     },
     getFinishTime(){
       if(this.roomMovie['videoId'] != ""){
@@ -309,7 +309,7 @@ export default {
         'img' : this.roomImg,
         'audios' : this.roomAudios,
         'movie' : this.roomMovie,
-        'setting' : this.roomSetting,
+        'setting' : this.mediaSetting,
       }
       this.message = "room情報を更新中です...";
       axios.post(url, room_datas)
@@ -343,7 +343,7 @@ export default {
   },
   watch : {
     getReadyCreateMovieFrame : function(newVal){
-      if(this.roomSetting['isShowMovie'] == true 
+      if(this.mediaSetting['isShowMovie'] == true 
       && this.roomMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();

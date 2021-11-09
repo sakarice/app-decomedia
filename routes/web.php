@@ -34,8 +34,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/user/getOwnProfile', 'App\Lib\UserUtil@getOwnProfile');
         Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
     // マイページで、作成済みRoomをもっと見る
-        Route::get('/addCreatedRoomPreviewInfos', 'App\Lib\RoomUtil@getCreatedRoomPreviewInfos');
-        Route::get('/addLikedRoomPreviewInfos', 'App\Lib\RoomUtil@getLikedRoomPreviewInfos');    
+        Route::get('/addCreatedMediaPreviewInfos', 'App\Lib\MediaUtil@getCreatedMediaPreviewInfos');
+        Route::get('/addLikedMediaPreviewInfos', 'App\Lib\MediaUtil@getLikedMediaPreviewInfos');    
     // マイページからRoomを選択し、手早くRoomリストを作成する
         Route::post('/roomlists/store', 'App\Http\Controllers\Ajax\RoomListController@quickStore');
     // マイページから選択したRoomを削除する(他ユーザのRoomは除外)
@@ -52,9 +52,9 @@ Route::middleware('auth')->group(function(){
         Route::post('/room/update', 'App\Http\Controllers\RoomController@update');
         Route::post('/room/delete', 'App\Http\Controllers\RoomController@destroy');
     // 入ったRoomをいいねしているかチェックする
-        Route::get('/user/likeState/{room_id}', 'App\Lib\LikeRoomUtil@getLikeState');
+        Route::get('/user/likeState/{room_id}', 'App\Lib\LikeMediaUtil@getLikeState');
     // Roomへ、いいね/いいね解除する
-        Route::post('/room/like', 'App\Lib\LikeRoomUtil@updateLikeState');
+        Route::post('/room/like', 'App\Lib\LikeMediaUtil@updateLikeState');
     // 自分が入ったRoomの作成者をフォローしているかチェックする
         Route::get('/user/followState/{room_owner_id}', 'App\Lib\FollowUtil@getFollowState');
     // ルーム作成者をフォロー/フォロー解除する

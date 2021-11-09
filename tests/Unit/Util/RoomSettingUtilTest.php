@@ -10,11 +10,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomSetting;
+use App\Models\MediaSetting;
 
-use App\Lib\RoomSettingUtil;
+use App\Lib\MediaSettingUtil;
 
-class RoomSettingUtilTest extends TestCase
+class MediaSettingUtilTest extends TestCase
 {
     // DBをクリア（各テスト毎にクリア）
     use RefreshDatabase;
@@ -37,7 +37,7 @@ class RoomSettingUtilTest extends TestCase
 
     // 3.store
     // 引数として渡したルームIDと動画情報がDB保存されること。
-    public function test_saveRoomSettingData(){
+    public function test_saveMediaSettingData(){
         // 0. 【準備】登録用データ作成
         $room_setting_data = array(
             'isPublic' => true,
@@ -56,7 +56,7 @@ class RoomSettingUtilTest extends TestCase
         $request->setting = $room_setting_data;
         $room_id = mt_rand(1, 2147483647); // 適当なルームID
         // 2. 登録：requestのデータを指定したルームIDに紐づく動画情報として保存
-        RoomSettingUtil::saveRoomSettingData($room_id, $request);
+        MediaSettingUtil::saveMediaSettingData($room_id, $request);
         // 3. 検証：登録用に準備したレコードがDBに存在するかチェック
         $this->assertDatabaseHas('room_settings',[
             'room_id' => $room_id,
@@ -78,7 +78,7 @@ class RoomSettingUtilTest extends TestCase
         $request->setting = $room_setting_data;
         $room_id = mt_rand(1, 2147483647); // 適当なルームID
         // 2. 登録：requestのデータを指定したルームIDに紐づく動画情報として保存
-        RoomSettingUtil::saveRoomSettingData($room_id, $request);
+        MediaSettingUtil::saveMediaSettingData($room_id, $request);
         // 3. 検証：登録用に準備したレコードがDBに存在するかチェック
         $this->assertDatabaseHas('room_settings',[
             'room_id' => $room_id,
@@ -95,16 +95,16 @@ class RoomSettingUtilTest extends TestCase
 
     // 4.show
     // 引数のルームIDに対応した動画情報がDBから取得できること
-    public function test_getRoomSettingData(){
+    public function test_getMediaSettingData(){
         // 1. 取得対象データ登録
         //    ダミーデータ登録
         $room = Room::factory()->create();
-        $room_setting = RoomSetting::factory()->create();
+        $room_setting = MediaSetting::factory()->create();
         $room_id = $room_setting->room_id;
 
         // 2. 取得
         //    作成したダミーデータを取得
-        $room_setting_data = RoomSettingUtil::getRoomSettingData($room_id);
+        $room_setting_data = MediaSettingUtil::getMediaSettingData($room_id);
 
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
@@ -123,11 +123,11 @@ class RoomSettingUtilTest extends TestCase
 
     // 6.update
     // 指定したルームIDに対応した動画情報のレコードをrequestの値で更新する。
-    public function test_updateRoomSettingData(){
+    public function test_updateMediaSettingData(){
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $room = Room::factory()->create();
-        $room_setting = RoomSetting::factory()->create();
+        $room_setting = MediaSetting::factory()->create();
         // 更新対象のルームID取得
         $room_id = $room_setting->room_id;
 
@@ -147,7 +147,7 @@ class RoomSettingUtilTest extends TestCase
         $request->setting = $room_setting_data;
 
         // 3. 更新
-        $room_setting_data = RoomSettingUtil::updateRoomSettingData($room_id, $request);
+        $room_setting_data = MediaSettingUtil::updateMediaSettingData($room_id, $request);
 
         // 4. 検証
         // 更新したレコードの内容が更新用データの値と一致すること

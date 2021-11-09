@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\AudioController;
 use App\Lib\StoreFileInS3;
-use App\Lib\RoomUtil;
+use App\Lib\MediaUtil;
 use App\Models\User;
 use App\Models\Room;
 use Storage;
@@ -29,7 +29,7 @@ class RoomController extends Controller
         $returnMsg;
         DB::beginTransaction();
         try{
-            RoomUtil::saveRoomDataInDB($request);
+            MediaUtil::saveMediaDataInDB($request);
             DB::commit();
             $returnMsg = 'roomを保存しました';
         } catch(\Exception $e){
@@ -42,14 +42,14 @@ class RoomController extends Controller
 
     // 4. show
     public function show($room_id) {
-        $room_data = RoomUtil::getRoomDatas($room_id);
+        $room_data = MediaUtil::getMediaDatas($room_id);
         $data = $room_data + array('isLogin' => Auth::check());
         return view('rooms.show', $data);
     }
 
     // 5. edit
     public function edit($room_id){
-        $room_data = RoomUtil::getRoomDatas($room_id);
+        $room_data = MediaUtil::getMediaDatas($room_id);
         return view('rooms.edit', $room_data);
     }
 
@@ -61,9 +61,9 @@ class RoomController extends Controller
         DB::beginTransaction(); // 更新は、削除と作成のセットで実現
         try{
             // $this->destroy($room_id);
-            // RoomUtil::deleteRoomDataFromDB($room_id);
-            // RoomUtil::saveRoomDataInDB($request);
-            RoomUtil::updateRoomData($room_id, $request);
+            // MediaUtil::deleteMediaDataFromDB($room_id);
+            // MediaUtil::saveMediaDataInDB($request);
+            MediaUtil::updateMediaData($room_id, $request);
             DB::commit();
             $returnMsg = 'roomを更新しました';
         } catch(\Exception $e){
@@ -78,7 +78,7 @@ class RoomController extends Controller
     public function destroy(Request $request){
         // $user_id = Auth::user()->id;
         $room_id = $request->room_id;
-        $returnMsg = RoomUtil::deleteRoomDataFromDB($room_id);
+        $returnMsg = MediaUtil::deleteMediaDataFromDB($room_id);
         return['message' => $returnMsg];
     }
 

@@ -2237,10 +2237,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2253,7 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
 /* harmony import */ var _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
-/* harmony import */ var _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue");
+/* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 /* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 /* harmony import */ var _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue");
@@ -2388,12 +2388,12 @@ __webpack_require__.r(__webpack_exports__);
     AudioSelect: _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     MovieSetting: _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    RoomSetting: _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default,
     RoomCreateButton: _RoomCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_8__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
+  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -2403,9 +2403,9 @@ __webpack_require__.r(__webpack_exports__);
         'imgModal': false,
         'audioModal': false,
         'movieModal': false,
-        'roomSettingModal': false
+        'mediaSettingModal': false
       },
-      roomSetting: {
+      mediaSetting: {
         'isPublic': true,
         // 公開/非公開 デフォルトは公開
         'name': "",
@@ -2461,7 +2461,7 @@ __webpack_require__.r(__webpack_exports__);
       this.roomImg['type'] = type;
       this.roomImg['id'] = id;
       this.roomImg['url'] = url;
-      this.roomSetting['isShowImg'] = true;
+      this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg: function judgeDelImg(url) {
       if (this.roomImg['url'] == url) {
@@ -2488,11 +2488,11 @@ __webpack_require__.r(__webpack_exports__);
         'height': this.roomMovie['height']
       };
       this.$refs.roomMovie.createYtPlayer(vars);
-      this.roomSetting['isShowMovie'] = true;
+      this.mediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame: function deleteMovieFrame() {
       this.$refs.roomMovie.deleteYtPlayer();
-      this.roomSetting['isShowMovie'] = false;
+      this.mediaSetting['isShowMovie'] = false;
     },
     getFinishTime: function getFinishTime() {
       if (this.roomMovie['videoId'] != "") {
@@ -2511,7 +2511,7 @@ __webpack_require__.r(__webpack_exports__);
         'img': this.roomImg,
         'audios': this.roomAudios,
         'movie': this.roomMovie,
-        'setting': this.roomSetting
+        'setting': this.mediaSetting
       };
       this.message = "room情報を保存中です...";
       axios.post(url, room_datas).then(function (response) {
@@ -2641,11 +2641,11 @@ __webpack_require__.r(__webpack_exports__);
     RoomPreview: _RoomPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     MypageMenuBar: _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  props: ['createdRoomPreviewInfosFromParent', 'likedRoomPreviewInfosFromParent'],
+  props: ['createdMediaPreviewInfosFromParent', 'likedMediaPreviewInfosFromParent'],
   data: function data() {
     return {
-      'createdRoomPreviewInfos': "",
-      'likedRoomPreviewInfos': "",
+      'createdMediaPreviewInfos': "",
+      'likedMediaPreviewInfos': "",
       'isShowCoverOnCreateRoom': true,
       'isShowCoverOnLikeRoom': false,
       'isShowCreatedRoomPreview': true,
@@ -2656,21 +2656,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    addCreatedRoomPreviewInfos: function addCreatedRoomPreviewInfos() {
-      var url = '/addCreatedRoomPreviewInfos';
+    addCreatedMediaPreviewInfos: function addCreatedMediaPreviewInfos() {
+      var url = '/addCreatedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
         tmpThis.isUpdateCreatedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
       });
     },
-    addLikedRoomPreviewInfos: function addLikedRoomPreviewInfos() {
-      var url = '/addLikedRoomPreviewInfos';
+    addLikedMediaPreviewInfos: function addLikedMediaPreviewInfos() {
+      var url = '/addLikedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
         tmpThis.isUpdateLikedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
@@ -2679,8 +2679,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
-    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+    this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
+    this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch: {},
   computed: {}
@@ -3202,7 +3202,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateLikeStateInDB: function updateLikeStateInDB() {
       var url = '/room/like';
-      var room_id = this.$parent.roomSetting['id'];
+      var room_id = this.$parent.mediaSetting['id'];
       var data = {
         'isLike': this.isLikeRoom,
         'room_id': room_id
@@ -3224,6 +3224,156 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
+  data: function data() {
+    return {
+      window_width: "",
+      window_height: ""
+    };
+  },
+  methods: {
+    closeModal: function closeModal() {
+      this.$emit('close-modal');
+    },
+    updateRoomName: function updateRoomName(event) {
+      this.$parent.mediaSetting['name'] = event.target.value;
+    },
+    updateRoomDescription: function updateRoomDescription(event) {
+      this.$parent.mediaSetting['description'] = event.target.value;
+    },
+    updateImg: function updateImg(event) {
+      var value = event.target.value; // 横幅、高さ、透過度の値
+
+      var type = event.target.dataset.inputType; // widthかheightかopacity
+
+      if (type == 'width') {
+        this.$parent.roomImg['width'] = value;
+      } else if (type == 'height') {
+        this.$parent.roomImg['height'] = value;
+      } else if (type == 'opacity') {
+        this.$parent.roomImg['opacity'] = value;
+      } // this.$emit('resize-img', value, type);
+
+    },
+    updateRoomBgColor: function updateRoomBgColor(event) {
+      // カラーピッカーの変更に、Room背景色を同期させて即反映
+      var value = event.target.value;
+      this.$parent.mediaSetting['roomBackgroundColor'] = value;
+    },
+    toggleRoomImg: function toggleRoomImg() {
+      // room画像の表示/非表示を切り替え
+      if (this.isShowRoomImg) {
+        this.$parent.mediaSetting['isShowImg'] = false;
+      } else if (!this.isShowRoomImg) {
+        this.$parent.mediaSetting['isShowImg'] = true;
+      }
+    },
+    deleteRoomImg: function deleteRoomImg() {
+      this.$emit('delete-room-img');
+    },
+    changePublicState: function changePublicState() {
+      if (this.isPublic) {
+        this.$parent.mediaSetting['isPublic'] = false;
+      } else if (!this.isPublic) {
+        this.$parent.mediaSetting['isPublic'] = true;
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.window_width = window.innerWidth;
+    this.window_height = window.innerHeight;
+  },
+  computed: {
+    showPublicState: function showPublicState() {
+      if (this.isPublic) {
+        return '公開（他のユーザも検索・閲覧できます）';
+      } else if (!this.isPublic) {
+        return '非公開（他のユーザは検索・閲覧できません）';
+      }
+    }
+  },
+  watch: {}
 });
 
 /***/ }),
@@ -3452,11 +3602,11 @@ __webpack_require__.r(__webpack_exports__);
     SelectedRoomDeleteButton: _SelectedRoomDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     UserPageProfile: _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default
   },
-  props: ['createdRoomPreviewInfosFromParent', 'likedRoomPreviewInfosFromParent'],
+  props: ['createdMediaPreviewInfosFromParent', 'likedMediaPreviewInfosFromParent'],
   data: function data() {
     return {
-      'createdRoomPreviewInfos': "",
-      'likedRoomPreviewInfos': "",
+      'createdMediaPreviewInfos': "",
+      'likedMediaPreviewInfos': "",
       'isSelectMode': false,
       'isShowCoverOnCreateRoomList': true,
       'isShowCoverOnCreateRoom': true,
@@ -3477,21 +3627,21 @@ __webpack_require__.r(__webpack_exports__);
     roomEditLink: function roomEditLink(id) {
       return "/room/" + id + "/edit";
     },
-    addCreatedRoomPreviewInfos: function addCreatedRoomPreviewInfos() {
-      var url = '/addCreatedRoomPreviewInfos';
+    addCreatedMediaPreviewInfos: function addCreatedMediaPreviewInfos() {
+      var url = '/addCreatedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
         tmpThis.isUpdateCreatedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
       });
     },
-    addLikedRoomPreviewInfos: function addLikedRoomPreviewInfos() {
-      var url = '/addLikedRoomPreviewInfos';
+    addLikedMediaPreviewInfos: function addLikedMediaPreviewInfos() {
+      var url = '/addLikedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
         tmpThis.isUpdateLikedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
@@ -3516,8 +3666,8 @@ __webpack_require__.r(__webpack_exports__);
       if (isChecked == true) {
         this.increaseCreatedRoomSelectedCount(index);
       } else if (isChecked == false) {
-        var unSelectedOrderNum = this.createdRoomPreviewInfos[index]['selectedOrderNum'];
-        this.createdRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        var unSelectedOrderNum = this.createdMediaPreviewInfos[index]['selectedOrderNum'];
+        this.createdMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseRoomSelectedCount(unSelectedOrderNum);
       }
     },
@@ -3525,29 +3675,29 @@ __webpack_require__.r(__webpack_exports__);
       if (isChecked == true) {
         this.increaseLikedRoomSelectedCount(index);
       } else if (isChecked == false) {
-        var unSelectedOrderNum = this.likedRoomPreviewInfos[index]['selectedOrderNum'];
-        this.likedRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        var unSelectedOrderNum = this.likedMediaPreviewInfos[index]['selectedOrderNum'];
+        this.likedMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseRoomSelectedCount(unSelectedOrderNum);
       }
     },
     increaseCreatedRoomSelectedCount: function increaseCreatedRoomSelectedCount(index) {
-      this.createdRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
+      this.createdMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
       this.totalSelectedCount++;
     },
     increaseLikedRoomSelectedCount: function increaseLikedRoomSelectedCount(index) {
-      this.likedRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
+      this.likedMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount + 1;
       this.totalSelectedCount++;
     },
     decreseRoomSelectedCount: function decreseRoomSelectedCount(unSelectedOrderNum) {
-      for (var i = 0; i < this.createdRoomPreviewInfos.length; i++) {
-        if (this.createdRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum) {
-          this.createdRoomPreviewInfos[i]['selectedOrderNum']--;
+      for (var i = 0; i < this.createdMediaPreviewInfos.length; i++) {
+        if (this.createdMediaPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum) {
+          this.createdMediaPreviewInfos[i]['selectedOrderNum']--;
         }
       }
 
-      for (var _i = 0; _i < this.likedRoomPreviewInfos.length; _i++) {
-        if (this.likedRoomPreviewInfos[_i]['selectedOrderNum'] > unSelectedOrderNum) {
-          this.likedRoomPreviewInfos[_i]['selectedOrderNum']--;
+      for (var _i = 0; _i < this.likedMediaPreviewInfos.length; _i++) {
+        if (this.likedMediaPreviewInfos[_i]['selectedOrderNum'] > unSelectedOrderNum) {
+          this.likedMediaPreviewInfos[_i]['selectedOrderNum']--;
         }
       }
 
@@ -3557,12 +3707,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.createdRoomPreview.unCheckAllRoom();
       this.$refs.likedRoomPreview.unCheckAllRoom();
 
-      for (var i = 0; i < this.createdRoomPreviewInfos.length; i++) {
-        this.createdRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      for (var i = 0; i < this.createdMediaPreviewInfos.length; i++) {
+        this.createdMediaPreviewInfos[i]['selectedOrderNum'] = 0;
       }
 
-      for (var _i2 = 0; _i2 < this.likedRoomPreviewInfos.length; _i2++) {
-        this.likedRoomPreviewInfos[_i2]['selectedOrderNum'] = 0;
+      for (var _i2 = 0; _i2 < this.likedMediaPreviewInfos.length; _i2++) {
+        this.likedMediaPreviewInfos[_i2]['selectedOrderNum'] = 0;
       }
 
       this.totalSelectedCount = 0;
@@ -3570,8 +3720,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
-    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+    this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
+    this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch: {},
   computed: {
@@ -3999,7 +4149,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       console.log(longestAudioDuration);
-      this.$parent.roomSetting['finish_time'] = longestAudioDuration;
+      this.$parent.mediaSetting['finish_time'] = longestAudioDuration;
     },
     updateAudioThumbnail: function updateAudioThumbnail() {
       var audioDoms = document.getElementsByClassName('audio-wrapper');
@@ -4100,7 +4250,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RoomHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomHeaderComponent.vue */ "./resources/js/components/RoomHeaderComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
-/* harmony import */ var _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue");
+/* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 /* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 /* harmony import */ var _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomInfoComponent.vue */ "./resources/js/components/RoomInfoComponent.vue");
@@ -4199,14 +4349,14 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     RoomHeader: _RoomHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default,
-    RoomSetting: _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+    MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
     RoomInfo: _RoomInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     RoomOwnerInfo: _RoomOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     LikeRoom: _LikeRoomComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
+  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       isMyRoom: false,
@@ -4236,7 +4386,7 @@ __webpack_require__.r(__webpack_exports__);
         'layer': 1
       },
       roomAudios: [],
-      roomSetting: {
+      mediaSetting: {
         'id': 0,
         'isPublic': true,
         // 公開/非公開 デフォルトは公開
@@ -4255,7 +4405,7 @@ __webpack_require__.r(__webpack_exports__);
     judgeIsMyRoom: function judgeIsMyRoom() {
       var _this = this;
 
-      var room_id = JSON.parse(this.roomSettingData).id;
+      var room_id = JSON.parse(this.mediaSettingData).id;
       var url = '/ajax/judgeIsMyRoom/' + room_id;
       console.log(url);
       axios.get(url).then(function (response) {
@@ -4314,16 +4464,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     initSetting: function initSetting() {
-      var tmpSettingData = JSON.parse(this.roomSettingData);
-      this.roomSetting['id'] = tmpSettingData.id;
-      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
-      this.roomSetting['name'] = tmpSettingData.name;
-      this.roomSetting['description'] = tmpSettingData.description;
-      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
-      this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
-      this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.roomSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+      var tmpSettingData = JSON.parse(this.mediaSettingData);
+      this.mediaSetting['id'] = tmpSettingData.id;
+      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
+      this.mediaSetting['name'] = tmpSettingData.name;
+      this.mediaSetting['description'] = tmpSettingData.description;
+      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
+      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
+      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
+      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
     },
     setAudioThumbnail: function setAudioThumbnail() {
       this.$refs.roomAudio.updateAudioThumbnail();
@@ -4364,7 +4514,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     getReadyCreateMovieFrame: function getReadyCreateMovieFrame(newVal) {
-      if (this.roomSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
+      if (this.mediaSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
         this.createMovieFrame();
       }
     },
@@ -4433,7 +4583,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
 /* harmony import */ var _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
 /* harmony import */ var _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue");
-/* harmony import */ var _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue");
+/* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
 /* harmony import */ var _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue");
 /* harmony import */ var _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue");
 var _methods;
@@ -4571,11 +4721,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     AudioSelect: _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_2__.default,
     MovieSetting: _MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__.default,
     RoomAudio: _RoomAudioComponent_vue__WEBPACK_IMPORTED_MODULE_4__.default,
-    RoomSetting: _RoomSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
+    MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_5__.default,
     RoomImg: _RoomImgComponent_vue__WEBPACK_IMPORTED_MODULE_6__.default,
     RoomMovie: _RoomMovieComponent_vue__WEBPACK_IMPORTED_MODULE_7__.default
   },
-  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'roomSettingData'],
+  props: ['roomImgData', 'roomAudiosData', 'roomMovieData', 'mediaSettingData'],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
@@ -4585,7 +4735,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'imgModal': false,
         'audioModal': false,
         'movieModal': false,
-        'roomSettingModal': false
+        'mediaSettingModal': false
       },
       roomImg: {
         'type': "",
@@ -4604,7 +4754,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'layer': 1
       },
       roomAudios: [],
-      roomSetting: {
+      mediaSetting: {
         'id': 0,
         'isPublic': true,
         // 公開/非公開 デフォルトは公開
@@ -4652,16 +4802,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     initSetting: function initSetting() {
-      var tmpSettingData = JSON.parse(this.roomSettingData);
-      this.roomSetting['id'] = tmpSettingData.id;
-      this.roomSetting['isPublic'] = tmpSettingData.isPublic;
-      this.roomSetting['name'] = tmpSettingData.name;
-      this.roomSetting['description'] = tmpSettingData.description;
-      this.roomSetting['finish_time'] = tmpSettingData.finish_time;
-      this.roomSetting['roomBackgroundColor'] = tmpSettingData.background_color;
-      this.roomSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.roomSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.roomSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+      var tmpSettingData = JSON.parse(this.mediaSettingData);
+      this.mediaSetting['id'] = tmpSettingData.id;
+      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
+      this.mediaSetting['name'] = tmpSettingData.name;
+      this.mediaSetting['description'] = tmpSettingData.description;
+      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
+      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
+      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
+      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
     },
     setAudioThumbnail: function setAudioThumbnail() {
       this.$refs.roomAudio.updateAudioThumbnail();
@@ -4698,7 +4848,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.roomImg['type'] = type;
       this.roomImg['id'] = id;
       this.roomImg['url'] = url;
-      this.roomSetting['isShowImg'] = true;
+      this.mediaSetting['isShowImg'] = true;
     },
     judgeDelImg: function judgeDelImg(url) {
       if (this.roomImg['url'] == url) {
@@ -4725,10 +4875,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       'height': this.roomMovie['height']
     };
     this.$refs.roomMovie.createYtPlayer(vars);
-    this.roomSetting['isShowMovie'] = true;
+    this.mediaSetting['isShowMovie'] = true;
   }), _defineProperty(_methods, "deleteMovieFrame", function deleteMovieFrame() {
     this.$refs.roomMovie.deleteYtPlayer();
-    this.roomSetting['isShowMovie'] = false;
+    this.mediaSetting['isShowMovie'] = false;
   }), _defineProperty(_methods, "getFinishTime", function getFinishTime() {
     if (this.roomMovie['videoId'] != "") {
       this.$refs.roomMovie.setMovieDurationToFinishTime();
@@ -4744,7 +4894,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       'img': this.roomImg,
       'audios': this.roomAudios,
       'movie': this.roomMovie,
-      'setting': this.roomSetting
+      'setting': this.mediaSetting
     };
     this.message = "room情報を更新中です...";
     axios.post(url, room_datas).then(function (response) {
@@ -4776,7 +4926,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   watch: {
     getReadyCreateMovieFrame: function getReadyCreateMovieFrame(newVal) {
-      if (this.roomSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
+      if (this.mediaSetting['isShowMovie'] == true && this.roomMovie['videoId'] != "" && newVal == true) {
         this.createMovieFrame();
       }
     }
@@ -5015,12 +5165,12 @@ __webpack_require__.r(__webpack_exports__);
       // 作成したRoomといいねしたRoomを結合
       var allRoomInfos = [];
 
-      for (var i = 0; i < this.$parent.createdRoomPreviewInfos.length; i++) {
-        allRoomInfos.push(this.$parent.createdRoomPreviewInfos[i]);
+      for (var i = 0; i < this.$parent.createdMediaPreviewInfos.length; i++) {
+        allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
       }
 
-      for (var _i = 0; _i < this.$parent.likedRoomPreviewInfos.length; _i++) {
-        allRoomInfos.push(this.$parent.likedRoomPreviewInfos[_i]);
+      for (var _i = 0; _i < this.$parent.likedMediaPreviewInfos.length; _i++) {
+        allRoomInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
       } // 選択されたRoomのみ抽出
 
 
@@ -5251,7 +5401,7 @@ __webpack_require__.r(__webpack_exports__);
     // ★動画の長さ取得
     setMovieDurationToFinishTime: function setMovieDurationToFinishTime() {
       var movieDuration = this.ytPlayer.getDuration();
-      this.$parent.roomSetting['finish_time'] = movieDuration;
+      this.$parent.mediaSetting['finish_time'] = movieDuration;
     },
     onPlayerStateChange: function onPlayerStateChange(event) {
       if (event.data == 0 && this.isLoopYoutube == true) {
@@ -5519,156 +5669,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['transitionName', 'isPublic', 'roomName', 'roomDescription', 'roomBackgroundColor', 'isShowRoomImg', 'roomImgWidth', 'roomImgHeight', 'roomImgOpacity'],
-  data: function data() {
-    return {
-      window_width: "",
-      window_height: ""
-    };
-  },
-  methods: {
-    closeModal: function closeModal() {
-      this.$emit('close-modal');
-    },
-    updateRoomName: function updateRoomName(event) {
-      this.$parent.roomSetting['name'] = event.target.value;
-    },
-    updateRoomDescription: function updateRoomDescription(event) {
-      this.$parent.roomSetting['description'] = event.target.value;
-    },
-    updateImg: function updateImg(event) {
-      var value = event.target.value; // 横幅、高さ、透過度の値
-
-      var type = event.target.dataset.inputType; // widthかheightかopacity
-
-      if (type == 'width') {
-        this.$parent.roomImg['width'] = value;
-      } else if (type == 'height') {
-        this.$parent.roomImg['height'] = value;
-      } else if (type == 'opacity') {
-        this.$parent.roomImg['opacity'] = value;
-      } // this.$emit('resize-img', value, type);
-
-    },
-    updateRoomBgColor: function updateRoomBgColor(event) {
-      // カラーピッカーの変更に、Room背景色を同期させて即反映
-      var value = event.target.value;
-      this.$parent.roomSetting['roomBackgroundColor'] = value;
-    },
-    toggleRoomImg: function toggleRoomImg() {
-      // room画像の表示/非表示を切り替え
-      if (this.isShowRoomImg) {
-        this.$parent.roomSetting['isShowImg'] = false;
-      } else if (!this.isShowRoomImg) {
-        this.$parent.roomSetting['isShowImg'] = true;
-      }
-    },
-    deleteRoomImg: function deleteRoomImg() {
-      this.$emit('delete-room-img');
-    },
-    changePublicState: function changePublicState() {
-      if (this.isPublic) {
-        this.$parent.roomSetting['isPublic'] = false;
-      } else if (!this.isPublic) {
-        this.$parent.roomSetting['isPublic'] = true;
-      }
-    }
-  },
-  mounted: function mounted() {
-    this.window_width = window.innerWidth;
-    this.window_height = window.innerHeight;
-  },
-  computed: {
-    showPublicState: function showPublicState() {
-      if (this.isPublic) {
-        return '公開（他のユーザも検索・閲覧できます）';
-      } else if (!this.isPublic) {
-        return '非公開（他のユーザは検索・閲覧できません）';
-      }
-    }
-  },
-  watch: {}
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=script&lang=js& ***!
@@ -5745,12 +5745,12 @@ __webpack_require__.r(__webpack_exports__);
       // 作成したRoomといいねしたRoomを結合
       var allRoomInfos = [];
 
-      for (var i = 0; i < this.$parent.createdRoomPreviewInfos.length; i++) {
-        allRoomInfos.push(this.$parent.createdRoomPreviewInfos[i]);
+      for (var i = 0; i < this.$parent.createdMediaPreviewInfos.length; i++) {
+        allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
       }
 
-      for (var _i = 0; _i < this.$parent.likedRoomPreviewInfos.length; _i++) {
-        allRoomInfos.push(this.$parent.likedRoomPreviewInfos[_i]);
+      for (var _i = 0; _i < this.$parent.likedMediaPreviewInfos.length; _i++) {
+        allRoomInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
       } // 選択されたRoomのみ抽出
 
 
@@ -5947,11 +5947,11 @@ __webpack_require__.r(__webpack_exports__);
     RoomPreview: _RoomPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default,
     MypageMenuBar: _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  props: ['createdRoomPreviewInfosFromParent', 'likedRoomPreviewInfosFromParent'],
+  props: ['createdMediaPreviewInfosFromParent', 'likedMediaPreviewInfosFromParent'],
   data: function data() {
     return {
-      'createdRoomPreviewInfos': "",
-      'likedRoomPreviewInfos': "",
+      'createdMediaPreviewInfos': "",
+      'likedMediaPreviewInfos': "",
       'isShowCoverOnCreateRoom': true,
       'isShowCoverOnLikeRoom': false,
       'isShowCreatedRoomPreview': true,
@@ -5962,21 +5962,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    addCreatedRoomPreviewInfos: function addCreatedRoomPreviewInfos() {
-      var url = '/addCreatedRoomPreviewInfos';
+    addCreatedMediaPreviewInfos: function addCreatedMediaPreviewInfos() {
+      var url = '/addCreatedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
         tmpThis.isUpdateCreatedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
       });
     },
-    addLikedRoomPreviewInfos: function addLikedRoomPreviewInfos() {
-      var url = '/addLikedRoomPreviewInfos';
+    addLikedMediaPreviewInfos: function addLikedMediaPreviewInfos() {
+      var url = '/addLikedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
         tmpThis.isUpdateLikedRoomPreviewInfo = true;
       })["catch"](function (error) {
         alert('room情報の取得に失敗しました');
@@ -5985,8 +5985,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {},
   mounted: function mounted() {
-    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
-    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+    this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
+    this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch: {},
   computed: {}
@@ -6199,11 +6199,11 @@ vue__WEBPACK_IMPORTED_MODULE_2__.default.component('follow-component', __webpack
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('img-select-component', __webpack_require__(/*! ./components/ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('movie-setting-component', __webpack_require__(/*! ./components/MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('audio-select-component', __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-setting-component', __webpack_require__(/*! ./components/RoomSettingComponent.vue */ "./resources/js/components/RoomSettingComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_2__.default.component('media-setting-component', __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-audio-component', __webpack_require__(/*! ./components/RoomAudioComponent.vue */ "./resources/js/components/RoomAudioComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-img-component', __webpack_require__(/*! ./components/RoomImgComponent.vue */ "./resources/js/components/RoomImgComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-movie-component', __webpack_require__(/*! ./components/RoomMovieComponent.vue */ "./resources/js/components/RoomMovieComponent.vue").default);
-vue__WEBPACK_IMPORTED_MODULE_2__.default.component('create-room-component', __webpack_require__(/*! ./components/CreateRoomComponent.vue */ "./resources/js/components/CreateRoomComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_2__.default.component('create-media-component', __webpack_require__(/*! ./components/CreateMediaComponent.vue */ "./resources/js/components/CreateMediaComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-create-button-component', __webpack_require__(/*! ./components/RoomCreateButtonComponent.vue */ "./resources/js/components/RoomCreateButtonComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('room-update-button-component', __webpack_require__(/*! ./components/RoomUpdateButtonComponent.vue */ "./resources/js/components/RoomUpdateButtonComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_2__.default.component('cancel-button-component', __webpack_require__(/*! ./components/CancelButtonComponent.vue */ "./resources/js/components/CancelButtonComponent.vue").default); // roomリスト作成用コンポーネント
@@ -10921,10 +10921,10 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11101,6 +11101,33 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.icon {\r\n  color: pink;\n}\r\n\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/roomEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/roomEditModals.css");
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 75%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\n}\n.setting {\r\n    margin-bottom : 20px;\n}\n.state-description {\r\n    font-size: 12px;\n}\n.public-state-icon {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon:hover {\r\n    opacity: 1;\n}\n.open-icon {\r\n    color: lawngreen;\n}\n.lock-icon {\r\n    color: yellow;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11521,33 +11548,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\n.room-wrapper[data-v-63cb9c0a] {\r\n
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../css/roomEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./resources/css/roomEditModals.css");
-// Imports
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_roomEditModals_css__WEBPACK_IMPORTED_MODULE_1__.default);
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 75%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\n}\n.setting {\r\n    margin-bottom : 20px;\n}\n.state-description {\r\n    font-size: 12px;\n}\n.public-state-icon {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon:hover {\r\n    opacity: 1;\n}\n.open-icon {\r\n    color: lawngreen;\n}\n.lock-icon {\r\n    color: yellow;\n}\n.message-label {\r\n    font-size: 10px;\n}\n.setting-title {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css& ***!
@@ -11670,7 +11670,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-32705670] {\r\n  margin-left: 70px;\n}\n.select-mode-switch[data-v-32705670] {\r\n  margin-bottom: 30px;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-description[data-v-32705670] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.select-mode-item[data-v-32705670] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-32705670] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-32705670] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-32705670] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-32705670] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-32705670]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-32705670] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-32705670]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-32705670] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-32705670] {\r\n  color: blue;\n}\n.view-more[data-v-32705670]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-32705670] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n    margin: 12px 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-32705670] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-32705670] {\r\n    margin: 2px 15px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.mypage-content-wrapper[data-v-32705670] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-32705670] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-32705670] {\r\n    background-color: black;\n}\n.linkTo-createRoom[data-v-32705670] {\r\n    font-size: 14px;\r\n    padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-32705670] {\r\n  margin-left: 70px;\n}\n.select-mode-switch[data-v-32705670] {\r\n  margin-bottom: 30px;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n  display: flex;\r\n  flex-wrap: wrap;\n}\n.select-mode-description[data-v-32705670] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.select-mode-item[data-v-32705670] {\r\n  margin: 0 10px 10px 0;\n}\n.mypage-section[data-v-32705670] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-32705670] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-32705670] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.room-create-wrapper[data-v-32705670] {\r\n  display: inline-block;\r\n  margin-bottom: 25px;\n}\n.room-create-wrapper[data-v-32705670]:hover {\r\n  transform: translate(0.7px, 0.5px);\n}\n.linkTo-createRoom[data-v-32705670] {\r\n  text-decoration: none;\r\n  font-size: 18px;\r\n  font-weight: bold;\r\n  font-family: \"Meiryo\";\r\n  color: white;\r\n  background-color: rgb(25,95,150);\r\n  padding: 3px 20px;\r\n  border-radius: 4px;\r\n  box-shadow: 2px 2px 4px grey;\n}\n.linkTo-createRoom[data-v-32705670]:hover {\r\n  background-color: rgb(245,50,110);\r\n  box-shadow: 1.5px 1.5px 3px darkgrey;\n}\n.preview-img[data-v-32705670] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-32705670] {\r\n  color: blue;\n}\n.view-more[data-v-32705670]:hover {\r\n  cursor: pointer;\r\n  color: aqua;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-32705670] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n    margin: 12px 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-32705670] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-32705670] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-32705670] {\r\n    margin: 2px 15px;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.mypage-content-wrapper[data-v-32705670] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-32705670] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-32705670] {\r\n    background-color: black;\n}\n.linkTo-createRoom[data-v-32705670] {\r\n    font-size: 14px;\r\n    padding: 6px 18px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49718,10 +49718,10 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -49731,7 +49731,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_style_index_0_id_73bdd4aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_style_index_0_id_0243e000_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&");
 
             
 
@@ -49740,11 +49740,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_style_index_0_id_73bdd4aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_style_index_0_id_0243e000_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_style_index_0_id_73bdd4aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_style_index_0_id_0243e000_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -49925,6 +49925,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -50405,36 +50435,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomPreviewComponent_vue_vue_type_style_index_0_id_63cb9c0a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
 
 /***/ }),
 
@@ -50979,10 +50979,10 @@ component.options.__file = "resources/js/components/CancelButtonComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/CreateRoomComponent.vue":
-/*!*********************************************************!*\
-  !*** ./resources/js/components/CreateRoomComponent.vue ***!
-  \*********************************************************/
+/***/ "./resources/js/components/CreateMediaComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/CreateMediaComponent.vue ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -50990,9 +50990,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true& */ "./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true&");
-/* harmony import */ var _CreateRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateRoomComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _CreateRoomComponent_vue_vue_type_style_index_0_id_73bdd4aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& */ "./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&");
+/* harmony import */ var _CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true& */ "./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true&");
+/* harmony import */ var _CreateMediaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CreateMediaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CreateMediaComponent_vue_vue_type_style_index_0_id_0243e000_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& */ "./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -51003,19 +51003,19 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _CreateRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _CreateMediaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "73bdd4aa",
+  "0243e000",
   null
   
 )
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/CreateRoomComponent.vue"
+component.options.__file = "resources/js/components/CreateMediaComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -51301,6 +51301,47 @@ var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__
 /* hot reload */
 if (false) { var api; }
 component.options.__file = "resources/js/components/LikeRoomComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaSettingComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/MediaSettingComponent.vue ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaSettingComponent.vue?vue&type=template&id=950e7a94& */ "./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94&");
+/* harmony import */ var _MediaSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MediaSettingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MediaSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _MediaSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MediaSettingComponent.vue"
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
@@ -51961,47 +52002,6 @@ component.options.__file = "resources/js/components/RoomPreviewComponent.vue"
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomSettingComponent.vue":
-/*!**********************************************************!*\
-  !*** ./resources/js/components/RoomSettingComponent.vue ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=template&id=016b6473& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&");
-/* harmony import */ var _RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
-  _RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.render,
-  _RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/RoomSettingComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomUpdateButtonComponent.vue":
 /*!***************************************************************!*\
   !*** ./resources/js/components/RoomUpdateButtonComponent.vue ***!
@@ -52280,10 +52280,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************!*\
-  !*** ./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/***/ "./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -52291,8 +52291,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRoomComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateMediaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -52405,6 +52405,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LikeRoomComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LikeRoomComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaSettingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -52664,22 +52680,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************!*\
-  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=script&lang=js& ***!
@@ -52802,15 +52802,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&":
-/*!******************************************************************************************************************!*\
-  !*** ./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& ***!
-  \******************************************************************************************************************/
+/***/ "./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&":
+/*!*******************************************************************************************************************!*\
+  !*** ./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_style_index_0_id_73bdd4aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=style&index=0&id=73bdd4aa&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_style_index_0_id_0243e000_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=style&index=0&id=0243e000&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -52889,6 +52889,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LikeRoomComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LikeRoomComponent.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -53101,19 +53114,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css& ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=style&index=0&lang=css&");
-
-
-/***/ }),
-
 /***/ "./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css&":
 /*!************************************************************************************************************************!*\
   !*** ./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=style&index=0&id=67bcec6c&scoped=true&lang=css& ***!
@@ -53226,19 +53226,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true& ***!
+  \*****************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateRoomComponent_vue_vue_type_template_id_73bdd4aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CreateMediaComponent_vue_vue_type_template_id_0243e000_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true&");
 
 
 /***/ }),
@@ -53358,6 +53358,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_template_id_14c21fb0___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LikeRoomComponent_vue_vue_type_template_id_14c21fb0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./LikeRoomComponent.vue?vue&type=template&id=14c21fb0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/LikeRoomComponent.vue?vue&type=template&id=14c21fb0&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94& ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaSettingComponent_vue_vue_type_template_id_950e7a94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaSettingComponent.vue?vue&type=template&id=950e7a94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94&");
 
 
 /***/ }),
@@ -53630,23 +53647,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomPreviewComponent_vue_vue_type_template_id_63cb9c0a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomPreviewComponent_vue_vue_type_template_id_63cb9c0a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomPreviewComponent.vue?vue&type=template&id=63cb9c0a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomPreviewComponent.vue?vue&type=template&id=63cb9c0a&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473& ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.render,
-/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RoomSettingComponent_vue_vue_type_template_id_016b6473___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./RoomSettingComponent.vue?vue&type=template&id=016b6473& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&");
 
 
 /***/ }),
@@ -54149,10 +54149,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateRoomComponent.vue?vue&type=template&id=73bdd4aa&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/CreateMediaComponent.vue?vue&type=template&id=0243e000&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -54168,7 +54168,7 @@ var render = function() {
   return _c(
     "div",
     {
-      style: { "background-color": _vm.roomSetting["roomBackgroundColor"] },
+      style: { "background-color": _vm.mediaSetting["roomBackgroundColor"] },
       attrs: { id: "field" },
       on: {
         click: function($event) {
@@ -54193,7 +54193,7 @@ var render = function() {
           roomImgHeight: _vm.roomImg["height"] + "px",
           roomImgLayer: _vm.roomImg["layer"],
           roomImgOpacity: _vm.roomImg["opacity"],
-          isShowRoomImg: _vm.roomSetting["isShowImg"]
+          isShowRoomImg: _vm.mediaSetting["isShowImg"]
         },
         on: { "parent-action": _vm.showModal }
       }),
@@ -54201,7 +54201,7 @@ var render = function() {
       _c("room-audio-component", {
         ref: "roomAudio",
         attrs: {
-          maxAudioNum: _vm.roomSetting["maxAudioNum"],
+          maxAudioNum: _vm.mediaSetting["maxAudioNum"],
           roomAudios: _vm.roomAudios
         }
       }),
@@ -54211,8 +54211,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.roomSetting["isShowMovie"],
-            expression: "roomSetting['isShowMovie']"
+            value: _vm.mediaSetting["isShowMovie"],
+            expression: "mediaSetting['isShowMovie']"
           }
         ],
         ref: "roomMovie",
@@ -54276,11 +54276,11 @@ var render = function() {
               "div",
               {
                 staticClass: "icon-wrapper",
-                attrs: { id: "disp-room-setting-modal-wrapper" },
+                attrs: { id: "disp-media-setting-modal-wrapper" },
                 on: {
                   click: function($event) {
                     $event.stopPropagation()
-                    return _vm.showModal("roomSettingModal")
+                    return _vm.showModal("mediaSettingModal")
                   }
                 }
               },
@@ -54346,22 +54346,22 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-setting-component", {
+      _c("media-setting-component", {
         directives: [
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowModal["roomSettingModal"],
-            expression: "isShowModal['roomSettingModal']"
+            value: _vm.isShowModal["mediaSettingModal"],
+            expression: "isShowModal['mediaSettingModal']"
           }
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          isPublic: _vm.roomSetting["isPublic"],
-          roomName: _vm.roomSetting["name"],
-          roomDescription: _vm.roomSetting["description"],
-          roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
-          isShowRoomImg: _vm.roomSetting["isShowImg"],
+          isPublic: _vm.mediaSetting["isPublic"],
+          roomName: _vm.mediaSetting["name"],
+          roomDescription: _vm.mediaSetting["description"],
+          roomBackgroundColor: _vm.mediaSetting["roomBackgroundColor"],
+          isShowRoomImg: _vm.mediaSetting["isShowImg"],
           roomImgWidth: _vm.roomImg["width"],
           roomImgHeight: _vm.roomImg["height"],
           roomImgOpacity: _vm.roomImg["opacity"]
@@ -54473,16 +54473,16 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addCreatedRoomPreviewInfos }
+                on: { click: _vm.addCreatedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
           ]),
           _vm._v(" "),
-          _c("room-preview-component", {
+          _c("media-preview-component", {
             ref: "createdRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.createdRoomPreviewInfos,
+              "media-preview-infos": _vm.createdMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnCreateRoom,
               "is-select-mode": _vm.isSelectMode
             },
@@ -54515,16 +54515,16 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addLikedRoomPreviewInfos }
+                on: { click: _vm.addLikedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
           ]),
           _vm._v(" "),
-          _c("room-preview-component", {
+          _c("media-preview-component", {
             ref: "likedRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.likedRoomPreviewInfos,
+              "media-preview-infos": _vm.likedMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnLikeRoom,
               "is-select-mode": _vm.isSelectMode
             },
@@ -55079,6 +55079,261 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaSettingComponent.vue?vue&type=template&id=950e7a94& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transition", { attrs: { name: _vm.transitionName } }, [
+    _c("div", { attrs: { id: "select-modal" } }, [
+      _c("div", { attrs: { id: "area-wrapper" } }, [
+        _c("div", { attrs: { id: "setting-wrapper" } }, [
+          _c(
+            "div",
+            { staticClass: "setting", attrs: { id: "room-is-public-wraper" } },
+            [
+              _c("p", { staticClass: "setting-title" }, [
+                _vm._v("公開/非公開")
+              ]),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.isPublic,
+                    expression: "isPublic"
+                  }
+                ],
+                staticClass:
+                  "fas fa-door-open fa-lg public-state-icon open-icon",
+                on: { click: _vm.changePublicState }
+              }),
+              _vm._v(" "),
+              _c("i", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.isPublic,
+                    expression: "!(isPublic)"
+                  }
+                ],
+                staticClass: "fas fa-lock fa-lg public-state-icon lock-icon",
+                on: { click: _vm.changePublicState }
+              }),
+              _vm._v(" "),
+              _c("span", { staticClass: "state-description" }, [
+                _vm._v(_vm._s(_vm.showPublicState))
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "setting", attrs: { id: "room-name-wraper" } },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room名")]),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [
+                _c("input", {
+                  attrs: {
+                    type: "text",
+                    id: "room-name",
+                    placeholder: "Room名"
+                  },
+                  domProps: { value: _vm.roomName },
+                  on: { input: _vm.updateRoomName }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "setting",
+              attrs: { id: "room-description-wrapper" }
+            },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("説明")]),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [
+                _c("textarea", {
+                  attrs: {
+                    type: "text",
+                    id: "room-description",
+                    rows: "4",
+                    cols: "30",
+                    maxlength: "120",
+                    placeholder: "説明文"
+                  },
+                  domProps: { value: _vm.roomDescription },
+                  on: { input: _vm.updateRoomDescription }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "setting", attrs: { id: "room-bg-color-wraper" } },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room背景")]),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "" } }, [
+                _c("input", {
+                  attrs: { type: "color", id: "room-bg-color" },
+                  domProps: { value: _vm.roomBackgroundColor },
+                  on: { input: _vm.updateRoomBgColor }
+                }),
+                _vm._v("\n            Room背景色\n          ")
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "setting",
+              attrs: { id: "room-img-setting-wrapper" }
+            },
+            [
+              _c("p", { staticClass: "setting-title" }, [_vm._v("Room画像")]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "img-config-input",
+                attrs: {
+                  "data-input-type": "width",
+                  type: "text",
+                  size: "5",
+                  placeholder: "横幅"
+                },
+                domProps: { value: _vm.roomImgWidth },
+                on: { input: _vm.updateImg }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("[px] 横幅")]),
+              _c("span", { staticClass: "message-label" }, [
+                _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")")
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "img-config-input",
+                attrs: {
+                  "data-input-type": "height",
+                  type: "text",
+                  size: "5",
+                  placeholder: "縦幅"
+                },
+                domProps: { value: _vm.roomImgHeight },
+                on: { input: _vm.updateImg }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("[px] 縦幅")]),
+              _c("span", { staticClass: "message-label" }, [
+                _vm._v(" (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")")
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "img-config-input",
+                attrs: {
+                  "data-input-type": "opacity",
+                  type: "text",
+                  size: "5",
+                  placeholder: "透明度"
+                },
+                domProps: { value: _vm.roomImgOpacity },
+                on: { input: _vm.updateImg }
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("透明度(0～1)")]),
+              _c("br"),
+              _vm._v(" "),
+              _c("button", { on: { click: _vm.toggleRoomImg } }, [
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isShowRoomImg,
+                        expression: "isShowRoomImg"
+                      }
+                    ]
+                  },
+                  [_vm._v("非表示")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isShowRoomImg,
+                        expression: "!(isShowRoomImg)"
+                      }
+                    ]
+                  },
+                  [_vm._v("表示")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("button", { on: { click: _vm.deleteRoomImg } }, [
+                _c("span", [_vm._v("削除")])
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fas fa-times-circle fa-2x for-mobile",
+        attrs: { id: "change-disp-modal" },
+        on: {
+          click: function($event) {
+            return _vm.closeModal()
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
+        _c("i", {
+          staticClass: "fas fa-chevron-circle-left fa-3x",
+          attrs: { id: "close-modal-icon" },
+          on: {
+            click: function($event) {
+              return _vm.closeModal()
+            }
+          }
+        })
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&scoped=true&":
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MovieSettingComponent.vue?vue&type=template&id=112e17fc&scoped=true& ***!
@@ -55322,7 +55577,7 @@ var render = function() {
               expression: "isShowCreatedRoomPreview"
             }
           ],
-          staticClass: "mypage-section created-room-list"
+          staticClass: "mypage-section created-media-list"
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
@@ -55334,7 +55589,7 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addCreatedRoomPreviewInfos }
+                on: { click: _vm.addCreatedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
@@ -55343,7 +55598,7 @@ var render = function() {
           _c("room-preview-component", {
             ref: "createdRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.createdRoomPreviewInfos,
+              "room-preview-infos": _vm.createdMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnCreateRoom,
               "is-select-mode": _vm.isSelectMode
             },
@@ -55364,7 +55619,7 @@ var render = function() {
               expression: "isShowLikedRoomPreview"
             }
           ],
-          staticClass: "mypage-section liked-room-list"
+          staticClass: "mypage-section liked-media-list"
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
@@ -55376,7 +55631,7 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addLikedRoomPreviewInfos }
+                on: { click: _vm.addLikedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
@@ -55385,7 +55640,7 @@ var render = function() {
           _c("room-preview-component", {
             ref: "likedRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.likedRoomPreviewInfos,
+              "room-preview-infos": _vm.likedMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnLikeRoom,
               "is-select-mode": _vm.isSelectMode
             },
@@ -55937,7 +56192,7 @@ var render = function() {
   return _c(
     "div",
     {
-      style: { "background-color": _vm.roomSetting["roomBackgroundColor"] },
+      style: { "background-color": _vm.mediaSetting["roomBackgroundColor"] },
       attrs: { id: "field" },
       on: {
         click: function($event) {
@@ -55952,8 +56207,8 @@ var render = function() {
       _c("room-header-component", {
         attrs: {
           isShowLinkToEdit: _vm.isMyRoom,
-          roomId: _vm.roomSetting["id"],
-          roomName: _vm.roomSetting["name"]
+          roomId: _vm.mediaSetting["id"],
+          roomName: _vm.mediaSetting["name"]
         }
       }),
       _vm._v(" "),
@@ -55965,14 +56220,14 @@ var render = function() {
           roomImgHeight: _vm.roomImg["height"] + "px",
           roomImgOpacity: _vm.roomImg["opacity"],
           roomImgLayer: _vm.roomImg["layer"],
-          isShowRoomImg: _vm.roomSetting["isShowImg"]
+          isShowRoomImg: _vm.mediaSetting["isShowImg"]
         }
       }),
       _vm._v(" "),
       _c("room-audio-component", {
         ref: "roomAudio",
         attrs: {
-          maxAudioNum: _vm.roomSetting["maxAudioNum"],
+          maxAudioNum: _vm.mediaSetting["maxAudioNum"],
           roomAudios: _vm.roomAudios
         }
       }),
@@ -55982,8 +56237,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.roomSetting["isShowMovie"],
-            expression: "roomSetting['isShowMovie']"
+            value: _vm.mediaSetting["isShowMovie"],
+            expression: "mediaSetting['isShowMovie']"
           }
         ],
         ref: "roomMovie",
@@ -56007,7 +56262,7 @@ var render = function() {
                   },
                   [
                     _c("like-room-component", {
-                      attrs: { roomId: _vm.roomSetting["id"] }
+                      attrs: { roomId: _vm.mediaSetting["id"] }
                     })
                   ],
                   1
@@ -56038,7 +56293,7 @@ var render = function() {
                       expression: "isShowModal['roomOwnerInfo']"
                     }
                   ],
-                  attrs: { roomId: _vm.roomSetting["id"] }
+                  attrs: { roomId: _vm.mediaSetting["id"] }
                 })
               ],
               1
@@ -56048,7 +56303,7 @@ var render = function() {
               "div",
               {
                 staticClass: "icon-wrapper",
-                attrs: { id: "disp-room-setting-modal-wrapper" },
+                attrs: { id: "disp-media-setting-modal-wrapper" },
                 on: {
                   click: function($event) {
                     $event.stopPropagation()
@@ -56073,8 +56328,8 @@ var render = function() {
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          name: _vm.roomSetting["name"],
-          description: _vm.roomSetting["description"]
+          name: _vm.mediaSetting["name"],
+          description: _vm.mediaSetting["description"]
         },
         on: { "close-modal": _vm.closeModal }
       })
@@ -56159,7 +56414,7 @@ var render = function() {
   return _c(
     "div",
     {
-      style: { "background-color": _vm.roomSetting["roomBackgroundColor"] },
+      style: { "background-color": _vm.mediaSetting["roomBackgroundColor"] },
       attrs: { id: "field" },
       on: {
         click: function($event) {
@@ -56175,7 +56430,7 @@ var render = function() {
         attrs: {
           isShowUpdateButton: true,
           isShowLinkToShow: true,
-          roomId: _vm.roomSetting["id"]
+          roomId: _vm.mediaSetting["id"]
         },
         on: { "update-room": _vm.updateRoom }
       }),
@@ -56188,7 +56443,7 @@ var render = function() {
           roomImgHeight: _vm.roomImg["height"] + "px",
           roomImgOpacity: _vm.roomImg["opacity"],
           roomImgLayer: _vm.roomImg["layer"],
-          isShowRoomImg: _vm.roomSetting["isShowImg"]
+          isShowRoomImg: _vm.mediaSetting["isShowImg"]
         },
         on: { "parent-action": _vm.showModal }
       }),
@@ -56196,7 +56451,7 @@ var render = function() {
       _c("room-audio-component", {
         ref: "roomAudio",
         attrs: {
-          maxAudioNum: _vm.roomSetting["maxAudioNum"],
+          maxAudioNum: _vm.mediaSetting["maxAudioNum"],
           roomAudios: _vm.roomAudios
         }
       }),
@@ -56206,8 +56461,8 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.roomSetting["isShowMovie"],
-            expression: "roomSetting['isShowMovie']"
+            value: _vm.mediaSetting["isShowMovie"],
+            expression: "mediaSetting['isShowMovie']"
           }
         ],
         ref: "roomMovie",
@@ -56271,11 +56526,11 @@ var render = function() {
               "div",
               {
                 staticClass: "icon-wrapper",
-                attrs: { id: "disp-room-setting-modal-wrapper" },
+                attrs: { id: "disp-media-setting-modal-wrapper" },
                 on: {
                   click: function($event) {
                     $event.stopPropagation()
-                    return _vm.showModal("roomSettingModal")
+                    return _vm.showModal("mediaSettingModal")
                   }
                 }
               },
@@ -56341,22 +56596,22 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("room-setting-component", {
+      _c("media-setting-component", {
         directives: [
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowModal["roomSettingModal"],
-            expression: "isShowModal['roomSettingModal']"
+            value: _vm.isShowModal["mediaSettingModal"],
+            expression: "isShowModal['mediaSettingModal']"
           }
         ],
         attrs: {
           transitionName: _vm.transitionName,
-          isPublic: _vm.roomSetting["isPublic"],
-          roomName: _vm.roomSetting["name"],
-          roomDescription: _vm.roomSetting["description"],
-          roomBackgroundColor: _vm.roomSetting["roomBackgroundColor"],
-          isShowRoomImg: _vm.roomSetting["isShowImg"],
+          isPublic: _vm.mediaSetting["isPublic"],
+          roomName: _vm.mediaSetting["name"],
+          roomDescription: _vm.mediaSetting["description"],
+          roomBackgroundColor: _vm.mediaSetting["roomBackgroundColor"],
+          isShowRoomImg: _vm.mediaSetting["isShowImg"],
           roomImgWidth: _vm.roomImg["width"],
           roomImgHeight: _vm.roomImg["height"],
           roomImgOpacity: _vm.roomImg["opacity"]
@@ -57190,261 +57445,6 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473&":
-/*!********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomSettingComponent.vue?vue&type=template&id=016b6473& ***!
-  \********************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => /* binding */ render,
-/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
-/* harmony export */ });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: _vm.transitionName } }, [
-    _c("div", { attrs: { id: "select-modal" } }, [
-      _c("div", { attrs: { id: "area-wrapper" } }, [
-        _c("div", { attrs: { id: "setting-wrapper" } }, [
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "room-is-public-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [
-                _vm._v("公開/非公開")
-              ]),
-              _vm._v(" "),
-              _c("i", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.isPublic,
-                    expression: "isPublic"
-                  }
-                ],
-                staticClass:
-                  "fas fa-door-open fa-lg public-state-icon open-icon",
-                on: { click: _vm.changePublicState }
-              }),
-              _vm._v(" "),
-              _c("i", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: !_vm.isPublic,
-                    expression: "!(isPublic)"
-                  }
-                ],
-                staticClass: "fas fa-lock fa-lg public-state-icon lock-icon",
-                on: { click: _vm.changePublicState }
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "state-description" }, [
-                _vm._v(_vm._s(_vm.showPublicState))
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "room-name-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Room名")]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("input", {
-                  attrs: {
-                    type: "text",
-                    id: "room-name",
-                    placeholder: "Room名"
-                  },
-                  domProps: { value: _vm.roomName },
-                  on: { input: _vm.updateRoomName }
-                })
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "setting",
-              attrs: { id: "room-description-wrapper" }
-            },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("説明")]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("textarea", {
-                  attrs: {
-                    type: "text",
-                    id: "room-description",
-                    rows: "4",
-                    cols: "30",
-                    maxlength: "120",
-                    placeholder: "説明文"
-                  },
-                  domProps: { value: _vm.roomDescription },
-                  on: { input: _vm.updateRoomDescription }
-                })
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "room-bg-color-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Room背景")]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("input", {
-                  attrs: { type: "color", id: "room-bg-color" },
-                  domProps: { value: _vm.roomBackgroundColor },
-                  on: { input: _vm.updateRoomBgColor }
-                }),
-                _vm._v("\n            Room背景色\n          ")
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "setting",
-              attrs: { id: "room-img-setting-wrapper" }
-            },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Room画像")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "width",
-                  type: "text",
-                  size: "5",
-                  placeholder: "横幅"
-                },
-                domProps: { value: _vm.roomImgWidth },
-                on: { input: _vm.updateImg }
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 横幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")")
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "height",
-                  type: "text",
-                  size: "5",
-                  placeholder: "縦幅"
-                },
-                domProps: { value: _vm.roomImgHeight },
-                on: { input: _vm.updateImg }
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 縦幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")")
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "opacity",
-                  type: "text",
-                  size: "5",
-                  placeholder: "透明度"
-                },
-                domProps: { value: _vm.roomImgOpacity },
-                on: { input: _vm.updateImg }
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("透明度(0～1)")]),
-              _c("br"),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.toggleRoomImg } }, [
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.isShowRoomImg,
-                        expression: "isShowRoomImg"
-                      }
-                    ]
-                  },
-                  [_vm._v("非表示")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.isShowRoomImg,
-                        expression: "!(isShowRoomImg)"
-                      }
-                    ]
-                  },
-                  [_vm._v("表示")]
-                )
-              ]),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.deleteRoomImg } }, [
-                _c("span", [_vm._v("削除")])
-              ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-times-circle fa-2x for-mobile",
-        attrs: { id: "change-disp-modal" },
-        on: {
-          click: function($event) {
-            return _vm.closeModal()
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
-        _c("i", {
-          staticClass: "fas fa-chevron-circle-left fa-3x",
-          attrs: { id: "close-modal-icon" },
-          on: {
-            click: function($event) {
-              return _vm.closeModal()
-            }
-          }
-        })
-      ])
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=template&id=67bcec6c&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/RoomUpdateButtonComponent.vue?vue&type=template&id=67bcec6c&scoped=true& ***!
@@ -57664,7 +57664,7 @@ var render = function() {
               expression: "isShowCreatedRoomPreview"
             }
           ],
-          staticClass: "mypage-section created-room-list"
+          staticClass: "mypage-section created-media-list"
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
@@ -57676,7 +57676,7 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addCreatedRoomPreviewInfos }
+                on: { click: _vm.addCreatedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
@@ -57685,7 +57685,7 @@ var render = function() {
           _c("room-preview-component", {
             ref: "createdRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.createdRoomPreviewInfos,
+              "room-preview-infos": _vm.createdMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnCreateRoom,
               "is-select-mode": _vm.isSelectMode
             },
@@ -57706,7 +57706,7 @@ var render = function() {
               expression: "isShowLikedRoomPreview"
             }
           ],
-          staticClass: "mypage-section liked-room-list"
+          staticClass: "mypage-section liked-media-list"
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
@@ -57718,7 +57718,7 @@ var render = function() {
               "span",
               {
                 staticClass: "view-more",
-                on: { click: _vm.addLikedRoomPreviewInfos }
+                on: { click: _vm.addLikedMediaPreviewInfos }
               },
               [_vm._v("\n        もっと見る\n      ")]
             )
@@ -57727,7 +57727,7 @@ var render = function() {
           _c("room-preview-component", {
             ref: "likedRoomPreview",
             attrs: {
-              "room-preview-infos": _vm.likedRoomPreviewInfos,
+              "room-preview-infos": _vm.likedMediaPreviewInfos,
               "is-show-cover": _vm.isShowCoverOnLikeRoom,
               "is-select-mode": _vm.isSelectMode
             },

@@ -189,7 +189,7 @@
           }
         }
         console.log(longestAudioDuration);
-        this.$parent.roomSetting['finish_time'] = longestAudioDuration;
+        this.$parent.mediaSetting['finish_time'] = longestAudioDuration;
       },
       updateAudioThumbnail() {
         let audioDoms = document.getElementsByClassName('audio-wrapper');

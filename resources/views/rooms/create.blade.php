@@ -12,7 +12,7 @@
 </head>
 <body>
   <div id="app">
-    <create-room-component></create-room-component>
+    <create-media-component></create-media-component>
   </div>
 
   {{-- <script src="{{ asset('/js/roomContentsDragAndDrop.js')}}"></script> --}}

@@ -87,10 +87,10 @@ export default {
       this.$emit('close-modal');
     },
     updateRoomName(event) {
-      this.$parent.roomSetting['name'] = event.target.value;
+      this.$parent.mediaSetting['name'] = event.target.value;
     },
     updateRoomDescription(event) {
-      this.$parent.roomSetting['description'] = event.target.value;
+      this.$parent.mediaSetting['description'] = event.target.value;
     },
     updateImg(event){
       let value = event.target.value; // 横幅、高さ、透過度の値
@@ -106,13 +106,13 @@ export default {
     },
     updateRoomBgColor(event){ // カラーピッカーの変更に、Room背景色を同期させて即反映
       let value = event.target.value;
-      this.$parent.roomSetting['roomBackgroundColor'] = value;
+      this.$parent.mediaSetting['roomBackgroundColor'] = value;
     },
     toggleRoomImg() { // room画像の表示/非表示を切り替え
       if(this.isShowRoomImg){
-        this.$parent.roomSetting['isShowImg'] = false;
+        this.$parent.mediaSetting['isShowImg'] = false;
       } else if(!(this.isShowRoomImg)){
-        this.$parent.roomSetting['isShowImg'] = true;
+        this.$parent.mediaSetting['isShowImg'] = true;
       }
     },
     deleteRoomImg(){
@@ -120,9 +120,9 @@ export default {
     },
     changePublicState() {
       if(this.isPublic){
-        this.$parent.roomSetting['isPublic'] = false;
+        this.$parent.mediaSetting['isPublic'] = false;
       } else if(!(this.isPublic)){
-        this.$parent.roomSetting['isPublic'] = true;
+        this.$parent.mediaSetting['isPublic'] = true;
       }
     }
 

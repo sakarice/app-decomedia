@@ -68,7 +68,7 @@
       // ★動画の長さ取得
       setMovieDurationToFinishTime(){
         let movieDuration = this.ytPlayer.getDuration();
-        this.$parent.roomSetting['finish_time'] = movieDuration;
+        this.$parent.mediaSetting['finish_time'] = movieDuration;
       },
       onPlayerStateChange(event) {
         if(event.data == 0 && this.isLoopYoutube == true){

@@ -44,7 +44,7 @@ export default{
     },
     updateLikeStateInDB(){
       let url = '/room/like';
-      const room_id = this.$parent.roomSetting['id'];
+      const room_id = this.$parent.mediaSetting['id'];
       let data = {
         'isLike' : this.isLikeRoom,
         'room_id' : room_id,

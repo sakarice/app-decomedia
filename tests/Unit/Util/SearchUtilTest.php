@@ -10,9 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomSetting;
+use App\Models\MediaSetting;
 
-use App\Lib\RoomUtil;
 use App\Lib\ImgUtil;
 
 class SearchUtilTest extends TestCase
@@ -44,11 +43,11 @@ class SearchUtilTest extends TestCase
         // キーワード無しの時に表示するroom。ルーム名(name)は一律"test_room"
         for($i=0; $i<30; $i++){
             Room::factory()->create();
-            RoomSetting::factory()->create();   // ルーム名(name)は"test_room"
+            MediaSetting::factory()->create();   // ルーム名(name)は"test_room"
         }
         // キーワードありの時に表示するroom。ルーム名を↑と変えている。
         Room::factory()->create();
-        RoomSetting::factory()->create(['name'=>'keyword_test']);
+        MediaSetting::factory()->create(['name'=>'keyword_test']);
 
         // パターン1:検索キーワードを設定
         $response = $this->post('/room/show/search/result', [

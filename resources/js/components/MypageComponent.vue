@@ -35,19 +35,19 @@
     </div>
 
     <!-- 作成済みRoomのプレビュー -->
-    <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
+    <section v-show="isShowCreatedRoomPreview" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">作成済みRoom</h3>
         <!-- {{-- Room作成 --}} -->
 
-        <span class="view-more" @click="addCreatedRoomPreviewInfos">
+        <span class="view-more" @click="addCreatedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
       <!-- {{-- 作成済みroom一覧 --}} -->
       <room-preview-component
-        :room-preview-infos="createdRoomPreviewInfos"
+        :room-preview-infos="createdMediaPreviewInfos"
         :is-show-cover="isShowCoverOnCreateRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
@@ -56,17 +56,17 @@
     </section>
 
     <!-- いいねしたRoomのプレビュー -->
-    <section v-show="isShowLikedRoomPreview" class="mypage-section liked-room-list">
+    <section v-show="isShowLikedRoomPreview" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <h3 class="section-title">いいねしたRoom</h3>
-        <span class="view-more" @click="addLikedRoomPreviewInfos">
+        <span class="view-more" @click="addLikedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
       <!-- いいねしたroom一覧 -->
       <room-preview-component
-        :room-preview-infos="likedRoomPreviewInfos"
+        :room-preview-infos="likedMediaPreviewInfos"
         :is-show-cover="isShowCoverOnLikeRoom"
         :is-select-mode="isSelectMode"
         @changeIsCheckedRoom="changeIsCheckedLikedRoom"
@@ -103,13 +103,13 @@ export default {
     UserPageProfile,
   },
   props : [
-    'createdRoomPreviewInfosFromParent',
-    'likedRoomPreviewInfosFromParent',
+    'createdMediaPreviewInfosFromParent',
+    'likedMediaPreviewInfosFromParent',
   ],
   data : () => {
     return {
-      'createdRoomPreviewInfos' : "",
-      'likedRoomPreviewInfos' : "",
+      'createdMediaPreviewInfos' : "",
+      'likedMediaPreviewInfos' : "",
       'isSelectMode' : false,
       'isShowCoverOnCreateRoomList' : true,
       'isShowCoverOnCreateRoom' : true,
@@ -130,24 +130,24 @@ export default {
     roomEditLink : function(id) {
       return "/room/" + id + "/edit";
     },
-    addCreatedRoomPreviewInfos(){
-      let url = '/addCreatedRoomPreviewInfos';
+    addCreatedMediaPreviewInfos(){
+      let url = '/addCreatedMediaPreviewInfos';
       let tmpThis = this;
       axios.get(url)
       .then(response => {
-        tmpThis.createdRoomPreviewInfos = response.data.createdRoomPreviewInfos;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
         tmpThis.isUpdateCreatedRoomPreviewInfo = true;
       })
       .catch(error => {
         alert('room情報の取得に失敗しました')
       })
     },
-    addLikedRoomPreviewInfos(){
-      let url = '/addLikedRoomPreviewInfos';
+    addLikedMediaPreviewInfos(){
+      let url = '/addLikedMediaPreviewInfos';
       let tmpThis = this;
       axios.get(url)
       .then(response => {
-        tmpThis.likedRoomPreviewInfos = response.data.likedRoomPreviewInfos;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
         tmpThis.isUpdateLikedRoomPreviewInfo = true;
       })
       .catch(error => {
@@ -175,8 +175,8 @@ export default {
       if(isChecked == true){
         this.increaseCreatedRoomSelectedCount(index);
       } else if(isChecked == false){
-        let unSelectedOrderNum = this.createdRoomPreviewInfos[index]['selectedOrderNum'];
-        this.createdRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        let unSelectedOrderNum = this.createdMediaPreviewInfos[index]['selectedOrderNum'];
+        this.createdMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseRoomSelectedCount(unSelectedOrderNum);
       }
     },
@@ -184,28 +184,28 @@ export default {
       if(isChecked == true){
         this.increaseLikedRoomSelectedCount(index);
       } else if(isChecked == false){
-        let unSelectedOrderNum = this.likedRoomPreviewInfos[index]['selectedOrderNum'];
-        this.likedRoomPreviewInfos[index]['selectedOrderNum'] = 0;
+        let unSelectedOrderNum = this.likedMediaPreviewInfos[index]['selectedOrderNum'];
+        this.likedMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseRoomSelectedCount(unSelectedOrderNum);
       }
     },
     increaseCreatedRoomSelectedCount(index){
-      this.createdRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
+      this.createdMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
       this.totalSelectedCount ++;
     },
     increaseLikedRoomSelectedCount(index){
-      this.likedRoomPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
+      this.likedMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
       this.totalSelectedCount ++;
     },
     decreseRoomSelectedCount(unSelectedOrderNum){
-      for(let i=0; i < this.createdRoomPreviewInfos.length; i++){
-        if(this.createdRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
-          this.createdRoomPreviewInfos[i]['selectedOrderNum'] --;
+      for(let i=0; i < this.createdMediaPreviewInfos.length; i++){
+        if(this.createdMediaPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
+          this.createdMediaPreviewInfos[i]['selectedOrderNum'] --;
         }
       }
-      for(let i=0; i < this.likedRoomPreviewInfos.length; i++){
-        if(this.likedRoomPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
-          this.likedRoomPreviewInfos[i]['selectedOrderNum'] --;
+      for(let i=0; i < this.likedMediaPreviewInfos.length; i++){
+        if(this.likedMediaPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
+          this.likedMediaPreviewInfos[i]['selectedOrderNum'] --;
         }
       }
       this.totalSelectedCount --;
@@ -213,11 +213,11 @@ export default {
     unCheckAllRoom(){
       this.$refs.createdRoomPreview.unCheckAllRoom();
       this.$refs.likedRoomPreview.unCheckAllRoom();
-      for(let i=0; i < this.createdRoomPreviewInfos.length; i++){
-        this.createdRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      for(let i=0; i < this.createdMediaPreviewInfos.length; i++){
+        this.createdMediaPreviewInfos[i]['selectedOrderNum'] = 0;
       }
-      for(let i=0; i < this.likedRoomPreviewInfos.length; i++){
-        this.likedRoomPreviewInfos[i]['selectedOrderNum'] = 0;
+      for(let i=0; i < this.likedMediaPreviewInfos.length; i++){
+        this.likedMediaPreviewInfos[i]['selectedOrderNum'] = 0;
       }
       this.totalSelectedCount = 0;
     }
@@ -226,8 +226,8 @@ export default {
   created() {
     },
   mounted() {
-    this.createdRoomPreviewInfos = this.createdRoomPreviewInfosFromParent;
-    this.likedRoomPreviewInfos = this.likedRoomPreviewInfosFromParent;
+    this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
+    this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch : {
   },

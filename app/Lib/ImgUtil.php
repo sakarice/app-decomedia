@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
 use App\Lib\Common\StringProcessing;
 use App\Http\Controllers\Img\ImgController;
-use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\UserOwnImg;

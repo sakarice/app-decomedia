@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Room\RoomController;
 use App\Models\User;
 use App\Models\Room;
-use App\Models\RoomSetting;
+use App\Models\MediaSetting;
 use App\Models\Roomlist;
 use App\Lib\EditRoom;
-use App\Lib\RoomUtil;
+use App\Lib\MediaUtil;
 
 class HomeController extends Controller
 {
@@ -34,11 +34,11 @@ class HomeController extends Controller
         $roomPreviewInfos = array();
         $getNum = 20; // 取得するRoomプレビュー情報件数
         // 公開中のRoomのみ取得
-        $openRoomSettings = RoomSetting::where('open_state', true)->inRandomOrder()->take($getNum)->get();
+        $openMediaSettings = MediaSetting::where('open_state', true)->inRandomOrder()->take($getNum)->get();
         // $rooms = Room::inRandomOrder()->take($getNum)->get();
-        foreach($openRoomSettings as $index => $openRoomSetting){
-            $room_id = $openRoomSetting->room_id;
-            $roomPreviewInfos[] = RoomUtil::getRoomPreviewInfo($room_id);
+        foreach($openMediaSettings as $index => $openMediaSetting){
+            $room_id = $openMediaSetting->room_id;
+            $roomPreviewInfos[] = MediaUtil::getRoomPreviewInfo($room_id);
         }
 
         // ログイン、ログアウト、サインアップの表示/非表示      
