@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function(){
         Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
     // 自分が入ったMediaの作成者をフォローしているかチェックする
         Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
-    // ルーム作成者をフォロー/フォロー解除する
+    // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
 
     // Ajax

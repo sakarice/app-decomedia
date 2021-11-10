@@ -40,7 +40,7 @@ class MediaMovieControllerTest extends TestCase
     }
 
     // 3.store
-    // 引数として渡したルームIDとルーム画像情報がDB保存されること。
+    // 引数として渡したメディアIDとメディア画像情報がDB保存されること。
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
@@ -53,17 +53,17 @@ class MediaMovieControllerTest extends TestCase
         );
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->movie = $media_movie_data;
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
-        //    requestのデータを指定したルームIDに紐づくルーム画像情報として保存
+        //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
         MediaMovieController::store($media_id, $request);
 
         // 3. 検証
     }
 
     // 4.show
-    // 引数のルームIDに対応したルーム画像情報がDBから取得できること
+    // 引数のメディアIDに対応したメディア画像情報がDBから取得できること
     public function test_show(){
         // 1. 取得対象データ登録
         //    ダミーデータ登録

@@ -38,7 +38,7 @@ class MediaAudioUtilTest extends TestCase
      */
 
     // 3.store
-    // 引数として渡したルームIDとルーム音楽情報がDB保存されること。
+    // 引数として渡したメディアIDとメディア音楽情報がDB保存されること。
     public function test_saveMediaAudioData(){
         // 0. 【準備】音楽情報を登録
         Media::factory()->create();
@@ -69,10 +69,10 @@ class MediaAudioUtilTest extends TestCase
         }
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->audios = $media_audio_datas;
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
-        //    requestのデータを指定したルームIDに紐づくルーム音楽情報として保存
+        //    requestのデータを指定したメディアIDに紐づくメディア音楽情報として保存
         MediaAudioUtil::saveMediaAudioData($media_id, $request);
 
         // 3. 検証

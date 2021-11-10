@@ -36,16 +36,16 @@ class SearchUtilTest extends TestCase
      */
 
 
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_searchMedias(){
         // キーワード無しの時は20個まで、ありの時は1つだけ検索結果が返ってくること
         // 【準備】Mediaを作成
-        // キーワード無しの時に表示するmedia。ルーム名(name)は一律"test_media"
+        // キーワード無しの時に表示するmedia。メディア名(name)は一律"test_media"
         for($i=0; $i<30; $i++){
             Media::factory()->create();
-            MediaSetting::factory()->create();   // ルーム名(name)は"test_media"
+            MediaSetting::factory()->create();   // メディア名(name)は"test_media"
         }
-        // キーワードありの時に表示するmedia。ルーム名を↑と変えている。
+        // キーワードありの時に表示するmedia。メディア名を↑と変えている。
         Media::factory()->create();
         MediaSetting::factory()->create(['name'=>'keyword_test']);
 

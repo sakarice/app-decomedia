@@ -40,7 +40,7 @@ class MediaUtilTest extends TestCase
      */
 
     // 3.store
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_getMediaPreviewImgUrl(){
         // 3パターンある テストしやすいので、パターン3からテストする。
         // パターン1：Media画像が設定されている

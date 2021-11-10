@@ -143,7 +143,7 @@
         audio['isLoop'] = false;
         audio['volume'] = 0.5;
         let beforeAudioNum = this.$parent.mediaAudios.length;
-        // オーディオは1ルームに5つまで。
+        // オーディオは1メディアに5つまで。
         // 既に5つある場合は一つ消してから追加。
         if(beforeAudioNum == this.maxAudioNum){
           // プレイヤーの初期化

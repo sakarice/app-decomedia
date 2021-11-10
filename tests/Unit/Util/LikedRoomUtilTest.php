@@ -35,10 +35,10 @@ class LikeMediaUtilTest extends TestCase
      * @return void
      */
 
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_updateLikeState(){
-        // 0. いいねするルームのidを作成
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        // 0. いいねするメディアのidを作成
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // パターン1 いいねされた場合
         // 1. requestを送信
@@ -46,7 +46,7 @@ class LikeMediaUtilTest extends TestCase
             'isLike' => true,
             'media_id' => $media_id,
         ]);
-        // 2. 検証：いいねしたユーザとルームのレコードがDBに存在すること
+        // 2. 検証：いいねしたユーザとメディアのレコードがDBに存在すること
         $this->assertDatabaseHas('user_like_medias',[
             'user_id' => $this->user->id,
             'media_id' => $media_id,
@@ -58,7 +58,7 @@ class LikeMediaUtilTest extends TestCase
             'isLike' => false,
             'media_id' => $media_id,
         ]);
-        // 2. 検証：いいね解除されたユーザとルームのレコードがDBから消えていること
+        // 2. 検証：いいね解除されたユーザとメディアのレコードがDBから消えていること
         $this->assertDatabaseMissing('user_like_medias',[
             'user_id' => $this->user->id,
             'media_id' => $media_id,

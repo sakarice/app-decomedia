@@ -3385,7 +3385,7 @@ __webpack_require__.r(__webpack_exports__);
       audio['isPlay'] = false;
       audio['isLoop'] = false;
       audio['volume'] = 0.5;
-      var beforeAudioNum = this.$parent.mediaAudios.length; // オーディオは1ルームに5つまで。
+      var beforeAudioNum = this.$parent.mediaAudios.length; // オーディオは1メディアに5つまで。
       // 既に5つある場合は一つ消してから追加。
 
       if (beforeAudioNum == this.maxAudioNum) {
@@ -4844,7 +4844,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {},
   computed: {
     isShowFollow: function isShowFollow() {
-      // ログインしていて自分のルームでなければフォローアイコンを表示
+      // ログインしていて自分のメディアでなければフォローアイコンを表示
       return this.$store.getters.getIsLogin && !this.isMyMedia;
     }
   }

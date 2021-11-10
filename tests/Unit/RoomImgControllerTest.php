@@ -42,7 +42,7 @@ class MediaImgControllerTest extends TestCase
     }
 
     // 3.store
-    // 引数として渡したルームIDとルーム画像情報がDB保存されること。
+    // 引数として渡したメディアIDとメディア画像情報がDB保存されること。
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
@@ -57,10 +57,10 @@ class MediaImgControllerTest extends TestCase
         );
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->img = $media_img_data;
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
-        //    requestのデータを指定したルームIDに紐づくルーム画像情報として保存
+        //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
         MediaImgController::store($media_id, $request);
 
         // 3. 検証
@@ -75,7 +75,7 @@ class MediaImgControllerTest extends TestCase
     }
 
     // 4.show
-    // 引数のルームIDに対応したルーム画像情報がDBから取得できること
+    // 引数のメディアIDに対応したメディア画像情報がDBから取得できること
     public function test_show(){
         // 1. 取得対象データ登録
         //    ダミーデータ登録
@@ -97,7 +97,7 @@ class MediaImgControllerTest extends TestCase
 
 
     // 6. update
-    // 引数のルームIDに対応したレコードを、引数のルーム画像情報で更新できること
+    // 引数のメディアIDに対応したレコードを、引数のメディア画像情報で更新できること
     public function test_update() {
         // 1. 更新対象データ登録
         //    ダミーデータ登録
@@ -121,7 +121,7 @@ class MediaImgControllerTest extends TestCase
         $request->img = $media_img_data;
 
         // 3. 更新
-        //    指定したルームIDのレコードをrequestの値で更新する
+        //    指定したメディアIDのレコードをrequestの値で更新する
         MediaImgController::update($media_id, $request);
 
         // 4. 検証
@@ -135,7 +135,7 @@ class MediaImgControllerTest extends TestCase
     }
 
     // 7. destroy
-    // 引数で指定したルームIDのレコードを削除する。
+    // 引数で指定したメディアIDのレコードを削除する。
     public function test_destroy(){
         // 1. 削除対象データ登録
         //    ダミーデータ作成
@@ -145,7 +145,7 @@ class MediaImgControllerTest extends TestCase
         $media_id = MediaImg::max('media_id');
 
         // 2. 削除
-        //    指定したルームIDのデータを削除
+        //    指定したメディアIDのデータを削除
         MediaImgController::destroy($media_id);
 
         // 3. 検証

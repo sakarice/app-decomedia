@@ -38,7 +38,7 @@ class MediaImgUtilTest extends TestCase
      */
 
     // 3.store
-    // 引数として渡したルームIDとルーム画像情報がDB保存されること。
+    // 引数として渡したメディアIDとメディア画像情報がDB保存されること。
     public function test_saveMediaImgData(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
@@ -53,10 +53,10 @@ class MediaImgUtilTest extends TestCase
         );
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->img = $media_img_data;
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
-        //    requestのデータを指定したルームIDに紐づくルーム画像情報として保存
+        //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
         MediaImgUtil::saveMediaImgData($media_id, $request);
 
         // 3. 検証
@@ -70,10 +70,10 @@ class MediaImgUtilTest extends TestCase
         ]);
     }
 
-    // 指定したルームIDでデフォルトのルーム画像情報を登録する
+    // 指定したメディアIDでデフォルトのメディア画像情報を登録する
     public function test_saveTentativeMediaImgData(){
-        // 1. 対象ルームIDの準備
-        $media_id = mt_rand(1, 2147483647); // 適当なルームID
+        // 1. 対象メディアIDの準備
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
         // 2. 登録
         MediaImgUtil::saveTentativeMediaImgData($media_id);
         // 3. 検証
@@ -91,26 +91,26 @@ class MediaImgUtilTest extends TestCase
     }
 
     // 4.show
-    // 引数のルームIDに対応したルーム画像情報がDBから取得できること
+    // 引数のメディアIDに対応したメディア画像情報がDBから取得できること
     public function test_getMediaImgData(){
-        // 準備：対象のルーム、ルームと紐づける画像データ作成
+        // 準備：対象のメディア、メディアと紐づける画像データ作成
         $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
 
-        // パターン1 ルーム画像未設定のためDBにはデフォルト値が保存されている
-        // 1. ルームID取得（※ルーム画像のimg_idを0に設定）
+        // パターン1 メディア画像未設定のためDBにはデフォルト値が保存されている
+        // 1. メディアID取得（※メディア画像のimg_idを0に設定）
         $media_img = MediaImg::factory()->create(['img_id' => 0]);
         $media_id = MediaImg::max('media_id');
-        // 2. ルーム画像データ取得
+        // 2. メディア画像データ取得
         $media_img_data = MediaImgUtil::getMediaImgData($media_id);
         // 3. 検証：データが取得できていること(中身はここでは問わない)
         $this->assertArrayHasKey('id', $media_img_data);
 
-        // パターン2 ルーム画像が登録されている
+        // パターン2 メディア画像が登録されている
         // 1. 取得対象データ登録
         $media_img = MediaImg::factory()->create();
         $media_id = MediaImg::max('media_id');
-        // 2. ルーム画像データ取得
+        // 2. メディア画像データ取得
         $media_img_data = MediaImgUtil::getMediaImgData($media_id);
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
@@ -121,7 +121,7 @@ class MediaImgUtilTest extends TestCase
 
 
     // 6. update
-    // 引数のルームIDに対応したレコードを、引数のルーム画像情報で更新できること
+    // 引数のメディアIDに対応したレコードを、引数のメディア画像情報で更新できること
     public function test_updateMediaImgData() {
         // 1. 更新対象データ登録
         //    ダミーデータ登録
@@ -145,7 +145,7 @@ class MediaImgUtilTest extends TestCase
         $request->img = $media_img_data;
 
         // 3. 更新
-        //    指定したルームIDのレコードをrequestの値で更新する
+        //    指定したメディアIDのレコードをrequestの値で更新する
         MediaImgUtil::updateMediaImgData($media_id, $request);
 
         // 4. 検証
@@ -159,7 +159,7 @@ class MediaImgUtilTest extends TestCase
     }
 
 
-    // 引数のルームIDに対応したレコードを、デフォルト値に更新する
+    // 引数のメディアIDに対応したレコードを、デフォルト値に更新する
     public function test_updateMediaImgDataToTentative() {
         // 1. 更新対象データ登録
         $media = Media::factory()->create();
@@ -167,7 +167,7 @@ class MediaImgUtilTest extends TestCase
         $media_img = MediaImg::factory()->create();
         $media_id = MediaImg::max('media_id');
 
-        // 2. 更新：指定したルームIDのレコードをrequestの値で更新する
+        // 2. 更新：指定したメディアIDのレコードをrequestの値で更新する
         MediaImgUtil::updateMediaImgDataToTentative($media_id);
 
         // 3. 検証：DBのデータが関数で指定しているデータと一致すること

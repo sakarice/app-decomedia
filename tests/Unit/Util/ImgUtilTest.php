@@ -36,7 +36,7 @@ class ImgUtilTest extends TestCase
      */
 
 
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_saveImgData(){
         // 【準備】保存する画像ファイルの情報を作成
         $fileDatas = array(
