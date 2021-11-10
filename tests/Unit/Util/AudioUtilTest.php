@@ -9,6 +9,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Lib\AudioUtil;
 use App\Models\User;
+use App\Models\UserOwnAudio;
+use App\Models\PublicAudio;
 
 class AudioUtilTest extends TestCase
 {
@@ -47,7 +49,7 @@ class AudioUtilTest extends TestCase
         // 1. 保存
         $saved_audio_id = AudioUtil::saveAudioData($fileDatas);
         // 2. 検証：保存したレコードがDefaultAudioテーブルに存在すること
-        $this->assertDatabaseHas('default_bgms',[
+        $this->assertDatabaseHas('public_audios',[
             'id' => $saved_audio_id,
             'owner_user_id' => NULL,
             'name' => "test",
@@ -63,7 +65,7 @@ class AudioUtilTest extends TestCase
         // 1. 保存
         $saved_audio_id = AudioUtil::saveAudioData($fileDatas);
         // 2. 検証：保存したレコードがUserOwnAudioテーブルに存在すること
-        $this->assertDatabaseHas('user_own_bgms',[
+        $this->assertDatabaseHas('user_own_audios',[
             'id' => $saved_audio_id,
             'owner_user_id' => $this->user->id,
             'name' => "test",

@@ -50,7 +50,7 @@ class ImgUtilTest extends TestCase
         // 1. 保存
         $saved_img_id = ImgUtil::saveImgData($fileDatas);
         // 2. 検証：保存したレコードがPublicImgテーブルに存在すること
-        $this->assertDatabaseHas('default_imgs',[
+        $this->assertDatabaseHas('public_imgs',[
             'id' => $saved_img_id,
             'owner_user_id' => NULL,
             'name' => "test",

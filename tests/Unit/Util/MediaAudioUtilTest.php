@@ -78,7 +78,7 @@ class MediaAudioUtilTest extends TestCase
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック
         for($i=1; $i<=2; $i++){
-            $this->assertDatabaseHas('media_bgms',[
+            $this->assertDatabaseHas('media_audios',[
                 'media_id' => $media_id,
                 'audio_type' => $i,
                 'order_seq' => $i,
@@ -101,7 +101,7 @@ class MediaAudioUtilTest extends TestCase
         $media_audio_datas = MediaAudioUtil::getMediaAudioData($media_id);
 
         foreach($media_audio_datas as $index => $media_audio_data){
-            $this->assertDatabaseHas('media_bgms',[
+            $this->assertDatabaseHas('media_audios',[
                'audio_type' => $media_audio_data['type'], 
                'audio_id' => $media_audio_data['id'], 
                'order_seq' => $index + 1,
@@ -161,7 +161,7 @@ class MediaAudioUtilTest extends TestCase
         // mediaAudioの数が1つになっていること
         $media_audio_num = MediaAudio::where('media_id', $media_id)->count();
         $this->assertEquals($media_audio_num, 1);
-        $this->assertDatabaseHas('media_bgms', [
+        $this->assertDatabaseHas('media_audios', [
             'audio_type' => 1,
             'volume' => 0.1,
             'isLoop' => 0,
@@ -184,13 +184,13 @@ class MediaAudioUtilTest extends TestCase
         // mediaAudioの数が2つになっていること
         $media_audio_num = MediaAudio::where('media_id', $media_id)->count();
         $this->assertEquals($media_audio_num, 2);
-        $this->assertDatabasehas('media_bgms', [
+        $this->assertDatabasehas('media_audios', [
             'audio_type' => 1,
             'volume' => 0.1,
             'isLoop' => false,
             'owner_user_id' => NULL,
         ]);
-        $this->assertDatabasehas('media_bgms', [
+        $this->assertDatabasehas('media_audios', [
             'audio_type' => 2,
             'volume' => 0.1,
             'isLoop' => false,
@@ -213,7 +213,7 @@ class MediaAudioUtilTest extends TestCase
     public function test_addEmptyMediaAudioData(){
         $media_id = mt_rand(1, 2147483647);
         MediaAudioUtil::addEmptyMediaAudioData($media_id);
-        $this->assertDatabaseHas('media_bgms', [
+        $this->assertDatabaseHas('media_audios', [
             'media_id' => $media_id,
             'audio_type' => 0,
             'audio_id' => 0,
@@ -226,17 +226,17 @@ class MediaAudioUtilTest extends TestCase
 
     public function test_getAudioId(){
         // パターン1:デフォルト音楽
-        $public_bgm = PublicAudio::factory()->create();
-        $public_bgm_url = $public_bgm->audio_url;        
-        $expected_audio_id = $public_bgm->id;
-        $actual_audio_id = MediaAudioUtil::getAudioId(1, $public_bgm_url);
+        $public_audio = PublicAudio::factory()->create();
+        $public_audio_url = $public_audio->audio_url;        
+        $expected_audio_id = $public_audio->id;
+        $actual_audio_id = MediaAudioUtil::getAudioId(1, $public_audio_url);
         $this->assertEquals($expected_audio_id, $actual_audio_id);
 
         // パターン2:ユーザがアップロードした音楽
-        $user_own_bgm = UserOwnAudio::factory()->create();
-        $user_own_bgm_url = $user_own_bgm->audio_url;
-        $expected_audio_id = $user_own_bgm->id;
-        $actual_audio_id = MediaAudioUtil::getAudioId(2, $user_own_bgm_url);
+        $user_own_audio = UserOwnAudio::factory()->create();
+        $user_own_audio_url = $user_own_audio->audio_url;
+        $expected_audio_id = $user_own_audio->id;
+        $actual_audio_id = MediaAudioUtil::getAudioId(2, $user_own_audio_url);
         $this->assertEquals($expected_audio_id, $actual_audio_id);
     }
 
