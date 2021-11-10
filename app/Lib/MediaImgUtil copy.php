@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\RooImgController;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\MediaImg;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
@@ -17,7 +16,7 @@ use Storage;
 class MediaImgUtil
 {
 
-  // 3.store // Room画像情報をDBに保存
+  // 3.store // Media画像情報をDBに保存
   public static function saveMediaImgData($media_id, $request){
     $mediaImg = new MediaImg();
     $mediaImg->media_id = $media_id;
@@ -46,7 +45,7 @@ class MediaImgUtil
   }
 
   // 4.show 
-  // Room画像の情報を取得(Room作成、編集、閲覧時に使用)
+  // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
   public static function getMediaImgData($media_id){
     $media_img_data;
     $img_url = "";
@@ -93,7 +92,7 @@ class MediaImgUtil
   }
 
 
-  // 仮のRoom画像情報を作成
+  // 仮のMedia画像情報を作成
   public static function getEmptyMediaImgData(){
     $media_img_data = [
       'id' => "",
@@ -108,7 +107,7 @@ class MediaImgUtil
   }
 
 
-  // Room画像のModelを取得
+  // Media画像のModelを取得
   // タイプに応じて取得先DBを選択
   public static function getMediaImgModel($img_id, $img_type){
     $media_img_model;

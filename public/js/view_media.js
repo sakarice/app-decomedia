@@ -5,14 +5,14 @@ $(function(){
   const track_player = document.getElementById("track-player");
   track_player.volume /= 3;
 
-  // 更新ボタンが押されたら、現在のRoomトラックのIDをPOSTする。
+  // 更新ボタンが押されたら、現在のMediaトラックのIDをPOSTする。
   $("#update-button").on("click", function(){
-    var room_id = $("#room-id").text();
-    var room_title = $("#room-title").text();
+    var media_id = $("#media-id").text();
+    var media_title = $("#media-title").text();
 
     // トラックIDの配列を作成
     var track_ids = new Array();
-    var track_id_doms = $("#room-track-list").find(".track-id");
+    var track_id_doms = $("#media-track-list").find(".track-id");
     track_id_doms.each(function(index, track_id_dom){
       var track_id = $(track_id_dom).text();
       track_ids.push(track_id);
@@ -23,32 +23,32 @@ $(function(){
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       type: 'POST',
-      url: location.href + '/updateRoom',
+      url: location.href + '/updateMedia',
       datatype: 'json',
       data: {
-        'room_id' : room_id,
-        'room_title' : room_title,
+        'media_id' : media_id,
+        'media_title' : media_title,
         'track_ids': track_ids,
       }
     }).done(function(){
-      // room画像、音楽、トラック名を入れ替え
-      alert("Room更新完了");
+      // media画像、音楽、トラック名を入れ替え
+      alert("Media更新完了");
     }).fail(function(){
-      alert('Room更新失敗');
+      alert('Media更新失敗');
     })
 
 
   })
 
-  // Roomタイトルがクリックされたら編集モードにする。
-  $("#room-title").on("click", function(){
+  // Mediaタイトルがクリックされたら編集モードにする。
+  $("#media-title").on("click", function(){
     if(!$(this).hasClass("on")){
       $(this).addClass("on");
       var txt = $(this).text();
       $(this).html("<input type=text value=" +txt+ ">");
 
       // 編集ボックスからフォーカスが外れたら編集終了
-      $("#room-title > input").focus().blur(function(){
+      $("#media-title > input").focus().blur(function(){
         judgeAndSetDefaultVal($(this));
       });
 
@@ -67,7 +67,7 @@ $(function(){
 
 
   // 再生トラック入れ替え
-  $(".room-and-track-wrapper").on("click", ".track-title", function(){
+  $(".media-and-track-wrapper").on("click", ".track-title", function(){
     var track_id = $(this).siblings('.track-id').html();
     var track_title = $(this).text();
     $.ajax({
@@ -81,7 +81,7 @@ $(function(){
         'track_id': track_id,
       }
     }).done(function (track){
-      // room画像、音楽、トラック名を入れ替え 
+      // media画像、音楽、トラック名を入れ替え 
       $("#media-img").attr('src', track.img_url);
       $("#track-player").children('source').attr('src', track.sound_url);
       $("#play-track-title").html(track_title);
@@ -97,8 +97,8 @@ $(function(){
   })
 
 
-  // +ボタンが押されたトラックをRoomトラックに追加
-  $(".room-and-track-wrapper").on("click", ".track-add-icon", function(){
+  // +ボタンが押されたトラックをMediaトラックに追加
+  $(".media-and-track-wrapper").on("click", ".track-add-icon", function(){
     var minus_icon = $(".track-remove-icon").first().attr('src');
     var img_url = $(this).siblings('.track-img-small').attr('src');
     var id = $(this).siblings('.track-id').text();
@@ -136,7 +136,7 @@ $(function(){
       "class", "track-title"
     ).html(title);
 
-    var room_track_info = $('<li></li>')
+    var media_track_info = $('<li></li>')
       .attr("class","track-info")
       .append(track_info_cover)
       .append(icon_and_index)
@@ -146,30 +146,30 @@ $(function(){
       .append(track_id)
       .append(track_title);
       
-      // Roomトラックのリスト要素を作成
-      $('#room-track-list').append(room_track_info);
+      // Mediaトラックのリスト要素を作成
+      $('#media-track-list').append(media_track_info);
 
-      // $('#room-track-list').load();
+      // $('#media-track-list').load();
       reNumberingTrack();
   
   })
 
-  // -ボタンが押されたトラックをRoomトラックから削除
-  $(".room-and-track-wrapper").on("click", ".track-remove-icon", function(){
+  // -ボタンが押されたトラックをMediaトラックから削除
+  $(".media-and-track-wrapper").on("click", ".track-remove-icon", function(){
     $(this).parents('.track-info').remove();
     reNumberingTrack();
   })
 
   
-  // Roomトラックの順番を更新する関数
+  // Mediaトラックの順番を更新する関数
   function reNumberingTrack(){
-    var track_infos = $("#room-track-list").children('.track-info');
+    var track_infos = $("#media-track-list").children('.track-info');
     track_infos.each(function(index, track_info){
       $(track_info).find('.track-index').first().html(index+1);
     })
   }
 
-  $(".room-and-track-wrapper").on(
+  $(".media-and-track-wrapper").on(
     "mouseover", ".track-info", function(){
     $(this).children(".track-info-cover").css({"opacity":0.6});
     $(this).find(".track-remove-icon").css({"opacity":1});

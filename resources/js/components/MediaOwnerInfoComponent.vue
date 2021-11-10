@@ -11,23 +11,23 @@
       <!-- プロフィール -->
       <div class="account-modal-profile">
         <div class="avatar-wrapper">
-            <img class="avatar" v-if="roomOwnerInfo['profile_img_url'] !== null" :src="roomOwnerInfo['profile_img_url']" alt="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
-            <img class="avatar" v-else src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg" alt="">
+            <img class="avatar" v-if="mediaOwnerInfo['profile_img_url'] !== null" :src="mediaOwnerInfo['profile_img_url']" alt="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg">
+            <img class="avatar" v-else src="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg" alt="">
         </div>
         <div class="name-wrapper">
-          <!-- <input type="text" v-model="roomOwnerInfo['name']" placeholder="ユーザ名"> -->
-          <p class="name">{{roomOwnerInfo['name']}}</p>
+          <!-- <input type="text" v-model="mediaOwnerInfo['name']" placeholder="ユーザ名"> -->
+          <p class="name">{{mediaOwnerInfo['name']}}</p>
         </div>
         <div class="about-me">
-          <textarea v-model="roomOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
+          <textarea v-model="mediaOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
         </div>
       </div>
 
       <!-- フォローアイコン -->
-      <div id="disp-follow-modal-wrapper" class="icon-wrapper" v-show="!isMyRoom">
+      <div id="disp-follow-modal-wrapper" class="icon-wrapper" v-show="!isMyMedia">
         <follow-component
         v-if="isShowFollow"
-        :room-owner-id="roomOwnerInfo['id']">
+        :media-owner-id="mediaOwnerInfo['id']">
         </follow-component>
       </div>
 
@@ -44,13 +44,13 @@ import Follow from './FollowComponent.vue';
       Follow,
     },
     props : [
-      'roomId',
+      'mediaId',
     ],
     data : () => {
       return {
-        isMyRoom : false,
+        isMyMedia : false,
         userId : 0,
-        roomOwnerInfo : {
+        mediaOwnerInfo : {
           'id' : 0,
           'name' : "",
           'profile_img_url' : null,
@@ -60,43 +60,43 @@ import Follow from './FollowComponent.vue';
       }
     },
     methods : {
-      checkIsMyRoom(){
-        let url = '/ajax/judgeIsMyRoom/' + this.roomId;
+      checkIsMyMedia(){
+        let url = '/ajax/judgeIsMyMedia/' + this.mediaId;
         axios.get(url)
           .then(response =>{
-            this.isMyRoom = response.data.isMyRoom;
+            this.isMyMedia = response.data.isMyMedia;
           })
           .catch(error => {})
       },
       closeProfileModal(){
-        this.$parent.isShowModal['roomOwnerInfo'] = false;
+        this.$parent.isShowModal['mediaOwnerInfo'] = false;
       },
       stopEvent: function(){
         event.stopPropagation();
       },
       getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
-        let url = '/user/roomOwner/profile/show/' + this.roomId;
+        let url = '/user/mediaOwner/profile/show/' + this.mediaId;
         axios.get(url)
         .then(res => {
-          this.roomOwnerInfo['id'] = res.data.id;
-          this.roomOwnerInfo['name'] = res.data.name;
-          this.roomOwnerInfo['aboutMe'] = res.data.aboutMe;
+          this.mediaOwnerInfo['id'] = res.data.id;
+          this.mediaOwnerInfo['name'] = res.data.name;
+          this.mediaOwnerInfo['aboutMe'] = res.data.aboutMe;
         })
         .catch(error => {
-          alert('Room作成者を取得できませんでした。');
+          alert('Media作成者を取得できませんでした。');
         })
       },
 
     },
     created(){},
     mounted: function(){
-      this.checkIsMyRoom();
+      this.checkIsMyMedia();
     },
     watch : {},
     computed : {
       isShowFollow: function(){
         // ログインしていて自分のルームでなければフォローアイコンを表示
-        return this.$store.getters.getIsLogin && !(this.isMyRoom);
+        return this.$store.getters.getIsLogin && !(this.isMyMedia);
       },
     }
 

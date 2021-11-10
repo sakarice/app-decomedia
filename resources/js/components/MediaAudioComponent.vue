@@ -1,6 +1,6 @@
 <template>
   <!-- <transition name="right-slide"> -->
-    <!-- Roomオーディオ -->
+    <!-- Mediaオーディオ -->
   <div id="media-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
     <!-- オーディオの表示・非表示切り替え -->
     <div class="change-disp-audio-wrapper">

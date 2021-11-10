@@ -23,8 +23,6 @@
     </media-component>
   </div>
 
-  
-  {{-- <script src="{{ asset('js/view_room.js') }}"></script> --}}
   <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

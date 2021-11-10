@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
-  <title>create room</title>
+  <title>create media</title>
 </head>
 <body>
   <div id="app">
     <create-media-component></create-media-component>
   </div>
 
-  {{-- <script src="{{ asset('/js/roomContentsDragAndDrop.js')}}"></script> --}}
+  {{-- <script src="{{ asset('/js/mediaContentsDragAndDrop.js')}}"></script> --}}
   <script src="{{ mix('/js/app.js') }}"></script>
 </body>
 </html>

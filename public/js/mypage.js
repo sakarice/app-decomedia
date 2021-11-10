@@ -4,16 +4,16 @@ $("#profile-img").on("click", function(){
   window.location.href = "mypage/profile";
 })
 
-// // showかeditがクリックされた時、roomIdを送信して画面遷移
+// // showかeditがクリックされた時、mediaIdを送信して画面遷移
 // $(function(){
 //   $(".cover-menu-link").on("click",function(){
-//     var room_id = $(this).parents('.preview-room').attr('id');
-//     var input = $("#room-post-input");
-//     input.val(room_id);
+//     var media_id = $(this).parents('.preview-media').attr('id');
+//     var input = $("#media-post-input");
+//     input.val(media_id);
 
 //     if($(this).val() == "show"){
-//       // $("#post-form").attr('action', "mypage/showroom");
-//       $("#post-form").attr('action', "/room/"+room_id);
+//       // $("#post-form").attr('action', "mypage/showmedia");
+//       $("#post-form").attr('action', "/media/"+media_id);
 //     } else {
 //       $("#post-form").attr('action', "  ");
 //     }
@@ -25,17 +25,17 @@ $("#profile-img").on("click", function(){
 // // 削除ボタン(ゴミ箱アイコン)がクリックされたら
 // $(function(){
 //   $(".del-icon").on("click", function(){
-//     var room_id = $(this).parents('.preview-room').attr('id');
-//     alert(room_id);
+//     var media_id = $(this).parents('.preview-media').attr('id');
+//     alert(media_id);
 
 //     $.ajax({
 //       headers: {
 //         'X-CSRF-TOKEN': $('meta[id="csrf-token"]').attr('content')
 //       },
-//       url: '/ajax/room/delete',
+//       url: '/ajax/media/delete',
 //       type: 'POST',
 //       data: {
-//         'room_id' : room_id
+//         'media_id' : media_id
 //       },
 //       success: function(data) {
 //         alert("OK");

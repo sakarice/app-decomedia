@@ -10,42 +10,42 @@
   <title>Document</title>
 </head>
 <body>
-  <div class="room-title-wrapper">
-    <p id="room-id" style="display: none">{{$room_id}}</p>
-    <p id="room-title">{{$room_title}}</p>
+  <div class="media-title-wrapper">
+    <p id="media-id" style="display: none">{{$media_id}}</p>
+    <p id="media-title">{{$media_title}}</p>
   </div>
-  <div class="room-and-track-wrapper">
-    {{-- room情報表示 --}}
-    <div class="room-wrapper">
+  <div class="media-and-track-wrapper">
+    {{-- media情報表示 --}}
+    <div class="media-wrapper">
       {{-- trackリスト --}}
-      <div class="room-tracks-wrapper">
-        <div class="room-track-list-cover"></div>
-        <ul id="room-track-list" class="room-track-list">
-          @foreach($room_tracks as $index => $room_track)
+      <div class="media-tracks-wrapper">
+        <div class="media-track-list-cover"></div>
+        <ul id="media-track-list" class="media-track-list">
+          @foreach($media_tracks as $index => $media_track)
             <li class="track-info">
               <div class="track-info-cover"></div>
               <div class="icon-and-index">
                 <img class="track-remove-icon" src="{{ asset('icon/マイナスマークアイコン 6.svg')}}" alt="-">
                 <span class="track-index">{{$index+1}}</span>
               </div>
-              <img class="track-img-small" src="{{$room_track->img_url}}" alt="">
-              <span class="track-id" style="display: none">{{$room_track->id}}</span>
-              <span class="track-title">{{$room_track->title}}</span>
+              <img class="track-img-small" src="{{$media_track->img_url}}" alt="">
+              <span class="track-id" style="display: none">{{$media_track->id}}</span>
+              <span class="track-title">{{$media_track->title}}</span>
             </li>
           @endforeach
         </ul>
       </div>
       {{-- track画像 --}}
       <div class="media-img-wrapper">
-        <img id="media-img" class="media-img" src="{{$room_tracks[0]->img_url}}" alt="room-image">
+        <img id="media-img" class="media-img" src="{{$media_tracks[0]->img_url}}" alt="media-image">
       </div>
 
       {{-- trackの再生プレイヤー --}}
       <div class="track-controller">
-        <div id="play-track-title">"{{$room_tracks[0]->title}}"</div>
+        <div id="play-track-title">"{{$media_tracks[0]->title}}"</div>
         <div class="track-player-wrapper">
           <audio id="track-player" controls controlslist="nodownload">
-            <source src="{{$room_tracks[0]->sound_url}}">
+            <source src="{{$media_tracks[0]->sound_url}}">
           </audio>
         </div>
       </div>
@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  {{-- Room更新用form --}}
+  {{-- Media更新用form --}}
   <form id="update-form" method="POST" action=""></form>
 
   {{-- ボタン --}}
@@ -78,6 +78,6 @@
     <button id="update-button">更新</button>
     <button>公開</button>
   </div>
-  <script src="{{ asset('js/view_room.js') }}"></script>
+  <script src="{{ asset('js/view_media.js') }}"></script>
 </body>
 </html>

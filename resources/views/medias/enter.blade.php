@@ -7,7 +7,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="{{ asset('css/medias.enter.css')}}">
   <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> {{-- jquery --}}
-  <title>roomEnter</title>
+  <title>mediaEnter</title>
 </head>
 <body>
 
@@ -24,40 +24,40 @@
   {{-- 戻るリンク --}}
   <a href="javascript:history.back()">戻る</a>
 
-  {{-- roomタイトル --}}
-  <div class="room-title-wrapper">
-    <p id="room-id" style="display: none">{{$room_id}}</p>
-    <p id="room-title">{{$room_title}}</p>
+  {{-- mediaタイトル --}}
+  <div class="media-title-wrapper">
+    <p id="media-id" style="display: none">{{$media_id}}</p>
+    <p id="media-title">{{$media_title}}</p>
   </div>
-  <div class="room-and-track-wrapper">
-    {{-- room情報表示 --}}
-    <div class="room-wrapper">
+  <div class="media-and-track-wrapper">
+    {{-- media情報表示 --}}
+    <div class="media-wrapper">
       {{-- trackリスト --}}
-      <div class="room-tracks-wrapper">
-        <div class="room-track-list-cover"></div>
-        <ul id="room-track-list" class="room-track-list">
-          @foreach($room_tracks as $index => $room_track)
+      <div class="media-tracks-wrapper">
+        <div class="media-track-list-cover"></div>
+        <ul id="media-track-list" class="media-track-list">
+          @foreach($media_tracks as $index => $media_track)
             <li class="track-info">
               <div class="track-info-cover"></div>
               <div class="icon-and-index">
                 <span class="track-index">{{$index+1}}</span>
               </div>
-              <img class="track-img-small" src="{{$room_track->img_url}}" alt="">
-              <span class="track-id" style="display: none">{{$room_track->id}}</span>
-              <span class="track-title">{{$room_track->title}}</span>
-              <span class="track-sound-url">{{$room_track->sound_url}}</span>
+              <img class="track-img-small" src="{{$media_track->img_url}}" alt="">
+              <span class="track-id" style="display: none">{{$media_track->id}}</span>
+              <span class="track-title">{{$media_track->title}}</span>
+              <span class="track-sound-url">{{$media_track->sound_url}}</span>
             </li>
           @endforeach
         </ul>
       </div>
       {{-- track画像 --}}
       <div class="media-img-wrapper">
-        <img id="media-img" class="media-img" src="{{$room_tracks[0]->img_url}}" alt="room-image">
+        <img id="media-img" class="media-img" src="{{$media_tracks[0]->img_url}}" alt="media-image">
       </div>
 
       {{-- 再生中のトラックタイトル --}}
       <div id="playing-track-title-wrapper">
-        <h3 id="playing-track-title">{{$room_tracks[0]->title}}</h3>
+        <h3 id="playing-track-title">{{$media_tracks[0]->title}}</h3>
       </div>
 
       {{-- 再生制御用 --}}
@@ -70,16 +70,16 @@
 
       {{-- trackの再生プレイヤー --}}
       {{-- <div class="track-controller">
-        <div id="play-track-title">"{{$room_tracks[0]->title}}"</div>
+        <div id="play-track-title">"{{$media_tracks[0]->title}}"</div>
         <div class="track-player-wrapper">
           <audio id="track-player" controls controlslist="nodownload">
-            <source src="{{$room_tracks[0]->sound_url}}">
+            <source src="{{$media_tracks[0]->sound_url}}">
           </audio>
         </div>
       </div> --}}
 
     </div>
 
-  <script src="{{ asset('js/enter_room.js') }}"></script>
+  <script src="{{ asset('js/enter_media.js') }}"></script>
 </body>
 </html>

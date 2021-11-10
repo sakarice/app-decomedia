@@ -1,33 +1,33 @@
 <template>
-  <ul class="room-list-wrapper">
-    <li v-for="(roomListPreviewInfo,index) in roomListPreviewInfos" :key="roomListPreviewInfo.id">
-      <div class="preview-room-list" :id="roomListPreviewInfo['id']">
-        <a :href="roomListShowLink(roomListPreviewInfo['id'])">
-          <img class="room-list-thumbnail" :src="roomListPreviewInfo['preview_img_url']" alt="">
+  <ul class="media-list-wrapper">
+    <li v-for="(mediaListPreviewInfo,index) in mediaListPreviewInfos" :key="mediaListPreviewInfo.id">
+      <div class="preview-media-list" :id="mediaListPreviewInfo['id']">
+        <a :href="mediaListShowLink(mediaListPreviewInfo['id'])">
+          <img class="media-list-thumbnail" :src="mediaListPreviewInfo['preview_img_url']" alt="">
         </a>
 
         <div class="cover-menu" v-show="isShowCover">
-          <a :href="roomListShowLink(roomListPreviewInfo['id'])" class="cover-menu-link">
+          <a :href="mediaListShowLink(mediaListPreviewInfo['id'])" class="cover-menu-link">
             <span class="link-title">閲覧</span>
           </a>
-          <a :href="roomListEditLink(roomListPreviewInfo['id'])" class="cover-menu-link">
+          <a :href="mediaListEditLink(mediaListPreviewInfo['id'])" class="cover-menu-link">
             <span class="link-title">編集</span>
           </a>
         </div>
-        <i class="fas fa-trash del-icon" @click="deleteroomList(roomListPreviewInfo['id'])" v-show="isShowCover"></i>
+        <i class="fas fa-trash del-icon" @click="deletemediaList(mediaListPreviewInfo['id'])" v-show="isShowCover"></i>
 
-        <!-- roomリスト選択用チェックボックス -->
+        <!-- mediaリスト選択用チェックボックス -->
         <div class="check-box-cover" v-show="isSelectMode">
-          <input type="checkbox" class="room-list-select-check" name="" @change="changeIsCheckedroomList($event, index)">
+          <input type="checkbox" class="media-list-select-check" name="" @change="changeIsCheckedmediaList($event, index)">
         </div>
 
         <!-- 選択順 -->
         <div class="selected-order-num-wrapper"
-        v-show="isSelectMode && roomListPreviewInfo['selectedOrderNum'] > 0">
-          <span class="selected-order-num">{{roomListPreviewInfo['selectedOrderNum']}}</span>
+        v-show="isSelectMode && mediaListPreviewInfo['selectedOrderNum'] > 0">
+          <span class="selected-order-num">{{mediaListPreviewInfo['selectedOrderNum']}}</span>
         </div>
 
-        <p class="room-list-title">{{roomListPreviewInfo['name']}}</p>
+        <p class="media-list-title">{{mediaListPreviewInfo['name']}}</p>
       </div>
     </li>
   </ul>
@@ -42,7 +42,7 @@ export default {
   ],
   data : () => {
     return {
-      'roomListPreviewInfos' : "",
+      'mediaListPreviewInfos' : "",
       'isShowSelectedOrderNum' : false,
     }
   },
@@ -50,57 +50,57 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    roomListShowLink : function(id) {
-      return "/home/roomList/" + id;
+    mediaListShowLink : function(id) {
+      return "/home/mediaList/" + id;
     },
-    roomListEditLink : function(id) {
-      return "/home/roomList/" + id + "/edit";
+    mediaListEditLink : function(id) {
+      return "/home/mediaList/" + id + "/edit";
     },
-    deleteroomList(roomList_id){
-      let roomList_data = {
-        'roomList_id' : roomList_id,
+    deletemediaList(mediaList_id){
+      let mediaList_data = {
+        'mediaList_id' : mediaList_id,
       }
-      const url = '/roomLists/delete';
-      axios.post(url, roomList_data)
+      const url = '/mediaLists/delete';
+      axios.post(url, mediaList_data)
       .then(response => {
         alert(response.data.message);
         location.reload();
       })
       .catch(error => {
-        alert('roomリスト削除に失敗しました。');
+        alert('mediaリスト削除に失敗しました。');
       })
     },
-    changeIsCheckedroomList(event, index){
+    changeIsCheckedmediaList(event, index){
       let isChecked = event.target.checked;
-      this.$emit('changeIsCheckedroomList', isChecked, index);
+      this.$emit('changeIsCheckedmediaList', isChecked, index);
     },
-    unCheckAllroomList(){
-      let checkBoxList = document.querySelectorAll(".room-list-select-check");
+    unCheckAllmediaList(){
+      let checkBoxList = document.querySelectorAll(".media-list-select-check");
       for(let i=0; i < checkBoxList.length; i++){
         checkBoxList[i].checked = false;
       }
     },
-    judgeIsChecked(roomListPreviewInfo){
-      if(roomListPreviewInfo['selectedOrderNum'] > 0){
+    judgeIsChecked(mediaListPreviewInfo){
+      if(mediaListPreviewInfo['selectedOrderNum'] > 0){
         return true;
       }
     },
-    // 作成済みRoomリストのプレビュー情報を取得
-    addCreatedRoomListPreviewInfos($num){
-      let url = '/ajax/addCreatedRoomListPreviewInfos/'+$num;
+    // 作成済みMediaリストのプレビュー情報を取得
+    addCreatedMediaListPreviewInfos($num){
+      let url = '/ajax/addCreatedMediaListPreviewInfos/'+$num;
       let tmpThis = this;
       axios.get(url)
       .then(response => {
-        tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos;
+        tmpThis.mediaListPreviewInfos = response.data.mediaListPreviewInfos;
       })
       .catch(error => {
-        console.log('roomリスト情報の取得に失敗しました')
+        console.log('mediaリスト情報の取得に失敗しました')
       })
     },
 
   },
   mounted : function(){
-    this.addCreatedRoomListPreviewInfos(this.firstPreviewNum);
+    this.addCreatedMediaListPreviewInfos(this.firstPreviewNum);
   },
   watch : {
   },
@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 
-.room-list-wrapper {
+.media-list-wrapper {
   display: flex;
   justify-content:flex-start;
   flex-wrap: wrap;
@@ -123,7 +123,7 @@ export default {
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
-/* .room-list-wrapper::after {
+/* .media-list-wrapper::after {
   display: block;
   content:"";
   width: 180px;
@@ -133,7 +133,7 @@ li {
   list-style: none;
 }
 
-.preview-room-list {
+.preview-media-list {
   position: relative;
   text-align: center;
   /* font-size: 50px; */
@@ -144,24 +144,24 @@ li {
   opacity: 0.8;
 }
 
-.preview-room-list:hover {
+.preview-media-list:hover {
   opacity: 1;
   transform: scale(0.98,0.98);
 
 }
 
-.preview-room-list:hover .cover-menu {
+.preview-media-list:hover .cover-menu {
   opacity: 0.7;
   z-index: 1;
 }
 
-.preview-room-list:hover .del-icon {
+.preview-media-list:hover .del-icon {
   opacity: 0.5;
   z-index: 2;
 }
 
 
-.room-list-thumbnail {
+.media-list-thumbnail {
   /* position: absolute; */
   top: 0;
   left: 0;
@@ -234,7 +234,7 @@ li {
   opacity: 0.8;
 }
 
-.room-list-select-check {
+.media-list-select-check {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -261,7 +261,7 @@ li {
   color: aquamarine;
 }
 
-.room-list-title {
+.media-list-title {
   text-align: center;
   font-size: 25px;
   margin: 0 0;

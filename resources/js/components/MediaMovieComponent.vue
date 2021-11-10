@@ -1,6 +1,6 @@
 <template>
   <!-- <transition name="right-slide"> -->
-    <!-- Room Movie-->
+    <!-- Media Movie-->
   <div id="media-movie-wrapper"
   v-bind:style="{'z-index' : mediaMovieLayer}">
 
@@ -145,7 +145,7 @@
     font-size: 12px;
   }
 
-  .room-yt-loop-icon {
+  .media-yt-loop-icon {
     margin: 10px;
   }
 

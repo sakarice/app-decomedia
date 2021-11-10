@@ -1,9 +1,9 @@
 <template>
   <div class="action-button-wrapper">
-    <i class="fas fa-trash fa-3x room-delete-icon" @click="deleteSelectedRoom"></i>
+    <i class="fas fa-trash fa-3x media-delete-icon" @click="deleteSelectedMedia"></i>
     <span class="action-item-subtitle">削除</span>
-    <p v-show="deleteSelectedRoomMessage">
-      {{deleteSelectedRoomMessage}}
+    <p v-show="deleteSelectedMediaMessage">
+      {{deleteSelectedMediaMessage}}
     </p>
   </div>
 </template>
@@ -13,57 +13,57 @@
     props : [],
     data : () => {
       return {
-        'deleteSelectedRoomMessage' : "",
+        'deleteSelectedMediaMessage' : "",
       }
     },
 
     methods : {
-      getSelectedRoomId(){
-        // 作成したRoomといいねしたRoomを結合
-        let allRoomInfos = [];
+      getSelectedMediaId(){
+        // 作成したMediaといいねしたMediaを結合
+        let allMediaInfos = [];
         for(let i=0;i < this.$parent.createdMediaPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
+          allMediaInfos.push(this.$parent.createdMediaPreviewInfos[i]);
         }
         for(let i=0;i < this.$parent.likedMediaPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.likedMediaPreviewInfos[i]);
+          allMediaInfos.push(this.$parent.likedMediaPreviewInfos[i]);
         }
-        // 選択されたRoomのみ抽出
-        let selectedRoomInfos = allRoomInfos.filter(function(roomInfo){
-          return roomInfo['selectedOrderNum'] > 0;
+        // 選択されたMediaのみ抽出
+        let selectedMediaInfos = allMediaInfos.filter(function(mediaInfo){
+          return mediaInfo['selectedOrderNum'] > 0;
         })
         // 選択された順番(昇順)で並べ替え
-        selectedRoomInfos.sort(function(a,b){
+        selectedMediaInfos.sort(function(a,b){
           if(a.selectedOrderNum < b.selectedOrderNum) return -1;
           if(a.selectedOrderNum > b.selectedOrderNum) return  1;
           return 0;
         });
-        // RoomIdを抽出した配列を作成
+        // MediaIdを抽出した配列を作成
         // [id1, id2, id3,...] (一つ前の処理で選択順にsort済み)
-        const selectedRoomIds
-         = selectedRoomInfos.map(
-           selectedRoomInfo => selectedRoomInfo.id
+        const selectedMediaIds
+         = selectedMediaInfos.map(
+           selectedMediaInfo => selectedMediaInfo.id
           );
         
-        return selectedRoomIds;
+        return selectedMediaIds;
       },
-      deleteSelectedRoom() {
-        const selectedRoomIds = this.getSelectedRoomId();
-        selectedRoomIds.forEach(selectedRoomId => {
-          alert(selectedRoomId);
+      deleteSelectedMedia() {
+        const selectedMediaIds = this.getSelectedMediaId();
+        selectedMediaIds.forEach(selectedMediaId => {
+          alert(selectedMediaId);
         });
-        const roomInfo = {
-          'selectedRoomIds' : selectedRoomIds,
+        const mediaInfo = {
+          'selectedMediaIds' : selectedMediaIds,
         }
-        const url = '/rooms/destroy';
-        axios.post(url, roomInfo)
+        const url = '/medias/destroy';
+        axios.post(url, mediaInfo)
           .then(response =>{
             alert(response.data.message);
-            this.deleteSelectedRoomMessage = "";
+            this.deleteSelectedMediaMessage = "";
             location.reload();
           })
           .catch(error => {
             alert('failed!');
-            this.deleteSelectedRoomMessage = "";
+            this.deleteSelectedMediaMessage = "";
           })
       }
 
@@ -80,7 +80,7 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "../../css/button.css";
 
-.room-delete-icon:hover {
+.media-delete-icon:hover {
   color: red;
 }
 

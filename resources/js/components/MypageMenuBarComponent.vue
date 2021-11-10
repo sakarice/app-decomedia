@@ -9,21 +9,21 @@
             </div>
         </div>
 
-        <!-- 作成済みroom一覧 -->
-        <div class="created-rooms">
+        <!-- 作成済みmedia一覧 -->
+        <div class="created-medias">
             <div class="content">
-                <!-- <a class="logo" href="/home/createdRoom"> -->
+                <!-- <a class="logo" href="/home/createdMedia"> -->
                     <!-- <i class="fas fa-hammer"></i> -->
-                    <i @click="switchToCreatedRoomPreview" class="fas fa-clone"></i>
+                    <i @click="switchToCreatedMediaPreview" class="fas fa-clone"></i>
                 <!-- </a> -->
             </div>
         </div>
 
-        <!-- お気に入りroom一覧 -->
-        <div class="liked-rooms">
+        <!-- お気に入りmedia一覧 -->
+        <div class="liked-medias">
             <div class="content">
-                <!-- <a class="logo" href="/home/createdRoom"> -->
-                    <i @click="switchToLikedRoomPreview" class="far fa-heart"></i>
+                <!-- <a class="logo" href="/home/createdMedia"> -->
+                    <i @click="switchToLikedMediaPreview" class="far fa-heart"></i>
                 <!-- </a> -->
             </div>
         </div>
@@ -46,19 +46,19 @@ export default {
     },
     methods : {
         switchToMypageDefault(){
-            this.$parent.isShowCreatedRoomPreview = true;
-            this.$parent.isShowLikedRoomPreview = true;
-            this.$parent.isShowCreatedRoomListPreview = true;
+            this.$parent.isShowCreatedMediaPreview = true;
+            this.$parent.isShowLikedMediaPreview = true;
+            this.$parent.isShowCreatedMediaListPreview = true;
         },
-        switchToCreatedRoomPreview(){
-            this.$parent.isShowCreatedRoomPreview = true;
-            this.$parent.isShowLikedRoomPreview = false;
-            this.$parent.isShowCreatedRoomListPreview = true;
+        switchToCreatedMediaPreview(){
+            this.$parent.isShowCreatedMediaPreview = true;
+            this.$parent.isShowLikedMediaPreview = false;
+            this.$parent.isShowCreatedMediaListPreview = true;
         },
-        switchToLikedRoomPreview(){
-            this.$parent.isShowCreatedRoomPreview = false;
-            this.$parent.isShowLikedRoomPreview = true;
-            this.$parent.isShowCreatedRoomListPreview = false;
+        switchToLikedMediaPreview(){
+            this.$parent.isShowCreatedMediaPreview = false;
+            this.$parent.isShowLikedMediaPreview = true;
+            this.$parent.isShowCreatedMediaListPreview = false;
         },
         
     },

@@ -19,11 +19,11 @@ class UserUtil
   }
 
 
-  // room所有者(=作成者)のユーザ情報を取得
-  public static function getMediaOwnerData($room_id){
-    $user_id = Media::find($room_id)->user_id;
-    $roomOwnerData = UserUtil::getUserData($user_id);
-    return $roomOwnerData;
+  // media所有者(=作成者)のユーザ情報を取得
+  public static function getMediaOwnerData($media_id){
+    $user_id = Media::find($media_id)->user_id;
+    $mediaOwnerData = UserUtil::getUserData($user_id);
+    return $mediaOwnerData;
   }
   
   // (ログイン中の)ユーザ情報を取得(id,ユーザ名,プロフィール文)

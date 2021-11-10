@@ -3844,8 +3844,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    createRoom: function createRoom() {
-      this.$emit('create-room');
+    createMedia: function createMedia() {
+      this.$emit('create-media');
     }
   }
 });
@@ -4442,57 +4442,57 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {
-      'createRoomListMessage': ""
+      'createMediaListMessage': ""
     };
   },
   methods: {
-    getSelectedRoomId: function getSelectedRoomId() {
-      // 作成したRoomといいねしたRoomを結合
-      var allRoomInfos = [];
+    getSelectedMediaId: function getSelectedMediaId() {
+      // 作成したMediaといいねしたMediaを結合
+      var allMediaInfos = [];
 
       for (var i = 0; i < this.$parent.createdMediaPreviewInfos.length; i++) {
-        allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
+        allMediaInfos.push(this.$parent.createdMediaPreviewInfos[i]);
       }
 
       for (var _i = 0; _i < this.$parent.likedMediaPreviewInfos.length; _i++) {
-        allRoomInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
-      } // 選択されたRoomのみ抽出
+        allMediaInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
+      } // 選択されたMediaのみ抽出
 
 
-      var selectedRoomInfos = allRoomInfos.filter(function (roomInfo) {
-        return roomInfo['selectedOrderNum'] > 0;
+      var selectedMediaInfos = allMediaInfos.filter(function (mediaInfo) {
+        return mediaInfo['selectedOrderNum'] > 0;
       }); // 選択された順番(昇順)で並べ替え
 
-      selectedRoomInfos.sort(function (a, b) {
+      selectedMediaInfos.sort(function (a, b) {
         if (a.selectedOrderNum < b.selectedOrderNum) return -1;
         if (a.selectedOrderNum > b.selectedOrderNum) return 1;
         return 0;
-      }); // RoomIdを抽出した配列を作成
+      }); // MediaIdを抽出した配列を作成
       // [id1, id2, id3,...] (一つ前の処理で選択順にsort済み)
 
-      var selectedRoomIds = selectedRoomInfos.map(function (selectedRoomInfo) {
-        return selectedRoomInfo.id;
+      var selectedMediaIds = selectedMediaInfos.map(function (selectedMediaInfo) {
+        return selectedMediaInfo.id;
       });
-      return selectedRoomIds;
+      return selectedMediaIds;
     },
-    createRoomList: function createRoomList() {
+    createMediaList: function createMediaList() {
       var _this = this;
 
-      var selectedRoomIds = this.getSelectedRoomId();
-      selectedRoomIds.forEach(function (selectedRoomId) {
-        alert(selectedRoomId);
+      var selectedMediaIds = this.getSelectedMediaId();
+      selectedMediaIds.forEach(function (selectedMediaId) {
+        alert(selectedMediaId);
       });
-      var roomInfo = {
-        'selectedRoomIds': selectedRoomIds
+      var mediaInfo = {
+        'selectedMediaIds': selectedMediaIds
       };
-      var url = '/roomlists/store'; // this.createRoomListMessage = "roomリスト情報を保存中です...";
+      var url = '/medialists/store'; // this.createMediaListMessage = "mediaリスト情報を保存中です...";
 
-      axios.post(url, roomInfo).then(function (response) {
+      axios.post(url, mediaInfo).then(function (response) {
         alert(response.data.message);
-        _this.createRoomListMessage = "";
+        _this.createMediaListMessage = "";
       })["catch"](function (error) {
-        alert('roomリストの作成に失敗しました');
-        _this.createRoomListMessage = "";
+        alert('mediaリストの作成に失敗しました');
+        _this.createMediaListMessage = "";
       });
     }
   }
@@ -4550,7 +4550,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['firstPreviewNum', 'isShowCover', 'isSelectMode'],
   data: function data() {
     return {
-      'roomListPreviewInfos': "",
+      'mediaListPreviewInfos': "",
       'isShowSelectedOrderNum': false
     };
   },
@@ -4558,53 +4558,53 @@ __webpack_require__.r(__webpack_exports__);
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
-    roomListShowLink: function roomListShowLink(id) {
-      return "/home/roomList/" + id;
+    mediaListShowLink: function mediaListShowLink(id) {
+      return "/home/mediaList/" + id;
     },
-    roomListEditLink: function roomListEditLink(id) {
-      return "/home/roomList/" + id + "/edit";
+    mediaListEditLink: function mediaListEditLink(id) {
+      return "/home/mediaList/" + id + "/edit";
     },
-    deleteroomList: function deleteroomList(roomList_id) {
-      var roomList_data = {
-        'roomList_id': roomList_id
+    deletemediaList: function deletemediaList(mediaList_id) {
+      var mediaList_data = {
+        'mediaList_id': mediaList_id
       };
-      var url = '/roomLists/delete';
-      axios.post(url, roomList_data).then(function (response) {
+      var url = '/mediaLists/delete';
+      axios.post(url, mediaList_data).then(function (response) {
         alert(response.data.message);
         location.reload();
       })["catch"](function (error) {
-        alert('roomリスト削除に失敗しました。');
+        alert('mediaリスト削除に失敗しました。');
       });
     },
-    changeIsCheckedroomList: function changeIsCheckedroomList(event, index) {
+    changeIsCheckedmediaList: function changeIsCheckedmediaList(event, index) {
       var isChecked = event.target.checked;
-      this.$emit('changeIsCheckedroomList', isChecked, index);
+      this.$emit('changeIsCheckedmediaList', isChecked, index);
     },
-    unCheckAllroomList: function unCheckAllroomList() {
-      var checkBoxList = document.querySelectorAll(".room-list-select-check");
+    unCheckAllmediaList: function unCheckAllmediaList() {
+      var checkBoxList = document.querySelectorAll(".media-list-select-check");
 
       for (var i = 0; i < checkBoxList.length; i++) {
         checkBoxList[i].checked = false;
       }
     },
-    judgeIsChecked: function judgeIsChecked(roomListPreviewInfo) {
-      if (roomListPreviewInfo['selectedOrderNum'] > 0) {
+    judgeIsChecked: function judgeIsChecked(mediaListPreviewInfo) {
+      if (mediaListPreviewInfo['selectedOrderNum'] > 0) {
         return true;
       }
     },
-    // 作成済みRoomリストのプレビュー情報を取得
-    addCreatedRoomListPreviewInfos: function addCreatedRoomListPreviewInfos($num) {
-      var url = '/ajax/addCreatedRoomListPreviewInfos/' + $num;
+    // 作成済みMediaリストのプレビュー情報を取得
+    addCreatedMediaListPreviewInfos: function addCreatedMediaListPreviewInfos($num) {
+      var url = '/ajax/addCreatedMediaListPreviewInfos/' + $num;
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.roomListPreviewInfos = response.data.roomListPreviewInfos;
+        tmpThis.mediaListPreviewInfos = response.data.mediaListPreviewInfos;
       })["catch"](function (error) {
-        console.log('roomリスト情報の取得に失敗しました');
+        console.log('mediaリスト情報の取得に失敗しました');
       });
     }
   },
   mounted: function mounted() {
-    this.addCreatedRoomListPreviewInfos(this.firstPreviewNum);
+    this.addCreatedMediaListPreviewInfos(this.firstPreviewNum);
   },
   watch: {},
   computed: {}
@@ -4794,12 +4794,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Follow: _FollowComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  props: ['roomId'],
+  props: ['mediaId'],
   data: function data() {
     return {
-      isMyRoom: false,
+      isMyMedia: false,
       userId: 0,
-      roomOwnerInfo: {
+      mediaOwnerInfo: {
         'id': 0,
         'name': "",
         'profile_img_url': null,
@@ -4809,16 +4809,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    checkIsMyRoom: function checkIsMyRoom() {
+    checkIsMyMedia: function checkIsMyMedia() {
       var _this = this;
 
-      var url = '/ajax/judgeIsMyRoom/' + this.roomId;
+      var url = '/ajax/judgeIsMyMedia/' + this.mediaId;
       axios.get(url).then(function (response) {
-        _this.isMyRoom = response.data.isMyRoom;
+        _this.isMyMedia = response.data.isMyMedia;
       })["catch"](function (error) {});
     },
     closeProfileModal: function closeProfileModal() {
-      this.$parent.isShowModal['roomOwnerInfo'] = false;
+      this.$parent.isShowModal['mediaOwnerInfo'] = false;
     },
     stopEvent: function stopEvent() {
       event.stopPropagation();
@@ -4827,25 +4827,25 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       // DBからログイン中ユーザのidとプロフィール情報を取得
-      var url = '/user/roomOwner/profile/show/' + this.roomId;
+      var url = '/user/mediaOwner/profile/show/' + this.mediaId;
       axios.get(url).then(function (res) {
-        _this2.roomOwnerInfo['id'] = res.data.id;
-        _this2.roomOwnerInfo['name'] = res.data.name;
-        _this2.roomOwnerInfo['aboutMe'] = res.data.aboutMe;
+        _this2.mediaOwnerInfo['id'] = res.data.id;
+        _this2.mediaOwnerInfo['name'] = res.data.name;
+        _this2.mediaOwnerInfo['aboutMe'] = res.data.aboutMe;
       })["catch"](function (error) {
-        alert('Room作成者を取得できませんでした。');
+        alert('Media作成者を取得できませんでした。');
       });
     }
   },
   created: function created() {},
   mounted: function mounted() {
-    this.checkIsMyRoom();
+    this.checkIsMyMedia();
   },
   watch: {},
   computed: {
     isShowFollow: function isShowFollow() {
       // ログインしていて自分のルームでなければフォローアイコンを表示
-      return this.$store.getters.getIsLogin && !this.isMyRoom;
+      return this.$store.getters.getIsLogin && !this.isMyMedia;
     }
   }
 });
@@ -5561,19 +5561,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     switchToMypageDefault: function switchToMypageDefault() {
-      this.$parent.isShowCreatedRoomPreview = true;
-      this.$parent.isShowLikedRoomPreview = true;
-      this.$parent.isShowCreatedRoomListPreview = true;
+      this.$parent.isShowCreatedMediaPreview = true;
+      this.$parent.isShowLikedMediaPreview = true;
+      this.$parent.isShowCreatedMediaListPreview = true;
     },
-    switchToCreatedRoomPreview: function switchToCreatedRoomPreview() {
-      this.$parent.isShowCreatedRoomPreview = true;
-      this.$parent.isShowLikedRoomPreview = false;
-      this.$parent.isShowCreatedRoomListPreview = true;
+    switchToCreatedMediaPreview: function switchToCreatedMediaPreview() {
+      this.$parent.isShowCreatedMediaPreview = true;
+      this.$parent.isShowLikedMediaPreview = false;
+      this.$parent.isShowCreatedMediaListPreview = true;
     },
-    switchToLikedRoomPreview: function switchToLikedRoomPreview() {
-      this.$parent.isShowCreatedRoomPreview = false;
-      this.$parent.isShowLikedRoomPreview = true;
-      this.$parent.isShowCreatedRoomListPreview = false;
+    switchToLikedMediaPreview: function switchToLikedMediaPreview() {
+      this.$parent.isShowCreatedMediaPreview = false;
+      this.$parent.isShowLikedMediaPreview = true;
+      this.$parent.isShowCreatedMediaListPreview = false;
     }
   },
   mounted: function mounted() {}
@@ -5737,57 +5737,57 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {
-      'deleteSelectedRoomMessage': ""
+      'deleteSelectedMediaMessage': ""
     };
   },
   methods: {
-    getSelectedRoomId: function getSelectedRoomId() {
-      // 作成したRoomといいねしたRoomを結合
-      var allRoomInfos = [];
+    getSelectedMediaId: function getSelectedMediaId() {
+      // 作成したMediaといいねしたMediaを結合
+      var allMediaInfos = [];
 
       for (var i = 0; i < this.$parent.createdMediaPreviewInfos.length; i++) {
-        allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
+        allMediaInfos.push(this.$parent.createdMediaPreviewInfos[i]);
       }
 
       for (var _i = 0; _i < this.$parent.likedMediaPreviewInfos.length; _i++) {
-        allRoomInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
-      } // 選択されたRoomのみ抽出
+        allMediaInfos.push(this.$parent.likedMediaPreviewInfos[_i]);
+      } // 選択されたMediaのみ抽出
 
 
-      var selectedRoomInfos = allRoomInfos.filter(function (roomInfo) {
-        return roomInfo['selectedOrderNum'] > 0;
+      var selectedMediaInfos = allMediaInfos.filter(function (mediaInfo) {
+        return mediaInfo['selectedOrderNum'] > 0;
       }); // 選択された順番(昇順)で並べ替え
 
-      selectedRoomInfos.sort(function (a, b) {
+      selectedMediaInfos.sort(function (a, b) {
         if (a.selectedOrderNum < b.selectedOrderNum) return -1;
         if (a.selectedOrderNum > b.selectedOrderNum) return 1;
         return 0;
-      }); // RoomIdを抽出した配列を作成
+      }); // MediaIdを抽出した配列を作成
       // [id1, id2, id3,...] (一つ前の処理で選択順にsort済み)
 
-      var selectedRoomIds = selectedRoomInfos.map(function (selectedRoomInfo) {
-        return selectedRoomInfo.id;
+      var selectedMediaIds = selectedMediaInfos.map(function (selectedMediaInfo) {
+        return selectedMediaInfo.id;
       });
-      return selectedRoomIds;
+      return selectedMediaIds;
     },
-    deleteSelectedRoom: function deleteSelectedRoom() {
+    deleteSelectedMedia: function deleteSelectedMedia() {
       var _this = this;
 
-      var selectedRoomIds = this.getSelectedRoomId();
-      selectedRoomIds.forEach(function (selectedRoomId) {
-        alert(selectedRoomId);
+      var selectedMediaIds = this.getSelectedMediaId();
+      selectedMediaIds.forEach(function (selectedMediaId) {
+        alert(selectedMediaId);
       });
-      var roomInfo = {
-        'selectedRoomIds': selectedRoomIds
+      var mediaInfo = {
+        'selectedMediaIds': selectedMediaIds
       };
-      var url = '/rooms/destroy';
-      axios.post(url, roomInfo).then(function (response) {
+      var url = '/medias/destroy';
+      axios.post(url, mediaInfo).then(function (response) {
         alert(response.data.message);
-        _this.deleteSelectedRoomMessage = "";
+        _this.deleteSelectedMediaMessage = "";
         location.reload();
       })["catch"](function (error) {
         alert('failed!');
-        _this.deleteSelectedRoomMessage = "";
+        _this.deleteSelectedMediaMessage = "";
       });
     }
   }
@@ -11316,7 +11316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .action-button-wrapper {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n} */\n.roomlist-create-button[data-v-7cbb2b10] {\n  /* position: absolute;\n  top : 20px;\n  right: 150px; */\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.roomlist-create-button[data-v-7cbb2b10]:hover {\n  background-color: aqua;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .action-button-wrapper {\n  width: 50%;\n  height: 50%;\n  position: absolute;\n  top: 0;\n  right: 0;\n} */\n.medialist-create-button[data-v-7cbb2b10] {\n  /* position: absolute;\n  top : 20px;\n  right: 150px; */\n  z-index: 1;\n  font-family: Inter,Noto Sans JP;\n  border-radius: 4px;\n  border: solid 1px grey;\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\n}\n.medialist-create-button[data-v-7cbb2b10]:hover {\n  background-color: aqua;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11340,7 +11340,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.room-list-wrapper[data-v-0263897c] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .room-list-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-0263897c] {\r\n  list-style: none;\n}\n.preview-room-list[data-v-0263897c] {\r\n  position: relative;\r\n  text-align: center;\r\n  /* font-size: 50px; */\r\n  margin-right: 40px;\r\n  margin-bottom: 80px;\r\n  width: 180px;\r\n  height: 180px;\r\n  opacity: 0.8;\n}\n.preview-room-list[data-v-0263897c]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-room-list:hover .cover-menu[data-v-0263897c] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-room-list:hover .del-icon[data-v-0263897c] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.room-list-thumbnail[data-v-0263897c] {\r\n  /* position: absolute; */\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.cover-menu[data-v-0263897c] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-0263897c] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-0263897c] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-0263897c]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-0263897c] {\r\n  color: aqua;\n}\n.del-icon[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-0263897c]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-0263897c] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-0263897c]:hover{\r\n  opacity: 0.8;\n}\n.room-list-select-check[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-0263897c]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.room-list-title[data-v-0263897c] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.media-list-wrapper[data-v-0263897c] {\r\n  display: flex;\r\n  justify-content:flex-start;\r\n  flex-wrap: wrap;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\r\n\r\n/* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */\r\n/* .media-list-wrapper::after {\r\n  display: block;\r\n  content:\"\";\r\n  width: 180px;\r\n} */\nli[data-v-0263897c] {\r\n  list-style: none;\n}\n.preview-media-list[data-v-0263897c] {\r\n  position: relative;\r\n  text-align: center;\r\n  /* font-size: 50px; */\r\n  margin-right: 40px;\r\n  margin-bottom: 80px;\r\n  width: 180px;\r\n  height: 180px;\r\n  opacity: 0.8;\n}\n.preview-media-list[data-v-0263897c]:hover {\r\n  opacity: 1;\r\n  transform: scale(0.98,0.98);\n}\n.preview-media-list:hover .cover-menu[data-v-0263897c] {\r\n  opacity: 0.7;\r\n  z-index: 1;\n}\n.preview-media-list:hover .del-icon[data-v-0263897c] {\r\n  opacity: 0.5;\r\n  z-index: 2;\n}\n.media-list-thumbnail[data-v-0263897c] {\r\n  /* position: absolute; */\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.cover-menu[data-v-0263897c] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: -10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0%;\r\n  background-color: grey;\r\n  display: flex;\n}\n.cover-menu-link[data-v-0263897c] {\r\n  width: 50%;\r\n  height: 100%;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  text-align: center;\r\n  /* background-color: rgba(100, 100, 100, 0.5); */\r\n  background-color: seashell;\r\n  opacity: 0.5;\r\n  text-decoration: none;\n}\n.link-title[data-v-0263897c] {\r\n  font-size: 25px;\n}\n.cover-menu-link[data-v-0263897c]:hover {\r\n  /* background-color: rgba(100, 100, 100, 0.8); */\r\n  opacity: 0.8;\n}\n.cover-menu-link:hover .link-title[data-v-0263897c] {\r\n  color: aqua;\n}\n.del-icon[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  right: 10px;\r\n  opacity: 0%;\r\n  z-index: -10;\r\n  font-size: 1.5em;\n}\n.del-icon[data-v-0263897c]:hover {\r\n  color: red;\r\n  opacity: 0.8;\n}\n.check-box-cover[data-v-0263897c] {\r\n  position: absolute;\r\n  top : 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  opacity: 0.6;\r\n  background-color: grey;\r\n  display: flex;\n}\n.check-box-cover[data-v-0263897c]:hover{\r\n  opacity: 0.8;\n}\n.media-list-select-check[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 10px;\r\n  left: 10px;\r\n  z-index: 10;\r\n  transform: scale(3);\n}\n.selected-order-num-wrapper[data-v-0263897c] {\r\n  position: absolute;\r\n  top: 0px;\r\n  left: 0px;\r\n  z-index: 10;\r\n  width: 100%;\r\n  height: 100%;\r\n  pointer-events: none;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.selected-order-num[data-v-0263897c]{\r\n  font-size: 80px;\r\n  color: aquamarine;\n}\n.media-list-title[data-v-0263897c] {\r\n  text-align: center;\r\n  font-size: 25px;\r\n  margin: 0 0;\r\n  font-family: 'Yu Mincho';\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11364,7 +11364,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-7a924e16] {\n  position : absolute;\n}\n.youtube-url-description[data-v-7a924e16] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.room-yt-loop-icon[data-v-7a924e16] {\n  margin: 10px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-7a924e16] {\n  position : absolute;\n}\n.youtube-url-description[data-v-7a924e16] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-7a924e16] {\n  margin: 10px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11595,7 +11595,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__.default);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.room-delete-icon[data-v-8f4a233c]:hover {\r\n  color: red;\n}\n.action-item-subtitle[data-v-8f4a233c] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-delete-icon[data-v-8f4a233c]:hover {\r\n  color: red;\n}\n.action-item-subtitle[data-v-8f4a233c] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55579,7 +55579,7 @@ var render = function() {
       "div",
       {
         staticClass: "action-trigger create-icon-wrapper",
-        on: { click: _vm.createRoom }
+        on: { click: _vm.createMedia }
       },
       [_c("i", { staticClass: "fas fa-check fa-2x create-icon" })]
     ),
@@ -56158,10 +56158,10 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "roomlist-create-button",
-        on: { click: _vm.createRoomList }
+        staticClass: "medialist-create-button",
+        on: { click: _vm.createMediaList }
       },
-      [_vm._v("\n    Roomリストを作成\n  ")]
+      [_vm._v("\n    Mediaリストを作成\n  ")]
     ),
     _vm._v(" "),
     _c(
@@ -56171,12 +56171,12 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.createRoomListMessage,
-            expression: "createRoomListMessage"
+            value: _vm.createMediaListMessage,
+            expression: "createMediaListMessage"
           }
         ]
       },
-      [_vm._v("\n    " + _vm._s(_vm.createRoomListMessage) + "\n  ")]
+      [_vm._v("\n    " + _vm._s(_vm.createMediaListMessage) + "\n  ")]
     )
   ])
 }
@@ -56205,26 +56205,28 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
-    { staticClass: "room-list-wrapper" },
-    _vm._l(_vm.roomListPreviewInfos, function(roomListPreviewInfo, index) {
-      return _c("li", { key: roomListPreviewInfo.id }, [
+    { staticClass: "media-list-wrapper" },
+    _vm._l(_vm.mediaListPreviewInfos, function(mediaListPreviewInfo, index) {
+      return _c("li", { key: mediaListPreviewInfo.id }, [
         _c(
           "div",
           {
-            staticClass: "preview-room-list",
-            attrs: { id: roomListPreviewInfo["id"] }
+            staticClass: "preview-media-list",
+            attrs: { id: mediaListPreviewInfo["id"] }
           },
           [
             _c(
               "a",
               {
-                attrs: { href: _vm.roomListShowLink(roomListPreviewInfo["id"]) }
+                attrs: {
+                  href: _vm.mediaListShowLink(mediaListPreviewInfo["id"])
+                }
               },
               [
                 _c("img", {
-                  staticClass: "room-list-thumbnail",
+                  staticClass: "media-list-thumbnail",
                   attrs: {
-                    src: roomListPreviewInfo["preview_img_url"],
+                    src: mediaListPreviewInfo["preview_img_url"],
                     alt: ""
                   }
                 })
@@ -56250,7 +56252,7 @@ var render = function() {
                   {
                     staticClass: "cover-menu-link",
                     attrs: {
-                      href: _vm.roomListShowLink(roomListPreviewInfo["id"])
+                      href: _vm.mediaListShowLink(mediaListPreviewInfo["id"])
                     }
                   },
                   [_c("span", { staticClass: "link-title" }, [_vm._v("閲覧")])]
@@ -56261,7 +56263,7 @@ var render = function() {
                   {
                     staticClass: "cover-menu-link",
                     attrs: {
-                      href: _vm.roomListEditLink(roomListPreviewInfo["id"])
+                      href: _vm.mediaListEditLink(mediaListPreviewInfo["id"])
                     }
                   },
                   [_c("span", { staticClass: "link-title" }, [_vm._v("編集")])]
@@ -56281,7 +56283,7 @@ var render = function() {
               staticClass: "fas fa-trash del-icon",
               on: {
                 click: function($event) {
-                  return _vm.deleteroomList(roomListPreviewInfo["id"])
+                  return _vm.deletemediaList(mediaListPreviewInfo["id"])
                 }
               }
             }),
@@ -56301,11 +56303,11 @@ var render = function() {
               },
               [
                 _c("input", {
-                  staticClass: "room-list-select-check",
+                  staticClass: "media-list-select-check",
                   attrs: { type: "checkbox", name: "" },
                   on: {
                     change: function($event) {
-                      return _vm.changeIsCheckedroomList($event, index)
+                      return _vm.changeIsCheckedmediaList($event, index)
                     }
                   }
                 })
@@ -56321,22 +56323,22 @@ var render = function() {
                     rawName: "v-show",
                     value:
                       _vm.isSelectMode &&
-                      roomListPreviewInfo["selectedOrderNum"] > 0,
+                      mediaListPreviewInfo["selectedOrderNum"] > 0,
                     expression:
-                      "isSelectMode && roomListPreviewInfo['selectedOrderNum'] > 0"
+                      "isSelectMode && mediaListPreviewInfo['selectedOrderNum'] > 0"
                   }
                 ],
                 staticClass: "selected-order-num-wrapper"
               },
               [
                 _c("span", { staticClass: "selected-order-num" }, [
-                  _vm._v(_vm._s(roomListPreviewInfo["selectedOrderNum"]))
+                  _vm._v(_vm._s(mediaListPreviewInfo["selectedOrderNum"]))
                 ])
               ]
             ),
             _vm._v(" "),
-            _c("p", { staticClass: "room-list-title" }, [
-              _vm._v(_vm._s(roomListPreviewInfo["name"]))
+            _c("p", { staticClass: "media-list-title" }, [
+              _vm._v(_vm._s(mediaListPreviewInfo["name"]))
             ])
           ]
         )
@@ -56417,20 +56419,20 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "account-modal-profile" }, [
         _c("div", { staticClass: "avatar-wrapper" }, [
-          _vm.roomOwnerInfo["profile_img_url"] !== null
+          _vm.mediaOwnerInfo["profile_img_url"] !== null
             ? _c("img", {
                 staticClass: "avatar",
                 attrs: {
-                  src: _vm.roomOwnerInfo["profile_img_url"],
+                  src: _vm.mediaOwnerInfo["profile_img_url"],
                   alt:
-                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
+                    "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
                 }
               })
             : _c("img", {
                 staticClass: "avatar",
                 attrs: {
                   src:
-                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
+                    "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
                   alt: ""
                 }
               })
@@ -56438,7 +56440,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "name-wrapper" }, [
           _c("p", { staticClass: "name" }, [
-            _vm._v(_vm._s(_vm.roomOwnerInfo["name"]))
+            _vm._v(_vm._s(_vm.mediaOwnerInfo["name"]))
           ])
         ]),
         _vm._v(" "),
@@ -56448,8 +56450,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.roomOwnerInfo["aboutMe"],
-                expression: "roomOwnerInfo['aboutMe']"
+                value: _vm.mediaOwnerInfo["aboutMe"],
+                expression: "mediaOwnerInfo['aboutMe']"
               }
             ],
             attrs: {
@@ -56459,13 +56461,13 @@ var render = function() {
               rows: "4",
               readonly: ""
             },
-            domProps: { value: _vm.roomOwnerInfo["aboutMe"] },
+            domProps: { value: _vm.mediaOwnerInfo["aboutMe"] },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.roomOwnerInfo, "aboutMe", $event.target.value)
+                _vm.$set(_vm.mediaOwnerInfo, "aboutMe", $event.target.value)
               }
             }
           })
@@ -56479,8 +56481,8 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: !_vm.isMyRoom,
-              expression: "!isMyRoom"
+              value: !_vm.isMyMedia,
+              expression: "!isMyMedia"
             }
           ],
           staticClass: "icon-wrapper",
@@ -56489,7 +56491,7 @@ var render = function() {
         [
           _vm.isShowFollow
             ? _c("follow-component", {
-                attrs: { "room-owner-id": _vm.roomOwnerInfo["id"] }
+                attrs: { "media-owner-id": _vm.mediaOwnerInfo["id"] }
               })
             : _vm._e()
         ],
@@ -57350,20 +57352,20 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "created-rooms" }, [
+    _c("div", { staticClass: "created-medias" }, [
       _c("div", { staticClass: "content" }, [
         _c("i", {
           staticClass: "fas fa-clone",
-          on: { click: _vm.switchToCreatedRoomPreview }
+          on: { click: _vm.switchToCreatedMediaPreview }
         })
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "liked-rooms" }, [
+    _c("div", { staticClass: "liked-medias" }, [
       _c("div", { staticClass: "content" }, [
         _c("i", {
           staticClass: "far fa-heart",
-          on: { click: _vm.switchToLikedRoomPreview }
+          on: { click: _vm.switchToLikedMediaPreview }
         })
       ])
     ])
@@ -57524,8 +57526,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "action-button-wrapper" }, [
     _c("i", {
-      staticClass: "fas fa-trash fa-3x room-delete-icon",
-      on: { click: _vm.deleteSelectedRoom }
+      staticClass: "fas fa-trash fa-3x media-delete-icon",
+      on: { click: _vm.deleteSelectedMedia }
     }),
     _vm._v(" "),
     _c("span", { staticClass: "action-item-subtitle" }, [_vm._v("削除")]),
@@ -57537,12 +57539,12 @@ var render = function() {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.deleteSelectedRoomMessage,
-            expression: "deleteSelectedRoomMessage"
+            value: _vm.deleteSelectedMediaMessage,
+            expression: "deleteSelectedMediaMessage"
           }
         ]
       },
-      [_vm._v("\n    " + _vm._s(_vm.deleteSelectedRoomMessage) + "\n  ")]
+      [_vm._v("\n    " + _vm._s(_vm.deleteSelectedMediaMessage) + "\n  ")]
     )
   ])
 }

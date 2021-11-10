@@ -24,8 +24,8 @@ Auth::routes();
 // ★ログイン認証必須ページ
 // ミドルウェアによるログインチェックをかませる
 Route::middleware('auth')->group(function(){
-    // 入っているRoomが自分のRoomかチェック
-        Route::post('/checkIsMyRoom', 'App\Http\Controllers\Ajax\Lib\RoomUtilAjax@judgeIsMyRoom');
+    // 入っているMediaが自分のMediaかチェック
+        Route::post('/checkIsMyMedia', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
     // マイページ
         Route::get('/mypage', 'App\Http\Controllers\MypageController@view');
         Route::get('/mypage/profile', 'App\Http\Controllers\MypageController@profile');
@@ -33,30 +33,30 @@ Route::middleware('auth')->group(function(){
         Route::resource('users', 'App\Http\Controllers\UserController');
         Route::get('/user/getOwnProfile', 'App\Lib\UserUtil@getOwnProfile');
         Route::put('/user/{id}', 'App\Http\Controllers\UserController@update');
-    // マイページで、作成済みRoomをもっと見る
+    // マイページで、作成済みMediaをもっと見る
         Route::get('/addCreatedMediaPreviewInfos', 'App\Lib\MediaUtil@getCreatedMediaPreviewInfos');
         Route::get('/addLikedMediaPreviewInfos', 'App\Lib\MediaUtil@getLikedMediaPreviewInfos');    
-    // マイページからRoomを選択し、手早くRoomリストを作成する
-        Route::post('/roomlists/store', 'App\Http\Controllers\Ajax\RoomListController@quickStore');
-    // マイページから選択したRoomを削除する(他ユーザのRoomは除外)
-        Route::post('/rooms/destroy', 'App\Http\Controllers\Ajax\MediaController@destroy');
-    // 作成したRoomリストのプレビュー情報を取得
-        Route::get('/ajax/addCreatedRoomListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\RoomListController@getRoomListPreviewInfos');
-    // 作成したRoomリストを削除
-        Route::post('/roomLists/delete', 'App\Http\Controllers\Ajax\RoomListController@destroy');
+    // マイページからMediaを選択し、手早くMediaリストを作成する
+        Route::post('/medialists/store', 'App\Http\Controllers\Ajax\MediaListController@quickStore');
+    // マイページから選択したMediaを削除する(他ユーザのMediaは除外)
+        Route::post('/medias/destroy', 'App\Http\Controllers\Ajax\MediaController@destroy');
+    // 作成したMediaリストのプレビュー情報を取得
+        Route::get('/ajax/addCreatedMediaListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\MediaListController@getMediaListPreviewInfos');
+    // 作成したMediaリストを削除
+        Route::post('/mediaLists/delete', 'App\Http\Controllers\Ajax\MediaListController@destroy');
 
-    // Room操作
-        Route::get('/room/create', 'App\Http\Controllers\MediaController@create');
-        Route::post('/room/store', 'App\Http\Controllers\MediaController@store');
-        Route::get('/room/{id}/edit', 'App\Http\Controllers\MediaController@edit');
-        Route::post('/room/update', 'App\Http\Controllers\MediaController@update');
-        Route::post('/room/delete', 'App\Http\Controllers\MediaController@destroy');
-    // 入ったRoomをいいねしているかチェックする
-        Route::get('/user/likeState/{room_id}', 'App\Lib\LikeMediaUtil@getLikeState');
-    // Roomへ、いいね/いいね解除する
-        Route::post('/room/like', 'App\Lib\LikeMediaUtil@updateLikeState');
-    // 自分が入ったRoomの作成者をフォローしているかチェックする
-        Route::get('/user/followState/{room_owner_id}', 'App\Lib\FollowUtil@getFollowState');
+    // Media操作
+        Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
+        Route::post('/media/store', 'App\Http\Controllers\MediaController@store');
+        Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
+        Route::post('/media/update', 'App\Http\Controllers\MediaController@update');
+        Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
+    // 入ったMediaをいいねしているかチェックする
+        Route::get('/user/likeState/{media_id}', 'App\Lib\LikeMediaUtil@getLikeState');
+    // Mediaへ、いいね/いいね解除する
+        Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
+    // 自分が入ったMediaの作成者をフォローしているかチェックする
+        Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
     // ルーム作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
 
@@ -88,15 +88,15 @@ Route::middleware('auth')->group(function(){
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // 検索結果
-    Route::post('/room/show/search/result', 'App\Lib\SearchUtil@searchRooms');
+    Route::post('/media/show/search/result', 'App\Lib\SearchUtil@searchMedias');
 
-// Room閲覧
-    Route::get('/room/{id}', 'App\Http\Controllers\MediaController@show');
-// 入ったroomが自分の作成したroomか判別する
-    Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Lib\RoomUtilAjax@judgeIsMyRoom');
+// Media閲覧
+    Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
+// 入ったmediaが自分の作成したmediaか判別する
+    Route::get('/ajax/judgeIsMyMedia/{media_id}', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
 
-// roomの作成者情報を表示
-    Route::get('/user/roomOwner/profile/show/{room_id}', 'App\Lib\UserUtil@getRoomOwnerData');
+// mediaの作成者情報を表示
+    Route::get('/user/mediaOwner/profile/show/{media_id}', 'App\Lib\UserUtil@getMediaOwnerData');
 // publicImgアップロード(開発用、後で消す)
     Route::get('/uploadPublicFiles', 'App\Lib\Common\Functions@view');
     Route::post('/uploadPublicFiles', 'App\Lib\Common\Functions@uploadFile');

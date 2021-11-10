@@ -1,7 +1,7 @@
 <template>
 
     <div class="action-trigger-wrapper">
-      <div class="action-trigger create-icon-wrapper" @click="createRoom">
+      <div class="action-trigger create-icon-wrapper" @click="createMedia">
         <i class="fas fa-check fa-2x create-icon"></i>
       </div>
       <span class="action-trigger-subtitle">作成</span>
@@ -24,8 +24,8 @@
     },
 
     methods : {
-      createRoom() {
-        this.$emit('create-room');
+      createMedia() {
+        this.$emit('create-media');
       }
     },
   }

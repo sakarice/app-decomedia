@@ -1,10 +1,10 @@
 <template>
   <div class="action-button-wrapper">
-    <button class="roomlist-create-button" @click="createRoomList">
-      Roomリストを作成
+    <button class="medialist-create-button" @click="createMediaList">
+      Mediaリストを作成
     </button>
-    <p v-show="createRoomListMessage">
-      {{createRoomListMessage}}
+    <p v-show="createMediaListMessage">
+      {{createMediaListMessage}}
     </p>
   </div>
 </template>
@@ -14,57 +14,57 @@
     props : [],
     data : () => {
       return {
-        'createRoomListMessage' : "",
+        'createMediaListMessage' : "",
       }
     },
 
     methods : {
-      getSelectedRoomId(){
-        // 作成したRoomといいねしたRoomを結合
-        let allRoomInfos = [];
+      getSelectedMediaId(){
+        // 作成したMediaといいねしたMediaを結合
+        let allMediaInfos = [];
         for(let i=0;i < this.$parent.createdMediaPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.createdMediaPreviewInfos[i]);
+          allMediaInfos.push(this.$parent.createdMediaPreviewInfos[i]);
         }
         for(let i=0;i < this.$parent.likedMediaPreviewInfos.length; i++){
-          allRoomInfos.push(this.$parent.likedMediaPreviewInfos[i]);
+          allMediaInfos.push(this.$parent.likedMediaPreviewInfos[i]);
         }
-        // 選択されたRoomのみ抽出
-        let selectedRoomInfos = allRoomInfos.filter(function(roomInfo){
-          return roomInfo['selectedOrderNum'] > 0;
+        // 選択されたMediaのみ抽出
+        let selectedMediaInfos = allMediaInfos.filter(function(mediaInfo){
+          return mediaInfo['selectedOrderNum'] > 0;
         })
         // 選択された順番(昇順)で並べ替え
-        selectedRoomInfos.sort(function(a,b){
+        selectedMediaInfos.sort(function(a,b){
           if(a.selectedOrderNum < b.selectedOrderNum) return -1;
           if(a.selectedOrderNum > b.selectedOrderNum) return  1;
           return 0;
         });
-        // RoomIdを抽出した配列を作成
+        // MediaIdを抽出した配列を作成
         // [id1, id2, id3,...] (一つ前の処理で選択順にsort済み)
-        const selectedRoomIds
-         = selectedRoomInfos.map(
-           selectedRoomInfo => selectedRoomInfo.id
+        const selectedMediaIds
+         = selectedMediaInfos.map(
+           selectedMediaInfo => selectedMediaInfo.id
           );
         
-        return selectedRoomIds;
+        return selectedMediaIds;
       },
-      createRoomList() {
-        let selectedRoomIds = this.getSelectedRoomId();
-        selectedRoomIds.forEach(selectedRoomId => {
-          alert(selectedRoomId);
+      createMediaList() {
+        let selectedMediaIds = this.getSelectedMediaId();
+        selectedMediaIds.forEach(selectedMediaId => {
+          alert(selectedMediaId);
         });
-        const roomInfo = {
-          'selectedRoomIds' : selectedRoomIds,
+        const mediaInfo = {
+          'selectedMediaIds' : selectedMediaIds,
         }
-        const url = '/roomlists/store';
-        // this.createRoomListMessage = "roomリスト情報を保存中です...";
-        axios.post(url, roomInfo)
+        const url = '/medialists/store';
+        // this.createMediaListMessage = "mediaリスト情報を保存中です...";
+        axios.post(url, mediaInfo)
           .then(response =>{
             alert(response.data.message);
-            this.createRoomListMessage = "";
+            this.createMediaListMessage = "";
           })
           .catch(error => {
-            alert('roomリストの作成に失敗しました');
-            this.createRoomListMessage = "";
+            alert('mediaリストの作成に失敗しました');
+            this.createMediaListMessage = "";
           })
       }
 
@@ -86,7 +86,7 @@
     right: 0;
   } */
 
-  .roomlist-create-button {
+  .medialist-create-button {
     /* position: absolute;
     top : 20px;
     right: 150px; */
@@ -97,7 +97,7 @@
     box-shadow: 0.5px 0.5px 1px lightslategrey;
   }
 
-  .roomlist-create-button:hover {
+  .medialist-create-button:hover {
     background-color: aqua;
   }
 

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Lib\ImgUtil;
 use App\Models\User;
-use App\Models\Room;
 use Storage;
 
 class ImgController extends Controller
@@ -19,7 +18,7 @@ class ImgController extends Controller
     public function create(Request $request){}
 
     // 3.store
-    // Room作成・編集画面でユーザがアップロードした画像ファイルを保存する。
+    // Media作成・編集画面でユーザがアップロードした画像ファイルを保存する。
     public function store(Request $request){
         $user_id = Auth::user()->id;
         $imgfile = $request->file('img');
