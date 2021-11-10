@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\UserOwnBgm;
+use App\Models\UserOwnAudio;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class UserOwnBgmFactory extends Factory
+class UserOwnAudioFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = UserOwnBgm::class;
+    protected $model = UserOwnAudio::class;
 
     /**
      * Define the model's userownbgm state.
