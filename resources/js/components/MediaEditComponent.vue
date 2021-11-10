@@ -1,15 +1,15 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['roomBackgroundColor']}">
+   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
 
-    <!-- Roomヘッダ -->
-    <room-header-component
+    <!-- Mediaヘッダ -->
+    <media-header-component
     :isShowUpdateButton=true
     :isShowLinkToShow=true
-    :roomId="mediaSetting['id']"
-    @update-room="updateRoom">
-    </room-header-component>
+    :mediaId="mediaSetting['id']"
+    @update-media="updateMedia">
+    </media-header-component>
 
     <!-- Media画像コンポーネント -->
     <media-img-component
@@ -23,14 +23,14 @@
       ref="mediaImg">
     </media-img-component>
 
-    <!-- Roomオーディオコンポーネント -->
+    <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
      :maxAudioNum="mediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
-    <!-- Room動画(=youtube)コンポーネント -->
+    <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
     v-show="mediaSetting['isShowMovie']"
     :isLoopYoutube="mediaMovie['isLoop']"
@@ -55,7 +55,7 @@
         <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('movieModal')">
           <i class="fab fa-youtube fa-2x"></i>
         </div>
-        <!-- Room設定 -->
+        <!-- Media設定 -->
         <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaSettingModal')">
           <i class="fas fa-cog fa-2x"></i>
         </div>
@@ -94,16 +94,16 @@
     :isLoopYoutube="mediaMovie['isLoop']">
     </movie-setting-component>
 
-    <!-- Room設定コンポーネント -->
+    <!-- Media設定コンポーネント -->
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
     v-on:delete-media-img="deleteMediaImg"
     :transitionName="transitionName"
     :isPublic="mediaSetting['isPublic']"
-    :roomName="mediaSetting['name']"
-    :roomDescription="mediaSetting['description']"
-    :roomBackgroundColor="mediaSetting['roomBackgroundColor']"
+    :mediaName="mediaSetting['name']"
+    :mediaDescription="mediaSetting['description']"
+    :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
     :isShowMediaImg="mediaSetting['isShowImg']"
     :mediaImgWidth="mediaImg['width']"
     :mediaImgHeight="mediaImg['height']"
@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import RoomHeader from './RoomHeaderComponent.vue';
+import MediaHeader from './MediaHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
@@ -126,7 +126,7 @@ import MediaMovie from './MediaMovieComponent.vue';
 
 export default {
   components : {
-    RoomHeader,
+    MediaHeader,
     ImgSelect,
     AudioSelect,
     MovieSetting,
@@ -176,7 +176,7 @@ export default {
         'name' : "",
         'description' : "",
         'finish_time' : 0,
-        'roomBackgroundColor' : "#333333", // 黒
+        'mediaBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
         'maxAudioNum' : 5,
@@ -186,7 +186,7 @@ export default {
     }
   },
   methods : {
-    // ●Room読み込み時の初期化処理
+    // ●Media読み込み時の初期化処理
 
     initImg(){
       // this.mediaImg['url'] = this.mediaImgData.url;
@@ -223,7 +223,7 @@ export default {
       this.mediaSetting['name'] = tmpSettingData.name;
       this.mediaSetting['description'] = tmpSettingData.description;
       this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
-      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['mediaBackgroundColor'] = tmpSettingData.background_color;
       this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
       this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
@@ -240,7 +240,7 @@ export default {
       this.$refs.mediaMovie.createYtPlayer(vars);
     },
     
-    // ●Room作成用の処理
+    // ●Media作成用の処理
     showModal(target){
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
       for(let key in this.isShowModal){
@@ -302,17 +302,17 @@ export default {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
     },
-    updateRoom() {
+    updateMedia() {
       this.getFinishTime();
-      const url = '/room/update';
-      let room_datas = {
+      const url = '/media/update';
+      let media_datas = {
         'img' : this.mediaImg,
         'audios' : this.mediaAudios,
         'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,
       }
-      this.message = "room情報を更新中です...";
-      axios.post(url, room_datas)
+      this.message = "media情報を更新中です...";
+      axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
           this.message = "";
@@ -356,7 +356,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/roomCommon.css";
-@import "../../css/roomModals.css";
+@import "../../css/mediaCommon.css";
+@import "../../css/mediaModals.css";
 
 </style>

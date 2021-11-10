@@ -24,11 +24,11 @@
     <section class="search-result">
       <h2 class="search-result-message">"{{$keyword}}"の検索結果</h2>
   
-      <room-preview-component
+      <media-preview-component
       :csrf="{{json_encode(csrf_token())}}"
-      :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+      :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
       :is-show-cover="false">
-      </room-preview-component>
+      </media-preview-component>
     </section>
   
   </div>

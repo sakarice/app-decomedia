@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
-use App\Models\Room;
+use App\Models\Media;
 use App\Models\PublicImg;
 
 class PublicImgController extends Controller
 {
     // 1.index
-    // Room作成・編集画面で使用。デフォルト画像を取得
+    // Media作成・編集画面で使用。デフォルト画像を取得
     public function index(){
         $owner_user_id = Auth::user()->id;
         $public_imgs = PublicImg::get();

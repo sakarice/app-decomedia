@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\Room;
+use App\Models\Media;
 use App\Models\MediaSetting;
 
 use App\Lib\ImgUtil;
@@ -37,20 +37,20 @@ class SearchUtilTest extends TestCase
 
 
     // 引数として渡したルームIDと動画情報がDB保存されること。
-    public function test_searchRooms(){
+    public function test_searchMedias(){
         // キーワード無しの時は20個まで、ありの時は1つだけ検索結果が返ってくること
-        // 【準備】Roomを作成
-        // キーワード無しの時に表示するroom。ルーム名(name)は一律"test_room"
+        // 【準備】Mediaを作成
+        // キーワード無しの時に表示するmedia。ルーム名(name)は一律"test_media"
         for($i=0; $i<30; $i++){
-            Room::factory()->create();
-            MediaSetting::factory()->create();   // ルーム名(name)は"test_room"
+            Media::factory()->create();
+            MediaSetting::factory()->create();   // ルーム名(name)は"test_media"
         }
-        // キーワードありの時に表示するroom。ルーム名を↑と変えている。
-        Room::factory()->create();
+        // キーワードありの時に表示するmedia。ルーム名を↑と変えている。
+        Media::factory()->create();
         MediaSetting::factory()->create(['name'=>'keyword_test']);
 
         // パターン1:検索キーワードを設定
-        $response = $this->post('/room/show/search/result', [
+        $response = $this->post('/media/show/search/result', [
             'keyword' => 'keyword_test',
         ]);
         $response
@@ -58,7 +58,7 @@ class SearchUtilTest extends TestCase
             ->assertViewHas('keyword', 'keyword_test');
         $this->assertEquals(true, $response['isLogin']);
         $this->assertEquals('keyword_test', $response['keyword']);
-        $this->assertEquals(1, count($response['roomPreviewInfos']));
+        $this->assertEquals(1, count($response['mediaPreviewInfos']));
 
         // パターン2:検索キーワードなしで検索
         // ★空の値をテストで送るとエラーになるので中止。

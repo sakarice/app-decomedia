@@ -1,15 +1,15 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['roomBackgroundColor']}">
+   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
 
-    <!-- Roomヘッダ -->
-    <room-header-component
+    <!-- Mediaヘッダ -->
+    <media-header-component
     :isShowCreateButton=true
-    @create-room="createRoom">
-    </room-header-component>
+    @create-media="createMedia">
+    </media-header-component>
 
-    <!-- Room画像コンポーネント -->
+    <!-- Media画像コンポーネント -->
     <media-img-component
      :mediaImgUrl="mediaImg['url']"
      :mediaImgWidth="mediaImg['width'] + 'px'"
@@ -21,14 +21,14 @@
       ref="mediaImg">
     </media-img-component>
 
-    <!-- Roomオーディオコンポーネント -->
+    <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
      :maxAudioNum="mediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
-    <!-- Room動画(=youtube)コンポーネント -->
+    <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
     v-show="mediaSetting['isShowMovie']"
     :isLoopYoutube="mediaMovie['isLoop']"
@@ -53,7 +53,7 @@
         <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('movieModal')">
           <i class="fab fa-youtube fa-2x"></i>
         </div>
-        <!-- Room設定 -->
+        <!-- Media設定 -->
         <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaSettingModal')">
           <i class="fas fa-cog fa-2x"></i>
         </div>
@@ -92,16 +92,16 @@
     :isLoopYoutube="mediaMovie['isLoop']">
     </movie-setting-component>
 
-    <!-- Room設定コンポーネント -->
+    <!-- Media設定コンポーネント -->
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
     v-on:delete-media-img="deleteMediaImg"
     :transitionName="transitionName"
     :isPublic="mediaSetting['isPublic']"
-    :roomName="mediaSetting['name']"
-    :roomDescription="mediaSetting['description']"
-    :roomBackgroundColor="mediaSetting['roomBackgroundColor']"
+    :mediaName="mediaSetting['name']"
+    :mediaDescription="mediaSetting['description']"
+    :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
     :isShowMediaImg="mediaSetting['isShowImg']"
     :mediaImgWidth="mediaImg['width']"
     :mediaImgHeight="mediaImg['height']"
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import RoomHeader from './RoomHeaderComponent.vue';
+import MediaHeader from './MediaHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
@@ -122,11 +122,11 @@ import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import MediaMovie from './MediaMovieComponent.vue';
-import RoomCreateButton from './RoomCreateButtonComponent.vue';
+import MediaCreateButton from './MediaCreateButtonComponent.vue';
 
 export default {
   components : {
-    RoomHeader,
+    MediaHeader,
     ImgSelect,
     AudioSelect,
     MovieSetting,
@@ -134,7 +134,7 @@ export default {
     MediaSetting,
     MediaImg,
     MediaMovie,
-    RoomCreateButton,
+    MediaCreateButton,
   },
   props: [
     'mediaImgData',
@@ -158,7 +158,7 @@ export default {
         'name' : "",
         'description' : "",
         'finish_time' : 0,
-        'roomBackgroundColor' : "#F7F7F7", // ほぼ白
+        'mediaBackgroundColor' : "#F7F7F7", // ほぼ白
         'isShowImg' : true,
         'isShowMovie' : false,
         'maxAudioNum' : 5,
@@ -247,9 +247,9 @@ export default {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
       }
     },
-    createRoom() {
+    createMedia() {
       this.getFinishTime();
-      const url = '/room/store';
+      const url = '/media/store';
       const tmpThis = this;
       let media_datas = {
         'img' : this.mediaImg,
@@ -257,7 +257,7 @@ export default {
         'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,
       }
-      this.message = "room情報を保存中です...";
+      this.message = "media情報を保存中です...";
       axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
@@ -282,7 +282,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/roomCommon.css";
-@import "../../css/roomModals.css";
+@import "../../css/mediaCommon.css";
+@import "../../css/mediaModals.css";
 
 </style>

@@ -1,43 +1,43 @@
 <template>
   <div class="follow-and-follower-wrapper">
 
-    <!-- 作成済みRoomのプレビュー -->
-    <section v-show="isShowCreatedRoomPreview" class="mypage-section created-room-list">
+    <!-- 作成済みMediaのプレビュー -->
+    <section v-show="isShowCreatedMediaPreview" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">作成済みRoom</h3>
-        <!-- {{-- Room作成 --}} -->
+        <h3 class="section-title">作成済みMedia</h3>
+        <!-- {{-- Media作成 --}} -->
 
         <span class="view-more" @click="addCreatedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
-      <!-- {{-- 作成済みroom一覧 --}} -->
+      <!-- {{-- 作成済みmedia一覧 --}} -->
       <media-preview-component
         :media-preview-infos="createdMediaPreviewInfos"
-        :is-show-cover="isShowCoverOnCreateRoom"
+        :is-show-cover="isShowCoverOnCreateMedia"
         :is-select-mode="isSelectMode"
-        @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
-        ref="createdRoomPreview">
+        @changeIsCheckedMedia="changeIsCheckedCreatedMedia"
+        ref="createdMediaPreview">
       </media-preview-component>
     </section>
 
-    <!-- いいねしたRoomのプレビュー -->
-    <section v-show="isShowLikedRoomPreview" class="mypage-section liked-room-list">
+    <!-- いいねしたMediaのプレビュー -->
+    <section v-show="isShowLikedMediaPreview" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">いいねしたRoom</h3>
+        <h3 class="section-title">いいねしたMedia</h3>
         <span class="view-more" @click="addLikedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
-      <!-- いいねしたroom一覧 -->
+      <!-- いいねしたmedia一覧 -->
       <media-preview-component
         :media-preview-infos="likedMediaPreviewInfos"
-        :is-show-cover="isShowCoverOnLikeRoom"
+        :is-show-cover="isShowCoverOnLikeMedia"
         :is-select-mode="isSelectMode"
-        @changeIsCheckedRoom="changeIsCheckedLikedRoom"
-        ref="likedRoomPreview">
+        @changeIsCheckedMedia="changeIsCheckedLikedMedia"
+        ref="likedMediaPreview">
       </media-preview-component>
     </section>
     
@@ -51,12 +51,12 @@
 </template>
 
 <script>
-import RoomPreview from './RoomPreviewComponent.vue';
+import MediaPreview from './MediaPreviewComponent.vue';
 import MypageMenuBar from './MypageMenuBarComponent.vue';
 
 export default {
   components : {
-    RoomPreview,
+    MediaPreview,
     MypageMenuBar,
   },
   props : [
@@ -67,12 +67,12 @@ export default {
     return {
       'createdMediaPreviewInfos' : "",
       'likedMediaPreviewInfos' : "",
-      'isShowCoverOnCreateRoom' : true,
-      'isShowCoverOnLikeRoom' : false,
-      'isShowCreatedRoomPreview' : true,
-      'isShowLikedRoomPreview' : true,
-      'isUpdateCreatedRoomPreviewInfo' : false,
-      'isUpdateLikedRoomPreviewInfo' : false,
+      'isShowCoverOnCreateMedia' : true,
+      'isShowCoverOnLikeMedia' : false,
+      'isShowCreatedMediaPreview' : true,
+      'isShowLikedMediaPreview' : true,
+      'isUpdateCreatedMediaPreviewInfo' : false,
+      'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
     }
   },
@@ -83,10 +83,10 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
-        tmpThis.isUpdateCreatedRoomPreviewInfo = true;
+        tmpThis.isUpdateCreatedMediaPreviewInfo = true;
       })
       .catch(error => {
-        alert('room情報の取得に失敗しました')
+        alert('media情報の取得に失敗しました')
       })
     },
     addLikedMediaPreviewInfos(){
@@ -95,10 +95,10 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
-        tmpThis.isUpdateLikedRoomPreviewInfo = true;
+        tmpThis.isUpdateLikedMediaPreviewInfo = true;
       })
       .catch(error => {
-        alert('room情報の取得に失敗しました')
+        alert('media情報の取得に失敗しました')
       })
     },
 
@@ -163,15 +163,15 @@ export default {
 }
 
 
-.room-create-wrapper {
+.media-create-wrapper {
   display: inline-block;
   margin-bottom: 25px;
 }
-.room-create-wrapper:hover {
+.media-create-wrapper:hover {
   transform: translate(0.7px, 0.5px);
 }
 
-.linkTo-createRoom {
+.linkTo-createMedia {
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
@@ -183,7 +183,7 @@ export default {
   box-shadow: 2px 2px 4px grey;
 }
 
-.linkTo-createRoom:hover {
+.linkTo-createMedia:hover {
   background-color: rgb(245,50,110);
   box-shadow: 1.5px 1.5px 3px darkgrey;
 
@@ -253,7 +253,7 @@ export default {
   .is-black {
     background-color: black;
   }
-  .linkTo-createRoom {
+  .linkTo-createMedia {
     font-size: 14px;
     padding: 6px 18px;
   }

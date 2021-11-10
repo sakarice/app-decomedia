@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
-use App\Lib\RoomListUtil;
-use App\Lib\RoomRoomListUtil;
+use App\Lib\MediaListUtil;
+use App\Lib\MediaMediaListUtil;
 use App\Models\User;
-use App\Models\Room;
-use App\Models\Roomlist;
-use App\Models\RoomRoomlist;
+use App\Models\Media;
+use App\Models\Medialist;
+use App\Models\MediaMedialist;
 
 use Storage;
 
-class RoomListController extends Controller
+class MediaListController extends Controller
 {
     // 1. index
     public function index() {}

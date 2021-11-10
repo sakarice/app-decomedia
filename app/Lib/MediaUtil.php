@@ -159,7 +159,7 @@ class MediaUtil
 
   // media情報をDBに保存
   public static function saveMediaDataInDB($request){
-    DB::beginTransaction();
+    // DB::beginTransaction();
     try{
       // media保存
       $media = new Media(); 
@@ -194,12 +194,13 @@ class MediaUtil
       }
 
       // media設定
+      \Log::info('start MediaSettingController');
       MediaSettingController::store($media_id, $request);
 
-      DB::commit();
+      // DB::commit();
 
     } catch(\Exception $e){
-      DB::rollback();
+      // DB::rollback();
     }
   }
 

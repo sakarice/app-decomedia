@@ -14,7 +14,6 @@ use App\Models\UserOwnAudioAudioThumbnail;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
-use App\Models\Room;
 use Storage;
 
 class AudioUtil

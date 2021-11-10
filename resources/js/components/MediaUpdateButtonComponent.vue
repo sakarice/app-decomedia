@@ -1,7 +1,7 @@
 <template>
 
     <div class="action-trigger-wrapper">
-      <div class="action-trigger update-icon-wrapper" @click="updateRoom">
+      <div class="action-trigger update-icon-wrapper" @click="updateMedia">
         <i class="fas fa-check fa-2x update-icon"></i>
       </div>
       <span class="action-trigger-subtitle">更新</span>
@@ -24,8 +24,8 @@
     },
 
     methods : {
-      updateRoom() {
-        this.$emit('update-room');
+      updateMedia() {
+        this.$emit('update-media');
       }
 
     },

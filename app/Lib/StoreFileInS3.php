@@ -5,7 +5,6 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\Room;
 use Storage;
 
 class StoreFileInS3

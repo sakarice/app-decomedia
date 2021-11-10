@@ -214,7 +214,7 @@ export default {
           this.userOwnImgs.splice(index,1);
           this.loadingMessage = ''
           this.isLoading = false;
-          // Room画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+          // Media画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
           this.$emit('img-del-notice', imgUrl);
         })
         .catch(error => {
@@ -238,7 +238,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
   #img-wrapper {
     /* モーダル内の画像サムネの配置 */

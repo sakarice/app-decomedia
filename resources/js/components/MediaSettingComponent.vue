@@ -5,38 +5,38 @@
 
         <div id="setting-wrapper">
 
-          <div id="room-is-public-wraper" class="setting">
+          <div id="media-is-public-wraper" class="setting">
             <p class="setting-title">公開/非公開</p>
             <i v-show="isPublic" @click="changePublicState" class="fas fa-door-open fa-lg public-state-icon open-icon"></i>
             <i v-show="!(isPublic)" @click="changePublicState" class="fas fa-lock fa-lg public-state-icon lock-icon"></i>
             <span class="state-description">{{showPublicState}}</span>
           </div>
 
-          <div id="room-name-wraper" class="setting">
-            <p class="setting-title">Room名</p>
+          <div id="media-name-wraper" class="setting">
+            <p class="setting-title">Media名</p>
             <label for="">
-              <input :value="roomName" @input="updateRoomName" type="text" id="room-name" placeholder="Room名">
+              <input :value="mediaName" @input="updateMediaName" type="text" id="media-name" placeholder="Media名">
             </label>
           </div>
 
-          <div id="room-description-wrapper" class="setting">
+          <div id="media-description-wrapper" class="setting">
             <p class="setting-title">説明</p>
             <label for="">
-              <!-- <input :value="roomDescription" @input="updateRoomDescription" type="text"> -->
-              <textarea :value="roomDescription" @input="updateRoomDescription" type="text" id="room-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
+              <!-- <input :value="mediaDescription" @input="updateMediaDescription" type="text"> -->
+              <textarea :value="mediaDescription" @input="updateMediaDescription" type="text" id="media-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
             </label>
           </div>
 
-          <div id="room-bg-color-wraper" class="setting">
-            <p class="setting-title">Room背景</p>
+          <div id="media-bg-color-wraper" class="setting">
+            <p class="setting-title">Media背景</p>
             <label for="">
-              <input :value="roomBackgroundColor" @input="updateRoomBgColor" type="color" id="room-bg-color">
-              Room背景色
+              <input :value="mediaBackgroundColor" @input="updateMediaBgColor" type="color" id="media-bg-color">
+              Media背景色
             </label>
           </div>
 
           <div id="media-img-setting-wrapper" class="setting">
-            <p class="setting-title">Room画像</p>
+            <p class="setting-title">Media画像</p>
             <input data-input-type="width" class="img-config-input" :value="mediaImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             <input data-input-type="height" class="img-config-input" :value="mediaImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
@@ -68,9 +68,9 @@ export default {
   props : [
     'transitionName',
     'isPublic',
-    'roomName',
-    'roomDescription',
-    'roomBackgroundColor',
+    'mediaName',
+    'mediaDescription',
+    'mediaBackgroundColor',
     'isShowMediaImg',
     'mediaImgWidth',
     'mediaImgHeight',
@@ -86,10 +86,10 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    updateRoomName(event) {
+    updateMediaName(event) {
       this.$parent.mediaSetting['name'] = event.target.value;
     },
-    updateRoomDescription(event) {
+    updateMediaDescription(event) {
       this.$parent.mediaSetting['description'] = event.target.value;
     },
     updateImg(event){
@@ -104,11 +104,11 @@ export default {
       }
       // this.$emit('resize-img', value, type);
     },
-    updateRoomBgColor(event){ // カラーピッカーの変更に、Room背景色を同期させて即反映
+    updateMediaBgColor(event){ // カラーピッカーの変更に、Media背景色を同期させて即反映
       let value = event.target.value;
-      this.$parent.mediaSetting['roomBackgroundColor'] = value;
+      this.$parent.mediaSetting['mediaBackgroundColor'] = value;
     },
-    toggleMediaImg() { // room画像の表示/非表示を切り替え
+    toggleMediaImg() { // media画像の表示/非表示を切り替え
       if(this.isShowMediaImg){
         this.$parent.mediaSetting['isShowImg'] = false;
       } else if(!(this.isShowMediaImg)){
@@ -149,7 +149,7 @@ export default {
 
 <style>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {

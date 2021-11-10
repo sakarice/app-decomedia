@@ -27,7 +27,7 @@
         <div class="search-wrapper">
             {{-- 検索フォーム --}}
             <div class="search-form-wrapper">
-                <form method="POST" class="search-form" action="/room/show/search/result">
+                <form method="POST" class="search-form" action="/media/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
                     <button type="submit" class="search-icon-wrapper">
@@ -56,12 +56,12 @@
     </section>
     <section id="about-app">
         {{-- <h2 id="about-app-header">
-            Roomとは?
+            Mediaとは?
         </h2>
         <p class="about-app-description">
             音楽、動画、画像を組み合わせて作る疑似空間です。<br>
-            誰かの作ったRoomを視聴したり、<br>
-            オリジナルのRoomを作って公開することができます。<br>
+            誰かの作ったMediaを視聴したり、<br>
+            オリジナルのMediaを作って公開することができます。<br>
             お気に入りの動画にBGMを付け加えたり、<br>
             音楽に背景を付けて簡易MVにしたり、<br>
             楽しみ方はあなた次第です。
@@ -72,13 +72,13 @@
         <div class="about-app-wrapper">
             <div class="about-app about-watch left">
                 <h3 class="about-app-title">視聴</h3>
-                <p class="watch-description">多種多様なRoomから好みのRoomを見つけて視聴してみましょう</p>
-                <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_watch.png" alt="">
+                <p class="watch-description">多種多様なMediaから好みのMediaを見つけて視聴してみましょう</p>
+                <img class="about-app-img" src="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_watch.png" alt="">
             </div>
             <div class="about-app about-create right">
                 <h3 class="about-app-title">作成</h3>
                 <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
-                <img class="about-app-img" src="https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
+                <img class="about-app-img" src="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
             </div>
         </div> --}}
     </section>
@@ -91,18 +91,18 @@
         {{-- :is-show-profile-icon="false" --}}
         </header-component>
 
-        {{-- Roomの一覧を表示 --}}
-        <section class="recently-posted-rooms">
+        {{-- Mediaの一覧を表示 --}}
+        <section class="recently-posted-medias">
             <h3 class="section-title recently-posted-title">最近の投稿</h3>
             <span class="recently-posted-supplement-info">
                 (サムネイルをタップするとルームに移動します)
             </span>
-            <div class="room-preview-wrapper">
-                <room-preview-component
+            <div class="media-preview-wrapper">
+                <media-preview-component
                 :csrf="{{json_encode(csrf_token())}}"
-                :room-preview-infos='@json($roomPreviewInfos,JSON_UNESCAPED_SLASHES)'
+                :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
                 :is-show-cover="false">
-                </room-preview-component>
+                </media-preview-component>
             </div>
         </section>
     </div>

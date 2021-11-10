@@ -42,12 +42,12 @@
 
 
 
-#room-title {
+#media-title {
   color:darkblue;
   display: inline-block;
 }
 
-.room-wrapper {
+.media-wrapper {
   position: relative;
   width: 700px;
   height: 700px;

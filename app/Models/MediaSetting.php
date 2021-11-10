@@ -9,6 +9,8 @@ class MediaSetting extends Model
 {
     use HasFactory;
 
+    protected $table = 'media_settings';
+
     public function medias(){
         return $this->belongsToMany(
             'App\Models\Media'

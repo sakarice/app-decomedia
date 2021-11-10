@@ -8,25 +8,25 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
-use App\Models\Room;
+use App\Models\Media;
 
 use Storage;
 
-class RoomUtilAjax
+class MediaUtilAjax
 {
-    // 入ったroomが自分の作成したroomか判別する(※ログインしている前提)
-    public static function judgeIsMyRoom($room_id){
+    // 入ったmediaが自分の作成したmediaか判別する(※ログインしている前提)
+    public static function judgeIsMyMedia($media_id){
         $enter_user_id = Auth::user()->id;
-        $room_owner_user_id = Room::find($room_id)->user_id;
-        $isMyRoom;
+        $media_owner_user_id = Media::find($media_id)->user_id;
+        $isMyMedia;
 
-        if($enter_user_id == $room_owner_user_id){
-            $isMyRoom = true;
+        if($enter_user_id == $media_owner_user_id){
+            $isMyMedia = true;
         } else {
-            $isMyRoom = false;
+            $isMyMedia = false;
         }
 
-        return ['isMyRoom' => $isMyRoom];
+        return ['isMyMedia' => $isMyMedia];
     }
 
 }

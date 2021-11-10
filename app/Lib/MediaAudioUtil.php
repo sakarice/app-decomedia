@@ -30,6 +30,7 @@ class MediaAudioUtil
       if($req_media_audio['type'] == 2){ //2:ユーザのアップロードした音楽
           $mediaAudio->owner_user_id = Auth::user()->id;
       } // 2以外はpublicオーディオ(=ユーザのものでない）ので、NULLで良い
+      \Log::info('called saveMediaAudioData');
       $mediaAudio->save();
     }
 

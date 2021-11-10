@@ -18,6 +18,8 @@ class MediaSettingUtil
   // 3.store // Media設定情報をDBに保存
   public static function saveMediaSettingData($media_id, $request){
     // $user_id = Auth::user()->id;
+    \Log::info('start saveMediaSettingData');
+    \Log::info($request->setting);
     $mediaSetting = new MediaSetting();
     $mediaSetting->media_id = $media_id;
     $mediaSetting->open_state = $request->setting['isPublic'];
@@ -33,6 +35,7 @@ class MediaSettingUtil
     $mediaSetting->max_audio_num = $request->setting['maxAudioNum'];
     // $mediaSetting->background_type = $request->setting['mediaBackgroundType'];
     $mediaSetting->background_color = $request->setting['mediaBackgroundColor'];
+    \Log::info('end saveMediaSettingData');
     $mediaSetting->save();
   }
 

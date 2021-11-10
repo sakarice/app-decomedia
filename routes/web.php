@@ -39,18 +39,18 @@ Route::middleware('auth')->group(function(){
     // マイページからRoomを選択し、手早くRoomリストを作成する
         Route::post('/roomlists/store', 'App\Http\Controllers\Ajax\RoomListController@quickStore');
     // マイページから選択したRoomを削除する(他ユーザのRoomは除外)
-        Route::post('/rooms/destroy', 'App\Http\Controllers\Ajax\RoomController@destroy');
+        Route::post('/rooms/destroy', 'App\Http\Controllers\Ajax\MediaController@destroy');
     // 作成したRoomリストのプレビュー情報を取得
         Route::get('/ajax/addCreatedRoomListPreviewInfos/{num}', 'App\Http\Controllers\Ajax\RoomListController@getRoomListPreviewInfos');
     // 作成したRoomリストを削除
         Route::post('/roomLists/delete', 'App\Http\Controllers\Ajax\RoomListController@destroy');
 
     // Room操作
-        Route::get('/room/create', 'App\Http\Controllers\RoomController@create');
-        Route::post('/room/store', 'App\Http\Controllers\RoomController@store');
-        Route::get('/room/{id}/edit', 'App\Http\Controllers\RoomController@edit');
-        Route::post('/room/update', 'App\Http\Controllers\RoomController@update');
-        Route::post('/room/delete', 'App\Http\Controllers\RoomController@destroy');
+        Route::get('/room/create', 'App\Http\Controllers\MediaController@create');
+        Route::post('/room/store', 'App\Http\Controllers\MediaController@store');
+        Route::get('/room/{id}/edit', 'App\Http\Controllers\MediaController@edit');
+        Route::post('/room/update', 'App\Http\Controllers\MediaController@update');
+        Route::post('/room/delete', 'App\Http\Controllers\MediaController@destroy');
     // 入ったRoomをいいねしているかチェックする
         Route::get('/user/likeState/{room_id}', 'App\Lib\LikeMediaUtil@getLikeState');
     // Roomへ、いいね/いいね解除する
@@ -91,7 +91,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/room/show/search/result', 'App\Lib\SearchUtil@searchRooms');
 
 // Room閲覧
-    Route::get('/room/{id}', 'App\Http\Controllers\RoomController@show');
+    Route::get('/room/{id}', 'App\Http\Controllers\MediaController@show');
 // 入ったroomが自分の作成したroomか判別する
     Route::get('/ajax/judgeIsMyRoom/{room_id}', 'App\Http\Controllers\Ajax\Lib\RoomUtilAjax@judgeIsMyRoom');
 

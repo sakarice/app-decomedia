@@ -3,17 +3,17 @@
     <div id="select-modal">
 
       <div id="area-wrapper">
-        <div class="room-info-wrapper">
-          <div id="room-name-wraper" class="room-info">
-            <p class="info-title">Room名</p>
+        <div class="media-info-wrapper">
+          <div id="media-name-wraper" class="media-info">
+            <p class="info-title">Media名</p>
             <label for="">
-              <p id="room-name">{{name}}</p>
+              <p id="media-name">{{name}}</p>
             </label>
           </div>
 
-          <div id="room-description-wrapper" class="room-info">
+          <div id="media-description-wrapper" class="media-info">
             <p class="info-title">説明</p>
-            <textarea :value="description" type="text" id="room-description" readonly></textarea>
+            <textarea :value="description" type="text" id="media-description" readonly></textarea>
           </div>
         </div>
       </div>
@@ -54,9 +54,9 @@ export default{
 
 <style scoped>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
-.room-info-wrapper {
+.media-info-wrapper {
   margin: 20px 0;
   width: 70%;
 
@@ -65,7 +65,7 @@ export default{
   align-items: flex-start;
 }
 
-.room-info {
+.media-info {
   margin-bottom : 20px;
 }
 
@@ -74,11 +74,11 @@ export default{
   font-weight: bold;
 }
 
-#room-name {
+#media-name {
   margin: 0;
 }
 
-#room-description {
+#media-description {
   width: 100%;
   height: 150px;
 }

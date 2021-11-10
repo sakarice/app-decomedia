@@ -10,7 +10,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Http\Controllers\UserController;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\MediaSetting;
 
 class HomeControllerTest extends TestCase

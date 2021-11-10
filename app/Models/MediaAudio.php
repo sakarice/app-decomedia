@@ -9,6 +9,8 @@ class MediaAudio extends Model
 {
     use HasFactory;
 
+    protected $table = 'media_audios';
+
     public function medias(){
         return $this->belongsToMany(
             'App\Models\Media'

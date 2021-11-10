@@ -22,7 +22,7 @@
 
           </div>
           <div class="setting-loop setting-content" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}">
-            <i class="room-yt-loop-icon fas fa-undo-alt fa-2x"></i>
+            <i class="media-yt-loop-icon fas fa-undo-alt fa-2x"></i>
             <span style="margin-left:10px">ループ</span>
           </div>
         </div>
@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {

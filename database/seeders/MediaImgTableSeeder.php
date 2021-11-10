@@ -15,13 +15,13 @@ class MediaImgTableSeeder extends Seeder
     {
         // ユーザがアップロードした画像ファイルを登録
         \App\Models\MediaImg::create([
-            'room_id' => 1,
+            'media_id' => 1,
             'img_id' => 1,
             'owner_user_id' => 1,
         ]);
         // デフォルトの画像ファイルを登録
         \App\Models\MediaImg::create([
-            'room_id' => 1,
+            'media_id' => 1,
             'img_id' => 1,
             'owner_user_id' => NULL,
         ]);

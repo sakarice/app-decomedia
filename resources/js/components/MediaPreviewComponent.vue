@@ -1,36 +1,36 @@
 <template>
-  <ul class="room-wrapper">
-    <li v-for="(roomPreviewInfo,index) in roomPreviewInfos" :key="roomPreviewInfo.id">
-      <div class="preview-room" :id="roomPreviewInfo['id']">
-        <a class="room-link" :href="roomShowLink(roomPreviewInfo['id'])">
-          <div class="room-thumbnail-wrapper">
-            <img class="room-thumbnail" :src="roomPreviewInfo['preview_img_url']" alt="">
+  <ul class="media-wrapper">
+    <li v-for="(mediaPreviewInfo,index) in mediaPreviewInfos" :key="mediaPreviewInfo.id">
+      <div class="preview-media" :id="mediaPreviewInfo['id']">
+        <a class="media-link" :href="mediaShowLink(mediaPreviewInfo['id'])">
+          <div class="media-thumbnail-wrapper">
+            <img class="media-thumbnail" :src="mediaPreviewInfo['preview_img_url']" alt="">
           </div>
         </a>
 
         <div class="cover-menu" v-show="isShowCover">
-          <a :href="roomShowLink(roomPreviewInfo['id'])" class="cover-menu-link show-room">
+          <a :href="mediaShowLink(mediaPreviewInfo['id'])" class="cover-menu-link show-media">
             <span class="link-title">閲覧</span>
           </a>
-          <a :href="roomEditLink(roomPreviewInfo['id'])" class="cover-menu-link edit-room">
+          <a :href="mediaEditLink(mediaPreviewInfo['id'])" class="cover-menu-link edit-media">
             <span class="link-title">編集</span>
           </a>
         </div>
-        <i class="fas fa-trash del-icon" @click="deleteRoom(roomPreviewInfo['id'])" v-show="isShowCover"></i>
+        <i class="fas fa-trash del-icon" @click="deleteMedia(mediaPreviewInfo['id'])" v-show="isShowCover"></i>
 
-        <!-- Room選択用チェックボックス -->
+        <!-- Media選択用チェックボックス -->
         <div class="check-box-cover" v-show="isSelectMode">
-          <input type="checkbox" class="room-select-check" name="" @change="changeIsCheckedRoom($event, index)">
+          <input type="checkbox" class="media-select-check" name="" @change="changeIsCheckedMedia($event, index)">
         </div>
 
         <!-- 選択順 -->
         <div class="selected-order-num-wrapper"
-        v-show="isSelectMode && roomPreviewInfo['selectedOrderNum'] > 0">
-          <span class="selected-order-num">{{roomPreviewInfo['selectedOrderNum']}}</span>
+        v-show="isSelectMode && mediaPreviewInfo['selectedOrderNum'] > 0">
+          <span class="selected-order-num">{{mediaPreviewInfo['selectedOrderNum']}}</span>
         </div>
 
       </div>
-      <p class="room-title">{{roomPreviewInfo['name']}}</p>
+      <p class="media-title">{{mediaPreviewInfo['name']}}</p>
     </li>
   </ul>  
 
@@ -39,7 +39,7 @@
 <script>
 export default {
   props : [
-    'roomPreviewInfos',
+    'mediaPreviewInfos',
     'isShowCover',
     'isSelectMode',
   ],
@@ -52,38 +52,38 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
-    roomShowLink : function(id) {
-      return "/room/" + id;
+    mediaShowLink : function(id) {
+      return "/media/" + id;
     },
-    roomEditLink : function(id) {
-      return "/room/" + id + "/edit";
+    mediaEditLink : function(id) {
+      return "/media/" + id + "/edit";
     },
-    deleteRoom(room_id){
-      let room_data = {
-        'room_id' : room_id,
+    deleteMedia(media_id){
+      let media_data = {
+        'media_id' : media_id,
       }
-      const url = '/room/delete';
-      axios.post(url, room_data)
+      const url = '/media/delete';
+      axios.post(url, media_data)
       .then(response => {
         alert(response.data.message);
         location.reload();
       })
       .catch(error => {
-        alert('room削除に失敗しました。');
+        alert('media削除に失敗しました。');
       })
     },
-    changeIsCheckedRoom(event, index){
+    changeIsCheckedMedia(event, index){
       let isChecked = event.target.checked;
-      this.$emit('changeIsCheckedRoom', isChecked, index);
+      this.$emit('changeIsCheckedMedia', isChecked, index);
     },
-    unCheckAllRoom(){
-      let checkBoxList = document.querySelectorAll(".room-select-check");
+    unCheckAllMedia(){
+      let checkBoxList = document.querySelectorAll(".media-select-check");
       for(let i=0; i < checkBoxList.length; i++){
         checkBoxList[i].checked = false;
       }
     },
-    judgeIsChecked(roomPreviewInfo){
-      if(roomPreviewInfo['selectedOrderNum'] > 0){
+    judgeIsChecked(mediaPreviewInfo){
+      if(mediaPreviewInfo['selectedOrderNum'] > 0){
         return true;
       }
     },
@@ -100,7 +100,7 @@ export default {
 
 <style scoped>
 
-.room-wrapper {
+.media-wrapper {
   width: 100%;
   padding-left: 0;
   max-width: 1200px;
@@ -110,7 +110,7 @@ export default {
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
-/* .room-wrapper::after {
+/* .media-wrapper::after {
   display: block;
   content:"";
   width: 180px;
@@ -122,7 +122,7 @@ li {
   margin-bottom: 20px;
 }
 
-.preview-room {
+.preview-media {
   position: relative;
   text-align: center;
   margin: 0 3px 5px 3px;
@@ -130,30 +130,30 @@ li {
   transition: 0.2s;
 }
 
-.preview-room:hover {
+.preview-media:hover {
   opacity: 1;
   transform: scale(0.98,0.98);
 
 }
 
-.preview-room:hover .cover-menu {
+.preview-media:hover .cover-menu {
   opacity: 0.7;
   z-index: 1;
 }
 
-.preview-room:hover .del-icon {
+.preview-media:hover .del-icon {
   opacity: 0.5;
   z-index: 2;
 }
 
-.room-thumbnail-wrapper {
+.media-thumbnail-wrapper {
   position: relative;
   width: 100%;
   height: 0px;
   padding: 0 0 100%;
 }
 
-.room-thumbnail {
+.media-thumbnail {
   position: absolute;
   top: 0;
   left: 0;
@@ -227,7 +227,7 @@ li {
   opacity: 0.8;
 }
 
-.room-select-check {
+.media-select-check {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -254,7 +254,7 @@ li {
   color: aquamarine;
 }
 
-.room-title {
+.media-title {
   text-align: center;
   font-size: 18px;
   line-height: 1.4rem;
@@ -270,10 +270,10 @@ li {
     width: 33%;
     margin-bottom: 10px;
   }
-  .preview-room {
+  .preview-media {
     margin: 0 2px 2px 2px;
   }
-  .room-title {
+  .media-title {
     font-size: 18px;
   }
   
@@ -281,20 +281,20 @@ li {
 
 /* スマホのみ */
 @media screen and (max-width: 420px) {
-  .room-wrapper {
+  .media-wrapper {
     width: 95%;
   }
-  .room-title {
+  .media-title {
     font-size: 13px;
     color: rgba(100,100,100,1);
   }
   .link-title {
     font-size: 17px;
   }
-  .show-room {
+  .show-media {
     display: none;
   }
-  .edit-room {
+  .edit-media {
     width: 100%;
   }
 
@@ -303,7 +303,7 @@ li {
     right: -5px;
     font-size: 1.2em;
   }
-  .room-select-check {
+  .media-select-check {
     top: 3px;
     left: 3px;
     transform: scale(2);

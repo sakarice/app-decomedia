@@ -3,75 +3,75 @@
     <!-- profile -->
     <user-page-profile></user-page-profile>
 
-    <!-- Room -->
+    <!-- Media -->
     <div class="mypage-action-menu">
-      <!-- Room作成 -->
-      <div class="mypage-action-item room-create-wrapper">
-        <a class="linkTo-createRoom" href="/room/create">
-          <i class="fas fa-plus fa-3x room-create-icon"></i>
+      <!-- Media作成 -->
+      <div class="mypage-action-item media-create-wrapper">
+        <a class="linkTo-createMedia" href="/media/create">
+          <i class="fas fa-plus fa-3x media-create-icon"></i>
         </a>
-        <span class="action-item-subtitle">Room作成</span>
+        <span class="action-item-subtitle">Media作成</span>
       </div>
-      <!-- Roomの選択モード -->
+      <!-- Mediaの選択モード -->
       <!-- 〇選択モードの切り替えボタン -->
       <div class="mypage-action-item select-mode-switch">
         <i id="change-select-mode" class="fas fa-hand-point-up fa-3x" @click="toggleSelectMode"></i>
         <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
       </div>
-      <!-- 〇選択したRoom削除ボタン -->
+      <!-- 〇選択したMedia削除ボタン -->
       <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
-        <selected-room-delete-button-component
+        <selected-media-delete-button-component
         class="mypage-action-item select-mode-item"
         v-show="isSelectMode">
-        </selected-room-delete-button-component>
+        </selected-media-delete-button-component>
 
         <!-- 〇選択をすべて解除するボタン -->
         <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
-          <i class="far fa-square fa-3x select-uncheck-icon" @click="unCheckAllRoom"></i>
+          <i class="far fa-square fa-3x select-uncheck-icon" @click="unCheckAllMedia"></i>
           <span class="action-item-subtitle">リセット</span>
         </div>
       </div>
       
     </div>
 
-    <!-- 作成済みRoomのプレビュー -->
-    <section v-show="isShowCreatedRoomPreview" class="mypage-section created-media-list">
+    <!-- 作成済みMediaのプレビュー -->
+    <section v-show="isShowCreatedMediaPreview" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">作成済みRoom</h3>
-        <!-- {{-- Room作成 --}} -->
+        <h3 class="section-title">作成済みMedia</h3>
+        <!-- {{-- Media作成 --}} -->
 
         <span class="view-more" @click="addCreatedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
-      <!-- {{-- 作成済みroom一覧 --}} -->
-      <room-preview-component
-        :room-preview-infos="createdMediaPreviewInfos"
-        :is-show-cover="isShowCoverOnCreateRoom"
+      <!-- {{-- 作成済みmedia一覧 --}} -->
+      <media-preview-component
+        :media-preview-infos="createdMediaPreviewInfos"
+        :is-show-cover="isShowCoverOnCreateMedia"
         :is-select-mode="isSelectMode"
-        @changeIsCheckedRoom="changeIsCheckedCreatedRoom"
-        ref="createdRoomPreview">
-      </room-preview-component>
+        @changeIsCheckedMedia="changeIsCheckedCreatedMedia"
+        ref="createdMediaPreview">
+      </media-preview-component>
     </section>
 
-    <!-- いいねしたRoomのプレビュー -->
-    <section v-show="isShowLikedRoomPreview" class="mypage-section liked-media-list">
+    <!-- いいねしたMediaのプレビュー -->
+    <section v-show="isShowLikedMediaPreview" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">いいねしたRoom</h3>
+        <h3 class="section-title">いいねしたMedia</h3>
         <span class="view-more" @click="addLikedMediaPreviewInfos">
           もっと見る
         </span>
       </div>
-      <!-- いいねしたroom一覧 -->
-      <room-preview-component
-        :room-preview-infos="likedMediaPreviewInfos"
-        :is-show-cover="isShowCoverOnLikeRoom"
+      <!-- いいねしたmedia一覧 -->
+      <media-preview-component
+        :media-preview-infos="likedMediaPreviewInfos"
+        :is-show-cover="isShowCoverOnLikeMedia"
         :is-select-mode="isSelectMode"
-        @changeIsCheckedRoom="changeIsCheckedLikedRoom"
-        ref="likedRoomPreview">
-      </room-preview-component>
+        @changeIsCheckedMedia="changeIsCheckedLikedMedia"
+        ref="likedMediaPreview">
+      </media-preview-component>
     </section>      
 
     <mypage-menu-bar-component>
@@ -86,20 +86,20 @@
 </template>
 
 <script>
-import RoomPreview from './RoomPreviewComponent.vue';
-import RoomListPreview from './RoomListPreviewComponent.vue';
+import MediaPreview from './MediaPreviewComponent.vue';
+import MediaListPreview from './MediaListPreviewComponent.vue';
 import MypageMenuBar from './MypageMenuBarComponent.vue';
-import RoomListCreateButton from './RoomListCreateButtonComponent.vue';
-import SelectedRoomDeleteButton from './SelectedRoomDeleteButtonComponent.vue';
+import MediaListCreateButton from './MediaListCreateButtonComponent.vue';
+import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue';
 import UserPageProfile from './UserPageProfileComponent.vue';
 
 export default {
   components : {
-    RoomPreview,
-    RoomListPreview,
+    MediaPreview,
+    MediaListPreview,
     MypageMenuBar,
-    RoomListCreateButton,
-    SelectedRoomDeleteButton,
+    MediaListCreateButton,
+    SelectedMediaDeleteButton,
     UserPageProfile,
   },
   props : [
@@ -111,24 +111,24 @@ export default {
       'createdMediaPreviewInfos' : "",
       'likedMediaPreviewInfos' : "",
       'isSelectMode' : false,
-      'isShowCoverOnCreateRoomList' : true,
-      'isShowCoverOnCreateRoom' : true,
-      'isShowCoverOnLikeRoom' : false,
-      'isShowCreatedRoomListPreview' : true,
-      'isShowCreatedRoomPreview' : true,
-      'isShowLikedRoomPreview' : true,
-      'isUpdateCreatedRoomPreviewInfo' : false,
-      'isUpdateLikedRoomPreviewInfo' : false,
+      'isShowCoverOnCreateMediaList' : true,
+      'isShowCoverOnCreateMedia' : true,
+      'isShowCoverOnLikeMedia' : false,
+      'isShowCreatedMediaListPreview' : true,
+      'isShowCreatedMediaPreview' : true,
+      'isShowLikedMediaPreview' : true,
+      'isUpdateCreatedMediaPreviewInfo' : false,
+      'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
     }
   },
   methods : {
     toggleSelectMode(){
-      this.isShowCoverOnCreateRoom = this.isSelectMode
+      this.isShowCoverOnCreateMedia = this.isSelectMode
       this.isSelectMode = !this.isSelectMode;
     },
-    roomEditLink : function(id) {
-      return "/room/" + id + "/edit";
+    mediaEditLink : function(id) {
+      return "/media/" + id + "/edit";
     },
     addCreatedMediaPreviewInfos(){
       let url = '/addCreatedMediaPreviewInfos';
@@ -136,10 +136,10 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
-        tmpThis.isUpdateCreatedRoomPreviewInfo = true;
+        tmpThis.isUpdateCreatedMediaPreviewInfo = true;
       })
       .catch(error => {
-        alert('room情報の取得に失敗しました')
+        alert('media情報の取得に失敗しました')
       })
     },
     addLikedMediaPreviewInfos(){
@@ -148,56 +148,56 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
-        tmpThis.isUpdateLikedRoomPreviewInfo = true;
+        tmpThis.isUpdateLikedMediaPreviewInfo = true;
       })
       .catch(error => {
-        alert('room情報の取得に失敗しました')
+        alert('media情報の取得に失敗しました')
       })
     },
-    addCreatedRoomListPreviewInfos(){
-      this.$refs.createdRoomListPreview.addCreatedRoomListPreviewInfos(300);
+    addCreatedMediaListPreviewInfos(){
+      this.$refs.createdMediaListPreview.addCreatedMediaListPreviewInfos(300);
     },
-    deleteRoom(room_id){
-      let room_data = {
-        'room_id' : room_id,
+    deleteMedia(media_id){
+      let media_data = {
+        'media_id' : media_id,
       }
-      const url = '/room/delete';
-      axios.post(url, room_data)
+      const url = '/media/delete';
+      axios.post(url, media_data)
       .then(response => {
         alert(response.data.message);
         location.reload();
       })
       .catch(error => {
-        alert('room削除に失敗しました。');
+        alert('media削除に失敗しました。');
       })
     },
-    changeIsCheckedCreatedRoom(isChecked, index){
+    changeIsCheckedCreatedMedia(isChecked, index){
       if(isChecked == true){
-        this.increaseCreatedRoomSelectedCount(index);
+        this.increaseCreatedMediaSelectedCount(index);
       } else if(isChecked == false){
         let unSelectedOrderNum = this.createdMediaPreviewInfos[index]['selectedOrderNum'];
         this.createdMediaPreviewInfos[index]['selectedOrderNum'] = 0;
-        this.decreseRoomSelectedCount(unSelectedOrderNum);
+        this.decreseMediaSelectedCount(unSelectedOrderNum);
       }
     },
-    changeIsCheckedLikedRoom(isChecked, index){
+    changeIsCheckedLikedMedia(isChecked, index){
       if(isChecked == true){
-        this.increaseLikedRoomSelectedCount(index);
+        this.increaseLikedMediaSelectedCount(index);
       } else if(isChecked == false){
         let unSelectedOrderNum = this.likedMediaPreviewInfos[index]['selectedOrderNum'];
         this.likedMediaPreviewInfos[index]['selectedOrderNum'] = 0;
-        this.decreseRoomSelectedCount(unSelectedOrderNum);
+        this.decreseMediaSelectedCount(unSelectedOrderNum);
       }
     },
-    increaseCreatedRoomSelectedCount(index){
+    increaseCreatedMediaSelectedCount(index){
       this.createdMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
       this.totalSelectedCount ++;
     },
-    increaseLikedRoomSelectedCount(index){
+    increaseLikedMediaSelectedCount(index){
       this.likedMediaPreviewInfos[index]['selectedOrderNum'] = this.totalSelectedCount+1;
       this.totalSelectedCount ++;
     },
-    decreseRoomSelectedCount(unSelectedOrderNum){
+    decreseMediaSelectedCount(unSelectedOrderNum){
       for(let i=0; i < this.createdMediaPreviewInfos.length; i++){
         if(this.createdMediaPreviewInfos[i]['selectedOrderNum'] > unSelectedOrderNum){
           this.createdMediaPreviewInfos[i]['selectedOrderNum'] --;
@@ -210,9 +210,9 @@ export default {
       }
       this.totalSelectedCount --;
     },
-    unCheckAllRoom(){
-      this.$refs.createdRoomPreview.unCheckAllRoom();
-      this.$refs.likedRoomPreview.unCheckAllRoom();
+    unCheckAllMedia(){
+      this.$refs.createdMediaPreview.unCheckAllMedia();
+      this.$refs.likedMediaPreview.unCheckAllMedia();
       for(let i=0; i < this.createdMediaPreviewInfos.length; i++){
         this.createdMediaPreviewInfos[i]['selectedOrderNum'] = 0;
       }
@@ -236,7 +236,7 @@ export default {
       if(this.isSelectMode){
         return '選択モードを解除';
       } else {
-        return 'Roomを選択する';
+        return 'Mediaを選択する';
       }
     }
   }
@@ -317,7 +317,7 @@ export default {
   color: blue;
 }
 
-.room-create-icon {
+.media-create-icon {
   color:white;
   background-color: aquamarine;
   padding: 6px 8px;
@@ -325,7 +325,7 @@ export default {
   box-shadow: 1px 1px 3px grey;
   transition: 0.2s;
 }
-.room-create-icon:hover {
+.media-create-icon:hover {
   background-color: darkturquoise;
   transform: scale(1.01);
   box-shadow: 2px 2px 7px grey;

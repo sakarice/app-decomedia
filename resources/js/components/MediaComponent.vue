@@ -1,16 +1,16 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['roomBackgroundColor']}">
+   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
 
-    <!-- Roomヘッダ -->
-    <room-header-component
-    :isShowLinkToEdit="isMyRoom"
-    :roomId="mediaSetting['id']"
-    :roomName="mediaSetting['name']">
-    </room-header-component>
+    <!-- Mediaヘッダ -->
+    <media-header-component
+    :isShowLinkToEdit="isMyMedia"
+    :mediaId="mediaSetting['id']"
+    :mediaName="mediaSetting['name']">
+    </media-header-component>
 
-    <!-- Room画像コンポーネント -->
+    <!-- Media画像コンポーネント -->
     <media-img-component
      :mediaImgUrl="mediaImg['url']"
      :mediaImgWidth="mediaImg['width'] + 'px'"
@@ -21,14 +21,14 @@
       ref="mediaImg">
     </media-img-component>
 
-    <!-- Roomオーディオコンポーネント -->
+    <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
      :maxAudioNum="mediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
-    <!-- Room動画(=youtube)コンポーネント -->
+    <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
     v-show="mediaSetting['isShowMovie']"
     :isLoopYoutube="mediaMovie['isLoop']"
@@ -40,24 +40,24 @@
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-room-like-modal-wrapper" class="icon-wrapper" v-if="$store.getters.getIsLogin && !(isMyRoom)">
-          <like-room-component
-          :roomId="mediaSetting['id']">
-          </like-room-component>
+        <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="$store.getters.getIsLogin && !(isMyMedia)">
+          <like-media-component
+          :mediaId="mediaSetting['id']">
+          </like-media-component>
         </div>
 
 
-        <!-- Room作成者情報 -->
-        <div id="disp-room-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomOwnerInfo')">
+        <!-- Media作成者情報 -->
+        <div id="disp-media-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaOwnerInfo')">
           <i class="fas fa-user-circle fa-2x"></i>
           <!-- ユーザプロフィール -->
-          <room-owner-info-component
-          v-show="isShowModal['roomOwnerInfo']"
-          :roomId="mediaSetting['id']">
-          </room-owner-info-component>
+          <media-owner-info-component
+          v-show="isShowModal['mediaOwnerInfo']"
+          :mediaId="mediaSetting['id']">
+          </media-owner-info-component>
         </div>
-        <!-- Room情報 -->
-        <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('roomInfoModal')">
+        <!-- Media情報 -->
+        <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaInfoModal')">
           <i class="fas fa-file-alt fa-2x setting-icon"></i>
         </div>
         <!-- 音楽 -->
@@ -67,39 +67,39 @@
       </div>
     </div>
 
-    <room-info-component
-    v-show="isShowModal['roomInfoModal']"
+    <media-info-component
+    v-show="isShowModal['mediaInfoModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
     :name="mediaSetting['name']"
     :description="mediaSetting['description']">
-    </room-info-component>
+    </media-info-component>
 
 
   </div>
 </template>
 
 <script>
-import RoomHeader from './RoomHeaderComponent.vue';
+import MediaHeader from './MediaHeaderComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import MediaMovie from './MediaMovieComponent.vue';
-import RoomInfo from './RoomInfoComponent.vue';
-import RoomOwnerInfo from './RoomOwnerInfoComponent.vue';
-import LikeRoom from './LikeRoomComponent.vue';
+import MediaInfo from './MediaInfoComponent.vue';
+import MediaOwnerInfo from './MediaOwnerInfoComponent.vue';
+import LikeMedia from './LikeMediaComponent.vue';
 
 
 export default {
   components : {
-    RoomHeader,
+    MediaHeader,
     MediaAudio,
     MediaSetting,
     MediaImg,
     MediaMovie,
-    RoomInfo,
-    RoomOwnerInfo,
-    LikeRoom,
+    MediaInfo,
+    MediaOwnerInfo,
+    LikeMedia,
   },
   props: [
     'mediaImgData',
@@ -109,7 +109,7 @@ export default {
   ],
   data : () => {
     return {
-      isMyRoom : false,
+      isMyMedia : false,
       getReadyCreateMovieFrame : false,
       getReadyPlayAudio : false,
       getReadyPlayMovie : false,
@@ -117,8 +117,8 @@ export default {
 
       transitionName : 'slide-in',
       isShowModal : {
-        'roomOwnerInfo' : false,
-        'roomInfoModal' : false,
+        'mediaOwnerInfo' : false,
+        'mediaInfoModal' : false,
       },
       mediaImg : {
         'type' : "",
@@ -144,7 +144,7 @@ export default {
         'name' : "",
         'description' : "",
         'finish_time' : 0,
-        'roomBackgroundColor' : "#333333", // 黒
+        'mediaBackgroundColor' : "#333333", // 黒
         'isShowImg' : true,
         'isShowMovie' : false,
         'maxAudioNum' : 5,
@@ -154,16 +154,16 @@ export default {
     }
   },
   methods : {
-    judgeIsMyRoom(){
-      let room_id = JSON.parse(this.mediaSettingData).id;
-      let url = '/ajax/judgeIsMyRoom/' + room_id;
+    judgeIsMyMedia(){
+      let media_id = JSON.parse(this.mediaSettingData).id;
+      let url = '/ajax/judgeIsMyMedia/' + media_id;
       console.log(url);
       axios.get(url)
         .then(response =>{
-          this.isMyRoom = response.data.isMyRoom;
+          this.isMyMedia = response.data.isMyMedia;
         })
         .catch(error => {
-          console.log('あなたがroom作成者か判別できませんでした');
+          console.log('あなたがmedia作成者か判別できませんでした');
         })
     },
     showModal(target){
@@ -218,7 +218,7 @@ export default {
       this.mediaSetting['name'] = tmpSettingData.name;
       this.mediaSetting['description'] = tmpSettingData.description;
       this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
-      this.mediaSetting['roomBackgroundColor'] = tmpSettingData.background_color;
+      this.mediaSetting['mediaBackgroundColor'] = tmpSettingData.background_color;
       this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
       this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
       this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
@@ -237,7 +237,7 @@ export default {
 
   },
   created() {
-    if(this.$store.getters.getIsLogin){ this.judgeIsMyRoom(); }
+    if(this.$store.getters.getIsLogin){ this.judgeIsMyMedia(); }
   },
   mounted() {
     this.initImg();
@@ -275,13 +275,13 @@ export default {
 
 <style scoped>
 
-@import "../../css/roomCommon.css";
-@import "../../css/roomModals.css";
+@import "../../css/mediaCommon.css";
+@import "../../css/mediaModals.css";
 @import "../../css/modalAnimation.css";
 
 
 
-  #disp-room-owner-modal-wrapper {
+  #disp-media-owner-modal-wrapper {
     color: white;
   }
 

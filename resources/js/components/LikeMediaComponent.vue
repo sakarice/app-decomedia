@@ -1,7 +1,7 @@
 <template>
   <div class="like-icon-wrapper">
-    <i v-show="!(isLikeRoom)" v-on:click="changeLikeStateOfViewAndDB()" class="far fa-heart fa-lg icon"></i>
-    <i v-show="isLikeRoom" v-on:click="changeLikeStateOfViewAndDB()" class="fas fa-heart fa-lg icon"></i>
+    <i v-show="!(isLikeMedia)" v-on:click="changeLikeStateOfViewAndDB()" class="far fa-heart fa-lg icon"></i>
+    <i v-show="isLikeMedia" v-on:click="changeLikeStateOfViewAndDB()" class="fas fa-heart fa-lg icon"></i>
   </div>
 </template>
 
@@ -9,19 +9,19 @@
 <script>
 export default{
   props: [
-    'roomId',
+    'mediaId',
   ],
   data : () => {
     return {
-      isLikeRoom : false,
+      isLikeMedia : false,
     }
   },
   methods : {
     getLikeState(){
-      let url = '/user/likeState/'+this.roomId;
+      let url = '/user/likeState/'+this.mediaId;
       axios.get(url)
       .then(response => {
-        this.isLikeRoom = response.data.isLikeRoom;
+        this.isLikeMedia = response.data.isLikeMedia;
       })
       .catch(error => {})
     },
@@ -40,14 +40,14 @@ export default{
       })
     },
     changeLikeState() {
-        this.isLikeRoom = !(this.isLikeRoom);
+        this.isLikeMedia = !(this.isLikeMedia);
     },
     updateLikeStateInDB(){
-      let url = '/room/like';
-      const room_id = this.$parent.mediaSetting['id'];
+      let url = '/media/like';
+      const media_id = this.$parent.mediaSetting['id'];
       let data = {
-        'isLike' : this.isLikeRoom,
-        'room_id' : room_id,
+        'isLike' : this.isLikeMedia,
+        'media_id' : media_id,
       }
       console.log('updateLikeStateInDB');
       axios.post(url, data)
@@ -63,7 +63,7 @@ export default{
   mounted : function() {
   },
   watch : {
-    roomId: function(newVal,oldVal){ // 親コンポーネントのroomOwnerIdがdataにセットされるのを待つ
+    mediaId: function(newVal,oldVal){ // 親コンポーネントのmediaOwnerIdがdataにセットされるのを待つ
       if(newVal > 0){
         this.getLikeState();
       }
@@ -76,7 +76,7 @@ export default{
 
 <style>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
 .icon {
   color: pink;

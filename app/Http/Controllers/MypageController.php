@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Room\RoomController;
 use App\Models\User;
-use App\Models\Room;
-use App\Models\Roomlist;
-use App\Lib\EditRoom;
+use App\Models\Media;
+use App\Models\Medialist;
+use App\Lib\EditMedia;
 use App\Lib\MediaUtil;
 
 use Storage;

@@ -9,7 +9,6 @@ use App\Lib\StoreFileInS3;
 use App\Lib\Common\StringProcessing;
 use App\Lib\AudioUtil;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\UserOwnAudioAudioThumbnail;
 use Storage;
 

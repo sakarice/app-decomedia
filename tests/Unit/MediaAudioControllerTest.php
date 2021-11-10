@@ -9,7 +9,6 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\Room;
 use App\Models\MediaAudio;
 use App\Models\DefaultAudio;
 use App\Models\UserOwnAudio;

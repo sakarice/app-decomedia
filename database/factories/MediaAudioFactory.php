@@ -24,11 +24,11 @@ class MediaAudioFactory extends Factory
      * @return array
      */
     public function definition(){
-        $room_id = Media::max('id');
+        $media_id = Media::max('id');
         $owner_user_id = User::max('id');
         $default_bgm_id = PublicAudio::max('id');
         $media_audio_data = [
-            'room_id' => $room_id,
+            'media_id' => $media_id,
             'audio_type' => 1,  // UserOwn
             'audio_id' => $default_bgm_id,
             'order_seq' => 1,

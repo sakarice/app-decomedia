@@ -9,23 +9,23 @@
         <div class="header-block header-center">
             <cancel-button></cancel-button>
 
-            <room-create-button v-if="isShowCreateButton"
-            @create-room="createRoom">
-            </room-create-button>
+            <media-create-button v-if="isShowCreateButton"
+            @create-media="createMedia">
+            </media-create-button>
 
-            <room-update-button v-if="isShowUpdateButton"
-            @update-room="updateRoom">
-            </room-update-button>
+            <media-update-button v-if="isShowUpdateButton"
+            @update-media="updateMedia">
+            </media-update-button>
 
-            <a v-if="isShowLinkToShow" :href="roomShowLink(roomId)" class="action-trigger-wrapper link-to-show-room">
-                <div class="action-trigger goto-show-room-icon-wrapper">
-                    <i class="fas fa-door-open fa-2x goto-show-room-icon "></i>
+            <a v-if="isShowLinkToShow" :href="mediaShowLink(mediaId)" class="action-trigger-wrapper link-to-show-media">
+                <div class="action-trigger goto-show-media-icon-wrapper">
+                    <i class="fas fa-door-open fa-2x goto-show-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">閲覧画面へ</span>
             </a>
-            <a v-if="isShowLinkToEdit" :href="roomEditLink(roomId)" class="action-trigger-wrapper link-to-edit-room">
-                <div class="action-trigger goto-edit-room-icon-wrapper">
-                    <i class="fas fa-pen fa-2x goto-edit-room-icon "></i>
+            <a v-if="isShowLinkToEdit" :href="mediaEditLink(mediaId)" class="action-trigger-wrapper link-to-edit-media">
+                <div class="action-trigger goto-edit-media-icon-wrapper">
+                    <i class="fas fa-pen fa-2x goto-edit-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">編集画面へ</span>
             </a>
@@ -34,7 +34,7 @@
 
         <!-- 右側 -->
         <div class="header-block header-right">
-            <span :v-if="roomName" class="header-content room-name">{{roomName}}</span>
+            <span :v-if="mediaName" class="header-content media-name">{{mediaName}}</span>
         </div>
     </div>
         
@@ -45,16 +45,16 @@
 <script>
 import HomeLink from './HomeLinkComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
-import RoomCreateButton from './RoomCreateButtonComponent.vue';
-import RoomUpdateButton from './RoomUpdateButtonComponent.vue';
+import MediaCreateButton from './MediaCreateButtonComponent.vue';
+import MediaUpdateButton from './MediaUpdateButtonComponent.vue';
 
 
 export default {
     components : {
         HomeLink,
         CancelButton,
-        RoomCreateButton,
-        RoomUpdateButton,
+        MediaCreateButton,
+        MediaUpdateButton,
     },
     props : [
         'csrf',
@@ -62,8 +62,8 @@ export default {
         'isShowUpdateButton',
         'isShowLinkToShow',
         'isShowLinkToEdit',
-        'roomId',
-        'roomName',
+        'mediaId',
+        'mediaName',
     ],
     data : () => {
         return {
@@ -73,17 +73,17 @@ export default {
         getFinishTime(){
             this.$emit('getFinishTime');
         },
-        createRoom(){
-            this.$emit('create-room');
+        createMedia(){
+            this.$emit('create-media');
         },
-        updateRoom(){
-            this.$emit('update-room');
+        updateMedia(){
+            this.$emit('update-media');
         },
-        roomShowLink : function(id) {
-            return "/room/" + id;
+        mediaShowLink : function(id) {
+            return "/media/" + id;
         },
-        roomEditLink : function(id) {
-            return "/room/" + id + "/edit";
+        mediaEditLink : function(id) {
+            return "/media/" + id + "/edit";
         },
     },
 

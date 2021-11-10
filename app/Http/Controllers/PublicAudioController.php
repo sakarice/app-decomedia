@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
-use App\Models\Room;
+use App\Models\Media;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
@@ -16,7 +16,7 @@ use App\Models\PublicAudioAudioThumbnail;
 class PublicAudioController extends Controller
 {
     // 1.index
-    // Room作成・編集画面で使用。デフォルトBGMを取得
+    // Media作成・編集画面で使用。デフォルトBGMを取得
     public function index(){
         $default_audios = PublicAudio::get();
         $audios = array();

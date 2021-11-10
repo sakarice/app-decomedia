@@ -38,8 +38,8 @@ Vue.component('test-parent-component', require('./components/TestParentComponent
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
 
-// ■Roomパーツ
-Vue.component('room-header-component', require('./components/RoomHeaderComponent.vue').default);
+// ■Mediaパーツ
+Vue.component('media-header-component', require('./components/MediaHeaderComponent.vue').default);
 
 
 // ■マイページ用
@@ -57,29 +57,29 @@ Vue.component('profile-component', require('./components/ProfileComponent.vue').
 Vue.component('user-page-profile-component', require('./components/UserPageProfileComponent.vue').default);
 
 
-// room一覧表示用コンポーネント
-Vue.component('room-preview-component', require('./components/RoomPreviewComponent.vue').default);
-// roomリスト一覧表示用コンポーネント
-Vue.component('room-list-preview-component', require('./components/RoomListPreviewComponent.vue').default);
+// media一覧表示用コンポーネント
+Vue.component('media-preview-component', require('./components/MediaPreviewComponent.vue').default);
+// mediaリスト一覧表示用コンポーネント
+Vue.component('media-list-preview-component', require('./components/MediaListPreviewComponent.vue').default);
 
-// room閲覧用コンポーネント
-Vue.component('room-component', require('./components/RoomComponent.vue').default);
-Vue.component('room-info-component', require('./components/RoomInfoComponent.vue').default);
+// media閲覧用コンポーネント
+Vue.component('media-component', require('./components/MediaComponent.vue').default);
+Vue.component('media-info-component', require('./components/MediaInfoComponent.vue').default);
 
-// room編集用コンポーネント
-Vue.component('room-edit-component', require('./components/RoomEditComponent.vue').default);
+// media編集用コンポーネント
+Vue.component('media-edit-component', require('./components/MediaEditComponent.vue').default);
 
 
-// room所有者(＝作成者)情報
-Vue.component('room-owner-info-component', require('./components/RoomOwnerInfoComponent.vue').default);
-// Roomへのいいねアイコンコンポーネント
-Vue.component('like-room-component', require('./components/LikeRoomComponent.vue').default);
-// Room作成者フォローコンポーネント
+// media所有者(＝作成者)情報
+Vue.component('media-owner-info-component', require('./components/MediaOwnerInfoComponent.vue').default);
+// Mediaへのいいねアイコンコンポーネント
+Vue.component('like-media-component', require('./components/LikeMediaComponent.vue').default);
+// Media作成者フォローコンポーネント
 Vue.component('follow-component', require('./components/FollowComponent.vue').default);
 
 
 
-// ★room作成用コンポーネント
+// ★media作成用コンポーネント
 Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
 Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
@@ -88,14 +88,14 @@ Vue.component('media-audio-component', require('./components/MediaAudioComponent
 Vue.component('media-img-component', require('./components/MediaImgComponent.vue').default);
 Vue.component('media-movie-component', require('./components/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);
-Vue.component('room-create-button-component', require('./components/RoomCreateButtonComponent.vue').default);
-Vue.component('room-update-button-component', require('./components/RoomUpdateButtonComponent.vue').default);
+Vue.component('media-create-button-component', require('./components/MediaCreateButtonComponent.vue').default);
+Vue.component('media-update-button-component', require('./components/MediaUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
 
-// roomリスト作成用コンポーネント
-Vue.component('room-list-create-button-component', require('./components/RoomListCreateButtonComponent.vue').default);
-// roomリスト作成用コンポーネント
-Vue.component('selected-room-delete-button-component', require('./components/SelectedRoomDeleteButtonComponent.vue').default);
+// mediaリスト作成用コンポーネント
+Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);
+// mediaリスト作成用コンポーネント
+Vue.component('selected-media-delete-button-component', require('./components/SelectedMediaDeleteButtonComponent.vue').default);
 
 
 /**
