@@ -16,7 +16,7 @@ class UserOwnAudioFactory extends Factory
     protected $model = UserOwnAudio::class;
 
     /**
-     * Define the model's userownbgm state.
+     * Define the model's userownaudio state.
      *
      * @return array
      */

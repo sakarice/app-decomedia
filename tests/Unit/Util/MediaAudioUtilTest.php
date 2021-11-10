@@ -171,7 +171,7 @@ class MediaAudioUtilTest extends TestCase
         // パターン2:requestのmediaAudioが更新前より多い(更新前:1つ 更新後:2つ)
         // 1. 更新用リクエストを用意
         $tmp_media_audio['type'] = 2;
-        $tmp_media_audio['audio_url'] = userOwnBgm::latest()->first()->audio_url;
+        $tmp_media_audio['audio_url'] = userOwnAudio::latest()->first()->audio_url;
         $media_audio_datas[] = $tmp_media_audio;
         
         $request2 = new \stdClass(); //key:value形式のリクエスト
