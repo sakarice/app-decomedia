@@ -87,7 +87,7 @@
       }
     },
     methods : {
-      hideAudio(){ // room閲覧時に最初に実行される
+      hideAudio(){ // media閲覧時に最初に実行される
         this.isShowAudio = false;
       },
       validEditMode(){ // 親コンポーネントから実行される

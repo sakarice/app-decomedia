@@ -17,7 +17,7 @@ class ChatsTableSeeder extends Seeder
         for($i = 1; $i <= 3; $i ++){
             \App\Models\Chat::create([
                 'user_id' => $i,
-                'room_id' => 1,
+                'media_list_id' => 1,
                 'message' => $i.'番目のテキスト'
             ]);
         }

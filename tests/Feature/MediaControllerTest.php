@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Tests\TestCase;
 use App\Models\User;
 
-class RoomControllerTest extends TestCase
+class MediaControllerTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -20,7 +20,7 @@ class RoomControllerTest extends TestCase
     public function testCreate(){
         $user = User::factory()->create();
         $this->actingAs($user);
-        $response = $this->get('/room/create');
+        $response = $this->get('/media/create');
         $response->assertStatus(200);
     }
 
@@ -28,7 +28,7 @@ class RoomControllerTest extends TestCase
     // public function testEdit(){
     //     $user = User::factory()->create();
     //     $this->actingAs($user);
-    //     $response = $this->get('/room/1/edit');
+    //     $response = $this->get('/media/1/edit');
     //     $response->assertStatus(200);
     // }
 

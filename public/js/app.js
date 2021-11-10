@@ -3324,7 +3324,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     hideAudio: function hideAudio() {
-      // room閲覧時に最初に実行される
+      // media閲覧時に最初に実行される
       this.isShowAudio = false;
     },
     validEditMode: function validEditMode() {

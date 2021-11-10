@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserLikeRoomsTable extends Migration
+class CreateUserLikeMediasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateUserLikeRoomsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_like_rooms', function (Blueprint $table) {
+        Schema::create('user_like_medias', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->integer('room_id');
+            $table->integer('media_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateUserLikeRoomsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_like_rooms');
+        Schema::dropIfExists('user_like_medias');
     }
 }

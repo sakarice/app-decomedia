@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDescriptionToRoomSettingsTable extends Migration
+class CreateMediaMedialistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddDescriptionToRoomSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::table('room_settings', function (Blueprint $table) {
-            //
-            $table->string('description', 191)->nullable()->after('name');
+        Schema::create('media_medialists', function (Blueprint $table) {
+            $table->id();
+            $table->integer('medialist_id');
+            $table->integer('media_id');
+            $table->integer('media_order_seq');
+            $table->timestamps();
         });
     }
 
@@ -26,9 +29,6 @@ class AddDescriptionToRoomSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('room_settings', function (Blueprint $table) {
-            //
-            $table->dropColumn('description');
-        });
+        Schema::dropIfExists('media_medialists');
     }
 }
