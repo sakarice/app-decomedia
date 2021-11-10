@@ -4844,7 +4844,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {},
   computed: {
     isShowFollow: function isShowFollow() {
-      // ログインしていて自分のメディアでなければフォローアイコンを表示
+      // ログインしていて自分のルームでなければフォローアイコンを表示
       return this.$store.getters.getIsLogin && !this.isMyMedia;
     }
   }

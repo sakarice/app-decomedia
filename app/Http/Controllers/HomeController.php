@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $env = app()->environment('AWS_BUCKET');
+        $env = config('app.aws_bucket');
         \Log::info($env);
         $mediaPreviewInfos = array();
         $getNum = 20; // 取得するMediaプレビュー情報件数

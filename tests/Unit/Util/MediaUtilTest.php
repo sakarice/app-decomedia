@@ -59,7 +59,7 @@ class MediaUtilTest extends TestCase
 
         $this->assertEquals(
             $media_img_url,
-            "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"
+            "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/app-decomedia/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png"
         );
 
         // パターン2：Media画像が設定されてなくて、Media動画が設定されている
@@ -68,7 +68,7 @@ class MediaUtilTest extends TestCase
         $media_img_url = MediaUtil::getMediaPreviewImgUrl($media_id);
         $this->assertEquals(
             $media_img_url,
-            "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"
+            "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/app-decomedia/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png"
         );
 
     }

@@ -143,13 +143,13 @@ class MediaUtil
         $media_img_url = $media_img->img_url;
         break;        
       case 2:
-        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
+        $media_img_url = "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/app-decomedia/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
         break;
       case 3:
-        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
+        $media_img_url = "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/app-decomedia/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
         break;
       default:
-        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png";
+        $media_img_url = "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/app-decomedia/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png";
     }
     
     return $media_img_url;

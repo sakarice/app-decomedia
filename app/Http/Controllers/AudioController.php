@@ -27,7 +27,7 @@ class AudioController extends Controller
                 $audio_save_url= Storage::disk('s3')->url($audio_save_path);
                 // サムネイル画像は、一次的にデフォルトのもの(♪マーク)で登録する
                 $thumbnail_save_path = 'public/img/audio_thumbnail/default/8分音符のアイコン素材 2.png';
-                $thumbnail_save_url = 'https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/public/img/audio_thumbnail/default/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E7%B4%A0%E6%9D%90+2.png';
+                $thumbnail_save_url = "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/public/img/audio_thumbnail/default/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E7%B4%A0%E6%9D%90+2.png";
 
                 $fileDatas = array (
                         'owner_user_id' => $user_id,

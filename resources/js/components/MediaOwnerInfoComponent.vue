@@ -95,7 +95,7 @@ import Follow from './FollowComponent.vue';
     watch : {},
     computed : {
       isShowFollow: function(){
-        // ログインしていて自分のメディアでなければフォローアイコンを表示
+        // ログインしていて自分のルームでなければフォローアイコンを表示
         return this.$store.getters.getIsLogin && !(this.isMyMedia);
       },
     }
