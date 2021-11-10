@@ -73,12 +73,12 @@
             <div class="about-app about-watch left">
                 <h3 class="about-app-title">視聴</h3>
                 <p class="watch-description">多種多様なMediaから好みのMediaを見つけて視聴してみましょう</p>
-                <img class="about-app-img" src="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_watch.png" alt="">
+                <img class="about-app-img" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/how-to-use-app_watch.png" alt="">
             </div>
             <div class="about-app about-create right">
                 <h3 class="about-app-title">作成</h3>
                 <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
-                <img class="about-app-img" src="https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/app/img/how-to-use-app_create.png" alt="">
+                <img class="about-app-img" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/how-to-use-app_create.png" alt="">
             </div>
         </div> --}}
     </section>

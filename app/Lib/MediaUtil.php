@@ -81,7 +81,7 @@ class MediaUtil
   public static function getLikedMediaModel($user_id, $record_num){
     $sql = <<< SQL
       SELECT * FROM medias r
-        INNER JOIN user_like_media ulm
+        INNER JOIN user_like_medias ulm
         ON ulm.media_id = r.id
         WHERE ulm.user_id = $user_id
         LIMIT $record_num
@@ -143,13 +143,13 @@ class MediaUtil
         $media_img_url = $media_img->img_url;
         break;        
       case 2:
-        $media_img_url = "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/media/img/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
+        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/3oLdT6SSOkEUW0ejXRWsLX177aXQVOd5vRa8Qtse.png";
         break;
       case 3:
-        $media_img_url = "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/media/img/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
+        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/t6xoK6A2Wgy33J82wCzEvW12pnLqmeDkF4ASzqtO.jpg";
         break;
       default:
-        $media_img_url = "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/media/img/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png";
+        $media_img_url = "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/tyOKqvszOb4LDP2egK6qTqWFzFiFnxlCurxaf98W.png";
     }
     
     return $media_img_url;

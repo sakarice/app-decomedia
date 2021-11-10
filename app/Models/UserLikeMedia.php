@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserLikeMedia extends Model
 {
     use HasFactory;
+
+    protected $table = 'user_like_medias';
+
 }
