@@ -231,6 +231,7 @@ class MediaUtil
         MediaAudioController::update($media_id, $request);
       }
       // media設定
+      \Log::info('called MediaSettingController');
       MediaSettingController::update($media_id, $request);      
 
       DB::commit();

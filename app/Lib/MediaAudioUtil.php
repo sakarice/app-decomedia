@@ -88,24 +88,28 @@ class MediaAudioUtil
 
   // 6.update
   public static function updateMediaAudioData($media_id, $request){
-    $mediaAudios;
+    \Log::info('start updateMediaAudioData');
+    $req_media_audios;
     $requestAudioNum;
     if(isset($request->audios[0])){ // リクエストにaudioがセットされている場合
-      $mediaAudios = $request->audios;
-      $requestAudioNum = count($mediaAudios);
+      $req_media_audios = $request->audios;
+      $requestAudioNum = count($req_media_audios);
       // DBのレコード数をリクエストのAudio数と同じにする
       MediaAudioUtil::equalizeNumOfMediaAudioDataWithRequest($media_id, $requestAudioNum);
       // レコードを更新
+      \Log::info('レコードを更新');
       $mediaAudios = MediaAudio::where('media_id', $media_id)->orderBy('id')->get();
-      foreach($mediaAudios as $index => $mediaAudio){
-        $mediaAudios[$index]->audio_type = $mediaAudio['type'];
-        $mediaAudios[$index]->audio_id = MediaAudioUtil::getAudioId($mediaAudio['type'], $mediaAudio['audio_url']);
+      \Log::info($mediaAudios);
+      \Log::info($req_media_audios);
+      foreach($req_media_audios as $index => $req_media_audio){
+        $mediaAudios[$index]->audio_type = $req_media_audio['type'];
+        $mediaAudios[$index]->audio_id = MediaAudioUtil::getAudioId($req_media_audio['type'], $req_media_audio['audio_url']);
         $mediaAudios[$index]->order_seq = $index + 1;
-        $mediaAudios[$index]->volume = $mediaAudio['volume'];
-        $mediaAudios[$index]->isLoop = $mediaAudio['isLoop'];
-        if($mediaAudio['type'] == 1){ //1:デフォルト 2:ユーザのアップロードしたもの
+        $mediaAudios[$index]->volume = $req_media_audio['volume'];
+        $mediaAudios[$index]->isLoop = $req_media_audio['isLoop'];
+        if($req_media_audio['type'] == 1){ //1:デフォルト 2:ユーザのアップロードしたもの
           $mediaAudios[$index]->owner_user_id = NULL;
-        } else if($mediaAudio['type'] == 2){
+        } else if($req_media_audio['type'] == 2){
           $mediaAudios[$index]->owner_user_id = Auth::user()->id;
         }
         $mediaAudios[$index]->save();
