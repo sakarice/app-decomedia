@@ -13,11 +13,14 @@ class StoreFileInS3
   public static function userOwnMediaFile($user_id, $file){
     // ファイルタイプに応じたS3の保存先ディレクトリを設定
     $directry;
-    \Log::info('start userOwnMediaFile');
     switch(true){
       case preg_match('/^image/', $file->getMimeType()):
         $directry = "users/".$user_id."/img/media";
         break;
+      case preg_match('/^audio/', $file->getMimeType()):
+        $directry = "users/".$user_id."/audio/media";
+        break;  
+    }
     // S3へファイル保存 & DBへ登録する保存先パスを取得
     $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
     return $filePath;
@@ -35,11 +38,12 @@ class StoreFileInS3
         $directry = "public/audio/media";
         break;
       case 'audio-thumbnail':
-        $directry = "publ 保存先パスを返す
+        $directry = "public/img/audio_thumbnail";
+        break;
+    }
     $file = $request->file($fileType);
     $filePath = Storage::disk('s3')->putFile($directry, $file, 'public');
     return $filePath;
-
   }
 
 }
