@@ -56425,14 +56425,14 @@ var render = function() {
                 attrs: {
                   src: _vm.mediaOwnerInfo["profile_img_url"],
                   alt:
-                    "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
+                    "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg"
                 }
               })
             : _c("img", {
                 staticClass: "avatar",
                 attrs: {
                   src:
-                    "https://hirosaka-testapp-media.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
+                    "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
                   alt: ""
                 }
               })
@@ -57421,14 +57421,14 @@ var render = function() {
                     attrs: {
                       src: _vm.userProfile["profile_img_url"],
                       alt:
-                        "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
+                        "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg"
                     }
                   })
                 : _c("img", {
                     staticClass: "avatar",
                     attrs: {
                       src:
-                        "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
+                        "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
                       alt: ""
                     }
                   })
@@ -57787,14 +57787,14 @@ var render = function() {
                 attrs: {
                   src: _vm.userProfile["profile_img_url"],
                   alt:
-                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg"
+                    "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg"
                 }
               })
             : _c("img", {
                 staticClass: "avatar",
                 attrs: {
                   src:
-                    "https://hirosaka-testapp-room.s3.ap-northeast-1.amazonaws.com/default/user/img/user-solid.svg",
+                    "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
                   alt: ""
                 }
               })
