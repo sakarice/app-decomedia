@@ -88,7 +88,6 @@ class MediaAudioUtil
 
   // 6.update
   public static function updateMediaAudioData($media_id, $request){
-    \Log::info('start updateMediaAudioData');
     $req_media_audios;
     $requestAudioNum;
     if(isset($request->audios[0])){ // リクエストにaudioがセットされている場合
@@ -97,10 +96,7 @@ class MediaAudioUtil
       // DBのレコード数をリクエストのAudio数と同じにする
       MediaAudioUtil::equalizeNumOfMediaAudioDataWithRequest($media_id, $requestAudioNum);
       // レコードを更新
-      \Log::info('レコードを更新');
       $mediaAudios = MediaAudio::where('media_id', $media_id)->orderBy('id')->get();
-      \Log::info($mediaAudios);
-      \Log::info($req_media_audios);
       foreach($req_media_audios as $index => $req_media_audio){
         $mediaAudios[$index]->audio_type = $req_media_audio['type'];
         $mediaAudios[$index]->audio_id = MediaAudioUtil::getAudioId($req_media_audio['type'], $req_media_audio['audio_url']);
