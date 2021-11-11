@@ -22,7 +22,7 @@
 
           </div>
           <div class="setting-loop setting-content" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}">
-            <i class="room-yt-loop-icon fas fa-undo-alt fa-2x"></i>
+            <i class="media-yt-loop-icon fas fa-undo-alt fa-2x"></i>
             <span style="margin-left:10px">ループ</span>
           </div>
         </div>
@@ -64,13 +64,13 @@ export default {
     },
     updateVideoId(event){
       let youtubeUrl = event.target.value;
-      this.$parent.roomMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
+      this.$parent.mediaMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
     },
     updateVideoWidth(event){
-      this.$parent.roomMovie['width'] = event.target.value;
+      this.$parent.mediaMovie['width'] = event.target.value;
     },
     updateVideoHeight(event){
-      this.$parent.roomMovie['height'] = event.target.value;
+      this.$parent.mediaMovie['height'] = event.target.value;
     },
     createMovieFrame() {
       // 親コンポーネントの動画フレーム作成メソッドを実行
@@ -81,9 +81,9 @@ export default {
     },
     loopYoutube(){
       if(this.isLoopYoutube == false){
-        this.$parent.roomMovie['isLoop'] = true;
+        this.$parent.mediaMovie['isLoop'] = true;
       } else {
-        this.$parent.roomMovie['isLoop'] = false;
+        this.$parent.mediaMovie['isLoop'] = false;
       }
     },
   },
@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {

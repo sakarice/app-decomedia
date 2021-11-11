@@ -6,13 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Lib\StoreFileInS3;
+use App\Lib\Common\StringProcessing;
 use App\Http\Controllers\Img\ImgController;
-use App\Http\Controllers\RoomSettingController;
 use App\Models\User;
-use App\Models\Room;
 use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
-use App\Models\RoomImg;
+use App\Models\PublicImg;
 use Storage;
 
 class ImgUtil
@@ -25,14 +23,14 @@ class ImgUtil
     // 保存先DBを振り分け
     $targetModel;
     if($owner_user_id == NULL){
-        $targetModel = new DefaultImg();
+        $targetModel = new PublicImg();
     } else {
         $targetModel = new UserOwnImg();
     }
 
     // モデルに値をセットして保存
     $targetModel->owner_user_id = $owner_user_id;
-    $targetModel->name = pathinfo($fileDatas['name'], PATHINFO_FILENAME);
+    $targetModel->name = $fileDatas['name']; // 拡張子を除いたファイル名のみ取得
     $targetModel->img_path = $fileDatas['path'];
     $targetModel->img_url = $fileDatas['url'];
     $targetModel->save();

@@ -7,15 +7,15 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ログイン -->
-            <div class="header-content-wrapper" v-show="!(isLogin)">
+            <div class="header-content-wrapper" v-if="!($store.getters.getIsLogin)">
                 <a class="login header-content" href="/login">ログイン</a>
             </div>
             <!-- アカウント作成 -->
-            <div class="header-content-wrapper" v-show="!(isLogin)">
+            <div class="header-content-wrapper" v-if="!($store.getters.getIsLogin)">
                 <a class="signup header-content" href="/register">アカウント作成</a>
             </div>
             <!-- ログアウト -->
-            <div class="header-content-wrapper" v-show="isLogin">
+            <div class="header-content-wrapper" v-if="$store.getters.getIsLogin">
                 <a class="logout header-content" href="/logout"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">ログアウト
@@ -24,7 +24,7 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <div class="header-content-wrapper" v-show="isLogin">
+            <div class="header-content-wrapper" v-if="$store.getters.getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
@@ -52,7 +52,6 @@ export default {
     },
     props : [
         'csrf',
-        'isLogin',
     ],
     data : () => {
         return {

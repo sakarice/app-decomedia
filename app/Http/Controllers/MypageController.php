@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Room\RoomController;
 use App\Models\User;
-use App\Models\Room;
-use App\Models\Roomlist;
-use App\Lib\EditRoom;
-use App\Lib\RoomUtil;
+use App\Models\Media;
+use App\Models\Medialist;
+use App\Lib\EditMedia;
+use App\Lib\MediaUtil;
 
 use Storage;
 
@@ -17,8 +16,8 @@ class MypageController extends Controller
 {
     public function view(){
         $data = [
-            'createdRoomPreviewInfos' => RoomUtil::getCreatedRoomPreviewInfos(5)['createdRoomPreviewInfos'],
-            'likedRoomPreviewInfos' => RoomUtil::getLikedRoomPreviewInfos(5)['likedRoomPreviewInfos'],
+            'createdMediaPreviewInfos' => MediaUtil::getCreatedMediaPreviewInfos(5)['createdMediaPreviewInfos'],
+            'likedMediaPreviewInfos' => MediaUtil::getLikedMediaPreviewInfos(5)['likedMediaPreviewInfos'],
         ];
 
         return view('mypage.view', $data);

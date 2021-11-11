@@ -1,0 +1,110 @@
+
+#field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+
+  /* モーダル内の要素の配置 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#disp-modal-zone {
+  position: absolute;
+  top: 30%;
+  /* left: 0; */
+  z-index: 10;
+  width: 55px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#disp-modal-wrapper {
+  z-index: 1;
+  background-color:#333333;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-wrapper {
+  padding: 12px;
+}
+.icon-wrapper:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+#disp-img-modal-wrapper {
+  color:lightseagreen;
+}
+#disp-movie-modal-wrapper {
+  color: orangered;
+}
+#disp-audio-modal-wrapper {
+  color: gold;
+}
+#disp-media-setting-modal-wrapper {
+  color: lightgray;
+}
+
+
+.hidden {
+  display: none;
+}
+
+
+
+/* Modal表示アニメーション */
+.slide-in-enter-active, .slide-in-leave-active {
+transform: translate(0px, 0px);
+transition: all 400ms
+}
+
+.slide-in-enter, .slide-in-leave-to {
+transform: translateX(-100vw)
+}
+
+
+
+/* レスポンシブ対応用 */
+/* スマホ以外 */
+@media screen and (min-width: 481px) {
+  .for-mobile{
+    display: none;
+  }
+  #disp-modal-wrapper {
+    padding: 10px 5px 10px 15px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;  
+  }
+  #disp-modal-zone {
+    left: 0;
+  }
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  .for-pc-tablet {
+    display: none;
+  }
+  #disp-modal-wrapper {
+    padding: 10px 15px 10px 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;  
+  }
+  
+  #disp-modal-zone {
+    right: 0;
+  }
+}

@@ -36,7 +36,7 @@
             <!-- uploads -->
             <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
-              <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToRoom('user-own', index)">
+              <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToMedia('user-own', index)">
                 {{userOwnAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
@@ -51,7 +51,7 @@
             <!-- default -->
             <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
-              <span class="audio_name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToRoom('default', index)">
+              <span class="audio_name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToMedia('default', index)">
                 {{defaultAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
@@ -122,8 +122,8 @@ export default {
           alert('オーディオ取得失敗');
         })
     },
-    getDefaultAudios(){
-      const url = '/ajax/getDefaultAudios';
+    getPublicAudios(){
+      const url = '/ajax/getPublicAudios';
       axios.get(url)
         .then(response => {
           response.data.audios.forEach(audio => {
@@ -188,10 +188,10 @@ export default {
       this.playAudioType = "";
       this.playAudioIndex = -1;
     },
-    addAudioToRoom : function(type, index) {
+    addAudioToMedia : function(type, index) {
       // こちらのコンポーネントの配列をそのまま渡すと、
       // 参照渡しとなり、コンポーネント間で配列が同期され予期せぬ同差をしてしまう
-      // 配列の内容だけを、新しい配列にコピーして、room側に渡す。
+      // 配列の内容だけを、新しい配列にコピーして、media側に渡す。
       let tmpAudio;
       let audio_type;
       if(type == 'user-own'){
@@ -295,7 +295,7 @@ export default {
           this.loadingMessage = ''
           this.isLoading = false;
           // loading_icon.classList.remove('rotate');
-          // Roomオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
+          // Mediaオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
           // this.$emit('audio-thumbnail-del-notice', audioUrl);
         })
         .catch(error => {
@@ -321,7 +321,7 @@ export default {
   },
   mounted : function() {
     this.getUserOwnAudios();
-    this.getDefaultAudios();
+    this.getPublicAudios();
 
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
@@ -333,7 +333,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
   
   #audio-thumbnail-wrapper {
     /* モーダル内のオーディオサムネの配置 */

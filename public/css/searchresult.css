@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 
-#room-preview-wrapper {
+#media-preview-wrapper {
   width: 80%;
   display: flex;
   justify-content: left;
@@ -15,17 +15,17 @@ body {
 }
 
 
-.room-list {
+.media-list {
   position: relative;
   list-style: none;
   margin: 20px;
 }
 
-.room-id {
+.media-id {
   display: none;
 }
 
-.room-img {
+.media-img {
   width: 200px;
   height: 250px;
 }

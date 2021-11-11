@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
-use App\Models\Room;
+use App\Models\Media;
 
 use App\Lib\UserUtil;
 
@@ -47,13 +47,13 @@ class UserUtilTest extends TestCase
     }
 
 
-    // room所有者(=作成者)のユーザ情報を取得
-    public function test_getRoomOwnerData(){
-        $room_id = Room::factory()->create(['user_id'=> $this->user->id])->id;
-        $room_owner_user_id = Room::find($room_id)->user_id;
-        $user_data = UserUtil::getRoomOwnerData($room_id);
+    // media所有者(=作成者)のユーザ情報を取得
+    public function test_getMediaOwnerData(){
+        $media_id = Media::factory()->create(['user_id'=> $this->user->id])->id;
+        $media_owner_user_id = Media::find($media_id)->user_id;
+        $user_data = UserUtil::getMediaOwnerData($media_id);
         $this->assertDatabaseHas('users', [
-            'id' => $room_owner_user_id,
+            'id' => $media_owner_user_id,
         ]);
     }
 

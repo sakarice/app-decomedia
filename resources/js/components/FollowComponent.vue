@@ -10,7 +10,7 @@
 <script>
 export default{
   props: [
-    'roomOwnerId',
+    'mediaOwnerId',
   ],
   data : () => {
     return {
@@ -19,8 +19,8 @@ export default{
   },
   methods : {
     getFollowState(){
-      const room_owner_id = this.$parent.roomOwnerInfo['id'];
-      let url = '/user/followState/'+room_owner_id;
+      const media_owner_id = this.$parent.mediaOwnerInfo['id'];
+      let url = '/user/followState/'+media_owner_id;
       axios.get(url)
       .then(response => {
         this.isFollow = response.data.isFollow;
@@ -46,7 +46,7 @@ export default{
     },
     updateFollowStateInDB(){
       let url = '/user/follow';
-      const target_user_id = this.$parent.roomOwnerInfo['id'];
+      const target_user_id = this.$parent.mediaOwnerInfo['id'];
       let data = {
         'isFollow' : this.isFollow,
         'target_user_id' : target_user_id,
@@ -68,7 +68,7 @@ export default{
     }
   },
   watch : {
-    roomOwnerId: function(newVal,oldVal){ // 親コンポーネントのroomOwnerIdがdataにセットされるのを待つ
+    mediaOwnerId: function(newVal,oldVal){ // 親コンポーネントのmediaOwnerIdがdataにセットされるのを待つ
       if(newVal > 0){
         this.getFollowState();
       }
@@ -84,7 +84,7 @@ export default{
 
 <style>
 
-@import "../../css/roomEditModals.css";
+@import "../../css/mediaEditModals.css";
 
 .follow-button {
   background-color: rgba(0,0,0,1);

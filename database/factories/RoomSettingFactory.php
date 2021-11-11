@@ -2,19 +2,19 @@
 
 namespace Database\Factories;
 
-use App\Models\RoomSetting;
-use App\Models\Room;
+use App\Models\MediaSetting;
+use App\Models\Media;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomSettingFactory extends Factory
+class MediaSettingFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RoomSetting::class;
+    protected $model = MediaSetting::class;
 
     /**
      * Define the model's default state.
@@ -23,13 +23,13 @@ class RoomSettingFactory extends Factory
      */
     public function definition()
     {
-        $room_id = Room::max('id');
+        $media_id = Media::max('id');
 
-        $room_setting_data = [
-            'room_id' => $room_id,
+        $media_setting_data = [
+            'media_id' => $media_id,
             'open_state' => true,
-            'name' => "test_room",
-            'description' => "test_room_desu",
+            'name' => "test_media",
+            'description' => "test_media_desu",
             'finish_time' => 100,
             'is_show_img' => true,
             'is_show_movie' => true,
@@ -37,6 +37,6 @@ class RoomSettingFactory extends Factory
             'background_color' => '#FFFFFF'
         ];
 
-        return $room_setting_data;
+        return $media_setting_data;
     }
 }

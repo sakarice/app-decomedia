@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
 use App\Models\UserOwnImg;
-use App\Models\DefaultImg;
+use App\Models\PublicImg;
 
 use App\Lib\ImgUtil;
 
@@ -36,7 +36,7 @@ class ImgUtilTest extends TestCase
      */
 
 
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_saveImgData(){
         // 【準備】保存する画像ファイルの情報を作成
         $fileDatas = array(
@@ -49,8 +49,8 @@ class ImgUtilTest extends TestCase
         // パターン1 デフォルト画像
         // 1. 保存
         $saved_img_id = ImgUtil::saveImgData($fileDatas);
-        // 2. 検証：保存したレコードがDefaultImgテーブルに存在すること
-        $this->assertDatabaseHas('default_imgs',[
+        // 2. 検証：保存したレコードがPublicImgテーブルに存在すること
+        $this->assertDatabaseHas('public_imgs',[
             'id' => $saved_img_id,
             'owner_user_id' => NULL,
             'name' => "test",

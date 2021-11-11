@@ -9,12 +9,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Models\User;
-use App\Models\Room;
-use App\Models\UserLikeRoom;
+use App\Models\Media;
+use App\Models\UserLikeMedia;
 
-use App\Lib\LikeRoomUtil;
+use App\Lib\LikeMediaUtil;
 
-class LikeRoomUtilTest extends TestCase
+class LikeMediaUtilTest extends TestCase
 {
     // DBをクリア（各テスト毎にクリア）
     use RefreshDatabase;
@@ -35,33 +35,33 @@ class LikeRoomUtilTest extends TestCase
      * @return void
      */
 
-    // 引数として渡したルームIDと動画情報がDB保存されること。
+    // 引数として渡したメディアIDと動画情報がDB保存されること。
     public function test_updateLikeState(){
-        // 0. いいねするルームのidを作成
-        $room_id = mt_rand(1, 2147483647); // 適当なルームID
+        // 0. いいねするメディアのidを作成
+        $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // パターン1 いいねされた場合
         // 1. requestを送信
-        $response = $this->postJson('/room/like', [
+        $response = $this->postJson('/media/like', [
             'isLike' => true,
-            'room_id' => $room_id,
+            'media_id' => $media_id,
         ]);
-        // 2. 検証：いいねしたユーザとルームのレコードがDBに存在すること
-        $this->assertDatabaseHas('user_like_rooms',[
+        // 2. 検証：いいねしたユーザとメディアのレコードがDBに存在すること
+        $this->assertDatabaseHas('user_like_medias',[
             'user_id' => $this->user->id,
-            'room_id' => $room_id,
+            'media_id' => $media_id,
         ]);
 
         // パターン2 いいね解除された場合
         // 1. requestを送信
-        $response = $this->postJson('/room/like', [
+        $response = $this->postJson('/media/like', [
             'isLike' => false,
-            'room_id' => $room_id,
+            'media_id' => $media_id,
         ]);
-        // 2. 検証：いいね解除されたユーザとルームのレコードがDBから消えていること
-        $this->assertDatabaseMissing('user_like_rooms',[
+        // 2. 検証：いいね解除されたユーザとメディアのレコードがDBから消えていること
+        $this->assertDatabaseMissing('user_like_medias',[
             'user_id' => $this->user->id,
-            'room_id' => $room_id,
+            'media_id' => $media_id,
         ]);
     }
 

@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\RoomImg;
-use App\Models\Room;
-use App\Models\DefaultImg;
+use App\Models\MediaImg;
+use App\Models\Media;
+use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomImgFactory extends Factory
+class MediaImgFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = RoomImg::class;
+    protected $model = MediaImg::class;
 
     /**
      * Define the model's default state.
@@ -24,12 +24,12 @@ class RoomImgFactory extends Factory
      */
     public function definition()
     {
-        $room_id = Room::max('id');
+        $media_id = Media::max('id');
         $img_type = 1;
-        $img_id = DefaultImg::max('id');
+        $img_id = PublicImg::max('id');
 
-        $room_img_data = [
-            'room_id' => $room_id,
+        $media_img_data = [
+            'media_id' => $media_id,
             'img_type' => $img_type,
             'img_id' => $img_id,
             'width' => 500,
@@ -39,6 +39,6 @@ class RoomImgFactory extends Factory
             'img_layer' => 1,
         ];
 
-        return $room_img_data;
+        return $media_img_data;
     }
 }

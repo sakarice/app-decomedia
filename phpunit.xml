@@ -29,6 +29,6 @@
         <server name="TELESCOPE_ENABLED" value="false"/>
 
         <!-- テスト用のDB設定 -->
-        <server name="DB_DATABASE" value="room_test"/>
+        <server name="DB_DATABASE" value="media_test"/>
     </php>
 </phpunit>

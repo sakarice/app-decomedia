@@ -203,7 +203,7 @@ p {
   text-decoration: none;
 }
 
-.recently-posted-rooms {
+.recently-posted-medias {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -221,7 +221,7 @@ p {
   text-align: center;
 }
 
-.room-preview-wrapper {
+.media-preview-wrapper {
   display: flex;
   justify-content: center;
 }

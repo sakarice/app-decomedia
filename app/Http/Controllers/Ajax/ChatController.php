@@ -20,7 +20,7 @@ class ChatController extends Controller
     public function create(Request $request){
         $message = Chat::create([
             'user_id' => Auth::user()->id,
-            'room_id' => 1, 
+            'media_id' => 1, 
             'message' => $request->message
         ]);
         event(new MessageCreated($message));

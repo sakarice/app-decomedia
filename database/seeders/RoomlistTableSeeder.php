@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RoomlistTableSeeder extends Seeder
+class MedialistTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,8 +14,8 @@ class RoomlistTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\Roomlist::create([
-            'name' => 'test_roomlist'
+        \App\Models\Medialist::create([
+            'name' => 'test_medialist'
         ]);
     }
 }

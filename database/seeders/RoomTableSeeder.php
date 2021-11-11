@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RoomTableSeeder extends Seeder
+class MediaTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class RoomTableSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\Room::create([
+        \App\Models\Media::create([
             'user_id' => 1,
-            'name' => 'testRoom'
+            'name' => 'testMedia'
         ]);
     }
 }

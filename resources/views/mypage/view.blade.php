@@ -29,8 +29,8 @@
       <section style="height:90px"></section>
 
       <mypage-component
-        :created-room-preview-infos-from-parent='@json($createdRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'
-        :liked-room-preview-infos-from-parent='@json($likedRoomPreviewInfos,JSON_UNESCAPED_SLASHES)'>
+        :created-media-preview-infos-from-parent='@json($createdMediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
+        :liked-media-preview-infos-from-parent='@json($likedMediaPreviewInfos,JSON_UNESCAPED_SLASHES)'>
       </mypage-component>
 
     </div>
