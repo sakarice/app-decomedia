@@ -128,6 +128,7 @@ li {
   margin: 0 3px 5px 3px;
   opacity: 0.8;
   transition: 0.2s;
+  box-shadow: 1px 1px 2px dimgrey;
 }
 
 .preview-media:hover {
