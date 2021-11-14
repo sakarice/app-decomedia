@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <title>Decomedia</title>
+
 </head>
 <body>
     <section id="home-top">
@@ -54,41 +55,14 @@
             音量に注意してお楽しみください。
         </p>
     </section>
-    <section id="about-app">
-        {{-- <h2 id="about-app-header">
-            Mediaとは?
-        </h2>
-        <p class="about-app-description">
-            音楽、動画、画像を組み合わせて作る疑似空間です。<br>
-            誰かの作ったMediaを視聴したり、<br>
-            オリジナルのMediaを作って公開することができます。<br>
-            お気に入りの動画にBGMを付け加えたり、<br>
-            音楽に背景を付けて簡易MVにしたり、<br>
-            楽しみ方はあなた次第です。
-        </p> --}}
-        {{-- <h2 id="how-to-use-header">
-            使い方
-        </h2>
-        <div class="about-app-wrapper">
-            <div class="about-app about-watch left">
-                <h3 class="about-app-title">視聴</h3>
-                <p class="watch-description">多種多様なMediaから好みのMediaを見つけて視聴してみましょう</p>
-                <img class="about-app-img" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/how-to-use-app_watch.png" alt="">
-            </div>
-            <div class="about-app about-create right">
-                <h3 class="about-app-title">作成</h3>
-                <p class="create-description">音楽、動画、画像を組み合わせ、好みの空間を作りましょう。</p>
-                <img class="about-app-img" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/how-to-use-app_create.png" alt="">
-            </div>
-        </div> --}}
-    </section>
+
+    <section id="about-app"></section>
 
     <div id="app">
         {{-- ヘッダー --}}
         <header-component
         :csrf="{{json_encode(csrf_token())}}"
         :is-login=@json($isLogin)>
-        {{-- :is-show-profile-icon="false" --}}
         </header-component>
 
         {{-- Mediaの一覧を表示 --}}
@@ -105,11 +79,13 @@
                 </media-preview-component>
             </div>
         </section>
+
+        {{-- <router-link to="/home">ホームへ</router-link> --}}
+        <router-view></router-view>
+
     </div>
- 
 
-<script src="{{ mix('/js/app.js') }}"></script>
-
-    
+    <script src="{{ mix('/js/app.js') }}"></script>
+     
 </body>
 </html>

@@ -86,7 +86,16 @@ Route::middleware('auth')->group(function(){
 
 // Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/home', function(){
+        return view('home');
+    });
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// // ★vur-routerテスト用
+//     Route::get('/home/vue', function(){
+//         return view('vue');
+//     });
+
 // 検索結果
     Route::post('/media/show/search/result', 'App\Lib\SearchUtil@searchMedias');
 

@@ -1,6 +1,7 @@
 <template>
   <div id="test">
     <!-- <button class="button" v-on:click="showModal()">{{button_text}}</button> -->
+    testコンポーネントです。
   </div>
 </template>
 
@@ -13,12 +14,6 @@
       }
     },
     methods: {
-      openModal() {
-        this.showContent = true;
-      },
-      closeModal() {
-        this.showContent = false;
-      }
     }
   }
 </script>
