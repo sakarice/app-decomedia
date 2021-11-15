@@ -17,6 +17,7 @@ const { default: axios } = require('axios');
 const { default: Echo } = require('laravel-echo');
 const { functionsIn } = require('lodash');
 
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -89,21 +90,22 @@ Vue.component('cancel-button-component', require('./components/CancelButtonCompo
 Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);
 // mediaリスト作成用コンポーネント
 Vue.component('selected-media-delete-button-component', require('./components/SelectedMediaDeleteButtonComponent.vue').default);
+// オーバーレイコンポーネント
+Vue.component('overlay-component', require('./components/OverlayComponent.vue').default);
+// ローディング中に表示するコンポーネント
+Vue.component('loading-component', require('./components/LoadingComponent.vue').default);
 
 
 
 Vue.component('home-component', require('./components/HomeComponent.vue').default);
 
 
-// import router from './router.js';
-// Vue.component('TestComponent', require('./components/TestComponent.vue').default);
-// import Test from './components/TestComponent.vue';
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 
 // ログインチェック後にvueアプリを生成するため、起動処理をcreateApp関数にまとめ、最後に呼び出し
 const createApp = async() => {
