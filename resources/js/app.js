@@ -94,6 +94,8 @@ Vue.component('selected-media-delete-button-component', require('./components/Se
 Vue.component('overlay-component', require('./components/OverlayComponent.vue').default);
 // ローディング中に表示するコンポーネント
 Vue.component('loading-component', require('./components/LoadingComponent.vue').default);
+// マイページへの遷移ボタンコンポーネント
+Vue.component('to-mypage-button-component', require('./components/ToMypageButtonComponent.vue').default);
 
 
 

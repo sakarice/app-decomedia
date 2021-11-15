@@ -8,6 +8,7 @@
         <!-- 中央 -->
         <div class="header-block header-center">
             <cancel-button></cancel-button>
+            <to-mypage-button></to-mypage-button>
 
             <media-create-button v-if="isShowCreateButton"
             @create-media="createMedia">
@@ -19,13 +20,13 @@
 
             <a v-if="isShowLinkToShow" :href="mediaShowLink(mediaId)" class="action-trigger-wrapper link-to-show-media">
                 <div class="action-trigger goto-show-media-icon-wrapper">
-                    <i class="fas fa-door-open fa-2x goto-show-media-icon "></i>
+                    <i class="fas fa-door-open fa-lg goto-show-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">閲覧画面へ</span>
             </a>
             <a v-if="isShowLinkToEdit" :href="mediaEditLink(mediaId)" class="action-trigger-wrapper link-to-edit-media">
                 <div class="action-trigger goto-edit-media-icon-wrapper">
-                    <i class="fas fa-pen fa-2x goto-edit-media-icon "></i>
+                    <i class="fas fa-pen fa-lg goto-edit-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">編集画面へ</span>
             </a>
@@ -45,6 +46,7 @@
 <script>
 import HomeLink from './HomeLinkComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
+import ToMypageButton from './ToMypageButtonComponent.vue';
 import MediaCreateButton from './MediaCreateButtonComponent.vue';
 import MediaUpdateButton from './MediaUpdateButtonComponent.vue';
 
@@ -53,6 +55,7 @@ export default {
     components : {
         HomeLink,
         CancelButton,
+        ToMypageButton,
         MediaCreateButton,
         MediaUpdateButton,
     },

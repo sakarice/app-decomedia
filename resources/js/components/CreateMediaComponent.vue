@@ -108,6 +108,13 @@
     :mediaImgOpacity="mediaImg['opacity']">
     </media-setting-component>
 
+  <div v-show="isCreatingMedia">
+    <overlay-component></overlay-component>
+    <loading-component
+    :message="'メディアを保存中です...'">
+    </loading-component>
+  </div>
+
 
 
   </div>
@@ -123,6 +130,8 @@ import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import MediaMovie from './MediaMovieComponent.vue';
 import MediaCreateButton from './MediaCreateButtonComponent.vue';
+import Overlay from './OverlayComponent.vue'
+import Loading from './LoadingComponent.vue'
 
 export default {
   components : {
@@ -135,6 +144,8 @@ export default {
     MediaImg,
     MediaMovie,
     MediaCreateButton,
+    Overlay,
+    Loading,
   },
   props: [
     'mediaImgData',
@@ -147,6 +158,7 @@ export default {
       getReadyCreateMovieFrame : false,
       autoPlay : false,
       transitionName : 'slide-in',
+      isCreatingMedia : false,
       isShowModal : {
         'imgModal' : false,
         'audioModal' : false,
@@ -258,14 +270,17 @@ export default {
         'setting' : this.mediaSetting,
       }
       this.message = "media情報を保存中です...";
+      this.isCreatingMedia = true;
       axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
           this.message = "";
+          this.isCreatingMedia = false;
         })
         .catch(error => {            
           alert('failed!');
           this.message = "";
+          this.isCreatingMedia = false;
         })
 
     }

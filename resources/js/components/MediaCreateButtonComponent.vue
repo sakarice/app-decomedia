@@ -2,7 +2,7 @@
 
     <div class="action-trigger-wrapper">
       <div class="action-trigger create-icon-wrapper" @click="createMedia">
-        <i class="fas fa-check fa-2x create-icon"></i>
+        <i class="fas fa-check fa-lg create-icon"></i>
       </div>
       <span class="action-trigger-subtitle">作成</span>
 
