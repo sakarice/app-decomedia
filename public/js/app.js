@@ -56978,7 +56978,7 @@ var staticRenderFns = [
     return _c(
       "div",
       { staticClass: "action-trigger goto-show-media-icon-wrapper" },
-      [_c("i", { staticClass: "fas fa-door-open fa-lg goto-show-media-icon " })]
+      [_c("i", { staticClass: "fas fa-tv fa-lg goto-show-media-icon " })]
     )
   },
   function() {

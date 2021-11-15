@@ -20,7 +20,7 @@
 
             <a v-if="isShowLinkToShow" :href="mediaShowLink(mediaId)" class="action-trigger-wrapper link-to-show-media">
                 <div class="action-trigger goto-show-media-icon-wrapper">
-                    <i class="fas fa-door-open fa-lg goto-show-media-icon "></i>
+                    <i class="fas fa-tv fa-lg goto-show-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">閲覧画面へ</span>
             </a>
