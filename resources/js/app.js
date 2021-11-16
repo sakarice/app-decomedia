@@ -111,7 +111,7 @@ Vue.component('home-component', require('./components/HomeComponent.vue').defaul
 
 // ログインチェック後にvueアプリを生成するため、起動処理をcreateApp関数にまとめ、最後に呼び出し
 const createApp = async() => {
-    await store.dispatch('checkIsLogin');
+    await store.dispatch('loginState/checkIsLogin');
 
     const app = new Vue({
         el : '#app',

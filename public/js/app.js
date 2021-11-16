@@ -6613,7 +6613,7 @@ var createApp = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('checkIsLogin');
+            return _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('loginState/checkIsLogin');
 
           case 2:
             app = new vue__WEBPACK_IMPORTED_MODULE_3__.default({
@@ -6742,34 +6742,50 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
+  modules: {
+    loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__.default
+  }
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/loginState.js":
+/*!**************************************************!*\
+  !*** ./resources/js/store/modules/loginState.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _modules_storeA_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/storeA.js */ "./resources/js/store/modules/storeA.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-
-
-
-
-vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.default);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
+var loginState = {
+  namespaced: true,
   state: {
-    isLogin: false,
-    storeA: _modules_storeA_js__WEBPACK_IMPORTED_MODULE_2__.default
+    isLogin: false
   },
-  getters: {
-    getIsLogin: function getIsLogin(state) {
-      return state.isLogin;
-    }
-  },
+  getters: {},
   mutations: {
     setIsLogin: function setIsLogin(state, payload) {
       state.isLogin = payload;
@@ -6784,7 +6800,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('/checkIsLogin');
+                return axios.get('/checkIsLogin');
 
               case 2:
                 res = _context.sent;
@@ -6800,26 +6816,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
       }))();
     }
   }
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/storeA.js":
-/*!**********************************************!*\
-  !*** ./resources/js/store/modules/storeA.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  namespaced: true,
-  message: 'hello first vuex message!'
-});
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loginState);
 
 /***/ }),
 
