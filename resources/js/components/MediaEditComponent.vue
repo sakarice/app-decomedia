@@ -13,11 +13,6 @@
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :mediaImgUrl="mediaImg['url']"
-     :mediaImgWidth="mediaImg['width'] + 'px'"
-     :mediaImgHeight="mediaImg['height'] + 'px'"
-     :mediaImgOpacity="mediaImg['opacity']"
-     :mediaImgLayer="mediaImg['layer']"
      :isShowMediaImg="mediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="mediaImg">
@@ -68,7 +63,6 @@
     <img-select-component 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
-    v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
     </img-select-component>
 
@@ -102,10 +96,7 @@
     :mediaName="mediaSetting['name']"
     :mediaDescription="mediaSetting['description']"
     :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
-    :isShowMediaImg="mediaSetting['isShowImg']"
-    :mediaImgWidth="mediaImg['width']"
-    :mediaImgHeight="mediaImg['height']"
-    :mediaImgOpacity="mediaImg['opacity']">
+    :isShowMediaImg="mediaSetting['isShowImg']">
     </media-setting-component>
 
 
@@ -113,6 +104,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations} from 'vuex';
 import MediaHeader from './MediaHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
@@ -150,15 +142,6 @@ export default {
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
-      mediaImg : {
-        'type' : "",
-        'id' : "",
-        'url' : "",
-        'width' : 500,
-        'height' : 500,
-        'opacity' : 1,
-        'layer' : 0,
-      },
       mediaMovie : {
         'videoId' : "",
         'width' : "500",
@@ -183,19 +166,20 @@ export default {
 
     }
   },
+  computed : {
+    ...mapGetters('mediaImg', ['getMediaImg']),
+  },
   methods : {
+    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     // ●Media読み込み時の初期化処理
-
     initImg(){
-      // this.mediaImg['url'] = this.mediaImgData.url;
       let tmpImgData = JSON.parse(this.mediaImgData);
-      this.mediaImg['type'] = tmpImgData.type;
-      this.mediaImg['id'] = tmpImgData.id;
-      this.mediaImg['url'] = tmpImgData.url;
-      this.mediaImg['width'] = tmpImgData.width;
-      this.mediaImg['height'] = tmpImgData.height;
-      this.mediaImg['opacity'] = tmpImgData.opacity;
-      this.mediaImg['layer'] = tmpImgData.layer;
+      const mediaImgKeys = [
+        'type','id','url','width','height','opacity','layer'
+      ];
+      mediaImgKeys.forEach(mediaImgKey => {
+        this.updateMediaImgObjectItem({key:mediaImgKey, value:tmpImgData[mediaImgKey]});
+      });
     },
     initMovie(){
       let tmpMovieData = JSON.parse(this.mediaMovieData);
@@ -286,7 +270,7 @@ export default {
       this.getFinishTime();
       const url = '/media/update';
       let media_datas = {
-        'img' : this.mediaImg,
+        'img' : this.getMediaImg,
         'audios' : this.mediaAudios,
         'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,

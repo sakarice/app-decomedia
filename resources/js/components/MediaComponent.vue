@@ -12,11 +12,6 @@
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :mediaImgUrl="mediaImg['url']"
-     :mediaImgWidth="mediaImg['width'] + 'px'"
-     :mediaImgHeight="mediaImg['height'] + 'px'"
-     :mediaImgOpacity="mediaImg['opacity']"
-     :mediaImgLayer="mediaImg['layer']"
      :isShowMediaImg="mediaSetting['isShowImg']"
       ref="mediaImg">
     </media-img-component>
@@ -80,8 +75,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
+import { mapGetters, mapMutations} from 'vuex';
 import MediaHeader from './MediaHeaderComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
@@ -122,15 +116,6 @@ export default {
         'mediaOwnerInfo' : false,
         'mediaInfoModal' : false,
       },
-      mediaImg : {
-        'type' : "",
-        'id' : "",
-        'url' : "",
-        'width' : 500,
-        'height' : 500,
-        'opacity' : 1,
-        'layer' : 0,
-      },
       mediaMovie : {
         'videoId' : "",
         'width' : "500",
@@ -157,8 +142,10 @@ export default {
   },
   computed : {
     ...mapGetters('loginState', ['getIsLogin']),
+    ...mapGetters('mediaImg', ['getMediaImg']),
   },
   methods : {
+    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     judgeIsMyMedia(){
       let media_id = JSON.parse(this.mediaSettingData).id;
       let url = '/ajax/judgeIsMyMedia/' + media_id;
@@ -189,15 +176,13 @@ export default {
       }
     },
     initImg(){
-      // this.mediaImg['url'] = this.mediaImgData.url;
       let tmpImgData = JSON.parse(this.mediaImgData);
-      this.mediaImg['type'] = tmpImgData.type;
-      this.mediaImg['id'] = tmpImgData.id;
-      this.mediaImg['url'] = tmpImgData.url;
-      this.mediaImg['width'] = tmpImgData.width;
-      this.mediaImg['height'] = tmpImgData.height;
-      this.mediaImg['opacity'] = tmpImgData.opacity;
-      this.mediaImg['layer'] = tmpImgData.layer;
+      const mediaImgKeys = [
+        'type','id','url','width','height','opacity','layer'
+      ];
+      mediaImgKeys.forEach(mediaImgKey => {
+        this.updateMediaImgObjectItem({key:mediaImgKey, value:tmpImgData[mediaImgKey]});
+      });
     },
     initMovie(){
       let tmpMovieData = JSON.parse(this.mediaMovieData);

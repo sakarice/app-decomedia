@@ -165,15 +165,6 @@ export default {
         'isShowMovie' : false,
         'maxAudioNum' : 5,
       },
-      // mediaImg : {
-      //   'type' : 0,
-      //   'id' : 0,
-      //   'url' : "",
-      //   'width' : 500,
-      //   'height' : 500,
-      //   'opacity' : 1,
-      //   'layer' : 0,
-      // },
       mediaMovie : {
         'videoId' : "",
         'width' : "500",
