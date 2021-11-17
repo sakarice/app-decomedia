@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 
 import Follow from './FollowComponent.vue';
 
@@ -94,9 +95,10 @@ import Follow from './FollowComponent.vue';
     },
     watch : {},
     computed : {
+      ...mapGetters('loginState', ['getIsLogin']),
       isShowFollow: function(){
         // ログインしていて自分のルームでなければフォローアイコンを表示
-        return this.$store.getters.getIsLogin && !(this.isMyMedia);
+        return this.getIsLogin && !(this.isMyMedia);
       },
     }
 

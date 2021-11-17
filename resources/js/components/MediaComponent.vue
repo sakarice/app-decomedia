@@ -40,7 +40,7 @@
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="$store.getters.getIsLogin && !(isMyMedia)">
+        <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="getIsLogin && !(isMyMedia)">
           <like-media-component
           :mediaId="mediaSetting['id']">
           </like-media-component>
@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import MediaHeader from './MediaHeaderComponent.vue';
 import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
@@ -152,6 +154,9 @@ export default {
 
 
     }
+  },
+  computed : {
+    ...mapGetters('loginState', ['getIsLogin']),
   },
   methods : {
     judgeIsMyMedia(){
@@ -237,7 +242,7 @@ export default {
 
   },
   created() {
-    if(this.$store.getters.getIsLogin){ this.judgeIsMyMedia(); }
+    if(this.getIsLogin){ this.judgeIsMyMedia(); }
   },
   mounted() {
     this.initImg();

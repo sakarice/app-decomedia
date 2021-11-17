@@ -2479,6 +2479,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaHeaderComponent.vue */ "./resources/js/components/MediaHeaderComponent.vue");
 /* harmony import */ var _ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue");
 /* harmony import */ var _AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
@@ -2490,6 +2491,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MediaCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./MediaCreateButtonComponent.vue */ "./resources/js/components/MediaCreateButtonComponent.vue");
 /* harmony import */ var _OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./OverlayComponent.vue */ "./resources/js/components/OverlayComponent.vue");
 /* harmony import */ var _LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2601,17 +2608,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -2662,15 +2659,15 @@ __webpack_require__.r(__webpack_exports__);
         'isShowMovie': false,
         'maxAudioNum': 5
       },
-      mediaImg: {
-        'type': 0,
-        'id': 0,
-        'url': "",
-        'width': 500,
-        'height': 500,
-        'opacity': 1,
-        'layer': 0
-      },
+      // mediaImg : {
+      //   'type' : 0,
+      //   'id' : 0,
+      //   'url' : "",
+      //   'width' : 500,
+      //   'height' : 500,
+      //   'opacity' : 1,
+      //   'layer' : 0,
+      // },
       mediaMovie: {
         'videoId': "",
         'width': "500",
@@ -2682,6 +2679,7 @@ __webpack_require__.r(__webpack_exports__);
       mediaAudios: []
     };
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaImg', ['getMediaImg'])),
   methods: {
     showModal: function showModal(target) {
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
@@ -2701,24 +2699,6 @@ __webpack_require__.r(__webpack_exports__);
       for (var key in this.isShowModal) {
         this.isShowModal[key] = false;
       }
-    },
-    setMediaImgUrl: function setMediaImgUrl(type, id, url) {
-      this.mediaImg['type'] = type;
-      this.mediaImg['id'] = id;
-      this.mediaImg['url'] = url;
-      this.mediaSetting['isShowImg'] = true;
-    },
-    judgeDelImg: function judgeDelImg(url) {
-      if (this.mediaImg['url'] == url) {
-        this.mediaImg['type'] = 0;
-        this.mediaImg['id'] = 0;
-        this.mediaImg['url'] = "";
-      }
-    },
-    deleteMediaImg: function deleteMediaImg() {
-      this.mediaImg['type'] = 0;
-      this.mediaImg['id'] = 0;
-      this.mediaImg['url'] = "";
     },
     addAudio: function addAudio(audio) {
       this.$refs.mediaAudio.addAudio(audio);
@@ -2753,7 +2733,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/media/store';
       var tmpThis = this;
       var media_datas = {
-        'img': this.mediaImg,
+        'img': this.getMediaImg,
         'audios': this.mediaAudios,
         'movie': this.mediaMovie,
         'setting': this.mediaSetting
@@ -3034,8 +3014,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _ProfileComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ProfileComponent.vue */ "./resources/js/components/ProfileComponent.vue");
 /* harmony import */ var _HomeLinkComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HomeLinkComponent.vue */ "./resources/js/components/HomeLinkComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3079,6 +3066,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -3092,6 +3080,7 @@ __webpack_require__.r(__webpack_exports__);
       isShowProfile: false
     };
   },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapState)('loginState', ['isLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('loginState', ['getIsLogin'])),
   methods: {
     // toUserProfile : function(){
     //     console.log("/users/"+this.userInfo['userId']);
@@ -3177,6 +3166,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -3189,6 +3179,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3249,6 +3245,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName'],
   data: function data() {
@@ -3266,7 +3263,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     };
   },
-  methods: {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['checkMediaImg'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
 
@@ -3324,7 +3322,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
-      this.$emit('set-media-img', imgType, imgId, imgUrl);
+      this.updateMediaImgContent({
+        type: imgType,
+        id: imgId,
+        url: imgUrl
+      });
     },
     findImgIdTiedUpWithUrl: function findImgIdTiedUpWithUrl(imgType, imgUrl) {
       var targetModel; // 検索対象のVueモデル
@@ -3400,7 +3402,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       var index = event.target.parentNode.parentNode.getAttribute('id');
       var imgUrl = this.userOwnImgs[index]['url'];
-      var imgId = this.findImgIdTiedUpWithUrl('1', imgUrl);
+      var imgId = this.findImgIdTiedUpWithUrl(2, imgUrl);
       var url = '/ajax/deleteImg';
       var params = {
         'imgId': +imgId,
@@ -3417,14 +3419,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         _this4.loadingMessage = '';
         _this4.isLoading = false; // Media画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
 
-        _this4.$emit('img-del-notice', imgUrl);
+        if (_this4.getMediaImg['url'] == imgUrl) {
+          _this4.updateMediaImgContent({
+            type: 0,
+            id: 0,
+            url: ""
+          });
+        }
       })["catch"](function (error) {
         alert('画像削除失敗');
         _this4.loadingMessage = '';
         _this4.isLoading = false;
       });
     }
-  },
+  }),
   mounted: function mounted() {
     this.getUserOwnImgs();
     this.getDefaultImgs();
@@ -3854,6 +3862,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaHeaderComponent.vue */ "./resources/js/components/MediaHeaderComponent.vue");
 /* harmony import */ var _MediaAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MediaAudioComponent.vue */ "./resources/js/components/MediaAudioComponent.vue");
 /* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
@@ -3862,6 +3871,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaInfoComponent.vue */ "./resources/js/components/MediaInfoComponent.vue");
 /* harmony import */ var _MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MediaOwnerInfoComponent.vue */ "./resources/js/components/MediaOwnerInfoComponent.vue");
 /* harmony import */ var _LikeMediaComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./LikeMediaComponent.vue */ "./resources/js/components/LikeMediaComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3943,6 +3958,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -4007,6 +4023,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_8__.mapGetters)('loginState', ['getIsLogin'])),
   methods: {
     judgeIsMyMedia: function judgeIsMyMedia() {
       var _this = this;
@@ -4094,7 +4111,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    if (this.$store.getters.getIsLogin) {
+    if (this.getIsLogin) {
       this.judgeIsMyMedia();
     }
   },
@@ -4196,8 +4213,6 @@ var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
 //
 //
 //
@@ -4450,24 +4465,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.isShowModal[key] = false;
       }
     },
-    setMediaImgUrl: function setMediaImgUrl(type, id, url) {
-      this.mediaImg['type'] = type;
-      this.mediaImg['id'] = id;
-      this.mediaImg['url'] = url;
-      this.mediaSetting['isShowImg'] = true;
-    },
-    judgeDelImg: function judgeDelImg(url) {
-      if (this.mediaImg['url'] == url) {
-        this.mediaImg['type'] = "";
-        this.mediaImg['id'] = "";
-        this.mediaImg['url'] = "";
-      }
-    },
-    deleteMediaImg: function deleteMediaImg() {
-      this.mediaImg['type'] = 0;
-      this.mediaImg['id'] = 0;
-      this.mediaImg['url'] = "";
-    },
     addAudio: function addAudio(audio) {
       this.$refs.mediaAudio.addAudio(audio);
     },
@@ -4651,6 +4648,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4670,17 +4674,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['mediaImgUrl', 'mediaImgWidth', 'mediaImgHeight', 'mediaImgLayer', 'mediaImgOpacity', 'isShowMediaImg'],
-  data: function data() {
-    return {// frameSize : {
-      //   width : "300px",
-      //   height : "300px"
-      // },
-    };
-  },
-  methods: {},
-  mounted: function mounted() {}
+  props: ['isShowMediaImg'],
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), {}, {
+    // ↓storeの値には単位[px]が付いてないので追加する
+    mediaImgWidth: function mediaImgWidth() {
+      return this.$store.getters['mediaImg/getMediaImg']['width'] + "px";
+    },
+    mediaImgHeight: function mediaImgHeight() {
+      return this.$store.getters['mediaImg/getMediaImg']['height'] + "px";
+    }
+  })
 });
 
 /***/ }),
@@ -5076,7 +5081,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _FollowComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FollowComponent.vue */ "./resources/js/components/FollowComponent.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5114,6 +5126,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -5167,12 +5180,12 @@ __webpack_require__.r(__webpack_exports__);
     this.checkIsMyMedia();
   },
   watch: {},
-  computed: {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('loginState', ['getIsLogin'])), {}, {
     isShowFollow: function isShowFollow() {
       // ログインしていて自分のルームでなければフォローアイコンを表示
-      return this.$store.getters.getIsLogin && !this.isMyMedia;
+      return this.getIsLogin && !this.isMyMedia;
     }
-  }
+  })
 });
 
 /***/ }),
@@ -5290,6 +5303,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5355,6 +5375,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName', 'isPublic', 'mediaName', 'mediaDescription', 'mediaBackgroundColor', 'isShowMediaImg', 'mediaImgWidth', 'mediaImgHeight', 'mediaImgOpacity'],
   data: function data() {
@@ -5363,7 +5384,16 @@ __webpack_require__.r(__webpack_exports__);
       window_height: ""
     };
   },
-  methods: {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), {}, {
+    showPublicState: function showPublicState() {
+      if (this.isPublic) {
+        return '公開（他のユーザも検索・閲覧できます）';
+      } else if (!this.isPublic) {
+        return '非公開（他のユーザは検索・閲覧できません）';
+      }
+    }
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -5372,20 +5402,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateMediaDescription: function updateMediaDescription(event) {
       this.$parent.mediaSetting['description'] = event.target.value;
-    },
-    updateImg: function updateImg(event) {
-      var value = event.target.value; // 横幅、高さ、透過度の値
-
-      var type = event.target.dataset.inputType; // widthかheightかopacity
-
-      if (type == 'width') {
-        this.$parent.mediaImg['width'] = value;
-      } else if (type == 'height') {
-        this.$parent.mediaImg['height'] = value;
-      } else if (type == 'opacity') {
-        this.$parent.mediaImg['opacity'] = value;
-      } // this.$emit('resize-img', value, type);
-
     },
     updateMediaBgColor: function updateMediaBgColor(event) {
       // カラーピッカーの変更に、Media背景色を同期させて即反映
@@ -5401,7 +5417,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     deleteMediaImg: function deleteMediaImg() {
-      this.$emit('delete-media-img');
+      this.updateMediaImgContent({
+        type: 0,
+        id: 0,
+        url: ""
+      });
     },
     changePublicState: function changePublicState() {
       if (this.isPublic) {
@@ -5410,19 +5430,10 @@ __webpack_require__.r(__webpack_exports__);
         this.$parent.mediaSetting['isPublic'] = true;
       }
     }
-  },
+  }),
   mounted: function mounted() {
     this.window_width = window.innerWidth;
     this.window_height = window.innerHeight;
-  },
-  computed: {
-    showPublicState: function showPublicState() {
-      if (this.isPublic) {
-        return '公開（他のユーザも検索・閲覧できます）';
-      } else if (!this.isPublic) {
-        return '非公開（他のユーザは検索・閲覧できません）';
-      }
-    }
   },
   watch: {}
 });
@@ -5944,6 +5955,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -5978,6 +5996,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -6046,10 +6065,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {},
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])),
   mounted: function mounted() {
     var _this3 = this;
 
-    if (this.$store.getters.getIsLogin) {
+    if (this.getIsLogin) {
       var promise = new Promise(function (resolve, reject) {
         _this3.getProfile(); // プロフィールの初期値を取得
 
@@ -6744,17 +6764,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
+/* harmony import */ var _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mediaImg.js */ "./resources/js/store/modules/mediaImg.js");
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.default);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_4__.default.Store({
   modules: {
-    loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__.default
+    loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__.default,
+    mediaImg: _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_2__.default
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -6785,7 +6808,11 @@ var loginState = {
   state: {
     isLogin: false
   },
-  getters: {},
+  getters: {
+    getIsLogin: function getIsLogin(state) {
+      return state.isLogin;
+    }
+  },
   mutations: {
     setIsLogin: function setIsLogin(state, payload) {
       state.isLogin = payload;
@@ -6818,6 +6845,56 @@ var loginState = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loginState);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/mediaImg.js":
+/*!************************************************!*\
+  !*** ./resources/js/store/modules/mediaImg.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+var mediaImg = {
+  namespaced: true,
+  state: {
+    mediaImg: {
+      type: 0,
+      id: 0,
+      url: "",
+      width: 500,
+      height: 500,
+      opacity: 1,
+      layer: 0
+    }
+  },
+  getters: {
+    getMediaImg: function getMediaImg(state) {
+      return state.mediaImg;
+    }
+  },
+  mutations: {
+    updateMediaImgContent: function updateMediaImgContent(state, _ref) {
+      var type = _ref.type,
+          id = _ref.id,
+          url = _ref.url;
+      state.mediaImg['type'] = type;
+      state.mediaImg['id'] = id;
+      state.mediaImg['url'] = url;
+    },
+    updateMediaImgObjectItem: function updateMediaImgObjectItem(state, _ref2) {
+      var key = _ref2.key,
+          value = _ref2.value;
+      state.mediaImg[key] = value;
+    }
+  },
+  actions: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaImg);
 
 /***/ }),
 
@@ -11670,7 +11747,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* img */\n#media-img-wrapper[data-v-34d61ca3] {\n  pointer-events: none;\n}\n#media-img-frame[data-v-34d61ca3] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  /* border: 2px;\n  border-style: dotted;\n  border-color: cadetblue; */\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-img-wrapper[data-v-34d61ca3] {\n  pointer-events: none;\n}\n#media-img-frame[data-v-34d61ca3] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -55120,14 +55197,7 @@ var render = function() {
       _vm._v(" "),
       _c("media-img-component", {
         ref: "mediaImg",
-        attrs: {
-          mediaImgUrl: _vm.mediaImg["url"],
-          mediaImgWidth: _vm.mediaImg["width"] + "px",
-          mediaImgHeight: _vm.mediaImg["height"] + "px",
-          mediaImgLayer: _vm.mediaImg["layer"],
-          mediaImgOpacity: _vm.mediaImg["opacity"],
-          isShowMediaImg: _vm.mediaSetting["isShowImg"]
-        },
+        attrs: { isShowMediaImg: _vm.mediaSetting["isShowImg"] },
         on: { "parent-action": _vm.showModal }
       }),
       _vm._v(" "),
@@ -55233,11 +55303,7 @@ var render = function() {
           }
         ],
         attrs: { transitionName: _vm.transitionName },
-        on: {
-          "close-modal": _vm.closeModal,
-          "set-media-img": _vm.setMediaImgUrl,
-          "img-del-notice": _vm.judgeDelImg
-        }
+        on: { "close-modal": _vm.closeModal }
       }),
       _vm._v(" "),
       _c("audio-select-component", {
@@ -55294,15 +55360,9 @@ var render = function() {
           mediaName: _vm.mediaSetting["name"],
           mediaDescription: _vm.mediaSetting["description"],
           mediaBackgroundColor: _vm.mediaSetting["mediaBackgroundColor"],
-          isShowMediaImg: _vm.mediaSetting["isShowImg"],
-          mediaImgWidth: _vm.mediaImg["width"],
-          mediaImgHeight: _vm.mediaImg["height"],
-          mediaImgOpacity: _vm.mediaImg["opacity"]
+          isShowMediaImg: _vm.mediaSetting["isShowImg"]
         },
-        on: {
-          "close-modal": _vm.closeModal,
-          "delete-media-img": _vm.deleteMediaImg
-        }
+        on: { "close-modal": _vm.closeModal }
       }),
       _vm._v(" "),
       _c(
@@ -55562,7 +55622,7 @@ var render = function() {
       "div",
       { staticClass: "header-right" },
       [
-        !_vm.$store.getters.getIsLogin
+        !_vm.getIsLogin
           ? _c("div", { staticClass: "header-content-wrapper" }, [
               _c(
                 "a",
@@ -55575,7 +55635,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        !_vm.$store.getters.getIsLogin
+        !_vm.getIsLogin
           ? _c("div", { staticClass: "header-content-wrapper" }, [
               _c(
                 "a",
@@ -55588,7 +55648,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.$store.getters.getIsLogin
+        _vm.getIsLogin
           ? _c("div", { staticClass: "header-content-wrapper" }, [
               _c(
                 "a",
@@ -55623,7 +55683,7 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.$store.getters.getIsLogin
+        _vm.getIsLogin
           ? _c("div", { staticClass: "header-content-wrapper" }, [
               _c(
                 "a",
@@ -56496,7 +56556,7 @@ var render = function() {
         { attrs: { id: "disp-modal-zone" }, on: { click: _vm.closeModal } },
         [
           _c("div", { attrs: { id: "disp-modal-wrapper" } }, [
-            _vm.$store.getters.getIsLogin && !_vm.isMyMedia
+            _vm.getIsLogin && !_vm.isMyMedia
               ? _c(
                   "div",
                   {
@@ -56793,11 +56853,7 @@ var render = function() {
           }
         ],
         attrs: { transitionName: _vm.transitionName },
-        on: {
-          "close-modal": _vm.closeModal,
-          "set-media-img": _vm.setMediaImgUrl,
-          "img-del-notice": _vm.judgeDelImg
-        }
+        on: { "close-modal": _vm.closeModal, "img-del-notice": _vm.judgeDelImg }
       }),
       _vm._v(" "),
       _c("audio-select-component", {
@@ -56859,10 +56915,7 @@ var render = function() {
           mediaImgHeight: _vm.mediaImg["height"],
           mediaImgOpacity: _vm.mediaImg["opacity"]
         },
-        on: {
-          "close-modal": _vm.closeModal,
-          "delete-media-img": _vm.deleteMediaImg
-        }
+        on: { "close-modal": _vm.closeModal }
       })
     ],
     1
@@ -57015,7 +57068,7 @@ var render = function() {
   return _c(
     "div",
     {
-      style: { "z-index": _vm.mediaImgLayer },
+      style: { "z-index": _vm.getMediaImg["layer"] },
       attrs: { id: "media-img-wrapper" }
     },
     [
@@ -57033,7 +57086,7 @@ var render = function() {
           style: {
             width: _vm.mediaImgWidth,
             height: _vm.mediaImgHeight,
-            opacity: _vm.mediaImgOpacity
+            opacity: _vm.getMediaImg["opacity"]
           },
           attrs: { id: "media-img-frame" },
           on: {
@@ -57048,8 +57101,8 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: !_vm.mediaImgUrl,
-                expression: "!(mediaImgUrl)"
+                value: !_vm.getMediaImg["url"],
+                expression: "!(getMediaImg['url'])"
               }
             ]
           }),
@@ -57059,18 +57112,18 @@ var render = function() {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.mediaImgUrl,
-                expression: "mediaImgUrl"
+                value: _vm.getMediaImg["url"],
+                expression: "getMediaImg['url']"
               }
             ],
             style: {
               width: _vm.mediaImgWidth,
               height: _vm.mediaImgHeight,
-              opacity: _vm.mediaImgOpacity
+              opacity: _vm.getMediaImg["opacity"]
             },
             attrs: {
               id: "media-img",
-              src: _vm.mediaImgUrl,
+              src: _vm.getMediaImg["url"],
               alt: "画像が選択されていません"
             }
           })
@@ -57840,8 +57893,15 @@ var render = function() {
                   size: "5",
                   placeholder: "横幅"
                 },
-                domProps: { value: _vm.mediaImgWidth },
-                on: { input: _vm.updateImg }
+                domProps: { value: _vm.getMediaImg["width"] },
+                on: {
+                  input: function($event) {
+                    return _vm.updateMediaImgObjectItem({
+                      key: "width",
+                      value: $event.target.value
+                    })
+                  }
+                }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("[px] 横幅")]),
@@ -57858,8 +57918,15 @@ var render = function() {
                   size: "5",
                   placeholder: "縦幅"
                 },
-                domProps: { value: _vm.mediaImgHeight },
-                on: { input: _vm.updateImg }
+                domProps: { value: _vm.getMediaImg["height"] },
+                on: {
+                  input: function($event) {
+                    return _vm.updateMediaImgObjectItem({
+                      key: "height",
+                      value: $event.target.value
+                    })
+                  }
+                }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("[px] 縦幅")]),
@@ -57876,8 +57943,15 @@ var render = function() {
                   size: "5",
                   placeholder: "透明度"
                 },
-                domProps: { value: _vm.mediaImgOpacity },
-                on: { input: _vm.updateImg }
+                domProps: { value: _vm.getMediaImg["opacity"] },
+                on: {
+                  input: function($event) {
+                    return _vm.updateMediaImgObjectItem({
+                      key: "opacity",
+                      value: $event.target.value
+                    })
+                  }
+                }
               }),
               _vm._v(" "),
               _c("span", [_vm._v("透明度(0～1)")]),

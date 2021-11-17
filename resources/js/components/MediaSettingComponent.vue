@@ -37,11 +37,11 @@
 
           <div id="media-img-setting-wrapper" class="setting">
             <p class="setting-title">Media画像</p>
-            <input data-input-type="width" class="img-config-input" :value="mediaImgWidth" @input="updateImg" type="text" size="5" placeholder="横幅">
+            <input data-input-type="width" class="img-config-input" :value="getMediaImg['width']" @input="updateMediaImgObjectItem({ key:'width' ,value:$event.target.value})" type="text" size="5" placeholder="横幅">
             <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input data-input-type="height" class="img-config-input" :value="mediaImgHeight" @input="updateImg" type="text" size="5" placeholder="縦幅">
+            <input data-input-type="height" class="img-config-input" :value="getMediaImg['height']" @input="updateMediaImgObjectItem({ key:'height' ,value:$event.target.value})" type="text" size="5" placeholder="縦幅">
             <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
-            <input data-input-type="opacity" class="img-config-input" :value="mediaImgOpacity" @input="updateImg" type="text" size="5" placeholder="透明度">
+            <input data-input-type="opacity" class="img-config-input" :value="getMediaImg['opacity']" @input="updateMediaImgObjectItem({ key:'opacity' ,value:$event.target.value})" type="text" size="5" placeholder="透明度">
             <span>透明度(0～1)</span><br>
             <button v-on:click="toggleMediaImg">
               <span v-show="isShowMediaImg">非表示</span>
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   props : [
     'transitionName',
@@ -82,7 +83,19 @@ export default {
       window_height : "",
     }
   },
+  computed :  {
+    ...mapGetters('mediaImg',['getMediaImg']),
+    showPublicState : function(){
+      if(this.isPublic){
+        return '公開（他のユーザも検索・閲覧できます）'
+      } else if(!(this.isPublic)){
+        return '非公開（他のユーザは検索・閲覧できません）'
+      }
+    }
+  },  
   methods : {
+    ...mapMutations('mediaImg', ['updateMediaImgContent']),
+    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     closeModal() {
       this.$emit('close-modal');
     },
@@ -91,18 +104,6 @@ export default {
     },
     updateMediaDescription(event) {
       this.$parent.mediaSetting['description'] = event.target.value;
-    },
-    updateImg(event){
-      let value = event.target.value; // 横幅、高さ、透過度の値
-      let type = event.target.dataset.inputType; // widthかheightかopacity
-      if(type == 'width'){
-        this.$parent.mediaImg['width'] = value;
-      } else if(type == 'height'){
-        this.$parent.mediaImg['height'] = value;
-      } else if(type == 'opacity'){
-        this.$parent.mediaImg['opacity'] = value;
-      }
-      // this.$emit('resize-img', value, type);
     },
     updateMediaBgColor(event){ // カラーピッカーの変更に、Media背景色を同期させて即反映
       let value = event.target.value;
@@ -116,7 +117,7 @@ export default {
       }
     },
     deleteMediaImg(){
-      this.$emit('delete-media-img');
+      this.updateMediaImgContent({type:0, id:0, url:""});
     },
     changePublicState() {
       if(this.isPublic){
@@ -130,15 +131,6 @@ export default {
   mounted : function() {
     this.window_width = window.innerWidth;
     this.window_height = window.innerHeight;
-  },
-  computed :  {
-    showPublicState : function(){
-      if(this.isPublic){
-        return '公開（他のユーザも検索・閲覧できます）'
-      } else if(!(this.isPublic)){
-        return '非公開（他のユーザは検索・閲覧できません）'
-      }
-    }
   },
   watch : {
   }

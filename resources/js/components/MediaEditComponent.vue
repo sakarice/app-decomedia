@@ -68,7 +68,6 @@
     <img-select-component 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
-    v-on:set-media-img="setMediaImgUrl"
     v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
     </img-select-component>
@@ -98,7 +97,6 @@
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
-    v-on:delete-media-img="deleteMediaImg"
     :transitionName="transitionName"
     :isPublic="mediaSetting['isPublic']"
     :mediaName="mediaSetting['name']"
@@ -257,24 +255,6 @@ export default {
       for(let key in this.isShowModal){
         this.isShowModal[key] = false;
       }
-    },
-    setMediaImgUrl(type, id, url) {
-      this.mediaImg['type'] = type;
-      this.mediaImg['id'] = id;
-      this.mediaImg['url'] = url;
-      this.mediaSetting['isShowImg'] = true;
-    },
-    judgeDelImg(url) {
-      if(this.mediaImg['url'] == url){
-        this.mediaImg['type'] = "";
-        this.mediaImg['id'] = "";
-        this.mediaImg['url'] = "";
-      }
-    }, 
-    deleteMediaImg(){
-      this.mediaImg['type'] = 0;
-      this.mediaImg['id'] = 0;
-      this.mediaImg['url'] = "";
     },
     addAudio(audio) {
       this.$refs.mediaAudio.addAudio(audio);

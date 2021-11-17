@@ -7,15 +7,15 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ログイン -->
-            <div class="header-content-wrapper" v-if="!($store.getters.getIsLogin)">
+            <div class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="login header-content" href="/login">ログイン</a>
             </div>
             <!-- アカウント作成 -->
-            <div class="header-content-wrapper" v-if="!($store.getters.getIsLogin)">
+            <div class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="signup header-content" href="/register">アカウント作成</a>
             </div>
             <!-- ログアウト -->
-            <div class="header-content-wrapper" v-if="$store.getters.getIsLogin">
+            <div class="header-content-wrapper" v-if="getIsLogin">
                 <a class="logout header-content" href="/logout"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">ログアウト
@@ -24,7 +24,7 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <div class="header-content-wrapper" v-if="$store.getters.getIsLogin">
+            <div class="header-content-wrapper" v-if="getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
@@ -42,6 +42,7 @@
 
 
 <script>
+import { mapState, mapGetters } from "vuex";
 import Profile from './ProfileComponent.vue';
 import HomeLink from './HomeLinkComponent.vue';
 
@@ -53,10 +54,14 @@ export default {
     props : [
         'csrf',
     ],
-    data : () => {
+    data : function(){
         return {
             isShowProfile : false,
         }
+    },
+    computed : {
+        ...mapState('loginState', ['isLogin']),
+        ...mapGetters('loginState', ['getIsLogin']),
     },
     methods : {
         // toUserProfile : function(){

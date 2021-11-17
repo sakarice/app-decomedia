@@ -1,44 +1,34 @@
 <template>
   <!-- Media画像-->
   <div id="media-img-wrapper"
-  v-bind:style="{'z-index' : mediaImgLayer}">
+  v-bind:style="{'z-index' : getMediaImg['layer']}">
 
     <div id="media-img-frame"
      v-on:click="$emit('parent-action', 'imgModal')"
      v-show="isShowMediaImg"
-     v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: mediaImgOpacity}">
-      <p v-show="!(mediaImgUrl)"></p>
+     v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: getMediaImg['opacity']}">
+      <p v-show="!(getMediaImg['url'])"></p>
       <img id="media-img"
-       :src="mediaImgUrl"
-       v-show="mediaImgUrl" alt="画像が選択されていません"
-       v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: mediaImgOpacity}">
+       :src="getMediaImg['url']"
+       v-show="getMediaImg['url']" alt="画像が選択されていません"
+       v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: getMediaImg['opacity']}">
     </div>
 
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   export default {
     props : [
-      'mediaImgUrl',
-      'mediaImgWidth',
-      'mediaImgHeight',
-      'mediaImgLayer',
-      'mediaImgOpacity',
       'isShowMediaImg'
     ],
-
-    data : () => {
-      return {
-        // frameSize : {
-        //   width : "300px",
-        //   height : "300px"
-        // },
-      }
+    computed : {
+      ...mapGetters('mediaImg', ['getMediaImg']),
+      // ↓storeの値には単位[px]が付いてないので追加する
+      mediaImgWidth() { return this.$store.getters['mediaImg/getMediaImg']['width'] + "px"; },
+      mediaImgHeight() { return this.$store.getters['mediaImg/getMediaImg']['height'] + "px"; },
     },
-    methods : {},
-    mounted: function(){}
-
   }
 
 </script>
@@ -46,7 +36,6 @@
 
 
 <style scoped>
-  /* img */
   #media-img-wrapper {
     pointer-events: none;
   }
@@ -54,9 +43,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px;
-    border-style: dotted;
-    border-color: cadetblue; */
   }
 
 </style>

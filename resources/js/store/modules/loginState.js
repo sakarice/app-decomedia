@@ -4,7 +4,11 @@ const loginState = {
   state : {
     isLogin : false,
   },
-  getters : {},
+  getters : {
+    getIsLogin : function(state){
+      return state.isLogin;
+    }
+  },
   mutations : {
     setIsLogin(state, payload){
       state.isLogin = payload;

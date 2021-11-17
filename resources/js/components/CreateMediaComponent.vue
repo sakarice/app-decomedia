@@ -11,11 +11,6 @@
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :mediaImgUrl="mediaImg['url']"
-     :mediaImgWidth="mediaImg['width'] + 'px'"
-     :mediaImgHeight="mediaImg['height'] + 'px'"
-     :mediaImgLayer="mediaImg['layer']"
-     :mediaImgOpacity="mediaImg['opacity']"
      :isShowMediaImg="mediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="mediaImg">
@@ -66,8 +61,6 @@
     <img-select-component 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
-    v-on:set-media-img="setMediaImgUrl"
-    v-on:img-del-notice="judgeDelImg"
     :transitionName="transitionName">
     </img-select-component>
 
@@ -96,16 +89,12 @@
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
-    v-on:delete-media-img="deleteMediaImg"
     :transitionName="transitionName"
     :isPublic="mediaSetting['isPublic']"
     :mediaName="mediaSetting['name']"
     :mediaDescription="mediaSetting['description']"
     :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
-    :isShowMediaImg="mediaSetting['isShowImg']"
-    :mediaImgWidth="mediaImg['width']"
-    :mediaImgHeight="mediaImg['height']"
-    :mediaImgOpacity="mediaImg['opacity']">
+    :isShowMediaImg="mediaSetting['isShowImg']">
     </media-setting-component>
 
   <div v-show="isCreatingMedia">
@@ -121,6 +110,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import MediaHeader from './MediaHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
@@ -175,15 +165,15 @@ export default {
         'isShowMovie' : false,
         'maxAudioNum' : 5,
       },
-      mediaImg : {
-        'type' : 0,
-        'id' : 0,
-        'url' : "",
-        'width' : 500,
-        'height' : 500,
-        'opacity' : 1,
-        'layer' : 0,
-      },
+      // mediaImg : {
+      //   'type' : 0,
+      //   'id' : 0,
+      //   'url' : "",
+      //   'width' : 500,
+      //   'height' : 500,
+      //   'opacity' : 1,
+      //   'layer' : 0,
+      // },
       mediaMovie : {
         'videoId' : "",
         'width' : "500",
@@ -196,6 +186,9 @@ export default {
 
 
     }
+  },
+  computed : {
+    ...mapGetters('mediaImg', ['getMediaImg']),
   },
   methods : {
     showModal(target){
@@ -214,24 +207,6 @@ export default {
       for(let key in this.isShowModal){
         this.isShowModal[key] = false;
       }
-    },
-    setMediaImgUrl(type, id, url) {
-      this.mediaImg['type'] = type;
-      this.mediaImg['id'] = id;
-      this.mediaImg['url'] = url;
-      this.mediaSetting['isShowImg'] = true;
-    },
-    judgeDelImg(url) {
-      if(this.mediaImg['url'] == url){
-        this.mediaImg['type'] = 0;
-        this.mediaImg['id'] = 0;
-        this.mediaImg['url'] = "";
-      }
-    },
-    deleteMediaImg(){
-      this.mediaImg['type'] = 0;
-      this.mediaImg['id'] = 0;
-      this.mediaImg['url'] = "";
     },
     addAudio(audio) {
       this.$refs.mediaAudio.addAudio(audio);
@@ -264,7 +239,7 @@ export default {
       const url = '/media/store';
       const tmpThis = this;
       let media_datas = {
-        'img' : this.mediaImg,
+        'img' : this.getMediaImg,
         'audios' : this.mediaAudios,
         'movie' : this.mediaMovie,
         'setting' : this.mediaSetting,
