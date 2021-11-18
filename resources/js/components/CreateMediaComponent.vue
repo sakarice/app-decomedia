@@ -1,7 +1,7 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
+   :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
     <!-- Mediaヘッダ -->
     <media-header-component
@@ -11,24 +11,22 @@
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :isShowMediaImg="mediaSetting['isShowImg']"
+     :isShowMediaImg="getMediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="mediaImg">
     </media-img-component>
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
-     :maxAudioNum="mediaSetting['maxAudioNum']"
+     :maxAudioNum="getMediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
     <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
-    v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="mediaMovie['isLoop']"
-    :mediaMovieLayer="mediaMovie['layer']"
-     ref="mediaMovie">
+    v-show="getMediaSetting['isShowMovie']"
+    ref="mediaMovie">
     </media-movie-component>
 
 
@@ -55,8 +53,6 @@
       </div>
     </div>
 
-
-
     <!-- 画像選択コンポーネント -->
     <img-select-component 
     v-show="isShowModal['imgModal']" 
@@ -79,32 +75,22 @@
     v-on:close-modal="closeModal"
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
-    :transitionName="transitionName"
-    :movieFrameWidth="mediaMovie['width']"
-    :movieFrameHeight="mediaMovie['height']"
-    :isLoopYoutube="mediaMovie['isLoop']">
+    :transitionName="transitionName">
     </movie-setting-component>
 
     <!-- Media設定コンポーネント -->
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
-    :transitionName="transitionName"
-    :isPublic="mediaSetting['isPublic']"
-    :mediaName="mediaSetting['name']"
-    :mediaDescription="mediaSetting['description']"
-    :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
-    :isShowMediaImg="mediaSetting['isShowImg']">
+    :transitionName="transitionName">
     </media-setting-component>
 
-  <div v-show="isCreatingMedia">
-    <overlay-component></overlay-component>
-    <loading-component
-    :message="'メディアを保存中です...'">
-    </loading-component>
-  </div>
-
-
+    <div v-show="isCreatingMedia">
+      <overlay-component></overlay-component>
+      <loading-component
+      :message="'メディアを保存中です...'">
+      </loading-component>
+    </div>
 
   </div>
 </template>
@@ -155,31 +141,14 @@ export default {
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
-      mediaSetting : {
-        'isPublic' : true,  // 公開/非公開 デフォルトは公開
-        'name' : "",
-        'description' : "",
-        'finish_time' : 0,
-        'mediaBackgroundColor' : "#F7F7F7", // ほぼ白
-        'isShowImg' : true,
-        'isShowMovie' : false,
-        'maxAudioNum' : 5,
-      },
-      mediaMovie : {
-        'videoId' : "",
-        'width' : "500",
-        'height' : "420",
-        'isLoop' : false,
-        'layer' : 1,
-      },
-      // maxAudioNum : 5,
       mediaAudios : [],
-
 
     }
   },
   computed : {
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaMovie', ['getMediaMovie']),
+    ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
     showModal(target){
@@ -207,19 +176,19 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.mediaMovie['videoId'],
-        'width' : this.mediaMovie['width'],
-        'height' : this.mediaMovie['height'],
+        'videoId' : this.getMediaMovie['videoId'],
+        'width' : this.getMediaMovie['width'],
+        'height' : this.getMediaMovie['height'],
       };
       this.$refs.mediaMovie.createYtPlayer(vars);
-      this.mediaSetting['isShowMovie'] = true;
+      this.getMediaSetting['isShowMovie'] = true;
     },
     deleteMovieFrame(){
       this.$refs.mediaMovie.deleteYtPlayer();
-      this.mediaSetting['isShowMovie'] = false;
+      this.getMediaSetting['isShowMovie'] = false;
     },
     getFinishTime(){
-      if(this.mediaMovie['videoId'] != ""){
+      if(this.getMediaMovie['videoId'] != ""){
         this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } else {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
@@ -232,8 +201,8 @@ export default {
       let media_datas = {
         'img' : this.getMediaImg,
         'audios' : this.mediaAudios,
-        'movie' : this.mediaMovie,
-        'setting' : this.mediaSetting,
+        'movie' : this.getMediaMovie,
+        'setting' : this.getMediaSetting,
       }
       this.message = "media情報を保存中です...";
       this.isCreatingMedia = true;

@@ -72,6 +72,7 @@
 </template>
 
 <script>
+  import { mapMutations } from 'vuex';
   export default {
     props : [
       'maxAudioNum',
@@ -87,6 +88,7 @@
       }
     },
     methods : {
+      ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
       hideAudio(){ // media閲覧時に最初に実行される
         this.isShowAudio = false;
       },
@@ -189,7 +191,7 @@
           }
         }
         console.log(longestAudioDuration);
-        this.$parent.mediaSetting['finish_time'] = longestAudioDuration;
+        this.updateMediaSettingObjectItem({key:'finish_time', value:longestAudioDuration});
       },
       updateAudioThumbnail() {
         let audioDoms = document.getElementsByClassName('audio-wrapper');

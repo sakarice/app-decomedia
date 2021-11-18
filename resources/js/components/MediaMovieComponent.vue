@@ -2,7 +2,7 @@
   <!-- <transition name="right-slide"> -->
     <!-- Media Movie-->
   <div id="media-movie-wrapper"
-  v-bind:style="{'z-index' : mediaMovieLayer}">
+  v-bind:style="{'z-index' : getMediaMovie['layer']}">
 
     <!-- youtube -->
     <div id="yt-player-wrapper">
@@ -16,12 +16,9 @@
 </template>
 
 <script>
+  import { mapGetters, mapMutations } from 'vuex';
   export default {
-    props : [
-      // 'isShowYoutube',
-      'isLoopYoutube',
-      'mediaMovieLayer'
-    ],
+    props : [],
 
     data : () => {
       return {
@@ -29,12 +26,18 @@
         playerVars : {},
       }
     },
+    computed : {
+      ...mapGetters('mediaMovie', ['getMediaMovie']),
+      ...mapGetters('mediaSetting', ['getMediaSetting']),
+    },
     methods : {
+      ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
+      ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
       loopYoutube(){
-        if(this.isLoopYoutube == false){
-          this.$parent.mediaMovie['isLoop'] = true;
+        if(this.getMediaMovie['isLoop'] == false){
+          this.updateMediaSettingObjectItem({kye:'isLoop', value:true});
         } else {
-          this.$parent.mediaMovie['isLoop'] = false;
+          this.updateMediaSettingObjectItem({kye:'isLoop', value:false});
         }
       },
       createYtPlayer(vars){
@@ -53,8 +56,6 @@
             'onReady': this.onPlayReady.bind(this),
             'onStateChange': this.onPlayerStateChange.bind(this),
           }
-          
-
         });
 
       },
@@ -68,10 +69,11 @@
       // ★動画の長さ取得
       setMovieDurationToFinishTime(){
         let movieDuration = this.ytPlayer.getDuration();
-        this.$parent.mediaSetting['finish_time'] = movieDuration;
+        this.updateMediaSettingObjectItem({key:'finish_time', value:movieDuration});
+
       },
       onPlayerStateChange(event) {
-        if(event.data == 0 && this.isLoopYoutube == true){
+        if(event.data == 0 && this.getMediaMovie['isLoop']){
           this.ytPlayer.seekTo(0);
           event.target.playVideo();
         }
@@ -93,7 +95,7 @@
       },
       deleteYtPlayer() {
         this.ytPlayer = "";
-        this.$parent.mediaMovie['videoId'] = "";
+        this.updateMediaMovieObjectItem({key:'videoId', value:""});
         this.initPlayerDom();
       },
       initPlayerDom() {

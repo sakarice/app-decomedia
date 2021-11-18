@@ -1,34 +1,29 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
+   :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
     <!-- Mediaヘッダ -->
     <media-header-component
-    :isShowLinkToEdit="isMyMedia"
-    :mediaId="mediaSetting['id']"
-    :mediaName="mediaSetting['name']">
+    :isShowLinkToEdit="isMyMedia">
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :isShowMediaImg="mediaSetting['isShowImg']"
       ref="mediaImg">
     </media-img-component>
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
-     :maxAudioNum="mediaSetting['maxAudioNum']"
+     :maxAudioNum="getMediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
     <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
-    v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="mediaMovie['isLoop']"
-    :mediaMovieLayer="mediaMovie['layer']"
-     ref="mediaMovie">
+    v-show="getMediaSetting['isShowMovie']"
+    ref="mediaMovie">
     </media-movie-component>
 
         <!-- 選択モーダル表示ボタン -->
@@ -36,19 +31,15 @@
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
         <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="getIsLogin && !(isMyMedia)">
-          <like-media-component
-          :mediaId="mediaSetting['id']">
-          </like-media-component>
+          <like-media-component></like-media-component>
         </div>
-
 
         <!-- Media作成者情報 -->
         <div id="disp-media-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaOwnerInfo')">
           <i class="fas fa-user-circle fa-2x"></i>
           <!-- ユーザプロフィール -->
           <media-owner-info-component
-          v-show="isShowModal['mediaOwnerInfo']"
-          :mediaId="mediaSetting['id']">
+          v-show="isShowModal['mediaOwnerInfo']">
           </media-owner-info-component>
         </div>
         <!-- Media情報 -->
@@ -66,8 +57,8 @@
     v-show="isShowModal['mediaInfoModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName"
-    :name="mediaSetting['name']"
-    :description="mediaSetting['description']">
+    :name="getMediaSetting['name']"
+    :description="getMediaSetting['description']">
     </media-info-component>
 
 
@@ -116,36 +107,20 @@ export default {
         'mediaOwnerInfo' : false,
         'mediaInfoModal' : false,
       },
-      mediaMovie : {
-        'videoId' : "",
-        'width' : "500",
-        'height' : "420",
-        'isLoop' : false,
-        'layer' : 1,
-      },
       mediaAudios : [],
-
-      mediaSetting : {
-        'id' : 0,
-        'isPublic' : true,  // 公開/非公開 デフォルトは公開
-        'name' : "",
-        'description' : "",
-        'finish_time' : 0,
-        'mediaBackgroundColor' : "#333333", // 黒
-        'isShowImg' : true,
-        'isShowMovie' : false,
-        'maxAudioNum' : 5,
-      },
-
 
     }
   },
   computed : {
     ...mapGetters('loginState', ['getIsLogin']),
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaMovie', ['getMediaMovie']),
+    ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+    ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
+    ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     judgeIsMyMedia(){
       let media_id = JSON.parse(this.mediaSettingData).id;
       let url = '/ajax/judgeIsMyMedia/' + media_id;
@@ -186,11 +161,12 @@ export default {
     },
     initMovie(){
       let tmpMovieData = JSON.parse(this.mediaMovieData);
-      this.mediaMovie['videoId'] = tmpMovieData.videoId;
-      this.mediaMovie['width'] = tmpMovieData.width;
-      this.mediaMovie['height'] = tmpMovieData.height;
-      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
-      this.mediaMovie['layer'] = tmpMovieData.layer;
+      const mediaMovieKeys = [
+        'videoId','width','height','isLoop','layer'
+      ];
+      mediaMovieKeys.forEach(mediaMovieKey => {
+        this.updateMediaMovieObjectItem({key:mediaMovieKey, value:tmpMovieData[mediaMovieKey]});
+      });
     },
     initAudio(){
       let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -203,24 +179,20 @@ export default {
     },
     initSetting(){
       let tmpSettingData = JSON.parse(this.mediaSettingData);
-      this.mediaSetting['id'] = tmpSettingData.id;
-      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
-      this.mediaSetting['name'] = tmpSettingData.name;
-      this.mediaSetting['description'] = tmpSettingData.description;
-      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
-      this.mediaSetting['mediaBackgroundColor'] = tmpSettingData.background_color;
-      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
-    },
-    setAudioThumbnail(){
+      const mediaSettingKeys = [
+        'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
+      ];
+      mediaSettingKeys.forEach(mediaSettingKey => {
+        this.updateMediaSettingObjectItem({key:mediaSettingKey, value:tmpSettingData[mediaSettingKey]});
+      });
+    },    setAudioThumbnail(){
       this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.mediaMovie['videoId'],
-        'width' : this.mediaMovie['width'],
-        'height' : this.mediaMovie['height'],
+        'videoId' : this.getMediaMovie['videoId'],
+        'width' : this.getMediaMovie['width'],
+        'height' : this.getMediaMovie['height'],
       };
       this.$refs.mediaMovie.createYtPlayer(vars);
     },
@@ -249,8 +221,8 @@ export default {
   },
   watch : {
     getReadyCreateMovieFrame : function(newVal){
-      if(this.mediaSetting['isShowMovie'] == true 
-      && this.mediaMovie['videoId'] != ""
+      if(this.getMediaSetting['isShowMovie'] == true 
+      && this.getMediaMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();
       }

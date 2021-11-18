@@ -10,18 +10,18 @@
           </div>
           <div class="yt-setting-wrapper">
             <div class="setting-content">
-              <input :value="movieFrameWidth" @input="updateVideoWidth" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
+              <input :value="getMediaMovie['width']" @input="updateMediaMovieObjectItem({key:'width',value:$event.target.value})" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
               <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             </div>
             <div class="setting-content">
-              <input :value="movieFrameHeight" @input="updateVideoHeight" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
+              <input :value="getMediaMovie['height']" @input="updateMediaMovieObjectItem({key:'height',value:$event.target.value})" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
               <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span>
             </div>
             <button  class="setting-content" type="submit" @click="createMovieFrame">再生プレイヤー作成</button>
             <button  class="setting-content" type="submit" @click="deleteMovieFrame">削除</button>
 
           </div>
-          <div class="setting-loop setting-content" v-on:click="loopYoutube" :class="{'isLoop' : isLoopYoutube}">
+          <div class="setting-loop setting-content" v-on:click="changeLoopSetting" :class="{'isLoop' : getMediaMovie['isLoop']}">
             <i class="media-yt-loop-icon fas fa-undo-alt fa-2x"></i>
             <span style="margin-left:10px">ループ</span>
           </div>
@@ -37,13 +37,11 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex';
 export default {
   props : [
     'transitionName',
-    'movieFrameWidth',
-    'movieFrameHeight',
-    'isLoopYoutube'
-    ],
+  ],
   data : () => {
     return {
       youtubeUrl : '',
@@ -51,7 +49,11 @@ export default {
       window_height : 0,
     }
   },
+  computed : {
+    ...mapGetters('mediaMovie', ['getMediaMovie']),
+  },
   methods : {
+    ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     closeModal() {
       this.$emit('close-modal');
     },
@@ -64,14 +66,10 @@ export default {
     },
     updateVideoId(event){
       let youtubeUrl = event.target.value;
-      this.$parent.mediaMovie['videoId'] = this.extractVideoIdFromUrl(youtubeUrl);
+      this.updateMediaMovieObjectItem({key:'videoId',value:this.extractVideoIdFromUrl(youtubeUrl)});
     },
-    updateVideoWidth(event){
-      this.$parent.mediaMovie['width'] = event.target.value;
-    },
-    updateVideoHeight(event){
-      this.$parent.mediaMovie['height'] = event.target.value;
-    },
+    // updateVideoWidth(event){},
+    // updateVideoHeight(event){},
     createMovieFrame() {
       // 親コンポーネントの動画フレーム作成メソッドを実行
       this.$emit('create-movie-frame');
@@ -79,12 +77,8 @@ export default {
     deleteMovieFrame(){
       this.$emit('delete-movie-frame');
     },
-    loopYoutube(){
-      if(this.isLoopYoutube == false){
-        this.$parent.mediaMovie['isLoop'] = true;
-      } else {
-        this.$parent.mediaMovie['isLoop'] = false;
-      }
+    changeLoopSetting(){
+      this.updateMediaMovieObjectItem({key:'isLoop',value:!(this.getMediaMovie['isLoop'])});
     },
   },
   mounted : function() {

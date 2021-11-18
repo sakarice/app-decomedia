@@ -18,13 +18,13 @@
             @update-media="updateMedia">
             </media-update-button>
 
-            <a v-if="isShowLinkToShow" :href="mediaShowLink(mediaId)" class="action-trigger-wrapper link-to-show-media">
+            <a v-if="isShowLinkToShow" :href="mediaShowLink(getMediaSetting['id'])" class="action-trigger-wrapper link-to-show-media">
                 <div class="action-trigger goto-show-media-icon-wrapper">
                     <i class="fas fa-tv fa-lg goto-show-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">閲覧画面へ</span>
             </a>
-            <a v-if="isShowLinkToEdit" :href="mediaEditLink(mediaId)" class="action-trigger-wrapper link-to-edit-media">
+            <a v-if="isShowLinkToEdit" :href="mediaEditLink(getMediaSetting['id'])" class="action-trigger-wrapper link-to-edit-media">
                 <div class="action-trigger goto-edit-media-icon-wrapper">
                     <i class="fas fa-pen fa-lg goto-edit-media-icon "></i>
                 </div>
@@ -35,7 +35,7 @@
 
         <!-- 右側 -->
         <div class="header-block header-right">
-            <span :v-if="mediaName" class="header-content media-name">{{mediaName}}</span>
+            <span :v-if="getMediaSetting['name']" class="header-content media-name">{{getMediaSetting['name']}}</span>
         </div>
     </div>
         
@@ -44,6 +44,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 import HomeLink from './HomeLinkComponent.vue';
 import CancelButton from './CancelButtonComponent.vue';
 import ToMypageButton from './ToMypageButtonComponent.vue';
@@ -65,12 +66,13 @@ export default {
         'isShowUpdateButton',
         'isShowLinkToShow',
         'isShowLinkToEdit',
-        'mediaId',
-        'mediaName',
     ],
     data : () => {
         return {
         }
+    },
+    computed : {
+        ...mapGetters('mediaSetting', ['getMediaSetting']),
     },
     methods : {
         getFinishTime(){

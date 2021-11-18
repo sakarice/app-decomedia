@@ -7,18 +7,20 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 export default{
-  props: [
-    'mediaId',
-  ],
+  props: [],
   data : () => {
     return {
       isLikeMedia : false,
     }
   },
+  computed : {
+    ...mapGetters('mediaSetting',['getMediaSetting']),
+  },
   methods : {
     getLikeState(){
-      let url = '/user/likeState/'+this.mediaId;
+      let url = '/user/likeState/'+this.getMediaSetting['id'];
       axios.get(url)
       .then(response => {
         this.isLikeMedia = response.data.isLikeMedia;
@@ -44,7 +46,7 @@ export default{
     },
     updateLikeStateInDB(){
       let url = '/media/like';
-      const media_id = this.$parent.mediaSetting['id'];
+      const media_id = this.getMediaSetting['id'];
       let data = {
         'isLike' : this.isLikeMedia,
         'media_id' : media_id,
@@ -61,14 +63,8 @@ export default{
 
   },
   mounted : function() {
+    this.getLikeState();
   },
-  watch : {
-    mediaId: function(newVal,oldVal){ // 親コンポーネントのmediaOwnerIdがdataにセットされるのを待つ
-      if(newVal > 0){
-        this.getLikeState();
-      }
-    }
-  },  
 
 }
 

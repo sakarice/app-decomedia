@@ -44,9 +44,7 @@ import Follow from './FollowComponent.vue';
     components : {
       Follow,
     },
-    props : [
-      'mediaId',
-    ],
+    props : [],
     data : () => {
       return {
         isMyMedia : false,
@@ -62,7 +60,7 @@ import Follow from './FollowComponent.vue';
     },
     methods : {
       checkIsMyMedia(){
-        let url = '/ajax/judgeIsMyMedia/' + this.mediaId;
+        let url = '/ajax/judgeIsMyMedia/' + this.getMediaSetting['id'];
         axios.get(url)
           .then(response =>{
             this.isMyMedia = response.data.isMyMedia;
@@ -76,7 +74,7 @@ import Follow from './FollowComponent.vue';
         event.stopPropagation();
       },
       getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
-        let url = '/user/mediaOwner/profile/show/' + this.mediaId;
+        let url = '/user/mediaOwner/profile/show/' + this.getMediaSetting['id'];
         axios.get(url)
         .then(res => {
           this.mediaOwnerInfo['id'] = res.data.id;
@@ -96,6 +94,7 @@ import Follow from './FollowComponent.vue';
     watch : {},
     computed : {
       ...mapGetters('loginState', ['getIsLogin']),
+      ...mapGetters('mediaSetting', ['getMediaSetting']),
       isShowFollow: function(){
         // ログインしていて自分のルームでなければフォローアイコンを表示
         return this.getIsLogin && !(this.isMyMedia);

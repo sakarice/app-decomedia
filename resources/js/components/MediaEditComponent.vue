@@ -1,36 +1,33 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : mediaSetting['mediaBackgroundColor']}">
+   :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
     <!-- Mediaヘッダ -->
     <media-header-component
     :isShowUpdateButton=true
     :isShowLinkToShow=true
-    :mediaId="mediaSetting['id']"
+    :mediaId="getMediaSetting['id']"
     @update-media="updateMedia">
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
     <media-img-component
-     :isShowMediaImg="mediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="mediaImg">
     </media-img-component>
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
-     :maxAudioNum="mediaSetting['maxAudioNum']"
+     :maxAudioNum="getMediaSetting['maxAudioNum']"
      :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
     <!-- Media動画(=youtube)コンポーネント -->
     <media-movie-component
-    v-show="mediaSetting['isShowMovie']"
-    :isLoopYoutube="mediaMovie['isLoop']"
-    :mediaMovieLayer="mediaMovie['layer']"
-     ref="mediaMovie">
+    v-show="getMediaSetting['isShowMovie']"
+    ref="mediaMovie">
     </media-movie-component>
 
 
@@ -81,24 +78,22 @@
     v-on:close-modal="closeModal"
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
-    :transitionName="transitionName"
-    :movieFrameWidth="mediaMovie['width']"
-    :movieFrameHeight="mediaMovie['height']"
-    :isLoopYoutube="mediaMovie['isLoop']">
+    :transitionName="transitionName">
     </movie-setting-component>
 
     <!-- Media設定コンポーネント -->
     <media-setting-component
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
-    :transitionName="transitionName"
-    :isPublic="mediaSetting['isPublic']"
-    :mediaName="mediaSetting['name']"
-    :mediaDescription="mediaSetting['description']"
-    :mediaBackgroundColor="mediaSetting['mediaBackgroundColor']"
-    :isShowMediaImg="mediaSetting['isShowImg']">
+    :transitionName="transitionName">
     </media-setting-component>
 
+    <div v-show="isUploadingMedia">
+      <overlay-component></overlay-component>
+      <loading-component
+      :message="'メディアを更新中です...'">
+      </loading-component>
+    </div>
 
   </div>
 </template>
@@ -113,6 +108,8 @@ import MediaAudio from './MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
 import MediaImg from './MediaImgComponent.vue';
 import MediaMovie from './MediaMovieComponent.vue';
+import Overlay from './OverlayComponent.vue'
+import Loading from './LoadingComponent.vue'
 
 export default {
   components : {
@@ -124,6 +121,8 @@ export default {
     MediaSetting,
     MediaImg,
     MediaMovie,
+    Overlay,
+    Loading,
   },
   props: [
     'mediaImgData',
@@ -136,41 +135,26 @@ export default {
       getReadyCreateMovieFrame : false,
       autoPlay : false,
       transitionName : 'slide-in',
+      isUploadingMedia : false,
       isShowModal : {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
-      mediaMovie : {
-        'videoId' : "",
-        'width' : "500",
-        'height' : "420",
-        'isLoop' : false,
-        'layer' : 1,
-      },
       mediaAudios : [],
-
-      mediaSetting : {
-        'id' : 0,
-        'isPublic' : true,  // 公開/非公開 デフォルトは公開
-        'name' : "",
-        'description' : "",
-        'finish_time' : 0,
-        'mediaBackgroundColor' : "#333333", // 黒
-        'isShowImg' : true,
-        'isShowMovie' : false,
-        'maxAudioNum' : 5,
-      },
-
 
     }
   },
   computed : {
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaMovie', ['getMediaMovie']),
+    ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+    ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
+    ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     // ●Media読み込み時の初期化処理
     initImg(){
       let tmpImgData = JSON.parse(this.mediaImgData);
@@ -183,11 +167,12 @@ export default {
     },
     initMovie(){
       let tmpMovieData = JSON.parse(this.mediaMovieData);
-      this.mediaMovie['videoId'] = tmpMovieData.videoId;
-      this.mediaMovie['width'] = tmpMovieData.width;
-      this.mediaMovie['height'] = tmpMovieData.height;
-      this.mediaMovie['isLoop'] = tmpMovieData.isLoop;
-      this.mediaMovie['layer'] = tmpMovieData.layer;
+      const mediaMovieKeys = [
+        'videoId','width','height','isLoop','layer'
+      ];
+      mediaMovieKeys.forEach(mediaMovieKey => {
+        this.updateMediaMovieObjectItem({key:mediaMovieKey, value:tmpMovieData[mediaMovieKey]});
+      });
     },
     initAudio(){
       let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
@@ -196,28 +181,25 @@ export default {
         tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
         tmpMediaAudios[i]['isPlay'] = false;
         this.mediaAudios.push(tmpMediaAudios[i]);
-      }      
+      }
     },
     initSetting(){
       let tmpSettingData = JSON.parse(this.mediaSettingData);
-      this.mediaSetting['id'] = tmpSettingData.id;
-      this.mediaSetting['isPublic'] = tmpSettingData.isPublic;
-      this.mediaSetting['name'] = tmpSettingData.name;
-      this.mediaSetting['description'] = tmpSettingData.description;
-      this.mediaSetting['finish_time'] = tmpSettingData.finish_time;
-      this.mediaSetting['mediaBackgroundColor'] = tmpSettingData.background_color;
-      this.mediaSetting['isShowImg'] = tmpSettingData.is_show_img;
-      this.mediaSetting['isShowMovie'] = tmpSettingData.is_show_movie;
-      this.mediaSetting['maxAudioNum'] = tmpSettingData.max_audio_num;
+      const mediaSettingKeys = [
+        'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
+      ];
+      mediaSettingKeys.forEach(mediaSettingKey => {
+        this.updateMediaSettingObjectItem({key:mediaSettingKey, value:tmpSettingData[mediaSettingKey]});
+      });
     },
     setAudioThumbnail(){
       this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.mediaMovie['videoId'],
-        'width' : this.mediaMovie['width'],
-        'height' : this.mediaMovie['height'],
+        'videoId' : this.getMediaMovie['videoId'],
+        'width' : this.getMediaMovie['width'],
+        'height' : this.getMediaMovie['height'],
       };
       this.$refs.mediaMovie.createYtPlayer(vars);
     },
@@ -248,19 +230,20 @@ export default {
     },
     createMovieFrame(){
       let vars = {
-        'videoId' : this.mediaMovie['videoId'],
-        'width' : this.mediaMovie['width'],
-        'height' : this.mediaMovie['height'],
+        'videoId' : this.getMediaMovie['videoId'],
+        'width' : this.getMediaMovie['width'],
+        'height' : this.getMediaMovie['height'],
       };
       this.$refs.mediaMovie.createYtPlayer(vars);
-      this.mediaSetting['isShowMovie'] = true;
+      this.updateMediaSettingObjectItem({key:'isShowMovie', value:true});
     },
     deleteMovieFrame(){
       this.$refs.mediaMovie.deleteYtPlayer();
-      this.mediaSetting['isShowMovie'] = false;
+      this.updateMediaSettingObjectItem({key:'isShowMovie', value:false});
+
     },
     getFinishTime(){
-      if(this.mediaMovie['videoId'] != ""){
+      if(this.getMediaMovie['videoId'] != ""){
         this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } else {
         this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
@@ -272,18 +255,21 @@ export default {
       let media_datas = {
         'img' : this.getMediaImg,
         'audios' : this.mediaAudios,
-        'movie' : this.mediaMovie,
-        'setting' : this.mediaSetting,
+        'movie' : this.getMediaMovie,
+        'setting' : this.getMediaSetting,
       }
       this.message = "media情報を更新中です...";
+      this.isUploadingMedia = true;
       axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
           this.message = "";
+          this.isUploadingMedia = false;
         })
         .catch(error => {            
           alert('failed!');
           this.message = "";
+          this.isUploadingMedia = false;
         })
     },
     
@@ -307,8 +293,8 @@ export default {
   },
   watch : {
     getReadyCreateMovieFrame : function(newVal){
-      if(this.mediaSetting['isShowMovie'] == true 
-      && this.mediaMovie['videoId'] != ""
+      if(this.getMediaSetting['isShowMovie'] == true 
+      && this.getMediaMovie['videoId'] != ""
       && newVal == true){
         this.createMovieFrame();
       }
