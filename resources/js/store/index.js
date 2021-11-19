@@ -3,6 +3,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import loginState from './modules/loginState.js';
 import mediaImg from './modules/mediaImg.js';
+import mediaAudios from './modules/mediaAudios.js';
 import mediaMovie from './modules/mediaMovie.js';
 import mediaSetting from './modules/mediaSetting.js';
 
@@ -12,6 +13,7 @@ const store = new Vuex.Store({
   modules : {
     loginState,
     mediaImg,
+    mediaAudios,
     mediaMovie,
     mediaSetting,
   }

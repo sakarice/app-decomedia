@@ -2087,8 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2101,6 +2100,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2176,6 +2181,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['transitionName'],
   data: function data() {
@@ -2199,7 +2205,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     };
   },
-  methods: _defineProperty({
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, _defineProperty({
     finishPlay: function finishPlay() {
       var audioDuration = this.audioPlayer.duration;
       this.audioPlayer.currentTime = audioDuration - 1;
@@ -2316,8 +2322,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       audio['name'] = tmpAudio['name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
-      audio['isPlay'] = false;
-      this.$emit('add-audio', audio);
+      audio['isPlay'] = false; // this.$emit('add-audio', audio);
+
+      this.addMediaAudiosObjectItem(audio);
     },
     dragEnter: function dragEnter() {
       this.isDragEnter = true;
@@ -2425,7 +2432,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.isPlay = false;
     this.playAudioType = "";
     this.playAudioIndex = -1;
-  }),
+  })),
   mounted: function mounted() {
     this.getUserOwnAudios();
     this.getPublicAudios();
@@ -2636,7 +2643,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       mediaAudios: []
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaAudio', ['getMediaAudio'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaSetting', ['getMediaSetting'])),
   methods: {
     showModal: function showModal(target) {
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
@@ -2691,7 +2698,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var tmpThis = this;
       var media_datas = {
         'img': this.getMediaImg,
-        'audios': this.mediaAudios,
+        'audios': this.getMediaAudio,
         'movie': this.getMediaMovie,
         'setting': this.getMediaSetting
       };
@@ -3528,7 +3535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _MediaAudioPlayerComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaAudioPlayerComponent.vue */ "./resources/js/components/MediaAudioPlayerComponent.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3585,69 +3593,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['maxAudioNum', 'mediaAudios'],
+  components: {
+    MediaAudioPlayer: _MediaAudioPlayerComponent_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  },
+  props: ['maxAudioNum' // 'mediaAudios',
+  ],
   data: function data() {
     return {
       audioPlayers: [],
       isShowAudio: false,
-      isEditMode: false,
-      mediaAudioNum: 0
+      isEditMode: false
     };
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
+    mediaAudioNum: function mediaAudioNum() {
+      return this.getMediaAudios.length;
+    }
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaAudios', ['updateMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+    // media閲覧時に最初に実行される
     hideAudio: function hideAudio() {
-      // media閲覧時に最初に実行される
       this.isShowAudio = false;
     },
+    // 親コンポーネントから実行される
     validEditMode: function validEditMode() {
-      // 親コンポーネントから実行される
       this.isEditMode = true;
     },
     playMediaAudio: function playMediaAudio(event) {
       var audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-      var playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
+      var playerIndex = this.getMediaAudios[audioIndex]['player_index'];
       this.audioPlayers[playerIndex].play();
-      this.$parent.mediaAudios[audioIndex]['isPlay'] = true;
+      this.getMediaAudios[audioIndex]['isPlay'] = true;
     },
     pauseMediaAudio: function pauseMediaAudio(event) {
       var audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-      var playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
+      var playerIndex = this.getMediaAudios[audioIndex]['player_index'];
       this.audioPlayers[playerIndex].pause();
-      this.$parent.mediaAudios[audioIndex]['isPlay'] = false;
+      this.getMediaAudios[audioIndex]['isPlay'] = false;
     },
     onFinishAudio: function onFinishAudio(i) {
       var mediaAudioNum = this.$parent.mediaAudios.length;
 
       for (var j = 0; j < mediaAudioNum; j++) {
-        var mediaAudio = this.$parent.mediaAudios[j];
+        var mediaAudio = this.getMediaAudios[j];
 
         if (mediaAudio['player_index'] == i && mediaAudio['isLoop'] == false) {
-          this.$parent.mediaAudios[j]['isPlay'] = false;
+          this.getMediaAudios[j]['isPlay'] = false;
         }
       }
     },
@@ -3658,7 +3652,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var audioNum = this.$parent.mediaAudios.length;
 
       for (var i = 0; i < audioNum; i++) {
-        this.$parent.mediaAudios[i]['isPlay'] = true;
+        this.getMediaAudios[i]['isPlay'] = true;
       }
     },
     finishPlayAudio: function finishPlayAudio() {
@@ -3672,10 +3666,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var audioNum = this.$parent.mediaAudios.length;
 
       for (var i = 0; i < audioNum; i++) {
-        var audioPlayerIndex = this.mediaAudios[i]['player_index'];
-        this.audioPlayers[audioPlayerIndex].src = this.mediaAudios[i]['audio_url'];
-        this.audioPlayers[audioPlayerIndex].volume = this.mediaAudios[i]['volume'];
-        this.audioPlayers[audioPlayerIndex].loop = this.mediaAudios[i]['isLoop'];
+        var audioPlayerIndex = this.getMediaAudios[i]['player_index'];
+        this.audioPlayers[audioPlayerIndex].src = this.getMediaAudios[i]['audio_url'];
+        this.audioPlayers[audioPlayerIndex].volume = this.getMediaAudios[i]['volume'];
+        this.audioPlayers[audioPlayerIndex].loop = this.getMediaAudios[i]['isLoop'];
       }
     },
     addAudio: function addAudio(audio) {
@@ -3686,19 +3680,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // 既に5つある場合は一つ消してから追加。
 
       if (beforeAudioNum == this.maxAudioNum) {
-        // プレイヤーの初期化
-        var resetPlayerIndex = this.$parent.mediaAudios[0]['player_index'];
-        this.audioPlayers[resetPlayerIndex].pause();
-        var newAudio = new Audio();
-        this.audioPlayers.splice(resetPlayerIndex, 1, newAudio); // オーディオの入れ替え
+        // まずはプレイヤーの初期化
+        // 一番古いオーディオに対応するプレイヤーを選択
+        var resetPlayerIndex = this.getMediaAudios[0]['player_index'];
+        this.audioPlayers[resetPlayerIndex].pause(); // 停止して
+
+        var newAudio = new Audio(); //新しいオーディオプレイヤーを作って
+
+        this.audioPlayers.splice(resetPlayerIndex, 1, newAudio); // プレイヤーを入れ替え
+        // プレイヤーの初期化が終わったら、一番古いオーディオを削除
 
         this.$parent.mediaAudios.splice(0, 1);
-      }
+      } // オーディオの追加
+
 
       this.$parent.mediaAudios.push(audio); // 追加されたオーディオの情報を取得
 
       var addedAudioIndex = this.$parent.mediaAudios.length - 1;
-      var addedAudio = this.$parent.mediaAudios[addedAudioIndex];
+      var addedAudio = this.getMediaAudios[addedAudioIndex];
       var addedAudioUrl = addedAudio['audio_url']; // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
 
       var emptyPlayerIndex;
@@ -3743,7 +3742,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var i = 0; i < audioNum; i++) {
         // オーディオのサムネイル表示&更新
         var audioThumbnail = audioDoms[i].firstChild;
-        var targetAudio = this.$parent.mediaAudios[i];
+        var targetAudio = this.getMediaAudios[i];
         audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
       }
     },
@@ -3754,7 +3753,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     deleteAudio: function deleteAudio(event) {
       var audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-      var playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
+      var playerIndex = this.getMediaAudios[audioIndex]['player_index'];
       this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
 
       var newAudioPlayer = new Audio(); // 新しいplayerを用意して、
@@ -3775,7 +3774,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     setAudioLoop: function setAudioLoop(event) {
       var audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-      var playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
+      var playerIndex = this.getMediaAudios[audioIndex]['player_index'];
       var audioPlayer = this.audioPlayers[playerIndex];
 
       if (audioPlayer.loop == false) {
@@ -3784,7 +3783,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         audioPlayer.loop = false;
       }
 
-      this.$parent.mediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
+      this.getMediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
     },
     setAudioVolume: function setAudioVolume(event) {
       console.log('called setAudioVolume', event.target.getAttribute('class'));
@@ -3794,9 +3793,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     updateAudioVol: function updateAudioVol(event) {
       var audioIndex = event.target.getAttribute('id');
-      var audioPlayerIndex = this.mediaAudios[audioIndex]['player_index'];
+      var audioPlayerIndex = this.getMediaAudios[audioIndex]['player_index'];
       var audioVolume = event.target.value;
-      this.mediaAudios[audioIndex]['volume'] = audioVolume;
+      this.getMediaAudios[audioIndex]['volume'] = audioVolume;
       this.audioPlayers[audioPlayerIndex].volume = audioVolume;
     }
   }),
@@ -3813,11 +3812,84 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     ;
   },
-  watch: {
-    mediaAudios: function mediaAudios() {
-      this.mediaAudioNum = this.$parent.mediaAudios.length;
+  watch: {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: [// storeから取得するオーディオオブジェクトのインデックス。
+  'mediaAudioIndex'],
+  data: function data() {
+    return {
+      player: ""
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
+    isPlay: function isPlay() {
+      return this.player.play;
     }
-  }
+  }),
+  methods: {
+    play: function play() {
+      this.player.play();
+    },
+    pause: function pause() {
+      this.player.pause();
+    },
+    setPlayerInfo: function setPlayerInfo() {
+      // 親コンポーネントのmediaAudiosから再生情報を取得
+      this.player.src = this.getMediaAudios['mediaAudioIndex']['audio_url'];
+      this.player.volume = this.getMediaAudios['mediaAudioIndex']['volume'];
+      this.player.loop = this.getMediaAudios['mediaAudioIndex']['isLoop'];
+    },
+    updateAudioThumbnail: function updateAudioThumbnail() {},
+    updateLoopSetting: function updateLoopSetting(loopSetting) {
+      this.player.loop = loopSetting;
+    },
+    updateVolume: function updateVolume(volume) {
+      this.player.volume = volume;
+    },
+    onFinishAudio: function onFinishAudio() {
+      console.log('audio再生終了');
+    }
+  },
+  mounted: function mounted() {
+    this.player = new Audio();
+    this.player.onended = this.onFinishAudio();
+  },
+  watch: {}
 });
 
 /***/ }),
@@ -6541,6 +6613,7 @@ vue__WEBPACK_IMPORTED_MODULE_3__.default.component('movie-setting-component', __
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('audio-select-component', __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('media-setting-component', __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('media-audio-component', __webpack_require__(/*! ./components/MediaAudioComponent.vue */ "./resources/js/components/MediaAudioComponent.vue").default);
+vue__WEBPACK_IMPORTED_MODULE_3__.default.component('media-audio-player-component', __webpack_require__(/*! ./components/MediaAudioPlayerComponent.vue */ "./resources/js/components/MediaAudioPlayerComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('media-img-component', __webpack_require__(/*! ./components/MediaImgComponent.vue */ "./resources/js/components/MediaImgComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('media-movie-component', __webpack_require__(/*! ./components/MediaMovieComponent.vue */ "./resources/js/components/MediaMovieComponent.vue").default);
 vue__WEBPACK_IMPORTED_MODULE_3__.default.component('create-media-component', __webpack_require__(/*! ./components/CreateMediaComponent.vue */ "./resources/js/components/CreateMediaComponent.vue").default);
@@ -6704,12 +6777,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/mediaImg.js */ "./resources/js/store/modules/mediaImg.js");
-/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
+/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
 
 
 
@@ -6717,13 +6791,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_5__.default.use(vuex__WEBPACK_IMPORTED_MODULE_6__.default);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_6__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_6__.default.use(vuex__WEBPACK_IMPORTED_MODULE_7__.default);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_7__.default.Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__.default,
     mediaImg: _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_2__.default,
-    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_3__.default,
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_4__.default
+    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_3__.default,
+    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_4__.default,
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_5__.default
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -6791,6 +6867,58 @@ var loginState = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loginState);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/mediaAudios.js":
+/*!***************************************************!*\
+  !*** ./resources/js/store/modules/mediaAudios.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+var mediaAudios = {
+  namespaced: true,
+  state: {
+    mediaAudios: [] // mediaAudio : {
+    //   'media_id' : null,
+    //   'audio_type' : 1,
+    //   'audio_id' : null,
+    //   'order_seq' : 1,
+    //   'name' : "",
+    //   'audio_url' : "",
+    //   'thumbnail_url' : "",
+    //   'volume' : 0.5,
+    //   'isLoop': false,
+    // },
+
+  },
+  getters: {
+    getMediaAudios: function getMediaAudios(state) {
+      return state.mediaAudios;
+    }
+  },
+  mutations: {
+    deleteMediaAudiosObjectItem: function deleteMediaAudiosObjectItem(state) {
+      state.mediaAudios.splice(0, 1); // 最も古いaudioを1つ削除
+    },
+    addMediaAudiosObjectItem: function addMediaAudiosObjectItem(state, payload) {
+      state.mediaAudios.push(payload);
+    },
+    updateMediaAudiosObjectItem: function updateMediaAudiosObjectItem(state, _ref) {
+      var index = _ref.index,
+          key = _ref.key,
+          value = _ref.value;
+      state.mediaAudios[index][key] = value;
+    }
+  },
+  actions: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaAudios);
 
 /***/ }),
 
@@ -11638,7 +11766,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-1e1f2f30] {\n    padding-bottom: 5px;\n    margin-bottom: 5px;\n    border-bottom: double 2px grey;\n    width: 90px;\n\n    display: flex;\n    justify-content: space-between;\n}\n.size-Adjust-box[data-v-1e1f2f30] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-1e1f2f30]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-1e1f2f30] {\n    color: ghostwhite;\n    height: 50px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-1e1f2f30] {\n    color: green;\n}\n#play-all-icon[data-v-1e1f2f30]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-1e1f2f30] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-1e1f2f30]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    top:55px;\n    bottom: 10px;\n    right: 0;\n    width: 180px;\n    padding: 5px 0 60px 0;\n    border-top-left-radius: 10px;\n    border-bottom-left-radius: 10px;\n    display: flex;\n    flex-direction: column-reverse;\n    justify-content: space-around;\n    /* overflow-y: scroll; */\n}\n.is-show[data-v-1e1f2f30] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-1e1f2f30]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#media-audio-frame[data-v-1e1f2f30] {\n    height: 100%;\n}\n#audios[data-v-1e1f2f30]{\n    height: 100%;\n    margin: 0;\n    padding-left: 0;\n\n    display: flex;\n    flex-flow: column;\n    justify-content: space-around;\n}\n.audio-area[data-v-1e1f2f30] {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.audio-wrapper[data-v-1e1f2f30],\n  .non-audio-frame[data-v-1e1f2f30] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    /* background-color: cornflowerblue; */\n    border: 1.5px dotted lightgrey;\n    margin: 10px 5px;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-thumbnail[data-v-1e1f2f30] {\n    width: 53px;\n    height: 53px;\n    border-radius: 50%;\n}\n.media-audio-play-icon[data-v-1e1f2f30],\n  .media-audio-pause-icon[data-v-1e1f2f30] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.media-audio-play-icon[data-v-1e1f2f30] {\n    left: 18px;\n}\n.media-audio-pause-icon[data-v-1e1f2f30] {\n    left: 11px;\n}\n.media-audio-delete-icon[data-v-1e1f2f30] {\n    position: absolute;\n    left: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-1e1f2f30] {\n    position: absolute;\n    right: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-1e1f2f30] {\n    /* position: absolute;\n    top: 37px;\n    right: 30px; */\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-1e1f2f30]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-play-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-pause-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-1e1f2f30] {\n    color : white;\n    font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    top: 43px;\n    left: 40px;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-1e1f2f30] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-1e1f2f30] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-play-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-pause-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-delete-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-1e1f2f30] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.is-reverse[data-v-1e1f2f30]{\n    transform: scale(-1, 1);\n}\n.media-audio-num[data-v-1e1f2f30] {\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    padding: 0 8px;\n    border-radius: 50%;\n    margin-right: -20px;\n    margin-top: -60px;\n    font-size: 16px;\n}\n.change-disp-audio[data-v-1e1f2f30] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-1e1f2f30]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isPlay[data-v-1e1f2f30] {\n    border-color: green;\n    opacity: 1;\n}\n.isLoop[data-v-1e1f2f30] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n@media screen and (max-width:480px) {\n.change-disp-audio[data-v-1e1f2f30] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-1e1f2f30] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-1e1f2f30] {\n    left: -25px;\n    top: -25px;\n}\n.media-audio-num[data-v-1e1f2f30] {\n    padding: 0 6px;\n    margin-right: -14px;\n    margin-top: -50px;\n    font-size: 13px;\n}\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-1e1f2f30] {\n    padding-bottom: 5px;\n    margin-bottom: 5px;\n    border-bottom: double 2px grey;\n    width: 90px;\n\n    display: flex;\n    justify-content: space-between;\n}\n.size-Adjust-box[data-v-1e1f2f30] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-1e1f2f30]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-1e1f2f30] {\n    color: ghostwhite;\n    height: 50px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-1e1f2f30] {\n    color: green;\n}\n#play-all-icon[data-v-1e1f2f30]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-1e1f2f30] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-1e1f2f30]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    top:55px;\n    bottom: 10px;\n    right: 0;\n    width: 180px;\n    padding: 5px 0 60px 0;\n    border-top-left-radius: 10px;\n    border-bottom-left-radius: 10px;\n    display: flex;\n    flex-direction: column-reverse;\n    justify-content: space-around;\n    /* overflow-y: scroll; */\n}\n.is-show[data-v-1e1f2f30] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-1e1f2f30]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#media-audio-frame[data-v-1e1f2f30] {\n    height: 100%;\n    background-color: rgba(0,0,0,0.8);\n}\n#audios[data-v-1e1f2f30]{\n    height: 100%;\n    margin: 0;\n    padding-left: 0;\n\n    display: flex;\n    flex-flow: column;\n    justify-content: space-around;\n}\n.audio-area[data-v-1e1f2f30] {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.audio-wrapper[data-v-1e1f2f30],\n  .non-audio-frame[data-v-1e1f2f30] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    /* background-color: cornflowerblue; */\n    border: 1.5px dotted lightgrey;\n    margin: 10px 5px;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-thumbnail[data-v-1e1f2f30] {\n    width: 53px;\n    height: 53px;\n    border-radius: 50%;\n}\n.media-audio-play-icon[data-v-1e1f2f30],\n  .media-audio-pause-icon[data-v-1e1f2f30] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.media-audio-play-icon[data-v-1e1f2f30] {\n    left: 18px;\n}\n.media-audio-pause-icon[data-v-1e1f2f30] {\n    left: 11px;\n}\n.media-audio-delete-icon[data-v-1e1f2f30] {\n    position: absolute;\n    left: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-1e1f2f30] {\n    position: absolute;\n    right: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-1e1f2f30] {\n    /* position: absolute;\n    top: 37px;\n    right: 30px; */\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-1e1f2f30]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-play-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-pause-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-1e1f2f30] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-1e1f2f30] {\n    color : white;\n    font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    top: 43px;\n    left: 40px;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-1e1f2f30] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-1e1f2f30] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-play-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-pause-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-delete-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-1e1f2f30]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-1e1f2f30] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-1e1f2f30] {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.is-reverse[data-v-1e1f2f30]{\n    transform: scale(-1, 1);\n}\n.media-audio-num[data-v-1e1f2f30] {\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    padding: 0 8px;\n    border-radius: 50%;\n    margin-right: -20px;\n    margin-top: -60px;\n    font-size: 16px;\n}\n.change-disp-audio[data-v-1e1f2f30] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-1e1f2f30]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isPlay[data-v-1e1f2f30] {\n    border-color: green;\n    opacity: 1;\n}\n.isLoop[data-v-1e1f2f30] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n@media screen and (max-width:480px) {\n.change-disp-audio[data-v-1e1f2f30] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-1e1f2f30] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-1e1f2f30] {\n    left: -25px;\n    top: -25px;\n}\n.media-audio-num[data-v-1e1f2f30] {\n    padding: 0 6px;\n    margin-right: -14px;\n    margin-top: -50px;\n    font-size: 13px;\n}\n}\n\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-6a0bf98f] {\n    padding-bottom: 5px;\n    margin-bottom: 5px;\n    border-bottom: double 2px grey;\n    width: 90px;\n\n    display: flex;\n    justify-content: space-between;\n}\n.size-Adjust-box[data-v-6a0bf98f] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-6a0bf98f]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-6a0bf98f] {\n    color: ghostwhite;\n    height: 50px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-6a0bf98f] {\n    color: green;\n}\n#play-all-icon[data-v-6a0bf98f]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-6a0bf98f] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-6a0bf98f]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-6a0bf98f] {\n    position: absolute;\n    top:55px;\n    bottom: 10px;\n    right: 0;\n    width: 180px;\n    padding: 5px 0 60px 0;\n    border-top-left-radius: 10px;\n    border-bottom-left-radius: 10px;\n    display: flex;\n    flex-direction: column-reverse;\n    justify-content: space-around;\n    /* overflow-y: scroll; */\n}\n.is-show[data-v-6a0bf98f] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-6a0bf98f]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#media-audio-frame[data-v-6a0bf98f] {\n    height: 100%;\n}\n#audios[data-v-6a0bf98f]{\n    height: 100%;\n    margin: 0;\n    padding-left: 0;\n\n    display: flex;\n    flex-flow: column;\n    justify-content: space-around;\n}\n.audio-area[data-v-6a0bf98f] {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.audio-wrapper[data-v-6a0bf98f],\n  .non-audio-frame[data-v-6a0bf98f] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    /* background-color: cornflowerblue; */\n    border: 1.5px dotted lightgrey;\n    margin: 10px 5px;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-thumbnail[data-v-6a0bf98f] {\n    width: 53px;\n    height: 53px;\n    border-radius: 50%;\n}\n.media-audio-play-icon[data-v-6a0bf98f],\n  .media-audio-pause-icon[data-v-6a0bf98f] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.media-audio-play-icon[data-v-6a0bf98f] {\n    left: 18px;\n}\n.media-audio-pause-icon[data-v-6a0bf98f] {\n    left: 11px;\n}\n.media-audio-delete-icon[data-v-6a0bf98f] {\n    position: absolute;\n    left: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-6a0bf98f] {\n    position: absolute;\n    right: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-6a0bf98f] {\n    /* position: absolute;\n    top: 37px;\n    right: 30px; */\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-6a0bf98f]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-play-icon[data-v-6a0bf98f] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-pause-icon[data-v-6a0bf98f] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-6a0bf98f] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-6a0bf98f] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-6a0bf98f] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-6a0bf98f] {\n    color : white;\n    font-size: 0.7rem;\n}\n.audio-vol-wrapper[data-v-6a0bf98f] {\n    position: absolute;\n    top: 43px;\n    left: 40px;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-6a0bf98f] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-6a0bf98f] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-play-icon[data-v-6a0bf98f]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-pause-icon[data-v-6a0bf98f]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-delete-icon[data-v-6a0bf98f]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-6a0bf98f]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-6a0bf98f] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-6a0bf98f] {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.is-reverse[data-v-6a0bf98f]{\n    transform: scale(-1, 1);\n}\n.media-audio-num[data-v-6a0bf98f] {\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    padding: 0 8px;\n    border-radius: 50%;\n    margin-right: -20px;\n    margin-top: -60px;\n    font-size: 16px;\n}\n.change-disp-audio[data-v-6a0bf98f] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-6a0bf98f]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isPlay[data-v-6a0bf98f] {\n    border-color: green;\n    opacity: 1;\n}\n.isLoop[data-v-6a0bf98f] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n@media screen and (max-width:480px) {\n.change-disp-audio[data-v-6a0bf98f] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-6a0bf98f] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-6a0bf98f] {\n    left: -25px;\n    top: -25px;\n}\n.media-audio-num[data-v-6a0bf98f] {\n    padding: 0 6px;\n    margin-right: -14px;\n    margin-top: -50px;\n    font-size: 13px;\n}\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -50607,6 +50759,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_style_index_0_id_6a0bf98f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_style_index_0_id_6a0bf98f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_style_index_0_id_6a0bf98f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaComponent.vue?vue&type=style&index=0&id=63cb17b8&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaComponent.vue?vue&type=style&index=0&id=63cb17b8&scoped=true&lang=css& ***!
@@ -52135,6 +52317,47 @@ component.options.__file = "resources/js/components/MediaAudioComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/MediaAudioPlayerComponent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/components/MediaAudioPlayerComponent.vue ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true& */ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true&");
+/* harmony import */ var _MediaAudioPlayerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MediaAudioPlayerComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _MediaAudioPlayerComponent_vue_vue_type_style_index_0_id_6a0bf98f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& */ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _MediaAudioPlayerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "6a0bf98f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/MediaAudioPlayerComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/MediaComponent.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/MediaComponent.vue ***!
@@ -53327,6 +53550,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioPlayerComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/MediaComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************!*\
   !*** ./resources/js/components/MediaComponent.vue?vue&type=script&lang=js& ***!
@@ -53850,6 +54089,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioComponent_vue_vue_type_style_index_0_id_1e1f2f30_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioComponent.vue?vue&type=style&index=0&id=1e1f2f30&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioComponent.vue?vue&type=style&index=0&id=1e1f2f30&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&":
+/*!************************************************************************************************************************!*\
+  !*** ./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_style_index_0_id_6a0bf98f_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=style&index=0&id=6a0bf98f&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -54383,6 +54635,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioComponent_vue_vue_type_template_id_1e1f2f30_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioComponent_vue_vue_type_template_id_1e1f2f30_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioComponent.vue?vue&type=template&id=1e1f2f30&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioComponent.vue?vue&type=template&id=1e1f2f30&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true& ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+/* harmony export */   "staticRenderFns": () => /* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MediaAudioPlayerComponent_vue_vue_type_template_id_6a0bf98f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true&");
 
 
 /***/ }),
@@ -56202,290 +56471,273 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      class: { "is-show": _vm.isShowAudio },
-      attrs: { id: "media-audio-wrapper" }
-    },
-    [
-      _c("div", { staticClass: "change-disp-audio-wrapper" }, [
-        _vm.isEditMode
-          ? _c("span", { staticClass: "media-audio-num" }, [
-              _vm._v(_vm._s(_vm.mediaAudioNum))
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("i", {
-          staticClass:
-            "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
-          class: { "is-reverse": _vm.isShowAudio },
-          on: {
-            click: function($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("i", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isShowAudio,
-              expression: "!isShowAudio"
-            }
-          ],
-          staticClass: "fas fa-music fa-2x change-disp-audio for-mobile",
-          on: {
-            click: function($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("i", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowAudio,
-              expression: "isShowAudio"
-            }
-          ],
-          staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
-          on: {
-            click: function($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            }
-          }
-        })
-      ]),
+  return _c("div", { attrs: { id: "media-audio-wrapper" } }, [
+    _c("div", { staticClass: "change-disp-audio-wrapper" }, [
+      _vm.isEditMode
+        ? _c("span", { staticClass: "media-audio-num" }, [
+            _vm._v(_vm._s(_vm.mediaAudioNum))
+          ])
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowAudio,
-              expression: "isShowAudio"
-            }
-          ],
-          staticClass: "media-audio-controller-zone"
-        },
-        [
-          _c(
-            "div",
-            {
-              directives: [
+      _c("i", {
+        staticClass:
+          "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
+        class: { "is-reverse": _vm.isShowAudio },
+        on: {
+          click: function($event) {
+            _vm.isShowAudio = !_vm.isShowAudio
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.isShowAudio,
+            expression: "!isShowAudio"
+          }
+        ],
+        staticClass: "fas fa-music fa-2x change-disp-audio for-mobile",
+        on: {
+          click: function($event) {
+            _vm.isShowAudio = !_vm.isShowAudio
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShowAudio,
+            expression: "isShowAudio"
+          }
+        ],
+        staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
+        on: {
+          click: function($event) {
+            _vm.isShowAudio = !_vm.isShowAudio
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShowAudio,
+            expression: "isShowAudio"
+          }
+        ],
+        attrs: { id: "media-audio-frame" }
+      },
+      [
+        _c(
+          "ul",
+          { attrs: { id: "audios" } },
+          [
+            _vm._l(_vm.getMediaAudios, function(mediaAudio, index) {
+              return _c(
+                "li",
                 {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isEditMode,
-                  expression: "isEditMode"
-                }
-              ],
-              staticClass: "all-audio-controll-wrapper"
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "all-audio-controller all-audio-play-wrapper" },
-                [
-                  _c("div", { staticClass: "size-Adjust-box" }, [
-                    _c("i", {
-                      staticClass: "fas fa-caret-right fa-3x",
-                      attrs: { id: "play-all-icon" },
-                      on: { click: _vm.playAllAudio }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticStyle: { color: "grey" } }, [
-                    _vm._v("play all")
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "all-audio-controller all-audio-finish-wrapper"
+                  key: mediaAudio.audio_url,
+                  staticClass: "audio-area",
+                  attrs: { id: index }
                 },
                 [
-                  _c("div", { staticClass: "size-Adjust-box" }, [
-                    _c("i", {
-                      staticClass: "fas fa-pause fa-2x",
-                      attrs: { id: "finish-all-icon" },
-                      on: { click: _vm.finishPlayAudio }
-                    })
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "audio-wrapper",
+                      class: { isPlay: mediaAudio["isPlay"] }
+                    },
+                    [
+                      _c("img", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: mediaAudio,
+                            expression: "mediaAudio"
+                          }
+                        ],
+                        staticClass: "media-audio-thumbnail",
+                        attrs: { src: "", alt: index }
+                      }),
+                      _vm._v(" "),
+                      _c("media-audio-player-component", {
+                        attrs: { mediaAudioIndex: index }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isEditMode,
+                            expression: "isEditMode"
+                          }
+                        ],
+                        staticClass:
+                          "media-audio-delete-icon fas fa-times fa-2x",
+                        on: { click: _vm.deleteAudio }
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isEditMode,
+                            expression: "isEditMode"
+                          }
+                        ],
+                        staticClass:
+                          "media-audio-loop-icon fas fa-undo-alt fa-2x",
+                        class: { isLoop: mediaAudio["isLoop"] },
+                        on: { click: _vm.setAudioLoop }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _c("span", { staticStyle: { color: "grey" } }, [
-                    _vm._v("stop all")
+                  mediaAudio
+                    ? _c("div", { staticClass: "media-audio-name-wrapper" }, [
+                        _c("span", { staticClass: "media-audio-name" }, [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(mediaAudio["name"]) +
+                              "\n          "
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "audio-vol-wrapper" }, [
+                    _c("i", {
+                      staticClass:
+                        "media-audio-vol-icon fas fa-volume-off fa-2x",
+                      on: { click: _vm.setAudioVolume }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vol-bar-wrapper" }, [
+                      _c("input", {
+                        staticClass: "audio-vol-range",
+                        attrs: {
+                          type: "range",
+                          id: index,
+                          min: "0",
+                          max: "1",
+                          step: "0.01"
+                        },
+                        on: { input: _vm.updateAudioVol }
+                      })
+                    ])
                   ])
                 ]
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { attrs: { id: "media-audio-frame" } }, [
-            _c(
-              "ul",
-              { attrs: { id: "audios" } },
-              [
-                _vm._l(_vm.mediaAudios, function(mediaAudio, index) {
-                  return _c(
-                    "li",
-                    {
-                      key: mediaAudio.audio_url,
-                      staticClass: "audio-area",
-                      attrs: { id: index }
-                    },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "audio-wrapper",
-                          class: { isPlay: mediaAudio["isPlay"] }
-                        },
-                        [
-                          _c("img", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: mediaAudio,
-                                expression: "mediaAudio"
-                              }
-                            ],
-                            staticClass: "media-audio-thumbnail",
-                            attrs: { src: "", alt: index }
-                          }),
-                          _vm._v(" "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !mediaAudio["isPlay"],
-                                expression: "!(mediaAudio['isPlay'])"
-                              }
-                            ],
-                            staticClass:
-                              "media-audio-play-icon fas fa-caret-right fa-4x",
-                            on: { click: _vm.playMediaAudio }
-                          }),
-                          _vm._v(" "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: mediaAudio["isPlay"],
-                                expression: "mediaAudio['isPlay']"
-                              }
-                            ],
-                            staticClass:
-                              "media-audio-pause-icon fas fa-pause fa-2x",
-                            on: { click: _vm.pauseMediaAudio }
-                          }),
-                          _vm._v(" "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isEditMode,
-                                expression: "isEditMode"
-                              }
-                            ],
-                            staticClass:
-                              "media-audio-delete-icon fas fa-times fa-2x",
-                            on: { click: _vm.deleteAudio }
-                          }),
-                          _vm._v(" "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isEditMode,
-                                expression: "isEditMode"
-                              }
-                            ],
-                            staticClass:
-                              "media-audio-loop-icon fas fa-undo-alt fa-2x",
-                            class: { isLoop: mediaAudio["isLoop"] },
-                            on: { click: _vm.setAudioLoop }
-                          })
-                        ]
-                      ),
-                      _vm._v(" "),
-                      mediaAudio
-                        ? _c(
-                            "div",
-                            { staticClass: "media-audio-name-wrapper" },
-                            [
-                              _c("span", { staticClass: "media-audio-name" }, [
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(mediaAudio["name"]) +
-                                    "\n            "
-                                )
-                              ])
-                            ]
-                          )
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "audio-vol-wrapper" }, [
-                        _c("i", {
-                          staticClass:
-                            "media-audio-vol-icon fas fa-volume-off fa-2x",
-                          on: { click: _vm.setAudioVolume }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "vol-bar-wrapper" }, [
-                          _c("input", {
-                            staticClass: "audio-vol-range",
-                            attrs: {
-                              type: "range",
-                              id: index,
-                              min: "0",
-                              max: "1",
-                              step: "0.01"
-                            },
-                            on: { input: _vm.updateAudioVol }
-                          })
-                        ])
-                      ])
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm._l(5, function(n) {
-                  return _c("li", {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.mediaAudios[n - 1],
-                        expression: "!(mediaAudios[n-1])"
-                      }
-                    ],
-                    key: n,
-                    staticClass: "non-audio-frame"
-                  })
-                })
-              ],
-              2
-            )
-          ])
-        ]
-      )
-    ]
-  )
+            }),
+            _vm._v(" "),
+            _vm._l(5, function(n) {
+              return _c("li", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: !_vm.getMediaAudios[n - 1],
+                    expression: "!(getMediaAudios[n-1])"
+                  }
+                ],
+                key: n,
+                staticClass: "non-audio-frame"
+              })
+            })
+          ],
+          2
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/MediaAudioPlayerComponent.vue?vue&type=template&id=6a0bf98f&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => /* binding */ render,
+/* harmony export */   "staticRenderFns": () => /* binding */ staticRenderFns
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "media-audio-frame" } }, [
+    _c(
+      "div",
+      {
+        staticClass: "audio-wrapper",
+        class: { isPlay: _vm.mediaAudio["isPlay"] }
+      },
+      [
+        _c("img", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.mediaAudio,
+              expression: "mediaAudio"
+            }
+          ],
+          staticClass: "media-audio-thumbnail",
+          attrs: { src: "", alt: _vm.index }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: !_vm.isPlay,
+              expression: "!(isPlay)"
+            }
+          ],
+          staticClass: "media-audio-play-icon fas fa-caret-right fa-4x",
+          on: { click: _vm.play }
+        }),
+        _vm._v(" "),
+        _c("i", {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isPlay,
+              expression: "isPlay"
+            }
+          ],
+          staticClass: "media-audio-pause-icon fas fa-pause fa-2x",
+          on: { click: _vm.pause }
+        })
+      ]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

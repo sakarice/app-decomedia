@@ -1,64 +1,82 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Mediaオーディオ -->
-  <div id="media-audio-wrapper">
+  <div id="media-audio-wrapper" v-bind:class="{'is-show': isShowAudio}">
     <!-- オーディオの表示・非表示切り替えアイコン -->
     <div class="change-disp-audio-wrapper">
       <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
+        <i v-on:click="isShowAudio = !(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
     </div>
+
+    <div v-show="isShowAudio" class="media-audio-controller-zone">
+      <!-- オーディオ再生・停止 -->
+      <div v-show="isEditMode" class="all-audio-controll-wrapper">
+        <div class="all-audio-controller all-audio-play-wrapper">
+          <!-- <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button> -->
+          <div class="size-Adjust-box">
+            <i id="play-all-icon" class="fas fa-caret-right fa-3x" @click="playAllAudio"></i>
+          </div>
+          <span style="color:grey">play all</span>
+        </div>
+
+        <div class="all-audio-controller all-audio-finish-wrapper">
+          <div class="size-Adjust-box">
+            <!-- <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button> -->
+            <i id="finish-all-icon" class="fas fa-pause fa-2x" @click="finishPlayAudio"></i>
+          </div>
+          <span style="color:grey">stop all</span>
+        </div>
+      </div>
 
       <!-- 選択したオーディオ一覧 -->
-    <!-- <div id="media-audio-frame" v-bind:class="{'is-show': isShowAudio}"> -->
-    <div id="media-audio-frame" v-show="isShowAudio">
-      <ul id="audios">
-        <li class="audio-area" :id="index" v-for="(mediaAudio, index) in getMediaAudios" :key="mediaAudio.audio_url">
-          <!-- オーディオのサムネと各種アイコン -->
-          <div class="audio-wrapper" :class="{'isPlay' : mediaAudio['isPlay']}">
-            <img class="media-audio-thumbnail"
-            src="" v-show="mediaAudio" :alt="index">
-            <media-audio-player-component
-            :mediaAudioIndex="index">
-            </media-audio-player-component>
-            <i class="media-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
-            <i class="media-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
-          </div>
-          <!-- オーディオ名 -->
-          <div v-if="mediaAudio" class="media-audio-name-wrapper">
-            <span class="media-audio-name">
-              {{mediaAudio['name']}}
-            </span>
-          </div>
-          <!-- ボリューム -->
-          <div class="audio-vol-wrapper">
-            <i class="media-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
-            <div class="vol-bar-wrapper">
-              <input type="range" :id="index" class="audio-vol-range" v-on:input="updateAudioVol" min="0" max="1" step="0.01">
+      <div id="media-audio-frame">
+        <ul id="audios">
+          <li class="audio-area" :id="index" v-for="(mediaAudio, index) in mediaAudios" :key="mediaAudio.audio_url">
+            <!-- オーディオのサムネと各種アイコン -->
+            <div class="audio-wrapper" :class="{'isPlay' : mediaAudio['isPlay']}">
+              <img class="media-audio-thumbnail"
+              src="" v-show="mediaAudio"
+              :alt="index">
+              <i class="media-audio-play-icon fas fa-caret-right fa-4x" v-on:click="playMediaAudio" v-show="!(mediaAudio['isPlay'])"></i>
+              <i class="media-audio-pause-icon fas fa-pause fa-2x" v-on:click="pauseMediaAudio" v-show="mediaAudio['isPlay']"></i>
+              <i class="media-audio-delete-icon fas fa-times fa-2x" v-on:click="deleteAudio" v-show="isEditMode"></i>
+              <i class="media-audio-loop-icon fas fa-undo-alt fa-2x" v-on:click="setAudioLoop" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
             </div>
-          </div>
+            <!-- オーディオ名 -->
+            <div v-if="mediaAudio" class="media-audio-name-wrapper">
+              <span class="media-audio-name">
+                {{mediaAudio['name']}}
+              </span>
+            </div>
+            <!-- ボリューム -->
+            <div class="audio-vol-wrapper">
+              <i class="media-audio-vol-icon fas fa-volume-off fa-2x" v-on:click="setAudioVolume"></i>
+              <div class="vol-bar-wrapper">
+                <input type="range" :id="index" class="audio-vol-range" v-on:input="updateAudioVol" min="0" max="1" step="0.01">
+              </div>
+            </div>
 
-        </li>
-        <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(getMediaAudios[n-1])">
-        </li>
-      </ul>
+          </li>
+          <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(mediaAudios[n-1])">
+          </li>
+        </ul>
+      </div>
     </div>
+
+
+
   </div>
   <!-- </transition> -->
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
-  import MediaAudioPlayer from './MediaAudioPlayerComponent.vue';
-
   export default {
-    components: {
-      MediaAudioPlayer,
-    },
     props : [
       'maxAudioNum',
-      // 'mediaAudios',
+      'mediaAudios',
     ],
 
     data : () => {
@@ -66,41 +84,41 @@
         audioPlayers : [],
         isShowAudio : false,
         isEditMode : false,
+        mediaAudioNum : 0,
       }
     },
     computed : {
       ...mapGetters('mediaAudios', ['getMediaAudios']),
-      mediaAudioNum : function(){
-        return this.getMediaAudios.length;
-      }
     },
     methods : {
       ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
       ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
       ...mapMutations('mediaAudios', ['updateMediaAudiosObjectItem']),
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
-      // media閲覧時に最初に実行される
-      hideAudio(){ this.isShowAudio = false; },
-      // 親コンポーネントから実行される
-      validEditMode(){ this.isEditMode = true; },
+      hideAudio(){ // media閲覧時に最初に実行される
+        this.isShowAudio = false;
+      },
+      validEditMode(){ // 親コンポーネントから実行される
+        this.isEditMode = true;
+      },
       playMediaAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.getMediaAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].play();
-        this.getMediaAudios[audioIndex]['isPlay'] = true;
+        this.$parent.mediaAudios[audioIndex]['isPlay'] = true;
       },
       pauseMediaAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.getMediaAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].pause();
-        this.getMediaAudios[audioIndex]['isPlay'] = false;
+        this.$parent.mediaAudios[audioIndex]['isPlay'] = false;
       },
       onFinishAudio : function(i){
         let mediaAudioNum = this.$parent.mediaAudios.length;
         for(let j=0; j < mediaAudioNum; j++){
-          let mediaAudio = this.getMediaAudios[j];
+          let mediaAudio = this.$parent.mediaAudios[j];
           if(mediaAudio['player_index'] == i && mediaAudio['isLoop'] == false){
-            this.getMediaAudios[j]['isPlay'] = false;
+            this.$parent.mediaAudios[j]['isPlay'] = false;
           }
         }
       },
@@ -110,7 +128,7 @@
         });
         let audioNum = this.$parent.mediaAudios.length;
         for(let i = 0; i < audioNum; i++){
-          this.getMediaAudios[i]['isPlay'] = true;
+          this.$parent.mediaAudios[i]['isPlay'] = true;
         }
       },
       finishPlayAudio(){
@@ -122,10 +140,10 @@
       setPlayerInfo(){ // 親コンポーネントのmediaAudiosから再生情報を取得
         let audioNum = this.$parent.mediaAudios.length;
         for(let i=0; i < audioNum; i++){
-          let audioPlayerIndex = this.getMediaAudios[i]['player_index'];
-          this.audioPlayers[audioPlayerIndex].src = this.getMediaAudios[i]['audio_url'];
-          this.audioPlayers[audioPlayerIndex].volume = this.getMediaAudios[i]['volume'];
-          this.audioPlayers[audioPlayerIndex].loop = this.getMediaAudios[i]['isLoop'];
+          let audioPlayerIndex = this.mediaAudios[i]['player_index'];
+          this.audioPlayers[audioPlayerIndex].src = this.mediaAudios[i]['audio_url'];
+          this.audioPlayers[audioPlayerIndex].volume = this.mediaAudios[i]['volume'];
+          this.audioPlayers[audioPlayerIndex].loop = this.mediaAudios[i]['isLoop'];
         }
       },
       addAudio(audio) {
@@ -138,7 +156,7 @@
         if(beforeAudioNum == this.maxAudioNum){
           // まずはプレイヤーの初期化
           // 一番古いオーディオに対応するプレイヤーを選択
-          let resetPlayerIndex = this.getMediaAudios[0]['player_index'];
+          let resetPlayerIndex = this.$parent.mediaAudios[0]['player_index'];
           this.audioPlayers[resetPlayerIndex].pause(); // 停止して
           let newAudio = new Audio(); //新しいオーディオプレイヤーを作って
           this.audioPlayers.splice(resetPlayerIndex, 1, newAudio); // プレイヤーを入れ替え
@@ -151,7 +169,7 @@
 
         // 追加されたオーディオの情報を取得
         let addedAudioIndex = this.$parent.mediaAudios.length - 1;
-        let addedAudio = this.getMediaAudios[addedAudioIndex];
+        let addedAudio = this.$parent.mediaAudios[addedAudioIndex];
         let addedAudioUrl = addedAudio['audio_url'];
         
         // 空いているオーディオプレイヤーの中で一番小さいIndexを取得
@@ -189,7 +207,7 @@
         for(let i = 0; i < audioNum; i++){
           // オーディオのサムネイル表示&更新
           let audioThumbnail = audioDoms[i].firstChild;
-          let targetAudio = this.getMediaAudios[i];
+          let targetAudio = this.$parent.mediaAudios[i];
           audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
         }
       },
@@ -200,7 +218,7 @@
       },
       deleteAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.getMediaAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
         let newAudioPlayer = new Audio(); // 新しいplayerを用意して、
         this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
@@ -220,14 +238,14 @@
       },
       setAudioLoop: function(event){  
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
-        let playerIndex = this.getMediaAudios[audioIndex]['player_index'];
+        let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];
         let audioPlayer = this.audioPlayers[playerIndex];
         if(audioPlayer.loop == false){
           audioPlayer.loop = true;
         } else if(audioPlayer.loop == true){
           audioPlayer.loop = false;
         }
-        this.getMediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
+        this.$parent.mediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
       },
       setAudioVolume: function(event) {
         console.log('called setAudioVolume', event.target.getAttribute('class'));
@@ -237,9 +255,9 @@
       },
       updateAudioVol(event){
         let audioIndex = event.target.getAttribute('id');
-        let audioPlayerIndex = this.getMediaAudios[audioIndex]['player_index'];
+        let audioPlayerIndex = this.mediaAudios[audioIndex]['player_index'];
         let audioVolume = event.target.value;
-        this.getMediaAudios[audioIndex]['volume'] = audioVolume;
+        this.mediaAudios[audioIndex]['volume'] = audioVolume;
         this.audioPlayers[audioPlayerIndex].volume = audioVolume;
       }
 
@@ -255,7 +273,11 @@
         this.audioPlayers[i].onended = this.onFinishAudio.bind(this,i);
       };
     },
-    watch : { }
+    watch : {
+      mediaAudios : function(){
+        this.mediaAudioNum = this.$parent.mediaAudios.length;
+      }
+    }
 
   }
 
@@ -340,7 +362,6 @@
 
   #media-audio-frame {
     height: 100%;
-    background-color: rgba(0,0,0,0.8);
   }
 
   #audios{

@@ -147,6 +147,7 @@ export default {
   },
   computed : {
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaAudio', ['getMediaAudio']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
@@ -200,7 +201,7 @@ export default {
       const tmpThis = this;
       let media_datas = {
         'img' : this.getMediaImg,
-        'audios' : this.mediaAudios,
+        'audios' : this.getMediaAudio,
         'movie' : this.getMediaMovie,
         'setting' : this.getMediaSetting,
       }

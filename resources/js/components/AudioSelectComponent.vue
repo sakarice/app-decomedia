@@ -74,6 +74,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
   props : ['transitionName'],
   data : () => {
@@ -97,6 +98,8 @@ export default {
     }
   },
   methods : {
+    ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
+    ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     finishPlay(){
       let audioDuration = this.audioPlayer.duration;
       this.audioPlayer.currentTime = audioDuration - 1;
@@ -211,7 +214,8 @@ export default {
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       audio['isPlay'] = false;
 
-      this.$emit('add-audio', audio);
+      // this.$emit('add-audio', audio);
+      this.addMediaAudiosObjectItem(audio);
     },
     
     dragEnter: function() {
