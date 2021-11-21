@@ -1,12 +1,10 @@
 <template>
   <!-- 選択したオーディオ一覧 -->
-  <div id="media-audio-frame">
-    <!-- オーディオのサムネと各種アイコン -->
-    <div class="audio-wrapper" :class="{'isPlay' : mediaAudio['isPlay']}">
-      <img v-show="mediaAudio" class="media-audio-thumbnail" src="" :alt="index">
-      <i class="media-audio-play-icon fas fa-caret-right fa-4x" v-on:click="play" v-show="!(isPlay)"></i>
-      <i class="media-audio-pause-icon fas fa-pause fa-2x" v-on:click="pause" v-show="isPlay"></i>
-    </div>
+  <!-- オーディオのサムネと各種アイコン -->
+  <div class="audio-wrapper" :class="{'isPlay' : getMediaAudios['isPlay']}">
+    <img v-show="getMediaAudios" class="media-audio-thumbnail" :src="thumbnailUrl">
+    <i class="media-audio-play-icon fas fa-caret-right fa-4x" v-on:click="play" v-show="!(isPlay)"></i>
+    <i class="media-audio-pause-icon fas fa-pause fa-2x" v-on:click="pause" v-show="isPlay"></i>
   </div>
 </template>
 
@@ -20,30 +18,59 @@
     data : () => {
       return {
         player : "",
+        isPlay : false,
       }
     },
     computed : {
       ...mapGetters('mediaAudios', ['getMediaAudios']),
-      isPlay : function(){ return this.player.play },
+      thumbnailUrl : function(){
+        return this.getMediaAudios[this.mediaAudioIndex]['thumbnail_url'];
+      },
     },
     methods : {
-      play(){ this.player.play(); },
-      pause(){ this.player.pause(); },
+      play(){ 
+        this.player.play(); 
+      },
+      pause(){ 
+        this.player.pause(); 
+        this.isPlay = false;
+      },
+      finish(){ // 再生位置を終わりに設定して疑似的に再生終了を実現する
+        this.player.currentTime = this.player.duration;
+      },
       setPlayerInfo(){ // 親コンポーネントのmediaAudiosから再生情報を取得
-          this.player.src = this.getMediaAudios['mediaAudioIndex']['audio_url'];
-          this.player.volume = this.getMediaAudios['mediaAudioIndex']['volume'];
-          this.player.loop = this.getMediaAudios['mediaAudioIndex']['isLoop'];
+          // this.player.src = this.getMediaAudios[this.mediaAudioIndex]['audio_url'];
+          this.player.volume = this.getMediaAudios[this.mediaAudioIndex]['volume'];
+          this.player.loop = this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
       },
       updateAudioThumbnail(){},
       updateLoopSetting(loopSetting){ this.player.loop = loopSetting},
       updateVolume(volume){ this.player.volume = volume; },
-      onFinishAudio(){console.log('audio再生終了')},
+      onPlayingAudio(){this.isPlay = true; },
+      onNotPlayingAudio(){this.isPlay = false; },
+      onFinishAudio(){if(this.player.loop==false){this.onNotPlayingAudio()}},
     },
-    mounted : function() {
-      this.player = new Audio();
-      this.player.onended = this.onFinishAudio();
+    created : function(){
+      let tmpThis = this;
+      const setAudioData = new Promise((resolve,reject)=>{
+        tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
+        tmpThis.setPlayerInfo();
+        resolve();
+      });
+      setAudioData.then(function(){
+        tmpThis.player.addEventListener('loadedmetadata', function(){
+          tmpThis.$emit('setMediaAudioDuration', tmpThis.mediaAudioIndex, tmpThis.player.duration);
+          tmpThis.$emit('taskAfterAudioAdded', tmpThis.mediaAudioIndex);
+        });
+        tmpThis.player.addEventListener('playing',()=>{ tmpThis.onPlayingAudio() });
+        tmpThis.player.addEventListener('pause',()=>{ tmpThis.onNotPlayingAudio() });
+        tmpThis.player.addEventListener('ended',()=>{ tmpThis.onFinishAudio()});
+
+      })
+
     },
-    watch : {}
+    mounted : function() {},
+    watch : {},
 
   }
 
@@ -141,7 +168,7 @@
 
   }
 
-  .audio-area {
+  .audio-wrapper {
     position: relative;
     display: flex;
     align-items: center;
@@ -214,35 +241,35 @@
   }
 
   /* hover設定(wrapper) */
-  .audio-area:hover {
+  .audio-wrapper:hover {
     opacity: 1;
   }
 
-  .audio-area:hover
+  .audio-wrapper:hover
   .media-audio-play-icon {
     z-index: 2;
     display: inline-block;
   }
 
-  .audio-area:hover
+  .audio-wrapper:hover
   .media-audio-pause-icon {
     z-index: 2;
     display: inline-block;
   }
 
-  .audio-area:hover
+  .audio-wrapper:hover
   .media-audio-delete-icon {
     z-index: 2;
     display: inline-block;
   }
 
-  .audio-area:hover
+  .audio-wrapper:hover
   .media-audio-loop-icon {
     z-index: 2;
     display: inline-block;
   }
 
-  .audio-area:hover
+  .audio-wrapper:hover
   .media-audio-vol-icon {
     z-index: 2;
     display: inline-block;

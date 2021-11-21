@@ -212,7 +212,10 @@ export default {
       audio['name'] = tmpAudio['name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
-      audio['isPlay'] = false;
+      // audio['isPlay'] = false;
+      audio['isLoop'] = false;
+      audio['duration'] = 0;
+      audio['volume'] = 0.5;
 
       // this.$emit('add-audio', audio);
       this.addMediaAudiosObjectItem(audio);

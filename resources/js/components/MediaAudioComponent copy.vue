@@ -542,6 +542,7 @@
     bottom: 0px;
     width: 100%;
     height: auto;
+    z-index : 10;
 
     display: flex;
     justify-content: flex-end;

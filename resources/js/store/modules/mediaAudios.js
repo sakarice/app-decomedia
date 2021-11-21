@@ -13,14 +13,15 @@ const mediaAudios = {
     //   'thumbnail_url' : "",
     //   'volume' : 0.5,
     //   'isLoop': false,
+    //   'duration' : 0,
     // },
   },
   getters : {
     getMediaAudios : function(state){ return state.mediaAudios; },
   },
   mutations : {
-    deleteMediaAudiosObjectItem(state){
-      state.mediaAudios.splice(0,1) // 最も古いaudioを1つ削除
+    deleteMediaAudiosObjectItem(state, payload){
+      state.mediaAudios.splice(payload,1) // audioを1つ削除
     },
     addMediaAudiosObjectItem(state, payload){
       state.mediaAudios.push(payload);
