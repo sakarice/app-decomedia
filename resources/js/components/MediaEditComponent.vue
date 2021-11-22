@@ -20,7 +20,6 @@
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
      :maxAudioNum="getMediaSetting['maxAudioNum']"
-     :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
@@ -283,8 +282,6 @@ export default {
 
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
-      this.$refs.mediaAudio.setPlayerInfo();
-      this.$refs.mediaAudio.updateAudioThumbnail();
       this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;

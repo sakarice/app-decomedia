@@ -151,7 +151,12 @@
 
     },
     mounted : function() {},
-    watch : { }
+    watch : { 
+      mediaAudioNum : function(audioNum){
+        if(audioNum > this.maxAudioNum){this.deleteAudio(0)}
+      },
+      
+    }
 
   }
 
@@ -216,7 +221,7 @@
     padding: 5px 0 60px 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;    
+    justify-content: space-around;
   }
   #media-audio-frame {
     background-color: rgba(0,0,0,0.8);
@@ -423,6 +428,7 @@
     position: absolute;
     bottom: 0px;
     width: 100%;
+    z-index: 10;
     height: auto;
 
     display: flex;

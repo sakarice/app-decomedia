@@ -19,7 +19,6 @@
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
      :maxAudioNum="getMediaSetting['maxAudioNum']"
-     :mediaAudios="mediaAudios"
      ref="mediaAudio">
     </media-audio-component>
 
