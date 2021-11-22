@@ -63,8 +63,7 @@
     <div id="app">
         {{-- ヘッダー --}}
         <header-component
-        :csrf="{{json_encode(csrf_token())}}"
-        :is-login=@json($isLogin)>
+        :csrf="{{json_encode(csrf_token())}}">
         </header-component>
 
         {{-- Mediaの一覧を表示 --}}

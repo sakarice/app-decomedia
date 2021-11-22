@@ -43,7 +43,6 @@ class HomeController extends Controller
 
         // ログイン、ログアウト、サインアップの表示/非表示      
         $data = [
-            'isLogin' => Auth::check(),
             'mediaPreviewInfos' => $mediaPreviewInfos
         ];
 
