@@ -63,8 +63,6 @@
     <audio-select-component 
     v-show="isShowModal['audioModal']" 
     v-on:close-modal="closeModal"
-    v-on:add-audio="addAudio"
-    v-on:audio-del-notice="judgeDelAudio"
     :transitionName="transitionName">
     </audio-select-component>
 
@@ -122,16 +120,10 @@ export default {
     Overlay,
     Loading,
   },
-  props: [
-    'mediaImgData',
-    'mediaAudiosData',
-    'mediaMovieData',
-    'mediaSettingData',
-  ],
+  props: [],
   data : () => {
     return {
       getReadyCreateMovieFrame : false,
-      autoPlay : false,
       transitionName : 'slide-in',
       isCreatingMedia : false,
       isShowModal : {
@@ -140,7 +132,6 @@ export default {
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
-      mediaAudios : [],
 
     }
   },
@@ -167,12 +158,6 @@ export default {
       for(let key in this.isShowModal){
         this.isShowModal[key] = false;
       }
-    },
-    addAudio(audio) {
-      this.$refs.mediaAudio.addAudio(audio);
-    },
-    judgeDelAudio(url) {
-      this.$refs.mediaAudio.judgeDelAudio(url);
     },
     createMovieFrame(){
       let vars = {

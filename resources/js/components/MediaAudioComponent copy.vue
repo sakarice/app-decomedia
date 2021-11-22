@@ -211,11 +211,6 @@
           audioThumbnail.setAttribute('src', targetAudio['thumbnail_url']);
         }
       },
-      judgeDelAudio(url) {
-        if(this.mediaAudioUrl == url){
-          this.mediaAudioUrl = "";
-        }
-      },
       deleteAudio: function(event) {
         let audioIndex = event.target.parentNode.parentNode.getAttribute('id');
         let playerIndex = this.$parent.mediaAudios[audioIndex]['player_index'];

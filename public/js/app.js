@@ -2601,8 +2601,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -2629,11 +2627,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Overlay: _OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_9__.default,
     Loading: _LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
-  props: ['mediaImgData', 'mediaAudiosData', 'mediaMovieData', 'mediaSettingData'],
+  props: [],
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
-      autoPlay: false,
       transitionName: 'slide-in',
       isCreatingMedia: false,
       isShowModal: {
@@ -2641,8 +2638,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'audioModal': false,
         'movieModal': false,
         'mediaSettingModal': false
-      },
-      mediaAudios: []
+      }
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaAudio', ['getMediaAudio'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapGetters)('mediaSetting', ['getMediaSetting'])),
@@ -2665,12 +2661,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var key in this.isShowModal) {
         this.isShowModal[key] = false;
       }
-    },
-    addAudio: function addAudio(audio) {
-      this.$refs.mediaAudio.addAudio(audio);
-    },
-    judgeDelAudio: function judgeDelAudio(url) {
-      this.$refs.mediaAudio.judgeDelAudio(url);
     },
     createMovieFrame: function createMovieFrame() {
       var vars = {
@@ -4267,8 +4257,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 
@@ -4297,7 +4285,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       getReadyCreateMovieFrame: false,
-      autoPlay: false,
       transitionName: 'slide-in',
       isUploadingMedia: false,
       isShowModal: {
@@ -4305,12 +4292,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'audioModal': false,
         'movieModal': false,
         'mediaSettingModal': false
-      },
-      mediaAudios: []
+      }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaSetting', ['getMediaSetting'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, (_objectSpread2 = {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, (_objectSpread2 = {
     // ●Media読み込み時の初期化処理
     initImg: function initImg() {
       var _this = this;
@@ -4324,6 +4310,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
+    initAudio: function initAudio() {
+      var tmpMediaAudios = JSON.parse(this.mediaAudiosData);
+      var audioNum = tmpMediaAudios.length;
+
+      for (var i = 0; i < audioNum; i++) {
+        // tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
+        tmpMediaAudios[i]['isPlay'] = false;
+        this.addMediaAudiosObjectItem(tmpMediaAudios[i]); // this.mediaAudios.push(tmpMediaAudios[i]);
+      }
+    },
     initMovie: function initMovie() {
       var _this2 = this;
 
@@ -4336,17 +4332,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-    initAudio: function initAudio() {
-      var tmpMediaAudios = JSON.parse(this.mediaAudiosData);
-      var audioNum = tmpMediaAudios.length;
-
-      for (var i = 0; i < audioNum; i++) {
-        tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
-
-        tmpMediaAudios[i]['isPlay'] = false;
-        this.mediaAudios.push(tmpMediaAudios[i]);
-      }
-    },
     initSetting: function initSetting() {
       var _this3 = this;
 
@@ -4358,9 +4343,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           value: tmpSettingData[mediaSettingKey]
         });
       });
-    },
-    setAudioThumbnail: function setAudioThumbnail() {
-      this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame: function createMovieFrame() {
       var vars = {
@@ -4389,12 +4371,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var key in this.isShowModal) {
         this.isShowModal[key] = false;
       }
-    },
-    addAudio: function addAudio(audio) {
-      this.$refs.mediaAudio.addAudio(audio);
-    },
-    judgeDelAudio: function judgeDelAudio(url) {
-      this.$refs.mediaAudio.judgeDelAudio(url);
     }
   }, _defineProperty(_objectSpread2, "createMovieFrame", function createMovieFrame() {
     var vars = {
@@ -4426,7 +4402,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var url = '/media/update';
     var media_datas = {
       'img': this.getMediaImg,
-      'audios': this.mediaAudios,
+      'audios': this.getMediaAudios,
       'movie': this.getMediaMovie,
       'setting': this.getMediaSetting
     };
@@ -55555,11 +55531,7 @@ var render = function() {
           }
         ],
         attrs: { transitionName: _vm.transitionName },
-        on: {
-          "close-modal": _vm.closeModal,
-          "add-audio": _vm.addAudio,
-          "audio-del-notice": _vm.judgeDelAudio
-        }
+        on: { "close-modal": _vm.closeModal }
       }),
       _vm._v(" "),
       _c("movie-setting-component", {
@@ -57100,11 +57072,7 @@ var render = function() {
           }
         ],
         attrs: { transitionName: _vm.transitionName },
-        on: {
-          "close-modal": _vm.closeModal,
-          "add-audio": _vm.addAudio,
-          "audio-del-notice": _vm.judgeDelAudio
-        }
+        on: { "close-modal": _vm.closeModal }
       }),
       _vm._v(" "),
       _c("movie-setting-component", {

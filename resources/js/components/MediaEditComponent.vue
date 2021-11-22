@@ -66,8 +66,6 @@
     <audio-select-component 
     v-show="isShowModal['audioModal']" 
     v-on:close-modal="closeModal"
-    v-on:add-audio="addAudio"
-    v-on:audio-del-notice="judgeDelAudio"
     :transitionName="transitionName">
     </audio-select-component>
 
@@ -132,7 +130,6 @@ export default {
   data : () => {
     return {
       getReadyCreateMovieFrame : false,
-      autoPlay : false,
       transitionName : 'slide-in',
       isUploadingMedia : false,
       isShowModal : {
@@ -141,17 +138,18 @@ export default {
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
-      mediaAudios : [],
 
     }
   },
   computed : {
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+    ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     // ●Media読み込み時の初期化処理
@@ -164,6 +162,16 @@ export default {
         this.updateMediaImgObjectItem({key:mediaImgKey, value:tmpImgData[mediaImgKey]});
       });
     },
+    initAudio(){
+      let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
+      let audioNum = tmpMediaAudios.length;
+      for(let i=0; i < audioNum; i++){
+        // tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
+        tmpMediaAudios[i]['isPlay'] = false;
+        this.addMediaAudiosObjectItem(tmpMediaAudios[i]);
+        // this.mediaAudios.push(tmpMediaAudios[i]);
+      }
+    },
     initMovie(){
       let tmpMovieData = JSON.parse(this.mediaMovieData);
       const mediaMovieKeys = [
@@ -173,15 +181,6 @@ export default {
         this.updateMediaMovieObjectItem({key:mediaMovieKey, value:tmpMovieData[mediaMovieKey]});
       });
     },
-    initAudio(){
-      let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
-      let audioNum = tmpMediaAudios.length;
-      for(let i=0; i < audioNum; i++){
-        tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
-        tmpMediaAudios[i]['isPlay'] = false;
-        this.mediaAudios.push(tmpMediaAudios[i]);
-      }
-    },
     initSetting(){
       let tmpSettingData = JSON.parse(this.mediaSettingData);
       const mediaSettingKeys = [
@@ -190,9 +189,6 @@ export default {
       mediaSettingKeys.forEach(mediaSettingKey => {
         this.updateMediaSettingObjectItem({key:mediaSettingKey, value:tmpSettingData[mediaSettingKey]});
       });
-    },
-    setAudioThumbnail(){
-      this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame(){
       let vars = {
@@ -221,12 +217,6 @@ export default {
         this.isShowModal[key] = false;
       }
     },
-    addAudio(audio) {
-      this.$refs.mediaAudio.addAudio(audio);
-    },
-    judgeDelAudio(url) {
-      this.$refs.mediaAudio.judgeDelAudio(url);
-    },
     createMovieFrame(){
       let vars = {
         'videoId' : this.getMediaMovie['videoId'],
@@ -253,7 +243,7 @@ export default {
       const url = '/media/update';
       let media_datas = {
         'img' : this.getMediaImg,
-        'audios' : this.mediaAudios,
+        'audios' : this.getMediaAudios,
         'movie' : this.getMediaMovie,
         'setting' : this.getMediaSetting,
       }
