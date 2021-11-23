@@ -23,7 +23,7 @@
     data : () => {
       return {
         ytPlayer : "",
-        playerVars : {},
+        // playerVars : {},
       }
     },
     computed : {
@@ -40,11 +40,11 @@
           this.updateMediaSettingObjectItem({kye:'isLoop', value:false});
         }
       },
-      createYtPlayer(vars){
+      createYtPlayer(){
         this.ytPlayer = new YT.Player('player', {
-          height: vars['height'],
-          width: vars['width'],
-          videoId: vars['videoId'],
+          height: this.getMediaMovie['height'],
+          width: this.getMediaMovie['width'],
+          videoId: this.getMediaMovie['videoId'],
           playerVars: {
             // 'autoplay' : 0,
             // 'loop' : false,
@@ -121,9 +121,7 @@
       const firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-      window.onYouTubeIframeAPIReady = () => {
-        console.log('get youtube ready');
-      }
+      window.onYouTubeIframeAPIReady = () => {}
     },
 
 

@@ -59,6 +59,15 @@ Route::middleware('auth')->group(function(){
         Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
     // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
+    
+    // メディア画像
+        Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
+    // メディア音楽
+        Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
+    // メディア動画
+        Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
+    // メディア設定
+        Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');

@@ -5,12 +5,16 @@ namespace App\Lib;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\RooAudioController;
+use App\Http\Controllers\MediaAudioController;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\MediaAudio;
 use App\Models\PublicAudio;
+use App\Models\PublicAudioThumbnail;
+use App\Models\PublicAudioAudioThumbnail;
 use App\Models\UserOwnAudio;
+use App\Models\UserOwnAudioThumbnail;
+use App\Models\UserOwnAudioAudioThumbnail;
 use Storage;
 
 class MediaAudioUtil
@@ -30,7 +34,6 @@ class MediaAudioUtil
       if($req_media_audio['type'] == 2){ //2:ユーザのアップロードした音楽
           $mediaAudio->owner_user_id = Auth::user()->id;
       } // 2以外はpublicオーディオ(=ユーザのものでない）ので、NULLで良い
-      \Log::info('called saveMediaAudioData');
       $mediaAudio->save();
     }
 
@@ -46,17 +49,26 @@ class MediaAudioUtil
       // Media音楽の情報を連想配列として一つずつ取得し、配列に追加していく
       foreach($media_audios as $media_audio){
         $audio_model;
+        $thumbnail_url;
         if($media_audio->audio_type == 1){
           $audio_model = PublicAudio::where('id', $media_audio->audio_id)->first();
+          $thumbnail_id = PublicAudioAudioThumbnail::where('audio_id', $audio_model->id)->first()->audio_thumbnail_id;
+          if(isset(PublicAudioThumbnail::find($thumbnail_id)->img_url)){
+            $thumbnail_url = PublicAudioThumbnail::find($thumbnail_id)->img_url;
+          } else {
+            $thumbnail_url = config('audioThumbnail.url');
+          }
         } else if($media_audio->audio_type == 2) {
           $audio_model = UserOwnAudio::where('id', $media_audio->audio_id)->first();
+          $thumbnail_id = UserOwnAudioAudioThumbnail::where('audio_id', $audio_model->id)->first()->audio_thumbnail_id;
+          $thumbnail_url = UserOwnAudioThumbnail::find($thumbnail_id)->img_url;
         }
         $tmp_media_audio_data = [
           'id' => $media_audio->audio_id,
           'type' => $media_audio->audio_type,
           'name' => $audio_model->name,
           'audio_url' => $audio_model->audio_url,
-          'thumbnail_url' => $audio_model->thumbnail_url,
+          'thumbnail_url' => $thumbnail_url,
           'volume' => $media_audio->volume,
           'isLoop' => $media_audio->isLoop,
         ];

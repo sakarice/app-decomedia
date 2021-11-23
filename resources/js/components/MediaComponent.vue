@@ -189,12 +189,7 @@ export default {
       this.$refs.mediaAudio.updateAudioThumbnail();
     },
     createMovieFrame(){
-      let vars = {
-        'videoId' : this.getMediaMovie['videoId'],
-        'width' : this.getMediaMovie['width'],
-        'height' : this.getMediaMovie['height'],
-      };
-      this.$refs.mediaMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer();
     },
 
   },

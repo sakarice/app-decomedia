@@ -122,14 +122,20 @@ export default {
     Loading,
   },
   props: [
-    'mediaImgData',
-    'mediaAudiosData',
-    'mediaMovieData',
-    'mediaSettingData',
+    // 'mediaImgData',
+    // 'mediaAudiosData',
+    // 'mediaMovieData',
+    // 'mediaSettingData',
   ],
   data : () => {
     return {
       getReadyCreateMovieFrame : false,
+      initStatus : 0,
+      // ↑initStatusについて
+      // 下記の加算で状態を表す(合計でmax31)
+      // 1:画像,2:音楽,4:動画,8:設定,16:youtubePlayer
+      // 例えば,28以上なら動画(4)、設定(8)、youtube(16)の初期化が完了していると見なせる
+
       transitionName : 'slide-in',
       isUploadingMedia : false,
       isShowModal : {
@@ -138,65 +144,86 @@ export default {
         'movieModal' : false,
         'mediaSettingModal' : false,
       },
+      autoplay : false,
 
     }
   },
   computed : {
+    ...mapGetters('media', ['getMediaId']),
     ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
+    ...mapMutations('media', ['setMediaId']),
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     // ●Media読み込み時の初期化処理
+    extractMediaIdFromUrl(){
+      const path = location.pathname;
+      const mediaId = path.match(/\d+/)[0]; // 連続した数字を抜き出す
+      return mediaId;
+    },
+    setMediaIdToStore(mediaId){this.setMediaId(mediaId)},
+    getMediaDataFromDB(dataName){
+      return new Promise((resolve, reject) => {
+        const url = '/'+dataName+'/'+this.getMediaId;
+        axios.get(url)
+        .then(response=>{
+          return resolve(response.data);
+        })
+        .catch(error=>{});
+      })
+    },
     initImg(){
-      let tmpImgData = JSON.parse(this.mediaImgData);
-      const mediaImgKeys = [
-        'type','id','url','width','height','opacity','layer'
-      ];
-      mediaImgKeys.forEach(mediaImgKey => {
-        this.updateMediaImgObjectItem({key:mediaImgKey, value:tmpImgData[mediaImgKey]});
+      // let mediaImgData = JSON.parse(this.mediaImgData);
+      this.getMediaDataFromDB('mediaImg')
+      .then(mediaImgData=>{
+        const dataKeys = [
+          'type','id','url','width','height','opacity','layer'
+        ];
+        dataKeys.forEach(dataKey => {
+          this.updateMediaImgObjectItem({key:dataKey, value:mediaImgData[dataKey]});
+        });
+        this.initStatus += 1;
       });
     },
     initAudio(){
-      let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
-      let audioNum = tmpMediaAudios.length;
-      for(let i=0; i < audioNum; i++){
-        // tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
-        tmpMediaAudios[i]['isPlay'] = false;
-        this.addMediaAudiosObjectItem(tmpMediaAudios[i]);
-        // this.mediaAudios.push(tmpMediaAudios[i]);
-      }
+      this.getMediaDataFromDB('mediaAudios')
+      .then(mediaAudioDatas=>{
+        mediaAudioDatas.forEach(mediaAudioData=>{
+          mediaAudioData['isPlay'] = false;
+          this.addMediaAudiosObjectItem(mediaAudioData);
+        })
+        this.initStatus += 2;
+      });
     },
     initMovie(){
-      let tmpMovieData = JSON.parse(this.mediaMovieData);
-      const mediaMovieKeys = [
-        'videoId','width','height','isLoop','layer'
-      ];
-      mediaMovieKeys.forEach(mediaMovieKey => {
-        this.updateMediaMovieObjectItem({key:mediaMovieKey, value:tmpMovieData[mediaMovieKey]});
+      this.getMediaDataFromDB('mediaMovie')
+      .then(mediaMovieData=>{
+        const dataKeys = [
+          'videoId','width','height','isLoop','layer'
+        ];
+        dataKeys.forEach(dataKey => {
+          this.updateMediaMovieObjectItem({key:dataKey, value:mediaMovieData[dataKey]});
+        });
+        this.initStatus += 4;
       });
     },
     initSetting(){
-      let tmpSettingData = JSON.parse(this.mediaSettingData);
-      const mediaSettingKeys = [
-        'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
-      ];
-      mediaSettingKeys.forEach(mediaSettingKey => {
-        this.updateMediaSettingObjectItem({key:mediaSettingKey, value:tmpSettingData[mediaSettingKey]});
+      this.getMediaDataFromDB('mediaSetting')
+      .then(mediaSettingData=>{
+        const dataKeys = [
+          'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
+        ];
+        dataKeys.forEach(dataKey => {
+          this.updateMediaSettingObjectItem({key:dataKey, value:mediaSettingData[dataKey]});
+        });
+        this.initStatus += 8;
       });
-    },
-    createMovieFrame(){
-      let vars = {
-        'videoId' : this.getMediaMovie['videoId'],
-        'width' : this.getMediaMovie['width'],
-        'height' : this.getMediaMovie['height'],
-      };
-      this.$refs.mediaMovie.createYtPlayer(vars);
     },
     
     // ●Media作成用の処理
@@ -218,12 +245,7 @@ export default {
       }
     },
     createMovieFrame(){
-      let vars = {
-        'videoId' : this.getMediaMovie['videoId'],
-        'width' : this.getMediaMovie['width'],
-        'height' : this.getMediaMovie['height'],
-      };
-      this.$refs.mediaMovie.createYtPlayer(vars);
+      this.$refs.mediaMovie.createYtPlayer();
       this.updateMediaSettingObjectItem({key:'isShowMovie', value:true});
     },
     deleteMovieFrame(){
@@ -239,7 +261,7 @@ export default {
       }
     },
     updateMedia() {
-      this.getFinishTime();
+      // this.getFinishTime();
       const url = '/media/update';
       let media_datas = {
         'img' : this.getMediaImg,
@@ -265,6 +287,7 @@ export default {
   },
   created() {},
   mounted() {
+    this.setMediaIdToStore(this.extractMediaIdFromUrl());
     this.initImg();
     this.initMovie();
     this.initAudio();
@@ -275,18 +298,20 @@ export default {
       this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
+        this.initStatus += 16;
       }
     });
   },
   watch : {
-    getReadyCreateMovieFrame : function(newVal){
+    // getReadyCreateMovieFrame : function(newVal){
+    initStatus : function(newVal){
       if(this.getMediaSetting['isShowMovie'] == true 
       && this.getMediaMovie['videoId'] != ""
-      && newVal == true){
+      && newVal >= 28){
         this.createMovieFrame();
       }
     },
-  }
+  },
 
 
 }

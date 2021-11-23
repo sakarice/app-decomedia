@@ -150,7 +150,6 @@
       }
 
     },
-    mounted : function() {},
     watch : { 
       mediaAudioNum : function(audioNum){
         if(audioNum > this.maxAudioNum){this.deleteAudio(0)}
