@@ -60,7 +60,6 @@
 
         </li>
         <li class="non-audio-frame" v-for="n in 5-(mediaAudioNum)" :key="5-n">
-        <!-- <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(getMediaAudios[n-1])"> -->
         </li>
       </ul>
     </div>
@@ -141,7 +140,6 @@
       },
       updateLoopSetting(index){
         const newLoopSetting = !(this.getMediaAudios[index]['isLoop']); // =現在のループ設定の逆
-        this.$refs.mediaAudioPlayer[index].updateLoopSetting(newLoopSetting);
         this.updateMediaAudiosObjectItem({index:index, key:'isLoop', value:newLoopSetting});
       },
       updateAudioVol(index,event){

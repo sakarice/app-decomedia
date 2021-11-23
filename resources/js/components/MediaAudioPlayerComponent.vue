@@ -26,6 +26,9 @@
       thumbnailUrl : function(){
         return this.getMediaAudios[this.mediaAudioIndex]['thumbnail_url'];
       },
+      loopSetting : function(){
+        return this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
+      }
     },
     methods : {
       play(){ 
@@ -70,7 +73,11 @@
 
     },
     mounted : function() {},
-    watch : {},
+    watch : {
+      loopSetting : function(val){
+        this.updateLoopSetting(val);
+      }
+    },
 
   }
 
