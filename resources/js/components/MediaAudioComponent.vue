@@ -33,8 +33,8 @@
 
       <!-- オーディオのサムネと各種アイコン -->
       <ul id="audios">
-        <li class="audio-area" :id="index" v-for="(mediaAudio, index) in getMediaAudios" :key="mediaAudio.audio_url">
-          <div class="audio-wrapper" :class="{'isPlay' : mediaAudio['isPlay']}">
+        <li class="audio-area" :id="index" v-for="(mediaAudio, index) in getMediaAudios" :key="index">
+          <div class="audio-wrapper">
             <media-audio-player-component
             @setMediaAudioDuration="setMediaAudioDuration"
             @taskAfterAudioAdded="taskAfterAudioAdded"
@@ -59,7 +59,8 @@
           </div>
 
         </li>
-        <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(getMediaAudios[n-1])">
+        <li class="non-audio-frame" v-for="n in 5-(mediaAudioNum)" :key="5-n">
+        <!-- <li class="non-audio-frame" v-for="n in 5" :key="n" v-show="!(getMediaAudios[n-1])"> -->
         </li>
       </ul>
     </div>
@@ -258,7 +259,6 @@
     display: flex;
     flex-flow: column;
     justify-content: space-around;
-
   }
 
   .audio-area {
@@ -267,13 +267,10 @@
     align-items: center;
   }
 
-  .audio-wrapper,
-  .non-audio-frame {
+  .audio-wrapper {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    /* background-color: cornflowerblue; */
-    border: 1.5px dotted lightgrey;
     margin: 10px 5px;
     position: relative;
     opacity: 0.7;
@@ -282,27 +279,13 @@
     align-items: center;
   }
 
-  .media-audio-thumbnail {
-    width: 53px;
-    height: 53px;
+  .non-audio-frame {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-  }
-
-  .media-audio-play-icon,
-  .media-audio-pause-icon {
-    position: absolute;
-    top: 5;
-    z-index: -1;
-    color: rgba(0,255,0,0.7);
-    display: none;
-  }
-
-  .media-audio-play-icon {
-    left: 18px;
-  }
-
-  .media-audio-pause-icon {
-    left: 11px;
+    border: 1.5px dotted lightgrey;
+    margin: 10px 5px;
+    opacity: 0.7;
   }
 
   .media-audio-delete-icon {
@@ -324,9 +307,6 @@
   }
 
   .media-audio-vol-icon {
-    /* position: absolute;
-    top: 37px;
-    right: 30px; */
     margin-right: 3px;
     z-index: -1;
     color:  rgba(255,255,255,0.8);
@@ -336,18 +316,6 @@
   /* hover設定(wrapper) */
   .audio-area:hover {
     opacity: 1;
-  }
-
-  .audio-area:hover
-  .media-audio-play-icon {
-    z-index: 2;
-    display: inline-block;
-  }
-
-  .audio-area:hover
-  .media-audio-pause-icon {
-    z-index: 2;
-    display: inline-block;
   }
 
   .audio-area:hover
@@ -371,6 +339,7 @@
   .media-audio-name {
     color : white;
     font-size: 0.7rem;
+    margin-left: 5px;
   }
 
   .audio-vol-wrapper {
@@ -397,14 +366,6 @@
 
 
   /* hover設定(各アイコン) */
-  .media-audio-play-icon:hover {
-    color:  rgba(0,255,0,1);
-  }
-
-  .media-audio-pause-icon:hover {
-    color:  rgba(0,255,0,1);
-  }
-
   .media-audio-delete-icon:hover {
     color:  rgba(255,10,10,1);
   }
@@ -464,11 +425,6 @@
 
 
   /* 再生関連 */
-  .isPlay {
-    border-color: green;
-    opacity: 1;
-  }
-
   .isLoop {
     color:  rgba(0,0,255,1);
     display: inline-block;

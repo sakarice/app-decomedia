@@ -179,15 +179,11 @@ export default {
       })
     },
     initImg(){
-      // let mediaImgData = JSON.parse(this.mediaImgData);
       this.getMediaDataFromDB('mediaImg')
-      .then(mediaImgData=>{
-        const dataKeys = [
-          'type','id','url','width','height','opacity','layer'
-        ];
-        dataKeys.forEach(dataKey => {
-          this.updateMediaImgObjectItem({key:dataKey, value:mediaImgData[dataKey]});
-        });
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaImgObjectItem({key:key, value:datas[key]});
+        }
         this.initStatus += 1;
       });
     },
@@ -195,7 +191,6 @@ export default {
       this.getMediaDataFromDB('mediaAudios')
       .then(mediaAudioDatas=>{
         mediaAudioDatas.forEach(mediaAudioData=>{
-          mediaAudioData['isPlay'] = false;
           this.addMediaAudiosObjectItem(mediaAudioData);
         })
         this.initStatus += 2;
@@ -203,25 +198,19 @@ export default {
     },
     initMovie(){
       this.getMediaDataFromDB('mediaMovie')
-      .then(mediaMovieData=>{
-        const dataKeys = [
-          'videoId','width','height','isLoop','layer'
-        ];
-        dataKeys.forEach(dataKey => {
-          this.updateMediaMovieObjectItem({key:dataKey, value:mediaMovieData[dataKey]});
-        });
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaMovieObjectItem({key:key, value:datas[key]});
+        }
         this.initStatus += 4;
       });
     },
     initSetting(){
       this.getMediaDataFromDB('mediaSetting')
-      .then(mediaSettingData=>{
-        const dataKeys = [
-          'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
-        ];
-        dataKeys.forEach(dataKey => {
-          this.updateMediaSettingObjectItem({key:dataKey, value:mediaSettingData[dataKey]});
-        });
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaSettingObjectItem({key:key, value:datas[key]});
+        };
         this.initStatus += 8;
       });
     },
@@ -305,7 +294,7 @@ export default {
   watch : {
     // getReadyCreateMovieFrame : function(newVal){
     initStatus : function(newVal){
-      if(this.getMediaSetting['isShowMovie'] == true 
+      if(this.getMediaSetting['isShowMovie'] == true
       && this.getMediaMovie['videoId'] != ""
       && newVal >= 28){
         this.createMovieFrame();
