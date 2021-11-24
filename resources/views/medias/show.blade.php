@@ -15,12 +15,10 @@
 <body>
 
   <div id="app">
-    <media-component
-    media-img-data='@json($media_img)'
-    media-audios-data='@json($media_audios)'
-    media-movie-data='@json($media_movie)'
-    media-setting-data='@json($media_setting)'>
-    </media-component>
+    {{-- <media-component>
+    </media-component> --}}
+    <router-view></router-view>
+    <router-view name="mediaHeader"></router-view>
   </div>
 
   <script src="{{ mix('/js/app.js') }}"></script>

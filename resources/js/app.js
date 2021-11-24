@@ -67,8 +67,10 @@ Vue.component('media-info-component', require('./components/MediaInfoComponent.v
 Vue.component('media-edit-component', require('./components/MediaEditComponent.vue').default);
 
 // media所有者(＝作成者)情報
+Vue.component('disp-media-owner-info-component', require('./components/media/action_parts/DispMediaOwnerInfoComponent.vue').default);
 Vue.component('media-owner-info-component', require('./components/MediaOwnerInfoComponent.vue').default);
 // Mediaへのいいねアイコンコンポーネント
+Vue.component('disp-media-like-component', require('./components/media/action_parts/DispMediaLikeComponent.vue').default);
 Vue.component('like-media-component', require('./components/LikeMediaComponent.vue').default);
 // Media作成者フォローコンポーネント
 Vue.component('follow-component', require('./components/FollowComponent.vue').default);

@@ -18,18 +18,19 @@
             @update-media="updateMedia">
             </media-update-button>
 
-            <a v-if="isShowLinkToShow" :href="mediaShowLink(getMediaSetting['id'])" class="action-trigger-wrapper link-to-show-media">
+            <router-link v-show="isMyMedia && (mode==2)" :to="'/media/'+getMediaId" class="action-trigger-wrapper link-to-show-media">
                 <div class="action-trigger goto-show-media-icon-wrapper">
                     <i class="fas fa-tv fa-lg goto-show-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">閲覧画面へ</span>
-            </a>
-            <a v-if="isShowLinkToEdit" :href="mediaEditLink(getMediaSetting['id'])" class="action-trigger-wrapper link-to-edit-media">
+            </router-link>
+
+            <router-link v-show="isMyMedia && (mode==3)" :to="'/media/'+getMediaId+'/edit'" class="action-trigger-wrapper link-to-edit-media">
                 <div class="action-trigger goto-edit-media-icon-wrapper">
                     <i class="fas fa-pen fa-lg goto-edit-media-icon "></i>
                 </div>
                 <span class="action-trigger-subtitle">編集画面へ</span>
-            </a>
+            </router-link>
 
         </div>
 
@@ -65,16 +66,41 @@ export default {
         'isShowCreateButton',
         'isShowUpdateButton',
         'isShowLinkToShow',
-        'isShowLinkToEdit',
+        // 'isShowLinkToEdit',
     ],
     data : () => {
         return {
+            isMyMedia : false,
         }
     },
     computed : {
         ...mapGetters('mediaSetting', ['getMediaSetting']),
+        ...mapGetters('loginState', ['getIsLogin']),
+        ...mapGetters('media', ['getMediaId']),
+        ...mapGetters('media', ['getMode']),
+        ...mapGetters('mediaSetting', ['getMediaSetting']),
+        doneGetMediaId : function(){
+            if(this.getMediaId != ""){return true}
+        },
+        mode : function(){ 
+        if(this.$route.path.match(/create/)){
+            return 1;
+        }
+        else if(this.$route.path.match(/edit/)){
+            return 2;
+        } else {return 3}
+        },
+
     },
     methods : {
+        checkIsMyMedia(){
+            let url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
+            axios.get(url)
+            .then(response =>{
+                this.isMyMedia = response.data.isMyMedia;
+            })
+            .catch(error => {})
+        },
         getFinishTime(){
             this.$emit('getFinishTime');
         },
@@ -91,6 +117,11 @@ export default {
             return "/media/" + id + "/edit";
         },
     },
+    watch : {
+        doneGetMediaId : function(val){
+            this.checkIsMyMedia();
+        },
+    }
 
 }
 

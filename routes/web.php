@@ -46,12 +46,17 @@ Route::middleware('auth')->group(function(){
         Route::post('/mediaLists/delete', 'App\Http\Controllers\Ajax\MediaListController@destroy');
 
     // Media操作
+    // 通常のCRUDルーティング
+        Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
         Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
         Route::post('/media/store', 'App\Http\Controllers\MediaController@store');
-        Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
+        // Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
         Route::post('/media/update', 'App\Http\Controllers\MediaController@update');
         Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
-    // 入ったMediaをいいねしているかチェックする
+    // vue-router用の定義
+        Route::get('/media/{any}', function(){return view('medias.show');})->where('any', '.*');
+
+        // 入ったMediaをいいねしているかチェックする
         Route::get('/user/likeState/{media_id}', 'App\Lib\LikeMediaUtil@getLikeState');
     // Mediaへ、いいね/いいね解除する
         Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
@@ -108,8 +113,6 @@ Route::middleware('auth')->group(function(){
 // 検索結果
     Route::post('/media/show/search/result', 'App\Lib\SearchUtil@searchMedias');
 
-// Media閲覧
-    Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
 // 入ったmediaが自分の作成したmediaか判別する
     Route::get('/ajax/judgeIsMyMedia/{media_id}', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
 

@@ -58,9 +58,21 @@ import Follow from './FollowComponent.vue';
         'message' : "",
       }
     },
+    computed : {
+      ...mapGetters('loginState', ['getIsLogin']),
+      ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('mediaSetting', ['getMediaSetting']),
+      isShowFollow: function(){
+        // ログインしていて自分のルームでなければフォローアイコンを表示
+        return this.getIsLogin && !(this.isMyMedia);
+      },
+      doneGetMediaId : function(){
+        if(this.getMediaId != ""){return true}
+      }
+    },
     methods : {
       checkIsMyMedia(){
-        let url = '/ajax/judgeIsMyMedia/' + this.getMediaSetting['id'];
+        let url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
         axios.get(url)
           .then(response =>{
             this.isMyMedia = response.data.isMyMedia;
@@ -87,19 +99,13 @@ import Follow from './FollowComponent.vue';
       },
 
     },
-    created(){},
-    mounted: function(){
-      this.checkIsMyMedia();
+    mounted: function(){},
+    watch : {
+      doneGetMediaId : function(val){
+        this.checkIsMyMedia();
+      }
     },
-    watch : {},
-    computed : {
-      ...mapGetters('loginState', ['getIsLogin']),
-      ...mapGetters('mediaSetting', ['getMediaSetting']),
-      isShowFollow: function(){
-        // ログインしていて自分のルームでなければフォローアイコンを表示
-        return this.getIsLogin && !(this.isMyMedia);
-      },
-    }
+
 
   }
 

@@ -4,53 +4,99 @@
    :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
     <!-- Mediaヘッダ -->
-    <media-header-component
-    :isShowLinkToEdit="isMyMedia">
-    </media-header-component>
+    <!-- <media-header></media-header> -->
+    <!-- <router-view name="header"></router-view> -->
 
     <!-- Media画像コンポーネント -->
-    <media-img-component
-      ref="mediaImg">
-    </media-img-component>
+    <media-img
+    ref="mediaImg">
+    </media-img>
 
     <!-- Mediaオーディオコンポーネント -->
-    <media-audio-component
+    <media-audio
      :maxAudioNum="getMediaSetting['maxAudioNum']"
-     :mediaAudios="mediaAudios"
      ref="mediaAudio">
-    </media-audio-component>
+    </media-audio>
 
     <!-- Media動画(=youtube)コンポーネント -->
-    <media-movie-component
+    <media-movie
     v-show="getMediaSetting['isShowMovie']"
     ref="mediaMovie">
-    </media-movie-component>
+    </media-movie>
 
         <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
-        <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="getIsLogin && !(isMyMedia)">
-          <like-media-component></like-media-component>
-        </div>
-
+        <router-view name="dispMediaLike">
+        </router-view>
         <!-- Media作成者情報 -->
-        <div id="disp-media-owner-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaOwnerInfo')">
-          <i class="fas fa-user-circle fa-2x"></i>
-          <!-- ユーザプロフィール -->
-          <media-owner-info-component
+        <router-view name="dispMediaOwnerInfo"
+        v-on:show-modal="showModal">
+        </router-view>
+        <!-- ユーザプロフィール -->
+        <router-view name="mediaOwnerInfo"
           v-show="isShowModal['mediaOwnerInfo']">
-          </media-owner-info-component>
-        </div>
+        </router-view>
         <!-- Media情報 -->
-        <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaInfoModal')">
-          <i class="fas fa-file-alt fa-2x setting-icon"></i>
-        </div>
-        <!-- 音楽 -->
-        <!-- <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaAudio')">
-          <i class="fas fa-music fa-2x setting-icon"></i>
-        </div> -->
+        <router-view name="dispMediaInfo"
+        v-on:show-modal="showModal">        
+        </router-view>
+        <!-- 画像 -->
+        <router-view name="dispImgModal"
+        v-on:show-modal="showModal">        
+        </router-view>
+        <!-- オーディオ -->
+        <router-view name="dispAudioModal"
+        v-on:show-modal="showModal">        
+        </router-view>
+        <!-- 動画 -->
+        <router-view name="dispMovieModal"
+        v-on:show-modal="showModal">        
+        </router-view>
+        <!-- Media設定 -->
+        <router-view name="dispMediaSettingModal"
+        v-on:show-modal="showModal">        
+        </router-view>
+
       </div>
+    </div>
+
+    <!-- 画像選択コンポーネント -->
+    <router-view name="imgSelect" 
+    v-show="isShowModal['imgModal']" 
+    v-on:close-modal="closeModal" 
+    :transitionName="transitionName">
+    </router-view>
+
+    <!-- オーディオ選択コンポーネント -->
+    <router-view name="audioSelect" 
+    v-show="isShowModal['audioModal']" 
+    v-on:close-modal="closeModal"
+    :transitionName="transitionName">
+    </router-view>
+
+    <!-- 動画設定コンポーネント -->
+    <router-view name="movieSetting"
+    v-show="isShowModal['movieModal']"
+    v-on:close-modal="closeModal"
+    v-on:create-movie-frame="createMovieFrame"
+    v-on:delete-movie-frame="deleteMovieFrame"
+    :transitionName="transitionName">
+    </router-view>
+
+    <!-- Media設定コンポーネント -->
+    <router-view name="mediaSetting"
+    v-show="isShowModal['mediaSettingModal']"
+    v-on:close-modal="closeModal"
+    :transitionName="transitionName">
+    </router-view>
+
+    <div v-show="getIsWaiting">
+      <router-view name="overlay"></router-view>
+      <router-view name="loading"
+      :message="waitingMsg">
+      </router-view>
     </div>
 
     <media-info-component
@@ -60,7 +106,6 @@
     :name="getMediaSetting['name']"
     :description="getMediaSetting['description']">
     </media-info-component>
-
 
   </div>
 </template>
@@ -74,7 +119,13 @@ import MediaImg from './MediaImgComponent.vue';
 import MediaMovie from './MediaMovieComponent.vue';
 import MediaInfo from './MediaInfoComponent.vue';
 import MediaOwnerInfo from './MediaOwnerInfoComponent.vue';
-import LikeMedia from './LikeMediaComponent.vue';
+// import LikeMedia from './LikeMediaComponent.vue';
+// import DispMediaLike from './media/action_parts/DispMediaLikeComponent.vue';
+// import DispMediaInfo from './media/action_parts/DispMediaInfoComponent.vue';
+// import DispImgModal from './media/action_parts/DispImgModalComponent.vue';
+// import DispAudioModal from './media/action_parts/DispAudioModalComponent.vue';
+// import DispMovieModal from './media/action_parts/DispMovieModalComponent.vue';
+// import DispMediaSettingModal from './media/action_parts/DispMediaSettingModalComponent.vue';
 
 
 export default {
@@ -86,52 +137,147 @@ export default {
     MediaMovie,
     MediaInfo,
     MediaOwnerInfo,
-    LikeMedia,
+    // LikeMedia,
+    // DispMediaLike,
+    // DispMediaInfo,
   },
-  props: [
-    'mediaImgData',
-    'mediaAudiosData',
-    'mediaMovieData',
-    'mediaSettingData',
-  ],
+  props: [],
   data : () => {
     return {
       isMyMedia : false,
       getReadyCreateMovieFrame : false,
-      getReadyPlayAudio : false,
-      getReadyPlayMovie : false,
-      autoPlay : true,
-
+      initStatus : 0,
+      // getReadyPlayAudio : false,
       transitionName : 'slide-in',
       isShowModal : {
         'mediaOwnerInfo' : false,
         'mediaInfoModal' : false,
       },
-      mediaAudios : [],
+      autoPlay : true,
 
     }
   },
   computed : {
     ...mapGetters('loginState', ['getIsLogin']),
+    ...mapGetters('media', ['getMediaId']),
+    ...mapGetters('media', ['getMode']),
+    ...mapGetters('media', ['getIsWaiting']),
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
+    // isSaveing:()=>{ if(this.getIsWaiting == 1){return true} },
+    // isUpdating:()=>{ if(this.getIsWaiting == 2){return true} },
+    waitingMsg:function(){
+      if(this.getMode==1){
+        return '作成中です...'
+      } else if(this.getMode==2){
+        return '更新中です...'
+      }
+    },
+    routerLinkPath : function(){
+      let id = this.getMediaId;
+      if(this.getMode == 2){ // 編集モードの時
+        return ('/media/'+id); // 閲覧画面へのリンク
+      } else if(this.getMode == 3){ // 閲覧モードの時
+        return ('/media/'+id+'/edit'); // 編集画面へのリンク
+      }
+    },
+    // isEditMode : function(){ if(this.getMode==2) return true; },
+    mode : function(){ 
+      if(this.$route.path.match(/create/)){
+        return 1;
+      }
+      else if(this.$route.path.match(/edit/)){
+        return 2;
+      } else {return 3}
+    },
+    // isShowMode : function(){ if(this.getMode==3) return true; },
+    // routerLinkText : function(){
+    //   if(this.getMode==2){return '閲覧画面へ'}
+    //   else if(this.getMode==3){return '編集画面へ'}
+    // }
+    
   },
   methods : {
+    ...mapMutations('media', ['setMediaId']),
+    ...mapMutations('media', ['setIsMyMedia']),
+    ...mapMutations('media', ['setMode']),
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+    ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     judgeIsMyMedia(){
-      let media_id = JSON.parse(this.mediaSettingData).id;
-      let url = '/ajax/judgeIsMyMedia/' + media_id;
-      console.log(url);
+      let url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
       axios.get(url)
         .then(response =>{
-          this.isMyMedia = response.data.isMyMedia;
+          this.setIsMyMedia(response.data.isMyMedia);
         })
         .catch(error => {
           console.log('あなたがmedia作成者か判別できませんでした');
         })
+    },
+    checkMode(){
+      const path = this.$route.path;
+      if(path.match(/create/)){
+          this.setMode(1); // create
+      } else if(path.match(/edit/)){
+          this.setMode(2); // edit
+      } else {
+          this.setMode(3); // show
+      }
+    },
+    extractMediaIdFromUrl(){
+      const path = location.pathname;
+      const mediaId = path.match(/\d+/)[0]; // 連続した数字を抜き出す
+      return mediaId;
+    },
+    setMediaIdToStore(mediaId){this.setMediaId(mediaId)},
+    getMediaDataFromDB(dataName){
+      return new Promise((resolve, reject) => {
+        const url = '/'+dataName+'/'+this.getMediaId;
+        axios.get(url)
+        .then(response=>{
+          return resolve(response.data);
+        })
+        .catch(error=>{});
+      })
+    },
+    initImg(){
+      this.getMediaDataFromDB('mediaImg')
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaImgObjectItem({key:key, value:datas[key]});
+        }
+        this.initStatus += 1;
+      });
+    },
+    initAudio(){
+      this.getMediaDataFromDB('mediaAudios')
+      .then(mediaAudioDatas=>{
+        mediaAudioDatas.forEach(mediaAudioData=>{
+          this.addMediaAudiosObjectItem(mediaAudioData);
+        })
+        this.initStatus += 2;
+      });
+    },
+    initMovie(){
+      this.getMediaDataFromDB('mediaMovie')
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaMovieObjectItem({key:key, value:datas[key]});
+        }
+        this.initStatus += 4;
+      });
+    },
+    initSetting(){
+      this.getMediaDataFromDB('mediaSetting')
+      .then(datas=>{
+        for(let key in datas){
+          this.updateMediaSettingObjectItem({key:key, value:datas[key]});
+        };
+        this.initStatus += 8;
+      });
     },
     showModal(target){
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
@@ -150,53 +296,24 @@ export default {
         this.isShowModal[key] = false;
       }
     },
-    initImg(){
-      let tmpImgData = JSON.parse(this.mediaImgData);
-      const mediaImgKeys = [
-        'type','id','url','width','height','opacity','layer'
-      ];
-      mediaImgKeys.forEach(mediaImgKey => {
-        this.updateMediaImgObjectItem({key:mediaImgKey, value:tmpImgData[mediaImgKey]});
-      });
-    },
-    initMovie(){
-      let tmpMovieData = JSON.parse(this.mediaMovieData);
-      const mediaMovieKeys = [
-        'videoId','width','height','isLoop','layer'
-      ];
-      mediaMovieKeys.forEach(mediaMovieKey => {
-        this.updateMediaMovieObjectItem({key:mediaMovieKey, value:tmpMovieData[mediaMovieKey]});
-      });
-    },
-    initAudio(){
-      let tmpMediaAudios = JSON.parse(this.mediaAudiosData);
-      let audioNum = tmpMediaAudios.length;
-      for(let i=0; i < audioNum; i++){
-        tmpMediaAudios[i]['player_index'] = i; //再生プレイヤーを割り当て
-        tmpMediaAudios[i]['isPlay'] = false;
-        this.mediaAudios.push(tmpMediaAudios[i]);
-      }
-    },
-    initSetting(){
-      let tmpSettingData = JSON.parse(this.mediaSettingData);
-      const mediaSettingKeys = [
-        'id', 'isPublic','name','description','finish_time','mediaBackgroundColor','isShowImg','isShowMovie', 'maxAudioNum'
-      ];
-      mediaSettingKeys.forEach(mediaSettingKey => {
-        this.updateMediaSettingObjectItem({key:mediaSettingKey, value:tmpSettingData[mediaSettingKey]});
-      });
-    },    setAudioThumbnail(){
-      this.$refs.mediaAudio.updateAudioThumbnail();
-    },
     createMovieFrame(){
       this.$refs.mediaMovie.createYtPlayer();
+    },
+    deleteMovieFrame(){
+      this.$refs.mediaMovie.deleteYtPlayer();
+      this.updateMediaSettingObjectItem({key:'isShowMovie', value:false});
     },
 
   },
   created() {
-    if(this.getIsLogin){ this.judgeIsMyMedia(); }
+    console.log('パス'+this.$route.path);
+    console.log('フルパス'+this.$route.fullPath);
+    // if(this.getIsLogin){ this.judgeIsMyMedia(); }
   },
   mounted() {
+    this.setMediaIdToStore(this.extractMediaIdFromUrl());
+    this.judgeIsMyMedia();
+    this.checkMode()
     this.initImg();
     this.initMovie();
     this.initAudio();
@@ -204,34 +321,37 @@ export default {
 
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
-      this.$refs.mediaAudio.setPlayerInfo();
-      this.$refs.mediaAudio.updateAudioThumbnail();
+      this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
+        this.initStatus += 16;
       }
       // 全オーディオの再生開始
-      this.$refs.mediaAudio.playAllAudio();
     });
 
   },
   watch : {
-    getReadyCreateMovieFrame : function(newVal){
-      if(this.getMediaSetting['isShowMovie'] == true 
+    initStatus : function(newVal){
+      // オーディオ情報の読み込みが完了したらオーディオ再生開始
+      if(newVal >= 2){ 
+        const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
+        setTimeout(play, 10000); 
+      }
+      // youtube情報取得と再生準備が完了したら再生開始
+      if(this.getMediaSetting['isShowMovie'] == true
       && this.getMediaMovie['videoId'] != ""
-      && newVal == true){
+      && newVal >= 28){
         this.createMovieFrame();
       }
     },
-    getReadyPlayMovie : function(newVal){
-      
-    }
   },
+
 
 }
 </script>
 
 <style scoped>
-
+@import "../../css/button.css";
 @import "../../css/mediaCommon.css";
 @import "../../css/mediaModals.css";
 @import "../../css/modalAnimation.css";

@@ -7,13 +7,13 @@
           <div id="media-name-wraper" class="media-info">
             <p class="info-title">Media名</p>
             <label for="">
-              <p id="media-name">{{name}}</p>
+              <p id="media-name">{{getMediaSetting['name']}}</p>
             </label>
           </div>
 
           <div id="media-description-wrapper" class="media-info">
             <p class="info-title">説明</p>
-            <textarea :value="description" type="text" id="media-description" readonly></textarea>
+            <textarea :value="getMediaSetting['description']" type="text" id="media-description" readonly></textarea>
           </div>
         </div>
       </div>
@@ -30,15 +30,20 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default{
   props: [
     'transitionName',
-    'name',
-    'description',
+    // 'name',
+    // 'description',
   ],
   data : () => {
     return {
     }
+  },
+  computed : {
+    ...mapGetters('mediaSetting', ['getMediaSetting']),
   },
   methods : {
     closeModal() {

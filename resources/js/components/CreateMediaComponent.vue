@@ -171,9 +171,6 @@ export default {
       if(this.getMediaMovie['videoId'] != ""){
         this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } 
-      // else {
-      //   this.$refs.mediaAudio.setLongestAudioDurationToFinishTime();
-      // }
     },
     createMedia() {
       this.getFinishTime();

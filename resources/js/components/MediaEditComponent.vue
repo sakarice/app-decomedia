@@ -56,40 +56,40 @@
 
 
     <!-- 画像選択コンポーネント -->
-    <img-select-component 
+    <router-view name="imgSelect" 
     v-show="isShowModal['imgModal']" 
     v-on:close-modal="closeModal" 
     :transitionName="transitionName">
-    </img-select-component>
+    </router-view>
 
     <!-- オーディオ選択コンポーネント -->
-    <audio-select-component 
+    <router-view name="audioSelect" 
     v-show="isShowModal['audioModal']" 
     v-on:close-modal="closeModal"
     :transitionName="transitionName">
-    </audio-select-component>
+    </router-view>
 
     <!-- 動画設定コンポーネント -->
-    <movie-setting-component
+    <router-view name="movieSetting"
     v-show="isShowModal['movieModal']"
     v-on:close-modal="closeModal"
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
     :transitionName="transitionName">
-    </movie-setting-component>
+    </router-view>
 
     <!-- Media設定コンポーネント -->
-    <media-setting-component
+    <router-view name="mediaSetting"
     v-show="isShowModal['mediaSettingModal']"
     v-on:close-modal="closeModal"
     :transitionName="transitionName">
-    </media-setting-component>
+    </router-view>
 
     <div v-show="isUploadingMedia">
-      <overlay-component></overlay-component>
-      <loading-component
+      <router-view name="overlay"></router-view>
+      <router-view name="loading"
       :message="'メディアを更新中です...'">
-      </loading-component>
+      </router-view>
     </div>
 
   </div>
@@ -121,12 +121,7 @@ export default {
     Overlay,
     Loading,
   },
-  props: [
-    // 'mediaImgData',
-    // 'mediaAudiosData',
-    // 'mediaMovieData',
-    // 'mediaSettingData',
-  ],
+  props: [],
   data : () => {
     return {
       getReadyCreateMovieFrame : false,
