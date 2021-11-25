@@ -1,7 +1,8 @@
-html, body {
-  width: 100%;
-  /* margin: 0; */
+
+body {
+  margin: 0;
 }
+
 p {
   color: #090909;
 }
