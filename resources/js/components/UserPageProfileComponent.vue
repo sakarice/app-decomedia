@@ -145,6 +145,7 @@
 
 #about-me {
   border: none;
+  background-color: rgba(250,250,250,1);
   color: darkslategray;
   width: 100%;
 }
