@@ -7,6 +7,9 @@
     <!-- <media-header></media-header> -->
     <!-- <router-view name="header"></router-view> -->
 
+    <router-view name="switchToEditMode"></router-view>
+    <router-view name="switchToShowMode"></router-view>
+
     <!-- Media画像コンポーネント -->
     <media-img
     ref="mediaImg">
@@ -152,6 +155,10 @@ export default {
       isShowModal : {
         'mediaOwnerInfo' : false,
         'mediaInfoModal' : false,
+        'imgModal' : false,
+        'audioModal' : false,
+        'movieModal' : false,
+        'mediaSettingModal' : false,
       },
       autoPlay : true,
 
@@ -298,6 +305,7 @@ export default {
     },
     createMovieFrame(){
       this.$refs.mediaMovie.createYtPlayer();
+      this.updateMediaSettingObjectItem({key:'isShowMovie', value:true});
     },
     deleteMovieFrame(){
       this.$refs.mediaMovie.deleteYtPlayer();
@@ -351,7 +359,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/button.css";
+/* @import "../../css/button.css"; */
 @import "../../css/mediaCommon.css";
 @import "../../css/mediaModals.css";
 @import "../../css/modalAnimation.css";

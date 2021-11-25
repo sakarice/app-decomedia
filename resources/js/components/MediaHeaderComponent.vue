@@ -7,31 +7,15 @@
 
         <!-- 中央 -->
         <div class="header-block header-center">
-            <cancel-button></cancel-button>
             <to-mypage-button></to-mypage-button>
 
-            <media-create-button v-if="isShowCreateButton"
+            <media-create-button v-show="(mode==1)"
             @create-media="createMedia">
             </media-create-button>
 
-            <media-update-button v-if="isShowUpdateButton"
+            <media-update-button v-show="isMyMedia && (mode==2)"
             @update-media="updateMedia">
             </media-update-button>
-
-            <router-link v-show="isMyMedia && (mode==2)" :to="'/media/'+getMediaId" class="action-trigger-wrapper link-to-show-media">
-                <div class="action-trigger goto-show-media-icon-wrapper">
-                    <i class="fas fa-tv fa-lg goto-show-media-icon "></i>
-                </div>
-                <span class="action-trigger-subtitle">閲覧画面へ</span>
-            </router-link>
-
-            <router-link v-show="isMyMedia && (mode==3)" :to="'/media/'+getMediaId+'/edit'" class="action-trigger-wrapper link-to-edit-media">
-                <div class="action-trigger goto-edit-media-icon-wrapper">
-                    <i class="fas fa-pen fa-lg goto-edit-media-icon "></i>
-                </div>
-                <span class="action-trigger-subtitle">編集画面へ</span>
-            </router-link>
-
         </div>
 
         <!-- 右側 -->

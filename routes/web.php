@@ -46,14 +46,14 @@ Route::middleware('auth')->group(function(){
         Route::post('/mediaLists/delete', 'App\Http\Controllers\Ajax\MediaListController@destroy');
 
     // Media操作
-    // 通常のCRUDルーティング
-        Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
+        // 通常のCRUDルーティング
         Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
         Route::post('/media/store', 'App\Http\Controllers\MediaController@store');
         // Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
         Route::post('/media/update', 'App\Http\Controllers\MediaController@update');
         Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
-    // vue-router用の定義
+        // Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
+        // vue-router用の定義
         Route::get('/media/{any}', function(){return view('medias.show');})->where('any', '.*');
 
         // 入ったMediaをいいねしているかチェックする
@@ -100,10 +100,8 @@ Route::middleware('auth')->group(function(){
 
 // Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/home', function(){
-        return view('home');
-    });
-    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/home', function(){ return view('home');});
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // // ★vur-routerテスト用
 //     Route::get('/home/vue', function(){

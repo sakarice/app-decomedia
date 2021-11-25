@@ -13,6 +13,8 @@ import Media from './components/MediaComponent.vue';
 import MediaEdit from './components/MediaEditComponent.vue';
 import MediaHeader from './components/MediaHeaderComponent.vue';
 import MediaOwnerInfo from './components/MediaOwnerInfoComponent.vue';
+import SwitchToShowMode from './components/media/action_parts/SwitchToShowModeComponent.vue';
+import SwitchToEditMode from './components/media/action_parts/SwitchToEditModeComponent.vue';
 import DispMediaOwnerInfo from './components/media/action_parts/DispMediaOwnerInfoComponent.vue';
 import DispMediaLike from './components/media/action_parts/DispMediaLikeComponent.vue';
 import DispMediaInfo from './components/media/action_parts/DispMediaInfoComponent.vue';
@@ -29,6 +31,8 @@ import Overlay from './components/OverlayComponent.vue';
 import Loading from './components/LoadingComponent.vue';
 Vue.component('home-component', Home);
 Vue.component('media-edit-component', MediaEdit);
+Vue.component('switch-to-show-mode-component', SwitchToShowMode);
+Vue.component('switch-to-edit-mode-component', SwitchToEditMode);
 Vue.component('media-header-component', MediaHeader);
 Vue.component('media-owner-info-component', MediaOwnerInfo);
 Vue.component('disp-media-owner-info-component', DispMediaOwnerInfo);
@@ -69,6 +73,7 @@ const router = new VueRouter({
         path : ':id',
         name : 'show',
         components : {
+          switchToEditMode : SwitchToEditMode,
           mediaOwnerInfo : MediaOwnerInfo,
           dispMediaLike : DispMediaLike,
           dispMediaOwnerInfo : DispMediaOwnerInfo,
@@ -79,6 +84,7 @@ const router = new VueRouter({
         path : ':id/edit',
         name : 'edit',
         components : {
+          switchToShowMode : SwitchToShowMode,
           dispImgModal : DispImgModal,
           dispAudioModal : DispAudioModal,
           dispMovieModal : DispMovieModal,
@@ -107,10 +113,10 @@ const router = new VueRouter({
     //     }
     //   }]
     // },
-    {
-      path : '/media/:mediaId/edit',
-      component : MediaEdit,
-    }
+    // {
+    //   path : '/media/:mediaId/edit',
+    //   component : MediaEdit,
+    // }
   ]
 })
 
