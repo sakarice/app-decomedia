@@ -10,9 +10,11 @@
 
         <div class="cover-menu" v-show="isShowCover">
           <a :href="mediaShowLink(mediaPreviewInfo['id'])" class="cover-menu-link show-media">
+            <i class="fas fa-tv fa-lg show-mode-icon"></i>
             <span class="link-title">閲覧</span>
           </a>
           <a :href="mediaEditLink(mediaPreviewInfo['id'])" class="cover-menu-link edit-media">
+            <i class="fas fa-pen fa-lg edit-mode-icon"></i>
             <span class="link-title">編集</span>
           </a>
         </div>
@@ -178,26 +180,26 @@ li {
   width: 50%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   /* background-color: rgba(100, 100, 100, 0.5); */
+  color : black;
   background-color: seashell;
   opacity: 0.5;
   text-decoration: none;
 }
 
 .link-title {
-  font-size: 25px;
+  font-size: 15px;
+  margin-top: 4px;
 }
 
 .cover-menu-link:hover {
   /* background-color: rgba(100, 100, 100, 0.8); */
   opacity: 0.8;
-}
-
-.cover-menu-link:hover .link-title {
-  color: aqua;
+  color: blue;
 }
 
 .del-icon {
