@@ -52,7 +52,7 @@
 
 <script>
 import MediaPreview from './MediaPreviewComponent.vue';
-import MypageMenuBar from './MypageMenuBarComponent.vue';
+import MypageMenuBar from './mypage/MypageMenuBarComponent.vue';
 
 export default {
   components : {

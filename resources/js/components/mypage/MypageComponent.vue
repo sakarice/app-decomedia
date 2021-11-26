@@ -86,10 +86,10 @@
 </template>
 
 <script>
-import MediaPreview from './MediaPreviewComponent.vue';
-import MediaListPreview from './MediaListPreviewComponent.vue';
+import MediaPreview from '../MediaPreviewComponent.vue';
+import MediaListPreview from '../MediaListPreviewComponent.vue';
 import MypageMenuBar from './MypageMenuBarComponent.vue';
-import MediaListCreateButton from './MediaListCreateButtonComponent.vue';
+import MediaListCreateButton from '../MediaListCreateButtonComponent.vue';
 import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue';
 import UserPageProfile from './UserPageProfileComponent.vue';
 
@@ -248,7 +248,7 @@ export default {
 <style scoped>
 
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
-@import "../../css/button.css";
+@import "/resources/css/button.css";
 
 .mypage-content-wrapper {
   margin-left: 70px;

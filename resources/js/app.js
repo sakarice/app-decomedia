@@ -41,9 +41,9 @@ Vue.component('home-link-component', require('./components/media/action_parts/Ho
 Vue.component('media-header-component', require('./components/media/MediaHeaderComponent.vue').default);
 
 // ■マイページ用
-Vue.component('mypage-menu-bar-component', require('./components/MypageMenuBarComponent.vue').default);
+Vue.component('mypage-menu-bar-component', require('./components/mypage/MypageMenuBarComponent.vue').default);
 // マイページ
-Vue.component('mypage-component', require('./components/MypageComponent.vue').default);
+Vue.component('mypage-component', require('./components/mypage/MypageComponent.vue').default);
 // ユーザページ
 Vue.component('user-page-component', require('./components/UserPageComponent.vue').default);
 // フォロー/フォロワー一覧
@@ -52,7 +52,7 @@ Vue.component('follow-and-follower-component', require('./components/FollowAndFo
 // ユーザプロフィール
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
 // ユーザプロフィール(ユーザページ表示用)
-Vue.component('user-page-profile-component', require('./components/UserPageProfileComponent.vue').default);
+Vue.component('user-page-profile-component', require('./components/mypage/UserPageProfileComponent.vue').default);
 
 // media一覧表示用コンポーネント
 Vue.component('media-preview-component', require('./components/MediaPreviewComponent.vue').default);
@@ -92,7 +92,7 @@ Vue.component('cancel-button-component', require('./components/media/action_part
 // mediaリスト作成用コンポーネント
 Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);
 // mediaリスト作成用コンポーネント
-Vue.component('selected-media-delete-button-component', require('./components/SelectedMediaDeleteButtonComponent.vue').default);
+Vue.component('selected-media-delete-button-component', require('./components/mypage/SelectedMediaDeleteButtonComponent.vue').default);
 // オーバーレイコンポーネント
 Vue.component('overlay-component', require('./components/OverlayComponent.vue').default);
 // ローディング中に表示するコンポーネント
