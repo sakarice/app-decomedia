@@ -3615,14 +3615,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.isEditMode = true;
     },
     playAllAudio: function playAllAudio() {
-      if (mediaAudioNum > 0) {
+      if (this.mediaAudioNum > 0) {
         this.$refs.mediaAudioPlayer.forEach(function (player) {
           player.play();
         });
       }
     },
     finishAllAudio: function finishAllAudio() {
-      if (mediaAudioNum > 0) {
+      if (this.mediaAudioNum > 0) {
         this.$refs.mediaAudioPlayer.forEach(function (player) {
           player.finish();
         });

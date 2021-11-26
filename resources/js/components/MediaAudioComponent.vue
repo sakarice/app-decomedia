@@ -103,12 +103,12 @@
       // 親コンポーネントから実行される
       validEditMode(){ this.isEditMode = true; },
       playAllAudio(){ 
-        if(mediaAudioNum>0){
+        if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.play()} ) 
         }
       },
       finishAllAudio(){
-        if(mediaAudioNum>0){
+        if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.finish()} ) 
         }
       },
