@@ -4151,8 +4151,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.checkMode();
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
-    this.judgeIsMyMedia();
-    this.initImg();
+    this.judgeIsMyMedia(); // this.initImg();
+
+    this.$refs.mediaImg.initImg();
     this.initMovie();
     this.initAudio();
     this.initSetting(); // 全ての子コンポーネントが描画されてから実行する処理
@@ -4739,13 +4740,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     // ↓storeの値には単位[px]が付いてないので追加する
     mediaImgWidth: function mediaImgWidth() {
       return this.$store.getters['mediaImg/getMediaImg']['width'] + "px";
     },
     mediaImgHeight: function mediaImgHeight() {
       return this.$store.getters['mediaImg/getMediaImg']['height'] + "px";
+    }
+  }),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), {}, {
+    getMediaImgFromDB: function getMediaImgFromDB() {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        var url = '/mediaImg/' + _this.getMediaId;
+        axios.get(url).then(function (response) {
+          return resolve(response.data);
+        })["catch"](function (error) {});
+      });
+    },
+    initImg: function initImg() {
+      var _this2 = this;
+
+      this.getMediaImgFromDB().then(function (datas) {
+        for (var key in datas) {
+          _this2.updateMediaImgObjectItem({
+            key: key,
+            value: datas[key]
+          });
+        }
+
+        _this2.updateIsInitializedImg(true); // this.initStatus += 1;
+
+      });
     }
   })
 });
@@ -12328,7 +12356,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

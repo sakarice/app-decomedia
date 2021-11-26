@@ -18,17 +18,42 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapMutations } from 'vuex';
   export default {
     props : [
     ],
     computed : {
+      ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
       // ↓storeの値には単位[px]が付いてないので追加する
       mediaImgWidth() { return this.$store.getters['mediaImg/getMediaImg']['width'] + "px"; },
       mediaImgHeight() { return this.$store.getters['mediaImg/getMediaImg']['height'] + "px"; },
     },
+    methods : {
+      ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+      ...mapMutations('mediaImg', ['updateIsInitializedImg']),
+      getMediaImgFromDB(){
+        return new Promise((resolve, reject) => {
+          const url = '/mediaImg/'+this.getMediaId;
+          axios.get(url)
+          .then(response=>{
+            return resolve(response.data);
+          })
+          .catch(error=>{});
+        })
+      },
+      initImg(){
+        this.getMediaImgFromDB()
+        .then(datas=>{
+          for(let key in datas){
+            this.updateMediaImgObjectItem({key:key, value:datas[key]});
+          }
+          this.updateIsInitializedImg(true);
+          // this.initStatus += 1;
+        });
+      },
+    }
   }
 
 </script>

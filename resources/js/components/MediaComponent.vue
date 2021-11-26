@@ -295,7 +295,8 @@ export default {
     this.checkMode()
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
     this.judgeIsMyMedia();
-    this.initImg();
+    // this.initImg();
+    this.$refs.mediaImg.initImg();
     this.initMovie();
     this.initAudio();
     this.initSetting();
