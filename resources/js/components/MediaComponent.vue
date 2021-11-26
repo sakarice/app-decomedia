@@ -233,9 +233,9 @@ export default {
     },
     initAudio(){
       this.getMediaDataFromDB('mediaAudios')
-      .then(mediaAudioDatas=>{
-        mediaAudioDatas.forEach(mediaAudioData=>{
-          this.addMediaAudiosObjectItem(mediaAudioData);
+      .then(datas=>{
+        datas.forEach(data=>{
+          this.addMediaAudiosObjectItem(data);
         })
         this.updateIsInitializedAudios(true);
         this.initStatus += 2;
@@ -298,7 +298,7 @@ export default {
     // this.initImg();
     this.$refs.mediaImg.initImg();
     this.initMovie();
-    this.initAudio();
+    this.$refs.mediaAudio.initAudio();
     this.initSetting();
 
     // 全ての子コンポーネントが描画されてから実行する処理

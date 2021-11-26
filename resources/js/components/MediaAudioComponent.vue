@@ -87,6 +87,7 @@
       }
     },
     computed : {
+      ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       mediaAudioNum : function(){
@@ -95,9 +96,30 @@
     },
     methods : {
       ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
+      ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
       ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
       ...mapMutations('mediaAudios', ['updateMediaAudiosObjectItem']),
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
+      getMediaAudiosFromDB(){
+        return new Promise((resolve, reject) => {
+          const url = '/mediaAudios/'+this.getMediaId;
+          axios.get(url)
+          .then(response=>{
+            return resolve(response.data);
+          })
+          .catch(error=>{});
+        })
+      },
+      initAudio(){
+        this.getMediaAudiosFromDB()
+        .then(datas=>{
+          datas.forEach(data=>{
+            this.addMediaAudiosObjectItem(data);
+          })
+          this.updateIsInitializedAudios(true);
+          // this.initStatus += 2;
+        });
+      },
       // media閲覧時に最初に実行される
       hideAudio(){ this.isShowAudio = false; },
       // 親コンポーネントから実行される
