@@ -7131,34 +7131,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue");
-/* harmony import */ var _components_MediaComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/MediaComponent.vue */ "./resources/js/components/MediaComponent.vue");
-/* harmony import */ var _components_MediaEditComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/MediaEditComponent.vue */ "./resources/js/components/MediaEditComponent.vue");
-/* harmony import */ var _components_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/MediaHeaderComponent.vue */ "./resources/js/components/MediaHeaderComponent.vue");
-/* harmony import */ var _components_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/MediaOwnerInfoComponent.vue */ "./resources/js/components/MediaOwnerInfoComponent.vue");
-/* harmony import */ var _components_media_action_parts_SwitchToShowModeComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/media/action_parts/SwitchToShowModeComponent.vue */ "./resources/js/components/media/action_parts/SwitchToShowModeComponent.vue");
-/* harmony import */ var _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/media/action_parts/SwitchToEditModeComponent.vue */ "./resources/js/components/media/action_parts/SwitchToEditModeComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaOwnerInfoComponent.vue */ "./resources/js/components/media/action_parts/DispMediaOwnerInfoComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaLikeComponent.vue */ "./resources/js/components/media/action_parts/DispMediaLikeComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaInfoComponent.vue */ "./resources/js/components/media/action_parts/DispMediaInfoComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/media/action_parts/DispImgModalComponent.vue */ "./resources/js/components/media/action_parts/DispImgModalComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/media/action_parts/DispAudioModalComponent.vue */ "./resources/js/components/media/action_parts/DispAudioModalComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/media/action_parts/DispMovieModalComponent.vue */ "./resources/js/components/media/action_parts/DispMovieModalComponent.vue");
-/* harmony import */ var _components_media_action_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaSettingModalComponent.vue */ "./resources/js/components/media/action_parts/DispMediaSettingModalComponent.vue");
-/* harmony import */ var _components_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue");
-/* harmony import */ var _components_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
-/* harmony import */ var _components_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
-/* harmony import */ var _components_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
-/* harmony import */ var _components_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/OverlayComponent.vue */ "./resources/js/components/OverlayComponent.vue");
-/* harmony import */ var _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
+/* harmony import */ var _components_MediaComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/MediaComponent.vue */ "./resources/js/components/MediaComponent.vue");
+/* harmony import */ var _components_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/MediaHeaderComponent.vue */ "./resources/js/components/MediaHeaderComponent.vue");
+/* harmony import */ var _components_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/MediaOwnerInfoComponent.vue */ "./resources/js/components/MediaOwnerInfoComponent.vue");
+/* harmony import */ var _components_media_action_parts_SwitchToShowModeComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/media/action_parts/SwitchToShowModeComponent.vue */ "./resources/js/components/media/action_parts/SwitchToShowModeComponent.vue");
+/* harmony import */ var _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/media/action_parts/SwitchToEditModeComponent.vue */ "./resources/js/components/media/action_parts/SwitchToEditModeComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaOwnerInfoComponent.vue */ "./resources/js/components/media/action_parts/DispMediaOwnerInfoComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaLikeComponent.vue */ "./resources/js/components/media/action_parts/DispMediaLikeComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaInfoComponent.vue */ "./resources/js/components/media/action_parts/DispMediaInfoComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/media/action_parts/DispImgModalComponent.vue */ "./resources/js/components/media/action_parts/DispImgModalComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/media/action_parts/DispAudioModalComponent.vue */ "./resources/js/components/media/action_parts/DispAudioModalComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/media/action_parts/DispMovieModalComponent.vue */ "./resources/js/components/media/action_parts/DispMovieModalComponent.vue");
+/* harmony import */ var _components_media_action_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/media/action_parts/DispMediaSettingModalComponent.vue */ "./resources/js/components/media/action_parts/DispMediaSettingModalComponent.vue");
+/* harmony import */ var _components_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/ImgSelectComponent.vue */ "./resources/js/components/ImgSelectComponent.vue");
+/* harmony import */ var _components_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/AudioSelectComponent.vue */ "./resources/js/components/AudioSelectComponent.vue");
+/* harmony import */ var _components_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/MovieSettingComponent.vue */ "./resources/js/components/MovieSettingComponent.vue");
+/* harmony import */ var _components_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
+/* harmony import */ var _components_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/OverlayComponent.vue */ "./resources/js/components/OverlayComponent.vue");
+/* harmony import */ var _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/LoadingComponent.vue */ "./resources/js/components/LoadingComponent.vue");
 
 
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // const HomeComponent = { template: '<div>初めてのVue Resource</div>'}
-
-var Test2Component = {
-  template: '<router-link to="/">topへ</router-link>'
-};
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
@@ -7177,88 +7171,42 @@ var Test2Component = {
 
 
 
-
-
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('home-component', _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('media-edit-component', _components_MediaEditComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('switch-to-show-mode-component', _components_media_action_parts_SwitchToShowModeComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('switch-to-edit-mode-component', _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('media-header-component', _components_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('media-owner-info-component', _components_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-media-owner-info-component', _components_media_action_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-media-like-component', _components_media_action_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-media-info-component', _components_media_action_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-img-modal-component', _components_media_action_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-audio-modal-component', _components_media_action_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-movie-modal-component', _components_media_action_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('disp-media-setting-modal-component', _components_media_action_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('img-select-component', _components_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('audio-select-component', _components_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('movie-setting-component', _components_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('media-setting-component', _components_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('overlay-component', _components_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('loading-component', _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: [{
-    path: '/',
-    component: _components_HomeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    children: [{
-      path: 'test',
-      component: Test2Component
-    }]
-  }, {
     path: '/media',
     components: {
-      "default": _components_MediaComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      mediaHeader: _components_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+      "default": _components_MediaComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      mediaHeader: _components_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
     },
     children: [{
       path: ':id',
       name: 'show',
       components: {
-        switchToEditMode: _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-        mediaOwnerInfo: _components_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-        dispMediaLike: _components_media_action_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-        dispMediaOwnerInfo: _components_media_action_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-        dispMediaInfo: _components_media_action_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+        switchToEditMode: _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+        mediaOwnerInfo: _components_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+        dispMediaLike: _components_media_action_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+        dispMediaOwnerInfo: _components_media_action_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+        dispMediaInfo: _components_media_action_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
       }
     }, {
       path: ':id/edit',
       name: 'edit',
       components: {
-        switchToShowMode: _components_media_action_parts_SwitchToShowModeComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-        dispImgModal: _components_media_action_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-        dispAudioModal: _components_media_action_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-        dispMovieModal: _components_media_action_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-        dispMediaSettingModal: _components_media_action_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-        imgSelect: _components_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-        audioSelect: _components_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-        movieSetting: _components_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
-        mediaSetting: _components_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-        overlay: _components_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
-        loading: _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
+        switchToShowMode: _components_media_action_parts_SwitchToShowModeComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+        dispImgModal: _components_media_action_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+        dispAudioModal: _components_media_action_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+        dispMovieModal: _components_media_action_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+        dispMediaSettingModal: _components_media_action_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+        imgSelect: _components_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+        audioSelect: _components_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+        movieSetting: _components_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+        mediaSetting: _components_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+        overlay: _components_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+        loading: _components_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
       }
     }]
-  } // {
-  //   path : '/media/:mediaId',
-  //   component : Media,
-  //   children : [{
-  //     path : '',
-  //     components : {
-  //       mediaHeader: MediaHeader,
-  //       mediaImg : MediaImg,
-  //       mediaAudio : MediaAudio,
-  //       mediaMovie : MediaMovie,
-  //       mediaSetting : MediaSetting,
-  //     }
-  //   }]
-  // },
-  // {
-  //   path : '/media/:mediaId/edit',
-  //   component : MediaEdit,
-  // }
-  ]
+  }]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
 
