@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ImgSelect from './media/edit_parts/ImgSelectComponent.vue';
+import ImgSelect from '../media/edit_parts/ImgSelectComponent.vue';
 export default {
   components : {
     ImgSelect

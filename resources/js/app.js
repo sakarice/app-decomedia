@@ -29,10 +29,6 @@ const { functionsIn } = require('lodash');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('test-component', require('./components/TestComponent.vue').default);
-Vue.component('test-parent-component', require('./components/TestParentComponent.vue').default);
-
 // ■ホーム画面用
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
@@ -44,8 +40,6 @@ Vue.component('media-header-component', require('./components/media/MediaHeaderC
 Vue.component('mypage-menu-bar-component', require('./components/mypage/MypageMenuBarComponent.vue').default);
 // マイページ
 Vue.component('mypage-component', require('./components/mypage/MypageComponent.vue').default);
-// ユーザページ
-Vue.component('user-page-component', require('./components/UserPageComponent.vue').default);
 // フォロー/フォロワー一覧
 Vue.component('follow-and-follower-component', require('./components/FollowAndFollowerComponent.vue').default);
 
@@ -102,7 +96,7 @@ Vue.component('to-mypage-button-component', require('./components/media/action_p
 
 
 
-Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('home-component', require('./components/home/HomeComponent.vue').default);
 
 
 /**
