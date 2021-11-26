@@ -1388,11 +1388,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -1451,6 +1446,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         initCountStack += 8;
       }
 
+      if (this.getReadyCreateMovieFrame) {
+        initCountStack += 16;
+      }
+
       return initCountStack;
     }
   }),
@@ -1495,35 +1494,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })["catch"](function (error) {});
       });
     },
-    // initImg(){
-    //   this.getMediaDataFromDB('mediaImg')
-    //   .then(datas=>{
-    //     for(let key in datas){
-    //       this.updateMediaImgObjectItem({key:key, value:datas[key]});
-    //     }
-    //     this.updateIsInitializedImg(true);
-    //     this.initStatus += 1;
-    //   });
-    // },
-    // initAudio(){
-    //   this.getMediaDataFromDB('mediaAudios')
-    //   .then(datas=>{
-    //     datas.forEach(data=>{
-    //       this.addMediaAudiosObjectItem(data);
-    //     })
-    //     this.updateIsInitializedAudios(true);
-    //     this.initStatus += 2;
-    //   });
-    // },
-    // initMovie(){
-    //   this.getMediaDataFromDB('mediaMovie')
-    //   .then(datas=>{
-    //     for(let key in datas){
-    //       this.updateMediaMovieObjectItem({key:key, value:datas[key]});
-    //     }
-    //     this.initStatus += 4;
-    //   });
-    // },
     initSetting: function initSetting() {
       var _this3 = this;
 
@@ -1576,10 +1546,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     }
   }),
-  created: function created() {
-    console.log('パス' + this.$route.path);
-    console.log('フルパス' + this.$route.fullPath); // if(this.getIsLogin){ this.judgeIsMyMedia(); }
-  },
+  created: function created() {},
   mounted: function mounted() {
     this.checkMode();
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
@@ -1602,7 +1569,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   },
   watch: {
-    initStatus: function initStatus(newVal) {
+    initStatus_compute_test: function initStatus_compute_test(newVal) {
       var _this5 = this;
 
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
@@ -3037,7 +3004,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8582,12 +8549,6 @@ var render = function () {
         },
         on: { "close-modal": _vm.closeModal },
       }),
-      _vm._v(" "),
-      _c("div", { staticClass: "init_count_display_test" }, [
-        _c("p", [_vm._v("initStatus:" + _vm._s(_vm.initStatus) + '"')]),
-        _vm._v(" "),
-        _c("p", [_vm._v(_vm._s(_vm.initStatus_compute_test))]),
-      ]),
     ],
     1
   )

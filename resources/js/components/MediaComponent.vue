@@ -106,11 +106,6 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
-    <div class="init_count_display_test">
-      <p>initStatus:{{initStatus}}"</p>
-      <p>{{initStatus_compute_test}}</p>
-    </div>
-
   </div>
 </template>
 
@@ -175,6 +170,7 @@ export default {
       if(this.getIsInitializedAudios){initCountStack += 2}
       if(this.getIsInitializedMovie){initCountStack += 4}
       if(this.getIsInitializedSetting){initCountStack += 8}
+      if(this.getReadyCreateMovieFrame){initCountStack += 16}
       return initCountStack;
     },
     
@@ -226,35 +222,6 @@ export default {
         .catch(error=>{});
       })
     },
-    // initImg(){
-    //   this.getMediaDataFromDB('mediaImg')
-    //   .then(datas=>{
-    //     for(let key in datas){
-    //       this.updateMediaImgObjectItem({key:key, value:datas[key]});
-    //     }
-    //     this.updateIsInitializedImg(true);
-    //     this.initStatus += 1;
-    //   });
-    // },
-    // initAudio(){
-    //   this.getMediaDataFromDB('mediaAudios')
-    //   .then(datas=>{
-    //     datas.forEach(data=>{
-    //       this.addMediaAudiosObjectItem(data);
-    //     })
-    //     this.updateIsInitializedAudios(true);
-    //     this.initStatus += 2;
-    //   });
-    // },
-    // initMovie(){
-    //   this.getMediaDataFromDB('mediaMovie')
-    //   .then(datas=>{
-    //     for(let key in datas){
-    //       this.updateMediaMovieObjectItem({key:key, value:datas[key]});
-    //     }
-    //     this.initStatus += 4;
-    //   });
-    // },
     initSetting(){
       this.getMediaDataFromDB('mediaSetting')
       .then(datas=>{
@@ -292,11 +259,7 @@ export default {
     },
 
   },
-  created() {
-    console.log('パス'+this.$route.path);
-    console.log('フルパス'+this.$route.fullPath);
-    // if(this.getIsLogin){ this.judgeIsMyMedia(); }
-  },
+  created() {},
   mounted() {
     this.checkMode()
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
@@ -318,7 +281,7 @@ export default {
 
   },
   watch : {
-    initStatus : function(newVal){
+    initStatus_compute_test : function(newVal){
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
       if(newVal >= 2){ 
         const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
