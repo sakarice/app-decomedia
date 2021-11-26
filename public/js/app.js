@@ -3827,14 +3827,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MediaHeaderComponent.vue */ "./resources/js/components/MediaHeaderComponent.vue");
-/* harmony import */ var _MediaAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MediaAudioComponent.vue */ "./resources/js/components/MediaAudioComponent.vue");
-/* harmony import */ var _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaSettingComponent.vue */ "./resources/js/components/MediaSettingComponent.vue");
-/* harmony import */ var _MediaImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MediaImgComponent.vue */ "./resources/js/components/MediaImgComponent.vue");
-/* harmony import */ var _MediaMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MediaMovieComponent.vue */ "./resources/js/components/MediaMovieComponent.vue");
-/* harmony import */ var _MediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaInfoComponent.vue */ "./resources/js/components/MediaInfoComponent.vue");
-/* harmony import */ var _MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MediaOwnerInfoComponent.vue */ "./resources/js/components/MediaOwnerInfoComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -3952,38 +3945,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-
-
-
-
-
-
-
- // import LikeMedia from './LikeMediaComponent.vue';
-// import DispMediaLike from './media/action_parts/DispMediaLikeComponent.vue';
-// import DispMediaInfo from './media/action_parts/DispMediaInfoComponent.vue';
-// import DispImgModal from './media/action_parts/DispImgModalComponent.vue';
-// import DispAudioModal from './media/action_parts/DispAudioModalComponent.vue';
-// import DispMovieModal from './media/action_parts/DispMovieModalComponent.vue';
-// import DispMediaSettingModal from './media/action_parts/DispMediaSettingModalComponent.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    MediaHeader: _MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    MediaAudio: _MediaAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    MediaSetting: _MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    MediaImg: _MediaImgComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    MediaMovie: _MediaMovieComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    MediaInfo: _MediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    MediaOwnerInfo: _MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"] // LikeMedia,
-    // DispMediaLike,
-    // DispMediaInfo,
-
-  },
+  components: {},
   props: [],
   data: function data() {
     return {
@@ -4003,9 +3967,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
-    // isSaveing:()=>{ if(this.getIsWaiting == 1){return true} },
-    // isUpdating:()=>{ if(this.getIsWaiting == 2){return true} },
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -4033,14 +3995,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else {
         return 3;
       }
-    } // isShowMode : function(){ if(this.getMode==3) return true; },
-    // routerLinkText : function(){
-    //   if(this.getMode==2){return '閲覧画面へ'}
-    //   else if(this.getMode==3){return '編集画面へ'}
-    // }
-
+    }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_7__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     judgeIsMyMedia: function judgeIsMyMedia() {
       var _this = this;
 
@@ -6744,7 +6701,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getIsMyMedia']))
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getIsMyMedia'])),
+  isShowMediaLike: function isShowMediaLike() {
+    if (this.getIsLogin && !this.getIsMyMedia) {
+      return true;
+    }
+  }
 });
 
 /***/ }),
@@ -12328,7 +12290,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12988,7 +12950,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.icon-wrapper[data-v-311a5ddf] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.icon-wrapper[data-v-311a5ddf] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#disp-media-info-wrapper[data-v-311a5ddf] {\n  color: white;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13036,7 +12998,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.icon-wrapper[data-v-26f0de88] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.icon-wrapper[data-v-26f0de88] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#disp-media-owner-modal-wrapper[data-v-26f0de88] {\n  color: white;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61299,7 +61261,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.getIsLogin && !_vm.getIsMyMedia
+  return _vm.isShowMediaLike
     ? _c(
         "div",
         {

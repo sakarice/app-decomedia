@@ -3,10 +3,6 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
-    <!-- Mediaヘッダ -->
-    <!-- <media-header></media-header> -->
-    <!-- <router-view name="header"></router-view> -->
-
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
@@ -115,35 +111,9 @@
 
 <script>
 import { mapGetters, mapMutations} from 'vuex';
-import MediaHeader from './MediaHeaderComponent.vue';
-import MediaAudio from './MediaAudioComponent.vue';
-import MediaSetting from './MediaSettingComponent.vue';
-import MediaImg from './MediaImgComponent.vue';
-import MediaMovie from './MediaMovieComponent.vue';
-import MediaInfo from './MediaInfoComponent.vue';
-import MediaOwnerInfo from './MediaOwnerInfoComponent.vue';
-// import LikeMedia from './LikeMediaComponent.vue';
-// import DispMediaLike from './media/action_parts/DispMediaLikeComponent.vue';
-// import DispMediaInfo from './media/action_parts/DispMediaInfoComponent.vue';
-// import DispImgModal from './media/action_parts/DispImgModalComponent.vue';
-// import DispAudioModal from './media/action_parts/DispAudioModalComponent.vue';
-// import DispMovieModal from './media/action_parts/DispMovieModalComponent.vue';
-// import DispMediaSettingModal from './media/action_parts/DispMediaSettingModalComponent.vue';
-
 
 export default {
-  components : {
-    MediaHeader,
-    MediaAudio,
-    MediaSetting,
-    MediaImg,
-    MediaMovie,
-    MediaInfo,
-    MediaOwnerInfo,
-    // LikeMedia,
-    // DispMediaLike,
-    // DispMediaInfo,
-  },
+  components : {},
   props: [],
   data : () => {
     return {
@@ -173,8 +143,7 @@ export default {
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
-    // isSaveing:()=>{ if(this.getIsWaiting == 1){return true} },
-    // isUpdating:()=>{ if(this.getIsWaiting == 2){return true} },
+
     waitingMsg:function(){
       if(this.getMode==1){
         return '作成中です...'
@@ -199,11 +168,6 @@ export default {
         return 2;
       } else {return 3}
     },
-    // isShowMode : function(){ if(this.getMode==3) return true; },
-    // routerLinkText : function(){
-    //   if(this.getMode==2){return '閲覧画面へ'}
-    //   else if(this.getMode==3){return '編集画面へ'}
-    // }
     
   },
   methods : {
