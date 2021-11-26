@@ -38,4 +38,8 @@
     align-items: center;
   }
 
+  #disp-media-owner-modal-wrapper {
+    color: white;
+  }
+  
 </style>

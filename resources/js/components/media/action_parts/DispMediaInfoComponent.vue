@@ -28,4 +28,9 @@
     align-items: center;
   }
 
+  #disp-media-info-wrapper {
+    color: white;
+  }
+
+
 </style>
