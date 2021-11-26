@@ -115,10 +115,19 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations} from 'vuex';
+  import { mapGetters, mapMutations} from 'vuex';
+  import MediaImg from './MediaImgComponent.vue';
+  import MediaAudio from './MediaAudioComponent.vue';
+  import MediaMovie from './MediaMovieComponent.vue';
+  import MediaSetting from './MediaSettingComponent.vue';
 
 export default {
-components : {},
+  components : {
+    MediaImg,
+    MediaAudio,
+    MediaSetting,
+    MediaMovie,
+  },
   props: [],
   data : () => {
     return {
