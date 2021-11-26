@@ -1424,7 +1424,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -1441,6 +1441,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (this.getIsInitializedAudios) {
         initCountStack += 2;
+      }
+
+      if (this.getIsInitializedMovie) {
+        initCountStack += 4;
       }
 
       return initCountStack;
@@ -1589,7 +1593,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.judgeIsMyMedia(); // this.initImg();
 
     this.$refs.mediaImg.initImg();
-    this.initMovie();
+    this.$refs.mediaMovie.initMovie();
     this.$refs.mediaAudio.initAudio();
     this.initSetting(); // 全ての子コンポーネントが描画されてから実行する処理
 
@@ -1915,8 +1919,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+    getMediaMovieFromDB: function getMediaMovieFromDB() {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        var url = '/mediaMovie/' + _this.getMediaId;
+        axios.get(url).then(function (response) {
+          return resolve(response.data);
+        })["catch"](function (error) {});
+      });
+    },
+    initMovie: function initMovie() {
+      var _this2 = this;
+
+      this.getMediaMovieFromDB().then(function (datas) {
+        for (var key in datas) {
+          _this2.updateMediaMovieObjectItem({
+            key: key,
+            value: datas[key]
+          });
+        }
+
+        _this2.updateIsInitializedMovie(true); // this.initStatus += 4;
+
+      });
+    },
     loopYoutube: function loopYoutube() {
       if (this.getMediaMovie['isLoop'] == false) {
         this.updateMediaSettingObjectItem({
@@ -3016,7 +3045,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -3114,7 +3143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-7a924e16] {\n  position : absolute;\n}\n.youtube-url-description[data-v-7a924e16] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-7a924e16] {\n  margin: 10px;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-7a924e16] {\n  position : absolute;\n}\n.youtube-url-description[data-v-7a924e16] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-7a924e16] {\n  margin: 10px;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

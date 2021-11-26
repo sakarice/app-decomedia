@@ -158,6 +158,7 @@ export default {
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
+    ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
 
     waitingMsg:function(){
@@ -171,6 +172,7 @@ export default {
       let initCountStack = 0;
       if(this.getIsInitializedImg){initCountStack += 1}
       if(this.getIsInitializedAudios){initCountStack += 2}
+      if(this.getIsInitializedMovie){initCountStack += 4}
       return initCountStack;
     },
     
@@ -297,7 +299,7 @@ export default {
     this.judgeIsMyMedia();
     // this.initImg();
     this.$refs.mediaImg.initImg();
-    this.initMovie();
+    this.$refs.mediaMovie.initMovie();
     this.$refs.mediaAudio.initAudio();
     this.initSetting();
 

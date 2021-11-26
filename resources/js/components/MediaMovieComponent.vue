@@ -27,12 +27,35 @@
       }
     },
     computed : {
+      ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
     },
     methods : {
+      ...mapMutations('mediaMovie', ['updateIsInitializedMovie']),
       ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
+      getMediaMovieFromDB(){
+        return new Promise((resolve, reject) => {
+          const url = '/mediaMovie/'+this.getMediaId;
+          axios.get(url)
+          .then(response=>{
+            return resolve(response.data);
+          })
+          .catch(error=>{});
+        })
+      },
+      initMovie(){
+        this.getMediaMovieFromDB()
+        .then(datas=>{
+          for(let key in datas){
+            this.updateMediaMovieObjectItem({key:key, value:datas[key]});
+          }
+          this.updateIsInitializedMovie(true);
+          // this.initStatus += 4;
+        });
+      },
       loopYoutube(){
         if(this.getMediaMovie['isLoop'] == false){
           this.updateMediaSettingObjectItem({kye:'isLoop', value:true});
