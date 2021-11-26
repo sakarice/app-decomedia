@@ -21,10 +21,10 @@ import DispMovieModal from './components/media/change_display_parts/DispMovieMod
 import DispMediaSettingModal from './components/media/change_display_parts/DispMediaSettingModalComponent.vue';
 
 // メディア編集用コンポーネント
-import ImgSelect from './components/ImgSelectComponent.vue';
-import AudioSelect from './components/AudioSelectComponent.vue';
-import MovieSetting from './components/MovieSettingComponent.vue';
-import MediaSetting from './components/MediaSettingComponent.vue';
+import ImgSelect from './components/media/edit_parts/ImgSelectComponent.vue';
+import AudioSelect from './components/media/edit_parts/AudioSelectComponent.vue';
+import MovieSetting from './components/media/edit_parts/MovieSettingComponent.vue';
+import MediaSetting from './components/media/edit_parts/MediaSettingComponent.vue';
 
 // 編集中のローディング表示コンポーネント
 import Overlay from './components/OverlayComponent.vue';

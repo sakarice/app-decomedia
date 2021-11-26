@@ -95,11 +95,11 @@
 <script>
 import { mapGetters } from 'vuex';
 import MediaHeader from './MediaHeaderComponent.vue';
-import ImgSelect from './ImgSelectComponent.vue';
-import AudioSelect from './AudioSelectComponent.vue';
-import MovieSetting from './MovieSettingComponent.vue';
+import ImgSelect from './media/edit_parts/ImgSelectComponent.vue';
+import AudioSelect from './media/edit_parts/AudioSelectComponent.vue';
+import MovieSetting from './media/edit_parts/MovieSettingComponent.vue';
 import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
-import MediaSetting from './MediaSettingComponent.vue';
+import MediaSetting from './media/edit_parts/MediaSettingComponent.vue';
 import MediaImg from './media/media_contents/MediaImgComponent.vue';
 import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
 import MediaCreateButton from './media/action_parts/MediaCreateButtonComponent.vue';

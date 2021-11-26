@@ -76,10 +76,10 @@ Vue.component('like-media-component', require('./components/LikeMediaComponent.v
 Vue.component('follow-component', require('./components/FollowComponent.vue').default);
 
 // ★media作成用コンポーネント
-Vue.component('img-select-component', require('./components/ImgSelectComponent.vue').default);
-Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
-Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
-Vue.component('media-setting-component', require('./components/MediaSettingComponent.vue').default);
+Vue.component('img-select-component', require('./components/media/edit_parts/ImgSelectComponent.vue').default);
+Vue.component('movie-setting-component', require('./components/media/edit_parts/MovieSettingComponent.vue').default);
+Vue.component('audio-select-component', require('./components/media/edit_parts/AudioSelectComponent.vue').default);
+Vue.component('media-setting-component', require('./components/media/edit_parts/MediaSettingComponent.vue').default);
 Vue.component('media-audio-component', require('./components/media/media_contents/MediaAudioComponent.vue').default);
 Vue.component('media-audio-player-component', require('./components/media/media_contents/MediaAudioPlayerComponent.vue').default);
 Vue.component('media-img-component', require('./components/media/media_contents/MediaImgComponent.vue').default);

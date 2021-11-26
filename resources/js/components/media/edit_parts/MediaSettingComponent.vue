@@ -113,7 +113,7 @@ export default {
 
 <style>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {

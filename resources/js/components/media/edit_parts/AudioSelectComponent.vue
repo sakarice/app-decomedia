@@ -340,7 +340,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
   
   #audio-thumbnail-wrapper {
     /* モーダル内のオーディオサムネの配置 */

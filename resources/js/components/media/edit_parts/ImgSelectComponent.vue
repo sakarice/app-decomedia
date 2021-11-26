@@ -246,7 +246,7 @@
 
 <style scoped>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
   #img-wrapper {
     /* モーダル内の画像サムネの配置 */

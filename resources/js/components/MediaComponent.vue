@@ -114,7 +114,7 @@
   import MediaImg from './media/media_contents/MediaImgComponent.vue';
   import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
-  import MediaSetting from './MediaSettingComponent.vue';
+  import MediaSetting from './media/edit_parts/MediaSettingComponent.vue';
 
 export default {
   components : {

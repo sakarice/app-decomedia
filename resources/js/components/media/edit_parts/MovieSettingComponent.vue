@@ -92,7 +92,7 @@ export default {
 
 <style scoped>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {
