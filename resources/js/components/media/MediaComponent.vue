@@ -111,10 +111,10 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
-  import MediaImg from './media/media_contents/MediaImgComponent.vue';
-  import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
-  import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
-  import MediaSetting from './media/edit_parts/MediaSettingComponent.vue';
+  import MediaImg from './media_contents/MediaImgComponent.vue';
+  import MediaAudio from './media_contents/MediaAudioComponent.vue';
+  import MediaMovie from './media_contents/MediaMovieComponent.vue';
+  import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
 export default {
   components : {
@@ -302,9 +302,9 @@ export default {
 
 <style scoped>
 /* @import "../../css/button.css"; */
-@import "../../css/mediaCommon.css";
-@import "../../css/mediaModals.css";
-@import "../../css/modalAnimation.css";
+@import "/resources/css/mediaCommon.css";
+@import "/resources/css/mediaModals.css";
+@import "/resources/css/modalAnimation.css";
 
 
 

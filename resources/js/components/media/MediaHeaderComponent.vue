@@ -30,11 +30,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import HomeLink from './media/action_parts/HomeLinkComponent.vue';
-import CancelButton from './media/action_parts/CancelButtonComponent.vue';
-import ToMypageButton from './media/action_parts/ToMypageButtonComponent.vue';
-import MediaCreateButton from './media/action_parts/MediaCreateButtonComponent.vue';
-import MediaUpdateButton from './media/action_parts/MediaUpdateButtonComponent.vue';
+import HomeLink from './action_parts/HomeLinkComponent.vue';
+import CancelButton from './action_parts/CancelButtonComponent.vue';
+import ToMypageButton from './action_parts/ToMypageButtonComponent.vue';
+import MediaCreateButton from './action_parts/MediaCreateButtonComponent.vue';
+import MediaUpdateButton from './action_parts/MediaUpdateButtonComponent.vue';
 
 
 export default {
@@ -114,7 +114,7 @@ export default {
 <style scoped>
 
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
-@import "../../css/button.css";
+@import "/resources/css/button.css";
 
 .header {
   position: fixed;

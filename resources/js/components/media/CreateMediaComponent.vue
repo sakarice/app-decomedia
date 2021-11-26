@@ -95,16 +95,16 @@
 <script>
 import { mapGetters } from 'vuex';
 import MediaHeader from './MediaHeaderComponent.vue';
-import ImgSelect from './media/edit_parts/ImgSelectComponent.vue';
-import AudioSelect from './media/edit_parts/AudioSelectComponent.vue';
-import MovieSetting from './media/edit_parts/MovieSettingComponent.vue';
-import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
-import MediaSetting from './media/edit_parts/MediaSettingComponent.vue';
-import MediaImg from './media/media_contents/MediaImgComponent.vue';
-import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
-import MediaCreateButton from './media/action_parts/MediaCreateButtonComponent.vue';
-import Overlay from './OverlayComponent.vue'
-import Loading from './LoadingComponent.vue'
+import ImgSelect from './edit_parts/ImgSelectComponent.vue';
+import AudioSelect from './edit_parts/AudioSelectComponent.vue';
+import MovieSetting from './edit_parts/MovieSettingComponent.vue';
+import MediaAudio from './media_contents/MediaAudioComponent.vue';
+import MediaSetting from './edit_parts/MediaSettingComponent.vue';
+import MediaImg from './media_contents/MediaImgComponent.vue';
+import MediaMovie from './media_contents/MediaMovieComponent.vue';
+import MediaCreateButton from './action_parts/MediaCreateButtonComponent.vue';
+import Overlay from '../OverlayComponent.vue'
+import Loading from '../LoadingComponent.vue'
 
 export default {
   components : {
@@ -210,7 +210,7 @@ export default {
 </script>
 
 <style scoped>
-@import "../../css/mediaCommon.css";
-@import "../../css/mediaModals.css";
+@import "/resources/css/mediaCommon.css";
+@import "/resources/css/mediaModals.css";
 
 </style>

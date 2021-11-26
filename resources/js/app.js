@@ -38,7 +38,7 @@ Vue.component('header-component', require('./components/HeaderComponent.vue').de
 Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
 
 // ■Mediaパーツ
-Vue.component('media-header-component', require('./components/MediaHeaderComponent.vue').default);
+Vue.component('media-header-component', require('./components/media/MediaHeaderComponent.vue').default);
 
 // ■マイページ用
 Vue.component('mypage-menu-bar-component', require('./components/MypageMenuBarComponent.vue').default);
@@ -60,11 +60,11 @@ Vue.component('media-preview-component', require('./components/MediaPreviewCompo
 Vue.component('media-list-preview-component', require('./components/MediaListPreviewComponent.vue').default);
 
 // media閲覧用コンポーネント
-Vue.component('media-component', require('./components/MediaComponent.vue').default);
+Vue.component('media-component', require('./components/media/MediaComponent.vue').default);
 Vue.component('media-info-component', require('./components/media/show_parts/MediaInfoComponent.vue').default);
 
 // media編集用コンポーネント
-Vue.component('media-edit-component', require('./components/MediaEditComponent.vue').default);
+Vue.component('media-edit-component', require('./components/media/MediaEditComponent.vue').default);
 
 // media所有者(＝作成者)情報
 Vue.component('disp-media-owner-info-component', require('./components/media/show_parts/DispMediaOwnerInfoComponent.vue').default);
@@ -84,7 +84,7 @@ Vue.component('media-audio-component', require('./components/media/media_content
 Vue.component('media-audio-player-component', require('./components/media/media_contents/MediaAudioPlayerComponent.vue').default);
 Vue.component('media-img-component', require('./components/media/media_contents/MediaImgComponent.vue').default);
 Vue.component('media-movie-component', require('./components/media/media_contents/MediaMovieComponent.vue').default);
-Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);
+Vue.component('create-media-component', require('./components/media/CreateMediaComponent.vue').default);
 Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);
 Vue.component('media-update-button-component', require('./components/media/action_parts/MediaUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/media/action_parts/CancelButtonComponent.vue').default);
