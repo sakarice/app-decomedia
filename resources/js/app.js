@@ -80,10 +80,10 @@ Vue.component('img-select-component', require('./components/ImgSelectComponent.v
 Vue.component('movie-setting-component', require('./components/MovieSettingComponent.vue').default);
 Vue.component('audio-select-component', require('./components/AudioSelectComponent.vue').default);
 Vue.component('media-setting-component', require('./components/MediaSettingComponent.vue').default);
-Vue.component('media-audio-component', require('./components/MediaAudioComponent.vue').default);
-Vue.component('media-audio-player-component', require('./components/MediaAudioPlayerComponent.vue').default);
-Vue.component('media-img-component', require('./components/MediaImgComponent.vue').default);
-Vue.component('media-movie-component', require('./components/MediaMovieComponent.vue').default);
+Vue.component('media-audio-component', require('./components/media/media_contents/MediaAudioComponent.vue').default);
+Vue.component('media-audio-player-component', require('./components/media/media_contents/MediaAudioPlayerComponent.vue').default);
+Vue.component('media-img-component', require('./components/media/media_contents/MediaImgComponent.vue').default);
+Vue.component('media-movie-component', require('./components/media/media_contents/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);
 Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);
 Vue.component('media-update-button-component', require('./components/media/action_parts/MediaUpdateButtonComponent.vue').default);

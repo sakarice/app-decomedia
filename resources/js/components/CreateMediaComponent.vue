@@ -98,10 +98,10 @@ import MediaHeader from './MediaHeaderComponent.vue';
 import ImgSelect from './ImgSelectComponent.vue';
 import AudioSelect from './AudioSelectComponent.vue';
 import MovieSetting from './MovieSettingComponent.vue';
-import MediaAudio from './MediaAudioComponent.vue';
+import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
 import MediaSetting from './MediaSettingComponent.vue';
-import MediaImg from './MediaImgComponent.vue';
-import MediaMovie from './MediaMovieComponent.vue';
+import MediaImg from './media/media_contents/MediaImgComponent.vue';
+import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
 import MediaCreateButton from './media/action_parts/MediaCreateButtonComponent.vue';
 import Overlay from './OverlayComponent.vue'
 import Loading from './LoadingComponent.vue'

@@ -111,9 +111,9 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
-  import MediaImg from './MediaImgComponent.vue';
-  import MediaAudio from './MediaAudioComponent.vue';
-  import MediaMovie from './MediaMovieComponent.vue';
+  import MediaImg from './media/media_contents/MediaImgComponent.vue';
+  import MediaAudio from './media/media_contents/MediaAudioComponent.vue';
+  import MediaMovie from './media/media_contents/MediaMovieComponent.vue';
   import MediaSetting from './MediaSettingComponent.vue';
 
 export default {
