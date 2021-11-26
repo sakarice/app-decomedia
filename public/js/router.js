@@ -1206,9 +1206,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     console.log('フルパス' + this.$route.fullPath); // if(this.getIsLogin){ this.judgeIsMyMedia(); }
   },
   mounted: function mounted() {
+    this.checkMode();
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
     this.judgeIsMyMedia();
-    this.checkMode();
     this.initImg();
     this.initMovie();
     this.initAudio();

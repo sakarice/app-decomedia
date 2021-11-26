@@ -266,9 +266,9 @@ export default {
     // if(this.getIsLogin){ this.judgeIsMyMedia(); }
   },
   mounted() {
+    this.checkMode()
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
     this.judgeIsMyMedia();
-    this.checkMode()
     this.initImg();
     this.initMovie();
     this.initAudio();
