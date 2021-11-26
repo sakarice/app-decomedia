@@ -3213,7 +3213,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsCrudDoing'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -7129,7 +7129,7 @@ var media = {
     isMyMedia: false,
     mode: 0,
     // 1:create, 2:edit, 3:show
-    isWaiting: false
+    IsCrudDoing: false
   },
   getters: {
     getMediaId: function getMediaId(state) {
@@ -7141,8 +7141,8 @@ var media = {
     getMode: function getMode(state) {
       return state.mode;
     },
-    getIsWaiting: function getIsWaiting(state) {
-      return state.IsWaiting;
+    getIsCrudDoing: function getIsCrudDoing(state) {
+      return state.IsCrudDoing;
     }
   },
   mutations: {
@@ -7155,8 +7155,8 @@ var media = {
     setMode: function setMode(state, payload) {
       state.mode = payload;
     },
-    setIsWaiting: function setIsWaiting(state, payload) {
-      state.isWaiting = payload;
+    setIsCrudDoing: function setIsCrudDoing(state, payload) {
+      state.IsCrudDoing = payload;
     }
   }
 };
@@ -57426,8 +57426,8 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.getIsWaiting,
-              expression: "getIsWaiting",
+              value: _vm.getIsCrudDoing,
+              expression: "getIsCrudDoing",
             },
           ],
         },

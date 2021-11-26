@@ -91,7 +91,7 @@
     :transitionName="transitionName">
     </router-view>
 
-    <div v-show="getIsWaiting">
+    <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
       <router-view name="loading"
       :message="waitingMsg">
@@ -147,7 +147,7 @@ export default {
     ...mapGetters('loginState', ['getIsLogin']),
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('media', ['getMode']),
-    ...mapGetters('media', ['getIsWaiting']),
+    ...mapGetters('media', ['getIsCrudDoing']),
     ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaImg', ['getIsInitializedImg']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
