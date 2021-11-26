@@ -6,7 +6,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import LikeMedia from './../../LikeMediaComponent.vue';
+import LikeMedia from '../../LikeMediaComponent.vue';
 
   export default {
     components : {

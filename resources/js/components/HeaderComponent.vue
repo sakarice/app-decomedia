@@ -44,7 +44,7 @@
 <script>
 import { mapState, mapGetters } from "vuex";
 import Profile from './ProfileComponent.vue';
-import HomeLink from './HomeLinkComponent.vue';
+import HomeLink from './media/action_parts/HomeLinkComponent.vue';
 
 export default {
     components : {

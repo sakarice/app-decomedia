@@ -30,11 +30,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import HomeLink from './HomeLinkComponent.vue';
-import CancelButton from './CancelButtonComponent.vue';
-import ToMypageButton from './ToMypageButtonComponent.vue';
-import MediaCreateButton from './MediaCreateButtonComponent.vue';
-import MediaUpdateButton from './MediaUpdateButtonComponent.vue';
+import HomeLink from './media/action_parts/HomeLinkComponent.vue';
+import CancelButton from './media/action_parts/CancelButtonComponent.vue';
+import ToMypageButton from './media/action_parts/ToMypageButtonComponent.vue';
+import MediaCreateButton from './media/action_parts/MediaCreateButtonComponent.vue';
+import MediaUpdateButton from './media/action_parts/MediaUpdateButtonComponent.vue';
 
 
 export default {

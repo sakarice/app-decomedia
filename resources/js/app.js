@@ -35,7 +35,7 @@ Vue.component('test-parent-component', require('./components/TestParentComponent
 
 // ■ホーム画面用
 Vue.component('header-component', require('./components/HeaderComponent.vue').default);
-Vue.component('home-link-component', require('./components/HomeLinkComponent.vue').default);
+Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
 
 // ■Mediaパーツ
 Vue.component('media-header-component', require('./components/MediaHeaderComponent.vue').default);
@@ -67,10 +67,10 @@ Vue.component('media-info-component', require('./components/MediaInfoComponent.v
 Vue.component('media-edit-component', require('./components/MediaEditComponent.vue').default);
 
 // media所有者(＝作成者)情報
-Vue.component('disp-media-owner-info-component', require('./components/media/action_parts/DispMediaOwnerInfoComponent.vue').default);
+Vue.component('disp-media-owner-info-component', require('./components/media/change_display_parts/DispMediaOwnerInfoComponent.vue').default);
 Vue.component('media-owner-info-component', require('./components/MediaOwnerInfoComponent.vue').default);
 // Mediaへのいいねアイコンコンポーネント
-Vue.component('disp-media-like-component', require('./components/media/action_parts/DispMediaLikeComponent.vue').default);
+Vue.component('disp-media-like-component', require('./components/media/change_display_parts/DispMediaLikeComponent.vue').default);
 Vue.component('like-media-component', require('./components/LikeMediaComponent.vue').default);
 // Media作成者フォローコンポーネント
 Vue.component('follow-component', require('./components/FollowComponent.vue').default);
@@ -85,9 +85,9 @@ Vue.component('media-audio-player-component', require('./components/MediaAudioPl
 Vue.component('media-img-component', require('./components/MediaImgComponent.vue').default);
 Vue.component('media-movie-component', require('./components/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/CreateMediaComponent.vue').default);
-Vue.component('media-create-button-component', require('./components/MediaCreateButtonComponent.vue').default);
-Vue.component('media-update-button-component', require('./components/MediaUpdateButtonComponent.vue').default);
-Vue.component('cancel-button-component', require('./components/CancelButtonComponent.vue').default);
+Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);
+Vue.component('media-update-button-component', require('./components/media/action_parts/MediaUpdateButtonComponent.vue').default);
+Vue.component('cancel-button-component', require('./components/media/action_parts/CancelButtonComponent.vue').default);
 
 // mediaリスト作成用コンポーネント
 Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);
@@ -98,7 +98,7 @@ Vue.component('overlay-component', require('./components/OverlayComponent.vue').
 // ローディング中に表示するコンポーネント
 Vue.component('loading-component', require('./components/LoadingComponent.vue').default);
 // マイページへの遷移ボタンコンポーネント
-Vue.component('to-mypage-button-component', require('./components/ToMypageButtonComponent.vue').default);
+Vue.component('to-mypage-button-component', require('./components/media/action_parts/ToMypageButtonComponent.vue').default);
 
 
 
