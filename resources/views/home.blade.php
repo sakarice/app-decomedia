@@ -19,10 +19,17 @@
     <section id="home-top">
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
-            <h2 class="top-message">聴いて、観て、繋がる</h2>
+            <h2 class="top-message">
+                創作に手が出せなかったあなたへ<br>
+            </h2>
             <p class="sub-message">
-                好みの音楽や動画であなただけのメディアを作り<br>
-                同じ感性の人々と繋がりましょう
+                0からコンテンツを作るのではなく、<br>
+                既にある画像や音楽、動画を組み合わせて<br>
+                メディアとして公開できるサービスです<br><br>
+                想像を形にするのは、<br>
+                スキルや時間が無いとなかなか踏み出せないもの<br>
+                そのハードルを少しでも下げ、<br>
+                創作や表現を楽しむきっかけを提供します
             </p>
         </div>
 
@@ -70,7 +77,7 @@
         <section class="recently-posted-medias">
             <h3 class="section-title recently-posted-title">最近の投稿</h3>
             <span class="recently-posted-supplement-info">
-                (サムネイルをタップするとメディアに移動します)
+                (サムネイルをタップすると再生画面に移動します)
             </span>
             <div class="media-preview-wrapper">
                 <media-preview-component
