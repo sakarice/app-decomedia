@@ -16,10 +16,10 @@ import LikeMedia from './../../LikeMediaComponent.vue';
     computed : {
       ...mapGetters('loginState', ['getIsLogin']),
       ...mapGetters('media', ['getIsMyMedia']),
+      isShowMediaLike : function(){
+        if(this.getIsLogin && !(this.getIsMyMedia)){ return true }
+      }
     },
-    isShowMediaLike : function(){
-      if(this.getIsLogin && !(this.getIsMyMedia)){ return true }
-    }
   }
 
 </script>
