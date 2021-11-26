@@ -84,7 +84,7 @@ export default{
 
 <style>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
 .follow-button {
   background-color: rgba(0,0,0,1);

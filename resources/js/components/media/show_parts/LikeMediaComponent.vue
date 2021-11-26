@@ -72,7 +72,7 @@ export default{
 
 <style>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
 .icon {
   color: pink;

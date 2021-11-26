@@ -59,7 +59,7 @@ export default{
 
 <style scoped>
 
-@import "../../css/mediaEditModals.css";
+@import "/resources/css/mediaEditModals.css";
 
 .media-info-wrapper {
   margin: 20px 0;

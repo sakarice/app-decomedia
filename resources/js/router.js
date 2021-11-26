@@ -7,14 +7,14 @@ Vue.use(VueRouter)
 
 import Media from './components/MediaComponent.vue';
 import MediaHeader from './components/MediaHeaderComponent.vue';
-import MediaOwnerInfo from './components/MediaOwnerInfoComponent.vue';
+import MediaOwnerInfo from './components/media/show_parts/MediaOwnerInfoComponent.vue';
 import SwitchToShowMode from './components/media/action_parts/SwitchToShowModeComponent.vue';
 import SwitchToEditMode from './components/media/action_parts/SwitchToEditModeComponent.vue';
 
 // 他コンポーネントのラッパー(表示切替も兼ねる)コンポーネント
-import DispMediaOwnerInfo from './components/media/change_display_parts/DispMediaOwnerInfoComponent.vue';
-import DispMediaLike from './components/media/change_display_parts/DispMediaLikeComponent.vue';
-import DispMediaInfo from './components/media/change_display_parts/DispMediaInfoComponent.vue';
+import DispMediaOwnerInfo from './components/media/show_parts/DispMediaOwnerInfoComponent.vue';
+import DispMediaLike from './components/media/show_parts/DispMediaLikeComponent.vue';
+import DispMediaInfo from './components/media/show_parts/DispMediaInfoComponent.vue';
 import DispImgModal from './components/media/change_display_parts/DispImgModalComponent.vue';
 import DispAudioModal from './components/media/change_display_parts/DispAudioModalComponent.vue';
 import DispMovieModal from './components/media/change_display_parts/DispMovieModalComponent.vue';
