@@ -7541,6 +7541,9 @@ __webpack_require__.r(__webpack_exports__);
 var mediaMovie = {
   namespaced: true,
   state: {
+    // DBから取得したデータで下記mediaMovieが初期化がされたか。
+    isInitialized: false,
+    // メディア動画情報。show,editモードでは始めにDBのデータで初期化される。    
     mediaMovie: {
       'videoId': "",
       'width': "500",
@@ -7550,6 +7553,9 @@ var mediaMovie = {
     }
   },
   getters: {
+    getIsInitializedMovie: function getIsInitializedMovie(state) {
+      return state.isInitialized;
+    },
     getMediaMovie: function getMediaMovie(state) {
       return state.mediaMovie;
     }
@@ -7559,6 +7565,9 @@ var mediaMovie = {
       var key = _ref.key,
           value = _ref.value;
       state.mediaMovie[key] = value;
+    },
+    updateIsInitializedMovie: function updateIsInitializedMovie(state, payload) {
+      state.isInitialized = payload;
     }
   },
   actions: {}
