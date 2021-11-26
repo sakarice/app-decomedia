@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Overlay from '../OverlayComponent.vue'
-import Loading from '../LoadingComponent.vue'
+import Overlay from '../common/OverlayComponent.vue'
+import Loading from '../common/LoadingComponent.vue'
 
 export default {
     components : {

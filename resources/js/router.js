@@ -27,8 +27,8 @@ import MovieSetting from './components/media/edit_parts/MovieSettingComponent.vu
 import MediaSetting from './components/media/edit_parts/MediaSettingComponent.vue';
 
 // 編集中のローディング表示コンポーネント
-import Overlay from './components/OverlayComponent.vue';
-import Loading from './components/LoadingComponent.vue';
+import Overlay from './components/common/OverlayComponent.vue';
+import Loading from './components/common/LoadingComponent.vue';
 
 const router = new VueRouter({
   mode : 'history',

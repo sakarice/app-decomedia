@@ -105,8 +105,8 @@ import MediaAudio from './media_contents/MediaAudioComponent.vue';
 import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 import MediaImg from './media_contents/MediaImgComponent.vue';
 import MediaMovie from './media_contents/MediaMovieComponent.vue';
-import Overlay from '../OverlayComponent.vue'
-import Loading from '../LoadingComponent.vue'
+import Overlay from '../common/OverlayComponent.vue'
+import Loading from '../common/LoadingComponent.vue'
 
 export default {
   components : {

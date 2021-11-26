@@ -30,7 +30,7 @@ const { functionsIn } = require('lodash');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // ■ホーム画面用
-Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('header-component', require('./components/common/HeaderComponent.vue').default);
 Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
 
 // ■Mediaパーツ
@@ -88,9 +88,9 @@ Vue.component('media-list-create-button-component', require('./components/MediaL
 // mediaリスト作成用コンポーネント
 Vue.component('selected-media-delete-button-component', require('./components/mypage/SelectedMediaDeleteButtonComponent.vue').default);
 // オーバーレイコンポーネント
-Vue.component('overlay-component', require('./components/OverlayComponent.vue').default);
+Vue.component('overlay-component', require('./components/common/OverlayComponent.vue').default);
 // ローディング中に表示するコンポーネント
-Vue.component('loading-component', require('./components/LoadingComponent.vue').default);
+Vue.component('loading-component', require('./components/common/LoadingComponent.vue').default);
 // マイページへの遷移ボタンコンポーネント
 Vue.component('to-mypage-button-component', require('./components/media/action_parts/ToMypageButtonComponent.vue').default);
 
