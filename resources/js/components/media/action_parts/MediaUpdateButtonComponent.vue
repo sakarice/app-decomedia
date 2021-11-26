@@ -15,6 +15,8 @@
 </template>
 
 <script>
+  import { mapGetters, mapMutations} from 'vuex';
+
   export default {
     props : [],
     data : () => {
@@ -22,11 +24,37 @@
         'message' : "",
       }
     },
-
+    computed : {
+      ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaAudios', ['getMediaAudios']),
+      ...mapGetters('mediaMovie', ['getMediaMovie']),
+      ...mapGetters('mediaSetting', ['getMediaSetting']),
+    },
     methods : {
+      ...mapMutations('media', ['setIsCrudDoing']),
+      // updateMedia() {
+      //   this.$emit('update-media');
+      // },
       updateMedia() {
-        this.$emit('update-media');
+      // this.getFinishTime();
+      const url = '/media/update';
+      let media_datas = {
+        'img' : this.getMediaImg,
+        'audios' : this.getMediaAudios,
+        'movie' : this.getMediaMovie,
+        'setting' : this.getMediaSetting,
       }
+      this.setIsCrudDoing(true);
+      axios.post(url, media_datas)
+        .then(response =>{
+          alert(response.data.message);
+          this.setIsCrudDoing(false);
+        })
+        .catch(error => {            
+          alert('failed!');
+          this.setIsCrudDoing(false);
+        })
+    },
 
     },
 
