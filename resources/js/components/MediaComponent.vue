@@ -106,6 +106,11 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
+    <div class="init_count_display_test">
+      <p>initStatus:{{initStatus}}"</p>
+      <p>{{initStatus_compute_test}}</p>
+    </div>
+
   </div>
 </template>
 
@@ -113,7 +118,7 @@
 import { mapGetters, mapMutations} from 'vuex';
 
 export default {
-  components : {},
+components : {},
   props: [],
   data : () => {
     return {
@@ -140,6 +145,7 @@ export default {
     ...mapGetters('media', ['getMode']),
     ...mapGetters('media', ['getIsWaiting']),
     ...mapGetters('mediaImg', ['getMediaImg']),
+    ...mapGetters('mediaImg', ['getIsInitializedImg']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -151,6 +157,11 @@ export default {
         return '更新中です...'
       }
     },
+    initStatus_compute_test : function(){
+      let initCountStack = 0;
+      if(this.getIsInitializedImg){initCountStack += 1}
+      return initCountStack;
+    },
     
   },
   methods : {
@@ -158,6 +169,7 @@ export default {
     ...mapMutations('media', ['setIsMyMedia']),
     ...mapMutations('media', ['setMode']),
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+    ...mapMutations('mediaImg', ['updateIsInitializedImg']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
@@ -203,6 +215,7 @@ export default {
         for(let key in datas){
           this.updateMediaImgObjectItem({key:key, value:datas[key]});
         }
+        this.updateIsInitializedImg(true);
         this.initStatus += 1;
       });
     },
