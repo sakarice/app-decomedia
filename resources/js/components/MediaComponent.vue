@@ -160,6 +160,7 @@ export default {
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
+    ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
 
     waitingMsg:function(){
       if(this.getMode==1){
@@ -173,6 +174,7 @@ export default {
       if(this.getIsInitializedImg){initCountStack += 1}
       if(this.getIsInitializedAudios){initCountStack += 2}
       if(this.getIsInitializedMovie){initCountStack += 4}
+      if(this.getIsInitializedSetting){initCountStack += 8}
       return initCountStack;
     },
     
@@ -186,6 +188,7 @@ export default {
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
+    ...mapMutations('mediaSetting', ['updateIsInitializedSetting']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     judgeIsMyMedia(){
       let url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
@@ -223,41 +226,42 @@ export default {
         .catch(error=>{});
       })
     },
-    initImg(){
-      this.getMediaDataFromDB('mediaImg')
-      .then(datas=>{
-        for(let key in datas){
-          this.updateMediaImgObjectItem({key:key, value:datas[key]});
-        }
-        this.updateIsInitializedImg(true);
-        this.initStatus += 1;
-      });
-    },
-    initAudio(){
-      this.getMediaDataFromDB('mediaAudios')
-      .then(datas=>{
-        datas.forEach(data=>{
-          this.addMediaAudiosObjectItem(data);
-        })
-        this.updateIsInitializedAudios(true);
-        this.initStatus += 2;
-      });
-    },
-    initMovie(){
-      this.getMediaDataFromDB('mediaMovie')
-      .then(datas=>{
-        for(let key in datas){
-          this.updateMediaMovieObjectItem({key:key, value:datas[key]});
-        }
-        this.initStatus += 4;
-      });
-    },
+    // initImg(){
+    //   this.getMediaDataFromDB('mediaImg')
+    //   .then(datas=>{
+    //     for(let key in datas){
+    //       this.updateMediaImgObjectItem({key:key, value:datas[key]});
+    //     }
+    //     this.updateIsInitializedImg(true);
+    //     this.initStatus += 1;
+    //   });
+    // },
+    // initAudio(){
+    //   this.getMediaDataFromDB('mediaAudios')
+    //   .then(datas=>{
+    //     datas.forEach(data=>{
+    //       this.addMediaAudiosObjectItem(data);
+    //     })
+    //     this.updateIsInitializedAudios(true);
+    //     this.initStatus += 2;
+    //   });
+    // },
+    // initMovie(){
+    //   this.getMediaDataFromDB('mediaMovie')
+    //   .then(datas=>{
+    //     for(let key in datas){
+    //       this.updateMediaMovieObjectItem({key:key, value:datas[key]});
+    //     }
+    //     this.initStatus += 4;
+    //   });
+    // },
     initSetting(){
       this.getMediaDataFromDB('mediaSetting')
       .then(datas=>{
         for(let key in datas){
           this.updateMediaSettingObjectItem({key:key, value:datas[key]});
         };
+        this.updateIsInitializedSetting(true);
         this.initStatus += 8;
       });
     },
@@ -297,7 +301,6 @@ export default {
     this.checkMode()
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
     this.judgeIsMyMedia();
-    // this.initImg();
     this.$refs.mediaImg.initImg();
     this.$refs.mediaMovie.initMovie();
     this.$refs.mediaAudio.initAudio();

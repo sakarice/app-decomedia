@@ -4011,7 +4011,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('media', ['getIsWaiting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -4034,10 +4034,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         initCountStack += 4;
       }
 
+      if (this.getIsInitializedSetting) {
+        initCountStack += 8;
+      }
+
       return initCountStack;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaSetting', ['updateIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     judgeIsMyMedia: function judgeIsMyMedia() {
       var _this = this;
 
@@ -4078,62 +4082,51 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         })["catch"](function (error) {});
       });
     },
-    initImg: function initImg() {
-      var _this3 = this;
-
-      this.getMediaDataFromDB('mediaImg').then(function (datas) {
-        for (var key in datas) {
-          _this3.updateMediaImgObjectItem({
-            key: key,
-            value: datas[key]
-          });
-        }
-
-        _this3.updateIsInitializedImg(true);
-
-        _this3.initStatus += 1;
-      });
-    },
-    initAudio: function initAudio() {
-      var _this4 = this;
-
-      this.getMediaDataFromDB('mediaAudios').then(function (datas) {
-        datas.forEach(function (data) {
-          _this4.addMediaAudiosObjectItem(data);
-        });
-
-        _this4.updateIsInitializedAudios(true);
-
-        _this4.initStatus += 2;
-      });
-    },
-    initMovie: function initMovie() {
-      var _this5 = this;
-
-      this.getMediaDataFromDB('mediaMovie').then(function (datas) {
-        for (var key in datas) {
-          _this5.updateMediaMovieObjectItem({
-            key: key,
-            value: datas[key]
-          });
-        }
-
-        _this5.initStatus += 4;
-      });
-    },
+    // initImg(){
+    //   this.getMediaDataFromDB('mediaImg')
+    //   .then(datas=>{
+    //     for(let key in datas){
+    //       this.updateMediaImgObjectItem({key:key, value:datas[key]});
+    //     }
+    //     this.updateIsInitializedImg(true);
+    //     this.initStatus += 1;
+    //   });
+    // },
+    // initAudio(){
+    //   this.getMediaDataFromDB('mediaAudios')
+    //   .then(datas=>{
+    //     datas.forEach(data=>{
+    //       this.addMediaAudiosObjectItem(data);
+    //     })
+    //     this.updateIsInitializedAudios(true);
+    //     this.initStatus += 2;
+    //   });
+    // },
+    // initMovie(){
+    //   this.getMediaDataFromDB('mediaMovie')
+    //   .then(datas=>{
+    //     for(let key in datas){
+    //       this.updateMediaMovieObjectItem({key:key, value:datas[key]});
+    //     }
+    //     this.initStatus += 4;
+    //   });
+    // },
     initSetting: function initSetting() {
-      var _this6 = this;
+      var _this3 = this;
 
       this.getMediaDataFromDB('mediaSetting').then(function (datas) {
         for (var key in datas) {
-          _this6.updateMediaSettingObjectItem({
+          _this3.updateMediaSettingObjectItem({
             key: key,
             value: datas[key]
           });
         }
 
         ;
-        _this6.initStatus += 8;
+
+        _this3.updateIsInitializedSetting(true);
+
+        _this3.initStatus += 8;
       });
     },
     showModal: function showModal(target) {
@@ -4177,33 +4170,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.checkMode();
     this.setMediaIdToStore(this.extractMediaIdFromUrl());
-    this.judgeIsMyMedia(); // this.initImg();
-
+    this.judgeIsMyMedia();
     this.$refs.mediaImg.initImg();
     this.$refs.mediaMovie.initMovie();
     this.$refs.mediaAudio.initAudio();
     this.initSetting(); // 全ての子コンポーネントが描画されてから実行する処理
 
     this.$nextTick(function () {
-      var _this7 = this;
+      var _this4 = this;
 
       this.$refs.mediaAudio.validEditMode();
 
       window.onYouTubeIframeAPIReady = function () {
-        _this7.getReadyCreateMovieFrame = true;
-        _this7.initStatus += 16;
+        _this4.getReadyCreateMovieFrame = true;
+        _this4.initStatus += 16;
       }; // 全オーディオの再生開始
 
     });
   },
   watch: {
     initStatus: function initStatus(newVal) {
-      var _this8 = this;
+      var _this5 = this;
 
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
       if (newVal >= 2) {
         var play = function play() {
-          _this8.$refs.mediaAudio.playAllAudio();
+          _this5.$refs.mediaAudio.playAllAudio();
         };
 
         setTimeout(play, 10000);
@@ -12425,7 +12417,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-63cb17b8] {\r\n    color: white;\n}\n.icon-wrapper[data-v-63cb17b8] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-63cb17b8] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-63cb17b8] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
