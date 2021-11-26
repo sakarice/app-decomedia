@@ -156,6 +156,7 @@ export default {
     ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaImg', ['getIsInitializedImg']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
+    ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
 
@@ -169,6 +170,7 @@ export default {
     initStatus_compute_test : function(){
       let initCountStack = 0;
       if(this.getIsInitializedImg){initCountStack += 1}
+      if(this.getIsInitializedAudios){initCountStack += 2}
       return initCountStack;
     },
     
@@ -180,6 +182,7 @@ export default {
     ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     ...mapMutations('mediaImg', ['updateIsInitializedImg']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
+    ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     judgeIsMyMedia(){
@@ -234,6 +237,7 @@ export default {
         mediaAudioDatas.forEach(mediaAudioData=>{
           this.addMediaAudiosObjectItem(mediaAudioData);
         })
+        this.updateIsInitializedAudios(true);
         this.initStatus += 2;
       });
     },

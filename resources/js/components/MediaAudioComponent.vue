@@ -87,12 +87,14 @@
       }
     },
     computed : {
+      ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       mediaAudioNum : function(){
         return this.getMediaAudios.length;
       }
     },
     methods : {
+      ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
       ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
       ...mapMutations('mediaAudios', ['updateMediaAudiosObjectItem']),
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),

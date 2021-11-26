@@ -2,6 +2,9 @@ const mediaAudios = {
   namespaced : true,
 
   state : {
+    // DBから取得したデータで下記mediaAudiosが初期化がされたか。
+    isInitialized : false,
+    // メディアオーディオ情報。show,editモードでは始めにDBのデータで初期化される。
     mediaAudios : [],
     // mediaAudio : {
     //   'media_id' : null,
@@ -17,6 +20,7 @@ const mediaAudios = {
     // },
   },
   getters : {
+    getIsInitializedAudios : function(state){ return state.isInitialized; },
     getMediaAudios : function(state){ return state.mediaAudios; },
   },
   mutations : {
@@ -26,6 +30,7 @@ const mediaAudios = {
     addMediaAudiosObjectItem(state, payload){
       state.mediaAudios.push(payload);
     },
+    updateIsInitializedAudios(state,payload){state.isInitialized = payload},
     updateMediaAudiosObjectItem(state, {index, key, value}){state.mediaAudios[index][key] = value;},
   },
   actions : {}
