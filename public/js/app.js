@@ -7619,6 +7619,9 @@ __webpack_require__.r(__webpack_exports__);
 var mediaSetting = {
   namespaced: true,
   state: {
+    // DBから取得したデータで下記mediaSettingが初期化がされたか。
+    isInitialized: false,
+    // メディア動画情報。show,editモードでは始めにDBのデータで初期化される。
     mediaSetting: {
       'id': null,
       'isPublic': true,
@@ -7634,6 +7637,9 @@ var mediaSetting = {
     }
   },
   getters: {
+    getIsInitializedSetting: function getIsInitializedSetting(state) {
+      return state.isInitialized;
+    },
     getMediaSetting: function getMediaSetting(state) {
       return state.mediaSetting;
     }
@@ -7643,6 +7649,9 @@ var mediaSetting = {
       var key = _ref.key,
           value = _ref.value;
       state.mediaSetting[key] = value;
+    },
+    updateIsInitializedSetting: function updateIsInitializedSetting(state, payload) {
+      state.isInitialized = payload;
     }
   },
   actions: {}
