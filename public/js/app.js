@@ -7382,6 +7382,9 @@ __webpack_require__.r(__webpack_exports__);
 var mediaImg = {
   namespaced: true,
   state: {
+    // DBから取得したデータで下記mediaImgが初期化がされたか。
+    isInitialized: false,
+    // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaImg: {
       type: 0,
       id: 0,
@@ -7393,6 +7396,9 @@ var mediaImg = {
     }
   },
   getters: {
+    getIsInitializedImg: function getIsInitializedImg(state) {
+      return state.isInitialized;
+    },
     getMediaImg: function getMediaImg(state) {
       return state.mediaImg;
     }
@@ -7410,6 +7416,9 @@ var mediaImg = {
       var key = _ref2.key,
           value = _ref2.value;
       state.mediaImg[key] = value;
+    },
+    updateIsInitializedImg: function updateIsInitializedImg(state, payload) {
+      state.isInitialized = payload;
     }
   },
   actions: {}
