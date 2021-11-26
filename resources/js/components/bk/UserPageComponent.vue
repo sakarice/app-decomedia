@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import MediaPreview from './MediaPreviewComponent.vue';
-import MypageMenuBar from './mypage/MypageMenuBarComponent.vue';
+import MediaPreview from '../MediaPreviewComponent.vue';
+import MypageMenuBar from '../mypage/MypageMenuBarComponent.vue';
 
 export default {
   components : {
