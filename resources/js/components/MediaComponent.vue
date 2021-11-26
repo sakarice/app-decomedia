@@ -151,23 +151,6 @@ export default {
         return '更新中です...'
       }
     },
-    routerLinkPath : function(){
-      let id = this.getMediaId;
-      if(this.getMode == 2){ // 編集モードの時
-        return ('/media/'+id); // 閲覧画面へのリンク
-      } else if(this.getMode == 3){ // 閲覧モードの時
-        return ('/media/'+id+'/edit'); // 編集画面へのリンク
-      }
-    },
-    // isEditMode : function(){ if(this.getMode==2) return true; },
-    mode : function(){ 
-      if(this.$route.path.match(/create/)){
-        return 1;
-      }
-      else if(this.$route.path.match(/edit/)){
-        return 2;
-      } else {return 3}
-    },
     
   },
   methods : {
