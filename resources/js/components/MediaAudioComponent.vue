@@ -102,8 +102,16 @@
       hideAudio(){ this.isShowAudio = false; },
       // 親コンポーネントから実行される
       validEditMode(){ this.isEditMode = true; },
-      playAllAudio(){ this.$refs.mediaAudioPlayer.forEach( player=>{player.play()} ) },
-      finishAllAudio(){ this.$refs.mediaAudioPlayer.forEach( player=>{player.finish()} ) },
+      playAllAudio(){ 
+        if(mediaAudioNum>0){
+          this.$refs.mediaAudioPlayer.forEach( player=>{player.play()} ) 
+        }
+      },
+      finishAllAudio(){
+        if(mediaAudioNum>0){
+          this.$refs.mediaAudioPlayer.forEach( player=>{player.finish()} ) 
+        }
+      },
       setMediaAudioDuration(index, duration){
         this.updateMediaAudiosObjectItem({index:index, key:'duration', value:duration});
       },
