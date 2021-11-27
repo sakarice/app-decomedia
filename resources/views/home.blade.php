@@ -20,7 +20,8 @@
         {{-- タイトルコピー --}}
         <div class="top-message-wrapper">
             <h2 class="top-message">
-                創作に手が出せなかったあなたへ<br>
+                <span>創作に手が出せなかった</span><br>
+                <span>あなたへ</span>
             </h2>
             <p class="sub-message">
                 0からコンテンツを作るのではなく、<br>
