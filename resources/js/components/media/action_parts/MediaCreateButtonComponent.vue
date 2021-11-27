@@ -38,7 +38,7 @@
             this.setIsCrudDoing(false);
           })
           .catch(error => {            
-            alert('failed!');
+            alert('メディア保存に失敗しました');
             this.setIsCrudDoing(false);
           })
       },
