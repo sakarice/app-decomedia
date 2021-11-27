@@ -12,8 +12,7 @@
             <media-create-button v-show="(mode==1)">
             </media-create-button>
 
-            <media-update-button v-show="isMyMedia && (mode==2)"
-            @update-media="updateMedia">
+            <media-update-button v-show="isMyMedia && (mode==2)">
             </media-update-button>
         </div>
 
