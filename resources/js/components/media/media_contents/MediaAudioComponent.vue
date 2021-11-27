@@ -246,7 +246,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index : 2;
+    z-index : 15;
     width: 180px;
     height: 100%;
     padding: 5px 0 60px 0;
