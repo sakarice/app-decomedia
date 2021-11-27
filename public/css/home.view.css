@@ -106,7 +106,6 @@ p {
 .top-message-wrapper {
   position: absolute;
   top: 10%;
-  left: 10%;
   color: white;
   text-shadow: 2px 2px 5px grey;
 }
@@ -232,10 +231,17 @@ p {
 
 
 /* タブレットサイズ */
+@media screen and (min-width: 781px) {
+  .top-message-wrapper {
+    left: 10%;
+  }
+
+}
+
 @media screen and (max-width: 780px) {
   #about-app {
     display: none;
-  }  
+  }
 }
 
 /* スマホサイズ */
@@ -247,8 +253,9 @@ p {
   }
   .top-message-wrapper {
     /* max-width: 400px; */
-    width: 100%;
+    width: 90%;
     font-size: 0.8rem;
+    text-align: center;
   }
 
   .top-message {
