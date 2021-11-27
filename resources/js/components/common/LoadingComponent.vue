@@ -3,8 +3,7 @@
   <transition name="flowup">
     <div id="loading-disp-background">
       <div id="loading-disp-wrapper">
-        <!-- <i class="far fa-lightbulb fa-3x loading-icon"></i> -->
-        <span class="material-icons-outlined">emoji_objects</span>
+        <i class="far fa-lightbulb fa-3x loading-icon"></i>
         <div class="loading-message">
           <span v-if="message">{{message}}</span>
           <span v-else>処理中です...</span>

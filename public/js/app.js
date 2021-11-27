@@ -2751,7 +2751,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['message'],
   data: function data() {
@@ -57022,9 +57021,7 @@ var render = function () {
   return _c("transition", { attrs: { name: "flowup" } }, [
     _c("div", { attrs: { id: "loading-disp-background" } }, [
       _c("div", { attrs: { id: "loading-disp-wrapper" } }, [
-        _c("span", { staticClass: "material-icons-outlined" }, [
-          _vm._v("emoji_objects"),
-        ]),
+        _c("i", { staticClass: "far fa-lightbulb fa-3x loading-icon" }),
         _vm._v(" "),
         _c("div", { staticClass: "loading-message" }, [
           _vm.message
