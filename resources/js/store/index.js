@@ -1,35 +1,26 @@
 import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import storeA from './modules/storeA.js';
+import loginState from './modules/loginState.js';
+import media from './modules/media.js';
+import mediaImg from './modules/mediaImg.js';
+import mediaAudios from './modules/mediaAudios.js';
+import mediaMovie from './modules/mediaMovie.js';
+import mediaSetting from './modules/mediaSetting.js';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  state : {
-    isLogin : false,
-    storeA
-  },
-  getters : {
-    getIsLogin(state) {
-      return state.isLogin;
-    },
-  },
-  mutations : {
-    setIsLogin(state, payload){
-      state.isLogin = payload;
-    },
-  },
-  actions : {
-    async checkIsLogin (context) {
-      const res = await axios.get('/checkIsLogin');
-      const isLogin = res.data.isLogin;
-      context.commit('setIsLogin', isLogin);
-    }
-
+  modules : {
+    loginState,
+    media,
+    mediaImg,
+    mediaAudios,
+    mediaMovie,
+    mediaSetting,
   }
 
 });
 
 
-export default store
+export default store;

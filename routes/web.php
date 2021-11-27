@@ -46,12 +46,17 @@ Route::middleware('auth')->group(function(){
         Route::post('/mediaLists/delete', 'App\Http\Controllers\Ajax\MediaListController@destroy');
 
     // Media操作
-        Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
+        // 通常のCRUDルーティング
+        // Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
         Route::post('/media/store', 'App\Http\Controllers\MediaController@store');
-        Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
+        // Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
         Route::post('/media/update', 'App\Http\Controllers\MediaController@update');
         Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
-    // 入ったMediaをいいねしているかチェックする
+        // Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
+        // vue-router用の定義
+        Route::get('/media/{any}', function(){return view('medias.show');})->where('any', '.*');
+
+        // 入ったMediaをいいねしているかチェックする
         Route::get('/user/likeState/{media_id}', 'App\Lib\LikeMediaUtil@getLikeState');
     // Mediaへ、いいね/いいね解除する
         Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
@@ -59,6 +64,15 @@ Route::middleware('auth')->group(function(){
         Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
     // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
+    
+    // メディア画像
+        Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
+    // メディア音楽
+        Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
+    // メディア動画
+        Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
+    // メディア設定
+        Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');
@@ -86,12 +100,17 @@ Route::middleware('auth')->group(function(){
 
 // Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    // Route::get('/home', function(){ return view('home');});
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// // ★vur-routerテスト用
+//     Route::get('/home/vue', function(){
+//         return view('vue');
+//     });
+
 // 検索結果
     Route::post('/media/show/search/result', 'App\Lib\SearchUtil@searchMedias');
 
-// Media閲覧
-    Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
 // 入ったmediaが自分の作成したmediaか判別する
     Route::get('/ajax/judgeIsMyMedia/{media_id}', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
 

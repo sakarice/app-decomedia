@@ -31,8 +31,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $env = config('app.aws_bucket');
-        \Log::info($env);
         $mediaPreviewInfos = array();
         $getNum = 20; // 取得するMediaプレビュー情報件数
         // 公開中のMediaのみ取得
@@ -45,7 +43,6 @@ class HomeController extends Controller
 
         // ログイン、ログアウト、サインアップの表示/非表示      
         $data = [
-            'isLogin' => Auth::check(),
             'mediaPreviewInfos' => $mediaPreviewInfos
         ];
 

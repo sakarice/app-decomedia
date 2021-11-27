@@ -12,7 +12,11 @@ use App\Models\User;
 use App\Models\Media;
 use App\Models\MediaAudio;
 use App\Models\PublicAudio;
+use App\Models\PublicAudioThumbnail;
+use App\Models\PublicAudioAudioThumbnail;
 use App\Models\UserOwnAudio;
+use App\Models\UserOwnAudioThumbnail;
+use App\Models\UserOwnAudioAudioThumbnail;
 
 use App\Lib\MediaAudioUtil;
 
@@ -93,7 +97,12 @@ class MediaAudioUtilTest extends TestCase
         // 0. 【準備】音楽情報を登録
         Media::factory()->create();
         PublicAudio::factory()->create();
+        PublicAudioThumbnail::factory()->create();
+        PublicAudioAudioThumbnail::factory()->create();
         UserOwnAudio::factory()->create();
+        UserOwnAudioThumbnail::factory()->create();
+        UserOwnAudioAudioThumbnail::factory()->create();
+
         $sample_media_audio_datas = array();
         $sample_media_audio_datas[] = MediaAudio::factory()->default()->create();
         $sample_media_audio_datas[] = MediaAudio::factory()->userown()->create(['order_seq'=>2]);

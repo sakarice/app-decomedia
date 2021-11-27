@@ -33,6 +33,7 @@
 </template>
 
 <script>
+  import { mapGetters } from "vuex";
 
   export default {
     props : [],
@@ -100,8 +101,11 @@
       },
     },
     created(){},
+    computed : {
+      ...mapGetters('loginState', ['getIsLogin']),
+    },
     mounted: function(){
-      if(this.$store.getters.getIsLogin){
+      if(this.getIsLogin){
         let promise = new Promise((resolve, reject) => {
           this.getProfile(); // プロフィールの初期値を取得
           resolve();

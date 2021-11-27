@@ -47,7 +47,7 @@
     top: 80px;
     width: 75%;
     height: 75vh;
-    z-index: 11;
+    z-index: 20;
     flex-flow: column;
   }
   /* .slide-in-enter, .slide-in-leave-to {

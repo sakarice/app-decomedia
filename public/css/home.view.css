@@ -1,7 +1,8 @@
-html, body {
-  width: 100%;
-  /* margin: 0; */
+
+body {
+  margin: 0;
 }
+
 p {
   color: #090909;
 }
@@ -11,8 +12,8 @@ p {
   height: 100vh;
   width: 100%;
   padding-bottom: 80px;
-  color: white;
-  text-align: center;
+  /* color: white; */
+  /* text-align: center; */
 
   display: flex;
   flex-direction: column;
@@ -20,15 +21,17 @@ p {
   align-items: center;
 
   /* background-image: url(https://cdn.pixabay.com/photo/2013/06/22/07/12/girl-140571_1280.jpg); */
-  background-image: url(https://cdn.pixabay.com/photo/2020/06/06/16/09/caricature-5267148_1280.jpg);
+  /* background-image: url(https://cdn.pixabay.com/photo/2020/06/06/16/09/caricature-5267148_1280.jpg); */
+  /* background-image: url(https://cdn.pixabay.com/photo/2015/01/08/12/02/puzzle-592803_1280.jpg); */
+  background-image: url('./../icon/Decomedia_top.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-color: rgb(8,8,8);
+  background-color: rgb(0,0,10);
 }
 
 .sub-message {
-  color: white
+  color: lightgray;
 ;}
 
 #about-app {
@@ -44,7 +47,7 @@ p {
 }
 .about-app-description {
   width: 80%;
-  text-align: center;
+  /* text-align: center; */
   font-size: 0.9rem;
   margin: 0 10px 50px 10px;
 }
@@ -108,8 +111,8 @@ p {
 }
 
 .top-message {
-  font-size: 30px;
-  text-align: center;
+  font-size: 50px;
+  /* text-align: center; */
   margin-bottom: 0;
 }
 
@@ -227,11 +230,18 @@ p {
 }
 
 
+/* スマホ以上のサイズ(PC、タブレット */
+@media screen and (min-width: 481px) {
+  .top-message-wrapper {
+    left: 10%;
+  }
+}
+
 /* タブレットサイズ */
 @media screen and (max-width: 780px) {
   #about-app {
     display: none;
-  }  
+  }
 }
 
 /* スマホサイズ */
@@ -243,8 +253,9 @@ p {
   }
   .top-message-wrapper {
     /* max-width: 400px; */
-    width: 100%;
+    width: 90%;
     font-size: 0.8rem;
+    text-align: center;
   }
 
   .top-message {

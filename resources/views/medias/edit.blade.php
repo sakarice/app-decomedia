@@ -14,16 +14,10 @@
 </head>
 <body>
 
-  {{-- ボタン --}}
-
   <div id="app">
-    <media-edit-component
-    media-img-data='@json($media_img)'
-    media-audios-data='@json($media_audios)'
-    media-movie-data='@json($media_movie)'
-    media-setting-data='@json($media_setting)'
-    >
-    </media-edit-component>
+    {{-- <media-edit-component>
+    </media-edit-component> --}}
+    <router-view></router-view>
   </div>
 
   
