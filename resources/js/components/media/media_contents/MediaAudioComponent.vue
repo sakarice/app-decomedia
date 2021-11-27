@@ -1,7 +1,7 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Mediaオーディオ -->
-  <div id="media-audio-wrapper">
+  <div id="media-audio-wrapper" :class="{'disp-front':isShowAudio}">
     <!-- オーディオの表示・非表示切り替えアイコン -->
     <div class="change-disp-audio-wrapper">
       <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
@@ -196,6 +196,10 @@
 
 <style scoped>
 
+  .disp-front {
+    z-index: 50;
+  }
+
   /* 全オーディオの再生停止コントローラー */
   .all-audio-controll-wrapper {
     padding-bottom: 5px;
@@ -246,7 +250,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    z-index : 15;
+    /* z-index : 9; */
     width: 180px;
     height: 100%;
     padding: 5px 0 60px 0;
