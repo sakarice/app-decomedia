@@ -41,6 +41,22 @@ const router = new VueRouter({
       },
       children : [
       {
+        path : 'create',
+        name : 'create',
+        components : {
+          dispImgModal : DispImgModal,
+          dispAudioModal : DispAudioModal,
+          dispMovieModal : DispMovieModal,
+          dispMediaSettingModal : DispMediaSettingModal,
+          imgSelect : ImgSelect,
+          audioSelect : AudioSelect,
+          movieSetting : MovieSetting,
+          mediaSetting : MediaSetting,
+          overlay : Overlay,
+          loading : Loading,
+        },
+      },
+      {
         path : ':id',
         name : 'show',
         components : {

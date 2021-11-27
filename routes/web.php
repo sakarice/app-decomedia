@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function(){
 
     // Media操作
         // 通常のCRUDルーティング
-        Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
+        // Route::get('/media/create', 'App\Http\Controllers\MediaController@create');
         Route::post('/media/store', 'App\Http\Controllers\MediaController@store');
         // Route::get('/media/{id}/edit', 'App\Http\Controllers\MediaController@edit');
         Route::post('/media/update', 'App\Http\Controllers\MediaController@update');

@@ -26280,6 +26280,21 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       mediaHeader: _components_media_MediaHeaderComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
     },
     children: [{
+      path: 'create',
+      name: 'create',
+      components: {
+        dispImgModal: _components_media_change_display_parts_DispImgModalComponent_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+        dispAudioModal: _components_media_change_display_parts_DispAudioModalComponent_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+        dispMovieModal: _components_media_change_display_parts_DispMovieModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+        dispMediaSettingModal: _components_media_change_display_parts_DispMediaSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+        imgSelect: _components_media_edit_parts_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+        audioSelect: _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+        movieSetting: _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+        mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+        overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+        loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+      }
+    }, {
       path: ':id',
       name: 'show',
       components: {
