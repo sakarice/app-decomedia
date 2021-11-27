@@ -260,7 +260,7 @@
     top:70px;
     bottom: 10px;
     right: 0;
-    padding: 5px 0 60px 10px;
+    padding: 5px 0 0 10px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     display: flex;
