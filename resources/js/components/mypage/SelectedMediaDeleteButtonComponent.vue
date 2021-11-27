@@ -48,9 +48,6 @@
       },
       deleteSelectedMedia() {
         const selectedMediaIds = this.getSelectedMediaId();
-        selectedMediaIds.forEach(selectedMediaId => {
-          alert(selectedMediaId);
-        });
         const mediaInfo = {
           'selectedMediaIds' : selectedMediaIds,
         }
