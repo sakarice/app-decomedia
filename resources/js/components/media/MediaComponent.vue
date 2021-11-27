@@ -258,22 +258,25 @@ export default {
   },
   created() {},
   mounted() {
-    this.checkMode()
-    this.setMediaIdToStore(this.extractMediaIdFromUrl());
-    this.judgeIsMyMedia();
-    this.$refs.mediaImg.initImg();
-    this.$refs.mediaMovie.initMovie();
-    this.$refs.mediaAudio.initAudio();
-    this.initSetting();
-
+    this.checkMode();
+    if(this.getMode!=1){ // 1:create以外(=showかedit)なら初期化処理を実行
+      this.setMediaIdToStore(this.extractMediaIdFromUrl());
+      this.judgeIsMyMedia();
+      this.$refs.mediaImg.initImg();
+      this.$refs.mediaMovie.initMovie();
+      this.$refs.mediaAudio.initAudio();
+      this.initSetting();
+    }
+    if(this.getMode!=3){ // 3:show以外(=createかeditなら)編集モードに設定
+      this.$refs.mediaAudio.validEditMode();
+    }
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
-      this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
       }
-      // 全オーディオの再生開始
     });
+
 
   },
   watch : {
