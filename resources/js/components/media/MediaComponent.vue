@@ -128,8 +128,6 @@ export default {
     return {
       isMyMedia : false,
       getReadyCreateMovieFrame : false,
-      initStatus : 0,
-      // getReadyPlayAudio : false,
       transitionName : 'slide-in',
       isShowModal : {
         'mediaOwnerInfo' : false,
@@ -164,7 +162,7 @@ export default {
         return '更新中です...'
       }
     },
-    initStatus_compute_test : function(){
+    initStatus : function(){
       let initCountStack = 0;
       if(this.getIsInitializedImg){initCountStack += 1}
       if(this.getIsInitializedAudios){initCountStack += 2}
@@ -229,7 +227,6 @@ export default {
           this.updateMediaSettingObjectItem({key:key, value:datas[key]});
         };
         this.updateIsInitializedSetting(true);
-        this.initStatus += 8;
       });
     },
     showModal(target){
@@ -274,14 +271,13 @@ export default {
       this.$refs.mediaAudio.validEditMode();
       window.onYouTubeIframeAPIReady = () => {
         this.getReadyCreateMovieFrame = true;
-        this.initStatus += 16;
       }
       // 全オーディオの再生開始
     });
 
   },
   watch : {
-    initStatus_compute_test : function(newVal){
+    initStatus : function(newVal){
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
       if(newVal >= 2){ 
         const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
