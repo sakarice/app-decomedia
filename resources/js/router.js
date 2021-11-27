@@ -57,17 +57,6 @@ const router = new VueRouter({
         },
       },
       {
-        path : ':id',
-        name : 'show',
-        components : {
-          switchToEditMode : SwitchToEditMode,
-          mediaOwnerInfo : MediaOwnerInfo,
-          dispMediaLike : DispMediaLike,
-          dispMediaOwnerInfo : DispMediaOwnerInfo,
-          dispMediaInfo : DispMediaInfo,
-        },
-      },
-      {
         path : ':id/edit',
         name : 'edit',
         components : {
@@ -84,6 +73,18 @@ const router = new VueRouter({
           loading : Loading,
         },
       },
+      {
+        path : ':id',
+        name : 'show',
+        components : {
+          switchToEditMode : SwitchToEditMode,
+          mediaOwnerInfo : MediaOwnerInfo,
+          dispMediaLike : DispMediaLike,
+          dispMediaOwnerInfo : DispMediaOwnerInfo,
+          dispMediaInfo : DispMediaInfo,
+        },
+      },
+
         ]
     },
   ]

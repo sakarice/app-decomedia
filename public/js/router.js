@@ -26295,16 +26295,6 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
       }
     }, {
-      path: ':id',
-      name: 'show',
-      components: {
-        switchToEditMode: _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-        mediaOwnerInfo: _components_media_show_parts_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-        dispMediaLike: _components_media_show_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-        dispMediaOwnerInfo: _components_media_show_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-        dispMediaInfo: _components_media_show_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
-      }
-    }, {
       path: ':id/edit',
       name: 'edit',
       components: {
@@ -26319,6 +26309,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
         mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
         overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
         loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+      }
+    }, {
+      path: ':id',
+      name: 'show',
+      components: {
+        switchToEditMode: _components_media_action_parts_SwitchToEditModeComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+        mediaOwnerInfo: _components_media_show_parts_MediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+        dispMediaLike: _components_media_show_parts_DispMediaLikeComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+        dispMediaOwnerInfo: _components_media_show_parts_DispMediaOwnerInfoComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+        dispMediaInfo: _components_media_show_parts_DispMediaInfoComponent_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
       }
     }]
   }]
