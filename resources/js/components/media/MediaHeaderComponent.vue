@@ -9,8 +9,7 @@
         <div class="header-block header-center">
             <to-mypage-button></to-mypage-button>
 
-            <media-create-button v-show="(mode==1)"
-            @create-media="createMedia">
+            <media-create-button v-show="(mode==1)">
             </media-create-button>
 
             <media-update-button v-show="isMyMedia && (mode==2)"
@@ -87,9 +86,6 @@ export default {
         },
         getFinishTime(){
             this.$emit('getFinishTime');
-        },
-        createMedia(){
-            this.$emit('create-media');
         },
         updateMedia(){
             this.$emit('update-media');

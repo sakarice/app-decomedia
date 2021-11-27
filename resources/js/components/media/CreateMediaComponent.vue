@@ -5,8 +5,7 @@
 
     <!-- Mediaヘッダ -->
     <media-header-component
-    :isShowCreateButton=true
-    @create-media="createMedia">
+    :isShowCreateButton=true>
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
@@ -172,31 +171,6 @@ export default {
         this.$refs.mediaMovie.setMovieDurationToFinishTime();
       } 
     },
-    createMedia() {
-      this.getFinishTime();
-      const url = '/media/store';
-      const tmpThis = this;
-      let media_datas = {
-        'img' : this.getMediaImg,
-        'audios' : this.getMediaAudios,
-        'movie' : this.getMediaMovie,
-        'setting' : this.getMediaSetting,
-      }
-      this.message = "media情報を保存中です...";
-      this.isCreatingMedia = true;
-      axios.post(url, media_datas)
-        .then(response =>{
-          alert(response.data.message);
-          this.message = "";
-          this.isCreatingMedia = false;
-        })
-        .catch(error => {            
-          alert('failed!');
-          this.message = "";
-          this.isCreatingMedia = false;
-        })
-
-    }
 
   },
   created() {},
