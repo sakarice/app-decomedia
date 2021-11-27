@@ -688,7 +688,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.setIsCrudDoing(false);
       })["catch"](function (error) {
-        alert('failed!');
+        alert('メディア更新に失敗しました');
 
         _this.setIsCrudDoing(false);
       });
