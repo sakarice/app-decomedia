@@ -32,9 +32,6 @@
     },
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
-      // updateMedia() {
-      //   this.$emit('update-media');
-      // },
       updateMedia() {
       // this.getFinishTime();
       const url = '/media/update';
