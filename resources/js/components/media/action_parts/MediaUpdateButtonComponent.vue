@@ -5,12 +5,7 @@
         <i class="fas fa-check fa-lg update-icon"></i>
       </div>
       <span class="action-trigger-subtitle">更新</span>
-      
-      <p v-show="message != ''">
-        {{message}}
-      </p>
     </div>
-
 
 </template>
 
@@ -18,12 +13,7 @@
   import { mapGetters, mapMutations} from 'vuex';
 
   export default {
-    props : [],
-    data : () => {
-      return {
-        'message' : "",
-      }
-    },
+    data : () => { return {} },
     computed : {
       ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
@@ -33,16 +23,16 @@
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
       updateMedia() {
-      // this.getFinishTime();
-      const url = '/media/update';
-      let media_datas = {
-        'img' : this.getMediaImg,
-        'audios' : this.getMediaAudios,
-        'movie' : this.getMediaMovie,
-        'setting' : this.getMediaSetting,
-      }
-      this.setIsCrudDoing(true);
-      axios.post(url, media_datas)
+        // this.getFinishTime();
+        const url = '/media/update';
+        let media_datas = {
+          'img' : this.getMediaImg,
+          'audios' : this.getMediaAudios,
+          'movie' : this.getMediaMovie,
+          'setting' : this.getMediaSetting,
+        }
+        this.setIsCrudDoing(true);
+        axios.post(url, media_datas)
         .then(response =>{
           alert(response.data.message);
           this.setIsCrudDoing(false);
@@ -51,12 +41,10 @@
           alert('failed!');
           this.setIsCrudDoing(false);
         })
-    },
-
+      },
     },
 
   }
-
 
 </script>
 
