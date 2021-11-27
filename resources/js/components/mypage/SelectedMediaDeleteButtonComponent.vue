@@ -1,14 +1,17 @@
 <template>
+
   <div class="action-button-wrapper">
     <i class="fas fa-trash fa-3x media-delete-icon" @click="deleteSelectedMedia"></i>
     <span class="action-item-subtitle">削除</span>
-    <p v-show="deleteSelectedMediaMessage">
+    <!-- <p v-show="deleteSelectedMediaMessage">
       {{deleteSelectedMediaMessage}}
-    </p>
+    </p> -->
   </div>
+
 </template>
 
 <script>
+  import { mapGetters, mapMutations } from 'vuex'
   export default {
     props : [],
     data : () => {
@@ -52,15 +55,18 @@
           'selectedMediaIds' : selectedMediaIds,
         }
         const url = '/medias/destroy';
+        this.$emit('set-is-delete', true);
         axios.post(url, mediaInfo)
           .then(response =>{
             alert(response.data.message);
             this.deleteSelectedMediaMessage = "";
+            this.$emit('set-is-delete', false);
             location.reload();
           })
           .catch(error => {
             alert('failed!');
             this.deleteSelectedMediaMessage = "";
+            this.$emit('set-is-delete', false);
           })
       }
 

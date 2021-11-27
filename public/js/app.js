@@ -6188,6 +6188,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../MediaListCreateButtonComponent.vue */ "./resources/js/components/MediaListCreateButtonComponent.vue");
 /* harmony import */ var _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectedMediaDeleteButtonComponent.vue */ "./resources/js/components/mypage/SelectedMediaDeleteButtonComponent.vue");
 /* harmony import */ var _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserPageProfileComponent.vue */ "./resources/js/components/mypage/UserPageProfileComponent.vue");
+/* harmony import */ var _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
+/* harmony import */ var _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
 //
 //
 //
@@ -6275,6 +6277,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -6288,7 +6299,9 @@ __webpack_require__.r(__webpack_exports__);
     MypageMenuBar: _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     MediaListCreateButton: _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     SelectedMediaDeleteButton: _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    UserPageProfile: _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    UserPageProfile: _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Overlay: _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Loading: _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: ['createdMediaPreviewInfosFromParent', 'likedMediaPreviewInfosFromParent'],
   data: function data() {
@@ -6304,7 +6317,8 @@ __webpack_require__.r(__webpack_exports__);
       'isShowLikedMediaPreview': true,
       'isUpdateCreatedMediaPreviewInfo': false,
       'isUpdateLikedMediaPreviewInfo': false,
-      'totalSelectedCount': 0
+      'totalSelectedCount': 0,
+      'isDeleting': false
     };
   },
   methods: {
@@ -6349,6 +6363,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         alert('media削除に失敗しました。');
       });
+    },
+    setIsDelete: function setIsDelete(isDelete) {
+      this.isDeleting = isDelete;
     },
     changeIsCheckedCreatedMedia: function changeIsCheckedCreatedMedia(isChecked, index) {
       if (isChecked == true) {
@@ -6521,6 +6538,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -6566,13 +6586,19 @@ __webpack_require__.r(__webpack_exports__);
         'selectedMediaIds': selectedMediaIds
       };
       var url = '/medias/destroy';
+      this.$emit('set-is-delete', true);
       axios.post(url, mediaInfo).then(function (response) {
         alert(response.data.message);
         _this.deleteSelectedMediaMessage = "";
+
+        _this.$emit('set-is-delete', false);
+
         location.reload();
       })["catch"](function (error) {
         alert('failed!');
         _this.deleteSelectedMediaMessage = "";
+
+        _this.$emit('set-is-delete', false);
       });
     }
   }
@@ -12842,7 +12868,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  display: flex;\r\n  align-items: flex-end;\r\n  margin-bottom: 30px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin-right: 30px;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n#change-select-mode[data-v-15798219]:hover {\r\n  color: black;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\n}\n.select-mode-description[data-v-15798219] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-section[data-v-15798219] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-15798219] {\n}\n.mypage-action-menu[data-v-15798219] {\r\n    margin-bottom: 15px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin-right: 15px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-15798219] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  display: flex;\r\n  align-items: flex-end;\r\n  margin-bottom: 30px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin-right: 30px;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n#change-select-mode[data-v-15798219]:hover {\r\n  color: black;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\n}\n.select-mode-description[data-v-15798219] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-section[data-v-15798219] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-15798219] {\n}\n.mypage-action-menu[data-v-15798219] {\r\n    margin-bottom: 15px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin-right: 15px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-15798219] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12893,7 +12919,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-delete-icon[data-v-76406b70]:hover {\r\n  color: red;\n}\n.action-item-subtitle[data-v-76406b70] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-delete-icon[data-v-76406b70]:hover {\r\n  color: red;\n}\n.action-item-subtitle[data-v-76406b70] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -60215,6 +60241,7 @@ var render = function () {
                 },
               ],
               staticClass: "mypage-action-item select-mode-item",
+              on: { "set-is-delete": _vm.setIsDelete },
             }),
             _vm._v(" "),
             _c(
@@ -60331,6 +60358,28 @@ var render = function () {
       ),
       _vm._v(" "),
       _c("mypage-menu-bar-component"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isDeleting,
+              expression: "isDeleting",
+            },
+          ],
+        },
+        [
+          _c("overlay"),
+          _vm._v(" "),
+          _c("loading", {
+            attrs: { message: "選択したメディアを削除中です..." },
+          }),
+        ],
+        1
+      ),
     ],
     1
   )
@@ -60441,21 +60490,6 @@ var render = function () {
     }),
     _vm._v(" "),
     _c("span", { staticClass: "action-item-subtitle" }, [_vm._v("削除")]),
-    _vm._v(" "),
-    _c(
-      "p",
-      {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.deleteSelectedMediaMessage,
-            expression: "deleteSelectedMediaMessage",
-          },
-        ],
-      },
-      [_vm._v("\n    " + _vm._s(_vm.deleteSelectedMediaMessage) + "\n  ")]
-    ),
   ])
 }
 var staticRenderFns = []

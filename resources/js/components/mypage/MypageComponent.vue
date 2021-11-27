@@ -22,7 +22,8 @@
       <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
         <selected-media-delete-button-component
         class="mypage-action-item select-mode-item"
-        v-show="isSelectMode">
+        v-show="isSelectMode"
+        v-on:set-is-delete="setIsDelete">
         </selected-media-delete-button-component>
 
         <!-- 〇選択をすべて解除するボタン -->
@@ -77,6 +78,12 @@
     <mypage-menu-bar-component>
     </mypage-menu-bar-component>
 
+    <div v-show="isDeleting">
+      <overlay></overlay>
+      <loading
+      message="選択したメディアを削除中です...">
+      </loading>
+    </div>
 
   </div>
 
@@ -92,6 +99,8 @@ import MypageMenuBar from './MypageMenuBarComponent.vue';
 import MediaListCreateButton from '../MediaListCreateButtonComponent.vue';
 import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue';
 import UserPageProfile from './UserPageProfileComponent.vue';
+import Overlay from '../common/OverlayComponent.vue';
+import Loading from '../common/LoadingComponent.vue';
 
 export default {
   components : {
@@ -101,6 +110,8 @@ export default {
     MediaListCreateButton,
     SelectedMediaDeleteButton,
     UserPageProfile,
+    Overlay,
+    Loading,
   },
   props : [
     'createdMediaPreviewInfosFromParent',
@@ -120,6 +131,7 @@ export default {
       'isUpdateCreatedMediaPreviewInfo' : false,
       'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
+      'isDeleting' : false,
     }
   },
   methods : {
@@ -170,6 +182,9 @@ export default {
       .catch(error => {
         alert('media削除に失敗しました。');
       })
+    },
+    setIsDelete(isDelete){
+      this.isDeleting = isDelete;
     },
     changeIsCheckedCreatedMedia(isChecked, index){
       if(isChecked == true){
