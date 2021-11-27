@@ -65,13 +65,16 @@ export default {
         'media_id' : media_id,
       }
       const url = '/media/delete';
+      this.$emit('set-is-delete', true);
       axios.post(url, media_data)
       .then(response => {
         alert(response.data.message);
+        this.$emit('set-is-delete', false);
         location.reload();
       })
       .catch(error => {
         alert('media削除に失敗しました。');
+        this.$emit('set-is-delete', false);
       })
     },
     changeIsCheckedMedia(event, index){

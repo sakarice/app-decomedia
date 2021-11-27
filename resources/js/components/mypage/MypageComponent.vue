@@ -51,6 +51,7 @@
         :media-preview-infos="createdMediaPreviewInfos"
         :is-show-cover="isShowCoverOnCreateMedia"
         :is-select-mode="isSelectMode"
+        v-on:set-is-delete="setIsDelete"
         @changeIsCheckedMedia="changeIsCheckedCreatedMedia"
         ref="createdMediaPreview">
       </media-preview-component>
@@ -81,7 +82,7 @@
     <div v-show="isDeleting">
       <overlay></overlay>
       <loading
-      message="選択したメディアを削除中です...">
+      message="メディアを削除中です...">
       </loading>
     </div>
 
@@ -174,13 +175,16 @@ export default {
         'media_id' : media_id,
       }
       const url = '/media/delete';
+      this.isDeleting = true;
       axios.post(url, media_data)
       .then(response => {
         alert(response.data.message);
+        this.isDeleting = false;        
         location.reload();
       })
       .catch(error => {
         alert('media削除に失敗しました。');
+        this.isDeleting = false;
       })
     },
     setIsDelete(isDelete){
