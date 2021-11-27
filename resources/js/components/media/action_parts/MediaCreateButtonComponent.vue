@@ -7,19 +7,13 @@
       <span class="action-trigger-subtitle">作成</span>
     </div>
 
-
 </template>
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
 
   export default {
-    props : [],
-    data : () => {
-      return {
-        'message' : "",
-      }
-    },
+    data : () => { return {} },
     computed : {
       ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
