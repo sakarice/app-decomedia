@@ -230,14 +230,14 @@ p {
 }
 
 
-/* タブレットサイズ */
-@media screen and (min-width: 781px) {
+/* スマホ以上のサイズ(PC、タブレット */
+@media screen and (min-width: 481px) {
   .top-message-wrapper {
     left: 10%;
   }
-
 }
 
+/* タブレットサイズ */
 @media screen and (max-width: 780px) {
   #about-app {
     display: none;
