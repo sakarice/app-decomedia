@@ -29,26 +29,19 @@
 <script>
 import { mapGetters } from 'vuex';
 import HomeLink from './action_parts/HomeLinkComponent.vue';
-import CancelButton from './action_parts/CancelButtonComponent.vue';
 import ToMypageButton from './action_parts/ToMypageButtonComponent.vue';
 import MediaCreateButton from './action_parts/MediaCreateButtonComponent.vue';
 import MediaUpdateButton from './action_parts/MediaUpdateButtonComponent.vue';
 
-
 export default {
     components : {
         HomeLink,
-        CancelButton,
         ToMypageButton,
         MediaCreateButton,
         MediaUpdateButton,
     },
     props : [
         'csrf',
-        'isShowCreateButton',
-        'isShowUpdateButton',
-        'isShowLinkToShow',
-        // 'isShowLinkToEdit',
     ],
     data : () => {
         return {
@@ -82,18 +75,6 @@ export default {
                 this.isMyMedia = response.data.isMyMedia;
             })
             .catch(error => {})
-        },
-        getFinishTime(){
-            this.$emit('getFinishTime');
-        },
-        updateMedia(){
-            this.$emit('update-media');
-        },
-        mediaShowLink : function(id) {
-            return "/media/" + id;
-        },
-        mediaEditLink : function(id) {
-            return "/media/" + id + "/edit";
         },
     },
     watch : {
