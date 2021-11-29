@@ -6,6 +6,10 @@
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
+    <media-figure></media-figure>
+    <media-figure-setting></media-figure-setting>
+
+
     <!-- Media画像コンポーネント -->
     <media-img
     ref="mediaImg">
@@ -116,12 +120,19 @@
   import MediaMovie from './media_contents/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
+  // テスト メディア図形
+  import MediaFigure from './media_contents/MediaFigureComponent.vue';
+  import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
+
+
 export default {
   components : {
     MediaImg,
     MediaAudio,
     MediaSetting,
     MediaMovie,
+    MediaFigure,
+    MediaFigureSetting,
   },
   props: [],
   data : () => {
