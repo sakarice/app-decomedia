@@ -5562,10 +5562,48 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
   data: function data() {
     return {};
   },
@@ -6429,14 +6467,85 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['index'],
   data: function data() {
     return {
       "ctx": "",
-      "window_width": "",
-      "window_height": ""
+      "window_width": 0,
+      "window_height": 0
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])), {}, {
+    canvas_width: function canvas_width() {
+      return this.window_width + "px";
+    },
+    canvas_height: function canvas_height() {
+      return this.window_height + "px";
+    },
+    x_position: function x_position() {
+      return this.getMediaFigure['x_position'];
+    },
+    y_position: function y_position() {
+      return this.getMediaFigure['y_position'];
+    },
+    degree: function degree() {
+      return this.getMediaFigure['degree'];
+    },
+    figure_width: function figure_width() {
+      return this.getMediaFigure['width'];
+    },
+    figure_height: function figure_height() {
+      return this.getMediaFigure['height'];
+    },
+    is_draw_fill: function is_draw_fill() {
+      return this.getMediaFigure['isDrawFill'];
+    },
+    is_draw_stroke: function is_draw_stroke() {
+      return this.getMediaFigure['isDrawStroke'];
+    },
+    fill_color: function fill_color() {
+      return this.getMediaFigure['fillColor'];
+    },
+    stroke_color: function stroke_color() {
+      return this.getMediaFigure['strokeColor'];
+    },
+    global_alpha: function global_alpha() {
+      return this.getMediaFigure['globalAlpha'];
+    }
+  }),
+  watch: {
+    figure_width: function figure_width() {
+      this.draw();
+    },
+    figure_height: function figure_height() {
+      this.draw();
+    },
+    x_position: function x_position() {
+      this.draw();
+    },
+    y_position: function y_position() {
+      this.draw();
+    },
+    degree: function degree() {
+      this.draw();
+    },
+    is_draw_fill: function is_draw_fill() {
+      this.draw();
+    },
+    is_draw_stroke: function is_draw_stroke() {
+      this.draw();
+    },
+    fill_color: function fill_color() {
+      this.draw();
+    },
+    stroke_color: function stroke_color() {
+      this.draw();
+    },
+    global_alpha: function global_alpha() {
+      this.setGlobalAlpha();
+      this.draw();
+    }
+  },
   methods: {
     setContext: function setContext() {
       console.log('start setContext');
@@ -6444,31 +6553,66 @@ function _defineProperty(obj, key, value) {
       this.ctx = canvas.getContext('2d');
     },
     draw: function draw() {
-      if (this.getMediaFigure['isFill']) {
-        this.fill();
+      var timer = "";
+      var tmpThis = this;
+
+      if (timer) {
+        clearTimeout(timer);
       }
 
-      if (this.getMediaFigure['isRect']) {
-        this.rect();
-      }
+      timer = setTimeout(function () {
+        tmpThis.clear();
+
+        if (tmpThis.getMediaFigure['isDrawFill']) {
+          tmpThis.fill();
+        }
+
+        ;
+
+        if (tmpThis.getMediaFigure['isDrawStroke']) {
+          tmpThis.stroke();
+        }
+
+        ;
+      }, 200);
+    },
+    clear: function clear() {
+      this.ctx.clearRect(0, 0, this.window_width, this.window_height);
+    },
+    setDegree: function setDegree() {
+      this.ctx.translate(this.window_width / 2, this.window_height / 2);
+      this.ctx.rotate(this.getMediaFigure['degree'] * Math.PI / 180);
+      this.ctx.translate(-this.window_width / 2, -this.window_height / 2);
+    },
+    setGlobalAlpha: function setGlobalAlpha() {
+      this.ctx.globalAlpha = this.getMediaFigure['globalAlpha'];
+    },
+    setFillColor: function setFillColor() {
+      this.ctx.fillStyle = this.getMediaFigure['fillColor'];
+    },
+    setStrokeColor: function setStrokeColor() {
+      this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];
     },
     fill: function fill() {
-      console.log('start fill');
-      this.ctx.fillStyle = this.getMediaFigure['fillColor'];
-      this.ctx.fillRect(10, 10, this.getMediaFigure['width'], this.getMediaFigure['height']);
+      this.setDegree();
+      this.setFillColor();
+      this.ctx.fillRect(this.getMediaFigure['x_position'], this.getMediaFigure['y_position'], this.getMediaFigure['width'], this.getMediaFigure['height']);
     },
-    rect: function rect() {
-      console.log('start rect');
-      this.ctx.fillStyle = this.getMediaFigure['rectColor'];
-      this.ctx.strokeRect(10, 10, this.getMediaFigure['width'], this.getMediaFigure['height']);
+    stroke: function stroke() {
+      this.setDegree();
+      this.setStrokeColor();
+      this.ctx.strokeRect(this.getMediaFigure['x_position'], this.getMediaFigure['y_position'], this.getMediaFigure['width'], this.getMediaFigure['height']);
     }
   },
   created: function created() {
-    this.window_width = window.innerWidth + "px";
-    this.window_height = window.innerHeight + "px";
+    this.window_width = window.innerWidth;
+    this.window_height = window.innerHeight;
   },
   mounted: function mounted() {
     this.setContext();
+    this.setGlobalAlpha();
+    this.setFillColor();
+    this.setStrokeColor();
     this.draw();
     var timer = "";
     var tmpThis = this;
@@ -6479,8 +6623,8 @@ function _defineProperty(obj, key, value) {
       }
 
       timer = setTimeout(function () {
-        tmpThis.window_width = window.innerWidth + "px";
-        tmpThis.window_height = window.innerHeight + "px";
+        tmpThis.window_width = window.innerWidth;
+        tmpThis.window_height = window.innerHeight;
         tmpThis.draw();
         console.log('window size changed');
       }, 200);
@@ -8565,14 +8709,17 @@ var mediaFigure = {
     mediaFigure: {
       type: 0,
       id: 0,
+      x_position: 100,
+      y_position: 100,
       width: 50,
       height: 50,
-      opacity: 1,
+      degree: 0,
+      globalAlpha: 1,
       layer: 0,
-      isFill: true,
-      fillColer: "red",
-      isRect: true,
-      rectColor: "blue"
+      isDrawFill: false,
+      fillColor: "red",
+      isDrawStroke: true,
+      strokeColor: "blue"
     }
   },
   getters: {
@@ -60471,11 +60618,63 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "media-figure-setting-wrapper" } }, [
+    _c("div", { staticClass: "x_position-wrapper" }, [
+      _c("span", [_vm._v("x軸位置:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text" },
+        domProps: { value: _vm.getMediaFigure["x_position"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "x_position",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "y_position-wrapper" }, [
+      _c("span", [_vm._v("y軸位置:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text" },
+        domProps: { value: _vm.getMediaFigure["y_position"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "y_position",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "degree-wrapper" }, [
+      _c("span", [_vm._v("回転:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "text" },
+        domProps: { value: _vm.getMediaFigure["degree"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "degree",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "width-input-wrapper" }, [
       _c("span", [_vm._v("横幅:")]),
       _vm._v(" "),
       _c("input", {
         attrs: { type: "text" },
+        domProps: { value: _vm.getMediaFigure["width"] },
         on: {
           input: function ($event) {
             return _vm.updateMediaFigureObjectItem({
@@ -60492,10 +60691,99 @@ var render = function () {
       _vm._v(" "),
       _c("input", {
         attrs: { type: "text" },
+        domProps: { value: _vm.getMediaFigure["height"] },
         on: {
           input: function ($event) {
             return _vm.updateMediaFigureObjectItem({
               key: "height",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "fill-input-wrapper" }, [
+      _c("span", [_vm._v("塗りつぶし")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "checkbox" },
+        domProps: { value: _vm.getMediaFigure["isDrawFill"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "isDrawFill",
+              value: $event.target.checked,
+            })
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("span", [_vm._v("色:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "color" },
+        domProps: { value: _vm.getMediaFigure["fillColor"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "fillColor",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "stroke-input-wrapper" }, [
+      _c("span", [_vm._v("枠線")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "checkbox" },
+        domProps: { value: _vm.getMediaFigure["isDrawStroke"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "isDrawStroke",
+              value: $event.target.checked,
+            })
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("span", [_vm._v("色:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: { type: "color" },
+        domProps: { value: _vm.getMediaFigure["strokeColor"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "strokeColor",
+              value: $event.target.value,
+            })
+          },
+        },
+      }),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "opacity-input-wrapper" }, [
+      _c("span", [_vm._v("透過度:")]),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "range",
+          name: "opacity",
+          id: "",
+          min: "0",
+          max: "1",
+          step: "0.05",
+        },
+        domProps: { value: _vm.getMediaFigure["globalAlpha"] },
+        on: {
+          input: function ($event) {
+            return _vm.updateMediaFigureObjectItem({
+              key: "globalAlpha",
               value: $event.target.value,
             })
           },
@@ -61331,7 +61619,7 @@ var render = function () {
   return _c("div", { attrs: { id: "media-figure-wrapper" } }, [
     _c("canvas", {
       staticClass: "canvas_test",
-      style: { width: _vm.window_width, height: _vm.window_height },
+      style: { width: _vm.canvas_width, height: _vm.canvas_height },
       attrs: { id: "canvas" },
     }),
   ])
