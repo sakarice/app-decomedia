@@ -2923,9 +2923,11 @@ function _defineProperty(obj, key, value) {
   props: ['index'],
   data: function data() {
     return {
+      "canvas": "",
       "ctx": "",
-      "window_width": 0,
-      "window_height": 0
+      "window_width": 400,
+      "window_height": 400,
+      "dpr": 1
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])), {}, {
@@ -3002,8 +3004,14 @@ function _defineProperty(obj, key, value) {
   methods: {
     setContext: function setContext() {
       console.log('start setContext');
-      var canvas = document.getElementById('canvas');
+      this.canvas = document.getElementById('canvas');
       this.ctx = canvas.getContext('2d');
+    },
+    resizeCanvas: function resizeCanvas() {
+      this.window_width = window.innerWidth;
+      this.window_height = window.innerHeight;
+      this.canvas.width = this.window_width;
+      this.canvas.height = this.window_height;
     },
     draw: function draw() {
       var timer = "";
@@ -3033,9 +3041,41 @@ function _defineProperty(obj, key, value) {
       this.ctx.clearRect(0, 0, this.window_width, this.window_height);
     },
     setDegree: function setDegree() {
-      this.ctx.translate(this.window_width / 2, this.window_height / 2);
+      // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
+      var move_x = Number(this.getMediaFigure['x_position']) + Number(this.getMediaFigure['width'] / 2);
+      var move_y = Number(this.getMediaFigure['y_position']) + Number(this.getMediaFigure['height'] / 2);
+      this.ctx.translate(move_x, move_y);
       this.ctx.rotate(this.getMediaFigure['degree'] * Math.PI / 180);
-      this.ctx.translate(-this.window_width / 2, -this.window_height / 2);
+      this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+    },
+    createPathRect: function createPathRect() {
+      var start_x = Number(this.getMediaFigure['x_position']);
+      var start_y = Number(this.getMediaFigure['y_position']);
+      var width = Number(this.getMediaFigure['width']);
+      var height = Number(this.getMediaFigure['height']); // 左上から半時計回りに、四角形の4頂点のポイントを指定
+
+      var point1_left_upper = {
+        x: start_x,
+        y: start_y
+      };
+      var point2_left_under = {
+        x: start_x,
+        y: start_y + height
+      };
+      var point3_right_under = {
+        x: start_x + width,
+        y: start_y + height
+      };
+      var point4_right_upper = {
+        x: start_x + width,
+        y: start_y
+      };
+      this.ctx.beginPath();
+      this.ctx.moveTo(point1_left_upper['x'], point1_left_upper['y']);
+      this.ctx.lineTo(point2_left_under['x'], point2_left_under['y']);
+      this.ctx.lineTo(point3_right_under['x'], point3_right_under['y']);
+      this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
+      this.ctx.closePath();
     },
     setGlobalAlpha: function setGlobalAlpha() {
       this.ctx.globalAlpha = this.getMediaFigure['globalAlpha'];
@@ -3047,22 +3087,28 @@ function _defineProperty(obj, key, value) {
       this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];
     },
     fill: function fill() {
-      this.setDegree();
+      this.ctx.save();
       this.setFillColor();
-      this.ctx.fillRect(this.getMediaFigure['x_position'], this.getMediaFigure['y_position'], this.getMediaFigure['width'], this.getMediaFigure['height']);
+      this.setDegree();
+      this.createPathRect();
+      this.ctx.fill();
+      this.ctx.restore();
     },
     stroke: function stroke() {
-      this.setDegree();
+      this.ctx.save();
       this.setStrokeColor();
-      this.ctx.strokeRect(this.getMediaFigure['x_position'], this.getMediaFigure['y_position'], this.getMediaFigure['width'], this.getMediaFigure['height']);
+      this.setDegree();
+      this.createPathRect();
+      this.ctx.stroke();
+      this.ctx.restore();
     }
   },
   created: function created() {
-    this.window_width = window.innerWidth;
-    this.window_height = window.innerHeight;
+    this.dpr = window.devicePixelRatio || 1;
   },
   mounted: function mounted() {
     this.setContext();
+    this.resizeCanvas();
     this.setGlobalAlpha();
     this.setFillColor();
     this.setStrokeColor();
@@ -3076,8 +3122,7 @@ function _defineProperty(obj, key, value) {
       }
 
       timer = setTimeout(function () {
-        tmpThis.window_width = window.innerWidth;
-        tmpThis.window_height = window.innerHeight;
+        tmpThis.resizeCanvas();
         tmpThis.draw();
         console.log('window size changed');
       }, 200);
@@ -4687,7 +4732,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.canvas_test[data-v-29e92a69] {\r\n  /* width: 500px;\r\n  height: 500px; */\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.canvas_test[data-v-29e92a69] {\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10083,7 +10128,7 @@ var render = function () {
       _c("span", [_vm._v("x軸位置:")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "text" },
+        attrs: { type: "number" },
         domProps: { value: _vm.getMediaFigure["x_position"] },
         on: {
           input: function ($event) {
@@ -10100,7 +10145,7 @@ var render = function () {
       _c("span", [_vm._v("y軸位置:")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "text" },
+        attrs: { type: "number" },
         domProps: { value: _vm.getMediaFigure["y_position"] },
         on: {
           input: function ($event) {
@@ -10117,7 +10162,7 @@ var render = function () {
       _c("span", [_vm._v("回転:")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "text" },
+        attrs: { type: "number" },
         domProps: { value: _vm.getMediaFigure["degree"] },
         on: {
           input: function ($event) {
@@ -10134,7 +10179,7 @@ var render = function () {
       _c("span", [_vm._v("横幅:")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "text" },
+        attrs: { type: "number" },
         domProps: { value: _vm.getMediaFigure["width"] },
         on: {
           input: function ($event) {
@@ -10151,7 +10196,7 @@ var render = function () {
       _c("span", [_vm._v("縦幅:")]),
       _vm._v(" "),
       _c("input", {
-        attrs: { type: "text" },
+        attrs: { type: "number" },
         domProps: { value: _vm.getMediaFigure["height"] },
         on: {
           input: function ($event) {
@@ -11072,15 +11117,18 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "media-figure-wrapper" } }, [
-    _c("canvas", {
-      staticClass: "canvas_test",
-      style: { width: _vm.canvas_width, height: _vm.canvas_height },
-      attrs: { id: "canvas" },
-    }),
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "media-figure-wrapper" } }, [
+      _c("canvas", { staticClass: "canvas_test", attrs: { id: "canvas" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 

@@ -4,26 +4,26 @@
 
     <div class="x_position-wrapper">
       <span>x軸位置:</span>
-      <input type="text" :value="getMediaFigure['x_position']" @input="updateMediaFigureObjectItem({key:'x_position', value:$event.target.value})">
+      <input type="number" :value="getMediaFigure['x_position']" @input="updateMediaFigureObjectItem({key:'x_position', value:$event.target.value})">
     </div>
 
     <div class="y_position-wrapper">
       <span>y軸位置:</span>
-      <input type="text" :value="getMediaFigure['y_position']" @input="updateMediaFigureObjectItem({key:'y_position', value:$event.target.value})">
+      <input type="number" :value="getMediaFigure['y_position']" @input="updateMediaFigureObjectItem({key:'y_position', value:$event.target.value})">
     </div>
 
     <div class="degree-wrapper">
       <span>回転:</span>
-      <input type="text" :value="getMediaFigure['degree']" @input="updateMediaFigureObjectItem({key:'degree', value:$event.target.value})">
+      <input type="number" :value="getMediaFigure['degree']" @input="updateMediaFigureObjectItem({key:'degree', value:$event.target.value})">
     </div>
 
     <div class="width-input-wrapper">
       <span>横幅:</span>
-      <input type="text" :value="getMediaFigure['width']" @input="updateMediaFigureObjectItem({key:'width', value:$event.target.value})">
+      <input type="number" :value="getMediaFigure['width']" @input="updateMediaFigureObjectItem({key:'width', value:$event.target.value})">
     </div>
     <div class="height-input-wrapper">
       <span>縦幅:</span>
-      <input type="text" :value="getMediaFigure['height']" @input="updateMediaFigureObjectItem({key:'height', value:$event.target.value})">
+      <input type="number" :value="getMediaFigure['height']" @input="updateMediaFigureObjectItem({key:'height', value:$event.target.value})">
     </div>
 
     <div class="fill-input-wrapper">

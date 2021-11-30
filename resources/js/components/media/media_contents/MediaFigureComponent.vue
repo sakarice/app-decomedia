@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-wrapper">
-    <canvas id="canvas" class="canvas_test" v-bind:style="{width:canvas_width, height:canvas_height}"></canvas>
+    <canvas id="canvas" class="canvas_test"></canvas>
   </div>
 </template>
 
@@ -13,9 +13,11 @@
     ],
     data : ()=>{
       return {
+        "canvas" : "",
         "ctx" : "",
-        "window_width" : 0,
-        "window_height" : 0,
+        "window_width" : 400,
+        "window_height" : 400,
+        "dpr" : 1,
       }
     },
     computed : {
@@ -51,8 +53,14 @@
     methods : {
       setContext(){
         console.log('start setContext');
-        const canvas = document.getElementById('canvas');
+        this.canvas = document.getElementById('canvas');
         this.ctx = canvas.getContext('2d');
+      },
+      resizeCanvas(){
+        this.window_width = window.innerWidth;
+        this.window_height = window.innerHeight;
+        this.canvas.width = this.window_width;
+        this.canvas.height = this.window_height;
       },
       draw(){
         let timer = "";
@@ -70,40 +78,58 @@
         this.ctx.clearRect(0,0,this.window_width,this.window_height);
       },
       setDegree(){ 
-        this.ctx.translate(this.window_width/2, this.window_height/2);
+        // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
+        let move_x = Number(this.getMediaFigure['x_position']) + Number(this.getMediaFigure['width']/2);
+        let move_y = Number(this.getMediaFigure['y_position']) + Number(this.getMediaFigure['height']/2);
+        this.ctx.translate(move_x, move_y);
         this.ctx.rotate(this.getMediaFigure['degree']*Math.PI / 180);
-        this.ctx.translate(-this.window_width/2, -this.window_height/2);
+        this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+      },
+      createPathRect(){
+        const start_x = Number(this.getMediaFigure['x_position']);
+        const start_y = Number(this.getMediaFigure['y_position']);
+        const width = Number(this.getMediaFigure['width']);
+        const height = Number(this.getMediaFigure['height']);
+
+        // 左上から半時計回りに、四角形の4頂点のポイントを指定
+        const point1_left_upper  = {x: start_x,         y: start_y};
+        const point2_left_under  = {x: start_x ,        y: start_y + height};
+        const point3_right_under = {x: start_x + width, y: start_y + height};
+        const point4_right_upper = {x: start_x + width, y: start_y};
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(point1_left_upper['x'],  point1_left_upper['y']);
+        this.ctx.lineTo(point2_left_under['x'], point2_left_under['y']);
+        this.ctx.lineTo(point3_right_under['x'], point3_right_under['y']);
+        this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
+        this.ctx.closePath();
       },
       setGlobalAlpha(){ this.ctx.globalAlpha = this.getMediaFigure['globalAlpha']},
       setFillColor(){this.ctx.fillStyle = this.getMediaFigure['fillColor'];},
       setStrokeColor(){this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];},
       fill(){
-        this.setDegree();
+        this.ctx.save();
         this.setFillColor();
-        this.ctx.fillRect(
-          this.getMediaFigure['x_position']
-          ,this.getMediaFigure['y_position']
-          ,this.getMediaFigure['width']
-          ,this.getMediaFigure['height']
-        );
+        this.setDegree();
+        this.createPathRect();
+        this.ctx.fill();
+        this.ctx.restore();
       },
       stroke(){
-        this.setDegree();
+        this.ctx.save();
         this.setStrokeColor();
-        this.ctx.strokeRect(
-          this.getMediaFigure['x_position']
-          ,this.getMediaFigure['y_position']
-          ,this.getMediaFigure['width']
-          ,this.getMediaFigure['height']
-        );
+        this.setDegree();
+        this.createPathRect();
+        this.ctx.stroke();
+        this.ctx.restore();
       }
     },
     created(){
-      this.window_width = window.innerWidth;
-      this.window_height = window.innerHeight;
+      this.dpr = window.devicePixelRatio || 1;
     },
     mounted(){
       this.setContext();
+      this.resizeCanvas();
       this.setGlobalAlpha();
       this.setFillColor();
       this.setStrokeColor();
@@ -116,8 +142,7 @@
           clearTimeout(timer);  
         }
         timer = setTimeout(function(){
-          tmpThis.window_width = window.innerWidth;
-          tmpThis.window_height = window.innerHeight;
+          tmpThis.resizeCanvas();
           tmpThis.draw();
           console.log('window size changed');
         },200);
@@ -135,8 +160,9 @@
   left: 0;
 }
 .canvas_test {
-  /* width: 500px;
-  height: 500px; */
+  display: block;
+  /* width: 100vw;
+  height: 100vh; */
 }
 
 
