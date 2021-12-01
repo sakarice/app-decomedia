@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-wrapper">
-    <canvas id="canvas" class="canvas_test"></canvas>
+    <canvas id="canvas" class="canvas_area"></canvas>
   </div>
 </template>
 
@@ -107,21 +107,21 @@
       setGlobalAlpha(){ this.ctx.globalAlpha = this.getMediaFigure['globalAlpha']},
       setFillColor(){this.ctx.fillStyle = this.getMediaFigure['fillColor'];},
       setStrokeColor(){this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];},
-      fill(){
+      prepareDraw(){
         this.ctx.save();
         this.setGlobalAlpha();
+        this.setStrokeColor();
         this.setFillColor();
         this.setDegree();
         this.createPathRect();
+      },
+      fill(){
+        this.prepareDraw();
         this.ctx.fill();
         this.ctx.restore();
       },
       stroke(){
-        this.ctx.save();
-        this.setGlobalAlpha();
-        this.setStrokeColor();
-        this.setDegree();
-        this.createPathRect();
+        this.prepareDraw();
         this.ctx.stroke();
         this.ctx.restore();
       }
@@ -132,9 +132,6 @@
     mounted(){
       this.setContext();
       this.resizeCanvas();
-      this.setGlobalAlpha();
-      this.setFillColor();
-      this.setStrokeColor();
       this.draw();
 
       let timer = "";
@@ -161,7 +158,7 @@
   top: 0;
   left: 0;
 }
-.canvas_test {
+.canvas_area {
   display: block;
   /* width: 100vw;
   height: 100vh; */

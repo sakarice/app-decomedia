@@ -2097,6 +2097,10 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2107,14 +2111,115 @@ function _defineProperty(obj, key, value) {
       "move_target": "",
       "x_in_element": 0,
       // クリックカーソルの要素内における相対位置(x座標)
-      "y_in_element": 0 // 〃↑のy座標
-
+      "y_in_element": 0,
+      // 〃↑のy座標
+      "canvas_length": 80,
+      "pre_canvas": "",
+      "pre_ctx": ""
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])), {}, {
+    degree: function degree() {
+      return this.getMediaFigure['degree'];
+    },
+    is_draw_fill: function is_draw_fill() {
+      return this.getMediaFigure['isDrawFill'];
+    },
+    is_draw_stroke: function is_draw_stroke() {
+      return this.getMediaFigure['isDrawStroke'];
+    },
+    fill_color: function fill_color() {
+      return this.getMediaFigure['fillColor'];
+    },
+    stroke_color: function stroke_color() {
+      return this.getMediaFigure['strokeColor'];
+    },
+    global_alpha: function global_alpha() {
+      return this.getMediaFigure['globalAlpha'];
+    },
+    longerEdge: function longerEdge() {
+      return this.canvas_length * 3 / 5;
+    },
+    width: function width() {
+      var actual_width = Number(this.getMediaFigure['width']);
+      var actual_height = Number(this.getMediaFigure['height']);
+
+      if (actual_width > actual_height) {
+        return this.longerEdge;
+      } else {
+        var ratio = actual_width / actual_height; // 縦横の比率
+
+        return this.longerEdge * ratio;
+      }
+    },
+    height: function height() {
+      var actual_width = Number(this.getMediaFigure['width']);
+      var actual_height = Number(this.getMediaFigure['height']);
+
+      if (actual_height > actual_width) {
+        return this.longerEdge;
+      } else {
+        var ratio = actual_height / actual_width; // 縦横の比率
+
+        return this.longerEdge * ratio;
+      }
+    },
+    start_x: function start_x() {
+      return (this.canvas_length - this.width) / 2;
+    },
+    start_y: function start_y() {
+      return (this.canvas_length - this.height) / 2;
+    }
+  }),
+  watch: {
+    degree: function degree() {
+      this.draw();
+    },
+    is_draw_fill: function is_draw_fill() {
+      this.draw();
+    },
+    is_draw_stroke: function is_draw_stroke() {
+      this.draw();
+    },
+    fill_color: function fill_color() {
+      this.draw();
+    },
+    stroke_color: function stroke_color() {
+      this.draw();
+    },
+    width: function width() {
+      this.draw();
+    },
+    height: function height() {
+      this.draw();
+    },
+    global_alpha: function global_alpha() {
+      this.setGlobalAlpha();
+      this.draw();
+    }
+  },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigure', ['updateMediaFigureObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    // 設定モーダル操作用
+    // モーダルの初期表示位置をウィンドウ中央に持ってくる
+    setModalCenter: function setModalCenter() {
+      var modal = document.getElementById('media-figure-setting-wrapper');
+      var modal_width = Number(this.getStyleSheetValue(modal, "width").replace("px", ""));
+      var modal_height = Number(this.getStyleSheetValue(modal, "height").replace("px", ""));
+      modal.style.left = window.innerWidth / 2 - modal_width / 2 + "px";
+      modal.style.top = window.innerHeight / 2 - modal_height / 2 + "px";
+    },
+    getStyleSheetValue: function getStyleSheetValue(element, property) {
+      // ↑でcssの値を取得するための関数
+      if (!element || !property) {
+        return null;
+      }
+
+      var style = window.getComputedStyle(element);
+      var value = style.getPropertyValue(property);
+      return value;
     },
     mouseDown: function mouseDown(e) {
       var event;
@@ -2147,10 +2252,110 @@ function _defineProperty(obj, key, value) {
       this.move_target.removeEventListener("mouseup", this.mouseUp, false);
       document.body.removeEventListener("touchmove", this.mouseMove, false);
       this.move_target.removeEventListener("touchend", this.mouseUp, false);
+    },
+    // 図形プレビュー用
+    setContext: function setContext() {
+      this.pre_canvas = document.getElementById('pre-canvas');
+      this.pre_ctx = this.pre_canvas.getContext('2d');
+    },
+    setCanvasSize: function setCanvasSize() {
+      this.pre_canvas.width = this.canvas_length;
+      this.pre_canvas.height = this.canvas_length;
+    },
+    draw: function draw() {
+      var timer = "";
+      var tmpThis = this;
+
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      timer = setTimeout(function () {
+        tmpThis.clear();
+
+        if (tmpThis.getMediaFigure['isDrawFill']) {
+          tmpThis.fill();
+        }
+
+        ;
+
+        if (tmpThis.getMediaFigure['isDrawStroke']) {
+          tmpThis.stroke();
+        }
+
+        ;
+      }, 200);
+    },
+    clear: function clear() {
+      this.pre_ctx.clearRect(0, 0, this.pre_canvas.width, this.pre_canvas.height);
+    },
+    setDegree: function setDegree() {
+      // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
+      var move_x = this.start_x + this.width / 2;
+      var move_y = this.start_y + this.height / 2;
+      this.pre_ctx.translate(move_x, move_y);
+      this.pre_ctx.rotate(this.getMediaFigure['degree'] * Math.PI / 180);
+      this.pre_ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+    },
+    createPathRect: function createPathRect() {
+      var point1_left_upper = {
+        x: this.start_x,
+        y: this.start_y
+      };
+      var point2_left_under = {
+        x: this.start_x,
+        y: this.start_y + this.height
+      };
+      var point3_right_under = {
+        x: this.start_x + this.width,
+        y: this.start_y + this.height
+      };
+      var point4_right_upper = {
+        x: this.start_x + this.width,
+        y: this.start_y
+      };
+      this.pre_ctx.beginPath();
+      this.pre_ctx.moveTo(point1_left_upper['x'], point1_left_upper['y']);
+      this.pre_ctx.lineTo(point2_left_under['x'], point2_left_under['y']);
+      this.pre_ctx.lineTo(point3_right_under['x'], point3_right_under['y']);
+      this.pre_ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
+      this.pre_ctx.closePath();
+    },
+    setGlobalAlpha: function setGlobalAlpha() {
+      this.pre_ctx.globalAlpha = this.getMediaFigure['globalAlpha'];
+    },
+    setFillColor: function setFillColor() {
+      this.pre_ctx.fillStyle = this.getMediaFigure['fillColor'];
+    },
+    setStrokeColor: function setStrokeColor() {
+      this.pre_ctx.strokeStyle = this.getMediaFigure['strokeColor'];
+    },
+    prepareDraw: function prepareDraw() {
+      this.pre_ctx.save();
+      this.setGlobalAlpha();
+      this.setStrokeColor();
+      this.setFillColor();
+      this.setDegree();
+      this.createPathRect();
+    },
+    fill: function fill() {
+      this.prepareDraw();
+      this.pre_ctx.fill();
+      this.pre_ctx.restore();
+    },
+    stroke: function stroke() {
+      this.prepareDraw();
+      this.pre_ctx.stroke();
+      this.pre_ctx.restore();
     }
   }),
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.setModalCenter();
+    this.setContext();
+    this.setCanvasSize();
+    this.draw();
+  }
 });
 
 /***/ }),
@@ -3168,21 +3373,21 @@ function _defineProperty(obj, key, value) {
     setStrokeColor: function setStrokeColor() {
       this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];
     },
-    fill: function fill() {
+    prepareDraw: function prepareDraw() {
       this.ctx.save();
       this.setGlobalAlpha();
+      this.setStrokeColor();
       this.setFillColor();
       this.setDegree();
       this.createPathRect();
+    },
+    fill: function fill() {
+      this.prepareDraw();
       this.ctx.fill();
       this.ctx.restore();
     },
     stroke: function stroke() {
-      this.ctx.save();
-      this.setGlobalAlpha();
-      this.setStrokeColor();
-      this.setDegree();
-      this.createPathRect();
+      this.prepareDraw();
       this.ctx.stroke();
       this.ctx.restore();
     }
@@ -3193,9 +3398,6 @@ function _defineProperty(obj, key, value) {
   mounted: function mounted() {
     this.setContext();
     this.resizeCanvas();
-    this.setGlobalAlpha();
-    this.setFillColor();
-    this.setStrokeColor();
     this.draw();
     var timer = "";
     var tmpThis = this;
@@ -4722,7 +4924,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 400px;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  height: 83px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: black;\r\n  padding: 1px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  margin-bottom: 10px;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4843,7 +5045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.canvas_test[data-v-29e92a69] {\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\n.canvas_area[data-v-29e92a69] {\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10437,6 +10639,8 @@ var render = function () {
             }),
           ]),
           _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
           _c("div", { staticClass: "media-figure-settings" }, [
             _c("div", { staticClass: "x_position-wrapper" }, [
               _c("span", [_vm._v("x軸位置:")]),
@@ -10616,7 +10820,16 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "figure-preview-wrapper" }, [
+      _c("canvas", { attrs: { id: "pre-canvas" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -11443,7 +11656,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { attrs: { id: "media-figure-wrapper" } }, [
-      _c("canvas", { staticClass: "canvas_test", attrs: { id: "canvas" } }),
+      _c("canvas", { staticClass: "canvas_area", attrs: { id: "canvas" } }),
     ])
   },
 ]
