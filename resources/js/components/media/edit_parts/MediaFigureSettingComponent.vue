@@ -6,6 +6,11 @@
       <div class="close-icon-wrapper">
         <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
+      <!-- 図形追加アイコン -->
+      <div class="add-icon-wrapper" @click="addMediaFigure()">
+        <i class="fas fa-plus fa-3x add-icon"></i>
+      </div>
+
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
         <canvas id="pre-canvas"></canvas>
@@ -14,45 +19,45 @@
       <div class="media-figure-settings">
         <div class="x_position-wrapper">
           <span>x軸位置:</span>
-          <input type="number" :value="getMediaFigure['x_position']" @input="updateMediaFigureObjectItem({key:'x_position', value:$event.target.value})">
+          <input type="number" :value="getFigureData['x_position']" @input="updateFigureData({key:'x_position', value:$event.target.value})">
         </div>
 
         <div class="y_position-wrapper">
           <span>y軸位置:</span>
-          <input type="number" :value="getMediaFigure['y_position']" @input="updateMediaFigureObjectItem({key:'y_position', value:$event.target.value})">
+          <input type="number" :value="getFigureData['y_position']" @input="updateFigureData({key:'y_position', value:$event.target.value})">
         </div>
 
         <div class="degree-wrapper">
           <span>回転:</span>
-          <input type="number" :value="getMediaFigure['degree']" @input="updateMediaFigureObjectItem({key:'degree', value:$event.target.value})">
+          <input type="number" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
         </div>
 
         <div class="width-input-wrapper">
           <span>横幅:</span>
-          <input type="number" :value="getMediaFigure['width']" @input="updateMediaFigureObjectItem({key:'width', value:$event.target.value})">
+          <input type="number" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
         </div>
         <div class="height-input-wrapper">
           <span>縦幅:</span>
-          <input type="number" :value="getMediaFigure['height']" @input="updateMediaFigureObjectItem({key:'height', value:$event.target.value})">
+          <input type="number" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
         </div>
 
         <div class="fill-input-wrapper">
           <span>塗りつぶし</span>
-          <input type="checkbox" :value="getMediaFigure['isDrawFill']" @input="updateMediaFigureObjectItem({key:'isDrawFill',value:$event.target.checked})">
+          <input type="checkbox" :value="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
           <span>色:</span>
-          <input type="color" :value="getMediaFigure['fillColor']" @input="updateMediaFigureObjectItem({key:'fillColor', value:$event.target.value})">
+          <input type="color" :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
         </div>
 
         <div class="stroke-input-wrapper">
           <span>枠線</span>
-          <input type="checkbox" :value="getMediaFigure['isDrawStroke']" @input="updateMediaFigureObjectItem({key:'isDrawStroke',value:$event.target.checked})">
+          <input type="checkbox" :value="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
           <span>色:</span>
-          <input type="color" :value="getMediaFigure['strokeColor']" @input="updateMediaFigureObjectItem({key:'strokeColor', value:$event.target.value})">
+          <input type="color" :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
         </div>
 
         <div class="opacity-input-wrapper">
           <span>透過度:</span>
-          <input type="range" :value="getMediaFigure['globalAlpha']" @input="updateMediaFigureObjectItem({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="range" :value="getFigureData['globalAlpha']" @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
       </div>
     </div>
@@ -75,17 +80,17 @@
       }
     },
     computed : {
-      ...mapGetters('mediaFigure', ['getMediaFigure']),
-      degree(){ return this.getMediaFigure['degree'] },
-      is_draw_fill(){ return this.getMediaFigure['isDrawFill']},
-      is_draw_stroke(){ return this.getMediaFigure['isDrawStroke']},
-      fill_color(){ return this.getMediaFigure['fillColor']},
-      stroke_color(){ return this.getMediaFigure['strokeColor']},
-      global_alpha(){ return this.getMediaFigure['globalAlpha']},
+      ...mapGetters('mediaFigureFactory', ['getFigureData']),
+      degree(){ return this.getFigureData['degree'] },
+      is_draw_fill(){ return this.getFigureData['isDrawFill']},
+      is_draw_stroke(){ return this.getFigureData['isDrawStroke']},
+      fill_color(){ return this.getFigureData['fillColor']},
+      stroke_color(){ return this.getFigureData['strokeColor']},
+      global_alpha(){ return this.getFigureData['globalAlpha']},
       longerEdge(){ return this.canvas_length * 3/5 },
       width(){
-        const actual_width = Number(this.getMediaFigure['width']);
-        const actual_height = Number(this.getMediaFigure['height']);
+        const actual_width = Number(this.getFigureData['width']);
+        const actual_height = Number(this.getFigureData['height']);
         if(actual_width > actual_height){
           return this.longerEdge;
         } else {
@@ -94,8 +99,8 @@
         }
       },
       height(){
-        const actual_width = Number(this.getMediaFigure['width']);
-        const actual_height = Number(this.getMediaFigure['height']);
+        const actual_width = Number(this.getFigureData['width']);
+        const actual_height = Number(this.getFigureData['height']);
         if(actual_height > actual_width){
           return this.longerEdge;
         } else {
@@ -121,9 +126,14 @@
       },
     },
     methods : {
-      ...mapMutations('mediaFigure', ['updateMediaFigureObjectItem']),
+      ...mapMutations('mediaFigureFactory', ['updateFigureData']),
+      ...mapMutations('mediaFigures', ['addMediaFiguresObjectItem']),
       closeModal(){
         this.$emit('close-modal');
+      },
+      addMediaFigure(){
+        console.log('callled addMediaFigure');
+        this.addMediaFiguresObjectItem(this.getFigureData);
       },
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる
@@ -191,8 +201,8 @@
         }
         timer = setTimeout(function(){
           tmpThis.clear();
-          if(tmpThis.getMediaFigure['isDrawFill']){ tmpThis.fill(); };
-          if(tmpThis.getMediaFigure['isDrawStroke']){ tmpThis.stroke(); };
+          if(tmpThis.getFigureData['isDrawFill']){ tmpThis.fill(); };
+          if(tmpThis.getFigureData['isDrawStroke']){ tmpThis.stroke(); };
         },200);
       },
       clear(){
@@ -203,7 +213,7 @@
         let move_x = this.start_x + this.width/2;
         let move_y = this.start_y + this.height/2;
         this.pre_ctx.translate(move_x, move_y);
-        this.pre_ctx.rotate(this.getMediaFigure['degree']*Math.PI / 180);
+        this.pre_ctx.rotate(this.getFigureData['degree']*Math.PI / 180);
         this.pre_ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
       },
       createPathRect(){
@@ -219,9 +229,9 @@
         this.pre_ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.pre_ctx.closePath();
       },
-      setGlobalAlpha(){ this.pre_ctx.globalAlpha = this.getMediaFigure['globalAlpha']},
-      setFillColor(){this.pre_ctx.fillStyle = this.getMediaFigure['fillColor'];},
-      setStrokeColor(){this.pre_ctx.strokeStyle = this.getMediaFigure['strokeColor'];},
+      setGlobalAlpha(){ this.pre_ctx.globalAlpha = this.getFigureData['globalAlpha']},
+      setFillColor(){this.pre_ctx.fillStyle = this.getFigureData['fillColor'];},
+      setStrokeColor(){this.pre_ctx.strokeStyle = this.getFigureData['strokeColor'];},
       prepareDraw(){
         this.pre_ctx.save();
         this.setGlobalAlpha();
@@ -298,10 +308,25 @@
   top: 0px;
   right: 0px;
   z-index: 3;
-  margin-bottom: 10px;
   padding: 5px;
 }
 .close-icon:hover {
+  cursor: pointer;
+}
+
+.add-icon-wrapper {
+  display: inline-block;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 3;
+  padding: 5px;
+  color: darkorange;
+  background-color: white;
+  box-shadow: 1px 1px 5px grey;
+  border-radius: 15px;
+}
+.add-icon-wrapper:hover {
   cursor: pointer;
 }
 

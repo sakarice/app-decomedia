@@ -23,10 +23,10 @@ const mediaFigure = {
   },
   getters : {
     getIsInitializedFigure : function(state){ return state.isInitialized; },
-    getMediaFigure : function(state){ return state.mediaFigure; },
+    getFigureData : function(state){ return state.mediaFigure; },
   },
   mutations : {
-    updateMediaFigureObjectItem(state, {key, value}){state.mediaFigure[key] = value;},
+    updateFigureData(state, {key, value}){state.mediaFigure[key] = value;},
     updateIsInitializedFigure(state,payload){state.isInitialized = payload},
   },
   actions : {}

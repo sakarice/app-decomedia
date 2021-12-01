@@ -21,19 +21,19 @@
       }
     },
     computed : {
-      ...mapGetters('mediaFigure', ['getMediaFigure']),
+      ...mapGetters('mediaFigureFactory', ['getFigureData']),
       canvas_width:function(){ return this.window_width+"px" },
       canvas_height:function(){ return this.window_height+"px" },
-      x_position(){ return this.getMediaFigure['x_position'] },
-      y_position(){ return this.getMediaFigure['y_position'] },
-      degree(){ return this.getMediaFigure['degree'] },
-      figure_width(){ return this.getMediaFigure['width'] },
-      figure_height(){ return this.getMediaFigure['height'] },
-      is_draw_fill(){ return this.getMediaFigure['isDrawFill']},
-      is_draw_stroke(){ return this.getMediaFigure['isDrawStroke']},
-      fill_color(){ return this.getMediaFigure['fillColor']},
-      stroke_color(){ return this.getMediaFigure['strokeColor']},
-      global_alpha(){ return this.getMediaFigure['globalAlpha']},
+      x_position(){ return this.getFigureData['x_position'] },
+      y_position(){ return this.getFigureData['y_position'] },
+      degree(){ return this.getFigureData['degree'] },
+      figure_width(){ return this.getFigureData['width'] },
+      figure_height(){ return this.getFigureData['height'] },
+      is_draw_fill(){ return this.getFigureData['isDrawFill']},
+      is_draw_stroke(){ return this.getFigureData['isDrawStroke']},
+      fill_color(){ return this.getFigureData['fillColor']},
+      stroke_color(){ return this.getFigureData['strokeColor']},
+      global_alpha(){ return this.getFigureData['globalAlpha']},
     },
     watch : {
       figure_width(){ this.draw(); },
@@ -70,8 +70,8 @@
         }
         timer = setTimeout(function(){
           tmpThis.clear();
-          if(tmpThis.getMediaFigure['isDrawFill']){ tmpThis.fill(); };
-          if(tmpThis.getMediaFigure['isDrawStroke']){ tmpThis.stroke(); };
+          if(tmpThis.getFigureData['isDrawFill']){ tmpThis.fill(); };
+          if(tmpThis.getFigureData['isDrawStroke']){ tmpThis.stroke(); };
         },200);
       },
       clear(){
@@ -79,17 +79,17 @@
       },
       setDegree(){ 
         // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-        let move_x = Number(this.getMediaFigure['x_position']) + Number(this.getMediaFigure['width']/2);
-        let move_y = Number(this.getMediaFigure['y_position']) + Number(this.getMediaFigure['height']/2);
+        let move_x = Number(this.getFigureData['x_position']) + Number(this.getFigureData['width']/2);
+        let move_y = Number(this.getFigureData['y_position']) + Number(this.getFigureData['height']/2);
         this.ctx.translate(move_x, move_y);
-        this.ctx.rotate(this.getMediaFigure['degree']*Math.PI / 180);
+        this.ctx.rotate(this.getFigureData['degree']*Math.PI / 180);
         this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
       },
       createPathRect(){
-        const start_x = Number(this.getMediaFigure['x_position']);
-        const start_y = Number(this.getMediaFigure['y_position']);
-        const width = Number(this.getMediaFigure['width']);
-        const height = Number(this.getMediaFigure['height']);
+        const start_x = Number(this.getFigureData['x_position']);
+        const start_y = Number(this.getFigureData['y_position']);
+        const width = Number(this.getFigureData['width']);
+        const height = Number(this.getFigureData['height']);
 
         // 左上から半時計回りに、四角形の4頂点のポイントを指定
         const point1_left_upper  = {x: start_x,         y: start_y};
@@ -104,9 +104,9 @@
         this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.ctx.closePath();
       },
-      setGlobalAlpha(){ this.ctx.globalAlpha = this.getMediaFigure['globalAlpha']},
-      setFillColor(){this.ctx.fillStyle = this.getMediaFigure['fillColor'];},
-      setStrokeColor(){this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];},
+      setGlobalAlpha(){ this.ctx.globalAlpha = this.getFigureData['globalAlpha']},
+      setFillColor(){this.ctx.fillStyle = this.getFigureData['fillColor'];},
+      setStrokeColor(){this.ctx.strokeStyle = this.getFigureData['strokeColor'];},
       prepareDraw(){
         this.ctx.save();
         this.setGlobalAlpha();

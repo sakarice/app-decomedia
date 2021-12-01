@@ -2101,6 +2101,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2118,31 +2123,31 @@ function _defineProperty(obj, key, value) {
       "pre_ctx": ""
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
     degree: function degree() {
-      return this.getMediaFigure['degree'];
+      return this.getFigureData['degree'];
     },
     is_draw_fill: function is_draw_fill() {
-      return this.getMediaFigure['isDrawFill'];
+      return this.getFigureData['isDrawFill'];
     },
     is_draw_stroke: function is_draw_stroke() {
-      return this.getMediaFigure['isDrawStroke'];
+      return this.getFigureData['isDrawStroke'];
     },
     fill_color: function fill_color() {
-      return this.getMediaFigure['fillColor'];
+      return this.getFigureData['fillColor'];
     },
     stroke_color: function stroke_color() {
-      return this.getMediaFigure['strokeColor'];
+      return this.getFigureData['strokeColor'];
     },
     global_alpha: function global_alpha() {
-      return this.getMediaFigure['globalAlpha'];
+      return this.getFigureData['globalAlpha'];
     },
     longerEdge: function longerEdge() {
       return this.canvas_length * 3 / 5;
     },
     width: function width() {
-      var actual_width = Number(this.getMediaFigure['width']);
-      var actual_height = Number(this.getMediaFigure['height']);
+      var actual_width = Number(this.getFigureData['width']);
+      var actual_height = Number(this.getFigureData['height']);
 
       if (actual_width > actual_height) {
         return this.longerEdge;
@@ -2153,8 +2158,8 @@ function _defineProperty(obj, key, value) {
       }
     },
     height: function height() {
-      var actual_width = Number(this.getMediaFigure['width']);
-      var actual_height = Number(this.getMediaFigure['height']);
+      var actual_width = Number(this.getFigureData['width']);
+      var actual_height = Number(this.getFigureData['height']);
 
       if (actual_height > actual_width) {
         return this.longerEdge;
@@ -2198,9 +2203,13 @@ function _defineProperty(obj, key, value) {
       this.draw();
     }
   },
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigure', ['updateMediaFigureObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    addMediaFigure: function addMediaFigure() {
+      console.log('callled addMediaFigure');
+      this.addMediaFiguresObjectItem(this.getFigureData);
     },
     // 設定モーダル操作用
     // モーダルの初期表示位置をウィンドウ中央に持ってくる
@@ -2273,13 +2282,13 @@ function _defineProperty(obj, key, value) {
       timer = setTimeout(function () {
         tmpThis.clear();
 
-        if (tmpThis.getMediaFigure['isDrawFill']) {
+        if (tmpThis.getFigureData['isDrawFill']) {
           tmpThis.fill();
         }
 
         ;
 
-        if (tmpThis.getMediaFigure['isDrawStroke']) {
+        if (tmpThis.getFigureData['isDrawStroke']) {
           tmpThis.stroke();
         }
 
@@ -2294,7 +2303,7 @@ function _defineProperty(obj, key, value) {
       var move_x = this.start_x + this.width / 2;
       var move_y = this.start_y + this.height / 2;
       this.pre_ctx.translate(move_x, move_y);
-      this.pre_ctx.rotate(this.getMediaFigure['degree'] * Math.PI / 180);
+      this.pre_ctx.rotate(this.getFigureData['degree'] * Math.PI / 180);
       this.pre_ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
     },
     createPathRect: function createPathRect() {
@@ -2322,13 +2331,13 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.closePath();
     },
     setGlobalAlpha: function setGlobalAlpha() {
-      this.pre_ctx.globalAlpha = this.getMediaFigure['globalAlpha'];
+      this.pre_ctx.globalAlpha = this.getFigureData['globalAlpha'];
     },
     setFillColor: function setFillColor() {
-      this.pre_ctx.fillStyle = this.getMediaFigure['fillColor'];
+      this.pre_ctx.fillStyle = this.getFigureData['fillColor'];
     },
     setStrokeColor: function setStrokeColor() {
-      this.pre_ctx.strokeStyle = this.getMediaFigure['strokeColor'];
+      this.pre_ctx.strokeStyle = this.getFigureData['strokeColor'];
     },
     prepareDraw: function prepareDraw() {
       this.pre_ctx.save();
@@ -3217,7 +3226,7 @@ function _defineProperty(obj, key, value) {
       "dpr": 1
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
     canvas_width: function canvas_width() {
       return this.window_width + "px";
     },
@@ -3225,34 +3234,34 @@ function _defineProperty(obj, key, value) {
       return this.window_height + "px";
     },
     x_position: function x_position() {
-      return this.getMediaFigure['x_position'];
+      return this.getFigureData['x_position'];
     },
     y_position: function y_position() {
-      return this.getMediaFigure['y_position'];
+      return this.getFigureData['y_position'];
     },
     degree: function degree() {
-      return this.getMediaFigure['degree'];
+      return this.getFigureData['degree'];
     },
     figure_width: function figure_width() {
-      return this.getMediaFigure['width'];
+      return this.getFigureData['width'];
     },
     figure_height: function figure_height() {
-      return this.getMediaFigure['height'];
+      return this.getFigureData['height'];
     },
     is_draw_fill: function is_draw_fill() {
-      return this.getMediaFigure['isDrawFill'];
+      return this.getFigureData['isDrawFill'];
     },
     is_draw_stroke: function is_draw_stroke() {
-      return this.getMediaFigure['isDrawStroke'];
+      return this.getFigureData['isDrawStroke'];
     },
     fill_color: function fill_color() {
-      return this.getMediaFigure['fillColor'];
+      return this.getFigureData['fillColor'];
     },
     stroke_color: function stroke_color() {
-      return this.getMediaFigure['strokeColor'];
+      return this.getFigureData['strokeColor'];
     },
     global_alpha: function global_alpha() {
-      return this.getMediaFigure['globalAlpha'];
+      return this.getFigureData['globalAlpha'];
     }
   }),
   watch: {
@@ -3311,13 +3320,13 @@ function _defineProperty(obj, key, value) {
       timer = setTimeout(function () {
         tmpThis.clear();
 
-        if (tmpThis.getMediaFigure['isDrawFill']) {
+        if (tmpThis.getFigureData['isDrawFill']) {
           tmpThis.fill();
         }
 
         ;
 
-        if (tmpThis.getMediaFigure['isDrawStroke']) {
+        if (tmpThis.getFigureData['isDrawStroke']) {
           tmpThis.stroke();
         }
 
@@ -3329,17 +3338,17 @@ function _defineProperty(obj, key, value) {
     },
     setDegree: function setDegree() {
       // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-      var move_x = Number(this.getMediaFigure['x_position']) + Number(this.getMediaFigure['width'] / 2);
-      var move_y = Number(this.getMediaFigure['y_position']) + Number(this.getMediaFigure['height'] / 2);
+      var move_x = Number(this.getFigureData['x_position']) + Number(this.getFigureData['width'] / 2);
+      var move_y = Number(this.getFigureData['y_position']) + Number(this.getFigureData['height'] / 2);
       this.ctx.translate(move_x, move_y);
-      this.ctx.rotate(this.getMediaFigure['degree'] * Math.PI / 180);
+      this.ctx.rotate(this.getFigureData['degree'] * Math.PI / 180);
       this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
     },
     createPathRect: function createPathRect() {
-      var start_x = Number(this.getMediaFigure['x_position']);
-      var start_y = Number(this.getMediaFigure['y_position']);
-      var width = Number(this.getMediaFigure['width']);
-      var height = Number(this.getMediaFigure['height']); // 左上から半時計回りに、四角形の4頂点のポイントを指定
+      var start_x = Number(this.getFigureData['x_position']);
+      var start_y = Number(this.getFigureData['y_position']);
+      var width = Number(this.getFigureData['width']);
+      var height = Number(this.getFigureData['height']); // 左上から半時計回りに、四角形の4頂点のポイントを指定
 
       var point1_left_upper = {
         x: start_x,
@@ -3365,13 +3374,13 @@ function _defineProperty(obj, key, value) {
       this.ctx.closePath();
     },
     setGlobalAlpha: function setGlobalAlpha() {
-      this.ctx.globalAlpha = this.getMediaFigure['globalAlpha'];
+      this.ctx.globalAlpha = this.getFigureData['globalAlpha'];
     },
     setFillColor: function setFillColor() {
-      this.ctx.fillStyle = this.getMediaFigure['fillColor'];
+      this.ctx.fillStyle = this.getFigureData['fillColor'];
     },
     setStrokeColor: function setStrokeColor() {
-      this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];
+      this.ctx.strokeStyle = this.getFigureData['strokeColor'];
     },
     prepareDraw: function prepareDraw() {
       this.ctx.save();
@@ -4924,7 +4933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 400px;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  height: 83px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: black;\r\n  padding: 1px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  margin-bottom: 10px;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 400px;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  height: 83px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: black;\r\n  padding: 1px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  z-index: 3;\r\n  padding: 5px;\r\n  color: darkorange;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 5px grey;\r\n  border-radius: 15px;\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10639,6 +10648,19 @@ var render = function () {
             }),
           ]),
           _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "add-icon-wrapper",
+              on: {
+                click: function ($event) {
+                  return _vm.addMediaFigure()
+                },
+              },
+            },
+            [_c("i", { staticClass: "fas fa-plus fa-3x add-icon" })]
+          ),
+          _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "media-figure-settings" }, [
@@ -10647,10 +10669,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "number" },
-                domProps: { value: _vm.getMediaFigure["x_position"] },
+                domProps: { value: _vm.getFigureData["x_position"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "x_position",
                       value: $event.target.value,
                     })
@@ -10664,10 +10686,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "number" },
-                domProps: { value: _vm.getMediaFigure["y_position"] },
+                domProps: { value: _vm.getFigureData["y_position"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "y_position",
                       value: $event.target.value,
                     })
@@ -10681,10 +10703,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "number" },
-                domProps: { value: _vm.getMediaFigure["degree"] },
+                domProps: { value: _vm.getFigureData["degree"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "degree",
                       value: $event.target.value,
                     })
@@ -10698,10 +10720,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "number" },
-                domProps: { value: _vm.getMediaFigure["width"] },
+                domProps: { value: _vm.getFigureData["width"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "width",
                       value: $event.target.value,
                     })
@@ -10715,10 +10737,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "number" },
-                domProps: { value: _vm.getMediaFigure["height"] },
+                domProps: { value: _vm.getFigureData["height"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "height",
                       value: $event.target.value,
                     })
@@ -10732,10 +10754,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "checkbox" },
-                domProps: { value: _vm.getMediaFigure["isDrawFill"] },
+                domProps: { value: _vm.getFigureData["isDrawFill"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "isDrawFill",
                       value: $event.target.checked,
                     })
@@ -10747,10 +10769,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "color" },
-                domProps: { value: _vm.getMediaFigure["fillColor"] },
+                domProps: { value: _vm.getFigureData["fillColor"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "fillColor",
                       value: $event.target.value,
                     })
@@ -10764,10 +10786,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "checkbox" },
-                domProps: { value: _vm.getMediaFigure["isDrawStroke"] },
+                domProps: { value: _vm.getFigureData["isDrawStroke"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "isDrawStroke",
                       value: $event.target.checked,
                     })
@@ -10779,10 +10801,10 @@ var render = function () {
               _vm._v(" "),
               _c("input", {
                 attrs: { type: "color" },
-                domProps: { value: _vm.getMediaFigure["strokeColor"] },
+                domProps: { value: _vm.getFigureData["strokeColor"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "strokeColor",
                       value: $event.target.value,
                     })
@@ -10803,10 +10825,10 @@ var render = function () {
                   max: "1",
                   step: "0.05",
                 },
-                domProps: { value: _vm.getMediaFigure["globalAlpha"] },
+                domProps: { value: _vm.getFigureData["globalAlpha"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaFigureObjectItem({
+                    return _vm.updateFigureData({
                       key: "globalAlpha",
                       value: $event.target.value,
                     })

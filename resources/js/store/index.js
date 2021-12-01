@@ -7,7 +7,8 @@ import mediaImg from './modules/mediaImg.js';
 import mediaAudios from './modules/mediaAudios.js';
 import mediaMovie from './modules/mediaMovie.js';
 import mediaSetting from './modules/mediaSetting.js';
-import mediaFigure from './modules/mediaFigure.js';
+import mediaFigureFactory from './modules/mediaFigureFactory.js';
+import mediaFigures from './modules/mediaFigures.js';
 
 Vue.use(Vuex);
 
@@ -19,7 +20,8 @@ const store = new Vuex.Store({
     mediaAudios,
     mediaMovie,
     mediaSetting,
-    mediaFigure,
+    mediaFigureFactory,
+    mediaFigures,
   }
 
 });
