@@ -6,10 +6,6 @@
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
-    <media-figure></media-figure>
-    <media-figure-setting></media-figure-setting>
-
-
     <!-- Media画像コンポーネント -->
     <media-img
     ref="mediaImg">
@@ -55,11 +51,15 @@
         </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
         </router-view>
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
+        </router-view>
+        <!-- 図形設定 -->
+        <router-view name="dispFigureSettingModal"
+        v-on:show-modal="showModal">
         </router-view>
 
       </div>
@@ -94,6 +94,14 @@
     v-on:close-modal="closeModal"
     :transitionName="transitionName">
     </router-view>
+
+    <!-- 図形設定コンポーネント -->
+    <media-figure-setting
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </media-figure-setting>
+    <media-figure></media-figure>
+
 
     <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
@@ -146,6 +154,7 @@ export default {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
+        'figureSettingModal' : false,
         'mediaSettingModal' : false,
       },
       autoPlay : true,

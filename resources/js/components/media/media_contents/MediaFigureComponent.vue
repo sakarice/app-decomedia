@@ -109,6 +109,7 @@
       setStrokeColor(){this.ctx.strokeStyle = this.getMediaFigure['strokeColor'];},
       fill(){
         this.ctx.save();
+        this.setGlobalAlpha();
         this.setFillColor();
         this.setDegree();
         this.createPathRect();
@@ -117,6 +118,7 @@
       },
       stroke(){
         this.ctx.save();
+        this.setGlobalAlpha();
         this.setStrokeColor();
         this.setDegree();
         this.createPathRect();

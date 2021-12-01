@@ -13,6 +13,7 @@ import DispImgModal from '../components/media/change_display_parts/DispImgModalC
 import DispAudioModal from '../components/media/change_display_parts/DispAudioModalComponent.vue';
 import DispMovieModal from '../components/media/change_display_parts/DispMovieModalComponent.vue';
 import DispMediaSettingModal from '../components/media/change_display_parts/DispMediaSettingModalComponent.vue';
+import DispFigureSettingModal from '../components/media/change_display_parts/DispFigureSettingModalComponent.vue';
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
@@ -40,6 +41,7 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
@@ -57,6 +59,7 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,

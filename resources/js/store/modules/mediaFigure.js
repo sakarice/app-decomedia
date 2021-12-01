@@ -16,9 +16,9 @@ const mediaFigure = {
       globalAlpha : 1,
       layer : 0,
       isDrawFill : false,
-      fillColor : "red",
+      fillColor : "black",
       isDrawStroke : true,
-      strokeColor : "blue",
+      strokeColor : "grey",
     },
   },
   getters : {
