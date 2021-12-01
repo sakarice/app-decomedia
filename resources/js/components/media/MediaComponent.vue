@@ -96,11 +96,19 @@
     </router-view>
 
     <!-- 図形設定コンポーネント -->
+    <ul class="figures-wrapper">
+      <li class="figure-list-item" :id="index" v-for="(mediaFigure, index) in this.getMediaFigures" :key="index">
+        <media-figure
+        :index="index">
+        </media-figure>
+      </li>
+    </ul>
+
     <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </media-figure-setting>
-    <media-figure></media-figure>
+
 
 
     <div v-show="getIsCrudDoing">
@@ -174,6 +182,8 @@ export default {
     ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
     ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
+    ...mapGetters('mediaFigures', ['getMediaFigures']),
+
 
     waitingMsg:function(){
       if(this.getMode==1){
@@ -325,7 +335,9 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-
+  .figures-wrapper {
+    list-style: none;
+  }
 
   #disp-media-owner-modal-wrapper {
     color: white;

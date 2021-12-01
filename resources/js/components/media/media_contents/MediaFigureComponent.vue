@@ -54,7 +54,7 @@
       setContext(){
         console.log('start setContext');
         this.canvas = document.getElementById('canvas');
-        this.ctx = canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d');
       },
       resizeCanvas(){
         this.window_width = window.innerWidth;
