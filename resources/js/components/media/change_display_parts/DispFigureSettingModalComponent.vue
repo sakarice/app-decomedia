@@ -18,7 +18,7 @@
 <style scoped>
 
   #disp-figure-setting-modal-wrapper {
-    color: blue;
+    color: skyblue;
   }
 
   .icon-wrapper {

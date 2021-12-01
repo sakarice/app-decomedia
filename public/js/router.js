@@ -2095,18 +2095,58 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
-    return {};
+    return {
+      "move_target": "",
+      "x_in_element": 0,
+      // クリックカーソルの要素内における相対位置(x座標)
+      "y_in_element": 0 // 〃↑のy座標
+
+    };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigure', ['getMediaFigure'])),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigure', ['updateMediaFigureObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    mouseDown: function mouseDown(e) {
+      var event;
+
+      if (e.type === "mousedown") {
+        event = e;
+      } else {
+        event = e.changedTouches[0];
+      }
+
+      this.move_target = document.getElementById('media-figure-setting-wrapper');
+      this.x_in_element = event.clientX - event.target.offsetLeft;
+      this.y_in_element = event.clientY - event.target.offsetTop; // ムーブイベントにコールバック
+
+      document.body.addEventListener("mousemove", this.mouseMove, false);
+      document.body.addEventListener("touchmove", this.mouseMove, false);
+    },
+    mouseMove: function mouseMove(e) {
+      e.preventDefault();
+      this.move_target.style.left = e.clientX - this.x_in_element + "px";
+      this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
+
+      this.move_target.addEventListener("mouseup", this.mouseUp, false);
+      document.body.addEventListener("mouseleave", this.mouseUp, false);
+      this.move_target.addEventListener("touchend", this.mouseUp, false);
+      document.body.addEventListener("touchleave", this.mouseUp, false);
+    },
+    mouseUp: function mouseUp() {
+      document.body.removeEventListener("mousemove", this.mouseMove, false);
+      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
+      document.body.removeEventListener("touchmove", this.mouseMove, false);
+      this.move_target.removeEventListener("touchend", this.mouseUp, false);
     }
   }),
   created: function created() {},
@@ -4538,7 +4578,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#disp-figure-setting-modal-wrapper[data-v-19872b35] {\n  color: blue;\n}\n.icon-wrapper[data-v-19872b35] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#disp-figure-setting-modal-wrapper[data-v-19872b35] {\n  color: skyblue;\n}\n.icon-wrapper[data-v-19872b35] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -4682,7 +4722,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  bottom: 20%;\r\n  left: 50%;\r\n  z-index: 30;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 30px;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: flex-end;\r\n  margin-bottom: 10px;\r\n  padding: 10px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10358,193 +10398,223 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "media-figure-setting-wrapper" } }, [
-    _c("div", { staticClass: "close-icon-wrapper" }, [
-      _c("i", {
-        staticClass: "fas fa-times fa-2x close-icon",
-        on: {
-          click: function ($event) {
-            return _vm.closeModal()
+  return _c(
+    "div",
+    {
+      attrs: { id: "media-figure-setting-wrapper" },
+      on: {
+        mousedown: function ($event) {
+          return _vm.mouseDown($event)
+        },
+        touchstart: function ($event) {
+          return _vm.mouseDown($event)
+        },
+      },
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "item-frame",
+          on: {
+            mousedown: function ($event) {
+              $event.stopPropagation()
+            },
+            mouseup: function ($event) {
+              $event.stopPropagation()
+            },
           },
         },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "media-figure-settings" }, [
-      _c("div", { staticClass: "x_position-wrapper" }, [
-        _c("span", [_vm._v("x軸位置:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "number" },
-          domProps: { value: _vm.getMediaFigure["x_position"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "x_position",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "y_position-wrapper" }, [
-        _c("span", [_vm._v("y軸位置:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "number" },
-          domProps: { value: _vm.getMediaFigure["y_position"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "y_position",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "degree-wrapper" }, [
-        _c("span", [_vm._v("回転:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "number" },
-          domProps: { value: _vm.getMediaFigure["degree"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "degree",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "width-input-wrapper" }, [
-        _c("span", [_vm._v("横幅:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "number" },
-          domProps: { value: _vm.getMediaFigure["width"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "width",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "height-input-wrapper" }, [
-        _c("span", [_vm._v("縦幅:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "number" },
-          domProps: { value: _vm.getMediaFigure["height"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "height",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "fill-input-wrapper" }, [
-        _c("span", [_vm._v("塗りつぶし")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox" },
-          domProps: { value: _vm.getMediaFigure["isDrawFill"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "isDrawFill",
-                value: $event.target.checked,
-              })
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v("色:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "color" },
-          domProps: { value: _vm.getMediaFigure["fillColor"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "fillColor",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "stroke-input-wrapper" }, [
-        _c("span", [_vm._v("枠線")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "checkbox" },
-          domProps: { value: _vm.getMediaFigure["isDrawStroke"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "isDrawStroke",
-                value: $event.target.checked,
-              })
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v("色:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: { type: "color" },
-          domProps: { value: _vm.getMediaFigure["strokeColor"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "strokeColor",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "opacity-input-wrapper" }, [
-        _c("span", [_vm._v("透過度:")]),
-        _vm._v(" "),
-        _c("input", {
-          attrs: {
-            type: "range",
-            name: "opacity",
-            id: "",
-            min: "0",
-            max: "1",
-            step: "0.05",
-          },
-          domProps: { value: _vm.getMediaFigure["globalAlpha"] },
-          on: {
-            input: function ($event) {
-              return _vm.updateMediaFigureObjectItem({
-                key: "globalAlpha",
-                value: $event.target.value,
-              })
-            },
-          },
-        }),
-      ]),
-    ]),
-  ])
+        [
+          _c("div", { staticClass: "close-icon-wrapper" }, [
+            _c("i", {
+              staticClass: "fas fa-times fa-2x close-icon",
+              on: {
+                click: function ($event) {
+                  return _vm.closeModal()
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "media-figure-settings" }, [
+            _c("div", { staticClass: "x_position-wrapper" }, [
+              _c("span", [_vm._v("x軸位置:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number" },
+                domProps: { value: _vm.getMediaFigure["x_position"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "x_position",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "y_position-wrapper" }, [
+              _c("span", [_vm._v("y軸位置:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number" },
+                domProps: { value: _vm.getMediaFigure["y_position"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "y_position",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "degree-wrapper" }, [
+              _c("span", [_vm._v("回転:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number" },
+                domProps: { value: _vm.getMediaFigure["degree"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "degree",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "width-input-wrapper" }, [
+              _c("span", [_vm._v("横幅:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number" },
+                domProps: { value: _vm.getMediaFigure["width"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "width",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "height-input-wrapper" }, [
+              _c("span", [_vm._v("縦幅:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "number" },
+                domProps: { value: _vm.getMediaFigure["height"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "height",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "fill-input-wrapper" }, [
+              _c("span", [_vm._v("塗りつぶし")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "checkbox" },
+                domProps: { value: _vm.getMediaFigure["isDrawFill"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "isDrawFill",
+                      value: $event.target.checked,
+                    })
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("色:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "color" },
+                domProps: { value: _vm.getMediaFigure["fillColor"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "fillColor",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "stroke-input-wrapper" }, [
+              _c("span", [_vm._v("枠線")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "checkbox" },
+                domProps: { value: _vm.getMediaFigure["isDrawStroke"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "isDrawStroke",
+                      value: $event.target.checked,
+                    })
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("span", [_vm._v("色:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "color" },
+                domProps: { value: _vm.getMediaFigure["strokeColor"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "strokeColor",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "opacity-input-wrapper" }, [
+              _c("span", [_vm._v("透過度:")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: {
+                  type: "range",
+                  name: "opacity",
+                  id: "",
+                  min: "0",
+                  max: "1",
+                  step: "0.05",
+                },
+                domProps: { value: _vm.getMediaFigure["globalAlpha"] },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateMediaFigureObjectItem({
+                      key: "globalAlpha",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              }),
+            ]),
+          ]),
+        ]
+      ),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
