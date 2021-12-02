@@ -8,7 +8,7 @@
       </div>
       <!-- 図形追加アイコン -->
       <div class="add-icon-wrapper" @mousedown.stop @click="addMediaFigure()">
-        <i class="fas fa-plus fa-lg add-icon"></i>
+        <i class="fas fa-plus fa-2x add-icon"></i>
         <span class="add-text">追加</span>
       </div>
 
@@ -288,11 +288,12 @@
   left: 50%;
   top: 50%;
   z-index: 30;
-  width: 350px;
-  height: 425px;
-  padding: 20px;
-  background-color: slategrey;
-  border-radius: 3px;
+  width: 300px;
+  height: 407px;
+  padding: 5px;
+  background-color: rgba(35,40,50,0.85);
+  color: white;
+  border-radius: 6px;
   box-shadow: 1px 1px 10px rgba(220,220,220,1);
 }
 #media-figure-setting-wrapper:hover{
@@ -300,7 +301,7 @@
 }
 
 .item-frame {
-  background-color: rgba(240,240,250,1);
+  /* background-color: rgba(240,240,250,1); */
 }
 .item-frame:hover{
   cursor: all-scroll;
@@ -313,7 +314,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px 0px;
+  padding: 10px 0px;
   margin-bottom: 5px;
 }
 
@@ -324,7 +325,7 @@
 }
 #pre-canvas:hover{
   cursor: pointer;
-  outline: 1px solid orange;
+  outline: 2px solid orange;
 }
 
 .close-icon-wrapper {
@@ -342,8 +343,8 @@
 .add-icon-wrapper {
   display: inline-block;
   position: absolute;
-  top: 100px;
-  left: 190px;
+  top: 80px;
+  left: 160px;
   z-index: 3;
   padding: 0px 4px;
   color: darkorange;
