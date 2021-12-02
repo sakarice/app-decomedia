@@ -42,12 +42,15 @@
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
       },
-      // setPosition(){
-      //   console.log(this.x_position);
-      //   const target = document.getElementById('figure-area');
-      //   target.style.left = this.x_position;
-      //   target.style.top = this.y_position;
-      // },
+      setPosition(){
+        const target = document.getElementById(this.canvas_with_index);
+        console.log(target);
+        console.log('rotate('+ this.degree +'deg)');
+        target.style.left = this.x_position + 'px';
+        target.style.top = this.y_position + 'px';
+        target.style.transform = 'rotate('+ this.degree +'deg)';
+        // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
+      },
       setFigureData(){
         const figureData = this.getOneFigure(this.index);
         this.x_position = Number(figureData['x_position']);
@@ -132,7 +135,7 @@
       this.setFigureData();
     },
     mounted(){
-      // this.setPosition();
+      this.setPosition();
       this.setContext();
       this.setCanvasSize();
       this.setGlobalAlpha();
@@ -149,18 +152,14 @@
 
 <style scoped>
 
-#media-figure-wrapper {
-  /* position: relative; */
-  /* width: 100%;
-  height: 100%; */
-}
 .canvas_area {
   position: absolute;
-  top: 0;
-  left: 0;
   display: block;
   /* width: 100vw;
   height: 100vh; */
+}
+.canvas_area:hover{
+  cursor: pointer;
 }
 
 

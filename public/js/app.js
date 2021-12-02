@@ -6811,12 +6811,14 @@ function _defineProperty(obj, key, value) {
       this.setTargetObjectIndex(index);
       return this.getMediaFigure;
     },
-    // setPosition(){
-    //   console.log(this.x_position);
-    //   const target = document.getElementById('figure-area');
-    //   target.style.left = this.x_position;
-    //   target.style.top = this.y_position;
-    // },
+    setPosition: function setPosition() {
+      var target = document.getElementById(this.canvas_with_index);
+      console.log(target);
+      console.log('rotate(' + this.degree + 'deg)');
+      target.style.left = this.x_position + 'px';
+      target.style.top = this.y_position + 'px';
+      target.style.transform = 'rotate(' + this.degree + 'deg)'; // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
+    },
     setFigureData: function setFigureData() {
       var figureData = this.getOneFigure(this.index);
       this.x_position = Number(figureData['x_position']);
@@ -6925,7 +6927,7 @@ function _defineProperty(obj, key, value) {
     this.setFigureData();
   },
   mounted: function mounted() {
-    // this.setPosition();
+    this.setPosition();
     this.setContext();
     this.setCanvasSize();
     this.setGlobalAlpha();
@@ -7017,6 +7019,13 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7034,12 +7043,11 @@ function _defineProperty(obj, key, value) {
   methods: {
     // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
     figureListCSSProperty: function figureListCSSProperty(figure) {
-      return {
-        left: figure['x_position'] + 'px',
-        top: figure['y_position'] + 'px',
-        width: figure['width'] + 'px',
-        height: figure['height'] + 'px',
-        transform: 'rotate(' + figure['degree'] + 'deg)'
+      return {// left:figure['x_position']+'px'
+        // ,top:figure['y_position']+'px'
+        // ,width:figure['width']+'px'
+        // ,height:figure['height']+'px'
+        // ,transform:'rotate('+ figure['degree'] +'deg)'
       };
     }
   },
@@ -14643,7 +14651,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-wrapper[data-v-29e92a69] {\r\n  /* position: relative; */\r\n  /* width: 100%;\r\n  height: 100%; */\n}\n.canvas_area[data-v-29e92a69] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_area[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: pointer;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14667,7 +14675,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.figures-wrapper[data-v-5d74340a] {\n  list-style: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width : 100vw;\n  height: 100vh;\n}\n.figure-list-item[data-v-5d74340a] {\n  position: absolute;\n}\n.figure-list-item[data-v-5d74340a]:hover {\n  cursor: pointer;\n}\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .figures-wrapper {\n  list-style: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width : 100vw;\n  height: 100vh;\n} */\n.figures-wrapper[data-v-5d74340a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n}\n\n/* .figure-list-item {\n  position: absolute;\n}\n.figure-list-item:hover {\n  cursor: pointer;\n} */\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62539,22 +62547,12 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "ul",
+    "div",
     { staticClass: "figures-wrapper" },
     _vm._l(this.getMediaFigures, function (figure, index) {
-      return _c(
-        "li",
-        {
-          key: index,
-          staticClass: "figure-list-item",
-          style: _vm.figureListCSSProperty(figure),
-          attrs: { id: index },
-        },
-        [_c("media-figure", { attrs: { index: index } })],
-        1
-      )
+      return _c("media-figure", { key: index, attrs: { index: index } })
     }),
-    0
+    1
   )
 }
 var staticRenderFns = []
