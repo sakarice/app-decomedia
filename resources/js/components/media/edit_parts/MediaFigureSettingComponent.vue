@@ -4,16 +4,17 @@
     <div class="item-frame" @mousedown.stop @mouseup.stop>
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper">
-        <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
+        <i class="fas fa-times fa-3x close-icon" @click="closeModal()"></i>
       </div>
       <!-- 図形追加アイコン -->
       <div class="add-icon-wrapper" @click="addMediaFigure()">
-        <i class="fas fa-plus fa-3x add-icon"></i>
+        <i class="fas fa-plus fa-lg add-icon"></i>
+        <span class="add-text">追加</span>
       </div>
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
-        <canvas id="pre-canvas"></canvas>
+        <canvas id="pre-canvas" @click="addMediaFigure()"></canvas>
       </div>
       <!-- 図形設定 -->
       <div class="media-figure-settings">
@@ -272,9 +273,10 @@
   top: 50%;
   z-index: 30;
   width: 350px;
-  height: 400px;
+  height: 415px;
   padding: 20px;
-  background-color: rgba(245,245,245,1);
+  background-color: slategrey;
+  border-radius: 3px;
   box-shadow: 1px 1px 10px rgba(220,220,220,1);
 }
 #media-figure-setting-wrapper:hover{
@@ -282,7 +284,7 @@
 }
 
 .item-frame {
-  background-color: rgba(250,250,255,1);
+  background-color: rgba(240,240,250,1);
 }
 .item-frame:hover{
   cursor:auto;
@@ -292,16 +294,20 @@
 }
 
 .figure-preview-wrapper{
-  height: 83px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: black;
-  padding: 1px;
+  padding: 5px 0px;
 }
 
 #pre-canvas {
   background-color: white;
+  border-radius: 50%;
+  padding: 4px;
+}
+#pre-canvas:hover{
+  cursor: pointer;
+  outline: 1px solid orange;
 }
 
 .close-icon-wrapper {
@@ -319,17 +325,22 @@
 .add-icon-wrapper {
   display: inline-block;
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  top: 100px;
+  left: 190px;
   z-index: 3;
-  padding: 5px;
+  padding: 0px 4px;
   color: darkorange;
-  background-color: white;
-  box-shadow: 1px 1px 5px grey;
-  border-radius: 15px;
+  /* background-color: rgba(255,255,255,0.1);
+  box-shadow: 1px 1px 3px lightslategrey;
+  border-radius: 4px; */
 }
 .add-icon-wrapper:hover {
   cursor: pointer;
+  /* outline: 1px solid orange; */
+}
+.add-text {
+  font-size: 11px;
+  margin-left: 2px;
 }
 
 

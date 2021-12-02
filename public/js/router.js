@@ -2114,6 +2114,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -5014,7 +5015,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 400px;\r\n  padding: 20px;\r\n  background-color: rgba(245,245,245,1);\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(250,250,255,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  height: 83px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  background-color: black;\r\n  padding: 1px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  z-index: 3;\r\n  padding: 5px;\r\n  color: darkorange;\r\n  background-color: white;\r\n  box-shadow: 1px 1px 5px grey;\r\n  border-radius: 15px;\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 415px;\r\n  padding: 20px;\r\n  background-color: slategrey;\r\n  border-radius: 3px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(240,240,250,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 25px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 1px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 100px;\r\n  left: 190px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10855,7 +10856,7 @@ var render = function () {
         [
           _c("div", { staticClass: "close-icon-wrapper" }, [
             _c("i", {
-              staticClass: "fas fa-times fa-2x close-icon",
+              staticClass: "fas fa-times fa-3x close-icon",
               on: {
                 click: function ($event) {
                   return _vm.closeModal()
@@ -10874,10 +10875,23 @@ var render = function () {
                 },
               },
             },
-            [_c("i", { staticClass: "fas fa-plus fa-3x add-icon" })]
+            [
+              _c("i", { staticClass: "fas fa-plus fa-lg add-icon" }),
+              _vm._v(" "),
+              _c("span", { staticClass: "add-text" }, [_vm._v("追加")]),
+            ]
           ),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "figure-preview-wrapper" }, [
+            _c("canvas", {
+              attrs: { id: "pre-canvas" },
+              on: {
+                click: function ($event) {
+                  return _vm.addMediaFigure()
+                },
+              },
+            }),
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "media-figure-settings" }, [
             _c("div", { staticClass: "x_position-wrapper" }, [
@@ -11058,16 +11072,7 @@ var render = function () {
     ]
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "figure-preview-wrapper" }, [
-      _c("canvas", { attrs: { id: "pre-canvas" } }),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
