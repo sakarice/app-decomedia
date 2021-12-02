@@ -1,8 +1,8 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-wrapper">
-    <canvas id="canvas" class="canvas_area"></canvas>
-  </div>
+  <!-- <div id="media-figure-wrapper"> -->
+  <canvas :id="canvas_with_index" class="canvas_area"></canvas>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -17,85 +17,95 @@
         "ctx" : "",
         "window_width" : 400,
         "window_height" : 400,
-        "dpr" : 1,
+        "x_position" : 0,
+        "y_position" : 0, 
+        "degree" : 0, 
+        "figure_width" : 0, 
+        "figure_height" : 0, 
+        "is_draw_fill" : false, 
+        "is_draw_stroke" : false,
+        "fill_color" : "",
+        "stroke_color" : "", 
+        "global_alpha" : 0, 
       }
     },
     computed : {
-      ...mapGetters('mediaFigureFactory', ['getFigureData']),
+      ...mapGetters('mediaFigures', ['getMediaFigure']),
       canvas_width:function(){ return this.window_width+"px" },
       canvas_height:function(){ return this.window_height+"px" },
-      x_position(){ return this.getFigureData['x_position'] },
-      y_position(){ return this.getFigureData['y_position'] },
-      degree(){ return this.getFigureData['degree'] },
-      figure_width(){ return this.getFigureData['width'] },
-      figure_height(){ return this.getFigureData['height'] },
-      is_draw_fill(){ return this.getFigureData['isDrawFill']},
-      is_draw_stroke(){ return this.getFigureData['isDrawStroke']},
-      fill_color(){ return this.getFigureData['fillColor']},
-      stroke_color(){ return this.getFigureData['strokeColor']},
-      global_alpha(){ return this.getFigureData['globalAlpha']},
+      canvas_with_index:function(){ return 'canvas'+this.index; }
     },
-    watch : {
-      figure_width(){ this.draw(); },
-      figure_height(){ this.draw(); },
-      x_position(){ this.draw(); },
-      y_position(){ this.draw(); },
-      degree(){ this.draw(); },
-      is_draw_fill(){ this.draw(); },
-      is_draw_stroke(){ this.draw(); },
-      fill_color(){ this.draw(); },
-      stroke_color(){ this.draw() },
-      global_alpha(){ 
-        this.setGlobalAlpha();
-        this.draw() 
-      },
-    },
+    watch : {},
     methods : {
+      ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+      getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
+        this.setTargetObjectIndex(index);
+        return this.getMediaFigure;
+      },
+      // setPosition(){
+      //   console.log(this.x_position);
+      //   const target = document.getElementById('figure-area');
+      //   target.style.left = this.x_position;
+      //   target.style.top = this.y_position;
+      // },
+      setFigureData(){
+        const figureData = this.getOneFigure(this.index);
+        this.x_position = Number(figureData['x_position']);
+        this.y_position = Number(figureData['y_position']);
+        this.degree = Number(figureData['degree']);
+        this.figure_width = Number(figureData['width']);
+        this.figure_height = Number(figureData['height']);
+        this.is_draw_fill = figureData['isDrawFill'];
+        this.is_draw_stroke = figureData['isDrawStroke'];
+        this.fill_color = figureData['fillColor'];
+        this.stroke_color = figureData['strokeColor'];
+        this.global_alpha = figureData['globalAlpha'];
+      },
       setContext(){
-        console.log('start setContext');
-        this.canvas = document.getElementById('canvas');
+        this.canvas = document.getElementById(this.canvas_with_index);
+        console.log(this.canvas);
         this.ctx = this.canvas.getContext('2d');
       },
-      resizeCanvas(){
-        this.window_width = window.innerWidth;
-        this.window_height = window.innerHeight;
+      setCanvasSize(){
+        this.window_width = this.figure_width;
+        // this.window_width = window.innerWidth;
+        this.window_height = this.figure_height;
+        // this.window_height = window.innerHeight;
         this.canvas.width = this.window_width;
         this.canvas.height = this.window_height;
       },
+      setDegree(){ 
+        // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
+        let move_x = this.figure_width/2;
+        let move_y = this.figure_height/2;
+        this.ctx.translate(move_x, move_y);
+        this.ctx.rotate(this.degree * Math.PI / 180);
+        this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+      },
       draw(){
-        let timer = "";
-        let tmpThis = this;
-        if(timer){
-          clearTimeout(timer);
-        }
-        timer = setTimeout(function(){
-          tmpThis.clear();
-          if(tmpThis.getFigureData['isDrawFill']){ tmpThis.fill(); };
-          if(tmpThis.getFigureData['isDrawStroke']){ tmpThis.stroke(); };
-        },200);
+        this.clear();
+        console.log('start draw');
+        if(this.is_draw_fill){ this.fill(); };
+        if(this.is_draw_stroke){ this.stroke(); };
       },
       clear(){
         this.ctx.clearRect(0,0,this.window_width,this.window_height);
       },
-      setDegree(){ 
-        // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-        let move_x = Number(this.getFigureData['x_position']) + Number(this.getFigureData['width']/2);
-        let move_y = Number(this.getFigureData['y_position']) + Number(this.getFigureData['height']/2);
-        this.ctx.translate(move_x, move_y);
-        this.ctx.rotate(this.getFigureData['degree']*Math.PI / 180);
-        this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
-      },
       createPathRect(){
-        const start_x = Number(this.getFigureData['x_position']);
-        const start_y = Number(this.getFigureData['y_position']);
-        const width = Number(this.getFigureData['width']);
-        const height = Number(this.getFigureData['height']);
+        // const start_x = this.x_position;
+        // const start_y = this.y_position;
+        const width = this.figure_width;
+        const height = this.figure_height;
 
         // 左上から半時計回りに、四角形の4頂点のポイントを指定
-        const point1_left_upper  = {x: start_x,         y: start_y};
-        const point2_left_under  = {x: start_x ,        y: start_y + height};
-        const point3_right_under = {x: start_x + width, y: start_y + height};
-        const point4_right_upper = {x: start_x + width, y: start_y};
+        // const point1_left_upper  = {x: start_x,         y: start_y};
+        // const point2_left_under  = {x: start_x ,        y: start_y + height};
+        // const point3_right_under = {x: start_x + width, y: start_y + height};
+        // const point4_right_upper = {x: start_x + width, y: start_y};
+        const point1_left_upper  = {x: 0,         y: 0};
+        const point2_left_under  = {x: 0 ,        y: 0 + height};
+        const point3_right_under = {x: 0 + width, y: 0 + height};
+        const point4_right_upper = {x: 0 + width, y: 0};
 
         this.ctx.beginPath();
         this.ctx.moveTo(point1_left_upper['x'],  point1_left_upper['y']);
@@ -104,48 +114,33 @@
         this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.ctx.closePath();
       },
-      setGlobalAlpha(){ this.ctx.globalAlpha = this.getFigureData['globalAlpha']},
-      setFillColor(){this.ctx.fillStyle = this.getFigureData['fillColor'];},
-      setStrokeColor(){this.ctx.strokeStyle = this.getFigureData['strokeColor'];},
-      prepareDraw(){
-        this.ctx.save();
-        this.setGlobalAlpha();
-        this.setStrokeColor();
-        this.setFillColor();
-        this.setDegree();
-        this.createPathRect();
-      },
+      setGlobalAlpha(){ this.ctx.globalAlpha = this.global_alpha;},
+      setStrokeColor(){this.ctx.strokeStyle = this.stroke_color;},
+      setFillColor(){this.ctx.fillStyle = this.fill_color;},
       fill(){
-        this.prepareDraw();
+        this.ctx.save();
         this.ctx.fill();
-        this.ctx.restore();
+        // this.ctx.restore();
       },
       stroke(){
-        this.prepareDraw();
+        this.ctx.save();
         this.ctx.stroke();
-        this.ctx.restore();
+        // this.ctx.restore();
       }
     },
     created(){
-      this.dpr = window.devicePixelRatio || 1;
+      this.setFigureData();
     },
     mounted(){
+      // this.setPosition();
       this.setContext();
-      this.resizeCanvas();
+      this.setCanvasSize();
+      this.setGlobalAlpha();
+      this.setStrokeColor();
+      this.setFillColor();
+      // this.setDegree();
+      this.createPathRect();
       this.draw();
-
-      let timer = "";
-      let tmpThis = this;
-      window.onresize = function(){
-        if(timer){
-          clearTimeout(timer);  
-        }
-        timer = setTimeout(function(){
-          tmpThis.resizeCanvas();
-          tmpThis.draw();
-          console.log('window size changed');
-        },200);
-      }
 
     },
   }
@@ -153,12 +148,16 @@
 </script>
 
 <style scoped>
+
 #media-figure-wrapper {
+  /* position: relative; */
+  /* width: 100%;
+  height: 100%; */
+}
+.canvas_area {
   position: absolute;
   top: 0;
   left: 0;
-}
-.canvas_area {
   display: block;
   /* width: 100vw;
   height: 100vh; */

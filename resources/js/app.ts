@@ -85,6 +85,7 @@ Vue.component('cancel-button-component', require('./components/media/action_part
 
 // media図形コンポーネント
 Vue.component('media-figure-component', require('./components/media/media_contents/MediaFigureComponent.vue').default);
+Vue.component('media-figure-mng-component', require('./components/media/media_contents/MediaFigureMngComponent.vue').default);
 
 
 // mediaリスト作成用コンポーネント

@@ -19,10 +19,12 @@ const mediaFigure = {
       // fillColor : "black",
       // isDrawStroke : true,
       // strokeColor : "grey",
+    targetObjectIndex : 0,
   },
   getters : {
     getIsInitializedFigures : function(state){ return state.isInitialized; },
     getMediaFigures : function(state){ return state.mediaFigures; },
+    getMediaFigure : function(state){ return state.mediaFigures[state.targetObjectIndex]; },
   },
   mutations : {
     deleteMediaFiguresObjectItem(state, payload){
@@ -32,7 +34,8 @@ const mediaFigure = {
       state.mediaFigures.push(payload);
     },
     updateIsInitializedFigures(state,payload){state.isInitialized = payload},
-    updateMediaFiguresObjectItem(state, {index, key, value}){state.mediaFigures[index][key] = value;},
+    updateMediaFiguresObjectItem(state, {index, key, value}){state.mediaFigures[index][key] = value },
+    setTargetObjectIndex(state, payload){ state.targetObjectIndex = payload },
   },
   actions : {}
 

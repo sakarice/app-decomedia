@@ -96,13 +96,12 @@
     </router-view>
 
     <!-- 図形設定コンポーネント -->
-    <ul class="figures-wrapper">
-      <li class="figure-list-item" :id="index" v-for="(mediaFigure, index) in this.getMediaFigures" :key="index">
-        <media-figure
-        :index="index">
-        </media-figure>
-      </li>
-    </ul>
+    <!-- <ul class="figures-wrapper">
+      <li class="figure-list-item" :id="index" v-for="(mediaFigure, index) in this.getMediaFigures" :key="index"> -->
+        <media-figure-mng>
+        </media-figure-mng>
+      <!-- </li>
+    </ul> -->
 
     <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
@@ -137,8 +136,9 @@
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
   // テスト メディア図形
-  import MediaFigure from './media_contents/MediaFigureComponent.vue';
   import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
+  import MediaFigureMng from './media_contents/MediaFigureMngComponent.vue';
+  // import MediaFigure from './media_contents/MediaFigureComponent.vue';
 
 
 export default {
@@ -147,8 +147,8 @@ export default {
     MediaAudio,
     MediaSetting,
     MediaMovie,
-    MediaFigure,
     MediaFigureSetting,
+    MediaFigureMng,
   },
   props: [],
   data : () => {
@@ -335,9 +335,6 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-  .figures-wrapper {
-    list-style: none;
-  }
 
   #disp-media-owner-modal-wrapper {
     color: white;

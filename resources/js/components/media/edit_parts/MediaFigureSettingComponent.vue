@@ -133,7 +133,9 @@
       },
       addMediaFigure(){
         console.log('callled addMediaFigure');
-        this.addMediaFiguresObjectItem(this.getFigureData);
+        // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
+        const mediaFigure = Object.assign({}, this.getFigureData);
+        this.addMediaFiguresObjectItem(mediaFigure);
       },
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる
