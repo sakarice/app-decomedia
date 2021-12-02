@@ -5807,9 +5807,11 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      this.move_target = document.getElementById('media-figure-setting-wrapper');
-      this.x_in_element = event.clientX - event.target.offsetLeft;
-      this.y_in_element = event.clientY - event.target.offsetTop; // ムーブイベントにコールバック
+      console.log(e);
+      this.move_target = document.getElementById('media-figure-setting-wrapper'); // this.move_target = event.target;
+
+      this.x_in_element = event.clientX - this.move_target.offsetLeft;
+      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
 
       document.body.addEventListener("mousemove", this.mouseMove, false);
       document.body.addEventListener("touchmove", this.mouseMove, false);
@@ -14540,7 +14542,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 415px;\r\n  padding: 20px;\r\n  background-color: slategrey;\r\n  border-radius: 3px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(240,240,250,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor:auto;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 35px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 1px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 100px;\r\n  left: 190px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 350px;\r\n  height: 425px;\r\n  padding: 20px;\r\n  background-color: slategrey;\r\n  border-radius: 3px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  background-color: rgba(240,240,250,1);\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 1px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 100px;\r\n  left: 190px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61481,21 +61483,18 @@ var render = function () {
       },
     },
     [
-      _c(
-        "div",
-        {
-          staticClass: "item-frame",
-          on: {
-            mousedown: function ($event) {
-              $event.stopPropagation()
-            },
-            mouseup: function ($event) {
-              $event.stopPropagation()
+      _c("div", { staticClass: "item-frame" }, [
+        _c(
+          "div",
+          {
+            staticClass: "close-icon-wrapper",
+            on: {
+              mousedown: function ($event) {
+                $event.stopPropagation()
+              },
             },
           },
-        },
-        [
-          _c("div", { staticClass: "close-icon-wrapper" }, [
+          [
             _c("i", {
               staticClass: "fas fa-times fa-3x close-icon",
               on: {
@@ -61504,253 +61503,274 @@ var render = function () {
                 },
               },
             }),
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "add-icon-wrapper",
-              on: {
-                click: function ($event) {
-                  return _vm.addMediaFigure()
-                },
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "add-icon-wrapper",
+            on: {
+              mousedown: function ($event) {
+                $event.stopPropagation()
+              },
+              click: function ($event) {
+                return _vm.addMediaFigure()
               },
             },
-            [
-              _c("i", { staticClass: "fas fa-plus fa-lg add-icon" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "add-text" }, [_vm._v("追加")]),
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "figure-preview-wrapper" }, [
-            _c("canvas", {
-              attrs: { id: "pre-canvas" },
-              on: {
-                click: function ($event) {
-                  return _vm.addMediaFigure()
-                },
+          },
+          [
+            _c("i", { staticClass: "fas fa-plus fa-lg add-icon" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "add-text" }, [_vm._v("追加")]),
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "figure-preview-wrapper" }, [
+          _c("canvas", {
+            attrs: { id: "pre-canvas" },
+            on: {
+              mousedown: function ($event) {
+                $event.stopPropagation()
               },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "media-figure-settings" }, [
-            _c("div", { staticClass: "setting-type-num" }, [
-              _c(
-                "div",
-                { staticClass: "disp-space-between x_position-wrapper" },
-                [
-                  _c("span", [_vm._v("配置座標(x):")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "input-num",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.getFigureData["x_position"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "x_position",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "disp-space-between y_position-wrapper" },
-                [
-                  _c("span", [_vm._v("配置座標(y):")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "input-num",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.getFigureData["y_position"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "y_position",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
-                _c("span", [_vm._v("回転:")]),
+              click: function ($event) {
+                return _vm.addMediaFigure()
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "media-figure-settings" }, [
+          _c("div", { staticClass: "setting-type-num" }, [
+            _c(
+              "div",
+              { staticClass: "disp-space-between x_position-wrapper" },
+              [
+                _c("span", [_vm._v("配置座標(x):")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["degree"] },
+                  domProps: { value: _vm.getFigureData["x_position"] },
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData({
-                        key: "degree",
+                        key: "x_position",
                         value: $event.target.value,
                       })
                     },
                   },
                 }),
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "disp-space-between width-input-wrapper" },
-                [
-                  _c("span", [_vm._v("横幅[px]:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "input-num",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.getFigureData["width"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "width",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "disp-space-between height-input-wrapper" },
-                [
-                  _c("span", [_vm._v("縦幅[px]:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "input-num",
-                    attrs: { type: "number" },
-                    domProps: { value: _vm.getFigureData["height"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "height",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]
-              ),
-            ]),
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "setting-type-color" }, [
-              _c(
-                "div",
-                { staticClass: "disp-space-between fill-input-wrapper" },
-                [
-                  _c("div", { staticClass: "fill-flag" }, [
-                    _c("span", [_vm._v("塗りつぶし")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "checkbox" },
-                      domProps: { value: _vm.getFigureData["isDrawFill"] },
-                      on: {
-                        input: function ($event) {
-                          return _vm.updateFigureData({
-                            key: "isDrawFill",
-                            value: $event.target.checked,
-                          })
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "fill-color" }, [
-                    _c("span", [_vm._v("色:")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "color" },
-                      domProps: { value: _vm.getFigureData["fillColor"] },
-                      on: {
-                        input: function ($event) {
-                          return _vm.updateFigureData({
-                            key: "fillColor",
-                            value: $event.target.value,
-                          })
-                        },
-                      },
-                    }),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "disp-space-between stroke-input-wrapper" },
-                [
-                  _c("div", { staticClass: "stroke-flag" }, [
-                    _c("span", [_vm._v("枠線")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "checkbox" },
-                      domProps: { value: _vm.getFigureData["isDrawStroke"] },
-                      on: {
-                        input: function ($event) {
-                          return _vm.updateFigureData({
-                            key: "isDrawStroke",
-                            value: $event.target.checked,
-                          })
-                        },
-                      },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "stroke-color" }, [
-                    _c("span", [_vm._v("色:")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "color" },
-                      domProps: { value: _vm.getFigureData["strokeColor"] },
-                      on: {
-                        input: function ($event) {
-                          return _vm.updateFigureData({
-                            key: "strokeColor",
-                            value: $event.target.value,
-                          })
-                        },
-                      },
-                    }),
-                  ]),
-                ]
-              ),
-            ]),
+            _c(
+              "div",
+              { staticClass: "disp-space-between y_position-wrapper" },
+              [
+                _c("span", [_vm._v("配置座標(y):")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.getFigureData["y_position"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData({
+                        key: "y_position",
+                        value: $event.target.value,
+                      })
+                    },
+                  },
+                }),
+              ]
+            ),
             _vm._v(" "),
-            _c("div", { staticClass: "opacity-input-wrapper" }, [
-              _c("span", [_vm._v("透過度:")]),
+            _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
+              _c("span", [_vm._v("回転:")]),
               _vm._v(" "),
               _c("input", {
-                attrs: {
-                  type: "range",
-                  name: "opacity",
-                  id: "",
-                  min: "0",
-                  max: "1",
-                  step: "0.05",
-                },
-                domProps: { value: _vm.getFigureData["globalAlpha"] },
+                staticClass: "input-num",
+                attrs: { type: "number" },
+                domProps: { value: _vm.getFigureData["degree"] },
                 on: {
                   input: function ($event) {
                     return _vm.updateFigureData({
-                      key: "globalAlpha",
+                      key: "degree",
                       value: $event.target.value,
                     })
                   },
                 },
               }),
             ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between width-input-wrapper" },
+              [
+                _c("span", [_vm._v("横幅[px]:")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.getFigureData["width"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData({
+                        key: "width",
+                        value: $event.target.value,
+                      })
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between height-input-wrapper" },
+              [
+                _c("span", [_vm._v("縦幅[px]:")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.getFigureData["height"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData({
+                        key: "height",
+                        value: $event.target.value,
+                      })
+                    },
+                  },
+                }),
+              ]
+            ),
           ]),
-        ]
-      ),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting-type-color" }, [
+            _c(
+              "div",
+              { staticClass: "disp-space-between fill-input-wrapper" },
+              [
+                _c("div", { staticClass: "fill-flag" }, [
+                  _c("span", [_vm._v("塗りつぶし")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "checkbox" },
+                    domProps: { value: _vm.getFigureData["isDrawFill"] },
+                    on: {
+                      mousedown: function ($event) {
+                        $event.stopPropagation()
+                      },
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "isDrawFill",
+                          value: $event.target.checked,
+                        })
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "fill-color" }, [
+                  _c("span", [_vm._v("色:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "color" },
+                    domProps: { value: _vm.getFigureData["fillColor"] },
+                    on: {
+                      mousedown: function ($event) {
+                        $event.stopPropagation()
+                      },
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "fillColor",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between stroke-input-wrapper" },
+              [
+                _c("div", { staticClass: "stroke-flag" }, [
+                  _c("span", [_vm._v("枠線")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "checkbox" },
+                    domProps: { value: _vm.getFigureData["isDrawStroke"] },
+                    on: {
+                      mousedown: function ($event) {
+                        $event.stopPropagation()
+                      },
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "isDrawStroke",
+                          value: $event.target.checked,
+                        })
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "stroke-color" }, [
+                  _c("span", [_vm._v("色:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "color" },
+                    domProps: { value: _vm.getFigureData["strokeColor"] },
+                    on: {
+                      mousedown: function ($event) {
+                        $event.stopPropagation()
+                      },
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "strokeColor",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "opacity-input-wrapper" }, [
+            _c("span", [_vm._v("透過度:")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: {
+                type: "range",
+                name: "opacity",
+                id: "",
+                min: "0",
+                max: "1",
+                step: "0.05",
+              },
+              domProps: { value: _vm.getFigureData["globalAlpha"] },
+              on: {
+                mousedown: function ($event) {
+                  $event.stopPropagation()
+                },
+                input: function ($event) {
+                  return _vm.updateFigureData({
+                    key: "globalAlpha",
+                    value: $event.target.value,
+                  })
+                },
+              },
+            }),
+          ]),
+        ]),
+      ]),
     ]
   )
 }

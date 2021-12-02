@@ -1,20 +1,20 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-setting-wrapper" @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
-    <div class="item-frame" @mousedown.stop @mouseup.stop>
+    <div class="item-frame">
       <!-- クローズアイコン -->
-      <div class="close-icon-wrapper">
+      <div class="close-icon-wrapper" @mousedown.stop>
         <i class="fas fa-times fa-3x close-icon" @click="closeModal()"></i>
       </div>
       <!-- 図形追加アイコン -->
-      <div class="add-icon-wrapper" @click="addMediaFigure()">
+      <div class="add-icon-wrapper" @mousedown.stop @click="addMediaFigure()">
         <i class="fas fa-plus fa-lg add-icon"></i>
         <span class="add-text">追加</span>
       </div>
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
-        <canvas id="pre-canvas" @click="addMediaFigure()"></canvas>
+        <canvas id="pre-canvas" @mousedown.stop @click="addMediaFigure()"></canvas>
       </div>
       <!-- 図形設定 -->
       <div class="media-figure-settings">
@@ -45,34 +45,34 @@
           </div>
         </div>
 
-      <!-- カラー系の設定 -->
-      <div class="setting-type-color">
-        <div class="disp-space-between fill-input-wrapper">
-          <div class="fill-flag">
-            <span>塗りつぶし</span>
-            <input type="checkbox" :value="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
+        <!-- カラー系の設定 -->
+        <div class="setting-type-color">
+          <div class="disp-space-between fill-input-wrapper">
+            <div class="fill-flag">
+              <span>塗りつぶし</span>
+              <input type="checkbox" @mousedown.stop :value="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
+            </div>
+            <div class="fill-color">
+              <span>色:</span>
+              <input type="color" @mousedown.stop :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
+            </div>
           </div>
-          <div class="fill-color">
-            <span>色:</span>
-            <input type="color" :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
-          </div>
-        </div>
 
-        <div class="disp-space-between stroke-input-wrapper">
-          <div class="stroke-flag">
-            <span>枠線</span>
-            <input type="checkbox" :value="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
-          </div>
-          <div class="stroke-color">
-            <span>色:</span>
-            <input type="color" :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
+          <div class="disp-space-between stroke-input-wrapper">
+            <div class="stroke-flag">
+              <span>枠線</span>
+              <input type="checkbox" @mousedown.stop :value="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
+            </div>
+            <div class="stroke-color">
+              <span>色:</span>
+              <input type="color" @mousedown.stop :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
+            </div>
           </div>
         </div>
-      </div>
 
         <div class="opacity-input-wrapper">
           <span>透過度:</span>
-          <input type="range" :value="getFigureData['globalAlpha']" @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
       </div>
     </div>
@@ -176,9 +176,11 @@
         } else {
           event = e.changedTouches[0];
         }
+        console.log(e);
         this.move_target = document.getElementById('media-figure-setting-wrapper');
-        this.x_in_element = event.clientX - event.target.offsetLeft;
-        this.y_in_element = event.clientY - event.target.offsetTop;
+        // this.move_target = event.target;
+        this.x_in_element = event.clientX - this.move_target.offsetLeft;
+        this.y_in_element = event.clientY - this.move_target.offsetTop;
         // ムーブイベントにコールバック
         document.body.addEventListener("mousemove", this.mouseMove, false);
         document.body.addEventListener("touchmove", this.mouseMove, false);
@@ -287,7 +289,7 @@
   top: 50%;
   z-index: 30;
   width: 350px;
-  height: 415px;
+  height: 425px;
   padding: 20px;
   background-color: slategrey;
   border-radius: 3px;
@@ -301,10 +303,10 @@
   background-color: rgba(240,240,250,1);
 }
 .item-frame:hover{
-  cursor:auto;
+  cursor: all-scroll;
 }
 .media-figure-settings {
-  padding: 15px 35px;
+  padding: 15px 45px;
 }
 
 .figure-preview-wrapper{
@@ -312,6 +314,7 @@
   justify-content: center;
   align-items: center;
   padding: 5px 0px;
+  margin-bottom: 5px;
 }
 
 #pre-canvas {
