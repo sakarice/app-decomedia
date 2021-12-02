@@ -18,43 +18,57 @@
       </div>
       <!-- 図形設定 -->
       <div class="media-figure-settings">
-        <div class="x_position-wrapper">
-          <span>x軸位置:</span>
-          <input type="number" :value="getFigureData['x_position']" @input="updateFigureData({key:'x_position', value:$event.target.value})">
+        <!-- 数値系の設定 -->
+        <div class="setting-type-num">
+          <div class="disp-space-between x_position-wrapper">
+            <span>配置座標(x):</span>
+            <input type="number" class="input-num" :value="getFigureData['x_position']" @input="updateFigureData({key:'x_position', value:$event.target.value})">
+          </div>
+
+          <div class="disp-space-between y_position-wrapper">
+            <span>配置座標(y):</span>
+            <input type="number" class="input-num" :value="getFigureData['y_position']" @input="updateFigureData({key:'y_position', value:$event.target.value})">
+          </div>
+
+          <div class="disp-space-between degree-wrapper">
+            <span>回転:</span>
+            <input type="number" class="input-num" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
+          </div>
+
+          <div class="disp-space-between width-input-wrapper">
+            <span>横幅[px]:</span>
+            <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
+          </div>
+          <div class="disp-space-between height-input-wrapper">
+            <span>縦幅[px]:</span>
+            <input type="number" class="input-num" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
+          </div>
         </div>
 
-        <div class="y_position-wrapper">
-          <span>y軸位置:</span>
-          <input type="number" :value="getFigureData['y_position']" @input="updateFigureData({key:'y_position', value:$event.target.value})">
+      <!-- カラー系の設定 -->
+      <div class="setting-type-color">
+        <div class="disp-space-between fill-input-wrapper">
+          <div class="fill-flag">
+            <span>塗りつぶし</span>
+            <input type="checkbox" :value="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
+          </div>
+          <div class="fill-color">
+            <span>色:</span>
+            <input type="color" :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
+          </div>
         </div>
 
-        <div class="degree-wrapper">
-          <span>回転:</span>
-          <input type="number" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
+        <div class="disp-space-between stroke-input-wrapper">
+          <div class="stroke-flag">
+            <span>枠線</span>
+            <input type="checkbox" :value="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
+          </div>
+          <div class="stroke-color">
+            <span>色:</span>
+            <input type="color" :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
+          </div>
         </div>
-
-        <div class="width-input-wrapper">
-          <span>横幅:</span>
-          <input type="number" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
-        </div>
-        <div class="height-input-wrapper">
-          <span>縦幅:</span>
-          <input type="number" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
-        </div>
-
-        <div class="fill-input-wrapper">
-          <span>塗りつぶし</span>
-          <input type="checkbox" :value="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
-          <span>色:</span>
-          <input type="color" :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
-        </div>
-
-        <div class="stroke-input-wrapper">
-          <span>枠線</span>
-          <input type="checkbox" :value="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
-          <span>色:</span>
-          <input type="color" :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
-        </div>
+      </div>
 
         <div class="opacity-input-wrapper">
           <span>透過度:</span>
@@ -290,7 +304,7 @@
   cursor:auto;
 }
 .media-figure-settings {
-  padding: 25px;
+  padding: 15px 35px;
 }
 
 .figure-preview-wrapper{
@@ -341,6 +355,20 @@
 .add-text {
   font-size: 11px;
   margin-left: 2px;
+}
+
+.setting-type-num,
+.setting-type-color {
+  margin-bottom: 15px;
+}
+
+.disp-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-num {
+  width: 100px;
 }
 
 
