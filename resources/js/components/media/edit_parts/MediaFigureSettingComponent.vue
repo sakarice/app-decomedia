@@ -1,6 +1,8 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-setting-wrapper" @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+  <div id="media-figure-setting-wrapper"
+   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)"
+   @mouseup="mouseUp($event)" @touchend="mouseUp($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" @mousedown.stop>

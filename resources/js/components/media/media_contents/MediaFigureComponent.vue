@@ -1,7 +1,9 @@
 <template>
   <!-- Media図形-->
   <!-- <div id="media-figure-wrapper"> -->
-  <canvas :id="canvas_with_index" class="canvas_area" @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+  <canvas :id="canvas_with_index" class="canvas_area" 
+  @mousedown="mouseDown($event)" @touchstart="mouseDown($event)"
+  @mouseup="mouseUp($event)">
   </canvas>
   <!-- </div> -->
 </template>
@@ -55,7 +57,6 @@
         } else {
           event = e.changedTouches[0];
         }
-        console.log(e);
         this.move_target = document.getElementById(this.canvas_with_index);
         // this.move_target = event.target;
         this.x_in_element = event.clientX - this.move_target.offsetLeft;

@@ -5672,6 +5672,8 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
 
 
 
@@ -6788,6 +6790,8 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
 
 
 
@@ -6845,7 +6849,6 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      console.log(e);
       this.move_target = document.getElementById(this.canvas_with_index); // this.move_target = event.target;
 
       this.x_in_element = event.clientX - this.move_target.offsetLeft;
@@ -61534,6 +61537,12 @@ var render = function () {
         touchstart: function ($event) {
           return _vm.mouseDown($event)
         },
+        mouseup: function ($event) {
+          return _vm.mouseUp($event)
+        },
+        touchend: function ($event) {
+          return _vm.mouseUp($event)
+        },
       },
     },
     [
@@ -62661,6 +62670,9 @@ var render = function () {
       },
       touchstart: function ($event) {
         return _vm.mouseDown($event)
+      },
+      mouseup: function ($event) {
+        return _vm.mouseUp($event)
       },
     },
   })
