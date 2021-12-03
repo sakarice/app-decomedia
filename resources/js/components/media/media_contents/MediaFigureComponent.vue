@@ -205,7 +205,8 @@
 }
 .canvas_area:hover{
   cursor: all-scroll;
-}
+  outline : 1.5px solid blue;
+  }
 
 
 </style>
