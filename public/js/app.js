@@ -6829,7 +6829,7 @@ function _defineProperty(obj, key, value) {
     }
   }),
   watch: {},
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), {}, {
     getOneFigure: function getOneFigure(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(index);
@@ -6864,7 +6864,17 @@ function _defineProperty(obj, key, value) {
       this.move_target.addEventListener("touchend", this.mouseUp, false);
       document.body.addEventListener("touchleave", this.mouseUp, false);
     },
-    mouseUp: function mouseUp() {
+    mouseUp: function mouseUp(e) {
+      this.updateMediaFiguresObjectItem({
+        index: this.index,
+        key: "x_position",
+        value: e.clientX - this.x_in_element
+      });
+      this.updateMediaFiguresObjectItem({
+        index: this.index,
+        key: "y_position",
+        value: e.clientY - this.y_in_element
+      });
       document.body.removeEventListener("mousemove", this.mouseMove, false);
       this.move_target.removeEventListener("mouseup", this.mouseUp, false);
       document.body.removeEventListener("touchmove", this.mouseMove, false);

@@ -42,6 +42,7 @@
     watch : {},
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+      ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
@@ -74,7 +75,10 @@
         this.move_target.addEventListener("touchend", this.mouseUp, false);
         document.body.addEventListener("touchleave", this.mouseUp, false);
       },
-      mouseUp(){
+      mouseUp(e){
+        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:e.clientX - this.x_in_element});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:e.clientY - this.y_in_element});
+
         document.body.removeEventListener("mousemove", this.mouseMove, false);
         this.move_target.removeEventListener("mouseup", this.mouseUp, false);
         document.body.removeEventListener("touchmove", this.mouseMove, false);
