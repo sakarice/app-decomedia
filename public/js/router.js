@@ -12042,6 +12042,9 @@ var render = function () {
       mouseup: function ($event) {
         return _vm.mouseUp($event)
       },
+      touchend: function ($event) {
+        return _vm.mouseUp($event)
+      },
     },
   })
 }

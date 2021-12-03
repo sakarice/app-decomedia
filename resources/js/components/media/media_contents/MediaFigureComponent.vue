@@ -3,7 +3,7 @@
   <!-- <div id="media-figure-wrapper"> -->
   <canvas :id="canvas_with_index" class="canvas_area" 
   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)"
-  @mouseup="mouseUp($event)">
+  @mouseup="mouseUp($event)" @touchend="mouseUp($event)">
   </canvas>
   <!-- </div> -->
 </template>
