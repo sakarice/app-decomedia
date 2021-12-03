@@ -6787,6 +6787,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -6796,6 +6797,12 @@ function _defineProperty(obj, key, value) {
     return {
       "canvas": "",
       "ctx": "",
+      "move_target": "",
+      // ドラッグ操作で移動させる対象
+      "x_in_element": 0,
+      // 移動対象要素に対するドラッグポイントの相対座標(x)
+      "y_in_element": 0,
+      // 移動対象要素に対するドラッグポイントの相対座標(y)
       "window_width": 400,
       "window_height": 400,
       "x_position": 0,
@@ -6828,6 +6835,42 @@ function _defineProperty(obj, key, value) {
       this.setTargetObjectIndex(index);
       return this.getMediaFigure;
     },
+    // 位置操作用
+    mouseDown: function mouseDown(e) {
+      var event;
+
+      if (e.type === "mousedown") {
+        event = e;
+      } else {
+        event = e.changedTouches[0];
+      }
+
+      console.log(e);
+      this.move_target = document.getElementById(this.canvas_with_index); // this.move_target = event.target;
+
+      this.x_in_element = event.clientX - this.move_target.offsetLeft;
+      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
+
+      document.body.addEventListener("mousemove", this.mouseMove, false);
+      document.body.addEventListener("touchmove", this.mouseMove, false);
+    },
+    mouseMove: function mouseMove(e) {
+      e.preventDefault();
+      this.move_target.style.left = e.clientX - this.x_in_element + "px";
+      this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
+
+      this.move_target.addEventListener("mouseup", this.mouseUp, false);
+      document.body.addEventListener("mouseleave", this.mouseUp, false);
+      this.move_target.addEventListener("touchend", this.mouseUp, false);
+      document.body.addEventListener("touchleave", this.mouseUp, false);
+    },
+    mouseUp: function mouseUp() {
+      document.body.removeEventListener("mousemove", this.mouseMove, false);
+      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
+      document.body.removeEventListener("touchmove", this.mouseMove, false);
+      this.move_target.removeEventListener("touchend", this.mouseUp, false);
+    },
+    // 初期描画位置
     setPosition: function setPosition() {
       var target = document.getElementById(this.canvas_with_index);
       console.log(target);
@@ -6836,6 +6879,7 @@ function _defineProperty(obj, key, value) {
       target.style.top = this.y_position + 'px';
       target.style.transform = 'rotate(' + this.degree + 'deg)'; // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
     },
+    // 図形描画関連
     setFigureData: function setFigureData() {
       var figureData = this.getOneFigure(this.index);
       this.x_position = Number(figureData['x_position']);
@@ -14668,7 +14712,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_area[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: pointer;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_area[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -62601,6 +62645,14 @@ var render = function () {
   return _c("canvas", {
     staticClass: "canvas_area",
     attrs: { id: _vm.canvas_with_index },
+    on: {
+      mousedown: function ($event) {
+        return _vm.mouseDown($event)
+      },
+      touchstart: function ($event) {
+        return _vm.mouseDown($event)
+      },
+    },
   })
 }
 var staticRenderFns = []

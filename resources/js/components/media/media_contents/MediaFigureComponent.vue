@@ -1,7 +1,8 @@
 <template>
   <!-- Media図形-->
   <!-- <div id="media-figure-wrapper"> -->
-  <canvas :id="canvas_with_index" class="canvas_area"></canvas>
+  <canvas :id="canvas_with_index" class="canvas_area" @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+  </canvas>
   <!-- </div> -->
 </template>
 
@@ -15,6 +16,9 @@
       return {
         "canvas" : "",
         "ctx" : "",
+        "move_target" : "", // ドラッグ操作で移動させる対象
+        "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
+        "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
         "window_width" : 400,
         "window_height" : 400,
         "x_position" : 0,
@@ -42,6 +46,41 @@
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
       },
+      // 位置操作用
+      mouseDown(e){
+        let event;
+        if(e.type==="mousedown"){
+          event = e;
+        } else {
+          event = e.changedTouches[0];
+        }
+        console.log(e);
+        this.move_target = document.getElementById(this.canvas_with_index);
+        // this.move_target = event.target;
+        this.x_in_element = event.clientX - this.move_target.offsetLeft;
+        this.y_in_element = event.clientY - this.move_target.offsetTop;
+        // ムーブイベントにコールバック
+        document.body.addEventListener("mousemove", this.mouseMove, false);
+        document.body.addEventListener("touchmove", this.mouseMove, false);
+      },
+      mouseMove(e){
+        e.preventDefault();
+        this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
+        this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
+
+        // マウス、タッチ解除時のイベントを設定
+        this.move_target.addEventListener("mouseup", this.mouseUp, false);
+        document.body.addEventListener("mouseleave", this.mouseUp, false);
+        this.move_target.addEventListener("touchend", this.mouseUp, false);
+        document.body.addEventListener("touchleave", this.mouseUp, false);
+      },
+      mouseUp(){
+        document.body.removeEventListener("mousemove", this.mouseMove, false);
+        this.move_target.removeEventListener("mouseup", this.mouseUp, false);
+        document.body.removeEventListener("touchmove", this.mouseMove, false);
+        this.move_target.removeEventListener("touchend", this.mouseUp, false);
+      },
+      // 初期描画位置
       setPosition(){
         const target = document.getElementById(this.canvas_with_index);
         console.log(target);
@@ -51,6 +90,8 @@
         target.style.transform = 'rotate('+ this.degree +'deg)';
         // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
       },
+
+      // 図形描画関連
       setFigureData(){
         const figureData = this.getOneFigure(this.index);
         this.x_position = Number(figureData['x_position']);
@@ -159,7 +200,7 @@
   height: 100vh; */
 }
 .canvas_area:hover{
-  cursor: pointer;
+  cursor: all-scroll;
 }
 
 
