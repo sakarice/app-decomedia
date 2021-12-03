@@ -1,8 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-setting-wrapper"
-   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)"
-   @mouseup="mouseUp($event)" @touchend="mouseUp($event)">
+   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" @mousedown.stop>
@@ -185,7 +184,9 @@
         this.y_in_element = event.clientY - this.move_target.offsetTop;
         // ムーブイベントにコールバック
         document.body.addEventListener("mousemove", this.mouseMove, false);
+        this.move_target.addEventListener("mouseup", this.mouseUp, false);
         document.body.addEventListener("touchmove", this.mouseMove, false);
+        this.move_target.addEventListener("touchend", this.mouseUp, false);
       },
       mouseMove(e){
         e.preventDefault();
@@ -193,12 +194,10 @@
         this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
 
         // マウス、タッチ解除時のイベントを設定
-        this.move_target.addEventListener("mouseup", this.mouseUp, false);
         document.body.addEventListener("mouseleave", this.mouseUp, false);
-        this.move_target.addEventListener("touchend", this.mouseUp, false);
         document.body.addEventListener("touchleave", this.mouseUp, false);
       },
-      mouseUp(){
+      mouseUp(e){
         document.body.removeEventListener("mousemove", this.mouseMove, false);
         this.move_target.removeEventListener("mouseup", this.mouseUp, false);
         document.body.removeEventListener("touchmove", this.mouseMove, false);

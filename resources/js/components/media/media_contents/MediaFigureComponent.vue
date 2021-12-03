@@ -1,11 +1,11 @@
 <template>
   <!-- Media図形-->
-  <!-- <div id="media-figure-wrapper"> -->
-  <canvas :id="canvas_with_index" class="canvas_area" 
-  @mousedown="mouseDown($event)" @touchstart="mouseDown($event)"
-  @mouseup="mouseUp($event)" @touchend="mouseUp($event)">
-  </canvas>
-  <!-- </div> -->
+  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper">
+    <canvas :id="canvas_with_index" class="canvas_area" 
+    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
+    </canvas>
+    <i class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
+  </div>
 </template>
 
 <script>
@@ -21,6 +21,9 @@
         "move_target" : "", // ドラッグ操作で移動させる対象
         "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
         "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
+        "rotate_target" : "", // ドラッグ操作で回転させる対象
+        "rotate_center_x" : 0,
+        "rotate_center_y" : 0,
         "window_width" : 400,
         "window_height" : 400,
         "x_position" : 0,
@@ -39,7 +42,8 @@
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       canvas_width:function(){ return this.window_width+"px" },
       canvas_height:function(){ return this.window_height+"px" },
-      canvas_with_index:function(){ return 'canvas'+this.index; }
+      canvas_with_index:function(){ return 'canvas'+this.index; },
+      canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
     watch : {},
     methods : {
@@ -50,51 +54,100 @@
         return this.getMediaFigure;
       },
       // 位置操作用
-      mouseDown(e){
+      moveStart(e){
         let event;
         if(e.type==="mousedown"){
           event = e;
         } else {
           event = e.changedTouches[0];
         }
-        this.move_target = document.getElementById(this.canvas_with_index);
+        this.move_target = document.getElementById(this.canvas_wrapper_with_index);
         // this.move_target = event.target;
         this.x_in_element = event.clientX - this.move_target.offsetLeft;
         this.y_in_element = event.clientY - this.move_target.offsetTop;
         // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.mouseMove, false);
-        document.body.addEventListener("touchmove", this.mouseMove, false);
+        document.body.addEventListener("mousemove", this.moving, false);
+        this.move_target.addEventListener("mouseup", this.moveEnd, false);
+        document.body.addEventListener("touchmove", this.moving, false);
+        this.move_target.addEventListener("touchend", this.moveEnd, false);
       },
-      mouseMove(e){
+      moving(e){
         e.preventDefault();
         this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
         this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
 
         // マウス、タッチ解除時のイベントを設定
-        this.move_target.addEventListener("mouseup", this.mouseUp, false);
-        document.body.addEventListener("mouseleave", this.mouseUp, false);
-        this.move_target.addEventListener("touchend", this.mouseUp, false);
-        document.body.addEventListener("touchleave", this.mouseUp, false);
+        document.body.addEventListener("mouseleave", this.moveEnd, false);
+        document.body.addEventListener("touchleave", this.moveEnd, false);
       },
-      mouseUp(e){
+      moveEnd(e){
         this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:e.clientX - this.x_in_element});
         this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:e.clientY - this.y_in_element});
 
-        document.body.removeEventListener("mousemove", this.mouseMove, false);
-        this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-        document.body.removeEventListener("touchmove", this.mouseMove, false);
-        this.move_target.removeEventListener("touchend", this.mouseUp, false);
+        document.body.removeEventListener("mousemove", this.moving, false);
+        this.move_target.removeEventListener("mouseup", this.moveEnd, false);
+        document.body.removeEventListener("touchmove", this.moving, false);
+        this.move_target.removeEventListener("touchend", this.moveEnd, false);
       },
       // 初期描画位置
       setPosition(){
-        const target = document.getElementById(this.canvas_with_index);
-        console.log(target);
-        console.log('rotate('+ this.degree +'deg)');
-        target.style.left = this.x_position + 'px';
-        target.style.top = this.y_position + 'px';
-        target.style.transform = 'rotate('+ this.degree +'deg)';
-        // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
+        const move_target = document.getElementById(this.canvas_wrapper_with_index);
+        move_target.style.left = this.x_position + 'px';
+        move_target.style.top = this.y_position + 'px';
+        move_target.style.transform = 'rotate('+ this.degree +'deg)';
       },
+      // 回転用
+      rotateStart(e){
+        let event;
+        if(e.type==="mousedown"){
+          event = e;
+        } else {
+          event = e.changedTouches[0];
+        }
+        const x = this.figure_width;
+        const y = this.figure_height;
+        const r =  Math.sqrt(x*x + y*y);
+        this.rotate_target = document.getElementById(this.canvas_wrapper_with_index);
+        this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px",""));
+        this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px",""));
+        this.rotate_center_x = this.target_left;
+        this.rotate_center_y = this.target_top;
+
+        // 回転イベントにコールバック
+        document.body.addEventListener("mousemove", this.rotating, false);
+        document.body.addEventListener("mouseup", this.rotateEnd, false);
+        document.body.addEventListener("touchmove", this.rotating, false);
+        document.body.addEventListener("touchend", this.rotateEnd, false);
+      },
+      rotating(e){
+        e.preventDefault();
+        const distance_x_from_target_center = e.clientX - this.rotate_center_x;
+        const distance_y_from_target_center = e.clientY - this.rotate_center_y;
+        const new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
+        const new_deg = new_rad * (180/Math.PI) * (-1); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
+        this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
+        this.degree = new_deg;
+        // マウス、タッチ解除時のイベントを設定
+        document.body.addEventListener("mouseleave", this.rotateEnd, false);
+        document.body.addEventListener("touchleave", this.rotateEnd, false);
+      },
+      rotateEnd(e){
+        this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:this.degree});
+
+        document.body.removeEventListener("mousemove", this.rotating, false);
+        this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
+        document.body.removeEventListener("touchmove", this.rotating, false);
+        this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
+      },
+      getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
+        if (!element || !property) {
+          return null;
+        }
+        var style = window.getComputedStyle(element);
+        var value = style.getPropertyValue(property);
+        return value;
+      },
+
 
       // 図形描画関連
       setFigureData(){
@@ -197,17 +250,58 @@
 </script>
 
 <style scoped>
+.canvas_item-wrapper {
+  position: absolute;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform-origin: center center;
+}
+.canvas_item-wrapper:hover .rotate-icon{
+  display: inline-block ;
+}
+.rotate-icon:hover{
+  cursor: all-scroll;
+}
+
 
 .canvas_area {
-  position: absolute;
   display: block;
+  /* position: absolute; */
   /* width: 100vw;
   height: 100vh; */
 }
+
 .canvas_area:hover{
   cursor: all-scroll;
   outline : 1.5px solid blue;
   }
+
+.rotate-icon {
+  position: absolute;
+  bottom: -60px;  
+  padding: 30px;
+  display: none;
+}
+
+
+#red_dot {
+  position: absolute;
+  background-color:red;
+  width: 5px;
+  height: 5px;
+}
+#blue_dot {
+  position: absolute;
+  background-color:blue;
+  width: 5px;
+  height: 5px;
+}
+.hidden {
+  display: none;
+}
+
 
 
 </style>

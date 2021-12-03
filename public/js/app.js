@@ -5673,7 +5673,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -5816,19 +5815,19 @@ function _defineProperty(obj, key, value) {
       this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
 
       document.body.addEventListener("mousemove", this.mouseMove, false);
+      this.move_target.addEventListener("mouseup", this.mouseUp, false);
       document.body.addEventListener("touchmove", this.mouseMove, false);
+      this.move_target.addEventListener("touchend", this.mouseUp, false);
     },
     mouseMove: function mouseMove(e) {
       e.preventDefault();
       this.move_target.style.left = e.clientX - this.x_in_element + "px";
       this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
 
-      this.move_target.addEventListener("mouseup", this.mouseUp, false);
       document.body.addEventListener("mouseleave", this.mouseUp, false);
-      this.move_target.addEventListener("touchend", this.mouseUp, false);
       document.body.addEventListener("touchleave", this.mouseUp, false);
     },
-    mouseUp: function mouseUp() {
+    mouseUp: function mouseUp(e) {
       document.body.removeEventListener("mousemove", this.mouseMove, false);
       this.move_target.removeEventListener("mouseup", this.mouseUp, false);
       document.body.removeEventListener("touchmove", this.mouseMove, false);
@@ -6807,6 +6806,10 @@ function _defineProperty(obj, key, value) {
       // 移動対象要素に対するドラッグポイントの相対座標(x)
       "y_in_element": 0,
       // 移動対象要素に対するドラッグポイントの相対座標(y)
+      "rotate_target": "",
+      // ドラッグ操作で回転させる対象
+      "rotate_center_x": 0,
+      "rotate_center_y": 0,
       "window_width": 400,
       "window_height": 400,
       "x_position": 0,
@@ -6830,6 +6833,9 @@ function _defineProperty(obj, key, value) {
     },
     canvas_with_index: function canvas_with_index() {
       return 'canvas' + this.index;
+    },
+    canvas_wrapper_with_index: function canvas_wrapper_with_index() {
+      return 'canvas_wrapper' + this.index;
     }
   }),
   watch: {},
@@ -6840,7 +6846,7 @@ function _defineProperty(obj, key, value) {
       return this.getMediaFigure;
     },
     // 位置操作用
-    mouseDown: function mouseDown(e) {
+    moveStart: function moveStart(e) {
       var event;
 
       if (e.type === "mousedown") {
@@ -6849,25 +6855,25 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      this.move_target = document.getElementById(this.canvas_with_index); // this.move_target = event.target;
+      this.move_target = document.getElementById(this.canvas_wrapper_with_index); // this.move_target = event.target;
 
       this.x_in_element = event.clientX - this.move_target.offsetLeft;
       this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
 
-      document.body.addEventListener("mousemove", this.mouseMove, false);
-      document.body.addEventListener("touchmove", this.mouseMove, false);
+      document.body.addEventListener("mousemove", this.moving, false);
+      this.move_target.addEventListener("mouseup", this.moveEnd, false);
+      document.body.addEventListener("touchmove", this.moving, false);
+      this.move_target.addEventListener("touchend", this.moveEnd, false);
     },
-    mouseMove: function mouseMove(e) {
+    moving: function moving(e) {
       e.preventDefault();
       this.move_target.style.left = e.clientX - this.x_in_element + "px";
       this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
 
-      this.move_target.addEventListener("mouseup", this.mouseUp, false);
-      document.body.addEventListener("mouseleave", this.mouseUp, false);
-      this.move_target.addEventListener("touchend", this.mouseUp, false);
-      document.body.addEventListener("touchleave", this.mouseUp, false);
+      document.body.addEventListener("mouseleave", this.moveEnd, false);
+      document.body.addEventListener("touchleave", this.moveEnd, false);
     },
-    mouseUp: function mouseUp(e) {
+    moveEnd: function moveEnd(e) {
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "x_position",
@@ -6878,19 +6884,75 @@ function _defineProperty(obj, key, value) {
         key: "y_position",
         value: e.clientY - this.y_in_element
       });
-      document.body.removeEventListener("mousemove", this.mouseMove, false);
-      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-      document.body.removeEventListener("touchmove", this.mouseMove, false);
-      this.move_target.removeEventListener("touchend", this.mouseUp, false);
+      document.body.removeEventListener("mousemove", this.moving, false);
+      this.move_target.removeEventListener("mouseup", this.moveEnd, false);
+      document.body.removeEventListener("touchmove", this.moving, false);
+      this.move_target.removeEventListener("touchend", this.moveEnd, false);
     },
     // 初期描画位置
     setPosition: function setPosition() {
-      var target = document.getElementById(this.canvas_with_index);
-      console.log(target);
-      console.log('rotate(' + this.degree + 'deg)');
-      target.style.left = this.x_position + 'px';
-      target.style.top = this.y_position + 'px';
-      target.style.transform = 'rotate(' + this.degree + 'deg)'; // target.style.webkitTransform = 'rotate('+ this.degree +'deg)';
+      var move_target = document.getElementById(this.canvas_wrapper_with_index);
+      move_target.style.left = this.x_position + 'px';
+      move_target.style.top = this.y_position + 'px';
+      move_target.style.transform = 'rotate(' + this.degree + 'deg)';
+    },
+    // 回転用
+    rotateStart: function rotateStart(e) {
+      var event;
+
+      if (e.type === "mousedown") {
+        event = e;
+      } else {
+        event = e.changedTouches[0];
+      }
+
+      var x = this.figure_width;
+      var y = this.figure_height;
+      var r = Math.sqrt(x * x + y * y);
+      this.rotate_target = document.getElementById(this.canvas_wrapper_with_index);
+      this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px", ""));
+      this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px", ""));
+      this.rotate_center_x = this.target_left;
+      this.rotate_center_y = this.target_top; // 回転イベントにコールバック
+
+      document.body.addEventListener("mousemove", this.rotating, false);
+      document.body.addEventListener("mouseup", this.rotateEnd, false);
+      document.body.addEventListener("touchmove", this.rotating, false);
+      document.body.addEventListener("touchend", this.rotateEnd, false);
+    },
+    rotating: function rotating(e) {
+      e.preventDefault();
+      var distance_x_from_target_center = e.clientX - this.rotate_center_x;
+      var distance_y_from_target_center = e.clientY - this.rotate_center_y;
+      var new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
+      var new_deg = new_rad * (180 / Math.PI) * -1; // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
+
+      this.rotate_target.style.transform = 'rotate(' + new_deg + 'deg)';
+      this.degree = new_deg; // マウス、タッチ解除時のイベントを設定
+
+      document.body.addEventListener("mouseleave", this.rotateEnd, false);
+      document.body.addEventListener("touchleave", this.rotateEnd, false);
+    },
+    rotateEnd: function rotateEnd(e) {
+      this.updateMediaFiguresObjectItem({
+        index: this.index,
+        key: "degree",
+        value: this.degree
+      });
+      document.body.removeEventListener("mousemove", this.rotating, false);
+      this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
+      document.body.removeEventListener("touchmove", this.rotating, false);
+      this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
+    },
+    getStyleSheetValue: function getStyleSheetValue(element, property) {
+      // ↑でcssの値を取得するための関数
+      if (!element || !property) {
+        return null;
+      }
+
+      var style = window.getComputedStyle(element);
+      var value = style.getPropertyValue(property);
+      return value;
     },
     // 図形描画関連
     setFigureData: function setFigureData() {
@@ -14725,7 +14787,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_area[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: block;\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\r\n  outline : 1.5px solid blue;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_item-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: inline-flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transform-origin: center center;\n}\n.canvas_item-wrapper:hover .rotate-icon[data-v-29e92a69]{\r\n  display: inline-block ;\n}\n.rotate-icon[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\n}\n.canvas_area[data-v-29e92a69] {\r\n  display: block;\r\n  /* position: absolute; */\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\r\n  outline : 1.5px solid blue;\n}\n.rotate-icon[data-v-29e92a69] {\r\n  position: absolute;\r\n  bottom: -60px;  \r\n  padding: 30px;\r\n  display: none;\n}\n#red_dot[data-v-29e92a69] {\r\n  position: absolute;\r\n  background-color:red;\r\n  width: 5px;\r\n  height: 5px;\n}\n#blue_dot[data-v-29e92a69] {\r\n  position: absolute;\r\n  background-color:blue;\r\n  width: 5px;\r\n  height: 5px;\n}\n.hidden[data-v-29e92a69] {\r\n  display: none;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -61537,12 +61599,6 @@ var render = function () {
         touchstart: function ($event) {
           return _vm.mouseDown($event)
         },
-        mouseup: function ($event) {
-          return _vm.mouseUp($event)
-        },
-        touchend: function ($event) {
-          return _vm.mouseUp($event)
-        },
       },
     },
     [
@@ -62661,24 +62717,39 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("canvas", {
-    staticClass: "canvas_area",
-    attrs: { id: _vm.canvas_with_index },
-    on: {
-      mousedown: function ($event) {
-        return _vm.mouseDown($event)
-      },
-      touchstart: function ($event) {
-        return _vm.mouseDown($event)
-      },
-      mouseup: function ($event) {
-        return _vm.mouseUp($event)
-      },
-      touchend: function ($event) {
-        return _vm.mouseUp($event)
-      },
+  return _c(
+    "div",
+    {
+      staticClass: "canvas_item-wrapper",
+      attrs: { id: _vm.canvas_wrapper_with_index },
     },
-  })
+    [
+      _c("canvas", {
+        staticClass: "canvas_area",
+        attrs: { id: _vm.canvas_with_index },
+        on: {
+          mousedown: function ($event) {
+            return _vm.moveStart($event)
+          },
+          touchstart: function ($event) {
+            return _vm.moveStart($event)
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("i", {
+        staticClass: "fas fa-sync fa-lg rotate-icon",
+        on: {
+          mousedown: function ($event) {
+            return _vm.rotateStart($event)
+          },
+          touchstart: function ($event) {
+            return _vm.rotateStart($event)
+          },
+        },
+      }),
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
