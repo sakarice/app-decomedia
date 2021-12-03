@@ -97,6 +97,7 @@ export default {
   /* コンテンツのCSS */
   #setting-wrapper {
     margin: 20px 0;
+    width: 95%;
 
     display: flex;
     flex-direction: column;

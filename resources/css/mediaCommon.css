@@ -39,7 +39,7 @@
 }
 
 .icon-wrapper {
-  padding: 12px;
+  padding: 10px;
 }
 .icon-wrapper:hover {
   background-color: rgba(255,255,255,0.2);
@@ -83,9 +83,9 @@ transform: translateX(-100vw)
     display: none;
   }
   #disp-modal-wrapper {
-    padding: 10px 5px 10px 15px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;  
+    padding: 8px 3px 8px 6px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;  
   }
   #disp-modal-zone {
     left: 0;

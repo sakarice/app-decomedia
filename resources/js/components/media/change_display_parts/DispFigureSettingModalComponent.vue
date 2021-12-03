@@ -1,6 +1,6 @@
 <template>
   <div id="disp-figure-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('figureSettingModal')">
-    <i class="fas fa-shapes fa-2x"></i>
+    <i class="fas fa-shapes fa-lg"></i>
   </div>
 </template>
 
