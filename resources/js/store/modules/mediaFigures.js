@@ -28,6 +28,7 @@ const mediaFigure = {
   },
   mutations : {
     deleteMediaFiguresObjectItem(state, payload){
+      // console.log(state.mediaFigures[payload]['x_position']);
       state.mediaFigures.splice(payload,1) // figureを1つ削除
     },
     addMediaFiguresObjectItem(state, payload){

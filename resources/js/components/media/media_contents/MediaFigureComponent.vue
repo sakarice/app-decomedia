@@ -1,10 +1,10 @@
 <template>
   <!-- Media図形-->
   <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper">
-    <canvas :id="canvas_with_index" class="canvas_area" 
+    <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)">
     </canvas>
-    <i class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
+    <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
   </div>
 </template>
 
@@ -16,6 +16,8 @@
     ],
     data : ()=>{
       return {
+        "isActive" : false,
+        "isReDraw" : false,
         "canvas" : "",
         "ctx" : "",
         "move_target" : "", // ドラッグ操作で移動させる対象
@@ -40,15 +42,19 @@
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
+      new_index:function(){ },
       canvas_width:function(){ return this.window_width+"px" },
       canvas_height:function(){ return this.window_height+"px" },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
-    watch : {},
+    watch : {
+      isReDraw:function(){ this.init(); }
+    },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
+      ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
@@ -62,7 +68,6 @@
           event = e.changedTouches[0];
         }
         this.move_target = document.getElementById(this.canvas_wrapper_with_index);
-        // this.move_target = event.target;
         this.x_in_element = event.clientX - this.move_target.offsetLeft;
         this.y_in_element = event.clientY - this.move_target.offsetTop;
         // ムーブイベントにコールバック
@@ -150,29 +155,41 @@
 
 
       // 図形描画関連
+      init(){
+        this.setFigureData();
+        this.setPosition();
+        this.setContext();
+        this.setCanvasSize();
+        this.setGlobalAlpha();
+        this.setStrokeColor();
+        this.setFillColor();
+        // this.setDegree();
+        this.createPathRect();
+        this.draw();
+        this.isReDraw = false;
+      },
       setFigureData(){
         const figureData = this.getOneFigure(this.index);
-        this.x_position = Number(figureData['x_position']);
-        this.y_position = Number(figureData['y_position']);
-        this.degree = Number(figureData['degree']);
-        this.figure_width = Number(figureData['width']);
-        this.figure_height = Number(figureData['height']);
-        this.is_draw_fill = figureData['isDrawFill'];
-        this.is_draw_stroke = figureData['isDrawStroke'];
-        this.fill_color = figureData['fillColor'];
-        this.stroke_color = figureData['strokeColor'];
-        this.global_alpha = figureData['globalAlpha'];
+        if(!(typeof figureData === "undefined")){
+          this.x_position = Number(figureData['x_position']);
+          this.y_position = Number(figureData['y_position']);
+          this.degree = Number(figureData['degree']);
+          this.figure_width = Number(figureData['width']);
+          this.figure_height = Number(figureData['height']);
+          this.is_draw_fill = figureData['isDrawFill'];
+          this.is_draw_stroke = figureData['isDrawStroke'];
+          this.fill_color = figureData['fillColor'];
+          this.stroke_color = figureData['strokeColor'];
+          this.global_alpha = figureData['globalAlpha'];
+        }
       },
       setContext(){
         this.canvas = document.getElementById(this.canvas_with_index);
-        console.log(this.canvas);
         this.ctx = this.canvas.getContext('2d');
       },
       setCanvasSize(){
         this.window_width = this.figure_width;
-        // this.window_width = window.innerWidth;
         this.window_height = this.figure_height;
-        // this.window_height = window.innerHeight;
         this.canvas.width = this.window_width;
         this.canvas.height = this.window_height;
       },
@@ -186,7 +203,6 @@
       },
       draw(){
         this.clear();
-        console.log('start draw');
         if(this.is_draw_fill){ this.fill(); };
         if(this.is_draw_stroke){ this.stroke(); };
       },
@@ -194,16 +210,10 @@
         this.ctx.clearRect(0,0,this.window_width,this.window_height);
       },
       createPathRect(){
-        // const start_x = this.x_position;
-        // const start_y = this.y_position;
         const width = this.figure_width;
         const height = this.figure_height;
 
         // 左上から半時計回りに、四角形の4頂点のポイントを指定
-        // const point1_left_upper  = {x: start_x,         y: start_y};
-        // const point2_left_under  = {x: start_x ,        y: start_y + height};
-        // const point3_right_under = {x: start_x + width, y: start_y + height};
-        // const point4_right_upper = {x: start_x + width, y: start_y};
         const point1_left_upper  = {x: 0,         y: 0};
         const point2_left_under  = {x: 0 ,        y: 0 + height};
         const point3_right_under = {x: 0 + width, y: 0 + height};
@@ -227,23 +237,26 @@
       stroke(){
         this.ctx.save();
         this.ctx.stroke();
-        // this.ctx.restore();
+      },
+      delete(){
+        if(this.isActive){
+          this.isActive = false;
+          this.deleteMediaFiguresObjectItem(this.index);
+        }
       }
     },
-    created(){
-      this.setFigureData();
-    },
+    created(){},
     mounted(){
-      this.setPosition();
-      this.setContext();
-      this.setCanvasSize();
-      this.setGlobalAlpha();
-      this.setStrokeColor();
-      this.setFillColor();
-      // this.setDegree();
-      this.createPathRect();
-      this.draw();
+      this.init();
 
+      // イベント登録
+      document.addEventListener('click', (e)=> {
+        if(!e.target.closest("#"+this.canvas_wrapper_with_index)){
+          this.isActive = false;
+        } else {
+          this.isActive = true;
+        }
+      });
     },
   }
 
@@ -268,39 +281,22 @@
 
 .canvas_area {
   display: block;
-  /* position: absolute; */
-  /* width: 100vw;
-  height: 100vh; */
 }
 
 .canvas_area:hover{
   cursor: all-scroll;
-  outline : 1.5px solid blue;
   }
 
 .rotate-icon {
   position: absolute;
   bottom: -60px;  
   padding: 30px;
-  display: none;
 }
 
+.is_active {
+  outline : 1.5px solid blue;
+}
 
-#red_dot {
-  position: absolute;
-  background-color:red;
-  width: 5px;
-  height: 5px;
-}
-#blue_dot {
-  position: absolute;
-  background-color:blue;
-  width: 5px;
-  height: 5px;
-}
-.hidden {
-  display: none;
-}
 
 
 

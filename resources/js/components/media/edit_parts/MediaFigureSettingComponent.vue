@@ -148,10 +148,13 @@
         this.$emit('close-modal');
       },
       addMediaFigure(){
-        console.log('callled addMediaFigure');
         // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
         const mediaFigure = Object.assign({}, this.getFigureData);
         this.addMediaFiguresObjectItem(mediaFigure);
+
+        // 図形追加後に次の描画位置をずらす
+        this.updateFigureData({key:'x_position', value:Number(this.getFigureData['x_position'])+40});
+        this.updateFigureData({key:'y_position', value:Number(this.getFigureData['y_position'])+40});
       },
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる
@@ -177,7 +180,6 @@
         } else {
           event = e.changedTouches[0];
         }
-        console.log(e);
         this.move_target = document.getElementById('media-figure-setting-wrapper');
         // this.move_target = event.target;
         this.x_in_element = event.clientX - this.move_target.offsetLeft;

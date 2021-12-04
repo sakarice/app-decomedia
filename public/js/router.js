@@ -2232,10 +2232,18 @@ function _defineProperty(obj, key, value) {
       this.$emit('close-modal');
     },
     addMediaFigure: function addMediaFigure() {
-      console.log('callled addMediaFigure'); // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
-
+      // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
       var mediaFigure = Object.assign({}, this.getFigureData);
-      this.addMediaFiguresObjectItem(mediaFigure);
+      this.addMediaFiguresObjectItem(mediaFigure); // 図形追加後に次の描画位置をずらす
+
+      this.updateFigureData({
+        key: 'x_position',
+        value: Number(this.getFigureData['x_position']) + 40
+      });
+      this.updateFigureData({
+        key: 'y_position',
+        value: Number(this.getFigureData['y_position']) + 40
+      });
     },
     // 設定モーダル操作用
     // モーダルの初期表示位置をウィンドウ中央に持ってくる
@@ -2265,7 +2273,6 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      console.log(e);
       this.move_target = document.getElementById('media-figure-setting-wrapper'); // this.move_target = event.target;
 
       this.x_in_element = event.clientX - this.move_target.offsetLeft;
@@ -3250,6 +3257,8 @@ function _defineProperty(obj, key, value) {
   props: ['index'],
   data: function data() {
     return {
+      "isActive": false,
+      "isReDraw": false,
       "canvas": "",
       "ctx": "",
       "move_target": "",
@@ -3277,6 +3286,7 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+    new_index: function new_index() {},
     canvas_width: function canvas_width() {
       return this.window_width + "px";
     },
@@ -3290,8 +3300,12 @@ function _defineProperty(obj, key, value) {
       return 'canvas_wrapper' + this.index;
     }
   }),
-  watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), {}, {
+  watch: {
+    isReDraw: function isReDraw() {
+      this.init();
+    }
+  },
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     getOneFigure: function getOneFigure(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(index);
@@ -3307,8 +3321,7 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      this.move_target = document.getElementById(this.canvas_wrapper_with_index); // this.move_target = event.target;
-
+      this.move_target = document.getElementById(this.canvas_wrapper_with_index);
       this.x_in_element = event.clientX - this.move_target.offsetLeft;
       this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
 
@@ -3407,29 +3420,42 @@ function _defineProperty(obj, key, value) {
       return value;
     },
     // 図形描画関連
+    init: function init() {
+      this.setFigureData();
+      this.setPosition();
+      this.setContext();
+      this.setCanvasSize();
+      this.setGlobalAlpha();
+      this.setStrokeColor();
+      this.setFillColor(); // this.setDegree();
+
+      this.createPathRect();
+      this.draw();
+      this.isReDraw = false;
+    },
     setFigureData: function setFigureData() {
       var figureData = this.getOneFigure(this.index);
-      this.x_position = Number(figureData['x_position']);
-      this.y_position = Number(figureData['y_position']);
-      this.degree = Number(figureData['degree']);
-      this.figure_width = Number(figureData['width']);
-      this.figure_height = Number(figureData['height']);
-      this.is_draw_fill = figureData['isDrawFill'];
-      this.is_draw_stroke = figureData['isDrawStroke'];
-      this.fill_color = figureData['fillColor'];
-      this.stroke_color = figureData['strokeColor'];
-      this.global_alpha = figureData['globalAlpha'];
+
+      if (!(typeof figureData === "undefined")) {
+        this.x_position = Number(figureData['x_position']);
+        this.y_position = Number(figureData['y_position']);
+        this.degree = Number(figureData['degree']);
+        this.figure_width = Number(figureData['width']);
+        this.figure_height = Number(figureData['height']);
+        this.is_draw_fill = figureData['isDrawFill'];
+        this.is_draw_stroke = figureData['isDrawStroke'];
+        this.fill_color = figureData['fillColor'];
+        this.stroke_color = figureData['strokeColor'];
+        this.global_alpha = figureData['globalAlpha'];
+      }
     },
     setContext: function setContext() {
       this.canvas = document.getElementById(this.canvas_with_index);
-      console.log(this.canvas);
       this.ctx = this.canvas.getContext('2d');
     },
     setCanvasSize: function setCanvasSize() {
-      this.window_width = this.figure_width; // this.window_width = window.innerWidth;
-
-      this.window_height = this.figure_height; // this.window_height = window.innerHeight;
-
+      this.window_width = this.figure_width;
+      this.window_height = this.figure_height;
       this.canvas.width = this.window_width;
       this.canvas.height = this.window_height;
     },
@@ -3443,7 +3469,6 @@ function _defineProperty(obj, key, value) {
     },
     draw: function draw() {
       this.clear();
-      console.log('start draw');
 
       if (this.is_draw_fill) {
         this.fill();
@@ -3461,14 +3486,8 @@ function _defineProperty(obj, key, value) {
       this.ctx.clearRect(0, 0, this.window_width, this.window_height);
     },
     createPathRect: function createPathRect() {
-      // const start_x = this.x_position;
-      // const start_y = this.y_position;
       var width = this.figure_width;
       var height = this.figure_height; // 左上から半時計回りに、四角形の4頂点のポイントを指定
-      // const point1_left_upper  = {x: start_x,         y: start_y};
-      // const point2_left_under  = {x: start_x ,        y: start_y + height};
-      // const point3_right_under = {x: start_x + width, y: start_y + height};
-      // const point4_right_upper = {x: start_x + width, y: start_y};
 
       var point1_left_upper = {
         x: 0,
@@ -3508,22 +3527,28 @@ function _defineProperty(obj, key, value) {
     },
     stroke: function stroke() {
       this.ctx.save();
-      this.ctx.stroke(); // this.ctx.restore();
+      this.ctx.stroke();
+    },
+    "delete": function _delete() {
+      if (this.isActive) {
+        this.isActive = false;
+        this.deleteMediaFiguresObjectItem(this.index);
+      }
     }
   }),
-  created: function created() {
-    this.setFigureData();
-  },
+  created: function created() {},
   mounted: function mounted() {
-    this.setPosition();
-    this.setContext();
-    this.setCanvasSize();
-    this.setGlobalAlpha();
-    this.setStrokeColor();
-    this.setFillColor(); // this.setDegree();
+    var _this = this;
 
-    this.createPathRect();
-    this.draw();
+    this.init(); // イベント登録
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest("#" + _this.canvas_wrapper_with_index)) {
+        _this.isActive = false;
+      } else {
+        _this.isActive = true;
+      }
+    });
   }
 });
 
@@ -3606,13 +3631,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -3629,17 +3647,29 @@ function _defineProperty(obj, key, value) {
   watch: {},
   methods: {
     // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-    figureListCSSProperty: function figureListCSSProperty(figure) {
-      return {// left:figure['x_position']+'px'
-        // ,top:figure['y_position']+'px'
-        // ,width:figure['width']+'px'
-        // ,height:figure['height']+'px'
-        // ,transform:'rotate('+ figure['degree'] +'deg)'
-      };
+    reRenderAll: function reRenderAll() {
+      console.log('called reRenderAll');
+      this.$refs.figures.forEach(function (figure) {
+        figure.init();
+      });
     }
   },
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    var _this = this;
+
+    document.addEventListener('keydown', function (e) {
+      if (e.code == "Delete") {
+        var figures_reverse = _this.$refs.figures.reverse();
+
+        figures_reverse.forEach(function (figure) {
+          figure["delete"]();
+        });
+
+        _this.reRenderAll();
+      }
+    });
+  }
 });
 
 /***/ }),
@@ -5271,7 +5301,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_item-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: inline-flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transform-origin: center center;\n}\n.canvas_item-wrapper:hover .rotate-icon[data-v-29e92a69]{\r\n  display: inline-block ;\n}\n.rotate-icon[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\n}\n.canvas_area[data-v-29e92a69] {\r\n  display: block;\r\n  /* position: absolute; */\r\n  /* width: 100vw;\r\n  height: 100vh; */\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\r\n  outline : 1.5px solid blue;\n}\n.rotate-icon[data-v-29e92a69] {\r\n  position: absolute;\r\n  bottom: -60px;  \r\n  padding: 30px;\r\n  display: none;\n}\n#red_dot[data-v-29e92a69] {\r\n  position: absolute;\r\n  background-color:red;\r\n  width: 5px;\r\n  height: 5px;\n}\n#blue_dot[data-v-29e92a69] {\r\n  position: absolute;\r\n  background-color:blue;\r\n  width: 5px;\r\n  height: 5px;\n}\n.hidden[data-v-29e92a69] {\r\n  display: none;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_item-wrapper[data-v-29e92a69] {\r\n  position: absolute;\r\n  display: inline-flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transform-origin: center center;\n}\n.canvas_item-wrapper:hover .rotate-icon[data-v-29e92a69]{\r\n  display: inline-block ;\n}\n.rotate-icon[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\n}\n.canvas_area[data-v-29e92a69] {\r\n  display: block;\n}\n.canvas_area[data-v-29e92a69]:hover{\r\n  cursor: all-scroll;\n}\n.rotate-icon[data-v-29e92a69] {\r\n  position: absolute;\r\n  bottom: -60px;  \r\n  padding: 30px;\n}\n.is_active[data-v-29e92a69] {\r\n  outline : 1.5px solid blue;\n}\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -5294,7 +5324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .figures-wrapper {\n  list-style: none;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width : 100vw;\n  height: 100vh;\n} */\n.figures-wrapper[data-v-5d74340a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n}\n\n/* .figure-list-item {\n  position: absolute;\n}\n.figure-list-item:hover {\n  cursor: pointer;\n} */\n\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.figures-wrapper[data-v-5d74340a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100vw;\n  height: 100vh;\n}\n\n/* .figure-list-item {\n  position: absolute;\n}\n.figure-list-item:hover {\n  cursor: pointer;\n} */\n\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12094,6 +12124,7 @@ var render = function () {
     [
       _c("canvas", {
         staticClass: "canvas_area",
+        class: { is_active: _vm.isActive },
         attrs: { id: _vm.canvas_with_index },
         on: {
           mousedown: function ($event) {
@@ -12106,6 +12137,14 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isActive,
+            expression: "isActive",
+          },
+        ],
         staticClass: "fas fa-sync fa-lg rotate-icon",
         on: {
           mousedown: function ($event) {
@@ -12144,8 +12183,14 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "figures-wrapper" },
-    _vm._l(this.getMediaFigures, function (figure, index) {
-      return _c("media-figure", { key: index, attrs: { index: index } })
+    _vm._l(_vm.getMediaFigures, function (figure, index) {
+      return _c("media-figure", {
+        key: index,
+        ref: "figures",
+        refInFor: true,
+        attrs: { index: index },
+        on: { "re-render-all": _vm.reRenderAll },
+      })
     }),
     1
   )
