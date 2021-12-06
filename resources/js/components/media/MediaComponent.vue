@@ -137,8 +137,7 @@
 
   // テスト メディア図形
   import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
-  import MediaFigureMng from './media_contents/MediaFigureMngComponent.vue';
-  // import MediaFigure from './media_contents/MediaFigureComponent.vue';
+  import MediaFigureMng from './media_contents/figure/MediaFigureMngComponent.vue';
 
 
 export default {

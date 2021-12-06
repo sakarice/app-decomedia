@@ -4,13 +4,31 @@
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)">
     </canvas>
-    <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
+    <div class="x-size-adjust-bar-wrapper" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
+      <div class="left-size-adjust-bar" @mousedown.stop="resizeLeftStart($event)"></div>
+      <div class="right-size-adjust-bar" @mousedown.stop="resizeRightStart($event)"></div>
+      <span class="mouse-position mouse-x" :v-show="isResizing">mouseX:{{mouse_x}}</span>
+      <span class="mouse-position mouse-y" :v-show="isResizing">mouseY:{{mouse_y}}</span>
+    </div>
+    <div class="y-size-adjust-bar-wrapper" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
+      <div class="top-size-adjust-bar" @mousedown.stop="resizeTopStart($event)"></div>
+      <div class="bottom-size-adjust-bar" @mousedown.stop="resizeBottomStart($event)"></div>
+    </div>
+    <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="rotateFinish"></figure-rotate>
+    <!-- <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i> -->
   </div>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
+import figureRotate from './FigureRotateComponent.vue';
+
   export default {
+    components : {
+      figureRotate,
+    },
     props:[
       'index',
     ],
@@ -18,6 +36,9 @@
       return {
         "isActive" : false,
         "isReDraw" : false,
+        "isResizing" :false,
+        "mouse_x" : 0,
+        "mouse_y" : 0,
         "canvas" : "",
         "ctx" : "",
         "move_target" : "", // ドラッグ操作で移動させる対象
@@ -80,6 +101,8 @@
         e.preventDefault();
         this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
         this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
+        this.x_position = (e.clientX - this.x_in_element);
+        this.y_position = (e.clientY - this.y_in_element);
 
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.moveEnd, false);
@@ -101,56 +124,90 @@
         move_target.style.top = this.y_position + 'px';
         move_target.style.transform = 'rotate('+ this.degree +'deg)';
       },
-      // 回転用
-      rotateStart(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        const x = this.figure_width;
-        const y = this.figure_height;
-        const r =  Math.sqrt(x*x + y*y);
-        this.rotate_target = document.getElementById(this.canvas_wrapper_with_index);
-        this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px",""));
-        this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px",""));
-        this.rotate_center_x = this.target_left;
-        this.rotate_center_y = this.target_top;
-
-        // 回転イベントにコールバック
-        document.body.addEventListener("mousemove", this.rotating, false);
-        document.body.addEventListener("mouseup", this.rotateEnd, false);
-        document.body.addEventListener("touchmove", this.rotating, false);
-        document.body.addEventListener("touchend", this.rotateEnd, false);
+      rotateFinish(new_degree){ this.degree = new_degree },
+      resizeRightStart(e){
+        document.body.addEventListener("mousemove", this.resizeRight, false);
+        document.body.addEventListener("mouseup", this.resizeEnd, false);
+        document.body.addEventListener("touchmove", this.resizeRight, false);
+        document.body.addEventListener("touchend", this.resizeEnd, false);
       },
-      rotating(e){
-        e.preventDefault();
-        const distance_x_from_target_center = e.clientX - this.rotate_center_x;
-        const distance_y_from_target_center = e.clientY - this.rotate_center_y;
-        const new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
-        const new_deg = new_rad * (180/Math.PI) * (-1); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
-        this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
-        this.degree = new_deg;
+      resizeRight(e){
+        this.figure_width = e.clientX - this.x_position;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.figure_width});
+        this.setCanvasSize();
+        this.createPathRect();
+        this.draw();
         // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.rotateEnd, false);
-        document.body.addEventListener("touchleave", this.rotateEnd, false);
+        document.body.addEventListener("mouseleave", this.resizeEnd, false);
+        document.body.addEventListener("touchleave", this.resizeEnd, false);
       },
-      rotateEnd(e){
-        this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:this.degree});
-
-        document.body.removeEventListener("mousemove", this.rotating, false);
-        this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
-        document.body.removeEventListener("touchmove", this.rotating, false);
-        this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
+      resizeLeftStart(e){
+        document.body.addEventListener("mousemove", this.resizeLeft, false);
+        document.body.addEventListener("mouseup", this.resizeEnd, false);
+        document.body.addEventListener("touchmove", this.resizeLeft, false);
+        document.body.addEventListener("touchend", this.resizeEnd, false);
       },
-      getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
-        if (!element || !property) {
-          return null;
-        }
-        var style = window.getComputedStyle(element);
-        var value = style.getPropertyValue(property);
-        return value;
+      resizeLeft(e){
+        const diff = this.x_position - e.clientX;
+        this.figure_width = this.figure_width + diff;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.figure_width});
+        this.x_position = this.x_position - diff;
+        this.setCanvasSize();
+        this.setPosition();
+        this.createPathRect();
+        this.draw();
+        // マウス、タッチ解除時のイベントを設定
+        document.body.addEventListener("mouseleave", this.resizeEnd, false);
+        document.body.addEventListener("touchleave", this.resizeEnd, false);
+      },
+      resizeBottomStart(e){
+        document.body.addEventListener("mousemove", this.resizeBottom, false);
+        document.body.addEventListener("mouseup", this.resizeEnd, false);
+        document.body.addEventListener("touchmove", this.resizeBottom, false);
+        document.body.addEventListener("touchend", this.resizeEnd, false);
+      },
+      resizeBottom(e){
+        // this.mouse_y = e.clientY;
+        // const new_height = e.clientY - this.y_position;
+        this.figure_height = e.clientY - this.y_position;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.figure_height});
+        this.setCanvasSize();
+        this.createPathRect();
+        this.draw();
+        // マウス、タッチ解除時のイベントを設定
+        document.body.addEventListener("mouseleave", this.resizeEnd, false);
+        document.body.addEventListener("touchleave", this.resizeEnd, false);
+      },
+      resizeTopStart(e){
+        document.body.addEventListener("mousemove", this.resizeTop, false);
+        document.body.addEventListener("mouseup", this.resizeEnd, false);
+        document.body.addEventListener("touchmove", this.resizeTop, false);
+        document.body.addEventListener("touchend", this.resizeEnd, false);
+      },
+      resizeTop(e){
+        const diff = this.y_position - e.clientY;
+        this.figure_height = this.figure_height + diff;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"heightfigure_height",value:this.figure_height});
+        this.y_position = this.y_position - diff;
+        this.setCanvasSize();
+        this.setPosition();
+        this.createPathRect();
+        this.draw();
+        // マウス、タッチ解除時のイベントを設定
+        document.body.addEventListener("mouseleave", this.resizeEnd, false);
+        document.body.addEventListener("touchleave", this.resizeEnd, false);
+      },
+      resizeEnd(e){
+        document.body.removeEventListener("mousemove", this.resizeRight, false);
+        document.body.removeEventListener("mousemove", this.resizeLeft, false);
+        document.body.removeEventListener("mousemove", this.resizeBottom, false);
+        document.body.removeEventListener("mousemove", this.resizeTop, false);
+        document.body.removeEventListener("mousemove", this.resize, false);
+        document.body.removeEventListener("touchmove", this.resizeRight, false);
+        document.body.removeEventListener("touchmove", this.resizeLeft, false);
+        document.body.removeEventListener("touchmove", this.resizeBottom, false);
+        document.body.removeEventListener("touchmove", this.resizeTop, false);
+        document.body.removeEventListener("touchmove", this.resize, false);
       },
 
 
@@ -289,15 +346,98 @@
 
 .rotate-icon {
   position: absolute;
-  bottom: -60px;  
+  bottom: -90px;  
   padding: 30px;
 }
 
 .is_active {
   outline : 1.5px solid blue;
 }
+.hidden {
+  /* display: none; */
+  opacity: 0;
+}
 
+.x-size-adjust-bar-wrapper,
+.y-size-adjust-bar-wrapper{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
+/* x軸方向のサイズ調整 */
+.x-size-adjust-bar-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+.x-size-adjust-bar-wrapper:hover{
+  cursor: all-scroll;
+}
+
+.right-size-adjust-bar,
+.left-size-adjust-bar {
+  background-color: red;
+  width: 5px;
+  height: 20px;
+  border-radius: 5px;
+}
+.right-size-adjust-bar{
+  margin-right: -3px;
+}
+.right-size-adjust-bar:hover{
+  cursor: auto;  
+}
+
+.left-size-adjust-bar{
+  margin-left: -3px;
+}
+.left-size-adjust-bar:hover{
+  cursor: auto;
+}
+
+/* y軸方向のサイズ調整 */
+.y-size-adjust-bar-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.y-size-adjust-bar-wrapper:hover{
+  cursor: all-scroll;
+}
+.top-size-adjust-bar,
+.bottom-size-adjust-bar {
+  background-color: blue;
+  width: 20px;
+  height: 5px;
+  border-radius: 5px;
+}
+.top-size-adjust-bar {
+  margin-top: -3px;
+}
+.top-size-adjust-bar:hover {
+  cursor: auto;
+}
+
+.bottom-size-adjust-bar {
+  margin-bottom: -3px;
+}
+.bottom-size-adjust-bar:hover {
+  cursor: auto;
+}
+
+.mouse-position {
+  position : absolute;
+  /* bottom: -20px; */
+  right: -90px;
+}
+.mouse-x {
+  bottom: -20px;
+}
+.mosue-y {
+  bottom: -40px;
+}
 
 
 </style>

@@ -84,8 +84,9 @@ Vue.component('media-update-button-component', require('./components/media/actio
 Vue.component('cancel-button-component', require('./components/media/action_parts/CancelButtonComponent.vue').default);
 
 // media図形コンポーネント
-Vue.component('media-figure-component', require('./components/media/media_contents/MediaFigureComponent.vue').default);
-Vue.component('media-figure-mng-component', require('./components/media/media_contents/MediaFigureMngComponent.vue').default);
+Vue.component('media-figure-mng-component', require('./components/media/media_contents/figure/MediaFigureMngComponent.vue').default);
+Vue.component('media-figure-component', require('./components/media/media_contents/figure/MediaFigureComponent.vue').default);
+Vue.component('figure-rotate-component', require('./components/media/media_contents/figure/FigureRotateComponent.vue').default);
 
 
 // mediaリスト作成用コンポーネント
