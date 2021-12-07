@@ -87,6 +87,8 @@ Vue.component('cancel-button-component', require('./components/media/action_part
 Vue.component('media-figure-mng-component', require('./components/media/media_contents/figure/MediaFigureMngComponent.vue').default);
 Vue.component('media-figure-component', require('./components/media/media_contents/figure/MediaFigureComponent.vue').default);
 Vue.component('figure-rotate-component', require('./components/media/media_contents/figure/FigureRotateComponent.vue').default);
+Vue.component('figure-resize-component', require('./components/media/media_contents/figure/FigureResizeComponent.vue').default);
+Vue.component('figure-update-component', require('./components/media/media_contents/figure/FigureUpdateComponent.vue').default);
 
 
 // mediaリスト作成用コンポーネント

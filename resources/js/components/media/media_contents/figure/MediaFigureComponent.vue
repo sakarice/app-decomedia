@@ -1,21 +1,14 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper">
+  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" @dblclick="showEditor">
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
-    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
+    @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
-    <div class="x-size-adjust-bar-wrapper" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
-    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
-      <div class="left-size-adjust-bar" @mousedown.stop="resizeLeftStart($event)"></div>
-      <div class="right-size-adjust-bar" @mousedown.stop="resizeRightStart($event)"></div>
-      <span class="mouse-position mouse-x" :v-show="isResizing">mouseX:{{mouse_x}}</span>
-      <span class="mouse-position mouse-y" :v-show="isResizing">mouseY:{{mouse_y}}</span>
-    </div>
-    <div class="y-size-adjust-bar-wrapper" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
-    @mousedown="moveStart($event)" @touchstart="moveStart($event)">
-      <div class="top-size-adjust-bar" @mousedown.stop="resizeTopStart($event)"></div>
-      <div class="bottom-size-adjust-bar" @mousedown.stop="resizeBottomStart($event)"></div>
-    </div>
+
+    <figure-resize :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+     v-on:resize="resize"
+     v-on:move="moveStart($event)">
+    </figure-resize>
     <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="rotateFinish"></figure-rotate>
     <!-- <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i> -->
   </div>
@@ -24,10 +17,13 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
 import figureRotate from './FigureRotateComponent.vue';
+import figureResize from './FigureResizeComponent.vue';
 
   export default {
     components : {
       figureRotate,
+      figureResize,
+      // figureUpdate,
     },
     props:[
       'index',
@@ -76,6 +72,7 @@ import figureRotate from './FigureRotateComponent.vue';
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
+      showEditor(){ this.$emit('show-editor', this.index)},
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
@@ -104,14 +101,15 @@ import figureRotate from './FigureRotateComponent.vue';
         this.x_position = (e.clientX - this.x_in_element);
         this.y_position = (e.clientY - this.y_in_element);
 
+        // console.log("moveEnd:"+(e.clientX - this.x_in_element));
+        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:e.clientX - this.x_in_element});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:e.clientY - this.y_in_element});
+
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.moveEnd, false);
         document.body.addEventListener("touchleave", this.moveEnd, false);
       },
       moveEnd(e){
-        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:e.clientX - this.x_in_element});
-        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:e.clientY - this.y_in_element});
-
         document.body.removeEventListener("mousemove", this.moving, false);
         this.move_target.removeEventListener("mouseup", this.moveEnd, false);
         document.body.removeEventListener("touchmove", this.moving, false);
@@ -125,91 +123,17 @@ import figureRotate from './FigureRotateComponent.vue';
         move_target.style.transform = 'rotate('+ this.degree +'deg)';
       },
       rotateFinish(new_degree){ this.degree = new_degree },
-      resizeRightStart(e){
-        document.body.addEventListener("mousemove", this.resizeRight, false);
-        document.body.addEventListener("mouseup", this.resizeEnd, false);
-        document.body.addEventListener("touchmove", this.resizeRight, false);
-        document.body.addEventListener("touchend", this.resizeEnd, false);
-      },
-      resizeRight(e){
-        this.figure_width = e.clientX - this.x_position;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.figure_width});
+      resize(){
+        const figure = this.getOneFigure(this.index);
+        this.figure_width = figure['width'];
+        this.figure_height = figure['height'];
         this.setCanvasSize();
-        this.createPathRect();
-        this.draw();
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.resizeEnd, false);
-        document.body.addEventListener("touchleave", this.resizeEnd, false);
-      },
-      resizeLeftStart(e){
-        document.body.addEventListener("mousemove", this.resizeLeft, false);
-        document.body.addEventListener("mouseup", this.resizeEnd, false);
-        document.body.addEventListener("touchmove", this.resizeLeft, false);
-        document.body.addEventListener("touchend", this.resizeEnd, false);
-      },
-      resizeLeft(e){
-        const diff = this.x_position - e.clientX;
-        this.figure_width = this.figure_width + diff;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.figure_width});
-        this.x_position = this.x_position - diff;
-        this.setCanvasSize();
+        this.x_position = figure['x_position'];
+        this.y_position = figure['y_position'];
         this.setPosition();
         this.createPathRect();
         this.draw();
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.resizeEnd, false);
-        document.body.addEventListener("touchleave", this.resizeEnd, false);
       },
-      resizeBottomStart(e){
-        document.body.addEventListener("mousemove", this.resizeBottom, false);
-        document.body.addEventListener("mouseup", this.resizeEnd, false);
-        document.body.addEventListener("touchmove", this.resizeBottom, false);
-        document.body.addEventListener("touchend", this.resizeEnd, false);
-      },
-      resizeBottom(e){
-        // this.mouse_y = e.clientY;
-        // const new_height = e.clientY - this.y_position;
-        this.figure_height = e.clientY - this.y_position;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.figure_height});
-        this.setCanvasSize();
-        this.createPathRect();
-        this.draw();
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.resizeEnd, false);
-        document.body.addEventListener("touchleave", this.resizeEnd, false);
-      },
-      resizeTopStart(e){
-        document.body.addEventListener("mousemove", this.resizeTop, false);
-        document.body.addEventListener("mouseup", this.resizeEnd, false);
-        document.body.addEventListener("touchmove", this.resizeTop, false);
-        document.body.addEventListener("touchend", this.resizeEnd, false);
-      },
-      resizeTop(e){
-        const diff = this.y_position - e.clientY;
-        this.figure_height = this.figure_height + diff;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"heightfigure_height",value:this.figure_height});
-        this.y_position = this.y_position - diff;
-        this.setCanvasSize();
-        this.setPosition();
-        this.createPathRect();
-        this.draw();
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.resizeEnd, false);
-        document.body.addEventListener("touchleave", this.resizeEnd, false);
-      },
-      resizeEnd(e){
-        document.body.removeEventListener("mousemove", this.resizeRight, false);
-        document.body.removeEventListener("mousemove", this.resizeLeft, false);
-        document.body.removeEventListener("mousemove", this.resizeBottom, false);
-        document.body.removeEventListener("mousemove", this.resizeTop, false);
-        document.body.removeEventListener("mousemove", this.resize, false);
-        document.body.removeEventListener("touchmove", this.resizeRight, false);
-        document.body.removeEventListener("touchmove", this.resizeLeft, false);
-        document.body.removeEventListener("touchmove", this.resizeBottom, false);
-        document.body.removeEventListener("touchmove", this.resizeTop, false);
-        document.body.removeEventListener("touchmove", this.resize, false);
-      },
-
 
       // 図形描画関連
       init(){

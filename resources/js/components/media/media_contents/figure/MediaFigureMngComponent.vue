@@ -4,8 +4,16 @@
     <media-figure v-for="(figure, index) in getMediaFigures" :key="index"
     :index="index"
     ref="figures"
+    @show-editor="showEditor(index)"
     @re-render-all="reRenderAll">
     </media-figure>
+
+    <figure-update v-show="isShowEditor"
+     :index="editor_index"
+     ref="Editor"
+     @close-editor="closeEditor"
+     @re-render="reRender">
+    </figure-update>
   </div>
 
 </template>
@@ -15,30 +23,42 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import MediaFigure from './MediaFigureComponent.vue';
+  import figureUpdate from './FigureUpdateComponent.vue';
 
 
   export default {
     components : {
       MediaFigure,
+      figureUpdate,
     },
     props:[
-      'index',
+      // 'index',
     ],
     data : ()=>{
       return {
+        "isShowEditor" : false,
+        "editor_index" : -1,
       }
     },
     computed : {
       // ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
     },
-    watch : {},
+    watch : {
+      // editor_index : function(val){ this.$refs.Editor.init(val); }
+    },
     methods : {
       // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-      reRenderAll(){
-        console.log('called reRenderAll');
-        this.$refs.figures.forEach(figure => {figure.init(); });
+      showEditor(index){
+        this.isShowEditor = true;
+        if(this.editor_index != index){
+          this.editor_index = index;
+          this.$refs.Editor.init(index);
+        }
       },
+      closeEditor(){ this.isShowEditor = false;},
+      reRender(index){ this.$refs.figures[index].init(); },
+      reRenderAll(){ this.$refs.figures.forEach(figure => {figure.init(); }); },
     },
     created(){
     },
