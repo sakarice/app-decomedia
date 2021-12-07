@@ -97,18 +97,6 @@
           "fillColor" : "",
           "strokeColor" : "",
         },
-        // "figureDataKeys" : [
-        //   "x_position",
-        //   "y_position",
-        //   "width",
-        //   "height",
-        //   "degree",
-        //   "isDrawFill",
-        //   "isDrawStroke",
-        //   "fillColor",
-        //   "strokeColor",
-        //   "globalAlpha",
-        // ],
       }
     },
     computed : {
