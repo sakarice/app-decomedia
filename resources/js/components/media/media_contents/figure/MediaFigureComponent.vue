@@ -1,6 +1,7 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" @dblclick="showEditor">
+  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" :style="{left:style_left,top:style_top,transform:style_rotate}"
+  @dblclick="showEditor">
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import figureRotate from './FigureRotateComponent.vue';
 import figureResize from './FigureResizeComponent.vue';
 
@@ -23,7 +24,6 @@ import figureResize from './FigureResizeComponent.vue';
     components : {
       figureRotate,
       figureResize,
-      // figureUpdate,
     },
     props:[
       'index',
@@ -45,16 +45,20 @@ import figureResize from './FigureResizeComponent.vue';
         "rotate_center_y" : 0,
         "window_width" : 400,
         "window_height" : 400,
-        "x_position" : 0,
-        "y_position" : 0, 
-        "degree" : 0, 
-        "figure_width" : 0, 
-        "figure_height" : 0, 
-        "is_draw_fill" : false, 
-        "is_draw_stroke" : false,
-        "fill_color" : "",
-        "stroke_color" : "", 
-        "global_alpha" : 0, 
+
+        "figureDatas" : {
+          "x_position" : 0,
+          "y_position" : 0,
+          "width" : 0,
+          "height" : 0,
+          "degree" : 0,
+          "globalAlpha" : 0,
+          "isDrawFill" : false,
+          "isDrawStroke" : false,
+          "fillColor" : "",
+          "strokeColor" : "",
+        },
+
       }
     },
     computed : {
@@ -64,6 +68,9 @@ import figureResize from './FigureResizeComponent.vue';
       canvas_height:function(){ return this.window_height+"px" },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
+      style_left : function(){ return this.figureDatas['x_position'] + 'px';},
+      style_top : function(){ return this.figureDatas['y_position'] + 'px';},
+      style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
     },
     watch : {
       isReDraw:function(){ this.init(); }
@@ -98,12 +105,11 @@ import figureResize from './FigureResizeComponent.vue';
         e.preventDefault();
         this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
         this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-        this.x_position = (e.clientX - this.x_in_element);
-        this.y_position = (e.clientY - this.y_in_element);
+        this.figureDatas['x_position'] = (e.clientX - this.x_in_element);
+        this.figureDatas['y_position'] = (e.clientY - this.y_in_element);
 
-        // console.log("moveEnd:"+(e.clientX - this.x_in_element));
-        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:e.clientX - this.x_in_element});
-        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:e.clientY - this.y_in_element});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:this.figureDatas['x_position']});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:this.figureDatas['y_position']});
 
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.moveEnd, false);
@@ -116,21 +122,21 @@ import figureResize from './FigureResizeComponent.vue';
         this.move_target.removeEventListener("touchend", this.moveEnd, false);
       },
       // 初期描画位置
-      setPosition(){
-        const move_target = document.getElementById(this.canvas_wrapper_with_index);
-        move_target.style.left = this.x_position + 'px';
-        move_target.style.top = this.y_position + 'px';
-        move_target.style.transform = 'rotate('+ this.degree +'deg)';
-      },
-      rotateFinish(new_degree){ this.degree = new_degree },
+      // setPosition(){
+      //   const move_target = document.getElementById(this.canvas_wrapper_with_index);
+      //   move_target.style.left = this.figureDatas['x_position'] + 'px';
+      //   move_target.style.top = this.figureDatas['y_position'] + 'px';
+      //   move_target.style.transform = 'rotate('+ this.figureDatas['degree'] +'deg)';
+      // },
+      rotateFinish(new_degree){ this.figureDatas['degree'] = new_degree },
       resize(){
         const figure = this.getOneFigure(this.index);
-        this.figure_width = figure['width'];
-        this.figure_height = figure['height'];
+        this.figureDatas['width'] = figure['width'];
+        this.figureDatas['height'] = figure['height'];
         this.setCanvasSize();
-        this.x_position = figure['x_position'];
-        this.y_position = figure['y_position'];
-        this.setPosition();
+        this.figureDatas['x_position'] = figure['x_position'];
+        this.figureDatas['y_position'] = figure['y_position'];
+        // this.setPosition();
         this.createPathRect();
         this.draw();
       },
@@ -138,7 +144,7 @@ import figureResize from './FigureResizeComponent.vue';
       // 図形描画関連
       init(){
         this.setFigureData();
-        this.setPosition();
+        // this.setPosition();
         this.setContext();
         this.setCanvasSize();
         this.setGlobalAlpha();
@@ -149,19 +155,25 @@ import figureResize from './FigureResizeComponent.vue';
         this.draw();
         this.isReDraw = false;
       },
+      checkTypeNum(key){
+        const num_type_keys = ["width","height","degree","x_position","y_position","globalAlpha"];
+        return num_type_keys.includes(key);
+      },
+      fixDataType(key, value){
+        let reTypedValue;
+        if(this.checkTypeNum(key)){
+          reTypedValue = Number(value);
+        } else {
+          reTypedValue = value;
+        }
+        return reTypedValue;
+      },      
       setFigureData(){
-        const figureData = this.getOneFigure(this.index);
-        if(!(typeof figureData === "undefined")){
-          this.x_position = Number(figureData['x_position']);
-          this.y_position = Number(figureData['y_position']);
-          this.degree = Number(figureData['degree']);
-          this.figure_width = Number(figureData['width']);
-          this.figure_height = Number(figureData['height']);
-          this.is_draw_fill = figureData['isDrawFill'];
-          this.is_draw_stroke = figureData['isDrawStroke'];
-          this.fill_color = figureData['fillColor'];
-          this.stroke_color = figureData['strokeColor'];
-          this.global_alpha = figureData['globalAlpha'];
+        const storeData = this.getOneFigure(this.index);
+        if(!(typeof storeData === "undefined")){
+          for(let key of Object.keys(storeData)){
+            this.figureDatas[key] = this.fixDataType(key, storeData[key]);
+          }
         }
       },
       setContext(){
@@ -169,30 +181,30 @@ import figureResize from './FigureResizeComponent.vue';
         this.ctx = this.canvas.getContext('2d');
       },
       setCanvasSize(){
-        this.window_width = this.figure_width;
-        this.window_height = this.figure_height;
+        this.window_width = this.figureDatas['width'];
+        this.window_height = this.figureDatas['height'];
         this.canvas.width = this.window_width;
         this.canvas.height = this.window_height;
       },
       setDegree(){ 
         // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-        let move_x = this.figure_width/2;
-        let move_y = this.figure_height/2;
+        let move_x = this.figureDatas['width']/2;
+        let move_y = this.figureDatas['height']/2;
         this.ctx.translate(move_x, move_y);
-        this.ctx.rotate(this.degree * Math.PI / 180);
+        this.ctx.rotate(this.figureDatas['degree'] * Math.PI / 180);
         this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
       },
       draw(){
         this.clear();
-        if(this.is_draw_fill){ this.fill(); };
-        if(this.is_draw_stroke){ this.stroke(); };
+        if(this.figureDatas['isDrawFill']){ this.fill(); };
+        if(this.figureDatas['isDrawStroke']){ this.stroke(); };
       },
       clear(){
         this.ctx.clearRect(0,0,this.window_width,this.window_height);
       },
       createPathRect(){
-        const width = this.figure_width;
-        const height = this.figure_height;
+        const width = this.figureDatas['width'];
+        const height = this.figureDatas['height'];
 
         // 左上から半時計回りに、四角形の4頂点のポイントを指定
         const point1_left_upper  = {x: 0,         y: 0};
@@ -207,9 +219,9 @@ import figureResize from './FigureResizeComponent.vue';
         this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.ctx.closePath();
       },
-      setGlobalAlpha(){ this.ctx.globalAlpha = this.global_alpha;},
-      setStrokeColor(){this.ctx.strokeStyle = this.stroke_color;},
-      setFillColor(){this.ctx.fillStyle = this.fill_color;},
+      setGlobalAlpha(){ this.ctx.globalAlpha = this.figureDatas['globalAlpha'];},
+      setStrokeColor(){this.ctx.strokeStyle = this.figureDatas['strokeColor'];},
+      setFillColor(){this.ctx.fillStyle = this.figureDatas['fillColor'];},
       fill(){
         this.ctx.save();
         this.ctx.fill();
