@@ -4295,8 +4295,6 @@ function _defineProperty(obj, key, value) {
       // ドラッグ操作で回転させる対象
       "rotate_center_x": 0,
       "rotate_center_y": 0,
-      "window_width": 400,
-      "window_height": 400,
       "figureDatas": {
         "x_position": 0,
         "y_position": 0,
@@ -4314,10 +4312,10 @@ function _defineProperty(obj, key, value) {
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
     new_index: function new_index() {},
     canvas_width: function canvas_width() {
-      return this.window_width + "px";
+      return this.figureDatas['width'] + "px";
     },
     canvas_height: function canvas_height() {
-      return this.window_height + "px";
+      return this.figureDatas['height'] + "px";
     },
     canvas_with_index: function canvas_with_index() {
       return 'canvas' + this.index;
@@ -4394,37 +4392,28 @@ function _defineProperty(obj, key, value) {
       document.body.removeEventListener("touchmove", this.moving, false);
       this.move_target.removeEventListener("touchend", this.moveEnd, false);
     },
-    // 初期描画位置
-    // setPosition(){
-    //   const move_target = document.getElementById(this.canvas_wrapper_with_index);
-    //   move_target.style.left = this.figureDatas['x_position'] + 'px';
-    //   move_target.style.top = this.figureDatas['y_position'] + 'px';
-    //   move_target.style.transform = 'rotate('+ this.figureDatas['degree'] +'deg)';
-    // },
-    rotateFinish: function rotateFinish(new_degree) {
+    updateDegree: function updateDegree(new_degree) {
       this.figureDatas['degree'] = new_degree;
     },
     resize: function resize() {
-      var figure = this.getOneFigure(this.index);
-      this.figureDatas['width'] = figure['width'];
-      this.figureDatas['height'] = figure['height'];
-      this.setCanvasSize();
-      this.figureDatas['x_position'] = figure['x_position'];
-      this.figureDatas['y_position'] = figure['y_position']; // this.setPosition();
+      var _this = this;
 
+      var keys = ["width", "height", "x_position", "y_position"];
+      var storeData = this.getOneFigure(this.index);
+      keys.forEach(function (key) {
+        _this.figureDatas[key] = storeData[key];
+      });
+      this.setCanvasSize();
       this.createPathRect();
       this.draw();
     },
     // 図形描画関連
     init: function init() {
-      this.setFigureData(); // this.setPosition();
-
-      this.setContext();
+      this.setFigureData();
       this.setCanvasSize();
       this.setGlobalAlpha();
       this.setStrokeColor();
-      this.setFillColor(); // this.setDegree();
-
+      this.setFillColor();
       this.createPathRect();
       this.draw();
       this.isReDraw = false;
@@ -4459,18 +4448,8 @@ function _defineProperty(obj, key, value) {
       this.ctx = this.canvas.getContext('2d');
     },
     setCanvasSize: function setCanvasSize() {
-      this.window_width = this.figureDatas['width'];
-      this.window_height = this.figureDatas['height'];
-      this.canvas.width = this.window_width;
-      this.canvas.height = this.window_height;
-    },
-    setDegree: function setDegree() {
-      // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-      var move_x = this.figureDatas['width'] / 2;
-      var move_y = this.figureDatas['height'] / 2;
-      this.ctx.translate(move_x, move_y);
-      this.ctx.rotate(this.figureDatas['degree'] * Math.PI / 180);
-      this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+      this.canvas.width = this.figureDatas['width'];
+      this.canvas.height = this.figureDatas['height'];
     },
     draw: function draw() {
       this.clear();
@@ -4488,7 +4467,7 @@ function _defineProperty(obj, key, value) {
       ;
     },
     clear: function clear() {
-      this.ctx.clearRect(0, 0, this.window_width, this.window_height);
+      this.ctx.clearRect(0, 0, this.figureDatas['width'], this.figureDatas['height']);
     },
     createPathRect: function createPathRect() {
       var width = this.figureDatas['width'];
@@ -4543,15 +4522,16 @@ function _defineProperty(obj, key, value) {
   }),
   created: function created() {},
   mounted: function mounted() {
-    var _this = this;
+    var _this2 = this;
 
+    this.setContext();
     this.init(); // イベント登録
 
     document.addEventListener('click', function (e) {
-      if (!e.target.closest("#" + _this.canvas_wrapper_with_index)) {
-        _this.isActive = false;
+      if (!e.target.closest("#" + _this2.canvas_wrapper_with_index)) {
+        _this2.isActive = false;
       } else {
-        _this.isActive = true;
+        _this2.isActive = true;
       }
     });
   }
@@ -13857,7 +13837,7 @@ var render = function () {
           },
         ],
         attrs: { index: _vm.index },
-        on: { "rotate-finish": _vm.rotateFinish },
+        on: { "rotate-finish": _vm.updateDegree },
       }),
     ],
     1

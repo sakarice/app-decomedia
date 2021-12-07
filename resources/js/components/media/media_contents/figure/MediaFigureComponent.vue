@@ -10,7 +10,7 @@
      v-on:resize="resize"
      v-on:move="moveStart($event)">
     </figure-resize>
-    <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="rotateFinish"></figure-rotate>
+    <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="updateDegree"></figure-rotate>
     <!-- <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i> -->
   </div>
 </template>
@@ -43,8 +43,6 @@ import figureResize from './FigureResizeComponent.vue';
         "rotate_target" : "", // ドラッグ操作で回転させる対象
         "rotate_center_x" : 0,
         "rotate_center_y" : 0,
-        "window_width" : 400,
-        "window_height" : 400,
 
         "figureDatas" : {
           "x_position" : 0,
@@ -64,8 +62,8 @@ import figureResize from './FigureResizeComponent.vue';
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       new_index:function(){ },
-      canvas_width:function(){ return this.window_width+"px" },
-      canvas_height:function(){ return this.window_height+"px" },
+      canvas_width:function(){ return this.figureDatas['width']+"px" },
+      canvas_height:function(){ return this.figureDatas['height']+"px" },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
       style_left : function(){ return this.figureDatas['x_position'] + 'px';},
@@ -121,36 +119,22 @@ import figureResize from './FigureResizeComponent.vue';
         document.body.removeEventListener("touchmove", this.moving, false);
         this.move_target.removeEventListener("touchend", this.moveEnd, false);
       },
-      // 初期描画位置
-      // setPosition(){
-      //   const move_target = document.getElementById(this.canvas_wrapper_with_index);
-      //   move_target.style.left = this.figureDatas['x_position'] + 'px';
-      //   move_target.style.top = this.figureDatas['y_position'] + 'px';
-      //   move_target.style.transform = 'rotate('+ this.figureDatas['degree'] +'deg)';
-      // },
-      rotateFinish(new_degree){ this.figureDatas['degree'] = new_degree },
+      updateDegree(new_degree){ this.figureDatas['degree'] = new_degree },
       resize(){
-        const figure = this.getOneFigure(this.index);
-        this.figureDatas['width'] = figure['width'];
-        this.figureDatas['height'] = figure['height'];
+        const keys = ["width","height","x_position","y_position"];
+        const storeData = this.getOneFigure(this.index);
+        keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
         this.setCanvasSize();
-        this.figureDatas['x_position'] = figure['x_position'];
-        this.figureDatas['y_position'] = figure['y_position'];
-        // this.setPosition();
         this.createPathRect();
         this.draw();
       },
-
       // 図形描画関連
       init(){
         this.setFigureData();
-        // this.setPosition();
-        this.setContext();
         this.setCanvasSize();
         this.setGlobalAlpha();
         this.setStrokeColor();
         this.setFillColor();
-        // this.setDegree();
         this.createPathRect();
         this.draw();
         this.isReDraw = false;
@@ -181,18 +165,8 @@ import figureResize from './FigureResizeComponent.vue';
         this.ctx = this.canvas.getContext('2d');
       },
       setCanvasSize(){
-        this.window_width = this.figureDatas['width'];
-        this.window_height = this.figureDatas['height'];
-        this.canvas.width = this.window_width;
-        this.canvas.height = this.window_height;
-      },
-      setDegree(){ 
-        // 描画予定の図形の中心にcontextの回転軸を持ってきて回転する。
-        let move_x = this.figureDatas['width']/2;
-        let move_y = this.figureDatas['height']/2;
-        this.ctx.translate(move_x, move_y);
-        this.ctx.rotate(this.figureDatas['degree'] * Math.PI / 180);
-        this.ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
+        this.canvas.width = this.figureDatas['width'];
+        this.canvas.height = this.figureDatas['height'];
       },
       draw(){
         this.clear();
@@ -200,7 +174,7 @@ import figureResize from './FigureResizeComponent.vue';
         if(this.figureDatas['isDrawStroke']){ this.stroke(); };
       },
       clear(){
-        this.ctx.clearRect(0,0,this.window_width,this.window_height);
+        this.ctx.clearRect(0,0,this.figureDatas['width'],this.figureDatas['height']);
       },
       createPathRect(){
         const width = this.figureDatas['width'];
@@ -240,6 +214,7 @@ import figureResize from './FigureResizeComponent.vue';
     },
     created(){},
     mounted(){
+      this.setContext();
       this.init();
 
       // イベント登録
