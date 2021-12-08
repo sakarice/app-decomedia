@@ -10032,7 +10032,7 @@ var mediaFigure = {
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaFigures: [],
     // media_id : null,
-    // type : null,
+    // type : 1,
     // groupNo : null,
     // left : 100,
     // top : 100,
