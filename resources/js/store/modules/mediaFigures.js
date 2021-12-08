@@ -6,8 +6,7 @@ const mediaFigure = {
     isInitialized : false,
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaFigures : [],
-      // type : 0,
-      // id : 0,
+      // media_id : null,
       // left : 100,
       // top : 100,
       // width : 50,

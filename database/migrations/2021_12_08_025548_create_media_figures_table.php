@@ -15,6 +15,21 @@ class CreateMediaFiguresTable extends Migration
     {
         Schema::create('media_figures', function (Blueprint $table) {
             $table->id();
+            $table->integer('media_id');
+            $table->integer('type');
+            $table->integer('user_selected_item_group_no');
+            $table->integer('left');
+            $table->integer('top');
+            $table->integer('width');
+            $table->integer('height');
+            $table->integer('degree')->default(1);
+            $table->float('global_alpha', 3, 2)->default(1);
+            $table->integer('layer');
+            $table->boolean('is_draw_fill');
+            $table->string('fill_color', 191)->nullable();
+            $table->boolean('is_draw_stroke');
+            $table->string('stroke_color', 191)->nullable();
+
             $table->timestamps();
         });
     }
