@@ -9984,9 +9984,9 @@ var mediaFigure = {
       globalAlpha: 1,
       layer: 0,
       isDrawFill: false,
-      fillColor: "black",
+      fillColor: "#000000",
       isDrawStroke: true,
-      strokeColor: "grey"
+      strokeColor: "#000000"
     }
   },
   getters: {
