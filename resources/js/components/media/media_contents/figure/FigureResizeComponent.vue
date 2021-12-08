@@ -101,37 +101,37 @@
         this.registEventMiddleToEnd();
       },
       resizeRight(e){
-        const x_position = this.getOneFigure(this.index)['x_position'];
-        this.width = e.clientX - x_position;
+        const left = this.getOneFigure(this.index)['left'];
+        this.width = e.clientX - left;
         this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.width});
         this.resizeMiddleLast();
       },
       resizeLeft(e){
-        const x = this.getOneFigure(this.index)['x_position'];
+        const x = this.getOneFigure(this.index)['left'];
         const diff = x - e.clientX;
         const width_before = this.getOneFigure(this.index)['width'];
         const width_new = width_before + diff;
         this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:width_new});
         this.width = width_new;
         const new_x = x - diff;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:new_x});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_x});
         this.resizeMiddleLast();
       },
       resizeBottom(e){
-        const y_position = this.getOneFigure(this.index)['y_position'];
-        this.height = e.clientY - y_position;
+        const top = this.getOneFigure(this.index)['top'];
+        this.height = e.clientY - top;
         this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.height});
         this.resizeMiddleLast();
       },
       resizeTop(e){
-        const y = this.getOneFigure(this.index)['y_position'];
+        const y = this.getOneFigure(this.index)['top'];
         const diff = y - e.clientY;
         const height_before = this.getOneFigure(this.index)['height'];
         const height_new = height_before + diff;
         this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:height_new});
         this.height = height_new;
         const new_y = y - diff;
-        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:new_y});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_y});
         this.resizeMiddleLast();
       },
 

@@ -8,8 +8,8 @@ const mediaFigure = {
     mediaFigures : [],
       // type : 0,
       // id : 0,
-      // x_position : 100,
-      // y_position : 100,
+      // left : 100,
+      // top : 100,
       // width : 50,
       // height : 50,
       // degree : 0,
@@ -28,7 +28,6 @@ const mediaFigure = {
   },
   mutations : {
     deleteMediaFiguresObjectItem(state, payload){
-      // console.log(state.mediaFigures[payload]['x_position']);
       state.mediaFigures.splice(payload,1) // figureを1つ削除
     },
     addMediaFiguresObjectItem(state, payload){

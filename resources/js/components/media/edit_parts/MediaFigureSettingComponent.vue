@@ -21,14 +21,14 @@
       <div class="media-figure-settings">
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="disp-space-between x_position-wrapper">
+          <div class="disp-space-between x-position-wrapper">
             <span>配置座標(x):</span>
-            <input type="number" class="input-num" :value="getFigureData['x_position']" @input="updateFigureData({key:'x_position', value:$event.target.value})">
+            <input type="number" class="input-num" :value="getFigureData['left']" @input="updateFigureData({key:'left', value:$event.target.value})">
           </div>
 
-          <div class="disp-space-between y_position-wrapper">
+          <div class="disp-space-between y-position-wrapper">
             <span>配置座標(y):</span>
-            <input type="number" class="input-num" :value="getFigureData['y_position']" @input="updateFigureData({key:'y_position', value:$event.target.value})">
+            <input type="number" class="input-num" :value="getFigureData['top']" @input="updateFigureData({key:'top', value:$event.target.value})">
           </div>
 
           <div class="disp-space-between degree-wrapper">
@@ -153,8 +153,8 @@
         this.addMediaFiguresObjectItem(mediaFigure);
 
         // 図形追加後に次の描画位置をずらす
-        this.updateFigureData({key:'x_position', value:Number(this.getFigureData['x_position'])+40});
-        this.updateFigureData({key:'y_position', value:Number(this.getFigureData['y_position'])+40});
+        this.updateFigureData({key:'left', value:Number(this.getFigureData['left'])+40});
+        this.updateFigureData({key:'top', value:Number(this.getFigureData['top'])+40});
       },
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる

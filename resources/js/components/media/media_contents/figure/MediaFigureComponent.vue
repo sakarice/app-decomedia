@@ -44,8 +44,8 @@ import figureResize from './FigureResizeComponent.vue';
         "rotate_center_y" : 0,
 
         "figureDatas" : {
-          "x_position" : 0,
-          "y_position" : 0,
+          "left" : 0,
+          "top" : 0,
           "width" : 0,
           "height" : 0,
           "degree" : 0,
@@ -65,8 +65,8 @@ import figureResize from './FigureResizeComponent.vue';
       canvas_height:function(){ return this.figureDatas['height']+"px" },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
-      style_left : function(){ return this.figureDatas['x_position'] + 'px';},
-      style_top : function(){ return this.figureDatas['y_position'] + 'px';},
+      style_left : function(){ return this.figureDatas['left'] + 'px';},
+      style_top : function(){ return this.figureDatas['top'] + 'px';},
       style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
     },
     watch : {
@@ -108,11 +108,11 @@ import figureResize from './FigureResizeComponent.vue';
         e.preventDefault();
         this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
         this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-        this.figureDatas['x_position'] = (e.clientX - this.x_in_element);
-        this.figureDatas['y_position'] = (e.clientY - this.y_in_element);
+        this.figureDatas['left'] = (e.clientX - this.x_in_element);
+        this.figureDatas['top'] = (e.clientY - this.y_in_element);
 
-        this.updateMediaFiguresObjectItem({index:this.index,key:"x_position",value:this.figureDatas['x_position']});
-        this.updateMediaFiguresObjectItem({index:this.index,key:"y_position",value:this.figureDatas['y_position']});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:this.figureDatas['left']});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:this.figureDatas['top']});
 
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.moveEnd, false);
@@ -126,7 +126,7 @@ import figureResize from './FigureResizeComponent.vue';
       },
       updateDegree(new_degree){ this.figureDatas['degree'] = new_degree },
       resize(){
-        const keys = ["width","height","x_position","y_position"];
+        const keys = ["width","height","left","top"];
         const storeData = this.getOneFigure(this.index);
         keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
         this.setCanvasSize();
@@ -145,7 +145,7 @@ import figureResize from './FigureResizeComponent.vue';
         this.isReDraw = false;
       },
       checkTypeNum(key){
-        const num_type_keys = ["width","height","degree","x_position","y_position","globalAlpha"];
+        const num_type_keys = ["width","height","degree","left","top","globalAlpha"];
         return num_type_keys.includes(key);
       },
       fixDataType(key, value){

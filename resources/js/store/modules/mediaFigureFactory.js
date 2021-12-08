@@ -8,8 +8,8 @@ const mediaFigure = {
     mediaFigure : {
       type : 0,
       id : 0,
-      x_position : 100,
-      y_position : 100,
+      left : 100,
+      top : 100,
       width : 50,
       height : 50,
       degree : 0,

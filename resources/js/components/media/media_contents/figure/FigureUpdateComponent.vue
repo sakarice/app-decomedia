@@ -12,14 +12,14 @@
       <div class="media-figure-settings">
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="disp-space-between x_position-wrapper">
+          <div class="disp-space-between x-position-wrapper">
             <span>配置座標(x):</span>
-            <input type="number" class="input-num" :value="figureDatas['x_position']" @input="updateFigureData('x_position', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['left']" @input="updateFigureData('left', $event.target.value)">
           </div>
 
-          <div class="disp-space-between y_position-wrapper">
+          <div class="disp-space-between y-position-wrapper">
             <span>配置座標(y):</span>
-            <input type="number" class="input-num" :value="figureDatas['y_position']" @input="updateFigureData('y_position', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['top']" @input="updateFigureData('top', $event.target.value)">
           </div>
 
           <div class="disp-space-between degree-wrapper">
@@ -86,8 +86,8 @@
         "y_in_element" : 0, // 〃↑のy座標
 
         "figureDatas" : {
-          "x_position" : 0,
-          "y_position" : 0,
+          "left" : 0,
+          "top" : 0,
           "width" : 0,
           "height" : 0,
           "degree" : 0,
@@ -125,7 +125,7 @@
         this.$emit('re-render', this.index);
       },
       checkTypeNum(key){
-        const num_type_keys = ["width","height","degree","x_position","y_position","globalAlpha"];
+        const num_type_keys = ["width","height","degree","left","top","globalAlpha"];
         return num_type_keys.includes(key);
       },
       fixDataType(key, value){

@@ -5779,12 +5779,12 @@ function _defineProperty(obj, key, value) {
       this.addMediaFiguresObjectItem(mediaFigure); // 図形追加後に次の描画位置をずらす
 
       this.updateFigureData({
-        key: 'x_position',
-        value: Number(this.getFigureData['x_position']) + 40
+        key: 'left',
+        value: Number(this.getFigureData['left']) + 40
       });
       this.updateFigureData({
-        key: 'y_position',
-        value: Number(this.getFigureData['y_position']) + 40
+        key: 'top',
+        value: Number(this.getFigureData['top']) + 40
       });
     },
     // 設定モーダル操作用
@@ -7230,8 +7230,8 @@ function _defineProperty(obj, key, value) {
       this.registEventMiddleToEnd();
     },
     resizeRight: function resizeRight(e) {
-      var x_position = this.getOneFigure(this.index)['x_position'];
-      this.width = e.clientX - x_position;
+      var left = this.getOneFigure(this.index)['left'];
+      this.width = e.clientX - left;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "width",
@@ -7240,7 +7240,7 @@ function _defineProperty(obj, key, value) {
       this.resizeMiddleLast();
     },
     resizeLeft: function resizeLeft(e) {
-      var x = this.getOneFigure(this.index)['x_position'];
+      var x = this.getOneFigure(this.index)['left'];
       var diff = x - e.clientX;
       var width_before = this.getOneFigure(this.index)['width'];
       var width_new = width_before + diff;
@@ -7253,14 +7253,14 @@ function _defineProperty(obj, key, value) {
       var new_x = x - diff;
       this.updateMediaFiguresObjectItem({
         index: this.index,
-        key: "x_position",
+        key: "left",
         value: new_x
       });
       this.resizeMiddleLast();
     },
     resizeBottom: function resizeBottom(e) {
-      var y_position = this.getOneFigure(this.index)['y_position'];
-      this.height = e.clientY - y_position;
+      var top = this.getOneFigure(this.index)['top'];
+      this.height = e.clientY - top;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "height",
@@ -7269,7 +7269,7 @@ function _defineProperty(obj, key, value) {
       this.resizeMiddleLast();
     },
     resizeTop: function resizeTop(e) {
-      var y = this.getOneFigure(this.index)['y_position'];
+      var y = this.getOneFigure(this.index)['top'];
       var diff = y - e.clientY;
       var height_before = this.getOneFigure(this.index)['height'];
       var height_new = height_before + diff;
@@ -7282,7 +7282,7 @@ function _defineProperty(obj, key, value) {
       var new_y = y - diff;
       this.updateMediaFiguresObjectItem({
         index: this.index,
-        key: "y_position",
+        key: "top",
         value: new_y
       });
       this.resizeMiddleLast();
@@ -7614,8 +7614,8 @@ function _defineProperty(obj, key, value) {
       "y_in_element": 0,
       // 〃↑のy座標
       "figureDatas": {
-        "x_position": 0,
-        "y_position": 0,
+        "left": 0,
+        "top": 0,
         "width": 0,
         "height": 0,
         "degree": 0,
@@ -7656,7 +7656,7 @@ function _defineProperty(obj, key, value) {
       this.$emit('re-render', this.index);
     },
     checkTypeNum: function checkTypeNum(key) {
-      var num_type_keys = ["width", "height", "degree", "x_position", "y_position", "globalAlpha"];
+      var num_type_keys = ["width", "height", "degree", "left", "top", "globalAlpha"];
       return num_type_keys.includes(key);
     },
     fixDataType: function fixDataType(key, value) {
@@ -7842,8 +7842,8 @@ function _defineProperty(obj, key, value) {
       "rotate_center_x": 0,
       "rotate_center_y": 0,
       "figureDatas": {
-        "x_position": 0,
-        "y_position": 0,
+        "left": 0,
+        "top": 0,
         "width": 0,
         "height": 0,
         "degree": 0,
@@ -7870,10 +7870,10 @@ function _defineProperty(obj, key, value) {
       return 'canvas_wrapper' + this.index;
     },
     style_left: function style_left() {
-      return this.figureDatas['x_position'] + 'px';
+      return this.figureDatas['left'] + 'px';
     },
     style_top: function style_top() {
-      return this.figureDatas['y_position'] + 'px';
+      return this.figureDatas['top'] + 'px';
     },
     style_rotate: function style_rotate() {
       return 'rotate(' + this.figureDatas['degree'] + 'deg)';
@@ -7922,17 +7922,17 @@ function _defineProperty(obj, key, value) {
       e.preventDefault();
       this.move_target.style.left = e.clientX - this.x_in_element + "px";
       this.move_target.style.top = e.clientY - this.y_in_element + "px";
-      this.figureDatas['x_position'] = e.clientX - this.x_in_element;
-      this.figureDatas['y_position'] = e.clientY - this.y_in_element;
+      this.figureDatas['left'] = e.clientX - this.x_in_element;
+      this.figureDatas['top'] = e.clientY - this.y_in_element;
       this.updateMediaFiguresObjectItem({
         index: this.index,
-        key: "x_position",
-        value: this.figureDatas['x_position']
+        key: "left",
+        value: this.figureDatas['left']
       });
       this.updateMediaFiguresObjectItem({
         index: this.index,
-        key: "y_position",
-        value: this.figureDatas['y_position']
+        key: "top",
+        value: this.figureDatas['top']
       }); // マウス、タッチ解除時のイベントを設定
 
       document.body.addEventListener("mouseleave", this.moveEnd, false);
@@ -7950,7 +7950,7 @@ function _defineProperty(obj, key, value) {
     resize: function resize() {
       var _this = this;
 
-      var keys = ["width", "height", "x_position", "y_position"];
+      var keys = ["width", "height", "left", "top"];
       var storeData = this.getOneFigure(this.index);
       keys.forEach(function (key) {
         _this.figureDatas[key] = storeData[key];
@@ -7971,7 +7971,7 @@ function _defineProperty(obj, key, value) {
       this.isReDraw = false;
     },
     checkTypeNum: function checkTypeNum(key) {
-      var num_type_keys = ["width", "height", "degree", "x_position", "y_position", "globalAlpha"];
+      var num_type_keys = ["width", "height", "degree", "left", "top", "globalAlpha"];
       return num_type_keys.includes(key);
     },
     fixDataType: function fixDataType(key, value) {
@@ -9974,8 +9974,8 @@ var mediaFigure = {
     mediaFigure: {
       type: 0,
       id: 0,
-      x_position: 100,
-      y_position: 100,
+      left: 100,
+      top: 100,
       width: 50,
       height: 50,
       degree: 0,
@@ -10031,8 +10031,8 @@ var mediaFigure = {
     mediaFigures: [],
     // type : 0,
     // id : 0,
-    // x_position : 100,
-    // y_position : 100,
+    // left : 100,
+    // top : 100,
     // width : 50,
     // height : 50,
     // degree : 0,
@@ -10057,7 +10057,6 @@ var mediaFigure = {
   },
   mutations: {
     deleteMediaFiguresObjectItem: function deleteMediaFiguresObjectItem(state, payload) {
-      // console.log(state.mediaFigures[payload]['x_position']);
       state.mediaFigures.splice(payload, 1); // figureを1つ削除
     },
     addMediaFiguresObjectItem: function addMediaFiguresObjectItem(state, payload) {
@@ -62786,18 +62785,18 @@ var render = function () {
           _c("div", { staticClass: "setting-type-num" }, [
             _c(
               "div",
-              { staticClass: "disp-space-between x_position-wrapper" },
+              { staticClass: "disp-space-between x-position-wrapper" },
               [
                 _c("span", [_vm._v("配置座標(x):")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["x_position"] },
+                  domProps: { value: _vm.getFigureData["left"] },
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData({
-                        key: "x_position",
+                        key: "left",
                         value: $event.target.value,
                       })
                     },
@@ -62808,18 +62807,18 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between y_position-wrapper" },
+              { staticClass: "disp-space-between y-position-wrapper" },
               [
                 _c("span", [_vm._v("配置座標(y):")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["y_position"] },
+                  domProps: { value: _vm.getFigureData["top"] },
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData({
-                        key: "y_position",
+                        key: "top",
                         value: $event.target.value,
                       })
                     },
@@ -64197,20 +64196,17 @@ var render = function () {
           _c("div", { staticClass: "setting-type-num" }, [
             _c(
               "div",
-              { staticClass: "disp-space-between x_position-wrapper" },
+              { staticClass: "disp-space-between x-position-wrapper" },
               [
                 _c("span", [_vm._v("配置座標(x):")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.figureDatas["x_position"] },
+                  domProps: { value: _vm.figureDatas["left"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData(
-                        "x_position",
-                        $event.target.value
-                      )
+                      return _vm.updateFigureData("left", $event.target.value)
                     },
                   },
                 }),
@@ -64219,20 +64215,17 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between y_position-wrapper" },
+              { staticClass: "disp-space-between y-position-wrapper" },
               [
                 _c("span", [_vm._v("配置座標(y):")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.figureDatas["y_position"] },
+                  domProps: { value: _vm.figureDatas["top"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData(
-                        "y_position",
-                        $event.target.value
-                      )
+                      return _vm.updateFigureData("top", $event.target.value)
                     },
                   },
                 }),
