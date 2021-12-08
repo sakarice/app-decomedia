@@ -4336,6 +4336,12 @@ function _defineProperty(obj, key, value) {
   watch: {
     isReDraw: function isReDraw() {
       this.init();
+    },
+    figureDatas: {
+      handler: function handler(val) {
+        this.$emit('change-figure-data', this.index);
+      },
+      deep: true
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
@@ -4625,6 +4631,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -4658,6 +4665,9 @@ function _defineProperty(obj, key, value) {
     },
     closeEditor: function closeEditor() {
       this.isShowEditor = false;
+    },
+    editorInit: function editorInit(index) {
+      this.$refs.Editor.init(index);
     },
     reRender: function reRender(index) {
       this.$refs.figures[index].init();
@@ -13878,6 +13888,9 @@ var render = function () {
           on: {
             "show-editor": function ($event) {
               return _vm.showEditor(index)
+            },
+            "change-figure-data": function ($event) {
+              return _vm.editorInit(index)
             },
             "re-render-all": _vm.reRenderAll,
           },

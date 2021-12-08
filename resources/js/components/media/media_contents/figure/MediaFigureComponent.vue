@@ -71,7 +71,13 @@ import figureResize from './FigureResizeComponent.vue';
       style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
     },
     watch : {
-      isReDraw:function(){ this.init(); }
+      isReDraw : function(){ this.init(); },
+      figureDatas : {
+        handler : function(val){
+          this.$emit('change-figure-data', this.index);
+        },
+        deep : true
+      },
     },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),

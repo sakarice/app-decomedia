@@ -5,6 +5,7 @@
     :index="index"
     ref="figures"
     @show-editor="showEditor(index)"
+    @change-figure-data="editorInit(index)"
     @re-render-all="reRenderAll">
     </media-figure>
 
@@ -57,6 +58,7 @@
         }
       },
       closeEditor(){ this.isShowEditor = false;},
+      editorInit(index){this.$refs.Editor.init(index);},
       reRender(index){ this.$refs.figures[index].init(); },
       reRenderAll(){ this.$refs.figures.forEach(figure => {figure.init(); }); },
     },
