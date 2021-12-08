@@ -21,7 +21,8 @@ class CreateMediaMoviesTable extends Migration
             $table->integer('width');
             $table->integer('height');
             $table->integer('isLoop');
-            $table->integer('movie_layer');            $table->timestamps();
+            $table->integer('movie_layer');
+            $table->timestamps();
         });
     }
 
