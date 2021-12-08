@@ -9972,8 +9972,9 @@ var mediaFigure = {
     isInitialized: false,
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaFigure: {
-      type: 0,
-      id: 0,
+      media_id: 0,
+      type: 1,
+      groupNo: null,
       left: 100,
       top: 100,
       width: 50,
@@ -10030,6 +10031,8 @@ var mediaFigure = {
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaFigures: [],
     // media_id : null,
+    // type : null,
+    // groupNo : null,
     // left : 100,
     // top : 100,
     // width : 50,
