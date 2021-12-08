@@ -166,7 +166,6 @@ class MediaUtil
       // $media->user_id = Auth::user()->id;
       $model = $media->create(['user_id' => Auth::user()->id]);
       
-      \Log::info($model);
       // 保存したmediaのidを取得
       $media_id = $model->id;
   
@@ -195,7 +194,6 @@ class MediaUtil
       }
 
       // media設定
-      \Log::info('start MediaSettingController');
       MediaSettingController::store($media_id, $request);
 
       // DB::commit();
