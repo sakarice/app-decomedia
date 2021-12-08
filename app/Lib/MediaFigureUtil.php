@@ -35,4 +35,37 @@ class MediaFigureUtil
     }
   }
 
+
+  // 4.show 
+  // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
+  public static function getMediaFigureData($media_id){
+    $media_figure_data = array();
+    if(MediaFigure::where('media_id', $media_id)->exists()){
+      $media_figures = MediaFigure::where('media_id', $media_id)->get();
+
+      // Media図形の情報を連想配列として一つずつ取得し、配列に追加していく
+      foreach($media_figures as $media_figure){
+        $tmp_media_figure_data = [
+          'media_id' => $media_figure->media_id,
+          'type' => $media_figure->type,
+          'groupNo' => $media_figure->group_no,
+          'left' => $media_figure->left,
+          'top' => $media_figure->top,
+          'width' => $media_figure->width,
+          'height' => $media_figure->height,
+          'degree' => $media_figure->degree,
+          'globalAlpha' => $media_figure->global_alpha,
+          'layer' => $media_figure->layer,
+          'isDrawFill' => $media_figure->is_draw_fill,
+          'fillColor' => $media_figure->fill_color,
+          'isDrawStroke' => $media_figure->is_draw_stroke,
+          'strokeColor' => $media_figure->stroke_color,
+        ];
+        $media_figure_data[] = $tmp_media_figure_data;      
+      }
+    }
+    return $media_figure_data;
+  }
+
+
 }

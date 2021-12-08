@@ -35,10 +35,14 @@
       }
     },
     computed : {
+      ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
     },
     watch : {},
     methods : {
+      ...mapMutations('mediaFigures', ['updateIsInitializedFigures']),
+      ...mapMutations('mediaFigures', ['addMediaFiguresObjectItem']),
+            
       showEditor(index){
         this.isShowEditor = true;
         if(this.editor_index != index){
@@ -50,7 +54,30 @@
       editorInit(index){this.$refs.Editor.init(index);},
       reRender(index){ this.$refs.figures[index].init(); },
       reRenderAll(){ this.$refs.figures.forEach(figure => {figure.init(); }); },
+
+      getMediaFiguresFromDB(){
+        return new Promise((resolve, reject) => {
+          const url = '/mediaFigures/'+this.getMediaId;
+          axios.get(url)
+          .then(response=>{
+            console.log(response.data);
+            return resolve(response.data);
+          })
+          .catch(error=>{});
+        })
+      },
+      initFigure(){
+        this.getMediaFiguresFromDB()
+        .then(datas=>{
+          datas.forEach(data=>{
+            this.addMediaFiguresObjectItem(data);
+          })
+          this.updateIsInitializedFigures(true);
+          // this.initStatus += 2;
+        });
+      },
     },
+
     mounted(){
       document.addEventListener('keydown', (e)=> {
         if(e.code=="Delete"){

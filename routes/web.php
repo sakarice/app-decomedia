@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function(){
     
     // メディア画像
         Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
+    // メディア図形
+        Route::get('/mediaFigures/{mediaId}', 'App\Lib\MediaFigureUtil@getMediaFigureData');
     // メディア音楽
         Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
     // メディア動画

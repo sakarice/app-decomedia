@@ -177,6 +177,7 @@ export default {
     ...mapGetters('media', ['getIsCrudDoing']),
     ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaImg', ['getIsInitializedImg']),
+    ...mapGetters('mediaFigures', ['getIsInitializedFigures']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
@@ -196,10 +197,11 @@ export default {
     initStatus : function(){
       let initCountStack = 0;
       if(this.getIsInitializedImg){initCountStack += 1}
-      if(this.getIsInitializedAudios){initCountStack += 2}
-      if(this.getIsInitializedMovie){initCountStack += 4}
-      if(this.getIsInitializedSetting){initCountStack += 8}
-      if(this.getReadyCreateMovieFrame){initCountStack += 16}
+      if(this.getIsInitializedFigures){initCountStack += 2}
+      if(this.getIsInitializedAudios){initCountStack += 4}
+      if(this.getIsInitializedMovie){initCountStack += 8}
+      if(this.getIsInitializedSetting){initCountStack += 16}
+      if(this.getReadyCreateMovieFrame){initCountStack += 32}
       return initCountStack;
     },
     
@@ -294,6 +296,7 @@ export default {
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
       this.$refs.mediaImg.initImg();
+      this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();
       this.initSetting();
@@ -313,14 +316,14 @@ export default {
   watch : {
     initStatus : function(newVal){
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
-      if(newVal >= 2){ 
+      if(newVal >= 4){ 
         const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
         setTimeout(play, 10000); 
       }
       // youtube情報取得と再生準備が完了したら再生開始
       if(this.getMediaSetting['isShowMovie'] == true
       && this.getMediaMovie['videoId'] != ""
-      && newVal >= 28){
+      && newVal >= 56){ // (56 = 32 + 16 + 8)
         this.createMovieFrame();
       }
     },
