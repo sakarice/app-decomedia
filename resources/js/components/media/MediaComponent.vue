@@ -11,6 +11,11 @@
     ref="mediaImg">
     </media-img>
 
+    <!-- Media図形コンポーネント -->
+    <media-figure-mng
+    ref="mediaFigure">
+    </media-figure-mng>
+
     <!-- Mediaオーディオコンポーネント -->
     <media-audio
      :maxAudioNum="getMediaSetting['maxAudioNum']"
@@ -94,14 +99,6 @@
     v-on:close-modal="closeModal"
     :transitionName="transitionName">
     </router-view>
-
-    <!-- 図形設定コンポーネント -->
-    <!-- <ul class="figures-wrapper">
-      <li class="figure-list-item" :id="index" v-for="(mediaFigure, index) in this.getMediaFigures" :key="index"> -->
-        <media-figure-mng>
-        </media-figure-mng>
-      <!-- </li>
-    </ul> -->
 
     <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
