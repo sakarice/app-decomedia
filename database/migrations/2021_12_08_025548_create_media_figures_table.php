@@ -17,7 +17,7 @@ class CreateMediaFiguresTable extends Migration
             $table->id();
             $table->integer('media_id');
             $table->integer('type');
-            $table->integer('user_selected_item_group_no')->nullable();
+            $table->integer('user_selected_item_group_no')->nullable()->default(NULL);
             $table->integer('left');
             $table->integer('top');
             $table->integer('width');

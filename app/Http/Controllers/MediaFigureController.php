@@ -31,10 +31,10 @@ class MediaFigureController extends Controller
 
         // // 5.edit
         // public static function edit($media_id){}
-        // // 6.update
-        // public static function update($media_id, $request){
-        //     MediaFigureUtil::updateMediaFigureData($media_id, $request);
-        // }
+        // 6.update
+        public static function update($media_id, $request){
+            MediaFigureUtil::updateMediaFigureData($media_id, $request);
+        }
         // // 7.destroy
         // public static function destroy($media_id){
         //     MediaFigure::where('media_id', $media_id)->delete();

@@ -186,26 +186,20 @@ class MediaUtil
           MediaImgUtil::saveTentativeMediaImgData($media_id);        
         }
       }
-  
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::store($media_id, $request);
       }
-  
       // media図形
       if(isset($request->figures[0])){
         MediaFigureController::store($media_id, $request);
       }
-
       // media音楽
       if(isset($request->audios[0])){
         MediaAudioController::store($media_id, $request);
       }
-
-
       // media設定
       MediaSettingController::store($media_id, $request);
-
       // DB::commit();
 
     } catch(\Exception $e){
@@ -231,6 +225,10 @@ class MediaUtil
           MediaImgUtil::updateMediaImgDataToTentative($media_id);        
         }
       }
+      // media図形
+      if(isset($request->figures[0])){
+        MediaFigureController::update($media_id, $request);
+      }      
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::update($media_id, $request);
