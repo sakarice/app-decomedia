@@ -193,7 +193,7 @@ class MediaUtil
       }
   
       // media図形
-      if(isset($request->figure[0])){
+      if(isset($request->figures[0])){
         MediaFigureController::store($media_id, $request);
       }
 
