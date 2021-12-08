@@ -1,5 +1,4 @@
 <template>
-
   <div class="figures-wrapper">
     <media-figure v-for="(figure, index) in getMediaFigures" :key="index"
     :index="index"
@@ -16,9 +15,7 @@
      @re-render="reRender">
     </figure-update>
   </div>
-
 </template>
-
 
 
 <script>
@@ -26,15 +23,11 @@
   import MediaFigure from './MediaFigureComponent.vue';
   import figureUpdate from './FigureUpdateComponent.vue';
 
-
   export default {
     components : {
       MediaFigure,
       figureUpdate,
     },
-    props:[
-      // 'index',
-    ],
     data : ()=>{
       return {
         "isShowEditor" : false,
@@ -42,14 +35,10 @@
       }
     },
     computed : {
-      // ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
     },
-    watch : {
-      // editor_index : function(val){ this.$refs.Editor.init(val); }
-    },
+    watch : {},
     methods : {
-      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       showEditor(index){
         this.isShowEditor = true;
         if(this.editor_index != index){
@@ -62,10 +51,7 @@
       reRender(index){ this.$refs.figures[index].init(); },
       reRenderAll(){ this.$refs.figures.forEach(figure => {figure.init(); }); },
     },
-    created(){
-    },
     mounted(){
-
       document.addEventListener('keydown', (e)=> {
         if(e.code=="Delete"){
           const figures_reverse = this.$refs.figures.reverse();
@@ -73,8 +59,8 @@
           this.reRenderAll();
         }
       })
-      
     },
+
   }
 
 </script>
@@ -88,14 +74,5 @@
     width: 100vw;
     height: 100vh;
   }
-
-  /* .figure-list-item {
-    position: absolute;
-  }
-  .figure-list-item:hover {
-    cursor: pointer;
-  } */
-
-
 
 </style>
