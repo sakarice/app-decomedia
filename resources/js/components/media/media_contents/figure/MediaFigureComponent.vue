@@ -11,7 +11,6 @@
      v-on:move="moveStart($event)">
     </figure-resize>
     <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="updateDegree"></figure-rotate>
-    <!-- <i v-show="isActive" class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i> -->
   </div>
 </template>
 
@@ -205,7 +204,6 @@ import figureResize from './FigureResizeComponent.vue';
       fill(){
         this.ctx.save();
         this.ctx.fill();
-        // this.ctx.restore();
       },
       stroke(){
         this.ctx.save();
@@ -271,7 +269,6 @@ import figureResize from './FigureResizeComponent.vue';
   outline : 1.5px solid blue;
 }
 .hidden {
-  /* display: none; */
   opacity: 0;
 }
 
@@ -346,7 +343,6 @@ import figureResize from './FigureResizeComponent.vue';
 
 .mouse-position {
   position : absolute;
-  /* bottom: -20px; */
   right: -90px;
 }
 .mouse-x {
