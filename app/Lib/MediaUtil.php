@@ -163,11 +163,12 @@ class MediaUtil
     try{
       // media保存
       $media = new Media(); 
-      $media->user_id = Auth::user()->id;
-      $media->save();
+      // $media->user_id = Auth::user()->id;
+      $model = $media->create(['user_id' => Auth::user()->id]);
       
+      \Log::info($model);
       // 保存したmediaのidを取得
-      $media_id = Media::latest()->first()->id;
+      $media_id = $model->id;
   
       // media画像
       if(isset($request->img['id'])){
