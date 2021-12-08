@@ -16,6 +16,7 @@
     data : () => { return {} },
     computed : {
       ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaFigures', ['getMediaFigures']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -27,6 +28,7 @@
         const url = '/media/store';
         let media_datas = {
           'img' : this.getMediaImg,
+          'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
           'setting' : this.getMediaSetting,
