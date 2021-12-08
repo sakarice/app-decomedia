@@ -100,10 +100,15 @@
     :transitionName="transitionName">
     </router-view>
 
-    <media-figure-setting
+    <router-view name="mediaFigureSetting"
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
-    </media-figure-setting>
+    </router-view>
+
+    <!-- <media-figure-setting
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </media-figure-setting> -->
 
 
 
@@ -133,7 +138,7 @@
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
   // テスト メディア図形
-  import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
+  // import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
   import MediaFigureMng from './media_contents/figure/MediaFigureMngComponent.vue';
 
 
@@ -143,7 +148,7 @@ export default {
     MediaAudio,
     MediaSetting,
     MediaMovie,
-    MediaFigureSetting,
+    // MediaFigureSetting,
     MediaFigureMng,
   },
   props: [],

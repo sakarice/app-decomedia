@@ -17,9 +17,11 @@ import DispFigureSettingModal from '../components/media/change_display_parts/Dis
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
+import MediaFigureSetting from '../components/media/edit_parts/MediaFigureSettingComponent.vue';
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
+
 
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
@@ -43,6 +45,7 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
+        mediaFigureSetting : MediaFigureSetting,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
@@ -61,6 +64,7 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
+        mediaFigureSetting : MediaFigureSetting,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
