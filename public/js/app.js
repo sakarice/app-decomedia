@@ -7639,11 +7639,7 @@ function _defineProperty(obj, key, value) {
       return this.getMediaFigure;
     },
     init: function init(index) {
-      var storeFigureData = this.getOneFigure(index); // this.figureDataKeys.forEach(figureDataKey=>{
-      //   this.figureDatas[figureDataKey] = this.fixDataType(figureDataKey,storeFigureData[figureDataKey]);
-      // })
-
-      console.log("storeFigureData:" + storeFigureData);
+      var storeFigureData = this.getOneFigure(index);
 
       for (var _i = 0, _Object$keys = Object.keys(storeFigureData); _i < _Object$keys.length; _i++) {
         var key = _Object$keys[_i];
@@ -7702,8 +7698,7 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      this.move_target = document.getElementById('media-figure-update-wrapper'); // this.move_target = event.target;
-
+      this.move_target = document.getElementById('media-figure-update-wrapper');
       this.x_in_element = event.clientX - this.move_target.offsetLeft;
       this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
 
@@ -7727,8 +7722,7 @@ function _defineProperty(obj, key, value) {
       this.move_target.removeEventListener("touchend", this.mouseUp, false);
     }
   }),
-  created: function created() {// this.init();
-  },
+  created: function created() {},
   mounted: function mounted() {
     this.setModalCenter();
   }
@@ -15598,7 +15592,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 300px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 300px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

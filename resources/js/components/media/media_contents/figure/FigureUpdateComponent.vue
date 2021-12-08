@@ -104,7 +104,6 @@
     },
     watch : {},
     methods : {
-      // ...mapMutations('mediaFigureFactory', ['updateFigureData']),
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
@@ -116,10 +115,6 @@
       },
       init(index){
         const storeFigureData = this.getOneFigure(index);
-          // this.figureDataKeys.forEach(figureDataKey=>{
-          //   this.figureDatas[figureDataKey] = this.fixDataType(figureDataKey,storeFigureData[figureDataKey]);
-        // })
-        console.log("storeFigureData:"+storeFigureData);
         for(let key of Object.keys(storeFigureData)){
           this.figureDatas[key] = this.fixDataType(key, storeFigureData[key]);
         }
@@ -167,7 +162,6 @@
           event = e.changedTouches[0];
         }
         this.move_target = document.getElementById('media-figure-update-wrapper');
-        // this.move_target = event.target;
         this.x_in_element = event.clientX - this.move_target.offsetLeft;
         this.y_in_element = event.clientY - this.move_target.offsetTop;
         // ムーブイベントにコールバック
@@ -192,12 +186,8 @@
         this.move_target.removeEventListener("touchend", this.mouseUp, false);
       },
     },
-    created(){
-      // this.init();
-    },
-    mounted(){
-      this.setModalCenter();
-    },
+    created(){},
+    mounted(){ this.setModalCenter(); },
   }
 
 </script>
@@ -220,9 +210,6 @@
   cursor: all-scroll;
 }
 
-.item-frame {
-  /* background-color: rgba(240,240,250,1); */
-}
 .item-frame:hover{
   cursor: all-scroll;
 }
