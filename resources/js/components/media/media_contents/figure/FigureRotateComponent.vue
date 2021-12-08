@@ -65,7 +65,7 @@
         const distance_x_from_target_center = e.clientX - this.rotate_center_x;
         const distance_y_from_target_center = e.clientY - this.rotate_center_y;
         const new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
-        const new_deg = new_rad * (180/Math.PI) * (-1); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
+        const new_deg = Math.floor((new_rad * (180/Math.PI) * (-1)) % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
         this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
         this.degree = new_deg;
         // マウス、タッチ解除時のイベントを設定
