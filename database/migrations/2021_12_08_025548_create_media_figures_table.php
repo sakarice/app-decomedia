@@ -22,7 +22,7 @@ class CreateMediaFiguresTable extends Migration
             $table->integer('top');
             $table->integer('width');
             $table->integer('height');
-            $table->integer('degree')->default(1);
+            $table->float('degree', 4, 1)->default(1);
             $table->float('global_alpha', 3, 2)->default(1);
             $table->integer('layer');
             $table->boolean('is_draw_fill');
