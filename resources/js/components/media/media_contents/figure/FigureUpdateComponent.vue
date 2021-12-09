@@ -1,6 +1,6 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-update-wrapper"
+  <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
    @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
@@ -129,6 +129,14 @@
           this.figureDatas['type'] = val;
         },
       },
+      isEditMode : function(){
+        const route_name = this.$route.name;
+        let isEdit = false;
+        if((route_name=="create") || (route_name=="edit")){
+          isEdit = true;
+        }
+        return isEdit;
+      },      
     },
     watch : {
       type(){ 
@@ -274,6 +282,10 @@
 
 .input-num {
   width: 100px;
+}
+
+.hidden {
+  display: none;
 }
 
 

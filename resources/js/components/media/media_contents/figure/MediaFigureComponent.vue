@@ -26,7 +26,6 @@ import figureResize from './FigureResizeComponent.vue';
     },
     props:[
       'index',
-      'isEditMode'
     ],
     data : ()=>{
       return {
@@ -70,6 +69,14 @@ import figureResize from './FigureResizeComponent.vue';
       style_left : function(){ return this.figureDatas['left'] + 'px';},
       style_top : function(){ return this.figureDatas['top'] + 'px';},
       style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
+      isEditMode : function(){
+        const route_name = this.$route.name;
+        if((route_name=="create") || (route_name=="edit")){
+          return true;
+        } else {
+          return false;
+        }
+      },
     },
     watch : {
       isReDraw : function(){ this.init(); },
