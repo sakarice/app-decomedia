@@ -36,7 +36,7 @@ import figureResize from './FigureResizeComponent.vue';
         "mouse_y" : 0,
         "canvas" : "",
         "ctx" : "",
-        "move_target" : "", // ドラッグ操作で移動させる対象
+        "canvas_wrapper" : "", // ドラッグ操作で移動させる対象
         "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
         "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
         "rotate_target" : "", // ドラッグ操作で回転させる対象
@@ -49,6 +49,7 @@ import figureResize from './FigureResizeComponent.vue';
           "width" : 0,
           "height" : 0,
           "degree" : 0,
+          "layer" : 0,
           "globalAlpha" : 0,
           "isDrawFill" : false,
           "isDrawStroke" : false,
@@ -95,19 +96,19 @@ import figureResize from './FigureResizeComponent.vue';
         } else {
           event = e.changedTouches[0];
         }
-        this.move_target = document.getElementById(this.canvas_wrapper_with_index);
-        this.x_in_element = event.clientX - this.move_target.offsetLeft;
-        this.y_in_element = event.clientY - this.move_target.offsetTop;
+        this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
+        this.x_in_element = event.clientX - this.canvas_wrapper.offsetLeft;
+        this.y_in_element = event.clientY - this.canvas_wrapper.offsetTop;
         // ムーブイベントにコールバック
         document.body.addEventListener("mousemove", this.moving, false);
-        this.move_target.addEventListener("mouseup", this.moveEnd, false);
+        this.canvas_wrapper.addEventListener("mouseup", this.moveEnd, false);
         document.body.addEventListener("touchmove", this.moving, false);
-        this.move_target.addEventListener("touchend", this.moveEnd, false);
+        this.canvas_wrapper.addEventListener("touchend", this.moveEnd, false);
       },
       moving(e){
         e.preventDefault();
-        this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-        this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
+        this.canvas_wrapper.style.left = (e.clientX - this.x_in_element) + "px";
+        this.canvas_wrapper.style.top = (e.clientY - this.y_in_element) + "px";
         this.figureDatas['left'] = (e.clientX - this.x_in_element);
         this.figureDatas['top'] = (e.clientY - this.y_in_element);
 
@@ -120,9 +121,9 @@ import figureResize from './FigureResizeComponent.vue';
       },
       moveEnd(e){
         document.body.removeEventListener("mousemove", this.moving, false);
-        this.move_target.removeEventListener("mouseup", this.moveEnd, false);
+        this.canvas_wrapper.removeEventListener("mouseup", this.moveEnd, false);
         document.body.removeEventListener("touchmove", this.moving, false);
-        this.move_target.removeEventListener("touchend", this.moveEnd, false);
+        this.canvas_wrapper.removeEventListener("touchend", this.moveEnd, false);
       },
       updateDegree(new_degree){ this.figureDatas['degree'] = new_degree },
       resize(){
@@ -137,6 +138,7 @@ import figureResize from './FigureResizeComponent.vue';
       init(){
         this.setFigureData();
         this.setCanvasSize();
+        this.setLayer();
         this.setGlobalAlpha();
         this.setStrokeColor();
         this.setFillColor();
@@ -198,6 +200,7 @@ import figureResize from './FigureResizeComponent.vue';
         this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.ctx.closePath();
       },
+      setLayer(){ this.canvas_wrapper.style.zIndex = this.figureDatas['layer'] },
       setGlobalAlpha(){ this.ctx.globalAlpha = this.figureDatas['globalAlpha'];},
       setStrokeColor(){this.ctx.strokeStyle = this.figureDatas['strokeColor'];},
       setFillColor(){this.ctx.fillStyle = this.figureDatas['fillColor'];},
@@ -218,6 +221,7 @@ import figureResize from './FigureResizeComponent.vue';
     },
     created(){},
     mounted(){
+      this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
       this.setContext();
       this.init();
 

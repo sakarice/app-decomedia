@@ -35,6 +35,11 @@
             <span>縦幅[px]:</span>
             <input type="number" class="input-num" :value="figureDatas['height']" @input="updateFigureData('height', $event.target.value)">
           </div>
+
+          <div class="disp-space-between layer-input-wrapper">
+            <span>重ね順:</span>
+            <input type="number" class="input-num" :value="figureDatas['layer']" @input="updateFigureData('layer', $event.target.value)">
+          </div>
         </div>
 
         <!-- カラー系の設定 -->
@@ -91,6 +96,7 @@
           "width" : 0,
           "height" : 0,
           "degree" : 0,
+          "layer" : 0,
           "globalAlpha" : 0,
           "isDrawFill" : false,
           "isDrawStroke" : false,
@@ -199,7 +205,7 @@
   top: 50%;
   z-index: 30;
   width: 300px;
-  height: 300px;
+  height: 320px;
   padding: 5px;
   background-color: rgba(35,40,50,0.85);
   color: white;

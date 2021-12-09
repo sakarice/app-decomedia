@@ -4057,6 +4057,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -4076,6 +4081,7 @@ function _defineProperty(obj, key, value) {
         "width": 0,
         "height": 0,
         "degree": 0,
+        "layer": 0,
         "globalAlpha": 0,
         "isDrawFill": false,
         "isDrawStroke": false,
@@ -4287,7 +4293,7 @@ function _defineProperty(obj, key, value) {
       "mouse_y": 0,
       "canvas": "",
       "ctx": "",
-      "move_target": "",
+      "canvas_wrapper": "",
       // ドラッグ操作で移動させる対象
       "x_in_element": 0,
       // 移動対象要素に対するドラッグポイントの相対座標(x)
@@ -4303,6 +4309,7 @@ function _defineProperty(obj, key, value) {
         "width": 0,
         "height": 0,
         "degree": 0,
+        "layer": 0,
         "globalAlpha": 0,
         "isDrawFill": false,
         "isDrawStroke": false,
@@ -4365,19 +4372,19 @@ function _defineProperty(obj, key, value) {
         event = e.changedTouches[0];
       }
 
-      this.move_target = document.getElementById(this.canvas_wrapper_with_index);
-      this.x_in_element = event.clientX - this.move_target.offsetLeft;
-      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
+      this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
+      this.x_in_element = event.clientX - this.canvas_wrapper.offsetLeft;
+      this.y_in_element = event.clientY - this.canvas_wrapper.offsetTop; // ムーブイベントにコールバック
 
       document.body.addEventListener("mousemove", this.moving, false);
-      this.move_target.addEventListener("mouseup", this.moveEnd, false);
+      this.canvas_wrapper.addEventListener("mouseup", this.moveEnd, false);
       document.body.addEventListener("touchmove", this.moving, false);
-      this.move_target.addEventListener("touchend", this.moveEnd, false);
+      this.canvas_wrapper.addEventListener("touchend", this.moveEnd, false);
     },
     moving: function moving(e) {
       e.preventDefault();
-      this.move_target.style.left = e.clientX - this.x_in_element + "px";
-      this.move_target.style.top = e.clientY - this.y_in_element + "px";
+      this.canvas_wrapper.style.left = e.clientX - this.x_in_element + "px";
+      this.canvas_wrapper.style.top = e.clientY - this.y_in_element + "px";
       this.figureDatas['left'] = e.clientX - this.x_in_element;
       this.figureDatas['top'] = e.clientY - this.y_in_element;
       this.updateMediaFiguresObjectItem({
@@ -4396,9 +4403,9 @@ function _defineProperty(obj, key, value) {
     },
     moveEnd: function moveEnd(e) {
       document.body.removeEventListener("mousemove", this.moving, false);
-      this.move_target.removeEventListener("mouseup", this.moveEnd, false);
+      this.canvas_wrapper.removeEventListener("mouseup", this.moveEnd, false);
       document.body.removeEventListener("touchmove", this.moving, false);
-      this.move_target.removeEventListener("touchend", this.moveEnd, false);
+      this.canvas_wrapper.removeEventListener("touchend", this.moveEnd, false);
     },
     updateDegree: function updateDegree(new_degree) {
       this.figureDatas['degree'] = new_degree;
@@ -4419,6 +4426,7 @@ function _defineProperty(obj, key, value) {
     init: function init() {
       this.setFigureData();
       this.setCanvasSize();
+      this.setLayer();
       this.setGlobalAlpha();
       this.setStrokeColor();
       this.setFillColor();
@@ -4504,6 +4512,9 @@ function _defineProperty(obj, key, value) {
       this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
       this.ctx.closePath();
     },
+    setLayer: function setLayer() {
+      this.canvas_wrapper.style.zIndex = this.figureDatas['layer'];
+    },
     setGlobalAlpha: function setGlobalAlpha() {
       this.ctx.globalAlpha = this.figureDatas['globalAlpha'];
     },
@@ -4532,6 +4543,7 @@ function _defineProperty(obj, key, value) {
   mounted: function mounted() {
     var _this2 = this;
 
+    this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
     this.setContext();
     this.init(); // イベント登録
 
@@ -6095,7 +6107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 300px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 320px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13659,6 +13671,25 @@ var render = function () {
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData("height", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between layer-input-wrapper" },
+              [
+                _c("span", [_vm._v("重ね順:")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.figureDatas["layer"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("layer", $event.target.value)
                     },
                   },
                 }),
