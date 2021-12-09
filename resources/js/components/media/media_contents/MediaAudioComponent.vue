@@ -185,8 +185,7 @@
       mediaAudioNum : function(audioNum){
         if(audioNum > this.maxAudioNum){this.deleteAudio(0)}
       },
-      
-    }
+    },
 
   }
 

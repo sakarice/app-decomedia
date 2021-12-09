@@ -22,7 +22,6 @@ import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
 
-
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
 import Loading from '../components/common/LoadingComponent.vue';
@@ -70,6 +69,7 @@ export default{
         mediaSetting : MediaSetting,
         overlay : Overlay,
         loading : Loading,
+        
       },
     },
     {

@@ -4359,7 +4359,7 @@ function _defineProperty(obj, key, value) {
     figureRotate: _FigureRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     figureResize: _FigureResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: ['index'],
+  props: ['index', 'isEditMode'],
   data: function data() {
     return {
       "isActive": false,
@@ -4744,6 +4744,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -4756,12 +4757,21 @@ function _defineProperty(obj, key, value) {
   },
   data: function data() {
     return {
+      "isEditMode": false,
       "isShowEditor": false,
       "editor_index": -1
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigures'])),
-  watch: {},
+  watch: {
+    $route: function $route(route) {
+      if (route.name == "create" || route.name == "edit") {
+        this.isEditMode = true;
+      } else {
+        this.isEditMode = false;
+      }
+    }
+  },
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     showEditor: function showEditor(index) {
       this.isShowEditor = true;
@@ -14055,6 +14065,14 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("figure-resize", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isEditMode,
+            expression: "isEditMode",
+          },
+        ],
         class: { hidden: !_vm.isActive },
         style: { width: _vm.canvas_width, height: _vm.canvas_height },
         attrs: { index: _vm.index },
@@ -14071,8 +14089,8 @@ var render = function () {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isActive,
-            expression: "isActive",
+            value: _vm.isEditMode && _vm.isActive,
+            expression: "isEditMode && isActive",
           },
         ],
         attrs: { index: _vm.index },
@@ -14113,7 +14131,7 @@ var render = function () {
           key: index,
           ref: "figures",
           refInFor: true,
-          attrs: { index: index },
+          attrs: { index: index, isEditMode: _vm.isEditMode },
           on: {
             "show-editor": function ($event) {
               return _vm.showEditor(index)
@@ -14131,8 +14149,8 @@ var render = function () {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowEditor,
-            expression: "isShowEditor",
+            value: _vm.isEditMode && _vm.isShowEditor,
+            expression: "isEditMode && isShowEditor",
           },
         ],
         ref: "Editor",

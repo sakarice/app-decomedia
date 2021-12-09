@@ -6,11 +6,11 @@
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
 
-    <figure-resize :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+    <figure-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
      v-on:resize="resize"
      v-on:move="moveStart($event)">
     </figure-resize>
-    <figure-rotate v-show="isActive" :index="index" v-on:rotate-finish="updateDegree"></figure-rotate>
+    <figure-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></figure-rotate>
   </div>
 </template>
 
@@ -26,6 +26,7 @@ import figureResize from './FigureResizeComponent.vue';
     },
     props:[
       'index',
+      'isEditMode'
     ],
     data : ()=>{
       return {

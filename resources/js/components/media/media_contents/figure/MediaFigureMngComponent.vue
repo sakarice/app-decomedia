@@ -2,13 +2,14 @@
   <div class="figures-wrapper">
     <media-figure v-for="(figure, index) in getMediaFigures" :key="index"
     :index="index"
+    :isEditMode="isEditMode"
     ref="figures"
     @show-editor="showEditor(index)"
     @change-figure-data="editorInit(index)"
     @re-render-all="reRenderAll">
     </media-figure>
 
-    <figure-update v-show="isShowEditor"
+    <figure-update v-show="isEditMode && isShowEditor"
      :index="editor_index"
      ref="Editor"
      @close-editor="closeEditor"
@@ -30,6 +31,7 @@
     },
     data : ()=>{
       return {
+        "isEditMode" : false,
         "isShowEditor" : false,
         "editor_index" : -1,
       }
@@ -38,7 +40,15 @@
       ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
     },
-    watch : {},
+    watch : {
+      $route(route){
+        if((route.name=="create") || (route.name=="edit")){
+          this.isEditMode = true;
+        } else {
+          this.isEditMode = false;
+        }
+      },
+    },
     methods : {
       ...mapMutations('mediaFigures', ['updateIsInitializedFigures']),
       ...mapMutations('mediaFigures', ['addMediaFiguresObjectItem']),
