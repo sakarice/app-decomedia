@@ -43,9 +43,8 @@
 
           <div class="disp-space-between type-input-wrapper">
             <span>種類:</span>
-            <select name="種類" class="input-num" @input="updateFigureData('type', $event.target.value)">
-              <option value="1">四角形</option>
-              <option value="2">円</option>
+            <select name="種類" class="input-num" v-model="figureDatas['type']">
+              <option v-for="(figureType) in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
             </select>
           </div>
 
@@ -99,7 +98,13 @@
         "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
         "y_in_element" : 0, // 〃↑のy座標
 
+        "figureTypeList" : [
+          {code : 1, name : "四角形"},
+          {code : 2, name : "丸"},
+        ],
+
         "figureDatas" : {
+          "type" : 1,
           "left" : 0,
           "top" : 0,
           "width" : 0,
@@ -116,8 +121,11 @@
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
+      type(){ return this.figureDatas['type'] },
     },
-    watch : {},
+    watch : {
+      type(val){ this.updateFigureData('type', val)}
+    },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),

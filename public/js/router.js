@@ -2149,7 +2149,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -2157,6 +2156,13 @@ function _defineProperty(obj, key, value) {
   components: {},
   data: function data() {
     return {
+      "figureTypeList": [{
+        code: 1,
+        name: "四角形"
+      }, {
+        code: 2,
+        name: "丸"
+      }],
       "move_target": "",
       "x_in_element": 0,
       // クリックカーソルの要素内における相対位置(x座標)
@@ -4111,7 +4117,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -4125,7 +4130,15 @@ function _defineProperty(obj, key, value) {
       // クリックカーソルの要素内における相対位置(x座標)
       "y_in_element": 0,
       // 〃↑のy座標
+      "figureTypeList": [{
+        code: 1,
+        name: "四角形"
+      }, {
+        code: 2,
+        name: "丸"
+      }],
       "figureDatas": {
+        "type": 1,
         "left": 0,
         "top": 0,
         "width": 0,
@@ -4140,8 +4153,16 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])),
-  watch: {},
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+    type: function type() {
+      return this.figureDatas['type'];
+    }
+  }),
+  watch: {
+    type: function type(val) {
+      this.updateFigureData('type', val);
+    }
+  },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     closeEditor: function closeEditor() {
       this.$emit('close-editor', this.index);
@@ -12273,11 +12294,17 @@ var render = function () {
                   },
                 },
               },
-              [
-                _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
-              ]
+              _vm._l(_vm.figureTypeList, function (figureType) {
+                return _c(
+                  "option",
+                  {
+                    key: figureType["code"],
+                    domProps: { value: figureType["code"] },
+                  },
+                  [_vm._v(_vm._s(figureType["name"]))]
+                )
+              }),
+              0
             ),
           ]),
           _vm._v(" "),
@@ -13803,19 +13830,47 @@ var render = function () {
                 _c(
                   "select",
                   {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.figureDatas["type"],
+                        expression: "figureDatas['type']",
+                      },
+                    ],
                     staticClass: "input-num",
                     attrs: { name: "種類" },
                     on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData("type", $event.target.value)
+                      change: function ($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function (o) {
+                            return o.selected
+                          })
+                          .map(function (o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.figureDatas,
+                          "type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
                       },
                     },
                   },
-                  [
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
-                  ]
+                  _vm._l(_vm.figureTypeList, function (figureType) {
+                    return _c(
+                      "option",
+                      {
+                        key: figureType["code"],
+                        domProps: { value: figureType["code"] },
+                      },
+                      [_vm._v(_vm._s(figureType["name"]))]
+                    )
+                  }),
+                  0
                 ),
               ]
             ),
