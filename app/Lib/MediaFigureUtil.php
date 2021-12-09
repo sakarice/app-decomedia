@@ -13,7 +13,7 @@ class MediaFigureUtil
 {
 
   // テーブルのカラムとrequestのプロパティ名の対応を連想配列に定義
-  private static $DB_REQ_RELATIONS = array(
+  private static $NAME_PAIRS_IN_COLUMN_AND_PROPERTY = array(
     'media_id' => 'media_id',
     'type' => 'type',
     'user_selected_item_group_no' => 'groupNo',
@@ -38,69 +38,43 @@ class MediaFigureUtil
     }
   }
 
-
   public static function saveMediaFigureRecord($media_id, $media_figure_data){
     $mediaFigure = new MediaFigure();
-    $model = $mediaFigure->create([
-      'media_id' => $media_id,
-      'type' => $media_figure_data['type'],
-      'user_selected_item_group_no' => $media_figure_data['groupNo'],
-      'left' => $media_figure_data['left'],
-      'top' => $media_figure_data['top'],
-      'width' => $media_figure_data['width'],
-      'height' => $media_figure_data['height'],
-      'degree' => $media_figure_data['degree'],
-      'global_alpha' => $media_figure_data['globalAlpha'],
-      'layer' => $media_figure_data['layer'],
-      'is_draw_fill' => $media_figure_data['isDrawFill'],
-      'fill_color' => $media_figure_data['fillColor'],
-      'is_draw_stroke' => $media_figure_data['isDrawStroke'],
-      'stroke_color' => $media_figure_data['strokeColor'],
-    ]);
+    $create_items = array();
+    $media_figure_data['media_id'] = $media_id; // メディアIDだけ初期化しておく
+    foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+      $create_items[$column_name] = $media_figure_data[$property_name];
+    }
+    $model = $mediaFigure->create($create_items);
     return $model;
   }
 
   public static function updateMediaFigureRecord($media_id, $req_datas){
     $target_records = MediaFigure::where('media_id', $media_id)->get();
     foreach($req_datas as $index => $req_data){
-      foreach(self::$DB_REQ_RELATIONS as $column_name => $property_name){        
+      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
         $target_records[$index][$column_name] = $req_data[$property_name];
       }
       $target_records[$index]->save();
     }
   }
 
-
-
   // 4.show 
   // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
   public static function getMediaFigureData($media_id){
-    $media_figure_data = array();
+    $media_figures = array();
     if(MediaFigure::where('media_id', $media_id)->exists()){
-      $media_figures = MediaFigure::where('media_id', $media_id)->get();
-
+      $db_datas = MediaFigure::where('media_id', $media_id)->get();
       // Media図形の情報を連想配列として一つずつ取得し、配列に追加していく
-      foreach($media_figures as $media_figure){
-        $tmp_media_figure_data = [
-          'media_id' => $media_figure->media_id,
-          'type' => $media_figure->type,
-          'groupNo' => $media_figure->group_no,
-          'left' => $media_figure->left,
-          'top' => $media_figure->top,
-          'width' => $media_figure->width,
-          'height' => $media_figure->height,
-          'degree' => $media_figure->degree,
-          'globalAlpha' => $media_figure->global_alpha,
-          'layer' => $media_figure->layer,
-          'isDrawFill' => $media_figure->is_draw_fill,
-          'fillColor' => $media_figure->fill_color,
-          'isDrawStroke' => $media_figure->is_draw_stroke,
-          'strokeColor' => $media_figure->stroke_color,
-        ];
-        $media_figure_data[] = $tmp_media_figure_data;      
+      $figure_object = array();
+      foreach($db_datas as $db_data){
+        foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+          $figure_object[$property_name] = $db_data[$column_name];
+        }
+        $media_figures[] = $figure_object;
       }
     }
-    return $media_figure_data;
+    return $media_figures;
   }
 
 
