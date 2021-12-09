@@ -43,7 +43,7 @@
 
           <div class="disp-space-between type-input-wrapper">
             <span>種類:</span>
-            <select name="種類" class="input-num" v-model="figureDatas['type']">
+            <select id="update-figure-type" name="種類" class="input-num" v-model="type">
               <option v-for="(figureType) in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
             </select>
           </div>
@@ -121,10 +121,19 @@
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
-      type(){ return this.figureDatas['type'] },
+      type:{
+        get(){
+          return this.figureDatas['type'];
+        },
+        set(val){
+          this.figureDatas['type'] = val;
+        },
+      },
     },
     watch : {
-      type(val){ this.updateFigureData('type', val)}
+      type(){ 
+        this.updateFigureData('type', this.figureDatas['type']);
+      }
     },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
@@ -148,7 +157,7 @@
         this.$emit('re-render', this.index);
       },
       checkTypeNum(key){
-        const num_type_keys = ["width","height","degree","left","top","globalAlpha"];
+        const num_type_keys = ["type", "width","height","degree","left","top","globalAlpha"];
         return num_type_keys.includes(key);
       },
       fixDataType(key, value){

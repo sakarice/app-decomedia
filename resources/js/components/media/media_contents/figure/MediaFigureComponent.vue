@@ -74,7 +74,9 @@ import figureResize from './FigureResizeComponent.vue';
       isReDraw : function(){ this.init(); },
       figureDatas : {
         handler : function(val){
-          this.$emit('change-figure-data', this.index);
+          if(this.isActive){
+            this.$emit('change-figure-data', this.index);
+          }
         },
         deep : true
       },

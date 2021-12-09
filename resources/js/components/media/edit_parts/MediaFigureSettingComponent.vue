@@ -23,8 +23,8 @@
         <!-- 図形の種類 -->
         <div class="disp-space-between type-input-wrapper">
           <span>種類:</span>
-          <select name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
-            <option v-for="(figureType) in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
+          <select id="create-figure-type" name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
+            <option v-for="figureType in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
           </select>
         </div>
 

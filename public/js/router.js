@@ -4154,13 +4154,18 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
-    type: function type() {
-      return this.figureDatas['type'];
+    type: {
+      get: function get() {
+        return this.figureDatas['type'];
+      },
+      set: function set(val) {
+        this.figureDatas['type'] = val;
+      }
     }
   }),
   watch: {
-    type: function type(val) {
-      this.updateFigureData('type', val);
+    type: function type() {
+      this.updateFigureData('type', this.figureDatas['type']);
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
@@ -4190,7 +4195,7 @@ function _defineProperty(obj, key, value) {
       this.$emit('re-render', this.index);
     },
     checkTypeNum: function checkTypeNum(key) {
-      var num_type_keys = ["width", "height", "degree", "left", "top", "globalAlpha"];
+      var num_type_keys = ["type", "width", "height", "degree", "left", "top", "globalAlpha"];
       return num_type_keys.includes(key);
     },
     fixDataType: function fixDataType(key, value) {
@@ -4419,7 +4424,9 @@ function _defineProperty(obj, key, value) {
     },
     figureDatas: {
       handler: function handler(val) {
-        this.$emit('change-figure-data', this.index);
+        if (this.isActive) {
+          this.$emit('change-figure-data', this.index);
+        }
       },
       deep: true
     }
@@ -12284,7 +12291,7 @@ var render = function () {
               "select",
               {
                 staticClass: "input-num",
-                attrs: { name: "種類" },
+                attrs: { id: "create-figure-type", name: "種類" },
                 on: {
                   input: function ($event) {
                     return _vm.updateFigureData({
@@ -13834,12 +13841,12 @@ var render = function () {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.figureDatas["type"],
-                        expression: "figureDatas['type']",
+                        value: _vm.type,
+                        expression: "type",
                       },
                     ],
                     staticClass: "input-num",
-                    attrs: { name: "種類" },
+                    attrs: { id: "update-figure-type", name: "種類" },
                     on: {
                       change: function ($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -13850,13 +13857,9 @@ var render = function () {
                             var val = "_value" in o ? o._value : o.value
                             return val
                           })
-                        _vm.$set(
-                          _vm.figureDatas,
-                          "type",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
+                        _vm.type = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
                       },
                     },
                   },
