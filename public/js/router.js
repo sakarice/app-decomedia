@@ -12426,7 +12426,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
-                    domProps: { value: _vm.getFigureData["isDrawFill"] },
+                    domProps: { checked: _vm.getFigureData["isDrawFill"] },
                     on: {
                       mousedown: function ($event) {
                         $event.stopPropagation()
@@ -12472,7 +12472,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
-                    domProps: { value: _vm.getFigureData["isDrawStroke"] },
+                    domProps: { checked: _vm.getFigureData["isDrawStroke"] },
                     on: {
                       mousedown: function ($event) {
                         $event.stopPropagation()
@@ -13886,7 +13886,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
-                    domProps: { value: _vm.figureDatas["isDrawFill"] },
+                    domProps: { checked: _vm.figureDatas["isDrawFill"] },
                     on: {
                       mousedown: function ($event) {
                         $event.stopPropagation()
@@ -13932,7 +13932,7 @@ var render = function () {
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
-                    domProps: { value: _vm.figureDatas["isDrawStroke"] },
+                    domProps: { checked: _vm.figureDatas["isDrawStroke"] },
                     on: {
                       mousedown: function ($event) {
                         $event.stopPropagation()

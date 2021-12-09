@@ -55,7 +55,7 @@
           <div class="disp-space-between fill-input-wrapper">
             <div class="fill-flag">
               <span>塗りつぶし</span>
-              <input type="checkbox" @mousedown.stop :value="figureDatas['isDrawFill']" @input="updateFigureData('isDrawFill',$event.target.checked)">
+              <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawFill']" @input="updateFigureData('isDrawFill',$event.target.checked)">
             </div>
             <div class="fill-color">
               <span>色:</span>
@@ -66,7 +66,7 @@
           <div class="disp-space-between stroke-input-wrapper">
             <div class="stroke-flag">
               <span>枠線</span>
-              <input type="checkbox" @mousedown.stop :value="figureDatas['isDrawStroke']" @input="updateFigureData('isDrawStroke',$event.target.checked)">
+              <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawStroke']" @input="updateFigureData('isDrawStroke',$event.target.checked)">
             </div>
             <div class="stroke-color">
               <span>色:</span>
