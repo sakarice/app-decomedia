@@ -122,7 +122,6 @@ class MediaFigureUtil
 
   // 6.update
   public static function updateMediaFigureData($media_id, $request){
-    \Log::info('start updateMediaFigureData');
     $req_media_figures;
     $req_figure_num;
     if(isset($request->figures[0])){ // リクエストにfigureがセットされている場合
@@ -134,7 +133,6 @@ class MediaFigureUtil
       // DBのメディア図形データを取得
       // $db_media_figures = MediaFigure::where('media_id', $media_id)->get();
       MediaFigureUtil::updateMediaFigureRecord($media_id, $req_media_figures);
-      \Log::info('finish updateMediaFigureData');
     } else { // セットされていなかった場合
       $req_figure_num = 0;
       // DBのMediaAudioのレコードを削除。更新処理は行わない。
