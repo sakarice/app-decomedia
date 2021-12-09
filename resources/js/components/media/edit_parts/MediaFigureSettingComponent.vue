@@ -44,7 +44,16 @@
             <span>縦幅[px]:</span>
             <input type="number" class="input-num" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
           </div>
+
+          <div class="disp-space-between type-input-wrapper">
+            <span>種類:</span>
+            <select name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
+              <option value="1">四角形</option>
+              <option value="2">円</option>
+            </select>
+          </div>
         </div>
+
 
         <!-- カラー系の設定 -->
         <div class="setting-type-color">
@@ -97,6 +106,7 @@
     },
     computed : {
       ...mapGetters('mediaFigureFactory', ['getFigureData']),
+      type(){ return this.getFigureData['type'] },
       degree(){ return this.getFigureData['degree'] },
       is_draw_fill(){ return this.getFigureData['isDrawFill']},
       is_draw_stroke(){ return this.getFigureData['isDrawStroke']},
@@ -129,6 +139,7 @@
 
     },
     watch : {
+      type(){ this.draw(); },
       degree(){ this.draw(); },
       is_draw_fill(){ this.draw(); },
       is_draw_stroke(){ this.draw(); },
@@ -238,7 +249,14 @@
         this.pre_ctx.rotate(this.getFigureData['degree']*Math.PI / 180);
         this.pre_ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
       },
-      createPathRect(){
+      createPath(){
+        if(this.getFigureData['type']==1){ // 四角形
+          this.createPathRect();
+        } else if(this.getFigureData['type']==2){ // 楕円
+          this.createPathEllipse();
+        }
+      },
+      createPathRect(){ // 四角形。図形タイプ1
         const point1_left_upper  = {x: this.start_x, y: this.start_y};
         const point2_left_under  = {x: this.start_x ,y: this.start_y + this.height};
         const point3_right_under = {x: this.start_x + this.width, y: this.start_y + this.height};
@@ -251,6 +269,14 @@
         this.pre_ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.pre_ctx.closePath();
       },
+      createPathEllipse(){ // 楕円。図形タイプ2
+        this.pre_ctx.beginPath();
+        const radius_x = this.width/2 - 2; // x軸半径
+        const radius_y = this.height/2 - 2; // y軸半径
+        const center_x = this.start_x +  radius_x + 1; // 中心x座標
+        const center_y = this.start_y +  radius_y + 1; // 中心y座標
+        this.pre_ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI*2);
+      },
       setGlobalAlpha(){ this.pre_ctx.globalAlpha = this.getFigureData['globalAlpha']},
       setFillColor(){this.pre_ctx.fillStyle = this.getFigureData['fillColor'];},
       setStrokeColor(){this.pre_ctx.strokeStyle = this.getFigureData['strokeColor'];},
@@ -260,7 +286,7 @@
         this.setStrokeColor();
         this.setFillColor();
         this.setDegree();
-        this.createPathRect();
+        this.createPath();
       },
       fill(){
         this.prepareDraw();
@@ -292,7 +318,7 @@
   top: 50%;
   z-index: 30;
   width: 300px;
-  height: 407px;
+  height: 420px;
   padding: 5px;
   background-color: rgba(35,40,50,0.85);
   color: white;

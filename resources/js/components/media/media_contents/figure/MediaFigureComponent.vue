@@ -131,7 +131,7 @@ import figureResize from './FigureResizeComponent.vue';
         const storeData = this.getOneFigure(this.index);
         keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
         this.setCanvasSize();
-        this.createPathRect();
+        this.createPath();
         this.draw();
       },
       // 図形描画関連
@@ -142,7 +142,7 @@ import figureResize from './FigureResizeComponent.vue';
         this.setGlobalAlpha();
         this.setStrokeColor();
         this.setFillColor();
-        this.createPathRect();
+        this.createPath();
         this.draw();
         this.isReDraw = false;
       },
@@ -183,7 +183,14 @@ import figureResize from './FigureResizeComponent.vue';
       clear(){
         this.ctx.clearRect(0,0,this.figureDatas['width'],this.figureDatas['height']);
       },
-      createPathRect(){
+      createPath(){
+        if(this.figureDatas['type']==1){ // 四角形
+          this.createPathRect();
+        } else if(this.figureDatas['type']==2){ // 楕円
+          this.createPathEllipse();
+        }
+      },
+      createPathRect(){ // 四角形。図形タイプ1
         const width = this.figureDatas['width'];
         const height = this.figureDatas['height'];
 
@@ -199,6 +206,14 @@ import figureResize from './FigureResizeComponent.vue';
         this.ctx.lineTo(point3_right_under['x'], point3_right_under['y']);
         this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
         this.ctx.closePath();
+      },
+      createPathEllipse(){ // 楕円。図形タイプ2
+        this.ctx.beginPath();
+        const radius_x = this.figureDatas['width']/2 - 2; // x軸半径
+        const radius_y = this.figureDatas['height']/2 - 2; // y軸半径
+        const center_x = radius_x + 1; // 中心x座標
+        const center_y = radius_y + 1; // 中心y座標
+        this.ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI*2);
       },
       setLayer(){ this.canvas_wrapper.style.zIndex = this.figureDatas['layer'] },
       setGlobalAlpha(){ this.ctx.globalAlpha = this.figureDatas['globalAlpha'];},

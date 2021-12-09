@@ -14,12 +14,12 @@
         <div class="setting-type-num">
           <div class="disp-space-between x-position-wrapper">
             <span>配置座標(x):</span>
-            <input type="number" class="input-num" :value="figureDatas['left']" @input="updateFigureData('left', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['left']" @input="updateFigureData('left', $event.target.value)" min="-1000" max="10000">
           </div>
 
           <div class="disp-space-between y-position-wrapper">
             <span>配置座標(y):</span>
-            <input type="number" class="input-num" :value="figureDatas['top']" @input="updateFigureData('top', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['top']" @input="updateFigureData('top', $event.target.value)" min="-1000" max="10000">
           </div>
 
           <div class="disp-space-between degree-wrapper">
@@ -29,17 +29,26 @@
 
           <div class="disp-space-between width-input-wrapper">
             <span>横幅[px]:</span>
-            <input type="number" class="input-num" :value="figureDatas['width']" @input="updateFigureData('width', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['width']" @input="updateFigureData('width', $event.target.value)" min="0" max="10000">
           </div>
           <div class="disp-space-between height-input-wrapper">
             <span>縦幅[px]:</span>
-            <input type="number" class="input-num" :value="figureDatas['height']" @input="updateFigureData('height', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['height']" @input="updateFigureData('height', $event.target.value)" min="0" max="10000">
           </div>
 
           <div class="disp-space-between layer-input-wrapper">
             <span>重ね順:</span>
-            <input type="number" class="input-num" :value="figureDatas['layer']" @input="updateFigureData('layer', $event.target.value)">
+            <input type="number" class="input-num" :value="figureDatas['layer']" @input="updateFigureData('layer', $event.target.value)"  min="0" max="100">
           </div>
+
+          <div class="disp-space-between type-input-wrapper">
+            <span>種類:</span>
+            <select name="種類" class="input-num" @input="updateFigureData('type', $event.target.value)">
+              <option value="1">四角形</option>
+              <option value="2">円</option>
+            </select>
+          </div>
+
         </div>
 
         <!-- カラー系の設定 -->
@@ -205,7 +214,7 @@
   top: 50%;
   z-index: 30;
   width: 300px;
-  height: 320px;
+  height: 340px;
   padding: 5px;
   background-color: rgba(35,40,50,0.85);
   color: white;

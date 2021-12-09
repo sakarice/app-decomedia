@@ -2138,6 +2138,15 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2156,6 +2165,9 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
+    type: function type() {
+      return this.getFigureData['type'];
+    },
     degree: function degree() {
       return this.getFigureData['degree'];
     },
@@ -2209,6 +2221,9 @@ function _defineProperty(obj, key, value) {
     }
   }),
   watch: {
+    type: function type() {
+      this.draw();
+    },
     degree: function degree() {
       this.draw();
     },
@@ -2349,7 +2364,17 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.rotate(this.getFigureData['degree'] * Math.PI / 180);
       this.pre_ctx.translate(-move_x, -move_y); // 回転軸を元の位置に戻す。
     },
+    createPath: function createPath() {
+      if (this.getFigureData['type'] == 1) {
+        // 四角形
+        this.createPathRect();
+      } else if (this.getFigureData['type'] == 2) {
+        // 楕円
+        this.createPathEllipse();
+      }
+    },
     createPathRect: function createPathRect() {
+      // 四角形。図形タイプ1
       var point1_left_upper = {
         x: this.start_x,
         y: this.start_y
@@ -2373,6 +2398,19 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
       this.pre_ctx.closePath();
     },
+    createPathEllipse: function createPathEllipse() {
+      // 楕円。図形タイプ2
+      this.pre_ctx.beginPath();
+      var radius_x = this.width / 2 - 2; // x軸半径
+
+      var radius_y = this.height / 2 - 2; // y軸半径
+
+      var center_x = this.start_x + radius_x + 1; // 中心x座標
+
+      var center_y = this.start_y + radius_y + 1; // 中心y座標
+
+      this.pre_ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI * 2);
+    },
     setGlobalAlpha: function setGlobalAlpha() {
       this.pre_ctx.globalAlpha = this.getFigureData['globalAlpha'];
     },
@@ -2388,7 +2426,7 @@ function _defineProperty(obj, key, value) {
       this.setStrokeColor();
       this.setFillColor();
       this.setDegree();
-      this.createPathRect();
+      this.createPath();
     },
     fill: function fill() {
       this.prepareDraw();
@@ -4062,6 +4100,15 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4419,7 +4466,7 @@ function _defineProperty(obj, key, value) {
         _this.figureDatas[key] = storeData[key];
       });
       this.setCanvasSize();
-      this.createPathRect();
+      this.createPath();
       this.draw();
     },
     // 図形描画関連
@@ -4430,7 +4477,7 @@ function _defineProperty(obj, key, value) {
       this.setGlobalAlpha();
       this.setStrokeColor();
       this.setFillColor();
-      this.createPathRect();
+      this.createPath();
       this.draw();
       this.isReDraw = false;
     },
@@ -4485,7 +4532,17 @@ function _defineProperty(obj, key, value) {
     clear: function clear() {
       this.ctx.clearRect(0, 0, this.figureDatas['width'], this.figureDatas['height']);
     },
+    createPath: function createPath() {
+      if (this.figureDatas['type'] == 1) {
+        // 四角形
+        this.createPathRect();
+      } else if (this.figureDatas['type'] == 2) {
+        // 楕円
+        this.createPathEllipse();
+      }
+    },
     createPathRect: function createPathRect() {
+      // 四角形。図形タイプ1
       var width = this.figureDatas['width'];
       var height = this.figureDatas['height']; // 左上から半時計回りに、四角形の4頂点のポイントを指定
 
@@ -4511,6 +4568,19 @@ function _defineProperty(obj, key, value) {
       this.ctx.lineTo(point3_right_under['x'], point3_right_under['y']);
       this.ctx.lineTo(point4_right_upper['x'], point4_right_upper['y']);
       this.ctx.closePath();
+    },
+    createPathEllipse: function createPathEllipse() {
+      // 楕円。図形タイプ2
+      this.ctx.beginPath();
+      var radius_x = this.figureDatas['width'] / 2 - 2; // x軸半径
+
+      var radius_y = this.figureDatas['height'] / 2 - 2; // y軸半径
+
+      var center_x = radius_x + 1; // 中心x座標
+
+      var center_y = radius_y + 1; // 中心y座標
+
+      this.ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI * 2);
     },
     setLayer: function setLayer() {
       this.canvas_wrapper.style.zIndex = this.figureDatas['layer'];
@@ -5894,7 +5964,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 407px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 420px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -6107,7 +6177,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 320px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-6bd475f9]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 340px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-6bd475f9]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-6bd475f9] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-6bd475f9] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-6bd475f9]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-6bd475f9],\r\n.setting-type-color[data-v-6bd475f9] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-6bd475f9] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-6bd475f9] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12289,6 +12359,35 @@ var render = function () {
                 }),
               ]
             ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between type-input-wrapper" },
+              [
+                _c("span", [_vm._v("種類:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    staticClass: "input-num",
+                    attrs: { name: "種類" },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "type",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
+                  ]
+                ),
+              ]
+            ),
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "setting-type-color" }, [
@@ -13594,7 +13693,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", min: "-1000", max: "10000" },
                   domProps: { value: _vm.figureDatas["left"] },
                   on: {
                     input: function ($event) {
@@ -13613,7 +13712,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", min: "-1000", max: "10000" },
                   domProps: { value: _vm.figureDatas["top"] },
                   on: {
                     input: function ($event) {
@@ -13647,7 +13746,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", min: "0", max: "10000" },
                   domProps: { value: _vm.figureDatas["width"] },
                   on: {
                     input: function ($event) {
@@ -13666,7 +13765,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", min: "0", max: "10000" },
                   domProps: { value: _vm.figureDatas["height"] },
                   on: {
                     input: function ($event) {
@@ -13685,7 +13784,7 @@ var render = function () {
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
-                  attrs: { type: "number" },
+                  attrs: { type: "number", min: "0", max: "100" },
                   domProps: { value: _vm.figureDatas["layer"] },
                   on: {
                     input: function ($event) {
@@ -13693,6 +13792,32 @@ var render = function () {
                     },
                   },
                 }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between type-input-wrapper" },
+              [
+                _c("span", [_vm._v("種類:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    staticClass: "input-num",
+                    attrs: { name: "種類" },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData("type", $event.target.value)
+                      },
+                    },
+                  },
+                  [
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
+                  ]
+                ),
               ]
             ),
           ]),
