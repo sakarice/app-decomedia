@@ -2147,6 +2147,9 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
 
 
 
@@ -12253,6 +12256,31 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "media-figure-settings" }, [
+          _c("div", { staticClass: "disp-space-between type-input-wrapper" }, [
+            _c("span", [_vm._v("種類:")]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "input-num",
+                attrs: { name: "種類" },
+                on: {
+                  input: function ($event) {
+                    return _vm.updateFigureData({
+                      key: "type",
+                      value: $event.target.value,
+                    })
+                  },
+                },
+              },
+              [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
+              ]
+            ),
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "setting-type-num" }, [
             _c(
               "div",
@@ -12357,35 +12385,6 @@ var render = function () {
                     },
                   },
                 }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between type-input-wrapper" },
-              [
-                _c("span", [_vm._v("種類:")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass: "input-num",
-                    attrs: { name: "種類" },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "type",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  },
-                  [
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("四角形")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [_vm._v("円")]),
-                  ]
-                ),
               ]
             ),
           ]),

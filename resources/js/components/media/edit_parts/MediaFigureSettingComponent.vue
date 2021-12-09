@@ -19,6 +19,16 @@
       </div>
       <!-- 図形設定 -->
       <div class="media-figure-settings">
+
+        <!-- 図形の種類 -->
+        <div class="disp-space-between type-input-wrapper">
+          <span>種類:</span>
+          <select name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
+            <option value="1">四角形</option>
+            <option value="2">円</option>
+          </select>
+        </div>
+
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
           <div class="disp-space-between x-position-wrapper">
@@ -45,13 +55,6 @@
             <input type="number" class="input-num" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
           </div>
 
-          <div class="disp-space-between type-input-wrapper">
-            <span>種類:</span>
-            <select name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
-              <option value="1">四角形</option>
-              <option value="2">円</option>
-            </select>
-          </div>
         </div>
 
 
