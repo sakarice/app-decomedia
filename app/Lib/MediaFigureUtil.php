@@ -14,6 +14,7 @@ class MediaFigureUtil
 
   // テーブルのカラムとrequestのプロパティ名の対応を連想配列に定義
   private static $NAME_PAIRS_IN_COLUMN_AND_PROPERTY = array(
+    // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
     'media_id' => 'media_id',
     'type' => 'type',
     'user_selected_item_group_no' => 'groupNo',
