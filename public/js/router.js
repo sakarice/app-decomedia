@@ -1816,7 +1816,7 @@ function _defineProperty(obj, key, value) {
 
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])),
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
@@ -1981,7 +1981,15 @@ function _defineProperty(obj, key, value) {
         _this4.userOwnImgs.splice(index, 1);
 
         _this4.loadingMessage = '';
-        _this4.isLoading = false; // Media画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+        _this4.isLoading = false; // Media画像に設定していた場合は削除する
+
+        var mediaImgs = _this4.getMediaImgs;
+        var tmpThis = _this4;
+        mediaImgs.forEach(function (mediaImg, index) {
+          if (mediaImg['url'] == imgUrl) {
+            tmpThis.deleteMediaImgsObjectItem(index);
+          }
+        });
 
         if (_this4.getMediaImg['url'] == imgUrl) {
           _this4.updateMediaImgContent({

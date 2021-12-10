@@ -78,9 +78,9 @@
       }
     },
     computed : {
-      ...mapGetters('mediaImg', ['getMediaImg']),
-      // ...mapGetters('mediaImgs', ['getMediaImg']),
-      // ...mapGetters('mediaImgs', ['getMediaImgs']),
+      // ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImgs']),
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgContent']),
@@ -237,7 +237,14 @@
             this.userOwnImgs.splice(index,1);
             this.loadingMessage = ''
             this.isLoading = false;
-            // Media画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+            // Media画像に設定していた場合は削除する
+            const mediaImgs = this.getMediaImgs;
+            const tmpThis = this;
+            mediaImgs.forEach(function(mediaImg,index){
+              if(mediaImg['url']==imgUrl){
+                tmpThis.deleteMediaImgsObjectItem(index);
+              }
+            })
             if(this.getMediaImg['url']==imgUrl){
               this.updateMediaImgContent({type:0, id:0, url:""});
             }
