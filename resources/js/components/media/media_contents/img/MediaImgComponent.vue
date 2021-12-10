@@ -21,6 +21,7 @@
   import { mapGetters, mapMutations } from 'vuex';
   export default {
     props : [
+      "index"
     ],
     computed : {
       ...mapGetters('media', ['getMediaId']),

@@ -7,9 +7,12 @@
     <router-view name="switchToShowMode"></router-view>
 
     <!-- Media画像コンポーネント -->
-    <media-img
+    <!-- <media-img-
     ref="mediaImg">
-    </media-img>
+    </media-img-> -->
+    <media-img-mng
+    ref="mediaImgMng">
+    </media-img-mng>
 
     <!-- Media図形コンポーネント -->
     <media-figure-mng
@@ -132,7 +135,8 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
-  import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import MediaImgMng from './media_contents/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
@@ -144,7 +148,8 @@
 
 export default {
   components : {
-    MediaImg,
+    // MediaImg,
+    MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
@@ -295,7 +300,7 @@ export default {
     if(this.getMode!=1){ // 1:create以外(=showかedit)なら初期化処理を実行
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
-      this.$refs.mediaImg.initImg();
+      // this.$refs.mediaImg.initImg();
       this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();
