@@ -76,7 +76,8 @@ Vue.component('audio-select-component', require('./components/media/edit_parts/A
 Vue.component('media-setting-component', require('./components/media/edit_parts/MediaSettingComponent.vue').default);
 Vue.component('media-audio-component', require('./components/media/media_contents/MediaAudioComponent.vue').default);
 Vue.component('media-audio-player-component', require('./components/media/media_contents/MediaAudioPlayerComponent.vue').default);
-Vue.component('media-img-component', require('./components/media/media_contents/MediaImgComponent.vue').default);
+Vue.component('media-img-mng-component', require('./components/media/media_contents/img/MediaImgMngComponent.vue').default);
+Vue.component('media-img-component', require('./components/media/media_contents/img/MediaImgComponent.vue').default);
 Vue.component('media-movie-component', require('./components/media/media_contents/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/media/CreateMediaComponent.vue').default);
 Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);

@@ -132,7 +132,7 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
-  import MediaImg from './media_contents/MediaImgComponent.vue';
+  import MediaImg from './media_contents/img/MediaImgComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
