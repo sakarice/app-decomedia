@@ -16,7 +16,7 @@ class CreateMediaImgSettingsTable extends Migration
         Schema::create('media_img_settings', function (Blueprint $table) {
             $table->id();
             $table->integer('media_img_id');
-            $table->integer('type');
+            $table->integer('type')->default(99);
             $table->integer('user_selected_item_group_no')->nullable()->default(NULL);
             $table->integer('left');
             $table->integer('top');
