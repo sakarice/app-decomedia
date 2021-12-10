@@ -1874,14 +1874,16 @@ function _defineProperty(obj, key, value) {
         imgType = 2;
       }
 
-      var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
+      var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl); // テスト用 あとで消す
+
+      var rand_width = Math.floor(Math.random() * 300);
       var mediaImgData = {
         'type': 99,
         'img_type': imgType,
         'id': imgId,
         'url': imgUrl,
-        'width': 500,
-        'height': 500,
+        'width': rand_width,
+        'height': rand_width + 50,
         'opacity': 1,
         'layer': 1
       };
@@ -3338,13 +3340,13 @@ function _defineProperty(obj, key, value) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     // ↓storeの値には単位[px]が付いてないので追加する
     mediaImgWidth: function mediaImgWidth() {
-      return this.$store.getters['mediaImg/getMediaImg']['width'] + "px";
+      return this.$store.getters['mediaImgs/getMediaImg']['width'] + "px";
     },
     mediaImgHeight: function mediaImgHeight() {
-      return this.$store.getters['mediaImg/getMediaImg']['height'] + "px";
+      return this.$store.getters['mediaImgs/getMediaImg']['height'] + "px";
     }
   }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), {}, {

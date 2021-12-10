@@ -144,13 +144,15 @@
           imgType = 2;
         }
         const imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
+        // テスト用 あとで消す
+        const rand_width = Math.floor(Math.random()*300);
         const mediaImgData = {
           'type' : 99,
           'img_type': imgType,
           'id' : imgId,
           'url' : imgUrl,
-          'width' : 500,
-          'height' : 500,
+          'width' : rand_width,
+          'height' : rand_width + 50,
           'opacity' : 1,
           'layer' : 1,
         }

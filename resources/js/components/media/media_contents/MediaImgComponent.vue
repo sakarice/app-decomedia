@@ -24,11 +24,13 @@
     ],
     computed : {
       ...mapGetters('media', ['getMediaId']),
-      ...mapGetters('mediaImg', ['getMediaImg']),
+      // ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
       // ↓storeの値には単位[px]が付いてないので追加する
-      mediaImgWidth() { return this.$store.getters['mediaImg/getMediaImg']['width'] + "px"; },
-      mediaImgHeight() { return this.$store.getters['mediaImg/getMediaImg']['height'] + "px"; },
+      mediaImgWidth() { return this.$store.getters['mediaImgs/getMediaImg']['width'] + "px"; },
+      mediaImgHeight() { return this.$store.getters['mediaImgs/getMediaImg']['height'] + "px"; },
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
