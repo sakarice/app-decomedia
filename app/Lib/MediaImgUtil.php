@@ -16,17 +16,28 @@ use Storage;
 class MediaImgUtil
 {
 
+  // テーブルのカラムとrequestのプロパティ名の対応を連想配列に定義
+  private static $NAME_PAIRS_IN_COLUMN_AND_PROPERTY = array(
+    // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
+    // 'media_id' => 'media_id',
+    'img_id' => 'id',
+    'img_type' => 'type',
+    'width' => 'width',
+    'height' => 'height',
+    'opacity' => 'opacity',
+    'img_layer' => 'layer',
+  );
+
+
   // 3.store // Media画像情報をDBに保存
   public static function saveMediaImgData($media_id, $request){
     $mediaImg = new MediaImg();
+    $req_data = $request->img;
+    foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+      $mediaImg[$column_name] = $req_data[$property_name];
+    }
     $mediaImg->media_id = $media_id;
     $mediaImg->owner_user_id = Auth::user()->id;
-    $mediaImg->img_id = $request->img['id'];
-    $mediaImg->img_type = $request->img['type'];
-    $mediaImg->width = $request->img['width'];
-    $mediaImg->height = $request->img['height'];
-    $mediaImg->opacity = $request->img['opacity'];
-    $mediaImg->img_layer = $request->img['layer'];
     $mediaImg->save();
   }
 
@@ -47,37 +58,31 @@ class MediaImgUtil
   // 4.show 
   // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
   public static function getMediaImgData($media_id){
-    $media_img_data;
+    $send_data; // リターン対象のデータ
     $img_url = "";
-    $media_img = MediaImg::where('media_id', $media_id)->first();
-    if($media_img->img_id == 0){
-      $media_img_data = MediaImgUtil::getEmptyMediaImgData();
+    $db_data = MediaImg::where('media_id', $media_id)->first();
+    if($db_data->img_id == 0){
+      $send_data = MediaImgUtil::getEmptyMediaImgData();
     } else {
-      $img_url = MediaImgUtil::getMediaImgModel($media_img->img_id, $media_img->img_type)->img_url;
-      $media_img_data = [
-          'id' => $media_img->img_id,
-          'type' => $media_img->img_type,
-          'url' => $img_url,
-          'width' => $media_img->width,
-          'height' => $media_img->height,
-          'opacity' => $media_img->opacity,
-          'layer' => $media_img->img_layer,
-      ];
+      $img_url = MediaImgUtil::getMediaImgModel($db_data->img_id, $db_data->img_type)->img_url;
+      $send_data = array();
+      $send_data['url'] = $img_url;
+      $send_data['type'] = 97;
+      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+        $send_data[$property_name] = $db_data[$column_name];        
+      }
     };
-    return $media_img_data;
+    return $send_data;
 }
 
 
   // 6.update
   public static function updateMediaImgData($media_id, $request){
-    $mediaImg = MediaImg::where('media_id', $media_id)->first();
-    $mediaImg->img_id = $request->img['id'];
-    $mediaImg->img_type = $request->img['type'];
-    $mediaImg->width = $request->img['width'];
-    $mediaImg->height = $request->img['height'];
-    $mediaImg->opacity = $request->img['opacity'];
-    $mediaImg->img_layer = $request->img['layer'];
-    $mediaImg->save();
+    $target_record = MediaImg::where('media_id', $media_id)->first();
+    foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+      $target_record[$column_name] = $request->img[$property_name];
+    }
+    $target_record->save();
   }
 
   public static function updateMediaImgDataToTentative($media_id){
