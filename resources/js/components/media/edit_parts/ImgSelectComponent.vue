@@ -79,10 +79,17 @@
     },
     computed : {
       ...mapGetters('mediaImg', ['getMediaImg']),
+      // ...mapGetters('mediaImgs', ['getMediaImg']),
+      // ...mapGetters('mediaImgs', ['getMediaImgs']),
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgContent']),
-      ...mapMutations('mediaImg', ['checkMediaImg']),
+      // ...mapMutations('mediaImg', ['checkMediaImg']),
+      ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
+      ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
+
       changeFileCategory(){
         this.isDefault = !(this.isDefault);
         if(this.isDefault == true){
@@ -128,17 +135,27 @@
         this.$emit('close-modal');
       },
       setMediaImg: function(event){
-        let imgUrl = event.target.previousElementSibling.getAttribute('src');
-        let imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
+        const imgUrl = event.target.previousElementSibling.getAttribute('src');
+        const imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
         let imgType;
         if(imgTypeLabel == 'default-img'){
           imgType = 1;
         } else if(imgTypeLabel == 'user-own-img'){
           imgType = 2;
         }
-        let imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
-        
+        const imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
+        const mediaImgData = {
+          'type' : 99,
+          'img_type': imgType,
+          'id' : imgId,
+          'url' : imgUrl,
+          'width' : 500,
+          'height' : 500,
+          'opacity' : 1,
+          'layer' : 1,
+        }
         this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
+        this.addMediaImgsObjectItem(mediaImgData);
       },
       findImgIdTiedUpWithUrl(imgType, imgUrl){
         let targetModel;  // 検索対象のVueモデル

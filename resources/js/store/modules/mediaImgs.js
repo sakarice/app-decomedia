@@ -1,4 +1,4 @@
-const mediaImg = {
+const mediaImgs = {
   namespaced : true,
 
   state : {
@@ -7,7 +7,8 @@ const mediaImg = {
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaImgs : [],
     // mediaImg : {
-    //   type : 0,
+    //   type : 99,
+    //   img_type : 0,
     //   id : 0,
     //   url : "",
     //   width : 500,
@@ -32,7 +33,6 @@ const mediaImg = {
     updateIsInitializedImgs(state,payload){state.isInitialized = payload},
     updateMediaImgsObjectItem(state, {index, key, value}){state.mediaImgs[index][key] = value;},
     setTargetObjectIndex(state, payload){ state.targetObjectIndex = payload },
-
   },
   actions : {}
 

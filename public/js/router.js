@@ -1817,7 +1817,7 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['checkMediaImg'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
 
@@ -1875,11 +1875,22 @@ function _defineProperty(obj, key, value) {
       }
 
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
+      var mediaImgData = {
+        'type': 99,
+        'img_type': imgType,
+        'id': imgId,
+        'url': imgUrl,
+        'width': 500,
+        'height': 500,
+        'opacity': 1,
+        'layer': 1
+      };
       this.updateMediaImgContent({
         type: imgType,
         id: imgId,
         url: imgUrl
       });
+      this.addMediaImgsObjectItem(mediaImgData);
     },
     findImgIdTiedUpWithUrl: function findImgIdTiedUpWithUrl(imgType, imgUrl) {
       var targetModel; // 検索対象のVueモデル

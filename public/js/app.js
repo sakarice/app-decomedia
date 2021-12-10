@@ -5359,7 +5359,7 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['checkMediaImg'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
 
@@ -5417,11 +5417,22 @@ function _defineProperty(obj, key, value) {
       }
 
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
+      var mediaImgData = {
+        'type': 99,
+        'img_type': imgType,
+        'id': imgId,
+        'url': imgUrl,
+        'width': 500,
+        'height': 500,
+        'opacity': 1,
+        'layer': 1
+      };
       this.updateMediaImgContent({
         type: imgType,
         id: imgId,
         url: imgUrl
       });
+      this.addMediaImgsObjectItem(mediaImgData);
     },
     findImgIdTiedUpWithUrl: function findImgIdTiedUpWithUrl(imgType, imgUrl) {
       var targetModel; // 検索対象のVueモデル
@@ -9873,16 +9884,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_media_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/media.js */ "./resources/js/store/modules/media.js");
 /* harmony import */ var _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaImg.js */ "./resources/js/store/modules/mediaImg.js");
-/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
-/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
-/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
-/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
+/* harmony import */ var _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaImgs */ "./resources/js/store/modules/mediaImgs.js");
+/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
+/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
+/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
 
 
 
@@ -9894,17 +9906,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_9__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_10__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_10__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_10__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_11__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_11__["default"].Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__["default"],
     media: _modules_media_js__WEBPACK_IMPORTED_MODULE_2__["default"],
     mediaImg: _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__["default"],
-    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__["default"]
+    mediaImgs: _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__["default"],
+    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__["default"],
+    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -10307,6 +10321,73 @@ var mediaImg = {
   actions: {}
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaImg);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/mediaImgs.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/mediaImgs.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var mediaImgs = {
+  namespaced: true,
+  state: {
+    // DBから取得したデータで下記mediaImgが初期化がされたか。
+    isInitialized: false,
+    // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
+    mediaImgs: [],
+    // mediaImg : {
+    //   type : 99,
+    //   img_type : 0,
+    //   id : 0,
+    //   url : "",
+    //   width : 500,
+    //   height : 500,
+    //   opacity : 1,
+    //   layer : 0,
+    // },
+    targetObjectIndex: 0
+  },
+  getters: {
+    getIsInitializedImg: function getIsInitializedImg(state) {
+      return state.isInitialized;
+    },
+    getMediaImgs: function getMediaImgs(state) {
+      return state.mediaImgs;
+    },
+    getMediaImg: function getMediaImg(state) {
+      return state.mediaImgs[state.targetObjectIndex];
+    }
+  },
+  mutations: {
+    deleteMediaImgsObjectItem: function deleteMediaImgsObjectItem(state, payload) {
+      state.mediaImgs.splice(payload, 1); // Imgを1つ削除
+    },
+    addMediaImgsObjectItem: function addMediaImgsObjectItem(state, payload) {
+      state.mediaImgs.push(payload);
+    },
+    updateIsInitializedImgs: function updateIsInitializedImgs(state, payload) {
+      state.isInitialized = payload;
+    },
+    updateMediaImgsObjectItem: function updateMediaImgsObjectItem(state, _ref) {
+      var index = _ref.index,
+          key = _ref.key,
+          value = _ref.value;
+      state.mediaImgs[index][key] = value;
+    },
+    setTargetObjectIndex: function setTargetObjectIndex(state, payload) {
+      state.targetObjectIndex = payload;
+    }
+  },
+  actions: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaImgs);
 
 /***/ }),
 
