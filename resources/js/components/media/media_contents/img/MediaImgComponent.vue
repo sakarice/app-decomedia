@@ -1,17 +1,17 @@
 <template>
   <!-- Media画像-->
   <div id="media-img-wrapper"
-  v-bind:style="{'z-index' : getMediaImg['layer']}">
+  v-bind:style="imgWrapperStyle()">
 
     <div id="media-img-frame"
       v-show="getMediaSetting['isShowImg']"
       v-on:click="$emit('parent-action', 'imgModal')"
-      v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: getMediaImg['opacity']}">
-      <p v-show="!(getMediaImg['url'])"></p>
+      v-bind:style="imgStyle()">
+      <p v-show="!(mediaImg['url'])"></p>
       <img id="media-img"
-       :src="getMediaImg['url']"
-       v-show="getMediaImg['url']" alt="画像が選択されていません"
-       v-bind:style="{width: mediaImgWidth, height: mediaImgHeight, opacity: getMediaImg['opacity']}">
+       :src="mediaImg['url']"
+       v-show="mediaImg['url']" alt="画像が選択されていません"
+       v-bind:style="imgStyle()">
     </div>
 
   </div>
@@ -23,40 +23,50 @@
     props : [
       "index"
     ],
+    data : ()=> {
+      return {
+        "mediaImg" : "",
+      }
+    },
     computed : {
       ...mapGetters('media', ['getMediaId']),
       // ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
-      // ↓storeの値には単位[px]が付いてないので追加する
-      mediaImgWidth() { return this.$store.getters['mediaImgs/getMediaImg']['width'] + "px"; },
-      mediaImgHeight() { return this.$store.getters['mediaImgs/getMediaImg']['height'] + "px"; },
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
       ...mapMutations('mediaImg', ['updateIsInitializedImg']),
-      getMediaImgFromDB(){
-        return new Promise((resolve, reject) => {
-          const url = '/mediaImg/'+this.getMediaId;
-          axios.get(url)
-          .then(response=>{
-            return resolve(response.data);
-          })
-          .catch(error=>{});
-        })
+      ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
+      getOneFigure(){ // ストアから自分のインデックスのオブジェクトだけ取得する
+        this.setTargetObjectIndex(this.index);
+        return this.getMediaImg;
       },
-      initImg(){
-        this.getMediaImgFromDB()
-        .then(datas=>{
-          for(let key in datas){
-            this.updateMediaImgObjectItem({key:key, value:datas[key]});
-          }
-          this.updateIsInitializedImg(true);
-          // this.initStatus += 1;
-        });
+      imgWrapperStyle(){
+        const mi = this.mediaImg;
+        const styleObject = {
+          "position" : "absolute",
+          "top" :  this.addPxToTail(mi['top']),
+          "left" :  this.addPxToTail(mi['left']),
+          'z-index' : this.mediaImg['layer'],
+        }
+        return styleObject;
       },
-    }
+      imgStyle(){
+        const mi = this.mediaImg;
+        const styleObject = {
+          "width" : this.addPxToTail(mi['width']),
+          "height" : this.addPxToTail(mi['height']),
+          "opacity" : mi['opacity'],
+        }
+        return styleObject;
+      },
+      addPxToTail(value){ return (value + "px") },
+    },
+    created(){
+      this.mediaImg = this.getOneFigure();
+    },
   }
 
 </script>
@@ -64,10 +74,8 @@
 
 
 <style scoped>
-  #media-img-wrapper {
-    pointer-events: none;
-  }
-  #media-img-frame {
+
+#media-img-frame {
     display: flex;
     justify-content: center;
     align-items: center;

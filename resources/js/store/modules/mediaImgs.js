@@ -11,6 +11,8 @@ const mediaImgs = {
     //   img_type : 0,
     //   id : 0,
     //   url : "",
+    //   top : 0,
+    //   left : 0,
     //   width : 500,
     //   height : 500,
     //   opacity : 1,

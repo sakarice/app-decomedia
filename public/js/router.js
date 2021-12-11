@@ -1817,8 +1817,20 @@ function _defineProperty(obj, key, value) {
       loadingMessage: "",
       userOwnImgs: [],
       // imgFileUrls : [],
-      defaultImgs: [] // defaultImgUrls : []
-
+      defaultImgs: [],
+      // defaultImgUrls : []
+      mediaImgBaseData: {
+        'type': 99,
+        'img_type': "",
+        'id': 0,
+        'url': "",
+        'top': 100,
+        'left': 100,
+        'width': 300,
+        'height': 220,
+        'opacity': 1,
+        'layer': 1
+      }
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])),
@@ -1880,24 +1892,20 @@ function _defineProperty(obj, key, value) {
       }
 
       var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl); // テスト用 あとで消す
+      // const rand_width = Math.floor(Math.random()*300);
 
-      var rand_width = Math.floor(Math.random() * 300);
-      var mediaImgData = {
-        'type': 99,
-        'img_type': imgType,
-        'id': imgId,
-        'url': imgUrl,
-        'width': rand_width,
-        'height': rand_width + 50,
-        'opacity': 1,
-        'layer': 1
-      };
+      var mediaImgData = Object.assign({}, this.mediaImgBaseData);
+      mediaImgData['img_type'] = imgType;
+      mediaImgData['id'] = imgId;
+      mediaImgData['url'] = imgUrl;
       this.updateMediaImgContent({
         type: imgType,
         id: imgId,
         url: imgUrl
       });
       this.addMediaImgsObjectItem(mediaImgData);
+      this.mediaImgBaseData['top'] += 30;
+      this.mediaImgBaseData['left'] += 30;
     },
     findImgIdTiedUpWithUrl: function findImgIdTiedUpWithUrl(imgType, imgUrl) {
       var targetModel; // 検索対象のVueモデル
@@ -4833,42 +4841,44 @@ function _defineProperty(obj, key, value) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["index"],
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
-    // ↓storeの値には単位[px]が付いてないので追加する
-    mediaImgWidth: function mediaImgWidth() {
-      return this.$store.getters['mediaImgs/getMediaImg']['width'] + "px";
+  data: function data() {
+    return {
+      "mediaImg": ""
+    };
+  },
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), {}, {
+    getOneFigure: function getOneFigure() {
+      // ストアから自分のインデックスのオブジェクトだけ取得する
+      this.setTargetObjectIndex(this.index);
+      return this.getMediaImg;
     },
-    mediaImgHeight: function mediaImgHeight() {
-      return this.$store.getters['mediaImgs/getMediaImg']['height'] + "px";
+    imgWrapperStyle: function imgWrapperStyle() {
+      var mi = this.mediaImg;
+      var styleObject = {
+        "position": "absolute",
+        "top": this.addPxToTail(mi['top']),
+        "left": this.addPxToTail(mi['left']),
+        'z-index': this.mediaImg['layer']
+      };
+      return styleObject;
+    },
+    imgStyle: function imgStyle() {
+      var mi = this.mediaImg;
+      var styleObject = {
+        "width": this.addPxToTail(mi['width']),
+        "height": this.addPxToTail(mi['height']),
+        "opacity": mi['opacity']
+      };
+      return styleObject;
+    },
+    addPxToTail: function addPxToTail(value) {
+      return value + "px";
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), {}, {
-    getMediaImgFromDB: function getMediaImgFromDB() {
-      var _this = this;
-
-      return new Promise(function (resolve, reject) {
-        var url = '/mediaImg/' + _this.getMediaId;
-        axios.get(url).then(function (response) {
-          return resolve(response.data);
-        })["catch"](function (error) {});
-      });
-    },
-    initImg: function initImg() {
-      var _this2 = this;
-
-      this.getMediaImgFromDB().then(function (datas) {
-        for (var key in datas) {
-          _this2.updateMediaImgObjectItem({
-            key: key,
-            value: datas[key]
-          });
-        }
-
-        _this2.updateIsInitializedImg(true); // this.initStatus += 1;
-
-      });
-    }
-  })
+  created: function created() {
+    this.mediaImg = this.getOneFigure();
+  }
 });
 
 /***/ }),
@@ -6415,7 +6425,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-img-wrapper[data-v-25c60fee] {\n  pointer-events: none;\n}\n#media-img-frame[data-v-25c60fee] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-img-frame[data-v-25c60fee] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14383,10 +14393,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      style: { "z-index": _vm.getMediaImg["layer"] },
-      attrs: { id: "media-img-wrapper" },
-    },
+    { style: _vm.imgWrapperStyle(), attrs: { id: "media-img-wrapper" } },
     [
       _c(
         "div",
@@ -14399,11 +14406,7 @@ var render = function () {
               expression: "getMediaSetting['isShowImg']",
             },
           ],
-          style: {
-            width: _vm.mediaImgWidth,
-            height: _vm.mediaImgHeight,
-            opacity: _vm.getMediaImg["opacity"],
-          },
+          style: _vm.imgStyle(),
           attrs: { id: "media-img-frame" },
           on: {
             click: function ($event) {
@@ -14417,8 +14420,8 @@ var render = function () {
               {
                 name: "show",
                 rawName: "v-show",
-                value: !_vm.getMediaImg["url"],
-                expression: "!(getMediaImg['url'])",
+                value: !_vm.mediaImg["url"],
+                expression: "!(mediaImg['url'])",
               },
             ],
           }),
@@ -14428,18 +14431,14 @@ var render = function () {
               {
                 name: "show",
                 rawName: "v-show",
-                value: _vm.getMediaImg["url"],
-                expression: "getMediaImg['url']",
+                value: _vm.mediaImg["url"],
+                expression: "mediaImg['url']",
               },
             ],
-            style: {
-              width: _vm.mediaImgWidth,
-              height: _vm.mediaImgHeight,
-              opacity: _vm.getMediaImg["opacity"],
-            },
+            style: _vm.imgStyle(),
             attrs: {
               id: "media-img",
-              src: _vm.getMediaImg["url"],
+              src: _vm.mediaImg["url"],
               alt: "画像が選択されていません",
             },
           }),

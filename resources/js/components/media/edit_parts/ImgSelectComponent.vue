@@ -73,8 +73,21 @@
         loadingMessage : "",
         userOwnImgs : [],
         // imgFileUrls : [],
-        defaultImgs : []
+        defaultImgs : [],
         // defaultImgUrls : []
+        mediaImgBaseData : {
+          'type' : 99,
+          'img_type': "",
+          'id' : 0,
+          'url' : "",
+          'top' : 100,
+          'left' : 100,
+          'width' : 300,
+          'height' : 220,
+          'opacity' : 1,
+          'layer' : 1,
+        },
+
       }
     },
     computed : {
@@ -145,19 +158,17 @@
         }
         const imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
         // テスト用 あとで消す
-        const rand_width = Math.floor(Math.random()*300);
-        const mediaImgData = {
-          'type' : 99,
-          'img_type': imgType,
-          'id' : imgId,
-          'url' : imgUrl,
-          'width' : rand_width,
-          'height' : rand_width + 50,
-          'opacity' : 1,
-          'layer' : 1,
-        }
+        // const rand_width = Math.floor(Math.random()*300);
+        let mediaImgData = Object.assign({}, this.mediaImgBaseData);
+        mediaImgData['img_type'] = imgType;
+        mediaImgData['id'] = imgId;
+        mediaImgData['url'] = imgUrl;
+        
         this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
         this.addMediaImgsObjectItem(mediaImgData);
+
+        this.mediaImgBaseData['top'] += 30;
+        this.mediaImgBaseData['left'] += 30;
       },
       findImgIdTiedUpWithUrl(imgType, imgUrl){
         let targetModel;  // 検索対象のVueモデル
