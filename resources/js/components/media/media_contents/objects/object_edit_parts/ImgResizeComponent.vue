@@ -57,7 +57,7 @@
       // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
-      ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
 
       getOneImg(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
@@ -107,7 +107,7 @@
       resizeRight(e){
         const left = this.getOneImg(this.index)['left'];
         this.width = e.clientX - left;
-        this.updateMediaImgObjectItem({index:this.index,key:"width",value:this.width});
+        this.updateMediaImgsObjectItem({index:this.index,key:"width",value:this.width});
         this.resizeMiddleLast();
       },
       resizeLeft(e){
@@ -115,16 +115,16 @@
         const diff = x - e.clientX;
         const width_before = this.getOneImg(this.index)['width'];
         const width_new = width_before + diff;
-        this.updateMediaImgObjectItem({index:this.index,key:"width",value:width_new});
+        this.updateMediaImgsObjectItem({index:this.index,key:"width",value:width_new});
         this.width = width_new;
         const new_x = x - diff;
-        this.updateMediaImgObjectItem({index:this.index,key:"left",value:new_x});
+        this.updateMediaImgsObjectItem({index:this.index,key:"left",value:new_x});
         this.resizeMiddleLast();
       },
       resizeBottom(e){
         const top = this.getOneImg(this.index)['top'];
         this.height = e.clientY - top;
-        this.updateMediaImgObjectItem({index:this.index,key:"height",value:this.height});
+        this.updateMediaImgsObjectItem({index:this.index,key:"height",value:this.height});
         this.resizeMiddleLast();
       },
       resizeTop(e){
@@ -132,10 +132,10 @@
         const diff = y - e.clientY;
         const height_before = this.getOneImg(this.index)['height'];
         const height_new = height_before + diff;
-        this.updateMediaImgObjectItem({index:this.index,key:"height",value:height_new});
+        this.updateMediaImgsObjectItem({index:this.index,key:"height",value:height_new});
         this.height = height_new;
         const new_y = y - diff;
-        this.updateMediaImgObjectItem({index:this.index,key:"top",value:new_y});
+        this.updateMediaImgsObjectItem({index:this.index,key:"top",value:new_y});
         this.resizeMiddleLast();
       },
 
