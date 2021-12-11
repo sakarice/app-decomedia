@@ -57,7 +57,7 @@ class MediaImgUtilTest extends TestCase
 
         // 2. 登録
         //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
-        MediaImgUtil::saveMediaImgData($media_id, $request);
+        MediaImgUtil::saveMediaImgData($media_id, $request->img);
 
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック

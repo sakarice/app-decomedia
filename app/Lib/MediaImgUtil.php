@@ -28,18 +28,63 @@ class MediaImgUtil
     'img_layer' => 'layer',
   );
 
+  private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG = array(
+    // "media_id",
+    "img_id" => "id",
+    "img_type" => "img_type",
+    "width" => "width",
+    "height" => "height",
+    "opacity" => "opacity",
+    // "owner_user_id" => "",
+    "img_layer" => "layer",
+  );
+
+  private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING = array(
+    // "media_img_id" => "",
+    "type" => "type",
+    "user_selected_item_group_no" => "groupNo",
+    "left" => "left",
+    "top" => "top",
+    "width" => "width",
+    "height" => "height",
+    "degree" => "degree",
+    "global_alpha" => "opacity",
+    "layer" => "layer",
+  );
+
 
   // 3.store // Media画像情報をDBに保存
-  public static function saveMediaImgData($media_id, $request){
+  public static function saveMediaImgData($media_id, $data){
     $mediaImg = new MediaImg();
-    $req_data = $request->img;
+    // $req_data = $request->img;
     foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
-      $mediaImg[$column_name] = $req_data[$property_name];
+      $mediaImg[$column_name] = $data[$property_name];
     }
     $mediaImg->media_id = $media_id;
     $mediaImg->owner_user_id = Auth::user()->id;
     $mediaImg->save();
   }
+
+  // // 複数のメディア画像保存用メソッド
+  // public static function saveMediaImgsData($media_id, $request){
+  //   $req_imgs = $request->img;
+  //   $to_media_imgs;
+  //   $to_media_img_settings;
+
+  //   foreach($req_imgs as $index => $req_img){
+  //     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
+  //       $tmp_to_media_imgs[] = $req_img[$property_name];
+  //     }
+  //   }
+
+  //   $mediaImg = new MediaImg();
+  //   foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+  //     $mediaImg[$column_name] = $req_data[$property_name];
+  //   }
+  //   $mediaImg->media_id = $media_id;
+  //   $mediaImg->owner_user_id = Auth::user()->id;
+  //   $mediaImg->save();
+  // }
 
   public static function saveTentativeMediaImgData($media_id){
     $mediaImg = new MediaImg();
