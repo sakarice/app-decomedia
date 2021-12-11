@@ -136,14 +136,14 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
-  import MediaImgMng from './media_contents/img/MediaImgMngComponent.vue';
+  import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
   // テスト メディア図形
   // import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
-  import MediaFigureMng from './media_contents/figure/MediaFigureMngComponent.vue';
+  import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
 
 
 export default {

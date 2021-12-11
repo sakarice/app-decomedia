@@ -76,8 +76,9 @@ Vue.component('audio-select-component', require('./components/media/edit_parts/A
 Vue.component('media-setting-component', require('./components/media/edit_parts/MediaSettingComponent.vue').default);
 Vue.component('media-audio-component', require('./components/media/media_contents/MediaAudioComponent.vue').default);
 Vue.component('media-audio-player-component', require('./components/media/media_contents/MediaAudioPlayerComponent.vue').default);
-Vue.component('media-img-mng-component', require('./components/media/media_contents/img/MediaImgMngComponent.vue').default);
-Vue.component('media-img-component', require('./components/media/media_contents/img/MediaImgComponent.vue').default);
+Vue.component('media-img-mng-component', require('./components/media/media_contents/objects/img/MediaImgMngComponent.vue').default);
+Vue.component('media-img-component', require('./components/media/media_contents/objects/img/MediaImgComponent.vue').default);
+Vue.component('img-property-component', require('./components/media/media_contents/objects/img/ImgPropertyComponent.vue').default);
 Vue.component('media-movie-component', require('./components/media/media_contents/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/media/CreateMediaComponent.vue').default);
 Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);
@@ -85,11 +86,11 @@ Vue.component('media-update-button-component', require('./components/media/actio
 Vue.component('cancel-button-component', require('./components/media/action_parts/CancelButtonComponent.vue').default);
 
 // media図形コンポーネント
-Vue.component('media-figure-mng-component', require('./components/media/media_contents/figure/MediaFigureMngComponent.vue').default);
-Vue.component('media-figure-component', require('./components/media/media_contents/figure/MediaFigureComponent.vue').default);
-Vue.component('figure-rotate-component', require('./components/media/media_contents/figure/FigureRotateComponent.vue').default);
-Vue.component('figure-resize-component', require('./components/media/media_contents/figure/FigureResizeComponent.vue').default);
-Vue.component('figure-update-component', require('./components/media/media_contents/figure/FigureUpdateComponent.vue').default);
+Vue.component('media-figure-mng-component', require('./components/media/media_contents/objects/figure/MediaFigureMngComponent.vue').default);
+Vue.component('media-figure-component', require('./components/media/media_contents/objects/figure/MediaFigureComponent.vue').default);
+Vue.component('figure-rotate-component', require('./components/media/media_contents/objects/figure/FigureRotateComponent.vue').default);
+Vue.component('figure-resize-component', require('./components/media/media_contents/objects/figure/FigureResizeComponent.vue').default);
+Vue.component('figure-update-component', require('./components/media/media_contents/objects/figure/FigureUpdateComponent.vue').default);
 
 
 // mediaリスト作成用コンポーネント
