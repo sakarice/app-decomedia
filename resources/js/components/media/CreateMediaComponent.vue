@@ -9,11 +9,11 @@
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
-    <media-img-component
+    <!-- <media-img-component
      :isShowMediaImg="getMediaSetting['isShowImg']"
       v-on:parent-action="showModal"
       ref="mediaImg">
-    </media-img-component>
+    </media-img-component> -->
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
@@ -112,7 +112,7 @@ export default {
     MovieSetting,
     MediaAudio,
     MediaSetting,
-    MediaImg,
+    // MediaImg,
     MediaMovie,
     MediaCreateButton,
     Overlay,

@@ -12,10 +12,10 @@
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
-    <media-img-component
+    <!-- <media-img-component
       v-on:parent-action="showModal"
       ref="mediaImg">
-    </media-img-component>
+    </media-img-component> -->
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component

@@ -1,6 +1,6 @@
 <template>
   <!-- Media画像-->
-  <div id="media-img-wrapper"
+  <div :id="imgWrapperWithIndex"
   v-bind:style="imgWrapperStyle()">
 
     <div id="media-img-frame"
@@ -14,24 +14,34 @@
        v-bind:style="imgStyle()">
     </div>
 
+    <img-rotate v-show="isActive"
+    :index="index">
+    </img-rotate>
+
   </div>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
+  import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   export default {
+    components : {
+      imgRotate,
+    },
     props : [
       "index"
     ],
     data : ()=> {
       return {
         "mediaImg" : "",
+        "isActive" : false,
       }
     },
     computed : {
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) }
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
@@ -44,6 +54,8 @@
         const mi = this.mediaImg;
         const styleObject = {
           "position" : "absolute",
+          "display" : "flex",
+          "justify-content" : "center",
           "top" :  this.addPxToTail(mi['top']),
           "left" :  this.addPxToTail(mi['left']),
           'z-index' : this.mediaImg['layer'],
@@ -64,6 +76,16 @@
     created(){
       this.mediaImg = this.getOneFigure();
     },
+    mounted(){
+      // イベント登録
+      document.addEventListener('click', (e)=> {
+        if(!e.target.closest("#"+this.imgWrapperWithIndex)){
+          this.isActive = false;
+        } else {
+          this.isActive = true;
+        }
+      });
+    }
   }
 
 </script>

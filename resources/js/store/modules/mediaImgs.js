@@ -15,6 +15,7 @@ const mediaImgs = {
     //   left : 0,
     //   width : 500,
     //   height : 500,
+    //   degree : 0,
     //   opacity : 1,
     //   layer : 1,
     // },

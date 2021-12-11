@@ -84,6 +84,7 @@
           'left' : 100,
           'width' : 300,
           'height' : 220,
+          'degree' : 0,
           'opacity' : 1,
           'layer' : 1,
         },
@@ -163,7 +164,7 @@
         mediaImgData['img_type'] = imgType;
         mediaImgData['id'] = imgId;
         mediaImgData['url'] = imgUrl;
-        
+
         this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
         this.addMediaImgsObjectItem(mediaImgData);
 

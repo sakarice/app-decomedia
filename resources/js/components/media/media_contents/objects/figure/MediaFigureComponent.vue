@@ -10,18 +10,18 @@
      v-on:resize="resize"
      v-on:move="moveStart($event)">
     </figure-resize>
-    <figure-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></figure-rotate>
+    <object-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></object-rotate>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import figureRotate from './FigureRotateComponent.vue';
+import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
 import figureResize from './FigureResizeComponent.vue';
 
   export default {
     components : {
-      figureRotate,
+      objectRotate,
       figureResize,
     },
     props:[
