@@ -29,15 +29,12 @@
       }
     },
     computed : {
-      ...mapGetters('media', ['getMediaId']),
-      // ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
-      ...mapMutations('mediaImg', ['updateIsInitializedImg']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       getOneFigure(){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(this.index);
