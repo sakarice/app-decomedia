@@ -9,6 +9,7 @@ use App\Http\Controllers\RooImgController;
 use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\MediaImg;
+use App\Models\MediaImgSetting;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Storage;
@@ -17,26 +18,16 @@ class MediaImgUtil
 {
 
   // テーブルのカラムとrequestのプロパティ名の対応を連想配列に定義
-  private static $NAME_PAIRS_IN_COLUMN_AND_PROPERTY = array(
+  private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG = array(
     // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
     // 'media_id' => 'media_id',
     'img_id' => 'id',
-    'img_type' => 'type',
+    'img_type' => 'img_type',
     'width' => 'width',
     'height' => 'height',
     'opacity' => 'opacity',
-    'img_layer' => 'layer',
-  );
-
-  private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG = array(
-    // "media_id",
-    "img_id" => "id",
-    "img_type" => "img_type",
-    "width" => "width",
-    "height" => "height",
-    "opacity" => "opacity",
     // "owner_user_id" => "",
-    "img_layer" => "layer",
+    'img_layer' => 'layer',
   );
 
   private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING = array(
@@ -54,37 +45,34 @@ class MediaImgUtil
 
 
   // 3.store // Media画像情報をDBに保存
-  public static function saveMediaImgData($media_id, $data){
-    $mediaImg = new MediaImg();
-    // $req_data = $request->img;
-    foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
-      $mediaImg[$column_name] = $data[$property_name];
+  // 複数のメディア画像保存用メソッド
+  public static function saveMediaImgsData($media_id, $objects){
+    foreach($objects as $index => $object){
+      MediaImgUtil::saveMediaImgData($media_id, $object);
+      $media_img_id = MediaImg::latest()->first()->id;
+      \Log::info($media_img_id);
+      MediaImgUtil::saveMediaImgSettingData($media_img_id, $object);
     }
-    $mediaImg->media_id = $media_id;
-    $mediaImg->owner_user_id = Auth::user()->id;
-    $mediaImg->save();
   }
 
-  // // 複数のメディア画像保存用メソッド
-  // public static function saveMediaImgsData($media_id, $request){
-  //   $req_imgs = $request->img;
-  //   $to_media_imgs;
-  //   $to_media_img_settings;
+  public static function saveMediaImgData($media_id, $object){
+    $mediaImg = new MediaImg();
+    foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
+      $mediaImg[$column_name] = $object[$property_name];
+    }
+    $mediaImg['media_id'] = $media_id;
+    $mediaImg['owner_user_id'] = Auth::user()->id;
+    $mediaImg->save();
+  }
+  public static function saveMediaImgSettingData($media_img_id, $object){
+    $mediaImgSetting = new MediaImgSetting();
+    foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING as $column_name => $property_name){
+      $mediaImgSetting[$column_name] = $object[$property_name];
+    }
+    $mediaImgSetting['media_img_id'] = $media_img_id;
+    $mediaImgSetting->save();
+  }
 
-  //   foreach($req_imgs as $index => $req_img){
-  //     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-  //       $tmp_to_media_imgs[] = $req_img[$property_name];
-  //     }
-  //   }
-
-  //   $mediaImg = new MediaImg();
-  //   foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
-  //     $mediaImg[$column_name] = $req_data[$property_name];
-  //   }
-  //   $mediaImg->media_id = $media_id;
-  //   $mediaImg->owner_user_id = Auth::user()->id;
-  //   $mediaImg->save();
-  // }
 
   public static function saveTentativeMediaImgData($media_id){
     $mediaImg = new MediaImg();
@@ -113,7 +101,7 @@ class MediaImgUtil
       $send_data = array();
       $send_data['url'] = $img_url;
       $send_data['type'] = 97;
-      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+      foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
         $send_data[$property_name] = $db_data[$column_name];        
       }
     };
@@ -124,7 +112,7 @@ class MediaImgUtil
   // 6.update
   public static function updateMediaImgData($media_id, $request){
     $target_record = MediaImg::where('media_id', $media_id)->first();
-    foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+    foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
       $target_record[$column_name] = $request->img[$property_name];
     }
     $target_record->save();

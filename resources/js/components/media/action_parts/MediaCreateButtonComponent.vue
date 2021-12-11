@@ -29,7 +29,7 @@
         const url = '/media/store';
         let media_datas = {
           'img' : this.getMediaImg,
-          // 'img' : this.getMediaImgs,
+          'imgs' : this.getMediaImgs,
           'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,

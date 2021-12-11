@@ -77,6 +77,7 @@
         // defaultImgUrls : []
         mediaImgBaseData : {
           'type' : 99,
+          'groupNo' : 0,
           'img_type': "",
           'id' : 0,
           'url' : "",

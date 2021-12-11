@@ -20,7 +20,8 @@ class MediaImgController extends Controller
     public function create(Request $request){}
     // 3.store
     public static function store($media_id, $request){
-        MediaImgUtil::saveMediaImgData($media_id, $request);
+        // MediaImgUtil::saveMediaImgData($media_id, $request->img);
+        MediaImgUtil::saveMediaImgsData($media_id, $request->imgs);
     }
 
     // 4.show   // Media画像情報の連想配列を返す

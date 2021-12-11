@@ -749,7 +749,7 @@ function _defineProperty(obj, key, value) {
       var url = '/media/store';
       var media_datas = {
         'img': this.getMediaImg,
-        // 'img' : this.getMediaImgs,
+        'imgs': this.getMediaImgs,
         'figures': this.getMediaFigures,
         'audios': this.getMediaAudios,
         'movie': this.getMediaMovie,
@@ -1822,6 +1822,7 @@ function _defineProperty(obj, key, value) {
       // defaultImgUrls : []
       mediaImgBaseData: {
         'type': 99,
+        'groupNo': 0,
         'img_type': "",
         'id': 0,
         'url': "",
