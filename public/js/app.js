@@ -8562,6 +8562,15 @@ function _defineProperty(obj, key, value) {
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
+    },
+    isEditMode: function isEditMode() {
+      var route_name = this.$route.name;
+
+      if (route_name == "create" || route_name == "edit") {
+        return true;
+      } else {
+        return false;
+      }
     }
   }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), {}, {
@@ -66265,8 +66274,8 @@ var render = function () {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isActive,
-            expression: "isActive",
+            value: _vm.isEditMode && _vm.isActive,
+            expression: "isEditMode && isActive",
           },
         ],
         attrs: { index: _vm.index },

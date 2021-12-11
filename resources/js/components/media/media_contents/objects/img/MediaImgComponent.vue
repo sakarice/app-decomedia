@@ -14,7 +14,7 @@
        v-bind:style="imgStyle()">
     </div>
 
-    <img-rotate v-show="isActive"
+    <img-rotate v-show="isEditMode && isActive"
     :index="index">
     </img-rotate>
 
@@ -41,7 +41,15 @@
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
-      imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) }
+      imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) },
+      isEditMode : function(){
+        const route_name = this.$route.name;
+        if((route_name=="create") || (route_name=="edit")){
+          return true;
+        } else {
+          return false;
+        }
+      },
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
