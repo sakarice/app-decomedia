@@ -92,7 +92,7 @@ Vue.component('figure-update-component', require('./components/media/media_conte
 
 // オブジェクト編集用コンポーネント
 Vue.component('object-rotate-component', require('./components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue').default);
-Vue.component('object-resize-component', require('./components/media/media_contents/objects/figure/ObjectResizeComponent.vue').default);
+Vue.component('object-resize-component', require('./components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue').default);
 
 // mediaリスト作成用コンポーネント
 Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);

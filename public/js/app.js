@@ -84001,7 +84001,7 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('media-figure-component', 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('figure-update-component', (__webpack_require__(/*! ./components/media/media_contents/objects/figure/FigureUpdateComponent.vue */ "./resources/js/components/media/media_contents/objects/figure/FigureUpdateComponent.vue")["default"])); // オブジェクト編集用コンポーネント
 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('object-rotate-component', (__webpack_require__(/*! ./components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('object-resize-component', Object(function webpackMissingModule() { var e = new Error("Cannot find module './components/media/media_contents/objects/figure/ObjectResizeComponent.vue'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())); // mediaリスト作成用コンポーネント
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('object-resize-component', (__webpack_require__(/*! ./components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue")["default"])); // mediaリスト作成用コンポーネント
 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('media-list-create-button-component', (__webpack_require__(/*! ./components/MediaListCreateButtonComponent.vue */ "./resources/js/components/MediaListCreateButtonComponent.vue")["default"])); // mediaリスト作成用コンポーネント
 
