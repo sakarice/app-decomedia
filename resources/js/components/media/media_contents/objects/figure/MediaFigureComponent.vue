@@ -6,10 +6,10 @@
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
 
-    <figure-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+    <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
      v-on:resize="resize"
      v-on:move="moveStart($event)">
-    </figure-resize>
+    </object-resize>
     <object-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></object-rotate>
   </div>
 </template>
@@ -17,12 +17,12 @@
 <script>
 import { mapGetters, mapMutations } from 'vuex';
 import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-import figureResize from './FigureResizeComponent.vue';
+import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
   export default {
     components : {
       objectRotate,
-      figureResize,
+      objectResize,
     },
     props:[
       'index',

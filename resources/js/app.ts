@@ -88,11 +88,11 @@ Vue.component('cancel-button-component', require('./components/media/action_part
 // media図形コンポーネント
 Vue.component('media-figure-mng-component', require('./components/media/media_contents/objects/figure/MediaFigureMngComponent.vue').default);
 Vue.component('media-figure-component', require('./components/media/media_contents/objects/figure/MediaFigureComponent.vue').default);
-Vue.component('figure-resize-component', require('./components/media/media_contents/objects/figure/FigureResizeComponent.vue').default);
 Vue.component('figure-update-component', require('./components/media/media_contents/objects/figure/FigureUpdateComponent.vue').default);
 
 // オブジェクト編集用コンポーネント
 Vue.component('object-rotate-component', require('./components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue').default);
+Vue.component('object-resize-component', require('./components/media/media_contents/objects/figure/ObjectResizeComponent.vue').default);
 
 // mediaリスト作成用コンポーネント
 Vue.component('media-list-create-button-component', require('./components/MediaListCreateButtonComponent.vue').default);
