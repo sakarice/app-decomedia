@@ -34,7 +34,7 @@ class MediaImgController extends Controller
     public function edit($media_id){}
     // 6.update
     public static function update($media_id, $request){
-        MediaImgUtil::updateMediaImgData($media_id, $request);
+        MediaImgUtil::updateMediaImgData($media_id, $request->imgs);
     }
     // 7.destroy
     public static function destroy($media_id){

@@ -48,21 +48,23 @@ class MediaImgUtil
   // 複数のメディア画像保存用メソッド
   public static function saveMediaImgsData($media_id, $objects){
     foreach($objects as $index => $object){
-      MediaImgUtil::saveMediaImgData($media_id, $object);
-      $media_img_id = MediaImg::latest()->first()->id;
-      \Log::info($media_img_id);
+      $just_created_record = MediaImgUtil::saveMediaImgData($media_id, $object);
+      // $media_img_id = MediaImg::latest()->first()->id;
+      $media_img_id = $just_created_record->id;
       MediaImgUtil::saveMediaImgSettingData($media_img_id, $object);
     }
   }
 
-  public static function saveMediaImgData($media_id, $object){
-    $mediaImg = new MediaImg();
+  public static function saveMediaImgData($media_id, $data_object){
+    $create_items = array();
+    $create_items['media_id'] = $media_id;
+    $create_items['owner_user_id'] = Auth::user()->id;
     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-      $mediaImg[$column_name] = $object[$property_name];
+      $create_items[$column_name] = $data_object[$property_name];
     }
-    $mediaImg['media_id'] = $media_id;
-    $mediaImg['owner_user_id'] = Auth::user()->id;
-    $mediaImg->save();
+    $media_img = new MediaImg();
+    $just_created_record = $media_img->create($create_items);
+    return $just_created_record;
   }
   public static function saveMediaImgSettingData($media_img_id, $object){
     $mediaImgSetting = new MediaImgSetting();
@@ -137,10 +139,24 @@ class MediaImgUtil
 
 
   // 6.update
-  public static function updateMediaImgData($media_id, $request){
+  public static function updateMediaImgsData($media_id, $objects){
+
+
+  }
+
+  // メディア画像テーブルの更新
+  public static function updateMediaImgData($media_id, $object){
     $target_record = MediaImg::where('media_id', $media_id)->first();
     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-      $target_record[$column_name] = $request->img[$property_name];
+      $target_record[$column_name] = $object[$property_name];
+    }
+    $target_record->save();
+  }
+  // メディア画像設定テーブルの更新
+  public static function updateMediaImgSettingData($media_img_id, $object){
+    $target_record = MediaImgSetting::where('media_img_id', $media_img_id)->first();
+    foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING as $column_name => $property_name){
+      $target_record[$column_name] = $object[$property_name];
     }
     $target_record->save();
   }
