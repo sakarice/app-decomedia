@@ -141,7 +141,6 @@ class MediaUtil
 
     switch ($imgPattern){
       case 1:
-        \Log::info($media_id);
         $media_img_id = MediaImg::where('media_id', $media_id)->first()->img_id;
         $media_img_type = MediaImg::where('media_id', $media_id)->first()->img_type;
         $media_img = MediaImgUtil::getMediaImgModel($media_img_id, $media_img_type);

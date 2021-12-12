@@ -78,7 +78,6 @@ class MediaMovieUtilTest extends TestCase
         $media = Media::factory()->create();
         $media_movie = MediaMovie::factory()->create();
         $media_id = $media_movie->media_id;
-        \Log::info($media_id);
 
         // 2. 取得
         //    作成したダミーデータを取得

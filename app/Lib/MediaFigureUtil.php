@@ -63,7 +63,6 @@ class MediaFigureUtil
   // 4.show 
   // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
   public static function getMediaFigureData($media_id){
-    \Log::info('start getMediaFigureData');
     $media_figures = array();
     if(MediaFigure::where('media_id', $media_id)->exists()){
       $db_datas = MediaFigure::where('media_id', $media_id)->get();

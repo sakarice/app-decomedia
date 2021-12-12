@@ -19,10 +19,6 @@ class SearchUtil
 
     public static function searchMedias(Request $request){
         $keyword = $request->input('keyword');
-        \Log::info($request);
-        \Log::info($request->has('input'));
-        \Log::info($request->has('keyword'));
-        \Log::info($keyword);
         $mediaPreviewInfos = array();
         if(!empty($keyword)){
             $media_settings
