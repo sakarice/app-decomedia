@@ -26,8 +26,8 @@
       ...mapGetters('mediaSetting', ['getMediaSetting']),
     },
     methods : {
-      ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
-      ...mapMutations('mediaImg', ['updateIsInitializedImg']),
+      ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['updateIsInitializedImgs']),
       getMediaImgFromDB(){
         return new Promise((resolve, reject) => {
           const url = '/mediaImg/'+this.getMediaId;
@@ -41,10 +41,10 @@
       initImg(){
         this.getMediaImgFromDB()
         .then(datas=>{
-          for(let key in datas){
-            this.updateMediaImgObjectItem({key:key, value:datas[key]});
-          }
-          this.updateIsInitializedImg(true);
+          datas.forEach(data=>{
+            this.addMediaImgsObjectItem(data);
+          })
+          this.updateIsInitializedImgs(true);
           // this.initStatus += 1;
         });
       },

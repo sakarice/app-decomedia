@@ -301,6 +301,7 @@ export default {
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
       // this.$refs.mediaImg.initImg();
+      this.$refs.mediaImgMng.initImg();
       this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();

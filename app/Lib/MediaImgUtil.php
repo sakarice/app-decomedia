@@ -90,23 +90,50 @@ class MediaImgUtil
 
   // 4.show 
   // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
+  // public static function getMediaImgData($media_id){
+  //   $send_data; // リターン対象のデータ
+  //   $img_url = "";
+  //   $db_data = MediaImg::where('media_id', $media_id)->first();
+  //   if($db_data->img_id == 0){
+  //     $send_data = MediaImgUtil::getEmptyMediaImgData();
+  //   } else {
+  //     $img_url = MediaImgUtil::getMediaImgModel($db_data->img_id, $db_data->img_type)->img_url;
+  //     $send_data = array();
+  //     $send_data['url'] = $img_url;
+  //     $send_data['type'] = 97;
+  //     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
+  //       $send_data[$property_name] = $db_data[$column_name];        
+  //     }
+  //   };
+  //   return $send_data;
+  // }
+
   public static function getMediaImgData($media_id){
-    $send_data; // リターン対象のデータ
+    $send_media_imgs; // リターン対象のデータ
     $img_url = "";
-    $db_data = MediaImg::where('media_id', $media_id)->first();
-    if($db_data->img_id == 0){
-      $send_data = MediaImgUtil::getEmptyMediaImgData();
-    } else {
-      $img_url = MediaImgUtil::getMediaImgModel($db_data->img_id, $db_data->img_type)->img_url;
-      $send_data = array();
-      $send_data['url'] = $img_url;
-      $send_data['type'] = 97;
-      foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-        $send_data[$property_name] = $db_data[$column_name];        
+    if(MediaImg::where('media_id', $media_id)->exists()){
+      $media_img_db_datas = MediaImg::where('media_id', $media_id)->get();
+      foreach($media_img_db_datas as $index => $media_img_db_data){
+        // メディア画像テーブルのデータ取得
+        $media_img = array();
+        $img_url = MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_url;
+        $media_img['url'] = $img_url;        
+        foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
+          $media_img[$property_name] = $media_img_db_data[$column_name];        
+        }
+
+        // メディア画像設定テーブルのデータ取得
+        $media_img_id = $media_img_db_data->id;
+        $media_img_setting_db_data = MediaImgSetting::where('media_img_id', $media_img_id)->first();
+        foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING as $column_name => $property_name){
+          $media_img[$property_name] = $media_img_setting_db_data[$column_name];        
+        }
+
+        $send_media_imgs[] = $media_img;
       }
-    };
-    return $send_data;
-}
+    }
+    return $send_media_imgs;
+  }
 
 
   // 6.update
