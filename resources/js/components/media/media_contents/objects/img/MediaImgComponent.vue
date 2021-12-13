@@ -129,6 +129,7 @@
           "justify-content" : "center",
           "top" :  this.addPxToTail(mi['top']),
           "left" :  this.addPxToTail(mi['left']),
+          "transform" : "rotate(" + this.mediaImg['degree'] + "deg)",
           'z-index' : this.mediaImg['layer'],
         }
         return styleObject;

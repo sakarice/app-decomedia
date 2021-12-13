@@ -27,7 +27,7 @@
       // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
-      ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
+      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
  
       getOneImg(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
@@ -82,7 +82,7 @@
         document.body.removeEventListener("touchmove", this.rotating, false);
         this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
 
-        this.updateMediaImgObjectItem({index:this.index,key:"degree",value:this.degree});
+        this.updateMediaImgsObjectItem({index:this.index,key:"degree",value:this.degree});
         // this.$emit('rotate-finish', this.degree);
       },
 

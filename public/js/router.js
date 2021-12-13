@@ -4579,6 +4579,7 @@ function _defineProperty(obj, key, value) {
         "justify-content": "center",
         "top": this.addPxToTail(mi['top']),
         "left": this.addPxToTail(mi['left']),
+        "transform": "rotate(" + this.mediaImg['degree'] + "deg)",
         'z-index': this.mediaImg['layer']
       };
       return styleObject;
@@ -5091,7 +5092,7 @@ function _defineProperty(obj, key, value) {
     }
   }),
   watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     getOneImg: function getOneImg(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(index);
@@ -5149,7 +5150,7 @@ function _defineProperty(obj, key, value) {
       this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
       document.body.removeEventListener("touchmove", this.rotating, false);
       this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
-      this.updateMediaImgObjectItem({
+      this.updateMediaImgsObjectItem({
         index: this.index,
         key: "degree",
         value: this.degree
