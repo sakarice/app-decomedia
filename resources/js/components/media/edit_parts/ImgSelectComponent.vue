@@ -76,10 +76,11 @@
         defaultImgs : [],
         // defaultImgUrls : []
         mediaImgBaseData : {
+          'id' : 0,
           'type' : 99,
           'groupNo' : 0,
+          'img_id' : 0,
           'img_type': "",
-          'id' : 0,
           'url' : "",
           'top' : 100,
           'left' : 100,
@@ -162,8 +163,8 @@
         // テスト用 あとで消す
         // const rand_width = Math.floor(Math.random()*300);
         let mediaImgData = Object.assign({}, this.mediaImgBaseData);
+        mediaImgData['img_id'] = imgId;
         mediaImgData['img_type'] = imgType;
-        mediaImgData['id'] = imgId;
         mediaImgData['url'] = imgUrl;
 
         this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
