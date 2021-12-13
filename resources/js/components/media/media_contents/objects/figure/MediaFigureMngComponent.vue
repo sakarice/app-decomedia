@@ -81,9 +81,11 @@
     mounted(){
       document.addEventListener('keydown', (e)=> {
         if(e.code=="Delete"){
-          const figures_reverse = this.$refs.figures.reverse();
-          figures_reverse.forEach(figure => {figure.delete(); });
-          this.reRenderAll();
+          if(this.$refs.figures){
+            const figures_reverse = this.$refs.figures.reverse();
+            figures_reverse.forEach(figure => {figure.delete(); });
+            this.reRenderAll();
+          }
         }
       })
     },

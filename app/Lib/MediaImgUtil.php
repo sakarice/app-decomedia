@@ -141,23 +141,11 @@ class MediaImgUtil
 
     $db_records_before_update = MediaImg::where('media_id', $media_id)->get();
     $delete_media_img_ids_in_db = array();
-    // \Log::info($db_records_before_update);
     foreach($db_records_before_update as $index => $db_record){
-      // \Log::info($index);
-      // \Log::info($db_record->id);
-      \Log::info(in_array($db_record->id, $media_img_ids_of_request));
       if(!in_array($db_record->id, $media_img_ids_of_request)){
-        // \Log::info($media_img_ids_of_request);
         $delete_media_img_ids_in_db[] = $db_record->id;
       }
     }
-
-    // \Log::info($media_img_ids_of_request);
-    // \Log::info($update_req_datas);
-    // \Log::info($create_req_datas);
-    \Log::info($delete_media_img_ids_in_db);
-
-
 
     DB::beginTransaction();
     try{
@@ -166,7 +154,7 @@ class MediaImgUtil
         if(MediaImgUtil::checkIsStoreOKImg($update_req_data['img_id'])){
           $just_updated_media_img_record = MediaImgUtil::updateMediaImgData($media_id, $update_req_data);
           $media_img_id = $just_updated_media_img_record->id;
-          MediaImgUtil::updateMediaImgSettingData($media_img_id, $object);
+          MediaImgUtil::updateMediaImgSettingData($media_img_id, $update_req_data);
         } else {
           throw new \Exception('checkIsStoreOKImg Method NG');
         }
@@ -197,8 +185,7 @@ class MediaImgUtil
     $target_record->media_id = (int)$media_id;
     $target_record->owner_user_id = Auth::user()->id;
     $target_record->save();
-    $just_updated_media_img_record = MediaImg::latest()->first();
-    return $just_updated_media_img_record;
+    return $target_record;
   }
   // メディア画像設定テーブルの更新
   public static function updateMediaImgSettingData($media_img_id, $object){

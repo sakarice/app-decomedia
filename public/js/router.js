@@ -4354,13 +4354,15 @@ function _defineProperty(obj, key, value) {
 
     document.addEventListener('keydown', function (e) {
       if (e.code == "Delete") {
-        var figures_reverse = _this3.$refs.figures.reverse();
+        if (_this3.$refs.figures) {
+          var figures_reverse = _this3.$refs.figures.reverse();
 
-        figures_reverse.forEach(function (figure) {
-          figure["delete"]();
-        });
+          figures_reverse.forEach(function (figure) {
+            figure["delete"]();
+          });
 
-        _this3.reRenderAll();
+          _this3.reRenderAll();
+        }
       }
     });
   }
@@ -4491,7 +4493,16 @@ function _defineProperty(obj, key, value) {
       }
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), {}, {
+  watch: {
+    isActive: function isActive(val) {
+      if (val == true) {
+        this.$emit('add-active-index', this.index);
+      } else {
+        this.$emit('del-active-index', this.index);
+      }
+    }
+  },
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     getOneImg: function getOneImg() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
@@ -4545,14 +4556,20 @@ function _defineProperty(obj, key, value) {
     updateDegree: function updateDegree(new_degree) {
       this.mediaImg['degree'] = new_degree;
     },
-    resize: function resize() {
+    reRender: function reRender() {
       var _this = this;
 
       var keys = ["width", "height", "left", "top"];
       var storeData = this.getOneImg(this.index);
-      keys.forEach(function (key) {
-        _this.mediaImg[key] = storeData[key];
-      });
+
+      if (storeData) {
+        keys.forEach(function (key) {
+          _this.mediaImg[key] = storeData[key];
+        });
+      }
+    },
+    init: function init() {
+      this.mediaImg = this.getOneImg();
     },
     imgWrapperStyle: function imgWrapperStyle() {
       var mi = this.mediaImg;
@@ -4580,7 +4597,7 @@ function _defineProperty(obj, key, value) {
     }
   }),
   created: function created() {
-    this.mediaImg = this.getOneImg();
+    this.init();
   },
   mounted: function mounted() {
     var _this2 = this; // イベント登録
@@ -4673,6 +4690,8 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
 
 
 
@@ -4682,8 +4701,13 @@ function _defineProperty(obj, key, value) {
     mediaImg: _MediaImgComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: [],
+  data: function data() {
+    return {
+      'active_indexs': []
+    };
+  },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['updateIsInitializedImgs'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['updateIsInitializedImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     getMediaImgFromDB: function getMediaImgFromDB() {
       var _this = this;
 
@@ -4705,8 +4729,40 @@ function _defineProperty(obj, key, value) {
         _this2.updateIsInitializedImgs(true); // this.initStatus += 1;
 
       });
+    },
+    reRender: function reRender(index) {
+      this.$refs.imgs[index].init();
+    },
+    reRenderAll: function reRenderAll() {
+      this.$refs.imgs.forEach(function (img) {
+        img.init();
+      });
+    },
+    addActiveIndex: function addActiveIndex(index) {
+      this.active_indexs.push(index);
+    },
+    delActiveIndex: function delActiveIndex(index) {
+      var del_index = this.active_indexs.indexOf(index);
+      this.active_indexs.splice(del_index, 1);
     }
-  })
+  }),
+  mounted: function mounted() {
+    var _this3 = this;
+
+    document.addEventListener('keydown', function (e) {
+      if (e.code == "Delete") {
+        _this3.active_indexs.forEach(function (index) {
+          _this3.deleteMediaImgsObjectItem(index);
+
+          console.log(index);
+
+          _this3.delActiveIndex(index);
+        });
+
+        _this3.reRenderAll();
+      }
+    });
+  }
 });
 
 /***/ }),
@@ -15042,7 +15098,7 @@ var render = function () {
         },
         attrs: { index: _vm.index },
         on: {
-          resize: _vm.resize,
+          resize: _vm.reRender,
           move: function ($event) {
             return _vm.moveStart($event)
           },
@@ -15095,6 +15151,14 @@ var render = function () {
         ref: "imgs",
         refInFor: true,
         attrs: { index: index },
+        on: {
+          "add-active-index": function ($event) {
+            return _vm.addActiveIndex(index)
+          },
+          "del-active-index": function ($event) {
+            return _vm.delActiveIndex(index)
+          },
+        },
       })
     }),
     1

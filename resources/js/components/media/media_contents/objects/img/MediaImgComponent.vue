@@ -15,7 +15,7 @@
     </div>
 
     <img-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:addPxToTail(mediaImg['width']), height:addPxToTail(mediaImg['height'])}"
-     v-on:resize="resize"
+     v-on:resize="reRender"
      v-on:move="moveStart($event)">
     </img-resize>
 
@@ -58,9 +58,19 @@
         }
       },
     },
+    watch : {
+      isActive(val){
+        if(val == true){
+          this.$emit('add-active-index', this.index);
+        } else {
+          this.$emit('del-active-index', this.index);
+        }
+      }
+    },
     methods : {
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
+      ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
       getOneImg(){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
@@ -103,11 +113,14 @@
         this.action_target.removeEventListener("touchend", this.moveEnd, false);
       },
       updateDegree(new_degree){ this.mediaImg['degree'] = new_degree },
-      resize(){
+      reRender(){
         const keys = ["width","height","left","top"];
         const storeData = this.getOneImg(this.index);
-        keys.forEach(key=>{ this.mediaImg[key] = storeData[key]});
+        if(storeData){
+          keys.forEach(key=>{ this.mediaImg[key] = storeData[key]});
+        }
       },
+      init(){ this.mediaImg = this.getOneImg(); },
       imgWrapperStyle(){
         const mi = this.mediaImg;
         const styleObject = {
@@ -131,8 +144,9 @@
       },
       addPxToTail(value){ return (value + "px") },
     },
+
     created(){
-      this.mediaImg = this.getOneImg();
+      this.init();
     },
     mounted(){
       // イベント登録
