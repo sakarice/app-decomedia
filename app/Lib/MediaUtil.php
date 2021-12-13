@@ -174,17 +174,18 @@ class MediaUtil
       $media_id = $model->id;
   
       // media画像
-      if(isset($request->img['id'])){
-        if($request->img['id'] != 0){
-          $img_id = $request->img['id'];
+      if(isset($request->imgs[0]['id'])){
+        if($request->imgs[0]['id'] != 0){
+          $img_id = $request->imgs[0]['id'];
           $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
           $isPublicImg = PublicImg::where('id', $img_id)->exists();
           if($isOwnImg || $isPublicImg){
             MediaImgController::store($media_id, $request);
           }
-        } else if($request->img['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-          MediaImgUtil::saveTentativeMediaImgData($media_id);        
-        }
+        } 
+        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
+        //   MediaImgUtil::saveTentativeMediaImgData($media_id);        
+        // }
       }
       // media動画
       if(isset($request->movie['videoId'])){
@@ -213,17 +214,18 @@ class MediaUtil
     try{
 
       // media画像
-      if(isset($request->img['id'])){
-        if($request->img['id'] != 0){
-          $img_id = $request->img['id'];
-          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isPublicImg = PublicImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isPublicImg){
-            MediaImgController::update($media_id, $request);
-          }
-        } else if($request->img['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-          MediaImgUtil::updateMediaImgDataToTentative($media_id);        
-        }
+      if(isset($request->imgs[0]['id'])){
+        // if($request->imgs[0]['id'] != 0){
+        //   $img_id = $request->imgs[0]['id'];
+        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
+        //   if($isOwnImg || $isPublicImg){
+          MediaImgController::update($media_id, $request->imgs);
+          // }
+        // } 
+        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
+        //   MediaImgUtil::updateMediaImgDataToTentative($media_id);        
+        // }
       }
       // media図形
       if(isset($request->figures[0])){

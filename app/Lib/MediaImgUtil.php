@@ -49,7 +49,6 @@ class MediaImgUtil
   public static function saveMediaImgsData($media_id, $objects){
     foreach($objects as $index => $object){
       $just_created_record = MediaImgUtil::saveMediaImgData($media_id, $object);
-      // $media_img_id = MediaImg::latest()->first()->id;
       $media_img_id = $just_created_record->id;
       MediaImgUtil::saveMediaImgSettingData($media_img_id, $object);
     }
@@ -90,26 +89,6 @@ class MediaImgUtil
     
   }
 
-  // 4.show 
-  // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
-  // public static function getMediaImgData($media_id){
-  //   $send_data; // リターン対象のデータ
-  //   $img_url = "";
-  //   $db_data = MediaImg::where('media_id', $media_id)->first();
-  //   if($db_data->img_id == 0){
-  //     $send_data = MediaImgUtil::getEmptyMediaImgData();
-  //   } else {
-  //     $img_url = MediaImgUtil::getMediaImgModel($db_data->img_id, $db_data->img_type)->img_url;
-  //     $send_data = array();
-  //     $send_data['url'] = $img_url;
-  //     $send_data['type'] = 97;
-  //     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-  //       $send_data[$property_name] = $db_data[$column_name];        
-  //     }
-  //   };
-  //   return $send_data;
-  // }
-
   public static function getMediaImgData($media_id){
     $send_media_imgs; // リターン対象のデータ
     $img_url = "";
@@ -123,14 +102,12 @@ class MediaImgUtil
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
           $media_img[$property_name] = $media_img_db_data[$column_name];        
         }
-
         // メディア画像設定テーブルのデータ取得
         $media_img_id = $media_img_db_data->id;
         $media_img_setting_db_data = MediaImgSetting::where('media_img_id', $media_img_id)->first();
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING as $column_name => $property_name){
           $media_img[$property_name] = $media_img_setting_db_data[$column_name];        
         }
-
         $send_media_imgs[] = $media_img;
       }
     }
@@ -140,17 +117,26 @@ class MediaImgUtil
 
   // 6.update
   public static function updateMediaImgsData($media_id, $objects){
-
-
+    foreach($objects as $index => $object){
+      if(MediaImgUtil::checkIsStoreOKImg($object['id'])){
+        $just_updated_media_img_record = MediaImgUtil::updateMediaImgData($media_id, $object);
+        $media_img_id = $just_updated_media_img_record->id;
+        MediaImgUtil::updateMediaImgSettingData($media_img_id, $object);
+      }
+    }
   }
-
   // メディア画像テーブルの更新
   public static function updateMediaImgData($media_id, $object){
-    $target_record = MediaImg::where('media_id', $media_id)->first();
+    // $update_items = array();
+    $target_record = MediaImg::where('media_id', $media_id)->where('img_id', $object['id'])->first();
     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
-      $target_record[$column_name] = $object[$property_name];
+      $target_record->$column_name = $object[$property_name];
     }
+    $target_record->media_id = (int)$media_id;
+    $target_record->owner_user_id = Auth::user()->id;
     $target_record->save();
+    $just_updated_media_img_record = MediaImg::latest()->first();
+    return $just_updated_media_img_record;
   }
   // メディア画像設定テーブルの更新
   public static function updateMediaImgSettingData($media_img_id, $object){
@@ -159,6 +145,17 @@ class MediaImgUtil
       $target_record[$column_name] = $object[$property_name];
     }
     $target_record->save();
+  }
+
+  // メディア画像として保存・更新してよいかチェック(他ユーザの画像使用などを防ぐ)
+  public static function checkIsStoreOKImg($img_id){
+    $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+    $isPublicImg = PublicImg::where('id', $img_id)->exists();
+    if($isOwnImg || $isPublicImg){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   public static function updateMediaImgDataToTentative($media_id){

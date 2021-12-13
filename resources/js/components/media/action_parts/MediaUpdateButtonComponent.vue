@@ -15,7 +15,8 @@
   export default {
     data : () => { return {} },
     computed : {
-      ...mapGetters('mediaImg', ['getMediaImg']),
+      // ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
@@ -27,7 +28,8 @@
         // this.getFinishTime();
         const url = '/media/update';
         let media_datas = {
-          'img' : this.getMediaImg,
+          // 'img' : this.getMediaImg,
+          'imgs' : this.getMediaImgs,
           'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
