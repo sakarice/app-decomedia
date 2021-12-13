@@ -48,9 +48,11 @@ class MediaImgUtil
   // 複数のメディア画像保存用メソッド
   public static function saveMediaImgsData($media_id, $objects){
     foreach($objects as $index => $object){
-      $just_created_record = MediaImgUtil::saveMediaImgData($media_id, $object);
-      $media_img_id = $just_created_record->id;
-      MediaImgUtil::saveMediaImgSettingData($media_img_id, $object);
+      if(MediaImgUtil::checkIsStoreOKImg($object['id'])){
+        $just_created_record = MediaImgUtil::saveMediaImgData($media_id, $object);
+        $media_img_id = $just_created_record->id;
+        MediaImgUtil::saveMediaImgSettingData($media_img_id, $object);
+      }
     }
   }
 

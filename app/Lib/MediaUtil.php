@@ -175,14 +175,14 @@ class MediaUtil
   
       // media画像
       if(isset($request->imgs[0]['id'])){
-        if($request->imgs[0]['id'] != 0){
-          $img_id = $request->imgs[0]['id'];
-          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isPublicImg = PublicImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isPublicImg){
+        // if($request->imgs[0]['id'] != 0){
+        //   $img_id = $request->imgs[0]['id'];
+        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
+        //   if($isOwnImg || $isPublicImg){
             MediaImgController::store($media_id, $request);
-          }
-        } 
+        //   }
+        // } 
         // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
         //   MediaImgUtil::saveTentativeMediaImgData($media_id);        
         // }
