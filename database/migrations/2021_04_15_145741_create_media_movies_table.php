@@ -18,10 +18,13 @@ class CreateMediaMoviesTable extends Migration
             $table->integer('user_id');
             $table->integer('media_id');
             $table->string('video_id', 191);
+            $table->integer('top');
+            $table->integer('left');
             $table->integer('width');
             $table->integer('height');
-            $table->integer('isLoop');
+            $table->integer('opacity');
             $table->integer('movie_layer');
+            $table->integer('isLoop');
             $table->timestamps();
         });
     }
