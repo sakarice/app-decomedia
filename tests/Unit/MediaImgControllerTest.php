@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Media;
 use App\Models\MediaImg;
+use App\Models\MediaImgSetting;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
@@ -56,7 +57,7 @@ class MediaImgControllerTest extends TestCase
             'layer' => 1,
         );
         $request = new \stdClass(); //key:value形式のリクエスト
-        $request->img = $media_img_data;
+        $request->imgs = $media_img_data;
         $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
@@ -82,6 +83,7 @@ class MediaImgControllerTest extends TestCase
         $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
+        $media_img = MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
 
         // 2. 取得
@@ -91,7 +93,7 @@ class MediaImgControllerTest extends TestCase
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
         $this->assertDatabaseHas('media_imgs', [
-            'img_id' => $media_img_data['id'],
+            'img_id' => $media_img_data['img_id'],
         ]);
     }
 
@@ -118,7 +120,7 @@ class MediaImgControllerTest extends TestCase
             'layer' => 1.1,
         );
         $request = new \stdClass(); // key:value形式のリクエストを用意
-        $request->img = $media_img_data;
+        $request->imgs = $media_img_data;
 
         // 3. 更新
         //    指定したメディアIDのレコードをrequestの値で更新する

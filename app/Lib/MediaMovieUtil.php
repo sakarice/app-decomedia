@@ -19,7 +19,7 @@ class MediaMovieUtil
   private static $COLUMN_AND_PROPERTY_OF_MEDIA_MOVIE = array(
     // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
     // 'media_id' => 'media_id',
-    'id' => 'id',
+    // 'id' => 'id',
     // 'media_id' => 'mediaId',
     // 'user_id' => 'userId',
     'video_id' => 'videoId',
@@ -58,6 +58,7 @@ class MediaMovieUtil
       foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_MOVIE as $column_name => $property_name){
         $send_data[$property_name] = $db_record[$column_name];
       }
+      $send_data['id'] = $db_record['id'];
     } else { // DBに動画設定が保存されていなければ、デフォルト値を設定
       $send_data = MediaMovieUtil::makeDefaultMovieData(); 
     }
@@ -83,6 +84,7 @@ class MediaMovieUtil
 
   public static function makeDefaultMovieData(){
     $media_movie_data = [
+      'id' => -1,
       'videoId' => "",
       'left' => 0,
       'top' => 0,
