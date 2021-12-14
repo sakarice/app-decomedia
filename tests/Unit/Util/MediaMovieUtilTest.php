@@ -46,8 +46,11 @@ class MediaMovieUtilTest extends TestCase
         //    登録したいデータをリクエスト形式で作成
         $media_movie_data = array(
             'videoId' => 1,
+            'left' => 1000,
+            'top' => 1000,
             'width' => 1000,
             'height' => 1000,
+            'opacity' => 1,
             'isLoop' => true,
             'layer' => 1,
         );

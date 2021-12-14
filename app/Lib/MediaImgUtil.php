@@ -100,6 +100,7 @@ class MediaImgUtil
       foreach($media_img_db_datas as $index => $media_img_db_data){
         // メディア画像テーブルのデータ取得
         $media_img = array();
+        \Log::info($media_img_db_data);
         $img_url = MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_url;
         $media_img['url'] = $img_url;        
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){

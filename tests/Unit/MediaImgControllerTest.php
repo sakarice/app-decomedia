@@ -119,12 +119,12 @@ class MediaImgControllerTest extends TestCase
             'opacity' => 1.1,
             'layer' => 1.1,
         );
-        $request = new \stdClass(); // key:value形式のリクエストを用意
-        $request->imgs = $media_img_data;
+        // $request = new \stdClass(); // key:value形式のリクエストを用意
+        // $request->imgs = $media_img_data;
 
         // 3. 更新
         //    指定したメディアIDのレコードをrequestの値で更新する
-        MediaImgController::update($media_id, $request);
+        MediaImgController::update($media_id, $media_img_data);
 
         // 4. 検証
         //    DBのデータが更新用データと一致すること

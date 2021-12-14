@@ -34,7 +34,6 @@ class MediaImgSettingFactory extends Factory
             'width' => 999,
             'height' => 999,
             'degree' => 0,
-            'opacity' => 1,
             'global_alpha' => 1,
             'layer' => 1,
         ];
