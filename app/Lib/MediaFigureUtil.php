@@ -47,6 +47,7 @@ class MediaFigureUtil
       $create_items[$column_name] = $media_figure_data[$property_name];
     }
     $model = $mediaFigure->create($create_items);
+    \Log::info($model->media_id);
     return $model;
   }
 
