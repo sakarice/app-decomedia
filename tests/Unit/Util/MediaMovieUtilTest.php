@@ -105,10 +105,13 @@ class MediaMovieUtilTest extends TestCase
         //    更新したいデータをリクエスト形式で作成
         $media_movie_data = array(
             'videoId' => 99,
+            'left' => 999,
+            'top' => 999,
             'width' => 999,
             'height' => 999,
-            'isLoop' => false,
+            'opacity' => 1,
             'layer' => 99,
+            'isLoop' => false,
         );
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->movie = $media_movie_data;
@@ -121,6 +124,8 @@ class MediaMovieUtilTest extends TestCase
         $this->assertDatabaseHas('media_movies', [
             'media_id' => $media_id,
             'video_id' => 99,
+            'left' => 999,
+            'top' => 999,
             'width' => 999,
             'height' => 999,
             'isLoop' => false,
