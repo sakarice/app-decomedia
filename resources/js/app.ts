@@ -79,7 +79,7 @@ Vue.component('media-audio-player-component', require('./components/media/media_
 Vue.component('media-img-mng-component', require('./components/media/media_contents/objects/img/MediaImgMngComponent.vue').default);
 Vue.component('media-img-component', require('./components/media/media_contents/objects/img/MediaImgComponent.vue').default);
 Vue.component('img-property-component', require('./components/media/media_contents/objects/img/ImgPropertyComponent.vue').default);
-Vue.component('media-movie-component', require('./components/media/media_contents/MediaMovieComponent.vue').default);
+Vue.component('media-movie-component', require('./components/media/media_contents/objects/movie/MediaMovieComponent.vue').default);
 Vue.component('create-media-component', require('./components/media/CreateMediaComponent.vue').default);
 Vue.component('media-create-button-component', require('./components/media/action_parts/MediaCreateButtonComponent.vue').default);
 Vue.component('media-update-button-component', require('./components/media/action_parts/MediaUpdateButtonComponent.vue').default);

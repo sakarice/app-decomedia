@@ -138,7 +138,7 @@
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
-  import MediaMovie from './media_contents/MediaMovieComponent.vue';
+  import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 
   // テスト メディア図形
