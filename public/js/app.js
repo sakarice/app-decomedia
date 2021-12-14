@@ -6346,6 +6346,18 @@ function _defineProperty(obj, key, value) {
 
       return videoId;
     },
+    updateWidth: function updateWidth(event) {
+      this.updateMediaMovieObjectItem({
+        key: 'width',
+        value: Number(event.target.value)
+      });
+    },
+    updateHeight: function updateHeight(event) {
+      this.updateMediaMovieObjectItem({
+        key: 'height',
+        value: Number(event.target.value)
+      });
+    },
     updateVideoId: function updateVideoId(event) {
       var youtubeUrl = event.target.value;
       this.updateMediaMovieObjectItem({
@@ -8507,6 +8519,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -8535,7 +8548,15 @@ function _defineProperty(obj, key, value) {
       return 'media-movie-wrapper' + this.index;
     }
   }),
+  watch: {},
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+    // サイズ変更
+    resize: function resize() {
+      console.log('resize');
+      console.log("width:" + this.ytPlayer.width);
+      this.ytPlayer.width = this.getMediaMovie['width'];
+      this.ytPlayer.height = this.getMediaMovie['height'];
+    },
     // 位置操作用
     moveStart: function moveStart(e) {
       console.log(e.target);
@@ -8584,6 +8605,9 @@ function _defineProperty(obj, key, value) {
     movieWrapperBindStyle: function movieWrapperBindStyle() {
       var mm = this.getMediaMovie;
       var style = {
+        // "top" : Number(mm['top']) + "px",
+        // "left" : Number(mm['left']) + "px",
+        // "z-index" : Number(mm['layer']),
         "top": mm['top'] + "px",
         "left": mm['left'] + "px",
         "z-index": mm['layer']
@@ -9370,6 +9394,7 @@ function _defineProperty(obj, key, value) {
       document.body.removeEventListener("touchmove", this.resizeLeft, false);
       document.body.removeEventListener("touchmove", this.resizeBottom, false);
       document.body.removeEventListener("touchmove", this.resizeTop, false);
+      this.$emit('resize');
     }
   }),
   created: function created() {},
@@ -11774,11 +11799,12 @@ var mediaMovie = {
     isInitialized: false,
     // メディア動画情報。show,editモードでは始めにDBのデータで初期化される。    
     mediaMovie: {
+      'id': 0,
       'videoId': "",
       'left': 100,
       'top': 100,
-      'width': "500",
-      'height': "420",
+      'width': 500,
+      'height': 420,
       'opacity': 1,
       'layer': 1,
       'isLoop': false
@@ -17249,7 +17275,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65715,10 +65741,7 @@ var render = function () {
                 domProps: { value: _vm.getMediaMovie["width"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaMovieObjectItem({
-                      key: "width",
-                      value: $event.target.value,
-                    })
+                    return _vm.updateWidth($event)
                   },
                 },
               }),
@@ -65741,10 +65764,7 @@ var render = function () {
                 domProps: { value: _vm.getMediaMovie["height"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateMediaMovieObjectItem({
-                      key: "height",
-                      value: $event.target.value,
-                    })
+                    return _vm.updateHeight($event)
                   },
                 },
               }),
@@ -67216,6 +67236,9 @@ var render = function () {
         on: {
           move: function ($event) {
             return _vm.moveStart($event)
+          },
+          resize: function ($event) {
+            return _vm.resize()
           },
         },
       }),

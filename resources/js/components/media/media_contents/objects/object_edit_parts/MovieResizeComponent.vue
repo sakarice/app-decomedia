@@ -157,6 +157,7 @@
         document.body.removeEventListener("touchmove", this.resizeLeft, false);
         document.body.removeEventListener("touchmove", this.resizeBottom, false);
         document.body.removeEventListener("touchmove", this.resizeTop, false);
+        this.$emit('resize');
       },
 
     },

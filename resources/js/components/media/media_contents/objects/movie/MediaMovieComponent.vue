@@ -17,7 +17,8 @@
 
     <movie-resize :class="{hidden:!isActive}"
     :index="index"
-    @move="moveStart($event)">
+    @move="moveStart($event)"
+    @resize="resize()">
     </movie-resize>
 
     <div id="youtube-url-form"></div>
@@ -53,11 +54,20 @@
       ...mapGetters('mediaSetting', ['getMediaSetting']),
       movieWrapperWithIndex(){ return ('media-movie-wrapper' + this.index) },
     },
+    watch : {
+    },
     methods : {
       ...mapMutations('mediaMovie', ['updateIsInitializedMovie']),
       ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
-            // 位置操作用
+      // サイズ変更
+      resize(){
+        console.log('resize');
+        console.log("width:"+this.ytPlayer.width);
+        this.ytPlayer.width = this.getMediaMovie['width'];
+        this.ytPlayer.height = this.getMediaMovie['height'];
+      },
+      // 位置操作用
       moveStart(e){
         console.log(e.target);
         let event;
@@ -96,6 +106,9 @@
       movieWrapperBindStyle(){
         const mm = this.getMediaMovie;
         const style = {
+          // "top" : Number(mm['top']) + "px",
+          // "left" : Number(mm['left']) + "px",
+          // "z-index" : Number(mm['layer']),
           "top" : mm['top'] + "px",
           "left" : mm['left'] + "px",
           "z-index" : mm['layer'],

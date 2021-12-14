@@ -30,10 +30,13 @@ class MediaMovieFactory extends Factory
             'user_id' => $user_id, 
             'media_id' => $media_id,
             'video_id' => mt_rand(1, 2147483647),
+            'left' => 100,
+            'top' => 100,
             'width' => 500,
             'height' => 500,
-            'isLoop' => true,
+            'opacity' => 1,
             'movie_layer' => 1,
+            'isLoop' => true,
         ];
 
         return $media_movie_data;

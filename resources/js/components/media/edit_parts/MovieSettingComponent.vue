@@ -10,11 +10,11 @@
           </div>
           <div class="yt-setting-wrapper">
             <div class="setting-content">
-              <input :value="getMediaMovie['width']" @input="updateMediaMovieObjectItem({key:'width',value:$event.target.value})" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
+              <input :value="getMediaMovie['width']" @input="updateWidth($event)" type="text" id="set-movie-frame-width" size=5 placeholder="横幅">
               <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
             </div>
             <div class="setting-content">
-              <input :value="getMediaMovie['height']" @input="updateMediaMovieObjectItem({key:'height',value:$event.target.value})" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
+              <input :value="getMediaMovie['height']" @input="updateHeight($event)" type="text" id="set-movie-frame-height" size=5 placeholder="縦幅">
               <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span>
             </div>
             <button  class="setting-content" type="submit" @click="createMovieFrame">再生プレイヤー作成</button>
@@ -64,6 +64,8 @@ export default {
       let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
       return videoId;
     },
+    updateWidth(event){ this.updateMediaMovieObjectItem({key:'width',value:Number(event.target.value)}) },
+    updateHeight(event){ this.updateMediaMovieObjectItem({key:'height',value:Number(event.target.value)}) },
     updateVideoId(event){
       let youtubeUrl = event.target.value;
       this.updateMediaMovieObjectItem({key:'videoId',value:this.extractVideoIdFromUrl(youtubeUrl)});
