@@ -110,6 +110,7 @@ class MediaImgUtilTest extends TestCase
         // パターン2 メディア画像が登録されている
         // 1. 取得対象データ登録
         $media_img = MediaImg::factory()->create();
+        $media_img_setting = MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
         // 2. メディア画像データ取得
         $media_img_data = MediaImgUtil::getMediaImgData($media_id);

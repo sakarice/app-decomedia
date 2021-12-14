@@ -51,18 +51,20 @@ class MediaImgControllerTest extends TestCase
         $media_img_data = array(
             'type' => 1,
             'id' => $media_img_id,
+            'top' => 1000,
+            'left' => 1000,
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
             'layer' => 1,
         );
-        $request = new \stdClass(); //key:value形式のリクエスト
-        $request->imgs = $media_img_data;
+        // $request = new \stdClass(); //key:value形式のリクエスト
+        // $request->imgs = $media_img_data;
         $media_id = mt_rand(1, 2147483647); // 適当なメディアID
 
         // 2. 登録
         //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
-        MediaImgController::store($media_id, $request);
+        MediaImgController::store($media_id, $media_img_data);
 
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック
@@ -114,6 +116,8 @@ class MediaImgControllerTest extends TestCase
         $media_img_data = array(
             'type' => 2,
             'id' => $media_img_id,
+            'left' => 1001,
+            'top' => 1001,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,

@@ -21,7 +21,7 @@ class MediaImgUtil
   private static $COLUMN_AND_PROPERTY_OF_MEDIA_IMG = array(
     // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
     // 'media_id' => 'media_id',
-    'id' => 'id',
+    // 'id' => 'id',
     'img_id' => 'img_id',
     'img_type' => 'img_type',
     'width' => 'width',
