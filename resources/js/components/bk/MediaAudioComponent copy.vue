@@ -198,7 +198,6 @@
             longestAudioDuration = this.audioPlayers[i].duration
           }
         }
-        console.log(longestAudioDuration);
         this.updateMediaSettingObjectItem({key:'finish_time', value:longestAudioDuration});
       },
       updateAudioThumbnail() {
@@ -217,11 +216,6 @@
         this.audioPlayers[playerIndex].pause(); // オーディオの再生を止めて、
         let newAudioPlayer = new Audio(); // 新しいplayerを用意して、
         this.audioPlayers.splice(playerIndex, 1, newAudioPlayer); // 削除したplayerと入れ替える
-
-        // デバッグ用後で消す
-        for(let i=0; i < 5; i++){
-          console.log(i, this.audioPlayers[i].src);
-        }
 
         this.$parent.mediaAudios.splice(audioIndex, 1);
 
@@ -243,7 +237,6 @@
         this.$parent.mediaAudios[audioIndex]['isLoop'] = audioPlayer.loop;
       },
       setAudioVolume: function(event) {
-        console.log('called setAudioVolume', event.target.getAttribute('class'));
       },
       doubleVal: function(event){
         return 0;

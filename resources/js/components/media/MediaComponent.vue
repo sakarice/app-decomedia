@@ -180,8 +180,6 @@ export default {
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('media', ['getMode']),
     ...mapGetters('media', ['getIsCrudDoing']),
-    ...mapGetters('mediaImg', ['getMediaImg']),
-    ...mapGetters('mediaImg', ['getIsInitializedImg']),
     ...mapGetters('mediaFigures', ['getIsInitializedFigures']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
@@ -294,7 +292,8 @@ export default {
     },
 
   },
-  created() {},
+  created() {
+  },
   mounted() {
     this.checkMode();
     if(this.getMode!=1){ // 1:create以外(=showかedit)なら初期化処理を実行

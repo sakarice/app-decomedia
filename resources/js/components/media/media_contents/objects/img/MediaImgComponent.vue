@@ -27,9 +27,11 @@
 </template>
 
 <script>
+  import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
   import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
+  
   export default {
     components : {
       imgRotate,
@@ -42,12 +44,10 @@
       return {        
         "mediaImg" : "",
         "isActive" : false,
-        "action_target" : "", // ドラッグ操作で移動させる対象
-        "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
-        "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
       }
     },
     computed : {
+      start(){ return start },
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -68,7 +68,8 @@
         } else {
           this.$emit('del-active-index', this.index);
         }
-      }
+      },
+      helper_left(val){ console.log('helper_left'+val)},
     },
     methods : {
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
@@ -80,40 +81,14 @@
       },
       // 位置操作用
       moveStart(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.action_target = document.getElementById(this.imgWrapperWithIndex);
-        this.x_in_element = event.clientX - this.action_target.offsetLeft;
-        this.y_in_element = event.clientY - this.action_target.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.moving, false);
-        this.action_target.addEventListener("mouseup", this.moveEnd, false);
-        document.body.addEventListener("touchmove", this.moving, false);
-        this.action_target.addEventListener("touchend", this.moveEnd, false);
-      },
-      moving(e){
-        e.preventDefault();
-        this.action_target.style.left = (e.clientX - this.x_in_element) + "px";
-        this.action_target.style.top = (e.clientY - this.y_in_element) + "px";
-        this.mediaImg['left'] = (e.clientX - this.x_in_element);
-        this.mediaImg['top'] = (e.clientY - this.y_in_element);
-
-        this.updateMediaImgsObjectItem({index:this.index,key:"left",value:this.mediaImg['left']});
-        this.updateMediaImgsObjectItem({index:this.index,key:"top",value:this.mediaImg['top']});
-
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.moveEnd, false);
-        document.body.addEventListener("touchleave", this.moveEnd, false);
+        const move_target_dom = document.getElementById(this.imgWrapperWithIndex);
+        moveStart(e, move_target_dom);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
       moveEnd(e){
-        document.body.removeEventListener("mousemove", this.moving, false);
-        this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-        document.body.removeEventListener("touchmove", this.moving, false);
-        this.action_target.removeEventListener("touchend", this.moveEnd, false);
+        e.target.removeEventListener('moveFinish', this.moveEnd, false);
+        this.updateMediaImgsObjectItem({index:this.index,key:"left",value:e.detail.left});
+        this.updateMediaImgsObjectItem({index:this.index,key:"top",value:e.detail.top});
       },
       updateDegree(new_degree){ this.mediaImg['degree'] = new_degree },
       reRender(){

@@ -57,7 +57,6 @@ class MediaController extends Controller
     public function update(Request $request){
         $media_id = $request->setting['id'];
         $returnMsg;
-
         DB::beginTransaction(); // 更新は、削除と作成のセットで実現
         try{
             // $this->destroy($media_id);

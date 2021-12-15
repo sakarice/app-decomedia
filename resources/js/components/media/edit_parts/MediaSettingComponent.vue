@@ -31,27 +31,9 @@
             <p class="setting-title">Media背景</p>
             <label for="">
               <input :value="getMediaSetting['mediaBackgroundColor']" @input="updateMediaSettingObjectItem({key:'mediaBackgroundColor', value:$event.target.value})" type="color" id="media-bg-color">
-              Media背景色
+              カラー選択
             </label>
           </div>
-
-          <div id="media-img-setting-wrapper" class="setting">
-            <p class="setting-title">Media画像</p>
-            <input data-input-type="width" class="img-config-input" :value="getMediaImg['width']" @input="updateMediaImgObjectItem({ key:'width' ,value:$event.target.value})" type="text" size="5" placeholder="横幅">
-            <span>[px] 横幅</span><span class="message-label"> (ブラウザの横幅：{{window_width}})</span><br>
-            <input data-input-type="height" class="img-config-input" :value="getMediaImg['height']" @input="updateMediaImgObjectItem({ key:'height' ,value:$event.target.value})" type="text" size="5" placeholder="縦幅">
-            <span>[px] 縦幅</span><span class="message-label"> (ブラウザの縦幅：{{window_height}})</span><br>
-            <input data-input-type="opacity" class="img-config-input" :value="getMediaImg['opacity']" @input="updateMediaImgObjectItem({ key:'opacity' ,value:$event.target.value})" type="text" size="5" placeholder="透明度">
-            <span>透明度(0～1)</span><br>
-            <button v-on:click="toggleIsShowMediaImg">
-              <span v-show="getMediaSetting['isShowImg']">非表示</span>
-              <span v-show="!(getMediaSetting['isShowImg'])">表示</span>
-            </button>
-            <button v-on:click="deleteMediaImg">
-              <span>削除</span>
-            </button>
-          </div>
-
         </div>
 
       </div>
@@ -76,7 +58,6 @@ export default {
     }
   },
   computed :  {
-    ...mapGetters('mediaImg',['getMediaImg']),
     ...mapGetters('mediaSetting',['getMediaSetting']),
     aboutPublicState : function(){
       if(this.getMediaSetting['isPublic']){

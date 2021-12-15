@@ -15,7 +15,6 @@
   export default {
     data : () => { return {} },
     computed : {
-      // ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),

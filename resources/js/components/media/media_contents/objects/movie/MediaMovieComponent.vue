@@ -28,6 +28,7 @@
 </template>
 
 <script>
+  import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
   import movieResize from '../object_edit_parts/MovieResizeComponent.vue'
   export default {
@@ -40,10 +41,6 @@
         index : 0,
         "isActive" : false,
         ytPlayer : "",
-        "action_target" : "", // ドラッグ操作で移動させる対象
-        "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
-        "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
-
         // playerVars : {},
       }
     },
@@ -62,47 +59,20 @@
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
       // サイズ変更
       resize(){
-        console.log('resize');
-        console.log("width:"+this.ytPlayer.width);
         this.ytPlayer.width = this.getMediaMovie['width'];
         this.ytPlayer.height = this.getMediaMovie['height'];
       },
       // 位置操作用
       moveStart(e){
-        console.log(e.target);
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.action_target = document.getElementById(this.movieWrapperWithIndex);
-        this.x_in_element = event.clientX - this.action_target.offsetLeft;
-        this.y_in_element = event.clientY - this.action_target.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.moving, false);
-        this.action_target.addEventListener("mouseup", this.moveEnd, false);
-        document.body.addEventListener("touchmove", this.moving, false);
-        this.action_target.addEventListener("touchend", this.moveEnd, false);
-      },
-      moving(e){
-        e.preventDefault();
-        const new_left = (e.clientX - this.x_in_element);
-        const new_top = (e.clientY - this.y_in_element);
-        this.updateMediaMovieObjectItem({index:this.index,key:"left",value:new_left});
-        this.updateMediaMovieObjectItem({index:this.index,key:"top",value:new_top});
-
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.moveEnd, false);
-        document.body.addEventListener("touchleave", this.moveEnd, false);
+        const move_target_dom = document.getElementById(this.movieWrapperWithIndex);
+        moveStart(e, move_target_dom);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
       moveEnd(e){
-        console.log('move end...');
-        document.body.removeEventListener("mousemove", this.moving, false);
-        this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-        document.body.removeEventListener("touchmove", this.moving, false);
-        this.action_target.removeEventListener("touchend", this.moveEnd, false);
-      },
+        e.target.removeEventListener('moveFinish', this.moveEnd, false);
+        this.updateMediaMovieObjectItem({index:this.index,key:"left",value:e.detail.left});
+        this.updateMediaMovieObjectItem({index:this.index,key:"top",value:e.detail.top});
+      }, 
       movieWrapperBindStyle(){
         const mm = this.getMediaMovie;
         const style = {
@@ -191,7 +161,6 @@
       },
       submitYoutubeUrl(event) {
         // let url = event.target.previousElementSibling.value;
-        // // console.log(url);
         // let pattern = /v=.*/;
         // let matchText = url.match(pattern); // object型で返ってくる
         // matchText = matchText.toString(); // object⇒stringへ変換
@@ -237,7 +206,6 @@
     mounted(){
       // イベント登録
       document.addEventListener('click', (e)=> {
-        console.log(e.target);
         // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
         if(!e.target.closest("#media-movie-wrapper0")){
           this.isActive = false;

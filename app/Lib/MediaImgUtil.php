@@ -14,10 +14,6 @@ use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Storage;
 
-ini_set("log_errors", "on");
-ini_set("error_log", "/logtest.txt");
-
-
 class MediaImgUtil
 {
 
@@ -105,6 +101,7 @@ class MediaImgUtil
         // メディア画像テーブルのデータ取得
         $media_img = array();
         $img_url = MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_url;
+        $media_img['id'] = $media_img_db_data['id'];
         $media_img['url'] = $img_url;        
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
           $media_img[$property_name] = $media_img_db_data[$column_name];        
@@ -125,7 +122,6 @@ class MediaImgUtil
   // 6.update
   public static function updateMediaImgsData($media_id, $objects){
     // 既存データは更新し、追加データは保存、リクエストに無いレコードは削除する。
-
     // 更新対象と新規追加対象の振り分け
     $update_req_datas = array();
     $create_req_datas = array();
@@ -145,13 +141,11 @@ class MediaImgUtil
 
     $db_records_before_update = MediaImg::where('media_id', $media_id)->get();
     $delete_media_img_ids_in_db = array();
-    foreach($db_records_before_update as $index => $db_record){
+    foreach($db_records_before_update as $db_record){
       if(!in_array($db_record->id, $media_img_ids_of_request)){
         $delete_media_img_ids_in_db[] = $db_record->id;
       }
     }
-
-    error_log(print_r($update_req_datas),true);
 
     DB::beginTransaction();
     try{
@@ -160,7 +154,7 @@ class MediaImgUtil
         if(MediaImgUtil::checkIsStoreOKImg($update_req_data['img_id'])){
           $just_updated_media_img_record = MediaImgUtil::updateMediaImgData($media_id, $update_req_data);
           $media_img_id = $just_updated_media_img_record->id;
-          MediaImgUtil::updateMediaImgSettingData($media_img_id, $update_req_data);
+          $just_updated_media_img_setting_record = MediaImgUtil::updateMediaImgSettingData($media_img_id, $update_req_data);
         } else {
           throw new \Exception('checkIsStoreOKImg Method NG');
         }

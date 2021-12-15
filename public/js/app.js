@@ -3124,7 +3124,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_10__.mapGetters)('mediaSetting', ['getMediaSetting'])),
   methods: {
     showModal: function showModal(target) {
       // this.$refs.disp_modal_wrapper.stopPropagation(); // 親要素のcloseModalメソッドの発火を防ぐ
@@ -3412,7 +3412,7 @@ function _defineProperty(obj, key, value) {
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getIsCrudDoing'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaImg', ['getIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getMediaFigures'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getIsCrudDoing'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getMediaFigures'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -3808,7 +3808,7 @@ function _defineProperty(obj, key, value) {
       autoplay: false
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapGetters)('mediaSetting', ['getMediaSetting'])),
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_9__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     // ●Media読み込み時の初期化処理
     extractMediaIdFromUrl: function extractMediaIdFromUrl() {
@@ -4267,7 +4267,7 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
     createMedia: function createMedia() {
       var _this = this; // this.getFinishTime();
@@ -6147,24 +6147,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -6176,7 +6158,7 @@ function _defineProperty(obj, key, value) {
       window_height: ""
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImg', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     aboutPublicState: function aboutPublicState() {
       if (this.getMediaSetting['isPublic']) {
         return '公開（他のユーザも検索・閲覧できます）';
@@ -7149,9 +7131,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/ObjectRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue");
-/* harmony import */ var _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ObjectResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ObjectRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue");
+/* harmony import */ var _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../object_edit_parts/ObjectResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -7224,10 +7207,11 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    objectRotate: _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    objectResize: _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    objectRotate: _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    objectResize: _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ['index'],
   data: function data() {
@@ -7235,20 +7219,9 @@ function _defineProperty(obj, key, value) {
       "isActive": false,
       "isReDraw": false,
       "isResizing": false,
-      "mouse_x": 0,
-      "mouse_y": 0,
       "canvas": "",
       "ctx": "",
       "canvas_wrapper": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(y)
-      "rotate_target": "",
-      // ドラッグ操作で回転させる対象
-      "rotate_center_x": 0,
-      "rotate_center_y": 0,
       "figureDatas": {
         "left": 0,
         "top": 0,
@@ -7264,7 +7237,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
     new_index: function new_index() {},
     canvas_width: function canvas_width() {
       return this.figureDatas['width'] + "px";
@@ -7310,7 +7283,7 @@ function _defineProperty(obj, key, value) {
       deep: true
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     showEditor: function showEditor() {
       this.$emit('show-editor', this.index);
     },
@@ -7321,48 +7294,28 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var event;
+      var move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
-      this.x_in_element = event.clientX - this.canvas_wrapper.offsetLeft;
-      this.y_in_element = event.clientY - this.canvas_wrapper.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.canvas_wrapper.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.canvas_wrapper.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      this.canvas_wrapper.style.left = e.clientX - this.x_in_element + "px";
-      this.canvas_wrapper.style.top = e.clientY - this.y_in_element + "px";
-      this.figureDatas['left'] = e.clientX - this.x_in_element;
-      this.figureDatas['top'] = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
+      var new_left = e.detail.left;
+      var new_top = e.detail.top;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "left",
-        value: this.figureDatas['left']
+        value: new_left
       });
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "top",
-        value: this.figureDatas['top']
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.canvas_wrapper.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.canvas_wrapper.removeEventListener("touchend", this.moveEnd, false);
+        value: new_top
+      });
+      this.figureDatas['left'] = new_left;
+      this.figureDatas['top'] = new_top;
     },
     updateDegree: function updateDegree(new_degree) {
       this.figureDatas['degree'] = new_degree;
@@ -7493,7 +7446,7 @@ function _defineProperty(obj, key, value) {
       this.ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI * 2);
     },
     setLayer: function setLayer() {
-      this.canvas_wrapper.style.zIndex = this.figureDatas['layer'];
+      document.getElementById(this.canvas_wrapper_with_index).style.zIndex = this.figureDatas['layer'];
     },
     setGlobalAlpha: function setGlobalAlpha() {
       this.ctx.globalAlpha = this.figureDatas['globalAlpha'];
@@ -7671,7 +7624,6 @@ function _defineProperty(obj, key, value) {
       return new Promise(function (resolve, reject) {
         var url = '/mediaFigures/' + _this.getMediaId;
         axios.get(url).then(function (response) {
-          console.log(response.data);
           return resolve(response.data);
         })["catch"](function (error) {});
       });
@@ -8032,9 +7984,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/ImgRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue");
-/* harmony import */ var _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ImgResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ImgRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue");
+/* harmony import */ var _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../object_edit_parts/ImgResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -8119,25 +8072,34 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    imgResize: _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    imgResize: _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ["index"],
   data: function data() {
     return {
       "mediaImg": "",
-      "isActive": false,
-      "action_target": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0 // 移動対象要素に対するドラッグポイントの相対座標(y)
-
+      "isActive": false
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({
+    start: function (_start) {
+      function start() {
+        return _start.apply(this, arguments);
+      }
+
+      start.toString = function () {
+        return _start.toString();
+      };
+
+      return start;
+    }(function () {
+      return start;
+    })
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
     },
@@ -8158,9 +8120,12 @@ function _defineProperty(obj, key, value) {
       } else {
         this.$emit('del-active-index', this.index);
       }
+    },
+    helper_left: function helper_left(val) {
+      console.log('helper_left' + val);
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     getOneImg: function getOneImg() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
@@ -8168,48 +8133,24 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var event;
+      var move_target_dom = document.getElementById(this.imgWrapperWithIndex);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.action_target = document.getElementById(this.imgWrapperWithIndex);
-      this.x_in_element = event.clientX - this.action_target.offsetLeft;
-      this.y_in_element = event.clientY - this.action_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.action_target.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.action_target.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      this.action_target.style.left = e.clientX - this.x_in_element + "px";
-      this.action_target.style.top = e.clientY - this.y_in_element + "px";
-      this.mediaImg['left'] = e.clientX - this.x_in_element;
-      this.mediaImg['top'] = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
       this.updateMediaImgsObjectItem({
         index: this.index,
         key: "left",
-        value: this.mediaImg['left']
+        value: e.detail.left
       });
       this.updateMediaImgsObjectItem({
         index: this.index,
         key: "top",
-        value: this.mediaImg['top']
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.action_target.removeEventListener("touchend", this.moveEnd, false);
+        value: e.detail.top
+      });
     },
     updateDegree: function updateDegree(new_degree) {
       this.mediaImg['degree'] = new_degree;
@@ -8438,8 +8379,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/MovieResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/MovieResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -8524,83 +8466,52 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    movieResize: _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    movieResize: _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: [],
   data: function data() {
     return {
       index: 0,
       "isActive": false,
-      ytPlayer: "",
-      "action_target": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0 // 移動対象要素に対するドラッグポイントの相対座標(y)
-      // playerVars : {},
+      ytPlayer: "" // playerVars : {},
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     movieWrapperWithIndex: function movieWrapperWithIndex() {
       return 'media-movie-wrapper' + this.index;
     }
   }),
   watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     // サイズ変更
     resize: function resize() {
-      console.log('resize');
-      console.log("width:" + this.ytPlayer.width);
       this.ytPlayer.width = this.getMediaMovie['width'];
       this.ytPlayer.height = this.getMediaMovie['height'];
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      console.log(e.target);
-      var event;
+      var move_target_dom = document.getElementById(this.movieWrapperWithIndex);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.action_target = document.getElementById(this.movieWrapperWithIndex);
-      this.x_in_element = event.clientX - this.action_target.offsetLeft;
-      this.y_in_element = event.clientY - this.action_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.action_target.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.action_target.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      var new_left = e.clientX - this.x_in_element;
-      var new_top = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
       this.updateMediaMovieObjectItem({
         index: this.index,
         key: "left",
-        value: new_left
+        value: e.detail.left
       });
       this.updateMediaMovieObjectItem({
         index: this.index,
         key: "top",
-        value: new_top
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      console.log('move end...');
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.action_target.removeEventListener("touchend", this.moveEnd, false);
+        value: e.detail.top
+      });
     },
     movieWrapperBindStyle: function movieWrapperBindStyle() {
       var mm = this.getMediaMovie;
@@ -8701,7 +8612,6 @@ function _defineProperty(obj, key, value) {
       }
     },
     submitYoutubeUrl: function submitYoutubeUrl(event) {// let url = event.target.previousElementSibling.value;
-      // // console.log(url);
       // let pattern = /v=.*/;
       // let matchText = url.match(pattern); // object型で返ってくる
       // matchText = matchText.toString(); // object⇒stringへ変換
@@ -8748,8 +8658,7 @@ function _defineProperty(obj, key, value) {
 
 
     document.addEventListener('click', function (e) {
-      console.log(e.target); // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
-
+      // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
       if (!e.target.closest("#media-movie-wrapper0")) {
         _this3.isActive = false;
       } else {
@@ -10017,7 +9926,6 @@ __webpack_require__.r(__webpack_exports__);
         'isFollow': this.isFollow,
         'target_user_id': target_user_id
       };
-      console.log('updateFollowStateInDB');
       axios.post(url, data).then(function (response) {})["catch"](function (error) {});
     }
   },
@@ -10158,7 +10066,6 @@ function _defineProperty(obj, key, value) {
         'isLike': this.isLikeMedia,
         'media_id': media_id
       };
-      console.log('updateLikeStateInDB');
       axios.post(url, data).then(function (response) {
         console.log(response.data.msg);
       })["catch"](function (error) {
@@ -11067,6 +10974,89 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
+/***/ "./resources/js/functions/moveHelper.js":
+/*!**********************************************!*\
+  !*** ./resources/js/functions/moveHelper.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "moveStart": () => (/* binding */ moveStart)
+/* harmony export */ });
+// オブジェクトの移動を行う処理群
+// 移動開始処理(moveStart関数)が、コンポーネントからイベントと移動対象DOMを受け取り、
+// そのDOMをドラッグ/タッチスライドで移動。
+// 移動終了後にカスタムイベントを発行し引数に位置(left,top)を渡す
+var move_target;
+var left;
+var top;
+var distance_from_target_left;
+var distance_from_target_top; // 位置操作用
+
+function moveStart(e, target) {
+  move_target = target;
+  var event;
+
+  if (e.type === "mousedown") {
+    event = e;
+    distance_from_target_left = event.clientX - move_target.offsetLeft;
+    distance_from_target_top = event.clientY - move_target.offsetTop;
+  } else {
+    event = e.changedTouches[0];
+    distance_from_target_left = event.pageX - move_target.offsetLeft;
+    distance_from_target_top = event.pageY - move_target.offsetTop;
+  } // ムーブイベントにコールバック
+
+
+  document.body.addEventListener("mousemove", moving, false);
+  move_target.addEventListener("mouseup", moveEnd, false);
+  document.body.addEventListener("touchmove", moving, false);
+  move_target.addEventListener("touchend", moveEnd, false);
+}
+
+function moving(e) {
+  e.preventDefault();
+  var event;
+
+  if (e.type === "mousedown") {
+    event = e;
+    left = event.clientX - distance_from_target_left;
+    top = event.clientY - distance_from_target_top;
+  } else {
+    event = e.changedTouches[0];
+    left = event.pageX - distance_from_target_left;
+    top = event.pageY - distance_from_target_top;
+  }
+
+  move_target.style.left = left + "px";
+  move_target.style.top = top + "px"; // マウス、タッチ解除時のイベントを設定
+
+  document.body.addEventListener("mouseleave", moveEnd, false);
+  document.body.addEventListener("touchleave", moveEnd, false);
+}
+
+function moveEnd(e) {
+  document.body.removeEventListener("mousemove", moving, false);
+  move_target.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("touchmove", moving, false);
+  move_target.removeEventListener("touchend", moveEnd, false); // 移動終了カスタムイベント。終了後の位置を引数で渡す。
+
+  var event = new CustomEvent('moveFinish', {
+    detail: {
+      left: left,
+      top: top
+    }
+  });
+  move_target.dispatchEvent(event);
+} // exportは、移動のトリガーとなるmoveStartのみ
+
+
+
+
+/***/ }),
+
 /***/ "./resources/js/router.js":
 /*!********************************!*\
   !*** ./resources/js/router.js ***!
@@ -11270,17 +11260,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_media_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/media.js */ "./resources/js/store/modules/media.js");
-/* harmony import */ var _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaImg.js */ "./resources/js/store/modules/mediaImg.js");
-/* harmony import */ var _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaImgs */ "./resources/js/store/modules/mediaImgs.js");
-/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
-/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
-/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
-/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
+/* harmony import */ var _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaImgs */ "./resources/js/store/modules/mediaImgs.js");
+/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
+/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
+/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
 
 
 
@@ -11292,19 +11281,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_10__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_11__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_11__["default"].Store({
+vue__WEBPACK_IMPORTED_MODULE_9__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_10__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_10__["default"].Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__["default"],
     media: _modules_media_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-    mediaImg: _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-    mediaImgs: _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__["default"],
-    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__["default"],
-    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__["default"]
+    mediaImgs: _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_3__["default"],
+    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -11648,65 +11635,6 @@ var mediaFigure = {
   actions: {}
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaFigure);
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/mediaImg.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/mediaImg.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var mediaImg = {
-  namespaced: true,
-  state: {
-    // DBから取得したデータで下記mediaImgが初期化がされたか。
-    isInitialized: false,
-    // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
-    mediaImg: {
-      type: 0,
-      id: 0,
-      url: "",
-      width: 500,
-      height: 500,
-      opacity: 1,
-      layer: 0
-    }
-  },
-  getters: {
-    getIsInitializedImg: function getIsInitializedImg(state) {
-      return state.isInitialized;
-    },
-    getMediaImg: function getMediaImg(state) {
-      return state.mediaImg;
-    }
-  },
-  mutations: {
-    updateMediaImgContent: function updateMediaImgContent(state, _ref) {
-      var type = _ref.type,
-          id = _ref.id,
-          url = _ref.url;
-      state.mediaImg['type'] = type;
-      state.mediaImg['id'] = id;
-      state.mediaImg['url'] = url;
-    },
-    updateMediaImgObjectItem: function updateMediaImgObjectItem(state, _ref2) {
-      var key = _ref2.key,
-          value = _ref2.value;
-      state.mediaImg[key] = value;
-    },
-    updateIsInitializedImg: function updateIsInitializedImg(state, payload) {
-      state.isInitialized = payload;
-    }
-  },
-  actions: {}
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaImg);
 
 /***/ }),
 
@@ -16567,7 +16495,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16702,7 +16630,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  color: darkorange;\n}\n.action-trigger-subtitle[data-v-93079c06] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  color: darkorange;\n}\n.action-trigger-subtitle[data-v-93079c06] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16729,7 +16657,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17275,7 +17203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65535,126 +65463,7 @@ var render = function () {
                     },
                   },
                 }),
-                _vm._v("\n            Media背景色\n          "),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "setting",
-              attrs: { id: "media-img-setting-wrapper" },
-            },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Media画像")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "width",
-                  type: "text",
-                  size: "5",
-                  placeholder: "横幅",
-                },
-                domProps: { value: _vm.getMediaImg["width"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "width",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 横幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")"),
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "height",
-                  type: "text",
-                  size: "5",
-                  placeholder: "縦幅",
-                },
-                domProps: { value: _vm.getMediaImg["height"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "height",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 縦幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")"),
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "opacity",
-                  type: "text",
-                  size: "5",
-                  placeholder: "透明度",
-                },
-                domProps: { value: _vm.getMediaImg["opacity"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "opacity",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("透明度(0～1)")]),
-              _c("br"),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.toggleIsShowMediaImg } }, [
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.getMediaSetting["isShowImg"],
-                        expression: "getMediaSetting['isShowImg']",
-                      },
-                    ],
-                  },
-                  [_vm._v("非表示")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.getMediaSetting["isShowImg"],
-                        expression: "!(getMediaSetting['isShowImg'])",
-                      },
-                    ],
-                  },
-                  [_vm._v("表示")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.deleteMediaImg } }, [
-                _c("span", [_vm._v("削除")]),
+                _vm._v("\n            カラー選択\n          "),
               ]),
             ]
           ),

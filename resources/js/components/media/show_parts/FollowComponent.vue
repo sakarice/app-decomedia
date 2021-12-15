@@ -51,7 +51,6 @@ export default{
         'isFollow' : this.isFollow,
         'target_user_id' : target_user_id,
       }
-      console.log('updateFollowStateInDB');
       axios.post(url, data)
         .then(response => {})
         .catch(error => {})

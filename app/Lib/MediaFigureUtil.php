@@ -47,18 +47,7 @@ class MediaFigureUtil
       $create_items[$column_name] = $media_figure_data[$property_name];
     }
     $model = $mediaFigure->create($create_items);
-    \Log::info($model->media_id);
     return $model;
-  }
-
-  public static function updateMediaFigureRecord($media_id, $req_datas){
-    $target_records = MediaFigure::where('media_id', $media_id)->get();
-    foreach($req_datas as $index => $req_data){
-      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
-        $target_records[$index][$column_name] = $req_data[$property_name];
-      }
-      $target_records[$index]->save();
-    }
   }
 
   // 4.show 
@@ -140,8 +129,19 @@ class MediaFigureUtil
       // DBのMediaAudioのレコードを削除。更新処理は行わない。
       MediaFigureUtil::equalizeNumOfMediaFigureDataWithRequest($media_id, $req_figure_num);
     }
-
   }
+
+  public static function updateMediaFigureRecord($media_id, $req_datas){
+    $target_records = MediaFigure::where('media_id', $media_id)->get();
+    foreach($req_datas as $index => $req_data){
+      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+        $target_records[$index][$column_name] = $req_data[$property_name];
+      }
+      $target_records[$index]['media_id'] = $media_id;
+      $target_records[$index]->save();
+    }
+  }
+
  
 
 

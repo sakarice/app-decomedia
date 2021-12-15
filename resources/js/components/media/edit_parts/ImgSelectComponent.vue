@@ -94,7 +94,6 @@
       }
     },
     computed : {
-      // ...mapGetters('mediaImg', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
     },

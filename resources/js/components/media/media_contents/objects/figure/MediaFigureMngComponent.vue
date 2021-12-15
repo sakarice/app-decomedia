@@ -60,7 +60,6 @@
           const url = '/mediaFigures/'+this.getMediaId;
           axios.get(url)
           .then(response=>{
-            console.log(response.data);
             return resolve(response.data);
           })
           .catch(error=>{});

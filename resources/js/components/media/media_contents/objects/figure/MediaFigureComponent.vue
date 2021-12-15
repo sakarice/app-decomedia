@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import {moveStart} from '../../../../../functions/moveHelper'
 import { mapGetters, mapMutations } from 'vuex';
 import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
 import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
@@ -32,16 +33,9 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         "isActive" : false,
         "isReDraw" : false,
         "isResizing" :false,
-        "mouse_x" : 0,
-        "mouse_y" : 0,
         "canvas" : "",
         "ctx" : "",
-        "canvas_wrapper" : "", // ドラッグ操作で移動させる対象
-        "x_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(x)
-        "y_in_element" : 0, // 移動対象要素に対するドラッグポイントの相対座標(y)
-        "rotate_target" : "", // ドラッグ操作で回転させる対象
-        "rotate_center_x" : 0,
-        "rotate_center_y" : 0,
+        "canvas_wrapper" : "",
 
         "figureDatas" : {
           "left" : 0,
@@ -100,40 +94,18 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       },
       // 位置操作用
       moveStart(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
-        this.x_in_element = event.clientX - this.canvas_wrapper.offsetLeft;
-        this.y_in_element = event.clientY - this.canvas_wrapper.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.moving, false);
-        this.canvas_wrapper.addEventListener("mouseup", this.moveEnd, false);
-        document.body.addEventListener("touchmove", this.moving, false);
-        this.canvas_wrapper.addEventListener("touchend", this.moveEnd, false);
-      },
-      moving(e){
-        e.preventDefault();
-        this.canvas_wrapper.style.left = (e.clientX - this.x_in_element) + "px";
-        this.canvas_wrapper.style.top = (e.clientY - this.y_in_element) + "px";
-        this.figureDatas['left'] = (e.clientX - this.x_in_element);
-        this.figureDatas['top'] = (e.clientY - this.y_in_element);
-
-        this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:this.figureDatas['left']});
-        this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:this.figureDatas['top']});
-
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.moveEnd, false);
-        document.body.addEventListener("touchleave", this.moveEnd, false);
+        const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
+        moveStart(e, move_target_dom);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
       moveEnd(e){
-        document.body.removeEventListener("mousemove", this.moving, false);
-        this.canvas_wrapper.removeEventListener("mouseup", this.moveEnd, false);
-        document.body.removeEventListener("touchmove", this.moving, false);
-        this.canvas_wrapper.removeEventListener("touchend", this.moveEnd, false);
+        e.target.removeEventListener('moveFinish', this.moveEnd, false);
+        const new_left = e.detail.left;
+        const new_top = e.detail.top;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
+        this.figureDatas['left'] = new_left;
+        this.figureDatas['top'] = new_top;
       },
       updateDegree(new_degree){ this.figureDatas['degree'] = new_degree },
       resize(){
@@ -225,7 +197,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         const center_y = radius_y + 1; // 中心y座標
         this.ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI*2);
       },
-      setLayer(){ this.canvas_wrapper.style.zIndex = this.figureDatas['layer'] },
+      setLayer(){ document.getElementById(this.canvas_wrapper_with_index).style.zIndex = this.figureDatas['layer'] },
       setGlobalAlpha(){ this.ctx.globalAlpha = this.figureDatas['globalAlpha'];},
       setStrokeColor(){this.ctx.strokeStyle = this.figureDatas['strokeColor'];},
       setFillColor(){this.ctx.fillStyle = this.figureDatas['fillColor'];},
