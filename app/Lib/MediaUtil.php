@@ -180,7 +180,7 @@ class MediaUtil
         //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
         //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
         //   if($isOwnImg || $isPublicImg){
-            MediaImgController::store($media_id, $request);
+            MediaImgController::store($media_id, $request->imgs);
         //   }
         // } 
         // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存

@@ -118,7 +118,7 @@ class MediaImgUtilTest extends TestCase
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
         $this->assertDatabaseHas('media_imgs', [
-            'img_id' => $media_img_data['img_id'],
+            'img_id' => $media_img_data[0]['img_id'],
         ]);
     }
 
@@ -210,7 +210,6 @@ class MediaImgUtilTest extends TestCase
         // パターン1 デフォルト画像
         // 1. 取得
         $media_img_data = MediaImgUtil::getMediaImgModel($default_img->id, 1);
-        MediaImgSetting::factory()->create();
         // 2. 検証：デフォルト画像は所有者ユーザIDがNULL
         $this->assertNull($media_img_data['owner_user_id']);
 
