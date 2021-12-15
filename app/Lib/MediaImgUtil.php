@@ -100,7 +100,6 @@ class MediaImgUtil
       foreach($media_img_db_datas as $index => $media_img_db_data){
         // メディア画像テーブルのデータ取得
         $media_img = array();
-        \Log::info($media_img_db_data);
         $img_url = MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_url;
         $media_img['url'] = $img_url;        
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){
@@ -127,7 +126,6 @@ class MediaImgUtil
     $update_req_datas = array();
     $create_req_datas = array();
     foreach($objects as $object){
-      \Log::info($object);
       if(MediaImg::where('id', $object['id'])->exists()){
         $update_req_datas[] = $object;
       } else {
@@ -193,9 +191,7 @@ class MediaImgUtil
   public static function updateMediaImgSettingData($media_img_id, $object){
     $target_record = MediaImgSetting::where('media_img_id', $media_img_id)->first();
     foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG_SETTING as $column_name => $property_name){
-      \Log::info($target_record);
-      \Log::info($object);
-      $target_record[$column_name] = $object[$property_name];
+      $target_record->$column_name = $object[$property_name];
     }
     $target_record->save();
   }
