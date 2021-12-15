@@ -51,8 +51,11 @@ class MediaImgControllerTest extends TestCase
         $public_img = PublicImg::factory()->create();
         $media_img_id = $public_img->id;
         $media_img_data = array(
+            'type' => 99,
             'img_type' => 1,
             'img_id' => $media_img_id,
+            'left' => 1000,
+            'top' => 1000,
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
@@ -110,15 +113,18 @@ class MediaImgControllerTest extends TestCase
         $media_img = MediaImg::factory()->create();
         $id = $media_img->id;
         $media_id = $media_img->media_id;
+        $media_img_id = $public_img->id;
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
         // $media_img_id = mt_rand(1, 2147483647);
-        $media_img_id = $public_img->id;
         $media_img_data = array(
             'id' => $id,
+            'type' => 99,
             'img_type' => 1,
             'img_id' => $media_img_id,
+            'left' => 1001,
+            'top' => 1001,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
@@ -135,6 +141,10 @@ class MediaImgControllerTest extends TestCase
         // 4. 検証
         //    DBのデータが更新用データと一致すること
         $this->assertDatabaseHas('media_imgs',[
+            'id' => $id,
+            'media_id' => $media_id,
+            'img_type' => 1,
+            'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
