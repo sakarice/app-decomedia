@@ -52,12 +52,14 @@ class MediaImgControllerTest extends TestCase
         $media_img_id = $public_img->id;
         $media_img_data = array(
             'type' => 99,
+            'groupNo' => null,
             'img_type' => 1,
             'img_id' => $media_img_id,
             'left' => 1000,
             'top' => 1000,
             'width' => 1000,
             'height' => 1000,
+            'degree' => 0,
             'opacity' => 1,
             'layer' => 1,
         );
@@ -121,10 +123,12 @@ class MediaImgControllerTest extends TestCase
         $media_img_data = array(
             'id' => $id,
             'type' => 99,
+            'groupNo' => null,
             'img_type' => 1,
             'img_id' => $media_img_id,
             'left' => 1001,
             'top' => 1001,
+            'degree' => 0,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
