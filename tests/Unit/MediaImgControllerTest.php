@@ -61,10 +61,10 @@ class MediaImgControllerTest extends TestCase
         // $request = new \stdClass(); //key:value形式のリクエスト
         // $request->imgs = $media_img_data;
         $media_id = mt_rand(1, 2147483647); // 適当なメディアID
-
+        $send_data = array($media_img_data);
         // 2. 登録
         //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
-        MediaImgController::store($media_id, $media_img_data);
+        MediaImgController::store($media_id, $send_data);
 
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック
@@ -125,10 +125,11 @@ class MediaImgControllerTest extends TestCase
         );
         // $request = new \stdClass(); // key:value形式のリクエストを用意
         // $request->imgs = $media_img_data;
+        $send_data = array($media_img_data);
 
         // 3. 更新
         //    指定したメディアIDのレコードをrequestの値で更新する
-        MediaImgController::update($media_id, $media_img_data);
+        MediaImgController::update($media_id, $send_data);
 
         // 4. 検証
         //    DBのデータが更新用データと一致すること
