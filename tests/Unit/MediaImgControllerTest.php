@@ -49,10 +49,8 @@ class MediaImgControllerTest extends TestCase
         //    登録したいデータをリクエスト形式で作成
         $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
-            'type' => 1,
-            'id' => $media_img_id,
-            'top' => 1000,
-            'left' => 1000,
+            'img_type' => 1,
+            'img_id' => $media_img_id,
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
@@ -114,10 +112,8 @@ class MediaImgControllerTest extends TestCase
         //    データをリクエスト形式で作成
         $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
-            'type' => 2,
-            'id' => $media_img_id,
-            'left' => 1001,
-            'top' => 1001,
+            'img_type' => 2,
+            'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
