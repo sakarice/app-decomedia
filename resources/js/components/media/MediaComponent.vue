@@ -7,9 +7,17 @@
     <router-view name="switchToShowMode"></router-view>
 
     <!-- Media画像コンポーネント -->
-    <media-img
+    <!-- <media-img-
     ref="mediaImg">
-    </media-img>
+    </media-img-> -->
+    <media-img-mng
+    ref="mediaImgMng">
+    </media-img-mng>
+
+    <!-- Media図形コンポーネント -->
+    <media-figure-mng
+    ref="mediaFigure">
+    </media-figure-mng>
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio
@@ -51,11 +59,15 @@
         </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
         </router-view>
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
+        </router-view>
+        <!-- 図形設定 -->
+        <router-view name="dispFigureSettingModal"
+        v-on:show-modal="showModal">
         </router-view>
 
       </div>
@@ -91,6 +103,18 @@
     :transitionName="transitionName">
     </router-view>
 
+    <router-view name="mediaFigureSetting"
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
+    <!-- <media-figure-setting
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </media-figure-setting> -->
+
+
+
     <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
       <router-view name="loading"
@@ -111,17 +135,26 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
-  import MediaImg from './media_contents/MediaImgComponent.vue';
+  // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
-  import MediaMovie from './media_contents/MediaMovieComponent.vue';
+  import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
+
+  // テスト メディア図形
+  // import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
+  import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
+
 
 export default {
   components : {
-    MediaImg,
+    // MediaImg,
+    MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
+    // MediaFigureSetting,
+    MediaFigureMng,
   },
   props: [],
   data : () => {
@@ -135,6 +168,7 @@ export default {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
+        'figureSettingModal' : false,
         'mediaSettingModal' : false,
       },
       autoPlay : true,
@@ -148,12 +182,15 @@ export default {
     ...mapGetters('media', ['getIsCrudDoing']),
     ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaImg', ['getIsInitializedImg']),
+    ...mapGetters('mediaFigures', ['getIsInitializedFigures']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
     ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
+    ...mapGetters('mediaFigures', ['getMediaFigures']),
+
 
     waitingMsg:function(){
       if(this.getMode==1){
@@ -165,10 +202,11 @@ export default {
     initStatus : function(){
       let initCountStack = 0;
       if(this.getIsInitializedImg){initCountStack += 1}
-      if(this.getIsInitializedAudios){initCountStack += 2}
-      if(this.getIsInitializedMovie){initCountStack += 4}
-      if(this.getIsInitializedSetting){initCountStack += 8}
-      if(this.getReadyCreateMovieFrame){initCountStack += 16}
+      if(this.getIsInitializedFigures){initCountStack += 2}
+      if(this.getIsInitializedAudios){initCountStack += 4}
+      if(this.getIsInitializedMovie){initCountStack += 8}
+      if(this.getIsInitializedSetting){initCountStack += 16}
+      if(this.getReadyCreateMovieFrame){initCountStack += 32}
       return initCountStack;
     },
     
@@ -262,7 +300,9 @@ export default {
     if(this.getMode!=1){ // 1:create以外(=showかedit)なら初期化処理を実行
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
-      this.$refs.mediaImg.initImg();
+      // this.$refs.mediaImg.initImg();
+      this.$refs.mediaImgMng.initImg();
+      this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();
       this.initSetting();
@@ -282,14 +322,14 @@ export default {
   watch : {
     initStatus : function(newVal){
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
-      if(newVal >= 2){ 
+      if(newVal >= 4){ 
         const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
         setTimeout(play, 10000); 
       }
       // youtube情報取得と再生準備が完了したら再生開始
       if(this.getMediaSetting['isShowMovie'] == true
       && this.getMediaMovie['videoId'] != ""
-      && newVal >= 28){
+      && newVal >= 56){ // (56 = 32 + 16 + 8)
         this.createMovieFrame();
       }
     },
@@ -304,7 +344,6 @@ export default {
 @import "/resources/css/mediaCommon.css";
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
-
 
 
   #disp-media-owner-modal-wrapper {

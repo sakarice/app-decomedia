@@ -1,6 +1,6 @@
 <template>
   <div id="disp-media-setting-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaSettingModal')">
-    <i class="fas fa-cog fa-2x"></i>
+    <i class="fas fa-cog fa-lg"></i>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="disp-movie-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('movieModal')">
-    <i class="fab fa-youtube fa-2x"></i>
+    <i class="fab fa-youtube fa-lg"></i>
   </div>
 </template>
 

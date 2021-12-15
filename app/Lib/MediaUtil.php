@@ -8,11 +8,14 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\AudioController;
 use App\Http\Controllers\MediaImgController;
+use App\Http\Controllers\MediaFigureController;
 use App\Http\Controllers\MediaAudioController;
 use App\Http\Controllers\MediaMovieController;
 use App\Http\Controllers\MediaSettingController;
+
 use App\Lib\ImgUtil;
 use App\Lib\MediaImgUtil;
+use App\Lib\MediaFigureUtil;
 use App\Lib\PublicImgUtil;
 use App\Lib\UserOwnImgUtil;
 use App\Lib\StoreFileInS3;
@@ -21,6 +24,7 @@ use App\Models\Media;
 use App\Models\UserOwnImg;
 use App\Models\PublicImg;
 use App\Models\MediaImg;
+use App\Models\MediaFigure;
 use App\Models\MediaAudio;
 use App\Models\MediaMovie;
 use App\Models\MediaSetting;
@@ -163,40 +167,40 @@ class MediaUtil
     try{
       // media保存
       $media = new Media(); 
-      $media->user_id = Auth::user()->id;
-      $media->save();
+      // $media->user_id = Auth::user()->id;
+      $model = $media->create(['user_id' => Auth::user()->id]);
       
       // 保存したmediaのidを取得
-      $media_id = Media::latest()->first()->id;
+      $media_id = $model->id;
   
       // media画像
-      if(isset($request->img['id'])){
-        if($request->img['id'] != 0){
-          $img_id = $request->img['id'];
-          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isPublicImg = PublicImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isPublicImg){
-            MediaImgController::store($media_id, $request);
-          }
-        } else if($request->img['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-          MediaImgUtil::saveTentativeMediaImgData($media_id);        
-        }
+      if(isset($request->imgs[0]['id'])){
+        // if($request->imgs[0]['id'] != 0){
+        //   $img_id = $request->imgs[0]['id'];
+        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
+        //   if($isOwnImg || $isPublicImg){
+            MediaImgController::store($media_id, $request->imgs);
+        //   }
+        // } 
+        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
+        //   MediaImgUtil::saveTentativeMediaImgData($media_id);        
+        // }
       }
-  
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::store($media_id, $request);
       }
-  
+      // media図形
+      if(isset($request->figures[0])){
+        MediaFigureController::store($media_id, $request);
+      }
       // media音楽
       if(isset($request->audios[0])){
         MediaAudioController::store($media_id, $request);
       }
-
       // media設定
-      \Log::info('start MediaSettingController');
       MediaSettingController::store($media_id, $request);
-
       // DB::commit();
 
     } catch(\Exception $e){
@@ -210,18 +214,23 @@ class MediaUtil
     try{
 
       // media画像
-      if(isset($request->img['id'])){
-        if($request->img['id'] != 0){
-          $img_id = $request->img['id'];
-          $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-          $isPublicImg = PublicImg::where('id', $img_id)->exists();
-          if($isOwnImg || $isPublicImg){
-            MediaImgController::update($media_id, $request);
-          }
-        } else if($request->img['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-          MediaImgUtil::updateMediaImgDataToTentative($media_id);        
-        }
+      if(isset($request->imgs[0]['id'])){
+        // if($request->imgs[0]['id'] != 0){
+        //   $img_id = $request->imgs[0]['id'];
+        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
+        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
+        //   if($isOwnImg || $isPublicImg){
+          MediaImgController::update($media_id, $request->imgs);
+          // }
+        // } 
+        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
+        //   MediaImgUtil::updateMediaImgDataToTentative($media_id);        
+        // }
       }
+      // media図形
+      if(isset($request->figures[0])){
+        MediaFigureController::update($media_id, $request);
+      }      
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::update($media_id, $request);

@@ -1,6 +1,6 @@
 <template>
   <div id="disp-media-info-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaInfoModal')">
-    <i class="fas fa-file-alt fa-2x setting-icon"></i>
+    <i class="fas fa-file-alt fa-lg setting-icon"></i>
   </div>
 </template>
 

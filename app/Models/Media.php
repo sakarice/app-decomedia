@@ -10,5 +10,6 @@ class Media extends Model
     use HasFactory;
 
     protected $table = 'medias';
+    protected $fillable = ['user_id'];
 
 }

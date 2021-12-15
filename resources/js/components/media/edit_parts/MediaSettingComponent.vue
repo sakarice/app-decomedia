@@ -111,14 +111,14 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 
 @import "/resources/css/mediaEditModals.css";
 
   /* コンテンツのCSS */
   #setting-wrapper {
     margin: 20px 0;
-    width: 75%;
+    width: 95%;
 
     display: flex;
     flex-direction: column;

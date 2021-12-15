@@ -13,12 +13,13 @@
   width: 100%;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: white;
+  background-color: rgba(35,40,50,0.85);
+  color: white;
   box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
 
   /* モーダル内の要素の配置 */
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-flow: column;
 }
 
@@ -35,8 +36,8 @@
   }
 
   #area-wrapper {
-    width: 90%;
-    padding-left: 50px;
+    width: 95%;
+    padding-left: 70px;
   }
 
 }

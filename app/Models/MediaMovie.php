@@ -14,4 +14,18 @@ class MediaMovie extends Model
             'App\Models\Media'
         );
      }
+
+    protected $fillable = [
+        'id',
+        'media_id',
+        'user_id',
+        'video_id',
+        'left',
+        'top',
+        'width',
+        'height',
+        'opacity',
+        'movie_layer',
+        'isLoop',
+    ];
 }

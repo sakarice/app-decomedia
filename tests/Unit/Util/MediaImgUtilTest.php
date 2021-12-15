@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Media;
 use App\Models\MediaImg;
+use App\Models\MediaImgSetting;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
@@ -44,8 +45,8 @@ class MediaImgUtilTest extends TestCase
         //    登録したいデータをリクエスト形式で作成
         $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
-            'type' => 1,
-            'id' => $media_img_id,
+            'img_id' => $media_img_id,
+            'img_type' => 1,
             'width' => 1000,
             'height' => 1000,
             'opacity' => 1,
@@ -57,7 +58,7 @@ class MediaImgUtilTest extends TestCase
 
         // 2. 登録
         //    requestのデータを指定したメディアIDに紐づくメディア画像情報として保存
-        MediaImgUtil::saveMediaImgData($media_id, $request);
+        MediaImgUtil::saveMediaImgData($media_id, $request->img);
 
         // 3. 検証
         //    指定の値がデータベースに存在するかチェック
@@ -95,27 +96,29 @@ class MediaImgUtilTest extends TestCase
     public function test_getMediaImgData(){
         // 準備：対象のメディア、メディアと紐づける画像データ作成
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
 
-        // パターン1 メディア画像未設定のためDBにはデフォルト値が保存されている
-        // 1. メディアID取得（※メディア画像のimg_idを0に設定）
-        $media_img = MediaImg::factory()->create(['img_id' => 0]);
-        $media_id = MediaImg::max('media_id');
-        // 2. メディア画像データ取得
-        $media_img_data = MediaImgUtil::getMediaImgData($media_id);
-        // 3. 検証：データが取得できていること(中身はここでは問わない)
-        $this->assertArrayHasKey('id', $media_img_data);
+        // // パターン1 メディア画像未設定のためDBにはデフォルト値が保存されている
+        // // 1. メディアID取得（※メディア画像のimg_idを0に設定）
+        // $media_img = MediaImg::factory()->create(['img_id' => 0]);
+        // $media_id = MediaImg::max('media_id');
+        // \Log::info($media_img);
+        // // 2. メディア画像データ取得
+        // $media_img_data = MediaImgUtil::getMediaImgData($media_id);
+        // // 3. 検証：データが取得できていること(中身はここでは問わない)
+        // $this->assertArrayHasKey('id', $media_img_data);
 
         // パターン2 メディア画像が登録されている
         // 1. 取得対象データ登録
         $media_img = MediaImg::factory()->create();
+        $media_img_setting = MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
         // 2. メディア画像データ取得
         $media_img_data = MediaImgUtil::getMediaImgData($media_id);
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
         $this->assertDatabaseHas('media_imgs', [
-            'img_id' => $media_img_data['id'],
+            'img_id' => $media_img_data[0]['img_id'],
         ]);
     }
 
@@ -126,27 +129,31 @@ class MediaImgUtilTest extends TestCase
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
-        $media_id = MediaImg::max('media_id');
+        MediaImgSetting::factory()->create();
+        $id = $media_img->id;
+        $media_id = $media_img->media_id;
+        $media_img_id = $public_img->id;
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        $media_img_id = mt_rand(1, 2147483647);
+        // $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
-            'type' => 2,
-            'id' => $media_img_id,
+            'id' => $id,
+            'img_type' => 1,
+            'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
             'layer' => 1.1,
         );
-        $request = new \stdClass(); // key:value形式のリクエストを用意
-        $request->img = $media_img_data;
+        // $request = new \stdClass(); // key:value形式のリクエストを用意
+        // $request->img = $media_img_data;
 
         // 3. 更新
         //    指定したメディアIDのレコードをrequestの値で更新する
-        MediaImgUtil::updateMediaImgData($media_id, $request);
+        MediaImgUtil::updateMediaImgData($media_id, $media_img_data);
 
         // 4. 検証
         //    DBのデータが更新用データと一致すること
@@ -163,8 +170,9 @@ class MediaImgUtilTest extends TestCase
     public function test_updateMediaImgDataToTentative() {
         // 1. 更新対象データ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
+        MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
 
         // 2. 更新：指定したメディアIDのレコードをrequestの値で更新する
@@ -199,12 +207,12 @@ class MediaImgUtilTest extends TestCase
     // Media画像のModelを取得:タイプに応じて取得先DBを選択
     public function test_getMediaImgModel(){
         //  準備：デフォルト画像とユーザアップロード画像をDBに登録
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $user_own_img = UserOwnImg::factory()->create();
 
         // パターン1 デフォルト画像
         // 1. 取得
-        $media_img_data = MediaImgUtil::getMediaImgModel($default_img->id, 1);
+        $media_img_data = MediaImgUtil::getMediaImgModel($public_img->id, 1);
         // 2. 検証：デフォルト画像は所有者ユーザIDがNULL
         $this->assertNull($media_img_data['owner_user_id']);
 

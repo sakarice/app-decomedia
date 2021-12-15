@@ -12,28 +12,27 @@
   <section id="upload">
     <form id="upload-form" action="/uploadPublicFiles" method="POST" enctype="multipart/form-data">
 
-      <div class="upload-wrapper">
-        <div class="img-upload-wrapper">
-          <div class="img-file-upload-wrapper">
-            {{csrf_field()}}
-            <h2>デフォルト画像をアップロード</h2>
-            <input form="upload-form" class="image-upload" type="file" accept="image/*" name="img">
-          </div>
+      <h2 class="upload-title">アップロードフォーム</h2>
+      <div class="upload-area">
+        {{-- <div class="img-upload-wrapper"></div> --}}
+        <div class="img-file-upload-wrapper upload-wrapper">
+          {{csrf_field()}}
+          <h3 class="sub-title">デフォルト画像</h3>
+          <input form="upload-form" class="upload" type="file" accept="image/*" name="img">
         </div>
   
-        <div class="audio-upload-wrapper">
-          <div class="audio-file-upload-wrapper">
-            {{csrf_field()}}
-            <h2>オーディオファイルをアップロード</h2>
-            <span>※↓のサムネをアップロードしない場合はデフォルトの♬(音符)サムネが割り当てられます</span>
-            <input form="upload-form" class="audio-upload"  type="file" accept="audio/*" name="audio">
-          </div>
-          <div class="audio-thumbnail-upload-wrapper">
-            {{csrf_field()}}
-            <h2>オーディオのサムネイル画像をアップロード</h2>
-            <span>※サムネだけのアップロードはできません。</span>
-            <input form="upload-form" class="audio-thumbnail-upload"  type="file" accept="image/*" name="audio-thumbnail">
-          </div>
+        {{-- <div class="audio-upload-wrapper upload-wrapper"></div> --}}
+        <div class="audio-file-upload-wrapper upload-wrapper">
+          {{csrf_field()}}
+          <h3 class="sub-title">オーディオファイル</h3>
+          <span class="sub-describe">※↓のサムネをアップロードしない場合はデフォルトの♬(音符)サムネが割り当てられます</span>
+          <input form="upload-form" class="upload"  type="file" accept="audio/*" name="audio">
+        </div>
+        <div class="audio-thumbnail-upload-wrapper upload-wrapper">
+          {{csrf_field()}}
+          <h3 class="sub-title">オーディオのサムネイル画像</h3>
+          <span class="sub-describe">※サムネだけのアップロードはできません。</span>
+          <input form="upload-form" class="upload"  type="file" accept="image/*" name="audio-thumbnail">
         </div>
       </div>
 

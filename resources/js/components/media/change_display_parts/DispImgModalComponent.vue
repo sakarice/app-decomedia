@@ -1,6 +1,6 @@
 <template>
   <div id="disp-img-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('imgModal')">
-    <i class="fas fa-image fa-2x"></i>
+    <i class="fas fa-image fa-lg"></i>
   </div>
 </template>
 

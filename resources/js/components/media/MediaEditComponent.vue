@@ -12,10 +12,10 @@
     </media-header-component>
 
     <!-- Media画像コンポーネント -->
-    <media-img-component
+    <!-- <media-img-component
       v-on:parent-action="showModal"
       ref="mediaImg">
-    </media-img-component>
+    </media-img-component> -->
 
     <!-- Mediaオーディオコンポーネント -->
     <media-audio-component
@@ -103,8 +103,7 @@ import AudioSelect from './edit_parts/AudioSelectComponent.vue';
 import MovieSetting from './edit_parts/MovieSettingComponent.vue';
 import MediaAudio from './media_contents/MediaAudioComponent.vue';
 import MediaSetting from './edit_parts/MediaSettingComponent.vue';
-import MediaImg from './media_contents/MediaImgComponent.vue';
-import MediaMovie from './media_contents/MediaMovieComponent.vue';
+import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
 import Overlay from '../common/OverlayComponent.vue'
 import Loading from '../common/LoadingComponent.vue'
 
@@ -116,7 +115,6 @@ export default {
     MovieSetting,
     MediaAudio,
     MediaSetting,
-    MediaImg,
     MediaMovie,
     Overlay,
     Loading,

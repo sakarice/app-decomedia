@@ -6,11 +6,15 @@ const mediaMovie = {
     isInitialized : false,
     // メディア動画情報。show,editモードでは始めにDBのデータで初期化される。    
     mediaMovie : {
+      'id' : 0,
       'videoId' : "",
-      'width' : "500",
-      'height' : "420",
-      'isLoop' : false,
+      'left' : 100,
+      'top' : 100,
+      'width' : 500,
+      'height' : 420,
+      'opacity' : 1,
       'layer' : 1,
+      'isLoop' : false,
     },
   },
   getters : {

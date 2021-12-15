@@ -46,8 +46,11 @@ class MediaMovieUtilTest extends TestCase
         //    登録したいデータをリクエスト形式で作成
         $media_movie_data = array(
             'videoId' => 1,
+            'left' => 1000,
+            'top' => 1000,
             'width' => 1000,
             'height' => 1000,
+            'opacity' => 1,
             'isLoop' => true,
             'layer' => 1,
         );
@@ -78,7 +81,6 @@ class MediaMovieUtilTest extends TestCase
         $media = Media::factory()->create();
         $media_movie = MediaMovie::factory()->create();
         $media_id = $media_movie->media_id;
-        \Log::info($media_id);
 
         // 2. 取得
         //    作成したダミーデータを取得
@@ -106,10 +108,13 @@ class MediaMovieUtilTest extends TestCase
         //    更新したいデータをリクエスト形式で作成
         $media_movie_data = array(
             'videoId' => 99,
+            'left' => 999,
+            'top' => 999,
             'width' => 999,
             'height' => 999,
-            'isLoop' => false,
+            'opacity' => 1,
             'layer' => 99,
+            'isLoop' => false,
         );
         $request = new \stdClass(); //key:value形式のリクエスト
         $request->movie = $media_movie_data;
@@ -122,6 +127,8 @@ class MediaMovieUtilTest extends TestCase
         $this->assertDatabaseHas('media_movies', [
             'media_id' => $media_id,
             'video_id' => 99,
+            'left' => 999,
+            'top' => 999,
             'width' => 999,
             'height' => 999,
             'isLoop' => false,

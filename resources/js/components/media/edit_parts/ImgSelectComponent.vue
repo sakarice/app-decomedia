@@ -73,16 +73,39 @@
         loadingMessage : "",
         userOwnImgs : [],
         // imgFileUrls : [],
-        defaultImgs : []
+        defaultImgs : [],
         // defaultImgUrls : []
+        mediaImgBaseData : {
+          'id' : 0,
+          'type' : 99,
+          'groupNo' : 0,
+          'img_id' : 0,
+          'img_type': "",
+          'url' : "",
+          'top' : 100,
+          'left' : 100,
+          'width' : 300,
+          'height' : 220,
+          'degree' : 0,
+          'opacity' : 1,
+          'layer' : 1,
+        },
+
       }
     },
     computed : {
-      ...mapGetters('mediaImg', ['getMediaImg']),
+      // ...mapGetters('mediaImg', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImg']),
+      ...mapGetters('mediaImgs', ['getMediaImgs']),
     },
     methods : {
       ...mapMutations('mediaImg', ['updateMediaImgContent']),
-      ...mapMutations('mediaImg', ['checkMediaImg']),
+      // ...mapMutations('mediaImg', ['checkMediaImg']),
+      ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
+      ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
+
       changeFileCategory(){
         this.isDefault = !(this.isDefault);
         if(this.isDefault == true){
@@ -128,17 +151,27 @@
         this.$emit('close-modal');
       },
       setMediaImg: function(event){
-        let imgUrl = event.target.previousElementSibling.getAttribute('src');
-        let imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
+        const imgUrl = event.target.previousElementSibling.getAttribute('src');
+        const imgTypeLabel = event.target.previousElementSibling.getAttribute('class');
         let imgType;
         if(imgTypeLabel == 'default-img'){
           imgType = 1;
         } else if(imgTypeLabel == 'user-own-img'){
           imgType = 2;
         }
-        let imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
-        
+        const imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
+        // テスト用 あとで消す
+        // const rand_width = Math.floor(Math.random()*300);
+        let mediaImgData = Object.assign({}, this.mediaImgBaseData);
+        mediaImgData['img_id'] = imgId;
+        mediaImgData['img_type'] = imgType;
+        mediaImgData['url'] = imgUrl;
+
         this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
+        this.addMediaImgsObjectItem(mediaImgData);
+
+        this.mediaImgBaseData['top'] += 30;
+        this.mediaImgBaseData['left'] += 30;
       },
       findImgIdTiedUpWithUrl(imgType, imgUrl){
         let targetModel;  // 検索対象のVueモデル
@@ -220,7 +253,14 @@
             this.userOwnImgs.splice(index,1);
             this.loadingMessage = ''
             this.isLoading = false;
-            // Media画像と同じだった場合は削除する必要があるので、親コンポーネントに通知
+            // Media画像に設定していた場合は削除する
+            const mediaImgs = this.getMediaImgs;
+            const tmpThis = this;
+            mediaImgs.forEach(function(mediaImg,index){
+              if(mediaImg['url']==imgUrl){
+                tmpThis.deleteMediaImgsObjectItem(index);
+              }
+            })
             if(this.getMediaImg['url']==imgUrl){
               this.updateMediaImgContent({type:0, id:0, url:""});
             }

@@ -19,8 +19,9 @@ class MediaImgController extends Controller
     // 2.create
     public function create(Request $request){}
     // 3.store
-    public static function store($media_id, $request){
-        MediaImgUtil::saveMediaImgData($media_id, $request);
+    public static function store($media_id, $received_datas){
+        // MediaImgUtil::saveMediaImgData($media_id, $request->img);
+        MediaImgUtil::saveMediaImgsData($media_id, $received_datas);
     }
 
     // 4.show   // Media画像情報の連想配列を返す
@@ -32,8 +33,9 @@ class MediaImgController extends Controller
     // 5.edit
     public function edit($media_id){}
     // 6.update
-    public static function update($media_id, $request){
-        MediaImgUtil::updateMediaImgData($media_id, $request);
+    public static function update($media_id, $received_datas){
+        // MediaImgUtil::updateMediaImgData($media_id, $request->imgs);
+        MediaImgUtil::updateMediaImgsData($media_id, $received_datas);
     }
     // 7.destroy
     public static function destroy($media_id){

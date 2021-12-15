@@ -13,9 +13,11 @@ import DispImgModal from '../components/media/change_display_parts/DispImgModalC
 import DispAudioModal from '../components/media/change_display_parts/DispAudioModalComponent.vue';
 import DispMovieModal from '../components/media/change_display_parts/DispMovieModalComponent.vue';
 import DispMediaSettingModal from '../components/media/change_display_parts/DispMediaSettingModalComponent.vue';
+import DispFigureSettingModal from '../components/media/change_display_parts/DispFigureSettingModalComponent.vue';
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
+import MediaFigureSetting from '../components/media/edit_parts/MediaFigureSettingComponent.vue';
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
@@ -40,7 +42,9 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
+        mediaFigureSetting : MediaFigureSetting,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
@@ -57,12 +61,15 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
+        mediaFigureSetting : MediaFigureSetting,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
         overlay : Overlay,
         loading : Loading,
+        
       },
     },
     {

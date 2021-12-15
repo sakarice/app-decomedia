@@ -1,6 +1,6 @@
 <template>
   <div id="disp-audio-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('audioModal')">
-    <i class="fas fa-music fa-2x"></i>
+    <i class="fas fa-music fa-lg"></i>
   </div>
 </template>
 

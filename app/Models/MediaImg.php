@@ -13,6 +13,17 @@ class MediaImg extends Model
         return $this->belongsToMany(
             'App\Models\Media'
         );
-     }
+    }
+
+    protected $fillable = [
+        'media_id',
+        'owner_user_id',
+        'img_id',
+        'img_type',
+        'width',
+        'height',
+        'opacity',
+        'img_layer',
+    ];
     
 }

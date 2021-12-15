@@ -46,8 +46,11 @@ class MediaMovieControllerTest extends TestCase
         //    登録したいデータをリクエスト形式で作成
         $media_movie_data = array(
             'videoId' => 1,
+            'left' => 1000,
+            'top' => 1000,
             'width' => 1000,
             'height' => 1000,
+            'opacity' => 1,
             'isLoop' => true,
             'layer' => 1,
         );
@@ -70,7 +73,6 @@ class MediaMovieControllerTest extends TestCase
         $media = Media::factory()->create();
         $media_movie = MediaMovie::factory()->create();
         $media_id = $media_movie->media_id;
-        \Log::info($media_id);
 
         // 2. 取得
         //    作成したダミーデータを取得
