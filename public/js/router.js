@@ -4520,8 +4520,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/MovieResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/MovieResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -4606,32 +4607,27 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    movieResize: _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    movieResize: _object_edit_parts_MovieResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   props: [],
   data: function data() {
     return {
       index: 0,
       "isActive": false,
-      ytPlayer: "",
-      "action_target": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0 // 移動対象要素に対するドラッグポイントの相対座標(y)
-      // playerVars : {},
+      ytPlayer: "" // playerVars : {},
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     movieWrapperWithIndex: function movieWrapperWithIndex() {
       return 'media-movie-wrapper' + this.index;
     }
   }),
   watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     // サイズ変更
     resize: function resize() {
       this.ytPlayer.width = this.getMediaMovie['width'];
@@ -4639,46 +4635,24 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var event;
+      var move_target_dom = document.getElementById(this.movieWrapperWithIndex);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.action_target = document.getElementById(this.movieWrapperWithIndex);
-      this.x_in_element = event.clientX - this.action_target.offsetLeft;
-      this.y_in_element = event.clientY - this.action_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.action_target.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.action_target.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      var new_left = e.clientX - this.x_in_element;
-      var new_top = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
       this.updateMediaMovieObjectItem({
         index: this.index,
         key: "left",
-        value: new_left
+        value: e.detail.left
       });
       this.updateMediaMovieObjectItem({
         index: this.index,
         key: "top",
-        value: new_top
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.action_target.removeEventListener("touchend", this.moveEnd, false);
+        value: e.detail.top
+      });
     },
     movieWrapperBindStyle: function movieWrapperBindStyle() {
       var mm = this.getMediaMovie;
@@ -7340,7 +7314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
