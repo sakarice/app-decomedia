@@ -4254,13 +4254,7 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       "mediaImg": "",
-      "isActive": false,
-      "action_target": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0 // 移動対象要素に対するドラッグポイントの相対座標(y)
-
+      "isActive": false
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({
