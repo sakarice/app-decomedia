@@ -47,7 +47,6 @@ class MediaImgControllerTest extends TestCase
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
-        // $media_img_id = mt_rand(1, 2147483647);
         $public_img = PublicImg::factory()->create();
         $media_img_id = $public_img->id;
         $media_img_data = array(
@@ -63,8 +62,6 @@ class MediaImgControllerTest extends TestCase
             'opacity' => 1,
             'layer' => 1,
         );
-        // $request = new \stdClass(); //key:value形式のリクエスト
-        // $request->imgs = $media_img_data;
         $media_id = mt_rand(1, 2147483647); // 適当なメディアID
         $send_data = array($media_img_data);
         // 2. 登録
@@ -120,7 +117,6 @@ class MediaImgControllerTest extends TestCase
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        // $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
             'id' => $id,
             'type' => 99,
@@ -135,8 +131,6 @@ class MediaImgControllerTest extends TestCase
             'opacity' => 0.9,
             'layer' => 2,
         );
-        // $request = new \stdClass(); // key:value形式のリクエストを用意
-        // $request->imgs = $media_img_data;
         $send_data = array($media_img_data);
 
         // 3. 更新

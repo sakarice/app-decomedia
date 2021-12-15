@@ -138,7 +138,6 @@ class MediaImgUtilTest extends TestCase
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        // $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
             'id' => $id,
             'img_type' => 1,
@@ -148,8 +147,6 @@ class MediaImgUtilTest extends TestCase
             'opacity' => 1.1,
             'layer' => 1.1,
         );
-        // $request = new \stdClass(); // key:value形式のリクエストを用意
-        // $request->img = $media_img_data;
 
         // 3. 更新
         //    指定したメディアIDのレコードをrequestの値で更新する
