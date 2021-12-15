@@ -7671,7 +7671,6 @@ function _defineProperty(obj, key, value) {
       return new Promise(function (resolve, reject) {
         var url = '/mediaFigures/' + _this.getMediaId;
         axios.get(url).then(function (response) {
-          console.log(response.data);
           return resolve(response.data);
         })["catch"](function (error) {});
       });
@@ -8552,14 +8551,11 @@ function _defineProperty(obj, key, value) {
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     // サイズ変更
     resize: function resize() {
-      console.log('resize');
-      console.log("width:" + this.ytPlayer.width);
       this.ytPlayer.width = this.getMediaMovie['width'];
       this.ytPlayer.height = this.getMediaMovie['height'];
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      console.log(e.target);
       var event;
 
       if (e.type === "mousedown") {
@@ -8596,7 +8592,6 @@ function _defineProperty(obj, key, value) {
       document.body.addEventListener("touchleave", this.moveEnd, false);
     },
     moveEnd: function moveEnd(e) {
-      console.log('move end...');
       document.body.removeEventListener("mousemove", this.moving, false);
       this.action_target.removeEventListener("mouseup", this.moveEnd, false);
       document.body.removeEventListener("touchmove", this.moving, false);
@@ -8701,7 +8696,6 @@ function _defineProperty(obj, key, value) {
       }
     },
     submitYoutubeUrl: function submitYoutubeUrl(event) {// let url = event.target.previousElementSibling.value;
-      // // console.log(url);
       // let pattern = /v=.*/;
       // let matchText = url.match(pattern); // object型で返ってくる
       // matchText = matchText.toString(); // object⇒stringへ変換
@@ -8748,8 +8742,7 @@ function _defineProperty(obj, key, value) {
 
 
     document.addEventListener('click', function (e) {
-      console.log(e.target); // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
-
+      // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
       if (!e.target.closest("#media-movie-wrapper0")) {
         _this3.isActive = false;
       } else {
@@ -10017,7 +10010,6 @@ __webpack_require__.r(__webpack_exports__);
         'isFollow': this.isFollow,
         'target_user_id': target_user_id
       };
-      console.log('updateFollowStateInDB');
       axios.post(url, data).then(function (response) {})["catch"](function (error) {});
     }
   },
@@ -10158,7 +10150,6 @@ function _defineProperty(obj, key, value) {
         'isLike': this.isLikeMedia,
         'media_id': media_id
       };
-      console.log('updateLikeStateInDB');
       axios.post(url, data).then(function (response) {
         console.log(response.data.msg);
       })["catch"](function (error) {
@@ -17275,7 +17266,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

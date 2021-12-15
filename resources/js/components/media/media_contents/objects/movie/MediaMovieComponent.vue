@@ -62,14 +62,11 @@
       ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
       // サイズ変更
       resize(){
-        console.log('resize');
-        console.log("width:"+this.ytPlayer.width);
         this.ytPlayer.width = this.getMediaMovie['width'];
         this.ytPlayer.height = this.getMediaMovie['height'];
       },
       // 位置操作用
       moveStart(e){
-        console.log(e.target);
         let event;
         if(e.type==="mousedown"){
           event = e;
@@ -97,7 +94,6 @@
         document.body.addEventListener("touchleave", this.moveEnd, false);
       },
       moveEnd(e){
-        console.log('move end...');
         document.body.removeEventListener("mousemove", this.moving, false);
         this.action_target.removeEventListener("mouseup", this.moveEnd, false);
         document.body.removeEventListener("touchmove", this.moving, false);
@@ -191,7 +187,6 @@
       },
       submitYoutubeUrl(event) {
         // let url = event.target.previousElementSibling.value;
-        // // console.log(url);
         // let pattern = /v=.*/;
         // let matchText = url.match(pattern); // object型で返ってくる
         // matchText = matchText.toString(); // object⇒stringへ変換
@@ -237,7 +232,6 @@
     mounted(){
       // イベント登録
       document.addEventListener('click', (e)=> {
-        console.log(e.target);
         // if(!e.target.closest("#"+this.movieWrapperWithIndex)){
         if(!e.target.closest("#media-movie-wrapper0")){
           this.isActive = false;

@@ -51,7 +51,6 @@ export default{
         'isLike' : this.isLikeMedia,
         'media_id' : media_id,
       }
-      console.log('updateLikeStateInDB');
       axios.post(url, data)
         .then(response => {
           console.log(response.data.msg);
