@@ -6147,24 +6147,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -11261,17 +11243,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_media_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/media.js */ "./resources/js/store/modules/media.js");
-/* harmony import */ var _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaImg.js */ "./resources/js/store/modules/mediaImg.js");
-/* harmony import */ var _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaImgs */ "./resources/js/store/modules/mediaImgs.js");
-/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
-/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
-/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
-/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
+/* harmony import */ var _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/mediaImgs */ "./resources/js/store/modules/mediaImgs.js");
+/* harmony import */ var _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/mediaAudios.js */ "./resources/js/store/modules/mediaAudios.js");
+/* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
+/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
 
 
 
@@ -11283,19 +11264,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-vue__WEBPACK_IMPORTED_MODULE_10__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_11__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_11__["default"].Store({
+vue__WEBPACK_IMPORTED_MODULE_9__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_10__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_10__["default"].Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__["default"],
     media: _modules_media_js__WEBPACK_IMPORTED_MODULE_2__["default"],
-    mediaImg: _modules_mediaImg_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-    mediaImgs: _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_4__["default"],
-    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_5__["default"],
-    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__["default"],
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_7__["default"],
-    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_8__["default"],
-    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_9__["default"]
+    mediaImgs: _modules_mediaImgs__WEBPACK_IMPORTED_MODULE_3__["default"],
+    mediaAudios: _modules_mediaAudios_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+    mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_5__["default"],
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_6__["default"],
+    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_7__["default"],
+    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_8__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -11639,65 +11618,6 @@ var mediaFigure = {
   actions: {}
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaFigure);
-
-/***/ }),
-
-/***/ "./resources/js/store/modules/mediaImg.js":
-/*!************************************************!*\
-  !*** ./resources/js/store/modules/mediaImg.js ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var mediaImg = {
-  namespaced: true,
-  state: {
-    // DBから取得したデータで下記mediaImgが初期化がされたか。
-    isInitialized: false,
-    // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
-    mediaImg: {
-      type: 0,
-      id: 0,
-      url: "",
-      width: 500,
-      height: 500,
-      opacity: 1,
-      layer: 0
-    }
-  },
-  getters: {
-    getIsInitializedImg: function getIsInitializedImg(state) {
-      return state.isInitialized;
-    },
-    getMediaImg: function getMediaImg(state) {
-      return state.mediaImg;
-    }
-  },
-  mutations: {
-    updateMediaImgContent: function updateMediaImgContent(state, _ref) {
-      var type = _ref.type,
-          id = _ref.id,
-          url = _ref.url;
-      state.mediaImg['type'] = type;
-      state.mediaImg['id'] = id;
-      state.mediaImg['url'] = url;
-    },
-    updateMediaImgObjectItem: function updateMediaImgObjectItem(state, _ref2) {
-      var key = _ref2.key,
-          value = _ref2.value;
-      state.mediaImg[key] = value;
-    },
-    updateIsInitializedImg: function updateIsInitializedImg(state, payload) {
-      state.isInitialized = payload;
-    }
-  },
-  actions: {}
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mediaImg);
 
 /***/ }),
 
@@ -65527,125 +65447,6 @@ var render = function () {
                   },
                 }),
                 _vm._v("\n            Media背景色\n          "),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "setting",
-              attrs: { id: "media-img-setting-wrapper" },
-            },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Media画像")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "width",
-                  type: "text",
-                  size: "5",
-                  placeholder: "横幅",
-                },
-                domProps: { value: _vm.getMediaImg["width"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "width",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 横幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")"),
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "height",
-                  type: "text",
-                  size: "5",
-                  placeholder: "縦幅",
-                },
-                domProps: { value: _vm.getMediaImg["height"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "height",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 縦幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")"),
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "img-config-input",
-                attrs: {
-                  "data-input-type": "opacity",
-                  type: "text",
-                  size: "5",
-                  placeholder: "透明度",
-                },
-                domProps: { value: _vm.getMediaImg["opacity"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateMediaImgObjectItem({
-                      key: "opacity",
-                      value: $event.target.value,
-                    })
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("透明度(0～1)")]),
-              _c("br"),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.toggleIsShowMediaImg } }, [
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.getMediaSetting["isShowImg"],
-                        expression: "getMediaSetting['isShowImg']",
-                      },
-                    ],
-                  },
-                  [_vm._v("非表示")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.getMediaSetting["isShowImg"],
-                        expression: "!(getMediaSetting['isShowImg'])",
-                      },
-                    ],
-                  },
-                  [_vm._v("表示")]
-                ),
-              ]),
-              _vm._v(" "),
-              _c("button", { on: { click: _vm.deleteMediaImg } }, [
-                _c("span", [_vm._v("削除")]),
               ]),
             ]
           ),
