@@ -14315,7 +14315,7 @@ var render = function () {
                     },
                   },
                 }),
-                _vm._v("\n            Media背景色\n          "),
+                _vm._v("\n            カラー選択\n          "),
               ]),
             ]
           ),

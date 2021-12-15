@@ -31,7 +31,7 @@
             <p class="setting-title">Media背景</p>
             <label for="">
               <input :value="getMediaSetting['mediaBackgroundColor']" @input="updateMediaSettingObjectItem({key:'mediaBackgroundColor', value:$event.target.value})" type="color" id="media-bg-color">
-              Media背景色
+              カラー選択
             </label>
           </div>
         </div>
