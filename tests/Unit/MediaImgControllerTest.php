@@ -47,7 +47,9 @@ class MediaImgControllerTest extends TestCase
     public function test_store(){
         // 1. 登録用データ準備
         //    登録したいデータをリクエスト形式で作成
-        $media_img_id = mt_rand(1, 2147483647);
+        // $media_img_id = mt_rand(1, 2147483647);
+        $public_img = PublicImg::factory()->create();
+        $media_img_id = $public_img->id;
         $media_img_data = array(
             'img_type' => 1,
             'img_id' => $media_img_id,
@@ -81,7 +83,7 @@ class MediaImgControllerTest extends TestCase
         // 1. 取得対象データ登録
         //    ダミーデータ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
         $media_img = MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
@@ -104,15 +106,18 @@ class MediaImgControllerTest extends TestCase
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
-        $media_id = MediaImg::max('media_id');
+        $id = $media_img->id;
+        $media_id = $media_img->media_id;
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        $media_img_id = mt_rand(1, 2147483647);
+        // $media_img_id = mt_rand(1, 2147483647);
+        $media_img_id = $public_img->id;
         $media_img_data = array(
-            'img_type' => 2,
+            'id' => $id,
+            'img_type' => 1,
             'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
@@ -143,7 +148,7 @@ class MediaImgControllerTest extends TestCase
         // 1. 削除対象データ登録
         //    ダミーデータ作成
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
         $media_id = MediaImg::max('media_id');
 

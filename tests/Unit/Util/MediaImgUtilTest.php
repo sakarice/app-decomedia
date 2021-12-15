@@ -96,7 +96,7 @@ class MediaImgUtilTest extends TestCase
     public function test_getMediaImgData(){
         // 準備：対象のメディア、メディアと紐づける画像データ作成
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
 
         // // パターン1 メディア画像未設定のためDBにはデフォルト値が保存されている
         // // 1. メディアID取得（※メディア画像のimg_idを0に設定）
@@ -129,17 +129,20 @@ class MediaImgUtilTest extends TestCase
         // 1. 更新対象データ登録
         //    ダミーデータ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
         MediaImgSetting::factory()->create();
-        $media_id = MediaImg::max('media_id');
+        $id = $media_img->id;
+        $media_id = $media_img->media_id;
+        $media_img_id = $public_img->id;
 
         // 2. 更新用データ作成
         //    データをリクエスト形式で作成
-        $media_img_id = mt_rand(1, 2147483647);
+        // $media_img_id = mt_rand(1, 2147483647);
         $media_img_data = array(
-            'type' => 2,
-            'id' => $media_img_id,
+            'id' => $id,
+            'img_type' => 1,
+            'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
@@ -167,7 +170,7 @@ class MediaImgUtilTest extends TestCase
     public function test_updateMediaImgDataToTentative() {
         // 1. 更新対象データ登録
         $media = Media::factory()->create();
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
         MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
@@ -204,12 +207,12 @@ class MediaImgUtilTest extends TestCase
     // Media画像のModelを取得:タイプに応じて取得先DBを選択
     public function test_getMediaImgModel(){
         //  準備：デフォルト画像とユーザアップロード画像をDBに登録
-        $default_img = PublicImg::factory()->create();
+        $public_img = PublicImg::factory()->create();
         $user_own_img = UserOwnImg::factory()->create();
 
         // パターン1 デフォルト画像
         // 1. 取得
-        $media_img_data = MediaImgUtil::getMediaImgModel($default_img->id, 1);
+        $media_img_data = MediaImgUtil::getMediaImgModel($public_img->id, 1);
         // 2. 検証：デフォルト画像は所有者ユーザIDがNULL
         $this->assertNull($media_img_data['owner_user_id']);
 
