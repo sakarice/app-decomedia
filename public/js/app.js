@@ -8013,9 +8013,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/ImgRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue");
-/* harmony import */ var _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ImgResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ImgRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue");
+/* harmony import */ var _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../object_edit_parts/ImgResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -8100,10 +8101,12 @@ function _defineProperty(obj, key, value) {
 
 
 
+ // const {start,middle,end} = moveHelper();
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    imgResize: _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    imgResize: _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ["index"],
   data: function data() {
@@ -8118,7 +8121,21 @@ function _defineProperty(obj, key, value) {
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({
+    start: function (_start) {
+      function start() {
+        return _start.apply(this, arguments);
+      }
+
+      start.toString = function () {
+        return _start.toString();
+      };
+
+      return start;
+    }(function () {
+      return start;
+    })
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
     },
@@ -8139,9 +8156,12 @@ function _defineProperty(obj, key, value) {
       } else {
         this.$emit('del-active-index', this.index);
       }
+    },
+    helper_left: function helper_left(val) {
+      console.log('helper_left' + val);
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     getOneImg: function getOneImg() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
@@ -8149,48 +8169,24 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var event;
+      var move_target_dom = document.getElementById(this.imgWrapperWithIndex);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.action_target = document.getElementById(this.imgWrapperWithIndex);
-      this.x_in_element = event.clientX - this.action_target.offsetLeft;
-      this.y_in_element = event.clientY - this.action_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.action_target.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.action_target.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      this.action_target.style.left = e.clientX - this.x_in_element + "px";
-      this.action_target.style.top = e.clientY - this.y_in_element + "px";
-      this.mediaImg['left'] = e.clientX - this.x_in_element;
-      this.mediaImg['top'] = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
       this.updateMediaImgsObjectItem({
         index: this.index,
         key: "left",
-        value: this.mediaImg['left']
+        value: e.detail.left
       });
       this.updateMediaImgsObjectItem({
         index: this.index,
         key: "top",
-        value: this.mediaImg['top']
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.action_target.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.action_target.removeEventListener("touchend", this.moveEnd, false);
+        value: e.detail.top
+      });
     },
     updateDegree: function updateDegree(new_degree) {
       this.mediaImg['degree'] = new_degree;
@@ -11037,6 +11033,78 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   cluster: "ap3",
   forceTLS: true
 });
+
+/***/ }),
+
+/***/ "./resources/js/functions/moveHelper.js":
+/*!**********************************************!*\
+  !*** ./resources/js/functions/moveHelper.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "moveStart": () => (/* binding */ moveStart)
+/* harmony export */ });
+// オブジェクトの移動を行う処理群
+// 移動開始処理(moveStart関数)が、コンポーネントからイベントと移動対象DOMを受け取り、
+// そのDOMをドラッグ/タッチスライドで移動。
+// 移動終了後にカスタムイベントを発行し引数に位置(left,top)を渡す
+var move_target;
+var left;
+var top;
+var distance_from_target_left;
+var distance_from_target_top; // 位置操作用
+
+function moveStart(e, target) {
+  console.log('1. move start test function');
+  var event;
+
+  if (e.type === "mousedown") {
+    event = e;
+  } else {
+    event = e.changedTouches[0];
+  }
+
+  move_target = target;
+  distance_from_target_left = event.clientX - move_target.offsetLeft;
+  distance_from_target_top = event.clientY - move_target.offsetTop; // ムーブイベントにコールバック
+
+  document.body.addEventListener("mousemove", moving, false);
+  move_target.addEventListener("mouseup", moveEnd, false);
+  document.body.addEventListener("touchmove", moving, false);
+  move_target.addEventListener("touchend", moveEnd, false);
+}
+
+function moving(e) {
+  e.preventDefault();
+  left = e.clientX - distance_from_target_left;
+  top = e.clientY - distance_from_target_top;
+  move_target.style.left = left + "px";
+  move_target.style.top = top + "px"; // マウス、タッチ解除時のイベントを設定
+
+  document.body.addEventListener("mouseleave", moveEnd, false);
+  document.body.addEventListener("touchleave", moveEnd, false);
+}
+
+function moveEnd(e) {
+  document.body.removeEventListener("mousemove", moving, false);
+  move_target.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("touchmove", moving, false);
+  move_target.removeEventListener("touchend", moveEnd, false); // 移動終了カスタムイベント。終了後の位置を引数で渡す。
+
+  var event = new CustomEvent('moveFinish', {
+    detail: {
+      left: left,
+      top: top
+    }
+  });
+  move_target.dispatchEvent(event);
+} // exportは、移動のトリガーとなるmoveStartのみ
+
+
+
 
 /***/ }),
 
@@ -16478,7 +16546,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
