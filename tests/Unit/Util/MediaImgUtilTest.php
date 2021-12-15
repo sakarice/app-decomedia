@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Media;
 use App\Models\MediaImg;
+use App\Models\MediaImgSetting;
 use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 
@@ -130,6 +131,7 @@ class MediaImgUtilTest extends TestCase
         $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
+        MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
 
         // 2. 更新用データ作成
@@ -167,6 +169,7 @@ class MediaImgUtilTest extends TestCase
         $media = Media::factory()->create();
         $default_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
+        MediaImgSetting::factory()->create();
         $media_id = MediaImg::max('media_id');
 
         // 2. 更新：指定したメディアIDのレコードをrequestの値で更新する
@@ -207,6 +210,7 @@ class MediaImgUtilTest extends TestCase
         // パターン1 デフォルト画像
         // 1. 取得
         $media_img_data = MediaImgUtil::getMediaImgModel($default_img->id, 1);
+        MediaImgSetting::factory()->create();
         // 2. 検証：デフォルト画像は所有者ユーザIDがNULL
         $this->assertNull($media_img_data['owner_user_id']);
 

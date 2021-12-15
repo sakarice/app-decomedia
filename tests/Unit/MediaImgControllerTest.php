@@ -90,12 +90,12 @@ class MediaImgControllerTest extends TestCase
 
         // 2. 取得
         //    作成したダミーデータを取得
-        $media_img_data = MediaImgController::show($media_id);
+        $media_img_datas = MediaImgController::show($media_id);
 
         // 3. 検証
         //    ダミーデータと取得したデータが一致すること
         $this->assertDatabaseHas('media_imgs', [
-            'img_id' => $media_img_data['img_id'],
+            'img_id' => $media_img_datas[0]['img_id'],
         ]);
     }
 
