@@ -31,8 +31,6 @@
   import { mapGetters, mapMutations } from 'vuex';
   import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
-
-  // const {start,middle,end} = moveHelper();
   
   export default {
     components : {
