@@ -92,7 +92,7 @@ class MediaFigureUtil
   public static function addEmptyMediaFigureData($media_id){
     $mediaFigure = new MediaFigure();
     $model = $mediaFigure->create([
-      'media_id' => (int)$media_id,
+      'media_id' => $media_id,
       'type' => 1,
       'user_selected_item_group_no' => null,
       'left' => 100,
