@@ -123,7 +123,7 @@ class MediaImgControllerTest extends TestCase
         $media_img_data = array(
             'id' => $id,
             'type' => 99,
-            'groupNo' => null,
+            'groupNo' => NULL,
             'img_type' => 1,
             'img_id' => $media_img_id,
             'left' => 1001,
@@ -131,8 +131,8 @@ class MediaImgControllerTest extends TestCase
             'degree' => 0,
             'width' => 1001,
             'height' => 1001,
-            'opacity' => 1.1,
-            'layer' => 1.1,
+            'opacity' => 0.9,
+            'layer' => 2,
         );
         // $request = new \stdClass(); // key:value形式のリクエストを用意
         // $request->imgs = $media_img_data;
