@@ -14,6 +14,10 @@ use App\Models\PublicImg;
 use App\Models\UserOwnImg;
 use Storage;
 
+ini_set("log_errors", "on");
+ini_set("error_log", "/logtest.txt");
+
+
 class MediaImgUtil
 {
 
@@ -146,6 +150,8 @@ class MediaImgUtil
         $delete_media_img_ids_in_db[] = $db_record->id;
       }
     }
+
+    error_log(print_r($update_req_datas),true);
 
     DB::beginTransaction();
     try{

@@ -90,8 +90,8 @@ class MediaImgControllerTest extends TestCase
         $media = Media::factory()->create();
         $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
-        $media_img = MediaImgSetting::factory()->create();
-        $media_id = MediaImg::max('media_id');
+        MediaImgSetting::factory()->create();
+        $media_id = $media_img->media_id;
 
         // 2. 取得
         //    作成したダミーデータを取得
@@ -113,6 +113,7 @@ class MediaImgControllerTest extends TestCase
         $media = Media::factory()->create();
         $public_img = PublicImg::factory()->create();
         $media_img = MediaImg::factory()->create();
+        MediaImgSetting::factory()->create();
         $id = $media_img->id;
         $media_id = $media_img->media_id;
         $media_img_id = $public_img->id;
@@ -151,8 +152,8 @@ class MediaImgControllerTest extends TestCase
             'img_id' => $media_img_id,
             'width' => 1001,
             'height' => 1001,
-            'opacity' => 1.1,
-            'img_layer' => 1.1,
+            'opacity' => 0.9,
+            'img_layer' => 2,
         ]);
     }
 
