@@ -212,7 +212,6 @@ class MediaUtil
   public static function updateMediaData($media_id, $request){
     DB::beginTransaction();
     try{
-
       // media画像
       if(isset($request->imgs[0]['id'])){
         // if($request->imgs[0]['id'] != 0){
