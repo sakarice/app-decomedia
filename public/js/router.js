@@ -3587,9 +3587,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../object_edit_parts/ObjectRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue");
-/* harmony import */ var _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ObjectResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ObjectRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue");
+/* harmony import */ var _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../object_edit_parts/ObjectResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ObjectResizeComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -3662,10 +3663,11 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    objectRotate: _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    objectResize: _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    objectRotate: _object_edit_parts_ObjectRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    objectResize: _object_edit_parts_ObjectResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ['index'],
   data: function data() {
@@ -3673,20 +3675,9 @@ function _defineProperty(obj, key, value) {
       "isActive": false,
       "isReDraw": false,
       "isResizing": false,
-      "mouse_x": 0,
-      "mouse_y": 0,
       "canvas": "",
       "ctx": "",
       "canvas_wrapper": "",
-      // ドラッグ操作で移動させる対象
-      "x_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(x)
-      "y_in_element": 0,
-      // 移動対象要素に対するドラッグポイントの相対座標(y)
-      "rotate_target": "",
-      // ドラッグ操作で回転させる対象
-      "rotate_center_x": 0,
-      "rotate_center_y": 0,
       "figureDatas": {
         "left": 0,
         "top": 0,
@@ -3702,7 +3693,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
     new_index: function new_index() {},
     canvas_width: function canvas_width() {
       return this.figureDatas['width'] + "px";
@@ -3748,7 +3739,7 @@ function _defineProperty(obj, key, value) {
       deep: true
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     showEditor: function showEditor() {
       this.$emit('show-editor', this.index);
     },
@@ -3759,48 +3750,28 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var event;
+      var move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
-      this.x_in_element = event.clientX - this.canvas_wrapper.offsetLeft;
-      this.y_in_element = event.clientY - this.canvas_wrapper.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.moving, false);
-      this.canvas_wrapper.addEventListener("mouseup", this.moveEnd, false);
-      document.body.addEventListener("touchmove", this.moving, false);
-      this.canvas_wrapper.addEventListener("touchend", this.moveEnd, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moving: function moving(e) {
-      e.preventDefault();
-      this.canvas_wrapper.style.left = e.clientX - this.x_in_element + "px";
-      this.canvas_wrapper.style.top = e.clientY - this.y_in_element + "px";
-      this.figureDatas['left'] = e.clientX - this.x_in_element;
-      this.figureDatas['top'] = e.clientY - this.y_in_element;
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
+      var new_left = e.detail.left;
+      var new_top = e.detail.top;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "left",
-        value: this.figureDatas['left']
+        value: new_left
       });
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "top",
-        value: this.figureDatas['top']
-      }); // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.moveEnd, false);
-      document.body.addEventListener("touchleave", this.moveEnd, false);
-    },
-    moveEnd: function moveEnd(e) {
-      document.body.removeEventListener("mousemove", this.moving, false);
-      this.canvas_wrapper.removeEventListener("mouseup", this.moveEnd, false);
-      document.body.removeEventListener("touchmove", this.moving, false);
-      this.canvas_wrapper.removeEventListener("touchend", this.moveEnd, false);
+        value: new_top
+      });
+      this.figureDatas['left'] = new_left;
+      this.figureDatas['top'] = new_top;
     },
     updateDegree: function updateDegree(new_degree) {
       this.figureDatas['degree'] = new_degree;
@@ -3931,7 +3902,7 @@ function _defineProperty(obj, key, value) {
       this.ctx.ellipse(center_x, center_y, radius_x, radius_y, 0, 0, Math.PI * 2);
     },
     setLayer: function setLayer() {
-      this.canvas_wrapper.style.zIndex = this.figureDatas['layer'];
+      document.getElementById(this.canvas_wrapper_with_index).style.zIndex = this.figureDatas['layer'];
     },
     setGlobalAlpha: function setGlobalAlpha() {
       this.ctx.globalAlpha = this.figureDatas['globalAlpha'];
