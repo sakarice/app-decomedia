@@ -11,15 +11,17 @@
 
 // 位置操作用
 function moveStart(e,target){
+  move_target = target;
   let event;
   if(e.type==="mousedown"){
     event = e;
+    distance_from_target_left = event.clientX - move_target.offsetLeft;
+    distance_from_target_top = event.clientY - move_target.offsetTop;
   } else {
     event = e.changedTouches[0];
+    distance_from_target_left = event.pageX - move_target.offsetLeft;
+    distance_from_target_top = event.pageY - move_target.offsetTop;
   }
-  move_target = target;
-  distance_from_target_left = event.clientX - move_target.offsetLeft;
-  distance_from_target_top = event.clientY - move_target.offsetTop;
 
   // ムーブイベントにコールバック
   document.body.addEventListener("mousemove", moving, false);
@@ -30,8 +32,16 @@ function moveStart(e,target){
 
 function moving(e){
   e.preventDefault();
-  left = e.clientX - distance_from_target_left;
-  top = e.clientY - distance_from_target_top;
+  let event;
+  if(e.type==="mousedown"){
+    event = e;
+    left = event.clientX - distance_from_target_left;
+    top = event.clientY - distance_from_target_top;
+    } else {
+    event = e.changedTouches[0];
+    left = event.pageX - distance_from_target_left;
+    top = event.pageY - distance_from_target_top;  
+  }
   move_target.style.left = left + "px";
   move_target.style.top = top + "px";
 
