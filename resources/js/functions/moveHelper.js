@@ -11,7 +11,6 @@
 
 // 位置操作用
 function moveStart(e,target){
-  console.log('1. move start test function');
   let event;
   if(e.type==="mousedown"){
     event = e;

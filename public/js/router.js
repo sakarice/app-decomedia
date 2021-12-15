@@ -6459,7 +6459,6 @@ var distance_from_target_left;
 var distance_from_target_top; // 位置操作用
 
 function moveStart(e, target) {
-  console.log('1. move start test function');
   var event;
 
   if (e.type === "mousedown") {
