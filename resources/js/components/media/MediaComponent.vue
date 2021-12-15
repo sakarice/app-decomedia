@@ -180,8 +180,6 @@ export default {
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('media', ['getMode']),
     ...mapGetters('media', ['getIsCrudDoing']),
-    ...mapGetters('mediaImg', ['getMediaImg']),
-    ...mapGetters('mediaImg', ['getIsInitializedImg']),
     ...mapGetters('mediaFigures', ['getIsInitializedFigures']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaAudios', ['getIsInitializedAudios']),

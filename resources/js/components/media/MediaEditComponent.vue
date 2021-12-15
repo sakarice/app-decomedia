@@ -143,7 +143,6 @@ export default {
   },
   computed : {
     ...mapGetters('media', ['getMediaId']),
-    ...mapGetters('mediaImg', ['getMediaImg']),
     ...mapGetters('mediaAudios', ['getMediaAudios']),
     ...mapGetters('mediaMovie', ['getMediaMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),

@@ -58,7 +58,6 @@ export default {
     }
   },
   computed :  {
-    ...mapGetters('mediaImg',['getMediaImg']),
     ...mapGetters('mediaSetting',['getMediaSetting']),
     aboutPublicState : function(){
       if(this.getMediaSetting['isPublic']){
