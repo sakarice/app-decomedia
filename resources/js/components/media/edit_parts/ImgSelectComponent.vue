@@ -72,9 +72,7 @@
         isLoading : false,
         loadingMessage : "",
         userOwnImgs : [],
-        // imgFileUrls : [],
         defaultImgs : [],
-        // defaultImgUrls : []
         mediaImgBaseData : {
           'id' : 0,
           'type' : 99,
@@ -98,8 +96,6 @@
       ...mapGetters('mediaImgs', ['getMediaImgs']),
     },
     methods : {
-      ...mapMutations('mediaImg', ['updateMediaImgContent']),
-      // ...mapMutations('mediaImg', ['checkMediaImg']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
       ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
@@ -117,7 +113,6 @@
         const url = '/ajax/getUserOwnImgs';
         axios.get(url)
           .then(response => {
-            // alert(response.data.urls[0]);
             response.data.file_datas.forEach(file_data => {            
               this.userOwnImgs.unshift(file_data);
             });
@@ -159,16 +154,11 @@
           imgType = 2;
         }
         const imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);      
-        // テスト用 あとで消す
-        // const rand_width = Math.floor(Math.random()*300);
         let mediaImgData = Object.assign({}, this.mediaImgBaseData);
         mediaImgData['img_id'] = imgId;
         mediaImgData['img_type'] = imgType;
         mediaImgData['url'] = imgUrl;
-
-        this.updateMediaImgContent({type:imgType, id:imgId, url:imgUrl});
         this.addMediaImgsObjectItem(mediaImgData);
-
         this.mediaImgBaseData['top'] += 30;
         this.mediaImgBaseData['left'] += 30;
       },
@@ -260,9 +250,6 @@
                 tmpThis.deleteMediaImgsObjectItem(index);
               }
             })
-            if(this.getMediaImg['url']==imgUrl){
-              this.updateMediaImgContent({type:0, id:0, url:""});
-            }
           })
           .catch(error => {
             alert('画像削除失敗');

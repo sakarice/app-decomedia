@@ -343,7 +343,7 @@ function _defineProperty(obj, key, value) {
       return initCountStack;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaImg', ['updateIsInitializedImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     judgeIsMyMedia: function judgeIsMyMedia() {
       var _this = this;
 
@@ -1819,9 +1819,7 @@ function _defineProperty(obj, key, value) {
       isLoading: false,
       loadingMessage: "",
       userOwnImgs: [],
-      // imgFileUrls : [],
       defaultImgs: [],
-      // defaultImgUrls : []
       mediaImgBaseData: {
         'id': 0,
         'type': 99,
@@ -1840,7 +1838,7 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
 
@@ -1855,7 +1853,6 @@ function _defineProperty(obj, key, value) {
 
       var url = '/ajax/getUserOwnImgs';
       axios.get(url).then(function (response) {
-        // alert(response.data.urls[0]);
         response.data.file_datas.forEach(function (file_data) {
           _this.userOwnImgs.unshift(file_data);
         });
@@ -1897,18 +1894,11 @@ function _defineProperty(obj, key, value) {
         imgType = 2;
       }
 
-      var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl); // テスト用 あとで消す
-      // const rand_width = Math.floor(Math.random()*300);
-
+      var imgId = this.findImgIdTiedUpWithUrl(imgType, imgUrl);
       var mediaImgData = Object.assign({}, this.mediaImgBaseData);
       mediaImgData['img_id'] = imgId;
       mediaImgData['img_type'] = imgType;
       mediaImgData['url'] = imgUrl;
-      this.updateMediaImgContent({
-        type: imgType,
-        id: imgId,
-        url: imgUrl
-      });
       this.addMediaImgsObjectItem(mediaImgData);
       this.mediaImgBaseData['top'] += 30;
       this.mediaImgBaseData['left'] += 30;
@@ -2011,14 +2001,6 @@ function _defineProperty(obj, key, value) {
             tmpThis.deleteMediaImgsObjectItem(index);
           }
         });
-
-        if (_this4.getMediaImg['url'] == imgUrl) {
-          _this4.updateMediaImgContent({
-            type: 0,
-            id: 0,
-            url: ""
-          });
-        }
       })["catch"](function (error) {
         alert('画像削除失敗');
         _this4.loadingMessage = '';
@@ -2044,7 +2026,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -2192,6 +2175,7 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -2203,17 +2187,15 @@ function _defineProperty(obj, key, value) {
         code: 2,
         name: "丸"
       }],
-      "move_target": "",
-      "x_in_element": 0,
-      // クリックカーソルの要素内における相対位置(x座標)
-      "y_in_element": 0,
-      // 〃↑のy座標
+      // "move_target" : "",
+      // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
+      // "y_in_element" : 0, // 〃↑のy座標
       "canvas_length": 80,
       "pre_canvas": "",
       "pre_ctx": ""
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
     type: function type() {
       return this.getFigureData['type'];
     },
@@ -2299,7 +2281,7 @@ function _defineProperty(obj, key, value) {
       this.draw();
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -2336,39 +2318,53 @@ function _defineProperty(obj, key, value) {
       var value = style.getPropertyValue(property);
       return value;
     },
-    mouseDown: function mouseDown(e) {
-      var event;
+    // 位置操作用
+    moveStart: function moveStart(e) {
+      var move_target_dom = document.getElementById("media-figure-setting-wrapper");
 
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      this.move_target = document.getElementById('media-figure-setting-wrapper'); // this.move_target = event.target;
-
-      this.x_in_element = event.clientX - this.move_target.offsetLeft;
-      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.mouseMove, false);
-      this.move_target.addEventListener("mouseup", this.mouseUp, false);
-      document.body.addEventListener("touchmove", this.mouseMove, false);
-      this.move_target.addEventListener("touchend", this.mouseUp, false);
+      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    mouseMove: function mouseMove(e) {
-      e.preventDefault();
-      this.move_target.style.left = e.clientX - this.x_in_element + "px";
-      this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.mouseUp, false);
-      document.body.addEventListener("touchleave", this.mouseUp, false);
+    moveEnd: function moveEnd(e) {
+      e.target.removeEventListener('moveFinish', this.moveEnd, false); // const new_left = e.detail.left;
+      // const new_top = e.detail.top;
+      // this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
+      // this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
+      // this.figureDatas['left'] = new_left;
+      // this.figureDatas['top'] = new_top;
     },
-    mouseUp: function mouseUp(e) {
-      document.body.removeEventListener("mousemove", this.mouseMove, false);
-      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-      document.body.removeEventListener("touchmove", this.mouseMove, false);
-      this.move_target.removeEventListener("touchend", this.mouseUp, false);
-    },
+    // mouseDown(e){
+    //   let event;
+    //   if(e.type==="mousedown"){
+    //     event = e;
+    //   } else {
+    //     event = e.changedTouches[0];
+    //   }
+    //   this.move_target = document.getElementById('media-figure-setting-wrapper');
+    //   // this.move_target = event.target;
+    //   this.x_in_element = event.clientX - this.move_target.offsetLeft;
+    //   this.y_in_element = event.clientY - this.move_target.offsetTop;
+    //   // ムーブイベントにコールバック
+    //   document.body.addEventListener("mousemove", this.mouseMove, false);
+    //   this.move_target.addEventListener("mouseup", this.mouseUp, false);
+    //   document.body.addEventListener("touchmove", this.mouseMove, false);
+    //   this.move_target.addEventListener("touchend", this.mouseUp, false);
+    // },
+    // mouseMove(e){
+    //   e.preventDefault();
+    //   this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
+    //   this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
+    //   // マウス、タッチ解除時のイベントを設定
+    //   document.body.addEventListener("mouseleave", this.mouseUp, false);
+    //   document.body.addEventListener("touchleave", this.mouseUp, false);
+    // },
+    // mouseUp(e){
+    //   document.body.removeEventListener("mousemove", this.mouseMove, false);
+    //   this.move_target.removeEventListener("mouseup", this.mouseUp, false);
+    //   document.body.removeEventListener("touchmove", this.mouseMove, false);
+    //   this.move_target.removeEventListener("touchend", this.mouseUp, false);
+    // },
     // 図形プレビュー用
     setContext: function setContext() {
       this.pre_canvas = document.getElementById('pre-canvas');
@@ -2628,7 +2624,7 @@ function _defineProperty(obj, key, value) {
       }
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgContent'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImg', ['updateMediaImgObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -4210,6 +4206,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -5129,7 +5126,6 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), {}, {
-    // ...mapGetters('mediaFigures', ['getMediaFigure']),
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
     }
@@ -6724,7 +6720,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\n@media screen and (min-width: 481px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#disp-modal-zone[data-v-442dbc22] {\r\n    right: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13853,10 +13849,10 @@ var render = function () {
       attrs: { id: "media-figure-setting-wrapper" },
       on: {
         mousedown: function ($event) {
-          return _vm.mouseDown($event)
+          return _vm.moveStart($event)
         },
         touchstart: function ($event) {
-          return _vm.mouseDown($event)
+          return _vm.moveStart($event)
         },
       },
     },
@@ -15417,6 +15413,14 @@ var render = function () {
               id: "media-img",
               src: _vm.mediaImg["url"],
               alt: "画像が選択されていません",
+            },
+            on: {
+              mousedown: function ($event) {
+                return _vm.moveStart($event)
+              },
+              touchstart: function ($event) {
+                return _vm.moveStart($event)
+              },
             },
           }),
         ]

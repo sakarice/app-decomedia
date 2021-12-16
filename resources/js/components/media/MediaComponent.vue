@@ -213,8 +213,6 @@ export default {
     ...mapMutations('media', ['setMediaId']),
     ...mapMutations('media', ['setIsMyMedia']),
     ...mapMutations('media', ['setMode']),
-    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
-    ...mapMutations('mediaImg', ['updateIsInitializedImg']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
