@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-setting-wrapper"
-   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+   @mousedown="moveStart($event)" @touchstart="moveStart($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" @mousedown.stop>
@@ -92,6 +92,8 @@
 </template>
 
 <script>
+  import {moveStart} from '../../../functions/moveHelper'
+
   import { mapGetters, mapMutations } from 'vuex';
 
   export default {
@@ -104,9 +106,9 @@
           {code : 2, name : "丸"},
         ],
 
-        "move_target" : "",
-        "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-        "y_in_element" : 0, // 〃↑のy座標
+        // "move_target" : "",
+        // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
+        // "y_in_element" : 0, // 〃↑のy座標
         "canvas_length" : 80,
         "pre_canvas" : "",
         "pre_ctx" : "",
@@ -192,38 +194,53 @@
         var value = style.getPropertyValue(property);
         return value;
       },
-      mouseDown(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.move_target = document.getElementById('media-figure-setting-wrapper');
-        // this.move_target = event.target;
-        this.x_in_element = event.clientX - this.move_target.offsetLeft;
-        this.y_in_element = event.clientY - this.move_target.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.mouseMove, false);
-        this.move_target.addEventListener("mouseup", this.mouseUp, false);
-        document.body.addEventListener("touchmove", this.mouseMove, false);
-        this.move_target.addEventListener("touchend", this.mouseUp, false);
+      // 位置操作用
+      moveStart(e){
+        const move_target_dom = document.getElementById("media-figure-setting-wrapper");
+        moveStart(e, move_target_dom);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
-      mouseMove(e){
-        e.preventDefault();
-        this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-        this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
+      moveEnd(e){
+        e.target.removeEventListener('moveFinish', this.moveEnd, false);
+        // const new_left = e.detail.left;
+        // const new_top = e.detail.top;
+        // this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
+        // this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
+        // this.figureDatas['left'] = new_left;
+        // this.figureDatas['top'] = new_top;
+      },
+      // mouseDown(e){
+      //   let event;
+      //   if(e.type==="mousedown"){
+      //     event = e;
+      //   } else {
+      //     event = e.changedTouches[0];
+      //   }
+      //   this.move_target = document.getElementById('media-figure-setting-wrapper');
+      //   // this.move_target = event.target;
+      //   this.x_in_element = event.clientX - this.move_target.offsetLeft;
+      //   this.y_in_element = event.clientY - this.move_target.offsetTop;
+      //   // ムーブイベントにコールバック
+      //   document.body.addEventListener("mousemove", this.mouseMove, false);
+      //   this.move_target.addEventListener("mouseup", this.mouseUp, false);
+      //   document.body.addEventListener("touchmove", this.mouseMove, false);
+      //   this.move_target.addEventListener("touchend", this.mouseUp, false);
+      // },
+      // mouseMove(e){
+      //   e.preventDefault();
+      //   this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
+      //   this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
 
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.mouseUp, false);
-        document.body.addEventListener("touchleave", this.mouseUp, false);
-      },
-      mouseUp(e){
-        document.body.removeEventListener("mousemove", this.mouseMove, false);
-        this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-        document.body.removeEventListener("touchmove", this.mouseMove, false);
-        this.move_target.removeEventListener("touchend", this.mouseUp, false);
-      },
+      //   // マウス、タッチ解除時のイベントを設定
+      //   document.body.addEventListener("mouseleave", this.mouseUp, false);
+      //   document.body.addEventListener("touchleave", this.mouseUp, false);
+      // },
+      // mouseUp(e){
+      //   document.body.removeEventListener("mousemove", this.mouseMove, false);
+      //   this.move_target.removeEventListener("mouseup", this.mouseUp, false);
+      //   document.body.removeEventListener("touchmove", this.mouseMove, false);
+      //   this.move_target.removeEventListener("touchend", this.mouseUp, false);
+      // },
 
       // 図形プレビュー用
       setContext(){
