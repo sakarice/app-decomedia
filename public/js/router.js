@@ -4260,9 +4260,6 @@ function _defineProperty(obj, key, value) {
       } else {
         this.$emit('del-active-index', this.index);
       }
-    },
-    helper_left: function helper_left(val) {
-      console.log('helper_left' + val);
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
@@ -6397,10 +6394,19 @@ var move_target;
 var left;
 var top;
 var distance_from_target_left;
-var distance_from_target_top; // 位置操作用
+var distance_from_target_top;
+
+function init(target) {
+  move_target = target;
+  left = Number(target.style.left.replace("px", ""));
+  top = Number(target.style.top.replace("px", ""));
+  distance_from_target_left = 0;
+  distance_from_target_top = 0;
+} // 位置操作用
+
 
 function moveStart(e, target) {
-  move_target = target;
+  init(target);
   var event;
 
   if (e.type === "mousedown") {
@@ -6424,7 +6430,7 @@ function moving(e) {
   e.preventDefault();
   var event;
 
-  if (e.type === "mousedown") {
+  if (e.type === "mousemove") {
     event = e;
     left = event.clientX - distance_from_target_left;
     top = event.clientY - distance_from_target_top;
@@ -6443,8 +6449,10 @@ function moving(e) {
 
 function moveEnd(e) {
   document.body.removeEventListener("mousemove", moving, false);
-  move_target.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("mouseleave", moveEnd, false);
   document.body.removeEventListener("touchmove", moving, false);
+  document.body.removeEventListener("touchleave", moveEnd, false);
+  move_target.removeEventListener("mouseup", moveEnd, false);
   move_target.removeEventListener("touchend", moveEnd, false); // 移動終了カスタムイベント。終了後の位置を引数で渡す。
 
   var event = new CustomEvent('moveFinish', {

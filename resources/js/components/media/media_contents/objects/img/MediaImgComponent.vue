@@ -70,7 +70,6 @@
           this.$emit('del-active-index', this.index);
         }
       },
-      helper_left(val){ console.log('helper_left'+val)},
     },
     methods : {
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
