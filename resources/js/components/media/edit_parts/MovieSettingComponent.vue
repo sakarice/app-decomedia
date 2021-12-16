@@ -108,10 +108,10 @@ export default {
 
   #player-setting-title {
     font-weight: bold;
-    margin-bottom: 10px 0 30px 0;
+    margin: 10px 0 30px 0;
     background-color: orangered;
     border-radius: 5px;
-    padding: 2 10px;
+    padding: 2px 10px;
   }
 
   .yt-setting-wrapper {
