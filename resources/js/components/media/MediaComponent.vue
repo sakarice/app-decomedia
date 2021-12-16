@@ -363,19 +363,17 @@ export default {
 
 
 
-@media screen and (min-width: 481px) {
+/* @media screen and (min-width: 481px) {
   #disp-modal-zone {
     left: 0;
   }
-  
 }
 
 @media screen and (max-width: 480px) {
   #disp-modal-zone {
     right: 0;
   }
-  
-}
+} */
 
 
 </style>

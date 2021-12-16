@@ -4,7 +4,7 @@
       <div id="area-wrapper">
 
         <div id="setting-wrapper">
-
+          <p id="media-setting-title">メディア設定</p>
           <div id="media-is-public-wraper" class="setting">
             <p class="setting-title">公開/非公開</p>
             <i v-show="getMediaSetting['isPublic']" @click="changePublicState" class="fas fa-door-open fa-lg public-state-icon open-icon"></i>
@@ -103,6 +103,14 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     overflow-y: scroll;
+  }
+
+  #media-setting-title{
+    font-weight: bold;
+    margin: 10px 0 30px 0;
+    background-color: lightslategrey;
+    border-radius: 5px;
+    padding: 2px 10px;
   }
 
   .setting {

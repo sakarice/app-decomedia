@@ -481,8 +481,12 @@
     margin-right: -14px;
     margin-top: -50px;
     font-size: 13px;    
-  }  
-}
+  }
 
+  .change-disp-audio-wrapper {
+    bottom: 60px;
+  }
+  
+}
 
 </style>

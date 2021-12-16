@@ -46,7 +46,7 @@
 /* スマホ */
 @media screen and (max-width: 480px) {
   #select-modal {
-    top: 80px;
+    /* top: 80px; */
     width: 75%;
     height: 75vh;
     padding-left: 20px;
