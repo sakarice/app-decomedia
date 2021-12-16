@@ -4,7 +4,7 @@
       <div id="area-wrapper">
 
         <div id="setting-wrapper">
-          <p id="player-setting-title">動画Player設定</p>
+          <p id="player-setting-title">動画プレイヤー設定</p>
           <div class="yt-form-wrapper setting-content">
             <input :value="youtubeUrl" @input="updateVideoId" type="text" id="youtube-url-input" size=30 placeholder="youtube movie URL">
           </div>
@@ -108,12 +108,20 @@ export default {
 
   #player-setting-title {
     font-weight: bold;
+    margin-bottom: 10px 0 30px 0;
+    background-color: orangered;
+    border-radius: 5px;
+    padding: 2 10px;
   }
 
   .yt-setting-wrapper {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  #youtube-url-input {
+    width: 95%;
   }
 
   .setting-content {
