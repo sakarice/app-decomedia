@@ -11,12 +11,13 @@
       <img id="media-img"
        :src="mediaImg['url']"
        v-show="mediaImg['url']" alt="画像が選択されていません"
+      @mousedown="moveStart($event)" @touchstart="moveStart($event)"
        v-bind:style="imgStyle()">
     </div>
 
     <img-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:addPxToTail(mediaImg['width']), height:addPxToTail(mediaImg['height'])}"
      v-on:resize="reRender"
-     v-on:move="moveStart($event)">
+     @move="moveStart($event)">
     </img-resize>
 
     <img-rotate v-show="isEditMode && isActive"
