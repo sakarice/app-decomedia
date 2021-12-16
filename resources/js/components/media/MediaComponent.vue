@@ -57,16 +57,16 @@
         <router-view name="dispAudioModal"
         v-on:show-modal="showModal">        
         </router-view>
+        <!-- 図形設定 -->
+        <router-view name="dispFigureSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
         v-on:show-modal="showModal">
         </router-view>
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
-        v-on:show-modal="showModal">
-        </router-view>
-        <!-- 図形設定 -->
-        <router-view name="dispFigureSettingModal"
         v-on:show-modal="showModal">
         </router-view>
 
@@ -87,6 +87,11 @@
     :transitionName="transitionName">
     </router-view>
 
+    <router-view name="mediaFigureSetting"
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
     <!-- 動画設定コンポーネント -->
     <router-view name="movieSetting"
     v-show="isShowModal['movieModal']"
@@ -103,10 +108,6 @@
     :transitionName="transitionName">
     </router-view>
 
-    <router-view name="mediaFigureSetting"
-    v-show="isShowModal['figureSettingModal']"
-    v-on:close-modal="closeModal">
-    </router-view>
 
     <!-- <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
