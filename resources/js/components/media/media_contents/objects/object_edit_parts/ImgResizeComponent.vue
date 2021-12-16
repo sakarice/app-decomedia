@@ -42,15 +42,9 @@
     ],
     data : ()=>{
       return {
-        "isResizing" :false,
-        "mouse_x" : 0,
-        "mouse_y" : 0,
-        "width" : "10px",
-        "height" : "10px",
       }
     },
     computed : {
-      // ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
       imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) },
     },
@@ -128,10 +122,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: lightgrey; */
 }
 .adjust-bar:hover {
-  /* background-color: aqua; */
   cursor: auto;
 }
 
@@ -209,7 +201,6 @@
 
 .mouse-position {
   position : absolute;
-  /* bottom: -20px; */
   right: -90px;
 }
 .mouse-x {
