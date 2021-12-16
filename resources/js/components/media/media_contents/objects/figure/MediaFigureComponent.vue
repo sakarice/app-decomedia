@@ -8,7 +8,7 @@
 
     <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
      v-on:resize="resize"
-     v-on:move="moveStart($event)">
+     @move="moveStart($event)">
     </object-resize>
     <object-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></object-rotate>
   </div>

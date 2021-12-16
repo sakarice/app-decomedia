@@ -19,13 +19,10 @@
     },
     computed : {
       ...mapGetters('mediaImgs', ['getMediaImg']),
-      // ...mapGetters('mediaFigures', ['getMediaFigure']),
       imgWrapperWithIndex:function(){ return 'media-img-wrapper'+this.index; },
     },
     watch : {},
     methods : {
-      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-      // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
  

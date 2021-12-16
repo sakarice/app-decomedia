@@ -68,8 +68,6 @@ export default {
     }
   },  
   methods : {
-    ...mapMutations('mediaImg', ['updateMediaImgContent']),
-    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
     closeModal() {
       this.$emit('close-modal');
