@@ -5548,7 +5548,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/resizeHelper */ "./resources/js/functions/resizeHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -5634,6 +5635,23 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5648,9 +5666,13 @@ function _defineProperty(obj, key, value) {
       "height": "10px"
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+    canvas_wrapper_with_index: function canvas_wrapper_with_index() {
+      return 'canvas_wrapper' + this.index;
+    }
+  }),
   watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), {}, {
     getOneFigure: function getOneFigure(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(index);
@@ -5659,114 +5681,135 @@ function _defineProperty(obj, key, value) {
     move: function move(event) {
       this.$emit('move', event);
     },
-    // リサイズ開始メソッドからフックする終了イベントの登録
-    registEventStartToEnd: function registEventStartToEnd() {
-      this.isResizing = true;
-      document.body.addEventListener("mouseup", this.resizeEnd, false);
-      document.body.addEventListener("touchend", this.resizeEnd, false);
+    resizeStart: function resizeStart(type) {
+      console.log('resize Start');
+      var target = document.getElementById(this.canvas_wrapper_with_index);
+      var mediaFigure = this.getOneFigure(this.index);
+      var sizeAndPositionInfos = [];
+      var keys = ['width', 'height', 'left', 'top'];
+      keys.forEach(function (key) {
+        sizeAndPositionInfos[key] = mediaFigure[key];
+      });
+      (0,_functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__.resizeInfoInit)(target, sizeAndPositionInfos);
+
+      (0,_functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__.resizeStart)(type);
+
+      target.addEventListener('resizingWidth', this.updateWidthAndLeft, false);
+      target.addEventListener('resizingHeight', this.updateHeighthAndTop, false);
     },
-    // リサイズ中メソッドからフックする終了イベントの登録
-    registEventMiddleToEnd: function registEventMiddleToEnd() {
-      // マウス、タッチ解除時のイベントを設定
-      document.body.addEventListener("mouseleave", this.resizeEnd, false);
-      document.body.addEventListener("touchleave", this.resizeEnd, false);
-    },
-    // 1. リサイズ開始メソッド
-    resizeRightStart: function resizeRightStart(e) {
-      document.body.addEventListener("mousemove", this.resizeRight, false);
-      document.body.addEventListener("touchmove", this.resizeRight, false);
-      this.registEventStartToEnd();
-    },
-    resizeLeftStart: function resizeLeftStart(e) {
-      document.body.addEventListener("mousemove", this.resizeLeft, false);
-      document.body.addEventListener("touchmove", this.resizeLeft, false);
-      this.registEventStartToEnd();
-    },
-    resizeBottomStart: function resizeBottomStart(e) {
-      document.body.addEventListener("mousemove", this.resizeBottom, false);
-      document.body.addEventListener("touchmove", this.resizeBottom, false);
-      this.registEventStartToEnd();
-    },
-    resizeTopStart: function resizeTopStart(e) {
-      document.body.addEventListener("mousemove", this.resizeTop, false);
-      document.body.addEventListener("touchmove", this.resizeTop, false);
-      this.registEventStartToEnd();
-    },
-    // 2. リサイズ中メソッド
-    resizeMiddleLast: function resizeMiddleLast() {
-      this.$emit('resize');
-      this.registEventMiddleToEnd();
-    },
-    resizeRight: function resizeRight(e) {
-      var left = this.getOneFigure(this.index)['left'];
-      this.width = e.clientX - left;
+    updateWidthAndLeft: function updateWidthAndLeft(e) {
+      var new_width = e.detail.width;
+      var new_left = e.detail.left;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "width",
-        value: this.width
+        value: new_width
       });
-      this.resizeMiddleLast();
-    },
-    resizeLeft: function resizeLeft(e) {
-      var x = this.getOneFigure(this.index)['left'];
-      var diff = x - e.clientX;
-      var width_before = this.getOneFigure(this.index)['width'];
-      var width_new = width_before + diff;
-      this.updateMediaFiguresObjectItem({
-        index: this.index,
-        key: "width",
-        value: width_new
-      });
-      this.width = width_new;
-      var new_x = x - diff;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "left",
-        value: new_x
+        value: new_left
       });
-      this.resizeMiddleLast();
+      this.$emit('resize');
     },
-    resizeBottom: function resizeBottom(e) {
-      var top = this.getOneFigure(this.index)['top'];
-      this.height = e.clientY - top;
+    updateHeighthAndTop: function updateHeighthAndTop(e) {
+      var new_height = e.detail.height;
+      var new_top = e.detail.top;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "height",
-        value: this.height
+        value: new_height
       });
-      this.resizeMiddleLast();
-    },
-    resizeTop: function resizeTop(e) {
-      var y = this.getOneFigure(this.index)['top'];
-      var diff = y - e.clientY;
-      var height_before = this.getOneFigure(this.index)['height'];
-      var height_new = height_before + diff;
-      this.updateMediaFiguresObjectItem({
-        index: this.index,
-        key: "height",
-        value: height_new
-      });
-      this.height = height_new;
-      var new_y = y - diff;
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "top",
-        value: new_y
+        value: new_top
       });
-      this.resizeMiddleLast();
-    },
-    // 3. リサイズ終了メソッド。登録したイベントを解除する。
-    resizeEnd: function resizeEnd(e) {
-      this.isResizing = false;
-      document.body.removeEventListener("mousemove", this.resizeRight, false);
-      document.body.removeEventListener("mousemove", this.resizeLeft, false);
-      document.body.removeEventListener("mousemove", this.resizeBottom, false);
-      document.body.removeEventListener("mousemove", this.resizeTop, false);
-      document.body.removeEventListener("touchmove", this.resizeRight, false);
-      document.body.removeEventListener("touchmove", this.resizeLeft, false);
-      document.body.removeEventListener("touchmove", this.resizeBottom, false);
-      document.body.removeEventListener("touchmove", this.resizeTop, false);
-    }
+      this.$emit('resize');
+    } // // リサイズ開始メソッドからフックする終了イベントの登録
+    // registEventStartToEnd(){
+    //   this.isResizing = true;
+    //   document.body.addEventListener("mouseup", this.resizeEnd, false);
+    //   document.body.addEventListener("touchend", this.resizeEnd, false);
+    // },
+    // // リサイズ中メソッドからフックする終了イベントの登録
+    // registEventMiddleToEnd(){ // マウス、タッチ解除時のイベントを設定
+    //   document.body.addEventListener("mouseleave", this.resizeEnd, false);
+    //   document.body.addEventListener("touchleave", this.resizeEnd, false);
+    // },
+    // // 1. リサイズ開始メソッド
+    // resizeRightStart(e){
+    //   document.body.addEventListener("mousemove", this.resizeRight, false);
+    //   document.body.addEventListener("touchmove", this.resizeRight, false);
+    //   this.registEventStartToEnd();
+    // },
+    // resizeLeftStart(e){
+    //   document.body.addEventListener("mousemove", this.resizeLeft, false);
+    //   document.body.addEventListener("touchmove", this.resizeLeft, false);
+    //   this.registEventStartToEnd();
+    // },
+    // resizeBottomStart(e){
+    //   document.body.addEventListener("mousemove", this.resizeBottom, false);
+    //   document.body.addEventListener("touchmove", this.resizeBottom, false);
+    //   this.registEventStartToEnd();
+    // },
+    // resizeTopStart(e){
+    //   document.body.addEventListener("mousemove", this.resizeTop, false);
+    //   document.body.addEventListener("touchmove", this.resizeTop, false);
+    //   this.registEventStartToEnd();
+    // },
+    // // 2. リサイズ中メソッド
+    // resizeMiddleLast(){
+    //   this.$emit('resize');
+    //   this.registEventMiddleToEnd();
+    // },
+    // resizeRight(e){
+    //   const left = this.getOneFigure(this.index)['left'];
+    //   this.width = e.clientX - left;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.width});
+    //   this.resizeMiddleLast();
+    // },
+    // resizeLeft(e){
+    //   const x = this.getOneFigure(this.index)['left'];
+    //   const diff = x - e.clientX;
+    //   const width_before = this.getOneFigure(this.index)['width'];
+    //   const width_new = width_before + diff;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:width_new});
+    //   this.width = width_new;
+    //   const new_x = x - diff;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_x});
+    //   this.resizeMiddleLast();
+    // },
+    // resizeBottom(e){
+    //   const top = this.getOneFigure(this.index)['top'];
+    //   this.height = e.clientY - top;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.height});
+    //   this.resizeMiddleLast();
+    // },
+    // resizeTop(e){
+    //   const y = this.getOneFigure(this.index)['top'];
+    //   const diff = y - e.clientY;
+    //   const height_before = this.getOneFigure(this.index)['height'];
+    //   const height_new = height_before + diff;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:height_new});
+    //   this.height = height_new;
+    //   const new_y = y - diff;
+    //   this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_y});
+    //   this.resizeMiddleLast();
+    // },
+    // // 3. リサイズ終了メソッド。登録したイベントを解除する。
+    // resizeEnd(e){
+    //   this.isResizing = false;
+    //   document.body.removeEventListener("mousemove", this.resizeRight, false);
+    //   document.body.removeEventListener("mousemove", this.resizeLeft, false);
+    //   document.body.removeEventListener("mousemove", this.resizeBottom, false);
+    //   document.body.removeEventListener("mousemove", this.resizeTop, false);
+    //   document.body.removeEventListener("touchmove", this.resizeRight, false);
+    //   document.body.removeEventListener("touchmove", this.resizeLeft, false);
+    //   document.body.removeEventListener("touchmove", this.resizeBottom, false);
+    //   document.body.removeEventListener("touchmove", this.resizeTop, false);
+    // },
+
   }),
   created: function created() {},
   mounted: function mounted() {}
@@ -16451,9 +16494,13 @@ var render = function () {
             {
               staticClass: "adjust-bar left-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("left")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
-                  return _vm.resizeLeftStart($event)
+                  return _vm.resizeStart("left")
                 },
               },
             },
@@ -16465,9 +16512,13 @@ var render = function () {
             {
               staticClass: "adjust-bar right-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("right")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
-                  return _vm.resizeRightStart($event)
+                  return _vm.resizeStart("right")
                 },
               },
             },
@@ -16485,9 +16536,13 @@ var render = function () {
             {
               staticClass: "adjust-bar top-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("top")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
-                  return _vm.resizeTopStart($event)
+                  return _vm.resizeStart("top")
                 },
               },
             },
@@ -16499,9 +16554,13 @@ var render = function () {
             {
               staticClass: "adjust-bar bottom-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("bottom")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
-                  return _vm.resizeBottomStart($event)
+                  return _vm.resizeStart("bottom")
                 },
               },
             },
@@ -16514,10 +16573,15 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point left top",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("left")
+              _vm.resizeStart("top")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
-              _vm.resizeLeftStart($event)
-              _vm.resizeTopStart($event)
+              _vm.resizeStart("left")
+              _vm.resizeStart("top")
             },
           },
         }),
@@ -16525,10 +16589,15 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point left bottom",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("left")
+              _vm.resizeStart("bottom")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
-              _vm.resizeLeftStart($event)
-              _vm.resizeBottomStart($event)
+              _vm.resizeStart("left")
+              _vm.resizeStart("bottom")
             },
           },
         }),
@@ -16536,10 +16605,15 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point right top",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("right")
+              _vm.resizeStart("top")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
-              _vm.resizeRightStart($event)
-              _vm.resizeTopStart($event)
+              _vm.resizeStart("right")
+              _vm.resizeStart("top")
             },
           },
         }),
@@ -16547,10 +16621,15 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point right bottom",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("right")
+              _vm.resizeStart("bottom")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
-              _vm.resizeRightStart($event)
-              _vm.resizeBottomStart($event)
+              _vm.resizeStart("right")
+              _vm.resizeStart("bottom")
             },
           },
         }),
