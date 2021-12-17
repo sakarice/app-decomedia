@@ -3,30 +3,46 @@
 
     <!-- // 横幅変更用 -->
     <div class="adjust-bar-wrapper x-size-adjust-bar-wrapper">
-      <div class="adjust-bar left-size-adjust-bar" @mousedown.stop="resizeStart('left')">
+      <div class="adjust-bar left-size-adjust-bar"
+        @touchstart.stop="resizeStart('left')"
+        @mousedown.stop="resizeStart('left')">
         <div class="adjust-inner-bar x-inner"></div>
       </div>
-      <div class="adjust-bar right-size-adjust-bar" @mousedown.stop="resizeStart('right')">
+      <div class="adjust-bar right-size-adjust-bar" 
+        @touchstart.stop="resizeStart('right')"
+        @mousedown.stop="resizeStart('right')">
         <div class="adjust-inner-bar x-inner"></div>
       </div>
     </div>
 
     <!-- // 縦幅変更用 -->
     <div class="adjust-bar-wrapper y-size-adjust-bar-wrapper">
-      <div class="adjust-bar top-size-adjust-bar" @mousedown.stop="resizeStart('top')">
+      <div class="adjust-bar top-size-adjust-bar"
+        @touchstart.stop="resizeStart('top')"
+        @mousedown.stop="resizeStart('top')">
         <div class="adjust-inner-bar y-inner"></div>
       </div>
-      <div class="adjust-bar bottom-size-adjust-bar" @mousedown.stop="resizeStart('bottom')">
+      <div class="adjust-bar bottom-size-adjust-bar"
+        @touchstart.stop="resizeStart('bottom')"
+        @mousedown.stop="resizeStart('bottom')">
         <div class="adjust-inner-bar y-inner"></div>
       </div>
     </div>
 
     <!-- 斜め幅変更用 -->
     <div class="adjust-point-wrapper">
-      <div class="adjust-point left top" @mousedown.stop="resizeStart('left'); resizeStart('top')"></div>
-      <div class="adjust-point left bottom" @mousedown.stop="resizeStart('left'); resizeStart('bottom')"></div>
-      <div class="adjust-point right top" @mousedown.stop="resizeStart('right'); resizeStart('top')"></div>
-      <div class="adjust-point right bottom" @mousedown.stop="resizeStart('right'); resizeStart('bottom')"></div>
+      <div class="adjust-point left top"
+       @touchstart.stop="resizeStart('left'); resizeStart('top')"
+       @mousedown.stop="resizeStart('left'); resizeStart('top')"></div>
+      <div class="adjust-point left bottom"
+       @touchstart.stop="resizeStart('left'); resizeStart('bottom')"
+       @mousedown.stop="resizeStart('left'); resizeStart('bottom')"></div>
+      <div class="adjust-point right top"
+       @touchstart.stop="resizeStart('right'); resizeStart('top')"
+       @mousedown.stop="resizeStart('right'); resizeStart('top')"></div>
+      <div class="adjust-point right bottom"
+       @touchstart.stop="resizeStart('right'); resizeStart('bottom')"
+       @mousedown.stop="resizeStart('right'); resizeStart('bottom')"></div>
     </div>
 
   </div>

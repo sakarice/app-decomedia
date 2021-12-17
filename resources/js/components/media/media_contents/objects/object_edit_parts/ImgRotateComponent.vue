@@ -40,12 +40,6 @@
       },
       // 回転用
       rotateStart(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
         this.rotate_target = document.getElementById(this.imgWrapperWithIndex);
         this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px",""));
         this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px",""));
@@ -62,9 +56,20 @@
         document.body.addEventListener("touchend", this.rotateEnd, false);
       },
       rotating(e){
+        console.log('start rotate');
         e.preventDefault();
-        const distance_x_from_target_center = e.clientX - this.rotate_center_x;
-        const distance_y_from_target_center = e.clientY - this.rotate_center_y;
+        let event;
+        let distance_x_from_target_center;
+        let distance_y_from_target_center;
+        if(e.type==="mousedown"){
+          event = e;
+          distance_x_from_target_center = event.clientX - this.rotate_center_x;
+          distance_y_from_target_center = event.clientY - this.rotate_center_y;
+        } else {
+          event = e.changedTouches[0];
+          distance_x_from_target_center = event.pageX - this.rotate_center_x;
+          distance_y_from_target_center = event.pageY - this.rotate_center_y;
+        }
         const new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
         const new_deg = Math.floor((new_rad * (180/Math.PI) * (-1)) % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
         this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
