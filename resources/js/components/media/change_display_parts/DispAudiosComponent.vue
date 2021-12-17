@@ -72,6 +72,10 @@
     align-items: center;
   }
 
+  #change-disp-audio-wrapper:hover {
+    background-color: rgba(0,110,110, 0.5);
+  }
+
   .change-disp-audio {
   color: lightgrey;
   padding: 10px 19px 10px 15px;
@@ -79,10 +83,11 @@
   border-radius: 50%;
   background-color: rgba(0,0,0, 0.5); */
   }
-  .change-disp-audio:hover {
-    background-color: rgba(0,110,110, 0.5);
+
+  .change-disp-audio {
     cursor: pointer;
   }
+
 
   .media-audio-num {
     z-index: 1;
