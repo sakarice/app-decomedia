@@ -13,9 +13,8 @@
   width: 100%;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background-color: rgba(35,40,50,0.85);
+  /* background-color: rgba(35,40,50,0.85); */
   color: white;
-  box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
 
   /* モーダル内の要素の配置 */
   display: flex;
@@ -38,6 +37,8 @@
   #area-wrapper {
     width: 95%;
     padding-left: 70px;
+    background-color: rgba(35,40,50,0.85);
+    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
   }
 
 }
@@ -45,10 +46,13 @@
 /* スマホ */
 @media screen and (max-width: 480px) {
   #select-modal {
-    top: 80px;
+    /* top: 80px; */
     width: 75%;
     height: 75vh;
+    padding-left: 20px;
     z-index: 20;
+    background-color: rgba(35,40,50,0.85);
+    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
     flex-flow: column;
   }
   /* .slide-in-enter, .slide-in-leave-to {

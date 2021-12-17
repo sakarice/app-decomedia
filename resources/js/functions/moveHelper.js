@@ -9,9 +9,17 @@
   let distance_from_target_left;
   let distance_from_target_top;
 
+function init(target){
+  move_target = target;
+  left = Number(target.style.left.replace("px",""));
+  top = Number(target.style.top.replace("px",""));
+  distance_from_target_left = 0;
+  distance_from_target_top = 0;
+}
+
 // 位置操作用
 function moveStart(e,target){
-  move_target = target;
+  init(target);
   let event;
   if(e.type==="mousedown"){
     event = e;
@@ -33,14 +41,14 @@ function moveStart(e,target){
 function moving(e){
   e.preventDefault();
   let event;
-  if(e.type==="mousedown"){
+  if(e.type==="mousemove"){
     event = e;
     left = event.clientX - distance_from_target_left;
     top = event.clientY - distance_from_target_top;
     } else {
     event = e.changedTouches[0];
     left = event.pageX - distance_from_target_left;
-    top = event.pageY - distance_from_target_top;  
+    top = event.pageY - distance_from_target_top;
   }
   move_target.style.left = left + "px";
   move_target.style.top = top + "px";
@@ -52,8 +60,10 @@ function moving(e){
 
 function moveEnd(e){
   document.body.removeEventListener("mousemove", moving, false);
-  move_target.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("mouseleave", moveEnd, false);
   document.body.removeEventListener("touchmove", moving, false);
+  document.body.removeEventListener("touchleave", moveEnd, false);
+  move_target.removeEventListener("mouseup", moveEnd, false);
   move_target.removeEventListener("touchend", moveEnd, false);
   
   // 移動終了カスタムイベント。終了後の位置を引数で渡す。

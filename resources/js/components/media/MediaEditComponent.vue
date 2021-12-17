@@ -149,7 +149,6 @@ export default {
   },
   methods : {
     ...mapMutations('media', ['setMediaId']),
-    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
     ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),

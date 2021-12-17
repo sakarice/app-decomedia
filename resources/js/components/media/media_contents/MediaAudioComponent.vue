@@ -1,39 +1,21 @@
 <template>
   <!-- <transition name="right-slide"> -->
     <!-- Mediaオーディオ -->
-  <div id="media-audio-wrapper" :class="{'disp-front':isShowAudio}">
+  <div id="media-audio-wrapper" v-show="isShowAudio" :class="{'disp-front':isShowAudio}">
     <!-- オーディオの表示・非表示切り替えアイコン -->
-    <div class="change-disp-audio-wrapper">
+    <!-- <div class="change-disp-audio-wrapper">
       <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
         <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
         <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
         <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
-    </div>
+    </div> -->
 
       <!-- 選択したオーディオ一覧 -->
-    <div id="media-audio-frame" v-show="isShowAudio">
-      <!-- オーディオ再生・停止 -->
-      <div v-show="isEditMode" class="all-audio-controll-wrapper">
-        <div class="all-audio-controller all-audio-play-wrapper">
-          <!-- <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button> -->
-          <div class="size-Adjust-box">
-            <i id="play-all-icon" class="fas fa-caret-right fa-3x" @click="playAllAudio"></i>
-          </div>
-          <span style="color:grey">play all</span>
-        </div>
-
-        <div class="all-audio-controller all-audio-finish-wrapper">
-          <div class="size-Adjust-box">
-            <!-- <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button> -->
-            <i id="finish-all-icon" class="fas fa-pause fa-2x" @click="finishAllAudio"></i>
-          </div>
-          <span style="color:grey">stop all</span>
-        </div>
-      </div>
-
+    <div id="media-audio-frame">
       <!-- オーディオのサムネと各種アイコン -->
       <ul id="audios">
         <li class="audio-area" :id="index" v-for="(mediaAudio, index) in getMediaAudios" :key="index">
+          <!-- オーディオアイコン -->
           <div class="audio-wrapper">
             <media-audio-player-component
             @setMediaAudioDuration="setMediaAudioDuration"
@@ -44,12 +26,6 @@
             <i class="media-audio-delete-icon fas fa-times fa-2x" @click="taskWhenAudioDelete(index)" v-show="isEditMode"></i>
             <i class="media-audio-loop-icon fas fa-undo-alt fa-2x" @click="updateLoopSetting(index)" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
           </div>
-          <!-- オーディオ名 -->
-          <div v-if="mediaAudio" class="media-audio-name-wrapper">
-            <span class="media-audio-name">
-              {{mediaAudio['name']}}
-            </span>
-          </div>
           <!-- ボリューム -->
           <div class="audio-vol-wrapper">
             <i class="media-audio-vol-icon fas fa-volume-off fa-2x"></i>
@@ -57,13 +33,44 @@
               <input type="range" :id="index" class="audio-vol-range" v-on:input="updateAudioVol(index,$event)" min="0" max="1" step="0.01">
             </div>
           </div>
+          <!-- オーディオ名 -->
+          <div v-if="mediaAudio" class="media-audio-name-wrapper">
+            <span class="media-audio-name">
+              {{mediaAudio['name']}}
+            </span>
+          </div>
+
 
         </li>
-        <li class="non-audio-frame" v-for="n in 5-(mediaAudioNum)" :key="5-n">
+        <li class="audio-area non-audio-frame" v-for="n in 5-(mediaAudioNum)" :key="5-n">
+          <div class="dummy-audio-icon"></div>
         </li>
       </ul>
     </div>
+
+      <!-- オーディオ再生・停止 -->
+    <div v-show="isEditMode" class="all-audio-controll-wrapper">
+      <div class="all-audio-controller all-audio-play-wrapper">
+        <!-- <button id="play-all-button" @click="playAllAudio">全オーディオ再生</button> -->
+        <div class="size-Adjust-box">
+          <i id="play-all-icon" class="fas fa-caret-right fa-3x" @click="playAllAudio"></i>
+        </div>
+        <!-- <span style="color:grey">play all</span> -->
+      </div>
+
+      <div class="all-audio-controller all-audio-finish-wrapper">
+        <div class="size-Adjust-box">
+          <!-- <button id="finish-button" @click="finishPlayAudio">オーディオ再生終了</button> -->
+          <i id="finish-all-icon" class="fas fa-pause fa-2x" @click="finishAllAudio"></i>
+        </div>
+        <!-- <span style="color:grey">stop all</span> -->
+      </div>
+    </div>
+
+
   </div>
+
+
   <!-- </transition> -->
 </template>
 
@@ -186,6 +193,14 @@
         if(audioNum > this.maxAudioNum){this.deleteAudio(0)}
       },
     },
+    created(){
+      document.body.addEventListener('changeDispAudioState', (e)=>{
+        console.log("changeDispAudioState:state->"+e.detail);
+        this.isShowAudio = e.detail;
+      })
+
+
+    },
 
   }
 
@@ -196,18 +211,22 @@
 <style scoped>
 
   .disp-front {
-    z-index: 50;
+    z-index: 11;
   }
 
   /* 全オーディオの再生停止コントローラー */
   .all-audio-controll-wrapper {
     padding-bottom: 5px;
-    margin-bottom: 5px;
-    border-bottom: double 2px grey;
-    width: 90px;
+    padding: 10px 0;
+    /* border-bottom: double 2px grey; */
+    width: 100%;
+    height: 80px;
+    background-color: black;
+    border-bottom-left-radius: 5px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    overflow-x: scroll;
   }
 
   .size-Adjust-box {
@@ -222,7 +241,7 @@
 
   .all-audio-controller {
     color: ghostwhite;
-    height: 50px;
+    min-width: 70px;
     font-size: 11px;
     display: flex;
     flex-direction: column;
@@ -247,29 +266,24 @@
   /* audio */
   #media-audio-wrapper {
     position: absolute;
-    top: 0;
-    right: 0;
+    /* top: 60px; */
+    /* right: 0; */
+    background-color: rgba(0,0,0,0.8);
+
     /* z-index : 9; */
     width: 180px;
-    height: 100%;
-    padding: 5px 0 60px 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    /* justify-content: space-around; */
   }
   #media-audio-frame {
-    background-color: rgba(0,0,0,0.8);
-    position: absolute;
-    top:70px;
-    bottom: 10px;
-    right: 0;
-    padding: 5px 0 0 10px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    /* overflow-y: scroll; */
   }
   .is-show {
     background-color: rgba(0,0,0,0.8);
@@ -286,26 +300,27 @@
 
   #audios{
     height: 100%;
-    width: 180px;
+    width: 100%;
     margin: 0;
-    padding-left: 0;
+    padding: 10px;
 
     display: flex;
-    flex-flow: column;
     justify-content: space-around;
+    align-items: flex-start;
   }
 
   .audio-area {
     position: relative;
     display: flex;
     align-items: center;
+    margin: 15px 0 15px 10px;
+    min-width: 100px;
   }
 
   .audio-wrapper {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    margin: 10px 5px;
     position: relative;
     opacity: 0.7;
     display: flex;
@@ -314,18 +329,20 @@
   }
 
   .non-audio-frame {
-    width: 50px;
-    height: 50px;
+  }
+
+  .dummy-audio-icon{
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     border: 1.5px dotted lightgrey;
-    margin: 10px 5px;
     opacity: 0.7;
   }
 
   .media-audio-delete-icon {
     position: absolute;
     left: -15px;
-    top: -15px;
+    top: -22px;
     z-index: -1;
     color:  rgba(220,50,50,0.8);
     display: none;
@@ -333,8 +350,8 @@
 
   .media-audio-loop-icon {
     position: absolute;
-    right: -15px;
-    top: -15px;
+    right: -16px;
+    top: -22px;
     z-index: -1;
     color:  rgba(20,20,250,0.8);
     display: none;
@@ -378,8 +395,6 @@
 
   .audio-vol-wrapper {
     position: absolute;
-    top: 43px;
-    left: 40px;
     /* transform: rotate(180deg); */
     display: flex;
     align-items: center;
@@ -418,6 +433,7 @@
     margin-bottom: 12px;
   }
 
+/* 
   .change-disp-audio-wrapper {
     position: absolute;
     bottom: 0px;
@@ -428,22 +444,23 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-  }
+  } */
 
-  .is-reverse{
+  /* .is-reverse{
     transform: scale(-1, 1);
-  }
+  } */
 
-  .media-audio-num {
+  /* .media-audio-num {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    padding: 0 8px;
     z-index: 1;
     background-color: rgba(50, 110, 110, 0.7);
     color: white;
-    padding: 0 8px;
     border-radius: 50%;
-    margin-right: -20px;
-    margin-top: -60px;
     font-size: 16px;
-  }
+  } */
 
   .change-disp-audio {
     color: lightgrey;
@@ -465,7 +482,59 @@
     z-index: 2;
   }
 
+/* スマホ以外 */
+@media screen and (min-width:481px) {
+  #media-audio-wrapper{
+    top: 60px;
+    right: 0;
+  }
+
+  #audios{
+    flex-flow: column;
+  }
+
+  .audio-area {
+    justify-content: flex-start;
+  }
+
+  .audio-vol-wrapper {
+    top: 35px;
+    left: 14px;
+  }
+
+}
+
+/* スマホ */
 @media screen and (max-width:480px) {
+  #media-audio-wrapper{
+    bottom: 0;
+    width: 100%
+  }
+
+  #audios{
+    justify-content: flex-start;
+    overflow-x:scroll;
+    padding: 10px 25px;
+  }
+
+  .audio-vol-wrapper {
+    bottom: 18px;
+    left: 12px;
+  }
+
+  .media-audio-name-wrapper {
+    margin-top: 20px;
+  }
+
+  .audio-area {
+    flex-direction: column;
+    margin: 15px 0 0 10px;
+  }
+
+  .all-audio-controll-wrapper {
+    height: 50px;
+  }
+
   .change-disp-audio {
     padding: 10px 12px 10px 8px;
   }
@@ -473,16 +542,20 @@
     padding: 10px 15px;
   }
   .media-audio-delete-icon {
+    padding: 5px;
     left: -25px;
+    top: -30px;
+  }
+  .media-audio-loop-icon {
+    right: -18px;
     top: -25px;
   }
-  .media-audio-num {
-    padding: 0 6px;
-    margin-right: -14px;
-    margin-top: -50px;
-    font-size: 13px;    
-  }  
-}
 
+
+  /* .change-disp-audio-wrapper {
+    bottom: 60px;
+  } */
+
+}
 
 </style>

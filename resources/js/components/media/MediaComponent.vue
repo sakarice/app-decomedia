@@ -25,6 +25,7 @@
      ref="mediaAudio">
     </media-audio>
 
+
     <!-- Media動画(=youtube)コンポーネント -->
     <media-movie
     v-show="getMediaSetting['isShowMovie']"
@@ -57,16 +58,16 @@
         <router-view name="dispAudioModal"
         v-on:show-modal="showModal">        
         </router-view>
+        <!-- 図形設定 -->
+        <router-view name="dispFigureSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
         v-on:show-modal="showModal">
         </router-view>
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
-        v-on:show-modal="showModal">
-        </router-view>
-        <!-- 図形設定 -->
-        <router-view name="dispFigureSettingModal"
         v-on:show-modal="showModal">
         </router-view>
 
@@ -87,6 +88,11 @@
     :transitionName="transitionName">
     </router-view>
 
+    <router-view name="mediaFigureSetting"
+    v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
     <!-- 動画設定コンポーネント -->
     <router-view name="movieSetting"
     v-show="isShowModal['movieModal']"
@@ -103,10 +109,8 @@
     :transitionName="transitionName">
     </router-view>
 
-    <router-view name="mediaFigureSetting"
-    v-show="isShowModal['figureSettingModal']"
-    v-on:close-modal="closeModal">
-    </router-view>
+    <disp-audios></disp-audios>
+
 
     <!-- <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
@@ -140,21 +144,17 @@
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
-
-  // テスト メディア図形
-  // import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
-
+  import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
 
 export default {
   components : {
-    // MediaImg,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
-    // MediaFigureSetting,
     MediaFigureMng,
+    DispAudios
   },
   props: [],
   data : () => {
@@ -213,8 +213,6 @@ export default {
     ...mapMutations('media', ['setMediaId']),
     ...mapMutations('media', ['setIsMyMedia']),
     ...mapMutations('media', ['setMode']),
-    ...mapMutations('mediaImg', ['updateMediaImgObjectItem']),
-    ...mapMutations('mediaImg', ['updateIsInitializedImg']),
     ...mapMutations('mediaAudios', ['addMediaAudiosObjectItem']),
     ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
@@ -364,19 +362,17 @@ export default {
 
 
 
-@media screen and (min-width: 481px) {
+/* @media screen and (min-width: 481px) {
   #disp-modal-zone {
     left: 0;
   }
-  
 }
 
 @media screen and (max-width: 480px) {
   #disp-modal-zone {
     right: 0;
   }
-  
-}
+} */
 
 
 </style>

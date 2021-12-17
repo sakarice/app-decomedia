@@ -1,6 +1,6 @@
 #toggle-wrapper {
   display: flex;
-  margin-bottom: 20px;
+  margin: 0 0 20px 0;
 }
 
 #file-category-toggle {
@@ -86,7 +86,7 @@
   bottom: 0px;
   right: -5px; */
   color: lightseagreen;
-  z-index: 1;
+  z-index: 2;
   margin-right: -85%;
   margin-top: -35px;
   cursor: pointer;
@@ -114,8 +114,8 @@
 #contents-wrapper {
   z-index: 2;
   width: 100%;
-  height: 92%;
-  padding: 10px 10px 10px 10px;
+  height: 100%;
+  padding: 20px 10px 10px 0px;
 
   display: flex;
   flex-direction: column;
@@ -198,8 +198,21 @@
     padding: 5px 15px;
     font-size: 13px;
   }
-  #setting-wrapper, #contents-wrapper {
+  #setting-wrapper {
     width: 220px;
   }
+
+  #contents-wrapper {
+    padding: 20px 10px 15px 0px;
+    flex-direction: column-reverse;
+  }
+  #toggle-wrapper {
+    margin: 0;
+  }
+
+  #upload-input-wrapper {
+    margin-bottom: 15px;
+  }  
+  
   
 }
