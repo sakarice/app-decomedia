@@ -65,7 +65,7 @@
 /* Modal表示アニメーション */
 .slide-in-enter-active, .slide-in-leave-active {
 transform: translate(0px, 0px);
-transition: all 400ms
+transition: all 200ms
 }
 
 .slide-in-enter, .slide-in-leave-to {
