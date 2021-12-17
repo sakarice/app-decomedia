@@ -49,6 +49,7 @@
       hideAudios(){
         const event = new CustomEvent('changeDispAudioState', {detail:false} );
         document.body.dispatchEvent(event);
+        this.isShowAudio = false;
       }
     }
   }

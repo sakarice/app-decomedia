@@ -4757,6 +4757,7 @@ function _defineProperty(obj, key, value) {
         detail: false
       });
       document.body.dispatchEvent(event);
+      this.isShowAudio = false;
     }
   }
 });
