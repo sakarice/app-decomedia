@@ -5927,14 +5927,6 @@ function _defineProperty(obj, key, value) {
     },
     // 回転用
     rotateStart: function rotateStart(e) {
-      var event;
-
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
-
       this.rotate_target = document.getElementById(this.canvas_wrapper_with_index);
       this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px", ""));
       this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px", ""));
@@ -5951,8 +5943,20 @@ function _defineProperty(obj, key, value) {
     },
     rotating: function rotating(e) {
       e.preventDefault();
-      var distance_x_from_target_center = e.clientX - this.rotate_center_x;
-      var distance_y_from_target_center = e.clientY - this.rotate_center_y;
+      var event;
+      var distance_x_from_target_center;
+      var distance_y_from_target_center;
+
+      if (e.type === "mousedown") {
+        event = e;
+        distance_x_from_target_center = event.clientX - this.rotate_center_x;
+        distance_y_from_target_center = event.clientY - this.rotate_center_y;
+      } else {
+        event = e.changedTouches[0];
+        distance_x_from_target_center = event.pageX - this.rotate_center_x;
+        distance_y_from_target_center = event.pageY - this.rotate_center_y;
+      }
+
       var new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
       var new_deg = Math.floor(new_rad * (180 / Math.PI) * -1 % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
 
