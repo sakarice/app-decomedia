@@ -360,8 +360,8 @@ export default {
   .audio-list {
     position: relative;
     width: 100%;
-    height: 30px;
-    margin-bottom: 2px;
+    height: 40px;
+    margin-bottom: 10px;
     border-radius: 5px;
     list-style: none;
     transition: transform 0.3s;
@@ -380,13 +380,13 @@ export default {
   }
 
   .audio-play-icon {
-    top: 0;
-    left: 12px;
+    top: 5;
+    left: 16px;
   }
 
   .audio-pause-icon {
-    top: 8px;
-    left: 7px;
+    top: 13px;
+    left: 12px;
   }
 
   .now-play {
@@ -445,8 +445,8 @@ export default {
 
 
   .audio-thumbnail {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: darkgray;
   }
