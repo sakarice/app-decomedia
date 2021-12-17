@@ -3834,27 +3834,17 @@ function _defineProperty(obj, key, value) {
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
     new_index: function new_index() {},
-    canvas_width: function canvas_width() {
-      return this.figureDatas['width'] + "px";
-    },
-    canvas_height: function canvas_height() {
-      return this.figureDatas['height'] + "px";
-    },
     canvas_with_index: function canvas_with_index() {
       return 'canvas' + this.index;
     },
     canvas_wrapper_with_index: function canvas_wrapper_with_index() {
       return 'canvas_wrapper' + this.index;
     },
-    style_left: function style_left() {
-      return this.figureDatas['left'] + 'px';
-    },
-    style_top: function style_top() {
-      return this.figureDatas['top'] + 'px';
-    },
-    style_rotate: function style_rotate() {
-      return 'rotate(' + this.figureDatas['degree'] + 'deg)';
-    },
+    // canvas_width:function(){ return this.figureDatas['width']+"px" },
+    // canvas_height:function(){ return this.figureDatas['height']+"px" },
+    // style_left : function(){ return this.figureDatas['left'] + 'px';},
+    // style_top : function(){ return this.figureDatas['top'] + 'px';},
+    // style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
     isEditMode: function isEditMode() {
       var route_name = this.$route.name;
 
@@ -3886,6 +3876,25 @@ function _defineProperty(obj, key, value) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(index);
       return this.getMediaFigure;
+    },
+    canvasWrapperStyle: function canvasWrapperStyle() {
+      var styleObject = {
+        "left": this.figureDatas["left"] + "px",
+        "top": this.figureDatas["top"] + "px",
+        "width": this.figureDatas["width"] + "px",
+        // キャンバスより若干大きめに
+        "height": this.figureDatas["height"] + "px",
+        // キャンバスより若干大きめに
+        "transform": 'rotate(' + this.figureDatas['degree'] + 'deg)'
+      };
+      return styleObject;
+    },
+    canvasSizeStyle: function canvasSizeStyle() {
+      var styleObject = {
+        "width": this.figureDatas["width"] + "px",
+        "height": this.figureDatas["height"] + "px"
+      };
+      return styleObject;
     },
     // 位置操作用
     moveStart: function moveStart(e) {
@@ -5703,8 +5712,8 @@ function _defineProperty(obj, key, value) {
       target.addEventListener('resizingHeight', this.updateHeighthAndTop, false);
     },
     updateWidthAndLeft: function updateWidthAndLeft(e) {
-      var new_width = e.detail.width;
-      var new_left = e.detail.left;
+      var new_width = Math.floor(e.detail.width);
+      var new_left = Math.floor(e.detail.left);
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "width",
@@ -5718,8 +5727,8 @@ function _defineProperty(obj, key, value) {
       this.$emit('resize');
     },
     updateHeighthAndTop: function updateHeighthAndTop(e) {
-      var new_height = e.detail.height;
-      var new_top = e.detail.top;
+      var new_height = Math.floor(e.detail.height);
+      var new_top = Math.floor(e.detail.top);
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: "height",
@@ -15717,11 +15726,7 @@ var render = function () {
     "div",
     {
       staticClass: "canvas_item-wrapper",
-      style: {
-        left: _vm.style_left,
-        top: _vm.style_top,
-        transform: _vm.style_rotate,
-      },
+      style: _vm.canvasWrapperStyle(),
       attrs: { id: _vm.canvas_wrapper_with_index },
       on: { dblclick: _vm.showEditor },
     },
@@ -15751,7 +15756,7 @@ var render = function () {
           },
         ],
         class: { hidden: !_vm.isActive },
-        style: { width: _vm.canvas_width, height: _vm.canvas_height },
+        style: _vm.canvasSizeStyle(),
         attrs: { index: _vm.index },
         on: {
           resize: _vm.resize,

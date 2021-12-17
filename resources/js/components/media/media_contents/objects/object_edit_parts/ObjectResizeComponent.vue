@@ -94,15 +94,15 @@
         target.addEventListener('resizingHeight',this.updateHeighthAndTop,false);
       },
       updateWidthAndLeft(e){
-        const new_width = e.detail.width;
-        const new_left  = e.detail.left;
+        const new_width = Math.floor(e.detail.width);
+        const new_left  = Math.floor(e.detail.left);
         this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:new_width});
         this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
         this.$emit('resize');
       },
       updateHeighthAndTop(e){
-        const new_height = e.detail.height;
-        const new_top = e.detail.top;
+        const new_height = Math.floor(e.detail.height);
+        const new_top = Math.floor(e.detail.top);
         this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:new_height});
         this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
         this.$emit('resize');

@@ -1,12 +1,12 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" :style="{left:style_left,top:style_top,transform:style_rotate}"
+  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" :style="canvasWrapperStyle()"
   @dblclick="showEditor">
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
 
-    <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:canvas_width, height:canvas_height}"
+    <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="canvasSizeStyle()"
      v-on:resize="resize"
      @move="moveStart($event)">
     </object-resize>
@@ -56,13 +56,13 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       new_index:function(){ },
-      canvas_width:function(){ return this.figureDatas['width']+"px" },
-      canvas_height:function(){ return this.figureDatas['height']+"px" },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
-      style_left : function(){ return this.figureDatas['left'] + 'px';},
-      style_top : function(){ return this.figureDatas['top'] + 'px';},
-      style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
+      // canvas_width:function(){ return this.figureDatas['width']+"px" },
+      // canvas_height:function(){ return this.figureDatas['height']+"px" },
+      // style_left : function(){ return this.figureDatas['left'] + 'px';},
+      // style_top : function(){ return this.figureDatas['top'] + 'px';},
+      // style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
       isEditMode : function(){
         const route_name = this.$route.name;
         if((route_name=="create") || (route_name=="edit")){
@@ -92,6 +92,24 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
       },
+      canvasWrapperStyle(){
+        const styleObject = {
+          "left" : this.figureDatas["left"] + "px",
+          "top" : this.figureDatas["top"] + "px",
+          "width" : this.figureDatas["width"] + "px", // キャンバスより若干大きめに
+          "height" : this.figureDatas["height"] + "px", // キャンバスより若干大きめに
+          "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
+        }
+        return styleObject;
+      },
+      canvasSizeStyle(){
+        const styleObject = {
+          "width" : this.figureDatas["width"] + "px",
+          "height" : this.figureDatas["height"] + "px",
+        }
+        return styleObject;
+      },
+
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
