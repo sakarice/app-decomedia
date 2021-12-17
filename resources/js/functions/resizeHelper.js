@@ -60,15 +60,33 @@ function resizeTopStart(e){
   document.body.addEventListener("touchmove", resizeTop, false);
 }
 
+// マウスポインターかタッチ箇所の座標を取得する
+function getPointerX(event){
+  if(event.type==="mousemove"){ // マウス操作
+    return event.clientX;
+  } else { // タッチ操作
+    return event.changedTouches[0].pageX;
+  }
+}
+
+function getPointerY(event){
+  if(event.type==="mousemove"){ // マウス操作
+    return event.clientY;
+  } else { // タッチ操作
+    return event.changedTouches[0].pageY;
+  }
+}
+
 // 2. リサイズ中メソッド
 function resizeRight(e){
-  const new_width = e.clientX - initial_left;
+  console.log('resize right');
+  const new_width = getPointerX(e) - initial_left;
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:initial_left}});
   resize_target.dispatchEvent(resizing_width_event);
   registEventMiddleToEnd();
 }
 function resizeLeft(e){
-  const diff = initial_left - e.clientX;
+  const diff = initial_left - getPointerX(e);
   const new_width = initial_width + diff;
   const new_left = initial_left - diff;
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:new_left}});
@@ -76,13 +94,13 @@ function resizeLeft(e){
   registEventMiddleToEnd();
 }
 function resizeBottom(e){
-  const new_height = e.clientY - initial_top;
+  const new_height = getPointerY(e) - initial_top;
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:initial_top}});
   resize_target.dispatchEvent(resizing_height_event);
   registEventMiddleToEnd();
 }
 function resizeTop(e){
-  const diff = initial_top - e.clientY;
+  const diff = initial_top - getPointerY(e);
   const new_height = initial_height + diff;
   const new_top = initial_top - diff;
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:new_top}});

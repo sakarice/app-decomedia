@@ -1,4 +1,10 @@
 
+/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */
+body {
+  overscroll-behavior-y: none;
+}
+
+
 #field {
   position: fixed;
   top: 0;

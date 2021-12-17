@@ -5045,6 +5045,22 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6623,11 +6639,33 @@ function resizeBottomStart(e) {
 function resizeTopStart(e) {
   document.body.addEventListener("mousemove", resizeTop, false);
   document.body.addEventListener("touchmove", resizeTop, false);
+} // マウスポインターかタッチ箇所の座標を取得する
+
+
+function getPointerX(event) {
+  if (event.type === "mousemove") {
+    // マウス操作
+    return event.clientX;
+  } else {
+    // タッチ操作
+    return event.changedTouches[0].pageX;
+  }
+}
+
+function getPointerY(event) {
+  if (event.type === "mousemove") {
+    // マウス操作
+    return event.clientY;
+  } else {
+    // タッチ操作
+    return event.changedTouches[0].pageY;
+  }
 } // 2. リサイズ中メソッド
 
 
 function resizeRight(e) {
-  var new_width = e.clientX - initial_left;
+  console.log('resize right');
+  var new_width = getPointerX(e) - initial_left;
   var resizing_width_event = new CustomEvent('resizingWidth', {
     detail: {
       width: new_width,
@@ -6639,7 +6677,7 @@ function resizeRight(e) {
 }
 
 function resizeLeft(e) {
-  var diff = initial_left - e.clientX;
+  var diff = initial_left - getPointerX(e);
   var new_width = initial_width + diff;
   var new_left = initial_left - diff;
   var resizing_width_event = new CustomEvent('resizingWidth', {
@@ -6653,7 +6691,7 @@ function resizeLeft(e) {
 }
 
 function resizeBottom(e) {
-  var new_height = e.clientY - initial_top;
+  var new_height = getPointerY(e) - initial_top;
   var resizing_height_event = new CustomEvent('resizingHeight', {
     detail: {
       height: new_height,
@@ -6665,7 +6703,7 @@ function resizeBottom(e) {
 }
 
 function resizeTop(e) {
-  var diff = initial_top - e.clientY;
+  var diff = initial_top - getPointerY(e);
   var new_height = initial_height + diff;
   var new_top = initial_top - diff;
   var resizing_height_event = new CustomEvent('resizingHeight', {
@@ -7895,7 +7933,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\ntransform: translate(0px, 0px);\r\ntransition: all 200ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\ntransform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 100%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 10px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 3px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n  \r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\ntransform: translate(0px, 0px);\r\ntransition: all 200ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\ntransform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 100%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 10px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 3px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n  \r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16036,6 +16074,10 @@ var render = function () {
             {
               staticClass: "adjust-bar left-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("left")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
                   return _vm.resizeStart("left")
@@ -16050,6 +16092,10 @@ var render = function () {
             {
               staticClass: "adjust-bar right-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("right")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
                   return _vm.resizeStart("right")
@@ -16070,6 +16116,10 @@ var render = function () {
             {
               staticClass: "adjust-bar top-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("top")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
                   return _vm.resizeStart("top")
@@ -16084,6 +16134,10 @@ var render = function () {
             {
               staticClass: "adjust-bar bottom-size-adjust-bar",
               on: {
+                touchstart: function ($event) {
+                  $event.stopPropagation()
+                  return _vm.resizeStart("bottom")
+                },
                 mousedown: function ($event) {
                   $event.stopPropagation()
                   return _vm.resizeStart("bottom")
@@ -16099,6 +16153,11 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point left top",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("left")
+              _vm.resizeStart("top")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
               _vm.resizeStart("left")
@@ -16110,6 +16169,11 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point left bottom",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("left")
+              _vm.resizeStart("bottom")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
               _vm.resizeStart("left")
@@ -16121,6 +16185,11 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point right top",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("right")
+              _vm.resizeStart("top")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
               _vm.resizeStart("right")
@@ -16132,6 +16201,11 @@ var render = function () {
         _c("div", {
           staticClass: "adjust-point right bottom",
           on: {
+            touchstart: function ($event) {
+              $event.stopPropagation()
+              _vm.resizeStart("right")
+              _vm.resizeStart("bottom")
+            },
             mousedown: function ($event) {
               $event.stopPropagation()
               _vm.resizeStart("right")
