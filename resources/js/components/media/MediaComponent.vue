@@ -25,6 +25,7 @@
      ref="mediaAudio">
     </media-audio>
 
+
     <!-- Media動画(=youtube)コンポーネント -->
     <media-movie
     v-show="getMediaSetting['isShowMovie']"
@@ -108,6 +109,8 @@
     :transitionName="transitionName">
     </router-view>
 
+    <disp-audios></disp-audios>
+
 
     <!-- <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
@@ -141,21 +144,17 @@
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
-
-  // テスト メディア図形
-  // import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
-
+  import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
 
 export default {
   components : {
-    // MediaImg,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
-    // MediaFigureSetting,
     MediaFigureMng,
+    DispAudios
   },
   props: [],
   data : () => {

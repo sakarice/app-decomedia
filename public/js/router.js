@@ -74,12 +74,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _media_contents_objects_img_MediaImgMngComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./media_contents/objects/img/MediaImgMngComponent.vue */ "./resources/js/components/media/media_contents/objects/img/MediaImgMngComponent.vue");
 /* harmony import */ var _media_contents_MediaAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./media_contents/MediaAudioComponent.vue */ "./resources/js/components/media/media_contents/MediaAudioComponent.vue");
 /* harmony import */ var _media_contents_objects_movie_MediaMovieComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./media_contents/objects/movie/MediaMovieComponent.vue */ "./resources/js/components/media/media_contents/objects/movie/MediaMovieComponent.vue");
 /* harmony import */ var _edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit_parts/MediaSettingComponent.vue */ "./resources/js/components/media/edit_parts/MediaSettingComponent.vue");
 /* harmony import */ var _media_contents_objects_figure_MediaFigureMngComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./media_contents/objects/figure/MediaFigureMngComponent.vue */ "./resources/js/components/media/media_contents/objects/figure/MediaFigureMngComponent.vue");
+/* harmony import */ var _media_change_display_parts_DispAudiosComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../media/change_display_parts/DispAudiosComponent.vue */ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -267,6 +268,9 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
 
 
  // import MediaImg from './media_contents/img/MediaImgComponent.vue';
@@ -274,19 +278,17 @@ function _defineProperty(obj, key, value) {
 
 
 
- // テスト メディア図形
-// import MediaFigureSetting from './edit_parts/MediaFigureSettingComponent.vue';
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    // MediaImg,
     MediaImgMng: _media_contents_objects_img_MediaImgMngComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     MediaAudio: _media_contents_MediaAudioComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     MediaSetting: _edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     MediaMovie: _media_contents_objects_movie_MediaMovieComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    // MediaFigureSetting,
-    MediaFigureMng: _media_contents_objects_figure_MediaFigureMngComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    MediaFigureMng: _media_contents_objects_figure_MediaFigureMngComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    DispAudios: _media_change_display_parts_DispAudiosComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: [],
   data: function data() {
@@ -306,7 +308,7 @@ function _defineProperty(obj, key, value) {
       autoPlay: true
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('media', ['getIsCrudDoing'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapGetters)('mediaFigures', ['getMediaFigures'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('media', ['getIsCrudDoing'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaFigures', ['getIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapGetters)('mediaFigures', ['getMediaFigures'])), {}, {
     waitingMsg: function waitingMsg() {
       if (this.getMode == 1) {
         return '作成中です...';
@@ -344,7 +346,7 @@ function _defineProperty(obj, key, value) {
       return initCountStack;
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_5__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('media', ['setMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('media', ['setIsMyMedia'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('media', ['setMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('mediaSetting', ['updateIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_6__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     judgeIsMyMedia: function judgeIsMyMedia() {
       var _this = this;
 
@@ -1099,6 +1101,130 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showModal: function showModal(target) {
       this.$emit('show-modal', target);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      isShowAudio: false
+    };
+  },
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
+    mediaAudioNum: function mediaAudioNum() {
+      return this.getMediaAudios.length;
+    },
+    isShowAudios: function isShowAudios() {
+      return this.mediaAudioNum > 0 ? true : false;
+    },
+    isEditMode: function isEditMode() {
+      var mode = this.$route.name;
+
+      if (mode == "create" || mode == "edit") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }),
+  watch: {
+    isShowAudios: function isShowAudios(newVal) {
+      if (newVal == 0) {
+        this.hideAudios();
+      }
+    }
+  },
+  methods: {
+    changeDispAudioState: function changeDispAudioState() {
+      this.isShowAudio = !this.isShowAudio;
+      var event = new CustomEvent('changeDispAudioState', {
+        detail: this.isShowAudio
+      });
+      document.body.dispatchEvent(event);
+    },
+    hideAudios: function hideAudios() {
+      var event = new CustomEvent('changeDispAudioState', {
+        detail: false
+      });
+      document.body.dispatchEvent(event);
     }
   }
 });
@@ -2960,6 +3086,13 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3097,6 +3230,14 @@ function _defineProperty(obj, key, value) {
         this.deleteAudio(0);
       }
     }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    document.body.addEventListener('changeDispAudioState', function (e) {
+      console.log("changeDispAudioState:state->" + e.detail);
+      _this3.isShowAudio = e.detail;
+    });
   }
 });
 
@@ -6823,7 +6964,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7023,6 +7164,29 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.icon-wrapper[data-v-4870f6bf] {\n  padding: 12px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: auto;\n  border-radius: 50%;\n  background-color: rgba(20,20,20,0.8);\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\ncolor: lightgrey;\npadding: 10px 19px 10px 15px;\n/* margin: 0 10px 10px 0;\nborder-radius: 50%;\nbackground-color: rgba(0,0,0, 0.5); */\n}\n.change-disp-audio[data-v-714f7a19]:hover {\n  background-color: rgba(0,110,110, 0.5);\n  cursor: pointer;\n}\n.media-audio-num[data-v-714f7a19] {\n  z-index: 1;\n  background-color: rgba(50, 110, 110, 0.7);\n  color: white;\n  border-radius: 50%;\n  position: absolute;\n  left: -10px;\n  top: -10px;\n  padding: 0 8px;\n  font-size: 16px;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 35px;\n    right: 0;\n    width: 55px;\n    height: 55px;\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n.media-audio-num[data-v-714f7a19] {\n    padding: 0 6px;\n    top: -3px;\n    left: -3px;\n    font-size: 13px;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7264,7 +7428,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 50;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    margin-bottom: 5px;\n    border-bottom: double 2px grey;\n    width: 90px;\n\n    display: flex;\n    justify-content: space-between;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    height: 50px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    top: 0;\n    right: 0;\n    /* z-index : 9; */\n    width: 180px;\n    height: 100%;\n    padding: 5px 0 60px 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n#media-audio-frame[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    position: absolute;\n    top:70px;\n    bottom: 10px;\n    right: 0;\n    padding: 5px 0 0 10px;\n    border-top-left-radius: 10px;\n    border-bottom-left-radius: 10px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n    /* overflow-y: scroll; */\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 180px;\n    margin: 0;\n    padding-left: 0;\n\n    display: flex;\n    flex-flow: column;\n    justify-content: space-around;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    margin: 10px 5px;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n    width: 50px;\n    height: 50px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    margin: 10px 5px;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -15px;\n    top: -15px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    top: 43px;\n    left: 40px;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    z-index: 10;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.is-reverse[data-v-91d677f2]{\n    transform: scale(-1, 1);\n}\n.media-audio-num[data-v-91d677f2] {\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    padding: 0 8px;\n    border-radius: 50%;\n    margin-right: -20px;\n    margin-top: -60px;\n    font-size: 16px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n@media screen and (max-width:480px) {\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    left: -25px;\n    top: -25px;\n}\n.media-audio-num[data-v-91d677f2] {\n    padding: 0 6px;\n    margin-right: -14px;\n    margin-top: -50px;\n    font-size: 13px;\n}\n.change-disp-audio-wrapper[data-v-91d677f2] {\n    bottom: 60px;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 10px 0;\n    /* border-bottom: double 2px grey; */\n    width: 100%;\n    height: 80px;\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n    overflow-x: scroll;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    /* top: 60px; */\n    /* right: 0; */\n    background-color: rgba(0,0,0,0.8);\n\n    /* z-index : 9; */\n    width: 180px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    /* height: 100%; */\n    display: flex;\n    flex-direction: column;\n    /* justify-content: space-around; */\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -16px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n\n/* \n  .change-disp-audio-wrapper {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    z-index: 10;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n  } */\n\n  /* .is-reverse{\n    transform: scale(-1, 1);\n  } */\n\n  /* .media-audio-num {\n    position: absolute;\n    top: -10px;\n    left: -10px;\n    padding: 0 8px;\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    border-radius: 50%;\n    font-size: 16px;\n  } */\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 60px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    top: 35px;\n    left: 14px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    bottom: 18px;\n    left: 12px;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    margin-top: 20px;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    height: 50px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    padding: 5px;\n    left: -25px;\n    top: -30px;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    right: -18px;\n    top: -25px;\n}\n\n\n  /* .change-disp-audio-wrapper {\n    bottom: 60px;\n  } */\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7287,7 +7451,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.audio-player-wrapper[data-v-3ede5126] {\n    display: flex;\n    align-items: center;\n    border: 1.5px dotted lightgrey;\n    border-radius: 50%;\n}\n.media-audio-thumbnail[data-v-3ede5126] {\n    width: 53px;\n    height: 53px;\n    border-radius: 50%;\n}\n.media-audio-play-icon[data-v-3ede5126],\n  .media-audio-pause-icon[data-v-3ede5126] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.media-audio-play-icon[data-v-3ede5126] {\n    left: 20px;\n}\n.media-audio-pause-icon[data-v-3ede5126] {\n    left: 14px;\n}\n\n  /* hover設定(wrapper) */\n.audio-player-wrapper[data-v-3ede5126]:hover {\n    opacity: 1;\n}\n.audio-player-wrapper:hover\n  .media-audio-play-icon[data-v-3ede5126] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-player-wrapper:hover\n  .media-audio-pause-icon[data-v-3ede5126] {\n    z-index: 2;\n    display: inline-block;\n}\n\n\n\n  /* hover設定(各アイコン) */\n.media-audio-play-icon[data-v-3ede5126]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-pause-icon[data-v-3ede5126]:hover {\n    color:  rgba(0,255,0,1);\n}\n\n  /* 再生関連 */\n.isPlay[data-v-3ede5126] {\n    border-color: springgreen;\n    opacity: 1;\n}\n@media screen and (max-width:480px) {\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.audio-player-wrapper[data-v-3ede5126] {\n    display: flex;\n    align-items: center;\n    border: 1.5px dotted lightgrey;\n    border-radius: 50%;\n}\n.media-audio-thumbnail[data-v-3ede5126] {\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n}\n.media-audio-play-icon[data-v-3ede5126],\n  .media-audio-pause-icon[data-v-3ede5126] {\n    position: absolute;\n    top: 5;\n    z-index: -1;\n    color: rgba(0,255,0,0.7);\n    display: none;\n}\n.media-audio-play-icon[data-v-3ede5126] {\n    left: 14px;\n}\n.media-audio-pause-icon[data-v-3ede5126] {\n    left: 8.5px;\n}\n\n  /* hover設定(wrapper) */\n.audio-player-wrapper[data-v-3ede5126]:hover {\n    opacity: 1;\n}\n.audio-player-wrapper:hover\n  .media-audio-play-icon[data-v-3ede5126] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-player-wrapper:hover\n  .media-audio-pause-icon[data-v-3ede5126] {\n    z-index: 2;\n    display: inline-block;\n}\n\n\n\n  /* hover設定(各アイコン) */\n.media-audio-play-icon[data-v-3ede5126]:hover {\n    color:  rgba(0,255,0,1);\n}\n.media-audio-pause-icon[data-v-3ede5126]:hover {\n    color:  rgba(0,255,0,1);\n}\n\n  /* 再生関連 */\n.isPlay[data-v-3ede5126] {\n    border-color: springgreen;\n    opacity: 1;\n}\n@media screen and (max-width:480px) {\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7730,7 +7894,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\ntransform: translate(0px, 0px);\r\ntransition: all 400ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\ntransform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-bottom : 3px;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 10px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 3px;\r\n    width: 100%;\r\n    overflow-x: scroll;\r\n  }\r\n  \r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\ntransform: translate(0px, 0px);\r\ntransition: all 400ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\ntransform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 100%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 10px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 3px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n  \r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7753,7 +7917,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: white;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#change-disp-modal {\r\n  /* position: absolute;\r\n  bottom: 0px;\r\n  right: -5px; */\r\n  color: lightseagreen;\r\n  z-index: 1;\r\n  margin-right: -85%;\r\n  margin-top: -35px;\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n  padding: 20px 10px 10px 0px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }\r\n  #setting-wrapper {\r\n    width: 220px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    padding: 20px 10px 15px 0px;\r\n    flex-direction: column-reverse;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    margin-bottom: 15px;\r\n  }  \r\n  \r\n  \r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: white;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#change-disp-modal {\r\n  /* position: absolute;\r\n  bottom: 0px;\r\n  right: -5px; */\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  margin-right: -85%;\r\n  margin-top: -35px;\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n  padding: 20px 10px 10px 0px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }\r\n  #setting-wrapper {\r\n    width: 220px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    padding: 20px 10px 15px 0px;\r\n    flex-direction: column-reverse;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    margin-bottom: 15px;\r\n  }  \r\n  \r\n  \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8209,6 +8373,35 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudioModalComponent_vue_vue_type_style_index_0_id_4870f6bf_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_style_index_0_id_714f7a19_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_style_index_0_id_714f7a19_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_style_index_0_id_714f7a19_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -9742,6 +9935,46 @@ component.options.__file = "resources/js/components/media/change_display_parts/D
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/DispAudiosComponent.vue ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true& */ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true&");
+/* harmony import */ var _DispAudiosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DispAudiosComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DispAudiosComponent_vue_vue_type_style_index_0_id_714f7a19_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& */ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DispAudiosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "714f7a19",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/media/change_display_parts/DispAudiosComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue":
 /*!************************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue ***!
@@ -11027,6 +11260,21 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DispAudiosComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue?vue&type=script&lang=js& ***!
@@ -11579,6 +11827,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_style_index_0_id_714f7a19_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=style&index=0&id=714f7a19&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue?vue&type=style&index=0&id=19872b35&scoped=true&lang=css&":
 /*!*********************************************************************************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue?vue&type=style&index=0&id=19872b35&scoped=true&lang=css& ***!
@@ -12087,6 +12347,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudioModalComponent_vue_vue_type_template_id_4870f6bf_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudioModalComponent_vue_vue_type_template_id_4870f6bf_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DispAudioModalComponent.vue?vue&type=template&id=4870f6bf&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=template&id=4870f6bf&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true&":
+/*!*******************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true& ***!
+  \*******************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DispAudiosComponent_vue_vue_type_template_id_714f7a19_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true&");
 
 
 /***/ }),
@@ -12789,6 +13065,8 @@ var render = function () {
         on: { "close-modal": _vm.closeModal },
       }),
       _vm._v(" "),
+      _c("disp-audios"),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -13165,6 +13443,95 @@ var render = function () {
       },
     },
     [_c("i", { staticClass: "fas fa-music fa-lg" })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudiosComponent.vue?vue&type=template&id=714f7a19&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShowAudios,
+          expression: "isShowAudios",
+        },
+      ],
+      attrs: { id: "change-disp-audio-wrapper" },
+    },
+    [
+      _vm.isEditMode
+        ? _c("span", { staticClass: "media-audio-num" }, [
+            _vm._v(_vm._s(_vm.mediaAudioNum)),
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _c("i", {
+        staticClass:
+          "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
+        class: { "is-reverse": _vm.isShowAudio },
+        on: {
+          click: function ($event) {
+            return _vm.changeDispAudioState()
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: !_vm.isShowAudio,
+            expression: "!isShowAudio",
+          },
+        ],
+        staticClass: "fas fa-music fa-2x change-disp-audio for-mobile",
+        on: {
+          click: function ($event) {
+            return _vm.changeDispAudioState()
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("i", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isShowAudio,
+            expression: "isShowAudio",
+          },
+        ],
+        staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
+        on: {
+          click: function ($event) {
+            return _vm.changeDispAudioState()
+          },
+        },
+      }),
+    ]
   )
 }
 var staticRenderFns = []
@@ -14644,61 +15011,136 @@ var render = function () {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShowAudio,
+          expression: "isShowAudio",
+        },
+      ],
       class: { "disp-front": _vm.isShowAudio },
       attrs: { id: "media-audio-wrapper" },
     },
     [
-      _c("div", { staticClass: "change-disp-audio-wrapper" }, [
-        _vm.isEditMode
-          ? _c("span", { staticClass: "media-audio-num" }, [
-              _vm._v(_vm._s(_vm.mediaAudioNum)),
-            ])
-          : _vm._e(),
-        _vm._v(" "),
-        _c("i", {
-          staticClass:
-            "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
-          class: { "is-reverse": _vm.isShowAudio },
-          on: {
-            click: function ($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("i", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isShowAudio,
-              expression: "!isShowAudio",
-            },
+      _c("div", { attrs: { id: "media-audio-frame" } }, [
+        _c(
+          "ul",
+          { attrs: { id: "audios" } },
+          [
+            _vm._l(_vm.getMediaAudios, function (mediaAudio, index) {
+              return _c(
+                "li",
+                { key: index, staticClass: "audio-area", attrs: { id: index } },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "audio-wrapper" },
+                    [
+                      _c(
+                        "media-audio-player-component",
+                        {
+                          ref: "mediaAudioPlayer",
+                          refInFor: true,
+                          attrs: { mediaAudioIndex: index },
+                          on: {
+                            setMediaAudioDuration: _vm.setMediaAudioDuration,
+                            taskAfterAudioAdded: _vm.taskAfterAudioAdded,
+                          },
+                        },
+                        [_vm._v("'\n          ")]
+                      ),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isEditMode,
+                            expression: "isEditMode",
+                          },
+                        ],
+                        staticClass:
+                          "media-audio-delete-icon fas fa-times fa-2x",
+                        on: {
+                          click: function ($event) {
+                            return _vm.taskWhenAudioDelete(index)
+                          },
+                        },
+                      }),
+                      _vm._v(" "),
+                      _c("i", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isEditMode,
+                            expression: "isEditMode",
+                          },
+                        ],
+                        staticClass:
+                          "media-audio-loop-icon fas fa-undo-alt fa-2x",
+                        class: { isLoop: mediaAudio["isLoop"] },
+                        on: {
+                          click: function ($event) {
+                            return _vm.updateLoopSetting(index)
+                          },
+                        },
+                      }),
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "audio-vol-wrapper" }, [
+                    _c("i", {
+                      staticClass:
+                        "media-audio-vol-icon fas fa-volume-off fa-2x",
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "vol-bar-wrapper" }, [
+                      _c("input", {
+                        staticClass: "audio-vol-range",
+                        attrs: {
+                          type: "range",
+                          id: index,
+                          min: "0",
+                          max: "1",
+                          step: "0.01",
+                        },
+                        on: {
+                          input: function ($event) {
+                            return _vm.updateAudioVol(index, $event)
+                          },
+                        },
+                      }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  mediaAudio
+                    ? _c("div", { staticClass: "media-audio-name-wrapper" }, [
+                        _c("span", { staticClass: "media-audio-name" }, [
+                          _vm._v(
+                            "\n            " +
+                              _vm._s(mediaAudio["name"]) +
+                              "\n          "
+                          ),
+                        ]),
+                      ])
+                    : _vm._e(),
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm._l(5 - _vm.mediaAudioNum, function (n) {
+              return _c(
+                "li",
+                { key: 5 - n, staticClass: "audio-area non-audio-frame" },
+                [_c("div", { staticClass: "dummy-audio-icon" })]
+              )
+            }),
           ],
-          staticClass: "fas fa-music fa-2x change-disp-audio for-mobile",
-          on: {
-            click: function ($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("i", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowAudio,
-              expression: "isShowAudio",
-            },
-          ],
-          staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
-          on: {
-            click: function ($event) {
-              _vm.isShowAudio = !_vm.isShowAudio
-            },
-          },
-        }),
+          2
+        ),
       ]),
       _vm._v(" "),
       _c(
@@ -14708,183 +15150,39 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.isShowAudio,
-              expression: "isShowAudio",
+              value: _vm.isEditMode,
+              expression: "isEditMode",
             },
           ],
-          attrs: { id: "media-audio-frame" },
+          staticClass: "all-audio-controll-wrapper",
         },
         [
           _c(
             "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: _vm.isEditMode,
-                  expression: "isEditMode",
-                },
-              ],
-              staticClass: "all-audio-controll-wrapper",
-            },
+            { staticClass: "all-audio-controller all-audio-play-wrapper" },
             [
-              _c(
-                "div",
-                { staticClass: "all-audio-controller all-audio-play-wrapper" },
-                [
-                  _c("div", { staticClass: "size-Adjust-box" }, [
-                    _c("i", {
-                      staticClass: "fas fa-caret-right fa-3x",
-                      attrs: { id: "play-all-icon" },
-                      on: { click: _vm.playAllAudio },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticStyle: { color: "grey" } }, [
-                    _vm._v("play all"),
-                  ]),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "all-audio-controller all-audio-finish-wrapper",
-                },
-                [
-                  _c("div", { staticClass: "size-Adjust-box" }, [
-                    _c("i", {
-                      staticClass: "fas fa-pause fa-2x",
-                      attrs: { id: "finish-all-icon" },
-                      on: { click: _vm.finishAllAudio },
-                    }),
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticStyle: { color: "grey" } }, [
-                    _vm._v("stop all"),
-                  ]),
-                ]
-              ),
+              _c("div", { staticClass: "size-Adjust-box" }, [
+                _c("i", {
+                  staticClass: "fas fa-caret-right fa-3x",
+                  attrs: { id: "play-all-icon" },
+                  on: { click: _vm.playAllAudio },
+                }),
+              ]),
             ]
           ),
           _vm._v(" "),
           _c(
-            "ul",
-            { attrs: { id: "audios" } },
+            "div",
+            { staticClass: "all-audio-controller all-audio-finish-wrapper" },
             [
-              _vm._l(_vm.getMediaAudios, function (mediaAudio, index) {
-                return _c(
-                  "li",
-                  {
-                    key: index,
-                    staticClass: "audio-area",
-                    attrs: { id: index },
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "audio-wrapper" },
-                      [
-                        _c(
-                          "media-audio-player-component",
-                          {
-                            ref: "mediaAudioPlayer",
-                            refInFor: true,
-                            attrs: { mediaAudioIndex: index },
-                            on: {
-                              setMediaAudioDuration: _vm.setMediaAudioDuration,
-                              taskAfterAudioAdded: _vm.taskAfterAudioAdded,
-                            },
-                          },
-                          [_vm._v("'\n          ")]
-                        ),
-                        _vm._v(" "),
-                        _c("i", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isEditMode,
-                              expression: "isEditMode",
-                            },
-                          ],
-                          staticClass:
-                            "media-audio-delete-icon fas fa-times fa-2x",
-                          on: {
-                            click: function ($event) {
-                              return _vm.taskWhenAudioDelete(index)
-                            },
-                          },
-                        }),
-                        _vm._v(" "),
-                        _c("i", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.isEditMode,
-                              expression: "isEditMode",
-                            },
-                          ],
-                          staticClass:
-                            "media-audio-loop-icon fas fa-undo-alt fa-2x",
-                          class: { isLoop: mediaAudio["isLoop"] },
-                          on: {
-                            click: function ($event) {
-                              return _vm.updateLoopSetting(index)
-                            },
-                          },
-                        }),
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    mediaAudio
-                      ? _c("div", { staticClass: "media-audio-name-wrapper" }, [
-                          _c("span", { staticClass: "media-audio-name" }, [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(mediaAudio["name"]) +
-                                "\n          "
-                            ),
-                          ]),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "audio-vol-wrapper" }, [
-                      _c("i", {
-                        staticClass:
-                          "media-audio-vol-icon fas fa-volume-off fa-2x",
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "vol-bar-wrapper" }, [
-                        _c("input", {
-                          staticClass: "audio-vol-range",
-                          attrs: {
-                            type: "range",
-                            id: index,
-                            min: "0",
-                            max: "1",
-                            step: "0.01",
-                          },
-                          on: {
-                            input: function ($event) {
-                              return _vm.updateAudioVol(index, $event)
-                            },
-                          },
-                        }),
-                      ]),
-                    ]),
-                  ]
-                )
-              }),
-              _vm._v(" "),
-              _vm._l(5 - _vm.mediaAudioNum, function (n) {
-                return _c("li", { key: 5 - n, staticClass: "non-audio-frame" })
-              }),
-            ],
-            2
+              _c("div", { staticClass: "size-Adjust-box" }, [
+                _c("i", {
+                  staticClass: "fas fa-pause fa-2x",
+                  attrs: { id: "finish-all-icon" },
+                  on: { click: _vm.finishAllAudio },
+                }),
+              ]),
+            ]
           ),
         ]
       ),

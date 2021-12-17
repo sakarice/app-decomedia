@@ -94,8 +94,8 @@
   }
 
   .media-audio-thumbnail {
-    width: 53px;
-    height: 53px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
   }
 
@@ -109,10 +109,10 @@
   }
 
   .media-audio-play-icon {
-    left: 20px;
+    left: 14px;
   }
   .media-audio-pause-icon {
-    left: 14px;
+    left: 8.5px;
   }
 
   /* hover設定(wrapper) */
