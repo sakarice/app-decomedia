@@ -395,7 +395,7 @@ export default {
 
   .delete-audio {
     position: absolute;
-    top: 0;
+    top: 4px;
     right: 0;
     margin-right: 5px;
     color: rgba(180, 50, 50, 0);
