@@ -96,16 +96,6 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 
-  /* コンテンツのCSS */
-  #setting-wrapper {
-    margin: 20px 0;
-    width: 95%;
-
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   #player-setting-title {
     font-weight: bold;
     margin: 10px 0 30px 0;
@@ -140,6 +130,13 @@ export default {
     color: blue;
   }
 
+@media screen and (max-width:480px) {
+  
+  #area-wrapper {
+    padding: 20px;
+  }
+  
+}
 
 
 </style>

@@ -12,8 +12,6 @@
   position: relative;
   height: 100%;
   width: 100%;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
   /* background-color: rgba(35,40,50,0.85); */
   color: white;
 
@@ -30,7 +28,9 @@
   #select-modal {
     top: 60px;
     width: 470px;
-    height: 85vh;  
+    height: 85vh;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;   
     flex-flow: row;
   }
 
@@ -46,13 +46,21 @@
 /* スマホ */
 @media screen and (max-width: 480px) {
   #select-modal {
-    /* top: 80px; */
-    width: 75%;
-    height: 75vh;
-    padding-left: 20px;
-    background-color: rgba(35,40,50,0.85);
-    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
+    bottom: 50px;
+    width: 100%;
+    height: 55vh;
     flex-flow: column;
+  }
+  #area-wrapper {
+    background-color: rgba(35,40,50,0.85);
+    width: 95%;
+    align-items: center;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+
+  .padding-for-mobile {
+    padding: 20px;
   }
   /* .slide-in-enter, .slide-in-leave-to {
     transform: translateX(100vw)

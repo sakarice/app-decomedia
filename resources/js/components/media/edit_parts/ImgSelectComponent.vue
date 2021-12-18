@@ -8,7 +8,7 @@
         @dragover.prevent
         @drop.prevent = "dropFile">
         </div>
-        <div id="contents-wrapper"
+        <div id="contents-wrapper" class="contents-img"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
             <div id="category-type">
@@ -297,7 +297,6 @@
     width: 49.5%;
     /* height: 140px; */
     margin-bottom: 2px;
-    border-radius: 5px;
     list-style: none;
     transition: transform 0.3s;
     background-color: grey;
@@ -357,6 +356,29 @@
   #add-img-icon {
     color: rgba(255, 255, 255, 0.7);
     pointer-events: none;
+  }
+
+  @media screen and (max-width:480px) {
+    .img-list {
+      border-radius: 5px;
+    }
+  }
+
+
+  @media screen and (max-width:480px) {
+    #img-wrapper {
+      width: 95%;
+      height: 90%;
+    }
+
+    .contents-img {
+      padding: 15px 0 15px 0;
+    }
+
+    .img-list {
+      width: 33%;
+    }
+    
   }
 
 

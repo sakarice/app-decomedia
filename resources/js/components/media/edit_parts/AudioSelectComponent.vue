@@ -8,7 +8,7 @@
         @dragover.prevent
         @drop.prevent = "dropFile">
         </div>
-        <div id="contents-wrapper"
+        <div id="contents-wrapper" class="contents-audio"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
             <div id="category-type">
@@ -452,6 +452,16 @@ export default {
     height: 40px;
     border-radius: 50%;
     background-color: darkgray;
+  }
+
+  .contents-audio {
+    padding: 25px 0 15px 0;
+  }
+
+  @media screen and (max-width: 480px) {
+    #audio-thumbnail-wrapper {
+      width: 80%;
+    }
   }
 
 
