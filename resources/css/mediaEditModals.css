@@ -1,5 +1,6 @@
 #toggle-wrapper {
   display: flex;
+  justify-content: center;
   margin: 0 0 20px 0;
 }
 
@@ -17,11 +18,21 @@
 }
 
 #category-type {
-  width: 60px;
-  margin-left: 10px;
-  color: white;
   display: flex;
   align-items: center;
+  color: rgba(200,200,200,1);
+}
+
+.category{
+  margin: 0 20px;
+}
+.category:hover{
+  cursor: pointer;
+}
+
+.active_category {
+  color: white;
+  border-bottom: 1.5px solid;
 }
 
 .isUpload {

@@ -11,10 +11,18 @@
         <div id="contents-wrapper"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <button id="file-category-toggle" tabindex=1 @click="changeFileCategory" :class="{isDefault: isDefault, isUpload: !(isDefault)}">
-              <div id="toggle-state-icon"></div>
-            </button>
-            <div id="category-type"><span>{{fileCategory}}</span></div>
+            <div id="category-type">
+              <span @click="changeFileCategory"
+              class="category category-default"
+               :class="{active_category: isDefault}">
+               default
+               </span>
+              <span @click="changeFileCategory"
+              class="category category-upload"
+               :class="{active_category: !isDefault}">
+               upload
+               </span>
+            </div>
           </div>
 
           <!-- アップロードエリア -->
@@ -106,11 +114,6 @@ export default {
     },
     changeFileCategory(){
       this.isDefault = !(this.isDefault);
-      if(this.isDefault == true){
-        this.fileCategory = "default";
-      } else {
-        this.fileCategory = "uploads";
-      }
     },
     getUserOwnAudios(){
       const url = '/ajax/getUserOwnAudios';

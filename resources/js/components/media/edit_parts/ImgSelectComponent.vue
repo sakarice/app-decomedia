@@ -11,11 +11,19 @@
         <div id="contents-wrapper"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <button id="file-category-toggle" tabindex=1 @click="changeFileCategory" :class="{isDefault: isDefault, isUpload: !(isDefault)}">
-              <div id="toggle-state-icon"></div>
-            </button>
-            <div id="category-type"><span>{{fileCategory}}</span></div>
-          </div>          
+            <div id="category-type">
+              <span @click="changeFileCategory"
+              class="category category-default"
+               :class="{active_category: isDefault}">
+               default
+               </span>
+              <span @click="changeFileCategory"
+              class="category category-upload"
+               :class="{active_category: !isDefault}">
+               upload
+               </span>
+            </div>
+          </div>
           <div id="upload-input-wrapper">
             <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
@@ -103,11 +111,6 @@
 
       changeFileCategory(){
         this.isDefault = !(this.isDefault);
-        if(this.isDefault == true){
-          this.fileCategory = "default";
-        } else {
-          this.fileCategory = "uploads";
-        }
       },
       getUserOwnImgs(){
         const url = '/ajax/getUserOwnImgs';
@@ -355,7 +358,6 @@
     color: rgba(255, 255, 255, 0.7);
     pointer-events: none;
   }
-
 
 
 </style>
