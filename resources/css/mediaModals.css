@@ -1,6 +1,7 @@
 #select-modal {
   position: fixed;
   left: 0;
+  z-index: 9;
 
   /* モーダル内の要素の配置 */
   display: flex;
@@ -30,7 +31,6 @@
     top: 60px;
     width: 470px;
     height: 85vh;  
-    z-index: 9;
     flex-flow: row;
   }
 
@@ -50,7 +50,6 @@
     width: 75%;
     height: 75vh;
     padding-left: 20px;
-    z-index: 20;
     background-color: rgba(35,40,50,0.85);
     box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);
     flex-flow: column;
