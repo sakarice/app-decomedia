@@ -8,13 +8,21 @@
         @dragover.prevent
         @drop.prevent = "dropFile">
         </div>
-        <div id="contents-wrapper"
+        <div id="contents-wrapper" class="contents-audio"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <button id="file-category-toggle" tabindex=1 @click="changeFileCategory" :class="{isDefault: isDefault, isUpload: !(isDefault)}">
-              <div id="toggle-state-icon"></div>
-            </button>
-            <div id="category-type"><span>{{fileCategory}}</span></div>
+            <div id="category-type">
+              <span @click="changeFileCategory"
+              class="category category-default"
+               :class="{active_category: isDefault}">
+               default
+               </span>
+              <span @click="changeFileCategory"
+              class="category category-upload"
+               :class="{active_category: !isDefault}">
+               upload
+               </span>
+            </div>
           </div>
 
           <!-- アップロードエリア -->
@@ -65,7 +73,9 @@
           </ul>
         </div>
       </div>
-      <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
+      <div class="change-disp-icon-wrapper">
+        <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
+      </div>
       <div class="close-icon-wrapper for-pc-tablet">
         <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
       </div>
@@ -106,11 +116,6 @@ export default {
     },
     changeFileCategory(){
       this.isDefault = !(this.isDefault);
-      if(this.isDefault == true){
-        this.fileCategory = "default";
-      } else {
-        this.fileCategory = "uploads";
-      }
     },
     getUserOwnAudios(){
       const url = '/ajax/getUserOwnAudios';
@@ -449,6 +454,16 @@ export default {
     height: 40px;
     border-radius: 50%;
     background-color: darkgray;
+  }
+
+  .contents-audio {
+    padding: 25px 0 15px 0;
+  }
+
+  @media screen and (max-width: 480px) {
+    #audio-thumbnail-wrapper {
+      width: 80%;
+    }
   }
 
 

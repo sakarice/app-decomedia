@@ -4709,8 +4709,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
 
 
 
@@ -5045,6 +5043,16 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5078,12 +5086,6 @@ function _defineProperty(obj, key, value) {
     },
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
-
-      if (this.isDefault == true) {
-        this.fileCategory = "default";
-      } else {
-        this.fileCategory = "uploads";
-      }
     },
     getUserOwnAudios: function getUserOwnAudios() {
       var _this = this;
@@ -5470,6 +5472,14 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5507,12 +5517,6 @@ function _defineProperty(obj, key, value) {
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
-
-      if (this.isDefault == true) {
-        this.fileCategory = "default";
-      } else {
-        this.fileCategory = "uploads";
-      }
     },
     getUserOwnImgs: function getUserOwnImgs() {
       var _this = this;
@@ -6561,10 +6565,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
-//
-//
-//
-//
 //
 //
 //
@@ -17125,7 +17125,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: auto;\n  border-radius: 50%;\n  background-color: rgba(20,20,20,0.8);\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n  background-color: rgba(0,110,110, 0.5);\n}\n.change-disp-audio[data-v-714f7a19] {\ncolor: lightgrey;\npadding: 10px 19px 10px 15px;\n/* margin: 0 10px 10px 0;\nborder-radius: 50%;\nbackground-color: rgba(0,0,0, 0.5); */\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.media-audio-num[data-v-714f7a19] {\n  z-index: 1;\n  background-color: rgba(50, 110, 110, 0.7);\n  color: white;\n  border-radius: 50%;\n  position: absolute;\n  left: -10px;\n  top: -10px;\n  padding: 0 8px;\n  font-size: 16px;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 35px;\n    right: 0;\n    width: 55px;\n    height: 55px;\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n.media-audio-num[data-v-714f7a19] {\n    padding: 0 6px;\n    top: -3px;\n    left: -3px;\n    font-size: 13px;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: 60px;\n  width: 60px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\n  color: lightgrey;\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (min-width:481px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    border-radius: 50%;\n    background-color: rgba(20,20,20,0.8);\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n    background-color: rgba(0,110,110, 0.5);\n}\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 50px;\n    right: 7;\n    width: 45px;\n    height: 45px;\n    background: linear-gradient(\n      -45deg\n      , #333333 50%\n      , #333333\n      , transparent 50%\n    );\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17248,7 +17248,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 10px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 16px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 12px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio_name[data-v-ee42beee] {\r\n    margin-left: 7px;\r\n    white-space: nowrap;\n}\n.audio_name[data-v-ee42beee]:hover {\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 10px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 16px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 12px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio_name[data-v-ee42beee] {\r\n    margin-left: 7px;\r\n    white-space: nowrap;\n}\n.audio_name[data-v-ee42beee]:hover {\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 25px 0 15px 0;\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17275,7 +17275,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17326,7 +17326,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper[data-v-786c26ba] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\n}\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.state-description[data-v-786c26ba] {\r\n    font-size: 12px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.state-description[data-v-786c26ba] {\r\n    font-size: 12px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17353,7 +17353,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n/* コンテンツのCSS */\n#setting-wrapper[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.yt-setting-wrapper[data-v-05ba1def] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-content[data-v-05ba1def] {\r\n    margin-bottom: 7px;\n}\n.setting-loop[data-v-05ba1def]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-05ba1def]:hover {\r\n    cursor: pointer;\n}\n.isLoop[data-v-05ba1def] {\r\n    color: blue;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.yt-setting-wrapper[data-v-05ba1def] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-content[data-v-05ba1def] {\r\n    margin-bottom: 7px;\n}\n.setting-loop[data-v-05ba1def]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-05ba1def]:hover {\r\n    cursor: pointer;\n}\n.isLoop[data-v-05ba1def] {\r\n    color: blue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17377,7 +17377,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 10px 0;\n    /* border-bottom: double 2px grey; */\n    width: 100%;\n    height: 80px;\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n    overflow-x: scroll;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    /* top: 60px; */\n    /* right: 0; */\n    background-color: rgba(0,0,0,0.8);\n\n    /* z-index : 9; */\n    width: 180px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    /* height: 100%; */\n    display: flex;\n    flex-direction: column;\n    /* justify-content: space-around; */\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -16px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    /* transform: rotate(180deg); */\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    /* background: #8acdff; */\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n\n/* \n  .change-disp-audio-wrapper {\n    position: absolute;\n    bottom: 0px;\n    width: 100%;\n    z-index: 10;\n    height: auto;\n\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n  } */\n\n  /* .is-reverse{\n    transform: scale(-1, 1);\n  } */\n\n  /* .media-audio-num {\n    position: absolute;\n    top: -10px;\n    left: -10px;\n    padding: 0 8px;\n    z-index: 1;\n    background-color: rgba(50, 110, 110, 0.7);\n    color: white;\n    border-radius: 50%;\n    font-size: 16px;\n  } */\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 60px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    top: 35px;\n    left: 14px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    bottom: 18px;\n    left: 12px;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    margin-top: 20px;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    height: 50px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    padding: 5px;\n    left: -25px;\n    top: -30px;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    right: -18px;\n    top: -25px;\n}\n\n\n  /* .change-disp-audio-wrapper {\n    bottom: 60px;\n  } */\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 10px 0;\n    width: 100%;\n    height: 80px;\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n    overflow-x: scroll;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    background-color: rgba(0,0,0,0.8);\n\n    width: 180px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n}\n.audio-num-wrapper[data-v-91d677f2]{\n    z-index: 1;\n    position: absolute;\n    top: 5px;\n    left: 2px;\n    width: 20px;\n    height: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-num[data-v-91d677f2]{\n    font-size: 16px;\n    color: lightseagreen;\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -16px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 60px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    top: 35px;\n    left: 14px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    bottom: 18px;\n    left: 12px;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    margin-top: 20px;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    height: 50px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    padding: 5px;\n    left: -25px;\n    top: -30px;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    right: -18px;\n    top: -25px;\n}\n.media-audio-num[data-v-91d677f2] {\n      font-size: 13px;    \n      color: lightgray;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18016,7 +18016,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\ntransform: translate(0px, 0px);\r\ntransition: all 200ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\ntransform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 100%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 10px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 3px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n  \r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n  min-width: 50px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 95%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 5px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18040,7 +18040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  width: 60px;\r\n  margin-left: 10px;\r\n  color: white;\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n#change-disp-modal {\r\n  /* position: absolute;\r\n  bottom: 0px;\r\n  right: -5px; */\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  margin-right: -85%;\r\n  margin-top: -35px;\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n  padding: 20px 10px 10px 0px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n\r\n}\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }\r\n  #setting-wrapper {\r\n    width: 220px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    padding: 20px 10px 15px 0px;\r\n    flex-direction: column-reverse;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    margin-bottom: 15px;\r\n  }  \r\n  \r\n  \r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  display: flex;\r\n  align-items: center;\r\n  color: rgba(200,200,200,1);\r\n}\r\n\r\n.category{\r\n  margin: 0 20px;\r\n}\r\n.category:hover{\r\n  cursor: pointer;\r\n}\r\n\r\n.active_category {\r\n  color: white;\r\n  border-bottom: 1.5px solid;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n.change-disp-icon-wrapper {\r\n  padding: 10px;\r\n  background-color: transparent;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  /* margin-right: -85%;\r\n  margin-top: -35px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n  #setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\r\n  }\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n\r\n@media screen and (min-width: 481px) {\r\n  #contents-wrapper {\r\n    padding: 20px 10px 10px 0px;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    flex-direction: column-reverse;\r\n    justify-content: space-between;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 15px 0 0 0;\r\n    height: 50px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    /* margin-bottom: 15px; */\r\n    margin-bottom: 0;\r\n  }\r\n\r\n  #setting-wrapper {\r\n    margin: 0;\r\n  }\r\n  \r\n  \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18064,7 +18064,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  border-top-right-radius: 5px;\r\n  border-bottom-right-radius: 5px;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;  \r\n    z-index: 9;\r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    /* top: 80px; */\r\n    width: 75%;\r\n    height: 75vh;\r\n    padding-left: 20px;\r\n    z-index: 20;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n    flex-flow: column;\r\n  }\r\n  /* .slide-in-enter, .slide-in-leave-to {\r\n    transform: translateX(100vw)\r\n  } */\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;   \r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 55vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 95%;\r\n    align-items: center;\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18088,7 +18088,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\n  transform: translate(0px, 0px);\r\n  transition: all 400ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\n  transform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  /* #select-modal {\r\n    right: 0;\r\n  }\r\n  .slide-in-enter, .slide-in-leave-to {\r\n    transform: translateX(100vw)\r\n  } */\r\n}\r\n\r\n\r\n\r\n  \r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* Modal表示アニメーション */\r\n.slide-in-enter-active, .slide-in-leave-active {\r\n  transform: translate(0px, 0px);\r\n  transition: all 250ms\r\n}\r\n\r\n.slide-in-enter, .slide-in-leave-to {\r\n  transform: translateX(-100vw)\r\n}\r\n\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n\r\n  /* Modal表示アニメーション */\r\n  .slide-in-enter-active, .slide-in-leave-active {\r\n    transform: translate(0px, 0px);\r\n    transition: all 250ms\r\n  }\r\n\r\n  .slide-in-enter, .slide-in-leave-to {\r\n    transform: translateY(100vh)\r\n  }\r\n\r\n}\r\n\r\n\r\n\r\n  \r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -64714,23 +64714,6 @@ var render = function () {
       attrs: { id: "change-disp-audio-wrapper" },
     },
     [
-      _vm.isEditMode
-        ? _c("span", { staticClass: "media-audio-num" }, [
-            _vm._v(_vm._s(_vm.mediaAudioNum)),
-          ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("i", {
-        staticClass:
-          "fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet",
-        class: { "is-reverse": _vm.isShowAudio },
-        on: {
-          click: function ($event) {
-            return _vm.changeDispAudioState()
-          },
-        },
-      }),
-      _vm._v(" "),
       _c("i", {
         directives: [
           {
@@ -64740,7 +64723,7 @@ var render = function () {
             expression: "!isShowAudio",
           },
         ],
-        staticClass: "fas fa-music fa-2x change-disp-audio for-mobile",
+        staticClass: "fas fa-music fa-2x change-disp-audio",
         on: {
           click: function ($event) {
             return _vm.changeDispAudioState()
@@ -64757,7 +64740,7 @@ var render = function () {
             expression: "isShowAudio",
           },
         ],
-        staticClass: "fas fa-times fa-2x change-disp-audio for-mobile",
+        staticClass: "fas fa-times fa-2x change-disp-audio",
         on: {
           click: function ($event) {
             return _vm.changeDispAudioState()
@@ -64963,23 +64946,32 @@ var render = function () {
         _c(
           "div",
           {
+            staticClass: "contents-audio",
             attrs: { id: "contents-wrapper" },
             on: { dragenter: _vm.dragEnter },
           },
           [
             _c("div", { attrs: { id: "toggle-wrapper" } }, [
-              _c(
-                "button",
-                {
-                  class: { isDefault: _vm.isDefault, isUpload: !_vm.isDefault },
-                  attrs: { id: "file-category-toggle", tabindex: "1" },
-                  on: { click: _vm.changeFileCategory },
-                },
-                [_c("div", { attrs: { id: "toggle-state-icon" } })]
-              ),
-              _vm._v(" "),
               _c("div", { attrs: { id: "category-type" } }, [
-                _c("span", [_vm._v(_vm._s(_vm.fileCategory))]),
+                _c(
+                  "span",
+                  {
+                    staticClass: "category category-default",
+                    class: { active_category: _vm.isDefault },
+                    on: { click: _vm.changeFileCategory },
+                  },
+                  [_vm._v("\n             default\n             ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "category category-upload",
+                    class: { active_category: !_vm.isDefault },
+                    on: { click: _vm.changeFileCategory },
+                  },
+                  [_vm._v("\n             upload\n             ")]
+                ),
               ]),
             ]),
             _vm._v(" "),
@@ -65237,15 +65229,17 @@ var render = function () {
         ),
       ]),
       _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-times-circle fa-2x for-mobile",
-        attrs: { id: "change-disp-modal" },
-        on: {
-          click: function ($event) {
-            return _vm.closeModal()
+      _c("div", { staticClass: "change-disp-icon-wrapper" }, [
+        _c("i", {
+          staticClass: "fas fa-times-circle fa-2x for-mobile",
+          attrs: { id: "change-disp-modal" },
+          on: {
+            click: function ($event) {
+              return _vm.closeModal()
+            },
           },
-        },
-      }),
+        }),
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
         _c("i", {
@@ -65305,23 +65299,32 @@ var render = function () {
         _c(
           "div",
           {
+            staticClass: "contents-img",
             attrs: { id: "contents-wrapper" },
             on: { dragenter: _vm.dragEnter },
           },
           [
             _c("div", { attrs: { id: "toggle-wrapper" } }, [
-              _c(
-                "button",
-                {
-                  class: { isDefault: _vm.isDefault, isUpload: !_vm.isDefault },
-                  attrs: { id: "file-category-toggle", tabindex: "1" },
-                  on: { click: _vm.changeFileCategory },
-                },
-                [_c("div", { attrs: { id: "toggle-state-icon" } })]
-              ),
-              _vm._v(" "),
               _c("div", { attrs: { id: "category-type" } }, [
-                _c("span", [_vm._v(_vm._s(_vm.fileCategory))]),
+                _c(
+                  "span",
+                  {
+                    staticClass: "category category-default",
+                    class: { active_category: _vm.isDefault },
+                    on: { click: _vm.changeFileCategory },
+                  },
+                  [_vm._v("\n             default\n             ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "category category-upload",
+                    class: { active_category: !_vm.isDefault },
+                    on: { click: _vm.changeFileCategory },
+                  },
+                  [_vm._v("\n             upload\n             ")]
+                ),
               ]),
             ]),
             _vm._v(" "),
@@ -66266,6 +66269,14 @@ var render = function () {
       attrs: { id: "media-audio-wrapper" },
     },
     [
+      _c("div", { staticClass: "audio-num-wrapper" }, [
+        _vm.isEditMode
+          ? _c("span", { staticClass: "media-audio-num" }, [
+              _vm._v(_vm._s(_vm.mediaAudioNum)),
+            ])
+          : _vm._e(),
+      ]),
+      _vm._v(" "),
       _c("div", { attrs: { id: "media-audio-frame" } }, [
         _c(
           "ul",

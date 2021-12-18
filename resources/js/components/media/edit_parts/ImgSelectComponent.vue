@@ -8,14 +8,22 @@
         @dragover.prevent
         @drop.prevent = "dropFile">
         </div>
-        <div id="contents-wrapper"
+        <div id="contents-wrapper" class="contents-img"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <button id="file-category-toggle" tabindex=1 @click="changeFileCategory" :class="{isDefault: isDefault, isUpload: !(isDefault)}">
-              <div id="toggle-state-icon"></div>
-            </button>
-            <div id="category-type"><span>{{fileCategory}}</span></div>
-          </div>          
+            <div id="category-type">
+              <span @click="changeFileCategory"
+              class="category category-default"
+               :class="{active_category: isDefault}">
+               default
+               </span>
+              <span @click="changeFileCategory"
+              class="category category-upload"
+               :class="{active_category: !isDefault}">
+               upload
+               </span>
+            </div>
+          </div>
           <div id="upload-input-wrapper">
             <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
@@ -103,11 +111,6 @@
 
       changeFileCategory(){
         this.isDefault = !(this.isDefault);
-        if(this.isDefault == true){
-          this.fileCategory = "default";
-        } else {
-          this.fileCategory = "uploads";
-        }
       },
       getUserOwnImgs(){
         const url = '/ajax/getUserOwnImgs';
@@ -294,7 +297,6 @@
     width: 49.5%;
     /* height: 140px; */
     margin-bottom: 2px;
-    border-radius: 5px;
     list-style: none;
     transition: transform 0.3s;
     background-color: grey;
@@ -356,6 +358,24 @@
     pointer-events: none;
   }
 
+  @media screen and (max-width:480px) {
+    .img-list {
+      border-radius: 5px;
+    }
+  }
+
+
+  @media screen and (max-width:480px) {
+
+    .contents-img {
+      padding: 15px 0 15px 0;
+    }
+
+    .img-list {
+      width: 33%;
+    }
+    
+  }
 
 
 </style>

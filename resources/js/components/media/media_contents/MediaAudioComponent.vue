@@ -2,13 +2,9 @@
   <!-- <transition name="right-slide"> -->
     <!-- Mediaオーディオ -->
   <div id="media-audio-wrapper" v-show="isShowAudio" :class="{'disp-front':isShowAudio}">
-    <!-- オーディオの表示・非表示切り替えアイコン -->
-    <!-- <div class="change-disp-audio-wrapper">
+    <div class="audio-num-wrapper">
       <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
-        <i v-on:click="isShowAudio=!(isShowAudio)" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
-    </div> -->
+    </div>
 
       <!-- 選択したオーディオ一覧 -->
     <div id="media-audio-frame">
@@ -218,7 +214,6 @@
   .all-audio-controll-wrapper {
     padding-bottom: 5px;
     padding: 10px 0;
-    /* border-bottom: double 2px grey; */
     width: 100%;
     height: 80px;
     background-color: black;
@@ -266,19 +261,32 @@
   /* audio */
   #media-audio-wrapper {
     position: absolute;
-    /* top: 60px; */
-    /* right: 0; */
     background-color: rgba(0,0,0,0.8);
 
-    /* z-index : 9; */
     width: 180px;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    /* height: 100%; */
     display: flex;
     flex-direction: column;
-    /* justify-content: space-around; */
   }
+
+  .audio-num-wrapper{
+    z-index: 1;
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .media-audio-num{
+    font-size: 16px;
+    color: lightseagreen;
+  }
+
   #media-audio-frame {
     border-top-left-radius: 5px;
     display: flex;
@@ -395,7 +403,6 @@
 
   .audio-vol-wrapper {
     position: absolute;
-    /* transform: rotate(180deg); */
     display: flex;
     align-items: center;
   }
@@ -427,40 +434,11 @@
     -webkit-appearance: none;
     appearance: none;
     cursor: pointer;
-    /* background: #8acdff; */
     height: 2px;
     width: 50px;
     margin-bottom: 12px;
   }
 
-/* 
-  .change-disp-audio-wrapper {
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    z-index: 10;
-    height: auto;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  } */
-
-  /* .is-reverse{
-    transform: scale(-1, 1);
-  } */
-
-  /* .media-audio-num {
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    padding: 0 8px;
-    z-index: 1;
-    background-color: rgba(50, 110, 110, 0.7);
-    color: white;
-    border-radius: 50%;
-    font-size: 16px;
-  } */
 
   .change-disp-audio {
     color: lightgrey;
@@ -551,10 +529,10 @@
     top: -25px;
   }
 
-
-  /* .change-disp-audio-wrapper {
-    bottom: 60px;
-  } */
+    .media-audio-num {
+      font-size: 13px;    
+      color: lightgray;
+    }
 
 }
 

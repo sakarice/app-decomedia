@@ -1,9 +1,7 @@
 <template>
   <div id="change-disp-audio-wrapper" v-show="isShowAudios">
-    <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
-    <i @click="changeDispAudioState()" class="fas fa-chevron-left fa-3x change-disp-audio for-pc-tablet" v-bind:class="{'is-reverse': isShowAudio}"></i>
-    <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio for-mobile" v-show="!isShowAudio"></i>
-    <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio for-mobile" v-show="isShowAudio"></i>
+    <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio" v-show="!isShowAudio"></i>
+    <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
   </div>
 
 </template>
@@ -63,42 +61,21 @@
     bottom: 10px;
     right: 10px;
     z-index: 12;
-    height: auto;
-    border-radius: 50%;
-    background-color: rgba(20,20,20,0.8);
+    height: 60px;
+    width: 60px;
 
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  #change-disp-audio-wrapper:hover {
-    background-color: rgba(0,110,110, 0.5);
-  }
 
   .change-disp-audio {
-  color: lightgrey;
-  padding: 10px 19px 10px 15px;
-  /* margin: 0 10px 10px 0;
-  border-radius: 50%;
-  background-color: rgba(0,0,0, 0.5); */
+    color: lightgrey;
   }
 
   .change-disp-audio {
     cursor: pointer;
-  }
-
-
-  .media-audio-num {
-    z-index: 1;
-    background-color: rgba(50, 110, 110, 0.7);
-    color: white;
-    border-radius: 50%;
-    position: absolute;
-    left: -10px;
-    top: -10px;
-    padding: 0 8px;
-    font-size: 16px;
   }
 
   .is-reverse{
@@ -106,24 +83,35 @@
   }
 
 
+  @media screen and (min-width:481px){
+    #change-disp-audio-wrapper {
+      border-radius: 50%;
+      background-color: rgba(20,20,20,0.8);
+    }
+    #change-disp-audio-wrapper:hover {
+      background-color: rgba(0,110,110, 0.5);
+    }
+
+  }
+
+
 
   @media screen and (max-width:480px){
     #change-disp-audio-wrapper {
-      bottom: 35px;
-      right: 0;
-      width: 55px;
-      height: 55px;
+      bottom: 50px;
+      right: 7;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(
+        -45deg
+        , #333333 50%
+        , #333333
+        , transparent 50%
+      );
     }
 
     .change-disp-audio {
     padding: 10px;
-    }
-
-    .media-audio-num {
-      padding: 0 6px;
-      top: -3px;
-      left: -3px;
-      font-size: 13px;    
     }
 
   }

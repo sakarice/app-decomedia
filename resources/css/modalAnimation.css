@@ -2,7 +2,7 @@
 /* Modal表示アニメーション */
 .slide-in-enter-active, .slide-in-leave-active {
   transform: translate(0px, 0px);
-  transition: all 400ms
+  transition: all 250ms
 }
 
 .slide-in-enter, .slide-in-leave-to {
@@ -21,12 +21,17 @@
 
 /* スマホ */
 @media screen and (max-width: 480px) {
-  /* #select-modal {
-    right: 0;
+
+  /* Modal表示アニメーション */
+  .slide-in-enter-active, .slide-in-leave-active {
+    transform: translate(0px, 0px);
+    transition: all 250ms
   }
+
   .slide-in-enter, .slide-in-leave-to {
-    transform: translateX(100vw)
-  } */
+    transform: translateY(100vh)
+  }
+
 }
 
 
