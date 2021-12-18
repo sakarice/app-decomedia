@@ -73,19 +73,24 @@
           </ul>
         </div>
       </div>
-      <div class="change-disp-icon-wrapper">
-        <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
-      </div>
-      <div class="close-icon-wrapper for-pc-tablet">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
-      </div>
+
+      <close-modal-bar class="for-mobile"></close-modal-bar>
+      <close-modal-icon class="for-pc-tablet"></close-modal-icon>
+
     </div>
   </transition>
 </template>
 
 <script>
 import { mapMutations } from 'vuex';
+import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
+import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+
 export default {
+  components : {
+    closeModalBar,
+    closeModalIcon,
+  },
   props : ['transitionName'],
   data : () => {
     return {

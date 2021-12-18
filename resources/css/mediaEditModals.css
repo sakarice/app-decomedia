@@ -74,23 +74,10 @@
   height: 20px;
   border-radius: 50%;
   background-color: white;
-
   pointer-events: none;
 }
 
 
-.close-icon-wrapper{
-  padding: 5px;
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-}
-
-#close-modal-icon {
-  /* position: absolute;
-  top: 200px;
-  left: -20px; */
-  cursor: pointer;
-}
 
 .change-disp-icon-wrapper {
   padding: 10px;

@@ -3,7 +3,6 @@
     <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio" v-show="!isShowAudio"></i>
     <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
   </div>
-
 </template>
 
 <script>
