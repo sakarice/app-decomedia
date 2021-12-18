@@ -92,14 +92,19 @@
   cursor: pointer;
 }
 
+.change-disp-icon-wrapper {
+  padding: 10px;
+  background-color: transparent;
+}
+
 #change-disp-modal {
-  /* position: absolute;
-  bottom: 0px;
-  right: -5px; */
+  position: absolute;
+  top: 0px;
+  right: -5px;
   color: lightseagreen;
   z-index: 2;
-  margin-right: -85%;
-  margin-top: -35px;
+  /* margin-right: -85%;
+  margin-top: -35px; */
   cursor: pointer;
 }
 
