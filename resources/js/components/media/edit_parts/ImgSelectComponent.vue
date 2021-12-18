@@ -366,10 +366,6 @@
 
 
   @media screen and (max-width:480px) {
-    #img-wrapper {
-      width: 95%;
-      height: 90%;
-    }
 
     .contents-img {
       padding: 15px 0 15px 0;

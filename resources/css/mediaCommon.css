@@ -68,19 +68,6 @@ body {
 }
 
 
-
-/* Modal表示アニメーション */
-.slide-in-enter-active, .slide-in-leave-active {
-transform: translate(0px, 0px);
-transition: all 200ms
-}
-
-.slide-in-enter, .slide-in-leave-to {
-transform: translateX(-100vw)
-}
-
-
-
 /* レスポンシブ対応用 */
 /* スマホ以外 */
 @media screen and (min-width: 481px) {
@@ -97,6 +84,8 @@ transform: translateX(-100vw)
     left: 0;
     top: 30%;
   }
+
+  
 }
 
 /* スマホ */
@@ -120,5 +109,5 @@ transform: translateX(-100vw)
     height: 50px;
     overflow-x: scroll;
   }
-  
+
 }

@@ -46,7 +46,7 @@
 /* スマホ */
 @media screen and (max-width: 480px) {
   #select-modal {
-    bottom: 50px;
+    bottom: 45px;
     width: 100%;
     height: 55vh;
     flex-flow: column;
@@ -62,7 +62,5 @@
   .padding-for-mobile {
     padding: 20px;
   }
-  /* .slide-in-enter, .slide-in-leave-to {
-    transform: translateX(100vw)
-  } */
+
 }
