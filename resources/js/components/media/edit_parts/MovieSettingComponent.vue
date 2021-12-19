@@ -3,17 +3,17 @@
     <div id="select-modal">
       <div id="area-wrapper">
 
-        <div id="yt-setting-area">
+        <div id="yt-setting-area" class="flex column a-start">
           <p id="player-setting-title">動画プレイヤー設定</p>
-          <div class="yt-setting-wrapper">
+          <div class="yt-setting-wrapper flex column a-start">
             <!-- 動画ID -->
             <div class="setting-block about-yt-video-id">
-              <h3 class="sub-title">youtube動画のURL</h3>
+              <h3 class="setting-title">youtube動画のURL</h3>
               <input id="youtube-url-input" :value="youtubeUrl" @input="updateVideoId" type="text" size=30 placeholder="youtube movie URL">
             </div>
             <!-- 再生プレイヤーの作成・削除 -->
-            <div class="setting-block about-create-del flex column align-start">
-              <h3 class="sub-title">再生プレイヤー</h3>
+            <div class="setting-block about-create-del flex column a-start">
+              <h3 class="setting-title">再生プレイヤー</h3>
               <div class="flex">
                 <button  class="setting button create-btn" type="submit" @click="createMovieFrame">作成</button>
                 <button  class="setting button delete-btn" type="submit" @click="deleteMovieFrame">削除</button>
@@ -21,7 +21,7 @@
             </div>
             <!-- 再生プレイヤーの縦横幅 -->
             <div class="setting-block about-size">
-              <h3 class="sub-title">サイズ</h3>
+              <h3 class="setting-title">サイズ</h3>
               <div class="flex">
                 <div class="setting-width flex column">
                   <div class="flex align-center" style="opacity:0.7">
@@ -41,9 +41,9 @@
             </div>
             <!-- 動画のループ設定 -->
             <div class="setting-block about-loop">
-              <h3 class="sub-title">ループ</h3>
+              <h3 class="setting-title">ループ</h3>
               <div class="flex align-center">
-                <div class="toggle-outer" v-on:click="changeLoopSetting" :class="{'is-loop-outer' : getMediaMovie['isLoop']}">
+                <div class="toggle-outer flex a-center" v-on:click="changeLoopSetting" :class="{'is-loop-outer' : getMediaMovie['isLoop']}">
                   <div class="toggle-inner" :class="{'is-loop-inner' : getMediaMovie['isLoop']}"></div>
                 </div>
                 <span style="margin-left:5px;opacity:0.7">{{loopOnOff}}</span>
@@ -128,6 +128,7 @@ export default {
 <style scoped>
 
 @import "/resources/css/mediaEditModals.css";
+@import "/resources/css/flexSetting.css";
 
   #player-setting-title {
     font-weight: bold;
@@ -140,16 +141,7 @@ export default {
   #yt-setting-area {
     margin: 20px 0;
     width: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     overflow-y: scroll;
-  }
-
-  .yt-setting-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
   }
 
   .about-yt-video-id {
@@ -174,10 +166,6 @@ export default {
     margin: 0 5px 5px 5px;
   }
 
-  .about-create-del {
-    display: flex;
-    align-items: center;
-  }
   .about-create-del .button {
     margin-right: 20px;
     color: white;
@@ -204,8 +192,6 @@ export default {
     padding: 2px;
     border-radius: 20px;
     background-color: grey;
-    display: flex;
-    align-items: center;
     transition-duration: 0.4s;
   }
 
@@ -217,33 +203,12 @@ export default {
   }
 
 
-  .sub-title {
+  .setting-title {
     font-size: 15px;
-  }
-
-  .flex {
-    display: flex;
-  }
-  .column {
-    flex-direction: column;
-  }
-  .align-start {
-    align-items: flex-start;
-  }
-  .align-center {
-    align-items: center;
   }
 
   .about-size input {
     width: 80px;
-  }
-
-  .setting-loop{
-    display: flex;
-    align-items: center;
-  }
-  .setting-loop:hover {
-    cursor: pointer;
   }
 
   .is-loop-outer {
