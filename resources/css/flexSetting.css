@@ -1,0 +1,34 @@
+.flex {
+  display: flex;
+}
+
+
+/* flex方向 */
+.column {
+  flex-direction: column;
+}
+
+
+/* align-items */
+.a-center {
+  align-items: center;
+}
+.a-start {
+  align-items: flex-start;
+}
+.a-end {
+  align-items: flex-end;
+}
+
+
+
+/* justify-contents */
+.j-center {
+  justify-content: center;
+}
+.j-start {
+  justify-content: flex-start;
+}
+.j-end {
+  justify-content: flex-end;
+}

@@ -2811,6 +2811,19 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2829,12 +2842,8 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
-    aboutPublicState: function aboutPublicState() {
-      if (this.getMediaSetting['isPublic']) {
-        return '公開（他のユーザも検索・閲覧できます）';
-      } else if (!this.getMediaSetting['isPublic']) {
-        return '非公開（他のユーザは検索・閲覧できません）';
-      }
+    openState: function openState() {
+      return this.getMediaSetting['isPublic'] ? "公開" : "非公開";
     }
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
@@ -7637,13 +7646,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
+
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.state-description[data-v-786c26ba] {\r\n    font-size: 12px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-area[data-v-786c26ba] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-786c26ba]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-786c26ba] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-786c26ba] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-786c26ba] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n#media-setting-area[data-v-786c26ba] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8136,6 +8148,29 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: end;\r\n  margin: 0 10px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:12px;\r\n  color: white;\r\n  margin: 0 2px;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css ***!
+  \******************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\r\n  display: flex;\r\n}\r\n\r\n\r\n/* flex方向 */\r\n.column {\r\n  flex-direction: column;\r\n}\r\n\r\n\r\n/* align-items */\r\n.a-center {\r\n  align-items: center;\r\n}\r\n.a-start {\r\n  align-items: flex-start;\r\n}\r\n.a-end {\r\n  align-items: flex-end;\r\n}\r\n\r\n\r\n\r\n/* justify-contents */\r\n.j-center {\r\n  justify-content: center;\r\n}\r\n.j-start {\r\n  justify-content: flex-start;\r\n}\r\n.j-end {\r\n  justify-content: flex-end;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15228,146 +15263,181 @@ var render = function () {
       { attrs: { id: "select-modal" } },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
-          _c("div", { attrs: { id: "setting-wrapper" } }, [
-            _c("p", { attrs: { id: "media-setting-title" } }, [
-              _vm._v("メディア設定"),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "setting",
-                attrs: { id: "media-is-public-wraper" },
-              },
-              [
-                _c("p", { staticClass: "setting-title" }, [
-                  _vm._v("公開/非公開"),
-                ]),
-                _vm._v(" "),
-                _c("i", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.getMediaSetting["isPublic"],
-                      expression: "getMediaSetting['isPublic']",
-                    },
-                  ],
-                  staticClass:
-                    "fas fa-door-open fa-lg public-state-icon open-icon",
-                  on: { click: _vm.changePublicState },
-                }),
-                _vm._v(" "),
-                _c("i", {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.getMediaSetting["isPublic"],
-                      expression: "!(getMediaSetting['isPublic'])",
-                    },
-                  ],
-                  staticClass: "fas fa-lock fa-lg public-state-icon lock-icon",
-                  on: { click: _vm.changePublicState },
-                }),
-                _vm._v(" "),
-                _c("span", { staticClass: "state-description" }, [
-                  _vm._v(_vm._s(_vm.aboutPublicState)),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "setting", attrs: { id: "media-name-wraper" } },
-              [
-                _c("p", { staticClass: "setting-title" }, [_vm._v("Media名")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c("input", {
-                    attrs: {
-                      type: "text",
-                      id: "media-name",
-                      placeholder: "Media名",
-                    },
-                    domProps: { value: _vm.getMediaSetting["name"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateMediaSettingObjectItem({
-                          key: "name",
-                          value: $event.target.value,
-                        })
+          _c(
+            "div",
+            {
+              staticClass: "flex column a-start",
+              attrs: { id: "media-setting-area" },
+            },
+            [
+              _c("h2", { attrs: { id: "media-setting-title" } }, [
+                _vm._v("メディア設定"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "setting", attrs: { id: "media-name-wraper" } },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [
+                    _vm._v("Media名"),
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("input", {
+                      attrs: {
+                        type: "text",
+                        id: "media-name",
+                        placeholder: "Media名",
                       },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "setting",
-                attrs: { id: "media-description-wrapper" },
-              },
-              [
-                _c("p", { staticClass: "setting-title" }, [_vm._v("説明")]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c("textarea", {
-                    attrs: {
-                      type: "text",
-                      id: "media-description",
-                      rows: "4",
-                      cols: "30",
-                      maxlength: "120",
-                      placeholder: "説明文",
-                    },
-                    domProps: { value: _vm.getMediaSetting["description"] },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateMediaSettingObjectItem({
-                          key: "description",
-                          value: $event.target.value,
-                        })
+                      domProps: { value: _vm.getMediaSetting["name"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "name",
+                            value: $event.target.value,
+                          })
+                        },
                       },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "setting",
-                attrs: { id: "media-bg-color-wraper" },
-              },
-              [
-                _c("p", { staticClass: "setting-title" }, [
-                  _vm._v("Media背景"),
-                ]),
-                _vm._v(" "),
-                _c("label", { attrs: { for: "" } }, [
-                  _c("input", {
-                    attrs: { type: "color", id: "media-bg-color" },
-                    domProps: {
-                      value: _vm.getMediaSetting["mediaBackgroundColor"],
-                    },
-                    on: {
-                      input: function ($event) {
-                        return _vm.updateMediaSettingObjectItem({
-                          key: "mediaBackgroundColor",
-                          value: $event.target.value,
-                        })
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-description-wrapper" },
+                },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [_vm._v("説明")]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("textarea", {
+                      attrs: {
+                        type: "text",
+                        id: "media-description",
+                        rows: "4",
+                        cols: "30",
+                        maxlength: "120",
+                        placeholder: "説明文",
                       },
-                    },
-                  }),
-                  _vm._v("\n            カラー選択\n          "),
-                ]),
-              ]
-            ),
-          ]),
+                      domProps: { value: _vm.getMediaSetting["description"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "description",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-bg-color-wraper" },
+                },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [
+                    _vm._v("Media背景"),
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("input", {
+                      attrs: { type: "color", id: "media-bg-color" },
+                      domProps: {
+                        value: _vm.getMediaSetting["mediaBackgroundColor"],
+                      },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "mediaBackgroundColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                    _vm._v("\n            カラー選択\n          "),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-is-public-wraper" },
+                },
+                [
+                  _c("div", { staticClass: "flex" }, [
+                    _c("h3", { staticClass: "setting-title" }, [
+                      _vm._v("公開 / 非公開"),
+                    ]),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.getMediaSetting["isPublic"],
+                          expression: "getMediaSetting['isPublic']",
+                        },
+                      ],
+                      staticClass:
+                        "fas fa-door-open fa-lg public-state-icon open-icon",
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.getMediaSetting["isPublic"],
+                          expression: "!(getMediaSetting['isPublic'])",
+                        },
+                      ],
+                      staticClass:
+                        "fas fa-lock fa-lg public-state-icon lock-icon",
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "toggle-outer flex a-center",
+                        class: {
+                          "is-public-outer": _vm.getMediaSetting["isPublic"],
+                        },
+                        on: { click: _vm.changePublicState },
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "toggle-inner",
+                          class: {
+                            "is-public-inner": _vm.getMediaSetting["isPublic"],
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticStyle: { "margin-left": "10px", opacity: "0.7" },
+                      },
+                      [_vm._v(_vm._s(_vm.openState))]
+                    ),
+                  ]),
+                ]
+              ),
+            ]
+          ),
         ]),
         _vm._v(" "),
         _c("close-modal-bar", { staticClass: "for-mobile" }),
