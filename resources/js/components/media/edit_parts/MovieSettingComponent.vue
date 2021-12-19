@@ -42,12 +42,12 @@
             <!-- 動画のループ設定 -->
             <div class="setting-block about-loop">
               <h3 class="sub-title">ループ</h3>
-              <div class="toggle-outer" v-on:click="changeLoopSetting" :class="{'is-loop-outer' : getMediaMovie['isLoop']}">
-                <div class="toggle-inner" :class="{'is-loop-inner' : getMediaMovie['isLoop']}"></div>
+              <div class="flex align-center">
+                <div class="toggle-outer" v-on:click="changeLoopSetting" :class="{'is-loop-outer' : getMediaMovie['isLoop']}">
+                  <div class="toggle-inner" :class="{'is-loop-inner' : getMediaMovie['isLoop']}"></div>
+                </div>
+                <span style="margin-left:5px;opacity:0.7">{{loopOnOff}}</span>
               </div>
-
-              <!-- <i class="media-yt-loop-icon fas fa-undo-alt fa-2x"></i> -->
-              <!-- <span style="margin-left:10px">ループ</span> -->
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default {
   },
   computed : {
     ...mapGetters('mediaMovie', ['getMediaMovie']),
-
+    loopOnOff(){ return (this.getMediaMovie['isLoop'] ? "ON":"OFF"); },
   },
   methods : {
     ...mapMutations('mediaMovie', ['updateMediaMovieObjectItem']),
@@ -199,19 +199,19 @@ export default {
 
   /* トグル */
   .toggle-outer{
-    width: 55px;
-    height: 25px;
+    width: 45px;
+    height: 17px;
     padding: 2px;
     border-radius: 20px;
     background-color: grey;
     display: flex;
     align-items: center;
-    transition-duration: 0.3s;
+    transition-duration: 0.4s;
   }
 
   .toggle-inner {
-    width: 22px;
-    height: 22px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     background-color: white;
   }
@@ -247,10 +247,10 @@ export default {
   }
 
   .is-loop-outer {
-    background-color: blue;
+    background-color: rgb(70,140,250);
   }
   .is-loop-inner {
-    margin-left: 29px;
+    margin-left: 25.5px;
   }
 
 @media screen and (max-width:480px) {
