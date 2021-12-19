@@ -24,8 +24,6 @@
     right: 7px;
     z-index: 10;
     height: 100%;
-    display: flex;
-    align-items: center;
   }
 
   .close-bar {
@@ -35,5 +33,12 @@
     height: 40%;
     background-color: black;
   }
+
+@media screen and (max-width:480px){
+  .close-bar-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
 
 </style>
