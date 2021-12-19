@@ -3,7 +3,7 @@
     <!-- Mediaオーディオ -->
   <div id="media-audio-wrapper" v-show="isShowAudio" :class="{'disp-front':isShowAudio}">
     <div class="audio-num-wrapper">
-      <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}</span>
+      <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}/{{maxAudioNum}}</span>
     </div>
 
       <!-- 選択したオーディオ一覧 -->
@@ -284,7 +284,9 @@
 
   .media-audio-num{
     font-size: 16px;
+    margin: -5px 0 0 5px;
     color: lightseagreen;
+    opacity: 0.7;
   }
 
   #media-audio-frame {
