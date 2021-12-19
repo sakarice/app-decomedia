@@ -6515,6 +6515,31 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -17114,7 +17139,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-82371542] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-82371542]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.edit-mode-icon[data-v-82371542] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '閲覧モード';\n}\n.change-mode:hover .show-mode-icon[data-v-82371542] {\r\n  display: none;\n}\n.change-mode:hover .edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\r\n\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n  /* @import \"/resources/css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-82371542] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-82371542]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.edit-mode-icon[data-v-82371542] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '閲覧モード';\n}\n.change-mode:hover .show-mode-icon[data-v-82371542] {\r\n  display: none;\n}\n.change-mode:hover .edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n  /* @import \"/resources/css/button.css\"; */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17141,7 +17166,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-2d7d2ccc] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-2d7d2ccc]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '編集モード';\n}\n.change-mode:hover .edit-mode-icon[data-v-2d7d2ccc] {\r\n  display: none;\n}\n.change-mode:hover .show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-2d7d2ccc] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-2d7d2ccc]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '編集モード';\n}\n.change-mode:hover .edit-mode-icon[data-v-2d7d2ccc] {\r\n  display: none;\n}\n.change-mode:hover .show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17192,7 +17217,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.close-bar-wrapper[data-v-f2b24f98] {\n  position: absolute;\n  top: 0;\n  right: 7px;\n  z-index: 10;\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.close-bar[data-v-f2b24f98] {\n  margin-right: 1px;\n  border-radius: 4px;\n  width: 8px;\n  height: 40%;\n  background-color: black;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.close-bar-wrapper[data-v-f2b24f98] {\n    position: absolute;\n    top: 0;\n    right: 7px;\n    z-index: 10;\n    height: 100%;\n}\n.close-bar[data-v-f2b24f98] {\n    margin-right: 1px;\n    border-radius: 4px;\n    width: 8px;\n    height: 40%;\n    background-color: black;\n}\n@media screen and (max-width:480px){\n.close-bar-wrapper[data-v-f2b24f98] {\n    display: flex;\n    align-items: center;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17492,7 +17517,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.yt-setting-wrapper[data-v-05ba1def] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-content[data-v-05ba1def] {\r\n    margin-bottom: 7px;\n}\n.setting-loop[data-v-05ba1def]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-05ba1def]:hover {\r\n    cursor: pointer;\n}\n.isLoop[data-v-05ba1def] {\r\n    color: blue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\n}\n.yt-setting-wrapper[data-v-05ba1def] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 5px 5px;\n}\n.about-create-del[data-v-05ba1def] {\r\n    display: flex;\r\n    align-items: center;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 20px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 55px;\r\n    height: 25px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    display: flex;\r\n    align-items: center;\r\n    transition-duration: 0.3s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 22px;\r\n    height: 22px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.sub-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.flex[data-v-05ba1def] {\r\n    display: flex;\n}\n.column[data-v-05ba1def] {\r\n    flex-direction: column;\n}\n.align-start[data-v-05ba1def] {\r\n    align-items: flex-start;\n}\n.align-center[data-v-05ba1def] {\r\n    align-items: center;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 80px;\n}\n.setting-loop[data-v-05ba1def]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-05ba1def]:hover {\r\n    cursor: pointer;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: blue;\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 29px;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66535,110 +66560,149 @@ var render = function () {
       { attrs: { id: "select-modal" } },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
-          _c("div", { attrs: { id: "setting-wrapper" } }, [
+          _c("div", { attrs: { id: "yt-setting-area" } }, [
             _c("p", { attrs: { id: "player-setting-title" } }, [
               _vm._v("動画プレイヤー設定"),
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "yt-form-wrapper setting-content" }, [
-              _c("input", {
-                attrs: {
-                  type: "text",
-                  id: "youtube-url-input",
-                  size: "30",
-                  placeholder: "youtube movie URL",
-                },
-                domProps: { value: _vm.youtubeUrl },
-                on: { input: _vm.updateVideoId },
-              }),
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "yt-setting-wrapper" }, [
-              _c("div", { staticClass: "setting-content" }, [
+              _c("div", { staticClass: "setting-block about-yt-video-id" }, [
+                _c("h3", { staticClass: "sub-title" }, [
+                  _vm._v("youtube動画のURL"),
+                ]),
+                _vm._v(" "),
                 _c("input", {
                   attrs: {
+                    id: "youtube-url-input",
                     type: "text",
-                    id: "set-movie-frame-width",
-                    size: "5",
-                    placeholder: "横幅",
+                    size: "30",
+                    placeholder: "youtube movie URL",
                   },
-                  domProps: { value: _vm.getMediaMovie["width"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateWidth($event)
-                    },
-                  },
+                  domProps: { value: _vm.youtubeUrl },
+                  on: { input: _vm.updateVideoId },
                 }),
-                _vm._v(" "),
-                _c("span", [_vm._v("[px] 横幅")]),
-                _c("span", { staticClass: "message-label" }, [
-                  _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")"),
-                ]),
-                _c("br"),
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "setting-content" }, [
-                _c("input", {
-                  attrs: {
-                    type: "text",
-                    id: "set-movie-frame-height",
-                    size: "5",
-                    placeholder: "縦幅",
-                  },
-                  domProps: { value: _vm.getMediaMovie["height"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateHeight($event)
-                    },
-                  },
-                }),
-                _vm._v(" "),
-                _c("span", [_vm._v("[px] 縦幅")]),
-                _c("span", { staticClass: "message-label" }, [
-                  _vm._v(
-                    " (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")"
-                  ),
-                ]),
               ]),
               _vm._v(" "),
               _c(
-                "button",
+                "div",
                 {
-                  staticClass: "setting-content",
-                  attrs: { type: "submit" },
-                  on: { click: _vm.createMovieFrame },
+                  staticClass:
+                    "setting-block about-create-del flex column align-start",
                 },
-                [_vm._v("再生プレイヤー作成")]
+                [
+                  _c("h3", { staticClass: "sub-title" }, [
+                    _vm._v("再生プレイヤー"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "setting button create-btn",
+                        attrs: { type: "submit" },
+                        on: { click: _vm.createMovieFrame },
+                      },
+                      [_vm._v("作成")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "setting button delete-btn",
+                        attrs: { type: "submit" },
+                        on: { click: _vm.deleteMovieFrame },
+                      },
+                      [_vm._v("削除")]
+                    ),
+                  ]),
+                ]
               ),
               _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "setting-content",
-                  attrs: { type: "submit" },
-                  on: { click: _vm.deleteMovieFrame },
-                },
-                [_vm._v("削除")]
-              ),
+              _c("div", { staticClass: "setting-block about-size" }, [
+                _c("h3", { staticClass: "sub-title" }, [_vm._v("サイズ")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex" }, [
+                  _c("div", { staticClass: "setting-width flex column" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "flex align-center",
+                        staticStyle: { opacity: "0.7" },
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-arrows-alt-h icon" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("横幅[px]")]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "setting",
+                      attrs: {
+                        id: "set-movie-frame-width",
+                        type: "number",
+                        placeholder: "横幅",
+                      },
+                      domProps: { value: _vm.getMediaMovie["width"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateWidth($event)
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "setting-height flex column" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "flex align-center",
+                        staticStyle: { opacity: "0.7" },
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-arrows-alt-v icon" }),
+                        _vm._v(" "),
+                        _c("span", [_vm._v("縦幅[px]")]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "setting",
+                      attrs: {
+                        id: "set-movie-frame-height",
+                        type: "number",
+                        placeholder: "縦幅",
+                      },
+                      domProps: { value: _vm.getMediaMovie["height"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateHeight($event)
+                        },
+                      },
+                    }),
+                  ]),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "setting-block about-loop" }, [
+                _c("h3", { staticClass: "sub-title" }, [_vm._v("ループ")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "toggle-outer",
+                    class: { "is-loop-outer": _vm.getMediaMovie["isLoop"] },
+                    on: { click: _vm.changeLoopSetting },
+                  },
+                  [
+                    _c("div", {
+                      staticClass: "toggle-inner",
+                      class: { "is-loop-inner": _vm.getMediaMovie["isLoop"] },
+                    }),
+                  ]
+                ),
+              ]),
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "setting-loop setting-content",
-                class: { isLoop: _vm.getMediaMovie["isLoop"] },
-                on: { click: _vm.changeLoopSetting },
-              },
-              [
-                _c("i", {
-                  staticClass: "media-yt-loop-icon fas fa-undo-alt fa-2x",
-                }),
-                _vm._v(" "),
-                _c("span", { staticStyle: { "margin-left": "10px" } }, [
-                  _vm._v("ループ"),
-                ]),
-              ]
-            ),
           ]),
         ]),
         _vm._v(" "),
