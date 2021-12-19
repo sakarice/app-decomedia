@@ -199,7 +199,7 @@ export default {
 
   /* トグル */
   .toggle-outer{
-    width: 45px;
+    width: 38px;
     height: 17px;
     padding: 2px;
     border-radius: 20px;
@@ -250,7 +250,7 @@ export default {
     background-color: rgb(70,140,250);
   }
   .is-loop-inner {
-    margin-left: 25.5px;
+    margin-left: 19px;
   }
 
 @media screen and (max-width:480px) {
