@@ -2232,7 +2232,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -2377,12 +2378,32 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       "figureTypeList": [{
@@ -2397,10 +2418,12 @@ function _defineProperty(obj, key, value) {
       // "y_in_element" : 0, // 〃↑のy座標
       "canvas_length": 80,
       "pre_canvas": "",
-      "pre_ctx": ""
+      "pre_ctx": "",
+      "isShowDetail": false,
+      "isMobile": false
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
     type: function type() {
       return this.getFigureData['type'];
     },
@@ -2484,11 +2507,38 @@ function _defineProperty(obj, key, value) {
     global_alpha: function global_alpha() {
       this.setGlobalAlpha();
       this.draw();
+    },
+    isMobile: function isMobile(new_val) {
+      if (new_val == true) {
+        this.deleteMoveEvent();
+        this.setModalAtMobilePosition();
+      } else {
+        this.registMoveEvent();
+      }
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    judgeIsMobile: function judgeIsMobile() {
+      this.isMobile = window.innerWidth < 481 ? true : false;
+    },
+    setModalAtMobilePosition: function setModalAtMobilePosition() {
+      var modal = document.getElementById('media-figure-setting-wrapper');
+      modal.style.left = "";
+      modal.style.top = ""; // topの指定を消す
+      // modal.style.bottom = "50px";
+    },
+    registMoveEvent: function registMoveEvent() {
+      var target = document.getElementById('media-figure-setting-wrapper');
+      target.addEventListener('mousedown', this.moveStart, false);
+      target.addEventListener('touchstart', this.moveStart, false);
+    },
+    deleteMoveEvent: function deleteMoveEvent() {
+      var target = document.getElementById('media-figure-setting-wrapper');
+      target.removeEventListener('mousedown', this.moveStart, false);
+      target.removeEventListener('touchstart', this.moveStart, false);
     },
     addMediaFigure: function addMediaFigure() {
       // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
@@ -2532,44 +2582,8 @@ function _defineProperty(obj, key, value) {
       move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
     moveEnd: function moveEnd(e) {
-      e.target.removeEventListener('moveFinish', this.moveEnd, false); // const new_left = e.detail.left;
-      // const new_top = e.detail.top;
-      // this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
-      // this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
-      // this.figureDatas['left'] = new_left;
-      // this.figureDatas['top'] = new_top;
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
     },
-    // mouseDown(e){
-    //   let event;
-    //   if(e.type==="mousedown"){
-    //     event = e;
-    //   } else {
-    //     event = e.changedTouches[0];
-    //   }
-    //   this.move_target = document.getElementById('media-figure-setting-wrapper');
-    //   // this.move_target = event.target;
-    //   this.x_in_element = event.clientX - this.move_target.offsetLeft;
-    //   this.y_in_element = event.clientY - this.move_target.offsetTop;
-    //   // ムーブイベントにコールバック
-    //   document.body.addEventListener("mousemove", this.mouseMove, false);
-    //   this.move_target.addEventListener("mouseup", this.mouseUp, false);
-    //   document.body.addEventListener("touchmove", this.mouseMove, false);
-    //   this.move_target.addEventListener("touchend", this.mouseUp, false);
-    // },
-    // mouseMove(e){
-    //   e.preventDefault();
-    //   this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-    //   this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-    //   // マウス、タッチ解除時のイベントを設定
-    //   document.body.addEventListener("mouseleave", this.mouseUp, false);
-    //   document.body.addEventListener("touchleave", this.mouseUp, false);
-    // },
-    // mouseUp(e){
-    //   document.body.removeEventListener("mousemove", this.mouseMove, false);
-    //   this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-    //   document.body.removeEventListener("touchmove", this.mouseMove, false);
-    //   this.move_target.removeEventListener("touchend", this.mouseUp, false);
-    // },
     // 図形プレビュー用
     setContext: function setContext() {
       this.pre_canvas = document.getElementById('pre-canvas');
@@ -2689,12 +2703,15 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.restore();
     }
   }),
-  created: function created() {},
+  created: function created() {
+    window.addEventListener('resize', this.judgeIsMobile, false);
+  },
   mounted: function mounted() {
     this.setModalCenter();
     this.setContext();
     this.setCanvasSize();
     this.draw();
+    this.registMoveEvent();
   }
 });
 
@@ -7622,11 +7639,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 420px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-681adb27] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-681adb27] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-681adb27] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\r\n  max-height: 200px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\n.reverse-y[data-v-681adb27] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-681adb27] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-681adb27] {\r\n    max-height: 20vh;\n}\n.item-frame[data-v-681adb27] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n.for-pc-tablet[data-v-681adb27]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14906,23 +14926,14 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      attrs: { id: "media-figure-setting-wrapper" },
-      on: {
-        mousedown: function ($event) {
-          return _vm.moveStart($event)
-        },
-        touchstart: function ($event) {
-          return _vm.moveStart($event)
-        },
-      },
-    },
+    { attrs: { id: "media-figure-setting-wrapper" } },
     [
       _c("div", { staticClass: "item-frame" }, [
         _c(
           "div",
           {
             staticClass: "close-icon-wrapper",
+            class: { hidden: _vm.isMobile },
             on: {
               mousedown: function ($event) {
                 $event.stopPropagation()
@@ -14975,269 +14986,317 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "media-figure-settings" }, [
-          _c("div", { staticClass: "disp-space-between type-input-wrapper" }, [
-            _c("span", [_vm._v("種類:")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "input-num",
-                attrs: { id: "create-figure-type", name: "種類" },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateFigureData({
-                      key: "type",
-                      value: $event.target.value,
-                    })
-                  },
-                },
+        _c(
+          "div",
+          {
+            staticClass: "change-disp-detail flex a-center j-center",
+            on: {
+              click: function ($event) {
+                _vm.isShowDetail = !_vm.isShowDetail
               },
-              _vm._l(_vm.figureTypeList, function (figureType) {
-                return _c(
-                  "option",
+            },
+          },
+          [
+            _c("span", { class: { "reverse-y": _vm.isShowDetail } }, [
+              _vm._v("▼"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "horizontal-bar" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("詳細")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "horizontal-bar" }),
+            _vm._v(" "),
+            _c("span", { class: { "reverse-y": _vm.isShowDetail } }, [
+              _vm._v("▼"),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowDetail,
+                expression: "isShowDetail",
+              },
+            ],
+            staticClass: "media-figure-settings",
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "disp-space-between type-input-wrapper" },
+              [
+                _c("span", [_vm._v("種類:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
                   {
-                    key: figureType["code"],
-                    domProps: { value: figureType["code"] },
+                    staticClass: "input-num",
+                    attrs: { id: "create-figure-type", name: "種類" },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "type",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
                   },
-                  [_vm._v(_vm._s(figureType["name"]))]
-                )
-              }),
-              0
+                  _vm._l(_vm.figureTypeList, function (figureType) {
+                    return _c(
+                      "option",
+                      {
+                        key: figureType["code"],
+                        domProps: { value: figureType["code"] },
+                      },
+                      [_vm._v(_vm._s(figureType["name"]))]
+                    )
+                  }),
+                  0
+                ),
+              ]
             ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-num" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between x-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(x):")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "setting-type-num" }, [
+              _c(
+                "div",
+                { staticClass: "disp-space-between x-position-wrapper" },
+                [
+                  _c("span", [_vm._v("配置座標(x):")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["left"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "left",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between y-position-wrapper" },
+                [
+                  _c("span", [_vm._v("配置座標(y):")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["top"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "top",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
+                _c("span", [_vm._v("回転:")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["left"] },
+                  domProps: { value: _vm.getFigureData["degree"] },
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData({
-                        key: "left",
+                        key: "degree",
                         value: $event.target.value,
                       })
                     },
                   },
                 }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between y-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(y):")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["top"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "top",
-                        value: $event.target.value,
-                      })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between width-input-wrapper" },
+                [
+                  _c("span", [_vm._v("横幅[px]:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["width"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "width",
+                          value: $event.target.value,
+                        })
+                      },
                     },
-                  },
-                }),
-              ]
-            ),
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between height-input-wrapper" },
+                [
+                  _c("span", [_vm._v("縦幅[px]:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["height"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "height",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
-              _c("span", [_vm._v("回転:")]),
+            _c("div", { staticClass: "setting-type-color" }, [
+              _c(
+                "div",
+                { staticClass: "disp-space-between fill-input-wrapper" },
+                [
+                  _c("div", { staticClass: "fill-flag" }, [
+                    _c("span", [_vm._v("塗りつぶし")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      domProps: { checked: _vm.getFigureData["isDrawFill"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "isDrawFill",
+                            value: $event.target.checked,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "fill-color" }, [
+                    _c("span", [_vm._v("色:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "color" },
+                      domProps: { value: _vm.getFigureData["fillColor"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "fillColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between stroke-input-wrapper" },
+                [
+                  _c("div", { staticClass: "stroke-flag" }, [
+                    _c("span", [_vm._v("枠線")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      domProps: { checked: _vm.getFigureData["isDrawStroke"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "isDrawStroke",
+                            value: $event.target.checked,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "stroke-color" }, [
+                    _c("span", [_vm._v("色:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "color" },
+                      domProps: { value: _vm.getFigureData["strokeColor"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "strokeColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "opacity-input-wrapper" }, [
+              _c("span", [_vm._v("透過度:")]),
               _vm._v(" "),
               _c("input", {
-                staticClass: "input-num",
-                attrs: { type: "number" },
-                domProps: { value: _vm.getFigureData["degree"] },
+                attrs: {
+                  type: "range",
+                  name: "opacity",
+                  id: "",
+                  min: "0",
+                  max: "1",
+                  step: "0.05",
+                },
+                domProps: { value: _vm.getFigureData["globalAlpha"] },
                 on: {
+                  mousedown: function ($event) {
+                    $event.stopPropagation()
+                  },
                   input: function ($event) {
                     return _vm.updateFigureData({
-                      key: "degree",
+                      key: "globalAlpha",
                       value: $event.target.value,
                     })
                   },
                 },
               }),
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between width-input-wrapper" },
-              [
-                _c("span", [_vm._v("横幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["width"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "width",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between height-input-wrapper" },
-              [
-                _c("span", [_vm._v("縦幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["height"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "height",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-color" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between fill-input-wrapper" },
-              [
-                _c("div", { staticClass: "fill-flag" }, [
-                  _c("span", [_vm._v("塗りつぶし")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.getFigureData["isDrawFill"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "isDrawFill",
-                          value: $event.target.checked,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "fill-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.getFigureData["fillColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "fillColor",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between stroke-input-wrapper" },
-              [
-                _c("div", { staticClass: "stroke-flag" }, [
-                  _c("span", [_vm._v("枠線")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.getFigureData["isDrawStroke"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "isDrawStroke",
-                          value: $event.target.checked,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "stroke-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.getFigureData["strokeColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "strokeColor",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "opacity-input-wrapper" }, [
-            _c("span", [_vm._v("透過度:")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "range",
-                name: "opacity",
-                id: "",
-                min: "0",
-                max: "1",
-                step: "0.05",
-              },
-              domProps: { value: _vm.getFigureData["globalAlpha"] },
-              on: {
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                },
-                input: function ($event) {
-                  return _vm.updateFigureData({
-                    key: "globalAlpha",
-                    value: $event.target.value,
-                  })
-                },
-              },
-            }),
-          ]),
-        ]),
+          ]
+        ),
       ]),
-    ]
+      _vm._v(" "),
+      _c("close-modal-bar", { staticClass: "for-mobile" }),
+    ],
+    1
   )
 }
 var staticRenderFns = []
