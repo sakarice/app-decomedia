@@ -101,12 +101,6 @@
       right: 7;
       width: 45px;
       height: 45px;
-      background: linear-gradient(
-        -45deg
-        , #333333 50%
-        , #333333
-        , transparent 50%
-      );
     }
 
     .change-disp-audio {

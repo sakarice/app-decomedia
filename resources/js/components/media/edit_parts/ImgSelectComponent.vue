@@ -28,7 +28,7 @@
             <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
-              <span>アップロード</span>
+              <span class="upload-label-text"></span>
               <input id="upload-input" style="display: none" @change="selectedFile" type="file" accept="image/*" name="img">
             </label>
             <div id="loading-display-wrapper" v-show="isLoading">
@@ -365,6 +365,11 @@
     pointer-events: none;
   }
 
+  .upload-label-text::after {
+    content: "アップロード"
+  }
+
+
   @media screen and (max-width:480px) {
     .img-list {
       border-radius: 5px;
@@ -382,6 +387,10 @@
       width: 33%;
     }
     
+    .upload-label-text::after {
+      content: "追加"
+    }
+
   }
 
 

@@ -29,7 +29,7 @@
           <div id="upload-input-wrapper">
             <label id="upload-label" for="upload-audio-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
-              <span>アップロード</span>
+              <span class="upload-label-text"></span>
               <input id="upload-audio-input" style="display: none" @change="selectedFile" type="file" accept="audio/*" name="audio">
             </label>
             <div id="loading-display-wrapper" v-show="isLoading">
@@ -465,10 +465,19 @@ export default {
     padding: 25px 0 15px 0;
   }
 
+  .upload-label-text::after {
+    content: "アップロード"
+  }
+
   @media screen and (max-width: 480px) {
     #audio-thumbnail-wrapper {
       width: 80%;
     }
+
+    .upload-label-text::after {
+      content: "追加"
+    }
+
   }
 
 

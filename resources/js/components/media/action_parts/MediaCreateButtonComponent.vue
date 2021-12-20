@@ -4,7 +4,7 @@
       <div class="action-trigger create-icon-wrapper" @click="createMedia">
         <i class="fas fa-check fa-lg create-icon"></i>
       </div>
-      <span class="action-trigger-subtitle">作成</span>
+      <span class="action-trigger-subtitle for-pc-tablet">作成</span>
     </div>
 
 </template>
@@ -58,12 +58,24 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-.create-icon-wrapper:hover {
-  color: darkorange;
+.create-icon-wrapper {
+  box-shadow: 1px 1px 1px dimgrey;
+  padding: 5px 7px;
+  background-color: rgb(100,100,255);
+  opacity: 0.9;
 }
 
-.action-trigger-subtitle {
-  margin-left: 7px;
+.create-icon-wrapper:hover {
+  opacity: 1;
 }
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  .for-pc-tablet {
+    display: none;
+  }
+}
+
+
 
 </style>
