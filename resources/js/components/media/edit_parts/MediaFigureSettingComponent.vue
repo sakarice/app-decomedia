@@ -348,7 +348,6 @@
   background-color: rgba(35,40,50,0.85);
   color: white;
   border-radius: 6px;
-  box-shadow: 1px 1px 10px rgba(220,220,220,1);
 }
 #media-figure-setting-wrapper:hover{
   cursor: all-scroll;
