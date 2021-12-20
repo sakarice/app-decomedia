@@ -48,12 +48,12 @@
   #select-modal {
     bottom: 45px;
     width: 100%;
-    height: 55vh;
+    height: 50vh;
     flex-flow: column;
   }
   #area-wrapper {
     background-color: rgba(35,40,50,0.85);
-    width: 95%;
+    width: 92%;
     align-items: center;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;

@@ -291,6 +291,9 @@ export default {
 
   },
   created() {
+    document.body.addEventListener('closeModal', (e)=> {
+      this.closeModal();
+    });
   },
   mounted() {
     this.checkMode();

@@ -58,6 +58,13 @@ import { mapGetters } from 'vuex';
   content: '編集モードへ';
 }
 
+@media screen and (max-width:480px) {
+  .change-mode {
+    bottom: 45px;
+    left: 5px;
+  }
+}
+
 
   /* @import "../../../../css/button.css"; */
   /* @import "/resources/css/button.css"; */

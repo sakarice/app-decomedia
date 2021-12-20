@@ -3,7 +3,6 @@
     <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio" v-show="!isShowAudio"></i>
     <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
   </div>
-
 </template>
 
 <script>
@@ -102,12 +101,6 @@
       right: 7;
       width: 45px;
       height: 45px;
-      background: linear-gradient(
-        -45deg
-        , #333333 50%
-        , #333333
-        , transparent 50%
-      );
     }
 
     .change-disp-audio {

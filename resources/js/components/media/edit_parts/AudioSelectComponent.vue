@@ -29,7 +29,7 @@
           <div id="upload-input-wrapper">
             <label id="upload-label" for="upload-audio-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
-              <span>アップロード</span>
+              <span class="upload-label-text"></span>
               <input id="upload-audio-input" style="display: none" @change="selectedFile" type="file" accept="audio/*" name="audio">
             </label>
             <div id="loading-display-wrapper" v-show="isLoading">
@@ -73,19 +73,24 @@
           </ul>
         </div>
       </div>
-      <div class="change-disp-icon-wrapper">
-        <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
-      </div>
-      <div class="close-icon-wrapper for-pc-tablet">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
-      </div>
+
+      <close-modal-bar class="for-mobile"></close-modal-bar>
+      <close-modal-icon class="for-pc-tablet"></close-modal-icon>
+
     </div>
   </transition>
 </template>
 
 <script>
 import { mapMutations } from 'vuex';
+import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
+import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+
 export default {
+  components : {
+    closeModalBar,
+    closeModalIcon,
+  },
   props : ['transitionName'],
   data : () => {
     return {
@@ -460,10 +465,19 @@ export default {
     padding: 25px 0 15px 0;
   }
 
+  .upload-label-text::after {
+    content: "アップロード"
+  }
+
   @media screen and (max-width: 480px) {
     #audio-thumbnail-wrapper {
       width: 80%;
     }
+
+    .upload-label-text::after {
+      content: "追加"
+    }
+
   }
 
 

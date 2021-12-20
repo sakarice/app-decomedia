@@ -28,7 +28,7 @@
             <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
-              <span>アップロード</span>
+              <span class="upload-label-text"></span>
               <input id="upload-input" style="display: none" @change="selectedFile" type="file" accept="image/*" name="img">
             </label>
             <div id="loading-display-wrapper" v-show="isLoading">
@@ -58,17 +58,24 @@
 
         </div>
       </div>
-      <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
-      <div class="close-icon-wrapper for-pc-tablet">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
-      </div>
+
+      <close-modal-bar class="for-mobile"></close-modal-bar>
+      <close-modal-icon class="for-pc-tablet"></close-modal-icon>
+
     </div>
   </transition>
 </template>
 
 <script>
   import { mapState, mapMutations, mapGetters } from 'vuex';
+  import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
+  import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+
   export default {
+    components : {
+      closeModalBar,
+      closeModalIcon,
+    },
     props : ['transitionName'],
     data : () => {
       return {
@@ -358,6 +365,11 @@
     pointer-events: none;
   }
 
+  .upload-label-text::after {
+    content: "アップロード"
+  }
+
+
   @media screen and (max-width:480px) {
     .img-list {
       border-radius: 5px;
@@ -375,6 +387,10 @@
       width: 33%;
     }
     
+    .upload-label-text::after {
+      content: "追加"
+    }
+
   }
 
 

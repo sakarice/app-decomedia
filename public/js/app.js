@@ -3544,7 +3544,13 @@ function _defineProperty(obj, key, value) {
       });
     }
   }),
-  created: function created() {},
+  created: function created() {
+    var _this4 = this;
+
+    document.body.addEventListener('closeModal', function (e) {
+      _this4.closeModal();
+    });
+  },
   mounted: function mounted() {
     this.checkMode();
 
@@ -3567,21 +3573,21 @@ function _defineProperty(obj, key, value) {
 
 
     this.$nextTick(function () {
-      var _this4 = this;
+      var _this5 = this;
 
       window.onYouTubeIframeAPIReady = function () {
-        _this4.getReadyCreateMovieFrame = true;
+        _this5.getReadyCreateMovieFrame = true;
       };
     });
   },
   watch: {
     initStatus: function initStatus(newVal) {
-      var _this5 = this; // オーディオ情報の読み込みが完了したらオーディオ再生開始
+      var _this6 = this; // オーディオ情報の読み込みが完了したらオーディオ再生開始
 
 
       if (newVal >= 4) {
         var play = function play() {
-          _this5.$refs.mediaAudio.playAllAudio();
+          _this6.$refs.mediaAudio.playAllAudio();
         };
 
         setTimeout(play, 10000);
@@ -4611,6 +4617,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    closeModal: function closeModal() {
+      var closeEvent = new CustomEvent('closeModal');
+      document.body.dispatchEvent(closeEvent);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  methods: {
+    closeModal: function closeModal() {
+      var closeEvent = new CustomEvent('closeModal');
+      document.body.dispatchEvent(closeEvent);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=script&lang=js& ***!
@@ -4702,7 +4764,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
-//
 //
 //
 //
@@ -4881,7 +4942,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -5051,12 +5114,16 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['transitionName'],
   data: function data() {
     return {
@@ -5079,7 +5146,7 @@ function _defineProperty(obj, key, value) {
 
     };
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, _defineProperty({
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, _defineProperty({
     finishPlay: function finishPlay() {
       var audioDuration = this.audioPlayer.duration;
       this.audioPlayer.currentTime = audioDuration - 1;
@@ -5325,7 +5392,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -5483,7 +5552,13 @@ function _defineProperty(obj, key, value) {
 
 
 
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['transitionName'],
   data: function data() {
     return {
@@ -5513,8 +5588,8 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImgs'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
     },
@@ -5698,7 +5773,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -5843,12 +5919,32 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
       "figureTypeList": [{
@@ -5863,10 +5959,12 @@ function _defineProperty(obj, key, value) {
       // "y_in_element" : 0, // 〃↑のy座標
       "canvas_length": 80,
       "pre_canvas": "",
-      "pre_ctx": ""
+      "pre_ctx": "",
+      "isShowDetail": false,
+      "isMobile": false
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigureFactory', ['getFigureData'])), {}, {
     type: function type() {
       return this.getFigureData['type'];
     },
@@ -5950,11 +6048,38 @@ function _defineProperty(obj, key, value) {
     global_alpha: function global_alpha() {
       this.setGlobalAlpha();
       this.draw();
+    },
+    isMobile: function isMobile(new_val) {
+      if (new_val == true) {
+        this.deleteMoveEvent();
+        this.setModalAtMobilePosition();
+      } else {
+        this.registMoveEvent();
+      }
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    judgeIsMobile: function judgeIsMobile() {
+      this.isMobile = window.innerWidth < 481 ? true : false;
+    },
+    setModalAtMobilePosition: function setModalAtMobilePosition() {
+      var modal = document.getElementById('media-figure-setting-wrapper');
+      modal.style.left = "";
+      modal.style.top = ""; // topの指定を消す
+      // modal.style.bottom = "50px";
+    },
+    registMoveEvent: function registMoveEvent() {
+      var target = document.getElementById('media-figure-setting-wrapper');
+      target.addEventListener('mousedown', this.moveStart, false);
+      target.addEventListener('touchstart', this.moveStart, false);
+    },
+    deleteMoveEvent: function deleteMoveEvent() {
+      var target = document.getElementById('media-figure-setting-wrapper');
+      target.removeEventListener('mousedown', this.moveStart, false);
+      target.removeEventListener('touchstart', this.moveStart, false);
     },
     addMediaFigure: function addMediaFigure() {
       // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
@@ -5998,44 +6123,8 @@ function _defineProperty(obj, key, value) {
       move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
     moveEnd: function moveEnd(e) {
-      e.target.removeEventListener('moveFinish', this.moveEnd, false); // const new_left = e.detail.left;
-      // const new_top = e.detail.top;
-      // this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
-      // this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
-      // this.figureDatas['left'] = new_left;
-      // this.figureDatas['top'] = new_top;
+      e.target.removeEventListener('moveFinish', this.moveEnd, false);
     },
-    // mouseDown(e){
-    //   let event;
-    //   if(e.type==="mousedown"){
-    //     event = e;
-    //   } else {
-    //     event = e.changedTouches[0];
-    //   }
-    //   this.move_target = document.getElementById('media-figure-setting-wrapper');
-    //   // this.move_target = event.target;
-    //   this.x_in_element = event.clientX - this.move_target.offsetLeft;
-    //   this.y_in_element = event.clientY - this.move_target.offsetTop;
-    //   // ムーブイベントにコールバック
-    //   document.body.addEventListener("mousemove", this.mouseMove, false);
-    //   this.move_target.addEventListener("mouseup", this.mouseUp, false);
-    //   document.body.addEventListener("touchmove", this.mouseMove, false);
-    //   this.move_target.addEventListener("touchend", this.mouseUp, false);
-    // },
-    // mouseMove(e){
-    //   e.preventDefault();
-    //   this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-    //   this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-    //   // マウス、タッチ解除時のイベントを設定
-    //   document.body.addEventListener("mouseleave", this.mouseUp, false);
-    //   document.body.addEventListener("touchleave", this.mouseUp, false);
-    // },
-    // mouseUp(e){
-    //   document.body.removeEventListener("mousemove", this.mouseMove, false);
-    //   this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-    //   document.body.removeEventListener("touchmove", this.mouseMove, false);
-    //   this.move_target.removeEventListener("touchend", this.mouseUp, false);
-    // },
     // 図形プレビュー用
     setContext: function setContext() {
       this.pre_canvas = document.getElementById('pre-canvas');
@@ -6155,12 +6244,15 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.restore();
     }
   }),
-  created: function created() {},
+  created: function created() {
+    window.addEventListener('resize', this.judgeIsMobile, false);
+  },
   mounted: function mounted() {
     this.setModalCenter();
     this.setContext();
     this.setCanvasSize();
     this.draw();
+    this.registMoveEvent();
   }
 });
 
@@ -6177,7 +6269,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -6276,10 +6370,29 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['transitionName'],
   data: function data() {
     return {
@@ -6287,16 +6400,12 @@ function _defineProperty(obj, key, value) {
       window_height: ""
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
-    aboutPublicState: function aboutPublicState() {
-      if (this.getMediaSetting['isPublic']) {
-        return '公開（他のユーザも検索・閲覧できます）';
-      } else if (!this.getMediaSetting['isPublic']) {
-        return '非公開（他のユーザは検索・閲覧できません）';
-      }
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+    openState: function openState() {
+      return this.getMediaSetting['isPublic'] ? "公開" : "非公開";
     }
   }),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -6340,7 +6449,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -6430,10 +6541,41 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: ['transitionName'],
   data: function data() {
     return {
@@ -6442,8 +6584,12 @@ function _defineProperty(obj, key, value) {
       window_height: 0
     };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getMediaMovie'])), {}, {
+    loopOnOff: function loopOnOff() {
+      return this.getMediaMovie['isLoop'] ? "ON" : "OFF";
+    }
+  }),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -16837,7 +16983,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16894,7 +17040,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-3c9730e2] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-3c9730e2] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-3c9730e2] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-3c9730e2] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-3c9730e2] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-3c9730e2] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-3c9730e2]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-3c9730e2] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-3c9730e2]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-3c9730e2] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-3c9730e2] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-3c9730e2] {\r\n        margin: 5px 0px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-3c9730e2] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-3c9730e2] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-3c9730e2] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-3c9730e2] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-3c9730e2] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-3c9730e2] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-3c9730e2]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-3c9730e2] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-3c9730e2]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-3c9730e2] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-3c9730e2] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-3c9730e2] {\r\n        margin: 5px 0px;\n}\n.header-center[data-v-3c9730e2] {\r\n        position: absolute;\r\n        left: 40%;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -16972,7 +17118,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  color: darkorange;\n}\n.action-trigger-subtitle[data-v-93079c06] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17023,7 +17169,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-82371542] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-82371542]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.edit-mode-icon[data-v-82371542] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '閲覧モード';\n}\n.change-mode:hover .show-mode-icon[data-v-82371542] {\r\n  display: none;\n}\n.change-mode:hover .edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\r\n\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n  /* @import \"/resources/css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-82371542] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-82371542]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.edit-mode-icon[data-v-82371542] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '閲覧モード';\n}\n.change-mode:hover .show-mode-icon[data-v-82371542] {\r\n  display: none;\n}\n.change-mode:hover .edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n  /* @import \"/resources/css/button.css\"; */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17050,7 +17196,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-2d7d2ccc] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-2d7d2ccc]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '編集モード';\n}\n.change-mode:hover .edit-mode-icon[data-v-2d7d2ccc] {\r\n  display: none;\n}\n.change-mode:hover .show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-2d7d2ccc] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-2d7d2ccc]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '編集モード';\n}\n.change-mode:hover .edit-mode-icon[data-v-2d7d2ccc] {\r\n  display: none;\n}\n.change-mode:hover .show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17078,6 +17224,54 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-icon[data-v-0be5d7b3] {\r\n    color: white;\n}\n.mypage-icon[data-v-0be5d7b3]:hover {\r\n    color: yellow;\n}\n@media screen and (max-width: 480px) {\n.mypage-icon-wrapper[data-v-0be5d7b3] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.close-bar-wrapper[data-v-f2b24f98] {\n    position: absolute;\n    top: 0;\n    right: 7px;\n    z-index: 10;\n    height: 100%;\n}\n.close-bar[data-v-f2b24f98] {\n    margin-right: 1px;\n    border-radius: 4px;\n    width: 8px;\n    height: 40%;\n    background-color: black;\n}\n@media screen and (max-width:480px){\n.close-bar-wrapper[data-v-f2b24f98] {\n    display: flex;\n    align-items: center;\n}\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.close-icon-wrapper[data-v-708e9a2c]{\r\n  position: absolute;\r\n  right: -25px;\r\n  top: 50%;\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17125,7 +17319,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: 60px;\n  width: 60px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\n  color: lightgrey;\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (min-width:481px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    border-radius: 50%;\n    background-color: rgba(20,20,20,0.8);\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n    background-color: rgba(0,110,110, 0.5);\n}\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 50px;\n    right: 7;\n    width: 45px;\n    height: 45px;\n    background: linear-gradient(\n      -45deg\n      , #333333 50%\n      , #333333\n      , transparent 50%\n    );\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: 60px;\n  width: 60px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\n  color: lightgrey;\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (min-width:481px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    border-radius: 50%;\n    background-color: rgba(20,20,20,0.8);\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n    background-color: rgba(0,110,110, 0.5);\n}\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 50px;\n    right: 7;\n    width: 45px;\n    height: 45px;\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17248,7 +17442,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 10px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 16px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 12px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio_name[data-v-ee42beee] {\r\n    margin-left: 7px;\r\n    white-space: nowrap;\n}\n.audio_name[data-v-ee42beee]:hover {\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 25px 0 15px 0;\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 10px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 16px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 12px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio_name[data-v-ee42beee] {\r\n    margin-left: 7px;\r\n    white-space: nowrap;\n}\n.audio_name[data-v-ee42beee]:hover {\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 40px;\r\n    height: 40px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 25px 0 15px 0;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n    content: \"アップロード\"\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n      content: \"追加\"\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17275,7 +17469,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n    content: \"アップロード\"\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n      content: \"追加\"\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17295,11 +17489,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 420px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-681adb27] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-681adb27] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-681adb27] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\r\n  max-height: 200px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 80px;\r\n  left: 160px;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\n.reverse-y[data-v-681adb27] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-681adb27] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-681adb27] {\r\n    max-height: 20vh;\n}\n.item-frame[data-v-681adb27] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n.for-pc-tablet[data-v-681adb27]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17320,13 +17517,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
+
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.state-description[data-v-786c26ba] {\r\n    font-size: 12px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-right: 5px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    font-weight: bold;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-area[data-v-786c26ba] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-786c26ba]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-786c26ba] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-786c26ba] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-786c26ba] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n#media-setting-area[data-v-786c26ba] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17347,13 +17547,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
+
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n.yt-setting-wrapper[data-v-05ba1def] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-content[data-v-05ba1def] {\r\n    margin-bottom: 7px;\n}\n.setting-loop[data-v-05ba1def]{\r\n    display: flex;\r\n    align-items: center;\n}\n.setting-loop[data-v-05ba1def]:hover {\r\n    cursor: pointer;\n}\n.isLoop[data-v-05ba1def] {\r\n    color: blue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 5px 5px;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 20px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 80px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17377,7 +17580,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 10px 0;\n    width: 100%;\n    height: 80px;\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n    overflow-x: scroll;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    background-color: rgba(0,0,0,0.8);\n\n    width: 180px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n}\n.audio-num-wrapper[data-v-91d677f2]{\n    z-index: 1;\n    position: absolute;\n    top: 5px;\n    left: 2px;\n    width: 20px;\n    height: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-num[data-v-91d677f2]{\n    font-size: 16px;\n    color: lightseagreen;\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -16px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 60px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    top: 35px;\n    left: 14px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    bottom: 18px;\n    left: 12px;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    margin-top: 20px;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    height: 50px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    padding: 5px;\n    left: -25px;\n    top: -30px;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    right: -18px;\n    top: -25px;\n}\n.media-audio-num[data-v-91d677f2] {\n      font-size: 13px;    \n      color: lightgray;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 10px 0;\n    width: 100%;\n    height: 80px;\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n    overflow-x: scroll;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    background-color: rgba(0,0,0,0.8);\n\n    width: 180px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n}\n.audio-num-wrapper[data-v-91d677f2]{\n    z-index: 1;\n    position: absolute;\n    top: 5px;\n    left: 2px;\n    width: 20px;\n    height: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-num[data-v-91d677f2]{\n    font-size: 16px;\n    margin: -5px 0 0 5px;\n    color: lightseagreen;\n    opacity: 0.7;\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    position: absolute;\n    left: -15px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(220,50,50,0.8);\n    display: none;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    position: absolute;\n    right: -16px;\n    top: -22px;\n    z-index: -1;\n    color:  rgba(20,20,250,0.8);\n    display: none;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    z-index: -1;\n    color:  rgba(255,255,255,0.8);\n    display: none;\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.audio-area:hover\n  .media-audio-delete-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-loop-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.audio-area:hover\n  .media-audio-vol-icon[data-v-91d677f2] {\n    z-index: 2;\n    display: inline-block;\n}\n.media-audio-name[data-v-91d677f2] {\n    color : white;\n    font-size: 0.7rem;\n    margin-left: 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    position: absolute;\n    display: flex;\n    align-items: center;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n    display: none;\n}\n.audio-vol-wrapper:hover\n  .vol-bar-wrapper[data-v-91d677f2] {\n    display: inline-block;\n}\n\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.media-audio-loop-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    height: 2px;\n    width: 50px;\n    margin-bottom: 12px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 60px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    top: 35px;\n    left: 14px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    bottom: 18px;\n    left: 12px;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    margin-top: 20px;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    height: 50px;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.fa-times[data-v-91d677f2] {\n    padding: 10px 15px;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    padding: 5px;\n    left: -25px;\n    top: -30px;\n}\n.media-audio-loop-icon[data-v-91d677f2] {\n    right: -18px;\n    top: -25px;\n}\n.media-audio-num[data-v-91d677f2] {\n      font-size: 13px;    \n      color: lightgray;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17992,7 +18195,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: end;\r\n  margin: 0 10px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:12px;\r\n  color: white;\r\n  margin: 0 2px;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: end;\r\n  margin: 0 10px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:11px;\r\n  color: grey;\r\n  margin-top: 2px;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css":
+/*!******************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css ***!
+  \******************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".flex {\r\n  display: flex;\r\n}\r\n\r\n\r\n/* flex方向 */\r\n.column {\r\n  flex-direction: column;\r\n}\r\n\r\n\r\n/* align-items */\r\n.a-center {\r\n  align-items: center;\r\n}\r\n.a-start {\r\n  align-items: flex-start;\r\n}\r\n.a-end {\r\n  align-items: flex-end;\r\n}\r\n\r\n\r\n\r\n/* justify-contents */\r\n.j-center {\r\n  justify-content: center;\r\n}\r\n.j-start {\r\n  justify-content: flex-start;\r\n}\r\n.j-end {\r\n  justify-content: flex-end;\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18040,7 +18267,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  display: flex;\r\n  align-items: center;\r\n  color: rgba(200,200,200,1);\r\n}\r\n\r\n.category{\r\n  margin: 0 20px;\r\n}\r\n.category:hover{\r\n  cursor: pointer;\r\n}\r\n\r\n.active_category {\r\n  color: white;\r\n  border-bottom: 1.5px solid;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n.close-icon-wrapper{\r\n  padding: 5px;\r\n  border-top-right-radius: 50%;\r\n  border-bottom-right-radius: 50%;\r\n}\r\n\r\n#close-modal-icon {\r\n  /* position: absolute;\r\n  top: 200px;\r\n  left: -20px; */\r\n  cursor: pointer;\r\n}\r\n\r\n.change-disp-icon-wrapper {\r\n  padding: 10px;\r\n  background-color: transparent;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  /* margin-right: -85%;\r\n  margin-top: -35px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n  #setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\r\n  }\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n\r\n@media screen and (min-width: 481px) {\r\n  #contents-wrapper {\r\n    padding: 20px 10px 10px 0px;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 5px 15px;\r\n    font-size: 13px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    flex-direction: column-reverse;\r\n    justify-content: space-between;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 15px 0 0 0;\r\n    height: 50px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    /* margin-bottom: 15px; */\r\n    margin-bottom: 0;\r\n  }\r\n\r\n  #setting-wrapper {\r\n    margin: 0;\r\n  }\r\n  \r\n  \r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  display: flex;\r\n  align-items: center;\r\n  color: rgba(200,200,200,1);\r\n}\r\n\r\n.category{\r\n  margin: 0 20px;\r\n}\r\n.category:hover{\r\n  cursor: pointer;\r\n}\r\n\r\n.active_category {\r\n  color: white;\r\n  border-bottom: 1.5px solid;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n\r\n.change-disp-icon-wrapper {\r\n  padding: 10px;\r\n  background-color: transparent;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  /* margin-right: -85%;\r\n  margin-top: -35px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n  #setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\r\n  }\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n\r\n@media screen and (min-width: 481px) {\r\n  #contents-wrapper {\r\n    padding: 20px 10px 10px 0px;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 4px 10px;\r\n    font-size: 10px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    flex-direction: column-reverse;\r\n    justify-content: space-between;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 15px 0 0 0;\r\n    height: 50px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    position: absolute;\r\n    bottom: 15px;\r\n    left: 30px;\r\n    margin: 0;\r\n    width: auto;\r\n  }\r\n\r\n  #setting-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  .category{\r\n    margin: 0 10px;\r\n  }\r\n  \r\n  \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18064,7 +18291,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;   \r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 55vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 95%;\r\n    align-items: center;\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;   \r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 50vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -56543,6 +56770,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_style_index_0_id_f2b24f98_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_style_index_0_id_f2b24f98_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_style_index_0_id_f2b24f98_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_style_index_0_id_708e9a2c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_style_index_0_id_708e9a2c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_style_index_0_id_708e9a2c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=style&index=0&id=4870f6bf&scoped=true&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=style&index=0&id=4870f6bf&scoped=true&lang=css& ***!
@@ -58720,6 +59007,88 @@ component.options.__file = "resources/js/components/media/action_parts/ToMypageB
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true& */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true&");
+/* harmony import */ var _CloseModalBarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CloseModalBarComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CloseModalBarComponent_vue_vue_type_style_index_0_id_f2b24f98_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CloseModalBarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "f2b24f98",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/media/change_display_parts/CloseModalBarComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true& */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true&");
+/* harmony import */ var _CloseModalIconComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CloseModalIconComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _CloseModalIconComponent_vue_vue_type_style_index_0_id_708e9a2c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _CloseModalIconComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "708e9a2c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/media/change_display_parts/CloseModalIconComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue":
 /*!****************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue ***!
@@ -60516,6 +60885,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalBarComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalIconComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=script&lang=js& ***!
@@ -61339,6 +61740,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_style_index_0_id_f2b24f98_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=style&index=0&id=f2b24f98&scoped=true&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_style_index_0_id_708e9a2c_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=style&index=0&id=708e9a2c&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=style&index=0&id=4870f6bf&scoped=true&lang=css&":
 /*!*************************************************************************************************************************************************!*\
   !*** ./resources/js/components/media/change_display_parts/DispAudioModalComponent.vue?vue&type=style&index=0&id=4870f6bf&scoped=true&lang=css& ***!
@@ -62143,6 +62570,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ToMypageButtonComponent_vue_vue_type_template_id_0be5d7b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ToMypageButtonComponent_vue_vue_type_template_id_0be5d7b3_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ToMypageButtonComponent.vue?vue&type=template&id=0be5d7b3&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/action_parts/ToMypageButtonComponent.vue?vue&type=template&id=0be5d7b3&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true&":
+/*!**********************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true& ***!
+  \**********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalBarComponent_vue_vue_type_template_id_f2b24f98_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true&":
+/*!***********************************************************************************************************************************!*\
+  !*** ./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true& ***!
+  \***********************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CloseModalIconComponent_vue_vue_type_template_id_708e9a2c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true&");
 
 
 /***/ }),
@@ -64476,7 +64937,9 @@ var render = function () {
       [_c("i", { staticClass: "fas fa-check fa-lg create-icon" })]
     ),
     _vm._v(" "),
-    _c("span", { staticClass: "action-trigger-subtitle" }, [_vm._v("作成")]),
+    _c("span", { staticClass: "action-trigger-subtitle for-pc-tablet" }, [
+      _vm._v("作成"),
+    ]),
   ])
 }
 var staticRenderFns = []
@@ -64640,6 +65103,82 @@ var staticRenderFns = [
     )
   },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue?vue&type=template&id=f2b24f98&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "close-bar-wrapper",
+      on: {
+        click: function ($event) {
+          return _vm.closeModal()
+        },
+        touchstart: function ($event) {
+          return _vm.closeModal()
+        },
+      },
+    },
+    [_c("div", { staticClass: "close-bar" })]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue?vue&type=template&id=708e9a2c&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "close-icon-wrapper" }, [
+    _c("i", {
+      staticClass: "fas fa-chevron-circle-left fa-3x",
+      on: {
+        click: function ($event) {
+          return _vm.closeModal()
+        },
+        touchstart: function ($event) {
+          return _vm.closeModal()
+        },
+      },
+    }),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64926,333 +65465,326 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
-    _c("div", { attrs: { id: "select-modal" } }, [
-      _c("div", { attrs: { id: "area-wrapper" } }, [
-        _c("div", {
-          class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
-          attrs: { id: "drop-zone" },
-          on: {
-            dragleave: _vm.dragLeave,
-            dragover: function ($event) {
-              $event.preventDefault()
+    _c(
+      "div",
+      { attrs: { id: "select-modal" } },
+      [
+        _c("div", { attrs: { id: "area-wrapper" } }, [
+          _c("div", {
+            class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
+            attrs: { id: "drop-zone" },
+            on: {
+              dragleave: _vm.dragLeave,
+              dragover: function ($event) {
+                $event.preventDefault()
+              },
+              drop: function ($event) {
+                $event.preventDefault()
+                return _vm.dropFile($event)
+              },
             },
-            drop: function ($event) {
-              $event.preventDefault()
-              return _vm.dropFile($event)
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "contents-audio",
+              attrs: { id: "contents-wrapper" },
+              on: { dragenter: _vm.dragEnter },
             },
-          },
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "contents-audio",
-            attrs: { id: "contents-wrapper" },
-            on: { dragenter: _vm.dragEnter },
-          },
-          [
-            _c("div", { attrs: { id: "toggle-wrapper" } }, [
-              _c("div", { attrs: { id: "category-type" } }, [
+            [
+              _c("div", { attrs: { id: "toggle-wrapper" } }, [
+                _c("div", { attrs: { id: "category-type" } }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "category category-default",
+                      class: { active_category: _vm.isDefault },
+                      on: { click: _vm.changeFileCategory },
+                    },
+                    [_vm._v("\n             default\n             ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "category category-upload",
+                      class: { active_category: !_vm.isDefault },
+                      on: { click: _vm.changeFileCategory },
+                    },
+                    [_vm._v("\n             upload\n             ")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "upload-input-wrapper" } }, [
                 _c(
-                  "span",
+                  "label",
                   {
-                    staticClass: "category category-default",
-                    class: { active_category: _vm.isDefault },
-                    on: { click: _vm.changeFileCategory },
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isDefault,
+                        expression: "!(isDefault)",
+                      },
+                    ],
+                    attrs: {
+                      id: "upload-label",
+                      for: "upload-audio-input",
+                      tabindex: "2",
+                    },
+                    on: {
+                      keydown: function ($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.startInput($event)
+                      },
+                    },
                   },
-                  [_vm._v("\n             default\n             ")]
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-upload",
+                      staticStyle: { "margin-right": "5px" },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "upload-label-text" }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "upload-audio-input",
+                        type: "file",
+                        accept: "audio/*",
+                        name: "audio",
+                      },
+                      on: { change: _vm.selectedFile },
+                    }),
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
-                  "span",
+                  "div",
                   {
-                    staticClass: "category category-upload",
-                    class: { active_category: !_vm.isDefault },
-                    on: { click: _vm.changeFileCategory },
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading",
+                      },
+                    ],
+                    attrs: { id: "loading-display-wrapper" },
                   },
-                  [_vm._v("\n             upload\n             ")]
+                  [
+                    _c("p", { staticClass: "loading-message" }, [
+                      _vm._v(_vm._s(_vm.loadingMessage)),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", {
+                      class: { "copy-to-right": _vm.isLoading },
+                      attrs: { id: "uploading-dot" },
+                    }),
+                  ]
                 ),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { attrs: { id: "upload-input-wrapper" } }, [
-              _c(
-                "label",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.isDefault,
-                      expression: "!(isDefault)",
-                    },
-                  ],
-                  attrs: {
-                    id: "upload-label",
-                    for: "upload-audio-input",
-                    tabindex: "2",
-                  },
-                  on: {
-                    keydown: function ($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.startInput($event)
-                    },
-                  },
-                },
-                [
-                  _c("i", {
-                    staticClass: "fas fa-upload",
-                    staticStyle: { "margin-right": "5px" },
-                  }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("アップロード")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticStyle: { display: "none" },
-                    attrs: {
-                      id: "upload-audio-input",
-                      type: "file",
-                      accept: "audio/*",
-                      name: "audio",
-                    },
-                    on: { change: _vm.selectedFile },
-                  }),
-                ]
-              ),
               _vm._v(" "),
               _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isLoading,
-                      expression: "isLoading",
-                    },
-                  ],
-                  attrs: { id: "loading-display-wrapper" },
-                },
+                "ul",
+                { attrs: { id: "audio-thumbnail-wrapper" } },
                 [
-                  _c("p", { staticClass: "loading-message" }, [
-                    _vm._v(_vm._s(_vm.loadingMessage)),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    class: { "copy-to-right": _vm.isLoading },
-                    attrs: { id: "uploading-dot" },
+                  _vm._l(_vm.userOwnAudios, function (userOwnAudio, index) {
+                    return _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isDefault,
+                            expression: "!(isDefault)",
+                          },
+                        ],
+                        key: userOwnAudio.id,
+                        staticClass: "audio-list",
+                        attrs: { id: index },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "audio-thumbnail",
+                          attrs: {
+                            src: userOwnAudio["thumbnail_url"],
+                            alt: userOwnAudio["thumbnail_url"],
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "audio_name",
+                            class: { "now-play": userOwnAudio["isPlay"] },
+                            on: {
+                              click: function ($event) {
+                                return _vm.addAudioToMedia("user-own", index)
+                              },
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(userOwnAudio["name"]) +
+                                "\n            "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !userOwnAudio["isPlay"],
+                              expression: "!(userOwnAudio['isPlay'])",
+                            },
+                          ],
+                          staticClass:
+                            "audio-play-icon fas fa-caret-right fa-2x",
+                          on: {
+                            click: function ($event) {
+                              return _vm.playAudio("user-own", index)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: userOwnAudio["isPlay"],
+                              expression: "userOwnAudio['isPlay']",
+                            },
+                          ],
+                          staticClass: "audio-pause-icon fas fa-pause fa-lg",
+                          on: {
+                            click: function ($event) {
+                              return _vm.pauseAudio("user-own", index)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("i", {
+                          staticClass: "delete-audio fas fa-times fa-2x",
+                          on: { click: _vm.deleteaudio },
+                        }),
+                      ]
+                    )
                   }),
-                ]
+                  _vm._v(" "),
+                  _vm._l(_vm.defaultAudios, function (defaultAudio, index) {
+                    return _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isDefault,
+                            expression: "isDefault",
+                          },
+                        ],
+                        key: defaultAudio.id,
+                        staticClass: "audio-list",
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "audio-thumbnail",
+                          attrs: {
+                            src: defaultAudio["thumbnail_url"],
+                            alt: defaultAudio["thumbnail_url"],
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          {
+                            staticClass: "audio_name",
+                            class: { "now-play": defaultAudio["isPlay"] },
+                            on: {
+                              click: function ($event) {
+                                return _vm.addAudioToMedia("default", index)
+                              },
+                            },
+                          },
+                          [
+                            _vm._v(
+                              "\n              " +
+                                _vm._s(defaultAudio["name"]) +
+                                "\n            "
+                            ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !defaultAudio["isPlay"],
+                              expression: "!(defaultAudio['isPlay'])",
+                            },
+                          ],
+                          staticClass:
+                            "audio-play-icon fas fa-caret-right fa-2x",
+                          on: {
+                            click: function ($event) {
+                              return _vm.playAudio("default", index)
+                            },
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c("i", {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: defaultAudio["isPlay"],
+                              expression: "defaultAudio['isPlay']",
+                            },
+                          ],
+                          staticClass: "audio-pause-icon fas fa-pause fa-lg",
+                          on: {
+                            click: function ($event) {
+                              return _vm.pauseAudio("default", index)
+                            },
+                          },
+                        }),
+                      ]
+                    )
+                  }),
+                ],
+                2
               ),
-            ]),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { attrs: { id: "audio-thumbnail-wrapper" } },
-              [
-                _vm._l(_vm.userOwnAudios, function (userOwnAudio, index) {
-                  return _c(
-                    "li",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.isDefault,
-                          expression: "!(isDefault)",
-                        },
-                      ],
-                      key: userOwnAudio.id,
-                      staticClass: "audio-list",
-                      attrs: { id: index },
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "audio-thumbnail",
-                        attrs: {
-                          src: userOwnAudio["thumbnail_url"],
-                          alt: userOwnAudio["thumbnail_url"],
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "audio_name",
-                          class: { "now-play": userOwnAudio["isPlay"] },
-                          on: {
-                            click: function ($event) {
-                              return _vm.addAudioToMedia("user-own", index)
-                            },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(userOwnAudio["name"]) +
-                              "\n            "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !userOwnAudio["isPlay"],
-                            expression: "!(userOwnAudio['isPlay'])",
-                          },
-                        ],
-                        staticClass: "audio-play-icon fas fa-caret-right fa-2x",
-                        on: {
-                          click: function ($event) {
-                            return _vm.playAudio("user-own", index)
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: userOwnAudio["isPlay"],
-                            expression: "userOwnAudio['isPlay']",
-                          },
-                        ],
-                        staticClass: "audio-pause-icon fas fa-pause fa-lg",
-                        on: {
-                          click: function ($event) {
-                            return _vm.pauseAudio("user-own", index)
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("i", {
-                        staticClass: "delete-audio fas fa-times fa-2x",
-                        on: { click: _vm.deleteaudio },
-                      }),
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.defaultAudios, function (defaultAudio, index) {
-                  return _c(
-                    "li",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.isDefault,
-                          expression: "isDefault",
-                        },
-                      ],
-                      key: defaultAudio.id,
-                      staticClass: "audio-list",
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "audio-thumbnail",
-                        attrs: {
-                          src: defaultAudio["thumbnail_url"],
-                          alt: defaultAudio["thumbnail_url"],
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "audio_name",
-                          class: { "now-play": defaultAudio["isPlay"] },
-                          on: {
-                            click: function ($event) {
-                              return _vm.addAudioToMedia("default", index)
-                            },
-                          },
-                        },
-                        [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(defaultAudio["name"]) +
-                              "\n            "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !defaultAudio["isPlay"],
-                            expression: "!(defaultAudio['isPlay'])",
-                          },
-                        ],
-                        staticClass: "audio-play-icon fas fa-caret-right fa-2x",
-                        on: {
-                          click: function ($event) {
-                            return _vm.playAudio("default", index)
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("i", {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: defaultAudio["isPlay"],
-                            expression: "defaultAudio['isPlay']",
-                          },
-                        ],
-                        staticClass: "audio-pause-icon fas fa-pause fa-lg",
-                        on: {
-                          click: function ($event) {
-                            return _vm.pauseAudio("default", index)
-                          },
-                        },
-                      }),
-                    ]
-                  )
-                }),
-              ],
-              2
-            ),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "change-disp-icon-wrapper" }, [
-        _c("i", {
-          staticClass: "fas fa-times-circle fa-2x for-mobile",
-          attrs: { id: "change-disp-modal" },
-          on: {
-            click: function ($event) {
-              return _vm.closeModal()
-            },
-          },
-        }),
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
-        _c("i", {
-          staticClass: "fas fa-chevron-circle-left fa-3x",
-          attrs: { id: "close-modal-icon" },
-          on: {
-            click: function ($event) {
-              return _vm.closeModal()
-            },
-          },
-        }),
-      ]),
-    ]),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("close-modal-bar", { staticClass: "for-mobile" }),
+        _vm._v(" "),
+        _c("close-modal-icon", { staticClass: "for-pc-tablet" }),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -65279,258 +65811,251 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
-    _c("div", { attrs: { id: "select-modal" } }, [
-      _c("div", { attrs: { id: "area-wrapper" } }, [
-        _c("div", {
-          class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
-          attrs: { id: "drop-zone" },
-          on: {
-            dragleave: _vm.dragLeave,
-            dragover: function ($event) {
-              $event.preventDefault()
+    _c(
+      "div",
+      { attrs: { id: "select-modal" } },
+      [
+        _c("div", { attrs: { id: "area-wrapper" } }, [
+          _c("div", {
+            class: { show: _vm.isDragEnter, hidden: !_vm.isDragEnter },
+            attrs: { id: "drop-zone" },
+            on: {
+              dragleave: _vm.dragLeave,
+              dragover: function ($event) {
+                $event.preventDefault()
+              },
+              drop: function ($event) {
+                $event.preventDefault()
+                return _vm.dropFile($event)
+              },
             },
-            drop: function ($event) {
-              $event.preventDefault()
-              return _vm.dropFile($event)
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "contents-img",
+              attrs: { id: "contents-wrapper" },
+              on: { dragenter: _vm.dragEnter },
             },
-          },
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "contents-img",
-            attrs: { id: "contents-wrapper" },
-            on: { dragenter: _vm.dragEnter },
-          },
-          [
-            _c("div", { attrs: { id: "toggle-wrapper" } }, [
-              _c("div", { attrs: { id: "category-type" } }, [
+            [
+              _c("div", { attrs: { id: "toggle-wrapper" } }, [
+                _c("div", { attrs: { id: "category-type" } }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "category category-default",
+                      class: { active_category: _vm.isDefault },
+                      on: { click: _vm.changeFileCategory },
+                    },
+                    [_vm._v("\n             default\n             ")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "category category-upload",
+                      class: { active_category: !_vm.isDefault },
+                      on: { click: _vm.changeFileCategory },
+                    },
+                    [_vm._v("\n             upload\n             ")]
+                  ),
+                ]),
+              ]),
+              _vm._v(" "),
+              _c("div", { attrs: { id: "upload-input-wrapper" } }, [
                 _c(
-                  "span",
+                  "label",
                   {
-                    staticClass: "category category-default",
-                    class: { active_category: _vm.isDefault },
-                    on: { click: _vm.changeFileCategory },
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isDefault,
+                        expression: "!(isDefault)",
+                      },
+                    ],
+                    attrs: {
+                      id: "upload-label",
+                      for: "upload-input",
+                      tabindex: "2",
+                    },
+                    on: {
+                      keydown: function ($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.startInput($event)
+                      },
+                    },
                   },
-                  [_vm._v("\n             default\n             ")]
+                  [
+                    _c("i", {
+                      staticClass: "fas fa-upload",
+                      staticStyle: { "margin-right": "5px" },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "upload-label-text" }),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "upload-input",
+                        type: "file",
+                        accept: "image/*",
+                        name: "img",
+                      },
+                      on: { change: _vm.selectedFile },
+                    }),
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
-                  "span",
+                  "div",
                   {
-                    staticClass: "category category-upload",
-                    class: { active_category: !_vm.isDefault },
-                    on: { click: _vm.changeFileCategory },
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading",
+                      },
+                    ],
+                    attrs: { id: "loading-display-wrapper" },
                   },
-                  [_vm._v("\n             upload\n             ")]
+                  [
+                    _c("p", { staticClass: "loading-message" }, [
+                      _vm._v(_vm._s(_vm.loadingMessage)),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", {
+                      class: { "copy-to-right": _vm.isLoading },
+                      attrs: { id: "uploading-dot" },
+                    }),
+                  ]
                 ),
               ]),
-            ]),
-            _vm._v(" "),
-            _c("div", { attrs: { id: "upload-input-wrapper" } }, [
-              _c(
-                "label",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.isDefault,
-                      expression: "!(isDefault)",
-                    },
-                  ],
-                  attrs: {
-                    id: "upload-label",
-                    for: "upload-input",
-                    tabindex: "2",
-                  },
-                  on: {
-                    keydown: function ($event) {
-                      if (
-                        !$event.type.indexOf("key") &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.startInput($event)
-                    },
-                  },
-                },
-                [
-                  _c("i", {
-                    staticClass: "fas fa-upload",
-                    staticStyle: { "margin-right": "5px" },
-                  }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("アップロード")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticStyle: { display: "none" },
-                    attrs: {
-                      id: "upload-input",
-                      type: "file",
-                      accept: "image/*",
-                      name: "img",
-                    },
-                    on: { change: _vm.selectedFile },
-                  }),
-                ]
-              ),
               _vm._v(" "),
               _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isLoading,
-                      expression: "isLoading",
-                    },
-                  ],
-                  attrs: { id: "loading-display-wrapper" },
-                },
+                "ul",
+                { attrs: { id: "img-wrapper" } },
                 [
-                  _c("p", { staticClass: "loading-message" }, [
-                    _vm._v(_vm._s(_vm.loadingMessage)),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    class: { "copy-to-right": _vm.isLoading },
-                    attrs: { id: "uploading-dot" },
-                  }),
-                ]
-              ),
-            ]),
-            _vm._v(" "),
-            _c(
-              "ul",
-              { attrs: { id: "img-wrapper" } },
-              [
-                _vm._l(_vm.userOwnImgs, function (userOwnImg, index) {
-                  return _c(
-                    "li",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.isDefault,
-                          expression: "!(isDefault)",
-                        },
-                      ],
-                      key: userOwnImg.url,
-                      staticClass: "img-list",
-                      attrs: { id: index },
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "user-own-img",
-                        attrs: {
-                          src: userOwnImg["url"],
-                          alt: userOwnImg["url"],
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "icon-cover",
-                          on: { click: _vm.setMediaImg },
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-times fa-2x",
-                            attrs: { id: "delete-img-icon" },
-                            on: {
-                              click: function ($event) {
-                                $event.stopPropagation()
-                                return _vm.deleteImg($event)
+                  _vm._l(_vm.userOwnImgs, function (userOwnImg, index) {
+                    return _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isDefault,
+                            expression: "!(isDefault)",
+                          },
+                        ],
+                        key: userOwnImg.url,
+                        staticClass: "img-list",
+                        attrs: { id: index },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "user-own-img",
+                          attrs: {
+                            src: userOwnImg["url"],
+                            alt: userOwnImg["url"],
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "icon-cover",
+                            on: { click: _vm.setMediaImg },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-times fa-2x",
+                              attrs: { id: "delete-img-icon" },
+                              on: {
+                                click: function ($event) {
+                                  $event.stopPropagation()
+                                  return _vm.deleteImg($event)
+                                },
                               },
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("i", {
-                            staticClass: "fas fa-plus fa-2x",
-                            attrs: { id: "add-img-icon" },
-                          }),
-                        ]
-                      ),
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm._l(_vm.defaultImgs, function (defaultImg, index) {
-                  return _c(
-                    "li",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.isDefault,
-                          expression: "isDefault",
-                        },
-                      ],
-                      key: defaultImg.url,
-                      staticClass: "img-list",
-                      attrs: { id: index },
-                    },
-                    [
-                      _c("img", {
-                        staticClass: "default-img",
-                        attrs: {
-                          src: defaultImg["url"],
-                          alt: defaultImg["url"],
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "icon-cover",
-                          on: { click: _vm.setMediaImg },
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fas fa-plus fa-2x",
-                            attrs: { id: "add-img-icon" },
-                          }),
-                        ]
-                      ),
-                    ]
-                  )
-                }),
-              ],
-              2
-            ),
-          ]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-times-circle fa-2x for-mobile",
-        attrs: { id: "change-disp-modal" },
-        on: {
-          click: function ($event) {
-            return _vm.closeModal()
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
-        _c("i", {
-          staticClass: "fas fa-chevron-circle-left fa-3x",
-          attrs: { id: "close-modal-icon" },
-          on: {
-            click: function ($event) {
-              return _vm.closeModal()
-            },
-          },
-        }),
-      ]),
-    ]),
+                            }),
+                            _vm._v(" "),
+                            _c("i", {
+                              staticClass: "fas fa-plus fa-2x",
+                              attrs: { id: "add-img-icon" },
+                            }),
+                          ]
+                        ),
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.defaultImgs, function (defaultImg, index) {
+                    return _c(
+                      "li",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.isDefault,
+                            expression: "isDefault",
+                          },
+                        ],
+                        key: defaultImg.url,
+                        staticClass: "img-list",
+                        attrs: { id: index },
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "default-img",
+                          attrs: {
+                            src: defaultImg["url"],
+                            alt: defaultImg["url"],
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "icon-cover",
+                            on: { click: _vm.setMediaImg },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-plus fa-2x",
+                              attrs: { id: "add-img-icon" },
+                            }),
+                          ]
+                        ),
+                      ]
+                    )
+                  }),
+                ],
+                2
+              ),
+            ]
+          ),
+        ]),
+        _vm._v(" "),
+        _c("close-modal-bar", { staticClass: "for-mobile" }),
+        _vm._v(" "),
+        _c("close-modal-icon", { staticClass: "for-pc-tablet" }),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -65558,23 +66083,14 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      attrs: { id: "media-figure-setting-wrapper" },
-      on: {
-        mousedown: function ($event) {
-          return _vm.moveStart($event)
-        },
-        touchstart: function ($event) {
-          return _vm.moveStart($event)
-        },
-      },
-    },
+    { attrs: { id: "media-figure-setting-wrapper" } },
     [
       _c("div", { staticClass: "item-frame" }, [
         _c(
           "div",
           {
             staticClass: "close-icon-wrapper",
+            class: { hidden: _vm.isMobile },
             on: {
               mousedown: function ($event) {
                 $event.stopPropagation()
@@ -65627,269 +66143,317 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "media-figure-settings" }, [
-          _c("div", { staticClass: "disp-space-between type-input-wrapper" }, [
-            _c("span", [_vm._v("種類:")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "input-num",
-                attrs: { id: "create-figure-type", name: "種類" },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateFigureData({
-                      key: "type",
-                      value: $event.target.value,
-                    })
-                  },
-                },
+        _c(
+          "div",
+          {
+            staticClass: "change-disp-detail flex a-center j-center",
+            on: {
+              click: function ($event) {
+                _vm.isShowDetail = !_vm.isShowDetail
               },
-              _vm._l(_vm.figureTypeList, function (figureType) {
-                return _c(
-                  "option",
+            },
+          },
+          [
+            _c("span", { class: { "reverse-y": _vm.isShowDetail } }, [
+              _vm._v("▼"),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "horizontal-bar" }),
+            _vm._v(" "),
+            _c("span", [_vm._v("詳細")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "horizontal-bar" }),
+            _vm._v(" "),
+            _c("span", { class: { "reverse-y": _vm.isShowDetail } }, [
+              _vm._v("▼"),
+            ]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowDetail,
+                expression: "isShowDetail",
+              },
+            ],
+            staticClass: "media-figure-settings",
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "disp-space-between type-input-wrapper" },
+              [
+                _c("span", [_vm._v("種類:")]),
+                _vm._v(" "),
+                _c(
+                  "select",
                   {
-                    key: figureType["code"],
-                    domProps: { value: figureType["code"] },
+                    staticClass: "input-num",
+                    attrs: { id: "create-figure-type", name: "種類" },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "type",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
                   },
-                  [_vm._v(_vm._s(figureType["name"]))]
-                )
-              }),
-              0
+                  _vm._l(_vm.figureTypeList, function (figureType) {
+                    return _c(
+                      "option",
+                      {
+                        key: figureType["code"],
+                        domProps: { value: figureType["code"] },
+                      },
+                      [_vm._v(_vm._s(figureType["name"]))]
+                    )
+                  }),
+                  0
+                ),
+              ]
             ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-num" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between x-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(x):")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "setting-type-num" }, [
+              _c(
+                "div",
+                { staticClass: "disp-space-between x-position-wrapper" },
+                [
+                  _c("span", [_vm._v("配置座標(x):")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["left"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "left",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between y-position-wrapper" },
+                [
+                  _c("span", [_vm._v("配置座標(y):")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["top"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "top",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
+                _c("span", [_vm._v("回転:")]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["left"] },
+                  domProps: { value: _vm.getFigureData["degree"] },
                   on: {
                     input: function ($event) {
                       return _vm.updateFigureData({
-                        key: "left",
+                        key: "degree",
                         value: $event.target.value,
                       })
                     },
                   },
                 }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between y-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(y):")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["top"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "top",
-                        value: $event.target.value,
-                      })
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between width-input-wrapper" },
+                [
+                  _c("span", [_vm._v("横幅[px]:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["width"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "width",
+                          value: $event.target.value,
+                        })
+                      },
                     },
-                  },
-                }),
-              ]
-            ),
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between height-input-wrapper" },
+                [
+                  _c("span", [_vm._v("縦幅[px]:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getFigureData["height"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData({
+                          key: "height",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
-              _c("span", [_vm._v("回転:")]),
+            _c("div", { staticClass: "setting-type-color" }, [
+              _c(
+                "div",
+                { staticClass: "disp-space-between fill-input-wrapper" },
+                [
+                  _c("div", { staticClass: "fill-flag" }, [
+                    _c("span", [_vm._v("塗りつぶし")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      domProps: { checked: _vm.getFigureData["isDrawFill"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "isDrawFill",
+                            value: $event.target.checked,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "fill-color" }, [
+                    _c("span", [_vm._v("色:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "color" },
+                      domProps: { value: _vm.getFigureData["fillColor"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "fillColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "disp-space-between stroke-input-wrapper" },
+                [
+                  _c("div", { staticClass: "stroke-flag" }, [
+                    _c("span", [_vm._v("枠線")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      domProps: { checked: _vm.getFigureData["isDrawStroke"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "isDrawStroke",
+                            value: $event.target.checked,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "stroke-color" }, [
+                    _c("span", [_vm._v("色:")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "color" },
+                      domProps: { value: _vm.getFigureData["strokeColor"] },
+                      on: {
+                        mousedown: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        input: function ($event) {
+                          return _vm.updateFigureData({
+                            key: "strokeColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "opacity-input-wrapper" }, [
+              _c("span", [_vm._v("透過度:")]),
               _vm._v(" "),
               _c("input", {
-                staticClass: "input-num",
-                attrs: { type: "number" },
-                domProps: { value: _vm.getFigureData["degree"] },
+                attrs: {
+                  type: "range",
+                  name: "opacity",
+                  id: "",
+                  min: "0",
+                  max: "1",
+                  step: "0.05",
+                },
+                domProps: { value: _vm.getFigureData["globalAlpha"] },
                 on: {
+                  mousedown: function ($event) {
+                    $event.stopPropagation()
+                  },
                   input: function ($event) {
                     return _vm.updateFigureData({
-                      key: "degree",
+                      key: "globalAlpha",
                       value: $event.target.value,
                     })
                   },
                 },
               }),
             ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between width-input-wrapper" },
-              [
-                _c("span", [_vm._v("横幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["width"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "width",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between height-input-wrapper" },
-              [
-                _c("span", [_vm._v("縦幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.getFigureData["height"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData({
-                        key: "height",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-color" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between fill-input-wrapper" },
-              [
-                _c("div", { staticClass: "fill-flag" }, [
-                  _c("span", [_vm._v("塗りつぶし")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.getFigureData["isDrawFill"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "isDrawFill",
-                          value: $event.target.checked,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "fill-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.getFigureData["fillColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "fillColor",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between stroke-input-wrapper" },
-              [
-                _c("div", { staticClass: "stroke-flag" }, [
-                  _c("span", [_vm._v("枠線")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.getFigureData["isDrawStroke"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "isDrawStroke",
-                          value: $event.target.checked,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "stroke-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.getFigureData["strokeColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData({
-                          key: "strokeColor",
-                          value: $event.target.value,
-                        })
-                      },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "opacity-input-wrapper" }, [
-            _c("span", [_vm._v("透過度:")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "range",
-                name: "opacity",
-                id: "",
-                min: "0",
-                max: "1",
-                step: "0.05",
-              },
-              domProps: { value: _vm.getFigureData["globalAlpha"] },
-              on: {
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                },
-                input: function ($event) {
-                  return _vm.updateFigureData({
-                    key: "globalAlpha",
-                    value: $event.target.value,
-                  })
-                },
-              },
-            }),
-          ]),
-        ]),
+          ]
+        ),
       ]),
-    ]
+      _vm._v(" "),
+      _c("close-modal-bar", { staticClass: "for-mobile" }),
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -65916,164 +66480,194 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
-    _c("div", { attrs: { id: "select-modal" } }, [
-      _c("div", { attrs: { id: "area-wrapper" } }, [
-        _c("div", { attrs: { id: "setting-wrapper" } }, [
-          _c("p", { attrs: { id: "media-setting-title" } }, [
-            _vm._v("メディア設定"),
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "media-is-public-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [
-                _vm._v("公開/非公開"),
-              ]),
-              _vm._v(" "),
-              _c("i", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.getMediaSetting["isPublic"],
-                    expression: "getMediaSetting['isPublic']",
-                  },
-                ],
-                staticClass:
-                  "fas fa-door-open fa-lg public-state-icon open-icon",
-                on: { click: _vm.changePublicState },
-              }),
-              _vm._v(" "),
-              _c("i", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: !_vm.getMediaSetting["isPublic"],
-                    expression: "!(getMediaSetting['isPublic'])",
-                  },
-                ],
-                staticClass: "fas fa-lock fa-lg public-state-icon lock-icon",
-                on: { click: _vm.changePublicState },
-              }),
-              _vm._v(" "),
-              _c("span", { staticClass: "state-description" }, [
-                _vm._v(_vm._s(_vm.aboutPublicState)),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "media-name-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Media名")]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("input", {
-                  attrs: {
-                    type: "text",
-                    id: "media-name",
-                    placeholder: "Media名",
-                  },
-                  domProps: { value: _vm.getMediaSetting["name"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateMediaSettingObjectItem({
-                        key: "name",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
+    _c(
+      "div",
+      { attrs: { id: "select-modal" } },
+      [
+        _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
             "div",
             {
-              staticClass: "setting",
-              attrs: { id: "media-description-wrapper" },
+              staticClass: "flex column a-start",
+              attrs: { id: "media-setting-area" },
             },
             [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("説明")]),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("textarea", {
-                  attrs: {
-                    type: "text",
-                    id: "media-description",
-                    rows: "4",
-                    cols: "30",
-                    maxlength: "120",
-                    placeholder: "説明文",
-                  },
-                  domProps: { value: _vm.getMediaSetting["description"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateMediaSettingObjectItem({
-                        key: "description",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
+              _c("h2", { attrs: { id: "media-setting-title" } }, [
+                _vm._v("メディア設定"),
               ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "setting", attrs: { id: "media-bg-color-wraper" } },
-            [
-              _c("p", { staticClass: "setting-title" }, [_vm._v("Media背景")]),
               _vm._v(" "),
-              _c("label", { attrs: { for: "" } }, [
-                _c("input", {
-                  attrs: { type: "color", id: "media-bg-color" },
-                  domProps: {
-                    value: _vm.getMediaSetting["mediaBackgroundColor"],
-                  },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateMediaSettingObjectItem({
-                        key: "mediaBackgroundColor",
-                        value: $event.target.value,
-                      })
-                    },
-                  },
-                }),
-                _vm._v("\n            カラー選択\n          "),
-              ]),
+              _c(
+                "div",
+                { staticClass: "setting", attrs: { id: "media-name-wraper" } },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [
+                    _vm._v("Media名"),
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("input", {
+                      attrs: {
+                        type: "text",
+                        id: "media-name",
+                        placeholder: "Media名",
+                      },
+                      domProps: { value: _vm.getMediaSetting["name"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "name",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-description-wrapper" },
+                },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [_vm._v("説明")]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("textarea", {
+                      attrs: {
+                        type: "text",
+                        id: "media-description",
+                        rows: "4",
+                        cols: "30",
+                        maxlength: "120",
+                        placeholder: "説明文",
+                      },
+                      domProps: { value: _vm.getMediaSetting["description"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "description",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-bg-color-wraper" },
+                },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [
+                    _vm._v("Media背景"),
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { attrs: { for: "" } }, [
+                    _c("input", {
+                      attrs: { type: "color", id: "media-bg-color" },
+                      domProps: {
+                        value: _vm.getMediaSetting["mediaBackgroundColor"],
+                      },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateMediaSettingObjectItem({
+                            key: "mediaBackgroundColor",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                    _vm._v("\n            カラー選択\n          "),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-is-public-wraper" },
+                },
+                [
+                  _c("div", { staticClass: "flex" }, [
+                    _c("h3", { staticClass: "setting-title" }, [
+                      _vm._v("公開 / 非公開"),
+                    ]),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.getMediaSetting["isPublic"],
+                          expression: "getMediaSetting['isPublic']",
+                        },
+                      ],
+                      staticClass:
+                        "fas fa-door-open fa-lg public-state-icon open-icon",
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: !_vm.getMediaSetting["isPublic"],
+                          expression: "!(getMediaSetting['isPublic'])",
+                        },
+                      ],
+                      staticClass:
+                        "fas fa-lock fa-lg public-state-icon lock-icon",
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "toggle-outer flex a-center",
+                        class: {
+                          "is-public-outer": _vm.getMediaSetting["isPublic"],
+                        },
+                        on: { click: _vm.changePublicState },
+                      },
+                      [
+                        _c("div", {
+                          staticClass: "toggle-inner",
+                          class: {
+                            "is-public-inner": _vm.getMediaSetting["isPublic"],
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        staticStyle: { "margin-left": "10px", opacity: "0.7" },
+                      },
+                      [_vm._v(_vm._s(_vm.openState))]
+                    ),
+                  ]),
+                ]
+              ),
             ]
           ),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-times-circle fa-2x for-mobile",
-        attrs: { id: "change-disp-modal" },
-        on: {
-          click: function ($event) {
-            return _vm.closeModal()
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
-        _c("i", {
-          staticClass: "fas fa-chevron-circle-left fa-3x",
-          attrs: { id: "close-modal-icon" },
-          on: {
-            click: function ($event) {
-              return _vm.closeModal()
-            },
-          },
-        }),
-      ]),
-    ]),
+        _vm._v(" "),
+        _c("close-modal-bar", { staticClass: "for-mobile" }),
+        _vm._v(" "),
+        _c("close-modal-icon", { staticClass: "for-pc-tablet" }),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -66100,135 +66694,200 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
-    _c("div", { attrs: { id: "select-modal" } }, [
-      _c("div", { attrs: { id: "area-wrapper" } }, [
-        _c("div", { attrs: { id: "setting-wrapper" } }, [
-          _c("p", { attrs: { id: "player-setting-title" } }, [
-            _vm._v("動画プレイヤー設定"),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "yt-form-wrapper setting-content" }, [
-            _c("input", {
-              attrs: {
-                type: "text",
-                id: "youtube-url-input",
-                size: "30",
-                placeholder: "youtube movie URL",
-              },
-              domProps: { value: _vm.youtubeUrl },
-              on: { input: _vm.updateVideoId },
-            }),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "yt-setting-wrapper" }, [
-            _c("div", { staticClass: "setting-content" }, [
-              _c("input", {
-                attrs: {
-                  type: "text",
-                  id: "set-movie-frame-width",
-                  size: "5",
-                  placeholder: "横幅",
-                },
-                domProps: { value: _vm.getMediaMovie["width"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateWidth($event)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 横幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの横幅：" + _vm._s(_vm.window_width) + ")"),
-              ]),
-              _c("br"),
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "setting-content" }, [
-              _c("input", {
-                attrs: {
-                  type: "text",
-                  id: "set-movie-frame-height",
-                  size: "5",
-                  placeholder: "縦幅",
-                },
-                domProps: { value: _vm.getMediaMovie["height"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateHeight($event)
-                  },
-                },
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("[px] 縦幅")]),
-              _c("span", { staticClass: "message-label" }, [
-                _vm._v(" (ブラウザの縦幅：" + _vm._s(_vm.window_height) + ")"),
-              ]),
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "setting-content",
-                attrs: { type: "submit" },
-                on: { click: _vm.createMovieFrame },
-              },
-              [_vm._v("再生プレイヤー作成")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "setting-content",
-                attrs: { type: "submit" },
-                on: { click: _vm.deleteMovieFrame },
-              },
-              [_vm._v("削除")]
-            ),
-          ]),
-          _vm._v(" "),
+    _c(
+      "div",
+      { attrs: { id: "select-modal" } },
+      [
+        _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
             "div",
             {
-              staticClass: "setting-loop setting-content",
-              class: { isLoop: _vm.getMediaMovie["isLoop"] },
-              on: { click: _vm.changeLoopSetting },
+              staticClass: "flex column a-start",
+              attrs: { id: "yt-setting-area" },
             },
             [
-              _c("i", {
-                staticClass: "media-yt-loop-icon fas fa-undo-alt fa-2x",
-              }),
-              _vm._v(" "),
-              _c("span", { staticStyle: { "margin-left": "10px" } }, [
-                _vm._v("ループ"),
+              _c("p", { attrs: { id: "player-setting-title" } }, [
+                _vm._v("動画プレイヤー設定"),
               ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "yt-setting-wrapper flex column a-start" },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "setting-block about-yt-video-id" },
+                    [
+                      _c("h3", { staticClass: "setting-title" }, [
+                        _vm._v("youtube動画のURL"),
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          id: "youtube-url-input",
+                          type: "text",
+                          size: "30",
+                          placeholder: "youtube movie URL",
+                        },
+                        domProps: { value: _vm.youtubeUrl },
+                        on: { input: _vm.updateVideoId },
+                      }),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "setting-block about-create-del flex column a-start",
+                    },
+                    [
+                      _c("h3", { staticClass: "setting-title" }, [
+                        _vm._v("再生プレイヤー"),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "setting button create-btn",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.createMovieFrame },
+                          },
+                          [_vm._v("作成")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "setting button delete-btn",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.deleteMovieFrame },
+                          },
+                          [_vm._v("削除")]
+                        ),
+                      ]),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "setting-block about-size" }, [
+                    _c("h3", { staticClass: "setting-title" }, [
+                      _vm._v("サイズ"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex" }, [
+                      _c("div", { staticClass: "setting-width flex column" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "flex align-center",
+                            staticStyle: { opacity: "0.7" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-arrows-alt-h icon",
+                            }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("横幅[px]")]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "setting",
+                          attrs: {
+                            id: "set-movie-frame-width",
+                            type: "number",
+                            placeholder: "横幅",
+                          },
+                          domProps: { value: _vm.getMediaMovie["width"] },
+                          on: {
+                            input: function ($event) {
+                              return _vm.updateWidth($event)
+                            },
+                          },
+                        }),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "setting-height flex column" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "flex align-center",
+                            staticStyle: { opacity: "0.7" },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-arrows-alt-v icon",
+                            }),
+                            _vm._v(" "),
+                            _c("span", [_vm._v("縦幅[px]")]),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "setting",
+                          attrs: {
+                            id: "set-movie-frame-height",
+                            type: "number",
+                            placeholder: "縦幅",
+                          },
+                          domProps: { value: _vm.getMediaMovie["height"] },
+                          on: {
+                            input: function ($event) {
+                              return _vm.updateHeight($event)
+                            },
+                          },
+                        }),
+                      ]),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "setting-block about-loop" }, [
+                    _c("h3", { staticClass: "setting-title" }, [
+                      _vm._v("ループ"),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex align-center" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "toggle-outer flex a-center",
+                          class: {
+                            "is-loop-outer": _vm.getMediaMovie["isLoop"],
+                          },
+                          on: { click: _vm.changeLoopSetting },
+                        },
+                        [
+                          _c("div", {
+                            staticClass: "toggle-inner",
+                            class: {
+                              "is-loop-inner": _vm.getMediaMovie["isLoop"],
+                            },
+                          }),
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticStyle: { "margin-left": "5px", opacity: "0.7" },
+                        },
+                        [_vm._v(_vm._s(_vm.loopOnOff))]
+                      ),
+                    ]),
+                  ]),
+                ]
+              ),
             ]
           ),
         ]),
-      ]),
-      _vm._v(" "),
-      _c("i", {
-        staticClass: "fas fa-times-circle fa-2x for-mobile",
-        attrs: { id: "change-disp-modal" },
-        on: {
-          click: function ($event) {
-            return _vm.closeModal()
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "close-icon-wrapper for-pc-tablet" }, [
-        _c("i", {
-          staticClass: "fas fa-chevron-circle-left fa-3x",
-          attrs: { id: "close-modal-icon" },
-          on: {
-            click: function ($event) {
-              return _vm.closeModal()
-            },
-          },
-        }),
-      ]),
-    ]),
+        _vm._v(" "),
+        _c("close-modal-bar", { staticClass: "for-mobile" }),
+        _vm._v(" "),
+        _c("close-modal-icon", { staticClass: "for-pc-tablet" }),
+      ],
+      1
+    ),
   ])
 }
 var staticRenderFns = []
@@ -66272,7 +66931,7 @@ var render = function () {
       _c("div", { staticClass: "audio-num-wrapper" }, [
         _vm.isEditMode
           ? _c("span", { staticClass: "media-audio-num" }, [
-              _vm._v(_vm._s(_vm.mediaAudioNum)),
+              _vm._v(_vm._s(_vm.mediaAudioNum) + "/" + _vm._s(_vm.maxAudioNum)),
             ])
           : _vm._e(),
       ]),

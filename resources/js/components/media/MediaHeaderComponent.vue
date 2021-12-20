@@ -165,6 +165,12 @@ a:hover {
     .header-content {
         margin: 5px 0px;
     }
+
+    .header-center {
+        position: absolute;
+        left: 40%;
+    }
+
 }
 
 

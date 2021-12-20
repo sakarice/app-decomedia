@@ -74,23 +74,10 @@
   height: 20px;
   border-radius: 50%;
   background-color: white;
-
   pointer-events: none;
 }
 
 
-.close-icon-wrapper{
-  padding: 5px;
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 50%;
-}
-
-#close-modal-icon {
-  /* position: absolute;
-  top: 200px;
-  left: -20px; */
-  cursor: pointer;
-}
 
 .change-disp-icon-wrapper {
   padding: 10px;
@@ -226,8 +213,8 @@
 
 @media screen and (max-width: 480px) {
   #upload-label {
-    padding: 5px 15px;
-    font-size: 13px;
+    padding: 4px 10px;
+    font-size: 10px;
   }
 
   #contents-wrapper {
@@ -240,12 +227,19 @@
   }
 
   #upload-input-wrapper {
-    /* margin-bottom: 15px; */
-    margin-bottom: 0;
+    position: absolute;
+    bottom: 15px;
+    left: 30px;
+    margin: 0;
+    width: auto;
   }
 
   #setting-wrapper {
     margin: 0;
+  }
+
+  .category{
+    margin: 0 10px;
   }
   
   
