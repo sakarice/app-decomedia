@@ -55,6 +55,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
+      ...mapGetters('selectedObjects', ['getSelectedObjects']),
       new_index:function(){ },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
@@ -82,11 +83,24 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         },
         deep : true
       },
+      isActive(val){
+        if(val==true){
+          const objectData = {type:0, index:this.index}
+          this.addSelectedObjectItem(objectData);
+        } else {
+          const objects = this.getSelectedObjects;
+          const judgeIsMyself = (obj) => (obj.type==0 && obj.index==this.index);
+          const myIndex = objects.findIndex(obj=>judgeIsMyself);
+          this.deleteSelectedObjectItem(myIndex);
+        }
+      }
     },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
+      ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
+      ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
       showEditor(){ this.$emit('show-editor', this.index)},
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
@@ -232,7 +246,15 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
           this.isActive = false;
           this.deleteMediaFiguresObjectItem(this.index);
         }
-      }
+      },
+      // addSelectedEvent(){
+      //   const event = new CustomEvent('onObjectSelected', {detail:{type:0, index:this.index}});
+      //   document.body.dispatchEvent(event);
+      // },
+      // deleteSelectedEvent(){
+      //   const event = new CustomEvent('offObjectSelected', {detail:{type:0, index:this.index}});
+      //   document.body.dispatchEvent(event);
+      // },
     },
     created(){},
     mounted(){

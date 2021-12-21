@@ -9,6 +9,7 @@ import mediaMovie from './modules/mediaMovie.js';
 import mediaSetting from './modules/mediaSetting.js';
 import mediaFigureFactory from './modules/mediaFigureFactory.js';
 import mediaFigures from './modules/mediaFigures.js';
+import selectedObjects from './modules/selectedObjects';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ const store = new Vuex.Store({
     mediaSetting,
     mediaFigureFactory,
     mediaFigures,
+    selectedObjects,
   }
 
 });

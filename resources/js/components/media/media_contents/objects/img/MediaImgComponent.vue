@@ -52,6 +52,7 @@
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      ...mapGetters('selectedObjects', ['getSelectedObjects']),
       imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) },
       isEditMode : function(){
         const route_name = this.$route.name;
@@ -66,8 +67,14 @@
       isActive(val){
         if(val == true){
           this.$emit('add-active-index', this.index);
+          const objectData = {type:1, index:this.index}
+          this.addSelectedObjectItem(objectData);
         } else {
           this.$emit('del-active-index', this.index);
+          const objects = this.getSelectedObjects;
+          const judgeIsMyself = (obj) => (obj.type==1 && obj.index==this.index);
+          const myIndex = objects.findIndex(obj=>judgeIsMyself);
+          this.deleteSelectedObjectItem(myIndex);
         }
       },
     },
@@ -75,6 +82,9 @@
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
+      ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
+
       getOneImg(){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;

@@ -134,6 +134,12 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
+
+    <media-object-controll-parts-wrapper>
+      <object-delete></object-delete>
+    </media-object-controll-parts-wrapper>
+
+
   </div>
 </template>
 
@@ -146,6 +152,8 @@
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
+  import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
+  import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
 
 export default {
   components : {
@@ -154,7 +162,9 @@ export default {
     MediaSetting,
     MediaMovie,
     MediaFigureMng,
-    DispAudios
+    DispAudios,
+    MediaObjectControllPartsWrapper,
+    ObjectDelete,
   },
   props: [],
   data : () => {

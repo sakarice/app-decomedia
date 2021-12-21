@@ -19,7 +19,15 @@
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
+        <div class="change-figure-type back-figure-type"
+        @mousedown="backFigureType()" @touchend="backFigureType()">
+          <i class="fas fa-angle-double-left fa-2x"></i>
+        </div>
         <canvas id="pre-canvas" @mousedown.stop @click="addMediaFigure()"></canvas>
+        <div class="change-figure-type next-figure-type"
+        @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
+          <i class="fas fa-angle-double-right fa-2x"></i>
+        </div>
       </div>
 
       <!-- 詳細設定の表示・非表示切り替え -->
@@ -122,6 +130,7 @@
           {code : 1, name : "四角形"},
           {code : 2, name : "丸"},
         ],
+        "figureType" : 1,
 
         // "move_target" : "",
         // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
@@ -203,7 +212,6 @@
         const modal = document.getElementById('media-figure-setting-wrapper');
         modal.style.left = "";
         modal.style.top = ""; // topの指定を消す
-        // modal.style.bottom = "50px";
       },
       registMoveEvent(){
         const target = document.getElementById('media-figure-setting-wrapper');
@@ -215,6 +223,29 @@
         target.removeEventListener('mousedown', this.moveStart, false);
         target.removeEventListener('touchstart', this.moveStart, false);
       },
+      goNextFigureType(e){
+        // const type_old = this.getFigureData['type'];
+        console.log('goNextFigureType:type='+e.type);
+        const type_new = this.figureType % 2 + 1;
+        // if(type_old == 2){
+        //   type_new = 1;
+        // } else {
+        //   type_new = type_old + 1;
+        // }
+        this.updateFigureData({key:'type', value:type_new});
+        this.figureType = type_new;
+      },
+      backFigureType(){
+        const type_old = this.getFigureData['type'];
+        let type_new;
+        if(type_old == 1){
+          type_new = 2;
+        } else {
+          type_new = type_old - 1;
+        }
+        this.updateFigureData({key:'type', value:type_new});
+      },
+
       addMediaFigure(){
         // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
         const mediaFigure = Object.assign({}, this.getFigureData);
@@ -333,6 +364,7 @@
       },
     },
     created(){
+      this.judgeIsMobile();
       window.addEventListener('resize',this.judgeIsMobile, false);
     },
     mounted(){
@@ -365,6 +397,16 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.change-figure-type {
+  margin: 0 10px;
+}
+.back-figure-type{
+  color: blue;
+}
+.next-figure-type{
+  color: red;
 }
 
 .item-frame {
@@ -424,10 +466,7 @@
 }
 
 .add-icon-wrapper {
-  display: inline-block;
   position: absolute;
-  top: 80px;
-  left: 160px;
   z-index: 3;
   padding: 0px 4px;
   color: darkorange;
@@ -475,6 +514,12 @@
     padding: 5px;
     border-radius: 6px;
   }
+  .add-icon-wrapper {
+    display: inline-block;
+    position: absolute;
+    top: 80px;
+    left: 160px;
+  }
   
 }
 
@@ -499,6 +544,12 @@
     border-top-left-radius: 5px;
   }
 
+  .add-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    top: 5px;
+    right: 20px;
+  }
 
   .for-pc-tablet{
     display: none;
