@@ -44,5 +44,8 @@
 
 @import "/resources/css/flexSetting.css";
 
+#object-setting-open-wrapper {
+  margin: 0 10px;
+}
 
 </style>

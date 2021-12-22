@@ -54,6 +54,7 @@
 @import "/resources/css/flexSetting.css";
 
 #delete-wrapper {
+  margin: 0 10px;
 }
 
 
