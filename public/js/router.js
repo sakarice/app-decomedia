@@ -1226,8 +1226,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     closeModal: function closeModal() {
-      var closeEvent = new CustomEvent('closeModal');
-      document.body.dispatchEvent(closeEvent);
+      var closeModalEvent = new CustomEvent('closeModal');
+      document.body.dispatchEvent(closeModalEvent);
+      var closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+      document.body.dispatchEvent(closeFigureSettingEvent);
     }
   }
 });
@@ -4034,7 +4036,7 @@ function _defineProperty(obj, key, value) {
 
       _this.isShowEditor = true;
     });
-    document.body.removeEventListener('closeFigureSetting', function (e) {
+    document.body.addEventListener('closeFigureSetting', function (e) {
       _this.isShowEditor = false;
     });
     document.body.addEventListener('objectStatusChanged', function (e) {

@@ -245,7 +245,7 @@
         this.isShowEditor = true;
       });
 
-      document.body.removeEventListener('closeFigureSetting', (e)=>{
+      document.body.addEventListener('closeFigureSetting', (e)=>{
         this.isShowEditor = false;
       });
 

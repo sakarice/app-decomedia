@@ -8,9 +8,12 @@
   export default {
     methods : {
       closeModal(){
-        const closeEvent = new CustomEvent('closeModal');
-        document.body.dispatchEvent(closeEvent);
-      }
+        const closeModalEvent = new CustomEvent('closeModal');
+        document.body.dispatchEvent(closeModalEvent);
+
+        const closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+        document.body.dispatchEvent(closeFigureSettingEvent);
+      },
     }
   }
 
