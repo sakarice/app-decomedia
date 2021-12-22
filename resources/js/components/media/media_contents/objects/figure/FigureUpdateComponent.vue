@@ -96,20 +96,17 @@
 
   export default {
     components : {closeModalBar},
-    props:[
-      // "index",
-    ],
     data : ()=>{
       return {
         isShowEditor : false,
         index: 0,
 
-        "figureTypeList" : [
+        figureTypeList : [
           {code : 1, name : "四角形"},
           {code : 2, name : "丸"},
         ],
-
-        "figureDatas" : {
+        
+        figureDatas : {
           "type" : 1,
           "left" : 0,
           "top" : 0,

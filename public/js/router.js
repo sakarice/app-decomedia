@@ -3992,20 +3992,18 @@ function _defineProperty(obj, key, value) {
   components: {
     closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  props: [// "index",
-  ],
   data: function data() {
     return {
       isShowEditor: false,
       index: 0,
-      "figureTypeList": [{
+      figureTypeList: [{
         code: 1,
         name: "四角形"
       }, {
         code: 2,
         name: "丸"
       }],
-      "figureDatas": {
+      figureDatas: {
         "type": 1,
         "left": 0,
         "top": 0,
