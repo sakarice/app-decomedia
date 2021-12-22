@@ -19,9 +19,6 @@
       }
     },
     methods : {
-      ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
-      ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
-      ...mapMutations('selectedObjects', ['unSelectedAll']),
       showObjectSetting(){
         const obj = this.firstSelectedObject;
         let event;

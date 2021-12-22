@@ -1599,7 +1599,7 @@ function _defineProperty(obj, key, value) {
       return this.getSelectedObjects[0];
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('selectedObjects', ['unSelectedAll'])), {}, {
+  methods: {
     showObjectSetting: function showObjectSetting() {
       var obj = this.firstSelectedObject;
       var event;
@@ -1624,7 +1624,7 @@ function _defineProperty(obj, key, value) {
 
       document.body.dispatchEvent(event);
     }
-  }),
+  },
   created: function created() {},
   mounted: function mounted() {}
 });
