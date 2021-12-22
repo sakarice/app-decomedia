@@ -7371,14 +7371,14 @@ function _defineProperty(obj, key, value) {
 
       for (var _i = 0, _Object$keys = Object.keys(storeFigureData); _i < _Object$keys.length; _i++) {
         var key = _Object$keys[_i];
-        this.figureDatas[key] = this.fixDataType(key, storeFigureData[key]);
+        this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
       }
     },
     updateFigureData: function updateFigureData(key, value) {
       this.updateMediaFiguresObjectItem({
         index: this.index,
         key: key,
-        value: this.fixDataType(key, value)
+        value: this.fixStrToNum(key, value)
       });
       this.figureDatas[key] = this.getOneFigure(this.index)[key];
       this.$emit('re-render', this.index);
@@ -7387,7 +7387,7 @@ function _defineProperty(obj, key, value) {
       var num_type_keys = ["type", "width", "height", "degree", "left", "top", "globalAlpha"];
       return num_type_keys.includes(key);
     },
-    fixDataType: function fixDataType(key, value) {
+    fixStrToNum: function fixStrToNum(key, value) {
       var reTypedValue;
 
       if (this.checkTypeNum(key)) {
@@ -7916,7 +7916,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
-//
 //
 //
 //
@@ -68276,7 +68275,6 @@ var render = function () {
             "change-figure-data": function ($event) {
               return _vm.editorInit(index)
             },
-            "re-render-all": _vm.reRenderAll,
           },
         })
       }),

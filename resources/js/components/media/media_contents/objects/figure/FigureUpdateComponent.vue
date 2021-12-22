@@ -157,11 +157,11 @@
       init(index){
         const storeFigureData = this.getOneFigure(index);
         for(let key of Object.keys(storeFigureData)){
-          this.figureDatas[key] = this.fixDataType(key, storeFigureData[key]);
+          this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
         }
       },
       updateFigureData(key, value){
-        this.updateMediaFiguresObjectItem({index:this.index, key:key, value:this.fixDataType(key, value)});
+        this.updateMediaFiguresObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
         this.figureDatas[key] = this.getOneFigure(this.index)[key];
         this.$emit('re-render', this.index);
       },
@@ -169,7 +169,7 @@
         const num_type_keys = ["type", "width","height","degree","left","top","globalAlpha"];
         return num_type_keys.includes(key);
       },
-      fixDataType(key, value){
+      fixStrToNum(key, value){
         let reTypedValue;
         if(this.checkTypeNum(key)){
           reTypedValue = Number(value);

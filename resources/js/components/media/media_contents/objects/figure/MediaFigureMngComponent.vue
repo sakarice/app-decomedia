@@ -4,8 +4,7 @@
     :index="index"
     ref="figures"
     @show-editor="showEditor(index)"
-    @change-figure-data="editorInit(index)"
-    @re-render-all="reRenderAll">
+    @change-figure-data="editorInit(index)">
     </media-figure>
 
     <figure-update v-show="isShowEditor"
