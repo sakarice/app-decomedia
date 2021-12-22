@@ -2,8 +2,7 @@
   <div class="figures-wrapper">
     <media-figure v-for="(figure, index) in getMediaFigures" :key="index"
     :index="index"
-    ref="figures"
-    @change-figure-data="editorInit(index)">
+    ref="figures">
     </media-figure>
 
     <figure-update
@@ -39,16 +38,6 @@
     methods : {
       ...mapMutations('mediaFigures', ['updateIsInitializedFigures']),
       ...mapMutations('mediaFigures', ['addMediaFiguresObjectItem']),
-            
-      // showEditor(index){
-      //   this.isShowEditor = true;
-      //   if(this.editor_index != index){
-      //     this.editor_index = index;
-      //     this.$refs.Editor.init(index);
-      //   }
-      // },
-      // closeEditor(){ this.isShowEditor = false;},
-      editorInit(index){this.$refs.Editor.init(index);},
       reRender(index){ this.$refs.figures[index].init(); },
       reRenderAll(){ this.$refs.figures.forEach(figure => {figure.init(); }); },
 

@@ -79,7 +79,6 @@ function getPointerY(event){
 
 // 2. リサイズ中メソッド
 function resizeRight(e){
-  console.log('resize right');
   const new_width = getPointerX(e) - initial_left;
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:initial_left}});
   resize_target.dispatchEvent(resizing_width_event);

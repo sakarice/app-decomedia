@@ -78,7 +78,8 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       figureDatas : {
         handler : function(val){
           if(this.isActive){
-            this.$emit('change-figure-data', this.index);
+            const event = new CustomEvent('objectStatusChanged',{detail:{index:this.index}});
+            document.body.dispatchEvent(event);
           }
         },
         deep : true
@@ -245,20 +246,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.ctx.save();
         this.ctx.stroke();
       },
-      // delete(){
-      //   if(this.isActive){
-      //     this.isActive = false;
-      //     this.deleteMediaFiguresObjectItem(this.index);
-      //   }
-      // },
-      // addSelectedEvent(){
-      //   const event = new CustomEvent('onObjectSelected', {detail:{type:0, index:this.index}});
-      //   document.body.dispatchEvent(event);
-      // },
-      // deleteSelectedEvent(){
-      //   const event = new CustomEvent('offObjectSelected', {detail:{type:0, index:this.index}});
-      //   document.body.dispatchEvent(event);
-      // },
     },
     created(){},
     mounted(){

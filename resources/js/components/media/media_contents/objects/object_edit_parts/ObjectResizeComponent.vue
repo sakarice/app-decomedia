@@ -80,7 +80,6 @@
 
       move(event){ this.$emit('move', event) },
       resizeStart(type){
-        console.log('resize Start');
         const target = document.getElementById(this.canvas_wrapper_with_index);
         const mediaFigure = this.getOneFigure(this.index);
         const sizeAndPositionInfos = [];

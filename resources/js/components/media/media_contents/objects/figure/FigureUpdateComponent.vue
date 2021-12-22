@@ -158,6 +158,7 @@
         return this.getMediaFigure;
       },
       init(index){
+        console.log('figure update component init');
         const storeFigureData = Object.assign({},this.getOneFigure(index));
         for(let key of Object.keys(storeFigureData)){
           this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
@@ -216,8 +217,10 @@
       });
 
       document.body.addEventListener('objectStatusChanged', (e)=>{
-        this.index = e.detail.index;
-        this.init(this.index);
+        const objInfo = e.detail;
+        if(objInfo.type==0 && objInfo.index==this.index){
+          this.init(this.index);
+        }
       })
 
       document.body.addEventListener('objectDeleted', (e)=> {

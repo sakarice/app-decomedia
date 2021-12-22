@@ -7366,6 +7366,7 @@ function _defineProperty(obj, key, value) {
       return this.getMediaFigure;
     },
     init: function init(index) {
+      console.log('figure update component init');
       var storeFigureData = Object.assign({}, this.getOneFigure(index));
 
       for (var _i = 0, _Object$keys = Object.keys(storeFigureData); _i < _Object$keys.length; _i++) {
@@ -7436,9 +7437,11 @@ function _defineProperty(obj, key, value) {
       _this.isShowEditor = false;
     });
     document.body.addEventListener('objectStatusChanged', function (e) {
-      _this.index = e.detail.index;
+      var objInfo = e.detail;
 
-      _this.init(_this.index);
+      if (objInfo.type == 0 && objInfo.index == _this.index) {
+        _this.init(_this.index);
+      }
     });
     document.body.addEventListener('objectDeleted', function (e) {
       var delObjs = e.detail.objs;
@@ -7608,7 +7611,12 @@ function _defineProperty(obj, key, value) {
     figureDatas: {
       handler: function handler(val) {
         if (this.isActive) {
-          this.$emit('change-figure-data', this.index);
+          var event = new CustomEvent('objectStatusChanged', {
+            detail: {
+              index: this.index
+            }
+          });
+          document.body.dispatchEvent(event);
         }
       },
       deep: true
@@ -7842,21 +7850,7 @@ function _defineProperty(obj, key, value) {
     stroke: function stroke() {
       this.ctx.save();
       this.ctx.stroke();
-    } // delete(){
-    //   if(this.isActive){
-    //     this.isActive = false;
-    //     this.deleteMediaFiguresObjectItem(this.index);
-    //   }
-    // },
-    // addSelectedEvent(){
-    //   const event = new CustomEvent('onObjectSelected', {detail:{type:0, index:this.index}});
-    //   document.body.dispatchEvent(event);
-    // },
-    // deleteSelectedEvent(){
-    //   const event = new CustomEvent('offObjectSelected', {detail:{type:0, index:this.index}});
-    //   document.body.dispatchEvent(event);
-    // },
-
+    }
   }),
   created: function created() {},
   mounted: function mounted() {
@@ -7959,7 +7953,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -7979,17 +7972,6 @@ function _defineProperty(obj, key, value) {
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigures'])),
   watch: {},
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
-    // showEditor(index){
-    //   this.isShowEditor = true;
-    //   if(this.editor_index != index){
-    //     this.editor_index = index;
-    //     this.$refs.Editor.init(index);
-    //   }
-    // },
-    // closeEditor(){ this.isShowEditor = false;},
-    editorInit: function editorInit(index) {
-      this.$refs.Editor.init(index);
-    },
     reRender: function reRender(index) {
       this.$refs.figures[index].init();
     },
@@ -9195,7 +9177,6 @@ function _defineProperty(obj, key, value) {
       this.$emit('move', event);
     },
     resizeStart: function resizeStart(type) {
-      console.log('resize Start');
       var target = document.getElementById(this.imgWrapperWithIndex);
       var mediaImg = this.getOneImg(this.index);
       var sizeAndPositionInfos = [];
@@ -9918,7 +9899,6 @@ function _defineProperty(obj, key, value) {
       this.$emit('move', event);
     },
     resizeStart: function resizeStart(type) {
-      console.log('resize Start');
       var target = document.getElementById(this.canvas_wrapper_with_index);
       var mediaFigure = this.getOneFigure(this.index);
       var sizeAndPositionInfos = [];
@@ -10179,7 +10159,7 @@ function _defineProperty(obj, key, value) {
       var distance_x_from_target_center;
       var distance_y_from_target_center;
 
-      if (e.type === "mousedown") {
+      if (e.type === "mousemove") {
         event = e;
         distance_x_from_target_center = event.clientX - this.rotate_center_x;
         distance_y_from_target_center = event.clientY - this.rotate_center_y;
@@ -11770,7 +11750,6 @@ function getPointerY(event) {
 
 
 function resizeRight(e) {
-  console.log('resize right');
   var new_width = getPointerX(e) - initial_left;
   var resizing_width_event = new CustomEvent('resizingWidth', {
     detail: {
@@ -68310,11 +68289,6 @@ var render = function () {
           ref: "figures",
           refInFor: true,
           attrs: { index: index },
-          on: {
-            "change-figure-data": function ($event) {
-              return _vm.editorInit(index)
-            },
-          },
         })
       }),
       _vm._v(" "),
