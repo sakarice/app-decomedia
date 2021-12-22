@@ -12911,7 +12911,7 @@ var selectedObjects = {
   namespaced: true,
   state: {
     selectedObjects: [] // selectedObject : {
-    //   type,  // type…1:figure, 2:img, 
+    //   type,  // type…0:figure, 1:img, 
     //   index,
     // },
 
