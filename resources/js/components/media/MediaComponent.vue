@@ -3,6 +3,8 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
+    <judge-device-type></judge-device-type>
+
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
@@ -88,9 +90,12 @@
     :transitionName="transitionName">
     </router-view>
 
-    <router-view name="mediaFigureSetting"
+    <router-view name="mediaFigureFactory"
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
+    </router-view>
+
+    <router-view name="figureUpdate">
     </router-view>
 
     <!-- 動画設定コンポーネント -->
@@ -146,6 +151,7 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
@@ -157,6 +163,7 @@
 
 export default {
   components : {
+    judgeDeviceType,
     MediaImgMng,
     MediaAudio,
     MediaSetting,

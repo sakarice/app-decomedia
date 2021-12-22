@@ -78,7 +78,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       figureDatas : {
         handler : function(val){
           if(this.isActive){
-            const event = new CustomEvent('objectStatusChanged',{detail:{index:this.index}});
+            const event = new CustomEvent('objectStatusChanged',{detail:{type:0,index:this.index}});
             document.body.dispatchEvent(event);
           }
         },
@@ -261,6 +261,11 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
           this.isActive = true;
         }
       });
+
+      this.canvas_wrapper.addEventListener('figureDataUpdated',(e)=>{
+        this.init();
+      });
+
     },
   }
 

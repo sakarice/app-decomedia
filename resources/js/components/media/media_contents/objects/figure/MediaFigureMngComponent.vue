@@ -4,12 +4,6 @@
     :index="index"
     ref="figures">
     </media-figure>
-
-    <figure-update
-     :index="editor_index"
-     ref="Editor"
-     @re-render="reRender">
-    </figure-update>
   </div>
 </template>
 
@@ -70,7 +64,8 @@
           // figures_reverse.forEach(figure => {figure.delete(); });
           this.reRenderAll();
         }
-      })
+      });
+
     },
 
   }

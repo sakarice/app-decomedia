@@ -2,6 +2,7 @@ import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import loginState from './modules/loginState.js';
+import deviceType from './modules/deviceType.js';
 import media from './modules/media.js';
 import mediaImgs from './modules/mediaImgs';
 import mediaAudios from './modules/mediaAudios.js';
@@ -16,6 +17,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules : {
     loginState,
+    deviceType,
     media,
     mediaImgs,
     mediaAudios,

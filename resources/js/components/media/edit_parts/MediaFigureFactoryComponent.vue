@@ -140,11 +140,12 @@
         "pre_ctx" : "",
 
         "isShowDetail" : false,
-        "isMobile" : false,
+        // "isMobile" : false,
       }
     },
     computed : {
       ...mapGetters('mediaFigureFactory', ['getFigureData']),
+      ...mapGetters('deviceType', ['getDeviceType']),
       type(){ return this.getFigureData['type'] },
       degree(){ return this.getFigureData['degree'] },
       is_draw_fill(){ return this.getFigureData['isDrawFill']},
@@ -175,7 +176,7 @@
       },
       start_x(){ return (this.canvas_length - this.width) / 2;},
       start_y(){ return (this.canvas_length - this.height) / 2;},
-
+      isMobile(){ return (this.getDeviceType==2) ? true : false; },
     },
     watch : {
       type(){ this.draw(); },
@@ -190,8 +191,8 @@
         this.setGlobalAlpha();
         this.draw()
       },
-      isMobile(new_val){
-        if(new_val==true){
+      getDeviceType(new_val){
+        if(new_val==2){ // モバイルの時
           this.deleteMoveEvent();
           this.setModalAtMobilePosition();
         } else {
@@ -205,9 +206,9 @@
       closeModal(){
         this.$emit('close-modal');
       },
-      judgeIsMobile(){
-        this.isMobile =  (window.innerWidth < 481 ? true : false);
-      },
+      // judgeIsMobile(){
+      //   this.isMobile =  (window.innerWidth < 481 ? true : false);
+      // },
       setModalAtMobilePosition(){
         const modal = document.getElementById('media-figure-factory-wrapper');
         modal.style.left = "";
@@ -363,8 +364,8 @@
       },
     },
     created(){
-      this.judgeIsMobile();
-      window.addEventListener('resize',this.judgeIsMobile, false);
+      // this.judgeIsMobile();
+      // window.addEventListener('resize',this.judgeIsMobile, false);
     },
     mounted(){
       this.setModalCenter();

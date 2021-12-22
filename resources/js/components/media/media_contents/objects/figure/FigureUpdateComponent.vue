@@ -1,11 +1,10 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
-  v-show="isShowEditor"
-   @mousedown="move($event)" @touchstart="move($event)">
+  v-show="isShowEditor">
     <div class="item-frame">
       <!-- クローズアイコン -->
-      <div class="close-icon-wrapper" @mousedown.stop>
+      <div class="close-icon-wrapper" @mousedown.stop :class="{hidden:isMobile}">
         <i class="fas fa-times fa-3x close-icon" @click="closeEditor"></i>
       </div>
 
@@ -82,15 +81,21 @@
         </div>
       </div>
     </div>
+
+    <close-modal-bar class="for-mobile"></close-modal-bar>
+
   </div>
+  
 </template>
 
 <script>
   import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
+  import closeModalBar from '../../../change_display_parts/CloseModalBarComponent.vue'
+
 
   export default {
-    components : {},
+    components : {closeModalBar},
     props:[
       // "index",
     ],
@@ -122,6 +127,8 @@
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
+      ...mapGetters('deviceType', ['getDeviceType']),
+      isMobile(){ return (this.getDeviceType==2) ? true : false; },
       type:{
         get(){
           return this.figureDatas['type'];
@@ -142,7 +149,16 @@
     watch : {
       type(){
         this.updateFigureData('type', this.figureDatas['type']);
-      }
+      },
+      getDeviceType(new_val){
+        if(new_val==2){ // モバイルの時
+          this.deleteMoveEvent();
+          this.setModalAtMobilePosition();
+        } else {
+          this.registMoveEvent();
+        }
+      },
+
     },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
@@ -152,13 +168,26 @@
         this.isShowEditor = false;
         // this.$emit('close-editor', this.index);
       },
-
+      setModalAtMobilePosition(){
+        const modal = document.getElementById('media-figure-update-wrapper');
+        modal.style.left = "";
+        modal.style.top = ""; // topの指定を消す
+      },      
+      registMoveEvent(){
+        const target = document.getElementById('media-figure-update-wrapper');
+        target.addEventListener('mousedown', this.move, false);
+        target.addEventListener('touchstart', this.move, false);
+      },
+      deleteMoveEvent(){
+        const target = document.getElementById('media-figure-update-wrapper');
+        target.removeEventListener('mousedown', this.move, false);
+        target.removeEventListener('touchstart', this.move, false);
+      },
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
       },
       init(index){
-        console.log('figure update component init');
         const storeFigureData = Object.assign({},this.getOneFigure(index));
         for(let key of Object.keys(storeFigureData)){
           this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
@@ -167,7 +196,11 @@
       updateFigureData(key, value){
         this.updateMediaFiguresObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
         this.figureDatas[key] = this.getOneFigure(this.index)[key];
-        this.$emit('re-render', this.index);
+        const targetDomId = 'canvas_wrapper'+this.index;
+        const targetDom = document.getElementById(targetDomId);
+        const event = new CustomEvent('figureDataUpdated');
+        targetDom.dispatchEvent(event);
+
       },
       checkTypeNum(key){
         const num_type_keys = ["type", "width","height","degree","left","top","globalAlpha"];
@@ -243,16 +276,8 @@
 <style scoped>
 #media-figure-update-wrapper{
   position: absolute;
-  left: 50%;
-  top: 50%;
   z-index: 30;
-  width: 300px;
-  height: 340px;
-  padding: 5px;
-  background-color: rgba(35,40,50,0.85);
   color: white;
-  border-radius: 6px;
-  box-shadow: 1px 1px 10px rgba(220,220,220,1);
 }
 #media-figure-update-wrapper:hover{
   cursor: all-scroll;
@@ -263,6 +288,7 @@
 }
 .media-figure-settings {
   padding: 15px 45px;
+  overflow-y: scroll;
 }
 
 
@@ -297,5 +323,39 @@
 }
 
 
+@media screen and (min-width:481px) {
+  #media-figure-update-wrapper{
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    padding: 5px;
+    background-color: rgba(35,40,50,0.85);
+    border-radius: 6px;
+  }
+
+}
+
+@media screen and (max-width:480px) {
+  #media-figure-update-wrapper{
+    bottom: 50px;  
+    max-height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .media-figure-settings {
+    max-height: 200px;
+  }
+
+
+  .item-frame {
+    width:92%;
+    background-color: rgba(35,40,50,0.85);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+}
 
 </style>

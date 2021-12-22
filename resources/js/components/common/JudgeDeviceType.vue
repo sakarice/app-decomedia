@@ -3,16 +3,20 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'; 
 
   export default {
-    props : [],
     data : () => {
       return {
         // 0:PC, 1:TABLET, 2:MOBILE
         deviceType : 0,
       }
     },
+    computed : {
+    },
     methods : {
+      ...mapMutations('deviceType', ['setDeviceType']),
+
       judgeDeviceType(){
         const window_width = window.innerWidth;
         if(window_width < 481){
@@ -22,7 +26,8 @@
         } else {
           this.deviceType = 0; // =PC
         }
-      },      
+        this.setDeviceType(this.deviceType);
+      },
     },
     created(){
       this.judgeDeviceType();
