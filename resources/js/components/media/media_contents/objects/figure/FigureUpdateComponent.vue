@@ -148,7 +148,7 @@
         this.updateFigureData('type', this.figureDatas['type']);
       },
       getDeviceType(){
-        this.responsiveTask();
+        this.responsiveAction();
       },
 
     },
@@ -159,7 +159,7 @@
       closeEditor(){
         this.isShowEditor = false;
       },
-      responsiveTask(){
+      responsiveAction(){
         if(this.getDeviceType==2){ // モバイルの時
           this.deleteMoveEvent();
           this.setModalAtMobilePosition();
@@ -259,7 +259,7 @@
 
     },
     mounted(){
-      this.responsiveTask();
+      this.responsiveAction();
     },
   }
 

@@ -1,10 +1,6 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-factory-wrapper">
-      <!-- モーダル移動用の領域。モバイルでは非表示にすること -->
-      <!-- <div class="area-for-move for-pc-tablet"
-      @mousedown="moveStart($event)" @touchstart="moveStart($event)">
-      </div> -->
     <div class="item-frame">
 
       <!-- クローズアイコン -->
@@ -126,20 +122,16 @@
     data : ()=>{
       return {
 
-        "figureTypeList" : [
+        figureTypeList : [
           {code : 1, name : "四角形"},
           {code : 2, name : "丸"},
         ],
-        "figureType" : 1,
+        figureType : 1,
+        canvas_length : 80,
+        pre_canvas : "",
+        pre_ctx : "",
 
-        // "move_target" : "",
-        // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-        // "y_in_element" : 0, // 〃↑のy座標
-        "canvas_length" : 80,
-        "pre_canvas" : "",
-        "pre_ctx" : "",
-
-        "isShowDetail" : false,
+        isShowDetail : false,
         // "isMobile" : false,
       }
     },
@@ -191,13 +183,8 @@
         this.setGlobalAlpha();
         this.draw()
       },
-      getDeviceType(new_val){
-        if(new_val==2){ // モバイルの時
-          this.deleteMoveEvent();
-          this.setModalAtMobilePosition();
-        } else {
-          this.registMoveEvent();
-        }
+      isMobile(){
+        this.responsiveAction();
       }
     },
     methods : {
@@ -206,9 +193,14 @@
       closeModal(){
         this.$emit('close-modal');
       },
-      // judgeIsMobile(){
-      //   this.isMobile =  (window.innerWidth < 481 ? true : false);
-      // },
+      responsiveAction(){
+        if(this.isMobile){ // モバイルの時
+          this.deleteMoveEvent();
+          this.setModalAtMobilePosition();
+        } else {
+          this.registMoveEvent();
+        }
+      },
       setModalAtMobilePosition(){
         const modal = document.getElementById('media-figure-factory-wrapper');
         modal.style.left = "";
@@ -225,13 +217,7 @@
         target.removeEventListener('touchstart', this.moveStart, false);
       },
       goNextFigureType(){
-        // const type_old = this.getFigureData['type'];
         const type_new = this.figureType % 2 + 1;
-        // if(type_old == 2){
-        //   type_new = 1;
-        // } else {
-        //   type_new = type_old + 1;
-        // }
         this.updateFigureData({key:'type', value:type_new});
         this.figureType = type_new;
       },
@@ -364,15 +350,13 @@
       },
     },
     created(){
-      // this.judgeIsMobile();
-      // window.addEventListener('resize',this.judgeIsMobile, false);
     },
     mounted(){
       this.setModalCenter();
       this.setContext();
       this.setCanvasSize();
       this.draw();
-      this.registMoveEvent();
+      this.responsiveAction();
     },
   }
 

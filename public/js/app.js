@@ -6180,10 +6180,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -6195,21 +6191,18 @@ function _defineProperty(obj, key, value) {
   },
   data: function data() {
     return {
-      "figureTypeList": [{
+      figureTypeList: [{
         code: 1,
         name: "四角形"
       }, {
         code: 2,
         name: "丸"
       }],
-      "figureType": 1,
-      // "move_target" : "",
-      // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-      // "y_in_element" : 0, // 〃↑のy座標
-      "canvas_length": 80,
-      "pre_canvas": "",
-      "pre_ctx": "",
-      "isShowDetail": false // "isMobile" : false,
+      figureType: 1,
+      canvas_length: 80,
+      pre_canvas: "",
+      pre_ctx: "",
+      isShowDetail: false // "isMobile" : false,
 
     };
   },
@@ -6301,23 +6294,23 @@ function _defineProperty(obj, key, value) {
       this.setGlobalAlpha();
       this.draw();
     },
-    getDeviceType: function getDeviceType(new_val) {
-      if (new_val == 2) {
-        // モバイルの時
-        this.deleteMoveEvent();
-        this.setModalAtMobilePosition();
-      } else {
-        this.registMoveEvent();
-      }
+    isMobile: function isMobile() {
+      this.responsiveAction();
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigureFactory', ['updateFigureData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
-    // judgeIsMobile(){
-    //   this.isMobile =  (window.innerWidth < 481 ? true : false);
-    // },
+    responsiveAction: function responsiveAction() {
+      if (this.isMobile) {
+        // モバイルの時
+        this.deleteMoveEvent();
+        this.setModalAtMobilePosition();
+      } else {
+        this.registMoveEvent();
+      }
+    },
     setModalAtMobilePosition: function setModalAtMobilePosition() {
       var modal = document.getElementById('media-figure-factory-wrapper');
       modal.style.left = "";
@@ -6334,13 +6327,7 @@ function _defineProperty(obj, key, value) {
       target.removeEventListener('touchstart', this.moveStart, false);
     },
     goNextFigureType: function goNextFigureType() {
-      // const type_old = this.getFigureData['type'];
-      var type_new = this.figureType % 2 + 1; // if(type_old == 2){
-      //   type_new = 1;
-      // } else {
-      //   type_new = type_old + 1;
-      // }
-
+      var type_new = this.figureType % 2 + 1;
       this.updateFigureData({
         key: 'type',
         value: type_new
@@ -6525,15 +6512,13 @@ function _defineProperty(obj, key, value) {
       this.pre_ctx.restore();
     }
   }),
-  created: function created() {// this.judgeIsMobile();
-    // window.addEventListener('resize',this.judgeIsMobile, false);
-  },
+  created: function created() {},
   mounted: function mounted() {
     this.setModalCenter();
     this.setContext();
     this.setCanvasSize();
     this.draw();
-    this.registMoveEvent();
+    this.responsiveAction();
   }
 });
 
@@ -7595,14 +7580,14 @@ function _defineProperty(obj, key, value) {
       this.updateFigureData('type', this.figureDatas['type']);
     },
     getDeviceType: function getDeviceType() {
-      this.responsiveTask();
+      this.responsiveAction();
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     closeEditor: function closeEditor() {
       this.isShowEditor = false;
     },
-    responsiveTask: function responsiveTask() {
+    responsiveAction: function responsiveAction() {
       if (this.getDeviceType == 2) {
         // モバイルの時
         this.deleteMoveEvent();
@@ -7717,7 +7702,7 @@ function _defineProperty(obj, key, value) {
     });
   },
   mounted: function mounted() {
-    this.responsiveTask();
+    this.responsiveAction();
   }
 });
 
