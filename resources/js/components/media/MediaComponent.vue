@@ -308,6 +308,10 @@ export default {
       this.$refs.mediaMovie.deleteYtPlayer();
       this.updateMediaSettingObjectItem({key:'isShowMovie', value:false});
     },
+    fieldClicked(){
+      const fieldClicked = new CustomEvent('fieldClicked');
+      document.body.dispatchEvent(fieldClicked);
+    },
 
   },
   created() {
@@ -330,6 +334,7 @@ export default {
     if(this.getMode!=3){ // 3:show以外(=createかeditなら)編集モードに設定
       this.$refs.mediaAudio.validEditMode();
     }
+
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
       window.onYouTubeIframeAPIReady = () => {
@@ -337,6 +342,10 @@ export default {
       }
     });
 
+    // 指定の領域がクリックされたら、選択中オブジェクトの選択を解除する
+    const field = document.getElementById('field');
+    field.addEventListener('click',this.fieldClicked, false);
+    field.addEventListener('touchstart',this.fieldClicked, false);
 
   },
   watch : {

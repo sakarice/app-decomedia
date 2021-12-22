@@ -559,6 +559,10 @@ function _defineProperty(obj, key, value) {
         key: 'isShowMovie',
         value: false
       });
+    },
+    fieldClicked: function fieldClicked() {
+      var fieldClicked = new CustomEvent('fieldClicked');
+      document.body.dispatchEvent(fieldClicked);
     }
   }),
   created: function created() {
@@ -595,7 +599,11 @@ function _defineProperty(obj, key, value) {
       window.onYouTubeIframeAPIReady = function () {
         _this5.getReadyCreateMovieFrame = true;
       };
-    });
+    }); // 指定の領域がクリックされたら、選択中オブジェクトの選択を解除する
+
+    var field = document.getElementById('field');
+    field.addEventListener('click', this.fieldClicked, false);
+    field.addEventListener('touchstart', this.fieldClicked, false);
   },
   watch: {
     initStatus: function initStatus(newVal) {
@@ -1582,6 +1590,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
+//
 //
 //
 //
@@ -4374,6 +4383,14 @@ function _defineProperty(obj, key, value) {
       };
       return styleObject;
     },
+    selected: function selected() {
+      var objectSelected = new CustomEvent('objectSelected');
+      document.body.dispatchEvent(objectSelected);
+      this.isActive = true;
+    },
+    unSelected: function unSelected() {
+      this.isActive = false;
+    },
     // 位置操作用
     moveStart: function moveStart(e) {
       var move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
@@ -4550,22 +4567,15 @@ function _defineProperty(obj, key, value) {
   }),
   created: function created() {},
   mounted: function mounted() {
-    var _this3 = this;
-
     this.canvas_wrapper = document.getElementById(this.canvas_wrapper_with_index);
     this.setContext();
     this.init(); // イベント登録
 
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest("#" + _this3.canvas_wrapper_with_index)) {
-        _this3.isActive = false;
-      } else {
-        _this3.isActive = true;
-      }
-    });
-    this.canvas_wrapper.addEventListener('figureDataUpdated', function (e) {
-      _this3.init();
-    });
+    this.canvas_wrapper.addEventListener('figureDataUpdated', this.init, false);
+    this.canvas_wrapper.addEventListener('click', this.selected, false);
+    this.canvas_wrapper.addEventListener('touchstart', this.selected, false);
+    document.body.addEventListener('fieldClicked', this.unSelected, false);
+    document.body.addEventListener('objectSelected', this.unSelected, false);
   }
 });
 
@@ -4776,6 +4786,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
+//
 //
 //
 //
@@ -6073,6 +6084,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
+//
 //
 //
 //
@@ -7734,7 +7746,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n \r\n\r\n\r\n\r\n/* @media screen and (min-width: 481px) {\r\n  #disp-modal-zone {\r\n    left: 0;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #disp-modal-zone {\r\n    right: 0;\r\n  }\r\n} */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -15357,6 +15369,14 @@ var render = function () {
     {
       staticClass: "flex a-center j-center",
       attrs: { id: "object-setting-open-wrapper" },
+      on: {
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
     },
     [
       _c("i", {
@@ -17159,6 +17179,14 @@ var render = function () {
       ],
       class: { hidden: !_vm.isEditMode },
       attrs: { id: "media-figure-update-wrapper" },
+      on: {
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
     },
     [
       _c("div", { staticClass: "item-frame" }, [
@@ -17497,10 +17525,18 @@ var render = function () {
   return _c(
     "div",
     {
-      staticClass: "canvas_item-wrapper",
+      staticClass: "obj canvas_item-wrapper",
       style: _vm.canvasWrapperStyle(),
       attrs: { id: _vm.canvas_wrapper_with_index },
-      on: { dblclick: _vm.showEditor },
+      on: {
+        dblclick: _vm.showEditor,
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
     },
     [
       _c("canvas", {
@@ -17614,7 +17650,18 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { style: _vm.imgWrapperStyle(), attrs: { id: _vm.imgWrapperWithIndex } },
+    {
+      style: _vm.imgWrapperStyle(),
+      attrs: { id: _vm.imgWrapperWithIndex },
+      on: {
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
+    },
     [
       _c(
         "div",
@@ -18233,7 +18280,18 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "flex a-center j-center", attrs: { id: "delete-wrapper" } },
+    {
+      staticClass: "flex a-center j-center",
+      attrs: { id: "delete-wrapper" },
+      on: {
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
+    },
     [
       _c("i", {
         staticClass: "fas fa-trash fa-2x del-icon",

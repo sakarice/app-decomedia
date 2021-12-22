@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" :style="canvasWrapperStyle()"
-  @dblclick="showEditor">
+  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper" :style="canvasWrapperStyle()"
+  @dblclick="showEditor" @click.stop @touchstart.stop>
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
@@ -128,7 +128,12 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         }
         return styleObject;
       },
-
+      selected(){ 
+        const objectSelected = new CustomEvent('objectSelected');
+        document.body.dispatchEvent(objectSelected);
+        this.isActive = true;
+      },
+      unSelected(){ this.isActive = false; },
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
@@ -254,18 +259,11 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       this.init();
 
       // イベント登録
-      document.addEventListener('click', (e)=> {
-        if(!e.target.closest("#"+this.canvas_wrapper_with_index)){
-          this.isActive = false;
-        } else {
-          this.isActive = true;
-        }
-      });
-
-      this.canvas_wrapper.addEventListener('figureDataUpdated',(e)=>{
-        this.init();
-      });
-
+      this.canvas_wrapper.addEventListener('figureDataUpdated',this.init,false);
+      this.canvas_wrapper.addEventListener('click',this.selected,false);
+      this.canvas_wrapper.addEventListener('touchstart',this.selected,false);
+      document.body.addEventListener('fieldClicked', this.unSelected, false);
+      document.body.addEventListener('objectSelected', this.unSelected, false);
     },
   }
 

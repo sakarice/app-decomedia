@@ -1,5 +1,6 @@
 <template>
-  <div id="delete-wrapper" class="flex a-center j-center">
+  <div id="delete-wrapper" class="flex a-center j-center"
+  @click.stop @touchstart.stop>
     <i class="fas fa-trash fa-2x del-icon" @click="deleteObject()"></i>
   </div>
 </template>

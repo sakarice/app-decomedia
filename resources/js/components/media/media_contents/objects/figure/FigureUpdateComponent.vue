@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
-  v-show="isShowEditor">
+  v-show="isShowEditor" @click.stop @touchstart.stop>
     <div class="item-frame">
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" @mousedown.stop :class="{hidden:isMobile}">

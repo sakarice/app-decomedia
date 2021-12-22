@@ -1,7 +1,8 @@
 <template>
   <!-- Media画像-->
   <div :id="imgWrapperWithIndex"
-  v-bind:style="imgWrapperStyle()">
+  v-bind:style="imgWrapperStyle()"
+  @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
       v-show="getMediaSetting['isShowImg']"

@@ -1,5 +1,6 @@
 <template>
-  <div id="object-setting-open-wrapper" class="flex a-center j-center">
+  <div id="object-setting-open-wrapper" class="flex a-center j-center"
+  @click.stop @touchstart.stop>
     <i class="fas fa-edit fa-2x" @click="showObjectSetting()"></i>
   </div>
 </template>
