@@ -142,6 +142,7 @@
 
     <media-object-controll-parts-wrapper>
       <object-delete></object-delete>
+      <object-setting-open></object-setting-open>
     </media-object-controll-parts-wrapper>
 
 
@@ -160,6 +161,7 @@
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
   import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
+  import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
 
 export default {
   components : {
@@ -172,6 +174,7 @@ export default {
     DispAudios,
     MediaObjectControllPartsWrapper,
     ObjectDelete,
+    ObjectSettingOpen,
   },
   props: [],
   data : () => {
