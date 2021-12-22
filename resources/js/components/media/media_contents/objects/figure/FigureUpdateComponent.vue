@@ -150,13 +150,8 @@
       type(){
         this.updateFigureData('type', this.figureDatas['type']);
       },
-      getDeviceType(new_val){
-        if(new_val==2){ // モバイルの時
-          this.deleteMoveEvent();
-          this.setModalAtMobilePosition();
-        } else {
-          this.registMoveEvent();
-        }
+      getDeviceType(){
+        this.responsiveTask();
       },
 
     },
@@ -166,13 +161,20 @@
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
       closeEditor(){
         this.isShowEditor = false;
-        // this.$emit('close-editor', this.index);
+      },
+      responsiveTask(){
+        if(this.getDeviceType==2){ // モバイルの時
+          this.deleteMoveEvent();
+          this.setModalAtMobilePosition();
+        } else {
+          this.registMoveEvent();
+        }
       },
       setModalAtMobilePosition(){
         const modal = document.getElementById('media-figure-update-wrapper');
         modal.style.left = "";
         modal.style.top = ""; // topの指定を消す
-      },      
+      },
       registMoveEvent(){
         const target = document.getElementById('media-figure-update-wrapper');
         target.addEventListener('mousedown', this.move, false);
@@ -214,15 +216,6 @@
           reTypedValue = value;
         }
         return reTypedValue;
-      },
-      // 設定モーダル操作用
-      // モーダルの初期表示位置をウィンドウ中央に持ってくる
-      setModalCenter(){
-        const modal = document.getElementById('media-figure-update-wrapper');
-        const modal_width = Number(this.getStyleSheetValue(modal,"width").replace("px",""));
-        const modal_height = Number(this.getStyleSheetValue(modal,"height").replace("px",""));
-        modal.style.left = (window.innerWidth/2 - modal_width/2) + "px";
-        modal.style.top = (window.innerHeight/2 - modal_height/2) + "px";
       },
       getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
         if (!element || !property) {
@@ -268,7 +261,9 @@
       });
 
     },
-    mounted(){ this.setModalCenter(); },
+    mounted(){
+      this.responsiveTask();
+    },
   }
 
 </script>
@@ -288,7 +283,6 @@
 }
 .media-figure-settings {
   padding: 15px 45px;
-  overflow-y: scroll;
 }
 
 
@@ -325,8 +319,8 @@
 
 @media screen and (min-width:481px) {
   #media-figure-update-wrapper{
-    left: 50%;
-    top: 50%;
+    left: 100px;
+    top: 100px;
     width: 300px;
     padding: 5px;
     background-color: rgba(35,40,50,0.85);
@@ -347,6 +341,7 @@
 
   .media-figure-settings {
     max-height: 200px;
+    overflow-y: scroll;
   }
 
 

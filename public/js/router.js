@@ -4048,19 +4048,22 @@ function _defineProperty(obj, key, value) {
     type: function type() {
       this.updateFigureData('type', this.figureDatas['type']);
     },
-    getDeviceType: function getDeviceType(new_val) {
-      if (new_val == 2) {
+    getDeviceType: function getDeviceType() {
+      this.responsiveTask();
+    }
+  },
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+    closeEditor: function closeEditor() {
+      this.isShowEditor = false;
+    },
+    responsiveTask: function responsiveTask() {
+      if (this.getDeviceType == 2) {
         // モバイルの時
         this.deleteMoveEvent();
         this.setModalAtMobilePosition();
       } else {
         this.registMoveEvent();
       }
-    }
-  },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
-    closeEditor: function closeEditor() {
-      this.isShowEditor = false; // this.$emit('close-editor', this.index);
     },
     setModalAtMobilePosition: function setModalAtMobilePosition() {
       var modal = document.getElementById('media-figure-update-wrapper');
@@ -4117,15 +4120,6 @@ function _defineProperty(obj, key, value) {
 
       return reTypedValue;
     },
-    // 設定モーダル操作用
-    // モーダルの初期表示位置をウィンドウ中央に持ってくる
-    setModalCenter: function setModalCenter() {
-      var modal = document.getElementById('media-figure-update-wrapper');
-      var modal_width = Number(this.getStyleSheetValue(modal, "width").replace("px", ""));
-      var modal_height = Number(this.getStyleSheetValue(modal, "height").replace("px", ""));
-      modal.style.left = window.innerWidth / 2 - modal_width / 2 + "px";
-      modal.style.top = window.innerHeight / 2 - modal_height / 2 + "px";
-    },
     getStyleSheetValue: function getStyleSheetValue(element, property) {
       // ↑でcssの値を取得するための関数
       if (!element || !property) {
@@ -4177,7 +4171,7 @@ function _defineProperty(obj, key, value) {
     });
   },
   mounted: function mounted() {
-    this.setModalCenter();
+    this.responsiveTask();
   }
 });
 
@@ -8348,7 +8342,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-update-wrapper[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n  padding: 15px 45px;\r\n  overflow-y: scroll;\n}\n.close-icon-wrapper[data-v-d96ba8d8] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-d96ba8d8]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-d96ba8d8],\r\n.setting-type-color[data-v-d96ba8d8] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-d96ba8d8] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-d96ba8d8] {\r\n  width: 100px;\n}\n.hidden[data-v-d96ba8d8] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    left: 50%;\r\n    top: 50%;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n    max-height: 200px;\n}\n.item-frame[data-v-d96ba8d8] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-update-wrapper[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-d96ba8d8] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-d96ba8d8]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-d96ba8d8],\r\n.setting-type-color[data-v-d96ba8d8] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-d96ba8d8] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-d96ba8d8] {\r\n  width: 100px;\n}\n.hidden[data-v-d96ba8d8] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n    max-height: 200px;\r\n    overflow-y: scroll;\n}\n.item-frame[data-v-d96ba8d8] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
