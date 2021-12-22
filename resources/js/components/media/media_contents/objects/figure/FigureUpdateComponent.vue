@@ -1,6 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
+  v-show="isShowEditor"
    @mousedown="move($event)" @touchstart="move($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
@@ -91,13 +92,12 @@
   export default {
     components : {},
     props:[
-      "index",
+      // "index",
     ],
     data : ()=>{
       return {
-        "move_target" : "",
-        "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-        "y_in_element" : 0, // 〃↑のy座標
+        isShowEditor : false,
+        index: 0,
 
         "figureTypeList" : [
           {code : 1, name : "四角形"},
@@ -140,7 +140,7 @@
       },      
     },
     watch : {
-      type(){ 
+      type(){
         this.updateFigureData('type', this.figureDatas['type']);
       }
     },
@@ -148,14 +148,17 @@
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
-      closeEditor(){ this.$emit('close-editor', this.index); },
+      closeEditor(){
+        this.isShowEditor = false;
+        // this.$emit('close-editor', this.index);
+      },
 
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
       },
       init(index){
-        const storeFigureData = this.getOneFigure(index);
+        const storeFigureData = Object.assign({},this.getOneFigure(index));
         for(let key of Object.keys(storeFigureData)){
           this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
         }
@@ -202,10 +205,32 @@
       },
     },
     created(){
-      document.addEventListener('objectDeleted', (e)=> {
-        console.log('objectDeleted:event name=>'+e.name);
-        this.init();
+      document.body.addEventListener('showFigureSetting', (e)=>{
+        this.index = e.detail.index;
+        this.init(this.index);
+        this.isShowEditor = true;
       });
+
+      document.body.removeEventListener('closeFigureSetting', (e)=>{
+        this.isShowEditor = false;
+      });
+
+      document.body.addEventListener('objectStatusChanged', (e)=>{
+        this.index = e.detail.index;
+        this.init(this.index);
+      })
+
+      document.body.addEventListener('objectDeleted', (e)=> {
+        const delObjs = e.detail.objs;
+        let isDeleted = false;
+        delObjs.forEach(obj=>{
+          if(obj.type==0 && obj.index==this.index){
+            isDeleted = true;
+          }
+        });
+        if(isDeleted){ this.isShowEditor = false; }
+      });
+
     },
     mounted(){ this.setModalCenter(); },
   }

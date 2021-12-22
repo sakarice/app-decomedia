@@ -7295,20 +7295,19 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
-  props: ["index"],
+  props: [// "index",
+  ],
   data: function data() {
     return {
-      "move_target": "",
-      "x_in_element": 0,
-      // クリックカーソルの要素内における相対位置(x座標)
-      "y_in_element": 0,
-      // 〃↑のy座標
+      isShowEditor: false,
+      index: 0,
       "figureTypeList": [{
         code: 1,
         name: "四角形"
@@ -7359,7 +7358,7 @@ function _defineProperty(obj, key, value) {
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     closeEditor: function closeEditor() {
-      this.$emit('close-editor', this.index);
+      this.isShowEditor = false; // this.$emit('close-editor', this.index);
     },
     getOneFigure: function getOneFigure(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
@@ -7367,7 +7366,7 @@ function _defineProperty(obj, key, value) {
       return this.getMediaFigure;
     },
     init: function init(index) {
-      var storeFigureData = this.getOneFigure(index);
+      var storeFigureData = Object.assign({}, this.getOneFigure(index));
 
       for (var _i = 0, _Object$keys = Object.keys(storeFigureData); _i < _Object$keys.length; _i++) {
         var key = _Object$keys[_i];
@@ -7426,10 +7425,33 @@ function _defineProperty(obj, key, value) {
   created: function created() {
     var _this = this;
 
-    document.addEventListener('objectDeleted', function (e) {
-      console.log('objectDeleted:event name=>' + e.name);
+    document.body.addEventListener('showFigureSetting', function (e) {
+      _this.index = e.detail.index;
 
-      _this.init();
+      _this.init(_this.index);
+
+      _this.isShowEditor = true;
+    });
+    document.body.removeEventListener('closeFigureSetting', function (e) {
+      _this.isShowEditor = false;
+    });
+    document.body.addEventListener('objectStatusChanged', function (e) {
+      _this.index = e.detail.index;
+
+      _this.init(_this.index);
+    });
+    document.body.addEventListener('objectDeleted', function (e) {
+      var delObjs = e.detail.objs;
+      var isDeleted = false;
+      delObjs.forEach(function (obj) {
+        if (obj.type == 0 && obj.index == _this.index) {
+          isDeleted = true;
+        }
+      });
+
+      if (isDeleted) {
+        _this.isShowEditor = false;
+      }
     });
   },
   mounted: function mounted() {
@@ -7616,7 +7638,13 @@ function _defineProperty(obj, key, value) {
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), {}, {
     showEditor: function showEditor() {
-      this.$emit('show-editor', this.index);
+      // this.$emit('show-editor', this.index);
+      var showSetting = new CustomEvent('showFigureSetting', {
+        detail: {
+          index: this.index
+        }
+      });
+      document.body.dispatchEvent(showSetting);
     },
     getOneFigure: function getOneFigure(index) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
@@ -7814,13 +7842,13 @@ function _defineProperty(obj, key, value) {
     stroke: function stroke() {
       this.ctx.save();
       this.ctx.stroke();
-    },
-    "delete": function _delete() {
-      if (this.isActive) {
-        this.isActive = false;
-        this.deleteMediaFiguresObjectItem(this.index);
-      }
-    } // addSelectedEvent(){
+    } // delete(){
+    //   if(this.isActive){
+    //     this.isActive = false;
+    //     this.deleteMediaFiguresObjectItem(this.index);
+    //   }
+    // },
+    // addSelectedEvent(){
     //   const event = new CustomEvent('onObjectSelected', {detail:{type:0, index:this.index}});
     //   document.body.dispatchEvent(event);
     // },
@@ -7932,8 +7960,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
 
 
 
@@ -7953,17 +7979,14 @@ function _defineProperty(obj, key, value) {
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigures'])),
   watch: {},
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateIsInitializedFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
-    showEditor: function showEditor(index) {
-      this.isShowEditor = true;
-
-      if (this.editor_index != index) {
-        this.editor_index = index;
-        this.$refs.Editor.init(index);
-      }
-    },
-    closeEditor: function closeEditor() {
-      this.isShowEditor = false;
-    },
+    // showEditor(index){
+    //   this.isShowEditor = true;
+    //   if(this.editor_index != index){
+    //     this.editor_index = index;
+    //     this.$refs.Editor.init(index);
+    //   }
+    // },
+    // closeEditor(){ this.isShowEditor = false;},
     editorInit: function editorInit(index) {
       this.$refs.Editor.init(index);
     },
@@ -8001,7 +8024,7 @@ function _defineProperty(obj, key, value) {
   mounted: function mounted() {
     var _this3 = this;
 
-    document.addEventListener('objectDeleted', function (e) {
+    document.body.addEventListener('objectDeleted', function (e) {
       if (_this3.$refs.figures) {
         // const figures_reverse = this.$refs.figures.reverse();
         // figures_reverse.forEach(figure => {figure.delete(); });
@@ -9714,11 +9737,22 @@ function _defineProperty(obj, key, value) {
     deleteObject: function deleteObject() {
       var _this = this;
 
-      var objs = this.getSelectedObjects;
-      objs.forEach(function (obj) {
-        _this.delMutations[obj.type]();
-      });
+      var delObjs = JSON.parse(JSON.stringify(this.getSelectedObjects)); // const delObjs = Object.assign({},this.getSelectedObjects);
+
+      delObjs.forEach(function (obj) {
+        _this.delMutations[obj.type](obj.index);
+      }); // Object.keys(delObjs).forEach(key=>{
+      //   this.delMutations[delObjs[key].type](delObjs[key].index);
+      // });
+
       this.unSelectedAll(); // 削除対象を格納したstoreの配列を空に
+
+      var event = new CustomEvent('objectDeleted', {
+        detail: {
+          objs: delObjs
+        }
+      });
+      document.body.dispatchEvent(event);
     }
   }),
   created: function created() {
@@ -67833,6 +67867,14 @@ var render = function () {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShowEditor,
+          expression: "isShowEditor",
+        },
+      ],
       class: { hidden: !_vm.isEditMode },
       attrs: { id: "media-figure-update-wrapper" },
       on: {
@@ -68269,9 +68311,6 @@ var render = function () {
           refInFor: true,
           attrs: { index: index },
           on: {
-            "show-editor": function ($event) {
-              return _vm.showEditor(index)
-            },
             "change-figure-data": function ($event) {
               return _vm.editorInit(index)
             },
@@ -68280,17 +68319,9 @@ var render = function () {
       }),
       _vm._v(" "),
       _c("figure-update", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isShowEditor,
-            expression: "isShowEditor",
-          },
-        ],
         ref: "Editor",
         attrs: { index: _vm.editor_index },
-        on: { "close-editor": _vm.closeEditor, "re-render": _vm.reRender },
+        on: { "re-render": _vm.reRender },
       }),
     ],
     2

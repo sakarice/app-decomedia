@@ -101,7 +101,11 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
       ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
-      showEditor(){ this.$emit('show-editor', this.index)},
+      showEditor(){
+        // this.$emit('show-editor', this.index);
+        const showSetting = new CustomEvent('showFigureSetting', {detail:{index:this.index}});
+        document.body.dispatchEvent(showSetting);
+      },
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
@@ -241,12 +245,12 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.ctx.save();
         this.ctx.stroke();
       },
-      delete(){
-        if(this.isActive){
-          this.isActive = false;
-          this.deleteMediaFiguresObjectItem(this.index);
-        }
-      },
+      // delete(){
+      //   if(this.isActive){
+      //     this.isActive = false;
+      //     this.deleteMediaFiguresObjectItem(this.index);
+      //   }
+      // },
       // addSelectedEvent(){
       //   const event = new CustomEvent('onObjectSelected', {detail:{type:0, index:this.index}});
       //   document.body.dispatchEvent(event);
