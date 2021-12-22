@@ -17,7 +17,7 @@ import DispFigureSettingModal from '../components/media/change_display_parts/Dis
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
-import MediaFigureSetting from '../components/media/edit_parts/MediaFigureSettingComponent.vue';
+import MediaFigureFactory from '../components/media/edit_parts/MediaFigureFactoryComponent.vue';
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
@@ -44,7 +44,7 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
-        mediaFigureSetting : MediaFigureSetting,
+        mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
@@ -63,7 +63,7 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
-        mediaFigureSetting : MediaFigureSetting,
+        mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,

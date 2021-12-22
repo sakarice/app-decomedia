@@ -1,6 +1,6 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-setting-wrapper">
+  <div id="media-figure-factory-wrapper">
       <!-- モーダル移動用の領域。モバイルでは非表示にすること -->
       <!-- <div class="area-for-move for-pc-tablet"
       @mousedown="moveStart($event)" @touchstart="moveStart($event)">
@@ -209,17 +209,17 @@
         this.isMobile =  (window.innerWidth < 481 ? true : false);
       },
       setModalAtMobilePosition(){
-        const modal = document.getElementById('media-figure-setting-wrapper');
+        const modal = document.getElementById('media-figure-factory-wrapper');
         modal.style.left = "";
         modal.style.top = ""; // topの指定を消す
       },
       registMoveEvent(){
-        const target = document.getElementById('media-figure-setting-wrapper');
+        const target = document.getElementById('media-figure-factory-wrapper');
         target.addEventListener('mousedown', this.moveStart, false);
         target.addEventListener('touchstart', this.moveStart, false);
       },
       deleteMoveEvent(){
-        const target = document.getElementById('media-figure-setting-wrapper');
+        const target = document.getElementById('media-figure-factory-wrapper');
         target.removeEventListener('mousedown', this.moveStart, false);
         target.removeEventListener('touchstart', this.moveStart, false);
       },
@@ -257,7 +257,7 @@
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる
       setModalCenter(){
-        const modal = document.getElementById('media-figure-setting-wrapper');
+        const modal = document.getElementById('media-figure-factory-wrapper');
         const modal_width = Number(this.getStyleSheetValue(modal,"width").replace("px",""));
         const modal_height = Number(this.getStyleSheetValue(modal,"height").replace("px",""));
         modal.style.left = (window.innerWidth/2 - modal_width/2) + "px";
@@ -273,7 +273,7 @@
       },
       // 位置操作用
       moveStart(e){
-        const move_target_dom = document.getElementById("media-figure-setting-wrapper");
+        const move_target_dom = document.getElementById("media-figure-factory-wrapper");
         moveStart(e, move_target_dom);
         move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
@@ -381,12 +381,12 @@
 
 @import "/resources/css/flexSetting.css";
 
-#media-figure-setting-wrapper{
+#media-figure-factory-wrapper{
   position: absolute;
   z-index: 30;
   color: white;
 }
-#media-figure-setting-wrapper:hover{
+#media-figure-factory-wrapper:hover{
   cursor: all-scroll;
 }
 
@@ -509,7 +509,7 @@
 }
 
 @media screen and (min-width:481px) {
-  #media-figure-setting-wrapper{
+  #media-figure-factory-wrapper{
     left: 100px;
     top: 100px;
     width: 300px;
@@ -527,7 +527,7 @@
 }
 
 @media screen and (max-width:480px) {
-  #media-figure-setting-wrapper{
+  #media-figure-factory-wrapper{
     bottom: 50px;  
     max-height: 50vh;
     width: 100%;
