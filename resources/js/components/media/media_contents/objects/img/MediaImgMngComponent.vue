@@ -69,11 +69,11 @@
     mounted(){
       document.addEventListener('keydown', (e)=> {
         if(e.code=="Delete"){
-          this.active_indexs.forEach(index=>{
-            this.deleteMediaImgsObjectItem(index);
-            console.log(index);
-            this.delActiveIndex(index);
-          })
+          // this.active_indexs.forEach(index=>{
+          //   this.deleteMediaImgsObjectItem(index);
+          //   console.log(index);
+          //   this.delActiveIndex(index);
+          // })
           this.reRenderAll();
         }
       })

@@ -223,9 +223,8 @@
         target.removeEventListener('mousedown', this.moveStart, false);
         target.removeEventListener('touchstart', this.moveStart, false);
       },
-      goNextFigureType(e){
+      goNextFigureType(){
         // const type_old = this.getFigureData['type'];
-        console.log('goNextFigureType:type='+e.type);
         const type_new = this.figureType % 2 + 1;
         // if(type_old == 2){
         //   type_new = 1;
@@ -402,6 +401,10 @@
 .change-figure-type {
   margin: 0 10px;
 }
+.change-figure-type:hover {
+  cursor:pointer;
+}
+
 .back-figure-type{
   color: blue;
 }

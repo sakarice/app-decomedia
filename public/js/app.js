@@ -6101,9 +6101,8 @@ function _defineProperty(obj, key, value) {
       target.removeEventListener('mousedown', this.moveStart, false);
       target.removeEventListener('touchstart', this.moveStart, false);
     },
-    goNextFigureType: function goNextFigureType(e) {
+    goNextFigureType: function goNextFigureType() {
       // const type_old = this.getFigureData['type'];
-      console.log('goNextFigureType:type=' + e.type);
       var type_new = this.figureType % 2 + 1; // if(type_old == 2){
       //   type_new = 1;
       // } else {
@@ -7157,7 +7156,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -7298,6 +7298,7 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   props: ["index"],
@@ -7331,7 +7332,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
     type: {
       get: function get() {
         return this.figureDatas['type'];
@@ -7356,7 +7357,7 @@ function _defineProperty(obj, key, value) {
       this.updateFigureData('type', this.figureDatas['type']);
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     closeEditor: function closeEditor() {
       this.$emit('close-editor', this.index);
     },
@@ -7416,40 +7417,21 @@ function _defineProperty(obj, key, value) {
       var value = style.getPropertyValue(property);
       return value;
     },
-    mouseDown: function mouseDown(e) {
-      var event;
-
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
-
-      this.move_target = document.getElementById('media-figure-update-wrapper');
-      this.x_in_element = event.clientX - this.move_target.offsetLeft;
-      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.mouseMove, false);
-      this.move_target.addEventListener("mouseup", this.mouseUp, false);
-      document.body.addEventListener("touchmove", this.mouseMove, false);
-      this.move_target.addEventListener("touchend", this.mouseUp, false);
-    },
-    mouseMove: function mouseMove(e) {
-      e.preventDefault();
-      this.move_target.style.left = e.clientX - this.x_in_element + "px";
-      this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.mouseUp, false);
-      document.body.addEventListener("touchleave", this.mouseUp, false);
-    },
-    mouseUp: function mouseUp(e) {
-      document.body.removeEventListener("mousemove", this.mouseMove, false);
-      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-      document.body.removeEventListener("touchmove", this.mouseMove, false);
-      this.move_target.removeEventListener("touchend", this.mouseUp, false);
+    // 位置操作用
+    move: function move(event) {
+      var move_target_dom = document.getElementById('media-figure-update-wrapper');
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(event, move_target_dom);
     }
   }),
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    document.addEventListener('objectDeleted', function (e) {
+      console.log('objectDeleted:event name=>' + e.name);
+
+      _this.init();
+    });
+  },
   mounted: function mounted() {
     this.setModalCenter();
   }
@@ -8020,17 +8002,11 @@ function _defineProperty(obj, key, value) {
   mounted: function mounted() {
     var _this3 = this;
 
-    document.addEventListener('keydown', function (e) {
-      if (e.code == "Delete") {
-        if (_this3.$refs.figures) {
-          var figures_reverse = _this3.$refs.figures.reverse();
-
-          figures_reverse.forEach(function (figure) {
-            figure["delete"]();
-          });
-
-          _this3.reRenderAll();
-        }
+    document.addEventListener('objectDeleted', function (e) {
+      if (_this3.$refs.figures) {
+        // const figures_reverse = this.$refs.figures.reverse();
+        // figures_reverse.forEach(figure => {figure.delete(); });
+        _this3.reRenderAll();
       }
     });
   }
@@ -8743,14 +8719,11 @@ function _defineProperty(obj, key, value) {
 
     document.addEventListener('keydown', function (e) {
       if (e.code == "Delete") {
-        _this3.active_indexs.forEach(function (index) {
-          _this3.deleteMediaImgsObjectItem(index);
-
-          console.log(index);
-
-          _this3.delActiveIndex(index);
-        });
-
+        // this.active_indexs.forEach(index=>{
+        //   this.deleteMediaImgsObjectItem(index);
+        //   console.log(index);
+        //   this.delActiveIndex(index);
+        // })
         _this3.reRenderAll();
       }
     });
@@ -9750,9 +9723,17 @@ function _defineProperty(obj, key, value) {
     }
   }),
   created: function created() {
+    var _this2 = this;
+
     this.delMutations[0] = this.deleteMediaFiguresObjectItem; // 0
 
     this.delMutations[1] = this.deleteMediaImgsObjectItem; // 1
+
+    document.addEventListener('keydown', function (e) {
+      if (e.code == "Delete") {
+        _this2.deleteObject();
+      }
+    });
   },
   mounted: function mounted() {}
 });
@@ -17831,7 +17812,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-681adb27] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-681adb27] {\r\n  margin: 0 10px;\n}\n.back-figure-type[data-v-681adb27]{\r\n  color: blue;\n}\n.next-figure-type[data-v-681adb27]{\r\n  color: red;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-681adb27] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-681adb27] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\r\n  max-height: 200px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  position: absolute;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\n.reverse-y[data-v-681adb27] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-681adb27] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n    display: inline-block;\r\n    position: absolute;\r\n    top: 80px;\r\n    left: 160px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-681adb27] {\r\n    max-height: 20vh;\n}\n.item-frame[data-v-681adb27] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    top: 5px;\r\n    right: 20px;\n}\n.for-pc-tablet[data-v-681adb27]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-setting-wrapper[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-681adb27] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-681adb27] {\r\n  margin: 0 10px;\n}\n.change-figure-type[data-v-681adb27]:hover {\r\n  cursor:pointer;\n}\n.back-figure-type[data-v-681adb27]{\r\n  color: blue;\n}\n.next-figure-type[data-v-681adb27]{\r\n  color: red;\n}\n.item-frame[data-v-681adb27] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-681adb27]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-681adb27] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-681adb27] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-681adb27] {\r\n  padding: 15px 45px;\r\n  max-height: 200px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-681adb27]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-681adb27] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-681adb27]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-681adb27] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-681adb27]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n  position: absolute;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\r\n  /* background-color: rgba(255,255,255,0.1);\r\n  box-shadow: 1px 1px 3px lightslategrey;\r\n  border-radius: 4px; */\n}\n.add-icon-wrapper[data-v-681adb27]:hover {\r\n  cursor: pointer;\r\n  /* outline: 1px solid orange; */\n}\n.add-text[data-v-681adb27] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-681adb27],\r\n.setting-type-color[data-v-681adb27] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-681adb27] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-681adb27] {\r\n  width: 100px;\n}\n.reverse-y[data-v-681adb27] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-681adb27] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n    display: inline-block;\r\n    position: absolute;\r\n    top: 80px;\r\n    left: 160px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-setting-wrapper[data-v-681adb27]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-681adb27] {\r\n    max-height: 20vh;\n}\n.item-frame[data-v-681adb27] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n.add-icon-wrapper[data-v-681adb27] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    top: 5px;\r\n    right: 20px;\n}\n.for-pc-tablet[data-v-681adb27]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67857,10 +67838,10 @@ var render = function () {
       attrs: { id: "media-figure-update-wrapper" },
       on: {
         mousedown: function ($event) {
-          return _vm.mouseDown($event)
+          return _vm.move($event)
         },
         touchstart: function ($event) {
-          return _vm.mouseDown($event)
+          return _vm.move($event)
         },
       },
     },

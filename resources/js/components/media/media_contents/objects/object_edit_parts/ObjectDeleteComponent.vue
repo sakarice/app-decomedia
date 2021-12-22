@@ -31,6 +31,12 @@
     created(){
       this.delMutations[0] = this.deleteMediaFiguresObjectItem; // 0
       this.delMutations[1] = this.deleteMediaImgsObjectItem;    // 1
+
+      document.addEventListener('keydown', (e)=>{
+        if(e.code=="Delete"){
+          this.deleteObject();
+        }
+      });
     },
     mounted(){},
   }

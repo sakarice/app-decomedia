@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
-   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+   @mousedown="move($event)" @touchstart="move($event)">
     <div class="item-frame">
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" @mousedown.stop>
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+  import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
 
   export default {
@@ -194,39 +195,18 @@
         var value = style.getPropertyValue(property);
         return value;
       },
-      mouseDown(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.move_target = document.getElementById('media-figure-update-wrapper');
-        this.x_in_element = event.clientX - this.move_target.offsetLeft;
-        this.y_in_element = event.clientY - this.move_target.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.mouseMove, false);
-        this.move_target.addEventListener("mouseup", this.mouseUp, false);
-        document.body.addEventListener("touchmove", this.mouseMove, false);
-        this.move_target.addEventListener("touchend", this.mouseUp, false);
-      },
-      mouseMove(e){
-        e.preventDefault();
-        this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-        this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.mouseUp, false);
-        document.body.addEventListener("touchleave", this.mouseUp, false);
-      },
-      mouseUp(e){
-        document.body.removeEventListener("mousemove", this.mouseMove, false);
-        this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-        document.body.removeEventListener("touchmove", this.mouseMove, false);
-        this.move_target.removeEventListener("touchend", this.mouseUp, false);
+      // 位置操作用
+      move(event){
+        const move_target_dom = document.getElementById('media-figure-update-wrapper');
+        moveStart(event, move_target_dom);
       },
     },
-    created(){},
+    created(){
+      document.addEventListener('objectDeleted', (e)=> {
+        console.log('objectDeleted:event name=>'+e.name);
+        this.init();
+      });
+    },
     mounted(){ this.setModalCenter(); },
   }
 
