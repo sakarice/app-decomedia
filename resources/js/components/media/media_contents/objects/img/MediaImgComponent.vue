@@ -71,11 +71,9 @@
     watch : {
       isActive(val){
         if(val == true){
-          this.$emit('add-active-index', this.index);
           const objectData = {type:1, index:this.index}
           this.addSelectedObjectItem(objectData);
         } else {
-          this.$emit('del-active-index', this.index);
           const objects = this.getSelectedObjects;
           const judgeIsMyself = (obj) => (obj.type==1 && obj.index==this.index);
           const myIndex = objects.findIndex(obj=>judgeIsMyself);

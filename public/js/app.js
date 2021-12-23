@@ -5837,8 +5837,8 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImgs'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImgs'])),
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     changeFileCategory: function changeFileCategory() {
       this.isDefault = !this.isDefault;
     },
@@ -8730,14 +8730,12 @@ var objectSelected = new CustomEvent('objectSelected');
       var _this = this;
 
       if (val == true) {
-        this.$emit('add-active-index', this.index);
         var objectData = {
           type: 1,
           index: this.index
         };
         this.addSelectedObjectItem(objectData);
       } else {
-        this.$emit('del-active-index', this.index);
         var objects = this.getSelectedObjects;
 
         var judgeIsMyself = function judgeIsMyself(obj) {
@@ -8926,8 +8924,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
 
 
 
@@ -8938,9 +8934,7 @@ function _defineProperty(obj, key, value) {
   },
   props: [],
   data: function data() {
-    return {
-      'active_indexs': []
-    };
+    return {};
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])),
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['updateIsInitializedImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
@@ -8973,25 +8967,13 @@ function _defineProperty(obj, key, value) {
       this.$refs.imgs.forEach(function (img) {
         img.init();
       });
-    },
-    addActiveIndex: function addActiveIndex(index) {
-      this.active_indexs.push(index);
-    },
-    delActiveIndex: function delActiveIndex(index) {
-      var del_index = this.active_indexs.indexOf(index);
-      this.active_indexs.splice(del_index, 1);
     }
   }),
   mounted: function mounted() {
     var _this3 = this;
 
-    document.addEventListener('keydown', function (e) {
-      if (e.code == "Delete") {
-        // this.active_indexs.forEach(index=>{
-        //   this.deleteMediaImgsObjectItem(index);
-        //   console.log(index);
-        //   this.delActiveIndex(index);
-        // })
+    document.body.addEventListener('objectDeleted', function (e) {
+      if (_this3.$refs.imgs) {
         _this3.reRenderAll();
       }
     });
@@ -9611,7 +9593,6 @@ function _defineProperty(obj, key, value) {
       document.body.addEventListener("touchend", this.rotateEnd, false);
     },
     rotating: function rotating(e) {
-      console.log('start rotate');
       e.preventDefault();
       var event;
       var distance_x_from_target_center;
@@ -9638,14 +9619,16 @@ function _defineProperty(obj, key, value) {
     },
     rotateEnd: function rotateEnd(e) {
       document.body.removeEventListener("mousemove", this.rotating, false);
-      this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
+      document.body.removeEventListener("mouseup", this.rotateEnd, false);
       document.body.removeEventListener("touchmove", this.rotating, false);
-      this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
+      document.body.removeEventListener("touchend", this.rotateEnd, false);
+      document.body.removeEventListener("mouseleave", this.rotateEnd, false);
+      document.body.removeEventListener("touchleave", this.rotateEnd, false);
       this.updateMediaImgsObjectItem({
         index: this.index,
         key: "degree",
         value: this.degree
-      }); // this.$emit('rotate-finish', this.degree);
+      });
     }
   })
 });
@@ -69418,14 +69401,6 @@ var render = function () {
         ref: "imgs",
         refInFor: true,
         attrs: { index: index },
-        on: {
-          "add-active-index": function ($event) {
-            return _vm.addActiveIndex(index)
-          },
-          "del-active-index": function ($event) {
-            return _vm.delActiveIndex(index)
-          },
-        },
       })
     }),
     1
