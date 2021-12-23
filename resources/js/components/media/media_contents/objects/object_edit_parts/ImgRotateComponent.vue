@@ -61,7 +61,7 @@
         let event;
         let distance_x_from_target_center;
         let distance_y_from_target_center;
-        if(e.type==="mousedown"){
+        if(e.type==="mousemove"){
           event = e;
           distance_x_from_target_center = event.clientX - this.rotate_center_x;
           distance_y_from_target_center = event.clientY - this.rotate_center_y;
