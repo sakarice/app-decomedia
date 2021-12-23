@@ -5,13 +5,15 @@
 </template>
 
 <script>
+  const closeModalEvent = new CustomEvent('closeModal');
+  const closeImgSettingEvent = new CustomEvent('closeImgSetting');
+  const closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+
   export default {
     methods : {
       closeModal(){
-        const closeModalEvent = new CustomEvent('closeModal');
         document.body.dispatchEvent(closeModalEvent);
-
-        const closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+        document.body.dispatchEvent(closeImgSettingEvent);
         document.body.dispatchEvent(closeFigureSettingEvent);
       },
     }

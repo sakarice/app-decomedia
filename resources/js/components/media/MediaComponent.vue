@@ -95,8 +95,8 @@
     v-on:close-modal="closeModal">
     </router-view>
 
-    <router-view name="figureUpdate">
-    </router-view>
+    <router-view name="imgProperty"></router-view>
+    <router-view name="figureUpdate"></router-view>
 
     <!-- 動画設定コンポーネント -->
     <router-view name="movieSetting"

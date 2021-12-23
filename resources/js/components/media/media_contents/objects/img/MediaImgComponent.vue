@@ -2,11 +2,10 @@
   <!-- Media画像-->
   <div :id="imgWrapperWithIndex"
   v-bind:style="imgWrapperStyle()"
-  @click.stop @touchstart.stop>
+  @dblclick="showEditor" @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
       v-show="getMediaSetting['isShowImg']"
-      v-on:click="$emit('parent-action', 'imgModal')"
       v-bind:style="imgStyle()">
       <p v-show="!(mediaImg['url'])"></p>
       <img id="media-img"
@@ -92,6 +91,10 @@
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
       },
+      showEditor(){
+        const showSetting = new CustomEvent('showImgSetting', {detail:{index:this.index}});
+        document.body.dispatchEvent(showSetting);
+      },
       selected(){
         document.body.dispatchEvent(objectSelected);
         this.isActive = true;
@@ -148,18 +151,11 @@
     mounted(){
       this.img_wrapper = document.getElementById(this.imgWrapperWithIndex);
       // イベント登録
+      this.img_wrapper.addEventListener('imgDataUpdated',this.init,false);
       this.img_wrapper.addEventListener('click',this.selected,false);
       this.img_wrapper.addEventListener('touchstart',this.selected,false);
       document.body.addEventListener('fieldClicked', this.unSelected, false);
       document.body.addEventListener('objectSelected', this.unSelected, false);
-
-      // document.addEventListener('click', (e)=> {
-      //   if(!e.target.closest("#"+this.imgWrapperWithIndex)){
-      //     this.isActive = false;
-      //   } else {
-      //     this.isActive = true;
-      //   }
-      // });
     }
   }
 

@@ -4767,12 +4767,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+var closeModalEvent = new CustomEvent('closeModal');
+var closeImgSettingEvent = new CustomEvent('closeImgSetting');
+var closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     closeModal: function closeModal() {
-      var closeModalEvent = new CustomEvent('closeModal');
       document.body.dispatchEvent(closeModalEvent);
-      var closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+      document.body.dispatchEvent(closeImgSettingEvent);
       document.body.dispatchEvent(closeFigureSettingEvent);
     }
   }
@@ -8281,7 +8283,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -8391,78 +8395,34 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
-  props: ["index"],
+  components: {
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      "move_target": "",
-      "x_in_element": 0,
-      // クリックカーソルの要素内における相対位置(x座標)
-      "y_in_element": 0,
-      // 〃↑のy座標
-      "figureTypeList": [{
-        code: 1,
-        name: "四角形"
-      }, {
-        code: 2,
-        name: "丸"
-      }],
-      "figureDatas": {
-        "type": 1,
-        "left": 0,
+      isShowEditor: false,
+      index: 0,
+      imgDatas: {
+        // "type" : 99,
         "top": 0,
+        "left": 0,
         "width": 0,
         "height": 0,
         "degree": 0,
-        "layer": 0,
-        "globalAlpha": 0,
-        "isDrawFill": false,
-        "isDrawStroke": false,
-        "fillColor": "",
-        "strokeColor": ""
+        "opacity": 0,
+        "layer": 0
       }
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), {}, {
-    type: {
-      get: function get() {
-        return this.figureDatas['type'];
-      },
-      set: function set(val) {
-        this.figureDatas['type'] = val;
-      }
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('deviceType', ['getDeviceType'])), {}, {
+    isMobile: function isMobile() {
+      return this.getDeviceType == 2 ? true : false;
     },
     isEditMode: function isEditMode() {
       var route_name = this.$route.name;
@@ -8476,41 +8436,68 @@ function _defineProperty(obj, key, value) {
     }
   }),
   watch: {
-    type: function type() {
-      this.updateFigureData('type', this.figureDatas['type']);
+    getDeviceType: function getDeviceType() {
+      this.responsiveAction();
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), {}, {
     closeEditor: function closeEditor() {
-      this.$emit('close-editor', this.index);
+      this.isShowEditor = false;
     },
-    getOneFigure: function getOneFigure(index) {
-      // ストアから自分のインデックスのオブジェクトだけ取得する
-      this.setTargetObjectIndex(index);
-      return this.getMediaFigure;
-    },
-    init: function init(index) {
-      var storeFigureData = this.getOneFigure(index);
-
-      for (var _i = 0, _Object$keys = Object.keys(storeFigureData); _i < _Object$keys.length; _i++) {
-        var key = _Object$keys[_i];
-        this.figureDatas[key] = this.fixDataType(key, storeFigureData[key]);
+    responsiveAction: function responsiveAction() {
+      if (this.getDeviceType == 2) {
+        // モバイルの時
+        this.deleteMoveEvent();
+        this.setModalAtMobilePosition();
+      } else {
+        this.registMoveEvent();
       }
     },
-    updateFigureData: function updateFigureData(key, value) {
-      this.updateMediaFiguresObjectItem({
+    setModalAtMobilePosition: function setModalAtMobilePosition() {
+      var modal = document.getElementById('media-img-update-wrapper');
+      modal.style.left = "";
+      modal.style.top = ""; // topの指定を消す
+    },
+    registMoveEvent: function registMoveEvent() {
+      var target = document.getElementById('media-img-update-wrapper');
+      target.addEventListener('mousedown', this.move, false);
+      target.addEventListener('touchstart', this.move, false);
+    },
+    deleteMoveEvent: function deleteMoveEvent() {
+      var target = document.getElementById('media-img-update-wrapper');
+      target.removeEventListener('mousedown', this.move, false);
+      target.removeEventListener('touchstart', this.move, false);
+    },
+    getOneImg: function getOneImg(index) {
+      // ストアから自分のインデックスのオブジェクトだけ取得する
+      this.setTargetObjectIndex(index);
+      return this.getMediaImg;
+    },
+    init: function init(index) {
+      var storeImgData = Object.assign({}, this.getOneImg(index));
+
+      for (var _i = 0, _Object$keys = Object.keys(storeImgData); _i < _Object$keys.length; _i++) {
+        var key = _Object$keys[_i];
+        this.imgDatas[key] = this.fixStrToNum(key, storeImgData[key]);
+      }
+    },
+    updateImgData: function updateImgData(key, value) {
+      this.updateMediaImgsObjectItem({
         index: this.index,
         key: key,
-        value: this.fixDataType(key, value)
+        value: this.fixStrToNum(key, value)
       });
-      this.figureDatas[key] = this.getOneFigure(this.index)[key];
-      this.$emit('re-render', this.index);
+      this.imgDatas[key] = this.getOneImg(this.index)[key];
+      var targetDomId = 'media-img-wrapper' + this.index;
+      var targetDom = document.getElementById(targetDomId);
+      var event = new CustomEvent('imgDataUpdated');
+      targetDom.dispatchEvent(event);
     },
     checkTypeNum: function checkTypeNum(key) {
-      var num_type_keys = ["type", "width", "height", "degree", "left", "top", "globalAlpha"];
+      var num_type_keys = ["type", "width", "height", "degree", "left", "top", "opacity"];
       return num_type_keys.includes(key);
     },
-    fixDataType: function fixDataType(key, value) {
+    fixStrToNum: function fixStrToNum(key, value) {
       var reTypedValue;
 
       if (this.checkTypeNum(key)) {
@@ -8520,15 +8507,6 @@ function _defineProperty(obj, key, value) {
       }
 
       return reTypedValue;
-    },
-    // 設定モーダル操作用
-    // モーダルの初期表示位置をウィンドウ中央に持ってくる
-    setModalCenter: function setModalCenter() {
-      var modal = document.getElementById('media-figure-update-wrapper');
-      var modal_width = Number(this.getStyleSheetValue(modal, "width").replace("px", ""));
-      var modal_height = Number(this.getStyleSheetValue(modal, "height").replace("px", ""));
-      modal.style.left = window.innerWidth / 2 - modal_width / 2 + "px";
-      modal.style.top = window.innerHeight / 2 - modal_height / 2 + "px";
     },
     getStyleSheetValue: function getStyleSheetValue(element, property) {
       // ↑でcssの値を取得するための関数
@@ -8540,42 +8518,48 @@ function _defineProperty(obj, key, value) {
       var value = style.getPropertyValue(property);
       return value;
     },
-    mouseDown: function mouseDown(e) {
-      var event;
-
-      if (e.type === "mousedown") {
-        event = e;
-      } else {
-        event = e.changedTouches[0];
-      }
-
-      this.move_target = document.getElementById('media-figure-update-wrapper');
-      this.x_in_element = event.clientX - this.move_target.offsetLeft;
-      this.y_in_element = event.clientY - this.move_target.offsetTop; // ムーブイベントにコールバック
-
-      document.body.addEventListener("mousemove", this.mouseMove, false);
-      this.move_target.addEventListener("mouseup", this.mouseUp, false);
-      document.body.addEventListener("touchmove", this.mouseMove, false);
-      this.move_target.addEventListener("touchend", this.mouseUp, false);
-    },
-    mouseMove: function mouseMove(e) {
-      e.preventDefault();
-      this.move_target.style.left = e.clientX - this.x_in_element + "px";
-      this.move_target.style.top = e.clientY - this.y_in_element + "px"; // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.mouseUp, false);
-      document.body.addEventListener("touchleave", this.mouseUp, false);
-    },
-    mouseUp: function mouseUp(e) {
-      document.body.removeEventListener("mousemove", this.mouseMove, false);
-      this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-      document.body.removeEventListener("touchmove", this.mouseMove, false);
-      this.move_target.removeEventListener("touchend", this.mouseUp, false);
+    // 位置操作用
+    move: function move(event) {
+      var move_target_dom = document.getElementById('media-img-update-wrapper');
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(event, move_target_dom);
     }
   }),
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    document.body.addEventListener('showImgSetting', function (e) {
+      _this.index = e.detail.index;
+
+      _this.init(_this.index);
+
+      _this.isShowEditor = true;
+    });
+    document.body.addEventListener('closeImgSetting', function (e) {
+      _this.isShowEditor = false;
+    });
+    document.body.addEventListener('objectStatusChanged', function (e) {
+      var objInfo = e.detail;
+
+      if (objInfo.type == 0 && objInfo.index == _this.index) {
+        _this.init(_this.index);
+      }
+    });
+    document.body.addEventListener('objectDeleted', function (e) {
+      var delObjs = e.detail.objs;
+      var isDeleted = false;
+      delObjs.forEach(function (obj) {
+        if (obj.type == 0 && obj.index == _this.index) {
+          isDeleted = true;
+        }
+      });
+
+      if (isDeleted) {
+        _this.isShowEditor = false;
+      }
+    });
+  },
   mounted: function mounted() {
-    this.setModalCenter();
+    this.responsiveAction();
   }
 });
 
@@ -8648,7 +8632,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
-//
 //
 //
 //
@@ -8755,6 +8738,14 @@ var objectSelected = new CustomEvent('objectSelected');
       this.setTargetObjectIndex(this.index);
       return this.getMediaImg;
     },
+    showEditor: function showEditor() {
+      var showSetting = new CustomEvent('showImgSetting', {
+        detail: {
+          index: this.index
+        }
+      });
+      document.body.dispatchEvent(showSetting);
+    },
     selected: function selected() {
       document.body.dispatchEvent(objectSelected);
       this.isActive = true;
@@ -8833,16 +8824,11 @@ var objectSelected = new CustomEvent('objectSelected');
   mounted: function mounted() {
     this.img_wrapper = document.getElementById(this.imgWrapperWithIndex); // イベント登録
 
+    this.img_wrapper.addEventListener('imgDataUpdated', this.init, false);
     this.img_wrapper.addEventListener('click', this.selected, false);
     this.img_wrapper.addEventListener('touchstart', this.selected, false);
     document.body.addEventListener('fieldClicked', this.unSelected, false);
-    document.body.addEventListener('objectSelected', this.unSelected, false); // document.addEventListener('click', (e)=> {
-    //   if(!e.target.closest("#"+this.imgWrapperWithIndex)){
-    //     this.isActive = false;
-    //   } else {
-    //     this.isActive = true;
-    //   }
-    // });
+    document.body.addEventListener('objectSelected', this.unSelected, false);
   }
 });
 
@@ -12183,12 +12169,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_media_change_display_parts_DispFigureSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../components/media/change_display_parts/DispFigureSettingModalComponent.vue */ "./resources/js/components/media/change_display_parts/DispFigureSettingModalComponent.vue");
 /* harmony import */ var _components_media_edit_parts_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/media/edit_parts/ImgSelectComponent.vue */ "./resources/js/components/media/edit_parts/ImgSelectComponent.vue");
 /* harmony import */ var _components_media_edit_parts_MediaFigureFactoryComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../components/media/edit_parts/MediaFigureFactoryComponent.vue */ "./resources/js/components/media/edit_parts/MediaFigureFactoryComponent.vue");
-/* harmony import */ var _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/media/media_contents/objects/figure/FigureUpdateComponent.vue */ "./resources/js/components/media/media_contents/objects/figure/FigureUpdateComponent.vue");
-/* harmony import */ var _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/media/edit_parts/AudioSelectComponent.vue */ "./resources/js/components/media/edit_parts/AudioSelectComponent.vue");
-/* harmony import */ var _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/media/edit_parts/MovieSettingComponent.vue */ "./resources/js/components/media/edit_parts/MovieSettingComponent.vue");
-/* harmony import */ var _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/media/edit_parts/MediaSettingComponent.vue */ "./resources/js/components/media/edit_parts/MediaSettingComponent.vue");
-/* harmony import */ var _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
-/* harmony import */ var _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
+/* harmony import */ var _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../components/media/edit_parts/AudioSelectComponent.vue */ "./resources/js/components/media/edit_parts/AudioSelectComponent.vue");
+/* harmony import */ var _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../components/media/edit_parts/MovieSettingComponent.vue */ "./resources/js/components/media/edit_parts/MovieSettingComponent.vue");
+/* harmony import */ var _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/media/edit_parts/MediaSettingComponent.vue */ "./resources/js/components/media/edit_parts/MediaSettingComponent.vue");
+/* harmony import */ var _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../components/media/media_contents/objects/figure/FigureUpdateComponent.vue */ "./resources/js/components/media/media_contents/objects/figure/FigureUpdateComponent.vue");
+/* harmony import */ var _components_media_media_contents_objects_img_ImgPropertyComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../components/media/media_contents/objects/img/ImgPropertyComponent.vue */ "./resources/js/components/media/media_contents/objects/img/ImgPropertyComponent.vue");
+/* harmony import */ var _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../components/common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
+/* harmony import */ var _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../components/common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
 
 
 
@@ -12207,6 +12194,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+ // オブジェクトの詳細確認＆編集コンポーネント
 
 
  // 編集中のローディング表示コンポーネント
@@ -12230,12 +12219,13 @@ __webpack_require__.r(__webpack_exports__);
       dispFigureSettingModal: _components_media_change_display_parts_DispFigureSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
       imgSelect: _components_media_edit_parts_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
       mediaFigureFactory: _components_media_edit_parts_MediaFigureFactoryComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-      figureUpdate: _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-      audioSelect: _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-      movieSetting: _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-      mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
-      overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-      loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+      audioSelect: _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+      movieSetting: _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+      mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+      figureUpdate: _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+      imgProperty: _components_media_media_contents_objects_img_ImgPropertyComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
+      overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
+      loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
     }
   }, {
     path: ':id/edit',
@@ -12249,12 +12239,13 @@ __webpack_require__.r(__webpack_exports__);
       dispFigureSettingModal: _components_media_change_display_parts_DispFigureSettingModalComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
       imgSelect: _components_media_edit_parts_ImgSelectComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
       mediaFigureFactory: _components_media_edit_parts_MediaFigureFactoryComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-      figureUpdate: _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-      audioSelect: _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-      movieSetting: _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-      mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
-      overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-      loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
+      audioSelect: _components_media_edit_parts_AudioSelectComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+      movieSetting: _components_media_edit_parts_MovieSettingComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+      mediaSetting: _components_media_edit_parts_MediaSettingComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+      figureUpdate: _components_media_media_contents_objects_figure_FigureUpdateComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+      imgProperty: _components_media_media_contents_objects_img_ImgPropertyComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
+      overlay: _components_common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
+      loading: _components_common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
     }
   }, {
     path: ':id',
@@ -18342,7 +18333,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-8f198900]{\r\n  position: absolute;\r\n  left: 50%;\r\n  top: 50%;\r\n  z-index: 30;\r\n  width: 300px;\r\n  height: 340px;\r\n  padding: 5px;\r\n  background-color: rgba(35,40,50,0.85);\r\n  color: white;\r\n  border-radius: 6px;\r\n  box-shadow: 1px 1px 10px rgba(220,220,220,1);\n}\n#media-figure-update-wrapper[data-v-8f198900]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-8f198900]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-8f198900] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-8f198900] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-8f198900]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-8f198900],\r\n.setting-type-color[data-v-8f198900] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-8f198900] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-8f198900] {\r\n  width: 100px;\n}\n.hidden[data-v-8f198900] {\r\n  display: none;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-img-update-wrapper[data-v-8f198900]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-img-update-wrapper[data-v-8f198900]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-8f198900]:hover{\r\n  cursor: all-scroll;\n}\n.media-img-settings[data-v-8f198900] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-8f198900] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-8f198900]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-8f198900],\r\n.setting-type-color[data-v-8f198900] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-8f198900] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-8f198900] {\r\n  width: 100px;\n}\n.hidden[data-v-8f198900] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-img-update-wrapper[data-v-8f198900]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-img-update-wrapper[data-v-8f198900]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-img-settings[data-v-8f198900] {\r\n    max-height: 200px;\r\n    overflow-y: scroll;\n}\n.item-frame[data-v-8f198900] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65595,6 +65586,8 @@ var render = function () {
         on: { "close-modal": _vm.closeModal },
       }),
       _vm._v(" "),
+      _c("router-view", { attrs: { name: "imgProperty" } }),
+      _vm._v(" "),
       _c("router-view", { attrs: { name: "figureUpdate" } }),
       _vm._v(" "),
       _c("router-view", {
@@ -68916,14 +68909,22 @@ var render = function () {
   return _c(
     "div",
     {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShowEditor,
+          expression: "isShowEditor",
+        },
+      ],
       class: { hidden: !_vm.isEditMode },
-      attrs: { id: "media-figure-update-wrapper" },
+      attrs: { id: "media-img-update-wrapper" },
       on: {
-        mousedown: function ($event) {
-          return _vm.mouseDown($event)
+        click: function ($event) {
+          $event.stopPropagation()
         },
         touchstart: function ($event) {
-          return _vm.mouseDown($event)
+          $event.stopPropagation()
         },
       },
     },
@@ -68933,6 +68934,7 @@ var render = function () {
           "div",
           {
             staticClass: "close-icon-wrapper",
+            class: { hidden: _vm.isMobile },
             on: {
               mousedown: function ($event) {
                 $event.stopPropagation()
@@ -68947,7 +68949,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "media-figure-settings" }, [
+        _c("div", { staticClass: "media-img-settings" }, [
           _c("div", { staticClass: "setting-type-num" }, [
             _c(
               "div",
@@ -68958,10 +68960,10 @@ var render = function () {
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["left"] },
+                  domProps: { value: _vm.imgDatas["left"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData("left", $event.target.value)
+                      return _vm.updateImgData("left", $event.target.value)
                     },
                   },
                 }),
@@ -68977,10 +68979,10 @@ var render = function () {
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["top"] },
+                  domProps: { value: _vm.imgDatas["top"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData("top", $event.target.value)
+                      return _vm.updateImgData("top", $event.target.value)
                     },
                   },
                 }),
@@ -68993,10 +68995,10 @@ var render = function () {
               _c("input", {
                 staticClass: "input-num",
                 attrs: { type: "number" },
-                domProps: { value: _vm.figureDatas["degree"] },
+                domProps: { value: _vm.imgDatas["degree"] },
                 on: {
                   input: function ($event) {
-                    return _vm.updateFigureData("degree", $event.target.value)
+                    return _vm.updateImgData("degree", $event.target.value)
                   },
                 },
               }),
@@ -69011,10 +69013,10 @@ var render = function () {
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["width"] },
+                  domProps: { value: _vm.imgDatas["width"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData("width", $event.target.value)
+                      return _vm.updateImgData("width", $event.target.value)
                     },
                   },
                 }),
@@ -69030,10 +69032,10 @@ var render = function () {
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["height"] },
+                  domProps: { value: _vm.imgDatas["height"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData("height", $event.target.value)
+                      return _vm.updateImgData("height", $event.target.value)
                     },
                   },
                 }),
@@ -69049,157 +69051,13 @@ var render = function () {
                 _c("input", {
                   staticClass: "input-num",
                   attrs: { type: "number", min: "0", max: "100" },
-                  domProps: { value: _vm.figureDatas["layer"] },
+                  domProps: { value: _vm.imgDatas["layer"] },
                   on: {
                     input: function ($event) {
-                      return _vm.updateFigureData("layer", $event.target.value)
+                      return _vm.updateImgData("layer", $event.target.value)
                     },
                   },
                 }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between type-input-wrapper" },
-              [
-                _c("span", [_vm._v("種類:")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.type,
-                        expression: "type",
-                      },
-                    ],
-                    staticClass: "input-num",
-                    attrs: { id: "update-figure-type", name: "種類" },
-                    on: {
-                      change: function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.type = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                    },
-                  },
-                  _vm._l(_vm.figureTypeList, function (figureType) {
-                    return _c(
-                      "option",
-                      {
-                        key: figureType["code"],
-                        domProps: { value: figureType["code"] },
-                      },
-                      [_vm._v(_vm._s(figureType["name"]))]
-                    )
-                  }),
-                  0
-                ),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-color" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between fill-input-wrapper" },
-              [
-                _c("div", { staticClass: "fill-flag" }, [
-                  _c("span", [_vm._v("塗りつぶし")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.figureDatas["isDrawFill"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData(
-                          "isDrawFill",
-                          $event.target.checked
-                        )
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "fill-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.figureDatas["fillColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData(
-                          "fillColor",
-                          $event.target.value
-                        )
-                      },
-                    },
-                  }),
-                ]),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between stroke-input-wrapper" },
-              [
-                _c("div", { staticClass: "stroke-flag" }, [
-                  _c("span", [_vm._v("枠線")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "checkbox" },
-                    domProps: { checked: _vm.figureDatas["isDrawStroke"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData(
-                          "isDrawStroke",
-                          $event.target.checked
-                        )
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "stroke-color" }, [
-                  _c("span", [_vm._v("色:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    attrs: { type: "color" },
-                    domProps: { value: _vm.figureDatas["strokeColor"] },
-                    on: {
-                      mousedown: function ($event) {
-                        $event.stopPropagation()
-                      },
-                      input: function ($event) {
-                        return _vm.updateFigureData(
-                          "strokeColor",
-                          $event.target.value
-                        )
-                      },
-                    },
-                  }),
-                ]),
               ]
             ),
           ]),
@@ -69216,23 +69074,23 @@ var render = function () {
                 max: "1",
                 step: "0.05",
               },
-              domProps: { value: _vm.figureDatas["globalAlpha"] },
+              domProps: { value: _vm.imgDatas["globalAlpha"] },
               on: {
                 mousedown: function ($event) {
                   $event.stopPropagation()
                 },
                 input: function ($event) {
-                  return _vm.updateFigureData(
-                    "globalAlpha",
-                    $event.target.value
-                  )
+                  return _vm.updateImgData("opacity", $event.target.value)
                 },
               },
             }),
           ]),
         ]),
       ]),
-    ]
+      _vm._v(" "),
+      _c("close-modal-bar", { staticClass: "for-mobile" }),
+    ],
+    1
   )
 }
 var staticRenderFns = []
@@ -69264,6 +69122,7 @@ var render = function () {
       style: _vm.imgWrapperStyle(),
       attrs: { id: _vm.imgWrapperWithIndex },
       on: {
+        dblclick: _vm.showEditor,
         click: function ($event) {
           $event.stopPropagation()
         },
@@ -69286,11 +69145,6 @@ var render = function () {
           ],
           style: _vm.imgStyle(),
           attrs: { id: "media-img-frame" },
-          on: {
-            click: function ($event) {
-              return _vm.$emit("parent-action", "imgModal")
-            },
-          },
         },
         [
           _c("p", {
