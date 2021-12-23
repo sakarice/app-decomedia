@@ -4821,6 +4821,7 @@ function _defineProperty(obj, key, value) {
 
 
 
+var objectSelected = new CustomEvent('objectSelected');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -4829,8 +4830,9 @@ function _defineProperty(obj, key, value) {
   props: ["index"],
   data: function data() {
     return {
-      "mediaImg": "",
-      "isActive": false
+      img_wrapper: "",
+      mediaImg: "",
+      isActive: false
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
@@ -4892,6 +4894,13 @@ function _defineProperty(obj, key, value) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
       return this.getMediaImg;
+    },
+    selected: function selected() {
+      document.body.dispatchEvent(objectSelected);
+      this.isActive = true;
+    },
+    unSelected: function unSelected() {
+      this.isActive = false;
     },
     // 位置操作用
     moveStart: function moveStart(e) {
@@ -4962,16 +4971,18 @@ function _defineProperty(obj, key, value) {
     this.init();
   },
   mounted: function mounted() {
-    var _this3 = this; // イベント登録
+    this.img_wrapper = document.getElementById(this.imgWrapperWithIndex); // イベント登録
 
-
-    document.addEventListener('click', function (e) {
-      if (!e.target.closest("#" + _this3.imgWrapperWithIndex)) {
-        _this3.isActive = false;
-      } else {
-        _this3.isActive = true;
-      }
-    });
+    this.img_wrapper.addEventListener('click', this.selected, false);
+    this.img_wrapper.addEventListener('touchstart', this.selected, false);
+    document.body.addEventListener('fieldClicked', this.unSelected, false);
+    document.body.addEventListener('objectSelected', this.unSelected, false); // document.addEventListener('click', (e)=> {
+    //   if(!e.target.closest("#"+this.imgWrapperWithIndex)){
+    //     this.isActive = false;
+    //   } else {
+    //     this.isActive = true;
+    //   }
+    // });
   }
 });
 
@@ -5740,7 +5751,7 @@ function _defineProperty(obj, key, value) {
       var distance_x_from_target_center;
       var distance_y_from_target_center;
 
-      if (e.type === "mousedown") {
+      if (e.type === "mousemove") {
         event = e;
         distance_x_from_target_center = event.clientX - this.rotate_center_x;
         distance_y_from_target_center = event.clientY - this.rotate_center_y;

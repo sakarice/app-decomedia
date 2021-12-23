@@ -34,6 +34,9 @@
   import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
   
+  const objectSelected = new CustomEvent('objectSelected');
+
+
   export default {
     components : {
       imgRotate,
@@ -44,8 +47,9 @@
     ],
     data : ()=> {
       return {        
-        "mediaImg" : "",
-        "isActive" : false,
+        img_wrapper : "",
+        mediaImg : "",
+        isActive : false,
       }
     },
     computed : {
@@ -90,6 +94,11 @@
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
       },
+      selected(){
+        document.body.dispatchEvent(objectSelected);
+        this.isActive = true;
+      },
+      unSelected(){ this.isActive = false; },
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.imgWrapperWithIndex);
@@ -139,14 +148,20 @@
       this.init();
     },
     mounted(){
+      this.img_wrapper = document.getElementById(this.imgWrapperWithIndex);
       // イベント登録
-      document.addEventListener('click', (e)=> {
-        if(!e.target.closest("#"+this.imgWrapperWithIndex)){
-          this.isActive = false;
-        } else {
-          this.isActive = true;
-        }
-      });
+      this.img_wrapper.addEventListener('click',this.selected,false);
+      this.img_wrapper.addEventListener('touchstart',this.selected,false);
+      document.body.addEventListener('fieldClicked', this.unSelected, false);
+      document.body.addEventListener('objectSelected', this.unSelected, false);
+
+      // document.addEventListener('click', (e)=> {
+      //   if(!e.target.closest("#"+this.imgWrapperWithIndex)){
+      //     this.isActive = false;
+      //   } else {
+      //     this.isActive = true;
+      //   }
+      // });
     }
   }
 
