@@ -23,13 +23,9 @@
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       deleteObject(){
         const delObjs = JSON.parse(JSON.stringify(this.getSelectedObjects));
-        // const delObjs = Object.assign({},this.getSelectedObjects);
         delObjs.forEach(obj=>{
           this.delMutations[obj.type](obj.index);
         })
-        // Object.keys(delObjs).forEach(key=>{
-        //   this.delMutations[delObjs[key].type](delObjs[key].index);
-        // });
         this.unSelectedAll(); // 削除対象を格納したstoreの配列を空に
         const event = new CustomEvent('objectDeleted', {detail:{objs:delObjs}});
         document.body.dispatchEvent(event);
@@ -45,7 +41,6 @@
         }
       });
     },
-    mounted(){},
   }
 
 </script>

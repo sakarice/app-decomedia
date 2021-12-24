@@ -5146,9 +5146,6 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     firstSelectedObject: function firstSelectedObject() {
       return this.getSelectedObjects[0];
@@ -5179,9 +5176,7 @@ function _defineProperty(obj, key, value) {
 
       document.body.dispatchEvent(event);
     }
-  },
-  created: function created() {},
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -10023,15 +10018,20 @@ function _defineProperty(obj, key, value) {
 
     document.addEventListener('keydown', function (e) {
       if (e.ctrlKey) {
-        if (e.code == "KeyC") {
-          _this3.copyObject();
-        } else if (e.code == "KeyV") {
-          _this3.pasteObject();
+        switch (e.code) {
+          case "KeyC":
+            _this3.copyObject();
+
+            break;
+
+          case "KeyV":
+            _this3.pasteObject();
+
+            break;
         }
       }
     });
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -10120,14 +10120,10 @@ function _defineProperty(obj, key, value) {
     deleteObject: function deleteObject() {
       var _this = this;
 
-      var delObjs = JSON.parse(JSON.stringify(this.getSelectedObjects)); // const delObjs = Object.assign({},this.getSelectedObjects);
-
+      var delObjs = JSON.parse(JSON.stringify(this.getSelectedObjects));
       delObjs.forEach(function (obj) {
         _this.delMutations[obj.type](obj.index);
-      }); // Object.keys(delObjs).forEach(key=>{
-      //   this.delMutations[delObjs[key].type](delObjs[key].index);
-      // });
-
+      });
       this.unSelectedAll(); // 削除対象を格納したstoreの配列を空に
 
       var event = new CustomEvent('objectDeleted', {
@@ -10150,8 +10146,7 @@ function _defineProperty(obj, key, value) {
         _this2.deleteObject();
       }
     });
-  },
-  mounted: function mounted() {}
+  }
 });
 
 /***/ }),
@@ -11331,21 +11326,11 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {},
-  data: function data() {
-    return {};
-  },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     isObjectSelected: function isObjectSelected() {
       return this.getSelectedObjects.length > 0 ? true : false;
     }
-  }),
-  methods: {// onObjectSelected(){ this.isObjectSelected = true; },
-    // offObjectSelected(){ this.isObjectSelected = false; },
-  },
-  created: function created() {// document.body.addEventListener('onObjectSelected', this.onObjectSelected, false);
-    // document.body.addEventListener('offObjectSelected', this.offObjectSelected, false);
-  }
+  })
 });
 
 /***/ }),

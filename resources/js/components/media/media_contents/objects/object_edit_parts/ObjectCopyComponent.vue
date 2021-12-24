@@ -30,7 +30,7 @@
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       copyObject(){
         this.resetCopyTargetInfo();
-        
+
         const copyObjInfos = JSON.parse(JSON.stringify(this.getSelectedObjects));
         copyObjInfos.forEach(objInfo=>{
           switch(objInfo.type) {
@@ -71,20 +71,20 @@
 
     },
     created(){
-      
       // ctrl+C, ctrl+Vのショートカットキー用にキーボードイベント作成
       document.addEventListener('keydown', (e)=>{
         if(e.ctrlKey){
-          if(e.code=="KeyC"){
-            this.copyObject();
-          } else if(e.code=="KeyV"){
-            this.pasteObject();
+          switch (e.code) {
+            case "KeyC" :
+              this.copyObject();
+              break;
+            case "KeyV" :
+              this.pasteObject();
+              break;
           }
         }
       });
-
     },
-    mounted(){},
   }
 
 </script>

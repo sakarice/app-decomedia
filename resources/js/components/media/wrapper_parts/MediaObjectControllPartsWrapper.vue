@@ -10,26 +10,12 @@
 import { mapGetters } from 'vuex';
 
   export default {
-    components : {
-    },
-    data : ()=>{
-      return {
-      }
-    },
     computed : {
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
       isObjectSelected(){
         return (this.getSelectedObjects.length > 0 ? true : false);
       }
     },
-    methods : {
-      // onObjectSelected(){ this.isObjectSelected = true; },
-      // offObjectSelected(){ this.isObjectSelected = false; },
-    },
-    created(){
-      // document.body.addEventListener('onObjectSelected', this.onObjectSelected, false);
-      // document.body.addEventListener('offObjectSelected', this.offObjectSelected, false);
-    }
   }
 
 </script>

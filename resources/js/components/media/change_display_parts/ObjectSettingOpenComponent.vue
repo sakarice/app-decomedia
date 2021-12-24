@@ -6,13 +6,9 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
+  import { mapGetters } from 'vuex';
 
   export default {
-    data : ()=>{
-      return {
-      }
-    },
     computed : {
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
       firstSelectedObject(){
@@ -34,9 +30,6 @@
         document.body.dispatchEvent(event);
       }
     },
-    created(){
-    },
-    mounted(){},
   }
 
 </script>
