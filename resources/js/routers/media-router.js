@@ -24,7 +24,7 @@ import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.v
 
 // オブジェクトの詳細確認＆編集コンポーネント
 import FigureUpdate from '../components/media/media_contents/objects/figure/FigureUpdateComponent.vue';
-import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue'
+import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
 
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';

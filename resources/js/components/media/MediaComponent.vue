@@ -143,6 +143,7 @@
     <media-object-controll-parts-wrapper>
       <object-delete></object-delete>
       <object-setting-open></object-setting-open>
+      <object-copy></object-copy>
     </media-object-controll-parts-wrapper>
 
 
@@ -162,6 +163,7 @@
   import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
+  import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
 
 export default {
   components : {
@@ -175,6 +177,7 @@ export default {
     MediaObjectControllPartsWrapper,
     ObjectDelete,
     ObjectSettingOpen,
+    ObjectCopy,
   },
   props: [],
   data : () => {
