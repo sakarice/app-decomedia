@@ -48,7 +48,6 @@
       return {        
         img_wrapper : "",
         mediaImg : "",
-        isActive : false,
       }
     },
     computed : {
@@ -66,19 +65,10 @@
           return false;
         }
       },
-    },
-    watch : {
-      isActive(val){
-        if(val == true){
-          const objectData = {type:1, index:this.index}
-          this.addSelectedObjectItem(objectData);
-        } else {
-          const objects = this.getSelectedObjects;
-          const judgeIsMyself = (obj) => (obj.type==1 && obj.index==this.index);
-          const myIndex = objects.findIndex(obj=>judgeIsMyself);
-          this.deleteSelectedObjectItem(myIndex);
-        }
+      isActive:function(){
+        return this.getSelectedObjects.some((obj)=>obj.type==1 && obj.index==this.index)
       },
+
     },
     methods : {
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
@@ -96,10 +86,9 @@
         document.body.dispatchEvent(showSetting);
       },
       selected(){
+        const objectSelected = new CustomEvent('objectSelected',{detail:{type:1,index:this.index}});
         document.body.dispatchEvent(objectSelected);
-        this.isActive = true;
       },
-      unSelected(){ this.isActive = false; },
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.imgWrapperWithIndex);
@@ -154,8 +143,6 @@
       this.img_wrapper.addEventListener('imgDataUpdated',this.init,false);
       this.img_wrapper.addEventListener('click',this.selected,false);
       this.img_wrapper.addEventListener('touchstart',this.selected,false);
-      document.body.addEventListener('fieldClicked', this.unSelected, false);
-      document.body.addEventListener('objectSelected', this.unSelected, false);
     }
   }
 

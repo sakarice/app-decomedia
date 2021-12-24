@@ -30,7 +30,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     ],
     data : ()=>{
       return {
-        "isActive" : false,
         "isReDraw" : false,
         "isResizing" :false,
         "canvas" : "",
@@ -62,6 +61,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         const rn = this.$route.name;
         return (rn=="create" || rn=="edit") ? true : false
       },
+      isActive:function(){
+        return this.getSelectedObjects.some((obj)=>obj.type==0 && obj.index==this.index)
+      },
+
     },
     watch : {
       isReDraw : function(){ this.init(); },
@@ -74,17 +77,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         },
         deep : true
       },
-      isActive(val){
-        if(val==true){
-          const objectData = {type:0, index:this.index}
-          this.addSelectedObjectItem(objectData);
-        } else {
-          const objects = this.getSelectedObjects;
-          const judgeIsMyself = (obj) => (obj.type==0 && obj.index==this.index);
-          const myIndex = objects.findIndex(obj=>judgeIsMyself);
-          this.deleteSelectedObjectItem(myIndex);
-        }
-      }
     },
     methods : {
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
@@ -93,7 +85,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
       ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
       showEditor(){
-        // this.$emit('show-editor', this.index);
         const showSetting = new CustomEvent('showFigureSetting', {detail:{index:this.index}});
         document.body.dispatchEvent(showSetting);
       },
@@ -118,12 +109,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         }
         return styleObject;
       },
-      selected(){ 
-        const objectSelected = new CustomEvent('objectSelected');
+      selected(){         
+        const objectSelected = new CustomEvent('objectSelected',{detail:{type:0,index:this.index}});
         document.body.dispatchEvent(objectSelected);
-        this.isActive = true;
       },
-      unSelected(){ this.isActive = false; },
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
@@ -252,8 +241,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       this.canvas_wrapper.addEventListener('figureDataUpdated',this.init,false);
       this.canvas_wrapper.addEventListener('click',this.selected,false);
       this.canvas_wrapper.addEventListener('touchstart',this.selected,false);
-      document.body.addEventListener('fieldClicked', this.unSelected, false);
-      document.body.addEventListener('objectSelected', this.unSelected, false);
     },
   }
 

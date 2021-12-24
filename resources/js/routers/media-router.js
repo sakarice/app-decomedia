@@ -22,6 +22,9 @@ import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
 
+// オブジェクト選択管理コンポーネント
+import ObjectSelectMng from '../components/media/media_contents/objects/object_edit_parts/ObjectSelectMngComponent.vue';
+
 // オブジェクトの詳細確認＆編集コンポーネント
 import FigureUpdate from '../components/media/media_contents/objects/figure/FigureUpdateComponent.vue';
 import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
@@ -54,6 +57,7 @@ export default{
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        objectSelectMng : ObjectSelectMng,
         overlay : Overlay,
         loading : Loading,
       },
@@ -75,6 +79,7 @@ export default{
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        objectSelectMng : ObjectSelectMng,
         overlay : Overlay,
         loading : Loading,
         

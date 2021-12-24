@@ -97,6 +97,7 @@
 
     <router-view name="imgProperty"></router-view>
     <router-view name="figureUpdate"></router-view>
+    <router-view name="objectSelectMng"></router-view>
 
     <!-- 動画設定コンポーネント -->
     <router-view name="movieSetting"
@@ -116,13 +117,10 @@
 
     <disp-audios></disp-audios>
 
-
     <!-- <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </media-figure-setting> -->
-
-
 
     <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
@@ -145,7 +143,6 @@
       <object-setting-open></object-setting-open>
       <object-copy></object-copy>
     </media-object-controll-parts-wrapper>
-
 
   </div>
 </template>
