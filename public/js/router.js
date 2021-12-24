@@ -4287,26 +4287,15 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
-    new_index: function new_index() {},
     canvas_with_index: function canvas_with_index() {
       return 'canvas' + this.index;
     },
     canvas_wrapper_with_index: function canvas_wrapper_with_index() {
       return 'canvas_wrapper' + this.index;
     },
-    // canvas_width:function(){ return this.figureDatas['width']+"px" },
-    // canvas_height:function(){ return this.figureDatas['height']+"px" },
-    // style_left : function(){ return this.figureDatas['left'] + 'px';},
-    // style_top : function(){ return this.figureDatas['top'] + 'px';},
-    // style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
     isEditMode: function isEditMode() {
-      var route_name = this.$route.name;
-
-      if (route_name == "create" || route_name == "edit") {
-        return true;
-      } else {
-        return false;
-      }
+      var rn = this.$route.name;
+      return rn == "create" || rn == "edit" ? true : false;
     }
   }),
   watch: {

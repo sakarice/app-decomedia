@@ -56,21 +56,11 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
-      new_index:function(){ },
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
-      // canvas_width:function(){ return this.figureDatas['width']+"px" },
-      // canvas_height:function(){ return this.figureDatas['height']+"px" },
-      // style_left : function(){ return this.figureDatas['left'] + 'px';},
-      // style_top : function(){ return this.figureDatas['top'] + 'px';},
-      // style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
       isEditMode : function(){
-        const route_name = this.$route.name;
-        if((route_name=="create") || (route_name=="edit")){
-          return true;
-        } else {
-          return false;
-        }
+        const rn = this.$route.name;
+        return (rn=="create" || rn=="edit") ? true : false
       },
     },
     watch : {
