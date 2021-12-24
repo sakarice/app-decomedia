@@ -18216,7 +18216,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#object-setting-open-wrapper[data-v-129865d2] {\r\n  margin: 0 10px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#object-setting-open-wrapper[data-v-129865d2] {\r\n  padding: 10px 12px;\n}\n#object-setting-open-wrapper[data-v-129865d2]:hover {\r\n  background-color: rgba(255,255,255,0.2);\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18699,7 +18699,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#delete-wrapper[data-v-00e81570] {\r\n  margin: 0 10px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#delete-wrapper[data-v-00e81570] {\r\n  padding: 10px 12px;\n}\n#delete-wrapper[data-v-00e81570]:hover {\r\n  background-color: rgba(255,255,255,0.2);\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66935,24 +66935,20 @@ var render = function () {
       staticClass: "flex a-center j-center",
       attrs: { id: "object-setting-open-wrapper" },
       on: {
-        click: function ($event) {
-          $event.stopPropagation()
-        },
+        click: [
+          function ($event) {
+            return _vm.showObjectSetting()
+          },
+          function ($event) {
+            $event.stopPropagation()
+          },
+        ],
         touchstart: function ($event) {
           $event.stopPropagation()
         },
       },
     },
-    [
-      _c("i", {
-        staticClass: "fas fa-edit fa-2x",
-        on: {
-          click: function ($event) {
-            return _vm.showObjectSetting()
-          },
-        },
-      }),
-    ]
+    [_c("i", { staticClass: "fas fa-edit fa-2x" })]
   )
 }
 var staticRenderFns = []
@@ -70109,24 +70105,20 @@ var render = function () {
       staticClass: "flex a-center j-center",
       attrs: { id: "delete-wrapper" },
       on: {
-        click: function ($event) {
-          $event.stopPropagation()
-        },
+        click: [
+          function ($event) {
+            return _vm.deleteObject()
+          },
+          function ($event) {
+            $event.stopPropagation()
+          },
+        ],
         touchstart: function ($event) {
           $event.stopPropagation()
         },
       },
     },
-    [
-      _c("i", {
-        staticClass: "fas fa-trash fa-2x del-icon",
-        on: {
-          click: function ($event) {
-            return _vm.deleteObject()
-          },
-        },
-      }),
-    ]
+    [_c("i", { staticClass: "fas fa-trash fa-2x del-icon" })]
   )
 }
 var staticRenderFns = []

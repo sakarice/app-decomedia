@@ -1,7 +1,7 @@
 <template>
   <div id="object-setting-open-wrapper" class="flex a-center j-center"
-  @click.stop @touchstart.stop>
-    <i class="fas fa-edit fa-2x" @click="showObjectSetting()"></i>
+  @click="showObjectSetting()" @click.stop @touchstart.stop>
+    <i class="fas fa-edit fa-2x"></i>
   </div>
 </template>
 
@@ -46,7 +46,10 @@
 @import "/resources/css/flexSetting.css";
 
 #object-setting-open-wrapper {
-  margin: 0 10px;
+  padding: 10px 12px;
+}
+#object-setting-open-wrapper:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 
 </style>

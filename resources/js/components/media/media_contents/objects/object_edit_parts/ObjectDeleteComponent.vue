@@ -1,7 +1,7 @@
 <template>
   <div id="delete-wrapper" class="flex a-center j-center"
-  @click.stop @touchstart.stop>
-    <i class="fas fa-trash fa-2x del-icon" @click="deleteObject()"></i>
+  @click="deleteObject()" @click.stop @touchstart.stop>
+    <i class="fas fa-trash fa-2x del-icon"></i>
   </div>
 </template>
 
@@ -55,7 +55,10 @@
 @import "/resources/css/flexSetting.css";
 
 #delete-wrapper {
-  margin: 0 10px;
+  padding: 10px 12px;
+}
+#delete-wrapper:hover {
+  background-color: rgba(255,255,255,0.2);
 }
 
 
