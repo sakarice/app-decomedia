@@ -1,7 +1,7 @@
 <template>
   <div id="delete-wrapper" class="flex a-center j-center"
   @click="deleteObject()" @click.stop @touchstart.stop>
-    <i class="fas fa-trash fa-2x del-icon"></i>
+    <i class="fas fa-trash fa-lg del-icon"></i>
   </div>
 </template>
 

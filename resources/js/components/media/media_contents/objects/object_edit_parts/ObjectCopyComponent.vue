@@ -1,7 +1,7 @@
 <template>
   <div id="copy-wrapper" class="flex a-center j-center"
   @click="copyAndPaste()" @click.stop @touchstart.stop>
-    <i class="fas fa-copy fa-2x copy-icon"></i>
+    <i class="fas fa-copy fa-lg copy-icon"></i>
   </div>
 </template>
 

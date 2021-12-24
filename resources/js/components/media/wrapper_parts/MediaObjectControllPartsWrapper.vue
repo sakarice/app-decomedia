@@ -28,7 +28,7 @@ import { mapGetters } from 'vuex';
   bottom: 0;
   z-index: 15;
 
-  background-color: black;
+  background-color: #333333;
   color: white;
   height: 50px;
   border-radius: 5px;

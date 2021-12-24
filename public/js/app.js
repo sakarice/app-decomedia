@@ -18994,7 +18994,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-object-controll-parts-wrapper[data-v-655bc064] {\r\n  position: absolute;\r\n  bottom: 0;\r\n  z-index: 15;\r\n\r\n  background-color: black;\r\n  color: white;\r\n  height: 50px;\r\n  border-radius: 5px;\r\n  padding: 10px;\n}\n@media screen and (max-width:480px) {\n#media-object-controll-parts-wrapper[data-v-655bc064] {\r\n    width: 95%;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-object-controll-parts-wrapper[data-v-655bc064] {\r\n  position: absolute;\r\n  bottom: 0;\r\n  z-index: 15;\r\n\r\n  background-color: #333333;\r\n  color: white;\r\n  height: 50px;\r\n  border-radius: 5px;\r\n  padding: 10px;\n}\n@media screen and (max-width:480px) {\n#media-object-controll-parts-wrapper[data-v-655bc064] {\r\n    width: 95%;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -67065,7 +67065,7 @@ var render = function () {
         },
       },
     },
-    [_c("i", { staticClass: "fas fa-edit fa-2x" })]
+    [_c("i", { staticClass: "fas fa-edit fa-lg" })]
   )
 }
 var staticRenderFns = []
@@ -70190,7 +70190,7 @@ var render = function () {
         },
       },
     },
-    [_c("i", { staticClass: "fas fa-copy fa-2x copy-icon" })]
+    [_c("i", { staticClass: "fas fa-copy fa-lg copy-icon" })]
   )
 }
 var staticRenderFns = []
@@ -70235,7 +70235,7 @@ var render = function () {
         },
       },
     },
-    [_c("i", { staticClass: "fas fa-trash fa-2x del-icon" })]
+    [_c("i", { staticClass: "fas fa-trash fa-lg del-icon" })]
   )
 }
 var staticRenderFns = []
