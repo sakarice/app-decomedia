@@ -134,6 +134,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         const storeData = this.getOneFigure(this.index);
         keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
         this.setCanvasSize();
+        this.setLayer();
+        this.setGlobalAlpha();
+        this.setStrokeColor();
+        this.setFillColor();
         this.createPath();
         this.draw();
       },

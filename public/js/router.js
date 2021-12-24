@@ -4399,6 +4399,10 @@ function _defineProperty(obj, key, value) {
         _this2.figureDatas[key] = storeData[key];
       });
       this.setCanvasSize();
+      this.setLayer();
+      this.setGlobalAlpha();
+      this.setStrokeColor();
+      this.setFillColor();
       this.createPath();
       this.draw();
     },
