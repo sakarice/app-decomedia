@@ -107,14 +107,12 @@
       }
     },
     computed : {
-      ...mapGetters('mediaImgs', ['getMediaImg']),
+      // ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
     },
     methods : {
-      ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
       ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
-      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
 
       changeFileCategory(){
         this.isDefault = !(this.isDefault);

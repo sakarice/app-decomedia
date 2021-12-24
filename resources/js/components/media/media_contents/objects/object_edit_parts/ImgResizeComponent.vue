@@ -75,7 +75,6 @@
       },
       move(event){ this.$emit('move', event) },
       resizeStart(type){
-        console.log('resize Start');
         const target = document.getElementById(this.imgWrapperWithIndex);
         const mediaImg = this.getOneImg(this.index);
         const sizeAndPositionInfos = [];

@@ -17,10 +17,17 @@ import DispFigureSettingModal from '../components/media/change_display_parts/Dis
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
-import MediaFigureSetting from '../components/media/edit_parts/MediaFigureSettingComponent.vue';
+import MediaFigureFactory from '../components/media/edit_parts/MediaFigureFactoryComponent.vue';
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
+
+// オブジェクト選択管理コンポーネント
+import ObjectSelectMng from '../components/media/media_contents/objects/object_edit_parts/ObjectSelectMngComponent.vue';
+
+// オブジェクトの詳細確認＆編集コンポーネント
+import FigureUpdate from '../components/media/media_contents/objects/figure/FigureUpdateComponent.vue';
+import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
 
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
@@ -44,10 +51,13 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
-        mediaFigureSetting : MediaFigureSetting,
+        mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
+        figureUpdate : FigureUpdate,
+        imgProperty : ImgProperty,
+        objectSelectMng : ObjectSelectMng,
         overlay : Overlay,
         loading : Loading,
       },
@@ -63,10 +73,13 @@ export default{
         dispMediaSettingModal : DispMediaSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
-        mediaFigureSetting : MediaFigureSetting,
+        mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
         mediaSetting : MediaSetting,
+        figureUpdate : FigureUpdate,
+        imgProperty : ImgProperty,
+        objectSelectMng : ObjectSelectMng,
         overlay : Overlay,
         loading : Loading,
         

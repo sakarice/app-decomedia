@@ -1,11 +1,11 @@
 <template>
   <!-- Media画像-->
   <div :id="imgWrapperWithIndex"
-  v-bind:style="imgWrapperStyle()">
+  v-bind:style="imgWrapperStyle()"
+  @dblclick="showEditor" @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
       v-show="getMediaSetting['isShowImg']"
-      v-on:click="$emit('parent-action', 'imgModal')"
       v-bind:style="imgStyle()">
       <p v-show="!(mediaImg['url'])"></p>
       <img id="media-img"
@@ -33,6 +33,9 @@
   import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
   
+  const objectSelected = new CustomEvent('objectSelected');
+
+
   export default {
     components : {
       imgRotate,
@@ -43,8 +46,8 @@
     ],
     data : ()=> {
       return {        
-        "mediaImg" : "",
-        "isActive" : false,
+        img_wrapper : "",
+        mediaImg : "",
       }
     },
     computed : {
@@ -52,6 +55,7 @@
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      ...mapGetters('selectedObjects', ['getSelectedObjects']),
       imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) },
       isEditMode : function(){
         const route_name = this.$route.name;
@@ -61,23 +65,29 @@
           return false;
         }
       },
-    },
-    watch : {
-      isActive(val){
-        if(val == true){
-          this.$emit('add-active-index', this.index);
-        } else {
-          this.$emit('del-active-index', this.index);
-        }
+      isActive:function(){
+        return this.getSelectedObjects.some((obj)=>obj.type==1 && obj.index==this.index)
       },
+
     },
     methods : {
       ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
       ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
+      ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
+
       getOneImg(){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
+      },
+      showEditor(){
+        const showSetting = new CustomEvent('showImgSetting', {detail:{index:this.index}});
+        document.body.dispatchEvent(showSetting);
+      },
+      selected(){
+        const objectSelected = new CustomEvent('objectSelected',{detail:{type:1,index:this.index}});
+        document.body.dispatchEvent(objectSelected);
       },
       // 位置操作用
       moveStart(e){
@@ -128,14 +138,11 @@
       this.init();
     },
     mounted(){
+      this.img_wrapper = document.getElementById(this.imgWrapperWithIndex);
       // イベント登録
-      document.addEventListener('click', (e)=> {
-        if(!e.target.closest("#"+this.imgWrapperWithIndex)){
-          this.isActive = false;
-        } else {
-          this.isActive = true;
-        }
-      });
+      this.img_wrapper.addEventListener('imgDataUpdated',this.init,false);
+      this.img_wrapper.addEventListener('click',this.selected,false);
+      this.img_wrapper.addEventListener('touchstart',this.selected,false);
     }
   }
 

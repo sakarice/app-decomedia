@@ -14,7 +14,7 @@
         "rotate_target" : "", // ドラッグ操作で回転させる対象
         "rotate_center_x" : 0,
         "rotate_center_y" : 0,
-        "degree" : 0, 
+        "degree" : 0,
       }
     },
     computed : {
@@ -56,12 +56,11 @@
         document.body.addEventListener("touchend", this.rotateEnd, false);
       },
       rotating(e){
-        console.log('start rotate');
         e.preventDefault();
         let event;
         let distance_x_from_target_center;
         let distance_y_from_target_center;
-        if(e.type==="mousedown"){
+        if(e.type==="mousemove"){
           event = e;
           distance_x_from_target_center = event.clientX - this.rotate_center_x;
           distance_y_from_target_center = event.clientY - this.rotate_center_y;
@@ -80,12 +79,13 @@
       },
       rotateEnd(e){
         document.body.removeEventListener("mousemove", this.rotating, false);
-        this.rotate_target.removeEventListener("mouseup", this.rotateEnd, false);
+        document.body.removeEventListener("mouseup", this.rotateEnd, false);
         document.body.removeEventListener("touchmove", this.rotating, false);
-        this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
+        document.body.removeEventListener("touchend", this.rotateEnd, false);
+        document.body.removeEventListener("mouseleave", this.rotateEnd, false);
+        document.body.removeEventListener("touchleave", this.rotateEnd, false);
 
         this.updateMediaImgsObjectItem({index:this.index,key:"degree",value:this.degree});
-        // this.$emit('rotate-finish', this.degree);
       },
 
     },

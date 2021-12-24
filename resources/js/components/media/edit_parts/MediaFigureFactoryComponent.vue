@@ -1,10 +1,6 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-setting-wrapper">
-      <!-- モーダル移動用の領域。モバイルでは非表示にすること -->
-      <!-- <div class="area-for-move for-pc-tablet"
-      @mousedown="moveStart($event)" @touchstart="moveStart($event)">
-      </div> -->
+  <div id="media-figure-factory-wrapper">
     <div class="item-frame">
 
       <!-- クローズアイコン -->
@@ -19,7 +15,15 @@
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
+        <div class="change-figure-type back-figure-type"
+        @mousedown="backFigureType()" @touchend="backFigureType()">
+          <i class="fas fa-angle-double-left fa-2x"></i>
+        </div>
         <canvas id="pre-canvas" @mousedown.stop @click="addMediaFigure()"></canvas>
+        <div class="change-figure-type next-figure-type"
+        @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
+          <i class="fas fa-angle-double-right fa-2x"></i>
+        </div>
       </div>
 
       <!-- 詳細設定の表示・非表示切り替え -->
@@ -118,24 +122,22 @@
     data : ()=>{
       return {
 
-        "figureTypeList" : [
+        figureTypeList : [
           {code : 1, name : "四角形"},
           {code : 2, name : "丸"},
         ],
+        figureType : 1,
+        canvas_length : 80,
+        pre_canvas : "",
+        pre_ctx : "",
 
-        // "move_target" : "",
-        // "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-        // "y_in_element" : 0, // 〃↑のy座標
-        "canvas_length" : 80,
-        "pre_canvas" : "",
-        "pre_ctx" : "",
-
-        "isShowDetail" : false,
-        "isMobile" : false,
+        isShowDetail : false,
+        // "isMobile" : false,
       }
     },
     computed : {
       ...mapGetters('mediaFigureFactory', ['getFigureData']),
+      ...mapGetters('deviceType', ['getDeviceType']),
       type(){ return this.getFigureData['type'] },
       degree(){ return this.getFigureData['degree'] },
       is_draw_fill(){ return this.getFigureData['isDrawFill']},
@@ -166,7 +168,7 @@
       },
       start_x(){ return (this.canvas_length - this.width) / 2;},
       start_y(){ return (this.canvas_length - this.height) / 2;},
-
+      isMobile(){ return (this.getDeviceType==2) ? true : false; },
     },
     watch : {
       type(){ this.draw(); },
@@ -181,13 +183,8 @@
         this.setGlobalAlpha();
         this.draw()
       },
-      isMobile(new_val){
-        if(new_val==true){
-          this.deleteMoveEvent();
-          this.setModalAtMobilePosition();
-        } else {
-          this.registMoveEvent();
-        }
+      isMobile(){
+        this.responsiveAction();
       }
     },
     methods : {
@@ -196,25 +193,45 @@
       closeModal(){
         this.$emit('close-modal');
       },
-      judgeIsMobile(){
-        this.isMobile =  (window.innerWidth < 481 ? true : false);
+      responsiveAction(){
+        if(this.isMobile){ // モバイルの時
+          this.deleteMoveEvent();
+          this.setModalAtMobilePosition();
+        } else {
+          this.registMoveEvent();
+        }
       },
       setModalAtMobilePosition(){
-        const modal = document.getElementById('media-figure-setting-wrapper');
+        const modal = document.getElementById('media-figure-factory-wrapper');
         modal.style.left = "";
         modal.style.top = ""; // topの指定を消す
-        // modal.style.bottom = "50px";
       },
       registMoveEvent(){
-        const target = document.getElementById('media-figure-setting-wrapper');
+        const target = document.getElementById('media-figure-factory-wrapper');
         target.addEventListener('mousedown', this.moveStart, false);
         target.addEventListener('touchstart', this.moveStart, false);
       },
       deleteMoveEvent(){
-        const target = document.getElementById('media-figure-setting-wrapper');
+        const target = document.getElementById('media-figure-factory-wrapper');
         target.removeEventListener('mousedown', this.moveStart, false);
         target.removeEventListener('touchstart', this.moveStart, false);
       },
+      goNextFigureType(){
+        const type_new = this.figureType % 2 + 1;
+        this.updateFigureData({key:'type', value:type_new});
+        this.figureType = type_new;
+      },
+      backFigureType(){
+        const type_old = this.getFigureData['type'];
+        let type_new;
+        if(type_old == 1){
+          type_new = 2;
+        } else {
+          type_new = type_old - 1;
+        }
+        this.updateFigureData({key:'type', value:type_new});
+      },
+
       addMediaFigure(){
         // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
         const mediaFigure = Object.assign({}, this.getFigureData);
@@ -227,7 +244,7 @@
       // 設定モーダル操作用
       // モーダルの初期表示位置をウィンドウ中央に持ってくる
       setModalCenter(){
-        const modal = document.getElementById('media-figure-setting-wrapper');
+        const modal = document.getElementById('media-figure-factory-wrapper');
         const modal_width = Number(this.getStyleSheetValue(modal,"width").replace("px",""));
         const modal_height = Number(this.getStyleSheetValue(modal,"height").replace("px",""));
         modal.style.left = (window.innerWidth/2 - modal_width/2) + "px";
@@ -243,7 +260,7 @@
       },
       // 位置操作用
       moveStart(e){
-        const move_target_dom = document.getElementById("media-figure-setting-wrapper");
+        const move_target_dom = document.getElementById("media-figure-factory-wrapper");
         moveStart(e, move_target_dom);
         move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
@@ -333,14 +350,13 @@
       },
     },
     created(){
-      window.addEventListener('resize',this.judgeIsMobile, false);
     },
     mounted(){
       this.setModalCenter();
       this.setContext();
       this.setCanvasSize();
       this.draw();
-      this.registMoveEvent();
+      this.responsiveAction();
     },
   }
 
@@ -350,12 +366,12 @@
 
 @import "/resources/css/flexSetting.css";
 
-#media-figure-setting-wrapper{
+#media-figure-factory-wrapper{
   position: absolute;
   z-index: 30;
   color: white;
 }
-#media-figure-setting-wrapper:hover{
+#media-figure-factory-wrapper:hover{
   cursor: all-scroll;
 }
 
@@ -365,6 +381,20 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.change-figure-type {
+  margin: 0 10px;
+}
+.change-figure-type:hover {
+  cursor:pointer;
+}
+
+.back-figure-type{
+  color: blue;
+}
+.next-figure-type{
+  color: red;
 }
 
 .item-frame {
@@ -424,10 +454,7 @@
 }
 
 .add-icon-wrapper {
-  display: inline-block;
   position: absolute;
-  top: 80px;
-  left: 160px;
   z-index: 3;
   padding: 0px 4px;
   color: darkorange;
@@ -467,7 +494,7 @@
 }
 
 @media screen and (min-width:481px) {
-  #media-figure-setting-wrapper{
+  #media-figure-factory-wrapper{
     left: 100px;
     top: 100px;
     width: 300px;
@@ -475,11 +502,17 @@
     padding: 5px;
     border-radius: 6px;
   }
+  .add-icon-wrapper {
+    display: inline-block;
+    position: absolute;
+    top: 80px;
+    left: 160px;
+  }
   
 }
 
 @media screen and (max-width:480px) {
-  #media-figure-setting-wrapper{
+  #media-figure-factory-wrapper{
     bottom: 50px;  
     max-height: 50vh;
     width: 100%;
@@ -499,6 +532,12 @@
     border-top-left-radius: 5px;
   }
 
+  .add-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    top: 5px;
+    right: 20px;
+  }
 
   .for-pc-tablet{
     display: none;

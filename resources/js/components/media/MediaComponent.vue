@@ -3,6 +3,8 @@
    v-on:click.self="closeModal()"
    :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
+    <judge-device-type></judge-device-type>
+
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
@@ -88,10 +90,14 @@
     :transitionName="transitionName">
     </router-view>
 
-    <router-view name="mediaFigureSetting"
+    <router-view name="mediaFigureFactory"
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </router-view>
+
+    <router-view name="imgProperty"></router-view>
+    <router-view name="figureUpdate"></router-view>
+    <router-view name="objectSelectMng"></router-view>
 
     <!-- 動画設定コンポーネント -->
     <router-view name="movieSetting"
@@ -111,13 +117,10 @@
 
     <disp-audios></disp-audios>
 
-
     <!-- <media-figure-setting
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </media-figure-setting> -->
-
-
 
     <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
@@ -134,27 +137,44 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
+
+    <media-object-controll-parts-wrapper>
+      <object-delete></object-delete>
+      <object-setting-open></object-setting-open>
+      <object-copy></object-copy>
+    </media-object-controll-parts-wrapper>
+
   </div>
 </template>
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
+  import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
+  import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
+  import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
+  import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
 
 export default {
   components : {
+    judgeDeviceType,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
     MediaFigureMng,
-    DispAudios
+    DispAudios,
+    MediaObjectControllPartsWrapper,
+    ObjectDelete,
+    ObjectSettingOpen,
+    ObjectCopy,
   },
   props: [],
   data : () => {
@@ -288,6 +308,10 @@ export default {
       this.$refs.mediaMovie.deleteYtPlayer();
       this.updateMediaSettingObjectItem({key:'isShowMovie', value:false});
     },
+    fieldClicked(){
+      const fieldClicked = new CustomEvent('fieldClicked');
+      document.body.dispatchEvent(fieldClicked);
+    },
 
   },
   created() {
@@ -310,6 +334,7 @@ export default {
     if(this.getMode!=3){ // 3:show以外(=createかeditなら)編集モードに設定
       this.$refs.mediaAudio.validEditMode();
     }
+
     // 全ての子コンポーネントが描画されてから実行する処理
     this.$nextTick(function(){
       window.onYouTubeIframeAPIReady = () => {
@@ -317,6 +342,10 @@ export default {
       }
     });
 
+    // 指定の領域がクリックされたら、選択中オブジェクトの選択を解除する
+    const field = document.getElementById('field');
+    field.addEventListener('click',this.fieldClicked, false);
+    field.addEventListener('touchstart',this.fieldClicked, false);
 
   },
   watch : {

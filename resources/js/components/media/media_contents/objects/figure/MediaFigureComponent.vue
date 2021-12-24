@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="canvas_item-wrapper" :style="canvasWrapperStyle()"
-  @dblclick="showEditor">
+  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper" :style="canvasWrapperStyle()"
+  @dblclick="showEditor" @click.stop @touchstart.stop>
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
@@ -30,7 +30,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     ],
     data : ()=>{
       return {
-        "isActive" : false,
         "isReDraw" : false,
         "isResizing" :false,
         "canvas" : "",
@@ -55,29 +54,25 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
-      new_index:function(){ },
+      ...mapGetters('selectedObjects', ['getSelectedObjects']),
       canvas_with_index:function(){ return 'canvas'+this.index; },
       canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
-      // canvas_width:function(){ return this.figureDatas['width']+"px" },
-      // canvas_height:function(){ return this.figureDatas['height']+"px" },
-      // style_left : function(){ return this.figureDatas['left'] + 'px';},
-      // style_top : function(){ return this.figureDatas['top'] + 'px';},
-      // style_rotate : function(){ return 'rotate('+ this.figureDatas['degree'] +'deg)';},
       isEditMode : function(){
-        const route_name = this.$route.name;
-        if((route_name=="create") || (route_name=="edit")){
-          return true;
-        } else {
-          return false;
-        }
+        const rn = this.$route.name;
+        return (rn=="create" || rn=="edit") ? true : false
       },
+      isActive:function(){
+        return this.getSelectedObjects.some((obj)=>obj.type==0 && obj.index==this.index)
+      },
+
     },
     watch : {
       isReDraw : function(){ this.init(); },
       figureDatas : {
         handler : function(val){
           if(this.isActive){
-            this.$emit('change-figure-data', this.index);
+            const event = new CustomEvent('objectStatusChanged',{detail:{type:0,index:this.index}});
+            document.body.dispatchEvent(event);
           }
         },
         deep : true
@@ -87,7 +82,12 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
-      showEditor(){ this.$emit('show-editor', this.index)},
+      ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
+      ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
+      showEditor(){
+        const showSetting = new CustomEvent('showFigureSetting', {detail:{index:this.index}});
+        document.body.dispatchEvent(showSetting);
+      },
       getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(index);
         return this.getMediaFigure;
@@ -109,7 +109,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         }
         return styleObject;
       },
-
+      selected(){         
+        const objectSelected = new CustomEvent('objectSelected',{detail:{type:0,index:this.index}});
+        document.body.dispatchEvent(objectSelected);
+      },
       // 位置操作用
       moveStart(e){
         const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
@@ -131,6 +134,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         const storeData = this.getOneFigure(this.index);
         keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
         this.setCanvasSize();
+        this.setLayer();
+        this.setGlobalAlpha();
+        this.setStrokeColor();
+        this.setFillColor();
         this.createPath();
         this.draw();
       },
@@ -227,12 +234,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.ctx.save();
         this.ctx.stroke();
       },
-      delete(){
-        if(this.isActive){
-          this.isActive = false;
-          this.deleteMediaFiguresObjectItem(this.index);
-        }
-      }
     },
     created(){},
     mounted(){
@@ -241,13 +242,9 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       this.init();
 
       // イベント登録
-      document.addEventListener('click', (e)=> {
-        if(!e.target.closest("#"+this.canvas_wrapper_with_index)){
-          this.isActive = false;
-        } else {
-          this.isActive = true;
-        }
-      });
+      this.canvas_wrapper.addEventListener('figureDataUpdated',this.init,false);
+      this.canvas_wrapper.addEventListener('click',this.selected,false);
+      this.canvas_wrapper.addEventListener('touchstart',this.selected,false);
     },
   }
 

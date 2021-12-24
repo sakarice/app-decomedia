@@ -1,134 +1,89 @@
 <template>
-  <!-- Media図形-->
-  <div id="media-figure-update-wrapper" :class="{hidden:!isEditMode}"
-   @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
+  <!-- Media画像-->
+  <div id="media-img-update-wrapper" :class="{hidden:!isEditMode}"
+  v-show="isShowEditor" @click.stop @touchstart.stop>
     <div class="item-frame">
       <!-- クローズアイコン -->
-      <div class="close-icon-wrapper" @mousedown.stop>
+      <div class="close-icon-wrapper" @mousedown.stop :class="{hidden:isMobile}">
         <i class="fas fa-times fa-3x close-icon" @click="closeEditor"></i>
       </div>
 
-      <!-- 図形設定 -->
-      <div class="media-figure-settings">
+      <!-- 画像設定 -->
+      <div class="media-img-settings">
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
           <div class="disp-space-between x-position-wrapper">
             <span>配置座標(x):</span>
-            <input type="number" class="input-num" :value="figureDatas['left']" @input="updateFigureData('left', $event.target.value)" min="-1000" max="10000">
+            <input type="number" class="input-num" :value="imgDatas['left']" @input="updateImgData('left', $event.target.value)" min="-1000" max="10000">
           </div>
 
           <div class="disp-space-between y-position-wrapper">
             <span>配置座標(y):</span>
-            <input type="number" class="input-num" :value="figureDatas['top']" @input="updateFigureData('top', $event.target.value)" min="-1000" max="10000">
+            <input type="number" class="input-num" :value="imgDatas['top']" @input="updateImgData('top', $event.target.value)" min="-1000" max="10000">
           </div>
 
           <div class="disp-space-between degree-wrapper">
             <span>回転:</span>
-            <input type="number" class="input-num" :value="figureDatas['degree']" @input="updateFigureData('degree', $event.target.value)">
+            <input type="number" class="input-num" :value="imgDatas['degree']" @input="updateImgData('degree', $event.target.value)">
           </div>
 
           <div class="disp-space-between width-input-wrapper">
             <span>横幅[px]:</span>
-            <input type="number" class="input-num" :value="figureDatas['width']" @input="updateFigureData('width', $event.target.value)" min="0" max="10000">
+            <input type="number" class="input-num" :value="imgDatas['width']" @input="updateImgData('width', $event.target.value)" min="0" max="10000">
           </div>
           <div class="disp-space-between height-input-wrapper">
             <span>縦幅[px]:</span>
-            <input type="number" class="input-num" :value="figureDatas['height']" @input="updateFigureData('height', $event.target.value)" min="0" max="10000">
+            <input type="number" class="input-num" :value="imgDatas['height']" @input="updateImgData('height', $event.target.value)" min="0" max="10000">
           </div>
 
           <div class="disp-space-between layer-input-wrapper">
             <span>重ね順:</span>
-            <input type="number" class="input-num" :value="figureDatas['layer']" @input="updateFigureData('layer', $event.target.value)"  min="0" max="100">
+            <input type="number" class="input-num" :value="imgDatas['layer']" @input="updateImgData('layer', $event.target.value)"  min="0" max="100">
           </div>
 
-          <div class="disp-space-between type-input-wrapper">
-            <span>種類:</span>
-            <select id="update-figure-type" name="種類" class="input-num" v-model="type">
-              <option v-for="(figureType) in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
-            </select>
-          </div>
-
-        </div>
-
-        <!-- カラー系の設定 -->
-        <div class="setting-type-color">
-          <div class="disp-space-between fill-input-wrapper">
-            <div class="fill-flag">
-              <span>塗りつぶし</span>
-              <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawFill']" @input="updateFigureData('isDrawFill',$event.target.checked)">
-            </div>
-            <div class="fill-color">
-              <span>色:</span>
-              <input type="color" @mousedown.stop :value="figureDatas['fillColor']" @input="updateFigureData('fillColor', $event.target.value)">
-            </div>
-          </div>
-
-          <div class="disp-space-between stroke-input-wrapper">
-            <div class="stroke-flag">
-              <span>枠線</span>
-              <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawStroke']" @input="updateFigureData('isDrawStroke',$event.target.checked)">
-            </div>
-            <div class="stroke-color">
-              <span>色:</span>
-              <input type="color" @mousedown.stop :value="figureDatas['strokeColor']" @input="updateFigureData('strokeColor', $event.target.value)">
-            </div>
-          </div>
         </div>
 
         <div class="opacity-input-wrapper">
           <span>透過度:</span>
-          <input type="range" :value="figureDatas['globalAlpha']" @mousedown.stop @input="updateFigureData('globalAlpha',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="range" :value="imgDatas['globalAlpha']" @mousedown.stop @input="updateImgData('opacity',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
       </div>
     </div>
+
+    <close-modal-bar class="for-mobile"></close-modal-bar>
+
   </div>
+  
 </template>
 
 <script>
+  import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
+  import closeModalBar from '../../../change_display_parts/CloseModalBarComponent.vue'
+
 
   export default {
-    components : {},
-    props:[
-      "index",
-    ],
+    components : {closeModalBar},
     data : ()=>{
       return {
-        "move_target" : "",
-        "x_in_element" : 0, // クリックカーソルの要素内における相対位置(x座標)
-        "y_in_element" : 0, // 〃↑のy座標
-
-        "figureTypeList" : [
-          {code : 1, name : "四角形"},
-          {code : 2, name : "丸"},
-        ],
-
-        "figureDatas" : {
-          "type" : 1,
-          "left" : 0,
+        isShowEditor : false,
+        index: 0,        
+        imgDatas : {
+          // "type" : 99,
           "top" : 0,
+          "left" : 0,
           "width" : 0,
           "height" : 0,
           "degree" : 0,
+          "opacity" : 0,
           "layer" : 0,
-          "globalAlpha" : 0,
-          "isDrawFill" : false,
-          "isDrawStroke" : false,
-          "fillColor" : "",
-          "strokeColor" : "",
         },
       }
     },
     computed : {
-      ...mapGetters('mediaFigures', ['getMediaFigure']),
-      type:{
-        get(){
-          return this.figureDatas['type'];
-        },
-        set(val){
-          this.figureDatas['type'] = val;
-        },
-      },
+      ...mapGetters('mediaImgs', ['getMediaImg']),
+      ...mapGetters('deviceType', ['getDeviceType']),
+      isMobile(){ return (this.getDeviceType==2) ? true : false; },
       isEditMode : function(){
         const route_name = this.$route.name;
         let isEdit = false;
@@ -139,36 +94,63 @@
       },      
     },
     watch : {
-      type(){ 
-        this.updateFigureData('type', this.figureDatas['type']);
-      }
+      getDeviceType(){
+        this.responsiveAction();
+      },
     },
     methods : {
-      ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-      ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
-      ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
-      closeEditor(){ this.$emit('close-editor', this.index); },
-
-      getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
-        this.setTargetObjectIndex(index);
-        return this.getMediaFigure;
+      ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
+      ...mapMutations('mediaImgs', ['updateMediaImgsObjectItem']),
+      ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      closeEditor(){
+        this.isShowEditor = false;
       },
-      init(index){
-        const storeFigureData = this.getOneFigure(index);
-        for(let key of Object.keys(storeFigureData)){
-          this.figureDatas[key] = this.fixDataType(key, storeFigureData[key]);
+      responsiveAction(){
+        if(this.getDeviceType==2){ // モバイルの時
+          this.deleteMoveEvent();
+          this.setModalAtMobilePosition();
+        } else {
+          this.registMoveEvent();
         }
       },
-      updateFigureData(key, value){
-        this.updateMediaFiguresObjectItem({index:this.index, key:key, value:this.fixDataType(key, value)});
-        this.figureDatas[key] = this.getOneFigure(this.index)[key];
-        this.$emit('re-render', this.index);
+      setModalAtMobilePosition(){
+        const modal = document.getElementById('media-img-update-wrapper');
+        modal.style.left = "";
+        modal.style.top = ""; // topの指定を消す
+      },
+      registMoveEvent(){
+        const target = document.getElementById('media-img-update-wrapper');
+        target.addEventListener('mousedown', this.move, false);
+        target.addEventListener('touchstart', this.move, false);
+      },
+      deleteMoveEvent(){
+        const target = document.getElementById('media-img-update-wrapper');
+        target.removeEventListener('mousedown', this.move, false);
+        target.removeEventListener('touchstart', this.move, false);
+      },
+      getOneImg(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
+        this.setTargetObjectIndex(index);
+        return this.getMediaImg;
+      },
+      init(index){
+        const storeImgData = Object.assign({},this.getOneImg(index));
+        for(let key of Object.keys(storeImgData)){
+          this.imgDatas[key] = this.fixStrToNum(key, storeImgData[key]);
+        }
+      },
+      updateImgData(key, value){
+        this.updateMediaImgsObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
+        this.imgDatas[key] = this.getOneImg(this.index)[key];
+        const targetDomId = 'media-img-wrapper'+this.index;
+        const targetDom = document.getElementById(targetDomId);
+        const event = new CustomEvent('imgDataUpdated');
+        targetDom.dispatchEvent(event);
       },
       checkTypeNum(key){
-        const num_type_keys = ["type", "width","height","degree","left","top","globalAlpha"];
+        const num_type_keys = ["type", "width","height","degree","left","top","opacity"];
         return num_type_keys.includes(key);
       },
-      fixDataType(key, value){
+      fixStrToNum(key, value){
         let reTypedValue;
         if(this.checkTypeNum(key)){
           reTypedValue = Number(value);
@@ -176,15 +158,6 @@
           reTypedValue = value;
         }
         return reTypedValue;
-      },
-      // 設定モーダル操作用
-      // モーダルの初期表示位置をウィンドウ中央に持ってくる
-      setModalCenter(){
-        const modal = document.getElementById('media-figure-update-wrapper');
-        const modal_width = Number(this.getStyleSheetValue(modal,"width").replace("px",""));
-        const modal_height = Number(this.getStyleSheetValue(modal,"height").replace("px",""));
-        modal.style.left = (window.innerWidth/2 - modal_width/2) + "px";
-        modal.style.top = (window.innerHeight/2 - modal_height/2) + "px";
       },
       getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
         if (!element || !property) {
@@ -194,66 +167,63 @@
         var value = style.getPropertyValue(property);
         return value;
       },
-      mouseDown(e){
-        let event;
-        if(e.type==="mousedown"){
-          event = e;
-        } else {
-          event = e.changedTouches[0];
-        }
-        this.move_target = document.getElementById('media-figure-update-wrapper');
-        this.x_in_element = event.clientX - this.move_target.offsetLeft;
-        this.y_in_element = event.clientY - this.move_target.offsetTop;
-        // ムーブイベントにコールバック
-        document.body.addEventListener("mousemove", this.mouseMove, false);
-        this.move_target.addEventListener("mouseup", this.mouseUp, false);
-        document.body.addEventListener("touchmove", this.mouseMove, false);
-        this.move_target.addEventListener("touchend", this.mouseUp, false);
-      },
-      mouseMove(e){
-        e.preventDefault();
-        this.move_target.style.left = (e.clientX - this.x_in_element) + "px";
-        this.move_target.style.top = (e.clientY - this.y_in_element) + "px";
-
-        // マウス、タッチ解除時のイベントを設定
-        document.body.addEventListener("mouseleave", this.mouseUp, false);
-        document.body.addEventListener("touchleave", this.mouseUp, false);
-      },
-      mouseUp(e){
-        document.body.removeEventListener("mousemove", this.mouseMove, false);
-        this.move_target.removeEventListener("mouseup", this.mouseUp, false);
-        document.body.removeEventListener("touchmove", this.mouseMove, false);
-        this.move_target.removeEventListener("touchend", this.mouseUp, false);
+      // 位置操作用
+      move(event){
+        const move_target_dom = document.getElementById('media-img-update-wrapper');
+        moveStart(event, move_target_dom);
       },
     },
-    created(){},
-    mounted(){ this.setModalCenter(); },
+    created(){
+      document.body.addEventListener('showImgSetting', (e)=>{
+        this.index = e.detail.index;
+        this.init(this.index);
+        this.isShowEditor = true;
+      });
+
+      document.body.addEventListener('closeImgSetting', (e)=>{
+        this.isShowEditor = false;
+      });
+
+      document.body.addEventListener('objectStatusChanged', (e)=>{
+        const objInfo = e.detail;
+        if(objInfo.type==0 && objInfo.index==this.index){
+          this.init(this.index);
+        }
+      })
+
+      document.body.addEventListener('objectDeleted', (e)=> {
+        const delObjs = e.detail.objs;
+        let isDeleted = false;
+        delObjs.forEach(obj=>{
+          if(obj.type==0 && obj.index==this.index){
+            isDeleted = true;
+          }
+        });
+        if(isDeleted){ this.isShowEditor = false; }
+      });
+
+    },
+    mounted(){
+      this.responsiveAction();
+    },
   }
 
 </script>
 
 <style scoped>
-#media-figure-update-wrapper{
+#media-img-update-wrapper{
   position: absolute;
-  left: 50%;
-  top: 50%;
   z-index: 30;
-  width: 300px;
-  height: 340px;
-  padding: 5px;
-  background-color: rgba(35,40,50,0.85);
   color: white;
-  border-radius: 6px;
-  box-shadow: 1px 1px 10px rgba(220,220,220,1);
 }
-#media-figure-update-wrapper:hover{
+#media-img-update-wrapper:hover{
   cursor: all-scroll;
 }
 
 .item-frame:hover{
   cursor: all-scroll;
 }
-.media-figure-settings {
+.media-img-settings {
   padding: 15px 45px;
 }
 
@@ -289,5 +259,40 @@
 }
 
 
+@media screen and (min-width:481px) {
+  #media-img-update-wrapper{
+    left: 100px;
+    top: 100px;
+    width: 300px;
+    padding: 5px;
+    background-color: rgba(35,40,50,0.85);
+    border-radius: 6px;
+  }
+
+}
+
+@media screen and (max-width:480px) {
+  #media-img-update-wrapper{
+    bottom: 50px;  
+    max-height: 50vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .media-img-settings {
+    max-height: 200px;
+    overflow-y: scroll;
+  }
+
+
+  .item-frame {
+    width:92%;
+    background-color: rgba(35,40,50,0.85);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+  }
+}
 
 </style>

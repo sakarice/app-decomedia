@@ -4,8 +4,6 @@
 
     <media-img v-for="(img, index) in getMediaImgs" :key="index"
     :index="index"
-    @add-active-index="addActiveIndex(index)"
-    @del-active-index="delActiveIndex(index)"
     ref="imgs">
     </media-img>
 
@@ -23,7 +21,6 @@
     ],
     data : ()=>{
       return {
-        'active_indexs' : [],
       }
     },
     computed : {
@@ -60,20 +57,10 @@
       reRenderAll(){ 
         this.$refs.imgs.forEach(img => { img.init(); }); 
       },
-      addActiveIndex(index){ this.active_indexs.push(index);},
-      delActiveIndex(index){
-        const del_index = this.active_indexs.indexOf(index);
-        this.active_indexs.splice(del_index, 1);
-      },
     },
     mounted(){
-      document.addEventListener('keydown', (e)=> {
-        if(e.code=="Delete"){
-          this.active_indexs.forEach(index=>{
-            this.deleteMediaImgsObjectItem(index);
-            console.log(index);
-            this.delActiveIndex(index);
-          })
+      document.body.addEventListener('objectDeleted', (e)=> {
+        if(this.$refs.imgs){
           this.reRenderAll();
         }
       })
