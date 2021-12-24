@@ -9890,6 +9890,8 @@ function _defineProperty(obj, key, value) {
 
 
 
+var randMinNum = 10;
+var randMaxNum = 20;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -9921,8 +9923,8 @@ function _defineProperty(obj, key, value) {
             _this.setTargetFigureIndex(objInfo.index);
 
             var figureData = JSON.parse(JSON.stringify(_this.getMediaFigure));
-            figureData['top'] += 20;
-            figureData['left'] += 20;
+            figureData['top'] += _this.getRandNum(randMinNum, randMaxNum);
+            figureData['left'] += _this.getRandNum(randMinNum, randMaxNum);
 
             _this.copyFigures.push(figureData);
 
@@ -9933,8 +9935,8 @@ function _defineProperty(obj, key, value) {
             _this.setTargetImgIndex(objInfo.index);
 
             var imgData = JSON.parse(JSON.stringify(_this.getMediaImg));
-            imgData['top'] += 20;
-            imgData['left'] += 20;
+            imgData['top'] += _this.getRandNum(randMinNum, randMaxNum);
+            imgData['left'] += _this.getRandNum(randMinNum, randMaxNum);
 
             _this.copyImgs.push(imgData);
 
@@ -9960,6 +9962,9 @@ function _defineProperty(obj, key, value) {
     resetCopyTargetInfo: function resetCopyTargetInfo() {
       this.copyFigures.length = 0;
       this.copyImgs.length = 0;
+    },
+    getRandNum: function getRandNum(min, max) {
+      return min + Math.floor(Math.random() * (max - min));
     }
   }),
   created: function created() {

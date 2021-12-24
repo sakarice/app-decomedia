@@ -8,6 +8,9 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
 
+  const randMinNum = 10;
+  const randMaxNum = 20;
+
   export default {
     data : ()=>{
       return {
@@ -30,22 +33,21 @@
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       copyObject(){
         this.resetCopyTargetInfo();
-
         const copyObjInfos = JSON.parse(JSON.stringify(this.getSelectedObjects));
         copyObjInfos.forEach(objInfo=>{
           switch(objInfo.type) {
             case 0 : // 図形
               this.setTargetFigureIndex(objInfo.index);
               const figureData = JSON.parse(JSON.stringify(this.getMediaFigure));
-              figureData['top'] += 20;
-              figureData['left'] += 20;
+              figureData['top'] += this.getRandNum(randMinNum, randMaxNum);
+              figureData['left'] += this.getRandNum(randMinNum, randMaxNum);
               this.copyFigures.push(figureData);
               break;
             case 1 : // 画像
               this.setTargetImgIndex(objInfo.index);
               const imgData = JSON.parse(JSON.stringify(this.getMediaImg));
-              imgData['top'] += 20;
-              imgData['left'] += 20;
+              imgData['top'] += this.getRandNum(randMinNum, randMaxNum);
+              imgData['left'] += this.getRandNum(randMinNum, randMaxNum);
               this.copyImgs.push(imgData);
               break;
           }
@@ -68,6 +70,9 @@
         this.copyFigures.length = 0;
         this.copyImgs.length = 0;
       },
+      getRandNum(min,max){
+        return min + Math.floor(Math.random() * (max - min));
+      }
 
     },
     created(){
