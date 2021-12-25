@@ -1,13 +1,20 @@
 <template>
   <div id="media-contents-field-wrapper">
-    <div id="media-contents-field">
+    <div id="media-contents-field"
+    :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-  export default{}
+import {mapGetters} from 'vuex';
+
+  export default{
+    computed : {
+      ...mapGetters('mediaSetting', ['getMediaSetting']),
+    },
+  }
 </script>
 
 <style scoped>

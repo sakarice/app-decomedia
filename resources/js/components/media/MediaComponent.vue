@@ -1,7 +1,6 @@
 <template>
   <div id="field"
-   v-on:click.self="closeModal()"
-   :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
+   v-on:click.self="closeModal()">
 
     <judge-device-type></judge-device-type>
 
