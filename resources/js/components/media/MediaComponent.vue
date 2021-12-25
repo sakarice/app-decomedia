@@ -18,18 +18,19 @@
           ref="mediaFigure">
           </media-figure-mng>
 
-          <!-- Mediaオーディオコンポーネント -->
-          <media-audio
-          :maxAudioNum="getMediaSetting['maxAudioNum']"
-          ref="mediaAudio">
-          </media-audio>
-
           <!-- Media動画(=youtube)コンポーネント -->
           <media-movie
           v-show="getMediaSetting['isShowMovie']"
           ref="mediaMovie">
           </media-movie>
         </media-content-field>
+
+        <!-- Mediaオーディオコンポーネント -->
+        <media-audio
+        :maxAudioNum="getMediaSetting['maxAudioNum']"
+        ref="mediaAudio">
+        </media-audio>
+
 
 
     <div id="disp-modal-zone" @click="closeModal">
