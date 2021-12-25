@@ -6760,90 +6760,7 @@ function _defineProperty(obj, key, value) {
         value: new_top
       });
       this.$emit('resize');
-    } // // リサイズ開始メソッドからフックする終了イベントの登録
-    // registEventStartToEnd(){
-    //   this.isResizing = true;
-    //   document.body.addEventListener("mouseup", this.resizeEnd, false);
-    //   document.body.addEventListener("touchend", this.resizeEnd, false);
-    // },
-    // // リサイズ中メソッドからフックする終了イベントの登録
-    // registEventMiddleToEnd(){ // マウス、タッチ解除時のイベントを設定
-    //   document.body.addEventListener("mouseleave", this.resizeEnd, false);
-    //   document.body.addEventListener("touchleave", this.resizeEnd, false);
-    // },
-    // // 1. リサイズ開始メソッド
-    // resizeRightStart(e){
-    //   document.body.addEventListener("mousemove", this.resizeRight, false);
-    //   document.body.addEventListener("touchmove", this.resizeRight, false);
-    //   this.registEventStartToEnd();
-    // },
-    // resizeLeftStart(e){
-    //   document.body.addEventListener("mousemove", this.resizeLeft, false);
-    //   document.body.addEventListener("touchmove", this.resizeLeft, false);
-    //   this.registEventStartToEnd();
-    // },
-    // resizeBottomStart(e){
-    //   document.body.addEventListener("mousemove", this.resizeBottom, false);
-    //   document.body.addEventListener("touchmove", this.resizeBottom, false);
-    //   this.registEventStartToEnd();
-    // },
-    // resizeTopStart(e){
-    //   document.body.addEventListener("mousemove", this.resizeTop, false);
-    //   document.body.addEventListener("touchmove", this.resizeTop, false);
-    //   this.registEventStartToEnd();
-    // },
-    // // 2. リサイズ中メソッド
-    // resizeMiddleLast(){
-    //   this.$emit('resize');
-    //   this.registEventMiddleToEnd();
-    // },
-    // resizeRight(e){
-    //   const left = this.getOneFigure(this.index)['left'];
-    //   this.width = e.clientX - left;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.width});
-    //   this.resizeMiddleLast();
-    // },
-    // resizeLeft(e){
-    //   const x = this.getOneFigure(this.index)['left'];
-    //   const diff = x - e.clientX;
-    //   const width_before = this.getOneFigure(this.index)['width'];
-    //   const width_new = width_before + diff;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:width_new});
-    //   this.width = width_new;
-    //   const new_x = x - diff;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_x});
-    //   this.resizeMiddleLast();
-    // },
-    // resizeBottom(e){
-    //   const top = this.getOneFigure(this.index)['top'];
-    //   this.height = e.clientY - top;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.height});
-    //   this.resizeMiddleLast();
-    // },
-    // resizeTop(e){
-    //   const y = this.getOneFigure(this.index)['top'];
-    //   const diff = y - e.clientY;
-    //   const height_before = this.getOneFigure(this.index)['height'];
-    //   const height_new = height_before + diff;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:height_new});
-    //   this.height = height_new;
-    //   const new_y = y - diff;
-    //   this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_y});
-    //   this.resizeMiddleLast();
-    // },
-    // // 3. リサイズ終了メソッド。登録したイベントを解除する。
-    // resizeEnd(e){
-    //   this.isResizing = false;
-    //   document.body.removeEventListener("mousemove", this.resizeRight, false);
-    //   document.body.removeEventListener("mousemove", this.resizeLeft, false);
-    //   document.body.removeEventListener("mousemove", this.resizeBottom, false);
-    //   document.body.removeEventListener("mousemove", this.resizeTop, false);
-    //   document.body.removeEventListener("touchmove", this.resizeRight, false);
-    //   document.body.removeEventListener("touchmove", this.resizeLeft, false);
-    //   document.body.removeEventListener("touchmove", this.resizeBottom, false);
-    //   document.body.removeEventListener("touchmove", this.resizeTop, false);
-    // },
-
+    }
   }),
   created: function created() {},
   mounted: function mounted() {}
@@ -7839,7 +7756,9 @@ var resize_target;
 var initial_left;
 var initial_top;
 var initial_width;
-var initial_height; // 0. リサイズ情報初期化
+var initial_height;
+var contents_area_left;
+var contents_area_top; // 0. リサイズ情報初期化
 
 function resizeInfoInit(target, sizeAndPositionInfos) {
   resize_target = target;
@@ -7847,6 +7766,9 @@ function resizeInfoInit(target, sizeAndPositionInfos) {
   initial_height = sizeAndPositionInfos.height;
   initial_left = sizeAndPositionInfos.left;
   initial_top = sizeAndPositionInfos.top;
+  var contents_area = document.getElementById('media-contents-field');
+  contents_area_left = contents_area.getBoundingClientRect().left;
+  contents_area_top = contents_area.getBoundingClientRect().top;
 }
 
 function registEventStartToEnd() {
@@ -7920,7 +7842,7 @@ function getPointerY(event) {
 
 
 function resizeRight(e) {
-  var new_width = getPointerX(e) - initial_left;
+  var new_width = getPointerX(e) - (contents_area_left + initial_left);
   var resizing_width_event = new CustomEvent('resizingWidth', {
     detail: {
       width: new_width,
@@ -7932,7 +7854,7 @@ function resizeRight(e) {
 }
 
 function resizeLeft(e) {
-  var diff = initial_left - getPointerX(e);
+  var diff = contents_area_left + initial_left - getPointerX(e);
   var new_width = initial_width + diff;
   var new_left = initial_left - diff;
   var resizing_width_event = new CustomEvent('resizingWidth', {
@@ -7946,7 +7868,7 @@ function resizeLeft(e) {
 }
 
 function resizeBottom(e) {
-  var new_height = getPointerY(e) - initial_top;
+  var new_height = getPointerY(e) - (contents_area_top + initial_top);
   var resizing_height_event = new CustomEvent('resizingHeight', {
     detail: {
       height: new_height,
@@ -7958,7 +7880,7 @@ function resizeBottom(e) {
 }
 
 function resizeTop(e) {
-  var diff = initial_top - getPointerY(e);
+  var diff = contents_area_top + initial_top - getPointerY(e);
   var new_height = initial_height + diff;
   var new_top = initial_top - diff;
   var resizing_height_event = new CustomEvent('resizingHeight', {

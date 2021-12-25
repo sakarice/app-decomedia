@@ -8,6 +8,8 @@
   let initial_top;
   let initial_width;
   let initial_height;
+  let contents_area_left;
+  let contents_area_top;
 
 // 0. リサイズ情報初期化
 function resizeInfoInit(target,sizeAndPositionInfos){
@@ -16,6 +18,9 @@ function resizeInfoInit(target,sizeAndPositionInfos){
   initial_height = sizeAndPositionInfos.height;
   initial_left = sizeAndPositionInfos.left;
   initial_top = sizeAndPositionInfos.top;
+  const contents_area = document.getElementById('media-contents-field');
+  contents_area_left = contents_area.getBoundingClientRect().left;
+  contents_area_top = contents_area.getBoundingClientRect().top;
 }
 
 
@@ -79,13 +84,13 @@ function getPointerY(event){
 
 // 2. リサイズ中メソッド
 function resizeRight(e){
-  const new_width = getPointerX(e) - initial_left;
+  const new_width = getPointerX(e) - (contents_area_left + initial_left);
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:initial_left}});
   resize_target.dispatchEvent(resizing_width_event);
   registEventMiddleToEnd();
 }
 function resizeLeft(e){
-  const diff = initial_left - getPointerX(e);
+  const diff = (contents_area_left + initial_left) - getPointerX(e);
   const new_width = initial_width + diff;
   const new_left = initial_left - diff;
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:new_left}});
@@ -93,13 +98,13 @@ function resizeLeft(e){
   registEventMiddleToEnd();
 }
 function resizeBottom(e){
-  const new_height = getPointerY(e) - initial_top;
+  const new_height = getPointerY(e) - (contents_area_top + initial_top);
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:initial_top}});
   resize_target.dispatchEvent(resizing_height_event);
   registEventMiddleToEnd();
 }
 function resizeTop(e){
-  const diff = initial_top - getPointerY(e);
+  const diff = (contents_area_top + initial_top) - getPointerY(e);
   const new_height = initial_height + diff;
   const new_top = initial_top - diff;
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:new_top}});

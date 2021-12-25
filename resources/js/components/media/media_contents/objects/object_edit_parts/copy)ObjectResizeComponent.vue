@@ -106,6 +106,92 @@
         this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
         this.$emit('resize');
       },
+      // // リサイズ開始メソッドからフックする終了イベントの登録
+      // registEventStartToEnd(){
+      //   this.isResizing = true;
+      //   document.body.addEventListener("mouseup", this.resizeEnd, false);
+      //   document.body.addEventListener("touchend", this.resizeEnd, false);
+      // },
+      // // リサイズ中メソッドからフックする終了イベントの登録
+      // registEventMiddleToEnd(){ // マウス、タッチ解除時のイベントを設定
+      //   document.body.addEventListener("mouseleave", this.resizeEnd, false);
+      //   document.body.addEventListener("touchleave", this.resizeEnd, false);
+      // },
+
+      // // 1. リサイズ開始メソッド
+      // resizeRightStart(e){
+      //   document.body.addEventListener("mousemove", this.resizeRight, false);
+      //   document.body.addEventListener("touchmove", this.resizeRight, false);
+      //   this.registEventStartToEnd();
+      // },
+      // resizeLeftStart(e){
+      //   document.body.addEventListener("mousemove", this.resizeLeft, false);
+      //   document.body.addEventListener("touchmove", this.resizeLeft, false);
+      //   this.registEventStartToEnd();
+      // },
+      // resizeBottomStart(e){
+      //   document.body.addEventListener("mousemove", this.resizeBottom, false);
+      //   document.body.addEventListener("touchmove", this.resizeBottom, false);
+      //   this.registEventStartToEnd();
+      // },
+      // resizeTopStart(e){
+      //   document.body.addEventListener("mousemove", this.resizeTop, false);
+      //   document.body.addEventListener("touchmove", this.resizeTop, false);
+      //   this.registEventStartToEnd();
+      // },
+
+      // // 2. リサイズ中メソッド
+      // resizeMiddleLast(){
+      //   this.$emit('resize');
+      //   this.registEventMiddleToEnd();
+      // },
+      // resizeRight(e){
+      //   const left = this.getOneFigure(this.index)['left'];
+      //   this.width = e.clientX - left;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:this.width});
+      //   this.resizeMiddleLast();
+      // },
+      // resizeLeft(e){
+      //   const x = this.getOneFigure(this.index)['left'];
+      //   const diff = x - e.clientX;
+      //   const width_before = this.getOneFigure(this.index)['width'];
+      //   const width_new = width_before + diff;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:width_new});
+      //   this.width = width_new;
+      //   const new_x = x - diff;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_x});
+      //   this.resizeMiddleLast();
+      // },
+      // resizeBottom(e){
+      //   const top = this.getOneFigure(this.index)['top'];
+      //   this.height = e.clientY - top;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:this.height});
+      //   this.resizeMiddleLast();
+      // },
+      // resizeTop(e){
+      //   const y = this.getOneFigure(this.index)['top'];
+      //   const diff = y - e.clientY;
+      //   const height_before = this.getOneFigure(this.index)['height'];
+      //   const height_new = height_before + diff;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:height_new});
+      //   this.height = height_new;
+      //   const new_y = y - diff;
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_y});
+      //   this.resizeMiddleLast();
+      // },
+
+      // // 3. リサイズ終了メソッド。登録したイベントを解除する。
+      // resizeEnd(e){
+      //   this.isResizing = false;
+      //   document.body.removeEventListener("mousemove", this.resizeRight, false);
+      //   document.body.removeEventListener("mousemove", this.resizeLeft, false);
+      //   document.body.removeEventListener("mousemove", this.resizeBottom, false);
+      //   document.body.removeEventListener("mousemove", this.resizeTop, false);
+      //   document.body.removeEventListener("touchmove", this.resizeRight, false);
+      //   document.body.removeEventListener("touchmove", this.resizeLeft, false);
+      //   document.body.removeEventListener("touchmove", this.resizeBottom, false);
+      //   document.body.removeEventListener("touchmove", this.resizeTop, false);
+      // },
 
     },
     created(){},
