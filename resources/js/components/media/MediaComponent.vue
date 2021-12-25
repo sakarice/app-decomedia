@@ -8,33 +8,30 @@
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
-    <!-- Media画像コンポーネント -->
-    <!-- <media-img-
-    ref="mediaImg">
-    </media-img-> -->
-    <media-img-mng
-    ref="mediaImgMng">
-    </media-img-mng>
+        <media-content-field @click="closeModal">
+          <media-img-mng
+          ref="mediaImgMng">
+          </media-img-mng>
 
-    <!-- Media図形コンポーネント -->
-    <media-figure-mng
-    ref="mediaFigure">
-    </media-figure-mng>
+          <!-- Media図形コンポーネント -->
+          <media-figure-mng
+          ref="mediaFigure">
+          </media-figure-mng>
 
-    <!-- Mediaオーディオコンポーネント -->
-    <media-audio
-     :maxAudioNum="getMediaSetting['maxAudioNum']"
-     ref="mediaAudio">
-    </media-audio>
+          <!-- Mediaオーディオコンポーネント -->
+          <media-audio
+          :maxAudioNum="getMediaSetting['maxAudioNum']"
+          ref="mediaAudio">
+          </media-audio>
+
+          <!-- Media動画(=youtube)コンポーネント -->
+          <media-movie
+          v-show="getMediaSetting['isShowMovie']"
+          ref="mediaMovie">
+          </media-movie>
+        </media-content-field>
 
 
-    <!-- Media動画(=youtube)コンポーネント -->
-    <media-movie
-    v-show="getMediaSetting['isShowMovie']"
-    ref="mediaMovie">
-    </media-movie>
-
-        <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
@@ -150,6 +147,7 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import MediaContentField from '../media/media_contents/MediaContentField.vue';
   import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
@@ -165,6 +163,7 @@
 export default {
   components : {
     judgeDeviceType,
+    MediaContentField,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
@@ -393,18 +392,6 @@ export default {
  
 
 
-
-/* @media screen and (min-width: 481px) {
-  #disp-modal-zone {
-    left: 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #disp-modal-zone {
-    right: 0;
-  }
-} */
 
 
 </style>
