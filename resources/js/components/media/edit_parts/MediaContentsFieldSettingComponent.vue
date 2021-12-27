@@ -4,11 +4,11 @@
       <div id="area-wrapper">
 
         <div id="media-contents-field-setting-area" class="flex column a-start">
-          <h2 id="media-contents-field-setting-title">メディア設定</h2>
+          <h2 id="media-contents-field-setting-title">メディア背景設定</h2>
 
           <!-- メディア背景色設定 -->
           <div id="media-bg-color-wraper" class="setting">
-            <h3 class="setting-title">Media背景</h3>
+            <h3 class="setting-title">背景色</h3>
             <label for="">
               <input :value="getMediaContentsField['color']" @input="updateMediaContentsFieldObjectItem({key:'color', value:$event.target.value})" type="color" id="media-bg-color">
               カラー選択

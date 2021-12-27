@@ -17563,7 +17563,7 @@ var render = function () {
               _c(
                 "h2",
                 { attrs: { id: "media-contents-field-setting-title" } },
-                [_vm._v("メディア設定")]
+                [_vm._v("メディア背景設定")]
               ),
               _vm._v(" "),
               _c(
@@ -17574,7 +17574,7 @@ var render = function () {
                 },
                 [
                   _c("h3", { staticClass: "setting-title" }, [
-                    _vm._v("Media背景"),
+                    _vm._v("背景色"),
                   ]),
                   _vm._v(" "),
                   _c("label", { attrs: { for: "" } }, [
