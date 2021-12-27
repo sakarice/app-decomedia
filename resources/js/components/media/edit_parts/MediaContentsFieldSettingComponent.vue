@@ -83,7 +83,7 @@ export default {
     font-weight: bold;
     font-size: 14px;
     margin: 10px 0 30px 0;
-    background-color: lightslategrey;
+    background-color: rgb(40,40,40);
     border-radius: 5px;
     padding: 3px 10px;
   }

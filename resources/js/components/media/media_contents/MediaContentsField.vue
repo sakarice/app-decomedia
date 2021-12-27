@@ -86,7 +86,7 @@ import {mapGetters,mapMutations} from 'vuex';
     width: 90%;
     height: 90%;
     background-color: rgb(255,255,255);
-    box-shadow: 1px 1px 3px lightgrey;
+    /* box-shadow: 1px 1px 3px lightgrey; */
   }
 
   @media screen and (max-width:480px) {
