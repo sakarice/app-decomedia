@@ -11,6 +11,8 @@ const mediaContentsField = {
       'width' : 500,
       'height' : 500,
       'color' : '#ffffff',
+      'img_id' : null,
+      'img_type' : null,
       'img_url' : '',
       'img_size_type' : 'cover',
     },

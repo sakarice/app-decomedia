@@ -19,6 +19,8 @@ class CreateMediaContentsFieldsTable extends Migration
             $table->integer('width');
             $table->integer('height');
             $table->string('color',191)->default('#ffffff'); // 白
+            $table->integer('img_id')->nullable();
+            $table->integer('img_type')->nullable();
             $table->string('img_url',191)->nullable();
             $table->string('img_size_type',191)->default('cover');
             $table->timestamps();

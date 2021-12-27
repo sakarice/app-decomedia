@@ -21,6 +21,8 @@ class MediaContentsFieldUtil
     'width' => 'width',
     'height' => 'height',
     'color' => 'color',
+    'img_id' => 'img_id',
+    'img_type' => 'img_type',
     'img_url' => 'img_url',
     'img_size_type' => 'img_size_type',
   );

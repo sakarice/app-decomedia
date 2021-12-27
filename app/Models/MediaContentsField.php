@@ -14,6 +14,8 @@ class MediaContentsField extends Model
         'width',
         'height',
         'color',
+        'img_id',
+        'img_type',
         'img_url',
         'img_size_type',
     ];
