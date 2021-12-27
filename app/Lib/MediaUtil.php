@@ -203,6 +203,7 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::store($media_id, $request);
       }
+      // コンテンツ描画エリア
       MediaContentsFieldController::store($media_id, $request->contents_field);
       // media設定
       MediaSettingController::store($media_id, $request);
@@ -243,6 +244,9 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::update($media_id, $request);
       }
+      // コンテンツ描画エリア
+      MediaContentsFieldController::update($media_id, $request->contents_field);
+
       // media設定
       MediaSettingController::update($media_id, $request);      
 
@@ -273,7 +277,10 @@ class MediaUtil
         if(MediaMovie::where('media_id', $media_id)->exists()){
             MediaMovieController::destroy($media_id);
         }
-    // Media設定
+        // コンテンツ描画エリア
+        MediaContentsFieldController::destroy($media_id, $request->contents_field);
+
+        // Media設定
         MediaSettingController::destroy($media_id);
 
         DB::commit();

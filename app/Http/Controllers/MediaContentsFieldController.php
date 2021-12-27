@@ -33,8 +33,8 @@ class MediaContentsFieldController extends Controller
     // 5.edit
     public static function edit($id){}
     // 6.update
-    public static function update($media_id, $request){
-      MediaContentsFieldUtil::updateMediaContentsFieldData($media_id, $request);
+    public static function update($media_id, $contents_field_data){
+      MediaContentsFieldUtil::updateMediaContentsFieldData($media_id, $contents_field_data);
     }
     // 7.destroy
     public static function destroy($media_id){
