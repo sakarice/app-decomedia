@@ -13395,8 +13395,8 @@ var mediaSetting = {
       'name': "",
       'description': "",
       'finish_time': 0,
-      'mediaBackgroundColor': "#F7F7F7",
-      // ほぼ白
+      'mediaBackgroundColor': "#F2F2F2",
+      // 若干グレー
       'isShowImg': true,
       'isShowMovie': false,
       'maxAudioNum': 5
