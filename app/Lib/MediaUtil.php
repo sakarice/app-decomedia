@@ -11,6 +11,7 @@ use App\Http\Controllers\MediaImgController;
 use App\Http\Controllers\MediaFigureController;
 use App\Http\Controllers\MediaAudioController;
 use App\Http\Controllers\MediaMovieController;
+use App\Http\Controllers\MediaContentsFieldController;
 use App\Http\Controllers\MediaSettingController;
 
 use App\Lib\ImgUtil;
@@ -27,6 +28,7 @@ use App\Models\MediaImg;
 use App\Models\MediaFigure;
 use App\Models\MediaAudio;
 use App\Models\MediaMovie;
+use App\Models\MediaContentsField;
 use App\Models\MediaSetting;
 use Storage;
 
@@ -39,12 +41,14 @@ class MediaUtil
     $media_img_data      = MediaImgController::show($media_id);
     $media_audios_data   = MediaAudioController::show($media_id);
     $media_movie_data    = MediaMovieController::show($media_id);
+    $contents_field_data  = MediaContentsFieldController::show($media_id);
     $media_setting_data  = MediaSettingController::show($media_id);
 
     $data = [
         'media_img' => $media_img_data,
         'media_audios' => $media_audios_data,
         'media_movie' => $media_movie_data,
+        'contents_field_data' => $contents_field_data,
         'media_setting' => $media_setting_data,
     ];
     return $data;
@@ -199,6 +203,7 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::store($media_id, $request);
       }
+      MediaContentsFieldController::store($media_id, $request->contents_field);
       // media設定
       MediaSettingController::store($media_id, $request);
       // DB::commit();

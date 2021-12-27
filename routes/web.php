@@ -73,6 +73,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
     // メディア動画
         Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
+    // コンテンツ描画エリア
+        Route::get('/mediaContentsField/{mediaId}', 'App\Lib\MediaContentsFieldUtil@getMediaContentsFieldData');
     // メディア設定
         Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 

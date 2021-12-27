@@ -7,7 +7,8 @@
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
-        <media-content-field @click="closeModal">
+        <media-contents-field @click="closeModal"
+        ref="mediaContentsField">
           <media-img-mng
           ref="mediaImgMng">
           </media-img-mng>
@@ -22,7 +23,7 @@
           v-show="getMediaSetting['isShowMovie']"
           ref="mediaMovie">
           </media-movie>
-        </media-content-field>
+        </media-contents-field>
 
         <!-- Mediaオーディオコンポーネント -->
         <media-audio
@@ -55,7 +56,7 @@
         </router-view>
         <!-- オーディオ -->
         <router-view name="dispAudioModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
         </router-view>
         <!-- 図形設定 -->
         <router-view name="dispFigureSettingModal"
@@ -65,6 +66,10 @@
         <router-view name="dispMovieModal"
         v-on:show-modal="showModal">
         </router-view>
+        <!-- Mediaコンテンツフィールド設定 -->
+        <router-view name="dispContentsFieldSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>        
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
         v-on:show-modal="showModal">
@@ -105,6 +110,13 @@
     :transitionName="transitionName">
     </router-view>
 
+    <!-- コンテンツフィールド設定コンポーネント -->
+    <router-view name="contentsFieldSetting"
+    v-show="isShowModal['contentsFieldSettingModal']"
+    v-on:close-modal="closeModal"
+    :transitionName="transitionName">
+    </router-view>
+
     <!-- Media設定コンポーネント -->
     <router-view name="mediaSetting"
     v-show="isShowModal['mediaSettingModal']"
@@ -134,7 +146,6 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
-
     <media-object-controll-parts-wrapper>
       <object-delete></object-delete>
       <object-setting-open></object-setting-open>
@@ -147,7 +158,7 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
-  import MediaContentField from '../media/media_contents/MediaContentField.vue';
+  import MediaContentsField from './media_contents/MediaContentsField.vue';
   import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
@@ -163,7 +174,7 @@
 export default {
   components : {
     judgeDeviceType,
-    MediaContentField,
+    MediaContentsField,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
@@ -188,6 +199,7 @@ export default {
         'audioModal' : false,
         'movieModal' : false,
         'figureSettingModal' : false,
+        'contentsFieldSettingModal': false,
         'mediaSettingModal' : false,
       },
       autoPlay : true,
@@ -206,6 +218,7 @@ export default {
     ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
     ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
+    ...mapGetters('mediaContentsField',['getMediaContentsField']),
     ...mapGetters('mediaFigures', ['getMediaFigures']),
 
 
@@ -324,6 +337,7 @@ export default {
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
       // this.$refs.mediaImg.initImg();
+      this.$refs.mediaContentsField.initContentsField();
       this.$refs.mediaImgMng.initImg();
       this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();

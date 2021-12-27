@@ -20,6 +20,8 @@
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      ...mapGetters('mediaContentsField',['getMediaContentsField']),
+      
     },
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
@@ -32,6 +34,7 @@
           'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
+          'contents_field': this.getMediaContentsField,
           'setting' : this.getMediaSetting,
         }
         this.setIsCrudDoing(true);

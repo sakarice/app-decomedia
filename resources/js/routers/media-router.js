@@ -13,6 +13,7 @@ import DispImgModal from '../components/media/change_display_parts/DispImgModalC
 import DispAudioModal from '../components/media/change_display_parts/DispAudioModalComponent.vue';
 import DispMovieModal from '../components/media/change_display_parts/DispMovieModalComponent.vue';
 import DispMediaSettingModal from '../components/media/change_display_parts/DispMediaSettingModalComponent.vue';
+import DispContentsFieldSettingModal from '../components/media/change_display_parts/DispMediaContentsFieldSettingModalComponent.vue';
 import DispFigureSettingModal from '../components/media/change_display_parts/DispFigureSettingModalComponent.vue';
 
 // メディア編集用コンポーネント
@@ -21,6 +22,8 @@ import MediaFigureFactory from '../components/media/edit_parts/MediaFigureFactor
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
+import ContentsFieldSetting from '../components/media/edit_parts/MediaContentsFieldSettingComponent.vue';
+
 
 // オブジェクト選択管理コンポーネント
 import ObjectSelectMng from '../components/media/media_contents/objects/object_edit_parts/ObjectSelectMngComponent.vue';
@@ -49,11 +52,13 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispContentsFieldSettingModal : DispContentsFieldSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
+        contentsFieldSetting : ContentsFieldSetting,
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
@@ -71,11 +76,13 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispContentsFieldSettingModal : DispContentsFieldSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
+        contentsFieldSetting : ContentsFieldSetting,
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
