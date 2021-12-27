@@ -2601,6 +2601,10 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2619,6 +2623,11 @@ function _defineProperty(obj, key, value) {
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaContentsField', ['updateMediaContentsFieldObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    clearBgImg: function clearBgImg() {
+      var listener_elem = document.getElementById('media-contents-field-wrapper');
+      var clearBgImgEvent = new CustomEvent('clearBgImg');
+      listener_elem.dispatchEvent(clearBgImgEvent);
     }
   }),
   mounted: function mounted() {}
@@ -4056,7 +4065,18 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])), {}, {
+    backGroundStyle: function backGroundStyle() {
+      var style = {
+        'background-color': this.getMediaContentsField['color'],
+        'background-image': 'url(' + this.getMediaContentsField['img_url'] + ')',
+        'background-size': this.getMediaContentsField['img_size_type'],
+        'background-position': 'center',
+        'background-repeat': 'no-repeat'
+      };
+      return style;
+    }
+  }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaContentsField', ['updateMediaContentsFieldObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaContentsField', ['updateIsInitializedContentsField'])), {}, {
     initContentsField: function initContentsField() {
       var _this = this;
@@ -4081,8 +4101,34 @@ function _defineProperty(obj, key, value) {
           return resolve(response.data);
         })["catch"](function (error) {});
       });
+    },
+    updateBgImg: function updateBgImg(img_id, img_type, img_url) {
+      this.updateMediaContentsFieldObjectItem({
+        key: 'img_id',
+        value: img_id
+      });
+      this.updateMediaContentsFieldObjectItem({
+        key: 'img_type',
+        value: img_type
+      });
+      this.updateMediaContentsFieldObjectItem({
+        key: 'img_url',
+        value: img_url
+      });
+    },
+    setBgImg: function setBgImg(event) {
+      var data = event.detail.img_data;
+      this.updateBgImg(data.img_id, data.img_type, data.url);
+    },
+    clearBgImg: function clearBgImg() {
+      this.updateBgImg(null, null, "");
     }
-  })
+  }),
+  mounted: function mounted() {
+    var listener_elem = document.getElementById('media-contents-field-wrapper');
+    listener_elem.addEventListener('setBgImg', this.setBgImg, false);
+    listener_elem.addEventListener('clearBgImg', this.clearBgImg, false);
+  }
 });
 
 /***/ }),
@@ -5081,6 +5127,12 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5096,6 +5148,9 @@ function _defineProperty(obj, key, value) {
       index: 0,
       imgDatas: {
         // "type" : 99,
+        "img_id": null,
+        "img_type": null,
+        "url": "",
         "top": 0,
         "left": 0,
         "width": 0,
@@ -5106,7 +5161,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('deviceType', ['getDeviceType'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('deviceType', ['getDeviceType'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaContentsField', ['getMediaContentsField'])), {}, {
     isMobile: function isMobile() {
       return this.getDeviceType == 2 ? true : false;
     },
@@ -5119,6 +5174,10 @@ function _defineProperty(obj, key, value) {
       }
 
       return isEdit;
+    },
+    isBgImg: function isBgImg() {
+      var bgImgUrl = this.getMediaContentsField['img_url'];
+      return this.imgDatas['url'] == bgImgUrl ? true : false;
     }
   }),
   watch: {
@@ -5143,6 +5202,37 @@ function _defineProperty(obj, key, value) {
       var modal = document.getElementById('media-img-update-wrapper');
       modal.style.left = "";
       modal.style.top = ""; // topの指定を消す
+    },
+    changeBgImg: function changeBgImg(isSetBgImg) {
+      console.log(isSetBgImg);
+
+      if (isSetBgImg == true) {
+        this.registSetBgImgEvent();
+      } else {
+        this.registClearBgImgEvent();
+      }
+    },
+    registSetBgImgEvent: function registSetBgImgEvent() {
+      var _this = this; // const img_data = this.getOneImg(this.index);
+
+
+      var bgImgKeys = ['img_id', 'img_type', 'url'];
+      var bg_img_info = new Object();
+      bgImgKeys.forEach(function (key) {
+        bg_img_info[key] = _this.imgDatas[key];
+      });
+      var setBgImgEvent = new CustomEvent('setBgImg', {
+        detail: {
+          img_data: bg_img_info
+        }
+      });
+      var target = document.getElementById('media-contents-field-wrapper');
+      target.dispatchEvent(setBgImgEvent);
+    },
+    registClearBgImgEvent: function registClearBgImgEvent() {
+      var clearBgImgEvent = new CustomEvent('clearBgImg');
+      var target = document.getElementById('media-contents-field-wrapper');
+      target.dispatchEvent(clearBgImgEvent);
     },
     registMoveEvent: function registMoveEvent() {
       var target = document.getElementById('media-img-update-wrapper');
@@ -5211,36 +5301,36 @@ function _defineProperty(obj, key, value) {
     }
   }),
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     document.body.addEventListener('showImgSetting', function (e) {
-      _this.index = e.detail.index;
+      _this2.index = e.detail.index;
 
-      _this.init(_this.index);
+      _this2.init(_this2.index);
 
-      _this.isShowEditor = true;
+      _this2.isShowEditor = true;
     });
     document.body.addEventListener('closeImgSetting', function (e) {
-      _this.isShowEditor = false;
+      _this2.isShowEditor = false;
     });
     document.body.addEventListener('objectStatusChanged', function (e) {
       var objInfo = e.detail;
 
-      if (objInfo.type == 0 && objInfo.index == _this.index) {
-        _this.init(_this.index);
+      if (objInfo.type == 0 && objInfo.index == _this2.index) {
+        _this2.init(_this2.index);
       }
     });
     document.body.addEventListener('objectDeleted', function (e) {
       var delObjs = e.detail.objs;
       var isDeleted = false;
       delObjs.forEach(function (obj) {
-        if (obj.type == 0 && obj.index == _this.index) {
+        if (obj.type == 0 && obj.index == _this2.index) {
           isDeleted = true;
         }
       });
 
       if (isDeleted) {
-        _this.isShowEditor = false;
+        _this2.isShowEditor = false;
       }
     });
   },
@@ -8936,7 +9026,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-3e8c78f2] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-3e8c78f2] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.clear-bg-img[data-v-3e8c78f2] {\r\n    color: blue;\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n.cursor-p[data-v-3e8c78f2]:hover {\r\n    cursor: pointer;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17598,6 +17688,35 @@ var render = function () {
                   ]),
                 ]
               ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting",
+                  attrs: { id: "media-bg-img-wraper" },
+                },
+                [
+                  _c("h3", { staticClass: "setting-title" }, [
+                    _vm._v("背景画像"),
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "clear-bg-img cursor-p",
+                      on: {
+                        mousedown: function ($event) {
+                          return _vm.clearBgImg()
+                        },
+                        touchstart: function ($event) {
+                          return _vm.clearBgImg()
+                        },
+                      },
+                    },
+                    [_vm._v("削除する")]
+                  ),
+                ]
+              ),
             ]
           ),
         ]),
@@ -18774,10 +18893,7 @@ var render = function () {
   return _c("div", { attrs: { id: "media-contents-field-wrapper" } }, [
     _c(
       "div",
-      {
-        style: { "background-color": _vm.getMediaContentsField["color"] },
-        attrs: { id: "media-contents-field" },
-      },
+      { style: _vm.backGroundStyle, attrs: { id: "media-contents-field" } },
       [_vm._t("default")],
       2
     ),
@@ -19462,6 +19578,23 @@ var render = function () {
                 },
                 input: function ($event) {
                   return _vm.updateImgData("opacity", $event.target.value)
+                },
+              },
+            }),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "set-background-wrapper" }, [
+            _c("span", [_vm._v("メディア背景に設定する")]),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "checkbox" },
+              domProps: { checked: _vm.isBgImg },
+              on: {
+                mousedown: function ($event) {
+                  $event.stopPropagation()
+                },
+                input: function ($event) {
+                  return _vm.changeBgImg($event.target.checked)
                 },
               },
             }),

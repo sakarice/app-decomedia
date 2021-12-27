@@ -14,7 +14,11 @@
               カラー選択
             </label>
           </div>
-
+          <!-- 背景画像設定 -->
+          <div id="media-bg-img-wraper" class="setting">
+            <h3 class="setting-title">背景画像</h3>
+            <span class="clear-bg-img cursor-p" @mousedown="clearBgImg()" @touchstart="clearBgImg()">削除する</span>
+          </div>
         </div>
 
       </div>
@@ -51,6 +55,12 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
+    clearBgImg(){
+      const listener_elem = document.getElementById('media-contents-field-wrapper');      
+      const clearBgImgEvent = new CustomEvent('clearBgImg');
+      listener_elem.dispatchEvent(clearBgImgEvent);
+    },
+
   },
   mounted : function() {
   },
@@ -95,7 +105,11 @@ export default {
   .lock-icon {
     color: yellow;
   }
-  
+
+  .clear-bg-img {
+    color: blue;
+    text-decoration-line: underline;
+  }
 
   .message-label {
     font-size: 10px;
@@ -135,7 +149,9 @@ export default {
     margin-left: 19px;
   }
 
-
+  .cursor-p:hover {
+    cursor: pointer;
+  }
 
 @media screen and (max-width:480px) {
   

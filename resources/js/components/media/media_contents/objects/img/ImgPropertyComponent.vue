@@ -47,6 +47,12 @@
           <span>透過度:</span>
           <input type="range" :value="imgDatas['globalAlpha']" @mousedown.stop @input="updateImgData('opacity',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
+
+        <div class="set-background-wrapper">
+          <span>メディア背景に設定する</span>
+          <input type="checkbox" :checked="isBgImg" @mousedown.stop @input="changeBgImg($event.target.checked)">
+        </div>
+
       </div>
     </div>
 
@@ -61,7 +67,6 @@
   import { mapGetters, mapMutations } from 'vuex';
   import closeModalBar from '../../../change_display_parts/CloseModalBarComponent.vue'
 
-
   export default {
     components : {closeModalBar},
     data : ()=>{
@@ -70,6 +75,9 @@
         index: 0,        
         imgDatas : {
           // "type" : 99,
+          "img_id" : null,
+          "img_type" : null,
+          "url" : "",
           "top" : 0,
           "left" : 0,
           "width" : 0,
@@ -83,6 +91,8 @@
     computed : {
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('deviceType', ['getDeviceType']),
+      ...mapGetters('mediaContentsField',['getMediaContentsField']),
+
       isMobile(){ return (this.getDeviceType==2) ? true : false; },
       isEditMode : function(){
         const route_name = this.$route.name;
@@ -91,7 +101,11 @@
           isEdit = true;
         }
         return isEdit;
-      },      
+      },
+      isBgImg : function(){
+        const bgImgUrl = this.getMediaContentsField['img_url'];
+        return (this.imgDatas['url']==bgImgUrl) ? true : false
+      },
     },
     watch : {
       getDeviceType(){
@@ -117,6 +131,30 @@
         const modal = document.getElementById('media-img-update-wrapper');
         modal.style.left = "";
         modal.style.top = ""; // topの指定を消す
+      },
+      changeBgImg(isSetBgImg){
+        console.log(isSetBgImg);
+        if(isSetBgImg==true){
+          this.registSetBgImgEvent();
+        } else {
+          this.registClearBgImgEvent();
+        }
+      },
+      registSetBgImgEvent(){
+        // const img_data = this.getOneImg(this.index);
+        const bgImgKeys = ['img_id','img_type','url'];
+        let bg_img_info = new Object;
+        bgImgKeys.forEach((key)=>{
+          bg_img_info[key] = this.imgDatas[key];
+        });
+        const setBgImgEvent = new CustomEvent('setBgImg',{detail:{img_data:bg_img_info}});
+        const target = document.getElementById('media-contents-field-wrapper');
+        target.dispatchEvent(setBgImgEvent);
+      },
+      registClearBgImgEvent(){
+        const clearBgImgEvent = new CustomEvent('clearBgImg');
+        const target = document.getElementById('media-contents-field-wrapper');
+        target.dispatchEvent(clearBgImgEvent);
       },
       registMoveEvent(){
         const target = document.getElementById('media-img-update-wrapper');

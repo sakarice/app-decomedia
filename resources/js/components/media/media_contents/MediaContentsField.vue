@@ -1,7 +1,7 @@
 <template>
   <div id="media-contents-field-wrapper">
     <div id="media-contents-field"
-    :style="{'background-color' : getMediaContentsField['color']}">
+    :style="backGroundStyle">
       <slot></slot>
     </div>
   </div>
@@ -14,6 +14,16 @@ import {mapGetters,mapMutations} from 'vuex';
     computed : {
       ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaContentsField', ['getMediaContentsField']),
+      backGroundStyle:function(){
+        const style = {
+          'background-color' : this.getMediaContentsField['color'],
+          'background-image' : 'url(' + this.getMediaContentsField['img_url'] + ')',
+          'background-size' : this.getMediaContentsField['img_size_type'],
+          'background-position' : 'center',
+          'background-repeat' : 'no-repeat',
+        }
+        return style;
+      }
     },
     methods : {
       ...mapMutations('mediaContentsField', ['updateMediaContentsFieldObjectItem']),
@@ -36,8 +46,24 @@ import {mapGetters,mapMutations} from 'vuex';
           })
           .catch(error=>{});
         })
-
-      }
+      },
+      updateBgImg(img_id,img_type,img_url){
+        this.updateMediaContentsFieldObjectItem({key:'img_id', value:img_id});
+        this.updateMediaContentsFieldObjectItem({key:'img_type', value:img_type});
+        this.updateMediaContentsFieldObjectItem({key:'img_url', value:img_url});
+      },
+      setBgImg(event){
+        const data = event.detail.img_data;
+        this.updateBgImg(data.img_id,data.img_type,data.url);
+      },
+      clearBgImg(){
+        this.updateBgImg(null,null,"");
+      },
+    },
+    mounted(){
+      const listener_elem = document.getElementById('media-contents-field-wrapper');
+      listener_elem.addEventListener('setBgImg', this.setBgImg, false);      
+      listener_elem.addEventListener('clearBgImg', this.clearBgImg, false);      
     },
   }
 </script>
