@@ -268,7 +268,9 @@ class MediaUtil
             ->where('user_id', $user_id)
             ->first()->delete();
         // Media画像
-        MediaImgController::destroy($media_id);
+        if(MediaImg::where('media_id', $media_id)->exists()){
+          MediaImgController::destroy($media_id);
+        }
         // Media音楽
         if(MediaAudio::where('media_id', $media_id)->exists()){                
             MediaAudioController::destroy($media_id);
@@ -278,7 +280,7 @@ class MediaUtil
             MediaMovieController::destroy($media_id);
         }
         // コンテンツ描画エリア
-        MediaContentsFieldController::destroy($media_id, $request->contents_field);
+        MediaContentsFieldController::destroy($media_id);
 
         // Media設定
         MediaSettingController::destroy($media_id);
