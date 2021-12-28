@@ -3,11 +3,9 @@
 </template>
 
 <script>
-  import { mapGetters, mapMutations } from 'vuex';
   export default {
     props:[
       'index',
-      // 'rotate_target'
     ],
     data : ()=>{
       return {
@@ -18,13 +16,9 @@
       }
     },
     computed : {
-      // ...mapGetters('mediaFigures', ['getMediaFigure']),
-      // canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
     watch : {},
     methods : {
-      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-      // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
         if (!element || !property) {
           return null;

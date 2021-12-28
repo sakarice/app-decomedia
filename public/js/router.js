@@ -7044,10 +7044,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['index' // 'rotate_target'
-  ],
+  props: ['index'],
   data: function data() {
     return {
       "rotate_target": "",
@@ -7057,13 +7055,9 @@ __webpack_require__.r(__webpack_exports__);
       "degree": 0
     };
   },
-  computed: {// ...mapGetters('mediaFigures', ['getMediaFigure']),
-    // canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
-  },
+  computed: {},
   watch: {},
   methods: {
-    // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-    // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
     getStyleSheetValue: function getStyleSheetValue(element, property) {
       // ↑でcssの値を取得するための関数
       if (!element || !property) {
