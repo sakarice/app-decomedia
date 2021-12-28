@@ -62,25 +62,57 @@
       }
     },
     computed : {
+      // ...mapGetters('mediaFigures', ['getMediaFigure']),
+      // ...mapGetters('selectedObjects', ['getSelectedObjects']),
+      // selectedObject:function(){ return this.getSelectedObjects[0] },
+      // canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
+    watch : {},
     methods : {
+      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+      // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
+      // getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
+      //   this.setTargetObjectIndex(index);
+      //   return this.getMediaFigure;
+      // },
       move(event){ this.$emit('move', event) },
       resizeInit(event){
-        this.target = document.getElementById(event.detail.element_id);
+        const datas = event.detail;
+        this.target = document.getElementById(datas.element_id);
+        console.log(target.id);
+        console.log(target.style);
         const sizeAndPositionInfos = [];
-        sizeAndPositionInfos['width'] = this.target.clientWidth;
-        sizeAndPositionInfos['height'] = this.target.clientHeight;
-        sizeAndPositionInfos['left'] = this.target.offsetLeft;
-        sizeAndPositionInfos['top'] = this.target.offsetTop;
+        const keys = ['width','height','left','top'];
+        keys.forEach(key=>{
+          sizeAndPositionInfos[key] = this.target.style.key;
+        })
         resizeInfoInit(this.target,sizeAndPositionInfos);
       },
       resizeStart(type){
         resizeStart(type);
+        // this.target.addEventListener('resizingWidth',this.updateWidthAndLeft,false);
+        // this.target.addEventListener('resizingHeight',this.updateHeighthAndTop,false);
       },
+      // updateWidthAndLeft(e){
+      //   const new_width = Math.floor(e.detail.width);
+      //   const new_left  = Math.floor(e.detail.left);
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:new_width});
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
+      //   this.$emit('resize');
+      // },
+      // updateHeighthAndTop(e){
+      //   const new_height = Math.floor(e.detail.height);
+      //   const new_top = Math.floor(e.detail.top);
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:new_height});
+      //   this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
+      //   this.$emit('resize');
+      // },
+
     },
     created(){
       document.body.addEventListener('objectSelected',this.resizeInit, false);
     },
+    mounted(){},
   }
 
 </script>

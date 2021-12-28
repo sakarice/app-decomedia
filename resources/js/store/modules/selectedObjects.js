@@ -3,7 +3,7 @@ const selectedObjects = {
   state : {
     selectedObjects : [],
     // selectedObject : {
-    //   type,  // type…0:figure, 1:img, 
+    //   type,  // type…0:figure, 1:img, 3:text
     //   index,
     // },
   },

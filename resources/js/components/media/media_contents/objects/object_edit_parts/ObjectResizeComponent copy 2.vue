@@ -58,29 +58,58 @@
     ],
     data : ()=>{
       return {
-        target : "",
+        "isResizing" :false,
+        "mouse_x" : 0,
+        "mouse_y" : 0,
+        "width" : "10px",
+        "height" : "10px",
       }
     },
     computed : {
+      ...mapGetters('mediaFigures', ['getMediaFigure']),
+      canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
+    watch : {},
     methods : {
+      ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+      ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
+      getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
+        this.setTargetObjectIndex(index);
+        return this.getMediaFigure;
+      },
+
       move(event){ this.$emit('move', event) },
-      resizeInit(event){
-        this.target = document.getElementById(event.detail.element_id);
-        const sizeAndPositionInfos = [];
-        sizeAndPositionInfos['width'] = this.target.clientWidth;
-        sizeAndPositionInfos['height'] = this.target.clientHeight;
-        sizeAndPositionInfos['left'] = this.target.offsetLeft;
-        sizeAndPositionInfos['top'] = this.target.offsetTop;
-        resizeInfoInit(this.target,sizeAndPositionInfos);
-      },
       resizeStart(type){
+        const target = document.getElementById(this.canvas_wrapper_with_index);
+        const mediaFigure = this.getOneFigure(this.index);
+        const sizeAndPositionInfos = [];
+        const keys = ['width','height','left','top'];
+        keys.forEach(key=>{
+          sizeAndPositionInfos[key] = mediaFigure[key];
+        })
+        resizeInfoInit(target,sizeAndPositionInfos);
         resizeStart(type);
+        target.addEventListener('resizingWidth',this.updateWidthAndLeft,false);
+        target.addEventListener('resizingHeight',this.updateHeighthAndTop,false);
       },
+      updateWidthAndLeft(e){
+        const new_width = Math.floor(e.detail.width);
+        const new_left  = Math.floor(e.detail.left);
+        this.updateMediaFiguresObjectItem({index:this.index,key:"width",value:new_width});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"left",value:new_left});
+        this.$emit('resize');
+      },
+      updateHeighthAndTop(e){
+        const new_height = Math.floor(e.detail.height);
+        const new_top = Math.floor(e.detail.top);
+        this.updateMediaFiguresObjectItem({index:this.index,key:"height",value:new_height});
+        this.updateMediaFiguresObjectItem({index:this.index,key:"top",value:new_top});
+        this.$emit('resize');
+      },
+
     },
-    created(){
-      document.body.addEventListener('objectSelected',this.resizeInit, false);
-    },
+    created(){},
+    mounted(){},
   }
 
 </script>

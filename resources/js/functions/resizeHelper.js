@@ -84,29 +84,29 @@ function getPointerY(event){
 
 // 2. リサイズ中メソッド
 function resizeRight(e){
-  const new_width = getPointerX(e) - (contents_area_left + initial_left);
+  const new_width = Math.floor(getPointerX(e) - (contents_area_left + initial_left));
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:initial_left}});
   resize_target.dispatchEvent(resizing_width_event);
   registEventMiddleToEnd();
 }
 function resizeLeft(e){
   const diff = (contents_area_left + initial_left) - getPointerX(e);
-  const new_width = initial_width + diff;
-  const new_left = initial_left - diff;
+  const new_width = Math.floor(initial_width + diff);
+  const new_left = Math.floor(initial_left - diff);
   const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:new_left}});
   resize_target.dispatchEvent(resizing_width_event);
   registEventMiddleToEnd();
 }
 function resizeBottom(e){
-  const new_height = getPointerY(e) - (contents_area_top + initial_top);
+  const new_height = Math.floor(getPointerY(e) - (contents_area_top + initial_top));
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:initial_top}});
   resize_target.dispatchEvent(resizing_height_event);
   registEventMiddleToEnd();
 }
 function resizeTop(e){
   const diff = (contents_area_top + initial_top) - getPointerY(e);
-  const new_height = initial_height + diff;
-  const new_top = initial_top - diff;
+  const new_height = Math.floor(initial_height + diff);
+  const new_top = Math.floor(initial_top - diff);
   const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:new_top}});
   resize_target.dispatchEvent(resizing_height_event);  
   registEventMiddleToEnd();

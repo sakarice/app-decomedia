@@ -19,6 +19,11 @@
           ref="mediaFigure">
           </media-figure-mng>
 
+          <!-- Mediaテキストコンポーネント -->
+          <media-text
+          :index="1">
+          </media-text>
+
           <!-- Media動画(=youtube)コンポーネント -->
           <media-movie
           v-show="getMediaSetting['isShowMovie']"
@@ -166,6 +171,7 @@
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
+  import MediaText from './media_contents/objects/text/MediaTextComponent.vue';
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
   import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
@@ -181,6 +187,7 @@ export default {
     MediaSetting,
     MediaMovie,
     MediaFigureMng,
+    MediaText,
     DispAudios,
     MediaObjectControllPartsWrapper,
     ObjectDelete,

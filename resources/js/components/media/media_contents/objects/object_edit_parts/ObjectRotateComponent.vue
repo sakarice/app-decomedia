@@ -18,17 +18,13 @@
       }
     },
     computed : {
-      ...mapGetters('mediaFigures', ['getMediaFigure']),
-      canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
+      // ...mapGetters('mediaFigures', ['getMediaFigure']),
+      // canvas_wrapper_with_index:function(){ return 'canvas_wrapper'+this.index; },
     },
     watch : {},
     methods : {
-      ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
-      ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
-      getOneFigure(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
-        this.setTargetObjectIndex(index);
-        return this.getMediaFigure;
-      },
+      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+      // ...mapMutations('mediaFigures', ['updateMediaFiguresObjectItem']),
       getStyleSheetValue(element,property){ // ↑でcssの値を取得するための関数
         if (!element || !property) {
           return null;
@@ -38,12 +34,16 @@
         return value;
       },
       // 回転用
+      rotateInit(event){
+        const target_id = event.detail.element_id;
+        this.rotate_target = document.getElementById(target_id);
+      },
       rotateStart(e){
-        this.rotate_target = document.getElementById(this.canvas_wrapper_with_index);
-        this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px",""));
-        this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px",""));
-        const x = this.getOneFigure(this.index)['width'];
-        const y = this.getOneFigure(this.index)['height'];
+
+        this.target_left = this.rotate_target.getBoundingClientRect().left + window.pageXOffset;
+        this.target_top = this.rotate_target.getBoundingClientRect().top + window.pageYOffset;
+        const x = this.rotate_target.clientWidth;
+        const y = this.rotate_target.clientHeight;
         // const r =  Math.sqrt(x*x + y*y);
         this.rotate_center_x = this.target_left + x/2;
         this.rotate_center_y = this.target_top + y/2;
@@ -82,11 +82,14 @@
         document.body.removeEventListener("touchmove", this.rotating, false);
         this.rotate_target.removeEventListener("touchend", this.rotateEnd, false);
 
-        this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:this.degree});
-        this.$emit('rotate-finish', this.degree);
+        const rotateFinishEvent = new CustomEvent('rotateFinish', {detail:{degree:this.degree}});
+        this.rotate_target.dispatchEvent(rotateFinishEvent);
       },
-
     },
+    created(){
+      document.body.addEventListener('objectSelected',this.rotateInit, false);
+    },
+
   }
 
 </script>

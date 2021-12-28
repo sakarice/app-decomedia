@@ -32,9 +32,6 @@
   import { mapGetters, mapMutations } from 'vuex';
   import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
   import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
-  
-  const objectSelected = new CustomEvent('objectSelected');
-
 
   export default {
     components : {
@@ -86,7 +83,8 @@
         document.body.dispatchEvent(showSetting);
       },
       selected(){
-        const objectSelected = new CustomEvent('objectSelected',{detail:{type:1,index:this.index}});
+        const objectSelected = new CustomEvent('objectSelected',
+        {detail:{type:1,index:this.index,element_id:this.imgWrapperWithIndex}});
         document.body.dispatchEvent(objectSelected);
       },
       // 位置操作用
