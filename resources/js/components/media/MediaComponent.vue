@@ -10,6 +10,9 @@
 
         <media-contents-field @click="closeModal"
         ref="mediaContentsField">
+
+          <dom-scale></dom-scale>
+
           <media-img-mng
           ref="mediaImgMng">
           </media-img-mng>
@@ -20,9 +23,9 @@
           </media-figure-mng>
 
           <!-- Mediaテキストコンポーネント -->
-          <media-text
-          :index="1">
-          </media-text>
+          <media-text-mng
+          ref="mediaTextMng">
+          </media-text-mng>
 
           <!-- Media動画(=youtube)コンポーネント -->
           <media-movie
@@ -68,6 +71,10 @@
         <router-view name="dispFigureSettingModal"
         v-on:show-modal="showModal">
         </router-view>
+        <!-- テキスト -->
+        <router-view  name="dispTextSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
         v-on:show-modal="showModal">
@@ -100,6 +107,11 @@
 
     <router-view name="mediaFigureFactory"
     v-show="isShowModal['figureSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
+    <router-view name="mediaTextFactory"
+    v-show="isShowModal['textSettingModal']"
     v-on:close-modal="closeModal">
     </router-view>
 
@@ -171,12 +183,14 @@
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
-  import MediaText from './media_contents/objects/text/MediaTextComponent.vue';
+  import MediaTextMng from './media_contents/objects/text/MediaTextMngComponent.vue';
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
   import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
   import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
+  import DomScale from '../media/media_contents/objects/object_edit_parts/DomScaleComponent.vue'
+
 
 export default {
   components : {
@@ -187,12 +201,13 @@ export default {
     MediaSetting,
     MediaMovie,
     MediaFigureMng,
-    MediaText,
+    MediaTextMng,
     DispAudios,
     MediaObjectControllPartsWrapper,
     ObjectDelete,
     ObjectSettingOpen,
     ObjectCopy,
+    DomScale,
   },
   props: [],
   data : () => {
@@ -206,6 +221,7 @@ export default {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
+        'textSettingModal' : false,
         'figureSettingModal' : false,
         'contentsFieldSettingModal': false,
         'mediaSettingModal' : false,
