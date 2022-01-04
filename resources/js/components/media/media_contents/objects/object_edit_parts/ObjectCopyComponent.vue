@@ -16,20 +16,23 @@
       return {
         copyFigures : [],
         copyImgs : [],
+        copyTexts : [],
       }
     },
     computed : {
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
+      ...mapGetters('mediaTexts', ['getMediaText']),
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
     },
     methods : {
-      // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
       setTargetFigureIndex(index){ this.$store.commit('mediaFigures/setTargetObjectIndex', index)},
       ...mapMutations('mediaFigures', ['addMediaFiguresObjectItem']),
-      // ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
       setTargetImgIndex(index){ this.$store.commit('mediaImgs/setTargetObjectIndex', index)},
       ...mapMutations('mediaImgs', ['addMediaImgsObjectItem']),
+      setTargetTextIndex(index){ this.$store.commit('mediaTexts/setTargetObjectIndex', index)},
+      ...mapMutations('mediaTexts', ['addMediaTextsObjectItem']),
+
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       copyObject(){
         this.resetCopyTargetInfo();
@@ -50,6 +53,13 @@
               imgData['left'] += this.getRandNum(randMinNum, randMaxNum);
               this.copyImgs.push(imgData);
               break;
+            case 2 : // テキスト
+              this.setTargetTextIndex(objInfo.index);
+              const textData = JSON.parse(JSON.stringify(this.getMediaText));
+              textData['top'] += this.getRandNum(randMinNum, randMaxNum);
+              textData['left'] += this.getRandNum(randMinNum, randMaxNum);
+              this.copyTexts.push(textData);
+              break;
           }
         })
       },
@@ -60,7 +70,10 @@
         this.copyImgs.forEach(figure=>{
           this.addMediaImgsObjectItem(figure);
         })
-        this.resetCopyTargetInfo();
+        this.copyTexts.forEach(text=>{
+          this.addMediaTextsObjectItem(text);
+        })
+      this.resetCopyTargetInfo();
       },
       copyAndPaste(){
         this.copyObject();
@@ -69,6 +82,7 @@
       resetCopyTargetInfo(){
         this.copyFigures.length = 0;
         this.copyImgs.length = 0;
+        this.copyTexts.length = 0;
       },
       getRandNum(min,max){
         return min + Math.floor(Math.random() * (max - min));

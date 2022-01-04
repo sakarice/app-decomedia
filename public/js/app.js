@@ -10337,21 +10337,24 @@ var randMaxNum = 20;
   data: function data() {
     return {
       copyFigures: [],
-      copyImgs: []
+      copyImgs: [],
+      copyTexts: []
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({
-    // ...mapMutations('mediaFigures', ['setTargetObjectIndex']),
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaTexts', ['getMediaText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])),
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
     setTargetFigureIndex: function setTargetFigureIndex(index) {
       this.$store.commit('mediaFigures/setTargetObjectIndex', index);
     }
   }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['addMediaFiguresObjectItem'])), {}, {
-    // ...mapMutations('mediaImgs', ['setTargetObjectIndex']),
     setTargetImgIndex: function setTargetImgIndex(index) {
       this.$store.commit('mediaImgs/setTargetObjectIndex', index);
     }
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('selectedObjects', ['unSelectedAll'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['addMediaImgsObjectItem'])), {}, {
+    setTargetTextIndex: function setTargetTextIndex(index) {
+      this.$store.commit('mediaTexts/setTargetObjectIndex', index);
+    }
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaTexts', ['addMediaTextsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('selectedObjects', ['unSelectedAll'])), {}, {
     copyObject: function copyObject() {
       var _this = this;
 
@@ -10382,6 +10385,18 @@ var randMaxNum = 20;
             _this.copyImgs.push(imgData);
 
             break;
+
+          case 2:
+            // テキスト
+            _this.setTargetTextIndex(objInfo.index);
+
+            var textData = JSON.parse(JSON.stringify(_this.getMediaText));
+            textData['top'] += _this.getRandNum(randMinNum, randMaxNum);
+            textData['left'] += _this.getRandNum(randMinNum, randMaxNum);
+
+            _this.copyTexts.push(textData);
+
+            break;
         }
       });
     },
@@ -10394,6 +10409,9 @@ var randMaxNum = 20;
       this.copyImgs.forEach(function (figure) {
         _this2.addMediaImgsObjectItem(figure);
       });
+      this.copyTexts.forEach(function (text) {
+        _this2.addMediaTextsObjectItem(text);
+      });
       this.resetCopyTargetInfo();
     },
     copyAndPaste: function copyAndPaste() {
@@ -10403,6 +10421,7 @@ var randMaxNum = 20;
     resetCopyTargetInfo: function resetCopyTargetInfo() {
       this.copyFigures.length = 0;
       this.copyImgs.length = 0;
+      this.copyTexts.length = 0;
     },
     getRandNum: function getRandNum(min, max) {
       return min + Math.floor(Math.random() * (max - min));
