@@ -22,19 +22,14 @@ function moveStart(e,target){
   init(target);
   let event;
   if(e.type==="mousedown"){
-    console.log(e.type)
     event = e;
     distance_from_target_left = event.clientX - move_target.offsetLeft;
     distance_from_target_top = event.clientY - move_target.offsetTop;
-    console.log("clientX,clientY="+event.clientX+","+event.clientY);
-    console.log("offsetLeft,offsetTop="+move_target.offsetLeft+","+move_target.offsetTop);
   } else {
     event = e.changedTouches[0];
     distance_from_target_left = event.pageX - move_target.offsetLeft;
     distance_from_target_top = event.pageY - move_target.offsetTop;
   }
-
-  // console.log('distance_from_target_top:'+distance_from_target_top)
 
   // ムーブイベントにコールバック
   document.body.addEventListener("mousemove", moving, false);
@@ -48,7 +43,6 @@ function moveStart(e,target){
 function moving(e){
   e.preventDefault();
   let event;
-  console.log(e.target.id)
   if(e.type==="mousemove"){
     event = e;
     left = event.clientX - distance_from_target_left;
