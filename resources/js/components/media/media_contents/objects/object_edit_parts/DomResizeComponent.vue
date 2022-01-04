@@ -194,8 +194,8 @@
 }
 
 .adjust-bar:hover .adjust-bar-inner{
-  /* background-color: lightpink;
-  box-shadow: 0 0 3px lightpink; */
+  /* background-color: lightgreen;
+  box-shadow: 0 0 3px lightgreen; */
 }
 
 .top-size-adjust-bar,
@@ -232,10 +232,10 @@
 }
 
 .adjust-bar-outer:hover {
-  box-shadow: 0 0 3px lightpink;
+  box-shadow: 0 0 3px lightgreen;
 }
 .adjust-bar-outer:hover .adjust-bar-inner {
-  background-color: lightpink;
+  background-color: lightgreen;
 }
 
 .x-outer {
@@ -271,10 +271,10 @@
   border-radius: 50%;
 }
 .adjust-point-outer:hover {
-  box-shadow: 0 0 8px lightpink;
+  box-shadow: 0 0 8px lightgreen;
 }
 .adjust-point-outer:hover .adjust-point-inner {
-  background-color: lightpink;
+  background-color: lightgreen;
 }
 .adjust-point-inner {
   background-color: white;
