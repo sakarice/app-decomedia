@@ -131,7 +131,6 @@ import { mapGetters, mapMutations } from 'vuex';
         }
       // dataを更新
         this.initTextData();
-        // this.updateWidthAndHeight();
         this.updateTextWrapperWidthAndHeight();
       },
       scale(event){
@@ -155,7 +154,6 @@ import { mapGetters, mapMutations } from 'vuex';
           this.updateMediaTextsObjectItem({index:this.index,key:key, value:updateStyleValues[key]})
         })
         this.initTextData();
-        // this.updateWidthAndHeight();
         this.updateTextWrapperWidthAndHeight();
       },
       scaleEnd(){},
@@ -173,10 +171,6 @@ import { mapGetters, mapMutations } from 'vuex';
         this.initTextData();
         e.target.removeEventListener('moveFinish', this.moveEnd, false);
       },
-      updateWidthAndHeight(){
-        // this.width = this.original_width * this.scale_x_and_y;
-        // this.height = this.original_height * this.scale_x_and_y;
-      },
       updateTextWrapperWidthAndHeight(){
         this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
         this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
@@ -188,7 +182,7 @@ import { mapGetters, mapMutations } from 'vuex';
       selected(){
         const objectSelected = new CustomEvent('objectSelected',
         {detail:{
-          type:3
+          type:2
           ,index:this.index
           ,element_id:this.text_wrapper_with_index}});
         document.body.dispatchEvent(objectSelected);

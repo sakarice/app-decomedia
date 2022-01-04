@@ -6949,7 +6949,7 @@ function _defineProperty(obj, key, value) {
     };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('selectedObjects', ['unSelectedAll'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaTexts', ['deleteMediaTextsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('selectedObjects', ['unSelectedAll'])), {}, {
     deleteObject: function deleteObject() {
       var _this = this;
 
@@ -6973,6 +6973,8 @@ function _defineProperty(obj, key, value) {
     this.delMutations[0] = this.deleteMediaFiguresObjectItem; // 0
 
     this.delMutations[1] = this.deleteMediaImgsObjectItem; // 1
+
+    this.delMutations[2] = this.deleteMediaTextsObjectItem; // 2
 
     document.addEventListener('keydown', function (e) {
       if (e.code == "Delete") {
@@ -7508,8 +7510,7 @@ function _defineProperty(obj, key, value) {
       } // dataを更新
 
 
-      this.initTextData(); // this.updateWidthAndHeight();
-
+      this.initTextData();
       this.updateTextWrapperWidthAndHeight();
     },
     scale: function scale(event) {
@@ -7543,8 +7544,7 @@ function _defineProperty(obj, key, value) {
           value: updateStyleValues[key]
         });
       });
-      this.initTextData(); // this.updateWidthAndHeight();
-
+      this.initTextData();
       this.updateTextWrapperWidthAndHeight();
     },
     scaleEnd: function scaleEnd() {},
@@ -7572,9 +7572,6 @@ function _defineProperty(obj, key, value) {
       this.initTextData();
       e.target.removeEventListener('moveFinish', this.moveEnd, false);
     },
-    updateWidthAndHeight: function updateWidthAndHeight() {// this.width = this.original_width * this.scale_x_and_y;
-      // this.height = this.original_height * this.scale_x_and_y;
-    },
     updateTextWrapperWidthAndHeight: function updateTextWrapperWidthAndHeight() {
       this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
       this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
@@ -7590,7 +7587,7 @@ function _defineProperty(obj, key, value) {
     selected: function selected() {
       var objectSelected = new CustomEvent('objectSelected', {
         detail: {
-          type: 3,
+          type: 2,
           index: this.index,
           element_id: this.text_wrapper_with_index
         }
@@ -7749,11 +7746,11 @@ function _defineProperty(obj, key, value) {
       });
     },
     reRender: function reRender(index) {
-      this.$refs.texts[index].init();
+      this.$refs.texts[index].initTextData();
     },
     reRenderAll: function reRenderAll() {
       this.$refs.texts.forEach(function (text) {
-        text.init();
+        text.initTextData();
       });
     }
   }),
