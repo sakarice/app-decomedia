@@ -111,7 +111,6 @@ import { mapGetters, mapMutations } from 'vuex';
           if(x != 0){ // x軸方向の変化
             this.resizeX(event);
           } else if(y != 0){ // y軸方向の変化
-            // this.scale(event); // テキストの場合はscaleで対応
           }
         } else { // 斜め方向の変化
           this.scale(event);
@@ -120,8 +119,8 @@ import { mapGetters, mapMutations } from 'vuex';
       resizeX(event){
       // 横幅
         const diff = event.detail.diff_x;
-        const start_width = event.detail.scale_start_infos['width'];
-        const start_left = event.detail.scale_start_infos['left'];
+        const start_width = event.detail.resize_start_infos['width'];
+        const start_left = event.detail.resize_start_infos['left'];
         this.original_width = (start_width + diff) / this.scale_x_and_y;
         this.updateMediaTextsObjectItem({index:this.index,key:"width", value:this.original_width})
       // オブジェクトの左辺リサイズ時のみleftを更新
@@ -138,7 +137,7 @@ import { mapGetters, mapMutations } from 'vuex';
       scale(event){
         // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
         const e = event.detail;
-        const start_infos = event.detail.scale_start_infos;
+        const start_infos = event.detail.resize_start_infos;
         this.width = start_infos["width"] + e.diff_x;
         this.height = start_infos["height"] + e.diff_y;
         this.scale_x_and_y = this.width / this.original_width;
@@ -227,7 +226,7 @@ import { mapGetters, mapMutations } from 'vuex';
 
       this.text_wrapper.addEventListener('moveStart',this.moveStart,false);
       this.text_wrapper.addEventListener('resize',this.resizeStart,false);
-      this.text_wrapper.addEventListener('scaleEnd',this.scaleEnd,false);
+      this.text_wrapper.addEventListener('scaleEnd',this.resizeEnd,false);
       this.text_wrapper.addEventListener('rotateObject',this.updateDegree,false);
       this.text_wrapper.addEventListener('click',this.selected,false);
       this.text_wrapper.addEventListener('touchstart',this.selected,false);

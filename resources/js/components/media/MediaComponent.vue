@@ -11,7 +11,7 @@
         <media-contents-field @click="closeModal"
         ref="mediaContentsField">
 
-          <router-view name="domScale"></router-view>
+          <router-view name="domResize"></router-view>
           <router-view name="objectRotate"></router-view>
 
           <media-img-mng

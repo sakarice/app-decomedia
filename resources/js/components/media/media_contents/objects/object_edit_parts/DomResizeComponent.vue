@@ -103,7 +103,8 @@
         this.target.removeEventListener('resize',this.resize,false);
       },
       getMutationObserver(){
-        const observer = new MutationObserver(()=>{
+        const observer = new MutationObserver((mutations)=>{
+          // mutations.forEach((mutation)=>{})
           this.SynchronizeStyleWithTarget();
         })
         const config = {
@@ -131,7 +132,7 @@
 
 #resize-wrapper {
   position: absolute;
-  z-index: 1;
+  z-index: 100;
 }
 
 .adjust-bar-wrapper {

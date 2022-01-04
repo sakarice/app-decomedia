@@ -8283,21 +8283,12 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
- // import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-// import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {// objectRotate,
-    // objectResize,
-  },
+  components: {},
   props: ['index'],
   data: function data() {
     return {
@@ -8379,9 +8370,9 @@ function _defineProperty(obj, key, value) {
         "top": this.figureDatas["top"] + "px",
         "width": this.figureDatas["width"] + "px",
         // キャンバスより若干大きめに
-        "height": this.figureDatas["height"] + "px",
-        // キャンバスより若干大きめに
-        "transform": 'rotate(' + this.figureDatas['degree'] + 'deg)'
+        "height": this.figureDatas["height"] + "px" // キャンバスより若干大きめに
+        // "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
+
       };
       return styleObject;
     },
@@ -8436,27 +8427,14 @@ function _defineProperty(obj, key, value) {
       });
       this.figureDatas['degree'] = new_degree;
     },
-    // updateSizeAndPosition(event){
-    //   const data = event.detail;
-    //   const keys = ["width","height","left","top"];
-    //   keys.forEach(key=>{
-    //     if(data[key]){
-    //       this.updateMediaFiguresObjectItem({index:this.index,key:key,value:data[key]});
-    //       this.figureDatas[key] = data[key];
-    //     }
-    //   });
-    //   this.reDraw();
-    // },
     updateSizeAndPosition: function updateSizeAndPosition(event) {
       var _this2 = this;
 
-      console.log("updateSizeAndPosition");
       var diff_x = event.detail.diff_x;
       var diff_y = event.detail.diff_y;
       var x = event.detail.resize_side['x'];
       var y = event.detail.resize_side['y'];
-      var start_value = event.detail.scale_start_infos;
-      console.log(start_value);
+      var start_value = event.detail.resize_start_infos;
       var new_values = {};
       new_values['width'] = start_value['width'] + diff_x;
       new_values['height'] = start_value['height'] + diff_y;
@@ -8629,10 +8607,7 @@ function _defineProperty(obj, key, value) {
     this.init(); // イベント登録
 
     this.canvas_wrapper.addEventListener('resize', this.updateSizeAndPosition, false);
-    this.canvas_wrapper.addEventListener('resizingWidth', this.updateSizeAndPosition, false);
-    this.canvas_wrapper.addEventListener('resizingHeight', this.updateSizeAndPosition, false);
-    this.canvas_wrapper.addEventListener('rotateObjectEvent', this.updateDegree, false); // this.canvas_wrapper.addEventListener('rotateFinish',this.updateDegree,false);
-
+    this.canvas_wrapper.addEventListener('rotateObject', this.updateDegree, false);
     this.canvas_wrapper.addEventListener('figureDataUpdated', this.init, false);
     this.canvas_wrapper.addEventListener('click', this.selected, false);
     this.canvas_wrapper.addEventListener('touchstart', this.selected, false);
@@ -9130,9 +9105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../object_edit_parts/ImgRotateComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue");
-/* harmony import */ var _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../object_edit_parts/ImgResizeComponent.vue */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -9204,26 +9177,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {
-    imgRotate: _object_edit_parts_ImgRotateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    imgResize: _object_edit_parts_ImgResizeComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
-  },
   props: ["index"],
   data: function data() {
     return {
@@ -9245,9 +9203,29 @@ function _defineProperty(obj, key, value) {
     }(function () {
       return start;
     })
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
+    },
+    imgWrapperStyle: function imgWrapperStyle() {
+      var mi = this.mediaImg;
+      var styleObject = {
+        "top": this.addPxToTail(mi['top']),
+        "left": this.addPxToTail(mi['left']),
+        "width": this.addPxToTail(mi['width']),
+        "height": this.addPxToTail(mi['height']),
+        'z-index': mi['layer']
+      };
+      return styleObject;
+    },
+    imgStyle: function imgStyle() {
+      var mi = this.mediaImg;
+      var styleObject = {
+        "width": this.addPxToTail(mi['width']),
+        "height": this.addPxToTail(mi['height']),
+        "opacity": mi['opacity']
+      };
+      return styleObject;
     },
     isEditMode: function isEditMode() {
       var route_name = this.$route.name;
@@ -9266,7 +9244,7 @@ function _defineProperty(obj, key, value) {
       });
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['deleteMediaImgsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), {}, {
     getOneImg: function getOneImg() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
@@ -9311,45 +9289,55 @@ function _defineProperty(obj, key, value) {
         value: e.detail.top
       });
     },
-    updateDegree: function updateDegree(new_degree) {
+    updateSizeAndPosition: function updateSizeAndPosition(event) {
+      var _this2 = this;
+
+      var e = event.detail;
+      var start_value = event.detail.resize_start_infos;
+      var new_values = {};
+      new_values['width'] = start_value['width'] + e.diff_x;
+      new_values['height'] = start_value['height'] + e.diff_y;
+      var left_diff = e.resize_side['x'] == -1 ? e.diff_x : 0;
+      var top_diff = e.resize_side['y'] == -1 ? e.diff_y : 0;
+      new_values['left'] = start_value['left'] - left_diff;
+      new_values['top'] = start_value['top'] - top_diff;
+      Object.keys(new_values).forEach(function (key) {
+        if (new_values[key]) {
+          var new_val = Math.floor(new_values[key]);
+
+          _this2.updateMediaImgsObjectItem({
+            index: _this2.index,
+            key: key,
+            value: new_val
+          });
+
+          _this2.mediaImg[key] = new_val;
+        }
+      });
+    },
+    updateDegree: function updateDegree(e) {
+      var new_degree = e.detail.degree;
+      this.updateMediaImgsObjectItem({
+        index: this.index,
+        key: "degree",
+        value: new_degree
+      });
       this.mediaImg['degree'] = new_degree;
     },
     reRender: function reRender() {
-      var _this2 = this;
+      var _this3 = this;
 
       var keys = ["width", "height", "left", "top"];
       var storeData = this.getOneImg(this.index);
 
       if (storeData) {
         keys.forEach(function (key) {
-          _this2.mediaImg[key] = storeData[key];
+          _this3.mediaImg[key] = storeData[key];
         });
       }
     },
     init: function init() {
       this.mediaImg = this.getOneImg();
-    },
-    imgWrapperStyle: function imgWrapperStyle() {
-      var mi = this.mediaImg;
-      var styleObject = {
-        "position": "absolute",
-        "display": "flex",
-        "justify-content": "center",
-        "top": this.addPxToTail(mi['top']),
-        "left": this.addPxToTail(mi['left']),
-        "transform": "rotate(" + this.mediaImg['degree'] + "deg)",
-        'z-index': this.mediaImg['layer']
-      };
-      return styleObject;
-    },
-    imgStyle: function imgStyle() {
-      var mi = this.mediaImg;
-      var styleObject = {
-        "width": this.addPxToTail(mi['width']),
-        "height": this.addPxToTail(mi['height']),
-        "opacity": mi['opacity']
-      };
-      return styleObject;
     },
     addPxToTail: function addPxToTail(value) {
       return value + "px";
@@ -9362,6 +9350,8 @@ function _defineProperty(obj, key, value) {
     this.img_wrapper = document.getElementById(this.imgWrapperWithIndex); // イベント登録
 
     this.img_wrapper.addEventListener('imgDataUpdated', this.init, false);
+    this.img_wrapper.addEventListener('resize', this.updateSizeAndPosition, false);
+    this.img_wrapper.addEventListener('rotateObject', this.updateDegree, false);
     this.img_wrapper.addEventListener('click', this.selected, false);
     this.img_wrapper.addEventListener('touchstart', this.selected, false);
   }
@@ -9981,7 +9971,8 @@ var touchstartEvent = new CustomEvent('touchstart');
     getMutationObserver: function getMutationObserver() {
       var _this = this;
 
-      var observer = new MutationObserver(function () {
+      var observer = new MutationObserver(function (mutations) {
+        // mutations.forEach((mutation)=>{})
         _this.SynchronizeStyleWithTarget();
       });
       var config = {
@@ -10000,357 +9991,6 @@ var touchstartEvent = new CustomEvent('touchstart');
   mounted: function mounted() {
     this.resize_wrapper = document.getElementById('resize-wrapper');
   }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/resizeHelper */ "./resources/js/functions/resizeHelper.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['index'],
-  data: function data() {
-    return {};
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), {}, {
-    imgWrapperWithIndex: function imgWrapperWithIndex() {
-      return 'media-img-wrapper' + this.index;
-    }
-  }),
-  watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
-    getOneImg: function getOneImg(index) {
-      // ストアから自分のインデックスのオブジェクトだけ取得する
-      this.setTargetObjectIndex(index);
-      return this.getMediaImg;
-    },
-    move: function move(event) {
-      this.$emit('move', event);
-    },
-    resizeStart: function resizeStart(type) {
-      var target = document.getElementById(this.imgWrapperWithIndex);
-      var mediaImg = this.getOneImg(this.index);
-      var sizeAndPositionInfos = [];
-      var keys = ['width', 'height', 'left', 'top'];
-      keys.forEach(function (key) {
-        sizeAndPositionInfos[key] = mediaImg[key];
-      });
-      (0,_functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__.resizeInfoInit)(target, sizeAndPositionInfos);
-
-      (0,_functions_resizeHelper__WEBPACK_IMPORTED_MODULE_0__.resizeStart)(type);
-
-      target.addEventListener('resizingWidth', this.updateWidthAndLeft, false);
-      target.addEventListener('resizingHeight', this.updateHeighthAndTop, false);
-    },
-    updateWidthAndLeft: function updateWidthAndLeft(e) {
-      var new_width = e.detail.width;
-      var new_left = e.detail.left;
-      this.updateMediaImgsObjectItem({
-        index: this.index,
-        key: "width",
-        value: new_width
-      });
-      this.updateMediaImgsObjectItem({
-        index: this.index,
-        key: "left",
-        value: new_left
-      });
-    },
-    updateHeighthAndTop: function updateHeighthAndTop(e) {
-      var new_height = e.detail.height;
-      var new_top = e.detail.top;
-      this.updateMediaImgsObjectItem({
-        index: this.index,
-        key: "height",
-        value: new_height
-      });
-      this.updateMediaImgsObjectItem({
-        index: this.index,
-        key: "top",
-        value: new_top
-      });
-    }
-  }),
-  created: function created() {},
-  mounted: function mounted() {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-
-    keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-
-  return target;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-} //
-//
-//
-//
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['index' // 'rotate_target'
-  ],
-  data: function data() {
-    return {
-      "rotate_target": "",
-      // ドラッグ操作で回転させる対象
-      "rotate_center_x": 0,
-      "rotate_center_y": 0,
-      "degree": 0
-    };
-  },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImg'])), {}, {
-    imgWrapperWithIndex: function imgWrapperWithIndex() {
-      return 'media-img-wrapper' + this.index;
-    }
-  }),
-  watch: {},
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaImgs', ['updateMediaImgsObjectItem'])), {}, {
-    getOneImg: function getOneImg(index) {
-      // ストアから自分のインデックスのオブジェクトだけ取得する
-      this.setTargetObjectIndex(index);
-      return this.getMediaImg;
-    },
-    getStyleSheetValue: function getStyleSheetValue(element, property) {
-      // ↑でcssの値を取得するための関数
-      if (!element || !property) {
-        return null;
-      }
-
-      var style = window.getComputedStyle(element);
-      var value = style.getPropertyValue(property);
-      return value;
-    },
-    // 回転用
-    rotateStart: function rotateStart(e) {
-      this.rotate_target = document.getElementById(this.imgWrapperWithIndex);
-      this.target_left = Number(this.getStyleSheetValue(this.rotate_target, "left").replace("px", ""));
-      this.target_top = Number(this.getStyleSheetValue(this.rotate_target, "top").replace("px", ""));
-      var x = this.getOneImg(this.index)['width'];
-      var y = this.getOneImg(this.index)['height']; // const r =  Math.sqrt(x*x + y*y);
-
-      this.rotate_center_x = this.target_left + x / 2;
-      this.rotate_center_y = this.target_top + y / 2; // 回転イベントにコールバック
-
-      document.body.addEventListener("mousemove", this.rotating, false);
-      document.body.addEventListener("mouseup", this.rotateEnd, false);
-      document.body.addEventListener("touchmove", this.rotating, false);
-      document.body.addEventListener("touchend", this.rotateEnd, false);
-    },
-    rotating: function rotating(e) {
-      e.preventDefault();
-      var event;
-      var distance_x_from_target_center;
-      var distance_y_from_target_center;
-
-      if (e.type === "mousemove") {
-        event = e;
-        distance_x_from_target_center = event.clientX - this.rotate_center_x;
-        distance_y_from_target_center = event.clientY - this.rotate_center_y;
-      } else {
-        event = e.changedTouches[0];
-        distance_x_from_target_center = event.pageX - this.rotate_center_x;
-        distance_y_from_target_center = event.pageY - this.rotate_center_y;
-      }
-
-      var new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
-      var new_deg = Math.floor(new_rad * (180 / Math.PI) * -1 % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
-
-      this.rotate_target.style.transform = 'rotate(' + new_deg + 'deg)';
-      this.degree = new_deg; // マウス、タッチ解除時のイベントを設定
-
-      document.body.addEventListener("mouseleave", this.rotateEnd, false);
-      document.body.addEventListener("touchleave", this.rotateEnd, false);
-    },
-    rotateEnd: function rotateEnd(e) {
-      document.body.removeEventListener("mousemove", this.rotating, false);
-      document.body.removeEventListener("mouseup", this.rotateEnd, false);
-      document.body.removeEventListener("touchmove", this.rotating, false);
-      document.body.removeEventListener("touchend", this.rotateEnd, false);
-      document.body.removeEventListener("mouseleave", this.rotateEnd, false);
-      document.body.removeEventListener("touchleave", this.rotateEnd, false);
-      this.updateMediaImgsObjectItem({
-        index: this.index,
-        key: "degree",
-        value: this.degree
-      });
-    }
-  })
 });
 
 /***/ }),
@@ -11484,7 +11124,6 @@ function _defineProperty(obj, key, value) {
           // x軸方向の変化
           this.resizeX(event);
         } else if (y != 0) {// y軸方向の変化
-          // this.scale(event); // テキストの場合はscaleで対応
         }
       } else {
         // 斜め方向の変化
@@ -11494,8 +11133,8 @@ function _defineProperty(obj, key, value) {
     resizeX: function resizeX(event) {
       // 横幅
       var diff = event.detail.diff_x;
-      var start_width = event.detail.scale_start_infos['width'];
-      var start_left = event.detail.scale_start_infos['left'];
+      var start_width = event.detail.resize_start_infos['width'];
+      var start_left = event.detail.resize_start_infos['left'];
       this.original_width = (start_width + diff) / this.scale_x_and_y;
       this.updateMediaTextsObjectItem({
         index: this.index,
@@ -11524,7 +11163,7 @@ function _defineProperty(obj, key, value) {
 
 
       var e = event.detail;
-      var start_infos = event.detail.scale_start_infos;
+      var start_infos = event.detail.resize_start_infos;
       this.width = start_infos["width"] + e.diff_x;
       this.height = start_infos["height"] + e.diff_y;
       this.scale_x_and_y = this.width / this.original_width;
@@ -11636,7 +11275,7 @@ function _defineProperty(obj, key, value) {
     this.initTextData();
     this.text_wrapper.addEventListener('moveStart', this.moveStart, false);
     this.text_wrapper.addEventListener('resize', this.resizeStart, false);
-    this.text_wrapper.addEventListener('scaleEnd', this.scaleEnd, false);
+    this.text_wrapper.addEventListener('scaleEnd', this.resizeEnd, false);
     this.text_wrapper.addEventListener('rotateObject', this.updateDegree, false);
     this.text_wrapper.addEventListener('click', this.selected, false);
     this.text_wrapper.addEventListener('touchstart', this.selected, false);
@@ -20334,7 +19973,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-img-frame[data-v-260fa2b3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.hidden[data-v-260fa2b3] {\r\n  /* display: none; */\r\n  opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.img-wrapper[data-v-260fa2b3] {\r\n  position : absolute;\r\n  display : flex;\r\n  justify-content : center;\n}\n#media-img-frame[data-v-260fa2b3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.hidden[data-v-260fa2b3] {\r\n  /* display: none; */\r\n  opacity: 0;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20406,55 +20045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 1;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-inner-bar[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -5px;\n}\n.right[data-v-3f24003a] {\r\n  right: -5px;\n}\n.top[data-v-3f24003a] {\r\n  top: -5px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -5px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-58c3b419] {\r\n  opacity: 0;\n}\n#resize-wrapper[data-v-58c3b419] {\r\n  position: absolute;\n}\n.adjust-bar-wrapper[data-v-58c3b419] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-58c3b419]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-58c3b419] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.adjust-bar[data-v-58c3b419]:hover {\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-58c3b419]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-58c3b419],\r\n.left-size-adjust-bar[data-v-58c3b419] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.top-size-adjust-bar[data-v-58c3b419],\r\n.bottom-size-adjust-bar[data-v-58c3b419] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-58c3b419]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-58c3b419]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-58c3b419] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-58c3b419] {\r\n  margin-bottom: -15px;\n}\n.adjust-inner-bar[data-v-58c3b419] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.x-inner[data-v-58c3b419] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-inner[data-v-58c3b419] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-58c3b419] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point[data-v-58c3b419] {\r\n  position: absolute;\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-58c3b419] {\r\n  left: -5px;\n}\n.right[data-v-58c3b419] {\r\n  right: -5px;\n}\n.top[data-v-58c3b419] {\r\n  top: -5px;\n}\n.bottom[data-v-58c3b419] {\r\n  bottom: -5px;\n}\n.mouse-position[data-v-58c3b419] {\r\n  position : absolute;\r\n  right: -90px;\n}\n.mouse-x[data-v-58c3b419] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-58c3b419] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-// Imports
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.rotate-icon[data-v-2f6cfad2] {\r\n  display: inline-block ;\r\n  position: absolute;\r\n  bottom: -90px;  \r\n  padding: 30px;\n}\n.rotate-icon[data-v-2f6cfad2]:hover{\r\n  cursor: all-scroll;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 100;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-inner-bar[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -5px;\n}\n.right[data-v-3f24003a] {\r\n  right: -5px;\n}\n.top[data-v-3f24003a] {\r\n  top: -5px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -5px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -60403,66 +59994,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_style_index_0_id_58c3b419_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_style_index_0_id_58c3b419_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_style_index_0_id_58c3b419_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&":
-/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& ***!
-  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_style_index_0_id_2f6cfad2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_style_index_0_id_2f6cfad2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_style_index_0_id_2f6cfad2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue?vue&type=style&index=0&id=ab774e68&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue?vue&type=style&index=0&id=ab774e68&scoped=true&lang=css& ***!
@@ -63358,88 +62889,6 @@ component.options.__file = "resources/js/components/media/media_contents/objects
 
 /***/ }),
 
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue ***!
-  \*******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true&");
-/* harmony import */ var _ImgResizeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImgResizeComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _ImgResizeComponent_vue_vue_type_style_index_0_id_58c3b419_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ImgResizeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "58c3b419",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue":
-/*!*******************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue ***!
-  \*******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true&");
-/* harmony import */ var _ImgRotateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImgRotateComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js&");
-/* harmony import */ var _ImgRotateComponent_vue_vue_type_style_index_0_id_2f6cfad2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& */ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-;
-
-
-/* normalize component */
-
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _ImgRotateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
-  false,
-  null,
-  "2f6cfad2",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue"
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
-
-/***/ }),
-
 /***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue":
 /*!*********************************************************************************************************!*\
   !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue ***!
@@ -65058,38 +64507,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgResizeComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgRotateComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/babel-loader/lib/index.js??clonedRuleSet-6[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=script&lang=js&");
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_babel_loader_lib_index_js_clonedRuleSet_6_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
 /***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************!*\
   !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/MovieResizeComponent.vue?vue&type=script&lang=js& ***!
@@ -66030,32 +65447,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DomResizeComponent_vue_vue_type_style_index_0_id_3f24003a_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DomResizeComponent.vue?vue&type=style&index=0&id=3f24003a&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/DomResizeComponent.vue?vue&type=style&index=0&id=3f24003a&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_style_index_0_id_58c3b419_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=style&index=0&id=58c3b419&scoped=true&lang=css&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&":
-/*!****************************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_style_index_0_id_2f6cfad2_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/style-loader/dist/cjs.js!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=style&index=0&id=2f6cfad2&scoped=true&lang=css&");
 
 
 /***/ }),
@@ -67153,40 +66544,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DomResizeComponent_vue_vue_type_template_id_3f24003a_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DomResizeComponent_vue_vue_type_template_id_3f24003a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./DomResizeComponent.vue?vue&type=template&id=3f24003a&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/DomResizeComponent.vue?vue&type=template&id=3f24003a&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true&":
-/*!**************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true& ***!
-  \**************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgResizeComponent_vue_vue_type_template_id_58c3b419_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true&");
-
-
-/***/ }),
-
-/***/ "./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true&":
-/*!**************************************************************************************************************************************************!*\
-  !*** ./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true& ***!
-  \**************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
-/* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ImgRotateComponent_vue_vue_type_template_id_2f6cfad2_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true&");
 
 
 /***/ }),
@@ -68669,7 +68026,7 @@ var render = function () {
         "media-contents-field",
         { ref: "mediaContentsField", on: { click: _vm.closeModal } },
         [
-          _c("router-view", { attrs: { name: "domScale" } }),
+          _c("router-view", { attrs: { name: "domResize" } }),
           _vm._v(" "),
           _c("router-view", { attrs: { name: "objectRotate" } }),
           _vm._v(" "),
@@ -72647,7 +72004,8 @@ var render = function () {
   return _c(
     "div",
     {
-      style: _vm.imgWrapperStyle(),
+      staticClass: "img-wrapper",
+      style: _vm.imgWrapperStyle,
       attrs: { id: _vm.imgWrapperWithIndex },
       on: {
         dblclick: _vm.showEditor,
@@ -72671,7 +72029,7 @@ var render = function () {
               expression: "getMediaSetting['isShowImg']",
             },
           ],
-          style: _vm.imgStyle(),
+          style: _vm.imgStyle,
           attrs: { id: "media-img-frame" },
         },
         [
@@ -72695,7 +72053,7 @@ var render = function () {
                 expression: "mediaImg['url']",
               },
             ],
-            style: _vm.imgStyle(),
+            style: _vm.imgStyle,
             attrs: {
               id: "media-img",
               src: _vm.mediaImg["url"],
@@ -72712,43 +72070,7 @@ var render = function () {
           }),
         ]
       ),
-      _vm._v(" "),
-      _c("img-resize", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isEditMode,
-            expression: "isEditMode",
-          },
-        ],
-        class: { hidden: !_vm.isActive },
-        style: {
-          width: _vm.addPxToTail(_vm.mediaImg["width"]),
-          height: _vm.addPxToTail(_vm.mediaImg["height"]),
-        },
-        attrs: { index: _vm.index },
-        on: {
-          resize: _vm.reRender,
-          move: function ($event) {
-            return _vm.moveStart($event)
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("img-rotate", {
-        directives: [
-          {
-            name: "show",
-            rawName: "v-show",
-            value: _vm.isEditMode && _vm.isActive,
-            expression: "isEditMode && isActive",
-          },
-        ],
-        attrs: { index: _vm.index },
-      }),
-    ],
-    1
+    ]
   )
 }
 var staticRenderFns = []
@@ -73047,231 +72369,6 @@ var render = function () {
       ]),
     ]
   )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgResizeComponent.vue?vue&type=template&id=58c3b419&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "resize-wrapper",
-      attrs: { id: "resize-wrapper" },
-      on: {
-        mousedown: function ($event) {
-          return _vm.move($event)
-        },
-        touchstart: function ($event) {
-          return _vm.move($event)
-        },
-      },
-    },
-    [
-      _c(
-        "div",
-        { staticClass: "adjust-bar-wrapper x-size-adjust-bar-wrapper" },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "adjust-bar left-size-adjust-bar",
-              on: {
-                touchstart: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("left")
-                },
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("left")
-                },
-              },
-            },
-            [_c("div", { staticClass: "adjust-inner-bar x-inner" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "adjust-bar right-size-adjust-bar",
-              on: {
-                touchstart: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("right")
-                },
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("right")
-                },
-              },
-            },
-            [_c("div", { staticClass: "adjust-inner-bar x-inner" })]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "adjust-bar-wrapper y-size-adjust-bar-wrapper" },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "adjust-bar top-size-adjust-bar",
-              on: {
-                touchstart: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("top")
-                },
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("top")
-                },
-              },
-            },
-            [_c("div", { staticClass: "adjust-inner-bar y-inner" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "adjust-bar bottom-size-adjust-bar",
-              on: {
-                touchstart: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("bottom")
-                },
-                mousedown: function ($event) {
-                  $event.stopPropagation()
-                  return _vm.resizeStart("bottom")
-                },
-              },
-            },
-            [_c("div", { staticClass: "adjust-inner-bar y-inner" })]
-          ),
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "adjust-point-wrapper" }, [
-        _c("div", {
-          staticClass: "adjust-point left top",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("left")
-              _vm.resizeStart("top")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("left")
-              _vm.resizeStart("top")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point left bottom",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("left")
-              _vm.resizeStart("bottom")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("left")
-              _vm.resizeStart("bottom")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point right top",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("right")
-              _vm.resizeStart("top")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("right")
-              _vm.resizeStart("top")
-            },
-          },
-        }),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point right bottom",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("right")
-              _vm.resizeStart("bottom")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              _vm.resizeStart("right")
-              _vm.resizeStart("bottom")
-            },
-          },
-        }),
-      ]),
-    ]
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/media/media_contents/objects/object_edit_parts/ImgRotateComponent.vue?vue&type=template&id=2f6cfad2&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* binding */ render),
-/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
-/* harmony export */ });
-var render = function () {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("i", {
-    staticClass: "fas fa-sync fa-lg rotate-icon",
-    on: {
-      mousedown: function ($event) {
-        return _vm.rotateStart($event)
-      },
-      touchstart: function ($event) {
-        return _vm.rotateStart($event)
-      },
-    },
-  })
 }
 var staticRenderFns = []
 render._withStripped = true
