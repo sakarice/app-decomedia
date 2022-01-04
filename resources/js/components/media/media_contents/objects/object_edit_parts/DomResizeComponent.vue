@@ -151,7 +151,7 @@
 
 #resize-wrapper {
   position: absolute;
-  z-index: 100;
+  z-index: 9;
 }
 
 .adjust-bar-wrapper {
