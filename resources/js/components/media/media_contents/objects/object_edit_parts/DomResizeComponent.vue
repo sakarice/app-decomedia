@@ -8,12 +8,16 @@
       <div class="adjust-bar left-size-adjust-bar"
        @touchstart.stop="resizeTrigger($event, 'left')"
        @mousedown.stop="resizeTrigger($event, 'left')">
-        <div class="adjust-inner-bar x-inner"></div>
+        <div class="adjust-bar-outer x-outer left-outer tran02">
+          <div class="adjust-bar-inner x-inner left-inner tran02"></div>
+        </div>
       </div>
       <div class="adjust-bar right-size-adjust-bar"
        @touchstart.stop="resizeTrigger($event, 'right')"
        @mousedown.stop="resizeTrigger($event,'right')">
-        <div class="adjust-inner-bar x-inner"></div>
+        <div class="adjust-bar-outer x-outer right-outer tran02">
+          <div class="adjust-bar-inner x-inner right-inner tran02"></div>
+        </div>
       </div>
     </div>
 
@@ -22,29 +26,41 @@
       <div class="adjust-bar top-size-adjust-bar"
        @touchstart.stop="resizeTrigger($event, 'top')"
        @mousedown.stop="resizeTrigger($event, 'top')">
-        <div class="adjust-inner-bar y-inner"></div>
+        <div class="adjust-bar-outer y-outer top-outer tran02">
+          <div class="adjust-bar-inner y-inner top-inner tran02"></div>
+        </div>
       </div>
       <div class="adjust-bar bottom-size-adjust-bar"
        @touchstart.stop="resizeTrigger($event, 'bottom')"
        @mousedown.stop="resizeTrigger($event, 'bottom')">
-        <div class="adjust-inner-bar y-inner"></div>
+        <div class="adjust-bar-outer y-outer bottom-outer tran02">
+          <div class="adjust-bar-inner y-inner bottom-inner tran02"></div>
+        </div>
       </div>
     </div>
 
         <!-- 斜め幅変更用 -->
     <div class="adjust-point-wrapper">
-      <div class="adjust-point left top"
+      <div class="adjust-point-outer left top"
        @touchstart.stop="resizeTrigger($event,'leftTop')"
-       @mousedown.stop="resizeTrigger($event,'leftTop')"></div>
-      <div class="adjust-point left bottom"
+       @mousedown.stop="resizeTrigger($event,'leftTop')">
+       <div class="adjust-point-inner"></div>
+       </div>
+      <div class="adjust-point-outer left bottom"
        @touchstart.stop="resizeTrigger($event,'leftBottom')"
-       @mousedown.stop="resizeTrigger($event,'leftBottom')"></div>
-      <div class="adjust-point right top"
+       @mousedown.stop="resizeTrigger($event,'leftBottom')">
+       <div class="adjust-point-inner"></div>
+       </div>
+      <div class="adjust-point-outer right top"
        @touchstart.stop="resizeTrigger($event,'rightTop')"
-       @mousedown.stop="resizeTrigger($event,'rightTop')"></div>
-      <div class="adjust-point right bottom"
+       @mousedown.stop="resizeTrigger($event,'rightTop')">
+       <div class="adjust-point-inner"></div>
+       </div>
+      <div class="adjust-point-outer right bottom"
        @touchstart.stop="resizeTrigger($event,'rightBottom')"
-       @mousedown.stop="resizeTrigger($event,'rightBottom')"></div>
+       @mousedown.stop="resizeTrigger($event,'rightBottom')">
+       <div class="adjust-point-inner"></div>
+       </div>
     </div>
 
   </div>
@@ -129,6 +145,9 @@
 .hidden {
   opacity: 0;
 }
+.tran02 {
+  transition: 0.2s;
+}
 
 #resize-wrapper {
   position: absolute;
@@ -173,6 +192,12 @@
   width: 30px;
   height: 100%;
 }
+
+.adjust-bar:hover .adjust-bar-inner{
+  /* background-color: lightpink;
+  box-shadow: 0 0 3px lightpink; */
+}
+
 .top-size-adjust-bar,
 .bottom-size-adjust-bar {
   width: 100%;
@@ -194,14 +219,37 @@
   margin-bottom: -15px;
 }
 
-.adjust-inner-bar {
+.adjust-bar-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  border-radius: 10px;
+}
+.adjust-bar-inner {
   background-color: white;
   box-shadow: 1px 1px 4px grey;
   border-radius: 10px;
 }
+
+.adjust-bar-outer:hover {
+  box-shadow: 0 0 3px lightpink;
+}
+.adjust-bar-outer:hover .adjust-bar-inner {
+  background-color: lightpink;
+}
+
+.x-outer {
+  width: 15px;
+  height: 100%;
+}
 .x-inner {
   width: 5px;
   height: 20px;
+}
+
+.y-outer {
+  width: 100%;
+  height: 15px;
 }
 .y-inner {
   width: 20px;
@@ -209,18 +257,33 @@
 }
 
 
+
+
 .adjust-point-wrapper {
   display: flex;
   justify-content: space-between;
 }
-.adjust-point {
+.adjust-point-outer {
   position: absolute;
+  padding: 10px;
+  /* width: 20px;
+  height: 20px; */
+  border-radius: 50%;
+}
+.adjust-point-outer:hover {
+  box-shadow: 0 0 8px lightpink;
+}
+.adjust-point-outer:hover .adjust-point-inner {
+  background-color: lightpink;
+}
+.adjust-point-inner {
   background-color: white;
   width: 10px;
   height: 10px;
   box-shadow: 1px 1px 4px grey;
   border-radius: 50%;
 }
+
 
 .test-point {
   position: absolute;
@@ -232,16 +295,16 @@
 }
 
 .left {
-  left: -5px;
+  left: -15px;
 }
 .right {
-  right: -5px;
+  right: -15px;
 }
 .top {
-  top: -5px;
+  top: -15px;
 }
 .bottom {
-  bottom: -5px;
+  bottom: -15px;
 }
 
 .mouse-position {

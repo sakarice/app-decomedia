@@ -9912,6 +9912,22 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -20045,7 +20061,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 100;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-inner-bar[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -5px;\n}\n.right[data-v-3f24003a] {\r\n  right: -5px;\n}\n.top[data-v-3f24003a] {\r\n  top: -5px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -5px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n.tran02[data-v-3f24003a] {\r\n  transition: 0.2s;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 100;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.adjust-bar:hover .adjust-bar-inner[data-v-3f24003a]{\r\n  /* background-color: lightpink;\r\n  box-shadow: 0 0 3px lightpink; */\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-bar-outer[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center; \r\n  border-radius: 10px;\n}\n.adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.adjust-bar-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 3px lightpink;\n}\n.adjust-bar-outer:hover .adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: lightpink;\n}\n.x-outer[data-v-3f24003a] {\r\n  width: 15px;\r\n  height: 100%;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-outer[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 15px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point-outer[data-v-3f24003a] {\r\n  position: absolute;\r\n  padding: 10px;\r\n  /* width: 20px;\r\n  height: 20px; */\r\n  border-radius: 50%;\n}\n.adjust-point-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 8px lightpink;\n}\n.adjust-point-outer:hover .adjust-point-inner[data-v-3f24003a] {\r\n  background-color: lightpink;\n}\n.adjust-point-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -15px;\n}\n.right[data-v-3f24003a] {\r\n  right: -15px;\n}\n.top[data-v-3f24003a] {\r\n  top: -15px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -15px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -72245,7 +72261,7 @@ var render = function () {
                 },
               },
             },
-            [_c("div", { staticClass: "adjust-inner-bar x-inner" })]
+            [_vm._m(0)]
           ),
           _vm._v(" "),
           _c(
@@ -72263,7 +72279,7 @@ var render = function () {
                 },
               },
             },
-            [_c("div", { staticClass: "adjust-inner-bar x-inner" })]
+            [_vm._m(1)]
           ),
         ]
       ),
@@ -72287,7 +72303,7 @@ var render = function () {
                 },
               },
             },
-            [_c("div", { staticClass: "adjust-inner-bar y-inner" })]
+            [_vm._m(2)]
           ),
           _vm._v(" "),
           _c(
@@ -72305,72 +72321,137 @@ var render = function () {
                 },
               },
             },
-            [_c("div", { staticClass: "adjust-inner-bar y-inner" })]
+            [_vm._m(3)]
           ),
         ]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "adjust-point-wrapper" }, [
-        _c("div", {
-          staticClass: "adjust-point left top",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "leftTop")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "leftTop")
+        _c(
+          "div",
+          {
+            staticClass: "adjust-point-outer left top",
+            on: {
+              touchstart: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "leftTop")
+              },
+              mousedown: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "leftTop")
+              },
             },
           },
-        }),
+          [_c("div", { staticClass: "adjust-point-inner" })]
+        ),
         _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point left bottom",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "leftBottom")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "leftBottom")
+        _c(
+          "div",
+          {
+            staticClass: "adjust-point-outer left bottom",
+            on: {
+              touchstart: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "leftBottom")
+              },
+              mousedown: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "leftBottom")
+              },
             },
           },
-        }),
+          [_c("div", { staticClass: "adjust-point-inner" })]
+        ),
         _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point right top",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "rightTop")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "rightTop")
+        _c(
+          "div",
+          {
+            staticClass: "adjust-point-outer right top",
+            on: {
+              touchstart: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "rightTop")
+              },
+              mousedown: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "rightTop")
+              },
             },
           },
-        }),
+          [_c("div", { staticClass: "adjust-point-inner" })]
+        ),
         _vm._v(" "),
-        _c("div", {
-          staticClass: "adjust-point right bottom",
-          on: {
-            touchstart: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "rightBottom")
-            },
-            mousedown: function ($event) {
-              $event.stopPropagation()
-              return _vm.resizeTrigger($event, "rightBottom")
+        _c(
+          "div",
+          {
+            staticClass: "adjust-point-outer right bottom",
+            on: {
+              touchstart: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "rightBottom")
+              },
+              mousedown: function ($event) {
+                $event.stopPropagation()
+                return _vm.resizeTrigger($event, "rightBottom")
+              },
             },
           },
-        }),
+          [_c("div", { staticClass: "adjust-point-inner" })]
+        ),
       ]),
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "adjust-bar-outer x-outer left-outer tran02" },
+      [_c("div", { staticClass: "adjust-bar-inner x-inner left-inner tran02" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "adjust-bar-outer x-outer right-outer tran02" },
+      [
+        _c("div", {
+          staticClass: "adjust-bar-inner x-inner right-inner tran02",
+        }),
+      ]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "adjust-bar-outer y-outer top-outer tran02" },
+      [_c("div", { staticClass: "adjust-bar-inner y-inner top-inner tran02" })]
+    )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "adjust-bar-outer y-outer bottom-outer tran02" },
+      [
+        _c("div", {
+          staticClass: "adjust-bar-inner y-inner bottom-inner tran02",
+        }),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
