@@ -1,6 +1,7 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper" :style="canvasWrapperStyle()"
+  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper"
+   :style="canvasWrapperStyle()" :class="{is_active : isActive}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
@@ -266,6 +267,10 @@ import { mapGetters, mapMutations } from 'vuex';
 </script>
 
 <style scoped>
+@import "/resources/css/mediaObjectCommon.css";
+@import "/resources/css/flexSetting.css";
+
+
 .canvas_item-wrapper {
   position: absolute;
   display: inline-flex;
@@ -284,12 +289,6 @@ import { mapGetters, mapMutations } from 'vuex';
   cursor: all-scroll;
   }
 
-.is_active {
-  outline : 1.5px solid blue;
-}
-.hidden {
-  opacity: 0;
-}
 
 .x-size-adjust-bar-wrapper,
 .y-size-adjust-bar-wrapper{

@@ -22,25 +22,33 @@ function moveStart(e,target){
   init(target);
   let event;
   if(e.type==="mousedown"){
+    console.log(e.type)
     event = e;
     distance_from_target_left = event.clientX - move_target.offsetLeft;
     distance_from_target_top = event.clientY - move_target.offsetTop;
+    console.log("clientX,clientY="+event.clientX+","+event.clientY);
+    console.log("offsetLeft,offsetTop="+move_target.offsetLeft+","+move_target.offsetTop);
   } else {
     event = e.changedTouches[0];
     distance_from_target_left = event.pageX - move_target.offsetLeft;
     distance_from_target_top = event.pageY - move_target.offsetTop;
   }
 
+  // console.log('distance_from_target_top:'+distance_from_target_top)
+
   // ムーブイベントにコールバック
   document.body.addEventListener("mousemove", moving, false);
+  document.body.addEventListener("mouseup", moveEnd, false);
   move_target.addEventListener("mouseup", moveEnd, false);
   document.body.addEventListener("touchmove", moving, false);
+  document.body.addEventListener("touchend", moveEnd, false);
   move_target.addEventListener("touchend", moveEnd, false);
 }
 
 function moving(e){
   e.preventDefault();
   let event;
+  console.log(e.target.id)
   if(e.type==="mousemove"){
     event = e;
     left = event.clientX - distance_from_target_left;
@@ -53,6 +61,9 @@ function moving(e){
   move_target.style.left = left + "px";
   move_target.style.top = top + "px";
 
+  const moving_event = new CustomEvent('moving',{detail:{left:left, top:top}})
+  move_target.dispatchEvent(moving_event);
+
   // マウス、タッチ解除時のイベントを設定
   document.body.addEventListener("mouseleave", moveEnd, false);
   document.body.addEventListener("touchleave", moveEnd, false);
@@ -63,6 +74,9 @@ function moveEnd(e){
   document.body.removeEventListener("mouseleave", moveEnd, false);
   document.body.removeEventListener("touchmove", moving, false);
   document.body.removeEventListener("touchleave", moveEnd, false);
+  document.body.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("touchend", moveEnd, false);
+
   move_target.removeEventListener("mouseup", moveEnd, false);
   move_target.removeEventListener("touchend", moveEnd, false);
   

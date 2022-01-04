@@ -1,7 +1,7 @@
 <template>
   <div id="resize-wrapper" class="resize-wrapper"
   v-show="isObjSelected"
-  @mousedown="move" @touchstart="move">
+  @mousedown="targetMoveStart($event)" @touchstart="targetMoveStart($event)">
 
     <!-- // 横幅変更用 -->
     <div class="adjust-bar-wrapper x-size-adjust-bar-wrapper">
@@ -71,9 +71,6 @@
   import {resizeTargetInit,resizeBasePointInit,resizeStart} from '../../../../../functions/resizeDiffCulcHelper.js'
   import { mapGetters, mapMutations } from 'vuex';
 
-  const mousedownEvent = new CustomEvent('mousedown');
-  const touchstartEvent = new CustomEvent('touchstart');
-
   export default {
     props:[],
     data : ()=>{
@@ -87,11 +84,8 @@
       isObjSelected:function(){ return (this.getSelectedObjects.length > 0 ) ? true : false },
     },
     methods : {
-      move(){
-        // 対象DOMも一緒に動かすためにイベントを作成
-        this.target.dispatchEvent(mousedownEvent);
-        this.target.dispatchEvent(touchstartEvent);
-      },
+      // 対象DOMも一緒に動かすためにイベントを作成
+      targetMoveStart(e){ moveStart(e,this.target);},
       ObjectSelected(event){
         const e = event.detail;
         this.target = document.getElementById(e.element_id);
@@ -146,7 +140,7 @@
   opacity: 0;
 }
 .tran02 {
-  transition: 0.2s;
+  transition: 0.1s;
 }
 
 #resize-wrapper {

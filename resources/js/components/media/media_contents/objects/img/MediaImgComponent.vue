@@ -1,7 +1,7 @@
 <template>
   <!-- Media画像-->
-  <div :id="imgWrapperWithIndex" class="img-wrapper"
-  v-bind:style="imgWrapperStyle"
+  <div :id="imgWrapperWithIndex" class="obj img-wrapper"
+  v-bind:style="imgWrapperStyle" :class="{is_active : isActive}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
@@ -159,6 +159,8 @@
 
 
 <style scoped>
+@import "/resources/css/mediaObjectCommon.css";
+@import "/resources/css/flexSetting.css";
 
 .img-wrapper {
   position : absolute;
@@ -171,10 +173,5 @@
     justify-content: center;
     align-items: center;
   }
-
-.hidden {
-  /* display: none; */
-  opacity: 0;
-}
 
 </style>

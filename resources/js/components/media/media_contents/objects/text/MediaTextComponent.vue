@@ -1,8 +1,8 @@
 <template>
   <!-- Media図形-->
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
-  :style="textWrapperStyle"
-  @click.stop @mousedown.stop="moveStart" @touchstart.stop="moveStart">
+  :class="{is_active : isActive}"
+  @click.stop @mousedown.stop="moveTrigger($event)" @touchstart.stop="moveTrigger($event)">
     <p contenteditable spellcheck="false"
     :id="text_with_index"
     class="text-area"
@@ -12,8 +12,6 @@
     <!-- ↓初期描画時にテキストの横幅を取得するための一時的な要素↓ -->
     <p id="tmp-dummy-text">{{text_default}}</p>
     
-    <!-- <object-rotate v-show="isEditMode && isActive"></object-rotate> -->
-
   </div>
 
   
@@ -60,13 +58,6 @@ import { mapGetters, mapMutations } from 'vuex';
       isActive:function(){
         return this.getSelectedObjects.some((obj)=>obj.type==3 && obj.index==this.index)
       },
-      textWrapperStyle:function(){
-        const textWrapperStyle = {
-          "left" : this.mediaText['left'] + "px",
-          "top" : this.mediaText['top'] + "px",
-        }
-        return textWrapperStyle;
-      },
       textStyle:function(){
         const textStyle = {
           "max-width" : this.original_width + "px",
@@ -74,7 +65,6 @@ import { mapGetters, mapMutations } from 'vuex';
         }
         return textStyle;
       },
-      // scale_x_and_y:function(){ return this.height / this.original_height },
     },
     watch : {
       text_default(){ console.log('text changed!');}
@@ -131,7 +121,7 @@ import { mapGetters, mapMutations } from 'vuex';
         }
       // dataを更新
         this.initTextData();
-        this.updateTextWrapperWidthAndHeight();
+        this.updateTextWrapperStyle();
       },
       scale(event){
         // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
@@ -154,24 +144,21 @@ import { mapGetters, mapMutations } from 'vuex';
           this.updateMediaTextsObjectItem({index:this.index,key:key, value:updateStyleValues[key]})
         })
         this.initTextData();
-        this.updateTextWrapperWidthAndHeight();
+        this.updateTextWrapperStyle();
       },
-      scaleEnd(){},
       // 位置操作用
-      moveStart(e){
+      moveTrigger(e){
         const move_target_dom = this.text_wrapper;
         moveStart(e, move_target_dom);
-        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
       },
-      moveEnd(e){
-        const new_left = e.detail.left;
-        const new_top = e.detail.top;
-        this.updateMediaTextsObjectItem({index:this.index,key:"left", value:new_left})
-        this.updateMediaTextsObjectItem({index:this.index,key:"top", value:new_top})
+      moving(e){
+        this.updateMediaTextsObjectItem({index:this.index,key:"left", value:e.detail.left})
+        this.updateMediaTextsObjectItem({index:this.index,key:"top", value:e.detail.top})
         this.initTextData();
-        e.target.removeEventListener('moveFinish', this.moveEnd, false);
       },
-      updateTextWrapperWidthAndHeight(){
+      updateTextWrapperStyle(){
+        this.text_wrapper.style.left = this.getMediaText["left"] + "px";
+        this.text_wrapper.style.top = this.getMediaText["top"] + "px";
         this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
         this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
       },
@@ -205,25 +192,26 @@ import { mapGetters, mapMutations } from 'vuex';
         this.original_height = dummy_text_height + 1;
         this.width = this.original_width;
         this.height = this.original_height;
-        this.updateTextWrapperWidthAndHeight();
+        this.updateTextWrapperStyle();
 
         const resizeObserver = new ResizeObserver(entrys=>{
           entrys.forEach((entry)=>{
             const rect = entry.contentRect;         
             this.original_height = rect["height"];
-            this.updateTextWrapperWidthAndHeight();
+            this.updateTextWrapperStyle();
           })
         });
         resizeObserver.observe(this.text);
       });
       this.initTextData();
 
-      this.text_wrapper.addEventListener('moveStart',this.moveStart,false);
-      this.text_wrapper.addEventListener('resize',this.resizeStart,false);
-      this.text_wrapper.addEventListener('scaleEnd',this.resizeEnd,false);
-      this.text_wrapper.addEventListener('rotateObject',this.updateDegree,false);
-      this.text_wrapper.addEventListener('click',this.selected,false);
+      this.text_wrapper.addEventListener('mousedown',this.moveTrigger,false);
+      this.text_wrapper.addEventListener('touchstart',this.moveTrigger,false);
       this.text_wrapper.addEventListener('touchstart',this.selected,false);
+      this.text_wrapper.addEventListener('click',this.selected,false);
+      this.text_wrapper.addEventListener('moving',this.moving,false);
+      this.text_wrapper.addEventListener('resize',this.resizeStart,false);
+      this.text_wrapper.addEventListener('rotateObject',this.updateDegree,false);
 
     },
   }
@@ -231,6 +219,9 @@ import { mapGetters, mapMutations } from 'vuex';
 </script>
 
 <style scoped>
+@import "/resources/css/mediaObjectCommon.css";
+@import "/resources/css/flexSetting.css";
+
 .text-wrapper {
   position: absolute;
   transform-origin: center center;

@@ -8283,6 +8283,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -9933,8 +9934,6 @@ function _defineProperty(obj, key, value) {
 
 
 
-var mousedownEvent = new CustomEvent('mousedown');
-var touchstartEvent = new CustomEvent('touchstart');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
@@ -9949,10 +9948,9 @@ var touchstartEvent = new CustomEvent('touchstart');
     }
   }),
   methods: {
-    move: function move() {
-      // 対象DOMも一緒に動かすためにイベントを作成
-      this.target.dispatchEvent(mousedownEvent);
-      this.target.dispatchEvent(touchstartEvent);
+    // 対象DOMも一緒に動かすためにイベントを作成
+    targetMoveStart: function targetMoveStart(e) {
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, this.target);
     },
     ObjectSelected: function ObjectSelected(event) {
       var e = event.detail;
@@ -11058,8 +11056,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
 
 
 
@@ -11106,21 +11102,13 @@ function _defineProperty(obj, key, value) {
         return obj.type == 3 && obj.index == _this.index;
       });
     },
-    textWrapperStyle: function textWrapperStyle() {
-      var textWrapperStyle = {
-        "left": this.mediaText['left'] + "px",
-        "top": this.mediaText['top'] + "px"
-      };
-      return textWrapperStyle;
-    },
     textStyle: function textStyle() {
       var textStyle = {
         "max-width": this.original_width + "px",
         "transform": "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")"
       };
       return textStyle;
-    } // scale_x_and_y:function(){ return this.height / this.original_height },
-
+    }
   }),
   watch: {
     text_default: function text_default() {
@@ -11192,7 +11180,7 @@ function _defineProperty(obj, key, value) {
 
 
       this.initTextData();
-      this.updateTextWrapperWidthAndHeight();
+      this.updateTextWrapperStyle();
     },
     scale: function scale(event) {
       var _this2 = this; // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
@@ -11226,34 +11214,29 @@ function _defineProperty(obj, key, value) {
         });
       });
       this.initTextData();
-      this.updateTextWrapperWidthAndHeight();
+      this.updateTextWrapperStyle();
     },
-    scaleEnd: function scaleEnd() {},
     // 位置操作用
-    moveStart: function moveStart(e) {
+    moveTrigger: function moveTrigger(e) {
       var move_target_dom = this.text_wrapper;
-
       (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
-
-      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
     },
-    moveEnd: function moveEnd(e) {
-      var new_left = e.detail.left;
-      var new_top = e.detail.top;
+    moving: function moving(e) {
       this.updateMediaTextsObjectItem({
         index: this.index,
         key: "left",
-        value: new_left
+        value: e.detail.left
       });
       this.updateMediaTextsObjectItem({
         index: this.index,
         key: "top",
-        value: new_top
+        value: e.detail.top
       });
       this.initTextData();
-      e.target.removeEventListener('moveFinish', this.moveEnd, false);
     },
-    updateTextWrapperWidthAndHeight: function updateTextWrapperWidthAndHeight() {
+    updateTextWrapperStyle: function updateTextWrapperStyle() {
+      this.text_wrapper.style.left = this.getMediaText["left"] + "px";
+      this.text_wrapper.style.top = this.getMediaText["top"] + "px";
       this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
       this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
     },
@@ -11293,24 +11276,25 @@ function _defineProperty(obj, key, value) {
       this.original_height = dummy_text_height + 1;
       this.width = this.original_width;
       this.height = this.original_height;
-      this.updateTextWrapperWidthAndHeight();
+      this.updateTextWrapperStyle();
       var resizeObserver = new ResizeObserver(function (entrys) {
         entrys.forEach(function (entry) {
           var rect = entry.contentRect;
           _this3.original_height = rect["height"];
 
-          _this3.updateTextWrapperWidthAndHeight();
+          _this3.updateTextWrapperStyle();
         });
       });
       resizeObserver.observe(this.text);
     });
     this.initTextData();
-    this.text_wrapper.addEventListener('moveStart', this.moveStart, false);
-    this.text_wrapper.addEventListener('resize', this.resizeStart, false);
-    this.text_wrapper.addEventListener('scaleEnd', this.resizeEnd, false);
-    this.text_wrapper.addEventListener('rotateObject', this.updateDegree, false);
-    this.text_wrapper.addEventListener('click', this.selected, false);
+    this.text_wrapper.addEventListener('mousedown', this.moveTrigger, false);
+    this.text_wrapper.addEventListener('touchstart', this.moveTrigger, false);
     this.text_wrapper.addEventListener('touchstart', this.selected, false);
+    this.text_wrapper.addEventListener('click', this.selected, false);
+    this.text_wrapper.addEventListener('moving', this.moving, false);
+    this.text_wrapper.addEventListener('resize', this.resizeStart, false);
+    this.text_wrapper.addEventListener('rotateObject', this.updateDegree, false);
   }
 });
 
@@ -12834,25 +12818,32 @@ function moveStart(e, target) {
   var event;
 
   if (e.type === "mousedown") {
+    console.log(e.type);
     event = e;
     distance_from_target_left = event.clientX - move_target.offsetLeft;
     distance_from_target_top = event.clientY - move_target.offsetTop;
+    console.log("clientX,clientY=" + event.clientX + "," + event.clientY);
+    console.log("offsetLeft,offsetTop=" + move_target.offsetLeft + "," + move_target.offsetTop);
   } else {
     event = e.changedTouches[0];
     distance_from_target_left = event.pageX - move_target.offsetLeft;
     distance_from_target_top = event.pageY - move_target.offsetTop;
-  } // ムーブイベントにコールバック
+  } // console.log('distance_from_target_top:'+distance_from_target_top)
+  // ムーブイベントにコールバック
 
 
   document.body.addEventListener("mousemove", moving, false);
+  document.body.addEventListener("mouseup", moveEnd, false);
   move_target.addEventListener("mouseup", moveEnd, false);
   document.body.addEventListener("touchmove", moving, false);
+  document.body.addEventListener("touchend", moveEnd, false);
   move_target.addEventListener("touchend", moveEnd, false);
 }
 
 function moving(e) {
   e.preventDefault();
   var event;
+  console.log(e.target.id);
 
   if (e.type === "mousemove") {
     event = e;
@@ -12865,7 +12856,14 @@ function moving(e) {
   }
 
   move_target.style.left = left + "px";
-  move_target.style.top = top + "px"; // マウス、タッチ解除時のイベントを設定
+  move_target.style.top = top + "px";
+  var moving_event = new CustomEvent('moving', {
+    detail: {
+      left: left,
+      top: top
+    }
+  });
+  move_target.dispatchEvent(moving_event); // マウス、タッチ解除時のイベントを設定
 
   document.body.addEventListener("mouseleave", moveEnd, false);
   document.body.addEventListener("touchleave", moveEnd, false);
@@ -12876,6 +12874,8 @@ function moveEnd(e) {
   document.body.removeEventListener("mouseleave", moveEnd, false);
   document.body.removeEventListener("touchmove", moving, false);
   document.body.removeEventListener("touchleave", moveEnd, false);
+  document.body.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("touchend", moveEnd, false);
   move_target.removeEventListener("mouseup", moveEnd, false);
   move_target.removeEventListener("touchend", moveEnd, false); // 移動終了カスタムイベント。終了後の位置を引数で渡す。
 
@@ -19929,11 +19929,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/mediaObjectCommon.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaObjectCommon.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_item-wrapper[data-v-069afa41] {\r\n  position: absolute;\r\n  display: inline-flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transform-origin: center center;\n}\n.canvas_area[data-v-069afa41] {\r\n  display: block;\n}\n.canvas_area[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.is_active[data-v-069afa41] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-069afa41] {\r\n  opacity: 0;\n}\n.x-size-adjust-bar-wrapper[data-v-069afa41],\r\n.y-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\r\n\r\n/* x軸方向のサイズ調整 */\n.x-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.x-size-adjust-bar-wrapper[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.right-size-adjust-bar[data-v-069afa41],\r\n.left-size-adjust-bar[data-v-069afa41] {\r\n  background-color: red;\r\n  width: 5px;\r\n  height: 20px;\r\n  border-radius: 5px;\n}\n.right-size-adjust-bar[data-v-069afa41]{\r\n  margin-right: -3px;\n}\n.right-size-adjust-bar[data-v-069afa41]:hover{\r\n  cursor: auto;\n}\n.left-size-adjust-bar[data-v-069afa41]{\r\n  margin-left: -3px;\n}\n.left-size-adjust-bar[data-v-069afa41]:hover{\r\n  cursor: auto;\n}\r\n\r\n/* y軸方向のサイズ調整 */\n.y-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.y-size-adjust-bar-wrapper[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.top-size-adjust-bar[data-v-069afa41],\r\n.bottom-size-adjust-bar[data-v-069afa41] {\r\n  background-color: blue;\r\n  width: 20px;\r\n  height: 5px;\r\n  border-radius: 5px;\n}\n.top-size-adjust-bar[data-v-069afa41] {\r\n  margin-top: -3px;\n}\n.top-size-adjust-bar[data-v-069afa41]:hover {\r\n  cursor: auto;\n}\n.bottom-size-adjust-bar[data-v-069afa41] {\r\n  margin-bottom: -3px;\n}\n.bottom-size-adjust-bar[data-v-069afa41]:hover {\r\n  cursor: auto;\n}\n.mouse-position[data-v-069afa41] {\r\n  position : absolute;\r\n  right: -90px;\n}\n.mouse-x[data-v-069afa41] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-069afa41] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.canvas_item-wrapper[data-v-069afa41] {\r\n  position: absolute;\r\n  display: inline-flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\r\n  transform-origin: center center;\n}\n.canvas_area[data-v-069afa41] {\r\n  display: block;\n}\n.canvas_area[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.x-size-adjust-bar-wrapper[data-v-069afa41],\r\n.y-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\n}\r\n\r\n/* x軸方向のサイズ調整 */\n.x-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.x-size-adjust-bar-wrapper[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.right-size-adjust-bar[data-v-069afa41],\r\n.left-size-adjust-bar[data-v-069afa41] {\r\n  background-color: red;\r\n  width: 5px;\r\n  height: 20px;\r\n  border-radius: 5px;\n}\n.right-size-adjust-bar[data-v-069afa41]{\r\n  margin-right: -3px;\n}\n.right-size-adjust-bar[data-v-069afa41]:hover{\r\n  cursor: auto;\n}\n.left-size-adjust-bar[data-v-069afa41]{\r\n  margin-left: -3px;\n}\n.left-size-adjust-bar[data-v-069afa41]:hover{\r\n  cursor: auto;\n}\r\n\r\n/* y軸方向のサイズ調整 */\n.y-size-adjust-bar-wrapper[data-v-069afa41]{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.y-size-adjust-bar-wrapper[data-v-069afa41]:hover{\r\n  cursor: all-scroll;\n}\n.top-size-adjust-bar[data-v-069afa41],\r\n.bottom-size-adjust-bar[data-v-069afa41] {\r\n  background-color: blue;\r\n  width: 20px;\r\n  height: 5px;\r\n  border-radius: 5px;\n}\n.top-size-adjust-bar[data-v-069afa41] {\r\n  margin-top: -3px;\n}\n.top-size-adjust-bar[data-v-069afa41]:hover {\r\n  cursor: auto;\n}\n.bottom-size-adjust-bar[data-v-069afa41] {\r\n  margin-bottom: -3px;\n}\n.bottom-size-adjust-bar[data-v-069afa41]:hover {\r\n  cursor: auto;\n}\n.mouse-position[data-v-069afa41] {\r\n  position : absolute;\r\n  right: -90px;\n}\n.mouse-x[data-v-069afa41] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-069afa41] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20001,11 +20007,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/mediaObjectCommon.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaObjectCommon.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.img-wrapper[data-v-260fa2b3] {\r\n  position : absolute;\r\n  display : flex;\r\n  justify-content : center;\n}\n#media-img-frame[data-v-260fa2b3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.hidden[data-v-260fa2b3] {\r\n  /* display: none; */\r\n  opacity: 0;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.img-wrapper[data-v-260fa2b3] {\r\n  position : absolute;\r\n  display : flex;\r\n  justify-content : center;\n}\n#media-img-frame[data-v-260fa2b3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20077,7 +20089,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n.tran02[data-v-3f24003a] {\r\n  transition: 0.2s;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 9;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.adjust-bar:hover .adjust-bar-inner[data-v-3f24003a]{\r\n  /* background-color: lightgreen;\r\n  box-shadow: 0 0 3px lightgreen; */\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-bar-outer[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center; \r\n  border-radius: 10px;\n}\n.adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.adjust-bar-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 3px lightgreen;\n}\n.adjust-bar-outer:hover .adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: lightgreen;\n}\n.x-outer[data-v-3f24003a] {\r\n  width: 15px;\r\n  height: 100%;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-outer[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 15px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point-outer[data-v-3f24003a] {\r\n  position: absolute;\r\n  padding: 10px;\r\n  /* width: 20px;\r\n  height: 20px; */\r\n  border-radius: 50%;\n}\n.adjust-point-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 8px lightgreen;\n}\n.adjust-point-outer:hover .adjust-point-inner[data-v-3f24003a] {\r\n  background-color: lightgreen;\n}\n.adjust-point-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -15px;\n}\n.right[data-v-3f24003a] {\r\n  right: -15px;\n}\n.top[data-v-3f24003a] {\r\n  top: -15px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -15px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.hidden[data-v-3f24003a] {\r\n  opacity: 0;\n}\n.tran02[data-v-3f24003a] {\r\n  transition: 0.1s;\n}\n#resize-wrapper[data-v-3f24003a] {\r\n  position: absolute;\r\n  z-index: 9;\n}\n.adjust-bar-wrapper[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 100%;\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.adjust-bar-wrapper[data-v-3f24003a]:hover {\r\n  cursor: all-scroll;\n}\n.adjust-bar[data-v-3f24003a] { \r\n  border-radius: 5px;\r\n  padding: 5px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  /* background-color: lightgrey; */\n}\n.adjust-bar[data-v-3f24003a]:hover {\r\n  /* background-color: aqua; */\r\n  cursor: auto;\n}\n.y-size-adjust-bar-wrapper[data-v-3f24003a]{\r\n  flex-direction: column;\n}\n.right-size-adjust-bar[data-v-3f24003a],\r\n.left-size-adjust-bar[data-v-3f24003a] {\r\n  width: 30px;\r\n  height: 100%;\n}\n.adjust-bar:hover .adjust-bar-inner[data-v-3f24003a]{\r\n  /* background-color: lightgreen;\r\n  box-shadow: 0 0 3px lightgreen; */\n}\n.top-size-adjust-bar[data-v-3f24003a],\r\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 30px;\n}\r\n\r\n\r\n/* 調整バーを枠内から枠上にずらすためのmargin */\n.right-size-adjust-bar[data-v-3f24003a]{\r\n  margin-right: -15px;\n}\n.left-size-adjust-bar[data-v-3f24003a]{\r\n  margin-left: -15px;\n}\n.top-size-adjust-bar[data-v-3f24003a] {\r\n  margin-top: -15px;\n}\n.bottom-size-adjust-bar[data-v-3f24003a] {\r\n  margin-bottom: -15px;\n}\n.adjust-bar-outer[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center; \r\n  border-radius: 10px;\n}\n.adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 10px;\n}\n.adjust-bar-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 3px lightgreen;\n}\n.adjust-bar-outer:hover .adjust-bar-inner[data-v-3f24003a] {\r\n  background-color: lightgreen;\n}\n.x-outer[data-v-3f24003a] {\r\n  width: 15px;\r\n  height: 100%;\n}\n.x-inner[data-v-3f24003a] {\r\n  width: 5px;\r\n  height: 20px;\n}\n.y-outer[data-v-3f24003a] {\r\n  width: 100%;\r\n  height: 15px;\n}\n.y-inner[data-v-3f24003a] {\r\n  width: 20px;\r\n  height: 5px;\n}\n.adjust-point-wrapper[data-v-3f24003a] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.adjust-point-outer[data-v-3f24003a] {\r\n  position: absolute;\r\n  padding: 10px;\r\n  /* width: 20px;\r\n  height: 20px; */\r\n  border-radius: 50%;\n}\n.adjust-point-outer[data-v-3f24003a]:hover {\r\n  box-shadow: 0 0 8px lightgreen;\n}\n.adjust-point-outer:hover .adjust-point-inner[data-v-3f24003a] {\r\n  background-color: lightgreen;\n}\n.adjust-point-inner[data-v-3f24003a] {\r\n  background-color: white;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.test-point[data-v-3f24003a] {\r\n  position: absolute;\r\n  background-color: red;\r\n  width: 10px;\r\n  height: 10px;\r\n  box-shadow: 1px 1px 4px grey;\r\n  border-radius: 50%;\n}\n.left[data-v-3f24003a] {\r\n  left: -15px;\n}\n.right[data-v-3f24003a] {\r\n  right: -15px;\n}\n.top[data-v-3f24003a] {\r\n  top: -15px;\n}\n.bottom[data-v-3f24003a] {\r\n  bottom: -15px;\n}\n.mouse-position[data-v-3f24003a] {\r\n  position : absolute;\r\n  /* bottom: -20px; */\r\n  right: -90px;\n}\n.mouse-x[data-v-3f24003a] {\r\n  bottom: -20px;\n}\n.mosue-y[data-v-3f24003a] {\r\n  bottom: -40px;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20223,9 +20235,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/mediaObjectCommon.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaObjectCommon.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.text-wrapper[data-v-22e33c6f] {\r\n  position: absolute;\r\n  transform-origin: center center;\n}\ntextarea[data-v-22e33c6f] {\r\n  overflow: hidden;\n}\n.text-area[data-v-22e33c6f] {\r\n  display: inline-block;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  border: none;\r\n  margin: 0;\r\n  transform-origin: 0 0;\r\n  resize: none;\r\n  padding: 0px;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\n}\n.text-area[data-v-22e33c6f]:hover {\r\n  cursor: pointer;\r\n  outline: 1px solid blue;\n}\n.text-area[data-v-22e33c6f]:focus {\r\n  outline: 1px solid blue;\n}\n.is_active[data-v-22e33c6f] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-22e33c6f] {\r\n  opacity: 0;\n}\n[data-v-22e33c6f]::-webkit-resizer {\r\n  display: none;\n}\r\n\r\n", ""]);
 // Exports
@@ -20678,6 +20696,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;   \r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 50vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaObjectCommon.css":
+/*!************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaObjectCommon.css ***!
+  \************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n.obj:hover {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.is_active {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -71716,6 +71758,7 @@ var render = function () {
     "div",
     {
       staticClass: "obj canvas_item-wrapper",
+      class: { is_active: _vm.isActive },
       style: _vm.canvasWrapperStyle(),
       attrs: { id: _vm.canvas_wrapper_with_index },
       on: {
@@ -72036,7 +72079,8 @@ var render = function () {
   return _c(
     "div",
     {
-      staticClass: "img-wrapper",
+      staticClass: "obj img-wrapper",
+      class: { is_active: _vm.isActive },
       style: _vm.imgWrapperStyle,
       attrs: { id: _vm.imgWrapperWithIndex },
       on: {
@@ -72255,7 +72299,14 @@ var render = function () {
       ],
       staticClass: "resize-wrapper",
       attrs: { id: "resize-wrapper" },
-      on: { mousedown: _vm.move, touchstart: _vm.move },
+      on: {
+        mousedown: function ($event) {
+          return _vm.targetMoveStart($event)
+        },
+        touchstart: function ($event) {
+          return _vm.targetMoveStart($event)
+        },
+      },
     },
     [
       _c(
@@ -73006,7 +73057,7 @@ var render = function () {
     "div",
     {
       staticClass: "obj text-wrapper",
-      style: _vm.textWrapperStyle,
+      class: { is_active: _vm.isActive },
       attrs: { id: _vm.text_wrapper_with_index },
       on: {
         click: function ($event) {
@@ -73014,11 +73065,11 @@ var render = function () {
         },
         mousedown: function ($event) {
           $event.stopPropagation()
-          return _vm.moveStart($event)
+          return _vm.moveTrigger($event)
         },
         touchstart: function ($event) {
           $event.stopPropagation()
-          return _vm.moveStart($event)
+          return _vm.moveTrigger($event)
         },
       },
     },
