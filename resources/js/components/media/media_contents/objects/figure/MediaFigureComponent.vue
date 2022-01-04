@@ -6,23 +6,23 @@
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
 
-    <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="canvasSizeStyle()"
+    <!-- <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="canvasSizeStyle()"
      @move="moveStart($event)">
-    </object-resize>
-    <object-rotate v-show="isEditMode && isActive" :index="index"></object-rotate>
+    </object-resize> -->
+    <!-- <object-rotate v-show="isEditMode && isActive" :index="index"></object-rotate> -->
   </div>
 </template>
 
 <script>
 import {moveStart} from '../../../../../functions/moveHelper'
 import { mapGetters, mapMutations } from 'vuex';
-import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
+// import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
+// import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
   export default {
     components : {
-      objectRotate,
-      objectResize,
+      // objectRotate,
+      // objectResize,
     },
     props:[
       'index',
@@ -133,15 +133,39 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:new_degree});
         this.figureDatas['degree'] = new_degree;
       },
+      // updateSizeAndPosition(event){
+      //   const data = event.detail;
+      //   const keys = ["width","height","left","top"];
+      //   keys.forEach(key=>{
+      //     if(data[key]){
+      //       this.updateMediaFiguresObjectItem({index:this.index,key:key,value:data[key]});
+      //       this.figureDatas[key] = data[key];
+      //     }
+      //   });
+      //   this.reDraw();
+      // },
       updateSizeAndPosition(event){
-        const data = event.detail;
-        const keys = ["width","height","left","top"];
-        keys.forEach(key=>{
-          if(data[key]){
-            this.updateMediaFiguresObjectItem({index:this.index,key:key,value:data[key]});
-            this.figureDatas[key] = data[key];
+        console.log("updateSizeAndPosition");
+        const diff_x = event.detail.diff_x;
+        const diff_y = event.detail.diff_y;
+        const x = event.detail.resize_side['x'];
+        const y = event.detail.resize_side['y'];
+        const start_value = event.detail.scale_start_infos;
+        console.log(start_value);
+        let new_values = {};
+        new_values['width'] = start_value['width'] + diff_x;
+        new_values['height'] = start_value['height'] + diff_y;
+        const current_left = start_value['left'];
+        const current_top = start_value['top'];
+        new_values['left'] = x == -1 ? current_left - diff_x : current_left;
+        new_values['top'] = y == -1 ? current_top - diff_y : current_top;
+        Object.keys(new_values).forEach((key)=>{
+          if(new_values[key]){
+            const new_val = Math.floor(new_values[key]);
+            this.updateMediaFiguresObjectItem({index:this.index,key:key,value:new_val});
+            this.figureDatas[key] = new_val;
           }
-        });
+        })
         this.reDraw();
       },
       reDraw(){
@@ -254,9 +278,11 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       this.init();
 
       // イベント登録
+      this.canvas_wrapper.addEventListener('resize',this.updateSizeAndPosition,false);
       this.canvas_wrapper.addEventListener('resizingWidth',this.updateSizeAndPosition,false);
       this.canvas_wrapper.addEventListener('resizingHeight',this.updateSizeAndPosition,false);
-      this.canvas_wrapper.addEventListener('rotateFinish',this.updateDegree,false);
+      this.canvas_wrapper.addEventListener('rotateObjectEvent',this.updateDegree,false);
+      // this.canvas_wrapper.addEventListener('rotateFinish',this.updateDegree,false);
       this.canvas_wrapper.addEventListener('figureDataUpdated',this.init,false);
       this.canvas_wrapper.addEventListener('click',this.selected,false);
       this.canvas_wrapper.addEventListener('touchstart',this.selected,false);
@@ -274,12 +300,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
   align-items: center;
   transform-origin: center center;
 }
-.canvas_item-wrapper:hover .rotate-icon{
-  display: inline-block ;
-}
-.rotate-icon:hover{
-  cursor: all-scroll;
-}
 
 
 .canvas_area {
@@ -289,12 +309,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 .canvas_area:hover{
   cursor: all-scroll;
   }
-
-.rotate-icon {
-  position: absolute;
-  bottom: -90px;  
-  padding: 30px;
-}
 
 .is_active {
   outline : 1.5px solid blue;

@@ -11,7 +11,8 @@
         <media-contents-field @click="closeModal"
         ref="mediaContentsField">
 
-          <dom-scale></dom-scale>
+          <router-view name="domScale"></router-view>
+          <router-view name="objectRotate"></router-view>
 
           <media-img-mng
           ref="mediaImgMng">
@@ -189,7 +190,6 @@
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
   import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
-  import DomScale from '../media/media_contents/objects/object_edit_parts/DomScaleComponent.vue'
 
 
 export default {
@@ -207,7 +207,6 @@ export default {
     ObjectDelete,
     ObjectSettingOpen,
     ObjectCopy,
-    DomScale,
   },
   props: [],
   data : () => {
@@ -383,7 +382,6 @@ export default {
     const field = document.getElementById('field');
     field.addEventListener('click',this.fieldClicked, false);
     field.addEventListener('touchstart',this.fieldClicked, false);
-
   },
   watch : {
     initStatus : function(newVal){
@@ -427,9 +425,5 @@ export default {
   .setting-icon {
     color : lightgrey;
   }
- 
-
-
-
 
 </style>

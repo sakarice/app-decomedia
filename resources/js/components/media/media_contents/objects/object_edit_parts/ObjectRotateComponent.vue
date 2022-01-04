@@ -1,21 +1,48 @@
 <template>
-  <i class="fas fa-sync fa-lg rotate-icon" @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
+  <div class="rotate-icon-wrapper" :style="style" v-show="isObjSelected">
+    <i class="fas fa-sync fa-lg rotate-icon"
+    @mousedown="rotateStart($event)" @touchstart="rotateStart($event)"></i>
+    <!-- <div class="point target" :style="style_target"></div> -->
+  </div>
+  
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
   export default {
     props:[
-      'index',
+      // 'index',
     ],
     data : ()=>{
       return {
         "rotate_target" : "", // ドラッグ操作で回転させる対象
-        "rotate_center_x" : 0,
-        "rotate_center_y" : 0,
+        "rotate_center_x_in_page" : 0,
+        "rotate_center_y_in_page" : 0,
         "degree" : 0, 
+        "rotate_icon_left" : 0,
+        "rotate_icon_top" : 0,
+        "resizeObserver" : "",
       }
     },
     computed : {
+      ...mapGetters('selectedObjects', ['getSelectedObjects']),
+      style:function(){
+        const style = {
+          "left" : this.rotate_icon_left + "px",
+          "top" : this.rotate_icon_top + "px",
+        }
+        return style;
+      },
+      style_center:function(){
+        const style = {
+          "left" : this.rotate_center_x_in_page + "px",
+          "top" : this.rotate_center_y_in_page + "px",
+        }
+        return style;
+      },
+      isObjSelected:function(){
+        return this.getSelectedObjects.length > 0 ? true:false
+      },
     },
     watch : {},
     methods : {
@@ -28,20 +55,36 @@
         return value;
       },
       // 回転用
-      rotateInit(event){
+      objectSelected(event){
         const target_id = event.detail.element_id;
+        this.target_init(target_id);
+        this.registEvent();
+        this.sizeAndPositionInit();
+      },
+      target_init(target_id){
         this.rotate_target = document.getElementById(target_id);
       },
+      registEvent(){
+        this.rotate_target.addEventListener('scale_right_top',this.sizeAndPositionInit,false);
+        this.resizeObserver.observe(this.rotate_target);
+      },
+      sizeAndPositionInit(){
+        const target_width = this.rotate_target.clientWidth;
+        const target_height = this.rotate_target.clientHeight;
+        const rect = this.rotate_target.getBoundingClientRect();
+        const target_left_in_page = rect.left + window.pageXOffset;
+        const target_top_in_page = rect.top + window.pageYOffset;
+        // ポインターがページ内の絶対座標のため、回転の中心もページ内の絶対座標とする
+        this.rotate_center_x_in_page = target_left_in_page + target_width/2;
+        this.rotate_center_y_in_page = target_top_in_page + target_height/2;
+        // アイコンはコンテンツ描画エリアにあるのでエリア内の相対座標でよい
+        const target_left_in_contents_field = Number(this.rotate_target.style.left.replace("px",""));
+        const target_top_in_contents_field = Number(this.rotate_target.style.top.replace("px",""));
+
+        this.rotate_icon_left = target_left_in_contents_field + target_width/2 - 10;
+        this.rotate_icon_top = target_top_in_contents_field + target_height + 50;
+      },
       rotateStart(e){
-
-        this.target_left = this.rotate_target.getBoundingClientRect().left + window.pageXOffset;
-        this.target_top = this.rotate_target.getBoundingClientRect().top + window.pageYOffset;
-        const x = this.rotate_target.clientWidth;
-        const y = this.rotate_target.clientHeight;
-        // const r =  Math.sqrt(x*x + y*y);
-        this.rotate_center_x = this.target_left + x/2;
-        this.rotate_center_y = this.target_top + y/2;
-
         // 回転イベントにコールバック
         document.body.addEventListener("mousemove", this.rotating, false);
         document.body.addEventListener("mouseup", this.rotateEnd, false);
@@ -55,12 +98,12 @@
         let distance_y_from_target_center;
         if(e.type==="mousemove"){
           event = e;
-          distance_x_from_target_center = event.clientX - this.rotate_center_x;
-          distance_y_from_target_center = event.clientY - this.rotate_center_y;
+          distance_x_from_target_center = event.clientX - this.rotate_center_x_in_page;
+          distance_y_from_target_center = event.clientY - this.rotate_center_y_in_page;
         } else {
           event = e.changedTouches[0];
-          distance_x_from_target_center = event.pageX - this.rotate_center_x;
-          distance_y_from_target_center = event.pageY - this.rotate_center_y;
+          distance_x_from_target_center = event.pageX - this.rotate_center_x_in_page;
+          distance_y_from_target_center = event.pageY - this.rotate_center_y_in_page;
         }
         const new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
         const new_deg = Math.floor((new_rad * (180/Math.PI) * (-1)) % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
@@ -69,6 +112,8 @@
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.rotateEnd, false);
         document.body.addEventListener("touchleave", this.rotateEnd, false);
+        const rotateObjectEvent = new CustomEvent('rotateObject', {detail:{degree:new_deg}});
+        this.rotate_target.dispatchEvent(rotateObjectEvent);
       },
       rotateEnd(e){
         document.body.removeEventListener("mousemove", this.rotating, false);
@@ -81,8 +126,16 @@
       },
     },
     created(){
-      document.body.addEventListener('objectSelected',this.rotateInit, false);
+      document.body.addEventListener('objectSelected',this.objectSelected, false);
     },
+    mounted(){
+      this.resizeObserver = new ResizeObserver(entrys=>{
+        entrys.forEach((entry)=>{
+          this.sizeAndPositionInit();
+        })
+      });
+
+    }
 
   }
 
@@ -90,15 +143,18 @@
 
 <style scoped>
 
+.rotate-icon-wrapper{
+  position:absolute;
+}
+
 .rotate-icon {
   display: inline-block ;
-  position: absolute;
-  bottom: -90px;  
-  padding: 30px;
+  /* position: absolute; */
 }
 
 .rotate-icon:hover{
   cursor: all-scroll;
 }
+
 
 </style>

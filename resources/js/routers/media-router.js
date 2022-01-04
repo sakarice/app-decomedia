@@ -25,7 +25,8 @@ import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
 import ContentsFieldSetting from '../components/media/edit_parts/MediaContentsFieldSettingComponent.vue';
-
+import DomResize from '../components/media/media_contents/objects/object_edit_parts/DomResizeComponent.vue'
+import ObjectRotate from '../components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue'
 
 // オブジェクト選択管理コンポーネント
 import ObjectSelectMng from '../components/media/media_contents/objects/object_edit_parts/ObjectSelectMngComponent.vue';
@@ -67,6 +68,8 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         objectSelectMng : ObjectSelectMng,
+        objectRotate : ObjectRotate,
+        domResize : DomResize,
         overlay : Overlay,
         loading : Loading,
       },
@@ -93,6 +96,8 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         objectSelectMng : ObjectSelectMng,
+        objectRotate : ObjectRotate,
+        domResize : DomResize,
         overlay : Overlay,
         loading : Loading,
         

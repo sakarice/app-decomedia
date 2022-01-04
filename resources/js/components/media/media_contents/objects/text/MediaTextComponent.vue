@@ -2,20 +2,17 @@
   <!-- Media図形-->
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
   :style="textWrapperStyle"
-  @click.stop @touchstart.stop>
+  @click.stop @mousedown.stop="moveStart" @touchstart.stop="moveStart">
     <p contenteditable spellcheck="false"
     :id="text_with_index"
     class="text-area"
-    :style="textStyle"
-    @mousedown="moveStart" @touchstart="moveStart">
-    {{mediaText['text']}}
+    :style="textStyle">
+    {{text_default}}
     </p>
-
-    <!-- <object-resize v-show="isEditMode" :index="index" :id="resize_wrapper_with_index" :class="{hidden:!isActive}"
-     @move="moveStart($event)">
-    </object-resize> -->
+    <!-- ↓初期描画時にテキストの横幅を取得するための一時的な要素↓ -->
+    <p id="tmp-dummy-text">{{text_default}}</p>
     
-    <object-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></object-rotate>
+    <!-- <object-rotate v-show="isEditMode && isActive"></object-rotate> -->
 
   </div>
 
@@ -25,13 +22,13 @@
 <script>
 import {moveStart} from '../../../../../functions/moveHelper'
 import { mapGetters, mapMutations } from 'vuex';
-import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
+// import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
+// import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
   export default {
     components : {
-      objectRotate,
-      objectResize,
+      // objectRotate,
+      // objectResize,
     },
     props:[
       'index',
@@ -45,7 +42,9 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         original_height : 100,
         width : 100,
         height : 100,
+        scale_x_and_y : 1,
         text_wrapper : "",
+        text_default : "text_defaultsssssssss",
       }
     },
     computed : {
@@ -61,35 +60,25 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       isActive:function(){
         return this.getSelectedObjects.some((obj)=>obj.type==3 && obj.index==this.index)
       },
-      // scale_x:function(){ return this.width / this.original_width},
-      // scale_y:function(){ return this.height / this.original_height},
       textWrapperStyle:function(){
         const textWrapperStyle = {
           "left" : this.mediaText['left'] + "px",
           "top" : this.mediaText['top'] + "px",
-          "width" : (this.original_width * this.mediaText['scale_x']) + "px",
-          "height" : (this.original_height * this.mediaText['scale_y']) + "px",
         }
         return textWrapperStyle;
       },
       textStyle:function(){
         const textStyle = {
-          // "width" : this.original_width + "px",
-          // "height" : this.original_height + "px",
+          "max-width" : this.original_width + "px",
           "transform" : "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")",
         }
         return textStyle;
       },
-      domScaleWrapperStyle:function(){
-        const style = {
-          "width" : this.mediaText['width'],
-          "height" :this.mediaText['height'],
-        }
-        return style;
-      },
-
+      // scale_x_and_y:function(){ return this.height / this.original_height },
     },
-    watch : {},
+    watch : {
+      text_default(){ console.log('text changed!');}
+    },
     methods : {
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
       ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
@@ -115,65 +104,62 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         }
         return reTypedValue;
       },
-      setTextData(){
-        const storeData = Object.assign({},this.getOneText(this.index));
-        if(!(typeof storeData === "undefined")){
-          for(let key of Object.keys(storeData)){
-            this.mediaText[key] = this.fixDataType(key, storeData[key]);
+      resizeStart(event){
+        const x = event.detail.resize_side['x'];
+        const y = event.detail.resize_side['y'];
+        if(x==0 || y==0){ // 縦か横どちらか(斜め方向の変化なし))
+          if(x != 0){ // x軸方向の変化
+            this.resizeX(event);
+          } else if(y != 0){ // y軸方向の変化
+            // this.scale(event); // テキストの場合はscaleで対応
           }
+        } else { // 斜め方向の変化
+          this.scale(event);
         }
       },
-      updateSizeAndPosition(event){
-        const data = event.detail;
-        const keys = ["width","height","left","top"];
-        keys.forEach(key=>{
-        });
-      },
-      scaleX(event){
-        console.log('scaleX');
-        const e = event.detail;
-        console.log(e);
-        this.width += e.diff;
-        this.text.style.width = this.original_width + "px";
-        const new_scale_x = this.width / this.original_width;
-        let new_left;
-        switch (e.direction) {
-          case "right":
-            new_left = this.mediaText['left'];
-            break;
-          case "left":
-            new_left = this.mediaText['left'] - e.diff;
-            break;
+      resizeX(event){
+      // 横幅
+        const diff = event.detail.diff_x;
+        const start_width = event.detail.scale_start_infos['width'];
+        const start_left = event.detail.scale_start_infos['left'];
+        this.original_width = (start_width + diff) / this.scale_x_and_y;
+        this.updateMediaTextsObjectItem({index:this.index,key:"width", value:this.original_width})
+      // オブジェクトの左辺リサイズ時のみleftを更新
+        const resize_side = event.detail.resize_side['x'] > 0 ? "right" : "left";
+        if(resize_side == "left"){
+          const new_left = start_left - diff;
+          this.updateMediaTextsObjectItem({index:this.index,key:"left", value:new_left})
         }
-        console.log("new_left:");
-        console.log(new_left);
-        // this.text_wrapper.style.left = new_left + "px";
-        this.updateMediaTextsObjectItem({index:this.index,key:"left", value:new_left})
-        this.updateMediaTextsObjectItem({index:this.index,key:"scale_x", value:new_scale_x})
+      // dataを更新
         this.initTextData();
+        // this.updateWidthAndHeight();
+        this.updateTextWrapperWidthAndHeight();
       },
-      scaleY(event){
-        console.log('scaleY');
+      scale(event){
+        // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
         const e = event.detail;
-        console.log(e);
-        this.height += e.diff;
-        this.text.style.height = this.original_height + "px";
-        const new_scale_y = this.height / this.original_height;
-        let new_top;
-        switch (e.direction) {
-          case "bottom":
-            new_top = this.mediaText['top'];
-            break;
-          case "top":
-            new_top = this.mediaText['top'] - e.diff;
-            break;
-        }
-        // this.text_wrapper.style.top = new_top + "px";
-        this.updateMediaTextsObjectItem({index:this.index,key:"top", value:new_top})
-        this.updateMediaTextsObjectItem({index:this.index,key:"scale_y", value:new_scale_y})
+        const start_infos = event.detail.scale_start_infos;
+        this.width = start_infos["width"] + e.diff_x;
+        this.height = start_infos["height"] + e.diff_y;
+        this.scale_x_and_y = this.width / this.original_width;
+        let updateStyleValues = {"scale_x":1,"scale_y":1,"left":0,"top":0}
+        updateStyleValues["scale_x"] = this.scale_x_and_y;
+        updateStyleValues["scale_y"] = this.scale_x_and_y;
+      // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
+        const current_left = start_infos['left'];
+        const current_top = start_infos['top'];
+        updateStyleValues["left"] = e.resize_side['x'] == -1 ? current_left - e.diff_x : current_left;
+        const scale_diff_y = this.original_height * this.scale_x_and_y - start_infos["height"];
+        updateStyleValues["top"] = e.resize_side['y'] == -1 ? current_top - scale_diff_y : current_top;
+      // storeの更新
+        Object.keys(updateStyleValues).forEach((key)=>{
+          this.updateMediaTextsObjectItem({index:this.index,key:key, value:updateStyleValues[key]})
+        })
         this.initTextData();
-        console.log(this.text_wrapper.style.top);
+        // this.updateWidthAndHeight();
+        this.updateTextWrapperWidthAndHeight();
       },
+      scaleEnd(){},
       // 位置操作用
       moveStart(e){
         const move_target_dom = this.text_wrapper;
@@ -188,6 +174,14 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.initTextData();
         e.target.removeEventListener('moveFinish', this.moveEnd, false);
       },
+      updateWidthAndHeight(){
+        // this.width = this.original_width * this.scale_x_and_y;
+        // this.height = this.original_height * this.scale_x_and_y;
+      },
+      updateTextWrapperWidthAndHeight(){
+        this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
+        this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
+      },
       updateDegree(event){
         const new_degree = event.detail.degree;
         this.updateMediaTextsObjectItem({index:this.index,key:"degree",value:new_degree});
@@ -197,38 +191,44 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         {detail:{
           type:3
           ,index:this.index
-          ,width:this.original_width
-          ,height:this.original_height
-          ,scale_x:this.mediaText['scale_x']
-          ,scale_y:this.mediaText['scale_y']
-          // ,element_id:this.text_with_index}});
           ,element_id:this.text_wrapper_with_index}});
         document.body.dispatchEvent(objectSelected);
-        // console.log(this.mediaText['scale_x']);
-        // console.log(objectSelected.detail.scale_x);
       },
     },
     created(){},
     mounted(){
       this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
       this.text = document.getElementById(this.text_with_index);
+
+      // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
+      const dummy_text = document.getElementById('tmp-dummy-text');
+      const dummy_text_width = dummy_text.offsetWidth;
+      const dummy_text_height = dummy_text.offsetHeight;
+      dummy_text.remove();
+
       // DOMの描画終了を待つ
       this.$nextTick(function(){
-        const width = Number(this.text.clientWidth);
-        const height = Number(this.text.clientHeight);
-        this.original_width = this.width = width;
-        this.original_height = this.height = height;
-        this.text.style.width = this.original_width;
-        this.text.style.height = this.original_height;
+        this.original_width = dummy_text_width + 1;
+        this.original_height = dummy_text_height + 1;
+        this.width = this.original_width;
+        this.height = this.original_height;
+        this.updateTextWrapperWidthAndHeight();
+
+        const resizeObserver = new ResizeObserver(entrys=>{
+          entrys.forEach((entry)=>{
+            const rect = entry.contentRect;         
+            this.original_height = rect["height"];
+            this.updateTextWrapperWidthAndHeight();
+          })
+        });
+        resizeObserver.observe(this.text);
       });
       this.initTextData();
-      // イベント登録
+
       this.text_wrapper.addEventListener('moveStart',this.moveStart,false);
-      this.text_wrapper.addEventListener('resizingWidth',this.updateSizeAndPosition,false);
-      this.text_wrapper.addEventListener('resizingHeight',this.updateSizeAndPosition,false);
-      this.text_wrapper.addEventListener('scaleX',this.scaleX,false);
-      this.text_wrapper.addEventListener('scaleY',this.scaleY,false);
-      this.text_wrapper.addEventListener('rotateFinish',this.updateDegree,false);
+      this.text_wrapper.addEventListener('resize',this.resizeStart,false);
+      this.text_wrapper.addEventListener('scaleEnd',this.scaleEnd,false);
+      this.text_wrapper.addEventListener('rotateObject',this.updateDegree,false);
       this.text_wrapper.addEventListener('click',this.selected,false);
       this.text_wrapper.addEventListener('touchstart',this.selected,false);
 
@@ -240,19 +240,26 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 <style scoped>
 .text-wrapper {
   position: absolute;
-  display: inline-flex;
-  flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
   transform-origin: center center;
 }
 
+textarea {
+  overflow: hidden;
+}
+
 .text-area {
-  font-size: 30px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
   border: none;
   margin: 0;
   transform-origin: 0 0;
+  resize: none;
+  padding: 0px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
+
 .text-area:hover {
   cursor: pointer;
   outline: 1px solid blue;
@@ -270,7 +277,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
 
 ::-webkit-resizer {
-    display: none;
+  display: none;
 }
 
 </style>

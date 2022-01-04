@@ -5,8 +5,8 @@
         <div id="media-text-setting-area" class="flex column a-start">
           <h2 id="media-text-setting-title">メディアテキスト設定</h2>
           <!-- メディア名設定 -->
-          <div id="media-text-add-wraper" class="setting">
-            <i class="fas fa-plus fa-2x add-text-icon" @click="addText()"></i>
+          <div id="media-text-add-wraper" class="setting" @click="addText()">
+            <i class="fas fa-plus fa-2x add-text-icon"></i>
             <span>追加</span>
           </div>
         </div>
