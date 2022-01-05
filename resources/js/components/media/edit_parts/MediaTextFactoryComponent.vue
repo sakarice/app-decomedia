@@ -4,11 +4,43 @@
       <div id="area-wrapper">
         <div id="media-text-setting-area" class="flex column a-start">
           <h2 id="media-text-setting-title">メディアテキスト設定</h2>
-          <!-- メディア名設定 -->
-          <div id="media-text-add-wraper" class="setting" @click="addText()">
-            <i class="fas fa-plus fa-2x add-text-icon"></i>
-            <span>追加</span>
+
+          <!-- テキストプレビュー -->
+          <div id="text-preview-wrapper" class="setting">
+            <input
+            id="text-preview"
+            :style="previewStyle" v-model="getTextData['text']">
           </div>
+          <!-- 追加 -->
+          <div id="media-text-add-wraper" class="setting flex column" @click="addText()">
+            <div class="flex a-center">
+              <i class="fas fa-plus add-text-icon"></i>
+              <button class="add-text-button">追加</button>
+            </div>
+          </div>
+
+          <!-- フォントサイズ -->
+          <div id="font-size-wrapper" class="setting flex column">
+            <span style="margin-right:5px">フォントサイズ</span>
+            <div>
+              <input type="number" id="font-size" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
+              <span>[px]</span>
+            </div>
+          </div>
+
+          <!-- 色 -->
+          <div id="text-color-wrapper" class="setting flex column">
+            <span>色</span>
+            <input type="color" :value="getTextData['color']" @input="updateTextData({key:'color',value:$event.target.value})">
+          </div>
+
+          <!-- 透過度 -->
+          <div id="opacity-wrapper" class="flex column">
+            <span>透過度:</span>
+            <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
+            <!-- <input type="range" :value="getTextData['opacity']" @mousedown.stop @input="updateTextData({key:'opacity',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05"> -->
+          </div>
+
         </div>
       </div>
       <close-modal-bar class="for-mobile"></close-modal-bar>
@@ -32,23 +64,23 @@ export default {
     'transitionName',
   ],
   data : () => {
-    return {
-      window_width : "",
-      window_height : "",
-    }
+    return {}
   },
   computed :  {
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('mediaTextFactory', ['getTextData']),
-    // ...mapGetters('mediaTexts', ['getMediaText']),
-    // ...mapGetters('mediaTexts', ['getMediaTexts']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
+    previewStyle(){
+      const style = {
+        "color" : this.getTextData['color'],
+        "opacity" : this.getTextData['opacity'],
+      }
+      return style;
+    },
   },  
   methods : {
     ...mapMutations('mediaTextFactory', ['updateTextData']),
     ...mapMutations('mediaTexts', ['addMediaTextsObjectItem']),
-    // ...mapMutations('mediaTexts', ['updateIsInitializedTexts']),
-    // ...mapMutations('mediaTexts', ['deleteMediaTextsObjectItem']),
     closeModal() {
       this.$emit('close-modal');
     },
@@ -58,11 +90,6 @@ export default {
       this.updateTextData({key:"left",value:Number(this.getTextData["left"]+20)})
       this.updateTextData({key:"top",value:Number(this.getTextData["top"]+20)})
     },
-
-  },
-  mounted : function() {
-    this.window_width = window.innerWidth;
-    this.window_height = window.innerHeight;
   },
 }
 </script>
@@ -93,16 +120,45 @@ export default {
   }
 
   .add-text-icon {
-    padding: 10px;
+    padding: 5px;
+    margin-right: 3px;
+    color: orange;
   }
-  .add-text-icon:hover{
-    color: lightsalmon;
+  .add-text-button{
+    border: 1px solid white;
+    border-radius: 4px;
+    background-color: transparent;
+    color: white;
+    font-size: 12px;
+  }
+  .add-text-button:hover{
+    background-color: orange;
+  }
+  .add-text-button:focus{
+    background-color: orange;
   }
 
+  #text-preview-wrapper {
+    width: 90%;
+    margin-bottom: 5px;
+  }
+
+  #text-preview {
+    width: 100%;
+    font-size: 18px;
+  }
+
+  #text-preview:hover {
+    outline: 1px solid lightgreen;
+  }
+
+
+  #font-size {
+    width: 70px;
+  }
 
   .setting-title {
     margin-bottom: 5px;
-    /* font-weight: bold; */
     font-size: 15px;
   }
 

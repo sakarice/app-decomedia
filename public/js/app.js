@@ -7016,6 +7016,38 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7028,15 +7060,18 @@ function _defineProperty(obj, key, value) {
   },
   props: ['transitionName'],
   data: function data() {
-    return {
-      window_width: "",
-      window_height: ""
-    };
+    return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+    previewStyle: function previewStyle() {
+      var style = {
+        "color": this.getTextData['color'],
+        "opacity": this.getTextData['opacity']
+      };
+      return style;
+    }
+  }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTextFactory', ['updateTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTexts', ['addMediaTextsObjectItem'])), {}, {
-    // ...mapMutations('mediaTexts', ['updateIsInitializedTexts']),
-    // ...mapMutations('mediaTexts', ['deleteMediaTextsObjectItem']),
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -7052,11 +7087,7 @@ function _defineProperty(obj, key, value) {
         value: Number(this.getTextData["top"] + 20)
       });
     }
-  }),
-  mounted: function mounted() {
-    this.window_width = window.innerWidth;
-    this.window_height = window.innerHeight;
-  }
+  })
 });
 
 /***/ }),
@@ -14307,13 +14338,15 @@ var mediaText = {
       type: 90,
       groupNo: null,
       id: 0,
-      text: "textTextテキスト",
+      text: "テキスト",
       top: 100,
       left: 100,
       width: 100,
       height: 100,
       scale_x: 1,
       scale_y: 1,
+      color: "#000000",
+      font_size: 18,
       degree: 0,
       opacity: 1,
       layer: 1
@@ -19812,7 +19845,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 10px;\n}\n.add-text-icon[data-v-35d10c14]:hover{\r\n    color: lightsalmon;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 4px;\r\n    background-color: transparent;\r\n    color: white;\r\n    font-size: 12px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: orange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\r\n    margin-bottom: 5px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n#font-size[data-v-35d10c14] {\r\n    width: 70px;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70846,6 +70879,37 @@ var render = function () {
                 "div",
                 {
                   staticClass: "setting",
+                  attrs: { id: "text-preview-wrapper" },
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.getTextData["text"],
+                        expression: "getTextData['text']",
+                      },
+                    ],
+                    style: _vm.previewStyle,
+                    attrs: { id: "text-preview" },
+                    domProps: { value: _vm.getTextData["text"] },
+                    on: {
+                      input: function ($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.getTextData, "text", $event.target.value)
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting flex column",
                   attrs: { id: "media-text-add-wraper" },
                   on: {
                     click: function ($event) {
@@ -70854,9 +70918,109 @@ var render = function () {
                   },
                 },
                 [
-                  _c("i", { staticClass: "fas fa-plus fa-2x add-text-icon" }),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", { staticClass: "fas fa-plus add-text-icon" }),
+                    _vm._v(" "),
+                    _c("button", { staticClass: "add-text-button" }, [
+                      _vm._v("追加"),
+                    ]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting flex column",
+                  attrs: { id: "font-size-wrapper" },
+                },
+                [
+                  _c("span", { staticStyle: { "margin-right": "5px" } }, [
+                    _vm._v("フォントサイズ"),
+                  ]),
                   _vm._v(" "),
-                  _c("span", [_vm._v("追加")]),
+                  _c("div", [
+                    _c("input", {
+                      attrs: { type: "number", id: "font-size" },
+                      domProps: { value: _vm.getTextData["font_size"] },
+                      on: {
+                        input: function ($event) {
+                          return _vm.updateTextData({
+                            key: "font_size",
+                            value: $event.target.value,
+                          })
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("[px]")]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting flex column",
+                  attrs: { id: "text-color-wrapper" },
+                },
+                [
+                  _c("span", [_vm._v("色")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "color" },
+                    domProps: { value: _vm.getTextData["color"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateTextData({
+                          key: "color",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex column",
+                  attrs: { id: "opacity-wrapper" },
+                },
+                [
+                  _c("span", [_vm._v("透過度:")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.getTextData["opacity"],
+                        expression: "getTextData['opacity']",
+                      },
+                    ],
+                    attrs: {
+                      type: "range",
+                      name: "opacity",
+                      min: "0",
+                      max: "1",
+                      step: "0.05",
+                    },
+                    domProps: { value: _vm.getTextData["opacity"] },
+                    on: {
+                      mousedown: function ($event) {
+                        $event.stopPropagation()
+                      },
+                      __r: function ($event) {
+                        return _vm.$set(
+                          _vm.getTextData,
+                          "opacity",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
                 ]
               ),
             ]
