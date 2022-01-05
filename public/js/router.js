@@ -4835,6 +4835,7 @@ function _defineProperty(obj, key, value) {
         detail: {
           type: 0,
           index: this.index,
+          degree: this.figureDatas['degree'],
           element_id: this.canvas_wrapper_with_index
         }
       });
@@ -5707,6 +5708,7 @@ function _defineProperty(obj, key, value) {
         detail: {
           type: 1,
           index: this.index,
+          degree: this.mediaImg['degree'],
           element_id: this.imgWrapperWithIndex
         }
       });
@@ -7124,6 +7126,7 @@ function _defineProperty(obj, key, value) {
     objectSelected: function objectSelected(event) {
       var target_id = event.detail.element_id;
       this.target_init(target_id);
+      this.degree = event.detail.degree;
 
       var _this$getMutationObse = this.getMutationObserver(),
           observer = _this$getMutationObse.observer,
@@ -7163,8 +7166,7 @@ function _defineProperty(obj, key, value) {
       var new_deg = Math.floor(new_rad * (180 / Math.PI) * -1 % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
 
       this.rotate_target.style.transform = 'rotate(' + new_deg + 'deg)';
-      this.degree = new_deg;
-      console.log("degree:" + this.degree); // マウス、タッチ解除時のイベントを設定
+      this.degree = new_deg; // マウス、タッチ解除時のイベントを設定
 
       document.body.addEventListener("mouseleave", this.rotateEnd, false);
       document.body.addEventListener("touchleave", this.rotateEnd, false);
@@ -7205,7 +7207,7 @@ function _defineProperty(obj, key, value) {
       var target_height = this.rotate_target.clientHeight;
       var rotate_center_x = target_left_in_contents_field + target_width / 2;
       var rotate_center_y = target_top_in_contents_field + target_height / 2;
-      var r = 80; // 回転対象オブジェクト中心から回転アイコンまでの距離
+      var r = target_height / 2 + 50; // 回転対象オブジェクト中心から回転アイコンまでの距離
 
       this.rotate_icon_left = rotate_center_x - r * Math.sin(this.degree * (Math.PI / 180)) - 10;
       this.rotate_icon_top = rotate_center_y + r * Math.cos(this.degree * (Math.PI / 180));
@@ -7624,6 +7626,7 @@ function _defineProperty(obj, key, value) {
         detail: {
           type: 2,
           index: this.index,
+          degree: this.mediaText['degree'],
           element_id: this.text_wrapper_with_index
         }
       });

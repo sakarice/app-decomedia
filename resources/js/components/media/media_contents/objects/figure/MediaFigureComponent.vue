@@ -101,7 +101,11 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       selected(){
         const objectSelected = new CustomEvent('objectSelected',
-        {detail:{type:0,index:this.index,element_id:this.canvas_wrapper_with_index}});
+        {detail:{
+          type:0
+          ,index:this.index
+          ,degree:this.figureDatas['degree']
+          ,element_id:this.canvas_wrapper_with_index}});
         document.body.dispatchEvent(objectSelected);
       },
       // 位置操作用

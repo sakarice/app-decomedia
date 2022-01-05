@@ -170,6 +170,7 @@ import { mapGetters, mapMutations } from 'vuex';
         {detail:{
           type:2
           ,index:this.index
+          ,degree:this.mediaText['degree']
           ,element_id:this.text_wrapper_with_index}});
         document.body.dispatchEvent(objectSelected);
       },

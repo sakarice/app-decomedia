@@ -91,6 +91,7 @@
         {detail:{
           type:1
           ,index:this.index
+          ,degree:this.mediaImg['degree']
           ,element_id:this.imgWrapperWithIndex
         }});
         document.body.dispatchEvent(objectSelected);

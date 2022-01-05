@@ -54,6 +54,7 @@
       objectSelected(event){
         const target_id = event.detail.element_id;
         this.target_init(target_id);
+        this.degree = event.detail.degree;
         const {observer, config} = this.getMutationObserver();
         observer.observe(this.rotate_target, config);
         this.setRotateCenter();
@@ -87,7 +88,6 @@
         const new_deg = Math.floor((new_rad * (180/Math.PI) * (-1)) % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
         this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
         this.degree = new_deg;
-        console.log("degree:"+this.degree)
         // マウス、タッチ解除時のイベントを設定
         document.body.addEventListener("mouseleave", this.rotateEnd, false);
         document.body.addEventListener("touchleave", this.rotateEnd, false);
@@ -121,7 +121,7 @@
         const target_height = this.rotate_target.clientHeight;
         const rotate_center_x = target_left_in_contents_field + target_width/2;
         const rotate_center_y = target_top_in_contents_field + target_height/2;
-        const r = 80; // 回転対象オブジェクト中心から回転アイコンまでの距離
+        const r = target_height/2 + 50; // 回転対象オブジェクト中心から回転アイコンまでの距離
         this.rotate_icon_left = rotate_center_x - r * Math.sin(this.degree * (Math.PI/180)) - 10;
         this.rotate_icon_top = rotate_center_y + r * Math.cos(this.degree* (Math.PI/180));
       },
