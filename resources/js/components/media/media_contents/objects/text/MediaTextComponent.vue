@@ -3,14 +3,12 @@
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
   :class="{is_active : isActive}"
   @click.stop @mousedown.stop="moveTrigger($event)" @touchstart.stop="moveTrigger($event)">
-    <p contenteditable spellcheck="false"
-    :id="text_with_index"
-    class="text-area"
-    :style="textStyle">
-    {{text_default}}
+    <p contenteditable spellcheck="false" class="text-area"
+    :id="text_with_index" :style="textStyle" @input="updateText($event)">
+    {{text_tmp}}
     </p>
     <!-- ↓初期描画時にテキストの横幅を取得するための一時的な要素↓ -->
-    <p id="tmp-dummy-text">{{text_default}}</p>
+    <p id="tmp-dummy-text">{{text_tmp}}</p>
     
   </div>
 
@@ -20,14 +18,9 @@
 <script>
 import {moveStart} from '../../../../../functions/moveHelper'
 import { mapGetters, mapMutations } from 'vuex';
-// import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-// import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
   export default {
-    components : {
-      // objectRotate,
-      // objectResize,
-    },
+    components : {},
     props:[
       'index',
     ],
@@ -42,7 +35,7 @@ import { mapGetters, mapMutations } from 'vuex';
         height : 100,
         scale_x_and_y : 1,
         text_wrapper : "",
-        text_default : "text_defaultsssssssss",
+        text_tmp : "default text",
       }
     },
     computed : {
@@ -67,7 +60,12 @@ import { mapGetters, mapMutations } from 'vuex';
       },
     },
     watch : {
-      text_default(){ console.log('text changed!');}
+      scale_x_and_y(new_val){
+        this.updateMediaTextsObjectItem({index:this.index,key:"scale_x", value:new_val})
+        this.updateMediaTextsObjectItem({index:this.index,key:"scale_y", value:new_val})
+      },
+      original_width(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"original_width", value:new_val})},
+      original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"original_height", value:new_val})},
     },
     methods : {
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
@@ -80,6 +78,10 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       initTextData(){
         this.mediaText = Object.assign({}, this.getOneText(this.index));
+      },
+      updateText(e){
+        const new_text = e.target.textContent;
+        this.updateMediaTextsObjectItem({index:this.index,key:"text",value:new_text});
       },
       checkTypeNum(key){
         const num_type_keys = ["width","height","left","top","degree","opacity"];
@@ -112,7 +114,6 @@ import { mapGetters, mapMutations } from 'vuex';
         const start_width = event.detail.resize_start_infos['width'];
         const start_left = event.detail.resize_start_infos['left'];
         this.original_width = (start_width + diff) / this.scale_x_and_y;
-        this.updateMediaTextsObjectItem({index:this.index,key:"width", value:this.original_width})
       // オブジェクトの左辺リサイズ時のみleftを更新
         const resize_side = event.detail.resize_side['x'] > 0 ? "right" : "left";
         if(resize_side == "left"){
@@ -130,9 +131,7 @@ import { mapGetters, mapMutations } from 'vuex';
         this.width = start_infos["width"] + e.diff_x;
         this.height = start_infos["height"] + e.diff_y;
         this.scale_x_and_y = this.width / this.original_width;
-        let updateStyleValues = {"scale_x":1,"scale_y":1,"left":0,"top":0}
-        updateStyleValues["scale_x"] = this.scale_x_and_y;
-        updateStyleValues["scale_y"] = this.scale_x_and_y;
+        let updateStyleValues = {"left":0,"top":0}
       // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
         const current_left = start_infos['left'];
         const current_top = start_infos['top'];
@@ -175,7 +174,10 @@ import { mapGetters, mapMutations } from 'vuex';
         document.body.dispatchEvent(objectSelected);
       },
     },
-    created(){},
+    created(){
+      this.initTextData();
+      this.text_tmp = this.mediaText["text"];
+    },
     mounted(){
       this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
       this.text = document.getElementById(this.text_with_index);
@@ -196,14 +198,13 @@ import { mapGetters, mapMutations } from 'vuex';
 
         const resizeObserver = new ResizeObserver(entrys=>{
           entrys.forEach((entry)=>{
-            const rect = entry.contentRect;         
-            this.original_height = rect["height"];
-            this.updateTextWrapperStyle();
+            const rect = entry.contentRect;
+            // this.original_height = rect["height"];
+            // this.updateTextWrapperStyle();
           })
         });
         resizeObserver.observe(this.text);
       });
-      this.initTextData();
 
       this.text_wrapper.addEventListener('mousedown',this.moveTrigger,false);
       this.text_wrapper.addEventListener('touchstart',this.moveTrigger,false);

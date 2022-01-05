@@ -7392,18 +7392,12 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
 
 
 
- // import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-// import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {// objectRotate,
-    // objectResize,
-  },
+  components: {},
   props: ['index'],
   data: function data() {
     return {
@@ -7416,7 +7410,7 @@ function _defineProperty(obj, key, value) {
       height: 100,
       scale_x_and_y: 1,
       text_wrapper: "",
-      text_default: "text_defaultsssssssss"
+      text_tmp: "default text"
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
@@ -7449,8 +7443,31 @@ function _defineProperty(obj, key, value) {
     }
   }),
   watch: {
-    text_default: function text_default() {
-      console.log('text changed!');
+    scale_x_and_y: function scale_x_and_y(new_val) {
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "scale_x",
+        value: new_val
+      });
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "scale_y",
+        value: new_val
+      });
+    },
+    original_width: function original_width(new_val) {
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "original_width",
+        value: new_val
+      });
+    },
+    original_height: function original_height(new_val) {
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "original_height",
+        value: new_val
+      });
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['updateMediaTextsObjectItem'])), {}, {
@@ -7461,6 +7478,14 @@ function _defineProperty(obj, key, value) {
     },
     initTextData: function initTextData() {
       this.mediaText = Object.assign({}, this.getOneText(this.index));
+    },
+    updateText: function updateText(e) {
+      var new_text = e.target.textContent;
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "text",
+        value: new_text
+      });
     },
     checkTypeNum: function checkTypeNum(key) {
       var num_type_keys = ["width", "height", "left", "top", "degree", "opacity"];
@@ -7498,12 +7523,7 @@ function _defineProperty(obj, key, value) {
       var diff = event.detail.diff_x;
       var start_width = event.detail.resize_start_infos['width'];
       var start_left = event.detail.resize_start_infos['left'];
-      this.original_width = (start_width + diff) / this.scale_x_and_y;
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "width",
-        value: this.original_width
-      }); // オブジェクトの左辺リサイズ時のみleftを更新
+      this.original_width = (start_width + diff) / this.scale_x_and_y; // オブジェクトの左辺リサイズ時のみleftを更新
 
       var resize_side = event.detail.resize_side['x'] > 0 ? "right" : "left";
 
@@ -7530,13 +7550,9 @@ function _defineProperty(obj, key, value) {
       this.height = start_infos["height"] + e.diff_y;
       this.scale_x_and_y = this.width / this.original_width;
       var updateStyleValues = {
-        "scale_x": 1,
-        "scale_y": 1,
         "left": 0,
         "top": 0
-      };
-      updateStyleValues["scale_x"] = this.scale_x_and_y;
-      updateStyleValues["scale_y"] = this.scale_x_and_y; // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
+      }; // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
 
       var current_left = start_infos['left'];
       var current_top = start_infos['top'];
@@ -7597,7 +7613,10 @@ function _defineProperty(obj, key, value) {
       document.body.dispatchEvent(objectSelected);
     }
   }),
-  created: function created() {},
+  created: function created() {
+    this.initTextData();
+    this.text_tmp = this.mediaText["text"];
+  },
   mounted: function mounted() {
     this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
     this.text = document.getElementById(this.text_with_index); // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
@@ -7608,8 +7627,6 @@ function _defineProperty(obj, key, value) {
     dummy_text.remove(); // DOMの描画終了を待つ
 
     this.$nextTick(function () {
-      var _this3 = this;
-
       this.original_width = dummy_text_width + 1;
       this.original_height = dummy_text_height + 1;
       this.width = this.original_width;
@@ -7617,15 +7634,12 @@ function _defineProperty(obj, key, value) {
       this.updateTextWrapperStyle();
       var resizeObserver = new ResizeObserver(function (entrys) {
         entrys.forEach(function (entry) {
-          var rect = entry.contentRect;
-          _this3.original_height = rect["height"];
-
-          _this3.updateTextWrapperStyle();
+          var rect = entry.contentRect; // this.original_height = rect["height"];
+          // this.updateTextWrapperStyle();
         });
       });
       resizeObserver.observe(this.text);
     });
-    this.initTextData();
     this.text_wrapper.addEventListener('mousedown', this.moveTrigger, false);
     this.text_wrapper.addEventListener('touchstart', this.moveTrigger, false);
     this.text_wrapper.addEventListener('touchstart', this.selected, false);
@@ -21388,12 +21402,17 @@ var render = function () {
             spellcheck: "false",
             id: _vm.text_with_index,
           },
+          on: {
+            input: function ($event) {
+              return _vm.updateText($event)
+            },
+          },
         },
-        [_vm._v("\n  " + _vm._s(_vm.text_default) + "\n  ")]
+        [_vm._v("\n  " + _vm._s(_vm.text_tmp) + "\n  ")]
       ),
       _vm._v(" "),
       _c("p", { attrs: { id: "tmp-dummy-text" } }, [
-        _vm._v(_vm._s(_vm.text_default)),
+        _vm._v(_vm._s(_vm.text_tmp)),
       ]),
     ]
   )
