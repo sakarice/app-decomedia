@@ -7073,13 +7073,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: [// 'index',
-  ],
+  props: [],
   data: function data() {
     return {
       "rotate_target": "",
@@ -7088,8 +7086,7 @@ function _defineProperty(obj, key, value) {
       "rotate_center_y_in_page": 0,
       "degree": 0,
       "rotate_icon_left": 0,
-      "rotate_icon_top": 0,
-      "resizeObserver": ""
+      "rotate_icon_top": 0
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
@@ -7127,30 +7124,17 @@ function _defineProperty(obj, key, value) {
     objectSelected: function objectSelected(event) {
       var target_id = event.detail.element_id;
       this.target_init(target_id);
-      this.registEvent();
-      this.sizeAndPositionInit();
+
+      var _this$getMutationObse = this.getMutationObserver(),
+          observer = _this$getMutationObse.observer,
+          config = _this$getMutationObse.config;
+
+      observer.observe(this.rotate_target, config);
+      this.setRotateCenter();
+      this.setPosition();
     },
     target_init: function target_init(target_id) {
       this.rotate_target = document.getElementById(target_id);
-    },
-    registEvent: function registEvent() {
-      this.rotate_target.addEventListener('scale_right_top', this.sizeAndPositionInit, false);
-      this.resizeObserver.observe(this.rotate_target);
-    },
-    sizeAndPositionInit: function sizeAndPositionInit() {
-      var target_width = this.rotate_target.clientWidth;
-      var target_height = this.rotate_target.clientHeight;
-      var rect = this.rotate_target.getBoundingClientRect();
-      var target_left_in_page = rect.left + window.pageXOffset;
-      var target_top_in_page = rect.top + window.pageYOffset; // ポインターがページ内の絶対座標のため、回転の中心もページ内の絶対座標とする
-
-      this.rotate_center_x_in_page = target_left_in_page + target_width / 2;
-      this.rotate_center_y_in_page = target_top_in_page + target_height / 2; // アイコンはコンテンツ描画エリアにあるのでエリア内の相対座標でよい
-
-      var target_left_in_contents_field = Number(this.rotate_target.style.left.replace("px", ""));
-      var target_top_in_contents_field = Number(this.rotate_target.style.top.replace("px", ""));
-      this.rotate_icon_left = target_left_in_contents_field + target_width / 2 - 10;
-      this.rotate_icon_top = target_top_in_contents_field + target_height + 50;
     },
     rotateStart: function rotateStart(e) {
       // 回転イベントにコールバック
@@ -7179,7 +7163,8 @@ function _defineProperty(obj, key, value) {
       var new_deg = Math.floor(new_rad * (180 / Math.PI) * -1 % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
 
       this.rotate_target.style.transform = 'rotate(' + new_deg + 'deg)';
-      this.degree = new_deg; // マウス、タッチ解除時のイベントを設定
+      this.degree = new_deg;
+      console.log("degree:" + this.degree); // マウス、タッチ解除時のイベントを設定
 
       document.body.addEventListener("mouseleave", this.rotateEnd, false);
       document.body.addEventListener("touchleave", this.rotateEnd, false);
@@ -7201,20 +7186,52 @@ function _defineProperty(obj, key, value) {
         }
       });
       this.rotate_target.dispatchEvent(rotateFinishEvent);
+    },
+    setRotateCenter: function setRotateCenter() {
+      var target_width = this.rotate_target.clientWidth;
+      var target_height = this.rotate_target.clientHeight;
+      var rect = this.rotate_target.getBoundingClientRect();
+      var target_left_in_page = rect.left + window.pageXOffset;
+      var target_top_in_page = rect.top + window.pageYOffset; // ポインターがページ内の絶対座標のため、回転の中心もページ内の絶対座標とする
+
+      this.rotate_center_x_in_page = target_left_in_page + target_width / 2;
+      this.rotate_center_y_in_page = target_top_in_page + target_height / 2;
+    },
+    setPosition: function setPosition() {
+      // アイコンを表示する座標は、コンテンツ描画エリア内の相対座標(回転対象オブジェクトと同じ)
+      var target_left_in_contents_field = Number(this.rotate_target.style.left.replace("px", ""));
+      var target_top_in_contents_field = Number(this.rotate_target.style.top.replace("px", ""));
+      var target_width = this.rotate_target.clientWidth;
+      var target_height = this.rotate_target.clientHeight;
+      var rotate_center_x = target_left_in_contents_field + target_width / 2;
+      var rotate_center_y = target_top_in_contents_field + target_height / 2;
+      var r = 80; // 回転対象オブジェクト中心から回転アイコンまでの距離
+
+      this.rotate_icon_left = rotate_center_x - r * Math.sin(this.degree * (Math.PI / 180)) - 10;
+      this.rotate_icon_top = rotate_center_y + r * Math.cos(this.degree * (Math.PI / 180));
+    },
+    getMutationObserver: function getMutationObserver() {
+      var _this = this;
+
+      var observer = new MutationObserver(function (mutations) {
+        _this.setRotateCenter();
+
+        _this.setPosition();
+      });
+      var config = {
+        attribute: true,
+        attributeFilter: ['style']
+      };
+      return {
+        "observer": observer,
+        "config": config
+      };
     }
   },
   created: function created() {
     document.body.addEventListener('objectSelected', this.objectSelected, false);
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    this.resizeObserver = new ResizeObserver(function (entrys) {
-      entrys.forEach(function (entry) {
-        _this.sizeAndPositionInit();
-      });
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
