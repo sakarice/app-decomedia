@@ -9,6 +9,7 @@ import mediaAudios from './modules/mediaAudios.js';
 import mediaMovie from './modules/mediaMovie.js';
 import mediaTextFactory from './modules/mediaTextFactory';
 import mediaTexts from './modules/mediaTexts';
+import fontFamilyList from './modules/fontFamilyList'
 import mediaContentsField from './modules/mediaContentsField';
 import mediaSetting from './modules/mediaSetting.js';
 import mediaFigureFactory from './modules/mediaFigureFactory.js';
@@ -27,6 +28,7 @@ const store = new Vuex.Store({
     mediaMovie,
     mediaTextFactory,
     mediaTexts,
+    fontFamilyList,
     mediaSetting,
     mediaContentsField,
     mediaFigureFactory,

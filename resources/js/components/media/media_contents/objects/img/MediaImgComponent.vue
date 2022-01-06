@@ -41,10 +41,11 @@
       imgWrapperStyle(){
         const mi = this.mediaImg;
         const styleObject = {
-          "top" :  this.addPxToTail(mi['top']),
-          "left" :  this.addPxToTail(mi['left']),
-          "width" : this.addPxToTail(mi['width']),
-          "height" : this.addPxToTail(mi['height']),
+          "top" :  mi['top'] + "px",
+          "left" :  mi['left'] + "px",
+          "width" : mi['width'] + "px",
+          "height" : mi['height'] + "px",
+          "transform" : "rotate(" + mi['degree'] + "deg)",
           'z-index' : mi['layer'],
         }
         return styleObject;
@@ -52,8 +53,8 @@
       imgStyle(){
         const mi = this.mediaImg;
         const styleObject = {
-          "width" : this.addPxToTail(mi['width']),
-          "height" : this.addPxToTail(mi['height']),
+          "width" : mi['width'] + "px",
+          "height" : mi['height'] + "px",
           "opacity" : mi['opacity'],
         }
         return styleObject;
@@ -82,6 +83,7 @@
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
       },
+      init(){ this.mediaImg = this.getOneImg(); },
       showEditor(){
         const showSetting = new CustomEvent('showImgSetting', {detail:{index:this.index}});
         document.body.dispatchEvent(showSetting);
@@ -120,25 +122,17 @@
         Object.keys(new_values).forEach((key)=>{
           if(new_values[key]){
             const new_val = Math.floor(new_values[key]);
-            this.updateMediaImgsObjectItem({index:this.index,key:key,value:new_val});
-            this.mediaImg[key] = new_val;
+            this.updateStoreAndMyData(key,new_val);
           }
         })
       },
-      updateDegree(e){
-        const new_degree = e.detail.degree;
-        this.updateMediaImgsObjectItem({index:this.index,key:"degree",value:new_degree});
-        this.mediaImg['degree'] = new_degree;
-        },
-      reRender(){
-        const keys = ["width","height","left","top"];
-        const storeData = this.getOneImg(this.index);
-        if(storeData){
-          keys.forEach(key=>{ this.mediaImg[key] = storeData[key]});
-        }
+      updateStoreAndMyData(key,value){
+        this.updateMediaImgsObjectItem({index:this.index,key:key,value:value});
+        this.mediaImg[key] = value;
       },
-      init(){ this.mediaImg = this.getOneImg(); },
-      addPxToTail(value){ return (value + "px") },
+      onChangeDegree(e){
+        this.updateStoreAndMyData("degree", e.detail.degree);
+      },
     },
 
     created(){
@@ -149,7 +143,7 @@
       // イベント登録
       this.img_wrapper.addEventListener('imgDataUpdated',this.init,false);
       this.img_wrapper.addEventListener('resize',this.updateSizeAndPosition,false);
-      this.img_wrapper.addEventListener('rotateObject',this.updateDegree,false);
+      this.img_wrapper.addEventListener('rotateObject',this.onChangeDegree,false);
       this.img_wrapper.addEventListener('click',this.selected,false);
       this.img_wrapper.addEventListener('touchstart',this.selected,false);
     }

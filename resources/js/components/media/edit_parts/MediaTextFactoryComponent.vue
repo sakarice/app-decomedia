@@ -35,10 +35,20 @@
           </div>
 
           <!-- 透過度 -->
-          <div id="opacity-wrapper" class="flex column">
+          <div id="opacity-wrapper" class="setting flex column">
             <span>透過度:</span>
             <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
             <!-- <input type="range" :value="getTextData['opacity']" @mousedown.stop @input="updateTextData({key:'opacity',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05"> -->
+          </div>
+
+          <!-- フォントスタイル(font-family) -->
+          <div id="font-style-wrapper" class="setting flex column">
+            <span>フォントスタイル</span>
+            <select id="" v-model="selected">
+              <option v-for="option in options" :value="option.value" :key="option.id">
+                {{option.name}}
+              </option>
+            </select>
           </div>
 
         </div>
@@ -64,20 +74,27 @@ export default {
     'transitionName',
   ],
   data : () => {
-    return {}
+    return {
+      selected : "",
+      options : "",
+    }
   },
   computed :  {
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('mediaTextFactory', ['getTextData']),
+    ...mapGetters('fontFamilyList', ['getFontFamilyList']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
     previewStyle(){
       const style = {
         "color" : this.getTextData['color'],
-        "opacity" : this.getTextData['opacity'],
+        "font-family" : this.selected,
       }
       return style;
     },
-  },  
+  },
+  watch : {
+    selected(new_val){ this.updateTextData({key:"font_family", value:new_val})},
+  },
   methods : {
     ...mapMutations('mediaTextFactory', ['updateTextData']),
     ...mapMutations('mediaTexts', ['addMediaTextsObjectItem']),
@@ -91,6 +108,10 @@ export default {
       this.updateTextData({key:"top",value:Number(this.getTextData["top"]+20)})
     },
   },
+  created(){
+    this.selected = this.getTextData['font_family'];
+    this.options = Object.assign({},this.getFontFamilyList);
+  },
 }
 </script>
 
@@ -99,6 +120,7 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/googleFontList.css";
 
   #media-text-setting-area {
     margin: 20px 0;

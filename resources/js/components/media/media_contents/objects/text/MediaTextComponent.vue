@@ -1,15 +1,12 @@
 <template>
   <!-- Media図形-->
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
-  :class="{is_active : isActive}"
+  :class="{is_active : isActive}" :style="textWrapperStyle"
   @click.stop @mousedown.stop="moveTrigger($event)" @touchstart.stop="moveTrigger($event)">
     <p contenteditable spellcheck="false" class="text-area"
-    :id="text_with_index" :style="textStyle" @input="updateText($event)">
+    :id="text_with_index" :style="textStyle" @input="onChangeTextContent($event)">
     {{text_tmp}}
-    </p>
-    <!-- ↓初期描画時にテキストの横幅を取得するための一時的な要素↓ -->
-    <p id="tmp-dummy-text">{{text_tmp}}</p>
-    
+    </p>    
   </div>
 
   
@@ -27,15 +24,11 @@ import { mapGetters, mapMutations } from 'vuex';
     data : ()=>{
       return {
         mediaText : "",
-        isReDraw : false,
-        isResizing :false,
         original_width : 100,
         original_height : 100,
-        width : 100,
-        height : 100,
-        scale_x_and_y : 1,
-        text_wrapper : "",
         text_tmp : "default text",
+        text_wrapper : "",
+        text : "",
       }
     },
     computed : {
@@ -51,20 +44,28 @@ import { mapGetters, mapMutations } from 'vuex';
       isActive:function(){
         return this.getSelectedObjects.some((obj)=>obj.type==3 && obj.index==this.index)
       },
-      textStyle:function(){
-        const textStyle = {
-          "max-width" : this.original_width + "px",
-          "transform" : "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")",
+      textWrapperStyle:function(){
+        return {
+          "transform" : "rotate(" + this.mediaText['degree'] + "deg)",
+          "left" : this.mediaText['left'] + "px",
+          "top" : this.mediaText['top'] + "px",
         }
-        return textStyle;
+      },
+      textStyle:function(){
+        return {
+          "transform" : "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")",
+          "color" : this.mediaText['color'],
+          "font-size" : this.mediaText['font_size'] + "px",
+          "font-family" : this.mediaText['font_family'],
+          "opacity" : this.mediaText['opacity'],
+        }
       },
     },
     watch : {
-      scale_x_and_y(new_val){
-        this.updateMediaTextsObjectItem({index:this.index,key:"scale_x", value:new_val})
-        this.updateMediaTextsObjectItem({index:this.index,key:"scale_y", value:new_val})
+      original_width(new_val){
+        this.updateTextWidth();
+        this.updateMediaTextsObjectItem({index:this.index,key:"original_width", value:new_val})
       },
-      original_width(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"original_width", value:new_val})},
       original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"original_height", value:new_val})},
     },
     methods : {
@@ -72,16 +73,33 @@ import { mapGetters, mapMutations } from 'vuex';
       ...mapMutations('selectedObjects', ['deleteSelectedObjectItem']),
       ...mapMutations('mediaTexts', ['setTargetObjectIndex']),
       ...mapMutations('mediaTexts', ['updateMediaTextsObjectItem']),
-      getOneText(index){ // ストアから自分のインデックスのオブジェクトだけ取得する
-        this.setTargetObjectIndex(index);
+      init(){
+        if(this.getOneText()){
+          this.setMyTextDataFromStore();
+          this.setDataFromStoreData();
+        }
+      },
+      setDomElement(){
+        this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
+        this.text = document.getElementById(this.text_with_index);
+      },
+      getOneText(){ // ストアから自分のインデックスのオブジェクトだけ取得する
+        this.setTargetObjectIndex(this.index);
         return this.getMediaText;
       },
-      initTextData(){
-        this.mediaText = Object.assign({}, this.getOneText(this.index));
+      setMyTextDataFromStore(){
+        this.mediaText = this.getOneText();
+        // this.mediaText = Object.assign({}, this.getOneText(this.index));
       },
-      updateText(e){
-        const new_text = e.target.textContent;
-        this.updateMediaTextsObjectItem({index:this.index,key:"text",value:new_text});
+      updateStoreAndMyData(key,value){
+        this.updateMediaTextsObjectItem({index:this.index,key:key,value:value});
+        this.mediaText[key] =  value;
+      },
+      onChangeDegree(e){
+        this.updateStoreAndMyData("degree", e.detail.degree);
+      },
+      onChangeTextContent(e){
+        this.updateStoreAndMyData("text", e.target.textContent);
       },
       checkTypeNum(key){
         const num_type_keys = ["width","height","left","top","degree","opacity"];
@@ -96,6 +114,26 @@ import { mapGetters, mapMutations } from 'vuex';
         }
         return reTypedValue;
       },
+      selected(){
+        const objectSelected = new CustomEvent('objectSelected',
+        {detail:{
+          type:2
+          ,index:this.index
+          ,degree:this.mediaText['degree']
+          ,element_id:this.text_wrapper_with_index}});
+        document.body.dispatchEvent(objectSelected);
+      },
+      // 位置操作用
+      moveTrigger(e){
+        const move_target_dom = this.text_wrapper;
+        moveStart(e, move_target_dom);
+      },
+      moving(e){
+        this.updateMediaTextsObjectItem({index:this.index,key:"left", value:e.detail.left})
+        this.updateMediaTextsObjectItem({index:this.index,key:"top", value:e.detail.top})
+        this.setMyTextDataFromStore();
+      },
+      // リサイズ用
       resizeStart(event){
         const x = event.detail.resize_side['x'];
         const y = event.detail.resize_side['y'];
@@ -110,101 +148,85 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       resizeX(event){
       // 横幅
-        const diff = event.detail.diff_x;
-        const start_width = event.detail.resize_start_infos['width'];
-        const start_left = event.detail.resize_start_infos['left'];
-        this.original_width = (start_width + diff) / this.scale_x_and_y;
+        const e = event.detail;
+        const diff = e.diff_x;
+        const start_width = e.resize_start_infos['width'];
+        const start_left = e.resize_start_infos['left'];
+
+        this.original_width = (start_width + diff) / this.mediaText['scale_x'];
+
       // オブジェクトの左辺リサイズ時のみleftを更新
-        const resize_side = event.detail.resize_side['x'] > 0 ? "right" : "left";
-        if(resize_side == "left"){
-          const new_left = start_left - diff;
-          this.updateMediaTextsObjectItem({index:this.index,key:"left", value:new_left})
+        const resize_side = e.resize_side['x'] > 0 ? "right" : "left";
+        if(e.resize_side['x'] < 0){ // =左辺のリサイズ
+          this.updateStoreAndMyData("left",start_left - diff);
         }
-      // dataを更新
-        this.initTextData();
-        this.updateTextWrapperStyle();
       },
       scale(event){
         // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
         const e = event.detail;
         const start_infos = event.detail.resize_start_infos;
-        this.width = start_infos["width"] + e.diff_x;
-        this.height = start_infos["height"] + e.diff_y;
-        this.scale_x_and_y = this.width / this.original_width;
-        let updateStyleValues = {"left":0,"top":0}
+        const new_width = start_infos["width"] + e.diff_x;
+        const new_scale = new_width / this.original_width;
       // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
-        const current_left = start_infos['left'];
-        const current_top = start_infos['top'];
-        updateStyleValues["left"] = e.resize_side['x'] == -1 ? current_left - e.diff_x : current_left;
-        const scale_diff_y = this.original_height * this.scale_x_and_y - start_infos["height"];
-        updateStyleValues["top"] = e.resize_side['y'] == -1 ? current_top - scale_diff_y : current_top;
+        const new_left = e.resize_side['x'] == -1 ? start_infos['left'] - e.diff_x : start_infos['left'];
+        const scale_diff_y = this.original_height * new_scale - start_infos["height"];
+        const new_top = e.resize_side['y'] == -1 ? start_infos['top'] - scale_diff_y : start_infos['top'];
+        const updateStyleValues = {"left":new_left,"top":new_top, "scale_x":new_scale, "scale_y":new_scale}
       // storeの更新
         Object.keys(updateStyleValues).forEach((key)=>{
-          this.updateMediaTextsObjectItem({index:this.index,key:key, value:updateStyleValues[key]})
+          this.updateStoreAndMyData(key,updateStyleValues[key]);
         })
-        this.initTextData();
         this.updateTextWrapperStyle();
       },
-      // 位置操作用
-      moveTrigger(e){
-        const move_target_dom = this.text_wrapper;
-        moveStart(e, move_target_dom);
+      getTextInitialSize(){
+        // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
+        const dummy_text_dom = document.createElement('p');
+        Object.keys(this.textStyle).forEach((key)=>{
+          dummy_text_dom.style[key] = this.textStyle[key];
+        })
+        dummy_text_dom.style.display = "inline-block"; // 幅を中味のテキストに合わせるため
+        dummy_text_dom.textContent = this.text_tmp;
+        this.text_wrapper.after(dummy_text_dom);
+        const width = dummy_text_dom.offsetWidth;
+        const height = dummy_text_dom.offsetHeight;
+        dummy_text_dom.remove();
+        return {"width":width, "height":height};
       },
-      moving(e){
-        this.updateMediaTextsObjectItem({index:this.index,key:"left", value:e.detail.left})
-        this.updateMediaTextsObjectItem({index:this.index,key:"top", value:e.detail.top})
-        this.initTextData();
+      setTextBoxInitialSize(){
+        const initial_size = this.getTextInitialSize();
+        this.original_width = initial_size["width"] + 1;
+        this.original_height = initial_size["height"] + 1;
       },
+      setDataFromStoreData(){
+        this.text_tmp = this.mediaText['text'];
+        this.original_width = this.mediaText['original_width'];
+        this.original_height = this.mediaText['original_height'];
+      },
+      updateTextWidth(){this.text.style.width = this.original_width+ "px";},
       updateTextWrapperStyle(){
-        this.text_wrapper.style.left = this.getMediaText["left"] + "px";
-        this.text_wrapper.style.top = this.getMediaText["top"] + "px";
-        this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
-        this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
-      },
-      updateDegree(event){
-        const new_degree = event.detail.degree;
-        this.updateMediaTextsObjectItem({index:this.index,key:"degree",value:new_degree});
-      },
-      selected(){
-        const objectSelected = new CustomEvent('objectSelected',
-        {detail:{
-          type:2
-          ,index:this.index
-          ,degree:this.mediaText['degree']
-          ,element_id:this.text_wrapper_with_index}});
-        document.body.dispatchEvent(objectSelected);
+        this.text_wrapper.style.width = this.original_width * this.mediaText['scale_x'] + "px";
+        this.text_wrapper.style.height = this.original_height * this.mediaText['scale_y'] + "px";
       },
     },
     created(){
-      this.initTextData();
+      this.setMyTextDataFromStore();
       this.text_tmp = this.mediaText["text"];
     },
     mounted(){
-      this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
-      this.text = document.getElementById(this.text_with_index);
-
-      // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
-      const dummy_text = document.getElementById('tmp-dummy-text');
-      const dummy_text_width = dummy_text.offsetWidth;
-      const dummy_text_height = dummy_text.offsetHeight;
-      dummy_text.remove();
-
+      this.setDomElement();
       // DOMの描画終了を待つ
       this.$nextTick(function(){
-        this.original_width = dummy_text_width + 1;
-        this.original_height = dummy_text_height + 1;
-        this.width = this.original_width;
-        this.height = this.original_height;
-        this.updateTextWrapperStyle();
+        this.setTextBoxInitialSize();
 
-        const resizeObserver = new ResizeObserver(entrys=>{
+        const textResizeObserver = new ResizeObserver(entrys=>{
+          console.log('resize text box')
           entrys.forEach((entry)=>{
             const rect = entry.contentRect;
-            // this.original_height = rect["height"];
-            // this.updateTextWrapperStyle();
+            this.original_height = rect["height"];
+            this.updateTextWrapperStyle();
           })
         });
-        resizeObserver.observe(this.text);
+        textResizeObserver.observe(this.text);
       });
 
       this.text_wrapper.addEventListener('mousedown',this.moveTrigger,false);
@@ -213,7 +235,7 @@ import { mapGetters, mapMutations } from 'vuex';
       this.text_wrapper.addEventListener('click',this.selected,false);
       this.text_wrapper.addEventListener('moving',this.moving,false);
       this.text_wrapper.addEventListener('resize',this.resizeStart,false);
-      this.text_wrapper.addEventListener('rotateObject',this.updateDegree,false);
+      this.text_wrapper.addEventListener('rotateObject',this.onChangeDegree,false);
 
     },
   }

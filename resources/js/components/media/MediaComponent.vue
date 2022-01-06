@@ -409,7 +409,6 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-
   #disp-media-owner-modal-wrapper {
     color: white;
   }

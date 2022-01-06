@@ -7048,6 +7048,16 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7060,17 +7070,28 @@ function _defineProperty(obj, key, value) {
   },
   props: ['transitionName'],
   data: function data() {
-    return {};
+    return {
+      selected: "",
+      options: ""
+    };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('fontFamilyList', ['getFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     previewStyle: function previewStyle() {
       var style = {
         "color": this.getTextData['color'],
-        "opacity": this.getTextData['opacity']
+        "font-family": this.selected
       };
       return style;
     }
   }),
+  watch: {
+    selected: function selected(new_val) {
+      this.updateTextData({
+        key: "font_family",
+        value: new_val
+      });
+    }
+  },
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTextFactory', ['updateTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTexts', ['addMediaTextsObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
@@ -7087,7 +7108,11 @@ function _defineProperty(obj, key, value) {
         value: Number(this.getTextData["top"] + 20)
       });
     }
-  })
+  }),
+  created: function created() {
+    this.selected = this.getTextData['font_family'];
+    this.options = Object.assign({}, this.getFontFamilyList);
+  }
 });
 
 /***/ }),
@@ -9243,10 +9268,11 @@ function _defineProperty(obj, key, value) {
     imgWrapperStyle: function imgWrapperStyle() {
       var mi = this.mediaImg;
       var styleObject = {
-        "top": this.addPxToTail(mi['top']),
-        "left": this.addPxToTail(mi['left']),
-        "width": this.addPxToTail(mi['width']),
-        "height": this.addPxToTail(mi['height']),
+        "top": mi['top'] + "px",
+        "left": mi['left'] + "px",
+        "width": mi['width'] + "px",
+        "height": mi['height'] + "px",
+        "transform": "rotate(" + mi['degree'] + "deg)",
         'z-index': mi['layer']
       };
       return styleObject;
@@ -9254,8 +9280,8 @@ function _defineProperty(obj, key, value) {
     imgStyle: function imgStyle() {
       var mi = this.mediaImg;
       var styleObject = {
-        "width": this.addPxToTail(mi['width']),
-        "height": this.addPxToTail(mi['height']),
+        "width": mi['width'] + "px",
+        "height": mi['height'] + "px",
         "opacity": mi['opacity']
       };
       return styleObject;
@@ -9282,6 +9308,9 @@ function _defineProperty(obj, key, value) {
       // ストアから自分のインデックスのオブジェクトだけ取得する
       this.setTargetObjectIndex(this.index);
       return this.getMediaImg;
+    },
+    init: function init() {
+      this.mediaImg = this.getOneImg();
     },
     showEditor: function showEditor() {
       var showSetting = new CustomEvent('showImgSetting', {
@@ -9339,42 +9368,20 @@ function _defineProperty(obj, key, value) {
         if (new_values[key]) {
           var new_val = Math.floor(new_values[key]);
 
-          _this2.updateMediaImgsObjectItem({
-            index: _this2.index,
-            key: key,
-            value: new_val
-          });
-
-          _this2.mediaImg[key] = new_val;
+          _this2.updateStoreAndMyData(key, new_val);
         }
       });
     },
-    updateDegree: function updateDegree(e) {
-      var new_degree = e.detail.degree;
+    updateStoreAndMyData: function updateStoreAndMyData(key, value) {
       this.updateMediaImgsObjectItem({
         index: this.index,
-        key: "degree",
-        value: new_degree
+        key: key,
+        value: value
       });
-      this.mediaImg['degree'] = new_degree;
+      this.mediaImg[key] = value;
     },
-    reRender: function reRender() {
-      var _this3 = this;
-
-      var keys = ["width", "height", "left", "top"];
-      var storeData = this.getOneImg(this.index);
-
-      if (storeData) {
-        keys.forEach(function (key) {
-          _this3.mediaImg[key] = storeData[key];
-        });
-      }
-    },
-    init: function init() {
-      this.mediaImg = this.getOneImg();
-    },
-    addPxToTail: function addPxToTail(value) {
-      return value + "px";
+    onChangeDegree: function onChangeDegree(e) {
+      this.updateStoreAndMyData("degree", e.detail.degree);
     }
   }),
   created: function created() {
@@ -9385,7 +9392,7 @@ function _defineProperty(obj, key, value) {
 
     this.img_wrapper.addEventListener('imgDataUpdated', this.init, false);
     this.img_wrapper.addEventListener('resize', this.updateSizeAndPosition, false);
-    this.img_wrapper.addEventListener('rotateObject', this.updateDegree, false);
+    this.img_wrapper.addEventListener('rotateObject', this.onChangeDegree, false);
     this.img_wrapper.addEventListener('click', this.selected, false);
     this.img_wrapper.addEventListener('touchstart', this.selected, false);
   }
@@ -10855,8 +10862,8 @@ function _defineProperty(obj, key, value) {
 
       var new_rad = Math.atan2(distance_x_from_target_center, distance_y_from_target_center);
       var new_deg = Math.floor(new_rad * (180 / Math.PI) * -1 % 360); // rotateは通常時計周り。そのままだとマウスの回転と逆になってしまうため×-1
+      // this.rotate_target.style.transform = 'rotate('+ new_deg +'deg)';
 
-      this.rotate_target.style.transform = 'rotate(' + new_deg + 'deg)';
       this.degree = new_deg; // マウス、タッチ解除時のイベントを設定
 
       document.body.addEventListener("mouseleave", this.rotateEnd, false);
@@ -11101,9 +11108,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
 
 
 
@@ -11114,15 +11118,11 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       mediaText: "",
-      isReDraw: false,
-      isResizing: false,
       original_width: 100,
       original_height: 100,
-      width: 100,
-      height: 100,
-      scale_x_and_y: 1,
+      text_tmp: "default text",
       text_wrapper: "",
-      text_tmp: "default text"
+      text: ""
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
@@ -11146,28 +11146,26 @@ function _defineProperty(obj, key, value) {
         return obj.type == 3 && obj.index == _this.index;
       });
     },
-    textStyle: function textStyle() {
-      var textStyle = {
-        "max-width": this.original_width + "px",
-        "transform": "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")"
+    textWrapperStyle: function textWrapperStyle() {
+      return {
+        "transform": "rotate(" + this.mediaText['degree'] + "deg)",
+        "left": this.mediaText['left'] + "px",
+        "top": this.mediaText['top'] + "px"
       };
-      return textStyle;
+    },
+    textStyle: function textStyle() {
+      return {
+        "transform": "scaleX(" + this.mediaText['scale_x'] + ")" + " scaleY(" + this.mediaText['scale_y'] + ")",
+        "color": this.mediaText['color'],
+        "font-size": this.mediaText['font_size'] + "px",
+        "font-family": this.mediaText['font_family'],
+        "opacity": this.mediaText['opacity']
+      };
     }
   }),
   watch: {
-    scale_x_and_y: function scale_x_and_y(new_val) {
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "scale_x",
-        value: new_val
-      });
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "scale_y",
-        value: new_val
-      });
-    },
     original_width: function original_width(new_val) {
+      this.updateTextWidth();
       this.updateMediaTextsObjectItem({
         index: this.index,
         key: "original_width",
@@ -11183,21 +11181,37 @@ function _defineProperty(obj, key, value) {
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['updateMediaTextsObjectItem'])), {}, {
-    getOneText: function getOneText(index) {
+    init: function init() {
+      if (this.getOneText()) {
+        this.setMyTextDataFromStore();
+        this.setDataFromStoreData();
+      }
+    },
+    setDomElement: function setDomElement() {
+      this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
+      this.text = document.getElementById(this.text_with_index);
+    },
+    getOneText: function getOneText() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
-      this.setTargetObjectIndex(index);
+      this.setTargetObjectIndex(this.index);
       return this.getMediaText;
     },
-    initTextData: function initTextData() {
-      this.mediaText = Object.assign({}, this.getOneText(this.index));
+    setMyTextDataFromStore: function setMyTextDataFromStore() {
+      this.mediaText = this.getOneText(); // this.mediaText = Object.assign({}, this.getOneText(this.index));
     },
-    updateText: function updateText(e) {
-      var new_text = e.target.textContent;
+    updateStoreAndMyData: function updateStoreAndMyData(key, value) {
       this.updateMediaTextsObjectItem({
         index: this.index,
-        key: "text",
-        value: new_text
+        key: key,
+        value: value
       });
+      this.mediaText[key] = value;
+    },
+    onChangeDegree: function onChangeDegree(e) {
+      this.updateStoreAndMyData("degree", e.detail.degree);
+    },
+    onChangeTextContent: function onChangeTextContent(e) {
+      this.updateStoreAndMyData("text", e.target.textContent);
     },
     checkTypeNum: function checkTypeNum(key) {
       var num_type_keys = ["width", "height", "left", "top", "degree", "opacity"];
@@ -11214,6 +11228,36 @@ function _defineProperty(obj, key, value) {
 
       return reTypedValue;
     },
+    selected: function selected() {
+      var objectSelected = new CustomEvent('objectSelected', {
+        detail: {
+          type: 2,
+          index: this.index,
+          degree: this.mediaText['degree'],
+          element_id: this.text_wrapper_with_index
+        }
+      });
+      document.body.dispatchEvent(objectSelected);
+    },
+    // 位置操作用
+    moveTrigger: function moveTrigger(e) {
+      var move_target_dom = this.text_wrapper;
+      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+    },
+    moving: function moving(e) {
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "left",
+        value: e.detail.left
+      });
+      this.updateMediaTextsObjectItem({
+        index: this.index,
+        key: "top",
+        value: e.detail.top
+      });
+      this.setMyTextDataFromStore();
+    },
+    // リサイズ用
     resizeStart: function resizeStart(event) {
       var x = event.detail.resize_side['x'];
       var y = event.detail.resize_side['y'];
@@ -11232,25 +11276,18 @@ function _defineProperty(obj, key, value) {
     },
     resizeX: function resizeX(event) {
       // 横幅
-      var diff = event.detail.diff_x;
-      var start_width = event.detail.resize_start_infos['width'];
-      var start_left = event.detail.resize_start_infos['left'];
-      this.original_width = (start_width + diff) / this.scale_x_and_y; // オブジェクトの左辺リサイズ時のみleftを更新
+      var e = event.detail;
+      var diff = e.diff_x;
+      var start_width = e.resize_start_infos['width'];
+      var start_left = e.resize_start_infos['left'];
+      this.original_width = (start_width + diff) / this.mediaText['scale_x']; // オブジェクトの左辺リサイズ時のみleftを更新
 
-      var resize_side = event.detail.resize_side['x'] > 0 ? "right" : "left";
+      var resize_side = e.resize_side['x'] > 0 ? "right" : "left";
 
-      if (resize_side == "left") {
-        var new_left = start_left - diff;
-        this.updateMediaTextsObjectItem({
-          index: this.index,
-          key: "left",
-          value: new_left
-        });
-      } // dataを更新
-
-
-      this.initTextData();
-      this.updateTextWrapperStyle();
+      if (e.resize_side['x'] < 0) {
+        // =左辺のリサイズ
+        this.updateStoreAndMyData("left", start_left - diff);
+      }
     },
     scale: function scale(event) {
       var _this2 = this; // スケール率を計算(※↓はheightを元に計算しているが、縦横の比率固定のため、計算には縦横どちらを使ってもよい)
@@ -11258,100 +11295,83 @@ function _defineProperty(obj, key, value) {
 
       var e = event.detail;
       var start_infos = event.detail.resize_start_infos;
-      this.width = start_infos["width"] + e.diff_x;
-      this.height = start_infos["height"] + e.diff_y;
-      this.scale_x_and_y = this.width / this.original_width;
-      var updateStyleValues = {
-        "left": 0,
-        "top": 0
-      }; // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
+      var new_width = start_infos["width"] + e.diff_x;
+      var new_scale = new_width / this.original_width; // 座標の微調整(左か上辺でリサイズした場合は位置の調整が必要)
 
-      var current_left = start_infos['left'];
-      var current_top = start_infos['top'];
-      updateStyleValues["left"] = e.resize_side['x'] == -1 ? current_left - e.diff_x : current_left;
-      var scale_diff_y = this.original_height * this.scale_x_and_y - start_infos["height"];
-      updateStyleValues["top"] = e.resize_side['y'] == -1 ? current_top - scale_diff_y : current_top; // storeの更新
+      var new_left = e.resize_side['x'] == -1 ? start_infos['left'] - e.diff_x : start_infos['left'];
+      var scale_diff_y = this.original_height * new_scale - start_infos["height"];
+      var new_top = e.resize_side['y'] == -1 ? start_infos['top'] - scale_diff_y : start_infos['top'];
+      var updateStyleValues = {
+        "left": new_left,
+        "top": new_top,
+        "scale_x": new_scale,
+        "scale_y": new_scale
+      }; // storeの更新
 
       Object.keys(updateStyleValues).forEach(function (key) {
-        _this2.updateMediaTextsObjectItem({
-          index: _this2.index,
-          key: key,
-          value: updateStyleValues[key]
-        });
+        _this2.updateStoreAndMyData(key, updateStyleValues[key]);
       });
-      this.initTextData();
       this.updateTextWrapperStyle();
     },
-    // 位置操作用
-    moveTrigger: function moveTrigger(e) {
-      var move_target_dom = this.text_wrapper;
-      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+    getTextInitialSize: function getTextInitialSize() {
+      var _this3 = this; // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
+
+
+      var dummy_text_dom = document.createElement('p');
+      Object.keys(this.textStyle).forEach(function (key) {
+        dummy_text_dom.style[key] = _this3.textStyle[key];
+      });
+      dummy_text_dom.style.display = "inline-block"; // 幅を中味のテキストに合わせるため
+
+      dummy_text_dom.textContent = this.text_tmp;
+      this.text_wrapper.after(dummy_text_dom);
+      var width = dummy_text_dom.offsetWidth;
+      var height = dummy_text_dom.offsetHeight;
+      dummy_text_dom.remove();
+      return {
+        "width": width,
+        "height": height
+      };
     },
-    moving: function moving(e) {
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "left",
-        value: e.detail.left
-      });
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "top",
-        value: e.detail.top
-      });
-      this.initTextData();
+    setTextBoxInitialSize: function setTextBoxInitialSize() {
+      var initial_size = this.getTextInitialSize();
+      this.original_width = initial_size["width"] + 1;
+      this.original_height = initial_size["height"] + 1;
+    },
+    setDataFromStoreData: function setDataFromStoreData() {
+      this.text_tmp = this.mediaText['text'];
+      this.original_width = this.mediaText['original_width'];
+      this.original_height = this.mediaText['original_height'];
+    },
+    updateTextWidth: function updateTextWidth() {
+      this.text.style.width = this.original_width + "px";
     },
     updateTextWrapperStyle: function updateTextWrapperStyle() {
-      this.text_wrapper.style.left = this.getMediaText["left"] + "px";
-      this.text_wrapper.style.top = this.getMediaText["top"] + "px";
-      this.text_wrapper.style.width = this.original_width * this.scale_x_and_y + "px";
-      this.text_wrapper.style.height = this.original_height * this.scale_x_and_y + "px";
-    },
-    updateDegree: function updateDegree(event) {
-      var new_degree = event.detail.degree;
-      this.updateMediaTextsObjectItem({
-        index: this.index,
-        key: "degree",
-        value: new_degree
-      });
-    },
-    selected: function selected() {
-      var objectSelected = new CustomEvent('objectSelected', {
-        detail: {
-          type: 2,
-          index: this.index,
-          degree: this.mediaText['degree'],
-          element_id: this.text_wrapper_with_index
-        }
-      });
-      document.body.dispatchEvent(objectSelected);
+      this.text_wrapper.style.width = this.original_width * this.mediaText['scale_x'] + "px";
+      this.text_wrapper.style.height = this.original_height * this.mediaText['scale_y'] + "px";
     }
   }),
   created: function created() {
-    this.initTextData();
+    this.setMyTextDataFromStore();
     this.text_tmp = this.mediaText["text"];
   },
   mounted: function mounted() {
-    this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
-    this.text = document.getElementById(this.text_with_index); // 初期テキストの横幅取得用要素から横幅を取得し要素を削除
-
-    var dummy_text = document.getElementById('tmp-dummy-text');
-    var dummy_text_width = dummy_text.offsetWidth;
-    var dummy_text_height = dummy_text.offsetHeight;
-    dummy_text.remove(); // DOMの描画終了を待つ
+    this.setDomElement(); // DOMの描画終了を待つ
 
     this.$nextTick(function () {
-      this.original_width = dummy_text_width + 1;
-      this.original_height = dummy_text_height + 1;
-      this.width = this.original_width;
-      this.height = this.original_height;
-      this.updateTextWrapperStyle();
-      var resizeObserver = new ResizeObserver(function (entrys) {
+      var _this4 = this;
+
+      this.setTextBoxInitialSize();
+      var textResizeObserver = new ResizeObserver(function (entrys) {
+        console.log('resize text box');
         entrys.forEach(function (entry) {
-          var rect = entry.contentRect; // this.original_height = rect["height"];
-          // this.updateTextWrapperStyle();
+          var rect = entry.contentRect;
+          _this4.original_height = rect["height"];
+
+          _this4.updateTextWrapperStyle();
         });
       });
-      resizeObserver.observe(this.text);
+      textResizeObserver.observe(this.text);
     });
     this.text_wrapper.addEventListener('mousedown', this.moveTrigger, false);
     this.text_wrapper.addEventListener('touchstart', this.moveTrigger, false);
@@ -11359,7 +11379,7 @@ function _defineProperty(obj, key, value) {
     this.text_wrapper.addEventListener('click', this.selected, false);
     this.text_wrapper.addEventListener('moving', this.moving, false);
     this.text_wrapper.addEventListener('resize', this.resizeStart, false);
-    this.text_wrapper.addEventListener('rotateObject', this.updateDegree, false);
+    this.text_wrapper.addEventListener('rotateObject', this.onChangeDegree, false);
   }
 });
 
@@ -11477,11 +11497,11 @@ function _defineProperty(obj, key, value) {
       });
     },
     reRender: function reRender(index) {
-      this.$refs.texts[index].initTextData();
+      this.$refs.texts[index].init();
     },
     reRenderAll: function reRenderAll() {
       this.$refs.texts.forEach(function (text) {
-        text.initTextData();
+        text.init();
       });
     }
   }),
@@ -13660,8 +13680,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_deviceType_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/deviceType.js */ "./resources/js/store/modules/deviceType.js");
 /* harmony import */ var _modules_media_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/media.js */ "./resources/js/store/modules/media.js");
@@ -13670,11 +13690,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/mediaMovie.js */ "./resources/js/store/modules/mediaMovie.js");
 /* harmony import */ var _modules_mediaTextFactory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaTextFactory */ "./resources/js/store/modules/mediaTextFactory.js");
 /* harmony import */ var _modules_mediaTexts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaTexts */ "./resources/js/store/modules/mediaTexts.js");
-/* harmony import */ var _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/mediaContentsField */ "./resources/js/store/modules/mediaContentsField.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
-/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
-/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
-/* harmony import */ var _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/selectedObjects */ "./resources/js/store/modules/selectedObjects.js");
+/* harmony import */ var _modules_fontFamilyList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/fontFamilyList */ "./resources/js/store/modules/fontFamilyList.js");
+/* harmony import */ var _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/mediaContentsField */ "./resources/js/store/modules/mediaContentsField.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
+/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
+/* harmony import */ var _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/selectedObjects */ "./resources/js/store/modules/selectedObjects.js");
 
 
 
@@ -13691,8 +13712,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_14__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_15__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_15__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_15__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_16__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_16__["default"].Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__["default"],
     deviceType: _modules_deviceType_js__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -13702,11 +13724,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_15__["default"].Store({
     mediaMovie: _modules_mediaMovie_js__WEBPACK_IMPORTED_MODULE_6__["default"],
     mediaTextFactory: _modules_mediaTextFactory__WEBPACK_IMPORTED_MODULE_7__["default"],
     mediaTexts: _modules_mediaTexts__WEBPACK_IMPORTED_MODULE_8__["default"],
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_10__["default"],
-    mediaContentsField: _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_9__["default"],
-    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_11__["default"],
-    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_12__["default"],
-    selectedObjects: _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_13__["default"]
+    fontFamilyList: _modules_fontFamilyList__WEBPACK_IMPORTED_MODULE_9__["default"],
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_11__["default"],
+    mediaContentsField: _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_10__["default"],
+    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_12__["default"],
+    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_13__["default"],
+    selectedObjects: _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_14__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -13742,6 +13765,132 @@ var deviceType = {
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (deviceType);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/fontFamilyList.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/modules/fontFamilyList.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var fontFamilyList = {
+  namespaced: true,
+  state: {
+    fontFamilyList: [// 総称フォント
+    {
+      name: "monospace",
+      value: "monospace"
+    }, {
+      name: "serif",
+      value: "serif"
+    }, // 英語(&日本語)
+    {
+      name: "Meiryo UI",
+      value: '"Meiryo UI"'
+    }, {
+      name: "Arial Black",
+      value: '"Arial Black"'
+    }, {
+      name: "Helvetica",
+      value: '"Helvetica"'
+    }, {
+      name: "Times New Roman",
+      value: '"Times New Roman"'
+    }, {
+      name: "Sacramento",
+      value: '"Sacramento"'
+    }, {
+      name: "Caveat",
+      value: '"Caveat"'
+    }, {
+      name: "Amatic SC",
+      value: '"Amatic SC"'
+    }, {
+      name: "Itim",
+      value: '"Itim"'
+    }, {
+      name: "Alegreya Sans SC",
+      value: '"Alegreya Sans SC"'
+    }, {
+      name: "Anton",
+      value: '"Anton"'
+    }, {
+      name: "Bangers",
+      value: '"Bangers"'
+    }, {
+      name: "Cherry Swash",
+      value: '"Cherry Swash"'
+    }, {
+      name: "Corben",
+      value: '"Corben"'
+    }, {
+      name: "Creepster",
+      value: '"Creepster"'
+    }, {
+      name: "IM Fell DW Pica SC",
+      value: '"IM Fell DW Pica SC"'
+    }, {
+      name: "Londrina Shadow",
+      value: '"Londrina Shadow"'
+    }, {
+      name: "",
+      value: '""'
+    }, {
+      name: "",
+      value: '""'
+    }, {
+      name: "",
+      value: '""'
+    }, // 日本語
+    {
+      name: "Sawarabi Mincho",
+      value: '"Sawarabi Mincho"'
+    }, {
+      name: "YuMincho",
+      value: '"Yu Mincho", "YuMincho"'
+    }, {
+      name: "Noto Serif JP",
+      value: '"Noto Serif JP"'
+    }, {
+      name: "Hiragino Sans",
+      value: '"Hiragino Sans"'
+    }, {
+      name: "Kosugi",
+      value: '"Kosugi"'
+    }, {
+      name: "Hannari",
+      value: '"Hannari"'
+    }, {
+      name: "Nikukyu",
+      value: '"Nikukyu"'
+    }, {
+      name: "Nico Moji",
+      value: '"Nico Moji"'
+    }, {
+      name: "",
+      value: '""'
+    }, {
+      name: "",
+      value: '""'
+    }, {
+      name: "",
+      value: '""'
+    }]
+  },
+  getters: {
+    getFontFamilyList: function getFontFamilyList(state) {
+      return state.fontFamilyList;
+    }
+  },
+  mutations: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fontFamilyList);
 
 /***/ }),
 
@@ -14338,7 +14487,7 @@ var mediaText = {
       type: 90,
       groupNo: null,
       id: 0,
-      text: "テキスト",
+      text: "テキストtext",
       top: 100,
       left: 100,
       width: 100,
@@ -14347,6 +14496,7 @@ var mediaText = {
       scale_y: 1,
       color: "#000000",
       font_size: 18,
+      font_family: "monospace",
       degree: 0,
       opacity: 1,
       layer: 1
@@ -19837,13 +19987,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css");
 // Imports
+
 
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 4px;\r\n    background-color: transparent;\r\n    color: white;\r\n    font-size: 12px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: orange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\r\n    margin-bottom: 5px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n#font-size[data-v-35d10c14] {\r\n    width: 70px;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
@@ -20686,6 +20839,33 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, ".flex {\r\n  display: flex;\r\n}\r\n\r\n\r\n/* flex方向 */\r\n.column {\r\n  flex-direction: column;\r\n}\r\n\r\n\r\n/* align-items */\r\n.a-center {\r\n  align-items: center;\r\n}\r\n.a-start {\r\n  align-items: flex-start;\r\n}\r\n.a-end {\r\n  align-items: flex-end;\r\n}\r\n\r\n\r\n\r\n/* justify-contents */\r\n.j-center {\r\n  justify-content: center;\r\n}\r\n.j-start {\r\n  justify-content: flex-start;\r\n}\r\n.j-end {\r\n  justify-content: flex-end;\r\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css":
+/*!*********************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css ***!
+  \*********************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Sacramento&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap);"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "/* Sacramento */\r\n\r\n/* Caveat */\r\n\r\n/* Amatic SC */\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70985,7 +71165,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "flex column",
+                  staticClass: "setting flex column",
                   attrs: { id: "opacity-wrapper" },
                 },
                 [
@@ -71021,6 +71201,61 @@ var render = function () {
                       },
                     },
                   }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting flex column",
+                  attrs: { id: "font-style-wrapper" },
+                },
+                [
+                  _c("span", [_vm._v("フォントスタイル")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.selected,
+                          expression: "selected",
+                        },
+                      ],
+                      attrs: { id: "" },
+                      on: {
+                        change: function ($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function (o) {
+                              return o.selected
+                            })
+                            .map(function (o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.selected = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        },
+                      },
+                    },
+                    _vm._l(_vm.options, function (option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.value } },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(option.name) +
+                              "\n            "
+                          ),
+                        ]
+                      )
+                    }),
+                    0
+                  ),
                 ]
               ),
             ]
@@ -73251,6 +73486,7 @@ var render = function () {
     {
       staticClass: "obj text-wrapper",
       class: { is_active: _vm.isActive },
+      style: _vm.textWrapperStyle,
       attrs: { id: _vm.text_wrapper_with_index },
       on: {
         click: function ($event) {
@@ -73279,16 +73515,12 @@ var render = function () {
           },
           on: {
             input: function ($event) {
-              return _vm.updateText($event)
+              return _vm.onChangeTextContent($event)
             },
           },
         },
         [_vm._v("\n  " + _vm._s(_vm.text_tmp) + "\n  ")]
       ),
-      _vm._v(" "),
-      _c("p", { attrs: { id: "tmp-dummy-text" } }, [
-        _vm._v(_vm._s(_vm.text_tmp)),
-      ]),
     ]
   )
 }

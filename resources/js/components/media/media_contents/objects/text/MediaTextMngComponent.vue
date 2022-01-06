@@ -52,9 +52,9 @@
           this.updateIsInitializedTexts(true);
         });
       },
-      reRender(index){ this.$refs.texts[index].initTextData(); },
+      reRender(index){ this.$refs.texts[index].init(); },
       reRenderAll(){ 
-        this.$refs.texts.forEach(text => { text.initTextData(); }); 
+        this.$refs.texts.forEach((text) => { text.init(); }); 
       },
     },
     mounted(){
