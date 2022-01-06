@@ -7701,7 +7701,6 @@ function _defineProperty(obj, key, value) {
 
       this.setTextBoxInitialSize();
       var textResizeObserver = new ResizeObserver(function (entrys) {
-        console.log('resize text box');
         entrys.forEach(function (entry) {
           var rect = entry.contentRect;
           _this4.original_height = rect["height"];
@@ -10443,8 +10442,17 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Sacramento&display=swap);"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);"]);
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Anton&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Bangers&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Caveat&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Cherry+Swash&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Corben:wght@400;700&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Creepster&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica+SC&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap);"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Sacramento */\r\n\r\n/* Caveat */\r\n\r\n/* Amatic SC */\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Sacramento */\r\n\r\n/* Caveat */\r\n\r\n/* Amatic SC */\r\n\r\n/* Anton */\r\n\r\n/* Alegreya Sans SC */\r\n\r\n/* Bangers */\r\n\r\n/* Caveat */\r\n\r\n/* Cherry Swash */\r\n\r\n/* Corben */\r\n\r\n/* Creepster */\r\n\r\n/* IM Fell DW Pica SC */\r\n\r\n/* Londrina Shadow */\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

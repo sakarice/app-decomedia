@@ -219,7 +219,6 @@ import { mapGetters, mapMutations } from 'vuex';
         this.setTextBoxInitialSize();
 
         const textResizeObserver = new ResizeObserver(entrys=>{
-          console.log('resize text box')
           entrys.forEach((entry)=>{
             const rect = entry.contentRect;
             this.original_height = rect["height"];
