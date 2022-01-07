@@ -17,6 +17,7 @@
     computed : {
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
+      ...mapGetters('mediaTexts', ['getMediaTexts']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -31,6 +32,7 @@
         let media_datas = {
           'img' : this.getMediaImg,
           'imgs' : this.getMediaImgs,
+          'texts' : this.getMediaTexts,
           'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\AudioController;
 use App\Http\Controllers\MediaImgController;
+use App\Http\Controllers\MediaTextController;
 use App\Http\Controllers\MediaFigureController;
 use App\Http\Controllers\MediaAudioController;
 use App\Http\Controllers\MediaMovieController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\MediaSettingController;
 
 use App\Lib\ImgUtil;
 use App\Lib\MediaImgUtil;
+use App\Lib\MediaTextUtil;
 use App\Lib\MediaFigureUtil;
 use App\Lib\PublicImgUtil;
 use App\Lib\UserOwnImgUtil;
@@ -25,6 +27,7 @@ use App\Models\Media;
 use App\Models\UserOwnImg;
 use App\Models\PublicImg;
 use App\Models\MediaImg;
+use App\Models\MediaText;
 use App\Models\MediaFigure;
 use App\Models\MediaAudio;
 use App\Models\MediaMovie;
@@ -188,6 +191,10 @@ class MediaUtil
       // media図形
       if(isset($request->figures[0])){
         MediaFigureController::store($media_id, $request);
+      }
+      // mediaテキスト
+      if(isset($request->texts[0])){
+        MediaTextController::store($media_id, $request);
       }
       // media音楽
       if(isset($request->audios[0])){

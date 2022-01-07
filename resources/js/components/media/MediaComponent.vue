@@ -363,6 +363,7 @@ export default {
       // this.$refs.mediaImg.initImg();
       this.$refs.mediaContentsField.initContentsField();
       this.$refs.mediaImgMng.initImg();
+      this.$refs.mediaTextMng.initText();
       this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();
