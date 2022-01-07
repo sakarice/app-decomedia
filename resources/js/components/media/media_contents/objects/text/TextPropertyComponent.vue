@@ -136,8 +136,6 @@
           return this.font_list_japanese;
         }
       },
-      // selected_category:function(){ return this.textDatas['font_category']},
-      // selected_font:function(){ return this.textDatas['font_family']},
       isMobile(){ return (this.getDeviceType==2) ? true : false; },
       type:{
         get(){
@@ -208,7 +206,6 @@
         this.setCategoryAndFontFromStoreData();
       },
       updateTextData(key, value){
-        // this.textDatas[key] = this.getOneText(this.index)[key];
         this.textDatas[key] = this.fixStrToNum(key, value);
         this.updateMediaTextsObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
         const targetDomId = 'text_wrapper'+this.index;

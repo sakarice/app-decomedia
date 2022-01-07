@@ -11756,8 +11756,6 @@ function _defineProperty(obj, key, value) {
         return this.font_list_japanese;
       }
     },
-    // selected_category:function(){ return this.textDatas['font_category']},
-    // selected_font:function(){ return this.textDatas['font_family']},
     isMobile: function isMobile() {
       return this.getDeviceType == 2 ? true : false;
     },
@@ -11846,7 +11844,6 @@ function _defineProperty(obj, key, value) {
       this.setCategoryAndFontFromStoreData();
     },
     updateTextData: function updateTextData(key, value) {
-      // this.textDatas[key] = this.getOneText(this.index)[key];
       this.textDatas[key] = this.fixStrToNum(key, value);
       this.updateMediaTextsObjectItem({
         index: this.index,
