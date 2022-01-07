@@ -10,6 +10,7 @@ import mediaMovie from './modules/mediaMovie.js';
 import mediaTextFactory from './modules/mediaTextFactory';
 import mediaTexts from './modules/mediaTexts';
 import fontFamilyList from './modules/fontFamilyList'
+import japaneseFontFamilyList from './modules/japaneseFontFamilyList'
 import mediaContentsField from './modules/mediaContentsField';
 import mediaSetting from './modules/mediaSetting.js';
 import mediaFigureFactory from './modules/mediaFigureFactory.js';
@@ -29,6 +30,7 @@ const store = new Vuex.Store({
     mediaTextFactory,
     mediaTexts,
     fontFamilyList,
+    japaneseFontFamilyList,
     mediaSetting,
     mediaContentsField,
     mediaFigureFactory,

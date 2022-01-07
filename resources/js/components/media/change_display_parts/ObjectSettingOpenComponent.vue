@@ -26,6 +26,9 @@
           case 1:
             event = new CustomEvent('showImgSetting', {detail:{index:obj.index}});
             break;
+          case 2:
+            event = new CustomEvent('showTextSetting', {detail:{index:obj.index}});
+            break;
         }
         document.body.dispatchEvent(event);
       }

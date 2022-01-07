@@ -7,21 +7,22 @@
 
           <!-- テキストプレビュー -->
           <div id="text-preview-wrapper" class="setting">
+            <h3 class="sub-title">プレビュー</h3>
             <input
             id="text-preview"
             :style="previewStyle" v-model="getTextData['text']">
-          </div>
-          <!-- 追加 -->
-          <div id="media-text-add-wraper" class="setting flex column" @click="addText()">
-            <div class="flex a-center">
-              <i class="fas fa-plus add-text-icon"></i>
-              <button class="add-text-button">追加</button>
+            <!-- 追加 -->
+            <div id="media-text-add-wraper" class="flex column" @click="addText()">
+              <div class="flex a-center">
+                <i class="fas fa-plus add-text-icon"></i>
+                <button class="add-text-button">追加</button>
+              </div>
             </div>
           </div>
 
           <!-- フォントサイズ -->
           <div id="font-size-wrapper" class="setting flex column">
-            <span style="margin-right:5px">フォントサイズ</span>
+            <h3 class="sub-title" style="margin-right:5px">サイズ</h3>
             <div>
               <input type="number" id="font-size" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
               <span>[px]</span>
@@ -30,26 +31,40 @@
 
           <!-- 色 -->
           <div id="text-color-wrapper" class="setting flex column">
-            <span>色</span>
+            <h3 class="sub-title">色</h3>
             <input type="color" :value="getTextData['color']" @input="updateTextData({key:'color',value:$event.target.value})">
-          </div>
-
-          <!-- 透過度 -->
-          <div id="opacity-wrapper" class="setting flex column">
-            <span>透過度:</span>
-            <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
-            <!-- <input type="range" :value="getTextData['opacity']" @mousedown.stop @input="updateTextData({key:'opacity',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05"> -->
           </div>
 
           <!-- フォントスタイル(font-family) -->
           <div id="font-style-wrapper" class="setting flex column">
-            <span>フォントスタイル</span>
-            <select id="" v-model="selected">
-              <option v-for="option in options" :value="option.value" :key="option.id">
-                {{option.name}}
-              </option>
-            </select>
+            <h3 class="sub-title">フォント</h3>
+            <div class="flex">
+              <div class="flex column" style="margin-right:5px">
+              <h4 class="sub-sub-title">カテゴリ</h4>
+                <select id="font-category" v-model="selected_category">
+                  <option v-for="category in font_category" :value="category" :key="category.id">
+                    {{category}}
+                  </option>
+                </select>
+              </div>
+              <div class="flex column">
+                <h4 class="sub-sub-title">スタイル</h4>
+                <select id="" v-model="selected_font">
+                  <option v-for="option in font_options" :value="option.value" :key="option.id">
+                    {{option.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
+
+          <!-- 透過度 -->
+          <div id="opacity-wrapper" class="setting flex column">
+            <h3 class="sub-title">透過度:</h3>
+            <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
+            <!-- <input type="range" :value="getTextData['opacity']" @mousedown.stop @input="updateTextData({key:'opacity',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05"> -->
+          </div>
+
 
         </div>
       </div>
@@ -75,7 +90,14 @@ export default {
   ],
   data : () => {
     return {
-      selected : "",
+      selected_category : "",
+      selected_font : "",
+      font_category : [
+        "normal",
+        "japanese",
+      ],
+      font_list : "",
+      font_list_japanese : "",
       options : "",
     }
   },
@@ -83,17 +105,26 @@ export default {
     ...mapGetters('media', ['getMediaId']),
     ...mapGetters('mediaTextFactory', ['getTextData']),
     ...mapGetters('fontFamilyList', ['getFontFamilyList']),
+    ...mapGetters('japaneseFontFamilyList', ['getJapaneseFontFamilyList']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
+    font_options:function(){
+      if(this.selected_category == "normal"){
+        return this.font_list;
+      } else if(this.selected_category == "japanese"){
+        return this.font_list_japanese;
+      }
+    },
     previewStyle(){
       const style = {
         "color" : this.getTextData['color'],
-        "font-family" : this.selected,
+        "font-family" : this.selected_font,
       }
       return style;
     },
   },
   watch : {
-    selected(new_val){ this.updateTextData({key:"font_family", value:new_val})},
+    selected_category(new_val){ this.updateTextData({key:"font_category", value:new_val})},
+    selected_font(new_val){ this.updateTextData({key:"font_family", value:new_val})},
   },
   methods : {
     ...mapMutations('mediaTextFactory', ['updateTextData']),
@@ -109,8 +140,10 @@ export default {
     },
   },
   created(){
-    this.selected = this.getTextData['font_family'];
-    this.options = Object.assign({},this.getFontFamilyList);
+    this.selected_category = this.getTextData['font_category'];
+    this.selected_font = this.getTextData['font_family'];
+    this.font_list = Object.assign({},this.getFontFamilyList);
+    this.font_list_japanese = Object.assign({},this.getJapaneseFontFamilyList);
   },
 }
 </script>
@@ -121,6 +154,7 @@ export default {
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
 @import "/resources/css/googleFontList.css";
+@import "/resources/css/googleJapaneseFontList.css";
 
   #media-text-setting-area {
     margin: 20px 0;
@@ -140,6 +174,15 @@ export default {
   .setting {
     margin-bottom : 20px;
   }
+
+  .sub-title {
+    font-size: 15px;
+  }
+  .sub-sub-title {
+    font-size: 13px;
+    color: darkgrey;
+  }
+
 
   .add-text-icon {
     padding: 5px;
@@ -162,12 +205,12 @@ export default {
 
   #text-preview-wrapper {
     width: 90%;
-    margin-bottom: 5px;
   }
 
   #text-preview {
     width: 100%;
     font-size: 18px;
+    margin-bottom: 3px;
   }
 
   #text-preview:hover {
@@ -182,6 +225,10 @@ export default {
   .setting-title {
     margin-bottom: 5px;
     font-size: 15px;
+  }
+
+  #font-category {
+    width : 100px;
   }
 
 

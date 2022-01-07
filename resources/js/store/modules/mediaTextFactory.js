@@ -18,6 +18,7 @@ const mediaText = {
       scale_y : 1,
       color : "#000000",
       font_size : 18,
+      font_category : "normal",
       font_family : "monospace",
       degree : 0,
       opacity : 1,

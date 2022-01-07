@@ -5262,6 +5262,14 @@ function _defineProperty(obj, key, value) {
             }
           });
           break;
+
+        case 2:
+          event = new CustomEvent('showTextSetting', {
+            detail: {
+              index: obj.index
+            }
+          });
+          break;
       }
 
       document.body.dispatchEvent(event);
@@ -7058,6 +7066,21 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7071,21 +7094,38 @@ function _defineProperty(obj, key, value) {
   props: ['transitionName'],
   data: function data() {
     return {
-      selected: "",
+      selected_category: "",
+      selected_font: "",
+      font_category: ["normal", "japanese"],
+      font_list: "",
+      font_list_japanese: "",
       options: ""
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('fontFamilyList', ['getFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('fontFamilyList', ['getFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('japaneseFontFamilyList', ['getJapaneseFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+    font_options: function font_options() {
+      if (this.selected_category == "normal") {
+        return this.font_list;
+      } else if (this.selected_category == "japanese") {
+        return this.font_list_japanese;
+      }
+    },
     previewStyle: function previewStyle() {
       var style = {
         "color": this.getTextData['color'],
-        "font-family": this.selected
+        "font-family": this.selected_font
       };
       return style;
     }
   }),
   watch: {
-    selected: function selected(new_val) {
+    selected_category: function selected_category(new_val) {
+      this.updateTextData({
+        key: "font_category",
+        value: new_val
+      });
+    },
+    selected_font: function selected_font(new_val) {
       this.updateTextData({
         key: "font_family",
         value: new_val
@@ -7110,8 +7150,10 @@ function _defineProperty(obj, key, value) {
     }
   }),
   created: function created() {
-    this.selected = this.getTextData['font_family'];
-    this.options = Object.assign({}, this.getFontFamilyList);
+    this.selected_category = this.getTextData['font_category'];
+    this.selected_font = this.getTextData['font_family'];
+    this.font_list = Object.assign({}, this.getFontFamilyList);
+    this.font_list_japanese = Object.assign({}, this.getJapaneseFontFamilyList);
   }
 });
 
@@ -13679,8 +13721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/loginState.js */ "./resources/js/store/modules/loginState.js");
 /* harmony import */ var _modules_deviceType_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/deviceType.js */ "./resources/js/store/modules/deviceType.js");
 /* harmony import */ var _modules_media_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/media.js */ "./resources/js/store/modules/media.js");
@@ -13690,11 +13732,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_mediaTextFactory__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/mediaTextFactory */ "./resources/js/store/modules/mediaTextFactory.js");
 /* harmony import */ var _modules_mediaTexts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/mediaTexts */ "./resources/js/store/modules/mediaTexts.js");
 /* harmony import */ var _modules_fontFamilyList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/fontFamilyList */ "./resources/js/store/modules/fontFamilyList.js");
-/* harmony import */ var _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/mediaContentsField */ "./resources/js/store/modules/mediaContentsField.js");
-/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
-/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
-/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
-/* harmony import */ var _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/selectedObjects */ "./resources/js/store/modules/selectedObjects.js");
+/* harmony import */ var _modules_japaneseFontFamilyList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/japaneseFontFamilyList */ "./resources/js/store/modules/japaneseFontFamilyList.js");
+/* harmony import */ var _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/mediaContentsField */ "./resources/js/store/modules/mediaContentsField.js");
+/* harmony import */ var _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/mediaSetting.js */ "./resources/js/store/modules/mediaSetting.js");
+/* harmony import */ var _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/mediaFigureFactory.js */ "./resources/js/store/modules/mediaFigureFactory.js");
+/* harmony import */ var _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/mediaFigures.js */ "./resources/js/store/modules/mediaFigures.js");
+/* harmony import */ var _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/selectedObjects */ "./resources/js/store/modules/selectedObjects.js");
 
 
 
@@ -13712,8 +13755,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_15__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_16__["default"]);
-var store = new vuex__WEBPACK_IMPORTED_MODULE_16__["default"].Store({
+
+vue__WEBPACK_IMPORTED_MODULE_16__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_17__["default"]);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_17__["default"].Store({
   modules: {
     loginState: _modules_loginState_js__WEBPACK_IMPORTED_MODULE_1__["default"],
     deviceType: _modules_deviceType_js__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -13724,11 +13768,12 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_16__["default"].Store({
     mediaTextFactory: _modules_mediaTextFactory__WEBPACK_IMPORTED_MODULE_7__["default"],
     mediaTexts: _modules_mediaTexts__WEBPACK_IMPORTED_MODULE_8__["default"],
     fontFamilyList: _modules_fontFamilyList__WEBPACK_IMPORTED_MODULE_9__["default"],
-    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_11__["default"],
-    mediaContentsField: _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_10__["default"],
-    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_12__["default"],
-    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_13__["default"],
-    selectedObjects: _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_14__["default"]
+    japaneseFontFamilyList: _modules_japaneseFontFamilyList__WEBPACK_IMPORTED_MODULE_10__["default"],
+    mediaSetting: _modules_mediaSetting_js__WEBPACK_IMPORTED_MODULE_12__["default"],
+    mediaContentsField: _modules_mediaContentsField__WEBPACK_IMPORTED_MODULE_11__["default"],
+    mediaFigureFactory: _modules_mediaFigureFactory_js__WEBPACK_IMPORTED_MODULE_13__["default"],
+    mediaFigures: _modules_mediaFigures_js__WEBPACK_IMPORTED_MODULE_14__["default"],
+    selectedObjects: _modules_selectedObjects__WEBPACK_IMPORTED_MODULE_15__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
@@ -13848,14 +13893,38 @@ var fontFamilyList = {
       value: '""'
     }, // 日本語
     {
+      name: "Noto Sans Japanese",
+      value: '"Noto Sans JP",sans-serif'
+    }, {
+      name: "Noto Serif Japanese",
+      value: '"Noto Serif JP",serif'
+    }, {
       name: "Sawarabi Mincho",
-      value: '"Sawarabi Mincho"'
+      value: '"Sawarabi Mincho",sans-serif'
+    }, {
+      name: "Mochiy Pop P One",
+      value: '"Mochiy Pop P One",sans-serif'
+    }, {
+      name: "Yuji Mai",
+      value: '"Yuji Mai", serif'
+    }, {
+      name: "Zen Antique",
+      value: '"Zen Antique",serif'
+    }, {
+      name: "Reggae One",
+      value: '"Reggae One", cursive'
+    }, {
+      name: "Rampart One",
+      value: '"Rampart One", cursive'
+    }, {
+      name: "DotGothic16",
+      value: '"DotGothic16", sans-serif'
+    }, {
+      name: "",
+      value: '""'
     }, {
       name: "YuMincho",
       value: '"Yu Mincho", "YuMincho"'
-    }, {
-      name: "Noto Serif JP",
-      value: '"Noto Serif JP"'
     }, {
       name: "Hiragino Sans",
       value: '"Hiragino Sans"'
@@ -13874,12 +13943,6 @@ var fontFamilyList = {
     }, {
       name: "",
       value: '""'
-    }, {
-      name: "",
-      value: '""'
-    }, {
-      name: "",
-      value: '""'
     }]
   },
   getters: {
@@ -13890,6 +13953,67 @@ var fontFamilyList = {
   mutations: {}
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (fontFamilyList);
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/japaneseFontFamilyList.js":
+/*!**************************************************************!*\
+  !*** ./resources/js/store/modules/japaneseFontFamilyList.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var japaneseFontFamilyList = {
+  namespaced: true,
+  state: {
+    japaneseFontFamilyList: [// 日本語
+    {
+      name: "Noto Sans Japanese",
+      value: '"Noto Sans JP",sans-serif'
+    }, {
+      name: "Noto Serif Japanese",
+      value: '"Noto Serif JP",serif'
+    }, {
+      name: "Sawarabi Mincho",
+      value: '"Sawarabi Mincho",sans-serif'
+    }, {
+      name: "Mochiy Pop P One",
+      value: '"Mochiy Pop P One",sans-serif'
+    }, {
+      name: "Yuji Mai",
+      value: '"Yuji Mai", serif'
+    }, {
+      name: "Zen Antique",
+      value: '"Zen Antique",serif'
+    }, {
+      name: "Reggae One",
+      value: '"Reggae One", cursive'
+    }, {
+      name: "Rampart One",
+      value: '"Rampart One", cursive'
+    }, {
+      name: "DotGothic16",
+      value: '"DotGothic16", sans-serif'
+    }, {
+      name: "YuMincho",
+      value: '"Yu Mincho", "YuMincho"'
+    }, {
+      name: "",
+      value: '""'
+    }]
+  },
+  getters: {
+    getJapaneseFontFamilyList: function getJapaneseFontFamilyList(state) {
+      return state.japaneseFontFamilyList;
+    }
+  },
+  mutations: {}
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (japaneseFontFamilyList);
 
 /***/ }),
 
@@ -14495,6 +14619,7 @@ var mediaText = {
       scale_y: 1,
       color: "#000000",
       font_size: 18,
+      font_category: "normal",
       font_family: "monospace",
       degree: 0,
       opacity: 1,
@@ -19987,7 +20112,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleJapaneseFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleJapaneseFontList.css");
 // Imports
+
 
 
 
@@ -19996,8 +20123,9 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 4px;\r\n    background-color: transparent;\r\n    color: white;\r\n    font-size: 12px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: orange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\r\n    margin-bottom: 5px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n#font-size[data-v-35d10c14] {\r\n    width: 70px;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 4px;\r\n    background-color: transparent;\r\n    color: white;\r\n    font-size: 12px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: orange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n#font-size[data-v-35d10c14] {\r\n    width: 70px;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14] {\r\n    width : 100px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20874,6 +21002,39 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.c
 ___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Londrina+Shadow&display=swap);"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "/* Sacramento */\r\n\r\n/* Caveat */\r\n\r\n/* Amatic SC */\r\n\r\n/* Anton */\r\n\r\n/* Alegreya Sans SC */\r\n\r\n/* Bangers */\r\n\r\n/* Caveat */\r\n\r\n/* Cherry Swash */\r\n\r\n/* Corben */\r\n\r\n/* Creepster */\r\n\r\n/* IM Fell DW Pica SC */\r\n\r\n/* Londrina Shadow */\r\n\r\n\r\n\r\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleJapaneseFontList.css":
+/*!*****************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleJapaneseFontList.css ***!
+  \*****************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Yuji+Mai&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Zen+Antique&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Reggae+One&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=Rampart+One&display=swap);"]);
+___CSS_LOADER_EXPORT___.push([module.id, "@import url(https://fonts.googleapis.com/css2?family=DotGothic16&display=swap);"]);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "/* Noto Sans Japanese */\r\n\r\n/* Noto Serif JP */\r\n\r\n/* Sawarabi Mincho */\r\n\r\n/* Mochiy Pop P One */\r\n\r\n/* Yuji Mai */\r\n\r\n/* Zen Antique */\r\n\r\n/* Reggae One */\r\n\r\n/* Rampart One */\r\n\r\n/* DotGothic16 */\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -71070,6 +71231,10 @@ var render = function () {
                   attrs: { id: "text-preview-wrapper" },
                 },
                 [
+                  _c("h3", { staticClass: "sub-title" }, [
+                    _vm._v("プレビュー"),
+                  ]),
+                  _vm._v(" "),
                   _c("input", {
                     directives: [
                       {
@@ -71091,28 +71256,28 @@ var render = function () {
                       },
                     },
                   }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "setting flex column",
-                  attrs: { id: "media-text-add-wraper" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.addText()
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "flex column",
+                      attrs: { id: "media-text-add-wraper" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.addText()
+                        },
+                      },
                     },
-                  },
-                },
-                [
-                  _c("div", { staticClass: "flex a-center" }, [
-                    _c("i", { staticClass: "fas fa-plus add-text-icon" }),
-                    _vm._v(" "),
-                    _c("button", { staticClass: "add-text-button" }, [
-                      _vm._v("追加"),
-                    ]),
-                  ]),
+                    [
+                      _c("div", { staticClass: "flex a-center" }, [
+                        _c("i", { staticClass: "fas fa-plus add-text-icon" }),
+                        _vm._v(" "),
+                        _c("button", { staticClass: "add-text-button" }, [
+                          _vm._v("追加"),
+                        ]),
+                      ]),
+                    ]
+                  ),
                 ]
               ),
               _vm._v(" "),
@@ -71123,9 +71288,14 @@ var render = function () {
                   attrs: { id: "font-size-wrapper" },
                 },
                 [
-                  _c("span", { staticStyle: { "margin-right": "5px" } }, [
-                    _vm._v("フォントサイズ"),
-                  ]),
+                  _c(
+                    "h3",
+                    {
+                      staticClass: "sub-title",
+                      staticStyle: { "margin-right": "5px" },
+                    },
+                    [_vm._v("サイズ")]
+                  ),
                   _vm._v(" "),
                   _c("div", [
                     _c("input", {
@@ -71153,7 +71323,7 @@ var render = function () {
                   attrs: { id: "text-color-wrapper" },
                 },
                 [
-                  _c("span", [_vm._v("色")]),
+                  _c("h3", { staticClass: "sub-title" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -71174,10 +71344,136 @@ var render = function () {
                 "div",
                 {
                   staticClass: "setting flex column",
+                  attrs: { id: "font-style-wrapper" },
+                },
+                [
+                  _c("h3", { staticClass: "sub-title" }, [_vm._v("フォント")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "flex column",
+                        staticStyle: { "margin-right": "5px" },
+                      },
+                      [
+                        _c("h4", { staticClass: "sub-sub-title" }, [
+                          _vm._v("カテゴリ"),
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.selected_category,
+                                expression: "selected_category",
+                              },
+                            ],
+                            attrs: { id: "font-category" },
+                            on: {
+                              change: function ($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function (o) {
+                                    return o.selected
+                                  })
+                                  .map(function (o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.selected_category = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              },
+                            },
+                          },
+                          _vm._l(_vm.font_category, function (category) {
+                            return _c(
+                              "option",
+                              {
+                                key: category.id,
+                                domProps: { value: category },
+                              },
+                              [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(category) +
+                                    "\n                "
+                                ),
+                              ]
+                            )
+                          }),
+                          0
+                        ),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex column" }, [
+                      _c("h4", { staticClass: "sub-sub-title" }, [
+                        _vm._v("スタイル"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected_font,
+                              expression: "selected_font",
+                            },
+                          ],
+                          attrs: { id: "" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected_font = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                          },
+                        },
+                        _vm._l(_vm.font_options, function (option) {
+                          return _c(
+                            "option",
+                            {
+                              key: option.id,
+                              domProps: { value: option.value },
+                            },
+                            [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(option.name) +
+                                  "\n                "
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "setting flex column",
                   attrs: { id: "opacity-wrapper" },
                 },
                 [
-                  _c("span", [_vm._v("透過度:")]),
+                  _c("h3", { staticClass: "sub-title" }, [_vm._v("透過度:")]),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -71209,61 +71505,6 @@ var render = function () {
                       },
                     },
                   }),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "setting flex column",
-                  attrs: { id: "font-style-wrapper" },
-                },
-                [
-                  _c("span", [_vm._v("フォントスタイル")]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selected,
-                          expression: "selected",
-                        },
-                      ],
-                      attrs: { id: "" },
-                      on: {
-                        change: function ($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function (o) {
-                              return o.selected
-                            })
-                            .map(function (o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.selected = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        },
-                      },
-                    },
-                    _vm._l(_vm.options, function (option) {
-                      return _c(
-                        "option",
-                        { key: option.id, domProps: { value: option.value } },
-                        [
-                          _vm._v(
-                            "\n              " +
-                              _vm._s(option.name) +
-                              "\n            "
-                          ),
-                        ]
-                      )
-                    }),
-                    0
-                  ),
                 ]
               ),
             ]
