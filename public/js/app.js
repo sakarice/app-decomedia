@@ -14994,7 +14994,7 @@ var mediaText = {
     isInitialized: false,
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
     mediaText: {
-      type: 90,
+      type: 2,
       groupNo: null,
       id: 0,
       text: "テキストtext",
