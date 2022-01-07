@@ -117,6 +117,7 @@
     </router-view>
 
     <router-view name="imgProperty"></router-view>
+    <router-view name="textProperty"></router-view>
     <router-view name="figureUpdate"></router-view>
     <router-view name="objectSelectMng"></router-view>
 

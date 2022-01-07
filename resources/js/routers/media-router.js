@@ -34,6 +34,7 @@ import ObjectSelectMng from '../components/media/media_contents/objects/object_e
 // オブジェクトの詳細確認＆編集コンポーネント
 import FigureUpdate from '../components/media/media_contents/objects/figure/FigureUpdateComponent.vue';
 import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
+import TextProperty from '../components/media/media_contents/objects/text/TextPropertyComponent.vue';
 
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
@@ -67,6 +68,7 @@ export default{
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        textProperty : TextProperty,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,
@@ -95,6 +97,7 @@ export default{
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        textProperty : TextProperty,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,

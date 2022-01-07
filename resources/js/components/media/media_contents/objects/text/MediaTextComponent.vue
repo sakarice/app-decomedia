@@ -64,9 +64,9 @@ import { mapGetters, mapMutations } from 'vuex';
     watch : {
       original_width(new_val){
         this.updateTextWidth();
-        this.updateMediaTextsObjectItem({index:this.index,key:"original_width", value:new_val})
+        this.updateMediaTextsObjectItem({index:this.index,key:"width", value:new_val})
       },
-      original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"original_height", value:new_val})},
+      original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"height", value:new_val})},
     },
     methods : {
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
@@ -199,8 +199,8 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       setDataFromStoreData(){
         this.text_tmp = this.mediaText['text'];
-        this.original_width = this.mediaText['original_width'];
-        this.original_height = this.mediaText['original_height'];
+        this.original_width = this.mediaText['width'];
+        this.original_height = this.mediaText['height'];
       },
       updateTextWidth(){this.text.style.width = this.original_width+ "px";},
       updateTextWrapperStyle(){
