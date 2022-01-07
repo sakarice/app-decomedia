@@ -266,6 +266,11 @@ class MediaUtil
         if(MediaMovie::where('media_id', $media_id)->exists()){
             MediaMovieController::destroy($media_id);
         }
+        // Mediaテキスト
+        if(MediaText::where('media_id', $media_id)->exists()){
+          MediaTextController::destroy($media_id);
+        }
+
         // コンテンツ描画エリア
         MediaContentsFieldController::destroy($media_id);
 

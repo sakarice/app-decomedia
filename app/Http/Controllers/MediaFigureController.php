@@ -35,9 +35,9 @@ class MediaFigureController extends Controller
         public static function update($media_id, $request){
             MediaFigureUtil::updateMediaFigureData($media_id, $request);
         }
-        // // 7.destroy
-        // public static function destroy($media_id){
-        //     MediaFigure::where('media_id', $media_id)->delete();
-        // }
+        // 7.destroy
+        public static function destroy($media_id){
+            MediaFigure::where('media_id', $media_id)->delete();
+        }
     
 }
