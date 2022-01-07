@@ -14272,64 +14272,6 @@ var fontFamilyList = {
     }, {
       name: "",
       value: '""'
-    }, {
-      name: "",
-      value: '""'
-    }, {
-      name: "",
-      value: '""'
-    }, // 日本語
-    {
-      name: "Noto Sans Japanese",
-      value: '"Noto Sans JP",sans-serif'
-    }, {
-      name: "Noto Serif Japanese",
-      value: '"Noto Serif JP",serif'
-    }, {
-      name: "Sawarabi Mincho",
-      value: '"Sawarabi Mincho",sans-serif'
-    }, {
-      name: "Mochiy Pop P One",
-      value: '"Mochiy Pop P One",sans-serif'
-    }, {
-      name: "Yuji Mai",
-      value: '"Yuji Mai", serif'
-    }, {
-      name: "Zen Antique",
-      value: '"Zen Antique",serif'
-    }, {
-      name: "Reggae One",
-      value: '"Reggae One", cursive'
-    }, {
-      name: "Rampart One",
-      value: '"Rampart One", cursive'
-    }, {
-      name: "DotGothic16",
-      value: '"DotGothic16", sans-serif'
-    }, {
-      name: "",
-      value: '""'
-    }, {
-      name: "YuMincho",
-      value: '"Yu Mincho", "YuMincho"'
-    }, {
-      name: "Hiragino Sans",
-      value: '"Hiragino Sans"'
-    }, {
-      name: "Kosugi",
-      value: '"Kosugi"'
-    }, {
-      name: "Hannari",
-      value: '"Hannari"'
-    }, {
-      name: "Nikukyu",
-      value: '"Nikukyu"'
-    }, {
-      name: "Nico Moji",
-      value: '"Nico Moji"'
-    }, {
-      name: "",
-      value: '""'
     }]
   },
   getters: {
