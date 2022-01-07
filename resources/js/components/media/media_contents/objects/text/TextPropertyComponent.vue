@@ -36,6 +36,12 @@
             <span>重ね順:</span>
             <input type="number" class="input-num" :value="textDatas['layer']" @input="updateTextData('layer', $event.target.value)"  min="0" max="100">
           </div>
+
+          <div class="disp-space-between font-size-input-wrapper">
+            <span>サイズ:</span>
+            <input type="number" class="input-num" :value="textDatas['font_size']" @input="updateTextData('font_size', $event.target.value)"  min="0" max="200">
+          </div>
+
         </div>
 
         <!-- カラー系の設定 -->
@@ -110,6 +116,7 @@
           "layer" : 0,
           "opacity" : 0,
           "color" : "",
+          "font_size" : 18,
           "font_category" : "",
           "font_family" : "",
         },

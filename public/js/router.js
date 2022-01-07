@@ -8050,6 +8050,12 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -8073,6 +8079,7 @@ function _defineProperty(obj, key, value) {
         "layer": 0,
         "opacity": 0,
         "color": "",
+        "font_size": 18,
         "font_category": "",
         "font_family": ""
       },
@@ -22569,6 +22576,28 @@ var render = function () {
                   on: {
                     input: function ($event) {
                       return _vm.updateTextData("layer", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "disp-space-between font-size-input-wrapper" },
+              [
+                _c("span", [_vm._v("サイズ:")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "0", max: "200" },
+                  domProps: { value: _vm.textDatas["font_size"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateTextData(
+                        "font_size",
+                        $event.target.value
+                      )
                     },
                   },
                 }),
