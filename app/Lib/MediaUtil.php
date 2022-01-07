@@ -231,6 +231,11 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::update($media_id, $request);
       }
+      // media音楽
+      if(isset($request->texts[0])){
+        MediaTextController::update($media_id, $request);
+      }
+
       // コンテンツ描画エリア
       MediaContentsFieldController::update($media_id, $request->contents_field);
 
@@ -257,6 +262,10 @@ class MediaUtil
         // Media画像
         if(MediaImg::where('media_id', $media_id)->exists()){
           MediaImgController::destroy($media_id);
+        }
+        // Medi図形
+        if(MediaFigure::where('media_id', $media_id)->exists()){
+          MediaFigureController::destroy($media_id);
         }
         // Media音楽
         if(MediaAudio::where('media_id', $media_id)->exists()){                
