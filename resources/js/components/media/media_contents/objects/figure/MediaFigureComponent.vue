@@ -1,30 +1,20 @@
 <template>
   <!-- Media図形-->
-  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper" :style="canvasWrapperStyle()"
+  <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper"
+   :style="canvasWrapperStyle()" :class="{is_active : isActive}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
     </canvas>
-
-    <object-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="canvasSizeStyle()"
-     v-on:resize="resize"
-     @move="moveStart($event)">
-    </object-resize>
-    <object-rotate v-show="isEditMode && isActive" :index="index" v-on:rotate-finish="updateDegree"></object-rotate>
   </div>
 </template>
 
 <script>
 import {moveStart} from '../../../../../functions/moveHelper'
 import { mapGetters, mapMutations } from 'vuex';
-import objectRotate from '../object_edit_parts/ObjectRotateComponent.vue';
-import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 
   export default {
-    components : {
-      objectRotate,
-      objectResize,
-    },
+    components : {},
     props:[
       'index',
     ],
@@ -98,7 +88,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
           "top" : this.figureDatas["top"] + "px",
           "width" : this.figureDatas["width"] + "px", // キャンバスより若干大きめに
           "height" : this.figureDatas["height"] + "px", // キャンバスより若干大きめに
-          "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
+          // "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
         }
         return styleObject;
       },
@@ -109,8 +99,13 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         }
         return styleObject;
       },
-      selected(){         
-        const objectSelected = new CustomEvent('objectSelected',{detail:{type:0,index:this.index}});
+      selected(){
+        const objectSelected = new CustomEvent('objectSelected',
+        {detail:{
+          type:0
+          ,index:this.index
+          ,degree:this.figureDatas['degree']
+          ,element_id:this.canvas_wrapper_with_index}});
         document.body.dispatchEvent(objectSelected);
       },
       // 位置操作用
@@ -128,11 +123,34 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
         this.figureDatas['left'] = new_left;
         this.figureDatas['top'] = new_top;
       },
-      updateDegree(new_degree){ this.figureDatas['degree'] = new_degree },
-      resize(){
-        const keys = ["width","height","left","top"];
-        const storeData = this.getOneFigure(this.index);
-        keys.forEach(key=>{ this.figureDatas[key] = storeData[key]});
+      updateDegree(event){
+        const new_degree = event.detail.degree;
+        this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:new_degree});
+        this.figureDatas['degree'] = new_degree;
+      },
+      updateSizeAndPosition(event){
+        const diff_x = event.detail.diff_x;
+        const diff_y = event.detail.diff_y;
+        const x = event.detail.resize_side['x'];
+        const y = event.detail.resize_side['y'];
+        const start_value = event.detail.resize_start_infos;
+        let new_values = {};
+        new_values['width'] = start_value['width'] + diff_x;
+        new_values['height'] = start_value['height'] + diff_y;
+        const current_left = start_value['left'];
+        const current_top = start_value['top'];
+        new_values['left'] = x == -1 ? current_left - diff_x : current_left;
+        new_values['top'] = y == -1 ? current_top - diff_y : current_top;
+        Object.keys(new_values).forEach((key)=>{
+          if(new_values[key]){
+            const new_val = Math.floor(new_values[key]);
+            this.updateMediaFiguresObjectItem({index:this.index,key:key,value:new_val});
+            this.figureDatas[key] = new_val;
+          }
+        })
+        this.reDraw();
+      },
+      reDraw(){
         this.setCanvasSize();
         this.setLayer();
         this.setGlobalAlpha();
@@ -165,7 +183,7 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
           reTypedValue = value;
         }
         return reTypedValue;
-      },      
+      },
       setFigureData(){
         const storeData = this.getOneFigure(this.index);
         if(!(typeof storeData === "undefined")){
@@ -242,6 +260,8 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
       this.init();
 
       // イベント登録
+      this.canvas_wrapper.addEventListener('resize',this.updateSizeAndPosition,false);
+      this.canvas_wrapper.addEventListener('rotateObject',this.updateDegree,false);
       this.canvas_wrapper.addEventListener('figureDataUpdated',this.init,false);
       this.canvas_wrapper.addEventListener('click',this.selected,false);
       this.canvas_wrapper.addEventListener('touchstart',this.selected,false);
@@ -251,6 +271,10 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
 </script>
 
 <style scoped>
+@import "/resources/css/mediaObjectCommon.css";
+@import "/resources/css/flexSetting.css";
+
+
 .canvas_item-wrapper {
   position: absolute;
   display: inline-flex;
@@ -258,12 +282,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
   justify-content: center;
   align-items: center;
   transform-origin: center center;
-}
-.canvas_item-wrapper:hover .rotate-icon{
-  display: inline-block ;
-}
-.rotate-icon:hover{
-  cursor: all-scroll;
 }
 
 
@@ -275,18 +293,6 @@ import objectResize from '../object_edit_parts/ObjectResizeComponent.vue';
   cursor: all-scroll;
   }
 
-.rotate-icon {
-  position: absolute;
-  bottom: -90px;  
-  padding: 30px;
-}
-
-.is_active {
-  outline : 1.5px solid blue;
-}
-.hidden {
-  opacity: 0;
-}
 
 .x-size-adjust-bar-wrapper,
 .y-size-adjust-bar-wrapper{

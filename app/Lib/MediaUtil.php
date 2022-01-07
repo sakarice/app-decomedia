@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ImgController;
 use App\Http\Controllers\AudioController;
 use App\Http\Controllers\MediaImgController;
+use App\Http\Controllers\MediaTextController;
 use App\Http\Controllers\MediaFigureController;
 use App\Http\Controllers\MediaAudioController;
 use App\Http\Controllers\MediaMovieController;
+use App\Http\Controllers\MediaContentsFieldController;
 use App\Http\Controllers\MediaSettingController;
 
 use App\Lib\ImgUtil;
 use App\Lib\MediaImgUtil;
+use App\Lib\MediaTextUtil;
 use App\Lib\MediaFigureUtil;
 use App\Lib\PublicImgUtil;
 use App\Lib\UserOwnImgUtil;
@@ -24,9 +27,11 @@ use App\Models\Media;
 use App\Models\UserOwnImg;
 use App\Models\PublicImg;
 use App\Models\MediaImg;
+use App\Models\MediaText;
 use App\Models\MediaFigure;
 use App\Models\MediaAudio;
 use App\Models\MediaMovie;
+use App\Models\MediaContentsField;
 use App\Models\MediaSetting;
 use Storage;
 
@@ -39,12 +44,14 @@ class MediaUtil
     $media_img_data      = MediaImgController::show($media_id);
     $media_audios_data   = MediaAudioController::show($media_id);
     $media_movie_data    = MediaMovieController::show($media_id);
+    $contents_field_data  = MediaContentsFieldController::show($media_id);
     $media_setting_data  = MediaSettingController::show($media_id);
 
     $data = [
         'media_img' => $media_img_data,
         'media_audios' => $media_audios_data,
         'media_movie' => $media_movie_data,
+        'contents_field_data' => $contents_field_data,
         'media_setting' => $media_setting_data,
     ];
     return $data;
@@ -175,17 +182,7 @@ class MediaUtil
   
       // media画像
       if(isset($request->imgs[0]['id'])){
-        // if($request->imgs[0]['id'] != 0){
-        //   $img_id = $request->imgs[0]['id'];
-        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
-        //   if($isOwnImg || $isPublicImg){
-            MediaImgController::store($media_id, $request->imgs);
-        //   }
-        // } 
-        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-        //   MediaImgUtil::saveTentativeMediaImgData($media_id);        
-        // }
+        MediaImgController::store($media_id, $request->imgs);
       }
       // media動画
       if(isset($request->movie['videoId'])){
@@ -195,10 +192,16 @@ class MediaUtil
       if(isset($request->figures[0])){
         MediaFigureController::store($media_id, $request);
       }
+      // mediaテキスト
+      if(isset($request->texts[0])){
+        MediaTextController::store($media_id, $request);
+      }
       // media音楽
       if(isset($request->audios[0])){
         MediaAudioController::store($media_id, $request);
       }
+      // コンテンツ描画エリア
+      MediaContentsFieldController::store($media_id, $request->contents_field);
       // media設定
       MediaSettingController::store($media_id, $request);
       // DB::commit();
@@ -214,17 +217,7 @@ class MediaUtil
     try{
       // media画像
       if(isset($request->imgs[0]['id'])){
-        // if($request->imgs[0]['id'] != 0){
-        //   $img_id = $request->imgs[0]['id'];
-        //   $isOwnImg = UserOwnImg::where('owner_user_id', Auth::user()->id)->where('id', $img_id)->exists();
-        //   $isPublicImg = PublicImg::where('id', $img_id)->exists();
-        //   if($isOwnImg || $isPublicImg){
-          MediaImgController::update($media_id, $request->imgs);
-          // }
-        // } 
-        // else if($request->imgs[0]['id'] == 0){ // media画像が設定されていなければ、仮情報を保存
-        //   MediaImgUtil::updateMediaImgDataToTentative($media_id);        
-        // }
+        MediaImgController::update($media_id, $request->imgs);
       }
       // media図形
       if(isset($request->figures[0])){
@@ -238,6 +231,9 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::update($media_id, $request);
       }
+      // コンテンツ描画エリア
+      MediaContentsFieldController::update($media_id, $request->contents_field);
+
       // media設定
       MediaSettingController::update($media_id, $request);      
 
@@ -259,7 +255,9 @@ class MediaUtil
             ->where('user_id', $user_id)
             ->first()->delete();
         // Media画像
-        MediaImgController::destroy($media_id);
+        if(MediaImg::where('media_id', $media_id)->exists()){
+          MediaImgController::destroy($media_id);
+        }
         // Media音楽
         if(MediaAudio::where('media_id', $media_id)->exists()){                
             MediaAudioController::destroy($media_id);
@@ -268,7 +266,10 @@ class MediaUtil
         if(MediaMovie::where('media_id', $media_id)->exists()){
             MediaMovieController::destroy($media_id);
         }
-    // Media設定
+        // コンテンツ描画エリア
+        MediaContentsFieldController::destroy($media_id);
+
+        // Media設定
         MediaSettingController::destroy($media_id);
 
         DB::commit();

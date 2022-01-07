@@ -93,7 +93,7 @@ class MediaImgUtil
   }
 
   public static function getMediaImgData($media_id){
-    $send_media_imgs; // リターン対象のデータ
+    $send_media_imgs = array(); // リターン対象のデータ
     $img_url = "";
     if(MediaImg::where('media_id', $media_id)->exists()){
       $media_img_db_datas = MediaImg::where('media_id', $media_id)->get();

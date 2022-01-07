@@ -1,26 +1,23 @@
-// オブジェクトのリサイズを行う処理群
-// リサイズ開始処理(resizeStart関数)が、
-// コンポーネントからイベント、リサイズ対象DOM、初期サイズと位置を受け取り、
+// オブジェクトの拡大・縮小を行う処理群
+// 拡大・縮小開始処理(resizeStart関数)が、
+// コンポーネントからイベント、拡大・縮小対象DOM、初期サイズと位置を受け取り、
 // 移動終了後にカスタムイベントを発行し引数にサイズ(width,height)と位置(left,top)を渡す
 
   let resize_target;
-  let initial_left;
-  let initial_top;
-  let initial_width;
-  let initial_height;
-  let contents_area_left;
-  let contents_area_top;
+  let left;
+  let top;
+  let width;
+  let height;
 
-// 0. リサイズ情報初期化
-function resizeInfoInit(target,sizeAndPositionInfos){
+function targetInit(target){
   resize_target = target;
-  initial_width = sizeAndPositionInfos.width;
-  initial_height = sizeAndPositionInfos.height;
-  initial_left = sizeAndPositionInfos.left;
-  initial_top = sizeAndPositionInfos.top;
-  const contents_area = document.getElementById('media-contents-field');
-  contents_area_left = contents_area.getBoundingClientRect().left;
-  contents_area_top = contents_area.getBoundingClientRect().top;
+}
+// 0. 拡大・縮小情報初期化
+function resizeInfoInit(sizeInfo){
+  left = resize_target.getBoundingClientRect().left + window.pageXOffset;
+  top = resize_target.getBoundingClientRect().top + window.pageYOffset;
+  width = sizeInfo.width;
+  height = sizeInfo.height;
 }
 
 
@@ -29,8 +26,9 @@ function registEventStartToEnd(){
   document.body.addEventListener("touchend", resizeEnd, false);
 }
 
-// 1. リサイズ開始メソッド
+// 1. 拡大・縮小開始メソッド
 function resizeStart(type){
+
   registEventStartToEnd();
   switch(type){
     case "right":
@@ -51,18 +49,26 @@ function resizeStart(type){
 function resizeRightStart(e){
   document.body.addEventListener("mousemove", resizeRight, false);
   document.body.addEventListener("touchmove", resizeRight, false);
+  // document.body.addEventListener("mousemove", resizeX, false);
+  // document.body.addEventListener("touchmove", resizeX, false);
 }
 function resizeLeftStart(e){
   document.body.addEventListener("mousemove", resizeLeft, false);
   document.body.addEventListener("touchmove", resizeLeft, false);
+  // document.body.addEventListener("mousemove", resizeX, false);
+  // document.body.addEventListener("touchmove", resizeX, false);
 }
 function resizeBottomStart(e){
   document.body.addEventListener("mousemove", resizeBottom, false);
   document.body.addEventListener("touchmove", resizeBottom, false);
+  // document.body.addEventListener("mousemove", resizeY, false);
+  // document.body.addEventListener("touchmove", resizeY, false);
 }
 function resizeTopStart(e){
   document.body.addEventListener("mousemove", resizeTop, false);
   document.body.addEventListener("touchmove", resizeTop, false);
+  // document.body.addEventListener("mousemove", resizeY, false);
+  // document.body.addEventListener("touchmove", resizeY, false);
 }
 
 // マウスポインターかタッチ箇所の座標を取得する
@@ -82,43 +88,58 @@ function getPointerY(event){
   }
 }
 
-// 2. リサイズ中メソッド
+
+
+// 2. 拡大・縮小中メソッド
+// X軸方向の拡大・縮小
 function resizeRight(e){
-  const new_width = Math.floor(getPointerX(e) - (contents_area_left + initial_left));
-  const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:initial_left}});
-  resize_target.dispatchEvent(resizing_width_event);
-  registEventMiddleToEnd();
+  const diff = Math.floor(getPointerX(e) - (left+width));
+  console.log(diff);
+  setScaleXEvent(diff,"right");
+  width = width + diff;
 }
 function resizeLeft(e){
-  const diff = (contents_area_left + initial_left) - getPointerX(e);
-  const new_width = Math.floor(initial_width + diff);
-  const new_left = Math.floor(initial_left - diff);
-  const resizing_width_event = new CustomEvent('resizingWidth', {detail:{width:new_width,left:new_left}});
-  resize_target.dispatchEvent(resizing_width_event);
+  const diff = Math.floor(left - getPointerX(e));
+  setScaleXEvent(diff,"left");
+  width = Math.floor(width + diff);
+  left = Math.floor(left - diff);
+}
+function setScaleXEvent(diff,direction){
+  const resize_x_event = new CustomEvent('resizeX', {detail:{diff:diff,direction:direction}});
+  resize_target.dispatchEvent(resize_x_event);
   registEventMiddleToEnd();
 }
+
+// y軸方向の拡大・縮小
 function resizeBottom(e){
-  const new_height = Math.floor(getPointerY(e) - (contents_area_top + initial_top));
-  const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:initial_top}});
-  resize_target.dispatchEvent(resizing_height_event);
-  registEventMiddleToEnd();
+  const diff = Math.floor(getPointerY(e) - (top+height));
+  console.log(diff);
+  setScaleYEvent(diff,"bottom");
+  height = height + diff;
 }
 function resizeTop(e){
-  const diff = (contents_area_top + initial_top) - getPointerY(e);
-  const new_height = Math.floor(initial_height + diff);
-  const new_top = Math.floor(initial_top - diff);
-  const resizing_height_event = new CustomEvent('resizingHeight', {detail:{height:new_height,top:new_top}});
-  resize_target.dispatchEvent(resizing_height_event);  
+  const diff = Math.floor(top - getPointerY(e));
+  console.log(diff);
+  setScaleYEvent(diff,"top");
+  height = height + diff;
+  top = Math.floor(top - diff);
+}
+function setScaleYEvent(diff,direction){
+  const resize_y_event = new CustomEvent('resizeY', {detail:{diff:diff,direction:direction}});
+  resize_target.dispatchEvent(resize_y_event);
   registEventMiddleToEnd();
 }
-// リサイズ中メソッドからフックする終了イベントの登録
+
+
+
+// 拡大・縮小中メソッドからフックする終了イベントの登録
 function registEventMiddleToEnd(){ // マウス、タッチ解除時のイベントを設定
   document.body.addEventListener("mouseleave", resizeEnd, false);
   document.body.addEventListener("touchleave", resizeEnd, false);
 }
 
 
-// 3. リサイズ終了メソッド。登録したイベントを解除する。
+// 3. 拡大・縮小終了メソッド。登録したイベントを解除する。
 function resizeEnd(e){
   document.body.removeEventListener("mousemove", resizeRight, false);
   document.body.removeEventListener("mousemove", resizeLeft, false);
@@ -136,5 +157,5 @@ function resizeEnd(e){
 }
 
 // exportは、移動のトリガーとなるメソッドのみ
-export {resizeInfoInit,resizeStart};
+export {targetInit,resizeInfoInit,resizeStart};
 

@@ -13,14 +13,20 @@ import DispImgModal from '../components/media/change_display_parts/DispImgModalC
 import DispAudioModal from '../components/media/change_display_parts/DispAudioModalComponent.vue';
 import DispMovieModal from '../components/media/change_display_parts/DispMovieModalComponent.vue';
 import DispMediaSettingModal from '../components/media/change_display_parts/DispMediaSettingModalComponent.vue';
+import DispContentsFieldSettingModal from '../components/media/change_display_parts/DispMediaContentsFieldSettingModalComponent.vue';
+import DispTextSettingModal from '../components/media/change_display_parts/DispTextSettingModalComponent.vue';
 import DispFigureSettingModal from '../components/media/change_display_parts/DispFigureSettingModalComponent.vue';
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
 import MediaFigureFactory from '../components/media/edit_parts/MediaFigureFactoryComponent.vue';
+import MediaTextFactory from '../components/media/edit_parts/MediaTextFactoryComponent.vue';
 import AudioSelect from '../components/media/edit_parts/AudioSelectComponent.vue';
 import MovieSetting from '../components/media/edit_parts/MovieSettingComponent.vue';
 import MediaSetting from '../components/media/edit_parts/MediaSettingComponent.vue';
+import ContentsFieldSetting from '../components/media/edit_parts/MediaContentsFieldSettingComponent.vue';
+import DomResize from '../components/media/media_contents/objects/object_edit_parts/DomResizeComponent.vue'
+import ObjectRotate from '../components/media/media_contents/objects/object_edit_parts/ObjectRotateComponent.vue'
 
 // オブジェクト選択管理コンポーネント
 import ObjectSelectMng from '../components/media/media_contents/objects/object_edit_parts/ObjectSelectMngComponent.vue';
@@ -28,6 +34,7 @@ import ObjectSelectMng from '../components/media/media_contents/objects/object_e
 // オブジェクトの詳細確認＆編集コンポーネント
 import FigureUpdate from '../components/media/media_contents/objects/figure/FigureUpdateComponent.vue';
 import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
+import TextProperty from '../components/media/media_contents/objects/text/TextPropertyComponent.vue';
 
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
@@ -49,15 +56,22 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispContentsFieldSettingModal : DispContentsFieldSettingModal,
+        dispTextSettingModal : DispTextSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
+        mediaTextFactory : MediaTextFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
+        contentsFieldSetting : ContentsFieldSetting,
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        textProperty : TextProperty,
         objectSelectMng : ObjectSelectMng,
+        objectRotate : ObjectRotate,
+        domResize : DomResize,
         overlay : Overlay,
         loading : Loading,
       },
@@ -71,15 +85,22 @@ export default{
         dispAudioModal : DispAudioModal,
         dispMovieModal : DispMovieModal,
         dispMediaSettingModal : DispMediaSettingModal,
+        dispContentsFieldSettingModal : DispContentsFieldSettingModal,
+        dispTextSettingModal : DispTextSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
+        mediaTextFactory : MediaTextFactory,
         audioSelect : AudioSelect,
         movieSetting : MovieSetting,
+        contentsFieldSetting : ContentsFieldSetting,
         mediaSetting : MediaSetting,
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
+        textProperty : TextProperty,
         objectSelectMng : ObjectSelectMng,
+        objectRotate : ObjectRotate,
+        domResize : DomResize,
         overlay : Overlay,
         loading : Loading,
         

@@ -15,7 +15,7 @@
     methods : {
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
-      onObjectSelected(event){
+      onObjedctSelected(event){
         this.unSelectedAll();
         const type = event.detail.type;
         const index = event.detail.index;
@@ -25,7 +25,7 @@
     },
     created(){
       document.body.addEventListener('fieldClicked', this.unSelectedAll, false);
-      document.body.addEventListener('objectSelected', this.onObjectSelected, false);      
+      document.body.addEventListener('objectSelected', this.onObjedctSelected, false);      
     },
   }
 

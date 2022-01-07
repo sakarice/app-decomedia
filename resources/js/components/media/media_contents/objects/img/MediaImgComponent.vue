@@ -1,28 +1,19 @@
 <template>
   <!-- Media画像-->
-  <div :id="imgWrapperWithIndex"
-  v-bind:style="imgWrapperStyle()"
+  <div :id="imgWrapperWithIndex" class="obj img-wrapper"
+  v-bind:style="imgWrapperStyle" :class="{is_active : isActive}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
       v-show="getMediaSetting['isShowImg']"
-      v-bind:style="imgStyle()">
+      v-bind:style="imgStyle">
       <p v-show="!(mediaImg['url'])"></p>
       <img id="media-img"
        :src="mediaImg['url']"
        v-show="mediaImg['url']" alt="画像が選択されていません"
       @mousedown="moveStart($event)" @touchstart="moveStart($event)"
-       v-bind:style="imgStyle()">
+       v-bind:style="imgStyle">
     </div>
-
-    <img-resize v-show="isEditMode" :index="index" :class="{hidden:!isActive}" :style="{width:addPxToTail(mediaImg['width']), height:addPxToTail(mediaImg['height'])}"
-     v-on:resize="reRender"
-     @move="moveStart($event)">
-    </img-resize>
-
-    <img-rotate v-show="isEditMode && isActive"
-    :index="index">
-    </img-rotate>
 
   </div>
 </template>
@@ -30,17 +21,7 @@
 <script>
   import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
-  import imgRotate from '../object_edit_parts/ImgRotateComponent.vue'
-  import imgResize from '../object_edit_parts/ImgResizeComponent.vue'
-  
-  const objectSelected = new CustomEvent('objectSelected');
-
-
   export default {
-    components : {
-      imgRotate,
-      imgResize,
-    },
     props : [
       "index"
     ],
@@ -57,6 +38,27 @@
       ...mapGetters('mediaSetting', ['getMediaSetting']),
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
       imgWrapperWithIndex(){ return ('media-img-wrapper' + this.index) },
+      imgWrapperStyle(){
+        const mi = this.mediaImg;
+        const styleObject = {
+          "top" :  mi['top'] + "px",
+          "left" :  mi['left'] + "px",
+          "width" : mi['width'] + "px",
+          "height" : mi['height'] + "px",
+          "transform" : "rotate(" + mi['degree'] + "deg)",
+          'z-index' : mi['layer'],
+        }
+        return styleObject;
+      },
+      imgStyle(){
+        const mi = this.mediaImg;
+        const styleObject = {
+          "width" : mi['width'] + "px",
+          "height" : mi['height'] + "px",
+          "opacity" : mi['opacity'],
+        }
+        return styleObject;
+      },      
       isEditMode : function(){
         const route_name = this.$route.name;
         if((route_name=="create") || (route_name=="edit")){
@@ -81,12 +83,19 @@
         this.setTargetObjectIndex(this.index);
         return this.getMediaImg;
       },
+      init(){ this.mediaImg = this.getOneImg(); },
       showEditor(){
         const showSetting = new CustomEvent('showImgSetting', {detail:{index:this.index}});
         document.body.dispatchEvent(showSetting);
       },
       selected(){
-        const objectSelected = new CustomEvent('objectSelected',{detail:{type:1,index:this.index}});
+        const objectSelected = new CustomEvent('objectSelected',
+        {detail:{
+          type:1
+          ,index:this.index
+          ,degree:this.mediaImg['degree']
+          ,element_id:this.imgWrapperWithIndex
+        }});
         document.body.dispatchEvent(objectSelected);
       },
       // 位置操作用
@@ -100,38 +109,30 @@
         this.updateMediaImgsObjectItem({index:this.index,key:"left",value:e.detail.left});
         this.updateMediaImgsObjectItem({index:this.index,key:"top",value:e.detail.top});
       },
-      updateDegree(new_degree){ this.mediaImg['degree'] = new_degree },
-      reRender(){
-        const keys = ["width","height","left","top"];
-        const storeData = this.getOneImg(this.index);
-        if(storeData){
-          keys.forEach(key=>{ this.mediaImg[key] = storeData[key]});
-        }
+      updateSizeAndPosition(event){
+        const e = event.detail;
+        const start_value = event.detail.resize_start_infos;
+        let new_values = {};
+        new_values['width'] = start_value['width'] + e.diff_x;
+        new_values['height'] = start_value['height'] + e.diff_y;
+        const left_diff = e.resize_side['x'] == -1 ? e.diff_x : 0;
+        const top_diff = e.resize_side['y'] == -1 ? e.diff_y : 0;
+        new_values['left'] = start_value['left'] - left_diff;
+        new_values['top'] = start_value['top'] - top_diff;
+        Object.keys(new_values).forEach((key)=>{
+          if(new_values[key]){
+            const new_val = Math.floor(new_values[key]);
+            this.updateStoreAndMyData(key,new_val);
+          }
+        })
       },
-      init(){ this.mediaImg = this.getOneImg(); },
-      imgWrapperStyle(){
-        const mi = this.mediaImg;
-        const styleObject = {
-          "position" : "absolute",
-          "display" : "flex",
-          "justify-content" : "center",
-          "top" :  this.addPxToTail(mi['top']),
-          "left" :  this.addPxToTail(mi['left']),
-          "transform" : "rotate(" + this.mediaImg['degree'] + "deg)",
-          'z-index' : this.mediaImg['layer'],
-        }
-        return styleObject;
+      updateStoreAndMyData(key,value){
+        this.updateMediaImgsObjectItem({index:this.index,key:key,value:value});
+        this.mediaImg[key] = value;
       },
-      imgStyle(){
-        const mi = this.mediaImg;
-        const styleObject = {
-          "width" : this.addPxToTail(mi['width']),
-          "height" : this.addPxToTail(mi['height']),
-          "opacity" : mi['opacity'],
-        }
-        return styleObject;
+      onChangeDegree(e){
+        this.updateStoreAndMyData("degree", e.detail.degree);
       },
-      addPxToTail(value){ return (value + "px") },
     },
 
     created(){
@@ -141,6 +142,8 @@
       this.img_wrapper = document.getElementById(this.imgWrapperWithIndex);
       // イベント登録
       this.img_wrapper.addEventListener('imgDataUpdated',this.init,false);
+      this.img_wrapper.addEventListener('resize',this.updateSizeAndPosition,false);
+      this.img_wrapper.addEventListener('rotateObject',this.onChangeDegree,false);
       this.img_wrapper.addEventListener('click',this.selected,false);
       this.img_wrapper.addEventListener('touchstart',this.selected,false);
     }
@@ -151,16 +154,19 @@
 
 
 <style scoped>
+@import "/resources/css/mediaObjectCommon.css";
+@import "/resources/css/flexSetting.css";
+
+.img-wrapper {
+  position : absolute;
+  display : flex;
+  justify-content : center;
+}
 
 #media-img-frame {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-
-.hidden {
-  /* display: none; */
-  opacity: 0;
-}
 
 </style>

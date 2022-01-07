@@ -20,6 +20,7 @@
     methods : {
       ...mapMutations('mediaFigures', ['deleteMediaFiguresObjectItem']),
       ...mapMutations('mediaImgs', ['deleteMediaImgsObjectItem']),
+      ...mapMutations('mediaTexts', ['deleteMediaTextsObjectItem']),
       ...mapMutations('selectedObjects', ['unSelectedAll']),
       deleteObject(){
         const delObjs = JSON.parse(JSON.stringify(this.getSelectedObjects));
@@ -34,6 +35,7 @@
     created(){
       this.delMutations[0] = this.deleteMediaFiguresObjectItem; // 0
       this.delMutations[1] = this.deleteMediaImgsObjectItem;    // 1
+      this.delMutations[2] = this.deleteMediaTextsObjectItem;    // 2
 
       document.addEventListener('keydown', (e)=>{
         if(e.code=="Delete"){

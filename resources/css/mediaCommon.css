@@ -59,6 +59,9 @@ body {
 #disp-audio-modal-wrapper {
   color: gold;
 }
+#disp-contents-field-setting-modal-wrapper {
+  color: white;
+}
 #disp-media-setting-modal-wrapper {
   color: lightgray;
 }

@@ -25,7 +25,7 @@
 
           <!-- メディア背景色設定 -->
           <div id="media-bg-color-wraper" class="setting">
-            <h3 class="setting-title">Media背景</h3>
+            <h3 class="setting-title">枠外の色</h3>
             <label for="">
               <input :value="getMediaSetting['mediaBackgroundColor']" @input="updateMediaSettingObjectItem({key:'mediaBackgroundColor', value:$event.target.value})" type="color" id="media-bg-color">
               カラー選択

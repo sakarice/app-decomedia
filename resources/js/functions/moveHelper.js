@@ -33,8 +33,10 @@ function moveStart(e,target){
 
   // ムーブイベントにコールバック
   document.body.addEventListener("mousemove", moving, false);
+  document.body.addEventListener("mouseup", moveEnd, false);
   move_target.addEventListener("mouseup", moveEnd, false);
   document.body.addEventListener("touchmove", moving, false);
+  document.body.addEventListener("touchend", moveEnd, false);
   move_target.addEventListener("touchend", moveEnd, false);
 }
 
@@ -53,6 +55,9 @@ function moving(e){
   move_target.style.left = left + "px";
   move_target.style.top = top + "px";
 
+  const moving_event = new CustomEvent('moving',{detail:{left:left, top:top}})
+  move_target.dispatchEvent(moving_event);
+
   // マウス、タッチ解除時のイベントを設定
   document.body.addEventListener("mouseleave", moveEnd, false);
   document.body.addEventListener("touchleave", moveEnd, false);
@@ -63,6 +68,9 @@ function moveEnd(e){
   document.body.removeEventListener("mouseleave", moveEnd, false);
   document.body.removeEventListener("touchmove", moving, false);
   document.body.removeEventListener("touchleave", moveEnd, false);
+  document.body.removeEventListener("mouseup", moveEnd, false);
+  document.body.removeEventListener("touchend", moveEnd, false);
+
   move_target.removeEventListener("mouseup", moveEnd, false);
   move_target.removeEventListener("touchend", moveEnd, false);
   

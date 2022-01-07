@@ -1,40 +1,48 @@
 <template>
   <div id="field"
    v-on:click.self="closeModal()"
-   :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
+  :style="{'background-color' : getMediaSetting['mediaBackgroundColor']}">
 
     <judge-device-type></judge-device-type>
 
     <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view>
 
-    <!-- Media画像コンポーネント -->
-    <!-- <media-img-
-    ref="mediaImg">
-    </media-img-> -->
-    <media-img-mng
-    ref="mediaImgMng">
-    </media-img-mng>
+        <media-contents-field @click="closeModal"
+        ref="mediaContentsField">
 
-    <!-- Media図形コンポーネント -->
-    <media-figure-mng
-    ref="mediaFigure">
-    </media-figure-mng>
+          <router-view name="domResize"></router-view>
+          <router-view name="objectRotate"></router-view>
 
-    <!-- Mediaオーディオコンポーネント -->
-    <media-audio
-     :maxAudioNum="getMediaSetting['maxAudioNum']"
-     ref="mediaAudio">
-    </media-audio>
+          <media-img-mng
+          ref="mediaImgMng">
+          </media-img-mng>
+
+          <!-- Media図形コンポーネント -->
+          <media-figure-mng
+          ref="mediaFigure">
+          </media-figure-mng>
+
+          <!-- Mediaテキストコンポーネント -->
+          <media-text-mng
+          ref="mediaTextMng">
+          </media-text-mng>
+
+          <!-- Media動画(=youtube)コンポーネント -->
+          <media-movie
+          v-show="getMediaSetting['isShowMovie']"
+          ref="mediaMovie">
+          </media-movie>
+        </media-contents-field>
+
+        <!-- Mediaオーディオコンポーネント -->
+        <media-audio
+        :maxAudioNum="getMediaSetting['maxAudioNum']"
+        ref="mediaAudio">
+        </media-audio>
 
 
-    <!-- Media動画(=youtube)コンポーネント -->
-    <media-movie
-    v-show="getMediaSetting['isShowMovie']"
-    ref="mediaMovie">
-    </media-movie>
 
-        <!-- 選択モーダル表示ボタン -->
     <div id="disp-modal-zone" @click="closeModal">
       <div id="disp-modal-wrapper">
         <!-- いいねアイコン -->
@@ -58,16 +66,24 @@
         </router-view>
         <!-- オーディオ -->
         <router-view name="dispAudioModal"
-        v-on:show-modal="showModal">        
+        v-on:show-modal="showModal">
         </router-view>
         <!-- 図形設定 -->
         <router-view name="dispFigureSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>
+        <!-- テキスト -->
+        <router-view  name="dispTextSettingModal"
         v-on:show-modal="showModal">
         </router-view>
         <!-- 動画 -->
         <router-view name="dispMovieModal"
         v-on:show-modal="showModal">
         </router-view>
+        <!-- Mediaコンテンツフィールド設定 -->
+        <router-view name="dispContentsFieldSettingModal"
+        v-on:show-modal="showModal">
+        </router-view>        
         <!-- Media設定 -->
         <router-view name="dispMediaSettingModal"
         v-on:show-modal="showModal">
@@ -95,7 +111,13 @@
     v-on:close-modal="closeModal">
     </router-view>
 
+    <router-view name="mediaTextFactory"
+    v-show="isShowModal['textSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
     <router-view name="imgProperty"></router-view>
+    <router-view name="textProperty"></router-view>
     <router-view name="figureUpdate"></router-view>
     <router-view name="objectSelectMng"></router-view>
 
@@ -105,6 +127,13 @@
     v-on:close-modal="closeModal"
     v-on:create-movie-frame="createMovieFrame"
     v-on:delete-movie-frame="deleteMovieFrame"
+    :transitionName="transitionName">
+    </router-view>
+
+    <!-- コンテンツフィールド設定コンポーネント -->
+    <router-view name="contentsFieldSetting"
+    v-show="isShowModal['contentsFieldSettingModal']"
+    v-on:close-modal="closeModal"
     :transitionName="transitionName">
     </router-view>
 
@@ -137,7 +166,6 @@
     :description="getMediaSetting['description']">
     </media-info-component>
 
-
     <media-object-controll-parts-wrapper>
       <object-delete></object-delete>
       <object-setting-open></object-setting-open>
@@ -150,26 +178,31 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   // import MediaImg from './media_contents/img/MediaImgComponent.vue';
+  import MediaContentsField from './media_contents/MediaContentsField.vue';
   import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
   import MediaAudio from './media_contents/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';
+  import MediaTextMng from './media_contents/objects/text/MediaTextMngComponent.vue';
   import DispAudios from '../media/change_display_parts/DispAudiosComponent.vue'
   import MediaObjectControllPartsWrapper from './wrapper_parts/MediaObjectControllPartsWrapper.vue'
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
   import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
 
+
 export default {
   components : {
     judgeDeviceType,
+    MediaContentsField,
     MediaImgMng,
     MediaAudio,
     MediaSetting,
     MediaMovie,
     MediaFigureMng,
+    MediaTextMng,
     DispAudios,
     MediaObjectControllPartsWrapper,
     ObjectDelete,
@@ -188,7 +221,9 @@ export default {
         'imgModal' : false,
         'audioModal' : false,
         'movieModal' : false,
+        'textSettingModal' : false,
         'figureSettingModal' : false,
+        'contentsFieldSettingModal': false,
         'mediaSettingModal' : false,
       },
       autoPlay : true,
@@ -207,6 +242,7 @@ export default {
     ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
     ...mapGetters('mediaSetting', ['getMediaSetting']),
     ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
+    ...mapGetters('mediaContentsField',['getMediaContentsField']),
     ...mapGetters('mediaFigures', ['getMediaFigures']),
 
 
@@ -325,7 +361,9 @@ export default {
       this.setMediaIdToStore(this.extractMediaIdFromUrl());
       this.judgeIsMyMedia();
       // this.$refs.mediaImg.initImg();
+      this.$refs.mediaContentsField.initContentsField();
       this.$refs.mediaImgMng.initImg();
+      this.$refs.mediaTextMng.initText();
       this.$refs.mediaFigure.initFigure();
       this.$refs.mediaMovie.initMovie();
       this.$refs.mediaAudio.initAudio();
@@ -346,7 +384,6 @@ export default {
     const field = document.getElementById('field');
     field.addEventListener('click',this.fieldClicked, false);
     field.addEventListener('touchstart',this.fieldClicked, false);
-
   },
   watch : {
     initStatus : function(newVal){
@@ -374,7 +411,6 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-
   #disp-media-owner-modal-wrapper {
     color: white;
   }
@@ -390,21 +426,5 @@ export default {
   .setting-icon {
     color : lightgrey;
   }
- 
-
-
-
-/* @media screen and (min-width: 481px) {
-  #disp-modal-zone {
-    left: 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  #disp-modal-zone {
-    right: 0;
-  }
-} */
-
 
 </style>

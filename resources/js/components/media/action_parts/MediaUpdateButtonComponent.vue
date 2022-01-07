@@ -20,18 +20,21 @@
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      ...mapGetters('mediaContentsField',['getMediaContentsField']),
     },
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
       updateMedia() {
         // this.getFinishTime();
         const url = '/media/update';
+        console.log(this.getMediaContentsField);
         let media_datas = {
           // 'img' : this.getMediaImg,
           'imgs' : this.getMediaImgs,
           'figures' : this.getMediaFigures,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
+          'contents_field': this.getMediaContentsField,
           'setting' : this.getMediaSetting,
         }
         this.setIsCrudDoing(true);

@@ -67,12 +67,16 @@ Route::middleware('auth')->group(function(){
     
     // メディア画像
         Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
+    // メディアテキスト
+        Route::get('/mediaText/{mediaId}', 'App\Lib\MediaTextUtil@getMediaTextData');
     // メディア図形
         Route::get('/mediaFigures/{mediaId}', 'App\Lib\MediaFigureUtil@getMediaFigureData');
     // メディア音楽
         Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
     // メディア動画
         Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
+    // コンテンツ描画エリア
+        Route::get('/mediaContentsField/{mediaId}', 'App\Lib\MediaContentsFieldUtil@getMediaContentsFieldData');
     // メディア設定
         Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
