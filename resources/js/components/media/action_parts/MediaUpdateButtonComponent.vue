@@ -16,6 +16,7 @@
     data : () => { return {} },
     computed : {
       ...mapGetters('mediaImgs', ['getMediaImgs']),
+      ...mapGetters('mediaTexts', ['getMediaTexts']),
       ...mapGetters('mediaFigures', ['getMediaFigures']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
@@ -25,13 +26,11 @@
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
       updateMedia() {
-        // this.getFinishTime();
         const url = '/media/update';
-        console.log(this.getMediaContentsField);
         let media_datas = {
-          // 'img' : this.getMediaImg,
           'imgs' : this.getMediaImgs,
           'figures' : this.getMediaFigures,
+          'texts' : this.getMediaTexts,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
           'contents_field': this.getMediaContentsField,

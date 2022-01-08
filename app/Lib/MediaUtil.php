@@ -222,7 +222,11 @@ class MediaUtil
       // media図形
       if(isset($request->figures[0])){
         MediaFigureController::update($media_id, $request);
-      }      
+      }
+      // mediaテキスト
+      if(isset($request->texts[0])){
+        MediaTextController::update($media_id, $request);
+      }
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::update($media_id, $request);
