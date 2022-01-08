@@ -1,5 +1,5 @@
 <template>
-  <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="isShowMediaLike">
+  <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="!(isMyMedia)">
     <like-media-component></like-media-component>
   </div>
 </template>
@@ -12,13 +12,24 @@ import LikeMedia from './LikeMediaComponent.vue';
     components : {
       LikeMedia,
     },
-    data : () => { return { } },
+    data : () => {
+      return {
+        isMyMedia : true,
+      }
+    },
     computed : {
       ...mapGetters('loginState', ['getIsLogin']),
       ...mapGetters('media', ['getIsMyMedia']),
-      isShowMediaLike : function(){
-        if(this.getIsLogin && !(this.getIsMyMedia)){ return true }
+    },
+    watch :{
+      getIsMyMedia:function(){
+        this.judgeIsMyMedia();
       }
+    },
+    methods : {
+      judgeIsMyMedia(){
+        this.isMyMedia = this.getIsLogin && this.getIsMyMedia ? true:false
+      },
     },
   }
 

@@ -12120,15 +12120,21 @@ function _defineProperty(obj, key, value) {
     LikeMedia: _LikeMediaComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      isMyMedia: true
+    };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getIsMyMedia'])), {}, {
-    isShowMediaLike: function isShowMediaLike() {
-      if (this.getIsLogin && !this.getIsMyMedia) {
-        return true;
-      }
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getIsMyMedia'])),
+  watch: {
+    getIsMyMedia: function getIsMyMedia() {
+      this.judgeIsMyMedia();
     }
-  })
+  },
+  methods: {
+    judgeIsMyMedia: function judgeIsMyMedia() {
+      this.isMyMedia = this.getIsLogin && this.getIsMyMedia ? true : false;
+    }
+  }
 });
 
 /***/ }),
@@ -74869,7 +74875,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.isShowMediaLike
+  return !_vm.isMyMedia
     ? _c(
         "div",
         {
