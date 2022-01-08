@@ -37,7 +37,7 @@ class MediaMovieController extends Controller
     }
     // 7.destroy
     public static function destroy($media_id){
-        MediaMovie::where('media_id', $media_id)->first()->delete();
+        MediaMovie::where('media_id', $media_id)->delete();
     }
 
 }

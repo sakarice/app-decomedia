@@ -1,7 +1,7 @@
 <template>
   <div id="media-contents-field-wrapper">
     <div id="media-contents-field"
-    :style="backGroundStyle">
+    :style="fieldStyle">
       <slot></slot>
     </div>
   </div>
@@ -11,23 +11,46 @@
 import {mapGetters,mapMutations} from 'vuex';
 
   export default{
+    data : ()=>{
+      return {
+        scale : 1,
+      }
+    },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('media', ['getMode']),
+      ...mapGetters('mediaContentsField', ['getIsInitializedContentsField']),
       ...mapGetters('mediaContentsField', ['getMediaContentsField']),
-      backGroundStyle:function(){
+      fieldStyle:function(){
         const style = {
           'background-color' : this.getMediaContentsField['color'],
           'background-image' : 'url(' + this.getMediaContentsField['img_url'] + ')',
           'background-size' : this.getMediaContentsField['img_size_type'],
           'background-position' : 'center',
           'background-repeat' : 'no-repeat',
+          'width' : this.getMediaContentsField['width'] + "px",
+          'height' : this.getMediaContentsField['height'] + "px",
+          'transform' : "scale(" + this.scale + ")",
         }
         return style;
       }
     },
+    watch : {
+      // getMode:function(mode){if(mode!=3){ this.scale = 1}},
+      $route(route){
+        console.log("route:"+route);
+        const mode = route.path;
+        if(mode.match(/create/) || mode.match(/edit/)){
+          this.scale = 1
+        } else {
+          this.scaleFieldSizeToWindow();
+        }
+      },
+    },
     methods : {
       ...mapMutations('mediaContentsField', ['updateMediaContentsFieldObjectItem']),
       ...mapMutations('mediaContentsField', ['updateIsInitializedContentsField']),
+
       initContentsField(){
         this.getContentsFieldSettingFromDB()
         .then(datas=>{
@@ -59,11 +82,21 @@ import {mapGetters,mapMutations} from 'vuex';
       clearBgImg(){
         this.updateBgImg(null,null,"");
       },
+      scaleFieldSizeToWindow(){
+        const ratio_w = window.innerWidth / this.getMediaContentsField['width'];
+        const ratio_h = window.innerHeight / this.getMediaContentsField['height'];
+        this.scale = ratio_w < ratio_h ? ratio_w*0.9 : ratio_h*0.8;
+      }
     },
     mounted(){
       const listener_elem = document.getElementById('media-contents-field-wrapper');
       listener_elem.addEventListener('setBgImg', this.setBgImg, false);      
       listener_elem.addEventListener('clearBgImg', this.clearBgImg, false);      
+      const mode = this.$route.path;
+      if(mode.match(/create/)){
+        this.updateMediaContentsFieldObjectItem({key:'width', value:window.innerWidth*0.9});
+        this.updateMediaContentsFieldObjectItem({key:'height', value:window.innerHeight*0.8});
+      }
     },
   }
 </script>
@@ -74,7 +107,7 @@ import {mapGetters,mapMutations} from 'vuex';
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
     margin-top: 70px;
     margin-bottom: 10px;
@@ -83,10 +116,7 @@ import {mapGetters,mapMutations} from 'vuex';
   #media-contents-field {
     overflow: hidden;
     position: relative;
-    width: 90%;
-    height: 90%;
     background-color: rgb(255,255,255);
-    /* box-shadow: 1px 1px 3px lightgrey; */
   }
 
   @media screen and (max-width:480px) {

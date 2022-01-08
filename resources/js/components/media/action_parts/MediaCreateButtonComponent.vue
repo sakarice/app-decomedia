@@ -27,13 +27,11 @@
     methods : {
       ...mapMutations('media', ['setIsCrudDoing']),
       createMedia() {
-        // this.getFinishTime();
         const url = '/media/store';
         let media_datas = {
-          'img' : this.getMediaImg,
           'imgs' : this.getMediaImgs,
-          'texts' : this.getMediaTexts,
           'figures' : this.getMediaFigures,
+          'texts' : this.getMediaTexts,
           'audios' : this.getMediaAudios,
           'movie' : this.getMediaMovie,
           'contents_field': this.getMediaContentsField,

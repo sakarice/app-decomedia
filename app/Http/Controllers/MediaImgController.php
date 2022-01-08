@@ -39,8 +39,7 @@ class MediaImgController extends Controller
     }
     // 7.destroy
     public static function destroy($media_id){
-        \Log::info($media_id);
-        MediaImg::where('media_id', $media_id)->first()->delete();
+        MediaImg::where('media_id', $media_id)->delete();
     }
     
 }

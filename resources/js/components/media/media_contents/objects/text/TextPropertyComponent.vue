@@ -42,8 +42,8 @@
             <input type="number" class="input-num" :value="textDatas['font_size']" @input="updateTextData('font_size', $event.target.value)"  min="0" max="200">
           </div>
 
-        </div>
 
+        </div>
         <!-- カラー系の設定 -->
         <div class="setting-wrapper setting-color">
           <div class="disp-space-between stroke-input-wrapper">

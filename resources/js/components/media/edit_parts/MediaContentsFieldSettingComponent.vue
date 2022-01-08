@@ -4,7 +4,7 @@
       <div id="area-wrapper">
 
         <div id="media-contents-field-setting-area" class="flex column a-start">
-          <h2 id="media-contents-field-setting-title">メディア背景設定</h2>
+          <h2 id="media-contents-field-setting-title">メディアエリア設定</h2>
 
           <!-- メディア背景色設定 -->
           <div id="media-bg-color-wraper" class="setting">
@@ -14,6 +14,27 @@
               カラー選択
             </label>
           </div>
+          <!-- メディアエリアサイズ設定 -->
+          <div id="media-size-wraper" class="setting">
+            <h3 class="setting-title">サイズ</h3>
+            <div class="flex">
+              <div class="setting-width flex column">
+                <div class="flex align-center" style="opacity:0.7">
+                  <i class="fas fa-arrows-alt-h icon"></i>
+                  <h4 class="sub-sub-title">横幅[px]</h4>
+                </div>
+                <input id="set-contents-area-frame-width" class="setting" :value="getMediaContentsField['width']" @input="updateStoreData('width',$event.target.value)" type="number" placeholder="横幅">
+              </div>
+              <div class="setting-height flex column">
+                <div class="flex align-center" style="opacity:0.7">
+                  <i class="fas fa-arrows-alt-v icon"></i>
+                  <h4 class="sub-sub-title">縦幅[px]</h4>
+                </div>
+                <input id="set-contents-area-height" class="setting" :value="getMediaContentsField['height']" @input="updateStoreData('height',$event.target.value)" type="number" placeholder="縦幅">
+              </div>
+            </div>
+          </div>
+
           <!-- 背景画像設定 -->
           <div id="media-bg-img-wraper" class="setting">
             <h3 class="setting-title">背景画像</h3>
@@ -44,8 +65,7 @@ export default {
     'transitionName',
   ],
   data : () => {
-    return {
-    }
+    return {}
   },
   computed :  {
     ...mapGetters('mediaContentsField',['getMediaContentsField']),
@@ -60,7 +80,9 @@ export default {
       const clearBgImgEvent = new CustomEvent('clearBgImg');
       listener_elem.dispatchEvent(clearBgImgEvent);
     },
-
+    updateStoreData(key,value){
+      this.updateMediaContentsFieldObjectItem({key:key, value:value});
+    },
   },
   mounted : function() {
   },
@@ -90,6 +112,14 @@ export default {
 
   .setting {
     margin-bottom : 20px;
+  }
+
+  #media-size-wraper input {
+    width: 80px;
+  }
+
+  .sub-sub-title {
+    font-size: 15px;
   }
 
   .public-state-icon {

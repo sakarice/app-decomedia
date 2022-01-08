@@ -222,7 +222,11 @@ class MediaUtil
       // media図形
       if(isset($request->figures[0])){
         MediaFigureController::update($media_id, $request);
-      }      
+      }
+      // mediaテキスト
+      if(isset($request->texts[0])){
+        MediaTextController::update($media_id, $request);
+      }
       // media動画
       if(isset($request->movie['videoId'])){
         MediaMovieController::update($media_id, $request);
@@ -231,6 +235,11 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::update($media_id, $request);
       }
+      // media音楽
+      if(isset($request->texts[0])){
+        MediaTextController::update($media_id, $request);
+      }
+
       // コンテンツ描画エリア
       MediaContentsFieldController::update($media_id, $request->contents_field);
 
@@ -258,6 +267,10 @@ class MediaUtil
         if(MediaImg::where('media_id', $media_id)->exists()){
           MediaImgController::destroy($media_id);
         }
+        // Medi図形
+        if(MediaFigure::where('media_id', $media_id)->exists()){
+          MediaFigureController::destroy($media_id);
+        }
         // Media音楽
         if(MediaAudio::where('media_id', $media_id)->exists()){                
             MediaAudioController::destroy($media_id);
@@ -266,6 +279,11 @@ class MediaUtil
         if(MediaMovie::where('media_id', $media_id)->exists()){
             MediaMovieController::destroy($media_id);
         }
+        // Mediaテキスト
+        if(MediaText::where('media_id', $media_id)->exists()){
+          MediaTextController::destroy($media_id);
+        }
+
         // コンテンツ描画エリア
         MediaContentsFieldController::destroy($media_id);
 

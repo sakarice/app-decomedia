@@ -387,11 +387,16 @@ export default {
   },
   watch : {
     initStatus : function(newVal){
+      console.log('initStatus:'+newVal)
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
       if(newVal >= 4){ 
         const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
         setTimeout(play, 10000); 
       }
+
+      if(this.getMode==3 && newVal >= 62){ // =showモード
+          this.$refs.mediaContentsField.scaleFieldSizeToWindow();
+        }
       // youtube情報取得と再生準備が完了したら再生開始
       if(this.getMediaSetting['isShowMovie'] == true
       && this.getMediaMovie['videoId'] != ""
