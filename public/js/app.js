@@ -21159,7 +21159,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.icon {\r\n  color: pink;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.icon {\r\n  color: yellow\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -74990,7 +74990,7 @@ var render = function () {
           expression: "!(isLikeMedia)",
         },
       ],
-      staticClass: "far fa-heart fa-lg icon",
+      staticClass: "far fa-thumbs-up fa-lg icon",
       on: {
         click: function ($event) {
           return _vm.changeLikeStateOfViewAndDB()
@@ -75007,7 +75007,7 @@ var render = function () {
           expression: "isLikeMedia",
         },
       ],
-      staticClass: "fas fa-heart fa-lg icon",
+      staticClass: "fas fa-thumbs-up fa-lg icon",
       on: {
         click: function ($event) {
           return _vm.changeLikeStateOfViewAndDB()
