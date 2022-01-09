@@ -1,5 +1,6 @@
 <template>
-  <div id="disp-media-like-modal-wrapper" class="icon-wrapper" v-if="!(isMyMedia)">
+  <div id="disp-media-like-modal-wrapper" class="icon-wrapper"
+   v-if="!isMyMedia">
     <like-media-component></like-media-component>
   </div>
 </template>
@@ -21,16 +22,15 @@ import LikeMedia from './LikeMediaComponent.vue';
       ...mapGetters('loginState', ['getIsLogin']),
       ...mapGetters('media', ['getIsMyMedia']),
     },
-    watch :{
-      getIsMyMedia:function(){
-        this.judgeIsMyMedia();
-      }
-    },
+    watch :{},
     methods : {
       judgeIsMyMedia(){
         this.isMyMedia = this.getIsLogin && this.getIsMyMedia ? true:false
       },
     },
+    created(){
+      document.addEventListener('setIsMyMedia',this.judgeIsMyMedia,false);
+    }
   }
 
 </script>
@@ -42,6 +42,10 @@ import LikeMedia from './LikeMediaComponent.vue';
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .hidden {
+    display: none;
   }
 
 </style>

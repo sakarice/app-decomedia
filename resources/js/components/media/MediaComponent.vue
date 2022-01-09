@@ -279,6 +279,8 @@ export default {
       axios.get(url)
         .then(response =>{
           this.setIsMyMedia(response.data.isMyMedia);
+          const event = new CustomEvent('setIsMyMedia');
+          document.dispatchEvent(event);
         })
         .catch(error => {
           console.log('あなたがmedia作成者か判別できませんでした');
