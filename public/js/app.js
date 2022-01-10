@@ -13021,6 +13021,19 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13033,12 +13046,34 @@ function _defineProperty(obj, key, value) {
   },
   props: ['transitionName'],
   data: function data() {
-    return {};
+    return {
+      mediaOwnerInfo: {}
+    };
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])),
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])),
+  watch: {
+    getIsInitializedSetting: function getIsInitializedSetting(val) {
+      if (val == true) {
+        this.getProfile();
+      }
+    }
+  },
   methods: {
     closeModal: function closeModal() {
       this.$emit('close-modal');
+    },
+    getProfile: function getProfile() {
+      var _this = this; // DBからログイン中ユーザのidとプロフィール情報を取得
+
+
+      var url = '/user/mediaOwner/profile/show/' + this.getMediaSetting['id'];
+      axios.get(url).then(function (res) {
+        _this.mediaOwnerInfo['id'] = res.data.id;
+        _this.mediaOwnerInfo['name'] = res.data.name;
+        _this.mediaOwnerInfo['profile_img_url'] = res.data.profile_img_url;
+      })["catch"](function (error) {
+        alert('Media作成者を取得できませんでした。');
+      });
     }
   }
 });
@@ -21934,7 +21969,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.media-info-wrapper[data-v-5350e894] {\r\n  overflow-y: scroll;\n}\n.info-title[data-v-5350e894] {\r\n  font-weight: bold;\n}\n#media-description[data-v-5350e894] {\r\n  height: 150px;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.media-info-wrapper[data-v-5350e894] {\r\n  overflow-y: scroll;\n}\n#media-description[data-v-5350e894] {\r\n  height: 150px;\n}\n.grey[data-v-5350e894] { color: grey;}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22111,7 +22146,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n\r\n  /* 下(bottom) */\r\n  .mb5 { margin-bottom: 5px}\r\n  .mb10 { margin-bottom: 10px}\r\n  .mb15 { margin-bottom: 15px}\r\n  .mb20 { margin-bottom: 20px}\r\n  .mb25 { margin-bottom: 25px}\r\n  .mb30 { margin-bottom: 30px}\r\n\r\n  /* 右(right) */\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 20px}\r\n\r\n  /* 左(left) */\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n\r\n\r\n  \r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n  /* px */\r\n  .border-r-3{ border-radius: 3px;}\r\n  .border-r-5{ border-radius: 5px;}\r\n  .border-r-7{ border-radius: 7px;}\r\n  .border-r-10{ border-radius: 10px;}\r\n  .border-r-15{ border-radius: 15px;}\r\n\r\n\r\n  /* % */\r\n  .border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n  .mt35 { margin-top: 35px}\r\n\r\n  /* 下(bottom) */\r\n  .mb5 { margin-bottom: 5px}\r\n  .mb10 { margin-bottom: 10px}\r\n  .mb15 { margin-bottom: 15px}\r\n  .mb20 { margin-bottom: 20px}\r\n  .mb25 { margin-bottom: 25px}\r\n  .mb30 { margin-bottom: 30px}\r\n  .mb35 { margin-bottom: 35px}\r\n\r\n  /* 右(right) */\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 30px}\r\n  .mr35 { margin-right: 35px}\r\n\r\n  /* 左(left) */\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n  .ml35 { margin-left: 35px}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n\r\n\r\n  \r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n  /* px */\r\n  .border-r-3{ border-radius: 3px;}\r\n  .border-r-5{ border-radius: 5px;}\r\n  .border-r-7{ border-radius: 7px;}\r\n  .border-r-10{ border-radius: 10px;}\r\n  .border-r-15{ border-radius: 15px;}\r\n\r\n\r\n  /* % */\r\n  .border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -76582,19 +76617,55 @@ var render = function () {
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
             "div",
-            {
-              staticClass:
-                "media-info-wrapper w90 mt20 mb20 flex column a-start",
-            },
+            { staticClass: "media-info-wrapper w90 mt20 mb20 flex column " },
             [
               _c(
                 "div",
                 {
-                  staticClass: "media-info mb20",
+                  staticClass: "mb35",
+                  attrs: { id: "media-creater-info-wrapper" },
+                },
+                [
+                  _c("h3", { staticClass: "info-title mb5 font-13 grey" }, [
+                    _vm._v("作成者"),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("div", { staticClass: "avatar-wrapper" }, [
+                      _vm.mediaOwnerInfo["profile_img_url"] !== null
+                        ? _c("img", {
+                            staticClass: "avatar w20px h20px border-r-50per",
+                            attrs: {
+                              src: _vm.mediaOwnerInfo["profile_img_url"],
+                              alt: "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
+                            },
+                          })
+                        : _c("img", {
+                            staticClass: "avatar w20px h20px border-r-50per",
+                            attrs: {
+                              src: "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
+                              alt: "",
+                            },
+                          }),
+                    ]),
+                    _vm._v(" "),
+                    _c("div", [
+                      _c("span", { staticClass: "ml10" }, [
+                        _vm._v(_vm._s(_vm.mediaOwnerInfo["name"])),
+                      ]),
+                    ]),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "media-info mb35",
                   attrs: { id: "media-name-wraper" },
                 },
                 [
-                  _c("p", { staticClass: "info-title mb5" }, [
+                  _c("h3", { staticClass: "info-title mb5 font-13 grey" }, [
                     _vm._v("Media名"),
                   ]),
                   _vm._v(" "),
@@ -76611,14 +76682,16 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "media-info mb20 w100",
+                  staticClass: "media-info mb35 w100",
                   attrs: { id: "media-description-wrapper" },
                 },
                 [
-                  _c("p", { staticClass: "info-title mb5" }, [_vm._v("説明")]),
+                  _c("h3", { staticClass: "info-title mb5 font-13 grey" }, [
+                    _vm._v("説明"),
+                  ]),
                   _vm._v(" "),
                   _c("textarea", {
-                    staticClass: "w100",
+                    staticClass: "w90",
                     attrs: {
                       type: "text",
                       id: "media-description",
