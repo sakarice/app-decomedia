@@ -24043,7 +24043,7 @@ var render = function () {
         },
       },
     },
-    [_c("i", { staticClass: "fas fa-comment fa-2x" })]
+    [_c("i", { staticClass: "fas fa-comment fa-lg" })]
   )
 }
 var staticRenderFns = []

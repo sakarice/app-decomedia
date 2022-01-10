@@ -1,6 +1,6 @@
 <template>
   <div id="disp-media-comment-modal-wrapper" class="icon-wrapper" v-on:click.stop="showModal('mediaComment')">
-    <i class="fas fa-comment fa-2x"></i>
+    <i class="fas fa-comment fa-lg"></i>
   </div>
 </template>
 
