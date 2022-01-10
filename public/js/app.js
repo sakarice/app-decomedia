@@ -12534,9 +12534,7 @@ function _defineProperty(obj, key, value) {
       comment_text: "comment",
       comment: {
         id: 0,
-        media_id: 0,
-        // comment : "test",
-        good: 0,
+        // media_id : 0,
         created_at: "",
         updated_at: ""
       }
@@ -12546,6 +12544,7 @@ function _defineProperty(obj, key, value) {
     comment_data: function comment_data() {
       var comment_datas = Object.assign(this.comment, this.user_info);
       comment_datas['comment'] = this.comment_text;
+      comment_datas['media_id'] = this.getMediaSetting['id'];
       return comment_datas;
     }
   }),
@@ -15112,7 +15111,7 @@ var mediaComments = {
     // user_name : "",
     // user_icon_url : "",
     // comment : "",
-    // good : 0,
+    // good : "",
     // created_at : 0,
     // updated_at : 0,
     targetObjectIndex: 0

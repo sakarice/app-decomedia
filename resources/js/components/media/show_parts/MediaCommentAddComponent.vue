@@ -23,6 +23,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+
 export default{
   props: [],
   data : () => {
@@ -37,9 +38,7 @@ export default{
       comment_text : "comment",
       comment : {
         id : 0,
-        media_id : 0,
-        // comment : "test",
-        good : 0,
+        // media_id : 0,
         created_at : "",
         updated_at : "",
       },
@@ -51,6 +50,7 @@ export default{
     comment_data:function(){
       let comment_datas = Object.assign(this.comment, this.user_info);
       comment_datas['comment'] = this.comment_text;
+      comment_datas['media_id'] = this.getMediaSetting['id'];
       return comment_datas;
     }
   },

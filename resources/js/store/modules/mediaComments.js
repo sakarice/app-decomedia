@@ -12,7 +12,7 @@ const mediaComments = {
       // user_name : "",
       // user_icon_url : "",
       // comment : "",
-      // good : 0,
+      // good : "",
       // created_at : 0,
       // updated_at : 0,
     targetObjectIndex : 0,
