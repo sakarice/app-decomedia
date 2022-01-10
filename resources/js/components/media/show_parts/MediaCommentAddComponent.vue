@@ -32,8 +32,8 @@ export default{
       user_info : {
         user_id : 0,
         user_name : "testUser",
-        // user_profile_icon_url : "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
-        user_profile_icon_url : "https://cdn.pixabay.com/photo/2021/11/21/22/08/british-shorthair-6815375_1280.jpg",
+        // profile_img_url : "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
+        profile_img_url : "https://cdn.pixabay.com/photo/2021/11/21/22/08/british-shorthair-6815375_1280.jpg",
       },
       comment_text : "comment",
       comment : {
@@ -56,16 +56,17 @@ export default{
   },
   methods : {
     ...mapMutations('mediaComments', ['addMediaCommentsObjectItem']),
-    getUserInfo(){
-      const url = '/user/info';
+    getUserInfoFromDb(){
+      const url = '/user/getOwnProfile';
       axios.get(url)
-      .then(response => {
-        const userInfos = response.data.userInfo;
-        Object.keys(userInfos).forEach((key)=>{
-          this.user_info[key] = userInfos[key]; 
-        })
+      .then(res => {
+        this.user_info['user_id'] = res.data['id'];
+        this.user_info['user_name'] = res.data['name'];
+        this.user_info['profile_img_url'] = res.data['profile_img_url'];
       })
-      .catch(error => {})
+      .catch(error => {
+        console.log('failed get user info');
+      })
     },
     storeCommentInDb(){
       const url = '/media/comment/store/'
@@ -91,7 +92,9 @@ export default{
     }
 
   },
-  created : function(){},
+  created : function(){
+    this.getUserInfoFromDb();
+  },
 
 }
 

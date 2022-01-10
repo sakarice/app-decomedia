@@ -12528,8 +12528,8 @@ function _defineProperty(obj, key, value) {
       user_info: {
         user_id: 0,
         user_name: "testUser",
-        // user_profile_icon_url : "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
-        user_profile_icon_url: "https://cdn.pixabay.com/photo/2021/11/21/22/08/british-shorthair-6815375_1280.jpg"
+        // profile_img_url : "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg",
+        profile_img_url: "https://cdn.pixabay.com/photo/2021/11/21/22/08/british-shorthair-6815375_1280.jpg"
       },
       comment_text: "comment",
       comment: {
@@ -12549,16 +12549,17 @@ function _defineProperty(obj, key, value) {
     }
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), {}, {
-    getUserInfo: function getUserInfo() {
+    getUserInfoFromDb: function getUserInfoFromDb() {
       var _this = this;
 
-      var url = '/user/info';
-      axios.get(url).then(function (response) {
-        var userInfos = response.data.userInfo;
-        Object.keys(userInfos).forEach(function (key) {
-          _this.user_info[key] = userInfos[key];
-        });
-      })["catch"](function (error) {});
+      var url = '/user/getOwnProfile';
+      axios.get(url).then(function (res) {
+        _this.user_info['user_id'] = res.data['id'];
+        _this.user_info['user_name'] = res.data['name'];
+        _this.user_info['profile_img_url'] = res.data['profile_img_url'];
+      })["catch"](function (error) {
+        console.log('failed get user info');
+      });
     },
     storeCommentInDb: function storeCommentInDb() {
       var _this2 = this;
@@ -12588,7 +12589,9 @@ function _defineProperty(obj, key, value) {
       this.hideCommentInput();
     }
   }),
-  created: function created() {}
+  created: function created() {
+    this.getUserInfoFromDb();
+  }
 });
 
 /***/ }),

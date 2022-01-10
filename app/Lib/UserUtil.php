@@ -32,6 +32,7 @@ class UserUtil
     $user_data = [
       'id' => $user_id,
       'name' => $user->name,
+      'profile_img_url' => $user->profile_img_url,
       'aboutMe' => $user->profile,
     ];
     return $user_data;
