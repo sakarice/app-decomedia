@@ -12,7 +12,7 @@
         
       </div>
       <media-comment-add></media-comment-add>
-      
+
       <close-modal-bar class="for-mobile"></close-modal-bar>
       <close-modal-icon class="for-pc-tablet"></close-modal-icon>
 
@@ -43,23 +43,46 @@ export default{
     }
   },
   computed : {
+    ...mapGetters('mediaSetting',['getIsInitializedSetting']),
     ...mapGetters('mediaSetting',['getMediaSetting']),
     ...mapGetters('mediaComments',['getMediaComments']),
   },
+  watch : {
+    getIsInitializedSetting:function(val){
+      if(val==true){ this.initComment();}
+    }
+  },
   methods : {
     ...mapMutations('mediaComments', ['addMediaCommentsObjectItem']),
-    setDbDataToStore(){
-      const media_id = this.getMediaSetting['id'];
-      const url = '/media/' + media_id + '/comments';
-      axios.get(url)
-      .then(datas=>{
-        datas.forEach(data=>{
-          this.addMediaCommentsObjectItem(data);
-          this.updateIsInitializedComments(true);
-        })
+    ...mapMutations('mediaComments',['updateIsInitializedComments']),
+
+    initComment(){
+      this.getCommentDataFromDb()
+      .then(comments=>{
+        this.setCommentDataToStore(comments);
       })
     },
+    getCommentDataFromDb(){
+      return new Promise((resolve, reject)=>{
+        const media_id = this.getMediaSetting['id'];
+        const url = '/media/' + media_id + '/comment';
+        axios.get(url)
+        .then(res=>{
+          const comments = res.data.comments;
+          return resolve(comments);
+        })
+        .catch(error=>{});
+      })
+    },
+    setCommentDataToStore(comments){
+      comments.forEach((comment)=>{
+        this.addMediaCommentsObjectItem(comment);
+      })
+      this.updateIsInitializedComments(true);
+    },
+
   },
+  created : function() {},
   mounted : function() {},
 
 }

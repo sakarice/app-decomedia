@@ -21,12 +21,10 @@ class MediaCommentUtil
   );
   
   // 自分が入ったMediaの作成者をフォローしているか確認する。
-  public static function getMediaComments($media_id){
+  public static function show($media_id){
     $user_id = Auth::user()->id;
-    $isLike = UserMediaComment::where('user_id',$user_id)->where('media_id',$media_id)->exists();
-    return [
-      'isLike' => $isLike,
-    ];
+    $comments = MediaComment::where('media_id',$media_id)->where('user_id',$user_id)->get();
+    return ['comments' => $comments];
   }
 
   public static function store(Request $request){

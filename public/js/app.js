@@ -12564,11 +12564,11 @@ function _defineProperty(obj, key, value) {
     storeCommentInDb: function storeCommentInDb() {
       var _this2 = this;
 
-      var url = '/media/comment/store/';
+      var media_id = this.getMediaSetting['id'];
+      var url = '/media/' + media_id + '/comment/store';
       var data = {
         'comment': this.comment_data
       };
-      console.log(data);
       axios.post(url, data).then(function (res) {
         console.log('success add comment!');
         var storeDatas = res.data;
@@ -12822,22 +12822,44 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaComments', ['getMediaComments'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), {}, {
-    setDbDataToStore: function setDbDataToStore() {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getIsInitializedSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaComments', ['getMediaComments'])),
+  watch: {
+    getIsInitializedSetting: function getIsInitializedSetting(val) {
+      if (val == true) {
+        this.initComment();
+      }
+    }
+  },
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaComments', ['updateIsInitializedComments'])), {}, {
+    initComment: function initComment() {
       var _this = this;
 
-      var media_id = this.getMediaSetting['id'];
-      var url = '/media/' + media_id + '/comments';
-      axios.get(url).then(function (datas) {
-        datas.forEach(function (data) {
-          _this.addMediaCommentsObjectItem(data);
-
-          _this.updateIsInitializedComments(true);
-        });
+      this.getCommentDataFromDb().then(function (comments) {
+        _this.setCommentDataToStore(comments);
       });
+    },
+    getCommentDataFromDb: function getCommentDataFromDb() {
+      var _this2 = this;
+
+      return new Promise(function (resolve, reject) {
+        var media_id = _this2.getMediaSetting['id'];
+        var url = '/media/' + media_id + '/comment';
+        axios.get(url).then(function (res) {
+          var comments = res.data.comments;
+          return resolve(comments);
+        })["catch"](function (error) {});
+      });
+    },
+    setCommentDataToStore: function setCommentDataToStore(comments) {
+      var _this3 = this;
+
+      comments.forEach(function (comment) {
+        _this3.addMediaCommentsObjectItem(comment);
+      });
+      this.updateIsInitializedComments(true);
     }
   }),
+  created: function created() {},
   mounted: function mounted() {}
 });
 

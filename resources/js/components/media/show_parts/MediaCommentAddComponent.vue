@@ -69,9 +69,9 @@ export default{
       })
     },
     storeCommentInDb(){
-      const url = '/media/comment/store/'
+      const media_id = this.getMediaSetting['id'];
+      const url = '/media/'+ media_id +'/comment/store';
       const data =  { 'comment' : this.comment_data}
-      console.log(data);
       axios.post(url, data)
       .then(res => {
         console.log('success add comment!');
