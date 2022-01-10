@@ -2,11 +2,13 @@
 import Media from '../components/media/MediaComponent.vue';
 import MediaHeader from '../components/media/MediaHeaderComponent.vue';
 import MediaOwnerInfo from '../components/media/show_parts/MediaOwnerInfoComponent.vue';
+import MediaCommentMng from '../components/media/show_parts/MediaCommentMngComponent.vue';
 import SwitchToShowMode from '../components/media/action_parts/SwitchToShowModeComponent.vue';
 import SwitchToEditMode from '../components/media/action_parts/SwitchToEditModeComponent.vue';
 
 // 他コンポーネントのラッパー(表示切替も兼ねる)コンポーネント
 import DispMediaOwnerInfo from '../components/media/show_parts/DispMediaOwnerInfoComponent.vue';
+import DispMediaComment from '../components/media/show_parts/DispMediaCommentComponent.vue';
 import DispMediaLike from '../components/media/show_parts/DispMediaLikeComponent.vue';
 import DispMediaInfo from '../components/media/show_parts/DispMediaInfoComponent.vue';
 import DispImgModal from '../components/media/change_display_parts/DispImgModalComponent.vue';
@@ -112,9 +114,11 @@ export default{
       components : {
         switchToEditMode : SwitchToEditMode,
         mediaOwnerInfo : MediaOwnerInfo,
+        mediaCommentMng : MediaCommentMng,
         dispMediaLike : DispMediaLike,
         dispMediaOwnerInfo : DispMediaOwnerInfo,
         dispMediaInfo : DispMediaInfo,
+        dispMediaComment : DispMediaComment,
       },
     },
   ]

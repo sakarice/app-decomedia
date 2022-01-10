@@ -60,6 +60,10 @@
         <router-view name="dispMediaInfo"
         v-on:show-modal="showModal">        
         </router-view>
+        <!-- Mediaコメント -->
+        <router-view name="dispMediaComment"
+        v-on:show-modal="showModal">
+        </router-view>
         <!-- 画像 -->
         <router-view name="dispImgModal"
         v-on:show-modal="showModal">        
@@ -106,13 +110,21 @@
     :transitionName="transitionName">
     </router-view>
 
+    <!-- メディア図形作成コンポーネント -->
     <router-view name="mediaFigureFactory"
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </router-view>
 
+    <!-- メディアテキスト作成コンポーネント -->
     <router-view name="mediaTextFactory"
     v-show="isShowModal['textSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
+    <!-- メディアコメントコンポーネント -->
+    <router-view name="mediaCommentMng"
+    v-show="isShowModal['mediaComment']"
     v-on:close-modal="closeModal">
     </router-view>
 
@@ -146,10 +158,6 @@
 
     <disp-audios></disp-audios>
 
-    <!-- <media-figure-setting
-    v-show="isShowModal['figureSettingModal']"
-    v-on:close-modal="closeModal">
-    </media-figure-setting> -->
 
     <div v-show="getIsCrudDoing">
       <router-view name="overlay"></router-view>
@@ -225,6 +233,7 @@ export default {
         'figureSettingModal' : false,
         'contentsFieldSettingModal': false,
         'mediaSettingModal' : false,
+        'mediaComment' : false,
       },
       autoPlay : true,
 

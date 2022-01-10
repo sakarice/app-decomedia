@@ -1,0 +1,210 @@
+
+/***************************
+  マージン(margin)
+***************************/
+  /* 全方位 */
+  .m5 { margin: 5px}
+  .m10 { margin: 10px}
+  .m15 { margin: 15px}
+  .m20 { margin: 20px}
+  .m25 { margin: 25px}
+  .m30 { margin: 30px}
+
+  /* 上(top) */
+  .mt5 { margin-top: 5px}
+  .mt10 { margin-top: 10px}
+  .mt15 { margin-top: 15px}
+  .mt20 { margin-top: 20px}
+  .mt25 { margin-top: 25px}
+  .mt30 { margin-top: 30px}
+
+  /* 下(bottom) */
+  .mb5 { margin-bottom: 5px}
+  .mb10 { margin-bottom: 10px}
+  .mb15 { margin-bottom: 15px}
+  .mb20 { margin-bottom: 20px}
+  .mb25 { margin-bottom: 25px}
+  .mb30 { margin-bottom: 30px}
+
+  /* 右(right) */
+  .mr5 { margin-right: 5px}
+  .mr10 { margin-right: 10px}
+  .mr15 { margin-right: 15px}
+  .mr20 { margin-right: 20px}
+  .mr25 { margin-right: 25px}
+  .mr30 { margin-right: 20px}
+
+  /* 左(left) */
+  .ml5 { margin-left: 5px}
+  .ml10 { margin-left: 10px}
+  .ml15 { margin-left: 15px}
+  .ml20 { margin-left: 20px}
+  .ml25 { margin-left: 25px}
+  .ml30 { margin-left: 30px}
+
+
+
+
+
+/***************************
+  パディング(padding)
+***************************/
+  /* 全方位 */
+  .p5 {padding: 5px}
+  .p10 {padding: 10px}
+  .p15 {padding: 15px}
+  .p20 {padding: 20px}
+  .p25 {padding: 25px}
+  .p30 {padding: 30px}
+
+  /* 上(top) */
+  .pt5 {padding-top: 5px}
+  .pt10 {padding-top: 10px}
+  .pt15 {padding-top: 15px}
+  .pt20 {padding-top: 20px}
+  .pt25 {padding-top: 25px}
+  .pt30 {padding-top: 30px}
+
+  /* 下(bottom) */
+  .pb5 {padding-bottom: 5px}
+  .pb10 {padding-bottom: 10px}
+  .pb15 {padding-bottom: 15px}
+  .pb20 {padding-bottom: 20px}
+  .pb25 {padding-bottom: 25px}
+  .pb30 {padding-bottom: 30px}
+
+  /* 右(right) */
+  .pr5 {padding-right: 5px}
+  .pr10 {padding-right: 10px}
+  .pr15 {padding-right: 15px}
+  .pr20 {padding-right: 20px}
+  .pr25 {padding-right: 25px}
+  .pr30 {padding-right: 30px}
+
+  /* 左(left) */
+  .pl5 {padding-left: 5px}
+  .pl10 {padding-left: 10px}
+  .pl15 {padding-left: 15px}
+  .pl20 {padding-left: 20px}
+  .pl25 {padding-left: 25px}
+  .pl30 {padding-left: 30px}
+
+
+
+
+/***************************
+  横幅(width)
+***************************/
+  /* px */
+  .w10px{ width: 10px;}
+  .w20px{ width: 20px;}
+  .w30px{ width: 30px;}
+  .w40px{ width: 40px;}
+  .w50px{ width: 50px;}
+  .w60px{ width: 60px;}
+  .w70px{ width: 70px;}
+  .w80px{ width: 80px;}
+  .w90px{ width: 90px;}
+  .w100px{ width: 100px;}
+
+  /* % */
+  .w10{ width: 10%;}
+  .w20{ width: 20%;}
+  .w30{ width: 30%;}
+  .w40{ width: 40%;}
+  .w50{ width: 50%;}
+  .w60{ width: 60%;}
+  .w70{ width: 70%;}
+  .w80{ width: 80%;}
+  .w90{ width: 90%;}
+  .w100{ width: 100%;}
+
+
+
+
+
+/***************************
+  縦幅(height)
+***************************/
+  /* px */
+  .h10px{ height: 10px;}
+  .h20px{ height: 20px;}
+  .h30px{ height: 30px;}
+  .h40px{ height: 40px;}
+  .h50px{ height: 50px;}
+  .h60px{ height: 60px;}
+  .h70px{ height: 70px;}
+  .h80px{ height: 80px;}
+  .h90px{ height: 90px;}
+  .h100px{ height: 100px;}
+
+  /* % */
+  .h10{ height: 10%;}
+  .h20{ height: 20%;}
+  .h30{ height: 30%;}
+  .h40{ height: 40%;}
+  .h50{ height: 50%;}
+  .h60{ height: 60%;}
+  .h70{ height: 70%;}
+  .h80{ height: 80%;}
+  .h90{ height: 90%;}
+  .h100{ height: 100%;}
+
+
+
+  
+/***************************
+  フォントサイズ(font-size)
+***************************/
+.font-11 {font-size: 11px;}
+.font-12 {font-size: 12px;}
+.font-13 {font-size: 13px;}
+.font-14 {font-size: 14px;}
+.font-15 {font-size: 15px;}
+.font-16 {font-size: 16px;}
+.font-17 {font-size: 17px;}
+.font-18 {font-size: 18px;}
+.font-19 {font-size: 19px;}
+.font-20 {font-size: 20px;}
+.font-21 {font-size: 21px;}
+.font-22 {font-size: 22px;}
+.font-23 {font-size: 23px;}
+.font-24 {font-size: 24px;}
+.font-25 {font-size: 25px;}
+
+
+/***************************
+  角丸(border-radius)
+***************************/
+  /* px */
+  .border-r-3{ border-radius: 3px;}
+  .border-r-5{ border-radius: 5px;}
+  .border-r-7{ border-radius: 7px;}
+  .border-r-10{ border-radius: 10px;}
+  .border-r-15{ border-radius: 15px;}
+
+
+  /* % */
+  .border-r-50per{ border-radius: 50%;}
+
+
+
+
+
+/***************************
+  ホバー(hover)
+***************************/
+.hover-p:hover { cursor: pointer;}
+
+
+
+/***************************
+  レスポンシブ系
+***************************/
+@media screen and (min-width: 481px) {
+  .for-mobile { display: none;}
+}
+
+@media screen and (max-width: 480px) {
+  .for-pc { display: none;}
+}

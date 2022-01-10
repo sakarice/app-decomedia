@@ -1,11 +1,11 @@
-const mediaComment = {
+const mediaComments = {
   namespaced : true,
 
   state : {
     // DBから取得したデータで下記mediaCommentが初期化がされたか。
     isInitialized : false,
     // メディア画像情報。show,editモードでは始めにDBのデータで初期化される。
-    mediaComment : [],
+    mediaComments : [],
       // id : 0,
       // media_id : 0,
       // user_id : 0,
@@ -36,5 +36,5 @@ const mediaComment = {
 
 }
 
-export default mediaComment;
+export default mediaComments;
 
