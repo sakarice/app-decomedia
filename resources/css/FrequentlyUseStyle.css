@@ -3,6 +3,7 @@
   マージン(margin)
 ***************************/
   /* 全方位 */
+  .m0 { margin: 0 }
   .m5 { margin: 5px}
   .m10 { margin: 10px}
   .m15 { margin: 15px}
@@ -50,6 +51,7 @@
   パディング(padding)
 ***************************/
   /* 全方位 */
+  .p0 {padding: 0}
   .p5 {padding: 5px}
   .p10 {padding: 10px}
   .p15 {padding: 15px}

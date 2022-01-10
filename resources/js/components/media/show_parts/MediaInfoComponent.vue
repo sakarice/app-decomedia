@@ -2,26 +2,24 @@
   <transition :name="transitionName">
     <div id="select-modal">
 
-      <div id="area-wrapper">
-        <div class="media-info-wrapper">
-          <div id="media-name-wraper" class="media-info">
-            <p class="info-title">Media名</p>
+      <div id="area-wrapper" class="">
+        <div class="media-info-wrapper w90 mt20 mb20 flex column a-start">
+          <div id="media-name-wraper" class="media-info mb20">
+            <p class="info-title mb5">Media名</p>
             <label for="">
-              <p id="media-name">{{getMediaSetting['name']}}</p>
+              <p id="media-name" class="m0">{{getMediaSetting['name']}}</p>
             </label>
           </div>
 
-          <div id="media-description-wrapper" class="media-info">
-            <p class="info-title">説明</p>
-            <textarea :value="getMediaSetting['description']" type="text" id="media-description" readonly></textarea>
+          <div id="media-description-wrapper" class="media-info mb20 w100">
+            <p class="info-title mb5">説明</p>
+            <textarea :value="getMediaSetting['description']" type="text" id="media-description" class="w100" readonly></textarea>
           </div>
         </div>
       </div>
 
-      <i v-on:click="closeModal()" id="change-disp-modal" class="fas fa-times-circle fa-2x for-mobile"></i>
-      <div class="close-icon-wrapper for-pc-tablet">
-        <i v-on:click="closeModal()" id="close-modal-icon" class="fas fa-chevron-circle-left fa-3x"></i>
-      </div>
+      <close-modal-bar class="for-mobile"></close-modal-bar>
+      <close-modal-icon class="for-pc-tablet"></close-modal-icon>
 
     </div>
   </transition>
@@ -31,12 +29,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
+import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 
 export default{
+  components : {
+    closeModalBar,
+    closeModalIcon,
+  },
   props: [
     'transitionName',
-    // 'name',
-    // 'description',
   ],
   data : () => {
     return {
@@ -60,31 +62,18 @@ export default{
 <style scoped>
 
 @import "/resources/css/mediaEditModals.css";
+@import "/resources/css/FrequentlyUseStyle.css";
+@import "/resources/css/flexSetting.css";
 
 .media-info-wrapper {
-  margin: 20px 0;
-  width: 70%;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.media-info {
-  margin-bottom : 20px;
+  overflow-y: scroll;
 }
 
 .info-title {
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
-#media-name {
-  margin: 0;
-}
-
 #media-description {
-  width: 100%;
   height: 150px;
 }
 
