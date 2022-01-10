@@ -76352,10 +76352,7 @@ var render = function () {
       _c("div", { staticClass: "user-icon-wrapper p5" }, [
         _c("img", {
           staticClass: "w30px h30px border-r-50per",
-          attrs: {
-            src: _vm.comment["user_profile_icon_url"],
-            alt: "unknown user",
-          },
+          attrs: { src: _vm.comment["profile_img_url"], alt: "unknown user" },
         }),
       ]),
       _vm._v(" "),

@@ -3,7 +3,7 @@
     <div class="user-icon-area flex column a-center">
       <div class="user-icon-wrapper p5">
         <!-- <i class="fas fa-user fa-lg"></i> -->
-        <img class="w30px h30px border-r-50per" :src="comment['user_profile_icon_url']" alt="unknown user">
+        <img class="w30px h30px border-r-50per" :src="comment['profile_img_url']" alt="unknown user">
       </div>
       <span class="user-name font-12">{{comment['user_name']}}</span>
     </div>
