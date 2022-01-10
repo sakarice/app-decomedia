@@ -12565,14 +12565,18 @@ function _defineProperty(obj, key, value) {
       var _this2 = this;
 
       var url = '/media/comment/store/';
-      axios.post(url, this.comment_data).then(function (res) {
+      var data = {
+        'comment': this.comment_data
+      };
+      console.log(data);
+      axios.post(url, data).then(function (res) {
         console.log('success add comment!');
-        var storeDatas = response.data.storeDatas;
+        var storeDatas = res.data;
         Object.keys(storeDatas).forEach(function (key) {
           _this2.comment[key] = storeDatas[key];
-
-          _this2.addCommentDataToStore();
         });
+
+        _this2.addCommentToStore();
       })["catch"](function (error) {
         console.log('failed add comment!');
       });
@@ -76296,7 +76300,7 @@ var render = function () {
               "button",
               {
                 staticClass: "button submit-btn ml5",
-                on: { click: _vm.addCommentToStore },
+                on: { click: _vm.storeCommentInDb },
               },
               [_vm._v("確定")]
             ),

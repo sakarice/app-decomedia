@@ -8,7 +8,7 @@
         v-model="comment_text"></textarea>
         <div class="button-wrapper flex">
           <button class="button cancel-btn mr5" @click="hideCommentInput">キャンセル</button>
-          <button class="button submit-btn ml5" @click="addCommentToStore">確定</button>
+          <button class="button submit-btn ml5" @click="storeCommentInDb">確定</button>
         </div>
       </div>
       <div class="add-icon-wrapper w90 mb10 border-r-3 flex j-center a-center"
@@ -70,14 +70,16 @@ export default{
     },
     storeCommentInDb(){
       const url = '/media/comment/store/'
-      axios.post(url, this.comment_data)
+      const data =  { 'comment' : this.comment_data}
+      console.log(data);
+      axios.post(url, data)
       .then(res => {
         console.log('success add comment!');
-        const storeDatas = response.data.storeDatas;
+        const storeDatas = res.data;
         Object.keys(storeDatas).forEach((key)=>{
-          this.comment[key] = storeDatas[key]; 
-          this.addCommentDataToStore();
+          this.comment[key] = storeDatas[key];
         })
+        this.addCommentToStore();
       })
       .catch(error=>{
         console.log('failed add comment!');

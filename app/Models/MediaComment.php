@@ -13,7 +13,7 @@ class MediaComment extends Model
       "media_id",
       "user_id",
       "user_name",
-      "user_icon_url",
+      "profile_img_url",
       "comment",
     ];
 

@@ -80,6 +80,9 @@ Route::middleware('auth')->group(function(){
     // メディア設定
         Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
+    // メディアコメント
+        Route::post('/media/comment/store/', 'App\Lib\MediaCommentUtil@store');
+
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');
         Route::get('/ajax/getPublicImgs', 'App\Http\Controllers\PublicImgController@index');

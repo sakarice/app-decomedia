@@ -16,7 +16,7 @@ class MediaCommentUtil
     "media_id" => "media_id",
     "user_id" => "user_id",
     "user_name" => "user_name",
-    "user_icon_url" => "user_icon_url",
+    "profile_img_url" => "profile_img_url",
     "comment" => "comment",
   );
   
@@ -29,8 +29,17 @@ class MediaCommentUtil
     ];
   }
 
-  public static function store($req_datas){
-
+  public static function store(Request $request){
+    if(Auth::user()->id == $request->comment['user_id']){
+      $store_items = array();
+      $req_data = $request->comment;
+      $comment = new MediaComment();  
+      foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column => $property){
+        $store_items[$column] = $req_data[$property];
+      }
+      $stored_datas = $comment->create($store_items);
+      return $stored_datas;
+    }
   }
 
 
