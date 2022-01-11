@@ -1,6 +1,6 @@
 <template>
   <transition name="flowup">
-    <div id="overlay"></div>
+    <div id="overlay" v-show="isShow"></div>
   </transition>
 </template>
 
@@ -10,9 +10,17 @@
     props : [],
     data : () => {
       return {
+        isShow : false,
       }
     },
-    methods : {},
+    methods : {
+      show(){ this.isShow = true; },
+      hide(){ this.isShow = false; },
+    },
+    created(){
+      document.body.addEventListener('showOverLay', this.show, false);
+      document.body.addEventListener('hideOverLay', this.hide, false);
+    }
 
   }
 

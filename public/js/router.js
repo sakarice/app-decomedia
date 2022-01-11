@@ -157,9 +157,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
-    return {};
+    return {
+      isShow: false
+    };
   },
-  methods: {}
+  methods: {
+    show: function show() {
+      this.isShow = true;
+    },
+    hide: function hide() {
+      this.isShow = false;
+    }
+  },
+  created: function created() {
+    document.body.addEventListener('showOverLay', this.show, false);
+    document.body.addEventListener('hideOverLay', this.hide, false);
+  }
 });
 
 /***/ }),
@@ -872,7 +885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -938,12 +952,13 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
     createMedia: function createMedia() {
       var _this = this;
 
@@ -957,18 +972,27 @@ function _defineProperty(obj, key, value) {
         'contents_field': this.getMediaContentsField,
         'setting': this.getMediaSetting
       };
-      this.setIsCrudDoing(true);
+      this.showWaitingModal();
       axios.post(url, media_datas).then(function (response) {
         alert(response.data.message);
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       })["catch"](function (error) {
         alert('メディア保存に失敗しました');
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       });
+    },
+    showWaitingModal: function showWaitingModal() {
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.showOverLay)();
+      this.setIsCrudDoing(true);
+    },
+    hideWaitingModal: function hideWaitingModal() {
+      this.setIsCrudDoing(false);
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.hideOverLay)();
     }
-  })
+  }),
+  created: function created() {}
 });
 
 /***/ }),
@@ -983,7 +1007,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -1049,12 +1074,13 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
     updateMedia: function updateMedia() {
       var _this = this;
 
@@ -1068,18 +1094,27 @@ function _defineProperty(obj, key, value) {
         'contents_field': this.getMediaContentsField,
         'setting': this.getMediaSetting
       };
-      this.setIsCrudDoing(true);
+      this.showWaitingModal();
       axios.post(url, media_datas).then(function (response) {
         alert(response.data.message);
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       })["catch"](function (error) {
         alert('メディア更新に失敗しました');
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       });
+    },
+    showWaitingModal: function showWaitingModal() {
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.showOverLay)();
+      this.setIsCrudDoing(true);
+    },
+    hideWaitingModal: function hideWaitingModal() {
+      this.setIsCrudDoing(false);
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.hideOverLay)();
     }
-  })
+  }),
+  created: function created() {}
 });
 
 /***/ }),
@@ -9644,6 +9679,34 @@ function moveEnd(e) {
 
 /***/ }),
 
+/***/ "./resources/js/functions/overlayDispHelper.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/functions/overlayDispHelper.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showOverLay": () => (/* binding */ showOverLay),
+/* harmony export */   "hideOverLay": () => (/* binding */ hideOverLay)
+/* harmony export */ });
+// 
+var showOverLayEvent = new CustomEvent('showOverLay');
+var hideOverLayEvent = new CustomEvent('hideOverLay');
+
+function showOverLay() {
+  document.body.dispatchEvent(showOverLayEvent);
+}
+
+function hideOverLay() {
+  document.body.dispatchEvent(hideOverLayEvent);
+} // exportは、移動のトリガーとなるmoveStartのみ
+
+
+
+
+/***/ }),
+
 /***/ "./resources/js/functions/resizeDiffCulcHelper.js":
 /*!********************************************************!*\
   !*** ./resources/js/functions/resizeDiffCulcHelper.js ***!
@@ -10306,7 +10369,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10332,7 +10395,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18808,7 +18871,17 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "flowup" } }, [
-    _c("div", { attrs: { id: "overlay" } }),
+    _c("div", {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShow,
+          expression: "isShow",
+        },
+      ],
+      attrs: { id: "overlay" },
+    }),
   ])
 }
 var staticRenderFns = []
@@ -19088,6 +19161,8 @@ var render = function () {
       _vm._v(" "),
       _c("disp-audios"),
       _vm._v(" "),
+      _c("router-view", { attrs: { name: "overlay" } }),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -19101,8 +19176,6 @@ var render = function () {
           ],
         },
         [
-          _c("router-view", { attrs: { name: "overlay" } }),
-          _vm._v(" "),
           _c("router-view", {
             attrs: { name: "loading", message: _vm.waitingMsg },
           }),

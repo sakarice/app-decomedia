@@ -79,8 +79,8 @@
     <mypage-menu-bar-component>
     </mypage-menu-bar-component>
 
+    <overlay></overlay>
     <div v-show="isDeleting">
-      <overlay></overlay>
       <loading
       message="メディアを削除中です...">
       </loading>
@@ -102,6 +102,8 @@ import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue'
 import UserPageProfile from './UserPageProfileComponent.vue';
 import Overlay from '../common/OverlayComponent.vue';
 import Loading from '../common/LoadingComponent.vue';
+import { showOverLay, hideOverLay } from '../../functions/overlayDispHelper';
+
 
 export default {
   components : {
@@ -189,6 +191,7 @@ export default {
     },
     setIsDelete(isDelete){
       this.isDeleting = isDelete;
+
     },
     changeIsCheckedCreatedMedia(isChecked, index){
       if(isChecked == true){
@@ -249,6 +252,13 @@ export default {
     this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
   watch : {
+    isDeleting:function(val){
+      if(val==true){
+        showOverLay();
+      } else {
+        hideOverLay();
+      }
+    }
   },
   computed : {
     selectModeButtonMessage : function(){

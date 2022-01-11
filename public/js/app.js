@@ -2976,9 +2976,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
-    return {};
+    return {
+      isShow: false
+    };
   },
-  methods: {}
+  methods: {
+    show: function show() {
+      this.isShow = true;
+    },
+    hide: function hide() {
+      this.isShow = false;
+    }
+  },
+  created: function created() {
+    document.body.addEventListener('showOverLay', this.show, false);
+    document.body.addEventListener('hideOverLay', this.hide, false);
+  }
 });
 
 /***/ }),
@@ -4399,7 +4412,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -4465,12 +4479,13 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
     createMedia: function createMedia() {
       var _this = this;
 
@@ -4484,18 +4499,27 @@ function _defineProperty(obj, key, value) {
         'contents_field': this.getMediaContentsField,
         'setting': this.getMediaSetting
       };
-      this.setIsCrudDoing(true);
+      this.showWaitingModal();
       axios.post(url, media_datas).then(function (response) {
         alert(response.data.message);
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       })["catch"](function (error) {
         alert('メディア保存に失敗しました');
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       });
+    },
+    showWaitingModal: function showWaitingModal() {
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.showOverLay)();
+      this.setIsCrudDoing(true);
+    },
+    hideWaitingModal: function hideWaitingModal() {
+      this.setIsCrudDoing(false);
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.hideOverLay)();
     }
-  })
+  }),
+  created: function created() {}
 });
 
 /***/ }),
@@ -4511,7 +4535,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -4577,12 +4602,13 @@ function _defineProperty(obj, key, value) {
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaTexts'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigures'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaContentsField', ['getMediaContentsField'])),
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('media', ['setIsCrudDoing'])), {}, {
     updateMedia: function updateMedia() {
       var _this = this;
 
@@ -4596,18 +4622,27 @@ function _defineProperty(obj, key, value) {
         'contents_field': this.getMediaContentsField,
         'setting': this.getMediaSetting
       };
-      this.setIsCrudDoing(true);
+      this.showWaitingModal();
       axios.post(url, media_datas).then(function (response) {
         alert(response.data.message);
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       })["catch"](function (error) {
         alert('メディア更新に失敗しました');
 
-        _this.setIsCrudDoing(false);
+        _this.hideWaitingModal();
       });
+    },
+    showWaitingModal: function showWaitingModal() {
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.showOverLay)();
+      this.setIsCrudDoing(true);
+    },
+    hideWaitingModal: function hideWaitingModal() {
+      this.setIsCrudDoing(false);
+      (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_0__.hideOverLay)();
     }
-  })
+  }),
+  created: function created() {}
 });
 
 /***/ }),
@@ -13387,6 +13422,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserPageProfileComponent.vue */ "./resources/js/components/mypage/UserPageProfileComponent.vue");
 /* harmony import */ var _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
 /* harmony import */ var _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 //
 //
 //
@@ -13482,6 +13518,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -13631,7 +13668,15 @@ __webpack_require__.r(__webpack_exports__);
     this.createdMediaPreviewInfos = this.createdMediaPreviewInfosFromParent;
     this.likedMediaPreviewInfos = this.likedMediaPreviewInfosFromParent;
   },
-  watch: {},
+  watch: {
+    isDeleting: function isDeleting(val) {
+      if (val == true) {
+        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.showOverLay)();
+      } else {
+        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.hideOverLay)();
+      }
+    }
+  },
   computed: {
     selectModeButtonMessage: function selectModeButtonMessage() {
       if (this.isSelectMode) {
@@ -14073,6 +14118,35 @@ function moveEnd(e) {
     }
   });
   move_target.dispatchEvent(event);
+} // exportは、移動のトリガーとなるmoveStartのみ
+
+
+
+
+/***/ }),
+
+/***/ "./resources/js/functions/overlayDispHelper.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/functions/overlayDispHelper.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showOverLay": () => (/* binding */ showOverLay),
+/* harmony export */   "hideOverLay": () => (/* binding */ hideOverLay)
+/* harmony export */ });
+// 
+var showOverLayEvent = new CustomEvent('showOverLay');
+var hideOverLayEvent = new CustomEvent('hideOverLay');
+
+function showOverLay() {
+  document.body.dispatchEvent(showOverLayEvent);
+}
+
+function hideOverLay() {
+  document.body.dispatchEvent(hideOverLayEvent);
 } // exportは、移動のトリガーとなるmoveStartのみ
 
 
@@ -20663,7 +20737,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20690,7 +20764,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.update-icon-wrapper[data-v-80a635e0]:hover {\r\n  color: darkorange;\n}\n.update-trigger-subtitle[data-v-80a635e0] {\r\n  margin-left: 7px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22079,7 +22153,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  display: flex;\r\n  align-items: flex-end;\r\n  margin-bottom: 30px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin-right: 30px;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n#change-select-mode[data-v-15798219]:hover {\r\n  color: black;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\n}\n.select-mode-description[data-v-15798219] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-section[data-v-15798219] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-15798219] {\n}\n.mypage-action-menu[data-v-15798219] {\r\n    margin-bottom: 15px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin-right: 15px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-15798219] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  display: flex;\r\n  align-items: flex-end;\r\n  margin-bottom: 30px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin-right: 30px;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n#change-select-mode[data-v-15798219]:hover {\r\n  color: black;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\n}\n.select-mode-description[data-v-15798219] {\r\n  font-size: 10px;\r\n  margin-top: 7px;\n}\n.mypage-section[data-v-15798219] {\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\";\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.select-mode-item[data-v-15798219] {\n}\n.mypage-action-menu[data-v-15798219] {\r\n    margin-bottom: 15px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin-right: 15px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-left: 20px;\n}\n.mypage-section[data-v-15798219] {\r\n      margin-left: 0;\r\n      padding: 5px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70061,7 +70135,17 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("transition", { attrs: { name: "flowup" } }, [
-    _c("div", { attrs: { id: "overlay" } }),
+    _c("div", {
+      directives: [
+        {
+          name: "show",
+          rawName: "v-show",
+          value: _vm.isShow,
+          expression: "isShow",
+        },
+      ],
+      attrs: { id: "overlay" },
+    }),
   ])
 }
 var staticRenderFns = []
@@ -70585,6 +70669,8 @@ var render = function () {
       _vm._v(" "),
       _c("disp-audios"),
       _vm._v(" "),
+      _c("router-view", { attrs: { name: "overlay" } }),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -70598,8 +70684,6 @@ var render = function () {
           ],
         },
         [
-          _c("router-view", { attrs: { name: "overlay" } }),
-          _vm._v(" "),
           _c("router-view", {
             attrs: { name: "loading", message: _vm.waitingMsg },
           }),
@@ -77108,6 +77192,8 @@ var render = function () {
       _vm._v(" "),
       _c("mypage-menu-bar-component"),
       _vm._v(" "),
+      _c("overlay"),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -77120,11 +77206,7 @@ var render = function () {
             },
           ],
         },
-        [
-          _c("overlay"),
-          _vm._v(" "),
-          _c("loading", { attrs: { message: "メディアを削除中です..." } }),
-        ],
+        [_c("loading", { attrs: { message: "メディアを削除中です..." } })],
         1
       ),
     ],

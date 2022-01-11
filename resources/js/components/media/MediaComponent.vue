@@ -159,8 +159,8 @@
     <disp-audios></disp-audios>
 
 
+    <router-view name="overlay"></router-view>
     <div v-show="getIsCrudDoing">
-      <router-view name="overlay"></router-view>
       <router-view name="loading"
       :message="waitingMsg">
       </router-view>
