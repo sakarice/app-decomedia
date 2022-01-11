@@ -9076,6 +9076,9 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
 
 
 
@@ -9086,13 +9089,13 @@ function _defineProperty(obj, key, value) {
       hideDetail: true,
       comment: "" // id : 0,
       // media_id : 0,
-      // user_id : 0,
       // user_name : "",
       // user_icon_url : "",
       // comment : "",
       // good : 0,
       // created_at : 0,
       // updated_at : 0,
+      // is_my_comment : false,
 
     };
   },
@@ -9101,7 +9104,7 @@ function _defineProperty(obj, key, value) {
       return this.hideDetail ? "全て表示" : "一部を表示";
     }
   }),
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['setTargetObjectIndex'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['deleteMediaCommentsObjectItem'])), {}, {
     getOneComment: function getOneComment() {
       this.setTargetObjectIndex(this.index);
       return this.getMediaComment;
@@ -9109,7 +9112,23 @@ function _defineProperty(obj, key, value) {
     init: function init() {
       this.comment = this.getOneComment();
     },
-    deleteComment: function deleteComment(comment_id) {}
+    deleteComment: function deleteComment() {
+      var _this = this;
+
+      var media_id = this.getMediaSetting['id']; // const comment_id = this.comment['id'];
+
+      var data = {
+        "comment": this.comment
+      };
+      var url = '/media/' + media_id + '/comment/delete';
+      axios.post(url, data).then(function (res) {
+        console.log('delete success');
+
+        _this.deleteMediaCommentsObjectItem(_this.index);
+      })["catch"](function (error) {
+        console.log(error.message);
+      });
+    }
   }),
   created: function created() {
     this.init();
@@ -11490,7 +11509,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.comment[data-v-e2688432] {\r\n  overflow-wrap: break-word;\n}\n.grey[data-v-e2688432] { color: grey}\n.comment[data-v-e2688432] { overflow: hidden\n}\n.hide-detail[data-v-e2688432] { max-height: 60px;}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.comment[data-v-e2688432] {\r\n  overflow-wrap: break-word;\n}\n.grey[data-v-e2688432] { color: darkgrey}\n.comment[data-v-e2688432] { overflow: hidden\n}\n.hide-detail[data-v-e2688432] { max-height: 60px;}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24519,7 +24538,7 @@ var render = function () {
       ]),
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "flex column w80 ml10 " }, [
+    _c("div", { staticClass: "comment-area flex column w80 ml10 " }, [
       _c(
         "p",
         {
@@ -24529,11 +24548,11 @@ var render = function () {
         [_vm._v("\n      " + _vm._s(_vm.comment["comment"]) + "\n    ")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "options-wrapper font-13 grey" }, [
+      _c("div", { staticClass: "options-wrapper flex a-center font-13 grey" }, [
         _c(
           "span",
           {
-            staticClass: "hover-p",
+            staticClass: "hover-p mr20",
             on: {
               click: function ($event) {
                 _vm.hideDetail = !_vm.hideDetail
@@ -24542,6 +24561,14 @@ var render = function () {
           },
           [_vm._v(_vm._s(_vm.detail_toggle_text))]
         ),
+        _vm._v(" "),
+        _vm.comment["is_my_comment"]
+          ? _c(
+              "span",
+              { staticClass: "hover-p", on: { click: _vm.deleteComment } },
+              [_vm._v("削除")]
+            )
+          : _vm._e(),
       ]),
     ]),
   ])

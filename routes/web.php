@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function(){
     // メディアコメント
         Route::get('/media/{media_id}/comment', 'App\Lib\MediaCommentUtil@show');
         Route::post('/media/{media_id}/comment/store', 'App\Lib\MediaCommentUtil@store');
+        Route::post('/media/{media_id}/comment/delete', 'App\Lib\MediaCommentUtil@destroy');
+        
 
     // Mediaへ、いいね/いいね解除する
         Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
