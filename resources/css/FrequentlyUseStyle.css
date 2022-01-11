@@ -66,6 +66,10 @@
   .p20 {padding: 20px}
   .p25 {padding: 25px}
   .p30 {padding: 30px}
+  .p35 {padding: 35px}
+  .p40 {padding: 40px}
+  .p45 {padding: 45px}
+  .p50 {padding: 50px}
 
   /* 上(top) */
   .pt5 {padding-top: 5px}
@@ -74,6 +78,10 @@
   .pt20 {padding-top: 20px}
   .pt25 {padding-top: 25px}
   .pt30 {padding-top: 30px}
+  .pt35 {padding-top: 35px}
+  .pt40 {padding-top: 40px}
+  .pt45 {padding-top: 45px}
+  .pt50 {padding-top: 50px}
 
   /* 下(bottom) */
   .pb5 {padding-bottom: 5px}
@@ -82,6 +90,10 @@
   .pb20 {padding-bottom: 20px}
   .pb25 {padding-bottom: 25px}
   .pb30 {padding-bottom: 30px}
+  .pb35 {padding-bottom: 35px}
+  .pb40 {padding-bottom: 40px}
+  .pb45 {padding-bottom: 45px}
+  .pb50 {padding-bottom: 50px}
 
   /* 右(right) */
   .pr5 {padding-right: 5px}
@@ -90,6 +102,10 @@
   .pr20 {padding-right: 20px}
   .pr25 {padding-right: 25px}
   .pr30 {padding-right: 30px}
+  .pr35 {padding-right: 35px}
+  .pr40 {padding-right: 40px}
+  .pr45 {padding-right: 45px}
+  .pr50 {padding-right: 50px}
 
   /* 左(left) */
   .pl5 {padding-left: 5px}
@@ -98,6 +114,10 @@
   .pl20 {padding-left: 20px}
   .pl25 {padding-left: 25px}
   .pl30 {padding-left: 30px}
+  .pl35 {padding-left: 35px}
+  .pl40 {padding-left: 40px}
+  .pl45 {padding-left: 45px}
+  .pl50 {padding-left: 50px}
 
 
 
@@ -237,19 +257,32 @@
 /***************************
   角丸(border-radius)
 ***************************/
-  /* px */
-  .border-r-3{ border-radius: 3px;}
-  .border-r-5{ border-radius: 5px;}
-  .border-r-7{ border-radius: 7px;}
-  .border-r-10{ border-radius: 10px;}
-  .border-r-15{ border-radius: 15px;}
+/* px */
+.border-r-3{ border-radius: 3px;}
+.border-r-5{ border-radius: 5px;}
+.border-r-7{ border-radius: 7px;}
+.border-r-10{ border-radius: 10px;}
+.border-r-15{ border-radius: 15px;}
 
 
-  /* % */
-  .border-r-50per{ border-radius: 50%;}
+/* % */
+.border-r-50per{ border-radius: 50%;}
 
 
 
+/***************************
+  透明度(opacity)
+***************************/
+.opa01{ opacity: 0.1;}
+.opa02{ opacity: 0.2;}
+.opa03{ opacity: 0.3;}
+.opa04{ opacity: 0.4;}
+.opa05{ opacity: 0.5;}
+.opa06{ opacity: 0.6;}
+.opa07{ opacity: 0.7;}
+.opa08{ opacity: 0.8;}
+.opa09{ opacity: 0.9;}
+.opa10{ opacity: 1;}
 
 
 /***************************
