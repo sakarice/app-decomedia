@@ -82,10 +82,17 @@ export default{
       })
       this.updateIsInitializedComments(true);
     },
-
+    initAll(){
+      this.$refs.comments.forEach(comment=>{ comment.init(); })
+    }
   },
   created(){
     document.body.addEventListener('initMediaSettingFinish',this.initComment,false);
+    document.body.addEventListener('commentDeleted', (e)=>{
+      if(this.$refs.comments){
+        this.initAll();
+      }
+    })
   },
   mounted() {},
 

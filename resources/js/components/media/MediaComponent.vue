@@ -159,7 +159,9 @@
     <disp-audios></disp-audios>
 
 
-    <router-view name="overlay"></router-view>
+    <!-- <router-view name="overlay"></router-view> -->
+    <overlay></overlay>
+
     <div v-show="getIsCrudDoing">
       <router-view name="loading"
       :message="waitingMsg">
@@ -199,6 +201,7 @@
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
   import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
+  import overlay from '../../components/common/OverlayComponent.vue';
 
 
 export default {
@@ -216,6 +219,7 @@ export default {
     ObjectDelete,
     ObjectSettingOpen,
     ObjectCopy,
+    overlay,
   },
   props: [],
   data : () => {

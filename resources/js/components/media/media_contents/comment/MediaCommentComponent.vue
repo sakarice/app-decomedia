@@ -61,7 +61,12 @@ export default{
       this.setTargetObjectIndex(this.index);
       return this.getMediaComment;
     },
-    init(){ this.comment = this.getOneComment(); },
+    setMyElem(){this.myElem = document.getElementById(this.idWithIndex);},
+    init(){
+      this.comment = this.getOneComment();
+      this.hideDetail = true;
+      this.setMyElem();
+    },
     deleteConfirm(){
       this.myElem.addEventListener('deleteComment', this.deleteComment, false);
       const event = new CustomEvent('showCommentDeleteConfirm',{detail:{elem:this.myElem}});
@@ -76,6 +81,8 @@ export default{
       .then(res=>{
         console.log('delete success')
         this.deleteMediaCommentsObjectItem(this.index);
+        const event = new CustomEvent('commentDeleted');
+        document.body.dispatchEvent(event);
       })
       .catch(error=>{
         console.log(error.message)
@@ -86,7 +93,7 @@ export default{
     this.init();
   },
   mounted(){
-    this.myElem = document.getElementById(this.idWithIndex);
+    this.setMyElem();
   }
 
 }
