@@ -47,11 +47,7 @@ export default{
     ...mapGetters('mediaSetting',['getMediaSetting']),
     ...mapGetters('mediaComments',['getMediaComments']),
   },
-  watch : {
-    getIsInitializedSetting:function(val){
-      if(val==true){ this.initComment();}
-    }
-  },
+  watch : {},
   methods : {
     ...mapMutations('mediaComments', ['addMediaCommentsObjectItem']),
     ...mapMutations('mediaComments',['updateIsInitializedComments']),
@@ -61,6 +57,7 @@ export default{
       .then(comments=>{
         this.setCommentDataToStore(comments);
       })
+      document.removeEventListener('initMediaSettingFinish',this.initComment,false);
     },
     getCommentDataFromDb(){
       return new Promise((resolve, reject)=>{
@@ -71,7 +68,9 @@ export default{
           const comments = res.data.comments;
           return resolve(comments);
         })
-        .catch(error=>{});
+        .catch(error=>{
+          console.log('getCommentDataFromDb failed!')
+        });
       })
     },
     setCommentDataToStore(comments){
@@ -82,8 +81,10 @@ export default{
     },
 
   },
-  created : function() {},
-  mounted : function() {},
+  created(){
+    document.body.addEventListener('initMediaSettingFinish',this.initComment,false);
+  },
+  mounted() {},
 
 }
 

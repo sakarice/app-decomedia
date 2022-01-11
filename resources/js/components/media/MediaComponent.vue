@@ -328,6 +328,8 @@ export default {
           this.updateMediaSettingObjectItem({key:key, value:datas[key]});
         };
         this.updateIsInitializedSetting(true);
+        const event = new CustomEvent('initMediaSettingFinish');
+        document.body.dispatchEvent(event);
       });
     },
     showModal(target){
