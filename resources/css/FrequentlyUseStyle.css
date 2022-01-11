@@ -12,6 +12,7 @@
   .m30 { margin: 30px}
 
   /* 上(top) */
+  .mt3 { margin-top: 3px}
   .mt5 { margin-top: 5px}
   .mt10 { margin-top: 10px}
   .mt15 { margin-top: 15px}
@@ -21,6 +22,7 @@
   .mt35 { margin-top: 35px}
 
   /* 下(bottom) */
+  .mb3 { margin-bottom: 3px}
   .mb5 { margin-bottom: 5px}
   .mb10 { margin-bottom: 10px}
   .mb15 { margin-bottom: 15px}
@@ -30,6 +32,7 @@
   .mb35 { margin-bottom: 35px}
 
   /* 右(right) */
+  .mb3 { margin-bottom: 3px}
   .mr5 { margin-right: 5px}
   .mr10 { margin-right: 10px}
   .mr15 { margin-right: 15px}
@@ -39,6 +42,7 @@
   .mr35 { margin-right: 35px}
 
   /* 左(left) */
+  .ml3 { margin-left: 3px}
   .ml5 { margin-left: 5px}
   .ml10 { margin-left: 10px}
   .ml15 { margin-left: 15px}

@@ -2,12 +2,18 @@
   <div class="media-comment-wrapper flex mb10">
     <div class="user-icon-area flex column a-center">
       <div class="user-icon-wrapper p5">
-        <!-- <i class="fas fa-user fa-lg"></i> -->
         <img class="w30px h30px border-r-50per" :src="comment['profile_img_url']" alt="unknown user">
       </div>
-      <span class="user-name font-12">{{comment['user_name']}}</span>
+      <span class="user-name font-12 grey">{{comment['user_name']}}</span>
     </div>
-    <p class="comment w80 mt10 mb5 ml10">{{comment['comment']}}</p>
+    <div class="flex column w80 ml10 ">
+      <p class="comment w100 mt5 mb3" :class="{'hide-detail':hideDetail}">
+        {{comment['comment']}}
+      </p>
+      <div class="options-wrapper font-13 grey">
+        <span class="hover-p" @click="hideDetail=!hideDetail">{{detail_toggle_text}}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,7 +26,8 @@ export default{
   ],
   data : () => {
     return {
-      comment : ""
+      hideDetail : true,
+      comment : "",
       // id : 0,
       // media_id : 0,
       // user_id : 0,
@@ -36,6 +43,9 @@ export default{
     ...mapGetters('mediaSetting',['getMediaSetting']),
     ...mapGetters('mediaComments',['getMediaComment']),
     ...mapGetters('mediaComments',['getMediaComments']),
+    detail_toggle_text:function(){
+      return this.hideDetail ? "全て表示" : "一部を表示";
+    }
   },
   methods : {
     ...mapMutations('mediaComments', ['addMediaCommentsObjectItem']),
@@ -65,6 +75,9 @@ export default{
 .comment {
   overflow-wrap: break-word;
 }
-.user-name { color: grey}
+.grey { color: grey}
+
+.comment { overflow: hidden }
+.hide-detail { max-height: 60px;}
 
 </style>
