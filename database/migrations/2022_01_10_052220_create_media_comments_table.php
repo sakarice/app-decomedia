@@ -19,7 +19,7 @@ class CreateMediaCommentsTable extends Migration
             $table->integer('user_id');
             $table->string('user_name',191);
             $table->string('profile_img_url',191)->nullable();
-            $table->string('comment',191);
+            $table->text('comment');
             $table->timestamps();
         });
     }
