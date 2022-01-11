@@ -1,9 +1,9 @@
 <template>
   <!-- Media図形-->
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
-  :class="{is_active : isActive}" :style="textWrapperStyle"
+  :class="{is_active : isActive, 'hover-blue' : getMode!=3}" :style="textWrapperStyle"
   @click.stop @mousedown.stop="moveTrigger($event)" @touchstart.stop="moveTrigger($event)">
-    <p contenteditable spellcheck="false" class="text-area"
+    <p spellcheck="false" class="text-area"
     :id="text_with_index" :style="textStyle" @input="onChangeTextContent($event)">
     {{text_tmp}}
     </p>    
@@ -32,6 +32,7 @@ import { mapGetters, mapMutations } from 'vuex';
       }
     },
     computed : {
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaTexts', ['getMediaText']),
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
       text_with_index:function(){ return 'text'+this.index; },
@@ -67,6 +68,13 @@ import { mapGetters, mapMutations } from 'vuex';
         this.updateMediaTextsObjectItem({index:this.index,key:"width", value:new_val})
       },
       original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"height", value:new_val})},
+      getMode(mode){
+        if(mode != 3){ // = createかeditモード
+          this.text.contentEditable = true;
+        } else { // =showモード
+          this.text.contentEditable = false;
+        }
+      }
     },
     methods : {
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
@@ -125,8 +133,10 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       // 位置操作用
       moveTrigger(e){
-        const move_target_dom = this.text_wrapper;
-        moveStart(e, move_target_dom);
+        if(this.getMode != 3){
+          const move_target_dom = this.text_wrapper;
+          moveStart(e, move_target_dom);
+        }
       },
       moving(e){
         this.updateMediaTextsObjectItem({index:this.index,key:"left", value:e.detail.left})
@@ -269,7 +279,6 @@ textarea {
 
 .text-area:hover {
   cursor: pointer;
-  outline: 1px solid blue;
 }
 .text-area:focus {
   outline: 1px solid blue;

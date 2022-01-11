@@ -46,6 +46,7 @@
     },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaMovie', ['getIsInitializedMovie']),
       ...mapGetters('mediaMovie', ['getMediaMovie']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -64,9 +65,11 @@
       },
       // 位置操作用
       moveStart(e){
-        const move_target_dom = document.getElementById(this.movieWrapperWithIndex);
-        moveStart(e, move_target_dom);
-        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        if(this.getMode != 3){
+          const move_target_dom = document.getElementById(this.movieWrapperWithIndex);
+          moveStart(e, move_target_dom);
+          move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        }
       },
       moveEnd(e){
         e.target.removeEventListener('moveFinish', this.moveEnd, false);

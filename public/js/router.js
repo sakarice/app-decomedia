@@ -678,6 +678,9 @@ function _defineProperty(obj, key, value) {
     field.addEventListener('touchstart', this.fieldClicked, false);
   },
   watch: {
+    $route: function $route() {
+      this.checkMode();
+    },
     initStatus: function initStatus(newVal) {
       var _this6 = this;
 
@@ -5545,7 +5548,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     canvas_with_index: function canvas_with_index() {
       return 'canvas' + this.index;
     },
@@ -5629,11 +5632,13 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
+      if (this.getMode != 3) {
+        var move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
 
-      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+        (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+      }
     },
     moveEnd: function moveEnd(e) {
       e.target.removeEventListener('moveFinish', this.moveEnd, false);
@@ -6420,7 +6425,7 @@ function _defineProperty(obj, key, value) {
       mediaImg: ""
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
     start: function (_start) {
       function start() {
         return _start.apply(this, arguments);
@@ -6434,7 +6439,7 @@ function _defineProperty(obj, key, value) {
     }(function () {
       return start;
     })
-  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
+  }, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImg'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaImgs', ['getMediaImgs'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     imgWrapperWithIndex: function imgWrapperWithIndex() {
       return 'media-img-wrapper' + this.index;
     },
@@ -6506,11 +6511,13 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var move_target_dom = document.getElementById(this.imgWrapperWithIndex);
+      if (this.getMode != 3) {
+        var move_target_dom = document.getElementById(this.imgWrapperWithIndex);
 
-      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+        (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+      }
     },
     moveEnd: function moveEnd(e) {
       e.target.removeEventListener('moveFinish', this.moveEnd, false);
@@ -6817,7 +6824,7 @@ function _defineProperty(obj, key, value) {
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getIsInitializedMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaMovie', ['getMediaMovie'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     movieWrapperWithIndex: function movieWrapperWithIndex() {
       return 'media-movie-wrapper' + this.index;
     }
@@ -6831,11 +6838,13 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveStart: function moveStart(e) {
-      var move_target_dom = document.getElementById(this.movieWrapperWithIndex);
+      if (this.getMode != 3) {
+        var move_target_dom = document.getElementById(this.movieWrapperWithIndex);
 
-      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+        (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
 
-      move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+      }
     },
     moveEnd: function moveEnd(e) {
       e.target.removeEventListener('moveFinish', this.moveEnd, false);
@@ -8193,7 +8202,7 @@ function _defineProperty(obj, key, value) {
       text: ""
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaTexts', ['getMediaText'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('selectedObjects', ['getSelectedObjects'])), {}, {
     text_with_index: function text_with_index() {
       return 'text' + this.index;
     },
@@ -8246,6 +8255,15 @@ function _defineProperty(obj, key, value) {
         key: "height",
         value: new_val
       });
+    },
+    getMode: function getMode(mode) {
+      if (mode != 3) {
+        // = createかeditモード
+        this.text.contentEditable = true;
+      } else {
+        // =showモード
+        this.text.contentEditable = false;
+      }
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['updateMediaTextsObjectItem'])), {}, {
@@ -8309,8 +8327,10 @@ function _defineProperty(obj, key, value) {
     },
     // 位置操作用
     moveTrigger: function moveTrigger(e) {
-      var move_target_dom = this.text_wrapper;
-      (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+      if (this.getMode != 3) {
+        var move_target_dom = this.text_wrapper;
+        (0,_functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__.moveStart)(e, move_target_dom);
+      }
     },
     moving: function moving(e) {
       this.updateMediaTextsObjectItem({
@@ -10402,7 +10422,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11355,7 +11375,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.img-wrapper[data-v-260fa2b3] {\r\n  position : absolute;\r\n  display : flex;\r\n  justify-content : center;\n}\n#media-img-frame[data-v-260fa2b3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.img-wrapper[data-v-260fa2b3] {\r\n  position : absolute;\r\n  display : flex;\r\n  justify-content : center;\n}\n#media-img-frame[data-v-260fa2b3] {\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\r\n\r\n/* .hover-blue:hover {\r\n  outline: 1px solid blue;\r\n} */\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11401,7 +11421,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* #youtube-url-form{\n  margin: 20px;\n} */\n#media-movie-wrapper[data-v-6c6d9b5a] {\n  position : absolute;\n}\n.movie-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a] {\n  position: absolute;\n  display: flex;\n  justify-content: center;\n  top : -30px;\n  left : -30px;\n  opacity : 0.2;\n  border-radius: 6px;\n  box-shadow: 1px 1px 10px darkgrey;\n  opacity : 0;\n}\n.movie-resize-trigger-area[data-v-6c6d9b5a]:hover{\n  cursor: all-scroll;\n}\n.movie-wrapper:hover .movie-resize-trigger-area[data-v-6c6d9b5a]{\n  opacity: 1;\n}\n.pinch-icon[data-v-6c6d9b5a] {\n  height: 30px;\n  margin-top: -22px;\n  opacity: 0.5;\n  transform-origin:center;\n  transform: rotate(-60deg);\n}\n#yt-player-wrapper[data-v-6c6d9b5a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n}\n.youtube-url-description[data-v-6c6d9b5a] {\n  margin-bottom: 5px;\n  font-size: 12px;\n}\n.media-yt-loop-icon[data-v-6c6d9b5a] {\n  margin: 10px;\n}\n.hidden[data-v-6c6d9b5a] {\n  opacity: 0;\n}\n\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11551,7 +11571,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.text-wrapper[data-v-22e33c6f] {\r\n  position: absolute;\r\n  transform-origin: center center;\n}\ntextarea[data-v-22e33c6f] {\r\n  overflow: hidden;\n}\n.text-area[data-v-22e33c6f] {\r\n  display: inline-block;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  border: none;\r\n  margin: 0;\r\n  transform-origin: 0 0;\r\n  resize: none;\r\n  padding: 0px;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\n}\n.text-area[data-v-22e33c6f]:hover {\r\n  cursor: pointer;\r\n  outline: 1px solid blue;\n}\n.text-area[data-v-22e33c6f]:focus {\r\n  outline: 1px solid blue;\n}\n.is_active[data-v-22e33c6f] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-22e33c6f] {\r\n  opacity: 0;\n}\n[data-v-22e33c6f]::-webkit-resizer {\r\n  display: none;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.text-wrapper[data-v-22e33c6f] {\r\n  position: absolute;\r\n  transform-origin: center center;\n}\ntextarea[data-v-22e33c6f] {\r\n  overflow: hidden;\n}\n.text-area[data-v-22e33c6f] {\r\n  display: inline-block;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  border: none;\r\n  margin: 0;\r\n  transform-origin: 0 0;\r\n  resize: none;\r\n  padding: 0px;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\n}\n.text-area[data-v-22e33c6f]:hover {\r\n  cursor: pointer;\n}\n.text-area[data-v-22e33c6f]:focus {\r\n  outline: 1px solid blue;\n}\n.is_active[data-v-22e33c6f] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-22e33c6f] {\r\n  opacity: 0;\n}\n[data-v-22e33c6f]::-webkit-resizer {\r\n  display: none;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12018,7 +12038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n.obj:hover {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.is_active {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n.obj:hover {\r\n  /* outline : 1.5px solid blue; */\r\n}\r\n.hover-blue:hover {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.is_active {\r\n  outline : 1.5px solid blue;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23241,7 +23261,7 @@ var render = function () {
     "div",
     {
       staticClass: "obj canvas_item-wrapper",
-      class: { is_active: _vm.isActive },
+      class: { is_active: _vm.isActive, "hover-blue": _vm.getMode != 3 },
       style: _vm.canvasWrapperStyle(),
       attrs: { id: _vm.canvas_wrapper_with_index },
       on: {
@@ -23560,7 +23580,7 @@ var render = function () {
     "div",
     {
       staticClass: "obj img-wrapper",
-      class: { is_active: _vm.isActive },
+      class: { is_active: _vm.isActive, "hover-blue": _vm.getMode != 3 },
       style: _vm.imgWrapperStyle,
       attrs: { id: _vm.imgWrapperWithIndex },
       on: {
@@ -24338,7 +24358,7 @@ var render = function () {
     "div",
     {
       staticClass: "obj text-wrapper",
-      class: { is_active: _vm.isActive },
+      class: { is_active: _vm.isActive, "hover-blue": _vm.getMode != 3 },
       style: _vm.textWrapperStyle,
       attrs: { id: _vm.text_wrapper_with_index },
       on: {
@@ -24361,11 +24381,7 @@ var render = function () {
         {
           staticClass: "text-area",
           style: _vm.textStyle,
-          attrs: {
-            contenteditable: "",
-            spellcheck: "false",
-            id: _vm.text_with_index,
-          },
+          attrs: { spellcheck: "false", id: _vm.text_with_index },
           on: {
             input: function ($event) {
               return _vm.onChangeTextContent($event)

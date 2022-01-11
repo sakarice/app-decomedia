@@ -1,7 +1,7 @@
 <template>
   <!-- Media画像-->
   <div :id="imgWrapperWithIndex" class="obj img-wrapper"
-  v-bind:style="imgWrapperStyle" :class="{is_active : isActive}"
+  v-bind:style="imgWrapperStyle" :class="{'is_active' : isActive, 'hover-blue' : getMode!=3}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
 
     <div id="media-img-frame"
@@ -33,6 +33,7 @@
     },
     computed : {
       start(){ return start },
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaImgs', ['getMediaImg']),
       ...mapGetters('mediaImgs', ['getMediaImgs']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
@@ -100,9 +101,11 @@
       },
       // 位置操作用
       moveStart(e){
-        const move_target_dom = document.getElementById(this.imgWrapperWithIndex);
-        moveStart(e, move_target_dom);
-        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        if(this.getMode != 3){
+          const move_target_dom = document.getElementById(this.imgWrapperWithIndex);
+          moveStart(e, move_target_dom);
+          move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        }
       },
       moveEnd(e){
         e.target.removeEventListener('moveFinish', this.moveEnd, false);
@@ -164,9 +167,13 @@
 }
 
 #media-img-frame {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .hover-blue:hover {
+  outline: 1px solid blue;
+} */
 
 </style>

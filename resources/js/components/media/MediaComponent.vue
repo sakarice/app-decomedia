@@ -403,6 +403,7 @@ export default {
     field.addEventListener('touchstart',this.fieldClicked, false);
   },
   watch : {
+    $route:function(){this.checkMode();},
     initStatus : function(newVal){
       console.log('initStatus:'+newVal)
       // オーディオ情報の読み込みが完了したらオーディオ再生開始

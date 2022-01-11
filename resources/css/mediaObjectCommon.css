@@ -5,6 +5,9 @@ body {
 }
 
 .obj:hover {
+  /* outline : 1.5px solid blue; */
+}
+.hover-blue:hover {
   outline : 1.5px solid blue;
 }
 
