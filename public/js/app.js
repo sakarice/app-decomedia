@@ -8411,8 +8411,8 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       hideDetail: true,
-      comment: "",
-      myElem: "" // id : 0,
+      myElem: "",
+      comment: "" // id : 0,
       // media_id : 0,
       // user_name : "",
       // user_icon_url : "",
@@ -8435,7 +8435,8 @@ function _defineProperty(obj, key, value) {
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['addMediaCommentsObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapMutations)('mediaComments', ['deleteMediaCommentsObjectItem'])), {}, {
     getOneComment: function getOneComment() {
       this.setTargetObjectIndex(this.index);
-      return this.getMediaComment;
+      var datas = Object.assign({}, this.getMediaComment);
+      return datas;
     },
     setMyElem: function setMyElem() {
       this.myElem = document.getElementById(this.idWithIndex);

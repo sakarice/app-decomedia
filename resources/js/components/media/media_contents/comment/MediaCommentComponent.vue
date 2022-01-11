@@ -30,8 +30,8 @@ export default{
   data : () => {
     return {
       hideDetail : true,
-      comment : "",
       myElem : "",
+      comment : "",
       // id : 0,
       // media_id : 0,
       // user_name : "",
@@ -59,7 +59,8 @@ export default{
     
     getOneComment(){
       this.setTargetObjectIndex(this.index);
-      return this.getMediaComment;
+      const datas = Object.assign({}, this.getMediaComment);
+      return datas;
     },
     setMyElem(){this.myElem = document.getElementById(this.idWithIndex);},
     init(){
