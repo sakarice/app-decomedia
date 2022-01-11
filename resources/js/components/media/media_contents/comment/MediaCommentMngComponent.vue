@@ -12,6 +12,7 @@
         
       </div>
       <media-comment-add></media-comment-add>
+      <comment-delete-confirm></comment-delete-confirm>
 
       <close-modal-bar class="for-mobile"></close-modal-bar>
       <close-modal-icon class="for-pc-tablet"></close-modal-icon>
@@ -23,11 +24,12 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
-import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+import closeModalBar from '../../change_display_parts/CloseModalBarComponent.vue'
+import closeModalIcon from '../../change_display_parts/CloseModalIconComponent.vue'
 
 import mediaComment from './MediaCommentComponent.vue';
-import mediaCommentAdd from './MediaCommentAddComponent.vue'
+import mediaCommentAdd from './MediaCommentAddComponent.vue';
+import commentDeleteConfirm from './CommentDeleteConfirmComponent.vue';
 
 export default{
   components : {
@@ -35,6 +37,7 @@ export default{
     closeModalIcon,
     mediaComment,
     mediaCommentAdd,
+    commentDeleteConfirm,
   },
   props: [ 'transitionName' ],
   data : () => {

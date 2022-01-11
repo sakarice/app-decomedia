@@ -2,7 +2,7 @@
 import Media from '../components/media/MediaComponent.vue';
 import MediaHeader from '../components/media/MediaHeaderComponent.vue';
 import MediaOwnerInfo from '../components/media/show_parts/MediaOwnerInfoComponent.vue';
-import MediaCommentMng from '../components/media/show_parts/MediaCommentMngComponent.vue';
+import MediaCommentMng from '../components/media/media_contents/comment/MediaCommentMngComponent.vue';
 import SwitchToShowMode from '../components/media/action_parts/SwitchToShowModeComponent.vue';
 import SwitchToEditMode from '../components/media/action_parts/SwitchToEditModeComponent.vue';
 

@@ -43,10 +43,10 @@ class MediaCommentUtil
       foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column => $property){
         $store_items[$column] = $req_data[$property];
       }
-      $stored_data_part = $comment->create($store_items);
+      $stored_data = $comment->create($store_items);
       // $stored_data_all = MediaComment::
-      $stored_data_part->is_my_comment = true; // 自分のコメントであるという情報を付与
-      return $stored_data_part;
+      $stored_data['is_my_comment'] = true; // 自分のコメントであるという情報を付与
+      return $stored_data;
     }
   }
 
