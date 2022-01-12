@@ -1,16 +1,16 @@
 <template>
-  <div class="mypage-content-wrapper">
+  <div class="mypage-content-wrapper ml70 w70">
     <!-- profile -->
     <user-page-profile></user-page-profile>
 
     <!-- Media -->
-    <div class="mypage-action-menu">
+    <div class="mypage-action-menu flex a-end">
       <!-- Media作成 -->
       <div class="mypage-action-item media-create-wrapper">
         <a class="linkTo-createMedia" href="/media/create">
           <i class="fas fa-plus fa-3x media-create-icon"></i>
         </a>
-        <span class="action-item-subtitle">Media作成</span>
+        <span class="action-item-subtitle">メディア作成</span>
       </div>
       <!-- Mediaの選択モード -->
       <!-- 〇選択モードの切り替えボタン -->
@@ -19,7 +19,7 @@
         <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
       </div>
       <!-- 〇選択したMedia削除ボタン -->
-      <div class="select-mode-item-wrapper" :class='{"is-black": isSelectMode}'>
+      <div class="select-mode-item-wrapper flex a-end" :class='{"is-black": isSelectMode}'>
         <selected-media-delete-button-component
         class="mypage-action-item select-mode-item"
         v-show="isSelectMode"
@@ -39,15 +39,16 @@
     <section v-show="isShowCreatedMediaPreview" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">作成済みMedia</h3>
+      <i class="fas fa-tools fa-lg category-icon"></i>
+        <h3 class="section-title">作成したメディア</h3>
         <!-- {{-- Media作成 --}} -->
 
         <span class="view-more" @click="addCreatedMediaPreviewInfos">
-          もっと見る
+          ▼more
         </span>
       </div>
       <!-- {{-- 作成済みmedia一覧 --}} -->
-      <media-preview-component
+      <media-preview-component class="media-preview"
         :media-preview-infos="createdMediaPreviewInfos"
         :is-show-cover="isShowCoverOnCreateMedia"
         :is-select-mode="isSelectMode"
@@ -61,13 +62,14 @@
     <section v-show="isShowLikedMediaPreview" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <h3 class="section-title">いいねしたMedia</h3>
+        <i class="fas fa-thumbs-up fa-lg category-icon"></i>
+        <h3 class="section-title">いいねしたメディア</h3>
         <span class="view-more" @click="addLikedMediaPreviewInfos">
-          もっと見る
+          ▼more
         </span>
       </div>
       <!-- いいねしたmedia一覧 -->
-      <media-preview-component
+      <media-preview-component class="media-preview"
         :media-preview-infos="likedMediaPreviewInfos"
         :is-show-cover="isShowCoverOnLikeMedia"
         :is-select-mode="isSelectMode"
@@ -279,15 +281,45 @@ export default {
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
+@import "/resources/css/FrequentlyUseStyle.css";
+@import "/resources/css/flexSetting.css";
+
+.bg-black { background-color: black;}
+.bg-lightgrey { background-color: rgb(252,252,252);}
+.white { color: white;}
+
+.media-preview {
+  margin-top: 0;
+  padding-top: 25px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,0.75);
+  box-shadow: 0px 2px 3px lightgrey;
+  border-top: 1.4px dashed lightgrey;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.category-icon {
+  z-index: -1;
+  margin-bottom: -2.5px;
+  margin-left: 1px;
+  margin-right: 10px;
+  padding: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: black;
+  color: white;
+}
+
 .mypage-content-wrapper {
-  margin-left: 70px;
-  width: 80%;
+  /* margin-left: 70px;
+  width: 80%; */
   margin: 0 auto;
 }
 
 .mypage-action-menu {
-  display: flex;
-  align-items: flex-end;
+  /* display: flex;
+  align-items: flex-end; */
   margin-bottom: 30px;
 }
 
@@ -310,17 +342,18 @@ export default {
 }
 
 .select-mode-item-wrapper {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
-  align-items: flex-end;
+  /* align-items: flex-end; */
 }
 
-.select-mode-description {
+/* .select-mode-description {
   font-size: 10px;
   margin-top: 7px;
-}
+} */
 
 .mypage-section {
+  margin-top: 60px;
   padding: 5px;
   width: 100%;
   max-width: 1200px;
@@ -329,14 +362,16 @@ export default {
 .section-top-wrapper {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
   width: 90%
 }
 
 .section-title {
   display: inline-block;
   margin: 0 20px 0 0;
-  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体";
+  font-size: 17px;
+  font-family: serif;
+  /* font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体"; */
 }
 
 .select-uncheck-icon {
