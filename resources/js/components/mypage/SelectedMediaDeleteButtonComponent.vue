@@ -1,7 +1,7 @@
 <template>
 
   <div class="action-button-wrapper">
-    <i class="fas fa-trash fa-3x media-delete-icon" @click="deleteSelectedMedia"></i>
+    <i class="fas fa-trash media-delete-icon" @click="deleteSelectedMedia"></i>
     <span class="action-item-subtitle">削除</span>
     <!-- <p v-show="deleteSelectedMediaMessage">
       {{deleteSelectedMediaMessage}}

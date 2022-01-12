@@ -4,36 +4,44 @@
     <user-page-profile class="for-pc-tablet"></user-page-profile>
 
     <!-- Media -->
-    <div class="mypage-action-menu flex a-end">
-      <!-- Media作成 -->
-      <div class="mypage-action-item media-create-wrapper">
-        <a class="linkTo-createMedia" href="/media/create">
-          <i class="fas fa-plus fa-2x media-create-icon"></i>
-        </a>
-        <span class="action-item-subtitle">作成</span>
-      </div>
-      <!-- Mediaの選択モード -->
-      <!-- 〇選択したMedia削除ボタン -->
-      <div class="select-mode-item-wrapper flex" :class='{"is-black": isSelectMode}'>
+    <div class="mypage-action-menu">
+      <div class="menu-inner flex a-end">
+        <!-- Media作成 -->
+        <div class="mypage-action-item media-create-wrapper" v-show="!isSelectMode">
+          <a class="linkTo-createMedia" href="/media/create">
+            <i class="fas fa-plus media-create-icon"></i>
+          </a>
+          <span class="action-item-subtitle">作成</span>
+        </div>
         <!-- 〇選択モードの切り替えボタン -->
-        <div class="mypage-action-item select-mode-switch">
-          <i v-show="!isSelectMode" id="change-select-mode" class="fas fa-hand-point-up fa-3x" @click="toggleSelectMode"></i>
-          <i v-show="isSelectMode" id="change-select-mode" class="far fa-window-close fa-3x" @click="toggleSelectMode"></i>
+        <div class="mypage-action-item select-mode-switch" v-show="!isSelectMode">
+          <i id="change-select-mode" class="fas fa-hand-point-up" @click="toggleSelectMode"></i>
+          <!-- <i v-show="isSelectMode" id="change-select-mode" class="far fa-window-close fa-3x" @click="toggleSelectMode"></i> -->
           <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
         </div>
-        <selected-media-delete-button-component
-        class="mypage-action-item select-mode-item"
-        v-show="isSelectMode"
-        v-on:set-is-delete="setIsDelete">
-        </selected-media-delete-button-component>
 
-        <!-- 〇選択をすべて解除するボタン -->
-        <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
-          <i class="far fa-square fa-3x select-uncheck-icon" @click="unCheckAllMedia"></i>
-          <span class="action-item-subtitle">リセット</span>
+        <!-- Mediaの選択モード -->
+        <!-- 〇選択したMedia削除ボタン -->
+        <div class="select-mode-item-wrapper flex" :class='{"is-black": isSelectMode}'>
+          <selected-media-delete-button-component
+          class="mypage-action-item select-mode-item"
+          v-show="isSelectMode"
+          v-on:set-is-delete="setIsDelete">
+          </selected-media-delete-button-component>
+
+          <!-- 〇選択をすべて解除するボタン -->
+          <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
+            <i class="far fa-square select-uncheck-icon" @click="unCheckAllMedia"></i>
+            <span class="action-item-subtitle">リセット</span>
+          </div>
+
+          <!-- 選択モードキャンセル -->
+          <div class="mypage-action-item select-mode-switch" v-show="isSelectMode">
+            <i id="change-select-mode" class="far fa-window-close" @click="toggleSelectMode"></i>
+            <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+          </div>
         </div>
       </div>
-      
     </div>
 
     <!-- 作成済みMediaのプレビュー -->
@@ -145,7 +153,7 @@ export default {
       if(this.isSelectMode){
         return 'キャンセル';
       } else {
-        return 'メディアを選択する';
+        return '選択';
       }
     }
   },
@@ -329,13 +337,17 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 3em;
 }
 .mypage-action-item:hover {
   cursor: pointer;
 }
 
+.media-create-wrapper {
+  font-size: 2em;
+}
+
 #change-select-mode {
-  color: darkgrey;
   transition: 0.2s;
 }
 
@@ -387,7 +399,7 @@ export default {
 .action-item-subtitle {
   margin-top: 5px;
   font-size:11px;
-  color:dimgrey;
+  color:grey;
 }
 
 
@@ -434,20 +446,40 @@ export default {
     padding-left: 0;
   }
 
+  .menu-inner {
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+    padding: 7px 10px;
+    justify-content: center;
+  }
+
   .select-mode-item-wrapper {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
+    padding: 6px 10px;
     color: white;
     z-index: 15;
     justify-content: center;
-    flex-direction: row-reverse;
+    flex-direction: row;
     overflow-x: scroll;
   }
 
+  .mypage-action-menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;    
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+
   .mypage-content-wrapper {
-    margin-top: 60px;
+    margin-top: 80px;
   }
 
 
@@ -455,14 +487,10 @@ export default {
     font-size: 13px;
   }
 
-  .mypage-action-menu {
-    padding: 0;
-  }
-
 
   .mypage-action-item {
     margin: 0 18px;
-    transform: scale(0.7);
+    font-size: 1.7em;
   }
 
   .mypage-content-wrapper {
@@ -482,7 +510,7 @@ export default {
   .media-create-wrapper {
     position: fixed;
     bottom: 10px;
-    right: 10px;
+    right: 20px;
     margin-right: 0;
     transform: scale(1.2);
   }
