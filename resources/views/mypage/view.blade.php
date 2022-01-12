@@ -22,12 +22,6 @@
       :is-login="true">
       </header-component>
 
-      {{-- <mypage-menu-bar-component
-      :csrf="{{json_encode(csrf_token())}}">
-      </mypage-menu-bar-component> --}}
-
-      <section style="height:90px"></section>
-
       <mypage-component
         :created-media-preview-infos-from-parent='@json($createdMediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
         :liked-media-preview-infos-from-parent='@json($likedMediaPreviewInfos,JSON_UNESCAPED_SLASHES)'>

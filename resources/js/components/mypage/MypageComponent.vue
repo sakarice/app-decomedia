@@ -1,25 +1,26 @@
 <template>
   <div class="mypage-content-wrapper">
     <!-- profile -->
-    <user-page-profile></user-page-profile>
+    <user-page-profile class="for-pc-tablet"></user-page-profile>
 
     <!-- Media -->
     <div class="mypage-action-menu flex a-end">
       <!-- Media作成 -->
       <div class="mypage-action-item media-create-wrapper">
         <a class="linkTo-createMedia" href="/media/create">
-          <i class="fas fa-plus fa-3x media-create-icon"></i>
+          <i class="fas fa-plus fa-2x media-create-icon"></i>
         </a>
-        <span class="action-item-subtitle">メディア作成</span>
+        <span class="action-item-subtitle">作成</span>
       </div>
       <!-- Mediaの選択モード -->
-      <!-- 〇選択モードの切り替えボタン -->
-      <div class="mypage-action-item select-mode-switch">
-        <i id="change-select-mode" class="fas fa-hand-point-up fa-3x" @click="toggleSelectMode"></i>
-        <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
-      </div>
       <!-- 〇選択したMedia削除ボタン -->
-      <div class="select-mode-item-wrapper flex a-end" :class='{"is-black": isSelectMode}'>
+      <div class="select-mode-item-wrapper flex" :class='{"is-black": isSelectMode}'>
+        <!-- 〇選択モードの切り替えボタン -->
+        <div class="mypage-action-item select-mode-switch">
+          <i v-show="!isSelectMode" id="change-select-mode" class="fas fa-hand-point-up fa-3x" @click="toggleSelectMode"></i>
+          <i v-show="isSelectMode" id="change-select-mode" class="far fa-window-close fa-3x" @click="toggleSelectMode"></i>
+          <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+        </div>
         <selected-media-delete-button-component
         class="mypage-action-item select-mode-item"
         v-show="isSelectMode"
@@ -137,6 +138,15 @@ export default {
       'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
       'isDeleting' : false,
+    }
+  },
+  computed : {
+    selectModeButtonMessage : function(){
+      if(this.isSelectMode){
+        return 'キャンセル';
+      } else {
+        return 'メディアを選択する';
+      }
     }
   },
   methods : {
@@ -262,15 +272,6 @@ export default {
       }
     }
   },
-  computed : {
-    selectModeButtonMessage : function(){
-      if(this.isSelectMode){
-        return '選択モードを解除';
-      } else {
-        return 'Mediaを選択する';
-      }
-    }
-  }
 
 }
 </script>
@@ -291,10 +292,9 @@ export default {
 .media-preview {
   margin-top: 0;
   padding-top: 25px;
-  padding-left: 20px;
   /* background-color: rgba(255,255,255,0.75);
   box-shadow: 0px 2px 3px lightgrey; */
-  border-top: 1.4px dashed lightgrey;
+  border-top: 1.4px dotted lightgrey;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
@@ -315,19 +315,20 @@ export default {
   margin-left: 70px;
   width: 80%;
   margin: 0 auto;
+  margin-top: 90px;
 }
 
 .mypage-action-menu {
-  /* display: flex;
-  align-items: flex-end; */
-  margin-bottom: 30px;
+  padding: 10px 30px;
+  background-color: rgb(255,255,255);
+  box-shadow: 0.5px 0.5px 2px lightgrey;
+  border-radius: 3px;
 }
 
 .mypage-action-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 30px;
 }
 .mypage-action-item:hover {
   cursor: pointer;
@@ -337,20 +338,9 @@ export default {
   color: darkgrey;
   transition: 0.2s;
 }
-#change-select-mode:hover {
-  color: black;
-}
 
 .select-mode-item-wrapper {
-  /* display: flex; */
-  flex-wrap: wrap;
-  /* align-items: flex-end; */
 }
-
-/* .select-mode-description {
-  font-size: 10px;
-  margin-top: 7px;
-} */
 
 .mypage-section {
   margin-top: 60px;
@@ -425,6 +415,10 @@ export default {
   .for-mobile {
     display: none;
   }
+
+  .mypage-action-item {
+    margin: 0 50px 0 0;
+  }
  
 }
 
@@ -443,26 +437,31 @@ export default {
   .select-mode-item-wrapper {
     position: fixed;
     bottom: 0;
-    width: 100%;
-    margin-left: -20px;
-    padding: 10px 0;
-    background-color: black;
+    left: 0;
+    right: 0;
     color: white;
     z-index: 15;
-
     justify-content: center;
+    flex-direction: row-reverse;
+    overflow-x: scroll;
   }
+
+  .mypage-content-wrapper {
+    margin-top: 60px;
+  }
+
 
   .section-title {
     font-size: 13px;
   }
 
   .mypage-action-menu {
-    margin-bottom: 15px;
+    padding: 0;
   }
 
+
   .mypage-action-item {
-    margin-right: 15px;
+    margin: 0 18px;
     transform: scale(0.7);
   }
 
@@ -478,7 +477,19 @@ export default {
   }
   .select-uncheck-icon {
     color: white;
-  }  
+  }
+
+  .media-create-wrapper {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    margin-right: 0;
+    transform: scale(1.2);
+  }
+
+  .liked-media-list {
+    margin-bottom: 100px;
+  }
 
 }
 

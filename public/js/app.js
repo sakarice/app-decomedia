@@ -13649,6 +13649,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -13686,6 +13687,15 @@ __webpack_require__.r(__webpack_exports__);
       'totalSelectedCount': 0,
       'isDeleting': false
     };
+  },
+  computed: {
+    selectModeButtonMessage: function selectModeButtonMessage() {
+      if (this.isSelectMode) {
+        return 'キャンセル';
+      } else {
+        return 'メディアを選択する';
+      }
+    }
   },
   methods: {
     toggleSelectMode: function toggleSelectMode() {
@@ -13805,15 +13815,6 @@ __webpack_require__.r(__webpack_exports__);
         (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.showOverLay)();
       } else {
         (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.hideOverLay)();
-      }
-    }
-  },
-  computed: {
-    selectModeButtonMessage: function selectModeButtonMessage() {
-      if (this.isSelectMode) {
-        return '選択モードを解除';
-      } else {
-        return 'Mediaを選択する';
       }
     }
   }
@@ -22316,7 +22317,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  padding-left: 20px;\r\n  /* background-color: rgba(255,255,255,0.75);\r\n  box-shadow: 0px 2px 3px lightgrey; */\r\n  border-top: 1.4px dashed lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: -1;\r\n  /* margin-bottom: -2.5px; */\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  /* display: flex;\r\n  align-items: flex-end; */\r\n  margin-bottom: 30px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  margin-right: 30px;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n#change-select-mode[data-v-15798219]:hover {\r\n  color: black;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  /* display: flex; */\r\n  flex-wrap: wrap;\r\n  /* align-items: flex-end; */\n}\r\n\r\n/* .select-mode-description {\r\n  font-size: 10px;\r\n  margin-top: 7px;\r\n} */\n.mypage-section[data-v-15798219] {\r\n  margin-top: 60px;\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\r\n  /* font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\"; */\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 12px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 5px;\r\n    padding-left: 0;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    width: 100%;\r\n    margin-left: -20px;\r\n    padding: 10px 0;\r\n    background-color: black;\r\n    color: white;\r\n    z-index: 15;\r\n\r\n    justify-content: center;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 13px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    margin-bottom: 15px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin-right: 15px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 30px;\r\n    padding: 0px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  /* background-color: rgba(255,255,255,0.75);\r\n  box-shadow: 0px 2px 3px lightgrey; */\r\n  border-top: 1.4px dotted lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: -1;\r\n  /* margin-bottom: -2.5px; */\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\r\n  margin-top: 90px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  padding: 10px 30px;\r\n  background-color: rgb(255,255,255);\r\n  box-shadow: 0.5px 0.5px 2px lightgrey;\r\n  border-radius: 3px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n#change-select-mode[data-v-15798219] {\r\n  color: darkgrey;\r\n  transition: 0.2s;\n}\n.select-mode-item-wrapper[data-v-15798219] {\n}\n.mypage-section[data-v-15798219] {\r\n  margin-top: 60px;\r\n  padding: 5px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\r\n  /* font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\"; */\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 12px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\r\n  color: aquamarine;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin: 0 50px 0 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 5px;\r\n    padding-left: 0;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    color: white;\r\n    z-index: 15;\r\n    justify-content: center;\r\n    flex-direction: row-reverse;\r\n    overflow-x: scroll;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-top: 60px;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 13px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    padding: 0;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin: 0 18px;\r\n    transform: scale(0.7);\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 30px;\r\n    padding: 0px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n.media-create-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 10px;\r\n    right: 10px;\r\n    margin-right: 0;\r\n    transform: scale(1.2);\n}\n.liked-media-list[data-v-15798219] {\r\n    margin-bottom: 100px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22346,7 +22347,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n    background-color: rgba(253, 253, 253, 1);\r\n    box-shadow: 1px 1px 10px lightgrey;\n}\n.content[data-v-1d9f09bd] {\r\n    color: black;\r\n    opacity: 0.9;\n}\n.content[data-v-1d9f09bd]:hover {\r\n    opacity: 1;\r\n    background-color: rgb(230,230,230);\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-1d9f09bd] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-1d9f09bd]:hover {\r\n    color: aquamarine;\n}\n@media screen and (min-width: 481px) {\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n        left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n        right: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n    background-color: rgba(253, 253, 253, 1);\r\n    box-shadow: 1px 1px 10px lightgrey;\n}\n.content[data-v-1d9f09bd] {\r\n    color: black;\r\n    opacity: 0.9;\n}\n.content[data-v-1d9f09bd]:hover {\r\n    opacity: 1;\r\n    background-color: rgb(230,230,230);\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-1d9f09bd] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-1d9f09bd]:hover {\r\n    color: aquamarine;\n}\n@media screen and (min-width: 481px) {\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n        left: 0;\n}\n}\n@media screen and (max-width: 480px) {\n#mypage-manu-bar[data-v-1d9f09bd] {\r\n        /* right: 0; */\r\n        display: none;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22397,7 +22398,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#frame[data-v-4b6d1532] {\r\n  margin-bottom: 30px;\n}\n.account-modal-profile[data-v-4b6d1532]{\r\n  display: flex;\r\n  align-items: flex-start;\r\n  justify-content: center;\r\n  border-bottom: 1px solid lightgrey;\n}\n.profile-block[data-v-4b6d1532] {\r\n  margin: 0 10px;\n}\n.profile-left[data-v-4b6d1532], .profile-right[data-v-4b6d1532] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: flex-start;\r\n  justify-content: center;\n}\n.profile-right-above[data-v-4b6d1532] {\r\n  display: flex;\r\n  margin-bottom: 10px;\n}\n.profile-right-below[data-v-4b6d1532] {\r\n  width: 100%\n}\n.name-input[data-v-4b6d1532] {\r\n  font-size: 25px;\r\n  border: none;\r\n  width: 180px;\n}\n#about-me[data-v-4b6d1532] {\r\n  border: none;\r\n  background-color: rgba(250,250,250,1);\r\n  color: darkslategray;\r\n  width: 100%;\n}\n.avatar-wrapper[data-v-4b6d1532] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-4b6d1532] {\r\n  width: 90px;\r\n  height: 90px;\r\n  border-radius: 50%;\n}\n.update-button[data-v-4b6d1532] {\r\n  background-color: transparent;\r\n  padding: 0 10px;\r\n  border: 0.1px solid grey;\r\n  border-radius: 3px;\r\n  margin: 0 0 0 10px;\r\n  transition: 0.2s;\n}\n.update-button[data-v-4b6d1532]:hover {\r\n  cursor: pointer;\r\n  background-color: aquamarine;\n}\n@media screen and (max-width: 480px) {\n#frame[data-v-4b6d1532] {\r\n    margin-bottom: 5px;\n}\n.profile-right-above[data-v-4b6d1532] {\r\n    flex-direction: column;\n}\n.avatar-wrapper[data-v-4b6d1532] {\r\n    width: 75px;\r\n    height: 75px;\n}\n.avatar[data-v-4b6d1532] {\r\n    width: 65px;\r\n    height: 65px;\n}\n.update-button[data-v-4b6d1532] {\r\n    margin: 10px 0;\n}\n.name-input[data-v-4b6d1532] {\r\n    font-size: 20px;\r\n    width: 100%;\n}\n#about-me[data-v-4b6d1532] {\r\n    font-size: 12px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#frame[data-v-4b6d1532] {\n}\n.account-modal-profile[data-v-4b6d1532]{\r\n  display: flex;\r\n  align-items: flex-start;\r\n  justify-content: center;\n}\n.profile-block[data-v-4b6d1532] {\r\n  margin: 0 10px;\n}\n.profile-left[data-v-4b6d1532], .profile-right[data-v-4b6d1532] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: flex-start;\r\n  justify-content: center;\n}\n.profile-right-above[data-v-4b6d1532] {\r\n  display: flex;\r\n  margin-bottom: 10px;\n}\n.profile-right-below[data-v-4b6d1532] {\r\n  width: 100%\n}\n.name-input[data-v-4b6d1532] {\r\n  font-size: 25px;\r\n  border: none;\r\n  width: 180px;\n}\n#about-me[data-v-4b6d1532] {\r\n  border: none;\r\n  background-color: rgba(250,250,250,1);\r\n  color: darkslategray;\r\n  width: 100%;\n}\n.avatar-wrapper[data-v-4b6d1532] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 4px grey;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n.avatar[data-v-4b6d1532] {\r\n  width: 90px;\r\n  height: 90px;\r\n  border-radius: 50%;\n}\n.update-button[data-v-4b6d1532] {\r\n  background-color: transparent;\r\n  padding: 0 10px;\r\n  border: 0.1px solid grey;\r\n  border-radius: 3px;\r\n  margin: 0 0 0 10px;\r\n  transition: 0.2s;\n}\n.update-button[data-v-4b6d1532]:hover {\r\n  cursor: pointer;\r\n  background-color: aquamarine;\n}\n@media screen and (max-width: 480px) {\n#frame[data-v-4b6d1532] {\r\n    margin-bottom: 5px;\n}\n.profile-right-above[data-v-4b6d1532] {\r\n    flex-direction: column;\n}\n.avatar-wrapper[data-v-4b6d1532] {\r\n    width: 75px;\r\n    height: 75px;\n}\n.avatar[data-v-4b6d1532] {\r\n    width: 65px;\r\n    height: 65px;\n}\n.update-button[data-v-4b6d1532] {\r\n    margin: 10px 0;\n}\n.name-input[data-v-4b6d1532] {\r\n    font-size: 20px;\r\n    width: 100%;\n}\n#about-me[data-v-4b6d1532] {\r\n    font-size: 12px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -77405,30 +77406,56 @@ var render = function () {
     "div",
     { staticClass: "mypage-content-wrapper" },
     [
-      _c("user-page-profile"),
+      _c("user-page-profile", { staticClass: "for-pc-tablet" }),
       _vm._v(" "),
       _c("div", { staticClass: "mypage-action-menu flex a-end" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "mypage-action-item select-mode-switch" }, [
-          _c("i", {
-            staticClass: "fas fa-hand-point-up fa-3x",
-            attrs: { id: "change-select-mode" },
-            on: { click: _vm.toggleSelectMode },
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "action-item-subtitle" }, [
-            _vm._v(_vm._s(_vm.selectModeButtonMessage)),
-          ]),
-        ]),
-        _vm._v(" "),
         _c(
           "div",
           {
-            staticClass: "select-mode-item-wrapper flex a-end",
+            staticClass: "select-mode-item-wrapper flex",
             class: { "is-black": _vm.isSelectMode },
           },
           [
+            _c(
+              "div",
+              { staticClass: "mypage-action-item select-mode-switch" },
+              [
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.isSelectMode,
+                      expression: "!isSelectMode",
+                    },
+                  ],
+                  staticClass: "fas fa-hand-point-up fa-3x",
+                  attrs: { id: "change-select-mode" },
+                  on: { click: _vm.toggleSelectMode },
+                }),
+                _vm._v(" "),
+                _c("i", {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.isSelectMode,
+                      expression: "isSelectMode",
+                    },
+                  ],
+                  staticClass: "far fa-window-close fa-3x",
+                  attrs: { id: "change-select-mode" },
+                  on: { click: _vm.toggleSelectMode },
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "action-item-subtitle" }, [
+                  _vm._v(_vm._s(_vm.selectModeButtonMessage)),
+                ]),
+              ]
+            ),
+            _vm._v(" "),
             _c("selected-media-delete-button-component", {
               directives: [
                 {
@@ -77602,12 +77629,10 @@ var staticRenderFns = [
             staticClass: "linkTo-createMedia",
             attrs: { href: "/media/create" },
           },
-          [_c("i", { staticClass: "fas fa-plus fa-3x media-create-icon" })]
+          [_c("i", { staticClass: "fas fa-plus fa-2x media-create-icon" })]
         ),
         _vm._v(" "),
-        _c("span", { staticClass: "action-item-subtitle" }, [
-          _vm._v("メディア作成"),
-        ]),
+        _c("span", { staticClass: "action-item-subtitle" }, [_vm._v("作成")]),
       ]
     )
   },

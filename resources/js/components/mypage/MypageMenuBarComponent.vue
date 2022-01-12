@@ -93,7 +93,8 @@ a:hover {
 
 @media screen and (max-width: 480px) {
     #mypage-manu-bar {
-        right: 0;
+        /* right: 0; */
+        display: none;
     }
 }
 

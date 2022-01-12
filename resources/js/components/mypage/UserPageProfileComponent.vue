@@ -107,14 +107,12 @@
 <style scoped>
 
 #frame {
-  margin-bottom: 30px;
 }
 
 .account-modal-profile{
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  border-bottom: 1px solid lightgrey;
 }
 
 .profile-block {
