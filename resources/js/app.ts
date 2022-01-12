@@ -39,8 +39,8 @@ Vue.component('media-header-component', require('./components/media/MediaHeaderC
 Vue.component('mypage-menu-bar-component', require('./components/mypage/MypageMenuBarComponent.vue').default);
 // マイページ
 Vue.component('mypage-component', require('./components/mypage/MypageComponent.vue').default);
-// フォロー/フォロワー一覧
-Vue.component('follow-and-follower-component', require('./components/FollowAndFollowerComponent.vue').default);
+// フォロワー/フォロー中ユーザ一覧
+Vue.component('follower-and-following-component', require('./components/FollowerAndFollowingComponent.vue').default);
 
 // ユーザプロフィール
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);

@@ -16,8 +16,12 @@
         <!-- 〇選択モードの切り替えボタン -->
         <div class="mypage-action-item select-mode-switch" v-show="!isSelectMode">
           <i id="change-select-mode" class="fas fa-hand-point-up" @click="toggleSelectMode"></i>
-          <!-- <i v-show="isSelectMode" id="change-select-mode" class="far fa-window-close fa-3x" @click="toggleSelectMode"></i> -->
           <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+        </div>
+        <!-- フォロー中/フォロワーユーザ表示切り替えボタン -->
+        <div class="mypage-action-item follow-user-disp-switch" v-show="!isSelectMode">
+          <i id="change-follow-user-mode" class="fas fa-user-friends" @click="toggleShowFollower"></i>
+          <span class="action-item-subtitle">フォロワー/フォロー中</span>
         </div>
 
         <!-- Mediaの選択モード -->
@@ -44,8 +48,12 @@
       </div>
     </div>
 
+    <!-- フォロワーとフォロー中ユーザ -->
+    <follower-and-following v-show="isShowFollower">
+    </follower-and-following>    
+
     <!-- 作成済みMediaのプレビュー -->
-    <section v-show="isShowCreatedMediaPreview" class="mypage-section created-media-list">
+    <section v-show="isShowMedia && isShowCreatedMedia" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
       <i class="fas fa-tools category-icon"></i>
@@ -68,7 +76,7 @@
     </section>
 
     <!-- いいねしたMediaのプレビュー -->
-    <section v-show="isShowLikedMediaPreview" class="mypage-section liked-media-list">
+    <section v-show="isShowMedia && isShowLikedMedia" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
         <i class="fas fa-thumbs-up category-icon"></i>
@@ -85,7 +93,8 @@
         @changeIsCheckedMedia="changeIsCheckedLikedMedia"
         ref="likedMediaPreview">
       </media-preview-component>
-    </section>      
+    </section>
+
 
     <mypage-menu-bar-component>
     </mypage-menu-bar-component>
@@ -111,6 +120,7 @@ import MypageMenuBar from './MypageMenuBarComponent.vue';
 import MediaListCreateButton from '../MediaListCreateButtonComponent.vue';
 import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue';
 import UserPageProfile from './UserPageProfileComponent.vue';
+import FollowerAndFollowing from '../FollowerAndFollowingComponent.vue';
 import Overlay from '../common/OverlayComponent.vue';
 import Loading from '../common/LoadingComponent.vue';
 import { showOverLay, hideOverLay } from '../../functions/overlayDispHelper';
@@ -124,6 +134,7 @@ export default {
     MediaListCreateButton,
     SelectedMediaDeleteButton,
     UserPageProfile,
+    FollowerAndFollowing,
     Overlay,
     Loading,
   },
@@ -136,32 +147,35 @@ export default {
       'createdMediaPreviewInfos' : "",
       'likedMediaPreviewInfos' : "",
       'isSelectMode' : false,
-      'isShowCoverOnCreateMediaList' : true,
-      'isShowCoverOnCreateMedia' : true,
+      // 'isShow' : {
+      //   'coverOnCreateMedia' : true,
+      //   'coverOnLikeMedia' : false,
+      //   'createdMediaListPreview' : true,
+      //   'createdMediaPreview' : true,
+      //   'likedMediaPreview' : true,
+      // },
+      'isShowFollower' : false,
+      'isShowCreatedMedia' : true,
+      'isShowLikedMedia' : true,
       'isShowCoverOnLikeMedia' : false,
-      'isShowCreatedMediaListPreview' : true,
-      'isShowCreatedMediaPreview' : true,
-      'isShowLikedMediaPreview' : true,
-      'isUpdateCreatedMediaPreviewInfo' : false,
-      'isUpdateLikedMediaPreviewInfo' : false,
+      // 'isUpdateCreatedMediaPreviewInfo' : false,
+      // 'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
       'isDeleting' : false,
     }
   },
   computed : {
     selectModeButtonMessage : function(){
-      if(this.isSelectMode){
-        return 'キャンセル';
-      } else {
-        return '選択';
-      }
-    }
+      return this.isSelectMode ? 'キャンセル' : '選択';
+    },
+    isShowCoverOnCreateMedia : function(){
+      return this.isSelectMode;
+    },
+    isShowMedia:function(){ return !this.isShowFollower},
   },
   methods : {
-    toggleSelectMode(){
-      this.isShowCoverOnCreateMedia = this.isSelectMode
-      this.isSelectMode = !this.isSelectMode;
-    },
+    toggleSelectMode(){this.isSelectMode = !this.isSelectMode;},
+    toggleShowFollower(){this.isShowFollower = !this.isShowFollower},
     mediaEditLink : function(id) {
       return "/media/" + id + "/edit";
     },
@@ -171,7 +185,7 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
-        tmpThis.isUpdateCreatedMediaPreviewInfo = true;
+        // tmpThis.isUpdateCreatedMediaPreviewInfo = true;
       })
       .catch(error => {
         alert('media情報の取得に失敗しました')
@@ -183,7 +197,7 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
-        tmpThis.isUpdateLikedMediaPreviewInfo = true;
+        // tmpThis.isUpdateLikedMediaPreviewInfo = true;
       })
       .catch(error => {
         alert('media情報の取得に失敗しました')
@@ -209,10 +223,7 @@ export default {
         this.isDeleting = false;
       })
     },
-    setIsDelete(isDelete){
-      this.isDeleting = isDelete;
-
-    },
+    setIsDelete(isDelete){this.isDeleting = isDelete;},
     changeIsCheckedCreatedMedia(isChecked, index){
       if(isChecked == true){
         this.increaseCreatedMediaSelectedCount(index);
