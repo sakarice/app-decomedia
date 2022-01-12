@@ -367,7 +367,6 @@ export default {
 
 .mypage-section {
   margin-top: 60px;
-  padding: 5px;
   width: 100%;
   max-width: 1200px;
 }
@@ -508,7 +507,6 @@ export default {
   }
   .mypage-section {
     margin-top: 30px;
-    padding: 0px;
   }
   .is-black {
     background-color: black;

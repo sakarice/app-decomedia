@@ -1,9 +1,18 @@
 <template>
   <section id="follower-and-followingwrapper">
+    <!-- フォロワーかフォロー中ユーザどちらを表示するか選択するためのカテゴリ -->
     <div class="category-wrapper flex a-center j-center">
-      <div id="category-follower w50">フォロワー</div>
-      <div id="category-following w50">フォロー中</div>
+      <div id="category-follower" class="category-area w50 pt10 pb10 text-center"
+      @click="isShowFollower=!isShowFollower">
+        <span class="category" :class="{isActive:isShowFollower}">フォロワー</span>
+      </div>
+      <div id="category-following" class="category-area w50 pt10 pb10 text-center"
+      @click="isShowFollower=!isShowFollower">
+        <span class="category" :class="{isActive:isShowFollowing}">フォロー中</span>
+      </div>
     </div>
+
+    <!-- フォロワーとフォロー中ユーザ一覧表示領域 -->
     <div class="following-and-follower-area">
 
     </div>
@@ -22,9 +31,12 @@ export default {
   ],
   data : () => {
     return {
+      isShowFollower : true,
     }
   },
-  computed : {},
+  computed : {
+    isShowFollowing:function(){ return !this.isShowFollower}
+  },
   methods : {},
   created() {},
   mounted() {},
@@ -41,5 +53,20 @@ export default {
 @import "/resources/css/FrequentlyUseStyle.css";
 @import "/resources/css/flexSetting.css";
 
+#follower-and-followingwrapper {
+  margin-top: 60px;
+}
+.category-wrapper {
+  border-bottom: 1px solid lightgrey;
+}
+.category-area {
+  /* padding : 10px 0; */
+}
+.category-area:hover {
+  background-color: rgb(248,248,248);
+}
 
+.category {
+}
+.isActive {border-bottom: 2px solid aqua; }
 </style>
