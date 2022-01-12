@@ -418,7 +418,6 @@ export default {
 
 .view-more:hover {
   cursor: pointer;
-  color: aquamarine;
 }
 
 
