@@ -77688,7 +77688,7 @@ var render = function () {
       _c("div", { staticClass: "liked-medias mb10" }, [
         _c("div", { staticClass: "content p10 flex j-center a-center" }, [
           _c("i", {
-            staticClass: "far fa-heart fa-2x",
+            staticClass: "fas fa-thumbs-up fa-2x",
             on: { click: _vm.switchToLikedMediaPreview },
           }),
         ]),

@@ -18,7 +18,7 @@
         <!-- お気に入りmedia一覧 -->
         <div class="liked-medias mb10">
             <div class="content p10 flex j-center a-center">
-                <i @click="switchToLikedMediaPreview" class="far fa-heart fa-2x"></i>
+                <i @click="switchToLikedMediaPreview" class="fas fa-thumbs-up fa-2x"></i>
             </div>
         </div>
 
