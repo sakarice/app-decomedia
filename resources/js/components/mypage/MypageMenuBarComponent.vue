@@ -69,6 +69,7 @@ export default {
 .content {
     color: black;
     opacity: 0.9;
+    margin: 10px 0;
 }
 
 .content:hover {
