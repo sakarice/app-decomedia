@@ -1,5 +1,5 @@
 <template>
-  <div class="mypage-content-wrapper ml70 w70">
+  <div class="mypage-content-wrapper">
     <!-- profile -->
     <user-page-profile></user-page-profile>
 
@@ -39,7 +39,7 @@
     <section v-show="isShowCreatedMediaPreview" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-      <i class="fas fa-tools fa-lg category-icon"></i>
+      <i class="fas fa-tools category-icon"></i>
         <h3 class="section-title">作成したメディア</h3>
         <!-- {{-- Media作成 --}} -->
 
@@ -62,7 +62,7 @@
     <section v-show="isShowLikedMediaPreview" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <i class="fas fa-thumbs-up fa-lg category-icon"></i>
+        <i class="fas fa-thumbs-up category-icon"></i>
         <h3 class="section-title">いいねしたメディア</h3>
         <span class="view-more" @click="addLikedMediaPreviewInfos">
           ▼more
@@ -292,8 +292,8 @@ export default {
   margin-top: 0;
   padding-top: 25px;
   padding-left: 20px;
-  background-color: rgba(255,255,255,0.75);
-  box-shadow: 0px 2px 3px lightgrey;
+  /* background-color: rgba(255,255,255,0.75);
+  box-shadow: 0px 2px 3px lightgrey; */
   border-top: 1.4px dashed lightgrey;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -301,10 +301,10 @@ export default {
 
 .category-icon {
   z-index: -1;
-  margin-bottom: -2.5px;
+  /* margin-bottom: -2.5px; */
   margin-left: 1px;
   margin-right: 10px;
-  padding: 15px;
+  padding: 8px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: black;
@@ -312,8 +312,8 @@ export default {
 }
 
 .mypage-content-wrapper {
-  /* margin-left: 70px;
-  width: 80%; */
+  margin-left: 70px;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -411,6 +411,7 @@ export default {
 
 .view-more {
   color: blue;
+  font-size: 12px;
 }
 
 .view-more:hover {
@@ -433,6 +434,12 @@ export default {
   .for-pc-tablet {
     display: none;
   }
+
+  .media-preview {
+    padding-top: 5px;
+    padding-left: 0;
+  }
+
   .select-mode-item-wrapper {
     position: fixed;
     bottom: 0;
@@ -445,7 +452,9 @@ export default {
 
     justify-content: center;
   }
-  .select-mode-item {
+
+  .section-title {
+    font-size: 13px;
   }
 
   .mypage-action-menu {
@@ -458,11 +467,11 @@ export default {
   }
 
   .mypage-content-wrapper {
-    margin-left: 20px;
+    width: 90%;
   }
   .mypage-section {
-      margin-left: 0;
-      padding: 5px;
+    margin-top: 30px;
+    padding: 0px;
   }
   .is-black {
     background-color: black;
