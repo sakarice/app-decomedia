@@ -20915,7 +20915,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.profile_img[data-v-c14d05ee] {\r\n  outline: 1px solid;\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.img-wrapper[data-v-c14d05ee] {\r\n  outline: 1px solid;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70804,12 +70804,16 @@ var render = function () {
     "section",
     { staticClass: "w80 p10 flex", attrs: { id: "user-info-wrapper" } },
     [
-      _c("div", { staticClass: "left w80px h80px" }, [
-        _c("img", {
-          staticClass: "profile_img border-r-50per w100 h100",
-          attrs: { src: _vm.follower_info["profile_img_url"], alt: "?" },
-        }),
-      ]),
+      _c(
+        "div",
+        { staticClass: "img-wrapper left w80px h80px border-r-50per" },
+        [
+          _c("img", {
+            staticClass: "profile_img w100 h100",
+            attrs: { src: _vm.follower_info["profile_img_url"], alt: "?" },
+          }),
+        ]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "right ml10 pt10 flex column" }, [
         _c("span", [_vm._v(_vm._s(_vm.follower_info["name"]))]),
