@@ -57,7 +57,7 @@ Route::middleware('auth')->group(function(){
         Route::get('/media/{media_id}/comment', 'App\Lib\MediaCommentUtil@show');
         Route::post('/media/{media_id}/comment/store', 'App\Lib\MediaCommentUtil@store');
         Route::post('/media/{media_id}/comment/delete', 'App\Lib\MediaCommentUtil@destroy');
-        
+
 
     // Mediaへ、いいね/いいね解除する
         Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
@@ -71,6 +71,9 @@ Route::middleware('auth')->group(function(){
         Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
     // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
+
+    // フォロワー情報を取得する
+        Route::get('/followers', 'App\Lib\FollowerUtil@show');
     
     // メディア画像
         Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');

@@ -1,5 +1,5 @@
 <template>
-  <section id="follower-and-followingwrapper">
+  <section id="follower-and-following-wrapper">
     <!-- フォロワーかフォロー中ユーザどちらを表示するか選択するためのカテゴリ -->
     <div class="category-wrapper flex a-center j-center">
       <div id="category-follower" class="category-area w50 pt10 pb10 text-center"
@@ -14,7 +14,7 @@
 
     <!-- フォロワーとフォロー中ユーザ一覧表示領域 -->
     <div class="following-and-follower-area">
-
+      <follower-list v-show="isShowFollower"></follower-list>
     </div>
 
   </section>
@@ -23,9 +23,12 @@
 </template>
 
 <script>
+  import followerList from './FollowerListComponent.vue'
 
 export default {
+
   components : {
+    followerList,
   },
   props : [
   ],
