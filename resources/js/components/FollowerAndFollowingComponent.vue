@@ -13,8 +13,10 @@
     </div>
 
     <!-- フォロワーとフォロー中ユーザ一覧表示領域 -->
+    <!-- フォロワー -->
     <div class="following-and-follower-area">
       <follower-list v-show="isShowFollower"></follower-list>
+      <following-list v-show="isShowFollowing"></following-list>
     </div>
 
   </section>
@@ -23,12 +25,14 @@
 </template>
 
 <script>
-  import followerList from './FollowerListComponent.vue'
+import followerList from './FollowerListComponent.vue'
+import followingList from './FollowingListComponent.vue'
 
 export default {
 
   components : {
     followerList,
+    followingList,
   },
   props : [
   ],

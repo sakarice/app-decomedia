@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function(){
 
     // フォロワー情報を取得する
         Route::get('/followers', 'App\Lib\FollowerUtil@show');
+    // フォロー中ユーザ情報を取得する
+        Route::get('/followings', 'App\Lib\FollowingUtil@show');
     
     // メディア画像
         Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');

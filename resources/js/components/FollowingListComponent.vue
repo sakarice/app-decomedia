@@ -1,7 +1,7 @@
 <template>
-  <section id="follower-list-wrapper" class="flex column a-center">
-    <user-info v-for="(follower, index) in getFollowers" :key="index"
-    :user_info="follower" ref="followers">
+  <section id="following-list-wrapper" class="flex column a-center">
+    <user-info v-for="(following, index) in getFollowings" :key="index"
+    :user_info="following" ref="followings">
     </user-info>
   </section>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex';
 import userInfo from './UserInfoComponent.vue';
+
 
 export default {
   components : {
@@ -21,22 +22,22 @@ export default {
     }
   },
   computed : {
-    ...mapGetters('followers', ['getFollowers']),
+    ...mapGetters('followings', ['getFollowings']),
   },
   methods : {
-    ...mapMutations('followers', ['addFollowersObjectItem']),
+    ...mapMutations('followings', ['addFollowingsObjectItem']),
     
     init(){
-      const url = '/followers';
+      const url = '/followings';
       axios.get(url)
       .then(res=>{
-        const followers = res.data.followers;
-        followers.forEach(follower => {
-          this.addFollowersObjectItem(follower);
+        const followings = res.data.followings;
+        followings.forEach(following => {
+          this.addFollowingsObjectItem(following);
         });
       })
       .catch(error=>{
-        console.log('フォロワー情報の取得に失敗しました。')
+        console.log('フォロー中ユーザ情報の取得に失敗しました。')
       })
     }
   },

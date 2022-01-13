@@ -2,6 +2,7 @@ import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import followers from './modules/followers.js';
+import followings from './modules/followings.js';
 import loginState from './modules/loginState.js';
 import deviceType from './modules/deviceType.js';
 import media from './modules/media.js';
@@ -24,6 +25,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules : {
     followers,
+    followings,
     loginState,
     deviceType,
     media,

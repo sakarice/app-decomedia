@@ -66,7 +66,7 @@ Vue.component('media-owner-info-component', require('./components/media/show_par
 Vue.component('disp-media-like-component', require('./components/media/show_parts/DispMediaLikeComponent.vue').default);
 Vue.component('like-media-component', require('./components/media/show_parts/LikeMediaComponent.vue').default);
 // Media作成者フォローコンポーネント
-Vue.component('follow-btn-component', require('./components/media/show_parts/FollowBtnComponent.vue').default);
+Vue.component('follow-btn-component', require('./components/common/FollowBtnComponent.vue').default);
 
 // ★media作成用コンポーネント
 Vue.component('img-select-component', require('./components/media/edit_parts/ImgSelectComponent.vue').default);

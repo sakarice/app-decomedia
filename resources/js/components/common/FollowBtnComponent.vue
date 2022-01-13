@@ -64,12 +64,15 @@ export default{
     }
   },
   watch : {
-    user_id: function(newVal,oldVal){ // 親コンポーネントのuser_idがdataにセットされるのを待つ
-      if(newVal > 0){
-        this.getFollowState();
-      }
-    }
+    // user_id: function(newVal,oldVal){ // 親コンポーネントのuser_idがdataにセットされるのを待つ
+    //   if(newVal > 0){
+    //     this.getFollowState();
+    //   }
+    // }
   },
+  created(){
+    this.getFollowState();
+  }
 
 }
 

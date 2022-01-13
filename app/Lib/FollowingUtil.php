@@ -8,15 +8,15 @@ use App\Models\User;
 use App\Models\Followers;
 
 
-class FollowerUtil
+class FollowingUtil
 {
   
   public static function show(){
     $user_id = Auth::user()->id;
-    $followers_id = Followers::where('user_id',$user_id)->get('follower_id')->pluck('follower_id');
-    $followers_info = User::whereIn('id', $followers_id)
+    $followings_id = Followers::where('follower_id',$user_id)->get('user_id')->pluck('user_id');
+    $followings_info = User::whereIn('id', $followings_id)
     ->get(['id', 'name', 'profile_img_url', 'profile']);
-    return ['followers' => $followers_info];
+    return ['followings' => $followings_info];
   }
 
 }

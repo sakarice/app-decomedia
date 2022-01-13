@@ -1,12 +1,17 @@
 <template>
-  <section id="user-info-wrapper" class="w80 p10 flex">
-    <div class="img-wrapper left w80px h80px border-r-50per">
-      <img :src="follower_info['profile_img_url']" alt="?"
+  <section id="user-info-wrapper" class="w70 p15 flex">
+
+    <div class="img-wrapper left w60px h60px border-r-50per">
+      <img :src="user_info['profile_img_url']" alt="?"
       class="profile_img w100 h100">
     </div>
-    <div class="right ml10 pt10 flex column">
-      <span>{{follower_info['name']}}</span>
-      <span>{{follower_info['profile']}}</span>
+
+    <div class="right pt3 pl15 flex column">
+      <div class="right-upper-box w100 flex j-s-between a-center">
+        <span>{{user_info['name']}}</span>
+        <follow-btn :user_id="user_info['id']"></follow-btn>
+      </div>
+      <span>{{user_info['profile']}}</span>
     </div>
 
   </section>
@@ -14,12 +19,15 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex';
+import FollowBtn from './common/FollowBtnComponent.vue';
+
 
 export default {
   components : {
+    FollowBtn,
   },
   props : [
-    "index"
+    "user_info"
   ],
   data : () => {
     return {
@@ -27,20 +35,22 @@ export default {
     }
   },
   computed : {
-    ...mapGetters('followers', ['getFollowers']),
-    ...mapGetters('followers', ['getFollower']),
+    // ...mapGetters('followers', ['getFollowers']),
+    // ...mapGetters('followers', ['getFollower']),
   },
   methods : {
-    ...mapMutations('followers', ['setTargetObjectIndex']),
-    getOneFollowerData(){
-      this.setTargetObjectIndex(this.index);
-      return this.getFollower;
-    },
-    init(){
-      this.follower_info = this.getOneFollowerData();
-    }
+    // ...mapMutations('followers', ['setTargetObjectIndex']),
+    // getOneFollowerData(){
+    //   this.setTargetObjectIndex(this.index);
+    //   return this.getFollower;
+    // },
+    // init(){
+    //   this.follower_info = this.getOneFollowerData();
+    // }
   },
-  created() { this.init(); },
+  created() { 
+    // this.init(); 
+  },
   mounted() {},
   watch : {},
 
@@ -55,8 +65,16 @@ export default {
 @import "/resources/css/FrequentlyUseStyle.css";
 @import "/resources/css/flexSetting.css";
 
+#user-info-wrapper  {
+  max-width: 600px;
+}
+
 .img-wrapper {
   outline: 1px solid;
+}
+
+.right {
+  width: calc(100% - 70px);
 }
 
 

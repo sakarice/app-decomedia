@@ -37,7 +37,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import FollowBtn from './FollowBtnComponent.vue';
+import FollowBtn from '../../common/FollowBtnComponent.vue';
 
   export default {
     components : {
