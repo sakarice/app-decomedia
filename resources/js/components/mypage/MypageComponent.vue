@@ -362,11 +362,8 @@ export default {
   transition: 0.2s;
 }
 
-.select-mode-item-wrapper {
-}
-
 .mypage-section {
-  margin-top: 60px;
+  margin-top: 20px;
   width: 100%;
   max-width: 1200px;
 }

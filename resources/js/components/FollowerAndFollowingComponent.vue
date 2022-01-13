@@ -48,7 +48,7 @@ export default {
 @import "/resources/css/flexSetting.css";
 
 #follower-and-following-wrapper {
-  margin-top: 60px;
+  margin-top: 20px;
 }
 .category-wrapper {
   border-bottom: 1px solid lightgrey;
