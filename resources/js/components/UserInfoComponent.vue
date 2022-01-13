@@ -1,13 +1,13 @@
 <template>
-  <section id="user-info-wrapper" class="w70 p15 flex">
+  <section id="user-info-wrapper" class="p15 flex">
 
-    <div class="img-wrapper left w60px h60px border-r-50per">
+    <div class="left-box img-wrapper border-r-50per">
       <img :src="user_info['profile_img_url']" alt="?"
       class="profile_img w100 h100">
     </div>
 
-    <div class="right pt3 pl15 flex column">
-      <div class="right-upper-box w100 flex j-s-between a-center">
+    <div class="right-box pt3 flex column">
+      <div class="right-upper-box w100 flex j-s-between">
         <span>{{user_info['name']}}</span>
         <follow-btn :user_id="user_info['id']"></follow-btn>
       </div>
@@ -18,9 +18,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex';
 import FollowBtn from './common/FollowBtnComponent.vue';
-
 
 export default {
   components : {
@@ -34,25 +32,7 @@ export default {
       follower_info : "",
     }
   },
-  computed : {
-    // ...mapGetters('followers', ['getFollowers']),
-    // ...mapGetters('followers', ['getFollower']),
-  },
-  methods : {
-    // ...mapMutations('followers', ['setTargetObjectIndex']),
-    // getOneFollowerData(){
-    //   this.setTargetObjectIndex(this.index);
-    //   return this.getFollower;
-    // },
-    // init(){
-    //   this.follower_info = this.getOneFollowerData();
-    // }
-  },
-  created() { 
-    // this.init(); 
-  },
-  mounted() {},
-  watch : {},
+  methods : {},
 
 }
 </script>
@@ -66,16 +46,38 @@ export default {
 @import "/resources/css/flexSetting.css";
 
 #user-info-wrapper  {
+  width: 70%;
   max-width: 600px;
 }
 
 .img-wrapper {
   outline: 1px solid;
+  width: 60px;
+  height: 60px;
 }
 
-.right {
+.right-box {
   width: calc(100% - 70px);
+  padding-left: 15px;
 }
 
+
+/* モバイル用 */
+@media screen and (max-width:480px) {
+  #user-info-wrapper  {
+    width: 100%;
+  }
+
+  .img-wrapper {
+    width: 40px;
+    height: 40px;
+  }  
+
+  .right-box {
+    font-size: 13px;
+    width: calc(100% - 45px);
+    padding-left: 10px;
+  }
+}
 
 </style>

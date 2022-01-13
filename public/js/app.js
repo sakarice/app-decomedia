@@ -2862,7 +2862,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     FollowBtn: _common_FollowBtnComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -2873,22 +2872,7 @@ __webpack_require__.r(__webpack_exports__);
       follower_info: ""
     };
   },
-  computed: {// ...mapGetters('followers', ['getFollowers']),
-    // ...mapGetters('followers', ['getFollower']),
-  },
-  methods: {// ...mapMutations('followers', ['setTargetObjectIndex']),
-    // getOneFollowerData(){
-    //   this.setTargetObjectIndex(this.index);
-    //   return this.getFollower;
-    // },
-    // init(){
-    //   this.follower_info = this.getOneFollowerData();
-    // }
-  },
-  created: function created() {// this.init(); 
-  },
-  mounted: function mounted() {},
-  watch: {}
+  methods: {}
 });
 
 /***/ }),
@@ -21061,7 +21045,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#user-info-wrapper[data-v-c14d05ee]  {\r\n  max-width: 600px;\n}\n.img-wrapper[data-v-c14d05ee] {\r\n  outline: 1px solid;\n}\n.right[data-v-c14d05ee] {\r\n  width: calc(100% - 70px);\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#user-info-wrapper[data-v-c14d05ee]  {\r\n  width: 70%;\r\n  max-width: 600px;\n}\n.img-wrapper[data-v-c14d05ee] {\r\n  outline: 1px solid;\r\n  width: 60px;\r\n  height: 60px;\n}\n.right-box[data-v-c14d05ee] {\r\n  width: calc(100% - 70px);\r\n  padding-left: 15px;\n}\r\n\r\n\r\n/* モバイル用 */\n@media screen and (max-width:480px) {\n#user-info-wrapper[data-v-c14d05ee]  {\r\n    width: 100%;\n}\n.img-wrapper[data-v-c14d05ee] {\r\n    width: 40px;\r\n    height: 40px;\n}\n.right-box[data-v-c14d05ee] {\r\n    font-size: 13px;\r\n    width: calc(100% - 45px);\r\n    padding-left: 10px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -71116,23 +71100,19 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "section",
-    { staticClass: "w70 p15 flex", attrs: { id: "user-info-wrapper" } },
+    { staticClass: "p15 flex", attrs: { id: "user-info-wrapper" } },
     [
-      _c(
-        "div",
-        { staticClass: "img-wrapper left w60px h60px border-r-50per" },
-        [
-          _c("img", {
-            staticClass: "profile_img w100 h100",
-            attrs: { src: _vm.user_info["profile_img_url"], alt: "?" },
-          }),
-        ]
-      ),
+      _c("div", { staticClass: "left-box img-wrapper border-r-50per" }, [
+        _c("img", {
+          staticClass: "profile_img w100 h100",
+          attrs: { src: _vm.user_info["profile_img_url"], alt: "?" },
+        }),
+      ]),
       _vm._v(" "),
-      _c("div", { staticClass: "right pt3 pl15 flex column" }, [
+      _c("div", { staticClass: "right-box pt3 flex column" }, [
         _c(
           "div",
-          { staticClass: "right-upper-box w100 flex j-s-between a-center" },
+          { staticClass: "right-upper-box w100 flex j-s-between" },
           [
             _c("span", [_vm._v(_vm._s(_vm.user_info["name"]))]),
             _vm._v(" "),
