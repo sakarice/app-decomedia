@@ -75,5 +75,10 @@ export default {
 
 .category {
 }
-.isActive {border-bottom: 2px solid aqua; }
+
+.isActive {
+  font-weight: bold;
+  border-bottom: 2px solid greenyellow;
+}
+
 </style>
