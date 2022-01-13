@@ -1,6 +1,6 @@
 <template>
   <div class="follow-button-wrapper">
-    <button class="follow-button" v-on:click="changeFollowStateOfViewAndDB()">
+    <button class="follow-button" :class="{'color-reverse':isFollow}" v-on:click="changeFollowStateOfViewAndDB()">
       {{follow_message}}
     </button>
   </div>
@@ -83,15 +83,19 @@ export default{
 @import "/resources/css/mediaEditModals.css";
 
 .follow-button {
-  background-color: rgba(0,0,0,1);
-  color: white;
   border: none;
   border-radius: 15px;
   padding: 5px 15px;
 }
 
 .follow-button:hover {
+  color: lightgreen;
   background-color: rgba(0,0,0,0.7);
+}
+
+.color-reverse {
+  color: white;
+  background-color: rgba(0,0,0,1);
 }
 
 </style>

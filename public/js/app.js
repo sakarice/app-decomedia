@@ -21110,7 +21110,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.follow-button {\r\n  background-color: rgba(0,0,0,1);\r\n  color: white;\r\n  border: none;\r\n  border-radius: 15px;\r\n  padding: 5px 15px;\n}\n.follow-button:hover {\r\n  background-color: rgba(0,0,0,0.7);\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.follow-button {\r\n  border: none;\r\n  border-radius: 15px;\r\n  padding: 5px 15px;\n}\n.follow-button:hover {\r\n  color: lightgreen;\r\n  background-color: rgba(0,0,0,0.7);\n}\n.color-reverse {\r\n  color: white;\r\n  background-color: rgba(0,0,0,1);\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -71196,6 +71196,7 @@ var render = function () {
       "button",
       {
         staticClass: "follow-button",
+        class: { "color-reverse": _vm.isFollow },
         on: {
           click: function ($event) {
             return _vm.changeFollowStateOfViewAndDB()
