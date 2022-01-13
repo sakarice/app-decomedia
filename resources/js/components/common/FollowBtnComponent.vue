@@ -1,7 +1,8 @@
 <template>
   <div class="follow-button-wrapper">
-    <button class="follow-button" :class="{'color-reverse':isFollow}" v-on:click="changeFollowStateOfViewAndDB()">
-      {{follow_message}}
+    <button class="follow-button" :class="{'following':isFollow, 'not-following':!isFollow}"
+     v-on:click="changeFollowStateOfViewAndDB()">
+      <!-- <span>{{follow_message}}</span> -->
     </button>
   </div>
 </template>
@@ -15,6 +16,11 @@ export default{
   data : () => {
     return {
       isFollow : false,
+    }
+  },
+  computed : {
+    follow_message : function(){
+      return this.isFollow ? "フォロー中" : "フォローする";
     }
   },
   methods : {
@@ -54,25 +60,9 @@ export default{
     },
 
   },
-  computed : {
-    follow_message : function(){
-      if(this.isFollow){
-        return "フォロー中"
-      } else {
-        return "フォローする"
-      }
-    }
-  },
-  watch : {
-    // user_id: function(newVal,oldVal){ // 親コンポーネントのuser_idがdataにセットされるのを待つ
-    //   if(newVal > 0){
-    //     this.getFollowState();
-    //   }
-    // }
-  },
   created(){
     this.getFollowState();
-  }
+  },
 
 }
 
@@ -88,14 +78,30 @@ export default{
   padding: 5px 15px;
 }
 
-.follow-button:hover {
-  color: lightgreen;
-  background-color: rgba(0,0,0,0.7);
+.following {
+  color: white;
+  background-color: black
+}
+.following::after {
+  content: "フォロー中";
+}
+.following:hover::after {
+  content: "フォロー解除";
+  color: tomato;
 }
 
-.color-reverse {
+
+.not-following {
+  color: black;
+  background-color: rgb(240,250,250);
+}
+.not-following::after {
+  content: "フォローする";
+}
+.not-following:hover {
   color: white;
   background-color: rgba(0,0,0,1);
 }
+
 
 </style>
