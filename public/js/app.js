@@ -2100,10 +2100,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2116,16 +2112,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isShowFollower: true
     };
-  },
-  computed: {
-    isShowFollowing: function isShowFollowing() {
-      return !this.isShowFollower;
-    }
-  },
-  methods: {},
-  created: function created() {},
-  mounted: function mounted() {},
-  watch: {}
+  }
 });
 
 /***/ }),
@@ -20888,7 +20875,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#follower-and-following-wrapper[data-v-5615814a] {\r\n  margin-top: 60px;\n}\n.category-wrapper[data-v-5615814a] {\r\n  border-bottom: 1px solid lightgrey;\n}\n.category-area[data-v-5615814a] {\r\n  /* padding : 10px 0; */\n}\n.category-area[data-v-5615814a]:hover {\r\n  background-color: rgb(248,248,248);\n}\n.category[data-v-5615814a] {\n}\n.isActive[data-v-5615814a] {\r\n  font-weight: bold;\r\n  border-bottom: 2px solid greenyellow;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#follower-and-following-wrapper[data-v-5615814a] {\r\n  margin-top: 60px;\n}\n.category-wrapper[data-v-5615814a] {\r\n  border-bottom: 1px solid lightgrey;\n}\n.category-area[data-v-5615814a] {\r\n  /* padding : 10px 0; */\n}\n.category-area[data-v-5615814a]:hover {\r\n  background-color: rgb(248,248,248);\n}\n.category[data-v-5615814a] {\n}\n.isActive[data-v-5615814a] {\r\n  font-weight: bold;\r\n  border-bottom: 2px solid greenyellow;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -70479,7 +70466,7 @@ var render = function () {
             "span",
             {
               staticClass: "category",
-              class: { isActive: _vm.isShowFollowing },
+              class: { isActive: !_vm.isShowFollower },
             },
             [_vm._v("フォロー中")]
           ),
@@ -70507,8 +70494,8 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.isShowFollowing,
-              expression: "isShowFollowing",
+              value: !_vm.isShowFollower,
+              expression: "!(isShowFollower)",
             },
           ],
         }),

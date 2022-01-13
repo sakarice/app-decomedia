@@ -8,20 +8,16 @@
       </div>
       <div id="category-following" class="category-area w50 pt10 pb10 text-center"
       @click="isShowFollower=!isShowFollower">
-        <span class="category" :class="{isActive:isShowFollowing}">フォロー中</span>
+        <span class="category" :class="{isActive:!(isShowFollower)}">フォロー中</span>
       </div>
     </div>
 
     <!-- フォロワーとフォロー中ユーザ一覧表示領域 -->
-    <!-- フォロワー -->
     <div class="following-and-follower-area">
       <follower-list v-show="isShowFollower"></follower-list>
-      <following-list v-show="isShowFollowing"></following-list>
+      <following-list v-show="!(isShowFollower)"></following-list>
     </div>
-
   </section>
-
-
 </template>
 
 <script>
@@ -29,7 +25,6 @@ import followerList from './FollowerListComponent.vue'
 import followingList from './FollowingListComponent.vue'
 
 export default {
-
   components : {
     followerList,
     followingList,
@@ -41,14 +36,6 @@ export default {
       isShowFollower : true,
     }
   },
-  computed : {
-    isShowFollowing:function(){ return !this.isShowFollower}
-  },
-  methods : {},
-  created() {},
-  mounted() {},
-  watch : {},
-
 }
 </script>
 
