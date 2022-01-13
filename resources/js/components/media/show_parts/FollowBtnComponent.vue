@@ -10,7 +10,7 @@
 <script>
 export default{
   props: [
-    'mediaOwnerId',
+    'user_id',
   ],
   data : () => {
     return {
@@ -19,8 +19,8 @@ export default{
   },
   methods : {
     getFollowState(){
-      const media_owner_id = this.$parent.mediaOwnerInfo['id'];
-      let url = '/user/followState/'+media_owner_id;
+      console.log('user_id:'+this.user_id)
+      const url = '/following/'+ this.user_id;
       axios.get(url)
       .then(response => {
         this.isFollow = response.data.isFollow;
@@ -30,29 +30,26 @@ export default{
     changeFollowStateOfViewAndDB(){
       // dataのいいね情報を更新が完了してから、DBも更新する
       // 下記Promise内はthisのスコープから外れてしまうため、thisを変数に収める
-      let tmpThis = this;
+      const tmpThis = this;
 
       var firstMethod = new Promise(function(resolve, reject){
-        tmpThis.changeFollowState();
+        tmpThis.updateFollowStateInDB();
         resolve();
       })
 
-      firstMethod.then(function(){
-        tmpThis.updateFollowStateInDB();
-      })
-    },
-    changeFollowState() {
-      this.isFollow = !(this.isFollow);
+      firstMethod.then(function(){})
     },
     updateFollowStateInDB(){
-      let url = '/user/follow';
-      const target_user_id = this.$parent.mediaOwnerInfo['id'];
-      let data = {
+      const url = '/user/follow';
+      const data = {
         'isFollow' : this.isFollow,
-        'target_user_id' : target_user_id,
+        'user_id' : this.user_id,
       }
       axios.post(url, data)
-        .then(response => {})
+        .then(res => {
+          console.log(res.data.isFollow);
+          this.isFollow = res.data.isFollow;
+        })
         .catch(error => {})
     },
 
@@ -67,15 +64,12 @@ export default{
     }
   },
   watch : {
-    mediaOwnerId: function(newVal,oldVal){ // 親コンポーネントのmediaOwnerIdがdataにセットされるのを待つ
+    user_id: function(newVal,oldVal){ // 親コンポーネントのuser_idがdataにセットされるのを待つ
       if(newVal > 0){
         this.getFollowState();
       }
     }
   },
-  // mounted() {
-  //   this.getFollowState();
-  // }
 
 }
 

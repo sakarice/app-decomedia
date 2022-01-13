@@ -68,7 +68,7 @@ Route::middleware('auth')->group(function(){
         // 入ったMediaをいいねしているかチェックする
         Route::get('/user/likeState/{media_id}', 'App\Lib\LikeMediaUtil@getLikeState');
     // 自分が入ったMediaの作成者をフォローしているかチェックする
-        Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
+        Route::get('/following/{user_id}', 'App\Lib\FollowUtil@getFollowState');
     // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
 

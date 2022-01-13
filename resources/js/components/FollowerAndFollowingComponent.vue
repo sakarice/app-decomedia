@@ -56,7 +56,7 @@ export default {
 @import "/resources/css/FrequentlyUseStyle.css";
 @import "/resources/css/flexSetting.css";
 
-#follower-and-followingwrapper {
+#follower-and-following-wrapper {
   margin-top: 60px;
 }
 .category-wrapper {

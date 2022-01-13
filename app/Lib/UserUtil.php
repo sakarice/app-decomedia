@@ -33,8 +33,9 @@ class UserUtil
       'id' => $user_id,
       'name' => $user->name,
       'profile_img_url' => $user->profile_img_url,
-      'aboutMe' => $user->profile,
+      'profile' => $user->profile,
     ];
+    // \Log::info($user_data);
     return $user_data;
   }
 

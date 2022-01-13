@@ -1,5 +1,5 @@
 <template>
-  <section id="follower-list-wrapper">
+  <section id="follower-list-wrapper" class="flex column a-center">
     <user-info v-for="(follower, index) in getFollowers" :key="index"
     :index="index" ref="followers">
     </user-info>

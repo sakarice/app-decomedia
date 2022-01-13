@@ -16,9 +16,7 @@ class FollowerUtil
     $followers_id = Followers::where('user_id',$user_id)->get('follower_id')->pluck('follower_id');
     $followers_info = User::whereIn('id', $followers_id)
     ->get(['name', 'profile_img_url', 'profile']);
-    return [
-      'followers' => $followers_info,
-    ];
+    return ['followers' => $followers_info];
   }
 
 }

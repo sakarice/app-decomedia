@@ -15,20 +15,19 @@
             <img class="avatar" v-else src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg" alt="">
         </div>
         <div class="name-wrapper">
-          <!-- <input type="text" v-model="mediaOwnerInfo['name']" placeholder="ユーザ名"> -->
           <p class="name">{{mediaOwnerInfo['name']}}</p>
         </div>
-        <div class="about-me">
-          <textarea v-model="mediaOwnerInfo['aboutMe']" name="about-me" id="about-me" cols="20" rows="4" readonly></textarea>
+        <div class="profile-text">
+          <textarea v-model="mediaOwnerInfo['profile']" name="profile-text" id="profile-text" cols="20" rows="4" readonly></textarea>
         </div>
       </div>
 
       <!-- フォローアイコン -->
       <div id="disp-follow-modal-wrapper" class="icon-wrapper" v-show="!isMyMedia">
-        <follow-component
+        <follow-btn-component
         v-if="isShowFollow"
-        :media-owner-id="mediaOwnerInfo['id']">
-        </follow-component>
+        :user_id="mediaOwnerInfo['id']">
+        </follow-btn-component>
       </div>
 
     </div>
@@ -38,11 +37,11 @@
 <script>
 import { mapGetters } from "vuex";
 
-import Follow from './FollowComponent.vue';
+import FollowBtn from './FollowBtnComponent.vue';
 
   export default {
     components : {
-      Follow,
+      FollowBtn,
     },
     props : [],
     data : () => {
@@ -52,8 +51,8 @@ import Follow from './FollowComponent.vue';
         mediaOwnerInfo : {
           'id' : 0,
           'name' : "",
-          'profile_img_url' : null,
-          'aboutMe' : "",
+          'profile_img_url' : "",
+          'profile' : "",
         },
         'message' : "",
       }
@@ -62,6 +61,8 @@ import Follow from './FollowComponent.vue';
       ...mapGetters('loginState', ['getIsLogin']),
       ...mapGetters('media', ['getMediaId']),
       ...mapGetters('mediaSetting', ['getMediaSetting']),
+      ...mapGetters('mediaSetting', ['getIsInitializedSetting']),
+
       isShowFollow: function(){
         // ログインしていて自分のルームでなければフォローアイコンを表示
         return this.getIsLogin && !(this.isMyMedia);
@@ -72,7 +73,7 @@ import Follow from './FollowComponent.vue';
     },
     methods : {
       checkIsMyMedia(){
-        let url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
+        const url = '/ajax/judgeIsMyMedia/' + this.getMediaId;
         axios.get(url)
           .then(response =>{
             this.isMyMedia = response.data.isMyMedia;
@@ -85,13 +86,14 @@ import Follow from './FollowComponent.vue';
       stopEvent: function(){
         event.stopPropagation();
       },
-      getProfile(){ // DBからログイン中ユーザのidとプロフィール情報を取得
-        let url = '/user/mediaOwner/profile/show/' + this.getMediaSetting['id'];
+      getProfile(){ // DBからメディア作成者の情報を取得
+        const url = '/user/mediaOwner/profile/show/' + this.getMediaSetting['id'];
         axios.get(url)
         .then(res => {
           this.mediaOwnerInfo['id'] = res.data.id;
           this.mediaOwnerInfo['name'] = res.data.name;
-          this.mediaOwnerInfo['aboutMe'] = res.data.aboutMe;
+          this.mediaOwnerInfo['profile_img_url'] = res.data.profile_img_url;
+          this.mediaOwnerInfo['profile'] = res.data.profile;
         })
         .catch(error => {
           alert('Media作成者を取得できませんでした。');
@@ -103,6 +105,9 @@ import Follow from './FollowComponent.vue';
     watch : {
       doneGetMediaId : function(val){
         this.checkIsMyMedia();
+      },
+      getIsInitializedSetting:function(val){
+        if(val==true){this.getProfile();}
       }
     },
 
@@ -144,7 +149,7 @@ import Follow from './FollowComponent.vue';
   align-items: center;
 }
 
-.avatar-wrapper, .name-wrapper, .about-me {
+.avatar-wrapper, .name-wrapper, .profile-text {
   margin-bottom: 20px;
 }
 
