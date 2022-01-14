@@ -149,8 +149,8 @@
 }
 
 .avatar-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   box-shadow: 1px 1px 4px grey;
 
@@ -160,13 +160,14 @@
 }
 
 .avatar {
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
 }
 
 .update-button {
-  background-color: transparent;
+  background-color: black;
+  color: white;
   padding: 0 10px;
   border: 0.1px solid grey;
   border-radius: 3px;
@@ -176,6 +177,7 @@
 .update-button:hover {
   cursor: pointer;
   background-color: aquamarine;
+  color: black;
 }
 
 
