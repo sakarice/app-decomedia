@@ -63,21 +63,24 @@
     </div>
 
     <!-- 作成済みMediaのプレビュー -->
-    <section v-show="isShowMedia && isShowCreatedMedia" class="mypage-section created-media-list">
+    <section class="mypage-section created-media-list"
+    v-show="isShowMedia">
       <!-- 説明やもっと見るの表示 -->
-      <div class="section-top-wrapper">
+      <div class="section-top-wrapper"
+      @click="isShowCreatedMedia=!isShowCreatedMedia">
         <div class="flex a-end">
           <i class="fas fa-tools category-icon"></i>
-          <h3 class="section-title">作成したメディア</h3>
+          <h3 class="section-title">作成済み</h3>
           <span class="view-more ml15" @click="addCreatedMediaPreviewInfos">
-            ▼さらに表示
+            さらに表示
           </span>
         </div>
-
+        <span class="show-hide-icon mr15 deg-90" :class="{'deg90':!isShowCreatedMedia}">≫</span>
       </div>
 
       <!-- {{-- 作成済みmedia一覧 --}} -->
       <media-preview-component class="media-preview"
+        v-show="isShowCreatedMedia"
         :media-preview-infos="createdMediaPreviewInfos"
         :is-show-cover="isShowCoverOnCreateMedia"
         :is-select-mode="isSelectMode"
@@ -88,19 +91,23 @@
     </section>
 
     <!-- いいねしたMediaのプレビュー -->
-    <section v-show="isShowMedia && isShowLikedMedia" class="mypage-section liked-media-list">
+    <section class="mypage-section liked-media-list"
+     v-show="isShowMedia">
       <!-- 説明やもっと見るの表示 -->
-      <div class="section-top-wrapper">
+      <div class="section-top-wrapper"
+      @click="isShowLikedMedia=!isShowLikedMedia">
         <div class="flex a-end">
           <i class="fas fa-thumbs-up category-icon"></i>
-          <h3 class="section-title">いいねしたメディア</h3>
+          <h3 class="section-title">お気に入り</h3>
           <span class="view-more" @click="addLikedMediaPreviewInfos">
-            ▼さらに表示
+            さらに表示
           </span>
         </div>
+        <span class="show-hide-icon mr15 deg-90" :class="{'deg90':!isShowLikedMedia}">≫</span>
       </div>
       <!-- いいねしたmedia一覧 -->
       <media-preview-component class="media-preview"
+        v-show="isShowLikedMedia"
         :media-preview-infos="likedMediaPreviewInfos"
         :is-show-cover="isShowCoverOnLikeMedia"
         :is-select-mode="isSelectMode"
@@ -182,8 +189,8 @@ export default {
       return "/media/" + id + "/edit";
     },
     addCreatedMediaPreviewInfos(){
-      let url = '/addCreatedMediaPreviewInfos';
-      let tmpThis = this;
+      const url = '/addCreatedMediaPreviewInfos';
+      const tmpThis = this;
       axios.get(url)
       .then(response => {
         tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
@@ -193,8 +200,8 @@ export default {
       })
     },
     addLikedMediaPreviewInfos(){
-      let url = '/addLikedMediaPreviewInfos';
-      let tmpThis = this;
+      const url = '/addLikedMediaPreviewInfos';
+      const tmpThis = this;
       axios.get(url)
       .then(response => {
         tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
@@ -207,7 +214,7 @@ export default {
       this.$refs.createdMediaListPreview.addCreatedMediaListPreviewInfos(300);
     },
     deleteMedia(media_id){
-      let media_data = {
+      const media_data = {
         'media_id' : media_id,
       }
       const url = '/media/delete';
@@ -228,7 +235,7 @@ export default {
       if(isChecked == true){
         this.increaseCreatedMediaSelectedCount(index);
       } else if(isChecked == false){
-        let unSelectedOrderNum = this.createdMediaPreviewInfos[index]['selectedOrderNum'];
+        const unSelectedOrderNum = this.createdMediaPreviewInfos[index]['selectedOrderNum'];
         this.createdMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseMediaSelectedCount(unSelectedOrderNum);
       }
@@ -237,7 +244,7 @@ export default {
       if(isChecked == true){
         this.increaseLikedMediaSelectedCount(index);
       } else if(isChecked == false){
-        let unSelectedOrderNum = this.likedMediaPreviewInfos[index]['selectedOrderNum'];
+        const unSelectedOrderNum = this.likedMediaPreviewInfos[index]['selectedOrderNum'];
         this.likedMediaPreviewInfos[index]['selectedOrderNum'] = 0;
         this.decreseMediaSelectedCount(unSelectedOrderNum);
       }
@@ -317,7 +324,7 @@ export default {
 }
 
 .category-icon {
-  z-index: -1;
+  z-index: 3;
   margin-left: 1px;
   margin-right: 10px;
   padding: 8px;
@@ -329,7 +336,7 @@ export default {
 
 .mypage-content-wrapper {
   margin-left: 70px;
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 90px;
 }
@@ -355,6 +362,7 @@ export default {
 
 .mypage-section {
   margin-top: 20px;
+  margin-bottom: 20px;
   width: 100%;
   max-width: 1200px;
 }
@@ -365,6 +373,13 @@ export default {
   align-items: flex-end;
   justify-content: space-between;
   width: 100%
+}
+.section-top-wrapper:hover {
+  background-color: rgb(240,240,245);
+  cursor: pointer;
+}
+.section-top-wrapper:hover .show-hide-icon{
+  color: red;
 }
 
 .section-title {
@@ -487,6 +502,13 @@ export default {
   color: blue;
 }
 
+.deg-90 {
+  transform: rotate(-90deg);
+}
+.deg90 {
+  transform: rotate(90deg);
+}
+
 
 /* スマホ以外 */
 @media screen and (min-width: 481px) {
@@ -575,7 +597,7 @@ export default {
 
   .mypage-section {
     margin-top: 15px;
-    margin-bottom: 70px;
+    margin-bottom: 20px;
   }
   .bg-black {
     background-color: black;
@@ -591,7 +613,7 @@ export default {
   }
 
   .liked-media-list {
-    margin-bottom: 100px;
+    margin-bottom: 60px;
   }
 
   .select-mode-on-wrapper {

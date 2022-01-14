@@ -13868,6 +13868,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -22771,7 +22778,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  border-top: 1.4px dotted lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: -1;\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\r\n  margin-top: 90px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  padding: 2px 0px;\n}\n.menu-inner[data-v-15798219]{\r\n  border-bottom: 1px solid grey;\n}\n.mypage-category[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  color: rgba(0,0,0,0.3);\r\n  font-size: 2em;\n}\n.mypage-category[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.mypage-section[data-v-15798219] {\r\n  margin-top: 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  justify-content: space-between;\r\n  width: 100%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\n}\n.uncheck-all:hover .select-mode-icon[data-v-15798219]{\r\n  color: blue;\n}\n.select-mode-cancel:hover .select-mode-icon[data-v-15798219]{\r\n  color: black;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 13px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  position: fixed;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  padding: 6px 10px 2px 10px;\r\n  background-color: dimgray;\r\n  color: aliceblue;\r\n  border-radius: 5px;\r\n  z-index: 15;\r\n  justify-content: center;\r\n  flex-direction: row;\n}\n.select-mode-item[data-v-15798219] {\r\n  margin: 0 18px;\r\n  padding: 5px 0;\r\n  min-width: 40px;\r\n  font-size: 22px;\r\n  color: white;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.select-mode-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-subtitle[data-v-15798219]{\r\n  margin-top: 5px;\r\n  font-size: 11px;\n}\n.media-action-title[data-v-15798219] {\r\n  color: darkslategrey;\r\n  font-size: 13px;\n}\n.media-action-wrapper[data-v-15798219]{\r\n  padding-top: 5px;\n}\n.action-btn-wrapper[data-v-15798219] {\r\n  padding: 6px 16px;\r\n  margin: 0 15px;\r\n  color: grey;\r\n  font-size: 1.8em;\r\n  border-radius: 2px;\r\n  box-shadow: 1.5px 1.5px 1px slategrey;\n}\n.action-btn-wrapper[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.media-create[data-v-15798219] {\r\n  background-color: rgb(100,250,60);\r\n  color: black;\r\n  -webkit-text-decoration-line: none;\r\n          text-decoration-line: none;\n}\n.media-create[data-v-15798219]:hover {\r\n  color: white;\n}\n.select-mode-on[data-v-15798219] {\r\n  background-color: rgb(240,245,245);\n}\n.select-mode-on[data-v-15798219]:hover {\r\n  color: blue;\n}\n.select-mode-on-icon[data-v-15798219]{}\n.media-action-btn-label[data-v-15798219]{\r\n  color: black;\r\n  margin-left: 8px;\r\n  margin-top: 3px;\r\n  font-size: 14px;\n}\n.isActive[data-v-15798219] {\r\n  color: blue;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 10px;\r\n    padding: 15px 15px 0 15px;\r\n    border-top-left-radius: 20px;\r\n    border-top-right-radius: 20px;\n}\n.action-item-subtitle[data-v-15798219] {\r\n    color:dimgrey;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 15px;\r\n    padding-left: 0;\n}\n.menu-inner[data-v-15798219] {\r\n    padding: 6px 10px 2px 10px;\r\n    background-color: rgb(245,245,245);\r\n    border-top-left-radius: 3px;\r\n    border-top-right-radius: 3px;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    overflow-x: scroll;\n}\n.select-mode-item[data-v-15798219] {\r\n    min-width: 60px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;    \r\n    padding: 0;\r\n    z-index: 2;\r\n    display: flex;\r\n    justify-content: center;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-top: 80px;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 15px;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 18px;\r\n    font-size: 1.7em;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.media-action-wrapper[data-v-15798219]{\r\n    padding-top: 10px;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 15px;\r\n    margin-bottom: 70px;\n}\n.bg-black[data-v-15798219] {\r\n    background-color: black;\n}\n.media-create[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 22px;\r\n    right: 0;\r\n    font-size: 22px;\r\n    padding: 7px 8px;\r\n    z-index: 30;\n}\n.liked-media-list[data-v-15798219] {\r\n    margin-bottom: 100px;\n}\n.select-mode-on-wrapper[data-v-15798219] {\r\n    font-size: 1.5em;\n}\n.select-mode-on[data-v-15798219] {\r\n    padding: 2px 15px;\n}\n.select-mode-on-icon[data-v-15798219] {\r\n    font-size: 20px;\n}\n.select-mode-on-label[data-v-15798219] {\r\n    font-size: 13px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  border-top: 1.4px dotted lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: 3;\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 70%;\r\n  margin: 0 auto;\r\n  margin-top: 90px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  padding: 2px 0px;\n}\n.menu-inner[data-v-15798219]{\r\n  border-bottom: 1px solid grey;\n}\n.mypage-category[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  color: rgba(0,0,0,0.3);\r\n  font-size: 2em;\n}\n.mypage-category[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.mypage-section[data-v-15798219] {\r\n  margin-top: 20px;\r\n  margin-bottom: 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  justify-content: space-between;\r\n  width: 100%\n}\n.section-top-wrapper[data-v-15798219]:hover {\r\n  background-color: rgb(240,240,245);\r\n  cursor: pointer;\n}\n.section-top-wrapper:hover .show-hide-icon[data-v-15798219]{\r\n  color: red;\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\n}\n.uncheck-all:hover .select-mode-icon[data-v-15798219]{\r\n  color: blue;\n}\n.select-mode-cancel:hover .select-mode-icon[data-v-15798219]{\r\n  color: black;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 13px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  position: fixed;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  padding: 6px 10px 2px 10px;\r\n  background-color: dimgray;\r\n  color: aliceblue;\r\n  border-radius: 5px;\r\n  z-index: 15;\r\n  justify-content: center;\r\n  flex-direction: row;\n}\n.select-mode-item[data-v-15798219] {\r\n  margin: 0 18px;\r\n  padding: 5px 0;\r\n  min-width: 40px;\r\n  font-size: 22px;\r\n  color: white;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.select-mode-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-subtitle[data-v-15798219]{\r\n  margin-top: 5px;\r\n  font-size: 11px;\n}\n.media-action-title[data-v-15798219] {\r\n  color: darkslategrey;\r\n  font-size: 13px;\n}\n.media-action-wrapper[data-v-15798219]{\r\n  padding-top: 5px;\n}\n.action-btn-wrapper[data-v-15798219] {\r\n  padding: 6px 16px;\r\n  margin: 0 15px;\r\n  color: grey;\r\n  font-size: 1.8em;\r\n  border-radius: 2px;\r\n  box-shadow: 1.5px 1.5px 1px slategrey;\n}\n.action-btn-wrapper[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.media-create[data-v-15798219] {\r\n  background-color: rgb(100,250,60);\r\n  color: black;\r\n  -webkit-text-decoration-line: none;\r\n          text-decoration-line: none;\n}\n.media-create[data-v-15798219]:hover {\r\n  color: white;\n}\n.select-mode-on[data-v-15798219] {\r\n  background-color: rgb(240,245,245);\n}\n.select-mode-on[data-v-15798219]:hover {\r\n  color: blue;\n}\n.select-mode-on-icon[data-v-15798219]{}\n.media-action-btn-label[data-v-15798219]{\r\n  color: black;\r\n  margin-left: 8px;\r\n  margin-top: 3px;\r\n  font-size: 14px;\n}\n.isActive[data-v-15798219] {\r\n  color: blue;\n}\n.deg-90[data-v-15798219] {\r\n  transform: rotate(-90deg);\n}\n.deg90[data-v-15798219] {\r\n  transform: rotate(90deg);\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 10px;\r\n    padding: 15px 15px 0 15px;\r\n    border-top-left-radius: 20px;\r\n    border-top-right-radius: 20px;\n}\n.action-item-subtitle[data-v-15798219] {\r\n    color:dimgrey;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 15px;\r\n    padding-left: 0;\n}\n.menu-inner[data-v-15798219] {\r\n    padding: 6px 10px 2px 10px;\r\n    background-color: rgb(245,245,245);\r\n    border-top-left-radius: 3px;\r\n    border-top-right-radius: 3px;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    overflow-x: scroll;\n}\n.select-mode-item[data-v-15798219] {\r\n    min-width: 60px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;    \r\n    padding: 0;\r\n    z-index: 2;\r\n    display: flex;\r\n    justify-content: center;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-top: 80px;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 15px;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 18px;\r\n    font-size: 1.7em;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.media-action-wrapper[data-v-15798219]{\r\n    padding-top: 10px;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 15px;\r\n    margin-bottom: 20px;\n}\n.bg-black[data-v-15798219] {\r\n    background-color: black;\n}\n.media-create[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 22px;\r\n    right: 0;\r\n    font-size: 22px;\r\n    padding: 7px 8px;\r\n    z-index: 30;\n}\n.liked-media-list[data-v-15798219] {\r\n    margin-bottom: 60px;\n}\n.select-mode-on-wrapper[data-v-15798219] {\r\n    font-size: 1.5em;\n}\n.select-mode-on[data-v-15798219] {\r\n    padding: 2px 15px;\n}\n.select-mode-on-icon[data-v-15798219] {\r\n    font-size: 20px;\n}\n.select-mode-on-label[data-v-15798219] {\r\n    font-size: 13px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78539,33 +78546,61 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.isShowMedia && _vm.isShowCreatedMedia,
-              expression: "isShowMedia && isShowCreatedMedia",
+              value: _vm.isShowMedia,
+              expression: "isShowMedia",
             },
           ],
           staticClass: "mypage-section created-media-list",
         },
         [
-          _c("div", { staticClass: "section-top-wrapper" }, [
-            _c("div", { staticClass: "flex a-end" }, [
-              _c("i", { staticClass: "fas fa-tools category-icon" }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "section-title" }, [
-                _vm._v("作成したメディア"),
+          _c(
+            "div",
+            {
+              staticClass: "section-top-wrapper",
+              on: {
+                click: function ($event) {
+                  _vm.isShowCreatedMedia = !_vm.isShowCreatedMedia
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "flex a-end" }, [
+                _c("i", { staticClass: "fas fa-tools category-icon" }),
+                _vm._v(" "),
+                _c("h3", { staticClass: "section-title" }, [
+                  _vm._v("作成済み"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "view-more ml15",
+                    on: { click: _vm.addCreatedMediaPreviewInfos },
+                  },
+                  [_vm._v("\n          さらに表示\n        ")]
+                ),
               ]),
               _vm._v(" "),
               _c(
                 "span",
                 {
-                  staticClass: "view-more ml15",
-                  on: { click: _vm.addCreatedMediaPreviewInfos },
+                  staticClass: "show-hide-icon mr15 deg-90",
+                  class: { deg90: !_vm.isShowCreatedMedia },
                 },
-                [_vm._v("\n          ▼さらに表示\n        ")]
+                [_vm._v("≫")]
               ),
-            ]),
-          ]),
+            ]
+          ),
           _vm._v(" "),
           _c("media-preview-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowCreatedMedia,
+                expression: "isShowCreatedMedia",
+              },
+            ],
             ref: "createdMediaPreview",
             staticClass: "media-preview",
             attrs: {
@@ -78589,33 +78624,61 @@ var render = function () {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.isShowMedia && _vm.isShowLikedMedia,
-              expression: "isShowMedia && isShowLikedMedia",
+              value: _vm.isShowMedia,
+              expression: "isShowMedia",
             },
           ],
           staticClass: "mypage-section liked-media-list",
         },
         [
-          _c("div", { staticClass: "section-top-wrapper" }, [
-            _c("div", { staticClass: "flex a-end" }, [
-              _c("i", { staticClass: "fas fa-thumbs-up category-icon" }),
-              _vm._v(" "),
-              _c("h3", { staticClass: "section-title" }, [
-                _vm._v("いいねしたメディア"),
+          _c(
+            "div",
+            {
+              staticClass: "section-top-wrapper",
+              on: {
+                click: function ($event) {
+                  _vm.isShowLikedMedia = !_vm.isShowLikedMedia
+                },
+              },
+            },
+            [
+              _c("div", { staticClass: "flex a-end" }, [
+                _c("i", { staticClass: "fas fa-thumbs-up category-icon" }),
+                _vm._v(" "),
+                _c("h3", { staticClass: "section-title" }, [
+                  _vm._v("お気に入り"),
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "view-more",
+                    on: { click: _vm.addLikedMediaPreviewInfos },
+                  },
+                  [_vm._v("\n          さらに表示\n        ")]
+                ),
               ]),
               _vm._v(" "),
               _c(
                 "span",
                 {
-                  staticClass: "view-more",
-                  on: { click: _vm.addLikedMediaPreviewInfos },
+                  staticClass: "show-hide-icon mr15 deg-90",
+                  class: { deg90: !_vm.isShowLikedMedia },
                 },
-                [_vm._v("\n          ▼さらに表示\n        ")]
+                [_vm._v("≫")]
               ),
-            ]),
-          ]),
+            ]
+          ),
           _vm._v(" "),
           _c("media-preview-component", {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: _vm.isShowLikedMedia,
+                expression: "isShowLikedMedia",
+              },
+            ],
             ref: "likedMediaPreview",
             staticClass: "media-preview",
             attrs: {
