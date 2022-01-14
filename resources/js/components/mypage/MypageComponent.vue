@@ -324,7 +324,6 @@ export default {
 }
 
 .category-icon {
-  z-index: 3;
   margin-left: 1px;
   margin-right: 10px;
   padding: 8px;
