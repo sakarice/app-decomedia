@@ -78574,8 +78574,13 @@ var render = function () {
                 _c(
                   "span",
                   {
-                    staticClass: "view-more ml15",
-                    on: { click: _vm.addCreatedMediaPreviewInfos },
+                    staticClass: "view-more ml15 z1",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.addCreatedMediaPreviewInfos($event)
+                      },
+                    },
                   },
                   [_vm._v("\n          さらに表示\n        ")]
                 ),
@@ -78652,8 +78657,13 @@ var render = function () {
                 _c(
                   "span",
                   {
-                    staticClass: "view-more",
-                    on: { click: _vm.addLikedMediaPreviewInfos },
+                    staticClass: "view-more z1",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.addLikedMediaPreviewInfos($event)
+                      },
+                    },
                   },
                   [_vm._v("\n          さらに表示\n        ")]
                 ),

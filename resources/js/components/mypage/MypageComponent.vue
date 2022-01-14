@@ -71,7 +71,7 @@
         <div class="flex a-end">
           <i class="fas fa-tools category-icon"></i>
           <h3 class="section-title">作成済み</h3>
-          <span class="view-more ml15" @click="addCreatedMediaPreviewInfos">
+          <span class="view-more ml15 z1" @click.stop="addCreatedMediaPreviewInfos">
             さらに表示
           </span>
         </div>
@@ -99,7 +99,7 @@
         <div class="flex a-end">
           <i class="fas fa-thumbs-up category-icon"></i>
           <h3 class="section-title">お気に入り</h3>
-          <span class="view-more" @click="addLikedMediaPreviewInfos">
+          <span class="view-more z1" @click.stop="addLikedMediaPreviewInfos">
             さらに表示
           </span>
         </div>
