@@ -123,7 +123,7 @@ export default {
 
 li {
   list-style: none;
-  width: 24%;
+  width: 20%;
   margin-bottom: 20px;
 }
 
