@@ -5,65 +5,77 @@
 
     <!-- Media -->
     <div class="mypage-action-menu">
-      <div class="menu-inner flex a-end">
-        <!-- Media作成 -->
-        <div class="mypage-action-item media-create-wrapper" v-show="!isSelectMode">
-          <a class="linkTo-createMedia" href="/media/create">
-            <i class="fas fa-plus media-create-icon"></i>
-          </a>
-          <span class="action-item-subtitle">作成</span>
-        </div>
-        <!-- 〇選択モードの切り替えボタン -->
-        <div class="mypage-action-item select-mode-switch" v-show="!isSelectMode">
-          <i id="change-select-mode" class="fas fa-hand-point-up" @click="toggleSelectMode"></i>
-          <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+      <div class="menu-inner flex j-center a-end">
+
+        <!-- メディア表示切り替えボタン -->
+        <div class="mypage-category media-disp-switch"
+         v-show="!isSelectMode" :class="{'isActive':isShowMedia}">
+          <i id="change-media-mode" class="fas fa-object-group" @click="changeActiveCategory('media')"></i>
+          <span class="action-item-subtitle">メディア</span>
         </div>
         <!-- フォロー中/フォロワーユーザ表示切り替えボタン -->
-        <div class="mypage-action-item follow-user-disp-switch" v-show="!isSelectMode">
-          <i id="change-follow-user-mode" class="fas fa-user-friends" @click="toggleShowFollower"></i>
-          <span class="action-item-subtitle">フォロワー/フォロー中</span>
+        <div class="mypage-category follow-user-disp-switch"
+         v-show="!isSelectMode" :class="{'isActive':isShowUser}">
+          <i id="change-follow-user-mode" class="fas fa-user-friends" @click="changeActiveCategory('user')"></i>
+          <span class="action-item-subtitle">ユーザー</span>
         </div>
 
         <!-- Mediaの選択モード -->
-        <!-- 〇選択したMedia削除ボタン -->
-        <div class="select-mode-item-wrapper flex" :class='{"is-black": isSelectMode}'>
+        <!-- 選択したMedia削除ボタン -->
+        <div class="select-mode-item-wrapper flex" v-show="isSelectMode">
           <selected-media-delete-button-component
-          class="mypage-action-item select-mode-item"
-          v-show="isSelectMode"
+          class="select-mode-item"
           v-on:set-is-delete="setIsDelete">
           </selected-media-delete-button-component>
-
-          <!-- 〇選択をすべて解除するボタン -->
-          <div class="mypage-action-item select-mode-item" v-show="isSelectMode">
-            <i class="far fa-square select-uncheck-icon" @click="unCheckAllMedia"></i>
-            <span class="action-item-subtitle">リセット</span>
+          <!-- 選択をすべて解除するボタン -->
+          <div class="select-mode-item uncheck-all" @click="unCheckAllMedia">
+            <i class="fas fa-undo select-mode-icon"></i>
+            <span class="select-mode-item-subtitle">リセット</span>
           </div>
-
           <!-- 選択モードキャンセル -->
-          <div class="mypage-action-item select-mode-switch" v-show="isSelectMode">
-            <i id="change-select-mode" class="far fa-window-close" @click="toggleSelectMode"></i>
-            <span class="action-item-subtitle">{{selectModeButtonMessage}}</span>
+          <div class="select-mode-item select-mode-cancel" @click="toggleSelectMode">
+            <i class="far fa-window-close select-mode-icon"></i>
+            <span class="select-mode-item-subtitle">{{selectModeButtonMessage}}</span>
           </div>
         </div>
+
       </div>
     </div>
 
     <!-- フォロワーとフォロー中ユーザ -->
-    <follower-and-following v-show="isShowFollower">
-    </follower-and-following>    
+    <follower-and-following v-show="isShowUser">
+    </follower-and-following>
+
+
+    <!-- メディアの操作ボタン -->
+    <span class="media-action-title for-pc-tablet" v-show="isShowMedia">メディア操作</span>
+    <div class="media-action-wrapper flex j-center a-center">
+      <!-- Media作成 -->
+      <a class="action-btn-wrapper media-create link flex a-center" v-show="isShowMedia && !isSelectMode" href="/media/create">
+        <i class="fas fa-plus media-create-icon"></i>
+        <span class="media-action-btn-label for-pc-tablet">作成</span>
+      </a>
+      <!-- 選択モードの切り替えボタン -->
+      <div class="action-btn-wrapper select-mode-on flex a-center" v-show="isShowMedia && !isSelectMode" @click="toggleSelectMode">
+        <i class="fas fa-check-square select-mode-on-icon"></i>
+        <span class="media-action-btn-label select-mode-on-label">{{selectModeButtonMessage}}</span>
+      </div>
+    </div>
 
     <!-- 作成済みMediaのプレビュー -->
     <section v-show="isShowMedia && isShowCreatedMedia" class="mypage-section created-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-      <i class="fas fa-tools category-icon"></i>
-        <h3 class="section-title">作成したメディア</h3>
-        <!-- {{-- Media作成 --}} -->
+        <div class="flex a-end">
+          <i class="fas fa-tools category-icon"></i>
+          <h3 class="section-title">作成したメディア</h3>
+          <span class="view-more ml15" @click="addCreatedMediaPreviewInfos">
+            ▼さらに表示
+          </span>
+        </div>
 
-        <span class="view-more" @click="addCreatedMediaPreviewInfos">
-          ▼more
-        </span>
       </div>
+
       <!-- {{-- 作成済みmedia一覧 --}} -->
       <media-preview-component class="media-preview"
         :media-preview-infos="createdMediaPreviewInfos"
@@ -79,11 +91,13 @@
     <section v-show="isShowMedia && isShowLikedMedia" class="mypage-section liked-media-list">
       <!-- 説明やもっと見るの表示 -->
       <div class="section-top-wrapper">
-        <i class="fas fa-thumbs-up category-icon"></i>
-        <h3 class="section-title">いいねしたメディア</h3>
-        <span class="view-more" @click="addLikedMediaPreviewInfos">
-          ▼more
-        </span>
+        <div class="flex a-end">
+          <i class="fas fa-thumbs-up category-icon"></i>
+          <h3 class="section-title">いいねしたメディア</h3>
+          <span class="view-more" @click="addLikedMediaPreviewInfos">
+            ▼さらに表示
+          </span>
+        </div>
       </div>
       <!-- いいねしたmedia一覧 -->
       <media-preview-component class="media-preview"
@@ -94,10 +108,6 @@
         ref="likedMediaPreview">
       </media-preview-component>
     </section>
-
-
-    <mypage-menu-bar-component>
-    </mypage-menu-bar-component>
 
     <overlay></overlay>
     <div v-show="isDeleting">
@@ -116,7 +126,6 @@
 <script>
 import MediaPreview from '../MediaPreviewComponent.vue';
 import MediaListPreview from '../MediaListPreviewComponent.vue';
-import MypageMenuBar from './MypageMenuBarComponent.vue';
 import MediaListCreateButton from '../MediaListCreateButtonComponent.vue';
 import SelectedMediaDeleteButton from './SelectedMediaDeleteButtonComponent.vue';
 import UserPageProfile from './UserPageProfileComponent.vue';
@@ -130,7 +139,6 @@ export default {
   components : {
     MediaPreview,
     MediaListPreview,
-    MypageMenuBar,
     MediaListCreateButton,
     SelectedMediaDeleteButton,
     UserPageProfile,
@@ -146,20 +154,11 @@ export default {
     return {
       'createdMediaPreviewInfos' : "",
       'likedMediaPreviewInfos' : "",
+      'activeCategory' : "media",
       'isSelectMode' : false,
-      // 'isShow' : {
-      //   'coverOnCreateMedia' : true,
-      //   'coverOnLikeMedia' : false,
-      //   'createdMediaListPreview' : true,
-      //   'createdMediaPreview' : true,
-      //   'likedMediaPreview' : true,
-      // },
-      'isShowFollower' : false,
       'isShowCreatedMedia' : true,
       'isShowLikedMedia' : true,
       'isShowCoverOnLikeMedia' : false,
-      // 'isUpdateCreatedMediaPreviewInfo' : false,
-      // 'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount' : 0,
       'isDeleting' : false,
     }
@@ -171,11 +170,14 @@ export default {
     isShowCoverOnCreateMedia : function(){
       return this.isSelectMode;
     },
-    isShowMedia:function(){ return !this.isShowFollower},
+    isShowUser:function(){ return this.activeCategory=="user" ? true : false; },
+    isShowMedia:function(){ return this.activeCategory=="media" ? true : false; },
   },
   methods : {
     toggleSelectMode(){this.isSelectMode = !this.isSelectMode;},
-    toggleShowFollower(){this.isShowFollower = !this.isShowFollower},
+    changeActiveCategory(category){
+      this.activeCategory = category;
+    },
     mediaEditLink : function(id) {
       return "/media/" + id + "/edit";
     },
@@ -185,7 +187,6 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
-        // tmpThis.isUpdateCreatedMediaPreviewInfo = true;
       })
       .catch(error => {
         alert('media情報の取得に失敗しました')
@@ -197,7 +198,6 @@ export default {
       axios.get(url)
       .then(response => {
         tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
-        // tmpThis.isUpdateLikedMediaPreviewInfo = true;
       })
       .catch(error => {
         alert('media情報の取得に失敗しました')
@@ -311,8 +311,6 @@ export default {
 .media-preview {
   margin-top: 0;
   padding-top: 25px;
-  /* background-color: rgba(255,255,255,0.75);
-  box-shadow: 0px 2px 3px lightgrey; */
   border-top: 1.4px dotted lightgrey;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -320,7 +318,6 @@ export default {
 
 .category-icon {
   z-index: -1;
-  /* margin-bottom: -2.5px; */
   margin-left: 1px;
   margin-right: 10px;
   padding: 8px;
@@ -338,29 +335,23 @@ export default {
 }
 
 .mypage-action-menu {
-  padding: 10px 30px;
-  background-color: rgb(255,255,255);
-  box-shadow: 0.5px 0.5px 2px lightgrey;
-  border-radius: 3px;
+  padding: 2px 0px;
+}
+.menu-inner{
+  border-bottom: 1px solid grey;
 }
 
-.mypage-action-item {
+.mypage-category {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 3em;
+  color: rgba(0,0,0,0.3);
+  font-size: 2em;
 }
-.mypage-action-item:hover {
+.mypage-category:hover {
   cursor: pointer;
 }
 
-.media-create-wrapper {
-  font-size: 2em;
-}
-
-#change-select-mode {
-  transition: 0.2s;
-}
 
 .mypage-section {
   margin-top: 20px;
@@ -372,7 +363,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  width: 90%
+  justify-content: space-between;
+  width: 100%
 }
 
 .section-title {
@@ -380,33 +372,20 @@ export default {
   margin: 0 20px 0 0;
   font-size: 17px;
   font-family: serif;
-  /* font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体"; */
 }
 
-.select-uncheck-icon {
-  color: black;
-}
-.select-uncheck-icon:hover {
+.uncheck-all:hover .select-mode-icon{
   color: blue;
 }
+.select-mode-cancel:hover .select-mode-icon{
+  color: black;
+}
 
-.media-create-icon {
-  color:white;
-  background-color: aquamarine;
-  padding: 6px 8px;
-  border-radius: 50%;
-  box-shadow: 1px 1px 3px grey;
-  transition: 0.2s;
-}
-.media-create-icon:hover {
-  background-color: darkturquoise;
-  transform: scale(1.01);
-  box-shadow: 2px 2px 7px grey;
-}
+
+
 .action-item-subtitle {
   margin-top: 5px;
   font-size:11px;
-  color:grey;
 }
 
 
@@ -420,11 +399,92 @@ export default {
 
 .view-more {
   color: blue;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .view-more:hover {
   cursor: pointer;
+}
+
+.select-mode-item-wrapper {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  padding: 6px 10px 2px 10px;
+  background-color: dimgray;
+  color: aliceblue;
+  border-radius: 5px;
+  z-index: 15;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.select-mode-item {
+  margin: 0 18px;
+  padding: 5px 0;
+  min-width: 40px;
+  font-size: 22px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.select-mode-item:hover {
+  cursor: pointer;
+}
+
+.select-mode-item-subtitle{
+  margin-top: 5px;
+  font-size: 11px;
+}
+
+.media-action-title {
+  color: darkslategrey;
+  font-size: 13px;
+}
+
+.media-action-wrapper{
+  padding-top: 5px;
+}
+
+.action-btn-wrapper {
+  padding: 6px 16px;
+  margin: 0 15px;
+  color: grey;
+  font-size: 1.8em;
+  border-radius: 2px;
+  box-shadow: 1.5px 1.5px 1px slategrey;
+}
+.action-btn-wrapper:hover {
+  cursor: pointer;
+}
+
+.media-create {
+  background-color: rgb(100,250,60);
+  color: black;
+  text-decoration-line: none;
+}
+.media-create:hover {
+  color: white;
+}
+
+.select-mode-on {
+  background-color: rgb(240,245,245);
+}
+.select-mode-on:hover {
+  color: blue;
+}
+.select-mode-on-icon{}
+
+.media-action-btn-label{
+  color: black;
+  margin-left: 8px;
+  margin-top: 3px;
+  font-size: 14px;
+}
+
+.isActive {
+  color: blue;
 }
 
 
@@ -434,8 +494,15 @@ export default {
     display: none;
   }
 
-  .mypage-action-item {
-    margin: 0 50px 0 0;
+  .mypage-category {
+    margin: 0 10px;
+    padding: 15px 15px 0 15px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .action-item-subtitle {
+    color:dimgrey;
   }
  
 }
@@ -448,30 +515,28 @@ export default {
   }
 
   .media-preview {
-    padding-top: 5px;
+    padding-top: 15px;
     padding-left: 0;
   }
 
   .menu-inner {
-    color: white;
-    background-color: black;
-    border-radius: 5px;
-    padding: 7px 10px;
-    justify-content: center;
+    padding: 6px 10px 2px 10px;
+    background-color: rgb(245,245,245);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
 
   .select-mode-item-wrapper {
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 6px 10px;
-    color: white;
-    z-index: 15;
-    justify-content: center;
-    flex-direction: row;
     overflow-x: scroll;
   }
+
+  .select-mode-item {
+    min-width: 60px;
+  }
+
 
   .mypage-action-menu {
     position: fixed;
@@ -479,6 +544,7 @@ export default {
     left: 0;
     right: 0;    
     padding: 0;
+    z-index: 2;
     display: flex;
     justify-content: center;
   }
@@ -490,11 +556,11 @@ export default {
 
 
   .section-title {
-    font-size: 13px;
+    font-size: 15px;
   }
 
 
-  .mypage-action-item {
+  .mypage-category {
     margin: 0 18px;
     font-size: 1.7em;
   }
@@ -502,27 +568,46 @@ export default {
   .mypage-content-wrapper {
     width: 90%;
   }
-  .mypage-section {
-    margin-top: 30px;
-  }
-  .is-black {
-    background-color: black;
-  }
-  .select-uncheck-icon {
-    color: white;
+
+  .media-action-wrapper{
+    padding-top: 10px;
   }
 
-  .media-create-wrapper {
+  .mypage-section {
+    margin-top: 15px;
+    margin-bottom: 70px;
+  }
+  .bg-black {
+    background-color: black;
+  }
+
+  .media-create {
     position: fixed;
-    bottom: 10px;
-    right: 20px;
-    margin-right: 0;
-    transform: scale(1.2);
+    bottom: 22px;
+    right: 0;
+    font-size: 22px;
+    padding: 7px 8px;
+    z-index: 30;
   }
 
   .liked-media-list {
     margin-bottom: 100px;
   }
+
+  .select-mode-on-wrapper {
+    font-size: 1.5em;
+  }
+
+  .select-mode-on {
+    padding: 2px 15px;
+  }
+  .select-mode-on-icon {
+    font-size: 20px;
+  }
+  .select-mode-on-label {
+    font-size: 13px;
+  }
+
 
 }
 

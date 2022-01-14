@@ -13736,14 +13736,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _MediaPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../MediaPreviewComponent.vue */ "./resources/js/components/MediaPreviewComponent.vue");
 /* harmony import */ var _MediaListPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../MediaListPreviewComponent.vue */ "./resources/js/components/MediaListPreviewComponent.vue");
-/* harmony import */ var _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MypageMenuBarComponent.vue */ "./resources/js/components/mypage/MypageMenuBarComponent.vue");
-/* harmony import */ var _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../MediaListCreateButtonComponent.vue */ "./resources/js/components/MediaListCreateButtonComponent.vue");
-/* harmony import */ var _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SelectedMediaDeleteButtonComponent.vue */ "./resources/js/components/mypage/SelectedMediaDeleteButtonComponent.vue");
-/* harmony import */ var _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserPageProfileComponent.vue */ "./resources/js/components/mypage/UserPageProfileComponent.vue");
-/* harmony import */ var _FollowerAndFollowingComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../FollowerAndFollowingComponent.vue */ "./resources/js/components/FollowerAndFollowingComponent.vue");
-/* harmony import */ var _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
-/* harmony import */ var _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
-/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
+/* harmony import */ var _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../MediaListCreateButtonComponent.vue */ "./resources/js/components/MediaListCreateButtonComponent.vue");
+/* harmony import */ var _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SelectedMediaDeleteButtonComponent.vue */ "./resources/js/components/mypage/SelectedMediaDeleteButtonComponent.vue");
+/* harmony import */ var _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserPageProfileComponent.vue */ "./resources/js/components/mypage/UserPageProfileComponent.vue");
+/* harmony import */ var _FollowerAndFollowingComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FollowerAndFollowingComponent.vue */ "./resources/js/components/FollowerAndFollowingComponent.vue");
+/* harmony import */ var _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/OverlayComponent.vue */ "./resources/js/components/common/OverlayComponent.vue");
+/* harmony import */ var _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/LoadingComponent.vue */ "./resources/js/components/common/LoadingComponent.vue");
+/* harmony import */ var _functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../functions/overlayDispHelper */ "./resources/js/functions/overlayDispHelper.js");
 //
 //
 //
@@ -13859,7 +13858,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13873,33 +13881,23 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     MediaPreview: _MediaPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     MediaListPreview: _MediaListPreviewComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    MypageMenuBar: _MypageMenuBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    MediaListCreateButton: _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    SelectedMediaDeleteButton: _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    UserPageProfile: _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    FollowerAndFollowing: _FollowerAndFollowingComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Overlay: _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Loading: _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    MediaListCreateButton: _MediaListCreateButtonComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    SelectedMediaDeleteButton: _SelectedMediaDeleteButtonComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    UserPageProfile: _UserPageProfileComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    FollowerAndFollowing: _FollowerAndFollowingComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Overlay: _common_OverlayComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Loading: _common_LoadingComponent_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: ['createdMediaPreviewInfosFromParent', 'likedMediaPreviewInfosFromParent'],
   data: function data() {
     return {
       'createdMediaPreviewInfos': "",
       'likedMediaPreviewInfos': "",
+      'activeCategory': "media",
       'isSelectMode': false,
-      // 'isShow' : {
-      //   'coverOnCreateMedia' : true,
-      //   'coverOnLikeMedia' : false,
-      //   'createdMediaListPreview' : true,
-      //   'createdMediaPreview' : true,
-      //   'likedMediaPreview' : true,
-      // },
-      'isShowFollower': false,
       'isShowCreatedMedia': true,
       'isShowLikedMedia': true,
       'isShowCoverOnLikeMedia': false,
-      // 'isUpdateCreatedMediaPreviewInfo' : false,
-      // 'isUpdateLikedMediaPreviewInfo' : false,
       'totalSelectedCount': 0,
       'isDeleting': false
     };
@@ -13911,16 +13909,19 @@ __webpack_require__.r(__webpack_exports__);
     isShowCoverOnCreateMedia: function isShowCoverOnCreateMedia() {
       return this.isSelectMode;
     },
+    isShowUser: function isShowUser() {
+      return this.activeCategory == "user" ? true : false;
+    },
     isShowMedia: function isShowMedia() {
-      return !this.isShowFollower;
+      return this.activeCategory == "media" ? true : false;
     }
   },
   methods: {
     toggleSelectMode: function toggleSelectMode() {
       this.isSelectMode = !this.isSelectMode;
     },
-    toggleShowFollower: function toggleShowFollower() {
-      this.isShowFollower = !this.isShowFollower;
+    changeActiveCategory: function changeActiveCategory(category) {
+      this.activeCategory = category;
     },
     mediaEditLink: function mediaEditLink(id) {
       return "/media/" + id + "/edit";
@@ -13929,7 +13930,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/addCreatedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos; // tmpThis.isUpdateCreatedMediaPreviewInfo = true;
+        tmpThis.createdMediaPreviewInfos = response.data.createdMediaPreviewInfos;
       })["catch"](function (error) {
         alert('media情報の取得に失敗しました');
       });
@@ -13938,7 +13939,7 @@ __webpack_require__.r(__webpack_exports__);
       var url = '/addLikedMediaPreviewInfos';
       var tmpThis = this;
       axios.get(url).then(function (response) {
-        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos; // tmpThis.isUpdateLikedMediaPreviewInfo = true;
+        tmpThis.likedMediaPreviewInfos = response.data.likedMediaPreviewInfos;
       })["catch"](function (error) {
         alert('media情報の取得に失敗しました');
       });
@@ -14030,9 +14031,9 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     isDeleting: function isDeleting(val) {
       if (val == true) {
-        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_9__.showOverLay)();
+        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.showOverLay)();
       } else {
-        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_9__.hideOverLay)();
+        (0,_functions_overlayDispHelper__WEBPACK_IMPORTED_MODULE_8__.hideOverLay)();
       }
     }
   }
@@ -20850,7 +20851,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#follower-and-following-wrapper[data-v-5615814a] {\r\n  margin-top: 20px;\n}\n.category-wrapper[data-v-5615814a] {\r\n  border-bottom: 1px solid lightgrey;\n}\n.category-area[data-v-5615814a] {\r\n  /* padding : 10px 0; */\n}\n.category-area[data-v-5615814a]:hover {\r\n  background-color: rgb(248,248,248);\n}\n.category[data-v-5615814a] {\n}\n.isActive[data-v-5615814a] {\r\n  font-weight: bold;\r\n  border-bottom: 2px solid greenyellow;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n#follower-and-following-wrapper[data-v-5615814a] {\r\n  margin-top: 20px;\n}\n.category-wrapper[data-v-5615814a] {\r\n  border-bottom: 1px solid lightgrey;\n}\n.category-area[data-v-5615814a] {\r\n  /* padding : 10px 0; */\n}\n.category-area[data-v-5615814a]:hover {\r\n  background-color: rgb(248,248,248);\n}\n.category[data-v-5615814a] {\n}\n.isActive[data-v-5615814a] {\r\n  font-weight: bold;\r\n  border-bottom: 2px solid aquamarine;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22770,7 +22771,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  /* background-color: rgba(255,255,255,0.75);\r\n  box-shadow: 0px 2px 3px lightgrey; */\r\n  border-top: 1.4px dotted lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: -1;\r\n  /* margin-bottom: -2.5px; */\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\r\n  margin-top: 90px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  padding: 10px 30px;\r\n  background-color: rgb(255,255,255);\r\n  box-shadow: 0.5px 0.5px 2px lightgrey;\r\n  border-radius: 3px;\n}\n.mypage-action-item[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  font-size: 3em;\n}\n.mypage-action-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.media-create-wrapper[data-v-15798219] {\r\n  font-size: 2em;\n}\n#change-select-mode[data-v-15798219] {\r\n  transition: 0.2s;\n}\n.mypage-section[data-v-15798219] {\r\n  margin-top: 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  width: 90%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\r\n  /* font-family: \"Yu Gothic\", \"游ゴシック\", YuGothic, \"游ゴシック体\"; */\n}\n.select-uncheck-icon[data-v-15798219] {\r\n  color: black;\n}\n.select-uncheck-icon[data-v-15798219]:hover {\r\n  color: blue;\n}\n.media-create-icon[data-v-15798219] {\r\n  color:white;\r\n  background-color: aquamarine;\r\n  padding: 6px 8px;\r\n  border-radius: 50%;\r\n  box-shadow: 1px 1px 3px grey;\r\n  transition: 0.2s;\n}\n.media-create-icon[data-v-15798219]:hover {\r\n  background-color: darkturquoise;\r\n  transform: scale(1.01);\r\n  box-shadow: 2px 2px 7px grey;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:grey;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 12px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin: 0 50px 0 0;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 5px;\r\n    padding-left: 0;\n}\n.menu-inner[data-v-15798219] {\r\n    color: white;\r\n    background-color: black;\r\n    border-radius: 5px;\r\n    padding: 7px 10px;\r\n    justify-content: center;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    padding: 6px 10px;\r\n    color: white;\r\n    z-index: 15;\r\n    justify-content: center;\r\n    flex-direction: row;\r\n    overflow-x: scroll;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;    \r\n    padding: 0;\r\n    display: flex;\r\n    justify-content: center;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-top: 80px;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 13px;\n}\n.mypage-action-item[data-v-15798219] {\r\n    margin: 0 18px;\r\n    font-size: 1.7em;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 30px;\n}\n.is-black[data-v-15798219] {\r\n    background-color: black;\n}\n.select-uncheck-icon[data-v-15798219] {\r\n    color: white;\n}\n.media-create-wrapper[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 10px;\r\n    right: 20px;\r\n    margin-right: 0;\r\n    transform: scale(1.2);\n}\n.liked-media-list[data-v-15798219] {\r\n    margin-bottom: 100px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.bg-black[data-v-15798219] { background-color: black;}\n.bg-lightgrey[data-v-15798219] { background-color: rgb(252,252,252);}\n.white[data-v-15798219] { color: white;}\n.media-preview[data-v-15798219] {\r\n  margin-top: 0;\r\n  padding-top: 25px;\r\n  border-top: 1.4px dotted lightgrey;\r\n  border-bottom-right-radius: 3px;\r\n  border-bottom-left-radius: 3px;\n}\n.category-icon[data-v-15798219] {\r\n  z-index: -1;\r\n  margin-left: 1px;\r\n  margin-right: 10px;\r\n  padding: 8px;\r\n  border-top-left-radius: 5px;\r\n  border-top-right-radius: 5px;\r\n  background-color: black;\r\n  color: white;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n  margin-left: 70px;\r\n  width: 80%;\r\n  margin: 0 auto;\r\n  margin-top: 90px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n  padding: 2px 0px;\n}\n.menu-inner[data-v-15798219]{\r\n  border-bottom: 1px solid grey;\n}\n.mypage-category[data-v-15798219] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  color: rgba(0,0,0,0.3);\r\n  font-size: 2em;\n}\n.mypage-category[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.mypage-section[data-v-15798219] {\r\n  margin-top: 20px;\r\n  width: 100%;\r\n  max-width: 1200px;\n}\n.section-top-wrapper[data-v-15798219] {\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: flex-end;\r\n  justify-content: space-between;\r\n  width: 100%\n}\n.section-title[data-v-15798219] {\r\n  display: inline-block;\r\n  margin: 0 20px 0 0;\r\n  font-size: 17px;\r\n  font-family: serif;\n}\n.uncheck-all:hover .select-mode-icon[data-v-15798219]{\r\n  color: blue;\n}\n.select-mode-cancel:hover .select-mode-icon[data-v-15798219]{\r\n  color: black;\n}\n.action-item-subtitle[data-v-15798219] {\r\n  margin-top: 5px;\r\n  font-size:11px;\n}\n.preview-img[data-v-15798219] {\r\n  width: 100px;\r\n  height: 100px;\r\n  border: 2px #aaaaaa solid;\r\n  border-radius: 50%;\r\n  margin-right: 20px;\n}\n.view-more[data-v-15798219] {\r\n  color: blue;\r\n  font-size: 13px;\n}\n.view-more[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n  position: fixed;\r\n  bottom: 10px;\r\n  right: 10px;\r\n  padding: 6px 10px 2px 10px;\r\n  background-color: dimgray;\r\n  color: aliceblue;\r\n  border-radius: 5px;\r\n  z-index: 15;\r\n  justify-content: center;\r\n  flex-direction: row;\n}\n.select-mode-item[data-v-15798219] {\r\n  margin: 0 18px;\r\n  padding: 5px 0;\r\n  min-width: 40px;\r\n  font-size: 22px;\r\n  color: white;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n.select-mode-item[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.select-mode-item-subtitle[data-v-15798219]{\r\n  margin-top: 5px;\r\n  font-size: 11px;\n}\n.media-action-title[data-v-15798219] {\r\n  color: darkslategrey;\r\n  font-size: 13px;\n}\n.media-action-wrapper[data-v-15798219]{\r\n  padding-top: 5px;\n}\n.action-btn-wrapper[data-v-15798219] {\r\n  padding: 6px 16px;\r\n  margin: 0 15px;\r\n  color: grey;\r\n  font-size: 1.8em;\r\n  border-radius: 2px;\r\n  box-shadow: 1.5px 1.5px 1px slategrey;\n}\n.action-btn-wrapper[data-v-15798219]:hover {\r\n  cursor: pointer;\n}\n.media-create[data-v-15798219] {\r\n  background-color: rgb(100,250,60);\r\n  color: black;\r\n  -webkit-text-decoration-line: none;\r\n          text-decoration-line: none;\n}\n.media-create[data-v-15798219]:hover {\r\n  color: white;\n}\n.select-mode-on[data-v-15798219] {\r\n  background-color: rgb(240,245,245);\n}\n.select-mode-on[data-v-15798219]:hover {\r\n  color: blue;\n}\n.select-mode-on-icon[data-v-15798219]{}\n.media-action-btn-label[data-v-15798219]{\r\n  color: black;\r\n  margin-left: 8px;\r\n  margin-top: 3px;\r\n  font-size: 14px;\n}\n.isActive[data-v-15798219] {\r\n  color: blue;\n}\r\n\r\n\r\n/* スマホ以外 */\n@media screen and (min-width: 481px) {\n.for-mobile[data-v-15798219] {\r\n    display: none;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 10px;\r\n    padding: 15px 15px 0 15px;\r\n    border-top-left-radius: 20px;\r\n    border-top-right-radius: 20px;\n}\n.action-item-subtitle[data-v-15798219] {\r\n    color:dimgrey;\n}\n}\r\n\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-15798219] {\r\n    display: none;\n}\n.media-preview[data-v-15798219] {\r\n    padding-top: 15px;\r\n    padding-left: 0;\n}\n.menu-inner[data-v-15798219] {\r\n    padding: 6px 10px 2px 10px;\r\n    background-color: rgb(245,245,245);\r\n    border-top-left-radius: 3px;\r\n    border-top-right-radius: 3px;\n}\n.select-mode-item-wrapper[data-v-15798219] {\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n    overflow-x: scroll;\n}\n.select-mode-item[data-v-15798219] {\r\n    min-width: 60px;\n}\n.mypage-action-menu[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;    \r\n    padding: 0;\r\n    z-index: 2;\r\n    display: flex;\r\n    justify-content: center;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    margin-top: 80px;\n}\n.section-title[data-v-15798219] {\r\n    font-size: 15px;\n}\n.mypage-category[data-v-15798219] {\r\n    margin: 0 18px;\r\n    font-size: 1.7em;\n}\n.mypage-content-wrapper[data-v-15798219] {\r\n    width: 90%;\n}\n.media-action-wrapper[data-v-15798219]{\r\n    padding-top: 10px;\n}\n.mypage-section[data-v-15798219] {\r\n    margin-top: 15px;\r\n    margin-bottom: 70px;\n}\n.bg-black[data-v-15798219] {\r\n    background-color: black;\n}\n.media-create[data-v-15798219] {\r\n    position: fixed;\r\n    bottom: 22px;\r\n    right: 0;\r\n    font-size: 22px;\r\n    padding: 7px 8px;\r\n    z-index: 30;\n}\n.liked-media-list[data-v-15798219] {\r\n    margin-bottom: 100px;\n}\n.select-mode-on-wrapper[data-v-15798219] {\r\n    font-size: 1.5em;\n}\n.select-mode-on[data-v-15798219] {\r\n    padding: 2px 15px;\n}\n.select-mode-on-icon[data-v-15798219] {\r\n    font-size: 20px;\n}\n.select-mode-on-label[data-v-15798219] {\r\n    font-size: 13px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22827,7 +22828,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-delete-icon[data-v-76406b70]:hover {\r\n  color: red;\n}\n.action-item-subtitle[data-v-76406b70] {\r\n  margin-top: 5px;\r\n  font-size:11px;\r\n  color:dimgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-delete:hover .media-delete-icon[data-v-76406b70]{\r\n  color: red;\n}\n.select-mode-item-subtitle[data-v-76406b70] {\r\n  margin-top: 5px;\r\n  font-size:11px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22875,7 +22876,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt3 { margin-top: 3px}\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n  .mt35 { margin-top: 35px}\r\n\r\n  .mt-3 { margin-top: -3px}\r\n  .mt-5 { margin-top: -5px}\r\n  .mt-10 { margin-top: -10px}\r\n  .mt-15 { margin-top: -15px}\r\n  .mt-20 { margin-top: -20px}\r\n  .mt-25 { margin-top: -25px}\r\n  .mt-30 { margin-top: -30px}\r\n  .mt-35 { margin-top: -35px}\r\n\r\n\r\n  /* 下(bottom) */\r\n  .mb-3 { margin-bottom: 3px}\r\n  .mb-5 { margin-bottom: 5px}\r\n  .mb-10 { margin-bottom: 10px}\r\n  .mb-15 { margin-bottom: 15px}\r\n  .mb-20 { margin-bottom: 20px}\r\n  .mb-25 { margin-bottom: 25px}\r\n  .mb-30 { margin-bottom: 30px}\r\n  .mb-35 { margin-bottom: 35px}\r\n  \r\n  .mb-3 { margin-bottom: -3px}\r\n  .mb-5 { margin-bottom: -5px}\r\n  .mb-10 { margin-bottom: -10px}\r\n  .mb-15 { margin-bottom: -15px}\r\n  .mb-20 { margin-bottom: -20px}\r\n  .mb-25 { margin-bottom: -25px}\r\n  .mb-30 { margin-bottom: -30px}\r\n  .mb-35 { margin-bottom: -35px}\r\n\r\n  /* 右(right) */\r\n  .mb3 { margin-bottom: 3px}\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 30px}\r\n  .mr35 { margin-right: 35px}\r\n\r\n  .mb-3 { margin-bottom: -3px}\r\n  .mr-5 { margin-right: -5px}\r\n  .mr-10 { margin-right: -10px}\r\n  .mr-15 { margin-right: -15px}\r\n  .mr-20 { margin-right: -20px}\r\n  .mr-25 { margin-right: -25px}\r\n  .mr-30 { margin-right: -30px}\r\n  .mr-35 { margin-right: -35px}\r\n\r\n  /* 左(left) */\r\n  .ml3 { margin-left: 3px}\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n  .ml35 { margin-left: 35px}\r\n\r\n  .ml-3 { margin-left: -3px}\r\n  .ml-5 { margin-left: -5px}\r\n  .ml-10 { margin-left: -10px}\r\n  .ml-15 { margin-left: -15px}\r\n  .ml-20 { margin-left: -20px}\r\n  .ml-25 { margin-left: -25px}\r\n  .ml-30 { margin-left: -30px}\r\n  .ml-35 { margin-left: -35px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n  .p35 {padding: 35px}\r\n  .p40 {padding: 40px}\r\n  .p45 {padding: 45px}\r\n  .p50 {padding: 50px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n  .pt35 {padding-top: 35px}\r\n  .pt40 {padding-top: 40px}\r\n  .pt45 {padding-top: 45px}\r\n  .pt50 {padding-top: 50px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n  .pb35 {padding-bottom: 35px}\r\n  .pb40 {padding-bottom: 40px}\r\n  .pb45 {padding-bottom: 45px}\r\n  .pb50 {padding-bottom: 50px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n  .pr35 {padding-right: 35px}\r\n  .pr40 {padding-right: 40px}\r\n  .pr45 {padding-right: 45px}\r\n  .pr50 {padding-right: 50px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n  .pl35 {padding-left: 35px}\r\n  .pl40 {padding-left: 40px}\r\n  .pl45 {padding-left: 45px}\r\n  .pl50 {padding-left: 50px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n/***************************\r\n  ポジション(position)\r\n***************************/\r\n  /* position */\r\n  .pos-a {position: absolute;}\r\n  .pos-r {position: relative;}\r\n  .pos-f {position: fixed;}\r\n\r\n  /* top */\r\n  .top0 {top:0}\r\n  .top5 {top:5px}\r\n  .top10 {top:10px}\r\n  .top50per {top:50%}\r\n\r\n  /* bottom */\r\n  .bottom0 {bottom:0}\r\n  .bottom5 {bottom:5px}\r\n  .bottom10 {bottom:10px}\r\n  .bottom50per {bottom:50%}\r\n\r\n  /* left */\r\n  .left0 {left:0}\r\n  .left5 {left:5px}\r\n  .left10 {left:10px}\r\n  .left50per {left:50%}\r\n\r\n  /* right */\r\n  .right0 {right:0}\r\n  .right5 {right:5px}\r\n  .right10 {right:10px}\r\n  .right50per {right:50%}\r\n  \r\n/***************************\r\n  重ね順(z-index)\r\n***************************/\r\n.z0 {z-index: 0;}\r\n.z1 {z-index: 1;}\r\n.z2 {z-index: 2;}\r\n.z3 {z-index: 3;}\r\n.z4 {z-index: 4;}\r\n.z5 {z-index: 5;}\r\n.z6 {z-index: 6;}\r\n.z7 {z-index: 7;}\r\n.z8 {z-index: 8;}\r\n.z9 {z-index: 9;}\r\n.z10 {z-index: 10;}\r\n.z15 {z-index: 15;}\r\n.z20 {z-index: 20;}\r\n.z50 {z-index: 50;}\r\n.z99 {z-index: 99;}\r\n.z100 {z-index: 100;}\r\n\r\n\r\n\r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  テキスト配置(text-align)\r\n***************************/\r\n.text-center {text-align: center;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n/* px */\r\n.border-r-3{ border-radius: 3px;}\r\n.border-r-5{ border-radius: 5px;}\r\n.border-r-7{ border-radius: 7px;}\r\n.border-r-10{ border-radius: 10px;}\r\n.border-r-15{ border-radius: 15px;}\r\n\r\n\r\n/* % */\r\n.border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n/***************************\r\n  透明度(opacity)\r\n***************************/\r\n.opa01{ opacity: 0.1;}\r\n.opa02{ opacity: 0.2;}\r\n.opa03{ opacity: 0.3;}\r\n.opa04{ opacity: 0.4;}\r\n.opa05{ opacity: 0.5;}\r\n.opa06{ opacity: 0.6;}\r\n.opa07{ opacity: 0.7;}\r\n.opa08{ opacity: 0.8;}\r\n.opa09{ opacity: 0.9;}\r\n.opa10{ opacity: 1;}\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt3 { margin-top: 3px}\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n  .mt35 { margin-top: 35px}\r\n  .mt40 { margin-top: 40px}\r\n  .mt45 { margin-top: 45px}\r\n  .mt50 { margin-top: 50px}\r\n  .mt55 { margin-top: 55px}\r\n  .mt60 { margin-top: 60px}\r\n\r\n  .mt-3 { margin-top: -3px}\r\n  .mt-5 { margin-top: -5px}\r\n  .mt-10 { margin-top: -10px}\r\n  .mt-15 { margin-top: -15px}\r\n  .mt-20 { margin-top: -20px}\r\n  .mt-25 { margin-top: -25px}\r\n  .mt-30 { margin-top: -30px}\r\n  .mt-35 { margin-top: -35px}\r\n  .mt-40 { margin-top: -40px}\r\n  .mt-45 { margin-top: -45px}\r\n  .mt-50 { margin-top: -50px}\r\n  .mt-55 { margin-top: -55px}\r\n  .mt-60 { margin-top: -60px}\r\n\r\n\r\n  /* 下(bottom) */\r\n  .mb3 { margin-bottom: 3px}\r\n  .mb5 { margin-bottom: 5px}\r\n  .mb10 { margin-bottom: 10px}\r\n  .mb15 { margin-bottom: 15px}\r\n  .mb20 { margin-bottom: 20px}\r\n  .mb25 { margin-bottom: 25px}\r\n  .mb30 { margin-bottom: 30px}\r\n  .mb35 { margin-bottom: 35px}\r\n  .mb40 { margin-bottom: 40px}\r\n  .mb45 { margin-bottom: 45px}\r\n  .mb50 { margin-bottom: 50px}\r\n  .mb55 { margin-bottom: 55px}\r\n  .mb60 { margin-bottom: 60px}\r\n  \r\n  .mb-3 { margin-bottom: -3px}\r\n  .mb-5 { margin-bottom: -5px}\r\n  .mb-10 { margin-bottom: -10px}\r\n  .mb-15 { margin-bottom: -15px}\r\n  .mb-20 { margin-bottom: -20px}\r\n  .mb-25 { margin-bottom: -25px}\r\n  .mb-30 { margin-bottom: -30px}\r\n  .mb-35 { margin-bottom: -35px}\r\n  .mb-40 { margin-bottom: -40px}\r\n  .mb-45 { margin-bottom: -45px}\r\n  .mb-50 { margin-bottom: -50px}\r\n  .mb-55 { margin-bottom: -55px}\r\n  .mb-60 { margin-bottom: -60px}\r\n\r\n  /* 右(right) */\r\n  .mb3 { margin-bottom: 3px}\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 30px}\r\n  .mr35 { margin-right: 35px}\r\n  .mr40 { margin-right: 40px}\r\n  .mr45 { margin-right: 45px}\r\n  .mr50 { margin-right: 50px}\r\n  .mr55 { margin-right: 55px}\r\n  .mr60 { margin-right: 60px}\r\n\r\n  .mb-3 { margin-bottom: -3px}\r\n  .mr-5 { margin-right: -5px}\r\n  .mr-10 { margin-right: -10px}\r\n  .mr-15 { margin-right: -15px}\r\n  .mr-20 { margin-right: -20px}\r\n  .mr-25 { margin-right: -25px}\r\n  .mr-30 { margin-right: -30px}\r\n  .mr-35 { margin-right: -35px}\r\n  .mr-40 { margin-right: -40px}\r\n  .mr-45 { margin-right: -45px}\r\n  .mr-50 { margin-right: -50px}\r\n  .mr-55 { margin-right: -55px}\r\n  .mr-60 { margin-right: -60px}\r\n\r\n  /* 左(left) */\r\n  .ml3 { margin-left: 3px}\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n  .ml35 { margin-left: 35px}\r\n  .ml40 { margin-left: 40px}\r\n  .ml45 { margin-left: 45px}\r\n  .ml50 { margin-left: 50px}\r\n  .ml55 { margin-left: 55px}\r\n  .ml60 { margin-left: 60px}\r\n\r\n  .ml-3 { margin-left: -3px}\r\n  .ml-5 { margin-left: -5px}\r\n  .ml-10 { margin-left: -10px}\r\n  .ml-15 { margin-left: -15px}\r\n  .ml-20 { margin-left: -20px}\r\n  .ml-25 { margin-left: -25px}\r\n  .ml-30 { margin-left: -30px}\r\n  .ml-35 { margin-left: -35px}\r\n  .ml-40 { margin-left: -40px}\r\n  .ml-45 { margin-left: -45px}\r\n  .ml-50 { margin-left: -50px}\r\n  .ml-55 { margin-left: -55px}\r\n  .ml-60 { margin-left: -60px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n  .p35 {padding: 35px}\r\n  .p40 {padding: 40px}\r\n  .p45 {padding: 45px}\r\n  .p50 {padding: 50px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n  .pt35 {padding-top: 35px}\r\n  .pt40 {padding-top: 40px}\r\n  .pt45 {padding-top: 45px}\r\n  .pt50 {padding-top: 50px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n  .pb35 {padding-bottom: 35px}\r\n  .pb40 {padding-bottom: 40px}\r\n  .pb45 {padding-bottom: 45px}\r\n  .pb50 {padding-bottom: 50px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n  .pr35 {padding-right: 35px}\r\n  .pr40 {padding-right: 40px}\r\n  .pr45 {padding-right: 45px}\r\n  .pr50 {padding-right: 50px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n  .pl35 {padding-left: 35px}\r\n  .pl40 {padding-left: 40px}\r\n  .pl45 {padding-left: 45px}\r\n  .pl50 {padding-left: 50px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n/***************************\r\n  ポジション(position)\r\n***************************/\r\n  /* position */\r\n  .pos-a {position: absolute;}\r\n  .pos-r {position: relative;}\r\n  .pos-f {position: fixed;}\r\n\r\n  /* top */\r\n  .top0 {top:0}\r\n  .top5 {top:5px}\r\n  .top10 {top:10px}\r\n  .top50per {top:50%}\r\n\r\n  /* bottom */\r\n  .bottom0 {bottom:0}\r\n  .bottom5 {bottom:5px}\r\n  .bottom10 {bottom:10px}\r\n  .bottom50per {bottom:50%}\r\n\r\n  /* left */\r\n  .left0 {left:0}\r\n  .left5 {left:5px}\r\n  .left10 {left:10px}\r\n  .left50per {left:50%}\r\n\r\n  /* right */\r\n  .right0 {right:0}\r\n  .right5 {right:5px}\r\n  .right10 {right:10px}\r\n  .right50per {right:50%}\r\n  \r\n/***************************\r\n  重ね順(z-index)\r\n***************************/\r\n.z0 {z-index: 0;}\r\n.z1 {z-index: 1;}\r\n.z2 {z-index: 2;}\r\n.z3 {z-index: 3;}\r\n.z4 {z-index: 4;}\r\n.z5 {z-index: 5;}\r\n.z6 {z-index: 6;}\r\n.z7 {z-index: 7;}\r\n.z8 {z-index: 8;}\r\n.z9 {z-index: 9;}\r\n.z10 {z-index: 10;}\r\n.z15 {z-index: 15;}\r\n.z20 {z-index: 20;}\r\n.z50 {z-index: 50;}\r\n.z99 {z-index: 99;}\r\n.z100 {z-index: 100;}\r\n\r\n\r\n\r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  テキスト配置(text-align)\r\n***************************/\r\n.text-center {text-align: center;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n/* px */\r\n.border-r-3{ border-radius: 3px;}\r\n.border-r-5{ border-radius: 5px;}\r\n.border-r-7{ border-radius: 7px;}\r\n.border-r-10{ border-radius: 10px;}\r\n.border-r-15{ border-radius: 15px;}\r\n\r\n\r\n/* % */\r\n.border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n/***************************\r\n  透明度(opacity)\r\n***************************/\r\n.opa01{ opacity: 0.1;}\r\n.opa02{ opacity: 0.2;}\r\n.opa03{ opacity: 0.3;}\r\n.opa04{ opacity: 0.4;}\r\n.opa05{ opacity: 0.5;}\r\n.opa06{ opacity: 0.6;}\r\n.opa07{ opacity: 0.7;}\r\n.opa08{ opacity: 0.8;}\r\n.opa09{ opacity: 0.9;}\r\n.opa10{ opacity: 1;}\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78327,7 +78328,7 @@ var render = function () {
       _c("user-page-profile", { staticClass: "for-pc-tablet" }),
       _vm._v(" "),
       _c("div", { staticClass: "mypage-action-menu" }, [
-        _c("div", { staticClass: "menu-inner flex a-end" }, [
+        _c("div", { staticClass: "menu-inner flex j-center a-end" }, [
           _c(
             "div",
             {
@@ -78339,39 +78340,22 @@ var render = function () {
                   expression: "!isSelectMode",
                 },
               ],
-              staticClass: "mypage-action-item media-create-wrapper",
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("span", { staticClass: "action-item-subtitle" }, [
-                _vm._v("作成"),
-              ]),
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              directives: [
-                {
-                  name: "show",
-                  rawName: "v-show",
-                  value: !_vm.isSelectMode,
-                  expression: "!isSelectMode",
-                },
-              ],
-              staticClass: "mypage-action-item select-mode-switch",
+              staticClass: "mypage-category media-disp-switch",
+              class: { isActive: _vm.isShowMedia },
             },
             [
               _c("i", {
-                staticClass: "fas fa-hand-point-up",
-                attrs: { id: "change-select-mode" },
-                on: { click: _vm.toggleSelectMode },
+                staticClass: "fas fa-object-group",
+                attrs: { id: "change-media-mode" },
+                on: {
+                  click: function ($event) {
+                    return _vm.changeActiveCategory("media")
+                  },
+                },
               }),
               _vm._v(" "),
               _c("span", { staticClass: "action-item-subtitle" }, [
-                _vm._v(_vm._s(_vm.selectModeButtonMessage)),
+                _vm._v("メディア"),
               ]),
             ]
           ),
@@ -78387,17 +78371,22 @@ var render = function () {
                   expression: "!isSelectMode",
                 },
               ],
-              staticClass: "mypage-action-item follow-user-disp-switch",
+              staticClass: "mypage-category follow-user-disp-switch",
+              class: { isActive: _vm.isShowUser },
             },
             [
               _c("i", {
                 staticClass: "fas fa-user-friends",
                 attrs: { id: "change-follow-user-mode" },
-                on: { click: _vm.toggleShowFollower },
+                on: {
+                  click: function ($event) {
+                    return _vm.changeActiveCategory("user")
+                  },
+                },
               }),
               _vm._v(" "),
               _c("span", { staticClass: "action-item-subtitle" }, [
-                _vm._v("フォロワー/フォロー中"),
+                _vm._v("ユーザー"),
               ]),
             ]
           ),
@@ -78405,43 +78394,32 @@ var render = function () {
           _c(
             "div",
             {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isSelectMode,
+                  expression: "isSelectMode",
+                },
+              ],
               staticClass: "select-mode-item-wrapper flex",
-              class: { "is-black": _vm.isSelectMode },
             },
             [
               _c("selected-media-delete-button-component", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.isSelectMode,
-                    expression: "isSelectMode",
-                  },
-                ],
-                staticClass: "mypage-action-item select-mode-item",
+                staticClass: "select-mode-item",
                 on: { "set-is-delete": _vm.setIsDelete },
               }),
               _vm._v(" "),
               _c(
                 "div",
                 {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isSelectMode,
-                      expression: "isSelectMode",
-                    },
-                  ],
-                  staticClass: "mypage-action-item select-mode-item",
+                  staticClass: "select-mode-item uncheck-all",
+                  on: { click: _vm.unCheckAllMedia },
                 },
                 [
-                  _c("i", {
-                    staticClass: "far fa-square select-uncheck-icon",
-                    on: { click: _vm.unCheckAllMedia },
-                  }),
+                  _c("i", { staticClass: "fas fa-undo select-mode-icon" }),
                   _vm._v(" "),
-                  _c("span", { staticClass: "action-item-subtitle" }, [
+                  _c("span", { staticClass: "select-mode-item-subtitle" }, [
                     _vm._v("リセット"),
                   ]),
                 ]
@@ -78450,24 +78428,15 @@ var render = function () {
               _c(
                 "div",
                 {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isSelectMode,
-                      expression: "isSelectMode",
-                    },
-                  ],
-                  staticClass: "mypage-action-item select-mode-switch",
+                  staticClass: "select-mode-item select-mode-cancel",
+                  on: { click: _vm.toggleSelectMode },
                 },
                 [
                   _c("i", {
-                    staticClass: "far fa-window-close",
-                    attrs: { id: "change-select-mode" },
-                    on: { click: _vm.toggleSelectMode },
+                    staticClass: "far fa-window-close select-mode-icon",
                   }),
                   _vm._v(" "),
-                  _c("span", { staticClass: "action-item-subtitle" }, [
+                  _c("span", { staticClass: "select-mode-item-subtitle" }, [
                     _vm._v(_vm._s(_vm.selectModeButtonMessage)),
                   ]),
                 ]
@@ -78483,11 +78452,85 @@ var render = function () {
           {
             name: "show",
             rawName: "v-show",
-            value: _vm.isShowFollower,
-            expression: "isShowFollower",
+            value: _vm.isShowUser,
+            expression: "isShowUser",
           },
         ],
       }),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.isShowMedia,
+              expression: "isShowMedia",
+            },
+          ],
+          staticClass: "media-action-title for-pc-tablet",
+        },
+        [_vm._v("メディア操作")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "media-action-wrapper flex j-center a-center" },
+        [
+          _c(
+            "a",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isShowMedia && !_vm.isSelectMode,
+                  expression: "isShowMedia && !isSelectMode",
+                },
+              ],
+              staticClass: "action-btn-wrapper media-create link flex a-center",
+              attrs: { href: "/media/create" },
+            },
+            [
+              _c("i", { staticClass: "fas fa-plus media-create-icon" }),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "media-action-btn-label for-pc-tablet" },
+                [_vm._v("作成")]
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isShowMedia && !_vm.isSelectMode,
+                  expression: "isShowMedia && !isSelectMode",
+                },
+              ],
+              staticClass: "action-btn-wrapper select-mode-on flex a-center",
+              on: { click: _vm.toggleSelectMode },
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-check-square select-mode-on-icon",
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "media-action-btn-label select-mode-on-label" },
+                [_vm._v(_vm._s(_vm.selectModeButtonMessage))]
+              ),
+            ]
+          ),
+        ]
+      ),
       _vm._v(" "),
       _c(
         "section",
@@ -78504,20 +78547,22 @@ var render = function () {
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
-            _c("i", { staticClass: "fas fa-tools category-icon" }),
-            _vm._v(" "),
-            _c("h3", { staticClass: "section-title" }, [
-              _vm._v("作成したメディア"),
+            _c("div", { staticClass: "flex a-end" }, [
+              _c("i", { staticClass: "fas fa-tools category-icon" }),
+              _vm._v(" "),
+              _c("h3", { staticClass: "section-title" }, [
+                _vm._v("作成したメディア"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "view-more ml15",
+                  on: { click: _vm.addCreatedMediaPreviewInfos },
+                },
+                [_vm._v("\n          ▼さらに表示\n        ")]
+              ),
             ]),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass: "view-more",
-                on: { click: _vm.addCreatedMediaPreviewInfos },
-              },
-              [_vm._v("\n        ▼more\n      ")]
-            ),
           ]),
           _vm._v(" "),
           _c("media-preview-component", {
@@ -78552,20 +78597,22 @@ var render = function () {
         },
         [
           _c("div", { staticClass: "section-top-wrapper" }, [
-            _c("i", { staticClass: "fas fa-thumbs-up category-icon" }),
-            _vm._v(" "),
-            _c("h3", { staticClass: "section-title" }, [
-              _vm._v("いいねしたメディア"),
+            _c("div", { staticClass: "flex a-end" }, [
+              _c("i", { staticClass: "fas fa-thumbs-up category-icon" }),
+              _vm._v(" "),
+              _c("h3", { staticClass: "section-title" }, [
+                _vm._v("いいねしたメディア"),
+              ]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "view-more",
+                  on: { click: _vm.addLikedMediaPreviewInfos },
+                },
+                [_vm._v("\n          ▼さらに表示\n        ")]
+              ),
             ]),
-            _vm._v(" "),
-            _c(
-              "span",
-              {
-                staticClass: "view-more",
-                on: { click: _vm.addLikedMediaPreviewInfos },
-              },
-              [_vm._v("\n        ▼more\n      ")]
-            ),
           ]),
           _vm._v(" "),
           _c("media-preview-component", {
@@ -78581,8 +78628,6 @@ var render = function () {
         ],
         1
       ),
-      _vm._v(" "),
-      _c("mypage-menu-bar-component"),
       _vm._v(" "),
       _c("overlay"),
       _vm._v(" "),
@@ -78605,18 +78650,7 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "linkTo-createMedia", attrs: { href: "/media/create" } },
-      [_c("i", { staticClass: "fas fa-plus media-create-icon" })]
-    )
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -78699,13 +78733,13 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "action-button-wrapper" }, [
+  return _c("div", { staticClass: "select-mode-item media-delete" }, [
     _c("i", {
       staticClass: "fas fa-trash media-delete-icon",
       on: { click: _vm.deleteSelectedMedia },
     }),
     _vm._v(" "),
-    _c("span", { staticClass: "action-item-subtitle" }, [_vm._v("削除")]),
+    _c("span", { staticClass: "select-mode-item-subtitle" }, [_vm._v("削除")]),
   ])
 }
 var staticRenderFns = []

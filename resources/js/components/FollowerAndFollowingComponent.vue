@@ -65,7 +65,7 @@ export default {
 
 .isActive {
   font-weight: bold;
-  border-bottom: 2px solid greenyellow;
+  border-bottom: 2px solid aquamarine;
 }
 
 </style>

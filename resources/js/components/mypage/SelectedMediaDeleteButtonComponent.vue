@@ -1,8 +1,8 @@
 <template>
 
-  <div class="action-button-wrapper">
+  <div class="select-mode-item media-delete">
     <i class="fas fa-trash media-delete-icon" @click="deleteSelectedMedia"></i>
-    <span class="action-item-subtitle">削除</span>
+    <span class="select-mode-item-subtitle">削除</span>
     <!-- <p v-show="deleteSelectedMediaMessage">
       {{deleteSelectedMediaMessage}}
     </p> -->
@@ -83,14 +83,13 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-.media-delete-icon:hover {
+.media-delete:hover .media-delete-icon{
   color: red;
 }
 
-.action-item-subtitle {
+.select-mode-item-subtitle {
   margin-top: 5px;
   font-size:11px;
-  color:dimgrey;  
 }
 
 </style>
