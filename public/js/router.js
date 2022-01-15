@@ -5361,6 +5361,33 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5468,6 +5495,14 @@ function _defineProperty(obj, key, value) {
         var key = _Object$keys[_i];
         this.figureDatas[key] = this.fixStrToNum(key, storeFigureData[key]);
       }
+    },
+    plusOneValue: function plusOneValue(data_key) {
+      var new_val = Number(this.figureDatas[data_key]) + 1;
+      this.updateFigureData(data_key, new_val);
+    },
+    minusOneValue: function minusOneValue(data_key) {
+      var new_val = Number(this.figureDatas[data_key]) - 1;
+      this.updateFigureData(data_key, new_val);
     },
     updateFigureData: function updateFigureData(key, value) {
       this.updateMediaFiguresObjectItem({
@@ -11324,11 +11359,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/FrequentlyUseStyle.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/FrequentlyUseStyle.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-update-wrapper[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-d96ba8d8] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-d96ba8d8]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-d96ba8d8],\r\n.setting-type-color[data-v-d96ba8d8] {\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-d96ba8d8] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-d96ba8d8] {\r\n  width: 100px;\n}\n.hidden[data-v-d96ba8d8] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n    max-height: 200px;\r\n    overflow-y: scroll;\n}\n.item-frame[data-v-d96ba8d8] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-update-wrapper[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-d96ba8d8]:hover{\r\n  cursor: all-scroll;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n  padding: 15px 25px;\n}\n.close-icon-wrapper[data-v-d96ba8d8] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-d96ba8d8]:hover {\r\n  cursor: pointer;\n}\n.setting-type-num[data-v-d96ba8d8],\r\n.setting-type-color[data-v-d96ba8d8] {\r\n  margin-bottom: 15px;\n}\n.flex j-s-between a-center[data-v-d96ba8d8] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.label[data-v-d96ba8d8] {\r\n  width: 60px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.input-num[data-v-d96ba8d8] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-d96ba8d8] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-d96ba8d8]:hover { cursor: pointer;}\n.plus-btn[data-v-d96ba8d8] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-d96ba8d8] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.hidden[data-v-d96ba8d8] {\r\n  display: none;\n}\n.grey[data-v-d96ba8d8] { color: grey;}\n@media screen and (min-width:481px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-update-wrapper[data-v-d96ba8d8]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-d96ba8d8] {\r\n    max-height: 200px;\r\n    overflow-y: scroll;\n}\n.item-frame[data-v-d96ba8d8] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23165,175 +23206,13 @@ var render = function () {
         ),
         _vm._v(" "),
         _c("div", { staticClass: "media-figure-settings" }, [
-          _c("div", { staticClass: "setting-type-num" }, [
+          _c("div", { staticClass: "setting-type-color mt10" }, [
             _c(
               "div",
-              { staticClass: "disp-space-between x-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(x):")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["left"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("left", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between y-position-wrapper" },
-              [
-                _c("span", [_vm._v("配置座標(y):")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["top"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("top", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
-              _c("span", [_vm._v("回転:")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "input-num",
-                attrs: { type: "number" },
-                domProps: { value: _vm.figureDatas["degree"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateFigureData("degree", $event.target.value)
-                  },
-                },
-              }),
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between width-input-wrapper" },
-              [
-                _c("span", [_vm._v("横幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["width"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("width", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between height-input-wrapper" },
-              [
-                _c("span", [_vm._v("縦幅[px]:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["height"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("height", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between layer-input-wrapper" },
-              [
-                _c("span", [_vm._v("重ね順:")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "100" },
-                  domProps: { value: _vm.figureDatas["layer"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("layer", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "disp-space-between type-input-wrapper" },
-              [
-                _c("span", [_vm._v("種類:")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.type,
-                        expression: "type",
-                      },
-                    ],
-                    staticClass: "input-num",
-                    attrs: { id: "update-figure-type", name: "種類" },
-                    on: {
-                      change: function ($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function (o) {
-                            return o.selected
-                          })
-                          .map(function (o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.type = $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      },
-                    },
-                  },
-                  _vm._l(_vm.figureTypeList, function (figureType) {
-                    return _c(
-                      "option",
-                      {
-                        key: figureType["code"],
-                        domProps: { value: figureType["code"] },
-                      },
-                      [_vm._v(_vm._s(figureType["name"]))]
-                    )
-                  }),
-                  0
-                ),
-              ]
-            ),
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "setting-type-color" }, [
-            _c(
-              "div",
-              { staticClass: "disp-space-between fill-input-wrapper" },
+              { staticClass: "flex j-s-between a-center fill-input-wrapper" },
               [
                 _c("div", { staticClass: "fill-flag" }, [
-                  _c("span", [_vm._v("塗りつぶし")]),
+                  _c("span", { staticClass: "label" }, [_vm._v("塗りつぶし")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
@@ -23353,7 +23232,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "fill-color" }, [
-                  _c("span", [_vm._v("色:")]),
+                  _c("span", { staticClass: "label" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -23376,10 +23255,10 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between stroke-input-wrapper" },
+              { staticClass: "flex j-s-between a-center stroke-input-wrapper" },
               [
                 _c("div", { staticClass: "stroke-flag" }, [
-                  _c("span", [_vm._v("枠線")]),
+                  _c("span", { staticClass: "label" }, [_vm._v("枠線")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "checkbox" },
@@ -23399,7 +23278,7 @@ var render = function () {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "stroke-color" }, [
-                  _c("span", [_vm._v("色:")]),
+                  _c("span", { staticClass: "label" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -23421,31 +23300,350 @@ var render = function () {
             ),
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "opacity-input-wrapper" }, [
-            _c("span", [_vm._v("透過度:")]),
-            _vm._v(" "),
-            _c("input", {
-              attrs: {
-                type: "range",
-                name: "opacity",
-                id: "",
-                min: "0",
-                max: "1",
-                step: "0.05",
-              },
-              domProps: { value: _vm.figureDatas["globalAlpha"] },
-              on: {
-                mousedown: function ($event) {
-                  $event.stopPropagation()
+          _c(
+            "div",
+            { staticClass: "opacity-input-wrapper mt10 mb15 flex a-center" },
+            [
+              _c("span", { staticClass: "label mr10" }, [_vm._v("透過度")]),
+              _vm._v(" "),
+              _c("input", {
+                attrs: {
+                  type: "range",
+                  name: "opacity",
+                  id: "",
+                  min: "0",
+                  max: "1",
+                  step: "0.05",
                 },
-                input: function ($event) {
-                  return _vm.updateFigureData(
-                    "globalAlpha",
-                    $event.target.value
+                domProps: { value: _vm.figureDatas["globalAlpha"] },
+                on: {
+                  mousedown: function ($event) {
+                    $event.stopPropagation()
+                  },
+                  input: function ($event) {
+                    return _vm.updateFigureData(
+                      "globalAlpha",
+                      $event.target.value
+                    )
+                  },
+                },
+              }),
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "flex mb10 j-s-between a-center type-input-wrapper",
+            },
+            [
+              _c("span", { staticClass: "label" }, [_vm._v("種類")]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.type,
+                      expression: "type",
+                    },
+                  ],
+                  staticClass: "input-num",
+                  attrs: { id: "update-figure-type", name: "種類" },
+                  on: {
+                    change: function ($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function (o) {
+                          return o.selected
+                        })
+                        .map(function (o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.type = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                  },
+                },
+                _vm._l(_vm.figureTypeList, function (figureType) {
+                  return _c(
+                    "option",
+                    {
+                      key: figureType["code"],
+                      domProps: { value: figureType["code"] },
+                    },
+                    [_vm._v(_vm._s(figureType["name"]))]
                   )
-                },
+                }),
+                0
+              ),
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "setting-type-num" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex mb10 j-s-between a-center x-position-wrapper",
               },
-            }),
+              [
+                _c("span", { staticClass: "label" }, [_vm._v("位置(横)")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("left")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("left")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "-1000", max: "10000" },
+                  domProps: { value: _vm.figureDatas["left"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("left", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex mb10 j-s-between a-center y-position-wrapper",
+              },
+              [
+                _c("span", { staticClass: "label" }, [_vm._v("位置(縦)")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("top")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("top")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "-1000", max: "10000" },
+                  domProps: { value: _vm.figureDatas["top"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("top", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex mb10 j-s-between a-center degree-wrapper" },
+              [
+                _c("span", { staticClass: "label" }, [_vm._v("回転")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("degree")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("degree")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.figureDatas["degree"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("degree", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex mb10 j-s-between a-center width-input-wrapper",
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("width")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("width")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "0", max: "10000" },
+                  domProps: { value: _vm.figureDatas["width"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("width", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex mb10 j-s-between a-center height-input-wrapper",
+              },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("height")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("height")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "0", max: "10000" },
+                  domProps: { value: _vm.figureDatas["height"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("height", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "flex mb10 j-s-between a-center layer-input-wrapper",
+              },
+              [
+                _c("span", { staticClass: "label" }, [_vm._v("重ね順")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("layer")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("layer")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number", min: "0", max: "100" },
+                  domProps: { value: _vm.figureDatas["layer"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateFigureData("layer", $event.target.value)
+                    },
+                  },
+                }),
+              ]
+            ),
           ]),
         ]),
       ]),
@@ -23455,7 +23653,26 @@ var render = function () {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w60px" }, [
+      _c("span", { staticClass: "label" }, [_vm._v("横幅")]),
+      _c("span", { staticClass: "font-11 grey" }, [_vm._v("[px]")]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w60px" }, [
+      _c("span", { staticClass: "label" }, [_vm._v("縦幅")]),
+      _c("span", { staticClass: "font-11 grey" }, [_vm._v("[px]")]),
+    ])
+  },
+]
 render._withStripped = true
 
 
