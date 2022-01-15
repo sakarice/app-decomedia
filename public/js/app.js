@@ -7698,6 +7698,14 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7734,6 +7742,18 @@ function _defineProperty(obj, key, value) {
       var videoId = matchText.substring(2, 13); // videoID部分を切りだし
 
       return videoId;
+    },
+    minusOneValue: function minusOneValue(data_key) {
+      this.updateMediaMovieObjectItem({
+        key: data_key,
+        value: Number(this.getMediaMovie[data_key] - 1)
+      });
+    },
+    plusOneValue: function plusOneValue(data_key) {
+      this.updateMediaMovieObjectItem({
+        key: data_key,
+        value: Number(this.getMediaMovie[data_key] + 1)
+      });
     },
     updateWidth: function updateWidth(event) {
       this.updateMediaMovieObjectItem({
@@ -22084,7 +22104,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 5px 5px;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 20px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 80px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 15px 5px;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 17px;\r\n    padding: 5px 18px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 60px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n.btns[data-v-05ba1def] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-05ba1def]:hover { cursor: pointer;}\n.plus-btn[data-v-05ba1def] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-05ba1def] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -75176,7 +75196,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "yt-setting-wrapper flex column a-start" },
+                { staticClass: "yt-setting-wrapper w100 flex column a-start" },
                 [
                   _c(
                     "div",
@@ -75234,75 +75254,137 @@ var render = function () {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "setting-block about-size" }, [
+                  _c("div", { staticClass: "setting-block about-size w90" }, [
                     _c("h3", { staticClass: "setting-title" }, [
                       _vm._v("サイズ"),
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "flex" }, [
-                      _c("div", { staticClass: "setting-width flex column" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "flex align-center",
-                            staticStyle: { opacity: "0.7" },
-                          },
-                          [
+                    _c("div", { staticClass: "flex column" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "setting-width flex j-s-between a-center",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "flex a-center",
+                              staticStyle: { opacity: "0.7" },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-arrows-alt-h icon",
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("横幅")]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex a-center" }, [
                             _c("i", {
-                              staticClass: "fas fa-arrows-alt-h icon",
+                              staticClass:
+                                "fas fa-minus fa-lg btns minus-btn mr10",
+                              on: {
+                                click: function ($event) {
+                                  $event.stopPropagation()
+                                  return _vm.minusOneValue("width")
+                                },
+                              },
                             }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("横幅[px]")]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "setting",
-                          attrs: {
-                            id: "set-movie-frame-width",
-                            type: "number",
-                            placeholder: "横幅",
-                          },
-                          domProps: { value: _vm.getMediaMovie["width"] },
-                          on: {
-                            input: function ($event) {
-                              return _vm.updateWidth($event)
+                            _c("i", {
+                              staticClass:
+                                "fas fa-plus fa-lg btns plus-btn ml10",
+                              on: {
+                                click: function ($event) {
+                                  $event.stopPropagation()
+                                  return _vm.plusOneValue("width")
+                                },
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "setting",
+                            attrs: {
+                              id: "set-movie-frame-width",
+                              type: "number",
+                              placeholder: "横幅",
                             },
-                          },
-                        }),
-                      ]),
+                            domProps: { value: _vm.getMediaMovie["width"] },
+                            on: {
+                              input: function ($event) {
+                                return _vm.updateWidth($event)
+                              },
+                            },
+                          }),
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "setting-height flex column" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "flex align-center",
-                            staticStyle: { opacity: "0.7" },
-                          },
-                          [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "setting-height flex j-s-between a-center",
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "flex a-center",
+                              staticStyle: { opacity: "0.7" },
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fas fa-arrows-alt-v icon",
+                              }),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("縦幅")]),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex a-center" }, [
                             _c("i", {
-                              staticClass: "fas fa-arrows-alt-v icon",
+                              staticClass:
+                                "fas fa-minus fa-lg btns minus-btn mr10",
+                              on: {
+                                click: function ($event) {
+                                  $event.stopPropagation()
+                                  return _vm.minusOneValue("height")
+                                },
+                              },
                             }),
                             _vm._v(" "),
-                            _c("span", [_vm._v("縦幅[px]")]),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "setting",
-                          attrs: {
-                            id: "set-movie-frame-height",
-                            type: "number",
-                            placeholder: "縦幅",
-                          },
-                          domProps: { value: _vm.getMediaMovie["height"] },
-                          on: {
-                            input: function ($event) {
-                              return _vm.updateHeight($event)
+                            _c("i", {
+                              staticClass:
+                                "fas fa-plus fa-lg btns plus-btn ml10",
+                              on: {
+                                click: function ($event) {
+                                  $event.stopPropagation()
+                                  return _vm.plusOneValue("height")
+                                },
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "setting",
+                            attrs: {
+                              id: "set-movie-frame-height",
+                              type: "number",
+                              placeholder: "縦幅",
                             },
-                          },
-                        }),
-                      ]),
+                            domProps: { value: _vm.getMediaMovie["height"] },
+                            on: {
+                              input: function ($event) {
+                                return _vm.updateHeight($event)
+                              },
+                            },
+                          }),
+                        ]
+                      ),
                     ]),
                   ]),
                   _vm._v(" "),
@@ -75311,7 +75393,7 @@ var render = function () {
                       _vm._v("ループ"),
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "flex align-center" }, [
+                    _c("div", { staticClass: "flex a-center" }, [
                       _c(
                         "div",
                         {
