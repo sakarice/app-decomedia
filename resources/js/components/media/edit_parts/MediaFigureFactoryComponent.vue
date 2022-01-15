@@ -106,7 +106,7 @@
           </div>
 
           <div class="flex mb10 j-s-between a-center width-input-wrapper">
-            <div class="w60px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="w50px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
               <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
@@ -114,7 +114,7 @@
             <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
           </div>
           <div class="flex mb10 j-s-between a-center height-input-wrapper">
-            <div class="w60px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="w50px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
               <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
@@ -559,8 +559,9 @@
 
 @media screen and (max-width:480px) {
   #media-figure-factory-wrapper{
+    z-index: 2;
     bottom: 50px;  
-    max-height: 50vh;
+    max-height: 60vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -568,14 +569,15 @@
   }
 
   .media-figure-settings {
-    max-height: 25vh;
+    max-height: 32vh;
   }
 
   .item-frame {
     width:92%;
     background-color: rgba(35,40,50,0.85);
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    border-radius: 5px;
+    /* border-top-right-radius: 5px;
+    border-top-left-radius: 5px; */
   }
 
   .add-icon-wrapper {
