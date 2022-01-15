@@ -74199,7 +74199,7 @@ var render = function () {
               "div",
               { staticClass: "opacity-input-wrapper mt10 mb15 flex a-center" },
               [
-                _c("span", { staticClass: "label mr10" }, [_vm._v("透過度:")]),
+                _c("span", { staticClass: "label mr10" }, [_vm._v("透過度")]),
                 _vm._v(" "),
                 _c("input", {
                   attrs: {
@@ -74475,7 +74475,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "w60px" }, [
       _c("span", { staticClass: "label" }, [_vm._v("横幅")]),
       _c("span", { staticClass: "font-11 grey" }, [_vm._v("[px]:")]),
     ])
@@ -74484,7 +74484,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
+    return _c("div", { staticClass: "w60px" }, [
       _c("span", { staticClass: "label" }, [_vm._v("縦幅")]),
       _c("span", { staticClass: "font-11 grey" }, [_vm._v("[px]:")]),
     ])

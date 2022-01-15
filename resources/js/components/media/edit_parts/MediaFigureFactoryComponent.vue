@@ -72,7 +72,7 @@
         </div>
 
         <div class="opacity-input-wrapper mt10 mb15 flex a-center">
-          <span class="label mr10">透過度:</span>
+          <span class="label mr10">透過度</span>
           <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
 
@@ -106,7 +106,7 @@
           </div>
 
           <div class="flex mb10 j-s-between a-center width-input-wrapper">
-            <div><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="w60px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
               <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
@@ -114,7 +114,7 @@
             <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
           </div>
           <div class="flex mb10 j-s-between a-center height-input-wrapper">
-            <div><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="w60px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
               <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
