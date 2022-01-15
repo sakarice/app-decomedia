@@ -226,7 +226,7 @@
       minusOneValue(data_key){
         const new_val = Number(this.figureDatas[data_key]) - 1;
         this.updateFigureData(data_key, new_val);
-      },      
+      },
       updateFigureData(key, value){
         this.updateMediaFiguresObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
         this.figureDatas[key] = this.getOneFigure(this.index)[key];
@@ -335,11 +335,6 @@
 .setting-type-num,
 .setting-type-color {
   margin-bottom: 15px;
-}
-
-.flex j-s-between a-center {
-  display: flex;
-  justify-content: space-between;
 }
 
 .label {
