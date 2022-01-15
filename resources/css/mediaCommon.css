@@ -104,11 +104,12 @@ body {
   }
 
   #disp-modal-wrapper {
-    padding: 5px 15px;
+    justify-content: flex-start;
+    padding: 5px 25px;
     /* border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;   */
     border-radius: 5px;
-    width: 100%;
+    width: 80%;
     height: 50px;
     overflow-x: scroll;
   }

@@ -12,20 +12,21 @@
             id="text-preview"
             :style="previewStyle" v-model="getTextData['text']">
             <!-- 追加 -->
-            <div id="media-text-add-wraper" class="flex column" @click="addText()">
+            <div id="media-text-add-wraper" class="mt3 flex column" @click="addText()">
               <div class="flex a-center">
-                <i class="fas fa-plus add-text-icon"></i>
-                <button class="add-text-button">追加</button>
+                <!-- <i class="fas fa-plus add-text-icon"></i> -->
+                <button class="add-text-button">+追加</button>
               </div>
             </div>
           </div>
 
           <!-- フォントサイズ -->
-          <div id="font-size-wrapper" class="setting flex column">
-            <h3 class="sub-title" style="margin-right:5px">サイズ</h3>
-            <div>
-              <input type="number" id="font-size" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
-              <span>[px]</span>
+          <div id="font-size-wrapper" class="setting flex j-s-between a-center">
+            <h3 class="sub-title mr10 mb0">サイズ</h3>
+            <input type="number" class="mr10 w60px" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('font_size')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('font_size')"></i>
             </div>
           </div>
 
@@ -39,7 +40,7 @@
           <div id="font-style-wrapper" class="setting flex column">
             <h3 class="sub-title">フォント</h3>
             <div class="flex">
-              <div class="flex column" style="margin-right:5px">
+              <div class="flex column mr5">
               <h4 class="sub-sub-title">カテゴリ</h4>
                 <select id="font-category" v-model="selected_category">
                   <option v-for="category in font_category" :value="category" :key="category.id">
@@ -62,7 +63,6 @@
           <div id="opacity-wrapper" class="setting flex column">
             <h3 class="sub-title">透過度:</h3>
             <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
-            <!-- <input type="range" :value="getTextData['opacity']" @mousedown.stop @input="updateTextData({key:'opacity',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05"> -->
           </div>
 
 
@@ -132,6 +132,8 @@ export default {
     closeModal() {
       this.$emit('close-modal');
     },
+    minusOneValue(data_key){this.updateTextData({key:data_key, value:Number(this.getTextData[data_key]-1)})},
+    plusOneValue(data_key){this.updateTextData({key:data_key, value:Number(this.getTextData[data_key]+1)})},
     addText(){
       const mediaText = Object.assign({},this.getTextData);
       this.addMediaTextsObjectItem(mediaText);
@@ -153,6 +155,7 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
 @import "/resources/css/googleFontList.css";
 @import "/resources/css/googleJapaneseFontList.css";
 
@@ -191,16 +194,17 @@ export default {
   }
   .add-text-button{
     border: 1px solid white;
-    border-radius: 4px;
-    background-color: transparent;
+    border-radius: 3px;
+    background-color: orange;
     color: white;
-    font-size: 12px;
+    padding: 0 12px;
+    font-size: 16px;
   }
   .add-text-button:hover{
-    background-color: orange;
+    background-color: darkorange;
   }
   .add-text-button:focus{
-    background-color: orange;
+    background-color: darkorange;
   }
 
   #text-preview-wrapper {
@@ -215,11 +219,6 @@ export default {
 
   #text-preview:hover {
     outline: 1px solid lightgreen;
-  }
-
-
-  #font-size {
-    width: 70px;
   }
 
   .setting-title {
@@ -247,6 +246,20 @@ export default {
     height: 15px;
     border-radius: 50%;
     background-color: white;
+  }
+
+  .btns {
+    border-radius: 50%;
+    padding: 5px 4px;
+  }
+  .btns:hover { cursor: pointer;}
+  .plus-btn {
+    color: palevioletred;
+    border: 1.5px solid palevioletred;
+  }
+  .minus-btn {
+    color: deepskyblue;
+    border: 1.5px solid deepskyblue;
   }
 
 

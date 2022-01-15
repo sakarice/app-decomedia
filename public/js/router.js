@@ -3788,6 +3788,18 @@ function _defineProperty(obj, key, value) {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
+    minusOneValue: function minusOneValue(data_key) {
+      this.updateTextData({
+        key: data_key,
+        value: Number(this.getTextData[data_key] - 1)
+      });
+    },
+    plusOneValue: function plusOneValue(data_key) {
+      this.updateTextData({
+        key: data_key,
+        value: Number(this.getTextData[data_key] + 1)
+      });
+    },
     addText: function addText() {
       var mediaText = Object.assign({}, this.getTextData);
       this.addMediaTextsObjectItem(mediaText);
@@ -11170,9 +11182,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css");
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleJapaneseFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleJapaneseFontList.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/FrequentlyUseStyle.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/FrequentlyUseStyle.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleFontList.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/googleJapaneseFontList.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/googleJapaneseFontList.css");
 // Imports
+
 
 
 
@@ -11181,10 +11195,11 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
-___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
-___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 4px;\r\n    background-color: transparent;\r\n    color: white;\r\n    font-size: 12px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: orange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n#font-size[data-v-35d10c14] {\r\n    width: 70px;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14] {\r\n    width : 100px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 3px;\r\n    background-color: orange;\r\n    color: white;\r\n    padding: 0 12px;\r\n    font-size: 16px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: darkorange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: darkorange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14] {\r\n    width : 100px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11984,7 +11999,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt3 { margin-top: 3px}\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n  .mt35 { margin-top: 35px}\r\n  .mt40 { margin-top: 40px}\r\n  .mt45 { margin-top: 45px}\r\n  .mt50 { margin-top: 50px}\r\n  .mt55 { margin-top: 55px}\r\n  .mt60 { margin-top: 60px}\r\n\r\n  .mt-3 { margin-top: -3px}\r\n  .mt-5 { margin-top: -5px}\r\n  .mt-10 { margin-top: -10px}\r\n  .mt-15 { margin-top: -15px}\r\n  .mt-20 { margin-top: -20px}\r\n  .mt-25 { margin-top: -25px}\r\n  .mt-30 { margin-top: -30px}\r\n  .mt-35 { margin-top: -35px}\r\n  .mt-40 { margin-top: -40px}\r\n  .mt-45 { margin-top: -45px}\r\n  .mt-50 { margin-top: -50px}\r\n  .mt-55 { margin-top: -55px}\r\n  .mt-60 { margin-top: -60px}\r\n\r\n\r\n  /* 下(bottom) */\r\n  .mb3 { margin-bottom: 3px}\r\n  .mb5 { margin-bottom: 5px}\r\n  .mb10 { margin-bottom: 10px}\r\n  .mb15 { margin-bottom: 15px}\r\n  .mb20 { margin-bottom: 20px}\r\n  .mb25 { margin-bottom: 25px}\r\n  .mb30 { margin-bottom: 30px}\r\n  .mb35 { margin-bottom: 35px}\r\n  .mb40 { margin-bottom: 40px}\r\n  .mb45 { margin-bottom: 45px}\r\n  .mb50 { margin-bottom: 50px}\r\n  .mb55 { margin-bottom: 55px}\r\n  .mb60 { margin-bottom: 60px}\r\n  \r\n  .mb-3 { margin-bottom: -3px}\r\n  .mb-5 { margin-bottom: -5px}\r\n  .mb-10 { margin-bottom: -10px}\r\n  .mb-15 { margin-bottom: -15px}\r\n  .mb-20 { margin-bottom: -20px}\r\n  .mb-25 { margin-bottom: -25px}\r\n  .mb-30 { margin-bottom: -30px}\r\n  .mb-35 { margin-bottom: -35px}\r\n  .mb-40 { margin-bottom: -40px}\r\n  .mb-45 { margin-bottom: -45px}\r\n  .mb-50 { margin-bottom: -50px}\r\n  .mb-55 { margin-bottom: -55px}\r\n  .mb-60 { margin-bottom: -60px}\r\n\r\n  /* 右(right) */\r\n  .mb3 { margin-bottom: 3px}\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 30px}\r\n  .mr35 { margin-right: 35px}\r\n  .mr40 { margin-right: 40px}\r\n  .mr45 { margin-right: 45px}\r\n  .mr50 { margin-right: 50px}\r\n  .mr55 { margin-right: 55px}\r\n  .mr60 { margin-right: 60px}\r\n\r\n  .mb-3 { margin-bottom: -3px}\r\n  .mr-5 { margin-right: -5px}\r\n  .mr-10 { margin-right: -10px}\r\n  .mr-15 { margin-right: -15px}\r\n  .mr-20 { margin-right: -20px}\r\n  .mr-25 { margin-right: -25px}\r\n  .mr-30 { margin-right: -30px}\r\n  .mr-35 { margin-right: -35px}\r\n  .mr-40 { margin-right: -40px}\r\n  .mr-45 { margin-right: -45px}\r\n  .mr-50 { margin-right: -50px}\r\n  .mr-55 { margin-right: -55px}\r\n  .mr-60 { margin-right: -60px}\r\n\r\n  /* 左(left) */\r\n  .ml3 { margin-left: 3px}\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n  .ml35 { margin-left: 35px}\r\n  .ml40 { margin-left: 40px}\r\n  .ml45 { margin-left: 45px}\r\n  .ml50 { margin-left: 50px}\r\n  .ml55 { margin-left: 55px}\r\n  .ml60 { margin-left: 60px}\r\n\r\n  .ml-3 { margin-left: -3px}\r\n  .ml-5 { margin-left: -5px}\r\n  .ml-10 { margin-left: -10px}\r\n  .ml-15 { margin-left: -15px}\r\n  .ml-20 { margin-left: -20px}\r\n  .ml-25 { margin-left: -25px}\r\n  .ml-30 { margin-left: -30px}\r\n  .ml-35 { margin-left: -35px}\r\n  .ml-40 { margin-left: -40px}\r\n  .ml-45 { margin-left: -45px}\r\n  .ml-50 { margin-left: -50px}\r\n  .ml-55 { margin-left: -55px}\r\n  .ml-60 { margin-left: -60px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n  .p35 {padding: 35px}\r\n  .p40 {padding: 40px}\r\n  .p45 {padding: 45px}\r\n  .p50 {padding: 50px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n  .pt35 {padding-top: 35px}\r\n  .pt40 {padding-top: 40px}\r\n  .pt45 {padding-top: 45px}\r\n  .pt50 {padding-top: 50px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n  .pb35 {padding-bottom: 35px}\r\n  .pb40 {padding-bottom: 40px}\r\n  .pb45 {padding-bottom: 45px}\r\n  .pb50 {padding-bottom: 50px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n  .pr35 {padding-right: 35px}\r\n  .pr40 {padding-right: 40px}\r\n  .pr45 {padding-right: 45px}\r\n  .pr50 {padding-right: 50px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n  .pl35 {padding-left: 35px}\r\n  .pl40 {padding-left: 40px}\r\n  .pl45 {padding-left: 45px}\r\n  .pl50 {padding-left: 50px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n/***************************\r\n  ポジション(position)\r\n***************************/\r\n  /* position */\r\n  .pos-a {position: absolute;}\r\n  .pos-r {position: relative;}\r\n  .pos-f {position: fixed;}\r\n\r\n  /* top */\r\n  .top0 {top:0}\r\n  .top5 {top:5px}\r\n  .top10 {top:10px}\r\n  .top50per {top:50%}\r\n\r\n  /* bottom */\r\n  .bottom0 {bottom:0}\r\n  .bottom5 {bottom:5px}\r\n  .bottom10 {bottom:10px}\r\n  .bottom50per {bottom:50%}\r\n\r\n  /* left */\r\n  .left0 {left:0}\r\n  .left5 {left:5px}\r\n  .left10 {left:10px}\r\n  .left50per {left:50%}\r\n\r\n  /* right */\r\n  .right0 {right:0}\r\n  .right5 {right:5px}\r\n  .right10 {right:10px}\r\n  .right50per {right:50%}\r\n  \r\n/***************************\r\n  重ね順(z-index)\r\n***************************/\r\n.z0 {z-index: 0;}\r\n.z1 {z-index: 1;}\r\n.z2 {z-index: 2;}\r\n.z3 {z-index: 3;}\r\n.z4 {z-index: 4;}\r\n.z5 {z-index: 5;}\r\n.z6 {z-index: 6;}\r\n.z7 {z-index: 7;}\r\n.z8 {z-index: 8;}\r\n.z9 {z-index: 9;}\r\n.z10 {z-index: 10;}\r\n.z15 {z-index: 15;}\r\n.z20 {z-index: 20;}\r\n.z50 {z-index: 50;}\r\n.z99 {z-index: 99;}\r\n.z100 {z-index: 100;}\r\n\r\n\r\n\r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  テキスト配置(text-align)\r\n***************************/\r\n.text-center {text-align: center;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n/* px */\r\n.border-r-3{ border-radius: 3px;}\r\n.border-r-5{ border-radius: 5px;}\r\n.border-r-7{ border-radius: 7px;}\r\n.border-r-10{ border-radius: 10px;}\r\n.border-r-15{ border-radius: 15px;}\r\n\r\n\r\n/* % */\r\n.border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n/***************************\r\n  透明度(opacity)\r\n***************************/\r\n.opa01{ opacity: 0.1;}\r\n.opa02{ opacity: 0.2;}\r\n.opa03{ opacity: 0.3;}\r\n.opa04{ opacity: 0.4;}\r\n.opa05{ opacity: 0.5;}\r\n.opa06{ opacity: 0.6;}\r\n.opa07{ opacity: 0.7;}\r\n.opa08{ opacity: 0.8;}\r\n.opa09{ opacity: 0.9;}\r\n.opa10{ opacity: 1;}\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/***************************\r\n  マージン(margin)\r\n***************************/\r\n  /* 全方位 */\r\n  .m0 { margin: 0 }\r\n  .m5 { margin: 5px}\r\n  .m10 { margin: 10px}\r\n  .m15 { margin: 15px}\r\n  .m20 { margin: 20px}\r\n  .m25 { margin: 25px}\r\n  .m30 { margin: 30px}\r\n\r\n  /* 上(top) */\r\n  .mt0 { margin-top: 0px}\r\n  .mt3 { margin-top: 3px}\r\n  .mt5 { margin-top: 5px}\r\n  .mt10 { margin-top: 10px}\r\n  .mt15 { margin-top: 15px}\r\n  .mt20 { margin-top: 20px}\r\n  .mt25 { margin-top: 25px}\r\n  .mt30 { margin-top: 30px}\r\n  .mt35 { margin-top: 35px}\r\n  .mt40 { margin-top: 40px}\r\n  .mt45 { margin-top: 45px}\r\n  .mt50 { margin-top: 50px}\r\n  .mt55 { margin-top: 55px}\r\n  .mt60 { margin-top: 60px}\r\n\r\n  .mt-3 { margin-top: -3px}\r\n  .mt-5 { margin-top: -5px}\r\n  .mt-10 { margin-top: -10px}\r\n  .mt-15 { margin-top: -15px}\r\n  .mt-20 { margin-top: -20px}\r\n  .mt-25 { margin-top: -25px}\r\n  .mt-30 { margin-top: -30px}\r\n  .mt-35 { margin-top: -35px}\r\n  .mt-40 { margin-top: -40px}\r\n  .mt-45 { margin-top: -45px}\r\n  .mt-50 { margin-top: -50px}\r\n  .mt-55 { margin-top: -55px}\r\n  .mt-60 { margin-top: -60px}\r\n\r\n\r\n  /* 下(bottom) */\r\n  .mb0 { margin-bottom: 0px}\r\n  .mb3 { margin-bottom: 3px}\r\n  .mb5 { margin-bottom: 5px}\r\n  .mb10 { margin-bottom: 10px}\r\n  .mb15 { margin-bottom: 15px}\r\n  .mb20 { margin-bottom: 20px}\r\n  .mb25 { margin-bottom: 25px}\r\n  .mb30 { margin-bottom: 30px}\r\n  .mb35 { margin-bottom: 35px}\r\n  .mb40 { margin-bottom: 40px}\r\n  .mb45 { margin-bottom: 45px}\r\n  .mb50 { margin-bottom: 50px}\r\n  .mb55 { margin-bottom: 55px}\r\n  .mb60 { margin-bottom: 60px}\r\n  \r\n  .mb-3 { margin-bottom: -3px}\r\n  .mb-5 { margin-bottom: -5px}\r\n  .mb-10 { margin-bottom: -10px}\r\n  .mb-15 { margin-bottom: -15px}\r\n  .mb-20 { margin-bottom: -20px}\r\n  .mb-25 { margin-bottom: -25px}\r\n  .mb-30 { margin-bottom: -30px}\r\n  .mb-35 { margin-bottom: -35px}\r\n  .mb-40 { margin-bottom: -40px}\r\n  .mb-45 { margin-bottom: -45px}\r\n  .mb-50 { margin-bottom: -50px}\r\n  .mb-55 { margin-bottom: -55px}\r\n  .mb-60 { margin-bottom: -60px}\r\n\r\n  /* 右(right) */\r\n  .mr0 { margin-right: 0px}\r\n  .mr3 { margin-right: 3px}\r\n  .mr5 { margin-right: 5px}\r\n  .mr10 { margin-right: 10px}\r\n  .mr15 { margin-right: 15px}\r\n  .mr20 { margin-right: 20px}\r\n  .mr25 { margin-right: 25px}\r\n  .mr30 { margin-right: 30px}\r\n  .mr35 { margin-right: 35px}\r\n  .mr40 { margin-right: 40px}\r\n  .mr45 { margin-right: 45px}\r\n  .mr50 { margin-right: 50px}\r\n  .mr55 { margin-right: 55px}\r\n  .mr60 { margin-right: 60px}\r\n\r\n  .mr-3 { margin-right: -3px}\r\n  .mr-5 { margin-right: -5px}\r\n  .mr-10 { margin-right: -10px}\r\n  .mr-15 { margin-right: -15px}\r\n  .mr-20 { margin-right: -20px}\r\n  .mr-25 { margin-right: -25px}\r\n  .mr-30 { margin-right: -30px}\r\n  .mr-35 { margin-right: -35px}\r\n  .mr-40 { margin-right: -40px}\r\n  .mr-45 { margin-right: -45px}\r\n  .mr-50 { margin-right: -50px}\r\n  .mr-55 { margin-right: -55px}\r\n  .mr-60 { margin-right: -60px}\r\n\r\n  /* 左(left) */\r\n  .ml0 { margin-left: 0px}\r\n  .ml3 { margin-left: 3px}\r\n  .ml5 { margin-left: 5px}\r\n  .ml10 { margin-left: 10px}\r\n  .ml15 { margin-left: 15px}\r\n  .ml20 { margin-left: 20px}\r\n  .ml25 { margin-left: 25px}\r\n  .ml30 { margin-left: 30px}\r\n  .ml35 { margin-left: 35px}\r\n  .ml40 { margin-left: 40px}\r\n  .ml45 { margin-left: 45px}\r\n  .ml50 { margin-left: 50px}\r\n  .ml55 { margin-left: 55px}\r\n  .ml60 { margin-left: 60px}\r\n\r\n  .ml-3 { margin-left: -3px}\r\n  .ml-5 { margin-left: -5px}\r\n  .ml-10 { margin-left: -10px}\r\n  .ml-15 { margin-left: -15px}\r\n  .ml-20 { margin-left: -20px}\r\n  .ml-25 { margin-left: -25px}\r\n  .ml-30 { margin-left: -30px}\r\n  .ml-35 { margin-left: -35px}\r\n  .ml-40 { margin-left: -40px}\r\n  .ml-45 { margin-left: -45px}\r\n  .ml-50 { margin-left: -50px}\r\n  .ml-55 { margin-left: -55px}\r\n  .ml-60 { margin-left: -60px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  パディング(padding)\r\n***************************/\r\n  /* 全方位 */\r\n  .p0 {padding: 0}\r\n  .p5 {padding: 5px}\r\n  .p10 {padding: 10px}\r\n  .p15 {padding: 15px}\r\n  .p20 {padding: 20px}\r\n  .p25 {padding: 25px}\r\n  .p30 {padding: 30px}\r\n  .p35 {padding: 35px}\r\n  .p40 {padding: 40px}\r\n  .p45 {padding: 45px}\r\n  .p50 {padding: 50px}\r\n\r\n  /* 上(top) */\r\n  .pt5 {padding-top: 5px}\r\n  .pt10 {padding-top: 10px}\r\n  .pt15 {padding-top: 15px}\r\n  .pt20 {padding-top: 20px}\r\n  .pt25 {padding-top: 25px}\r\n  .pt30 {padding-top: 30px}\r\n  .pt35 {padding-top: 35px}\r\n  .pt40 {padding-top: 40px}\r\n  .pt45 {padding-top: 45px}\r\n  .pt50 {padding-top: 50px}\r\n\r\n  /* 下(bottom) */\r\n  .pb5 {padding-bottom: 5px}\r\n  .pb10 {padding-bottom: 10px}\r\n  .pb15 {padding-bottom: 15px}\r\n  .pb20 {padding-bottom: 20px}\r\n  .pb25 {padding-bottom: 25px}\r\n  .pb30 {padding-bottom: 30px}\r\n  .pb35 {padding-bottom: 35px}\r\n  .pb40 {padding-bottom: 40px}\r\n  .pb45 {padding-bottom: 45px}\r\n  .pb50 {padding-bottom: 50px}\r\n\r\n  /* 右(right) */\r\n  .pr5 {padding-right: 5px}\r\n  .pr10 {padding-right: 10px}\r\n  .pr15 {padding-right: 15px}\r\n  .pr20 {padding-right: 20px}\r\n  .pr25 {padding-right: 25px}\r\n  .pr30 {padding-right: 30px}\r\n  .pr35 {padding-right: 35px}\r\n  .pr40 {padding-right: 40px}\r\n  .pr45 {padding-right: 45px}\r\n  .pr50 {padding-right: 50px}\r\n\r\n  /* 左(left) */\r\n  .pl5 {padding-left: 5px}\r\n  .pl10 {padding-left: 10px}\r\n  .pl15 {padding-left: 15px}\r\n  .pl20 {padding-left: 20px}\r\n  .pl25 {padding-left: 25px}\r\n  .pl30 {padding-left: 30px}\r\n  .pl35 {padding-left: 35px}\r\n  .pl40 {padding-left: 40px}\r\n  .pl45 {padding-left: 45px}\r\n  .pl50 {padding-left: 50px}\r\n\r\n\r\n\r\n\r\n/***************************\r\n  横幅(width)\r\n***************************/\r\n  /* px */\r\n  .w10px{ width: 10px;}\r\n  .w20px{ width: 20px;}\r\n  .w30px{ width: 30px;}\r\n  .w40px{ width: 40px;}\r\n  .w50px{ width: 50px;}\r\n  .w60px{ width: 60px;}\r\n  .w70px{ width: 70px;}\r\n  .w80px{ width: 80px;}\r\n  .w90px{ width: 90px;}\r\n  .w100px{ width: 100px;}\r\n\r\n  /* % */\r\n  .w10{ width: 10%;}\r\n  .w20{ width: 20%;}\r\n  .w30{ width: 30%;}\r\n  .w40{ width: 40%;}\r\n  .w50{ width: 50%;}\r\n  .w60{ width: 60%;}\r\n  .w70{ width: 70%;}\r\n  .w80{ width: 80%;}\r\n  .w90{ width: 90%;}\r\n  .w100{ width: 100%;}\r\n\r\n\r\n\r\n\r\n\r\n/***************************\r\n  縦幅(height)\r\n***************************/\r\n  /* px */\r\n  .h10px{ height: 10px;}\r\n  .h20px{ height: 20px;}\r\n  .h30px{ height: 30px;}\r\n  .h40px{ height: 40px;}\r\n  .h50px{ height: 50px;}\r\n  .h60px{ height: 60px;}\r\n  .h70px{ height: 70px;}\r\n  .h80px{ height: 80px;}\r\n  .h90px{ height: 90px;}\r\n  .h100px{ height: 100px;}\r\n\r\n  /* % */\r\n  .h10{ height: 10%;}\r\n  .h20{ height: 20%;}\r\n  .h30{ height: 30%;}\r\n  .h40{ height: 40%;}\r\n  .h50{ height: 50%;}\r\n  .h60{ height: 60%;}\r\n  .h70{ height: 70%;}\r\n  .h80{ height: 80%;}\r\n  .h90{ height: 90%;}\r\n  .h100{ height: 100%;}\r\n\r\n/***************************\r\n  ポジション(position)\r\n***************************/\r\n  /* position */\r\n  .pos-a {position: absolute;}\r\n  .pos-r {position: relative;}\r\n  .pos-f {position: fixed;}\r\n\r\n  /* top */\r\n  .top0 {top:0}\r\n  .top5 {top:5px}\r\n  .top10 {top:10px}\r\n  .top50per {top:50%}\r\n\r\n  /* bottom */\r\n  .bottom0 {bottom:0}\r\n  .bottom5 {bottom:5px}\r\n  .bottom10 {bottom:10px}\r\n  .bottom50per {bottom:50%}\r\n\r\n  /* left */\r\n  .left0 {left:0}\r\n  .left5 {left:5px}\r\n  .left10 {left:10px}\r\n  .left50per {left:50%}\r\n\r\n  /* right */\r\n  .right0 {right:0}\r\n  .right5 {right:5px}\r\n  .right10 {right:10px}\r\n  .right50per {right:50%}\r\n  \r\n/***************************\r\n  重ね順(z-index)\r\n***************************/\r\n.z0 {z-index: 0;}\r\n.z1 {z-index: 1;}\r\n.z2 {z-index: 2;}\r\n.z3 {z-index: 3;}\r\n.z4 {z-index: 4;}\r\n.z5 {z-index: 5;}\r\n.z6 {z-index: 6;}\r\n.z7 {z-index: 7;}\r\n.z8 {z-index: 8;}\r\n.z9 {z-index: 9;}\r\n.z10 {z-index: 10;}\r\n.z15 {z-index: 15;}\r\n.z20 {z-index: 20;}\r\n.z50 {z-index: 50;}\r\n.z99 {z-index: 99;}\r\n.z100 {z-index: 100;}\r\n\r\n\r\n\r\n/***************************\r\n  フォントサイズ(font-size)\r\n***************************/\r\n.font-11 {font-size: 11px;}\r\n.font-12 {font-size: 12px;}\r\n.font-13 {font-size: 13px;}\r\n.font-14 {font-size: 14px;}\r\n.font-15 {font-size: 15px;}\r\n.font-16 {font-size: 16px;}\r\n.font-17 {font-size: 17px;}\r\n.font-18 {font-size: 18px;}\r\n.font-19 {font-size: 19px;}\r\n.font-20 {font-size: 20px;}\r\n.font-21 {font-size: 21px;}\r\n.font-22 {font-size: 22px;}\r\n.font-23 {font-size: 23px;}\r\n.font-24 {font-size: 24px;}\r\n.font-25 {font-size: 25px;}\r\n\r\n\r\n/***************************\r\n  テキスト配置(text-align)\r\n***************************/\r\n.text-center {text-align: center;}\r\n\r\n\r\n/***************************\r\n  角丸(border-radius)\r\n***************************/\r\n/* px */\r\n.border-r-3{ border-radius: 3px;}\r\n.border-r-5{ border-radius: 5px;}\r\n.border-r-7{ border-radius: 7px;}\r\n.border-r-10{ border-radius: 10px;}\r\n.border-r-15{ border-radius: 15px;}\r\n\r\n\r\n/* % */\r\n.border-r-50per{ border-radius: 50%;}\r\n\r\n\r\n\r\n/***************************\r\n  透明度(opacity)\r\n***************************/\r\n.opa01{ opacity: 0.1;}\r\n.opa02{ opacity: 0.2;}\r\n.opa03{ opacity: 0.3;}\r\n.opa04{ opacity: 0.4;}\r\n.opa05{ opacity: 0.5;}\r\n.opa06{ opacity: 0.6;}\r\n.opa07{ opacity: 0.7;}\r\n.opa08{ opacity: 0.8;}\r\n.opa09{ opacity: 0.9;}\r\n.opa10{ opacity: 1;}\r\n\r\n\r\n/***************************\r\n  ホバー(hover)\r\n***************************/\r\n.hover-p:hover { cursor: pointer;}\r\n\r\n\r\n\r\n/***************************\r\n  レスポンシブ系\r\n***************************/\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile { display: none;}\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  .for-pc { display: none;}\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12120,7 +12135,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n  min-width: 50px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-contents-field-setting-modal-wrapper {\r\n  color: white;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 95%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    padding: 5px 15px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 5px;\r\n    width: 100%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n\r\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\r\n/* アンドロイドchromeで下スクロール時のブラウザ更新を無効化 */\r\nbody {\r\n  overscroll-behavior-y: none;\r\n}\r\n\r\n\r\n#field {\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\r\n  flex-direction: column;\r\n}\r\n\r\n#disp-modal-zone {\r\n  position: absolute;\r\n  /* left: 0; */\r\n  z-index: 10;\r\n  width: 55px;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n\r\n}\r\n\r\n#disp-modal-wrapper {\r\n  z-index: 1;\r\n  background-color:#333333;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n}\r\n\r\n.icon-wrapper {\r\n  padding: 10px;\r\n  min-width: 50px;\r\n}\r\n.icon-wrapper:hover {\r\n  background-color: rgba(255,255,255,0.2);\r\n}\r\n\r\n#disp-img-modal-wrapper {\r\n  color:lightseagreen;\r\n}\r\n#disp-movie-modal-wrapper {\r\n  color: orangered;\r\n}\r\n#disp-audio-modal-wrapper {\r\n  color: gold;\r\n}\r\n#disp-contents-field-setting-modal-wrapper {\r\n  color: white;\r\n}\r\n#disp-media-setting-modal-wrapper {\r\n  color: lightgray;\r\n}\r\n\r\n.hidden {\r\n  display: none;\r\n}\r\n\r\n\r\n/* レスポンシブ対応用 */\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  .for-mobile{\r\n    display: none;\r\n  }\r\n  #disp-modal-wrapper {\r\n    flex-direction: column;\r\n    padding: 8px 3px 8px 6px;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n  #disp-modal-zone {\r\n    left: 0;\r\n    top: 30%;\r\n  }\r\n\r\n  \r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .for-pc-tablet {\r\n    display: none;\r\n  }\r\n\r\n  #disp-modal-zone {\r\n    /* right: 0; */\r\n    bottom: 0;\r\n    width: 95%;\r\n  }\r\n\r\n  #disp-modal-wrapper {\r\n    justify-content: flex-start;\r\n    padding: 5px 25px;\r\n    /* border-top-left-radius: 10px;\r\n    border-bottom-left-radius: 10px;   */\r\n    border-radius: 5px;\r\n    width: 80%;\r\n    height: 50px;\r\n    overflow-x: scroll;\r\n  }\r\n\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12166,7 +12181,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 60px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;   \r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 50vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 70px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    /* border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;    */\r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 50vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22103,7 +22118,7 @@ var render = function () {
                   _c(
                     "div",
                     {
-                      staticClass: "flex column",
+                      staticClass: "mt3 flex column",
                       attrs: { id: "media-text-add-wraper" },
                       on: {
                         click: function ($event) {
@@ -22113,10 +22128,8 @@ var render = function () {
                     },
                     [
                       _c("div", { staticClass: "flex a-center" }, [
-                        _c("i", { staticClass: "fas fa-plus add-text-icon" }),
-                        _vm._v(" "),
                         _c("button", { staticClass: "add-text-button" }, [
-                          _vm._v("追加"),
+                          _vm._v("+追加"),
                         ]),
                       ]),
                     ]
@@ -22127,34 +22140,48 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting flex column",
+                  staticClass: "setting flex j-s-between a-center",
                   attrs: { id: "font-size-wrapper" },
                 },
                 [
-                  _c(
-                    "h3",
-                    {
-                      staticClass: "sub-title",
-                      staticStyle: { "margin-right": "5px" },
-                    },
-                    [_vm._v("サイズ")]
-                  ),
+                  _c("h3", { staticClass: "sub-title mr10 mb0" }, [
+                    _vm._v("サイズ"),
+                  ]),
                   _vm._v(" "),
-                  _c("div", [
-                    _c("input", {
-                      attrs: { type: "number", id: "font-size" },
-                      domProps: { value: _vm.getTextData["font_size"] },
+                  _c("input", {
+                    staticClass: "mr10 w60px",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.getTextData["font_size"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateTextData({
+                          key: "font_size",
+                          value: $event.target.value,
+                        })
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
                       on: {
-                        input: function ($event) {
-                          return _vm.updateTextData({
-                            key: "font_size",
-                            value: $event.target.value,
-                          })
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("font_size")
                         },
                       },
                     }),
                     _vm._v(" "),
-                    _c("span", [_vm._v("[px]")]),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("font_size")
+                        },
+                      },
+                    }),
                   ]),
                 ]
               ),
@@ -22193,65 +22220,55 @@ var render = function () {
                   _c("h3", { staticClass: "sub-title" }, [_vm._v("フォント")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "flex column",
-                        staticStyle: { "margin-right": "5px" },
-                      },
-                      [
-                        _c("h4", { staticClass: "sub-sub-title" }, [
-                          _vm._v("カテゴリ"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selected_category,
-                                expression: "selected_category",
-                              },
-                            ],
-                            attrs: { id: "font-category" },
-                            on: {
-                              change: function ($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function (o) {
-                                    return o.selected
-                                  })
-                                  .map(function (o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.selected_category = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              },
+                    _c("div", { staticClass: "flex column mr5" }, [
+                      _c("h4", { staticClass: "sub-sub-title" }, [
+                        _vm._v("カテゴリ"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected_category,
+                              expression: "selected_category",
+                            },
+                          ],
+                          attrs: { id: "font-category" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             },
                           },
-                          _vm._l(_vm.font_category, function (category) {
-                            return _c(
-                              "option",
-                              {
-                                key: category.id,
-                                domProps: { value: category },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                  " +
-                                    _vm._s(category) +
-                                    "\n                "
-                                ),
-                              ]
-                            )
-                          }),
-                          0
-                        ),
-                      ]
-                    ),
+                        },
+                        _vm._l(_vm.font_category, function (category) {
+                          return _c(
+                            "option",
+                            { key: category.id, domProps: { value: category } },
+                            [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(category) +
+                                  "\n                "
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "flex column" }, [
                       _c("h4", { staticClass: "sub-sub-title" }, [
