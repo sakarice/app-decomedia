@@ -8,6 +8,7 @@
   const closeModalEvent = new CustomEvent('closeModal');
   const closeImgSettingEvent = new CustomEvent('closeImgSetting');
   const closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+  const closeTextSettingEvent = new CustomEvent('closeTextSetting');
 
   export default {
     methods : {
@@ -15,6 +16,7 @@
         document.body.dispatchEvent(closeModalEvent);
         document.body.dispatchEvent(closeImgSettingEvent);
         document.body.dispatchEvent(closeFigureSettingEvent);
+        document.body.dispatchEvent(closeTextSettingEvent);
       },
     }
   }

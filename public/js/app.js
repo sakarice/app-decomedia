@@ -5145,12 +5145,14 @@ __webpack_require__.r(__webpack_exports__);
 var closeModalEvent = new CustomEvent('closeModal');
 var closeImgSettingEvent = new CustomEvent('closeImgSetting');
 var closeFigureSettingEvent = new CustomEvent('closeFigureSetting');
+var closeTextSettingEvent = new CustomEvent('closeTextSetting');
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   methods: {
     closeModal: function closeModal() {
       document.body.dispatchEvent(closeModalEvent);
       document.body.dispatchEvent(closeImgSettingEvent);
       document.body.dispatchEvent(closeFigureSettingEvent);
+      document.body.dispatchEvent(closeTextSettingEvent);
     }
   }
 });
