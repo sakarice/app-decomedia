@@ -89,7 +89,7 @@ import { mapGetters, mapMutations } from 'vuex';
           "top" : this.figureDatas["top"] + "px",
           "width" : this.figureDatas["width"] + "px", // キャンバスより若干大きめに
           "height" : this.figureDatas["height"] + "px", // キャンバスより若干大きめに
-          // "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
+          "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
         }
         return styleObject;
       },
@@ -130,6 +130,7 @@ import { mapGetters, mapMutations } from 'vuex';
         const new_degree = event.detail.degree;
         this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:new_degree});
         this.figureDatas['degree'] = new_degree;
+        // this.canvas_wrapper.style.transform = "rotate(" + new_degree + "deg)";
       },
       updateSizeAndPosition(event){
         const diff_x = event.detail.diff_x;

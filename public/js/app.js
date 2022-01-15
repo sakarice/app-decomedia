@@ -9471,9 +9471,9 @@ function _defineProperty(obj, key, value) {
         "top": this.figureDatas["top"] + "px",
         "width": this.figureDatas["width"] + "px",
         // キャンバスより若干大きめに
-        "height": this.figureDatas["height"] + "px" // キャンバスより若干大きめに
-        // "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
-
+        "height": this.figureDatas["height"] + "px",
+        // キャンバスより若干大きめに
+        "transform": 'rotate(' + this.figureDatas['degree'] + 'deg)'
       };
       return styleObject;
     },
@@ -9529,7 +9529,7 @@ function _defineProperty(obj, key, value) {
         key: "degree",
         value: new_degree
       });
-      this.figureDatas['degree'] = new_degree;
+      this.figureDatas['degree'] = new_degree; // this.canvas_wrapper.style.transform = "rotate(" + new_degree + "deg)";
     },
     updateSizeAndPosition: function updateSizeAndPosition(event) {
       var _this2 = this;
