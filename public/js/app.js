@@ -77008,6 +77008,9 @@ var render = function () {
         mousedown: function ($event) {
           return _vm.targetMoveStart($event)
         },
+        click: function ($event) {
+          $event.stopPropagation()
+        },
         touchstart: function ($event) {
           return _vm.targetMoveStart($event)
         },

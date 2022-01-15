@@ -1,7 +1,7 @@
 <template>
   <div id="resize-wrapper" class="resize-wrapper"
   v-show="isObjSelected"
-  @mousedown="targetMoveStart($event)" @touchstart="targetMoveStart($event)">
+  @mousedown="targetMoveStart($event)" @click.stop @touchstart="targetMoveStart($event)">
 
     <!-- // 横幅変更用 -->
     <div class="adjust-bar-wrapper x-size-adjust-bar-wrapper">
