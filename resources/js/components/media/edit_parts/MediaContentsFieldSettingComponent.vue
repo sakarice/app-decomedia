@@ -122,7 +122,7 @@ export default {
   }
 
   #media-size-wraper input {
-    width: 80px;
+    width: 60px;
   }
 
   .sub-sub-title {
