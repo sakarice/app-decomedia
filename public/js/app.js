@@ -12806,6 +12806,30 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -12935,6 +12959,14 @@ function _defineProperty(obj, key, value) {
       }
 
       this.setCategoryAndFontFromStoreData();
+    },
+    plusOneValue: function plusOneValue(data_key) {
+      var new_val = Number(this.textDatas[data_key]) + 1;
+      this.updateTextData(data_key, new_val);
+    },
+    minusOneValue: function minusOneValue(data_key) {
+      var new_val = Number(this.textDatas[data_key]) - 1;
+      this.updateTextData(data_key, new_val);
     },
     updateTextData: function updateTextData(key, value) {
       this.textDatas[key] = this.fixStrToNum(key, value);
@@ -22652,11 +22684,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/FrequentlyUseStyle.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/FrequentlyUseStyle.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
 // Imports
 
+
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-update-wrapper[data-v-721899b0]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-text-update-wrapper[data-v-721899b0]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-721899b0]:hover{\r\n  cursor: all-scroll;\n}\n.media-text-settings[data-v-721899b0] {\r\n  padding: 15px 45px;\n}\n.close-icon-wrapper[data-v-721899b0] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-721899b0]:hover {\r\n  cursor: pointer;\n}\n.setting-wrapper[data-v-721899b0]{\r\n  margin-bottom: 15px;\n}\n.disp-space-between[data-v-721899b0] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.input-num[data-v-721899b0] {\r\n  width: 100px;\n}\n.sub-title[data-v-721899b0] {\r\n  font-size: 15px;\n}\n.sub-sub-title[data-v-721899b0] {\r\n  font-size: 13px;\r\n  color: darkgrey;\n}\n.hidden[data-v-721899b0] {\r\n  display: none;\n}\n@media screen and (min-width:481px) {\n#media-text-update-wrapper[data-v-721899b0]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-text-update-wrapper[data-v-721899b0]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-text-settings[data-v-721899b0] {\r\n    max-height: 200px;\r\n    overflow-y: scroll;\n}\n.item-frame[data-v-721899b0] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-update-wrapper[data-v-721899b0]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-text-update-wrapper[data-v-721899b0]:hover{\r\n  cursor: all-scroll;\n}\n.item-frame[data-v-721899b0]:hover{\r\n  cursor: all-scroll;\n}\n.media-text-settings[data-v-721899b0] {\r\n  max-height: 350px;\r\n  padding: 15px 25px;\r\n  overflow-y: scroll;\n}\n.close-icon-wrapper[data-v-721899b0] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-721899b0]:hover {\r\n  cursor: pointer;\n}\n.setting-wrapper[data-v-721899b0]{\r\n  margin-bottom: 15px;\n}\n.flex j-s-between a-center mb10[data-v-721899b0] {\r\n  display: flex;\r\n  justify-content: space-between;\n}\n.label[data-v-721899b0] {\r\n  width: 60px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.input-num[data-v-721899b0] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-721899b0] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-721899b0]:hover { cursor: pointer;}\n.plus-btn[data-v-721899b0] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-721899b0] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.hidden[data-v-721899b0] {\r\n  display: none;\n}\n.grey[data-v-721899b0] { color: grey;}\n.sub-title[data-v-721899b0] {\r\n  font-size: 15px;\n}\n.sub-sub-title[data-v-721899b0] {\r\n  margin-bottom: 2px;\r\n  font-size: 13px;\r\n  color: darkgrey;\n}\n@media screen and (min-width:481px) {\n#media-text-update-wrapper[data-v-721899b0]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    padding: 5px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-text-update-wrapper[data-v-721899b0]{\r\n    bottom: 50px;  \r\n    max-height: 50vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-text-settings[data-v-721899b0] {\r\n    max-height: 250px;\n}\n.item-frame[data-v-721899b0] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78115,9 +78153,34 @@ var render = function () {
           _c("div", { staticClass: "setting-wrapper setting-num" }, [
             _c(
               "div",
-              { staticClass: "disp-space-between x-position-wrapper" },
+              {
+                staticClass:
+                  "x-position-wrapper flex j-s-between a-center mb10",
+              },
               [
-                _c("span", [_vm._v("配置座標(x):")]),
+                _c("span", { staticClass: "label" }, [_vm._v("位置(横)")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("left")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("left")
+                      },
+                    },
+                  }),
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
@@ -78134,9 +78197,34 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between y-position-wrapper" },
+              {
+                staticClass:
+                  "flex j-s-between a-center mb10 y-position-wrapper",
+              },
               [
-                _c("span", [_vm._v("配置座標(y):")]),
+                _c("span", { staticClass: "label" }, [_vm._v("位置(縦)")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("top")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("top")
+                      },
+                    },
+                  }),
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
@@ -78153,9 +78241,34 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between width-input-wrapper" },
+              {
+                staticClass:
+                  "width-input-wrapper flex j-s-between a-center mb10",
+              },
               [
-                _c("span", [_vm._v("横幅[px]:")]),
+                _c("span", { staticClass: "label" }, [_vm._v("横幅[px]")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("width")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("width")
+                      },
+                    },
+                  }),
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
@@ -78170,26 +78283,77 @@ var render = function () {
               ]
             ),
             _vm._v(" "),
-            _c("div", { staticClass: "disp-space-between degree-wrapper" }, [
-              _c("span", [_vm._v("回転:")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "input-num",
-                attrs: { type: "number" },
-                domProps: { value: _vm.textDatas["degree"] },
-                on: {
-                  input: function ($event) {
-                    return _vm.updateTextData("degree", $event.target.value)
+            _c(
+              "div",
+              { staticClass: "degree-wrapper flex j-s-between a-center mb10" },
+              [
+                _c("span", { staticClass: "label" }, [_vm._v("回転")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("degree")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("degree")
+                      },
+                    },
+                  }),
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "input-num",
+                  attrs: { type: "number" },
+                  domProps: { value: _vm.textDatas["degree"] },
+                  on: {
+                    input: function ($event) {
+                      return _vm.updateTextData("degree", $event.target.value)
+                    },
                   },
-                },
-              }),
-            ]),
+                }),
+              ]
+            ),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between layer-input-wrapper" },
+              {
+                staticClass:
+                  "layer-input-wrapper flex j-s-between a-center mb10",
+              },
               [
-                _c("span", [_vm._v("重ね順:")]),
+                _c("span", { staticClass: "label" }, [_vm._v("重ね順")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("layer")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("layer")
+                      },
+                    },
+                  }),
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
@@ -78206,9 +78370,34 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "disp-space-between font-size-input-wrapper" },
+              {
+                staticClass:
+                  "font-size-input-wrapper flex j-s-between a-center mb10",
+              },
               [
-                _c("span", [_vm._v("サイズ:")]),
+                _c("span", { staticClass: "label" }, [_vm._v("サイズ")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "flex a-center" }, [
+                  _c("i", {
+                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.minusOneValue("font_size")
+                      },
+                    },
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                    on: {
+                      click: function ($event) {
+                        $event.stopPropagation()
+                        return _vm.plusOneValue("font_size")
+                      },
+                    },
+                  }),
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "input-num",
@@ -78230,10 +78419,13 @@ var render = function () {
           _c("div", { staticClass: "setting-wrapper setting-color" }, [
             _c(
               "div",
-              { staticClass: "disp-space-between stroke-input-wrapper" },
+              {
+                staticClass:
+                  "stroke-input-wrapper flex j-s-between a-center mb15",
+              },
               [
                 _c("div", { staticClass: "text-color" }, [
-                  _c("span", [_vm._v("色:")]),
+                  _c("span", { staticClass: "label" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -78256,7 +78448,7 @@ var render = function () {
             "div",
             {
               staticClass:
-                "setting-wrapper disp-space-between type-input-wrapper",
+                "setting-wrapper type-input-wrapper flex j-s-between a-center mb10",
             },
             [
               _c(
@@ -78269,67 +78461,57 @@ var render = function () {
                   _c("h3", { staticClass: "sub-title" }, [_vm._v("フォント")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex column" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "flex column",
-                        staticStyle: { "margin-right": "5px" },
-                      },
-                      [
-                        _c("h4", { staticClass: "sub-sub-title" }, [
-                          _vm._v("カテゴリ"),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selected_category,
-                                expression: "selected_category",
-                              },
-                            ],
-                            attrs: { id: "font-category" },
-                            on: {
-                              change: function ($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function (o) {
-                                    return o.selected
-                                  })
-                                  .map(function (o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return val
-                                  })
-                                _vm.selected_category = $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              },
+                    _c("div", { staticClass: "flex column mb10" }, [
+                      _c("h4", { staticClass: "sub-sub-title" }, [
+                        _vm._v("カテゴリ"),
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.selected_category,
+                              expression: "selected_category",
+                            },
+                          ],
+                          attrs: { id: "font-category" },
+                          on: {
+                            change: function ($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function (o) {
+                                  return o.selected
+                                })
+                                .map(function (o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.selected_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             },
                           },
-                          _vm._l(_vm.font_category, function (category) {
-                            return _c(
-                              "option",
-                              {
-                                key: category.id,
-                                domProps: { value: category },
-                              },
-                              [
-                                _vm._v(
-                                  "\n                  " +
-                                    _vm._s(category) +
-                                    "\n                "
-                                ),
-                              ]
-                            )
-                          }),
-                          0
-                        ),
-                      ]
-                    ),
+                        },
+                        _vm._l(_vm.font_category, function (category) {
+                          return _c(
+                            "option",
+                            { key: category.id, domProps: { value: category } },
+                            [
+                              _vm._v(
+                                "\n                  " +
+                                  _vm._s(category) +
+                                  "\n                "
+                              ),
+                            ]
+                          )
+                        }),
+                        0
+                      ),
+                    ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "flex column" }, [
+                    _c("div", { staticClass: "flex column mb10" }, [
                       _c("h4", { staticClass: "sub-sub-title" }, [
                         _vm._v("スタイル"),
                       ]),
@@ -78388,7 +78570,7 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "setting-wrapper opacity-input-wrapper" }, [
-            _c("span", [_vm._v("透過度:")]),
+            _c("span", { staticClass: "label" }, [_vm._v("透過度")]),
             _vm._v(" "),
             _c("input", {
               attrs: {
