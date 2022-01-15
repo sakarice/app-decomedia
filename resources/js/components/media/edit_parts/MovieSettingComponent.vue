@@ -139,6 +139,8 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
+
 
   #player-setting-title {
     font-weight: bold;

@@ -2820,6 +2820,14 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2843,6 +2851,18 @@ function _defineProperty(obj, key, value) {
       var listener_elem = document.getElementById('media-contents-field-wrapper');
       var clearBgImgEvent = new CustomEvent('clearBgImg');
       listener_elem.dispatchEvent(clearBgImgEvent);
+    },
+    minusOneValue: function minusOneValue(data_key) {
+      this.updateMediaContentsFieldObjectItem({
+        key: data_key,
+        value: Number(this.getMediaContentsField[data_key] - 1)
+      });
+    },
+    plusOneValue: function plusOneValue(data_key) {
+      this.updateMediaContentsFieldObjectItem({
+        key: data_key,
+        value: Number(this.getMediaContentsField[data_key] + 1)
+      });
     },
     updateStoreData: function updateStoreData(key, value) {
       this.updateMediaContentsFieldObjectItem({
@@ -4666,11 +4686,11 @@ function _defineProperty(obj, key, value) {
     if (mode.match(/create/)) {
       this.updateMediaContentsFieldObjectItem({
         key: 'width',
-        value: window.innerWidth * 0.9
+        value: Math.floor(window.innerWidth * 0.9)
       });
       this.updateMediaContentsFieldObjectItem({
         key: 'height',
-        value: window.innerHeight * 0.8
+        value: Math.floor(window.innerHeight * 0.8)
       });
     }
   }
@@ -11115,15 +11135,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/FrequentlyUseStyle.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/FrequentlyUseStyle.css");
 // Imports
+
 
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: rgb(40,40,40);\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-3e8c78f2] {\r\n    margin-bottom : 20px;\n}\n#media-size-wraper input[data-v-3e8c78f2] {\r\n    width: 80px;\n}\n.sub-sub-title[data-v-3e8c78f2] {\r\n    font-size: 15px;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.clear-bg-img[data-v-3e8c78f2] {\r\n    color: blue;\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n.cursor-p[data-v-3e8c78f2]:hover {\r\n    cursor: pointer;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: rgb(40,40,40);\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#media-size-wraper input[data-v-3e8c78f2] {\r\n    width: 80px;\n}\n.sub-sub-title[data-v-3e8c78f2] {\r\n    font-size: 15px;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.clear-bg-img[data-v-3e8c78f2] {\r\n    color: blue;\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n.cursor-p[data-v-3e8c78f2]:hover {\r\n    cursor: pointer;\n}\n.btns[data-v-3e8c78f2] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-3e8c78f2]:hover { cursor: pointer;}\n.plus-btn[data-v-3e8c78f2] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-3e8c78f2] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11240,13 +11263,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 /* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/flexSetting.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/flexSetting.css");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/FrequentlyUseStyle.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/FrequentlyUseStyle.css");
 // Imports
+
 
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 15px 5px;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 17px;\r\n    padding: 5px 18px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 60px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n.btns[data-v-05ba1def] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-05ba1def]:hover { cursor: pointer;}\n.plus-btn[data-v-05ba1def] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-05ba1def] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
@@ -21116,7 +21142,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting",
+                  staticClass: "setting mb20",
                   attrs: { id: "media-bg-color-wraper" },
                 },
                 [
@@ -21144,84 +21170,129 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "setting", attrs: { id: "media-size-wraper" } },
+                {
+                  staticClass: "setting w90",
+                  attrs: { id: "media-size-wraper" },
+                },
                 [
                   _c("h3", { staticClass: "setting-title" }, [
                     _vm._v("サイズ"),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "flex" }, [
-                    _c("div", { staticClass: "setting-width flex column" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "flex align-center",
-                          staticStyle: { opacity: "0.7" },
-                        },
-                        [
+                  _c("div", { staticClass: "flex column" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "setting-width mb15 flex j-s-between a-center",
+                      },
+                      [
+                        _c("h4", { staticClass: "sub-sub-title mb0 w50px" }, [
                           _c("i", { staticClass: "fas fa-arrows-alt-h icon" }),
+                          _vm._v("\n                横幅\n              "),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex a-center" }, [
+                          _c("i", {
+                            staticClass:
+                              "fas fa-minus fa-lg btns minus-btn mr10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.minusOneValue("width")
+                              },
+                            },
+                          }),
                           _vm._v(" "),
-                          _c("h4", { staticClass: "sub-sub-title" }, [
-                            _vm._v("横幅[px]"),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "setting",
-                        attrs: {
-                          id: "set-contents-area-frame-width",
-                          type: "number",
-                          placeholder: "横幅",
-                        },
-                        domProps: { value: _vm.getMediaContentsField["width"] },
-                        on: {
-                          input: function ($event) {
-                            return _vm.updateStoreData(
-                              "width",
-                              $event.target.value
-                            )
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.plusOneValue("width")
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "setting",
+                          attrs: {
+                            id: "set-contents-area-frame-width",
+                            type: "number",
+                            placeholder: "横幅",
                           },
-                        },
-                      }),
-                    ]),
+                          domProps: {
+                            value: _vm.getMediaContentsField["width"],
+                          },
+                          on: {
+                            input: function ($event) {
+                              return _vm.updateStoreData(
+                                "width",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ]
+                    ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "setting-height flex column" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "flex align-center",
-                          staticStyle: { opacity: "0.7" },
-                        },
-                        [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "setting-height mb15 flex j-s-between a-center",
+                      },
+                      [
+                        _c("h4", { staticClass: "sub-sub-title mb0 w50px" }, [
                           _c("i", { staticClass: "fas fa-arrows-alt-v icon" }),
+                          _vm._v("\n                縦幅\n              "),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex a-center" }, [
+                          _c("i", {
+                            staticClass:
+                              "fas fa-minus fa-lg btns minus-btn mr10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.minusOneValue("height")
+                              },
+                            },
+                          }),
                           _vm._v(" "),
-                          _c("h4", { staticClass: "sub-sub-title" }, [
-                            _vm._v("縦幅[px]"),
-                          ]),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "setting",
-                        attrs: {
-                          id: "set-contents-area-height",
-                          type: "number",
-                          placeholder: "縦幅",
-                        },
-                        domProps: {
-                          value: _vm.getMediaContentsField["height"],
-                        },
-                        on: {
-                          input: function ($event) {
-                            return _vm.updateStoreData(
-                              "height",
-                              $event.target.value
-                            )
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.plusOneValue("height")
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "setting",
+                          attrs: {
+                            id: "set-contents-area-height",
+                            type: "number",
+                            placeholder: "縦幅",
                           },
-                        },
-                      }),
-                    ]),
+                          domProps: {
+                            value: _vm.getMediaContentsField["height"],
+                          },
+                          on: {
+                            input: function ($event) {
+                              return _vm.updateStoreData(
+                                "height",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ]
+                    ),
                   ]),
                 ]
               ),
@@ -21229,7 +21300,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting",
+                  staticClass: "setting mb20",
                   attrs: { id: "media-bg-img-wraper" },
                 },
                 [

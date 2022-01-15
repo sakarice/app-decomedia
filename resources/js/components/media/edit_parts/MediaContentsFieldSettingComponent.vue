@@ -7,7 +7,7 @@
           <h2 id="media-contents-field-setting-title">メディアエリア設定</h2>
 
           <!-- メディア背景色設定 -->
-          <div id="media-bg-color-wraper" class="setting">
+          <div id="media-bg-color-wraper" class="setting mb20">
             <h3 class="setting-title">背景色</h3>
             <label for="">
               <input :value="getMediaContentsField['color']" @input="updateMediaContentsFieldObjectItem({key:'color', value:$event.target.value})" type="color" id="media-bg-color">
@@ -15,20 +15,28 @@
             </label>
           </div>
           <!-- メディアエリアサイズ設定 -->
-          <div id="media-size-wraper" class="setting">
+          <div id="media-size-wraper" class="setting w90">
             <h3 class="setting-title">サイズ</h3>
-            <div class="flex">
-              <div class="setting-width flex column">
-                <div class="flex align-center" style="opacity:0.7">
+            <div class="flex column">
+              <div class="setting-width mb15 flex j-s-between a-center">
+                <h4 class="sub-sub-title mb0 w50px">
                   <i class="fas fa-arrows-alt-h icon"></i>
-                  <h4 class="sub-sub-title">横幅[px]</h4>
+                  横幅
+                </h4>
+                <div class="flex a-center">
+                  <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
+                  <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
                 </div>
                 <input id="set-contents-area-frame-width" class="setting" :value="getMediaContentsField['width']" @input="updateStoreData('width',$event.target.value)" type="number" placeholder="横幅">
               </div>
-              <div class="setting-height flex column">
-                <div class="flex align-center" style="opacity:0.7">
+              <div class="setting-height mb15 flex j-s-between a-center">
+                <h4 class="sub-sub-title mb0 w50px">
                   <i class="fas fa-arrows-alt-v icon"></i>
-                  <h4 class="sub-sub-title">縦幅[px]</h4>
+                  縦幅
+                </h4>
+                <div class="flex a-center">
+                  <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
+                  <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
                 </div>
                 <input id="set-contents-area-height" class="setting" :value="getMediaContentsField['height']" @input="updateStoreData('height',$event.target.value)" type="number" placeholder="縦幅">
               </div>
@@ -36,7 +44,7 @@
           </div>
 
           <!-- 背景画像設定 -->
-          <div id="media-bg-img-wraper" class="setting">
+          <div id="media-bg-img-wraper" class="setting mb20">
             <h3 class="setting-title">背景画像</h3>
             <span class="clear-bg-img cursor-p" @mousedown="clearBgImg()" @touchstart="clearBgImg()">削除する</span>
           </div>
@@ -80,6 +88,8 @@ export default {
       const clearBgImgEvent = new CustomEvent('clearBgImg');
       listener_elem.dispatchEvent(clearBgImgEvent);
     },
+    minusOneValue(data_key){this.updateMediaContentsFieldObjectItem({key:data_key, value:Number(this.getMediaContentsField[data_key]-1)})},
+    plusOneValue(data_key){this.updateMediaContentsFieldObjectItem({key:data_key, value:Number(this.getMediaContentsField[data_key]+1)})},
     updateStoreData(key,value){
       this.updateMediaContentsFieldObjectItem({key:key, value:value});
     },
@@ -94,6 +104,7 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
 
   #media-contents-field-setting-area {
     margin: 20px 0;
@@ -108,10 +119,6 @@ export default {
     background-color: rgb(40,40,40);
     border-radius: 5px;
     padding: 3px 10px;
-  }
-
-  .setting {
-    margin-bottom : 20px;
   }
 
   #media-size-wraper input {
@@ -182,6 +189,20 @@ export default {
   .cursor-p:hover {
     cursor: pointer;
   }
+
+  .btns {
+    border-radius: 50%;
+    padding: 5px 4px;
+  }
+  .btns:hover { cursor: pointer;}
+  .plus-btn {
+    color: palevioletred;
+    border: 1.5px solid palevioletred;
+  }
+  .minus-btn {
+    color: deepskyblue;
+    border: 1.5px solid deepskyblue;
+  }  
 
 @media screen and (max-width:480px) {
   
