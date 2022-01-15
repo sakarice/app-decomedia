@@ -39,71 +39,92 @@
       <div class="media-figure-settings" v-show="isShowDetail">
 
         <!-- 図形の種類 -->
-        <div class="disp-space-between type-input-wrapper">
-          <span>種類:</span>
-          <select id="create-figure-type" name="種類" class="input-num" @input="updateFigureData({key:'type', value:$event.target.value})">
+        <div class="flex j-s-between a-center type-input-wrapper">
+          <span class="label">種類</span>
+          <select id="create-figure-type" name="種類" class="w80px" @input="updateFigureData({key:'type', value:$event.target.value})">
             <option v-for="figureType in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
           </select>
         </div>
 
+        <!-- カラー系の設定 -->
+        <div class="setting-type-color mt10">
+          <div class="flex j-s-between a-center fill-input-wrapper">
+            <div class="fill-flag">
+              <span class="label">塗りつぶし</span>
+              <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
+            </div>
+            <div class="fill-color">
+              <span class="label">色</span>
+              <input type="color" @mousedown.stop :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
+            </div>
+          </div>
+
+          <div class="flex j-s-between a-center stroke-input-wrapper">
+            <div class="stroke-flag">
+              <span class="label">枠線</span>
+              <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
+            </div>
+            <div class="stroke-color">
+              <span class="label">色</span>
+              <input type="color" @mousedown.stop :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
+            </div>
+          </div>
+        </div>
+
+        <div class="opacity-input-wrapper mt10 mb15 flex a-center">
+          <span class="label mr10">透過度:</span>
+          <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+        </div>
+
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="disp-space-between x-position-wrapper">
-            <span>配置座標(x):</span>
+          <div class="flex mb10 j-s-between a-center x-position-wrapper">
+            <span class="label">位置(横)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('left')"></i>
+            </div>
             <input type="number" class="input-num" :value="getFigureData['left']" @input="updateFigureData({key:'left', value:$event.target.value})">
           </div>
 
-          <div class="disp-space-between y-position-wrapper">
-            <span>配置座標(y):</span>
+          <div class="flex mb10 j-s-between a-center y-position-wrapper">
+            <span class="label">位置(縦)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('top')"></i>
+            </div>            
             <input type="number" class="input-num" :value="getFigureData['top']" @input="updateFigureData({key:'top', value:$event.target.value})">
           </div>
 
-          <div class="disp-space-between degree-wrapper">
-            <span>回転:</span>
+          <div class="flex mb10 j-s-between a-center degree-wrapper">
+            <span class="label">回転</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('degree')"></i>
+            </div>
             <input type="number" class="input-num" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
           </div>
 
-          <div class="disp-space-between width-input-wrapper">
-            <span>横幅[px]:</span>
+          <div class="flex mb10 j-s-between a-center width-input-wrapper">
+            <div><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
+            </div>
             <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
           </div>
-          <div class="disp-space-between height-input-wrapper">
-            <span>縦幅[px]:</span>
+          <div class="flex mb10 j-s-between a-center height-input-wrapper">
+            <div><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
+            </div>
             <input type="number" class="input-num" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
           </div>
 
         </div>
 
 
-        <!-- カラー系の設定 -->
-        <div class="setting-type-color">
-          <div class="disp-space-between fill-input-wrapper">
-            <div class="fill-flag">
-              <span>塗りつぶし</span>
-              <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
-            </div>
-            <div class="fill-color">
-              <span>色:</span>
-              <input type="color" @mousedown.stop :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
-            </div>
-          </div>
-
-          <div class="disp-space-between stroke-input-wrapper">
-            <div class="stroke-flag">
-              <span>枠線</span>
-              <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
-            </div>
-            <div class="stroke-color">
-              <span>色:</span>
-              <input type="color" @mousedown.stop :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
-            </div>
-          </div>
-        </div>
-
-        <div class="opacity-input-wrapper">
-          <span>透過度:</span>
-          <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
-        </div>
       </div>
     </div>
 
@@ -231,7 +252,14 @@
         }
         this.updateFigureData({key:'type', value:type_new});
       },
-
+      plusOneValue(data_key){
+        const new_val = Number(this.getFigureData[data_key]) + 1;
+        this.updateFigureData({key:data_key, value:new_val});
+      },
+      minusOneValue(data_key){
+        const new_val = Number(this.getFigureData[data_key]) - 1;
+        this.updateFigureData({key:data_key, value:new_val});
+      },
       addMediaFigure(){
         // ↓オブジェクトをそのまま渡すと参照渡しになってしまうので、切りだして新しいオブジェクトを作る。
         const mediaFigure = Object.assign({}, this.getFigureData);
@@ -365,6 +393,8 @@
 <style scoped>
 
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
+
 
 #media-figure-factory-wrapper{
   position: absolute;
@@ -391,10 +421,10 @@
 }
 
 .back-figure-type{
-  color: blue;
+  color: deepskyblue;
 }
 .next-figure-type{
-  color: red;
+  color: palevioletred;
 }
 
 .item-frame {
@@ -418,7 +448,7 @@
 
 
 .media-figure-settings {
-  padding: 15px 45px;
+  padding: 15px 25px;
   max-height: 200px;
   overflow-y: scroll;
 }
@@ -458,13 +488,9 @@
   z-index: 3;
   padding: 0px 4px;
   color: darkorange;
-  /* background-color: rgba(255,255,255,0.1);
-  box-shadow: 1px 1px 3px lightslategrey;
-  border-radius: 4px; */
 }
 .add-icon-wrapper:hover {
   cursor: pointer;
-  /* outline: 1px solid orange; */
 }
 .add-text {
   font-size: 11px;
@@ -476,13 +502,29 @@
   margin-bottom: 15px;
 }
 
-.disp-space-between {
-  display: flex;
-  justify-content: space-between;
+.input-num {
+  width: 60px;
+  color: darkgray;
 }
 
-.input-num {
-  width: 100px;
+.btns {
+  border-radius: 50%;
+  padding: 5px 4px;
+}
+.btns:hover { cursor: pointer;}
+.plus-btn {
+  color: palevioletred;
+  border: 1.5px solid palevioletred;
+}
+.minus-btn {
+  color: deepskyblue;
+  border: 1.5px solid deepskyblue;
+}
+
+.label {
+  width: 50px;
+  color: lightgrey;
+  font-size: 13px;
 }
 
 .reverse-y {
@@ -492,6 +534,10 @@
 .hidden {
   display: none;
 }
+
+.grey { color: grey;}
+
+
 
 @media screen and (min-width:481px) {
   #media-figure-factory-wrapper{
@@ -522,7 +568,7 @@
   }
 
   .media-figure-settings {
-    max-height: 20vh;
+    max-height: 25vh;
   }
 
   .item-frame {
