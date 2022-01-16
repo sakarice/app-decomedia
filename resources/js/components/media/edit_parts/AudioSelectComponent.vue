@@ -439,7 +439,8 @@ export default {
 
 
   .audio_name {
-    margin-left: 7px;
+    width: 100%;
+    margin-left: 10px;
     white-space: nowrap;
   }
 
