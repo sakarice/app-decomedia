@@ -12,33 +12,57 @@
       <div class="media-text-settings">
         <!-- 数値系の設定 -->
         <div class="setting-wrapper setting-num">
-          <div class="disp-space-between x-position-wrapper">
-            <span>配置座標(x):</span>
+          <div class="x-position-wrapper flex j-s-between a-center mb10">
+            <span class="label">位置(横)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('left')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['left']" @input="updateTextData('left', $event.target.value)" min="-1000" max="10000">
           </div>
 
-          <div class="disp-space-between y-position-wrapper">
-            <span>配置座標(y):</span>
+          <div class="flex j-s-between a-center mb10 y-position-wrapper">
+            <span class="label">位置(縦)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('top')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['top']" @input="updateTextData('top', $event.target.value)" min="-1000" max="10000">
           </div>
 
-          <div class="disp-space-between width-input-wrapper">
-            <span>横幅[px]:</span>
+          <div class="width-input-wrapper flex j-s-between a-center mb10">
+            <span class="label">横幅[px]</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['width']" @input="updateTextData('width', $event.target.value)" min="0" max="10000">
           </div>
 
-          <div class="disp-space-between degree-wrapper">
-            <span>回転:</span>
+          <div class="degree-wrapper flex j-s-between a-center mb10">
+            <span class="label">回転</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('degree')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['degree']" @input="updateTextData('degree', $event.target.value)">
           </div>
 
-          <div class="disp-space-between layer-input-wrapper">
-            <span>重ね順:</span>
+          <div class="layer-input-wrapper flex j-s-between a-center mb10">
+            <span class="label">重ね順</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('layer')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('layer')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['layer']" @input="updateTextData('layer', $event.target.value)"  min="0" max="100">
           </div>
 
-          <div class="disp-space-between font-size-input-wrapper">
-            <span>サイズ:</span>
+          <div class="font-size-input-wrapper flex j-s-between a-center mb10">
+            <span class="label">サイズ</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('font_size')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('font_size')"></i>
+            </div>
             <input type="number" class="input-num" :value="textDatas['font_size']" @input="updateTextData('font_size', $event.target.value)"  min="0" max="200">
           </div>
 
@@ -46,20 +70,20 @@
         </div>
         <!-- カラー系の設定 -->
         <div class="setting-wrapper setting-color">
-          <div class="disp-space-between stroke-input-wrapper">
+          <div class="stroke-input-wrapper flex j-s-between a-center mb15">
             <div class="text-color">
-              <span>色:</span>
+              <span class="label">色</span>
               <input type="color" @mousedown.stop :value="textDatas['color']" @input="updateTextData('color', $event.target.value)">
             </div>
           </div>
         </div>
 
-        <div class="setting-wrapper disp-space-between type-input-wrapper">
+        <div class="setting-wrapper type-input-wrapper flex j-s-between a-center mb10">
           <!-- フォントスタイル(font-family) -->
           <div id="font-style-wrapper" class="setting flex column">
             <h3 class="sub-title">フォント</h3>
             <div class="flex column">
-              <div class="flex column" style="margin-right:5px">
+              <div class="flex column mb10">
                 <h4 class="sub-sub-title">カテゴリ</h4>
                 <select id="font-category" v-model="selected_category">
                   <option v-for="category in font_category" :value="category" :key="category.id">
@@ -67,7 +91,7 @@
                   </option>
                 </select>
               </div>
-              <div class="flex column">
+              <div class="flex column mb10">
                 <h4 class="sub-sub-title">スタイル</h4>
                 <select id="" v-model="selected_font">
                   <option v-for="option in font_options" :value="option.value" :key="option.id">
@@ -81,7 +105,7 @@
 
 
         <div class="setting-wrapper opacity-input-wrapper">
-          <span>透過度:</span>
+          <span class="label">透過度</span>
           <input type="range" :value="textDatas['opacity']" @mousedown.stop @input="updateTextData('opacity',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
       </div>
@@ -212,6 +236,14 @@
         }
         this.setCategoryAndFontFromStoreData();
       },
+      plusOneValue(data_key){
+        const new_val = Number(this.textDatas[data_key]) + 1;
+        this.updateTextData(data_key, new_val);
+      },
+      minusOneValue(data_key){
+        const new_val = Number(this.textDatas[data_key]) - 1;
+        this.updateTextData(data_key, new_val);
+      },
       updateTextData(key, value){
         this.textDatas[key] = this.fixStrToNum(key, value);
         this.updateMediaTextsObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
@@ -293,6 +325,9 @@
 </script>
 
 <style scoped>
+@import "/resources/css/FrequentlyUseStyle.css";
+@import "/resources/css/flexSetting.css";
+
 #media-text-update-wrapper{
   position: absolute;
   z-index: 30;
@@ -306,7 +341,9 @@
   cursor: all-scroll;
 }
 .media-text-settings {
-  padding: 15px 45px;
+  max-height: 350px;
+  padding: 15px 25px;
+  overflow-y: scroll;
 }
 
 
@@ -326,26 +363,49 @@
   margin-bottom: 15px;
 }
 
-.disp-space-between {
+.flex j-s-between a-center mb10 {
   display: flex;
   justify-content: space-between;
 }
 
-.input-num {
-  width: 100px;
+.label {
+  width: 60px;
+  color: lightgrey;
+  font-size: 13px;
 }
+
+.input-num {
+  width: 60px;
+  color: darkgray;
+}
+
+.btns {
+  border-radius: 50%;
+  padding: 5px 4px;
+}
+.btns:hover { cursor: pointer;}
+.plus-btn {
+  color: palevioletred;
+  border: 1.5px solid palevioletred;
+}
+.minus-btn {
+  color: deepskyblue;
+  border: 1.5px solid deepskyblue;
+}
+
+.hidden {
+  display: none;
+}
+
+.grey { color: grey;}
 
 .sub-title {
   font-size: 15px;
 }
 .sub-sub-title {
+  margin-bottom: 2px;
   font-size: 13px;
   color: darkgrey;
-}
-
-
-.hidden {
-  display: none;
 }
 
 
@@ -372,8 +432,7 @@
   }
 
   .media-text-settings {
-    max-height: 200px;
-    overflow-y: scroll;
+    max-height: 250px;
   }
 
 

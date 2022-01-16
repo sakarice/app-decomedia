@@ -60,6 +60,10 @@
         <router-view name="dispMediaInfo"
         v-on:show-modal="showModal">        
         </router-view>
+        <!-- Mediaコメント -->
+        <router-view name="dispMediaComment"
+        v-on:show-modal="showModal">
+        </router-view>
         <!-- 画像 -->
         <router-view name="dispImgModal"
         v-on:show-modal="showModal">        
@@ -106,13 +110,21 @@
     :transitionName="transitionName">
     </router-view>
 
+    <!-- メディア図形作成コンポーネント -->
     <router-view name="mediaFigureFactory"
     v-show="isShowModal['figureSettingModal']"
     v-on:close-modal="closeModal">
     </router-view>
 
+    <!-- メディアテキスト作成コンポーネント -->
     <router-view name="mediaTextFactory"
     v-show="isShowModal['textSettingModal']"
+    v-on:close-modal="closeModal">
+    </router-view>
+
+    <!-- メディアコメントコンポーネント -->
+    <router-view name="mediaCommentMng"
+    v-show="isShowModal['mediaComment']"
     v-on:close-modal="closeModal">
     </router-view>
 
@@ -146,13 +158,11 @@
 
     <disp-audios></disp-audios>
 
-    <!-- <media-figure-setting
-    v-show="isShowModal['figureSettingModal']"
-    v-on:close-modal="closeModal">
-    </media-figure-setting> -->
+
+    <!-- <router-view name="overlay"></router-view> -->
+    <overlay></overlay>
 
     <div v-show="getIsCrudDoing">
-      <router-view name="overlay"></router-view>
       <router-view name="loading"
       :message="waitingMsg">
       </router-view>
@@ -191,6 +201,7 @@
   import ObjectDelete from '../media/media_contents/objects/object_edit_parts/ObjectDeleteComponent.vue'
   import ObjectSettingOpen from '../../components/media/change_display_parts/ObjectSettingOpenComponent.vue'
   import ObjectCopy from '../../components/media/media_contents/objects/object_edit_parts/ObjectCopyComponent.vue';
+  import overlay from '../../components/common/OverlayComponent.vue';
 
 
 export default {
@@ -208,6 +219,7 @@ export default {
     ObjectDelete,
     ObjectSettingOpen,
     ObjectCopy,
+    overlay,
   },
   props: [],
   data : () => {
@@ -225,6 +237,7 @@ export default {
         'figureSettingModal' : false,
         'contentsFieldSettingModal': false,
         'mediaSettingModal' : false,
+        'mediaComment' : false,
       },
       autoPlay : true,
 
@@ -279,6 +292,8 @@ export default {
       axios.get(url)
         .then(response =>{
           this.setIsMyMedia(response.data.isMyMedia);
+          const event = new CustomEvent('setIsMyMedia');
+          document.dispatchEvent(event);
         })
         .catch(error => {
           console.log('あなたがmedia作成者か判別できませんでした');
@@ -317,6 +332,8 @@ export default {
           this.updateMediaSettingObjectItem({key:key, value:datas[key]});
         };
         this.updateIsInitializedSetting(true);
+        const event = new CustomEvent('initMediaSettingFinish');
+        document.body.dispatchEvent(event);
       });
     },
     showModal(target){
@@ -386,6 +403,7 @@ export default {
     field.addEventListener('touchstart',this.fieldClicked, false);
   },
   watch : {
+    $route:function(){this.checkMode();},
     initStatus : function(newVal){
       console.log('initStatus:'+newVal)
       // オーディオ情報の読み込みが完了したらオーディオ再生開始

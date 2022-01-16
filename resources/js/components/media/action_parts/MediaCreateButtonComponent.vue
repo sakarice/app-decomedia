@@ -11,6 +11,7 @@
 
 <script>
   import { mapGetters, mapMutations} from 'vuex';
+  import { showOverLay, hideOverLay } from '../../../functions/overlayDispHelper';
 
   export default {
     data : () => { return {} },
@@ -37,18 +38,27 @@
           'contents_field': this.getMediaContentsField,
           'setting' : this.getMediaSetting,
         }
-        this.setIsCrudDoing(true);
+        this.showWaitingModal();
         axios.post(url, media_datas)
           .then(response =>{
             alert(response.data.message);
-            this.setIsCrudDoing(false);
+            this.hideWaitingModal();
           })
           .catch(error => {            
             alert('メディア保存に失敗しました');
-            this.setIsCrudDoing(false);
+            this.hideWaitingModal();
           })
       },
+      showWaitingModal(){
+        showOverLay();
+        this.setIsCrudDoing(true);
+      },
+      hideWaitingModal(){
+        this.setIsCrudDoing(false);
+        hideOverLay();
+      },
     },
+    created(){},
     
   }
 

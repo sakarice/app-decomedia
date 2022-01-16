@@ -1,5 +1,5 @@
 <template>
-  <div id="copy-wrapper" class="flex a-center j-center"
+  <div id="copy-wrapper" class="p20 flex a-center j-center"
   @click="copyAndPaste()" @click.stop @touchstart.stop>
     <i class="fas fa-copy fa-lg copy-icon"></i>
   </div>
@@ -111,10 +111,8 @@
 <style scoped>
 
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
 
-#copy-wrapper {
-  padding: 10px 12px;
-}
 #copy-wrapper:hover {
   background-color: rgba(255,255,255,0.2);
 }

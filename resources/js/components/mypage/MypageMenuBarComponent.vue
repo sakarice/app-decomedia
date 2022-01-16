@@ -1,30 +1,24 @@
 <template>
-    <div class="mypage-manu-bar">
+    <div id="mypage-manu-bar"
+     class="pos-f top0 z1 w60px h100 pt50 flex column j-center a-center">
         <!-- マイページトップ -->
-        <div class="my-page-top">
-            <div class="content">
-                <!-- <a class="logo" href="/mypage"> -->
-                <i @click="switchToMypageDefault" class="fas fa-door-open"></i>
-                <!-- </a> -->
+        <div class="my-page-top mb10">
+            <div class="content p10 flex j-center a-center">
+                <i @click="switchToMypageDefault" class="fas fa-home fa-2x"></i>
             </div>
         </div>
 
         <!-- 作成済みmedia一覧 -->
-        <div class="created-medias">
-            <div class="content">
-                <!-- <a class="logo" href="/home/createdMedia"> -->
-                    <!-- <i class="fas fa-hammer"></i> -->
-                    <i @click="switchToCreatedMediaPreview" class="fas fa-clone"></i>
-                <!-- </a> -->
+        <div class="created-medias mb10">
+            <div class="content p10 flex j-center a-center">
+                <i @click="switchToCreatedMediaPreview" class="fas fa-tools fa-2x"></i>
             </div>
         </div>
 
         <!-- お気に入りmedia一覧 -->
-        <div class="liked-medias">
-            <div class="content">
-                <!-- <a class="logo" href="/home/createdMedia"> -->
-                    <i @click="switchToLikedMediaPreview" class="far fa-heart"></i>
-                <!-- </a> -->
+        <div class="liked-medias mb10">
+            <div class="content p10 flex j-center a-center">
+                <i @click="switchToLikedMediaPreview" class="fas fa-thumbs-up fa-2x"></i>
             </div>
         </div>
 
@@ -37,13 +31,9 @@
 
 export default {
     components : {},
-    props : [
-        // 'csrf',
+    props : [ // 'csrf',
     ],
-    data : () => {
-        return {
-        }
-    },
+    data : () => {return {}},
     methods : {
         switchToMypageDefault(){
             this.$parent.isShowCreatedMediaPreview = true;
@@ -62,41 +52,29 @@ export default {
         },
         
     },
-    mounted(){}
 }
 
 </script>
 
 <style scoped>
+@import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
 
-.mypage-manu-bar {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: 40px;
-  height: 100%;
-  padding: 50px 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+#mypage-manu-bar {
+    background-color: rgba(253, 253, 253, 1);
+    box-shadow: 1px 1px 10px lightgrey;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    margin: 7px 0;
-    padding: 10px;
+    color: black;
     opacity: 0.9;
+    margin: 10px 0;
 }
 
 .content:hover {
-  opacity: 1;
-  background-color: grey;
+    opacity: 1;
+    background-color: rgb(230,230,230);
 }
 
 /* aタグ全体の設定 */
@@ -109,14 +87,15 @@ a:hover {
 }
 
 @media screen and (min-width: 481px) {
-    .mypage-manu-bar {
+    #mypage-manu-bar {
         left: 0;
     }    
 }
 
 @media screen and (max-width: 480px) {
-    .mypage-manu-bar {
-        right: 0;
+    #mypage-manu-bar {
+        /* right: 0; */
+        display: none;
     }
 }
 

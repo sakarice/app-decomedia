@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Vue from 'vue';
 import Vuex from 'vuex';
+import followers from './modules/followers.js';
+import followings from './modules/followings.js';
 import loginState from './modules/loginState.js';
 import deviceType from './modules/deviceType.js';
 import media from './modules/media.js';
@@ -16,11 +18,14 @@ import mediaSetting from './modules/mediaSetting.js';
 import mediaFigureFactory from './modules/mediaFigureFactory.js';
 import mediaFigures from './modules/mediaFigures.js';
 import selectedObjects from './modules/selectedObjects';
+import mediaComments from './modules/mediaComments';
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   modules : {
+    followers,
+    followings,
     loginState,
     deviceType,
     media,
@@ -36,6 +41,7 @@ const store = new Vuex.Store({
     mediaFigureFactory,
     mediaFigures,
     selectedObjects,
+    mediaComments,
   }
 
 });

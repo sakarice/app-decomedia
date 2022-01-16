@@ -10,10 +10,10 @@ use App\Models\Followers;
 
 class FollowUtil
 {
-  // 自分が入ったMediaの作成者をフォローしているか確認する。
-  public static function getFollowState($media_owner_id){
-    $user_id = Auth::user()->id;
-    $isFollow = Followers::where('user_id',$user_id)->where('follower_id',$media_owner_id)->exists();
+  // 自分が対象ユーザをフォローしているか確認する。
+  public static function getFollowState($user_id){
+    $my_id = Auth::user()->id;
+    $isFollow = Followers::where('user_id',$user_id)->where('follower_id',$my_id)->exists();
     return [
       'isFollow' => $isFollow,
     ];
@@ -22,29 +22,29 @@ class FollowUtil
   // (ログイン中の)ユーザ情報を取得(id,ユーザ名,プロフィール文)
   public static function updateFollowState(Request $request){
       $isFollow = $request->isFollow;
-      $follower_id = $request->target_user_id;
-      $user_id = Auth::user()->id;
-      $returnMsg;
-      
+      $follower_id = Auth::user()->id;
+      $user_id = $request->user_id;
+      $updatedState;
       switch ($isFollow) {
-        case true:   // フォローされたら、フォロー情報を作成
+        case false:   // フォロー
           $followers = new Followers();
-          $followers->user_id = $user_id;
-          $followers->follower_id = $follower_id;
-          $followers->save();
-          $returnMsg = 'フォローしました';
+          $model = $followers->create([
+            'user_id' => $user_id,
+            'follower_id' => $follower_id,
+          ]);
+          if($model){$updatedState = true;}
           break;
-        case false: // フォロー解除されたら、フォロー情報を削除
+        case true: // フォロー解除
           Followers::where('user_id', $user_id)
           ->where('follower_id', $follower_id)
           ->first()
           ->delete();
-          $returnMsg = 'フォロー解除しました';
+          $updatedState = false;
           break;
       }
 
       return [
-        'msg' => $returnMsg,
+        'isFollow' => $updatedState,
       ];
   }
 

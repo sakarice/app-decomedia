@@ -39,8 +39,8 @@ Vue.component('media-header-component', require('./components/media/MediaHeaderC
 Vue.component('mypage-menu-bar-component', require('./components/mypage/MypageMenuBarComponent.vue').default);
 // マイページ
 Vue.component('mypage-component', require('./components/mypage/MypageComponent.vue').default);
-// フォロー/フォロワー一覧
-Vue.component('follow-and-follower-component', require('./components/FollowAndFollowerComponent.vue').default);
+// フォロワー/フォロー中ユーザ一覧
+Vue.component('follower-and-following-component', require('./components/FollowerAndFollowingComponent.vue').default);
 
 // ユーザプロフィール
 Vue.component('profile-component', require('./components/ProfileComponent.vue').default);
@@ -66,7 +66,7 @@ Vue.component('media-owner-info-component', require('./components/media/show_par
 Vue.component('disp-media-like-component', require('./components/media/show_parts/DispMediaLikeComponent.vue').default);
 Vue.component('like-media-component', require('./components/media/show_parts/LikeMediaComponent.vue').default);
 // Media作成者フォローコンポーネント
-Vue.component('follow-component', require('./components/media/show_parts/FollowComponent.vue').default);
+Vue.component('follow-btn-component', require('./components/common/FollowBtnComponent.vue').default);
 
 // ★media作成用コンポーネント
 Vue.component('img-select-component', require('./components/media/edit_parts/ImgSelectComponent.vue').default);

@@ -53,17 +53,29 @@ Route::middleware('auth')->group(function(){
         Route::post('/media/update', 'App\Http\Controllers\MediaController@update');
         Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
         // Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
+    // メディアコメント
+        Route::get('/media/{media_id}/comment', 'App\Lib\MediaCommentUtil@show');
+        Route::post('/media/{media_id}/comment/store', 'App\Lib\MediaCommentUtil@store');
+        Route::post('/media/{media_id}/comment/delete', 'App\Lib\MediaCommentUtil@destroy');
+
+
+    // Mediaへ、いいね/いいね解除する
+        Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
+
         // vue-router用の定義
         Route::get('/media/{any}', function(){return view('medias.show');})->where('any', '.*');
 
         // 入ったMediaをいいねしているかチェックする
         Route::get('/user/likeState/{media_id}', 'App\Lib\LikeMediaUtil@getLikeState');
-    // Mediaへ、いいね/いいね解除する
-        Route::post('/media/like', 'App\Lib\LikeMediaUtil@updateLikeState');
     // 自分が入ったMediaの作成者をフォローしているかチェックする
-        Route::get('/user/followState/{media_owner_id}', 'App\Lib\FollowUtil@getFollowState');
+        Route::get('/following/{user_id}', 'App\Lib\FollowUtil@getFollowState');
     // メディア作成者をフォロー/フォロー解除する
         Route::post('/user/follow', 'App\Lib\FollowUtil@updateFollowState');
+
+    // フォロワー情報を取得する
+        Route::get('/followers', 'App\Lib\FollowerUtil@show');
+    // フォロー中ユーザ情報を取得する
+        Route::get('/followings', 'App\Lib\FollowingUtil@show');
     
     // メディア画像
         Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');

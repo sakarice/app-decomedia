@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Followers extends Model
+class MediaComment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'follower_id',
+      "media_id",
+      "user_id",
+      "user_name",
+      "profile_img_url",
+      "comment",
     ];
 
 }

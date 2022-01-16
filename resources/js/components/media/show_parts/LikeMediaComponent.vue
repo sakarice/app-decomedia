@@ -1,7 +1,7 @@
 <template>
   <div class="like-icon-wrapper">
-    <i v-show="!(isLikeMedia)" v-on:click="changeLikeStateOfViewAndDB()" class="far fa-heart fa-lg icon"></i>
-    <i v-show="isLikeMedia" v-on:click="changeLikeStateOfViewAndDB()" class="fas fa-heart fa-lg icon"></i>
+    <i v-show="!(isLikeMedia)" v-on:click="changeLikeStateOfViewAndDB()" class="far fa-thumbs-up fa-lg icon"></i>
+    <i v-show="isLikeMedia" v-on:click="changeLikeStateOfViewAndDB()" class="fas fa-thumbs-up fa-lg icon"></i>
   </div>
 </template>
 
@@ -69,12 +69,12 @@ export default{
 
 </script>
 
-<style>
+<style scoped>
 
 @import "/resources/css/mediaEditModals.css";
 
 .icon {
-  color: pink;
+  color: yellow
 }
 
 

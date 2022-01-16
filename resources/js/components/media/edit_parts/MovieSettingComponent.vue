@@ -5,7 +5,7 @@
 
         <div id="yt-setting-area" class="flex column a-start">
           <p id="player-setting-title">動画プレイヤー設定</p>
-          <div class="yt-setting-wrapper flex column a-start">
+          <div class="yt-setting-wrapper w100 flex column a-start">
             <!-- 動画ID -->
             <div class="setting-block about-yt-video-id">
               <h3 class="setting-title">youtube動画のURL</h3>
@@ -20,20 +20,28 @@
               </div>
             </div>
             <!-- 再生プレイヤーの縦横幅 -->
-            <div class="setting-block about-size">
+            <div class="setting-block about-size w90">
               <h3 class="setting-title">サイズ</h3>
-              <div class="flex">
-                <div class="setting-width flex column">
-                  <div class="flex align-center" style="opacity:0.7">
+              <div class="flex column">
+                <div class="setting-width flex j-s-between a-center">
+                  <div class="flex a-center" style="opacity:0.7">
                     <i class="fas fa-arrows-alt-h icon"></i>
-                    <span>横幅[px]</span>
+                    <span>横幅</span>
+                  </div>
+                  <div class="flex a-center">
+                    <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
+                    <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
                   </div>
                   <input id="set-movie-frame-width" class="setting" :value="getMediaMovie['width']" @input="updateWidth($event)" type="number" placeholder="横幅">
                 </div>
-                <div class="setting-height flex column">
-                  <div class="flex align-center" style="opacity:0.7">
+                <div class="setting-height flex j-s-between a-center">
+                  <div class="flex a-center" style="opacity:0.7">
                     <i class="fas fa-arrows-alt-v icon"></i>
-                    <span>縦幅[px]</span>
+                    <span>縦幅</span>
+                  </div>
+                  <div class="flex a-center">
+                    <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
+                    <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
                   </div>
                   <input id="set-movie-frame-height" class="setting" :value="getMediaMovie['height']" @input="updateHeight($event)" type="number" placeholder="縦幅">
                 </div>
@@ -42,7 +50,7 @@
             <!-- 動画のループ設定 -->
             <div class="setting-block about-loop">
               <h3 class="setting-title">ループ</h3>
-              <div class="flex align-center">
+              <div class="flex a-center">
                 <div class="toggle-outer flex a-center" v-on:click="changeLoopSetting" :class="{'is-loop-outer' : getMediaMovie['isLoop']}">
                   <div class="toggle-inner" :class="{'is-loop-inner' : getMediaMovie['isLoop']}"></div>
                 </div>
@@ -97,6 +105,8 @@ export default {
       let videoId = matchText.substring(2, 13);  // videoID部分を切りだし
       return videoId;
     },
+    minusOneValue(data_key){this.updateMediaMovieObjectItem({key:data_key, value:Number(this.getMediaMovie[data_key]-1)})},
+    plusOneValue(data_key){this.updateMediaMovieObjectItem({key:data_key, value:Number(this.getMediaMovie[data_key]+1)})},
     updateWidth(event){ this.updateMediaMovieObjectItem({key:'width',value:Number(event.target.value)}) },
     updateHeight(event){ this.updateMediaMovieObjectItem({key:'height',value:Number(event.target.value)}) },
     updateVideoId(event){
@@ -129,6 +139,8 @@ export default {
 
 @import "/resources/css/mediaEditModals.css";
 @import "/resources/css/flexSetting.css";
+@import "/resources/css/FrequentlyUseStyle.css";
+
 
   #player-setting-title {
     font-weight: bold;
@@ -163,11 +175,12 @@ export default {
 
   .setting-width,
   .setting-height {
-    margin: 0 5px 5px 5px;
+    margin: 0 5px 15px 5px;
   }
 
   .about-create-del .button {
-    margin-right: 20px;
+    margin-right: 17px;
+    padding: 5px 18px;
     color: white;
     border: none;
     border-radius: 2px;
@@ -208,7 +221,7 @@ export default {
   }
 
   .about-size input {
-    width: 80px;
+    width: 60px;
   }
 
   .is-loop-outer {
@@ -217,6 +230,21 @@ export default {
   .is-loop-inner {
     margin-left: 19px;
   }
+
+  .btns {
+    border-radius: 50%;
+    padding: 5px 4px;
+  }
+  .btns:hover { cursor: pointer;}
+  .plus-btn {
+    color: palevioletred;
+    border: 1.5px solid palevioletred;
+  }
+  .minus-btn {
+    color: deepskyblue;
+    border: 1.5px solid deepskyblue;
+  }
+
 
 @media screen and (max-width:480px) {
   #yt-setting-area {

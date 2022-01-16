@@ -68,6 +68,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            // 'profile_img_url' => "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-solid.svg"
+            'profile_img_url' => "https://app-decomedia-production.s3.ap-northeast-1.amazonaws.com/app-decomedia/user-icon-white.png"
         ]);
     }
 }

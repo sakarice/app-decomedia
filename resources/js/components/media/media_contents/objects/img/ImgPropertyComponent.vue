@@ -12,43 +12,68 @@
       <div class="media-img-settings">
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="disp-space-between x-position-wrapper">
-            <span>配置座標(x):</span>
+          <div class="-position-wrapper mb10 flex j-s-between a-center">
+            <span class="label">位置(横)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('left')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['left']" @input="updateImgData('left', $event.target.value)" min="-1000" max="10000">
           </div>
 
-          <div class="disp-space-between y-position-wrapper">
-            <span>配置座標(y):</span>
+          <div class="y-position-wrapper mb10 flex j-s-between a-center">
+            <span class="label">位置(縦)</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('top')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['top']" @input="updateImgData('top', $event.target.value)" min="-1000" max="10000">
           </div>
 
-          <div class="disp-space-between degree-wrapper">
-            <span>回転:</span>
+          <div class="degree-wrapper mb10 flex j-s-between a-center">
+            <span class="label">回転</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('degree')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['degree']" @input="updateImgData('degree', $event.target.value)">
           </div>
 
-          <div class="disp-space-between width-input-wrapper">
-            <span>横幅[px]:</span>
+          <div class="width-input-wrapper mb10 flex j-s-between a-center">
+            <div class="w60px"><span class="label">横幅</span><span class="font-11 grey">[px]</span></div>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['width']" @input="updateImgData('width', $event.target.value)" min="0" max="10000">
           </div>
-          <div class="disp-space-between height-input-wrapper">
-            <span>縦幅[px]:</span>
+
+          <div class="height-input-wrapper mb10 flex j-s-between a-center">
+            <div class="w60px"><span class="label">縦幅</span><span class="font-11 grey">[px]</span></div>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['height']" @input="updateImgData('height', $event.target.value)" min="0" max="10000">
           </div>
 
-          <div class="disp-space-between layer-input-wrapper">
-            <span>重ね順:</span>
+          <div class="layer-input-wrapper mb10 flex j-s-between a-center">
+            <span class="label">重ね順</span>
+            <div class="flex a-center">
+              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('layer')"></i>
+              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('layer')"></i>
+            </div>
             <input type="number" class="input-num" :value="imgDatas['layer']" @input="updateImgData('layer', $event.target.value)"  min="0" max="100">
           </div>
 
         </div>
 
-        <div class="opacity-input-wrapper">
-          <span>透過度:</span>
+        <div class="opacity-input-wrapper mb10">
+          <span class="label">透過度</span>
           <input type="range" :value="imgDatas['globalAlpha']" @mousedown.stop @input="updateImgData('opacity',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
         </div>
 
-        <div class="set-background-wrapper">
+        <div class="set-background-wrapper mb10">
           <span>メディア背景に設定する</span>
           <input type="checkbox" :checked="isBgImg" @mousedown.stop @input="changeBgImg($event.target.checked)">
         </div>
@@ -176,6 +201,14 @@
           this.imgDatas[key] = this.fixStrToNum(key, storeImgData[key]);
         }
       },
+      plusOneValue(data_key){
+        const new_val = Number(this.imgDatas[data_key]) + 1;
+        this.updateImgData(data_key, new_val);
+      },
+      minusOneValue(data_key){
+        const new_val = Number(this.imgDatas[data_key]) - 1;
+        this.updateImgData(data_key, new_val);
+      },
       updateImgData(key, value){
         this.updateMediaImgsObjectItem({index:this.index, key:key, value:this.fixStrToNum(key, value)});
         this.imgDatas[key] = this.getOneImg(this.index)[key];
@@ -249,6 +282,9 @@
 </script>
 
 <style scoped>
+@import "/resources/css/FrequentlyUseStyle.css";
+@import "/resources/css/flexSetting.css";
+
 #media-img-update-wrapper{
   position: absolute;
   z-index: 30;
@@ -262,7 +298,7 @@
   cursor: all-scroll;
 }
 .media-img-settings {
-  padding: 15px 45px;
+  padding: 15px 25px;
 }
 
 
@@ -283,18 +319,44 @@
   margin-bottom: 15px;
 }
 
-.disp-space-between {
+.flex j-s-between a-center {
   display: flex;
   justify-content: space-between;
 }
 
-.input-num {
-  width: 100px;
+.label {
+  width: 60px;
+  color: lightgrey;
+  font-size: 13px;
 }
+
+.input-num {
+  width: 60px;
+  color: darkgray;
+}
+
+
+.btns {
+  border-radius: 50%;
+  padding: 5px 4px;
+}
+.btns:hover { cursor: pointer;}
+.plus-btn {
+  color: palevioletred;
+  border: 1.5px solid palevioletred;
+}
+.minus-btn {
+  color: deepskyblue;
+  border: 1.5px solid deepskyblue;
+}
+
 
 .hidden {
   display: none;
 }
+
+.grey { color: grey;}
+
 
 
 @media screen and (min-width:481px) {

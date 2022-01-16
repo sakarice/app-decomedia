@@ -1,7 +1,7 @@
 <template>
   <!-- Media図形-->
   <div :id="canvas_wrapper_with_index" class="obj canvas_item-wrapper"
-   :style="canvasWrapperStyle()" :class="{is_active : isActive}"
+   :style="canvasWrapperStyle()" :class="{is_active : isActive,'hover-blue' : getMode!=3}"
   @dblclick="showEditor" @click.stop @touchstart.stop>
     <canvas :id="canvas_with_index" class="canvas_area" :class="{is_active:isActive}"
     @mousedown="moveStart($event)" @touchstart="moveStart($event)" @dblclick="showEditor">
@@ -43,6 +43,7 @@ import { mapGetters, mapMutations } from 'vuex';
       }
     },
     computed : {
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaFigures', ['getMediaFigure']),
       ...mapGetters('selectedObjects', ['getSelectedObjects']),
       canvas_with_index:function(){ return 'canvas'+this.index; },
@@ -88,7 +89,7 @@ import { mapGetters, mapMutations } from 'vuex';
           "top" : this.figureDatas["top"] + "px",
           "width" : this.figureDatas["width"] + "px", // キャンバスより若干大きめに
           "height" : this.figureDatas["height"] + "px", // キャンバスより若干大きめに
-          // "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
+          "transform" : 'rotate('+ this.figureDatas['degree'] +'deg)',
         }
         return styleObject;
       },
@@ -110,9 +111,11 @@ import { mapGetters, mapMutations } from 'vuex';
       },
       // 位置操作用
       moveStart(e){
-        const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
-        moveStart(e, move_target_dom);
-        move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        if(this.getMode != 3){
+          const move_target_dom = document.getElementById(this.canvas_wrapper_with_index);
+          moveStart(e, move_target_dom);
+          move_target_dom.addEventListener('moveFinish', this.moveEnd, false);
+        }
       },
       moveEnd(e){
         e.target.removeEventListener('moveFinish', this.moveEnd, false);
@@ -127,6 +130,7 @@ import { mapGetters, mapMutations } from 'vuex';
         const new_degree = event.detail.degree;
         this.updateMediaFiguresObjectItem({index:this.index,key:"degree",value:new_degree});
         this.figureDatas['degree'] = new_degree;
+        // this.canvas_wrapper.style.transform = "rotate(" + new_degree + "deg)";
       },
       updateSizeAndPosition(event){
         const diff_x = event.detail.diff_x;

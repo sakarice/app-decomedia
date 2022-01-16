@@ -32,3 +32,9 @@
 .j-end {
   justify-content: flex-end;
 }
+.j-s-between {
+  justify-content: space-between;
+}
+.j-s-around {
+  justify-content: space-around;
+}
