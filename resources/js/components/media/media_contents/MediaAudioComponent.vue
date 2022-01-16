@@ -285,7 +285,7 @@
   .media-audio-num{
     font-size: 16px;
     margin: -5px 0 0 5px;
-    color: lightseagreen;
+    color: gold;
     opacity: 0.7;
   }
 
