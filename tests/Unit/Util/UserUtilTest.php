@@ -42,7 +42,7 @@ class UserUtilTest extends TestCase
         $this->assertDatabaseHas('users', [
             'id' => $user_data['id'],
             'name' => $user_data['name'],
-            'profile' => $user_data['aboutMe'],
+            'profile' => $user_data['profile'],
         ]);
     }
 
@@ -65,7 +65,7 @@ class UserUtilTest extends TestCase
         $this->assertDatabaseHas('users', [
             'id' => $user_data['id'],
             'name' => $user_data['name'],
-            'profile' => $user_data['aboutMe'],
+            'profile' => $user_data['profile'],
         ]);
     }
 
