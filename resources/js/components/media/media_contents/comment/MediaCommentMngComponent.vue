@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div id="select-modal">
+    <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper" class="comment-area flex">
         
         <h2 class="sub-title w90 font-15 mt15 mb15">コメント</h2>

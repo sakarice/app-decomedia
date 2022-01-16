@@ -1,6 +1,6 @@
 <template>
   <!-- Media図形-->
-  <div id="media-figure-factory-wrapper">
+  <div id="media-figure-factory-wrapper" @click.stop @touchstart.stop>
     <div class="item-frame">
 
       <!-- クローズアイコン -->

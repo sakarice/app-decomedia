@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div id="select-modal">
+    <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <div id="drop-zone" 
         :class="{show: isDragEnter, hidden: !(isDragEnter)}"

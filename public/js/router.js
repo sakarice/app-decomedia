@@ -706,6 +706,7 @@ function _defineProperty(obj, key, value) {
     fieldClicked: function fieldClicked() {
       var fieldClicked = new CustomEvent('fieldClicked');
       document.body.dispatchEvent(fieldClicked);
+      this.closeModal();
     }
   }),
   created: function created() {
@@ -1419,10 +1420,16 @@ var closeTextSettingEvent = new CustomEvent('closeTextSetting');
   methods: {
     closeModal: function closeModal() {
       document.body.dispatchEvent(closeModalEvent);
+      this.closeSettingModals();
+    },
+    closeSettingModals: function closeSettingModals() {
       document.body.dispatchEvent(closeImgSettingEvent);
       document.body.dispatchEvent(closeFigureSettingEvent);
       document.body.dispatchEvent(closeTextSettingEvent);
     }
+  },
+  created: function created() {
+    document.body.addEventListener('fieldClicked', this.closeSettingModals, false);
   }
 });
 
@@ -10634,7 +10641,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaModals_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_modalAnimation_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* @import \"../../css/button.css\"; */\n#disp-media-owner-modal-wrapper[data-v-442dbc22] {\r\n    color: white;\n}\n.icon-wrapper[data-v-442dbc22] {\r\n    padding: 12px;\r\n\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\n}\n.setting-icon[data-v-442dbc22] {\r\n    color : lightgrey;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20521,7 +20528,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c("div", {
@@ -20866,7 +20883,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c("div", {
@@ -21136,7 +21163,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
@@ -21399,7 +21436,17 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "media-figure-factory-wrapper" } },
+    {
+      attrs: { id: "media-figure-factory-wrapper" },
+      on: {
+        click: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
+    },
     [
       _c("div", { staticClass: "item-frame" }, [
         _c(
@@ -21984,7 +22031,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
@@ -22197,7 +22254,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
@@ -22533,7 +22600,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
@@ -23386,7 +23463,17 @@ var render = function () {
   return _c("transition", { attrs: { name: _vm.transitionName } }, [
     _c(
       "div",
-      { attrs: { id: "select-modal" } },
+      {
+        attrs: { id: "select-modal" },
+        on: {
+          click: function ($event) {
+            $event.stopPropagation()
+          },
+          touchstart: function ($event) {
+            $event.stopPropagation()
+          },
+        },
+      },
       [
         _c(
           "div",

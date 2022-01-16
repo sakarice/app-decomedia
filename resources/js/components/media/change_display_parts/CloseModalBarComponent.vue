@@ -14,10 +14,16 @@
     methods : {
       closeModal(){
         document.body.dispatchEvent(closeModalEvent);
+        this.closeSettingModals();
+      },
+      closeSettingModals(){
         document.body.dispatchEvent(closeImgSettingEvent);
         document.body.dispatchEvent(closeFigureSettingEvent);
         document.body.dispatchEvent(closeTextSettingEvent);
       },
+    },
+    created(){
+      document.body.addEventListener('fieldClicked', this.closeSettingModals,false);
     }
   }
 
