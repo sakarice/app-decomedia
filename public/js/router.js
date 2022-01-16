@@ -1557,6 +1557,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -10909,7 +10910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: 60px;\n  width: 60px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\n  color: lightgrey;\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (min-width:481px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    border-radius: 50%;\n    background-color: rgba(20,20,20,0.8);\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n    background-color: rgba(0,110,110, 0.5);\n}\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 50px;\n    right: 7;\n    width: 45px;\n    height: 45px;\n}\n.change-disp-audio[data-v-714f7a19] {\n  padding: 10px;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#change-disp-audio-wrapper[data-v-714f7a19] {\n  position: absolute;\n  bottom: 10px;\n  right: 10px;\n  z-index: 12;\n  height: 60px;\n  width: 60px;\n\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.change-disp-audio[data-v-714f7a19] {\n  color: lightgrey;\n}\n.change-disp-audio[data-v-714f7a19] {\n  cursor: pointer;\n}\n.audio-num[data-v-714f7a19] {\n  color: rgb(170,170,0);\n  position: absolute;\n  z-index: 1;\n  bottom: 3px;\n  right: 9px;\n}\n.is-reverse[data-v-714f7a19]{\n  transform: scale(-1, 1);\n}\n@media screen and (min-width:481px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    border-radius: 50%;\n    background-color: rgba(20,20,20,0.7);\n}\n#change-disp-audio-wrapper[data-v-714f7a19]:hover {\n    background-color: rgba(20,20,20,0.9);\n}\n}\n@media screen and (max-width:480px){\n#change-disp-audio-wrapper[data-v-714f7a19] {\n    bottom: 50px;\n    right: 7;\n    width: 45px;\n    height: 45px;\n}\n.change-disp-audio[data-v-714f7a19] {\n    padding: 10px;\n}\n.audio-num[data-v-714f7a19] {\n    bottom: -7px;\n    right: 3px;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20234,6 +20235,10 @@ var render = function () {
           },
         },
       }),
+      _vm._v(" "),
+      _c("span", { staticClass: "audio-num" }, [
+        _vm._v(_vm._s(_vm.mediaAudioNum)),
+      ]),
     ]
   )
 }
