@@ -2752,12 +2752,12 @@ function _defineProperty(obj, key, value) {
       userProfileInit: {
         'name': "",
         'profile_img_url': null,
-        'aboutMe': ""
+        'profile': ""
       },
       userProfile: {
         'name': "",
         'profile_img_url': null,
-        'aboutMe': ""
+        'profile': ""
       },
       'message': ""
     };
@@ -2766,7 +2766,7 @@ function _defineProperty(obj, key, value) {
     closeProfileModal: function closeProfileModal() {
       // プロフィールを最初の状態に戻す
       this.userProfile['name'] = this.userProfileInit['name'];
-      this.userProfile['aboutMe'] = this.userProfileInit['aboutMe'];
+      this.userProfile['profile'] = this.userProfileInit['profile'];
       this.$parent.isShowProfile = false;
     },
     stopEvent: function stopEvent() {
@@ -2780,7 +2780,7 @@ function _defineProperty(obj, key, value) {
       axios.get(url).then(function (res) {
         _this.userId = res.data.id;
         _this.userProfileInit['name'] = _this.userProfile['name'] = res.data.name;
-        _this.userProfileInit['aboutMe'] = _this.userProfile['aboutMe'] = res.data.aboutMe;
+        _this.userProfileInit['profile'] = _this.userProfile['profile'] = res.data.profile;
       })["catch"](function (error) {
         alert('ユーザプロフィール情報を取得できませんでした。');
       });
@@ -2794,7 +2794,7 @@ function _defineProperty(obj, key, value) {
       var profileDatas = {
         'id': userId,
         'name': this.userProfile['name'],
-        'profile': this.userProfile['aboutMe']
+        'profile': this.userProfile['profile']
       };
       this.message = "更新中...";
       axios.put(url, profileDatas).then(function (response) {
@@ -2802,7 +2802,7 @@ function _defineProperty(obj, key, value) {
         var newName = response.data.name;
         var newAboutMe = response.data.profile;
         _this2.userProfileInit['name'] = _this2.userProfile['name'] = newName;
-        _this2.userProfileInit['aboutMe'] = _this2.userProfile['aboutMe'] = newAboutMe;
+        _this2.userProfileInit['profile'] = _this2.userProfile['profile'] = newAboutMe;
         _this2.message = "";
       })["catch"](function (error) {
         alert('更新失敗');
@@ -14450,12 +14450,12 @@ __webpack_require__.r(__webpack_exports__);
       userProfileInit: {
         'name': "",
         'profile_img_url': null,
-        'aboutMe': ""
+        'profile': ""
       },
       userProfile: {
         'name': "",
         'profile_img_url': null,
-        'aboutMe': ""
+        'profile': ""
       },
       'message': ""
     };
@@ -14469,7 +14469,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (res) {
         _this.userId = res.data.id;
         _this.userProfileInit['name'] = _this.userProfile['name'] = res.data.name;
-        _this.userProfileInit['aboutMe'] = _this.userProfile['aboutMe'] = res.data.aboutMe;
+        _this.userProfileInit['profile'] = _this.userProfile['profile'] = res.data.profile;
       })["catch"](function (error) {
         alert('ユーザプロフィール情報を取得できませんでした。');
       });
@@ -14483,15 +14483,15 @@ __webpack_require__.r(__webpack_exports__);
       var profileDatas = {
         'id': userId,
         'name': this.userProfile['name'],
-        'profile': this.userProfile['aboutMe']
+        'profile': this.userProfile['profile']
       };
       this.message = "更新中...";
       axios.put(url, profileDatas).then(function (response) {
         alert('更新完了');
         var newName = response.data.name;
-        var newAboutMe = response.data.profile;
+        var newProfile = response.data.profile;
         _this2.userProfileInit['name'] = _this2.userProfile['name'] = newName;
-        _this2.userProfileInit['aboutMe'] = _this2.userProfile['aboutMe'] = newAboutMe;
+        _this2.userProfileInit['profile'] = _this2.userProfile['profile'] = newProfile;
         _this2.message = "";
       })["catch"](function (error) {
         alert('更新失敗');
@@ -71277,8 +71277,8 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.userProfile["aboutMe"],
-                    expression: "userProfile['aboutMe']",
+                    value: _vm.userProfile["profile"],
+                    expression: "userProfile['profile']",
                   },
                 ],
                 attrs: {
@@ -71288,13 +71288,13 @@ var render = function () {
                   rows: "5",
                   placeholder: "プロフィール",
                 },
-                domProps: { value: _vm.userProfile["aboutMe"] },
+                domProps: { value: _vm.userProfile["profile"] },
                 on: {
                   input: function ($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.userProfile, "aboutMe", $event.target.value)
+                    _vm.$set(_vm.userProfile, "profile", $event.target.value)
                   },
                 },
               }),
@@ -79913,8 +79913,8 @@ var render = function () {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.userProfile["aboutMe"],
-                  expression: "userProfile['aboutMe']",
+                  value: _vm.userProfile["profile"],
+                  expression: "userProfile['profile']",
                 },
               ],
               attrs: {
@@ -79923,13 +79923,13 @@ var render = function () {
                 rows: "5",
                 placeholder: "プロフィール",
               },
-              domProps: { value: _vm.userProfile["aboutMe"] },
+              domProps: { value: _vm.userProfile["profile"] },
               on: {
                 input: function ($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.userProfile, "aboutMe", $event.target.value)
+                  _vm.$set(_vm.userProfile, "profile", $event.target.value)
                 },
               },
             }),
