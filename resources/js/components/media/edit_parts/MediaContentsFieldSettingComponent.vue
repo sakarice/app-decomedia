@@ -7,21 +7,21 @@
           <h2 id="media-contents-field-setting-title">メディアエリア設定</h2>
 
           <!-- メディア背景色設定 -->
-          <div id="media-bg-color-wraper" class="setting mb20">
+          <div id="media-bg-color-wraper" class="setting mb30">
             <h3 class="setting-title">背景色</h3>
             <label for="">
               <input :value="getMediaContentsField['color']" @input="updateMediaContentsFieldObjectItem({key:'color', value:$event.target.value})" type="color" id="media-bg-color">
-              カラー選択
+              <span class="font-12">カラー</span>
             </label>
           </div>
           <!-- メディアエリアサイズ設定 -->
-          <div id="media-size-wraper" class="setting w90">
+          <div id="media-size-wraper" class="setting w90 mb30">
             <h3 class="setting-title">サイズ</h3>
             <div class="flex column">
-              <div class="setting-width mb15 flex j-s-between a-center">
-                <h4 class="sub-sub-title mb0 w50px">
+              <div class="setting-width mb15 flex j-s-between a-end">
+                <h4 class="sub-sub-title mb0 w60px flex a-center">
                   <i class="fas fa-arrows-alt-h icon"></i>
-                  横幅
+                  <span class="font-12">横幅</span>
                 </h4>
                 <div class="flex a-center">
                   <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
@@ -29,10 +29,10 @@
                 </div>
                 <input id="set-contents-area-frame-width" class="setting" :value="getMediaContentsField['width']" @input="updateStoreData('width',$event.target.value)" type="number" placeholder="横幅">
               </div>
-              <div class="setting-height mb15 flex j-s-between a-center">
-                <h4 class="sub-sub-title mb0 w50px">
+              <div class="setting-height mb15 flex j-s-between a-end">
+                <h4 class="sub-sub-title mb0 w60px flex a-center">
                   <i class="fas fa-arrows-alt-v icon"></i>
-                  縦幅
+                  <span class="font-12">縦幅</span>
                 </h4>
                 <div class="flex a-center">
                   <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
@@ -127,6 +127,7 @@ export default {
 
   .sub-sub-title {
     font-size: 15px;
+    color: lightgrey;
   }
 
   .public-state-icon {
@@ -203,6 +204,11 @@ export default {
     color: deepskyblue;
     border: 1.5px solid deepskyblue;
   }  
+
+  .icon {
+    width: 20px;
+    text-align:center;
+  }
 
 @media screen and (max-width:480px) {
   
