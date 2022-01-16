@@ -6,10 +6,9 @@
     <p spellcheck="false" class="text-area"
     :id="text_with_index" :style="textStyle" @input="onChangeTextContent($event)">
     {{text_tmp}}
-    </p>    
+    </p>
   </div>
-
-  
+    
 </template>
 
 <script>
@@ -68,13 +67,7 @@ import { mapGetters, mapMutations } from 'vuex';
         this.updateMediaTextsObjectItem({index:this.index,key:"width", value:new_val})
       },
       original_height(new_val){this.updateMediaTextsObjectItem({index:this.index,key:"height", value:new_val})},
-      getMode(mode){
-        if(mode != 3){ // = createかeditモード
-          this.text.contentEditable = true;
-        } else { // =showモード
-          this.text.contentEditable = false;
-        }
-      }
+      getMode(){ this.setEditable()},
     },
     methods : {
       ...mapMutations('selectedObjects', ['addSelectedObjectItem']),
@@ -90,6 +83,13 @@ import { mapGetters, mapMutations } from 'vuex';
       setDomElement(){
         this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
         this.text = document.getElementById(this.text_with_index);
+      },
+      setEditable(){
+        if(this.getMode != 3){ // = createかeditモード
+          this.text.contentEditable = true;
+        } else { // =showモード
+          this.text.contentEditable = false;
+        }
       },
       getOneText(){ // ストアから自分のインデックスのオブジェクトだけ取得する
         this.setTargetObjectIndex(this.index);
@@ -225,6 +225,9 @@ import { mapGetters, mapMutations } from 'vuex';
     mounted(){
       this.setDomElement();
       // DOMの描画終了を待つ
+      // this.text.contentEditable = true;
+      this.setEditable();
+
       this.$nextTick(function(){
         this.setTextBoxInitialSize();
 
@@ -254,6 +257,19 @@ import { mapGetters, mapMutations } from 'vuex';
 <style scoped>
 @import "/resources/css/mediaObjectCommon.css";
 @import "/resources/css/flexSetting.css";
+
+.text-area:focus{
+  outline:solid 2px #ff6a00;
+}
+
+.focus-trigger{
+  margin-top: 10px;
+  margin-left: -10px;
+}
+.focus-trigger:hover{
+  cursor:pointer
+}
+
 
 .text-wrapper {
   position: absolute;

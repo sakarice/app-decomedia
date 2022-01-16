@@ -8414,7 +8414,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -8486,14 +8485,8 @@ function _defineProperty(obj, key, value) {
         value: new_val
       });
     },
-    getMode: function getMode(mode) {
-      if (mode != 3) {
-        // = createかeditモード
-        this.text.contentEditable = true;
-      } else {
-        // =showモード
-        this.text.contentEditable = false;
-      }
+    getMode: function getMode() {
+      this.setEditable();
     }
   },
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['addSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('selectedObjects', ['deleteSelectedObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaTexts', ['updateMediaTextsObjectItem'])), {}, {
@@ -8506,6 +8499,15 @@ function _defineProperty(obj, key, value) {
     setDomElement: function setDomElement() {
       this.text_wrapper = document.getElementById(this.text_wrapper_with_index);
       this.text = document.getElementById(this.text_with_index);
+    },
+    setEditable: function setEditable() {
+      if (this.getMode != 3) {
+        // = createかeditモード
+        this.text.contentEditable = true;
+      } else {
+        // =showモード
+        this.text.contentEditable = false;
+      }
     },
     getOneText: function getOneText() {
       // ストアから自分のインデックスのオブジェクトだけ取得する
@@ -8675,7 +8677,9 @@ function _defineProperty(obj, key, value) {
   },
   mounted: function mounted() {
     this.setDomElement(); // DOMの描画終了を待つ
+    // this.text.contentEditable = true;
 
+    this.setEditable();
     this.$nextTick(function () {
       var _this4 = this;
 
@@ -11812,7 +11816,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaObjectCommon_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.text-wrapper[data-v-22e33c6f] {\r\n  position: absolute;\r\n  transform-origin: center center;\n}\ntextarea[data-v-22e33c6f] {\r\n  overflow: hidden;\n}\n.text-area[data-v-22e33c6f] {\r\n  display: inline-block;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  border: none;\r\n  margin: 0;\r\n  transform-origin: 0 0;\r\n  resize: none;\r\n  padding: 0px;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\n}\n.text-area[data-v-22e33c6f]:hover {\r\n  cursor: pointer;\n}\n.text-area[data-v-22e33c6f]:focus {\r\n  outline: 1px solid blue;\n}\n.is_active[data-v-22e33c6f] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-22e33c6f] {\r\n  opacity: 0;\n}\n[data-v-22e33c6f]::-webkit-resizer {\r\n  display: none;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.text-area[data-v-22e33c6f]:focus{\r\n  outline:solid 2px #ff6a00;\n}\n.focus-trigger[data-v-22e33c6f]{\r\n  margin-top: 10px;\r\n  margin-left: -10px;\n}\n.focus-trigger[data-v-22e33c6f]:hover{\r\n  cursor:pointer\n}\n.text-wrapper[data-v-22e33c6f] {\r\n  position: absolute;\r\n  transform-origin: center center;\n}\ntextarea[data-v-22e33c6f] {\r\n  overflow: hidden;\n}\n.text-area[data-v-22e33c6f] {\r\n  display: inline-block;\r\n  box-sizing: border-box;\r\n  width: 100%;\r\n  border: none;\r\n  margin: 0;\r\n  transform-origin: 0 0;\r\n  resize: none;\r\n  padding: 0px;\r\n  word-wrap: break-word;\r\n  overflow-wrap: break-word;\n}\n.text-area[data-v-22e33c6f]:hover {\r\n  cursor: pointer;\n}\n.text-area[data-v-22e33c6f]:focus {\r\n  outline: 1px solid blue;\n}\n.is_active[data-v-22e33c6f] {\r\n  outline : 1.5px solid blue;\n}\n.hidden[data-v-22e33c6f] {\r\n  opacity: 0;\n}\n[data-v-22e33c6f]::-webkit-resizer {\r\n  display: none;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
