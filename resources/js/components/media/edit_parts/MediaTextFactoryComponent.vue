@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div id="select-modal">
+    <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <div id="media-text-setting-area" class="flex column a-start">
           <h2 id="media-text-setting-title">メディアテキスト設定</h2>

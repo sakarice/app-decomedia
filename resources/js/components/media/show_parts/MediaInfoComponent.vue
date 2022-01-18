@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div id="select-modal">
+    <div id="select-modal" @click.stop @touchstart.stop>
 
       <div id="area-wrapper" class="">
         <div class="media-info-wrapper w90 mt20 mb20 flex column ">

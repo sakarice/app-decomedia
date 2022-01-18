@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionName">
-    <div id="select-modal">
+    <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <div id="drop-zone" 
         :class="{show: isDragEnter, hidden: !(isDragEnter)}"
@@ -44,7 +44,7 @@
             <!-- uploads -->
             <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
-              <span class="audio_name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToMedia('user-own', index)">
+              <span class="audio-name" :class="{'now-play' : userOwnAudio['isPlay']}" v-on:click="addAudioToMedia('user-own', index)">
                 {{userOwnAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
@@ -59,7 +59,7 @@
             <!-- default -->
             <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
-              <span class="audio_name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToMedia('default', index)">
+              <span class="audio-name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToMedia('default', index)">
                 {{defaultAudio['name']}}
               </span>
               <i class="audio-play-icon fas fa-caret-right fa-2x"
@@ -101,7 +101,7 @@ export default {
       uploadFile : "",
       isLoading : false,
       loadingMessage : "",
-      userOwnAudios : [],   // thumbnail_url, audio_name
+      userOwnAudios : [],   // thumbnail_url, audio-name
       defaultAudios : [],
       audioPlayer : new Audio(),
       playAudioType : "",
@@ -273,7 +273,7 @@ export default {
       axios.post(url, formData)
         .then(response => {
           this.userOwnAudios.unshift(response.data.audios);
-          // alert(this.userOwnAudios['audio_name']);
+          // alert(this.userOwnAudios['audio-name']);
           this.uploadFile = "";
           this.loadingMessage = '';
           this.isLoading = false;
@@ -371,7 +371,7 @@ export default {
     position: relative;
     width: 100%;
     height: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border-radius: 5px;
     list-style: none;
     transition: transform 0.3s;
@@ -391,12 +391,12 @@ export default {
 
   .audio-play-icon {
     top: 5;
-    left: 16px;
+    left: 12px;
   }
 
   .audio-pause-icon {
     top: 13px;
-    left: 12px;
+    left: 7px;
   }
 
   .now-play {
@@ -413,7 +413,6 @@ export default {
   }
 
   .audio-list:hover {
-    cursor: pointer;
     transform: scale(0.98,0.98);
   }
 
@@ -438,12 +437,15 @@ export default {
   }
 
 
-  .audio_name {
-    margin-left: 7px;
+  .audio-name {
+    width: 80%;
+    margin-left: 10px;
+    font-size: 11px;
     white-space: nowrap;
   }
 
-  .audio_name:hover {
+  .audio-name:hover {
+    cursor: pointer;
     text-decoration: underline;
   }
 
@@ -455,14 +457,14 @@ export default {
 
 
   .audio-thumbnail {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: darkgray;
   }
 
   .contents-audio {
-    padding: 25px 0 15px 0;
+    padding: 15px 0 15px 0;
   }
 
   .upload-label-text::after {

@@ -18,7 +18,7 @@
         </div>
         <div class="profile-right-below">
           <div class="about-me-wrapper">
-            <textarea v-model="userProfile['aboutMe']" name="about-me" id="about-me" rows="5" placeholder="プロフィール"></textarea>
+            <textarea v-model="userProfile['profile']" name="about-me" id="about-me" rows="5" placeholder="プロフィール"></textarea>
           </div>
           <span style="margin:10px">{{message}}</span>
         </div>
@@ -41,12 +41,12 @@
         userProfileInit : {
           'name' : "",
           'profile_img_url' : null,
-          'aboutMe' : "",
+          'profile' : "",
         },
         userProfile : {
           'name' : "",
           'profile_img_url' : null,
-          'aboutMe' : "",
+          'profile' : "",
         },
         'message' : "",
       }
@@ -58,7 +58,7 @@
         .then(res => {
           this.userId = res.data.id;
           this.userProfileInit['name'] = this.userProfile['name'] = res.data.name;
-          this.userProfileInit['aboutMe'] = this.userProfile['aboutMe'] = res.data.aboutMe;
+          this.userProfileInit['profile'] = this.userProfile['profile'] = res.data.profile;
         })
         .catch(error => {
           alert('ユーザプロフィール情報を取得できませんでした。');
@@ -70,16 +70,16 @@
         let profileDatas = {
           'id' : userId,
           'name' : this.userProfile['name'],
-          'profile' : this.userProfile['aboutMe'],
+          'profile' : this.userProfile['profile'],
         }
         this.message = "更新中...";
         axios.put(url, profileDatas)
         .then(response => {
           alert('更新完了');
           let newName = response.data.name;
-          let newAboutMe = response.data.profile;
+          let newProfile = response.data.profile;
           this.userProfileInit['name']    = this.userProfile['name']    = newName;
-          this.userProfileInit['aboutMe'] = this.userProfile['aboutMe'] = newAboutMe;
+          this.userProfileInit['profile'] = this.userProfile['profile'] = newProfile;
           this.message = "";
         })
         .catch(error => {

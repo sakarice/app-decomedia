@@ -2,6 +2,7 @@
   <div id="change-disp-audio-wrapper" v-show="isShowAudios">
     <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio" v-show="!isShowAudio"></i>
     <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
+    <span class="audio-num">{{mediaAudioNum}}</span>
   </div>
 </template>
 
@@ -77,6 +78,14 @@
     cursor: pointer;
   }
 
+  .audio-num {
+    color: rgb(170,170,0);
+    position: absolute;
+    z-index: 1;
+    bottom: 3px;
+    right: 9px;
+  }
+
   .is-reverse{
     transform: scale(-1, 1);
   }
@@ -85,10 +94,11 @@
   @media screen and (min-width:481px){
     #change-disp-audio-wrapper {
       border-radius: 50%;
-      background-color: rgba(20,20,20,0.8);
+      background-color: rgba(20,20,20,0.7);
     }
     #change-disp-audio-wrapper:hover {
-      background-color: rgba(0,110,110, 0.5);
+      background-color: rgba(20,20,20,0.9);
+
     }
 
   }
@@ -104,8 +114,14 @@
     }
 
     .change-disp-audio {
-    padding: 10px;
+      padding: 10px;
     }
+
+    .audio-num {
+      bottom: -7px;
+      right: 3px;
+    }
+
 
   }
 

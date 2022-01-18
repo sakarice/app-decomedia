@@ -364,6 +364,7 @@ export default {
     fieldClicked(){
       const fieldClicked = new CustomEvent('fieldClicked');
       document.body.dispatchEvent(fieldClicked);
+      this.closeModal();
     },
 
   },
