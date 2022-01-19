@@ -52,15 +52,11 @@ class Functions
 
       // S3へのファイル保存とDBに登録するデータ作成
       function storeFileAndcreateDataForDb($request, $type){
-
         // ファイル名から拡張子を除外する
-        $originalFilename = $request->file($type)->getClientOriginalName();
-        $extExceptedFilename = StringProcessing::getFilenameExceptExt($originalFilename);
-
-        $fileName = $extExceptedFilename;
-        $filePath = StoreFileInS3::PublicMediaFile($request, $type);
+        $file = $request->file($type);
+        $store_directory = StoreFileInS3::judgeS3StoreDirectoryFromFileType($type);
+        [$filePath, $fileName] = StoreFileInS3::storePublicFileInS3($file, $store_directory);
         $fileUrl = Storage::disk('s3')->url($filePath);
-
         
         $fileDatas = array (
           'owner_user_id' => NULL,
