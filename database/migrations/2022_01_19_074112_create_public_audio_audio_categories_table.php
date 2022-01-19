@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreatePublicAudioAudioCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('public_audio_audio_categories', function (Blueprint $table) {
             $table->id();
+            $table->integer('audio_id');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('public_audio_audio_categories');
     }
 }
