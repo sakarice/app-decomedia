@@ -38,6 +38,14 @@
             </div>
           </div>
 
+          <!-- オーディオのカテゴリ -->
+          <ul class="audio-category-wrapper">
+            <li @click="changeAudioCategory(category)" v-for="category in audioCategory" :key="category.id"
+            class="audio-category" :class="{'active-audio-category':(category==selectedAudioCategory)}">
+              <span>{{category}}</span>
+            </li>
+          </ul>
+
           <!-- オーディオのリスト表示 -->
           <ul id="audio-thumbnail-wrapper">
 
@@ -57,7 +65,8 @@
             </li>
 
             <!-- default -->
-            <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
+            <li class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id"
+            v-show="isDefault && (defaultAudio['category']==selectedAudioCategory || selectedAudioCategory=='all')">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
               <span class="audio-name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToMedia('default', index)">
                 {{defaultAudio['name']}}
@@ -96,6 +105,8 @@ export default {
     return {
       popMessage : 'メッセージです',
       isDefault : true,
+      audioCategory : [],
+      selectedAudioCategory : "",
       fileCategory : "default",
       isDragEnter : false,
       uploadFile : "",
@@ -147,6 +158,18 @@ export default {
         .catch(error => {
           alert('オーディオ取得失敗');
         })
+    },
+    getAudioCategory(){
+      const url = '/audioCategory';
+      axios.get(url)
+      .then(res=>{
+        res.data.category.forEach(category=>{
+          this.audioCategory.push(category);
+        })
+      })
+    },
+    changeAudioCategory(category){
+      this.selectedAudioCategory = category;
     },
     playAudio : function(type, index){
       // 選択したオーディオを再生
@@ -336,9 +359,14 @@ export default {
     },
 
   },
-  mounted : function() {
+  created(){
     this.getUserOwnAudios();
     this.getPublicAudios();
+    this.getAudioCategory();
+  },
+  mounted(){
+    this.audioCategory.unshift('all');
+    this.selectedAudioCategory = 'all';
 
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
@@ -365,6 +393,37 @@ export default {
     /* margin-top: 20px; */
     padding-left: 0;
     overflow-y: scroll;
+  }
+
+  .audio-category-wrapper {
+    width: 85%;
+    display: flex;
+    padding: 5px 0px;
+    overflow-x: scroll;
+  }
+
+  .audio-category {
+    padding: 12px 8px;
+    margin: 0 5px;
+    white-space: pre;
+    border-radius: 15px;
+    background-color: white;
+    color : black;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audio-category:hover {
+    cursor: pointer;
+    background-color: rgb(235,235,235);
+  }
+
+  .active-audio-category{
+    color: white;
+    background-color: black;
   }
 
   .audio-list {
@@ -468,7 +527,8 @@ export default {
   }
 
   .upload-label-text::after {
-    content: "アップロード"
+    content: "追加";
+    font-size: 12px;
   }
 
   @media screen and (max-width: 480px) {
@@ -476,8 +536,9 @@ export default {
       width: 80%;
     }
 
-    .upload-label-text::after {
-      content: "追加"
+    .audio-category-wrapper {
+      margin: 0;
+      padding: 0;
     }
 
   }

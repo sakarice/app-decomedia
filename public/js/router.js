@@ -2065,6 +2065,15 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2080,6 +2089,8 @@ function _defineProperty(obj, key, value) {
     return {
       popMessage: 'メッセージです',
       isDefault: true,
+      audioCategory: [],
+      selectedAudioCategory: "",
       fileCategory: "default",
       isDragEnter: false,
       uploadFile: "",
@@ -2132,6 +2143,19 @@ function _defineProperty(obj, key, value) {
       })["catch"](function (error) {
         alert('オーディオ取得失敗');
       });
+    },
+    getAudioCategory: function getAudioCategory() {
+      var _this3 = this;
+
+      var url = '/audioCategory';
+      axios.get(url).then(function (res) {
+        res.data.category.forEach(function (category) {
+          _this3.audioCategory.push(category);
+        });
+      });
+    },
+    changeAudioCategory: function changeAudioCategory(category) {
+      this.selectedAudioCategory = category;
     },
     playAudio: function playAudio(type, index) {
       // 選択したオーディオを再生
@@ -2246,7 +2270,7 @@ function _defineProperty(obj, key, value) {
     },
     // ajaxでオーディオファイルを送る
     uploadAudio: function uploadAudio() {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = '/ajax/uploadAudio';
       var formData = new FormData();
@@ -2257,21 +2281,21 @@ function _defineProperty(obj, key, value) {
       // loading_icon.classList.add('rotate');
 
       axios.post(url, formData).then(function (response) {
-        _this3.userOwnAudios.unshift(response.data.audios); // alert(this.userOwnAudios['audio-name']);
+        _this4.userOwnAudios.unshift(response.data.audios); // alert(this.userOwnAudios['audio-name']);
 
 
-        _this3.uploadFile = "";
-        _this3.loadingMessage = '';
-        _this3.isLoading = false; // loading_icon.classList.remove('rotate');
+        _this4.uploadFile = "";
+        _this4.loadingMessage = '';
+        _this4.isLoading = false; // loading_icon.classList.remove('rotate');
 
-        _this3.dragLeave();
+        _this4.dragLeave();
       })["catch"](function (error) {
         alert('アップロード失敗');
       });
     },
     // オーディオファイルを削除する
     deleteaudio: function deleteaudio(event) {
-      var _this4 = this;
+      var _this5 = this;
 
       var url = '/ajax/deleteAudio';
       var audioId = event.target.parentNode.getAttribute('id');
@@ -2288,7 +2312,7 @@ function _defineProperty(obj, key, value) {
         alert(response.data); // 画面に即自反映するため、オーディオURLをdataから削除
         // 削除対象URLが入っている配列のインデックスを取得
 
-        var index = _this4.userOwnAudios.some(function (v, i) {
+        var index = _this5.userOwnAudios.some(function (v, i) {
           if (v['audio_url'] == audioUrl) {
             return i;
           }
@@ -2297,16 +2321,16 @@ function _defineProperty(obj, key, value) {
         }); // 配列から削除
 
 
-        _this4.userOwnAudios.splice(index, 1);
+        _this5.userOwnAudios.splice(index, 1);
 
-        _this4.loadingMessage = '';
-        _this4.isLoading = false; // loading_icon.classList.remove('rotate');
+        _this5.loadingMessage = '';
+        _this5.isLoading = false; // loading_icon.classList.remove('rotate');
         // Mediaオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
         // this.$emit('audio-thumbnail-del-notice', audioUrl);
       })["catch"](function (error) {
         alert('オーディオ削除失敗');
-        _this4.loadingMessage = '';
-        _this4.isLoading = false;
+        _this5.loadingMessage = '';
+        _this5.isLoading = false;
       });
     }
   }, "finishAudio", function finishAudio() {
@@ -2322,9 +2346,14 @@ function _defineProperty(obj, key, value) {
     this.playAudioType = "";
     this.playAudioIndex = -1;
   })),
-  mounted: function mounted() {
+  created: function created() {
     this.getUserOwnAudios();
     this.getPublicAudios();
+    this.getAudioCategory();
+  },
+  mounted: function mounted() {
+    this.audioCategory.unshift('all');
+    this.selectedAudioCategory = 'all';
     var audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
   }
@@ -2499,6 +2528,18 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2514,6 +2555,8 @@ function _defineProperty(obj, key, value) {
     return {
       popMessage: 'メッセージです',
       isDefault: true,
+      imgCategory: [],
+      selectedImgCategory: "",
       fileCategory: "default",
       isDragEnter: false,
       uploadFile: "",
@@ -2567,6 +2610,19 @@ function _defineProperty(obj, key, value) {
       })["catch"](function (error) {
         alert('画像取得失敗');
       });
+    },
+    getImgCategory: function getImgCategory() {
+      var _this3 = this;
+
+      var url = '/imgCategory';
+      axios.get(url).then(function (res) {
+        res.data.category.forEach(function (category) {
+          _this3.imgCategory.push(category);
+        });
+      });
+    },
+    changeImgCategory: function changeImgCategory(category) {
+      this.selectedImgCategory = category;
     },
     dragEnter: function dragEnter() {
       this.isDragEnter = true;
@@ -2642,7 +2698,7 @@ function _defineProperty(obj, key, value) {
     },
     // ajaxで画像ファイルを送る
     uploadImg: function uploadImg() {
-      var _this3 = this;
+      var _this4 = this;
 
       var url = '/ajax/uploadImg';
       var formData = new FormData();
@@ -2653,22 +2709,22 @@ function _defineProperty(obj, key, value) {
       // loading_icon.classList.add('rotate');
 
       axios.post(url, formData).then(function (response) {
-        _this3.userOwnImgs.unshift(response.data.img_file_info);
+        _this4.userOwnImgs.unshift(response.data.img_file_info);
 
-        _this3.uploadFile = "";
-        _this3.loadingMessage = '';
-        _this3.isLoading = false; // loading_icon.classList.remove('rotate');
+        _this4.uploadFile = "";
+        _this4.loadingMessage = '';
+        _this4.isLoading = false; // loading_icon.classList.remove('rotate');
 
-        _this3.dragLeave();
+        _this4.dragLeave();
       })["catch"](function (error) {
         alert('アップロード失敗');
-        _this3.loadingMessage = '';
-        _this3.isLoading = false;
+        _this4.loadingMessage = '';
+        _this4.isLoading = false;
       });
     },
     // 画像ファイルを削除する
     deleteImg: function deleteImg(event) {
-      var _this4 = this;
+      var _this5 = this;
 
       var index = event.target.parentNode.parentNode.getAttribute('id');
       var imgUrl = this.userOwnImgs[index]['url'];
@@ -2684,13 +2740,13 @@ function _defineProperty(obj, key, value) {
       axios.post(url, params).then(function (response) {
         alert(response.data); // 画面に即自反映するため、画像URLをdataから削除
 
-        _this4.userOwnImgs.splice(index, 1);
+        _this5.userOwnImgs.splice(index, 1);
 
-        _this4.loadingMessage = '';
-        _this4.isLoading = false; // Media画像に設定していた場合は削除する
+        _this5.loadingMessage = '';
+        _this5.isLoading = false; // Media画像に設定していた場合は削除する
 
-        var mediaImgs = _this4.getMediaImgs;
-        var tmpThis = _this4;
+        var mediaImgs = _this5.getMediaImgs;
+        var tmpThis = _this5;
         mediaImgs.forEach(function (mediaImg, index) {
           if (mediaImg['url'] == imgUrl) {
             tmpThis.deleteMediaImgsObjectItem(index);
@@ -2698,14 +2754,19 @@ function _defineProperty(obj, key, value) {
         });
       })["catch"](function (error) {
         alert('画像削除失敗');
-        _this4.loadingMessage = '';
-        _this4.isLoading = false;
+        _this5.loadingMessage = '';
+        _this5.isLoading = false;
       });
     }
   }),
-  mounted: function mounted() {
+  created: function created() {
     this.getUserOwnImgs();
     this.getDefaultImgs();
+    this.getImgCategory();
+  },
+  mounted: function mounted() {
+    this.imgCategory.unshift('all');
+    this.selectedImgCategory = 'all';
   }
 });
 
@@ -11138,7 +11199,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 5px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 12px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 7px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio-name[data-v-ee42beee] {\r\n    width: 80%;\r\n    margin-left: 10px;\r\n    font-size: 11px;\r\n    white-space: nowrap;\n}\n.audio-name[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 30px;\r\n    height: 30px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 15px 0 15px 0;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n    content: \"アップロード\"\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n      content: \"追加\"\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.audio-category[data-v-ee42beee] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.audio-category[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    background-color: rgb(235,235,235);\n}\n.active-audio-category[data-v-ee42beee]{\r\n    color: white;\r\n    background-color: black;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 5px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 12px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 7px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio-name[data-v-ee42beee] {\r\n    width: 80%;\r\n    margin-left: 10px;\r\n    font-size: 11px;\r\n    white-space: nowrap;\n}\n.audio-name[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 30px;\r\n    height: 30px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 15px 0 15px 0;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11164,7 +11225,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n    content: \"アップロード\"\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n      content: \"追加\"\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-category-wrapper[data-v-306434fc] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.img-category[data-v-306434fc] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.img-category[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    background-color: rgb(235,235,235);\n}\n.active-img-category[data-v-306434fc]{\r\n    color: white;\r\n    background-color: black;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n      content: \"追加\"\n}\n.img-category-wrapper[data-v-306434fc] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12260,7 +12321,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  display: flex;\r\n  align-items: center;\r\n  color: rgba(200,200,200,1);\r\n}\r\n\r\n.category{\r\n  margin: 0 20px;\r\n}\r\n.category:hover{\r\n  cursor: pointer;\r\n}\r\n\r\n.active_category {\r\n  color: white;\r\n  border-bottom: 1.5px solid;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n\r\n.change-disp-icon-wrapper {\r\n  padding: 10px;\r\n  background-color: transparent;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  /* margin-right: -85%;\r\n  margin-top: -35px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n  #setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\r\n  }\r\n\r\n\r\n#upload-input-wrapper {\r\n  width: 100%;\r\n  margin-bottom: 25px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n#upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n\r\n@media screen and (min-width: 481px) {\r\n  #contents-wrapper {\r\n    padding: 20px 10px 10px 0px;\r\n  }\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 4px 10px;\r\n    font-size: 10px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    flex-direction: column-reverse;\r\n    justify-content: space-between;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 15px 0 0 0;\r\n    height: 50px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    position: absolute;\r\n    bottom: 15px;\r\n    left: 30px;\r\n    margin: 0;\r\n    width: auto;\r\n  }\r\n\r\n  #setting-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  .category{\r\n    margin: 0 10px;\r\n  }\r\n  \r\n  \r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#toggle-wrapper {\r\n  display: flex;\r\n  justify-content: center;\r\n  margin: 0 0 20px 0;\r\n}\r\n\r\n#file-category-toggle {\r\n  width: 50px;\r\n  height: 24px;\r\n  outline: none;\r\n  border: none;\r\n  border-radius: 50px;\r\n  padding: 2px 2px;\r\n  background-color: plum;\r\n}\r\n#file-category-toggle:focus {\r\n  box-shadow: 0 0 0 1px grey;\r\n}\r\n\r\n#category-type {\r\n  display: flex;\r\n  align-items: center;\r\n  color: rgba(200,200,200,1);\r\n}\r\n\r\n.category{\r\n  margin: 0 20px;\r\n}\r\n.category:hover{\r\n  cursor: pointer;\r\n}\r\n\r\n.active_category {\r\n  color: white;\r\n  border-bottom: 1.5px solid;\r\n}\r\n\r\n.isUpload {\r\n  animation-name: change-toggle-left-to-right;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards; \r\n}\r\n@keyframes change-toggle-left-to-right{\r\n  0% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n  100% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n}\r\n\r\n.isDefault {\r\n  animation-name: change-toggle-right-to-left;\r\n  animation-duration: 0.2s;\r\n  animation-timing-function: ease-out;\r\n  animation-fill-mode: forwards;\r\n}\r\n@keyframes change-toggle-right-to-left{\r\n  0% {\r\n    background-color:paleturquoise;\r\n    padding-left: 28px;\r\n  }\r\n  100% {\r\n    background-color: plum;\r\n    padding-left: 2px;\r\n  }    \r\n}\r\n\r\n#toggle-state-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  border-radius: 50%;\r\n  background-color: white;\r\n  pointer-events: none;\r\n}\r\n\r\n\r\n\r\n.change-disp-icon-wrapper {\r\n  padding: 10px;\r\n  background-color: transparent;\r\n}\r\n\r\n#change-disp-modal {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: -5px;\r\n  color: lightseagreen;\r\n  z-index: 2;\r\n  /* margin-right: -85%;\r\n  margin-top: -35px; */\r\n  cursor: pointer;\r\n}\r\n\r\n\r\n\r\n#drop-zone {\r\n  position: absolute;\r\n  top: 0;\r\n  right: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: blue;\r\n}\r\n\r\n.show {\r\n  z-index: 3;\r\n  opacity: 0.3;\r\n}\r\n.hidden {\r\n  z-index: -3;\r\n}\r\n\r\n#contents-wrapper {\r\n  z-index: 2;\r\n  width: 100%;\r\n  height: 100%;\r\n\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n  #setting-wrapper {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: flex-start;\r\n    overflow-y: scroll;\r\n  }\r\n\r\n\r\n#upload-input-wrapper {\r\n  position: absolute;\r\n  padding: 5px 20px 2px 20px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: flex-start;\r\n  align-items: center;\r\n}\r\n\r\n#loading-display-wrapper {\r\n  display: flex;\r\n  align-items: center;\r\n  margin-left: 10px;\r\n}\r\n\r\n.loading-message {\r\n  font-size: 0.5rem;\r\n  margin-bottom: 0;\r\n}\r\n\r\n#uploading-dot {\r\n  margin-left: 3px;\r\n  width: 2px;\r\n  height: 2px;\r\n  border-radius: 50%;\r\n  /* background-color: black; */\r\n}\r\n\r\n.copy-to-right {\r\n  animation-name: dot-copy-to-right;\r\n  animation-duration: 3s;\r\n  animation-timing-function: steps(3, start);\r\n  animation-iteration-count: infinite;\r\n}\r\n@keyframes dot-copy-to-right {\r\n  /* ドットを右にコピーして増やしていく(影でコピーを表現) */\r\n  33%   {box-shadow: 5px 0 0 0 black}\r\n  66%   {box-shadow: 10px 0 0 0 black}\r\n  100%  {box-shadow: 15px 0 0 0 black,16px 0 0 0 black;}\r\n}\r\n\r\n#loading-icon {\r\n  width: 20px; \r\n  height: 20px;\r\n  margin-right: 10px;\r\n  background: linear-gradient(#05FBFF, #FF33aa);\r\n  border-radius: 50%;\r\n}\r\n\r\n.rotate {\r\n  animation: rotate-anime 2s linear infinite;\r\n}\r\n@keyframes rotate-anime {\r\n  0%  {transform: rotate(0);}\r\n  100%  {transform: rotate(360deg);}\r\n}\r\n\r\n/* #upload-label {\r\n  padding: 5px 30px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n} */\r\n#upload-label {\r\n  padding: 3px 10px;\r\n  background-color: rgba(100, 200, 250, 0.4);\r\n  border-radius: 20px;\r\n  margin-bottom: 0;\r\n}\r\n#upload-label:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(100, 200, 250, 0.8);\r\n}\r\n\r\n\r\n@media screen and (min-width: 481px) {\r\n  #contents-wrapper {\r\n    padding: 20px 10px 10px 0px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    top: 12px;\r\n    right: 10px;\r\n  }\r\n\r\n}\r\n\r\n@media screen and (max-width: 480px) {\r\n  #upload-label {\r\n    padding: 4px 10px;\r\n    font-size: 10px;\r\n  }\r\n\r\n  #contents-wrapper {\r\n    flex-direction: column-reverse;\r\n    justify-content: space-between;\r\n  }\r\n  #toggle-wrapper {\r\n    margin: 15px 0 0 0;\r\n    height: 50px;\r\n  }\r\n\r\n  #upload-input-wrapper {\r\n    /* position: absolute; */\r\n    bottom: 12px;\r\n    left: 10px;\r\n    margin: 0;\r\n    width: auto;\r\n  }\r\n\r\n  #setting-wrapper {\r\n    margin: 0;\r\n  }\r\n\r\n  .category{\r\n    margin: 0 10px;\r\n  }\r\n  \r\n  \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12283,7 +12344,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 70px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    /* border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;    */\r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 50vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#select-modal {\r\n  position: fixed;\r\n  left: 0;\r\n  z-index: 9;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n\r\n#area-wrapper {\r\n  position: relative;\r\n  height: 100%;\r\n  width: 100%;\r\n  /* background-color: rgba(35,40,50,0.85); */\r\n  color: white;\r\n\r\n  /* モーダル内の要素の配置 */\r\n  display: flex;\r\n  align-items: flex-start;\r\n  flex-flow: column;\r\n}\r\n\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n  #select-modal {\r\n    top: 70px;\r\n    width: 470px;\r\n    height: 85vh;\r\n    /* border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;    */\r\n    flex-flow: row;\r\n  }\r\n\r\n  #area-wrapper {\r\n    width: 95%;\r\n    padding-left: 70px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    box-shadow: 1px 1px 2px 1px rgba(130, 130, 130, 0.6);\r\n    border-top-right-radius: 5px;\r\n    border-bottom-right-radius: 5px;\r\n  }\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  #select-modal {\r\n    bottom: 45px;\r\n    width: 100%;\r\n    height: 60vh;\r\n    flex-flow: column;\r\n  }\r\n  #area-wrapper {\r\n    background-color: rgba(35,40,50,0.85);\r\n    width: 92%;\r\n    align-items: center;\r\n    border-radius: 5px;\r\n  }\r\n\r\n  .padding-for-mobile {\r\n    padding: 20px;\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20712,6 +20773,31 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "ul",
+                { staticClass: "audio-category-wrapper" },
+                _vm._l(_vm.audioCategory, function (category) {
+                  return _c(
+                    "li",
+                    {
+                      key: category.id,
+                      staticClass: "audio-category",
+                      class: {
+                        "active-audio-category":
+                          category == _vm.selectedAudioCategory,
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.changeAudioCategory(category)
+                        },
+                      },
+                    },
+                    [_c("span", [_vm._v(_vm._s(category))])]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
                 { attrs: { id: "audio-thumbnail-wrapper" } },
                 [
                   _vm._l(_vm.userOwnAudios, function (userOwnAudio, index) {
@@ -20810,8 +20896,13 @@ var render = function () {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.isDefault,
-                            expression: "isDefault",
+                            value:
+                              _vm.isDefault &&
+                              (defaultAudio["category"] ==
+                                _vm.selectedAudioCategory ||
+                                _vm.selectedAudioCategory == "all"),
+                            expression:
+                              "isDefault && (defaultAudio['category']==selectedAudioCategory || selectedAudioCategory=='all')",
                           },
                         ],
                         key: defaultAudio.id,
@@ -21067,6 +21158,31 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "ul",
+                { staticClass: "img-category-wrapper" },
+                _vm._l(_vm.imgCategory, function (category) {
+                  return _c(
+                    "li",
+                    {
+                      key: category.id,
+                      staticClass: "img-category",
+                      class: {
+                        "active-img-category":
+                          category == _vm.selectedImgCategory,
+                      },
+                      on: {
+                        click: function ($event) {
+                          return _vm.changeImgCategory(category)
+                        },
+                      },
+                    },
+                    [_c("span", [_vm._v(_vm._s(category))])]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c(
+                "ul",
                 { attrs: { id: "img-wrapper" } },
                 [
                   _vm._l(_vm.userOwnImgs, function (userOwnImg, index) {
@@ -21130,8 +21246,13 @@ var render = function () {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.isDefault,
-                            expression: "isDefault",
+                            value:
+                              _vm.isDefault &&
+                              (defaultImg["category"] ==
+                                _vm.selectedImgCategory ||
+                                _vm.selectedImgCategory == "all"),
+                            expression:
+                              "isDefault && (defaultImg['category']==selectedImgCategory || selectedImgCategory=='all')",
                           },
                         ],
                         key: defaultImg.url,

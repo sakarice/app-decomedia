@@ -137,8 +137,8 @@
 
 
 #upload-input-wrapper {
-  width: 100%;
-  margin-bottom: 25px;
+  position: absolute;
+  padding: 5px 20px 2px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -193,8 +193,14 @@
   100%  {transform: rotate(360deg);}
 }
 
-#upload-label {
+/* #upload-label {
   padding: 5px 30px;
+  background-color: rgba(100, 200, 250, 0.4);
+  border-radius: 20px;
+  margin-bottom: 0;
+} */
+#upload-label {
+  padding: 3px 10px;
   background-color: rgba(100, 200, 250, 0.4);
   border-radius: 20px;
   margin-bottom: 0;
@@ -209,6 +215,12 @@
   #contents-wrapper {
     padding: 20px 10px 10px 0px;
   }
+
+  #upload-input-wrapper {
+    top: 12px;
+    right: 10px;
+  }
+
 }
 
 @media screen and (max-width: 480px) {
@@ -227,9 +239,9 @@
   }
 
   #upload-input-wrapper {
-    position: absolute;
-    bottom: 15px;
-    left: 30px;
+    /* position: absolute; */
+    bottom: 12px;
+    left: 10px;
     margin: 0;
     width: auto;
   }

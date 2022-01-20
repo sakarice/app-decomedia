@@ -24,8 +24,9 @@
                </span>
             </div>
           </div>
+
+          <!-- アップロードエリア -->
           <div id="upload-input-wrapper">
-            <!-- <div id="loading-icon"></div> -->
             <label id="upload-label" for="upload-input" tabindex=2 @keydown.enter="startInput" v-show="!(isDefault)">
               <i class="fas fa-upload" style="margin-right: 5px"></i>
               <span class="upload-label-text"></span>
@@ -36,6 +37,16 @@
               <div id="uploading-dot" :class="{'copy-to-right': isLoading}"></div>
             </div>
           </div>
+
+          <!-- 画像のカテゴリ -->
+          <ul class="img-category-wrapper">
+            <li @click="changeImgCategory(category)" v-for="category in imgCategory" :key="category.id"
+            class="img-category" :class="{'active-img-category':(category==selectedImgCategory)}">
+              <span>{{category}}</span>
+            </li>
+          </ul>
+
+          <!-- 画像リスト表示 -->
           <ul id="img-wrapper">
             <!-- uploads -->
             <li :id="index" v-show="!(isDefault)" class="img-list" v-for="(userOwnImg, index) in userOwnImgs" :key="userOwnImg.url">
@@ -46,7 +57,8 @@
               </div>
             </li>
             <!-- default -->
-            <li :id="index" v-show="isDefault" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.url">
+            <li :id="index" class="img-list" v-for="(defaultImg, index) in defaultImgs" :key="defaultImg.url"
+             v-show="isDefault && (defaultImg['category']==selectedImgCategory || selectedImgCategory=='all')">
               <img class="default-img" :src="defaultImg['url']" :alt="defaultImg['url']" />
               <div class="icon-cover" v-on:click="setMediaImg">
                 <!-- <i id="delete-img-icon" class="fas fa-times fa-2x" v-on:click="deleteImg"></i> -->
@@ -81,6 +93,8 @@
       return {
         popMessage : 'メッセージです',
         isDefault : true,
+        imgCategory : [],
+        selectedImgCategory : "",
         fileCategory : "default",
         isDragEnter : false,
         uploadFile : "",
@@ -141,6 +155,18 @@
           .catch(error => {
             alert('画像取得失敗');
           })
+      },
+      getImgCategory(){
+        const url = '/imgCategory';
+        axios.get(url)
+        .then(res=>{
+          res.data.category.forEach(category=>{
+            this.imgCategory.push(category);
+          })
+        })
+      },
+      changeImgCategory(category){
+        this.selectedImgCategory = category;
       },
       dragEnter: function() {
         this.isDragEnter = true;
@@ -269,9 +295,14 @@
       },
       
     },
-    mounted() {
+    created(){
       this.getUserOwnImgs();
       this.getDefaultImgs();
+      this.getImgCategory();
+    },
+    mounted() {
+      this.imgCategory.unshift('all');
+      this.selectedImgCategory = 'all';
     },
 
   }
@@ -296,6 +327,38 @@
     padding-left: 0;
     overflow-y: scroll;
   }
+
+
+  .img-category-wrapper {
+    width: 85%;
+    display: flex;
+    padding: 5px 0px;
+    overflow-x: scroll;
+  }
+
+  .img-category {
+    padding: 12px 8px;
+    margin: 0 5px;
+    white-space: pre;
+    border-radius: 15px;
+    background-color: white;
+    color : black;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .img-category:hover {
+    cursor: pointer;
+    background-color: rgb(235,235,235);
+  }
+
+  .active-img-category{
+    color: white;
+    background-color: black;
+  }  
 
   .img-list {
     position: relative;
@@ -364,7 +427,8 @@
   }
 
   .upload-label-text::after {
-    content: "アップロード"
+    content: "追加";
+    font-size: 12px;
   }
 
 
@@ -388,6 +452,12 @@
     .upload-label-text::after {
       content: "追加"
     }
+
+    .img-category-wrapper {
+      margin: 0;
+      padding: 0;
+    }
+
 
   }
 
