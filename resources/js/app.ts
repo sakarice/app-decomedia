@@ -84,6 +84,10 @@ Vue.component('media-create-button-component', require('./components/media/actio
 Vue.component('media-update-button-component', require('./components/media/action_parts/MediaUpdateButtonComponent.vue').default);
 Vue.component('cancel-button-component', require('./components/media/action_parts/CancelButtonComponent.vue').default);
 
+Vue.component('public-img-component', require('./components/mng/PublicImgComponent.vue').default);
+Vue.component('public-audio-component', require('./components/mng/PublicAudioComponent.vue').default);
+
+
 // media図形コンポーネント
 Vue.component('media-figure-mng-component', require('./components/media/media_contents/objects/figure/MediaFigureMngComponent.vue').default);
 Vue.component('media-figure-component', require('./components/media/media_contents/objects/figure/MediaFigureComponent.vue').default);

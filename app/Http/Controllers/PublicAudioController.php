@@ -12,24 +12,34 @@ use App\Models\Media;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
+use App\Models\PublicAudioAudioCategory;
+use App\Models\AudioCategory;
 
 class PublicAudioController extends Controller
 {
     // 1.index
     // Media作成・編集画面で使用。デフォルトBGMを取得
     public function index(){
-        $default_audios = PublicAudio::get();
+        $public_audios = PublicAudio::get();
         $audios = array();
-        foreach($default_audios as $index => $default_audio){
+        foreach($public_audios as $index => $public_audio){
             $tmpAudios = array();
-            $tmpAudios += array('name' => $default_audio->name);
-            $tmpAudios += array('audio_url' => $default_audio->audio_url);
-            $audio_thumbnail_id = PublicAudioAudioThumbnail::where('audio_id',$default_audio->id)->get()->first()->audio_thumbnail_id;
+            $tmpAudios += array('name' => $public_audio->name);
+            $tmpAudios += array('audio_id' => $public_audio->id);
+            $tmpAudios += array('audio_url' => $public_audio->audio_url);
+            $audio_thumbnail_id = PublicAudioAudioThumbnail::where('audio_id',$public_audio->id)->get()->first()->audio_thumbnail_id;
             if($audio_thumbnail_id){
                 $tmpAudios += array('thumbnail_url' => PublicAudioThumbnail::find($audio_thumbnail_id)->img_url);
             } else {
                 $tmpAudios += array('thumbnail_url' => "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/public/img/audio_thumbnail/default/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E7%B4%A0%E6%9D%90+2.png");
             }
+            if(PublicAudioAudioCategory::where('audio_id',$public_audio->id)->exists()){
+                $category_id = PublicAudioAudioCategory::where('audio_id',$public_audio->id)->first()->category_id;
+                $category = AudioCategory::find($category_id)->category;
+            } else {
+                $category = "";
+            }
+            $tmpAudios += array('category' => $category);
             $audios[$index] = $tmpAudios;
         };
         return ['audios' => $audios];
