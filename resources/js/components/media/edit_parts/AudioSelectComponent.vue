@@ -40,6 +40,10 @@
 
           <!-- オーディオのカテゴリ -->
           <ul class="audio-category-wrapper">
+            <li @click="changeAudioCategory('all')"
+            class="audio-category" :class="{'active-audio-category':selectedAudioCategory=='all'}">
+              <span>all</span>
+            </li>
             <li @click="changeAudioCategory(category)" v-for="category in audioCategory" :key="category.id"
             class="audio-category" :class="{'active-audio-category':(category==selectedAudioCategory)}">
               <span>{{category}}</span>
@@ -106,7 +110,7 @@ export default {
       popMessage : 'メッセージです',
       isDefault : true,
       audioCategory : [],
-      selectedAudioCategory : "",
+      selectedAudioCategory : "all",
       fileCategory : "default",
       isDragEnter : false,
       uploadFile : "",
@@ -365,9 +369,6 @@ export default {
     this.getAudioCategory();
   },
   mounted(){
-    this.audioCategory.unshift('all');
-    this.selectedAudioCategory = 'all';
-
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
   },
@@ -418,7 +419,7 @@ export default {
 
   .audio-category:hover {
     cursor: pointer;
-    background-color: rgb(235,235,235);
+    outline: 1.5px solid black;
   }
 
   .active-audio-category{

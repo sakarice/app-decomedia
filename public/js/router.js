@@ -2074,6 +2074,10 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2090,7 +2094,7 @@ function _defineProperty(obj, key, value) {
       popMessage: 'メッセージです',
       isDefault: true,
       audioCategory: [],
-      selectedAudioCategory: "",
+      selectedAudioCategory: "all",
       fileCategory: "default",
       isDragEnter: false,
       uploadFile: "",
@@ -2352,8 +2356,6 @@ function _defineProperty(obj, key, value) {
     this.getAudioCategory();
   },
   mounted: function mounted() {
-    this.audioCategory.unshift('all');
-    this.selectedAudioCategory = 'all';
     var audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
   }
@@ -2540,6 +2542,10 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2556,7 +2562,7 @@ function _defineProperty(obj, key, value) {
       popMessage: 'メッセージです',
       isDefault: true,
       imgCategory: [],
-      selectedImgCategory: "",
+      selectedImgCategory: "all",
       fileCategory: "default",
       isDragEnter: false,
       uploadFile: "",
@@ -2764,10 +2770,7 @@ function _defineProperty(obj, key, value) {
     this.getDefaultImgs();
     this.getImgCategory();
   },
-  mounted: function mounted() {
-    this.imgCategory.unshift('all');
-    this.selectedImgCategory = 'all';
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -11199,7 +11202,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.audio-category[data-v-ee42beee] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.audio-category[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    background-color: rgb(235,235,235);\n}\n.active-audio-category[data-v-ee42beee]{\r\n    color: white;\r\n    background-color: black;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 5px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 12px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 7px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio-name[data-v-ee42beee] {\r\n    width: 80%;\r\n    margin-left: 10px;\r\n    font-size: 11px;\r\n    white-space: nowrap;\n}\n.audio-name[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 30px;\r\n    height: 30px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 15px 0 15px 0;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n    /* モーダル内のオーディオサムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.audio-category[data-v-ee42beee] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.audio-category[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    outline: 1.5px solid black;\n}\n.active-audio-category[data-v-ee42beee]{\r\n    color: white;\r\n    background-color: black;\n}\n.audio-list[data-v-ee42beee] {\r\n    position: relative;\r\n    width: 100%;\r\n    height: 40px;\r\n    margin-bottom: 5px;\r\n    border-radius: 5px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    /* background-color: grey; */\r\n\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.audio-play-icon[data-v-ee42beee],\r\n  .audio-pause-icon[data-v-ee42beee] {\r\n    position: absolute;\r\n    z-index: -1;\r\n    color: rgba(255, 0, 0, 0);\n}\n.audio-play-icon[data-v-ee42beee] {\r\n    top: 5;\r\n    left: 12px;\n}\n.audio-pause-icon[data-v-ee42beee] {\r\n    top: 13px;\r\n    left: 7px;\n}\n.now-play[data-v-ee42beee] {\r\n    color : rgb(0, 255, 0);\n}\n.delete-audio[data-v-ee42beee] {\r\n    position: absolute;\r\n    top: 4px;\r\n    right: 0;\r\n    margin-right: 5px;\r\n    color: rgba(180, 50, 50, 0);\r\n    z-index: -1;\n}\n.audio-list[data-v-ee42beee]:hover {\r\n    transform: scale(0.98,0.98);\n}\n.audio-list:hover .delete-audio[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(180, 50, 50, 0.4);\n}\n.audio-list:hover .audio-play-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-pause-icon[data-v-ee42beee] {\r\n    z-index: 2;\r\n    color: rgba(0, 255, 0, 0.8);\n}\n.audio-list:hover .audio-thumbnail[data-v-ee42beee] {\r\n    z-index: -1;\r\n    opacity: 0.3;\n}\n.audio-name[data-v-ee42beee] {\r\n    width: 80%;\r\n    margin-left: 10px;\r\n    font-size: 11px;\r\n    white-space: nowrap;\n}\n.audio-name[data-v-ee42beee]:hover {\r\n    cursor: pointer;\r\n    text-decoration: underline;\n}\n#add-audio-thumbnail-icon[data-v-ee42beee] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.audio-thumbnail[data-v-ee42beee] {\r\n    width: 30px;\r\n    height: 30px;\r\n    border-radius: 50%;\r\n    background-color: darkgray;\n}\n.contents-audio[data-v-ee42beee] {\r\n    padding: 15px 0 15px 0;\n}\n.upload-label-text[data-v-ee42beee]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width: 480px) {\n#audio-thumbnail-wrapper[data-v-ee42beee] {\r\n      width: 80%;\n}\n.audio-category-wrapper[data-v-ee42beee] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11225,7 +11228,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-category-wrapper[data-v-306434fc] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.img-category[data-v-306434fc] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.img-category[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    background-color: rgb(235,235,235);\n}\n.active-img-category[data-v-306434fc]{\r\n    color: white;\r\n    background-color: black;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n      content: \"追加\"\n}\n.img-category-wrapper[data-v-306434fc] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#img-wrapper[data-v-306434fc] {\r\n    /* モーダル内の画像サムネの配置 */\r\n    display: flex;\r\n    flex-wrap: wrap;\r\n    align-content: flex-start;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n\r\n    width: 92%;\r\n    height: 80vh;\r\n    /* margin-top: 20px; */\r\n    padding-left: 0;\r\n    overflow-y: scroll;\n}\n.img-category-wrapper[data-v-306434fc] {\r\n    width: 85%;\r\n    display: flex;\r\n    padding: 5px 0px;\r\n    overflow-x: scroll;\n}\n.img-category[data-v-306434fc] {\r\n    padding: 12px 8px;\r\n    margin: 0 5px;\r\n    white-space: pre;\r\n    border-radius: 15px;\r\n    background-color: white;\r\n    color : black;\r\n    list-style: none;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.img-category[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    outline: 1.5px solid black;\n}\n.active-img-category[data-v-306434fc]{\r\n    color: white;\r\n    background-color: black;\n}\n.img-list[data-v-306434fc] {\r\n    position: relative;\r\n    width: 49.5%;\r\n    /* height: 140px; */\r\n    margin-bottom: 2px;\r\n    list-style: none;\r\n    transition: transform 0.3s;\r\n    background-color: grey;\n}\n.img-list[data-v-306434fc]:before {\r\n    content: \"\";\r\n    display: block;\r\n    padding-top: 100%;\n}\n.img-list[data-v-306434fc]:hover {\r\n    cursor: pointer;\r\n    transform: scale(0.98,0.98);\n}\n.img-list:hover .icon-cover[data-v-306434fc] {\r\n    z-index: 2;\r\n    background-color: rgba(130, 130, 130, 0.6);\n}\n.user-own-img[data-v-306434fc],.default-img[data-v-306434fc]{\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    width: 100%;\r\n    height: 100%;\r\n    margin: auto;\r\n    -o-object-fit: cover;\r\n       object-fit: cover;\n}\n.icon-cover[data-v-306434fc] {\r\n    position: absolute ;\r\n    top: 0;\r\n    left: 0;\r\n    z-index: -1;\r\n    width: 100%;\r\n    height: 100%;\r\n    background-color: rgba(130, 130, 130, 0);\r\n\r\n    /* 要素の配置 */\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n#delete-img-icon[data-v-306434fc] {\r\n    position: absolute;\r\n    top: 0;\r\n    left: 0;\r\n    margin-left: 5px;\r\n    margin-top: 5px;\r\n    color: rgba(255, 255, 255, 0.7);\n}\n#add-img-icon[data-v-306434fc] {\r\n    color: rgba(255, 255, 255, 0.7);\r\n    pointer-events: none;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n    content: \"追加\";\r\n    font-size: 12px;\n}\n@media screen and (max-width:480px) {\n.img-list[data-v-306434fc] {\r\n      border-radius: 5px;\n}\n}\n@media screen and (max-width:480px) {\n.contents-img[data-v-306434fc] {\r\n      padding: 15px 0 15px 0;\n}\n.img-list[data-v-306434fc] {\r\n      width: 33%;\n}\n.upload-label-text[data-v-306434fc]::after {\r\n      content: \"追加\"\n}\n.img-category-wrapper[data-v-306434fc] {\r\n      margin: 0;\r\n      padding: 0;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20774,26 +20777,45 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "audio-category-wrapper" },
-                _vm._l(_vm.audioCategory, function (category) {
-                  return _c(
+                [
+                  _c(
                     "li",
                     {
-                      key: category.id,
                       staticClass: "audio-category",
                       class: {
                         "active-audio-category":
-                          category == _vm.selectedAudioCategory,
+                          _vm.selectedAudioCategory == "all",
                       },
                       on: {
                         click: function ($event) {
-                          return _vm.changeAudioCategory(category)
+                          return _vm.changeAudioCategory("all")
                         },
                       },
                     },
-                    [_c("span", [_vm._v(_vm._s(category))])]
-                  )
-                }),
-                0
+                    [_c("span", [_vm._v("all")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.audioCategory, function (category) {
+                    return _c(
+                      "li",
+                      {
+                        key: category.id,
+                        staticClass: "audio-category",
+                        class: {
+                          "active-audio-category":
+                            category == _vm.selectedAudioCategory,
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.changeAudioCategory(category)
+                          },
+                        },
+                      },
+                      [_c("span", [_vm._v(_vm._s(category))])]
+                    )
+                  }),
+                ],
+                2
               ),
               _vm._v(" "),
               _c(
@@ -21159,26 +21181,44 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "img-category-wrapper" },
-                _vm._l(_vm.imgCategory, function (category) {
-                  return _c(
+                [
+                  _c(
                     "li",
                     {
-                      key: category.id,
                       staticClass: "img-category",
                       class: {
-                        "active-img-category":
-                          category == _vm.selectedImgCategory,
+                        "active-img-category": _vm.selectedImgCategory == "all",
                       },
                       on: {
                         click: function ($event) {
-                          return _vm.changeImgCategory(category)
+                          return _vm.changeImgCategory("all")
                         },
                       },
                     },
-                    [_c("span", [_vm._v(_vm._s(category))])]
-                  )
-                }),
-                0
+                    [_c("span", [_vm._v("all")])]
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.imgCategory, function (category) {
+                    return _c(
+                      "li",
+                      {
+                        key: category.id,
+                        staticClass: "img-category",
+                        class: {
+                          "active-img-category":
+                            category == _vm.selectedImgCategory,
+                        },
+                        on: {
+                          click: function ($event) {
+                            return _vm.changeImgCategory(category)
+                          },
+                        },
+                      },
+                      [_c("span", [_vm._v(_vm._s(category))])]
+                    )
+                  }),
+                ],
+                2
               ),
               _vm._v(" "),
               _c(

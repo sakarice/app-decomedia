@@ -40,6 +40,10 @@
 
           <!-- 画像のカテゴリ -->
           <ul class="img-category-wrapper">
+            <li @click="changeImgCategory('all')"
+            class="img-category" :class="{'active-img-category':selectedImgCategory=='all'}">
+              <span>all</span>
+            </li>            
             <li @click="changeImgCategory(category)" v-for="category in imgCategory" :key="category.id"
             class="img-category" :class="{'active-img-category':(category==selectedImgCategory)}">
               <span>{{category}}</span>
@@ -94,7 +98,7 @@
         popMessage : 'メッセージです',
         isDefault : true,
         imgCategory : [],
-        selectedImgCategory : "",
+        selectedImgCategory : "all",
         fileCategory : "default",
         isDragEnter : false,
         uploadFile : "",
@@ -301,8 +305,6 @@
       this.getImgCategory();
     },
     mounted() {
-      this.imgCategory.unshift('all');
-      this.selectedImgCategory = 'all';
     },
 
   }
@@ -352,13 +354,13 @@
 
   .img-category:hover {
     cursor: pointer;
-    background-color: rgb(235,235,235);
+    outline: 1.5px solid black;
   }
 
   .active-img-category{
     color: white;
     background-color: black;
-  }  
+  }
 
   .img-list {
     position: relative;
