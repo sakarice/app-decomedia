@@ -1896,6 +1896,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 /* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
+var _objectSpread2;
+
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -2078,6 +2080,14 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2104,15 +2114,19 @@ function _defineProperty(obj, key, value) {
       // thumbnail_url, audio-name
       defaultAudios: [],
       audioPlayer: new Audio(),
+      ctxs: [],
+      audioInputNodes: [],
+      panner: "",
       playAudioType: "",
       playAudioIndex: -1,
       playAudioUrl: "",
-      isPlay: false // userOwnAudioThumbnailUrls : [],
+      isPlay: false,
+      // userOwnAudioThumbnailUrls : [],
       // defaultAudioThumbnailUrls : []
-
+      pannerController: ""
     };
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, _defineProperty({
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, (_objectSpread2 = {
     finishPlay: function finishPlay() {
       var audioDuration = this.audioPlayer.duration;
       this.audioPlayer.currentTime = audioDuration - 1;
@@ -2171,10 +2185,13 @@ function _defineProperty(obj, key, value) {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['audio_url'];
-      this.audioPlayer.play();
       this.isPlay = true;
-      playTargetAudio['isPlay'] = true; // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
+      playTargetAudio['isPlay'] = true; // audioエレメントを初期化
+
+      this.audioPlayer = new Audio(playTargetAudio['audio_url']); // クロスオリジン設定をリクエストヘッダにを付与
+
+      this.audioPlayer.crossOrigin = "anonymous";
+      this.audioPlayer.onloadstart = this.setUpWebAudio(); // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
 
       var stopTargetAudio;
 
@@ -2308,10 +2325,7 @@ function _defineProperty(obj, key, value) {
         'audioUrl': audioUrl
       };
       this.loadingMessage = '削除中';
-      this.isLoading = true; // const loading_icon = document.getElementById('loading-icon');
-      // loading_icon.classList.add('rotate');
-      // alert(audioUrl);
-
+      this.isLoading = true;
       axios.post(url, params).then(function (response) {
         alert(response.data); // 画面に即自反映するため、オーディオURLをdataから削除
         // 削除対象URLが入っている配列のインデックスを取得
@@ -2328,16 +2342,14 @@ function _defineProperty(obj, key, value) {
         _this5.userOwnAudios.splice(index, 1);
 
         _this5.loadingMessage = '';
-        _this5.isLoading = false; // loading_icon.classList.remove('rotate');
-        // Mediaオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
-        // this.$emit('audio-thumbnail-del-notice', audioUrl);
+        _this5.isLoading = false;
       })["catch"](function (error) {
         alert('オーディオ削除失敗');
         _this5.loadingMessage = '';
         _this5.isLoading = false;
       });
     }
-  }, "finishAudio", function finishAudio() {
+  }, _defineProperty(_objectSpread2, "finishAudio", function finishAudio() {
     this.isPlay = false;
 
     if (this.playAudioType == 'user-own') {
@@ -2349,7 +2361,36 @@ function _defineProperty(obj, key, value) {
     this.isPlay = false;
     this.playAudioType = "";
     this.playAudioIndex = -1;
-  })),
+  }), _defineProperty(_objectSpread2, "setAudioCtx", function setAudioCtx() {
+    var AudioContext = window.AudioContext || window.webkitAudioContext; // this.ctx = new AudioContext();
+
+    return new AudioContext();
+  }), _defineProperty(_objectSpread2, "createPannerNode", function createPannerNode() {
+    // ●panner 
+    var pannerOptions = {
+      panningModel: "HRTF"
+    };
+    var panner = new PannerNode(this.ctxs[0], pannerOptions);
+    panner.positionX.value = 1;
+    return panner;
+  }), _defineProperty(_objectSpread2, "setUpWebAudio", function setUpWebAudio() {
+    this.ctxs.forEach(function (ctx) {
+      ctx.close();
+    });
+    this.ctxs.length = 0;
+    this.audioInputNodes.length = 0;
+    this.ctxs.push(this.setAudioCtx());
+    var panner = this.createPannerNode();
+    this.audioInputNodes.push(this.ctxs[this.ctxs.length - 1].createMediaElementSource(this.audioPlayer));
+
+    for (var i = 0; i < this.ctxs.length; i++) {
+      this.audioInputNodes[i].connect(panner).connect(this.ctxs[i].destination);
+    }
+
+    if (this.isPlay == true) {
+      this.audioPlayer.play();
+    }
+  }), _objectSpread2)),
   created: function created() {
     this.getUserOwnAudios();
     this.getPublicAudios();
@@ -2357,7 +2398,13 @@ function _defineProperty(obj, key, value) {
   },
   mounted: function mounted() {
     var audio = this.audioPlayer;
-    audio.onended = this.finishAudio.bind(this);
+    audio.onended = this.finishAudio.bind(this); // イベントのコールバック内でthisを使えるようにthisを別名でコピー
+
+    var tmpThis = this;
+    this.pannerController = document.getElementById('panner-controller');
+    this.pannerController.addEventListener('input', function () {
+      tmpThis.panner.positionX.value = this.value;
+    }, false);
   }
 });
 
@@ -20817,6 +20864,17 @@ var render = function () {
                 ],
                 2
               ),
+              _vm._v(" "),
+              _c("input", {
+                attrs: {
+                  id: "panner-controller",
+                  type: "range",
+                  min: "-1",
+                  max: "1",
+                  step: "0.01",
+                  value: "0",
+                },
+              }),
               _vm._v(" "),
               _c(
                 "ul",

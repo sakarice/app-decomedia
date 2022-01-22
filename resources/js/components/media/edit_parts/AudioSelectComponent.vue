@@ -50,6 +50,14 @@
             </li>
           </ul>
 
+          <!-- ★★★後で消す）corsデバッグ用 -->
+          <!-- <audio src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/public/audio/media/MeTjSnyBIV8BRtd4wqia6UcvAvQeKC8weyHdB6BZ.mp3"
+          controls="true" id="audio-cors"
+          crossorigin="anonymous">
+          </audio> -->
+
+          <input id="panner-controller" type="range" min="-1" max="1" step="0.01" value="0">
+
           <!-- オーディオのリスト表示 -->
           <ul id="audio-thumbnail-wrapper">
 
@@ -119,12 +127,16 @@ export default {
       userOwnAudios : [],   // thumbnail_url, audio-name
       defaultAudios : [],
       audioPlayer : new Audio(),
+      ctxs : [],
+      audioInputNodes : [],
+      panner : "",
       playAudioType : "",
       playAudioIndex : -1,
       playAudioUrl : "",
       isPlay : false,
       // userOwnAudioThumbnailUrls : [],
       // defaultAudioThumbnailUrls : []
+      pannerController : "",
     }
   },
   methods : {
@@ -184,10 +196,14 @@ export default {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['audio_url'];
-      this.audioPlayer.play();
       this.isPlay = true;
       playTargetAudio['isPlay'] = true;
+
+      // audioエレメントを初期化
+      this.audioPlayer = new Audio(playTargetAudio['audio_url']);
+      // クロスオリジン設定をリクエストヘッダにを付与
+      this.audioPlayer.crossOrigin = "anonymous";
+      this.audioPlayer.onloadstart = this.setUpWebAudio();
 
       // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
       let stopTargetAudio;
@@ -203,7 +219,6 @@ export default {
       // 再生中のオーディオ種別とインデックスを更新
       this.playAudioType = type;
       this.playAudioIndex = index;
-
     },
 
     finishAudio: function(event){
@@ -321,9 +336,6 @@ export default {
       }
       this.loadingMessage = '削除中'
       this.isLoading = true;
-      // const loading_icon = document.getElementById('loading-icon');
-      // loading_icon.classList.add('rotate');
-      // alert(audioUrl);
       axios.post(url, params)
         .then(response => {
           alert(response.data);
@@ -338,9 +350,6 @@ export default {
           this.userOwnAudios.splice(index,1);
           this.loadingMessage = ''
           this.isLoading = false;
-          // loading_icon.classList.remove('rotate');
-          // Mediaオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
-          // this.$emit('audio-thumbnail-del-notice', audioUrl);
         })
         .catch(error => {
           alert('オーディオ削除失敗');
@@ -361,16 +370,58 @@ export default {
       this.playAudioType = "";
       this.playAudioIndex = -1;
     },
+    setAudioCtx(){
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      // this.ctx = new AudioContext();
+      return new AudioContext();
+    },
+    createPannerNode(){
+    // ●panner 
+      const pannerOptions = {panningModel:"HRTF"};
+      const panner = new PannerNode(this.ctxs[0], pannerOptions);
+      panner.positionX.value = 1;
+      return panner;
+    },
+    setUpWebAudio(){
+      this.ctxs.forEach((ctx)=>{
+        ctx.close();
+      })
+      this.ctxs.length = 0;
+      this.audioInputNodes.length = 0;
+
+      this.ctxs.push(this.setAudioCtx());
+      const panner = this.createPannerNode();
+      this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
+
+      for(let i=0; i<this.ctxs.length; i++){
+        this.audioInputNodes[i].connect(panner).connect(this.ctxs[i].destination);
+      }
+
+      if(this.isPlay==true){
+        this.audioPlayer.play();
+      }
+    },
 
   },
   created(){
     this.getUserOwnAudios();
     this.getPublicAudios();
     this.getAudioCategory();
+
   },
   mounted(){
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
+
+    // イベントのコールバック内でthisを使えるようにthisを別名でコピー
+    const tmpThis = this;
+
+    this.pannerController = document.getElementById('panner-controller');
+    this.pannerController.addEventListener('input', function(){
+      tmpThis.panner.positionX.value = this.value;
+    },false)
+
+
   },
 
 }
