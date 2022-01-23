@@ -2254,7 +2254,7 @@ function _defineProperty(obj, key, value) {
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url']; // audio['isPlay'] = false;
 
-      audio['isLoop'] = false;
+      audio['panningFlag'] = false, audio['panningModel'] = "HRTF", audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5; // this.$emit('add-audio', audio);
 
@@ -4341,6 +4341,26 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4355,7 +4375,8 @@ function _defineProperty(obj, key, value) {
       isShowAudio: false,
       isEditMode: false,
       longestAudioDuration: 0,
-      isShowSettings: [false, false, false, false, false]
+      isShowAudioSettings: [false, false, false, false, false],
+      isShowPanningSettings: [false, false, false, false, false]
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
@@ -4392,18 +4413,51 @@ function _defineProperty(obj, key, value) {
     },
     hideSetting: function hideSetting() {
       var audio_settings = document.getElementsByClassName('audio-settings');
-      console.log(audio_settings.length);
+      var panning_settings = document.getElementsByClassName('panning-settings');
 
       for (var i = 0; i < audio_settings.length; i++) {
         audio_settings[i].style.display = "none";
-        this.isShowSettings[i] = false;
+        panning_settings[i].style.display = "none";
+        this.isShowAudioSettings[i] = false;
+        this.isShowPanningSettings[i] = false;
       }
     },
-    toggleSetting: function toggleSetting(index) {
+    hideAudiogSetting: function hideAudiogSetting(index) {
       var audio_settings = document.getElementsByClassName('audio-settings');
-      var val = this.isShowSettings[index];
+      audio_settings[index].style.display = "none";
+      this.isShowAudioSettings[index] = false;
+    },
+    hidePanningSetting: function hidePanningSetting(index) {
+      var panning_settings = document.getElementsByClassName('panning-settings');
+      panning_settings[index].style.display = "none";
+      this.isShowPanningSettings[index] = false;
+    },
+    toggleAudioSetting: function toggleAudioSetting(index) {
+      var audio_settings = document.getElementsByClassName('audio-settings');
+      var val = this.isShowAudioSettings[index];
       audio_settings[index].style.display = val ? "none" : "flex";
-      this.isShowSettings[index] = !val;
+      this.isShowAudioSettings[index] = !val;
+
+      if (this.isShowAudioSettings[index]) {
+        this.hidePanningSetting(index);
+      }
+    },
+    togglePanningSetting: function togglePanningSetting(index) {
+      var panning_settings = document.getElementsByClassName('panning-settings');
+      var val = this.isShowPanningSettings[index];
+      panning_settings[index].style.display = val ? "none" : "flex";
+      this.isShowPanningSettings[index] = !val;
+
+      if (this.isShowPanningSettings[index]) {
+        this.hideAudiogSetting(index);
+      }
+    },
+    changePanningModel: function changePanningModel(index, value) {
+      this.updateMediaAudiosObjectItem({
+        index: index,
+        key: 'panningModel',
+        value: value
+      });
     },
     // 親コンポーネントから実行される
     validEditMode: function validEditMode() {
@@ -4452,13 +4506,11 @@ function _defineProperty(obj, key, value) {
 
       if (duration >= this.longestAudioDuration) {
         this.updateLongestDuration(duration);
-      } // this.isShowSettings.push(false);
-
+      }
     },
     // ※オーディオ削除含め、削除時に必要な処理をまとめた関数。(↑のtask～addedと違い、delete処理も含まれる)
     taskWhenAudioDelete: function taskWhenAudioDelete(index) {
       var duration = this.getMediaAudios[index]['duration']; // ！オーディオ削除前に再生時間を取得しておく
-      // this.isShowSettings.splice(index,1);
 
       this.deleteAudio(index);
 
@@ -4478,6 +4530,15 @@ function _defineProperty(obj, key, value) {
         index: index,
         key: 'isLoop',
         value: newLoopSetting
+      });
+    },
+    switchPanning: function switchPanning(index) {
+      var newPanningSetting = !this.getMediaAudios[index]['panningFlag']; // =現在のpanning設定の逆
+
+      this.updateMediaAudiosObjectItem({
+        index: index,
+        key: 'panningFlag',
+        value: newPanningSetting
       });
     },
     updateAudioVol: function updateAudioVol(index, event) {
@@ -4501,7 +4562,6 @@ function _defineProperty(obj, key, value) {
     var _this3 = this;
 
     document.body.addEventListener('changeDispAudioState', function (e) {
-      console.log("changeDispAudioState:state->" + e.detail);
       _this3.isShowAudio = e.detail;
     });
   }
@@ -4590,7 +4650,11 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       player: "",
-      isPlay: false
+      isPlay: false,
+      ctx: "",
+      inputNode: "",
+      panner: "",
+      isPan: false
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
@@ -4599,6 +4663,12 @@ function _defineProperty(obj, key, value) {
     },
     loopSetting: function loopSetting() {
       return this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
+    },
+    panningFlag: function panningFlag() {
+      return this.getMediaAudios[this.mediaAudioIndex]['panningFlag'];
+    },
+    panningModel: function panningModel() {
+      return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
     }
   }),
   methods: {
@@ -4607,7 +4677,6 @@ function _defineProperty(obj, key, value) {
     },
     pause: function pause() {
       this.player.pause();
-      this.isPlay = false;
     },
     finish: function finish() {
       // 再生位置を終わりに設定して疑似的に再生終了を実現する
@@ -4615,7 +4684,6 @@ function _defineProperty(obj, key, value) {
     },
     setPlayerInfo: function setPlayerInfo() {
       // 親コンポーネントのmediaAudiosから再生情報を取得
-      // this.player.src = this.getMediaAudios[this.mediaAudioIndex]['audio_url'];
       this.player.volume = this.getMediaAudios[this.mediaAudioIndex]['volume'];
       this.player.loop = this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
     },
@@ -4636,12 +4704,51 @@ function _defineProperty(obj, key, value) {
       if (this.player.loop == false) {
         this.onNotPlayingAudio();
       }
+    },
+    setUpAudioContext: function setUpAudioContext() {
+      var AudioContext = window.AudioContext || window.webkitAudioContext;
+      var ctx = new AudioContext();
+      this.ctx = ctx;
+    },
+    setUpPanner: function setUpPanner(ctx) {
+      var pannerOptions = {
+        panningModel: "HRTF"
+      };
+      var panner = new PannerNode(ctx, pannerOptions);
+      panner.positionX.value = 0.1;
+      this.panner = panner;
+    },
+    panningOn: function panningOn() {
+      console.log('panning on');
+      this.inputNode.disconnect();
+      this.inputNode.connect(this.panner).connect(this.ctx.destination);
+    },
+    panningOff: function panningOff() {
+      console.log('panning off');
+      this.inputNode.disconnect();
+      this.inputNode.connect(this.ctx.destination);
     }
   },
   created: function created() {
+    // Web Audio APIの準備
+    this.setUpAudioContext();
+    this.setUpPanner(this.ctx);
     var tmpThis = this;
     var setAudioData = new Promise(function (resolve, reject) {
       tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
+      tmpThis.player.crossOrigin = "anonymous";
+
+      tmpThis.player.onloadstart = function () {
+        tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
+        console.log('onload start');
+
+        if (this.panningFlag) {
+          tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
+        } else {
+          tmpThis.inputNode.connect(tmpThis.ctx.destination);
+        }
+      };
+
       tmpThis.setPlayerInfo();
       resolve();
     });
@@ -4665,6 +4772,16 @@ function _defineProperty(obj, key, value) {
   watch: {
     loopSetting: function loopSetting(val) {
       this.updateLoopSetting(val);
+    },
+    panningFlag: function panningFlag(val) {
+      if (val == true) {
+        this.panningOn();
+      } else {
+        this.panningOff();
+      }
+    },
+    panningModel: function panningModel(val) {
+      this.panner.panningModel = val;
     }
   }
 });
@@ -11458,7 +11575,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 2px 0;\n    width: 100%;\n    /* height: 60px; */\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    margin: 0 5px;\n    padding: 7px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n.all-audio-controller[data-v-91d677f2]:hover {\n    background-color: rgb(50,50,50);\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    background-color: rgba(0,0,0,0.8);\n\n    width: 240px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n}\n.audio-num-wrapper[data-v-91d677f2]{\n    z-index: 1;\n    position: absolute;\n    top: 5px;\n    left: 2px;\n    width: 20px;\n    height: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-num[data-v-91d677f2]{\n    font-size: 16px;\n    margin: -5px 0 0 5px;\n    color: gold;\n    opacity: 0.7;\n}\n#media-audio-frame[data-v-91d677f2] {\n    border-top-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    width: 95%;\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.media-audio-delete-icon[data-v-91d677f2] {\n    color:  rgba(220,50,50,0.8);\n}\n.loop-setting-icon[data-v-91d677f2] {\n    color: grey;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    color:  rgba(255,255,255,0.8);\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    width: 90%;\n    margin-left: 5px;\n    color : white;\n    white-space: nowrap;\n    text-overflow: clip;\n    overflow: hidden;\n}\n.media-audio-name[data-v-91d677f2] {\n    font-size: 0.7rem;\n}\n.audio-setting-wrapper[data-v-91d677f2] {\n    z-index: 2;\n    position: absolute;\n    right: 0;\n    display: flex;\n    flex-direction: row-reverse;\n    align-items: center;\n}\n.setting-disp-trigger[data-v-91d677f2]{\n    color: rgb(100,100,100);\n    margin-left: 5px;\n}\n.audio-settings[data-v-91d677f2] {\n    /* display: flex; */\n    display: none;\n    align-items: center;\n    width: 140px;\n    padding: 2px 0 2px 2px;\n    border-radius: 5px;\n    background-color: rgb(30,30,30);\n}\n.audio-setting[data-v-91d677f2] {\n    margin: 0 5px;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    /* position: absolute; */\n    margin-right: 5px;\n    display: flex;\n    align-items: center;\n}\n.audio-vol-wrapper:hover +.media-audio-name-wrapper[data-v-91d677f2] {\n    display: none;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n}\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.loop-icon[data-v-91d677f2] {\n    position: absolute;\n    top: -4px;\n    left: -4px;\n}\n.loop-setting-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    height: 2px;\n    width: 100%;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n.white[data-v-91d677f2] { color: white;}\n.blue[data-v-91d677f2] { color: blue;}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 70px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    right: 0;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px 5px 25px;\n}\n.audio-setting-wrapper[data-v-91d677f2] {\n    right: 10px;\n    top: -20px;\n    flex-direction: column;\n    align-items: flex-end;\n}\n.audio-settings[data-v-91d677f2] {\n    flex-direction: column;\n    width: 90px;\n    padding: 0;\n}\n.del-and-loop-wrapper[data-v-91d677f2]{\n    width: 100%;\n    padding: 5px 0 10px 0;\n    display: flex;\n    align-items: center;\n    justify-content: space-around;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    width: 70px;\n    text-align: center;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    overflow-x: scroll;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.media-audio-num[data-v-91d677f2] {\n    font-size: 13px;    \n    color: lightgray;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disp-front[data-v-91d677f2] {\n    z-index: 11;\n}\n\n  /* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    padding-bottom: 5px;\n    padding: 2px 0;\n    width: 100%;\n    /* height: 60px; */\n    background-color: black;\n    border-bottom-left-radius: 5px;\n\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2] {\n    opacity: 0.85;\n    height: 33px;\n    display: flex;\n    justify-content: center;\n}\n.size-Adjust-box[data-v-91d677f2]:hover{\n    opacity: 1;\n}\n.all-audio-controller[data-v-91d677f2] {\n    color: ghostwhite;\n    min-width: 70px;\n    margin: 0 5px;\n    padding: 7px;\n    font-size: 11px;\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n.all-audio-controller[data-v-91d677f2]:hover {\n    background-color: rgb(50,50,50);\n}\n#play-all-icon[data-v-91d677f2] {\n    color: green;\n}\n#play-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n#finish-all-icon[data-v-91d677f2] {\n    color: lightgrey;\n    margin-top: 5px;\n}\n#finish-all-icon[data-v-91d677f2]:hover {\n    cursor: pointer;\n}\n\n  /* audio */\n#media-audio-wrapper[data-v-91d677f2] {\n    position: absolute;\n    background-color: rgba(0,0,0,0.8);\n\n    width: 240px;\n    border-top-left-radius: 5px;\n    border-bottom-left-radius: 5px;\n    display: flex;\n    flex-direction: column;\n}\n.audio-num-wrapper[data-v-91d677f2]{\n    z-index: 1;\n    position: absolute;\n    top: 5px;\n    left: 2px;\n    width: 20px;\n    height: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.media-audio-num[data-v-91d677f2]{\n    font-size: 16px;\n    margin: -5px 0 0 5px;\n    color: gold;\n    opacity: 0.7;\n}\n#media-audio-frame[data-v-91d677f2] {\n    height: 100%;\n    display: flex;\n    border-top-left-radius: 5px;\n    flex-direction: column;\n    justify-content: space-around;\n}\n.is-show[data-v-91d677f2] {\n    background-color: rgba(0,0,0,0.8);\n    z-index: 15;\n}\n.media-audio-controller-zone[data-v-91d677f2]{\n    padding-left: 15px;\n    display: flex;\n    flex-direction: column;\n    align-items: flex-start;\n    overflow-y: scroll;\n}\n#audios[data-v-91d677f2]{\n    height: 100%;\n    width: 100%;\n    margin: 0;\n    padding: 10px;\n\n    display: flex;\n    justify-content: space-around;\n    align-items: flex-start;\n}\n.audio-area[data-v-91d677f2] {\n    width: 95%;\n    position: relative;\n    display: flex;\n    align-items: center;\n    margin: 15px 0 15px 10px;\n    min-width: 100px;\n}\n.audio-wrapper[data-v-91d677f2] {\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    position: relative;\n    opacity: 0.7;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.non-audio-frame[data-v-91d677f2] {\n}\n.dummy-audio-icon[data-v-91d677f2]{\n    width: 42px;\n    height: 42px;\n    border-radius: 50%;\n    border: 1.5px dotted lightgrey;\n    opacity: 0.7;\n}\n.setting-icon[data-v-91d677f2] {\n    color: grey;\n    margin: 7px;\n    font-size: 17px;\n}\n.media-audio-vol-icon[data-v-91d677f2] {\n    margin-right: 3px;\n    color:  rgba(255,255,255,0.8);\n}\n\n  /* hover設定(wrapper) */\n.audio-area[data-v-91d677f2]:hover {\n    opacity: 1;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    width: 90%;\n    margin-left: 5px;\n    color : white;\n    white-space: nowrap;\n    text-overflow: clip;\n    overflow: hidden;\n}\n.media-audio-name[data-v-91d677f2] {\n    font-size: 0.7rem;\n}\n.setting-disp-wrapper[data-v-91d677f2] {\n    z-index: 2;\n    position: absolute;\n    right: 0;\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n}\n.setting-wrapper[data-v-91d677f2] {\n    position: absolute;\n    right: 30px;\n    z-index: 3;\n}\n.setting-disp-trigger[data-v-91d677f2]{\n    color: rgb(100,100,100);\n    margin-left: 5px;\n}\n.audio-settings[data-v-91d677f2] {\n    display: none;\n}\n.panning-settings[data-v-91d677f2] {\n    display: none;\n    justify-content: space-around;\n}\n.panning-label[data-v-91d677f2] {\n    color: grey;\n    font-size: 12px;\n}\n.setting-cover[data-v-91d677f2] {\n    align-items: center;\n    width: 180px;\n    padding: 2px 0 2px 2px;\n    border-radius: 5px;\n    background-color: rgba(60,70,100,0.9);\n}\n.audio-setting[data-v-91d677f2] {\n    /* margin: 0 5px; */\n}\n.del-and-loop-wrapper[data-v-91d677f2]{\n    display: flex;\n    align-items: center;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n}\n.audio-vol-wrapper:hover +.media-audio-name-wrapper[data-v-91d677f2] {\n    display: none;\n}\n.vol-bar-wrapper[data-v-91d677f2] {\n    display: flex;\n    align-items: center;\n}\n\n  /* hover設定(各アイコン) */\n.media-audio-delete-icon[data-v-91d677f2]:hover {\n    color:  rgba(255,10,10,1);\n}\n.loop-icon[data-v-91d677f2] {\n    position: absolute;\n    top: -4px;\n    left: -4px;\n}\n.loop-setting-icon[data-v-91d677f2]:hover {\n    color:  rgba(10,10,255,1);\n}\n.audio-vol-range[data-v-91d677f2] {\n    -webkit-appearance: none;\n    -moz-appearance: none;\n         appearance: none;\n    cursor: pointer;\n    height: 2px;\n    width: 100%;\n}\n.change-disp-audio[data-v-91d677f2] {\n    color: lightgrey;\n    margin: 0 10px 10px 0;\n    padding: 10px 19px 10px 15px;\n    border-radius: 50%;\n    background-color: rgba(0,0,0, 0.5);\n}\n.change-disp-audio[data-v-91d677f2]:hover {\n    background-color: rgba(0,110,110, 0.5);\n    cursor: pointer;\n}\n\n\n  /* 再生関連 */\n.isLoop[data-v-91d677f2] {\n    color:  rgba(0,0,255,1);\n    display: inline-block;\n    z-index: 2;\n}\n.panning-on[data-v-91d677f2] {\n    color: greenyellow;\n    z-index : 2;\n}\n.white[data-v-91d677f2] { color: white;}\n.blue[data-v-91d677f2] { color: blue;}\n\n/* スマホ以外 */\n@media screen and (min-width:481px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    top: 70px;\n    bottom: 80px;\n    right: 0;\n}\n#audios[data-v-91d677f2]{\n    flex-flow: column;\n}\n.audio-area[data-v-91d677f2] {\n    justify-content: flex-start;\n}\n.audio-vol-wrapper[data-v-91d677f2] {\n    right: 0;\n    margin: 0 5px;\n}\n}\n\n/* スマホ */\n@media screen and (max-width:480px) {\n#media-audio-wrapper[data-v-91d677f2]{\n    bottom: 0;\n    width: 100%\n}\n#audios[data-v-91d677f2]{\n    height: 110px;\n    justify-content: flex-start;\n    overflow-x:scroll;\n    padding: 10px 25px 5px 25px;\n}\n.setting-wrapper[data-v-91d677f2] {\n    right: 10px;\n    top: -20px;\n    flex-direction: column;\n    align-items: flex-end;\n}\n.setting-disp-wrapper[data-v-91d677f2]{\n    right: -5px;\n    top: -10px;\n}\n.setting-cover[data-v-91d677f2] {\n    flex-direction: column;\n    justify-content: space-between;\n    width: 75px;\n    height: 95px;\n    padding: 3px;\n    margin-right: 10px;\n}\n.del-and-loop-wrapper[data-v-91d677f2]{\n    width: 100%;\n    padding: 0 0 10px 0;\n    justify-content: space-between;\n}\n.media-audio-name-wrapper[data-v-91d677f2] {\n    width: 70px;\n    text-align: center;\n}\n.audio-area[data-v-91d677f2] {\n    flex-direction: column;\n    margin: 15px 0 0 10px;\n}\n.all-audio-controll-wrapper[data-v-91d677f2] {\n    overflow-x: scroll;\n}\n.change-disp-audio[data-v-91d677f2] {\n    padding: 10px 12px 10px 8px;\n}\n.media-audio-num[data-v-91d677f2] {\n    font-size: 13px;    \n    color: lightgray;\n}\n.loop-icon[data-v-91d677f2] {\n    left: 22px;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23246,7 +23363,7 @@ var render = function () {
                   _c(
                     "div",
                     {
-                      staticClass: "audio-setting-wrapper",
+                      staticClass: "setting-disp-wrapper",
                       on: {
                         click: function ($event) {
                           $event.stopPropagation()
@@ -23263,15 +23380,24 @@ var render = function () {
                           staticClass: "setting-disp-trigger",
                           on: {
                             click: function ($event) {
-                              return _vm.toggleSetting(index)
+                              return _vm.toggleAudioSetting(index)
                             },
                           },
                         },
-                        [_c("i", { staticClass: "fas fa-cog fa-lg" })]
+                        [_c("i", { staticClass: "setting-icon fas fa-cog" })]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "audio-settings" }, [
-                        _c("div", { staticClass: "del-and-loop-wrapper" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "setting-disp-trigger",
+                          on: {
+                            click: function ($event) {
+                              return _vm.togglePanningSetting(index)
+                            },
+                          },
+                        },
+                        [
                           _c("i", {
                             directives: [
                               {
@@ -23281,64 +23407,169 @@ var render = function () {
                                 expression: "isEditMode",
                               },
                             ],
-                            staticClass:
-                              "media-audio-delete-icon audio-setting fas fa-trash fa-lg",
-                            on: {
-                              click: function ($event) {
-                                return _vm.taskWhenAudioDelete(index)
-                              },
-                            },
+                            staticClass: "setting-icon fas fa-headphones-alt",
                           }),
-                          _vm._v(" "),
-                          _c("i", {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.isEditMode,
-                                expression: "isEditMode",
-                              },
-                            ],
-                            staticClass:
-                              "loop-setting-icon audio-setting fas fa-undo-alt fa-lg",
-                            class: { isLoop: mediaAudio["isLoop"] },
-                            on: {
-                              click: function ($event) {
-                                return _vm.updateLoopSetting(index)
-                              },
-                            },
-                          }),
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "audio-vol-wrapper audio-setting" },
-                          [
+                        ]
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "setting-wrapper audio-setting-wrapper",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        touchstart: function ($event) {
+                          $event.stopPropagation()
+                        },
+                      },
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "audio-settings setting-cover" },
+                        [
+                          _c("div", { staticClass: "del-and-loop-wrapper" }, [
                             _c("i", {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.isEditMode,
+                                  expression: "isEditMode",
+                                },
+                              ],
                               staticClass:
-                                "media-audio-vol-icon fas fa-volume-off fa-2x",
+                                "media-audio-delete-icon setting-icon fas fa-trash",
+                              on: {
+                                click: function ($event) {
+                                  return _vm.taskWhenAudioDelete(index)
+                                },
+                              },
                             }),
                             _vm._v(" "),
-                            _c("div", { staticClass: "vol-bar-wrapper" }, [
-                              _c("input", {
-                                staticClass: "audio-vol-range",
-                                attrs: {
-                                  type: "range",
-                                  id: index,
-                                  min: "0",
-                                  max: "1",
-                                  step: "0.01",
+                            _c("i", {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: _vm.isEditMode,
+                                  expression: "isEditMode",
                                 },
-                                on: {
-                                  input: function ($event) {
-                                    return _vm.updateAudioVol(index, $event)
-                                  },
+                              ],
+                              staticClass:
+                                "loop-setting-icon setting-icon fas fa-undo-alt",
+                              class: { isLoop: mediaAudio["isLoop"] },
+                              on: {
+                                click: function ($event) {
+                                  return _vm.updateLoopSetting(index)
                                 },
+                              },
+                            }),
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "audio-vol-wrapper audio-setting" },
+                            [
+                              _c("i", {
+                                staticClass:
+                                  "media-audio-vol-icon fas fa-volume-off fa-2x",
                               }),
-                            ]),
-                          ]
-                        ),
-                      ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "vol-bar-wrapper" }, [
+                                _c("input", {
+                                  staticClass: "audio-vol-range",
+                                  attrs: {
+                                    type: "range",
+                                    id: index,
+                                    min: "0",
+                                    max: "1",
+                                    step: "0.01",
+                                  },
+                                  on: {
+                                    input: function ($event) {
+                                      return _vm.updateAudioVol(index, $event)
+                                    },
+                                  },
+                                }),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "setting-wrapper panning-setting-wrapper",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                        },
+                        touchstart: function ($event) {
+                          $event.stopPropagation()
+                        },
+                      },
+                    },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "panning-settings setting-cover",
+                          on: {
+                            click: function ($event) {
+                              return _vm.switchPanning(index)
+                            },
+                          },
+                        },
+                        [
+                          _c("span", { staticClass: "panning-label" }, [
+                            _vm._v("立体音響"),
+                          ]),
+                          _c("i", {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isEditMode,
+                                expression: "isEditMode",
+                              },
+                            ],
+                            staticClass: "setting-icon fas fa-rss",
+                            class: { "panning-on": mediaAudio["panningFlag"] },
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              attrs: { id: "select-panning-model" },
+                              on: {
+                                input: function ($event) {
+                                  return _vm.changePanningModel(
+                                    index,
+                                    $event.target.value
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("option", { attrs: { value: "HRTF" } }, [
+                                _vm._v("Type:A"),
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "equalpower" } }, [
+                                _vm._v("Type:B"),
+                              ]),
+                            ]
+                          ),
+                        ]
+                      ),
                     ]
                   ),
                 ]

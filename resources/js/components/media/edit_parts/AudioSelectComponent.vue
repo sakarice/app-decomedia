@@ -265,6 +265,8 @@ export default {
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
       // audio['isPlay'] = false;
+      audio['panningFlag'] = false,
+      audio['panningModel'] ="HRTF",
       audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5;
