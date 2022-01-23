@@ -38,7 +38,21 @@
       },
       panningModel : function(){
         return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
-      }
+      },
+      panner_x : function(){
+        if(this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX']){
+          return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX'];
+        } else {
+          return 0;
+        }
+      },
+      panner_y : function(){
+        if(this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY']){
+          return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY'];
+        } else {
+          return 0;
+        }
+      },
     },
     methods : {
       play(){ this.player.play(); },
@@ -64,9 +78,12 @@
       setUpPanner(ctx){
         const pannerOptions = {panningModel:"HRTF"};
         const panner = new PannerNode(ctx, pannerOptions);
-        panner.positionX.value = 0.1;
+        panner.positionX.value = this.panner_x;
+        panner.positionY.value = this.panner_y;
         this.panner = panner;
       },
+      updatePannerPositionX(){ this.panner.positionX.value = this.panner_x;},
+      updatePannerPositionY(){ this.panner.positionY.value = this.panner_y;},
       panningOn(){
         console.log('panning on');
         this.inputNode.disconnect();
@@ -125,6 +142,8 @@
       panningModel : function(val){
         this.panner.panningModel = val;
       },
+      panner_x : function(){ this.updatePannerPositionX();},
+      panner_y : function(){ this.updatePannerPositionY();},
     },
 
   }

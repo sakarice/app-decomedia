@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.in-flex {
+  display: inline-flex;
+}
+
 
 /* flex方向 */
 .column {

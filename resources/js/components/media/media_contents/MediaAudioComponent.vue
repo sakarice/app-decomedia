@@ -25,6 +25,7 @@
             :mediaAudioIndex="index"
             :ref="'mediaAudioPlayer'">'
             </media-audio-player-component>
+            <span class="audio-index">{{index+1}}</span>
           </div>
           <!-- オーディオ名 -->
           <div v-if="mediaAudio" class="media-audio-name-wrapper">
@@ -67,8 +68,9 @@
 
           <!-- 立体音響の設定 -->
           <div class="setting-wrapper panning-setting-wrapper" @click.stop @touchstart.stop>
-            <div class="panning-settings setting-cover" @click="switchPanning(index)">
-              <span class="panning-label">立体音響</span><i class="setting-icon fas fa-rss"
+            <div class="panning-settings setting-cover">
+              <span class="panning-label">立体音響</span>
+              <i class="setting-icon fas fa-rss" @click="switchPanning(index)"
                v-show="isEditMode" :class="{'panning-on':mediaAudio['panningFlag']}"></i>
                <select id="select-panning-model" @input="changePanningModel(index, $event.target.value)">
                  <option value="HRTF">Type:A</option>
@@ -87,18 +89,29 @@
 
       <!-- オーディオ再生・停止 -->
     <div v-show="isEditMode" class="all-audio-controll-wrapper">
+      <!-- 全オーディオ再生開始 -->
       <div class="all-audio-controller all-audio-play-wrapper" @click="playAllAudio">
         <div class="size-Adjust-box">
           <i id="play-all-icon" class="fas fa-caret-right fa-3x"></i>
         </div>
       </div>
-
+      <!-- 全オーディオ停止 -->
       <div class="all-audio-controller all-audio-finish-wrapper" @click="finishAllAudio">
         <div class="size-Adjust-box">
           <i id="finish-all-icon" class="fas fa-pause fa-2x"></i>
         </div>
       </div>
+      <!-- 立体音響定位の設定画面を表示 -->
+      <div class="all-audio-controller disp-panning-setting-wrapper" @click="dispSterePhonicArrangeField">
+        <div class="size-Adjust-box">
+          <i id="disp-panning-setting-icon" class="fas fa-headphones-alt fa-2x"></i>
+        </div>
+      </div>
     </div>
+
+
+    <!-- <stereo-phonic-arrange v-show="isShowSterePhonicArrangeField">
+    </stereo-phonic-arrange> -->
 
 
   </div>
@@ -110,10 +123,12 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import MediaAudioPlayer from './MediaAudioPlayerComponent.vue';
+  import StereoPhonicArrange from './StereoPhonicArrangeComponent.vue';
 
   export default {
     components: {
       MediaAudioPlayer,
+      StereoPhonicArrange,
     },
     props : [
       'maxAudioNum',
@@ -126,6 +141,7 @@
         longestAudioDuration : 0,
         isShowAudioSettings : [false,false,false,false,false,],
         isShowPanningSettings : [false,false,false,false,false,],
+        isShowSterePhonicArrangeField : false,
       }
     },
     computed : {
@@ -212,6 +228,11 @@
         if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.finish()} ) 
         }
+      },
+      dispSterePhonicArrangeField(){
+        // this.isShowSterePhonicArrangeField = !this.isShowSterePhonicArrangeField;
+        const event = new CustomEvent('changeDispStereoPhonicArrangeField');
+        document.body.dispatchEvent(event);
       },
       setMediaAudioDuration(index, duration){
         this.updateMediaAudiosObjectItem({index:index, key:'duration', value:duration});
@@ -305,6 +326,7 @@
     height: 33px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .size-Adjust-box:hover{
     opacity: 1;
@@ -333,11 +355,17 @@
   }
   #finish-all-icon {
     color: lightgrey;
-    margin-top: 5px;
   }
   #finish-all-icon:hover {
     cursor: pointer;
   }
+  #disp-panning-setting-icon {
+    color:rgba(173,255,47,0.8);
+  }
+  #disp-panning-setting-icon {
+    cursor: pointer;
+  }
+  
 
   /* audio */
   #media-audio-wrapper {
@@ -417,6 +445,7 @@
     position: relative;
     opacity: 0.7;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -574,6 +603,11 @@
   .panning-on {
     color: greenyellow;
     z-index : 2;
+  }
+
+  .audio-index{
+    position: absolute;
+    color: rgba(255,255,255,0.8);
   }
 
   .white { color: white;}

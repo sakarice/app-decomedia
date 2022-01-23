@@ -50,17 +50,8 @@
             </li>
           </ul>
 
-          <!-- ★★★後で消す）corsデバッグ用 -->
-          <!-- <audio src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/public/audio/media/MeTjSnyBIV8BRtd4wqia6UcvAvQeKC8weyHdB6BZ.mp3"
-          controls="true" id="audio-cors"
-          crossorigin="anonymous">
-          </audio> -->
-
-          <input id="panner-controller" type="range" min="-1" max="1" step="0.01" value="0">
-
           <!-- オーディオのリスト表示 -->
           <ul id="audio-thumbnail-wrapper">
-
             <!-- uploads -->
             <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
@@ -136,7 +127,6 @@ export default {
       isPlay : false,
       // userOwnAudioThumbnailUrls : [],
       // defaultAudioThumbnailUrls : []
-      pannerController : "",
     }
   },
   methods : {
@@ -267,6 +257,8 @@ export default {
       // audio['isPlay'] = false;
       audio['panningFlag'] = false,
       audio['panningModel'] ="HRTF",
+      audio['pannerPositionX'] = 0,
+      audio['pannerPositionY'] = 0,
       audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5;
@@ -374,15 +366,7 @@ export default {
     },
     setAudioCtx(){
       const AudioContext = window.AudioContext || window.webkitAudioContext;
-      // this.ctx = new AudioContext();
       return new AudioContext();
-    },
-    createPannerNode(){
-    // ●panner 
-      const pannerOptions = {panningModel:"HRTF"};
-      const panner = new PannerNode(this.ctxs[0], pannerOptions);
-      panner.positionX.value = 1;
-      return panner;
     },
     setUpWebAudio(){
       this.ctxs.forEach((ctx)=>{
@@ -392,11 +376,10 @@ export default {
       this.audioInputNodes.length = 0;
 
       this.ctxs.push(this.setAudioCtx());
-      const panner = this.createPannerNode();
       this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
 
       for(let i=0; i<this.ctxs.length; i++){
-        this.audioInputNodes[i].connect(panner).connect(this.ctxs[i].destination);
+        this.audioInputNodes[i].connect(this.ctxs[i].destination);
       }
 
       if(this.isPlay==true){
@@ -414,16 +397,6 @@ export default {
   mounted(){
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
-
-    // イベントのコールバック内でthisを使えるようにthisを別名でコピー
-    const tmpThis = this;
-
-    this.pannerController = document.getElementById('panner-controller');
-    this.pannerController.addEventListener('input', function(){
-      tmpThis.panner.positionX.value = this.value;
-    },false)
-
-
   },
 
 }
