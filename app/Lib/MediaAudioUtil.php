@@ -107,12 +107,15 @@ class MediaAudioUtil
     if($audioNumDiff > 0){
       // 足りない分だけ空のレコードを追加
       for($i=0; $i<$audioNumDiff; $i++){
-        MediaAudioUtil::addEmptyMediaAudioData($media_id);
+        $stored_media_audio_id = MediaAudioUtil::addEmptyMediaAudioData($media_id)['id'];
+        StereoPhonicArrangeUtil::addEmptyStereoPhonicArrangeData($stored_media_audio_id);
       }
     } else if($audioNumDiff < 0){
       // 多い分だけレコードを削除
       for($i=0; $i<abs($audioNumDiff); $i++){
+        $del_media_audio_id = MediaAudio::where('media_id', $media_id)->orderBy('id', 'desc')->first()->id;
         MediaAudio::where('media_id', $media_id)->orderBy('id', 'desc')->first()->delete();
+        StereoPhonicArrange::where('media_audio_id', $del_media_audio_id)->orderBy('id', 'desc')->first()->delete();
       }
     }
   }
@@ -141,6 +144,8 @@ class MediaAudioUtil
           $mediaAudios[$index]->owner_user_id = Auth::user()->id;
         }
         $mediaAudios[$index]->save();
+        $media_audio_id = $mediaAudios[$index]['id'];
+        StereoPhonicArrangeUtil::updateStereoPhonicArrangeData($media_audio_id, $req_media_audio);
       }
     } else { // セットされていなかった場合
       $requestAudioNum = 0;
@@ -154,14 +159,25 @@ class MediaAudioUtil
   // 空のAudioレコードを作成する。
   public static function addEmptyMediaAudioData($media_id){
       $mediaAudio = new MediaAudio();
-      $mediaAudio->media_id = $media_id;
-      $mediaAudio->audio_type = 0;
-      $mediaAudio->audio_id = 0;
-      $mediaAudio->order_seq = -1;
-      $mediaAudio->volume = 1;
-      $mediaAudio->isLoop = false;
-      $mediaAudio->owner_user_id = Auth::user()->id;
-      $mediaAudio->save();
+      // $mediaAudio->media_id = $media_id;
+      // $mediaAudio->audio_type = 0;
+      // $mediaAudio->audio_id = 0;
+      // $mediaAudio->order_seq = -1;
+      // $mediaAudio->volume = 1;
+      // $mediaAudio->isLoop = false;
+      // $mediaAudio->owner_user_id = Auth::user()->id;
+      // $mediaAudio->save();
+      $create_items = array();
+      $create_items['media_id'] = $media_id;
+      $create_items['audio_type'] = 0;
+      $create_items['audio_id'] = 0;
+      $create_items['order_seq'] = -1;
+      $create_items['volume'] = 1;
+      $create_items['isLoop'] = false;
+      $create_items['owner_user_id'] = Auth::user()->id;
+
+      $just_stored_data = $mediaAudio->create($create_items);
+      return $just_stored_data;
   }
 
 

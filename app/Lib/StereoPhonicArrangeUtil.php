@@ -35,8 +35,6 @@ class StereoPhonicArrangeUtil
   // 3.store // Media画像情報をDBに保存
   public static function saveStereoPhonicArrangeData($media_audio_id, $req_media_audio_data){
     $data = $req_media_audio_data;
-    \Log::info($media_audio_id);
-    \Log::info($data);
     $model = new StereoPhonicArrange();
     $create_items = array();
     $create_items['media_audio_id'] = $media_audio_id;
@@ -44,9 +42,31 @@ class StereoPhonicArrangeUtil
       $create_items[$column] = $data[$property];
     }
     $create_items['panningFlag'] = 1;
-
-    \Log::info($create_items);
     $just_stored_data = $model->create($create_items);
   }
+
+  public static function updateStereoPhonicArrangeData($media_audio_id, $req_media_audio_data){
+    $model = StereoPhonicArrange::where('media_audio_id', $media_audio_id)->first();
+    foreach(self::$COLUMN_AND_PROPERTY_LIST as $column => $property){
+      $model->$column = $req_media_audio_data[$property];
+    }
+    $model->save();
+  }
+
+  // 空のAudioレコードを作成する。
+  public static function addEmptyStereoPhonicArrangeData($media_audio_id){
+    $model = new StereoPhonicArrange();
+    $create_items = array();
+    $create_items['media_audio_id'] = $media_audio_id;
+    $create_items['panningFlag'] = 0;
+    $create_items['panningModel'] = "equalpower";
+    $create_items['positionX'] = 0;
+    $create_items['positionY'] = 0;
+    $create_items['positionZ'] = 0;
+
+    $just_stored_data = $model->create($create_items);
+    return $just_stored_data;
+}
+
 
 }
