@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Models\Media;
 use App\Models\MediaAudio;
+use App\Models\StereoPhonicArrange;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
@@ -58,6 +59,12 @@ class MediaAudioUtilTest extends TestCase
                 'type' => $i,
                 'volume' => 1,
                 'isLoop' => true,
+                'panningFlag' => 0,
+                'panningModel' => 'equalpower',
+                'positionX' => 0,
+                'positionY' => 0,
+                'positionZ' => 0,
+            
             );
             switch ($i) {
                 case 1:
@@ -105,7 +112,9 @@ class MediaAudioUtilTest extends TestCase
 
         $sample_media_audio_datas = array();
         $sample_media_audio_datas[] = MediaAudio::factory()->default()->create();
+        StereoPhonicArrange::factory()->create();
         $sample_media_audio_datas[] = MediaAudio::factory()->userown()->create(['order_seq'=>2]);
+        StereoPhonicArrange::factory()->create();
         $media_id = $sample_media_audio_datas[0]->media_id;
         $media_audio_datas = MediaAudioUtil::getMediaAudioData($media_id);
 
@@ -127,7 +136,9 @@ class MediaAudioUtilTest extends TestCase
         PublicAudio::factory()->create();
         UserOwnAudio::factory()->create();
         MediaAudio::factory()->default()->create();
+        StereoPhonicArrange::factory()->create();
         MediaAudio::factory()->userown()->create(['order_seq'=>2]);
+        StereoPhonicArrange::factory()->create();
         $media_id = MediaAudio::max('media_id');
 
         // パターン1:mediaAudioが減る場合(2つ⇒1つ)
@@ -148,7 +159,9 @@ class MediaAudioUtilTest extends TestCase
         PublicAudio::factory()->create();
         UserOwnAudio::factory()->create();
         MediaAudio::factory()->default()->create();
+        StereoPhonicArrange::factory()->create();
         MediaAudio::factory()->userown()->create(['order_seq'=>2]);
+        StereoPhonicArrange::factory()->create();
         $media_id = MediaAudio::max('media_id');
 
         // パターン1:requestのmediaAudioが更新前より少ない(更新前:2つ 更新後:1つ)
