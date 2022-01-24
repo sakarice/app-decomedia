@@ -171,6 +171,11 @@ class MediaAudioUtilTest extends TestCase
             'volume' => 0.1,
             'isLoop' => false,
             'audio_url' => PublicAudio::latest()->first()->audio_url,
+            'panningFlag' => 0,
+            'panningModel' => 'equalpower',
+            'positionX' => 0,
+            'positionY' => 0,
+            'positionZ' => 0,
         );
         $media_audio_datas[] = $tmp_media_audio;        
         $request1 = new \stdClass(); //key:value形式のリクエスト
@@ -242,7 +247,6 @@ class MediaAudioUtilTest extends TestCase
             'order_seq' => -1,
             'volume' => 1,
             'isLoop' => false,
-            'owner_user_id' => $this->user->id,
         ]);
     }
 
