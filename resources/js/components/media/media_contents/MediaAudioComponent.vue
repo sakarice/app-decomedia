@@ -25,6 +25,7 @@
             :mediaAudioIndex="index"
             :ref="'mediaAudioPlayer'">'
             </media-audio-player-component>
+            <span class="audio-index">{{index+1}}</span>
           </div>
           <!-- オーディオ名 -->
           <div v-if="mediaAudio" class="media-audio-name-wrapper">
@@ -33,19 +34,27 @@
             </span>
           </div>
 
-          <!-- オーディオの設定(ボリューム、ループ、削除) -->
-          <div class="audio-setting-wrapper" @click.stop @touchstart.stop>
-            <!-- 設定表示切替用アイコン -->
-            <div class="setting-disp-trigger" @click="toggleSetting(index)">
-              <i class="fas fa-cog fa-lg"></i>
+          
+          <!-- 設定表示切替用アイコン -->
+          <div class="setting-disp-wrapper" @click.stop @touchstart.stop>
+            <!-- 音量、ループ、削除の設定 -->
+            <div class="setting-disp-trigger" @click="toggleAudioSetting(index)">
+              <i class="setting-icon fas fa-cog"></i>
             </div>
+            <!-- 立体音響の設定 -->
+            <div class="setting-disp-trigger" @click="togglePanningSetting(index)">
+              <i class="setting-icon fas fa-headphones-alt" v-show="isEditMode"></i>
+            </div>
+          </div>
 
-            <div class="audio-settings">
+          <!-- オーディオの設定(ボリューム、ループ、削除) -->
+          <div class="setting-wrapper audio-setting-wrapper" @click.stop @touchstart.stop>
+            <div class="audio-settings setting-cover">
               <div class="del-and-loop-wrapper">
                 <!-- 削除 -->
-                <i class="media-audio-delete-icon audio-setting fas fa-trash fa-lg" @click="taskWhenAudioDelete(index)" v-show="isEditMode"></i>
+                <i class="media-audio-delete-icon setting-icon fas fa-trash" @click="taskWhenAudioDelete(index)" v-show="isEditMode"></i>
                 <!-- ループ -->
-                <i class="loop-setting-icon audio-setting fas fa-undo-alt fa-lg" @click="updateLoopSetting(index)" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
+                <i class="loop-setting-icon setting-icon fas fa-undo-alt" @click="updateLoopSetting(index)" v-show="isEditMode" :class="{'isLoop' : mediaAudio['isLoop']}"></i>
               </div>
               <!-- ボリューム -->
               <div class="audio-vol-wrapper audio-setting">
@@ -57,8 +66,21 @@
             </div>
           </div>
 
+          <!-- 立体音響の設定 -->
+          <div class="setting-wrapper panning-setting-wrapper" @click.stop @touchstart.stop>
+            <div class="panning-settings setting-cover">
+              <span class="panning-label">立体音響</span>
+              <i class="setting-icon fas fa-rss" @click="switchPanning(index)"
+               v-show="isEditMode" :class="{'panning-on':mediaAudio['panningFlag']}"></i>
+               <select id="select-panning-model" @input="changePanningModel(index, $event.target.value)">
+                 <option value="HRTF">Type:A</option>
+                 <option value="equalpower">Type:B</option>
+               </select>
+            </div>
+          </div>
 
         </li>
+
         <li class="audio-area non-audio-frame" v-for="n in 5-(mediaAudioNum)" :key="5-n">
           <div class="dummy-audio-icon"></div>
         </li>
@@ -67,18 +89,29 @@
 
       <!-- オーディオ再生・停止 -->
     <div v-show="isEditMode" class="all-audio-controll-wrapper">
+      <!-- 全オーディオ再生開始 -->
       <div class="all-audio-controller all-audio-play-wrapper" @click="playAllAudio">
         <div class="size-Adjust-box">
           <i id="play-all-icon" class="fas fa-caret-right fa-3x"></i>
         </div>
       </div>
-
+      <!-- 全オーディオ停止 -->
       <div class="all-audio-controller all-audio-finish-wrapper" @click="finishAllAudio">
         <div class="size-Adjust-box">
           <i id="finish-all-icon" class="fas fa-pause fa-2x"></i>
         </div>
       </div>
+      <!-- 立体音響定位の設定画面を表示 -->
+      <div class="all-audio-controller disp-panning-setting-wrapper" @click="dispSterePhonicArrangeField">
+        <div class="size-Adjust-box">
+          <i id="disp-panning-setting-icon" class="fas fa-headphones-alt fa-2x"></i>
+        </div>
+      </div>
     </div>
+
+
+    <!-- <stereo-phonic-arrange v-show="isShowSterePhonicArrangeField">
+    </stereo-phonic-arrange> -->
 
 
   </div>
@@ -90,10 +123,12 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import MediaAudioPlayer from './MediaAudioPlayerComponent.vue';
+  import StereoPhonicArrange from './StereoPhonicArrangeComponent.vue';
 
   export default {
     components: {
       MediaAudioPlayer,
+      StereoPhonicArrange,
     },
     props : [
       'maxAudioNum',
@@ -102,18 +137,24 @@
     data : () => {
       return {
         isShowAudio : false,
-        isEditMode : false,
+        // isEditMode : false,
         longestAudioDuration : 0,
-        isShowSettings : [false,false,false,false,false,],
+        isShowAudioSettings : [false,false,false,false,false,],
+        isShowPanningSettings : [false,false,false,false,false,],
+        isShowSterePhonicArrangeField : false,
       }
     },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       mediaAudioNum : function(){
         return this.getMediaAudios.length;
-      }
+      },
+      isEditMode:function(){
+        return (this.getMode==1 || this.getMode==2) ? true : false;
+      },
     },
     methods : {
       ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
@@ -145,20 +186,43 @@
       hideAudio(){ this.isShowAudio = false; },
       hideSetting(){
         const audio_settings = document.getElementsByClassName('audio-settings');
-        console.log(audio_settings.length);
+        const panning_settings = document.getElementsByClassName('panning-settings');
         for(let i=0; i<audio_settings.length; i++){
           audio_settings[i].style.display = "none";
-          this.isShowSettings[i] = false;
+          panning_settings[i].style.display = "none";
+          this.isShowAudioSettings[i] = false;
+          this.isShowPanningSettings[i] = false;
         }
       },
-      toggleSetting(index){
+      hideAudiogSetting(index){
         const audio_settings = document.getElementsByClassName('audio-settings');
-        const val = this.isShowSettings[index];
+        audio_settings[index].style.display = "none";
+        this.isShowAudioSettings[index] = false;
+      },
+      hidePanningSetting(index){
+        const panning_settings = document.getElementsByClassName('panning-settings');
+        panning_settings[index].style.display = "none";
+        this.isShowPanningSettings[index] = false;
+      },
+      toggleAudioSetting(index){
+        const audio_settings = document.getElementsByClassName('audio-settings');
+        const val = this.isShowAudioSettings[index];
         audio_settings[index].style.display = val ? "none" : "flex";
-        this.isShowSettings[index] = !val;
+        this.isShowAudioSettings[index] = !val;
+        if(this.isShowAudioSettings[index]){ this.hidePanningSetting(index);}
+      },
+      togglePanningSetting(index){
+        const panning_settings = document.getElementsByClassName('panning-settings');
+        const val = this.isShowPanningSettings[index];
+        panning_settings[index].style.display = val ? "none" : "flex";
+        this.isShowPanningSettings[index] = !val;
+        if(this.isShowPanningSettings[index]){ this.hideAudiogSetting(index);}
+      },
+      changePanningModel(index,value){
+        this.updateMediaAudiosObjectItem({index:index, key:'panningModel', value:value});
       },
       // 親コンポーネントから実行される
-      validEditMode(){ this.isEditMode = true; },
+      // validEditMode(){ this.isEditMode = true; },
       playAllAudio(){ 
         if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.play()} ) 
@@ -168,6 +232,11 @@
         if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.finish()} ) 
         }
+      },
+      dispSterePhonicArrangeField(){
+        // this.isShowSterePhonicArrangeField = !this.isShowSterePhonicArrangeField;
+        const event = new CustomEvent('changeDispStereoPhonicArrangeField');
+        document.body.dispatchEvent(event);
       },
       setMediaAudioDuration(index, duration){
         this.updateMediaAudiosObjectItem({index:index, key:'duration', value:duration});
@@ -191,12 +260,10 @@
         if(duration >= this.longestAudioDuration){
           this.updateLongestDuration(duration);
         }
-        // this.isShowSettings.push(false);
       },
       // ※オーディオ削除含め、削除時に必要な処理をまとめた関数。(↑のtask～addedと違い、delete処理も含まれる)
       taskWhenAudioDelete(index){
         const duration = this.getMediaAudios[index]['duration']; // ！オーディオ削除前に再生時間を取得しておく
-        // this.isShowSettings.splice(index,1);
         this.deleteAudio(index);
         if(duration >= this.longestAudioDuration){
           const newLongestDuration = this.searchLongestDuration();
@@ -210,6 +277,10 @@
       updateLoopSetting(index){
         const newLoopSetting = !(this.getMediaAudios[index]['isLoop']); // =現在のループ設定の逆
         this.updateMediaAudiosObjectItem({index:index, key:'isLoop', value:newLoopSetting});
+      },
+      switchPanning(index){
+        const newPanningSetting = !(this.getMediaAudios[index]['panningFlag']); // =現在のpanning設定の逆
+        this.updateMediaAudiosObjectItem({index:index, key:'panningFlag', value:newPanningSetting});
       },
       updateAudioVol(index,event){
         const audioVolume = event.target.value;
@@ -225,7 +296,6 @@
     },
     created(){
       document.body.addEventListener('changeDispAudioState', (e)=>{
-        console.log("changeDispAudioState:state->"+e.detail);
         this.isShowAudio = e.detail;
       })
     },
@@ -260,6 +330,7 @@
     height: 33px;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .size-Adjust-box:hover{
     opacity: 1;
@@ -288,11 +359,17 @@
   }
   #finish-all-icon {
     color: lightgrey;
-    margin-top: 5px;
   }
   #finish-all-icon:hover {
     cursor: pointer;
   }
+  #disp-panning-setting-icon {
+    color:rgba(173,255,47,0.8);
+  }
+  #disp-panning-setting-icon {
+    cursor: pointer;
+  }
+  
 
   /* audio */
   #media-audio-wrapper {
@@ -326,8 +403,9 @@
   }
 
   #media-audio-frame {
-    border-top-left-radius: 5px;
+    height: 100%;
     display: flex;
+    border-top-left-radius: 5px;
     flex-direction: column;
     justify-content: space-around;
   }
@@ -371,6 +449,7 @@
     position: relative;
     opacity: 0.7;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
@@ -386,12 +465,10 @@
     opacity: 0.7;
   }
 
-  .media-audio-delete-icon {
-    color:  rgba(220,50,50,0.8);
-  }
-
-  .loop-setting-icon {
+  .setting-icon {
     color: grey;
+    margin: 7px;
+    font-size: 17px;
   }
 
   .media-audio-vol-icon {
@@ -417,13 +494,20 @@
     font-size: 0.7rem;
   }
 
-  .audio-setting-wrapper {
+  .setting-disp-wrapper {
     z-index: 2;
     position: absolute;
     right: 0;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+  }
+
+  .setting-wrapper {
+    position: absolute;
+    right: 30px;
+    z-index: 3;
   }
 
   .setting-disp-trigger{
@@ -432,22 +516,37 @@
   }
 
   .audio-settings {
-    /* display: flex; */
     display: none;
+  }
+  .panning-settings {
+    display: none;
+    justify-content: space-around;
+  }
+
+  .panning-label {
+    color: grey;
+    font-size: 12px;
+  }
+
+  .setting-cover {
     align-items: center;
-    width: 140px;
+    width: 180px;
     padding: 2px 0 2px 2px;
     border-radius: 5px;
-    background-color: rgb(30,30,30);
+    background-color: rgba(60,70,100,0.9);
   }
+
   .audio-setting {
-    margin: 0 5px;
+    /* margin: 0 5px; */
+  }
+
+  .del-and-loop-wrapper{
+    display: flex;
+    align-items: center;
   }
 
 
   .audio-vol-wrapper {
-    /* position: absolute; */
-    margin-right: 5px;
     display: flex;
     align-items: center;
   }
@@ -505,6 +604,16 @@
     z-index: 2;
   }
 
+  .panning-on {
+    color: greenyellow;
+    z-index : 2;
+  }
+
+  .audio-index{
+    position: absolute;
+    color: rgba(255,255,255,0.8);
+  }
+
   .white { color: white;}
   .blue { color: blue;}
 
@@ -512,6 +621,7 @@
 @media screen and (min-width:481px) {
   #media-audio-wrapper{
     top: 70px;
+    bottom: 80px;
     right: 0;
   }
 
@@ -525,6 +635,7 @@
 
   .audio-vol-wrapper {
     right: 0;
+    margin: 0 5px;
   }
 
 }
@@ -537,29 +648,37 @@
   }
 
   #audios{
+    height: 110px;
     justify-content: flex-start;
     overflow-x:scroll;
     padding: 10px 25px 5px 25px;
   }
 
-  .audio-setting-wrapper {
+  .setting-wrapper {
     right: 10px;
     top: -20px;
     flex-direction: column;
     align-items: flex-end;
   }
-  .audio-settings {
+
+  .setting-disp-wrapper{
+    right: -5px;
+    top: -10px;
+  }
+
+  .setting-cover {
     flex-direction: column;
-    width: 90px;
-    padding: 0;
+    justify-content: space-between;
+    width: 75px;
+    height: 95px;
+    padding: 3px;
+    margin-right: 10px;
   }
 
   .del-and-loop-wrapper{
     width: 100%;
-    padding: 5px 0 10px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    padding: 0 0 10px 0;
+    justify-content: space-between;
   }
   
 
@@ -584,6 +703,10 @@
   .media-audio-num {
     font-size: 13px;    
     color: lightgray;
+  }
+
+  .loop-icon {
+    left: 22px;
   }
 
 }

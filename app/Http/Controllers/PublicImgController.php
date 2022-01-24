@@ -10,6 +10,8 @@ use App\Lib\StoreFileInS3;
 use App\Models\User;
 use App\Models\Media;
 use App\Models\PublicImg;
+use App\Models\PublicImgImgCategory;
+use App\Models\ImgCategory;
 
 class PublicImgController extends Controller
 {
@@ -24,6 +26,13 @@ class PublicImgController extends Controller
             $tmp_img_file_datas = array();
             $tmp_img_file_datas += array('id' => $public_img->id);
             $tmp_img_file_datas += array('url' => $public_img->img_url);
+            if(PublicImgImgCategory::where('img_id', $public_img->id)->exists()){
+                $img_category_id = PublicImgImgCategory::where('img_id', $public_img->id)->first()->category_id;
+                $img_category = ImgCategory::find($img_category_id)->category;
+            } else {
+                $img_category = "";
+            }
+            $tmp_img_file_datas += array('category' => $img_category);
             $img_file_datas[$index] = $tmp_img_file_datas;
         };
 

@@ -19,6 +19,9 @@
       return {
         player : "",
         isPlay : false,
+        ctx : "",
+        inputNode : "",
+        panner : "",
       }
     },
     computed : {
@@ -28,23 +31,37 @@
       },
       loopSetting : function(){
         return this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
-      }
+      },
+      panningFlag : function(){
+        return this.getMediaAudios[this.mediaAudioIndex]['panningFlag'];
+      },
+      panningModel : function(){
+        return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
+      },
+      panner_x : function(){
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionX']){
+          return this.getMediaAudios[this.mediaAudioIndex]['positionX'];
+        } else {
+          return 0;
+        }
+      },
+      panner_z : function(){
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionZ']){
+          return this.getMediaAudios[this.mediaAudioIndex]['positionZ'];
+        } else {
+          return 0;
+        }
+      },
     },
     methods : {
-      play(){ 
-        this.player.play(); 
-      },
-      pause(){ 
-        this.player.pause(); 
-        this.isPlay = false;
-      },
+      play(){ this.player.play(); },
+      pause(){ this.player.pause(); },
       finish(){ // 再生位置を終わりに設定して疑似的に再生終了を実現する
         this.player.currentTime = Math.floor(this.player.duration);
       },
       setPlayerInfo(){ // 親コンポーネントのmediaAudiosから再生情報を取得
-          // this.player.src = this.getMediaAudios[this.mediaAudioIndex]['audio_url'];
-          this.player.volume = this.getMediaAudios[this.mediaAudioIndex]['volume'];
-          this.player.loop = this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
+        this.player.volume = this.getMediaAudios[this.mediaAudioIndex]['volume'];
+        this.player.loop = this.getMediaAudios[this.mediaAudioIndex]['isLoop'];
       },
       updateAudioThumbnail(){},
       updateLoopSetting(loopSetting){ this.player.loop = loopSetting},
@@ -52,11 +69,56 @@
       onPlayingAudio(){this.isPlay = true; },
       onNotPlayingAudio(){this.isPlay = false; },
       onFinishAudio(){if(this.player.loop==false){this.onNotPlayingAudio()}},
+      setUpAudioContext(){
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioContext();
+        this.ctx = ctx;
+      },
+      setUpPanner(ctx){
+        const pannerOptions = {panningModel:"HRTF"};
+        const panner = new PannerNode(ctx, pannerOptions);
+        panner.positionX.value = this.panner_x;
+        panner.positionZ.value = this.panner_z;
+        this.panner = panner;
+      },
+      updatePannerPositionX(){ this.panner.positionX.value = this.panner_x;},
+      updatePannerPositionZ(){ this.panner.positionZ.value = this.panner_z;},
+      panningSwitch(){
+        if(this.panningFlag){
+          this.panningOn();
+        } else {
+          this.panningOff();
+        }
+      },
+      panningOn(){
+        console.log('panning on');
+        this.inputNode.disconnect();
+        this.inputNode.connect(this.panner).connect(this.ctx.destination);
+      },
+      panningOff(){
+        console.log('panning off');
+        this.inputNode.disconnect();
+        this.inputNode.connect(this.ctx.destination);
+      },
     },
     created : function(){
+      // Web Audio APIの準備
+      this.setUpAudioContext();
+      this.setUpPanner(this.ctx);
+
       let tmpThis = this;
       const setAudioData = new Promise((resolve,reject)=>{
         tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
+        tmpThis.player.crossOrigin = "anonymous";
+        tmpThis.player.onloadstart = function(){
+          tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
+          console.log('onload start');
+          if(tmpThis.panningFlag){
+            tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
+          } else {
+            tmpThis.inputNode.connect(tmpThis.ctx.destination);
+          }
+        }
         tmpThis.setPlayerInfo();
         resolve();
       });
@@ -68,7 +130,6 @@
         tmpThis.player.addEventListener('playing',()=>{ tmpThis.onPlayingAudio() });
         tmpThis.player.addEventListener('pause',()=>{ tmpThis.onNotPlayingAudio() });
         tmpThis.player.addEventListener('ended',()=>{ tmpThis.onFinishAudio()});
-
       })
 
     },
@@ -76,7 +137,16 @@
     watch : {
       loopSetting : function(val){
         this.updateLoopSetting(val);
-      }
+      },
+      panningFlag : function(val){
+        console.log('panning flag changed, value:'+val);
+        this.panningSwitch();
+      },
+      panningModel : function(val){
+        this.panner.panningModel = val;
+      },
+      panner_x : function(){ this.updatePannerPositionX();},
+      panner_z : function(){ this.updatePannerPositionZ();},
     },
 
   }

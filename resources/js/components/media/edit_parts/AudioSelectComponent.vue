@@ -38,9 +38,20 @@
             </div>
           </div>
 
+          <!-- オーディオのカテゴリ -->
+          <ul class="audio-category-wrapper">
+            <li @click="changeAudioCategory('all')"
+            class="audio-category" :class="{'active-audio-category':selectedAudioCategory=='all'}">
+              <span>all</span>
+            </li>
+            <li @click="changeAudioCategory(category)" v-for="category in audioCategory" :key="category.id"
+            class="audio-category" :class="{'active-audio-category':(category==selectedAudioCategory)}">
+              <span>{{category}}</span>
+            </li>
+          </ul>
+
           <!-- オーディオのリスト表示 -->
           <ul id="audio-thumbnail-wrapper">
-
             <!-- uploads -->
             <li v-show="!(isDefault)" :id="index" class="audio-list" v-for="(userOwnAudio, index) in userOwnAudios" :key="userOwnAudio.id">
               <img class="audio-thumbnail" :src="userOwnAudio['thumbnail_url']" :alt="userOwnAudio['thumbnail_url']">
@@ -57,7 +68,8 @@
             </li>
 
             <!-- default -->
-            <li v-show="isDefault" class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id">
+            <li class="audio-list" v-for="(defaultAudio, index) in defaultAudios" :key="defaultAudio.id"
+            v-show="isDefault && (defaultAudio['category']==selectedAudioCategory || selectedAudioCategory=='all')">
               <img class="audio-thumbnail" :src="defaultAudio['thumbnail_url']" :alt="defaultAudio['thumbnail_url']">
               <span class="audio-name" :class="{'now-play' : defaultAudio['isPlay']}" v-on:click="addAudioToMedia('default', index)">
                 {{defaultAudio['name']}}
@@ -82,7 +94,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 
@@ -96,6 +108,8 @@ export default {
     return {
       popMessage : 'メッセージです',
       isDefault : true,
+      audioCategory : [],
+      selectedAudioCategory : "all",
       fileCategory : "default",
       isDragEnter : false,
       uploadFile : "",
@@ -104,6 +118,9 @@ export default {
       userOwnAudios : [],   // thumbnail_url, audio-name
       defaultAudios : [],
       audioPlayer : new Audio(),
+      ctxs : [],
+      audioInputNodes : [],
+      panner : "",
       playAudioType : "",
       playAudioIndex : -1,
       playAudioUrl : "",
@@ -111,6 +128,9 @@ export default {
       // userOwnAudioThumbnailUrls : [],
       // defaultAudioThumbnailUrls : []
     }
+  },
+  computed : {
+    ...mapGetters('stereoPhonicArrangeDefault', ['getStereoPhonicArrangeDefault']),
   },
   methods : {
     ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
@@ -148,6 +168,18 @@ export default {
           alert('オーディオ取得失敗');
         })
     },
+    getAudioCategory(){
+      const url = '/audioCategory';
+      axios.get(url)
+      .then(res=>{
+        res.data.category.forEach(category=>{
+          this.audioCategory.push(category);
+        })
+      })
+    },
+    changeAudioCategory(category){
+      this.selectedAudioCategory = category;
+    },
     playAudio : function(type, index){
       // 選択したオーディオを再生
       let playTargetAudio;
@@ -157,10 +189,14 @@ export default {
         playTargetAudio = this.defaultAudios[index];
       }
 
-      this.audioPlayer.src = playTargetAudio['audio_url'];
-      this.audioPlayer.play();
       this.isPlay = true;
       playTargetAudio['isPlay'] = true;
+
+      // audioエレメントを初期化
+      this.audioPlayer = new Audio(playTargetAudio['audio_url']);
+      // クロスオリジン設定をリクエストヘッダにを付与
+      this.audioPlayer.crossOrigin = "anonymous";
+      this.audioPlayer.onloadstart = this.setUpWebAudio();
 
       // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
       let stopTargetAudio;
@@ -176,7 +212,6 @@ export default {
       // 再生中のオーディオ種別とインデックスを更新
       this.playAudioType = type;
       this.playAudioIndex = index;
-
     },
 
     finishAudio: function(event){
@@ -217,17 +252,18 @@ export default {
 
       // 新しい連想配列を用意
       let audio = {};
-      // audio['id'] = tmpAudio['id'];
       audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
-      // audio['isPlay'] = false;
       audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5;
 
-      // this.$emit('add-audio', audio);
+      // 立体音響用のデフォルト設定を追加する
+      const stereoSetting = this.getStereoPhonicArrangeDefault;
+      Object.assign(audio, stereoSetting);
+      
       this.addMediaAudiosObjectItem(audio);
     },
     
@@ -294,9 +330,6 @@ export default {
       }
       this.loadingMessage = '削除中'
       this.isLoading = true;
-      // const loading_icon = document.getElementById('loading-icon');
-      // loading_icon.classList.add('rotate');
-      // alert(audioUrl);
       axios.post(url, params)
         .then(response => {
           alert(response.data);
@@ -311,9 +344,6 @@ export default {
           this.userOwnAudios.splice(index,1);
           this.loadingMessage = ''
           this.isLoading = false;
-          // loading_icon.classList.remove('rotate');
-          // Mediaオーディオと同じだった場合は削除する必要があるので、親コンポーネントに通知
-          // this.$emit('audio-thumbnail-del-notice', audioUrl);
         })
         .catch(error => {
           alert('オーディオ削除失敗');
@@ -334,12 +364,37 @@ export default {
       this.playAudioType = "";
       this.playAudioIndex = -1;
     },
+    setAudioCtx(){
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      return new AudioContext();
+    },
+    setUpWebAudio(){
+      this.ctxs.forEach((ctx)=>{
+        ctx.close();
+      })
+      this.ctxs.length = 0;
+      this.audioInputNodes.length = 0;
+
+      this.ctxs.push(this.setAudioCtx());
+      this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
+
+      for(let i=0; i<this.ctxs.length; i++){
+        this.audioInputNodes[i].connect(this.ctxs[i].destination);
+      }
+
+      if(this.isPlay==true){
+        this.audioPlayer.play();
+      }
+    },
 
   },
-  mounted : function() {
+  created(){
     this.getUserOwnAudios();
     this.getPublicAudios();
+    this.getAudioCategory();
 
+  },
+  mounted(){
     let audio = this.audioPlayer;
     audio.onended = this.finishAudio.bind(this);
   },
@@ -365,6 +420,37 @@ export default {
     /* margin-top: 20px; */
     padding-left: 0;
     overflow-y: scroll;
+  }
+
+  .audio-category-wrapper {
+    width: 85%;
+    display: flex;
+    padding: 5px 0px;
+    overflow-x: scroll;
+  }
+
+  .audio-category {
+    padding: 12px 8px;
+    margin: 0 5px;
+    white-space: pre;
+    border-radius: 15px;
+    background-color: white;
+    color : black;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .audio-category:hover {
+    cursor: pointer;
+    outline: 1.5px solid black;
+  }
+
+  .active-audio-category{
+    color: white;
+    background-color: black;
   }
 
   .audio-list {
@@ -468,7 +554,8 @@ export default {
   }
 
   .upload-label-text::after {
-    content: "アップロード"
+    content: "追加";
+    font-size: 12px;
   }
 
   @media screen and (max-width: 480px) {
@@ -476,8 +563,9 @@ export default {
       width: 80%;
     }
 
-    .upload-label-text::after {
-      content: "追加"
+    .audio-category-wrapper {
+      margin: 0;
+      padding: 0;
     }
 
   }

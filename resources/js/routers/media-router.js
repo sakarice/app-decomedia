@@ -38,6 +38,10 @@ import FigureUpdate from '../components/media/media_contents/objects/figure/Figu
 import ImgProperty from '../components/media/media_contents/objects/img/ImgPropertyComponent.vue';
 import TextProperty from '../components/media/media_contents/objects/text/TextPropertyComponent.vue';
 
+// オーディオの立体音響の定位設定
+import StereoPhonicArrange from '../components/media/media_contents/StereoPhonicArrangeComponent.vue';
+
+
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
 import Loading from '../components/common/LoadingComponent.vue';
@@ -71,6 +75,7 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         textProperty : TextProperty,
+        stereoPhonicArrange : StereoPhonicArrange,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,
@@ -100,6 +105,7 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         textProperty : TextProperty,
+        stereoPhonicArrange : StereoPhonicArrange,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,

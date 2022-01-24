@@ -41,6 +41,9 @@
         ref="mediaAudio">
         </media-audio>
 
+        <!-- 立体音響の定位設定 -->
+        <router-view name="stereoPhonicArrange"></router-view>
+
 
 
     <div id="disp-modal-zone" @click="closeModal">
@@ -182,6 +185,7 @@
       <object-copy></object-copy>
     </media-object-controll-parts-wrapper>
 
+
   </div>
 </template>
 
@@ -224,6 +228,10 @@ export default {
   props: [],
   data : () => {
     return {
+      // デバッグ用後で消す
+      center_x : 0,
+      center_y : 0,
+
       isMyMedia : false,
       getReadyCreateMovieFrame : false,
       transitionName : 'slide-in',
@@ -372,6 +380,7 @@ export default {
     document.body.addEventListener('closeModal', (e)=> {
       this.closeModal();
     });
+
   },
   mounted() {
     this.checkMode();
@@ -388,7 +397,7 @@ export default {
       this.initSetting();
     }
     if(this.getMode!=3){ // 3:show以外(=createかeditなら)編集モードに設定
-      this.$refs.mediaAudio.validEditMode();
+      // this.$refs.mediaAudio.validEditMode();
     }
 
     // 全ての子コンポーネントが描画されてから実行する処理
@@ -434,6 +443,7 @@ export default {
 @import "/resources/css/mediaCommon.css";
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
+
 
   #disp-media-owner-modal-wrapper {
     color: white;

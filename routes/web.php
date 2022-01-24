@@ -134,7 +134,17 @@ Route::middleware('auth')->group(function(){
 
 // mediaの作成者情報を表示
     Route::get('/user/mediaOwner/profile/show/{media_id}', 'App\Lib\UserUtil@getMediaOwnerData');
-// publicImgアップロード(開発用、後で消す)
+
+// publicImg一覧＆編集
+    Route::get('/publicImgs', function(){return view('public_img.view');});
+    Route::get('/imgCategory', 'App\Lib\ImgCategoryUtil@getImgCategory');
+    Route::post('/publicImg/category/update', 'App\Lib\PublicImgUtil@updatePublicImgCategory');
+// publicAudio一覧＆編集
+    Route::get('/publicAudios', function(){return view('public_audio.view');});
+    Route::get('/audioCategory', 'App\Lib\AudioCategoryUtil@getAudioCategory');
+    Route::post('/publicAudio/category/update', 'App\Lib\PublicAudioUtil@updatePublicAudioCategory');
+
+// publicファイルアップロード(開発用、後で消す)
     Route::get('/uploadPublicFiles', 'App\Lib\Common\Functions@view');
     Route::post('/uploadPublicFiles', 'App\Lib\Common\Functions@uploadFile');
 

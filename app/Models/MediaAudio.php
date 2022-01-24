@@ -11,9 +11,19 @@ class MediaAudio extends Model
 
     protected $table = 'media_audios';
 
+    protected $fillable = [
+        'media_id',
+        'audio_id',
+        'order_seq',
+        'audio_type',
+        'volume',
+        'isLoop',
+    ];
+
     public function medias(){
         return $this->belongsToMany(
             'App\Models\Media'
         );
-     }
+    }
+    
 }
