@@ -22,7 +22,6 @@
         ctx : "",
         inputNode : "",
         panner : "",
-        isPan : false,
       }
     },
     computed : {
@@ -40,15 +39,15 @@
         return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
       },
       panner_x : function(){
-        if(this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX']){
-          return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX'];
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionX']){
+          return this.getMediaAudios[this.mediaAudioIndex]['positionX'];
         } else {
           return 0;
         }
       },
-      panner_y : function(){
-        if(this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY']){
-          return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY'];
+      panner_z : function(){
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionZ']){
+          return this.getMediaAudios[this.mediaAudioIndex]['positionZ'];
         } else {
           return 0;
         }
@@ -79,11 +78,18 @@
         const pannerOptions = {panningModel:"HRTF"};
         const panner = new PannerNode(ctx, pannerOptions);
         panner.positionX.value = this.panner_x;
-        panner.positionY.value = this.panner_y;
+        panner.positionZ.value = this.panner_z;
         this.panner = panner;
       },
       updatePannerPositionX(){ this.panner.positionX.value = this.panner_x;},
-      updatePannerPositionY(){ this.panner.positionY.value = this.panner_y;},
+      updatePannerPositionZ(){ this.panner.positionZ.value = this.panner_z;},
+      panningSwitch(){
+        if(this.panningFlag){
+          this.panningOn();
+        } else {
+          this.panningOff();
+        }
+      },
       panningOn(){
         console.log('panning on');
         this.inputNode.disconnect();
@@ -107,7 +113,7 @@
         tmpThis.player.onloadstart = function(){
           tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
           console.log('onload start');
-          if(this.panningFlag){
+          if(tmpThis.panningFlag){
             tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
           } else {
             tmpThis.inputNode.connect(tmpThis.ctx.destination);
@@ -133,17 +139,14 @@
         this.updateLoopSetting(val);
       },
       panningFlag : function(val){
-        if(val==true){
-          this.panningOn();
-        } else {
-          this.panningOff();
-        }
+        console.log('panning flag changed, value:'+val);
+        this.panningSwitch();
       },
       panningModel : function(val){
         this.panner.panningModel = val;
       },
       panner_x : function(){ this.updatePannerPositionX();},
-      panner_y : function(){ this.updatePannerPositionY();},
+      panner_z : function(){ this.updatePannerPositionZ();},
     },
 
   }

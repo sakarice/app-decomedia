@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MediaAudioController;
 use App\Lib\StoreFileInS3;
+use App\Lib\StereoPhonicArrangeUtil;
+
 use App\Models\User;
 use App\Models\MediaAudio;
+use App\Models\StereoPhonicArrange;
 use App\Models\PublicAudio;
 use App\Models\PublicAudioThumbnail;
 use App\Models\PublicAudioAudioThumbnail;
@@ -20,24 +23,37 @@ use Storage;
 class MediaAudioUtil
 {
 
+  // テーブルのカラムとrequestのプロパティ名の対応を連想配列に定義
+  private static $COLUMN_AND_PROPERTY_LIST = array(
+    // 左(key)がテーブルのカラム名、右(value)がリクエストで送られてくるオブジェクトのプロパティ名
+    // 'media_id' => 'media_id',
+    // 'id' => 'id',
+    'audio_type' => 'type',
+    'volume' => 'volume',
+    'isLoop' => 'isLoop',
+  );
+  
   // 3.store // Media画像情報をDBに保存
   public static function saveMediaAudioData($media_id, $request){
     $req_media_audios = $request->audios;
     foreach($req_media_audios as $index => $req_media_audio){
       $mediaAudio = new MediaAudio();
-      $mediaAudio->media_id = $media_id;
-      $mediaAudio->audio_type = $req_media_audio['type'];
-      $mediaAudio->audio_id = MediaAudioUtil::getAudioId($req_media_audio['type'], $req_media_audio['audio_url']);
-      $mediaAudio->order_seq = $index + 1;
-      $mediaAudio->volume = $req_media_audio['volume'];
-      $mediaAudio->isLoop = $req_media_audio['isLoop'];
+      $create_items = array();
+      $create_items['media_id'] = $media_id;
+      $create_items['audio_type'] = $req_media_audio['type'];
+      $create_items['audio_id'] = MediaAudioUtil::getAudioId($req_media_audio['type'], $req_media_audio['audio_url']);
+      $create_items['order_seq'] = $index + 1;
+      $create_items['volume'] = $req_media_audio['volume'];
+      $create_items['isLoop'] = $req_media_audio['isLoop'];
       if($req_media_audio['type'] == 2){ //2:ユーザのアップロードした音楽
-          $mediaAudio->owner_user_id = Auth::user()->id;
+          $create_items['owner_user_id'] = Auth::user()->id;
       } // 2以外はpublicオーディオ(=ユーザのものでない）ので、NULLで良い
-      $mediaAudio->save();
+      $just_stored_data = $mediaAudio->create($create_items);
+      $media_audio_id = $just_stored_data['id'];
+      StereoPhonicArrangeUtil::saveStereoPhonicArrangeData($media_audio_id, $req_media_audio);
     }
-
   }
+
 
   // 4.show 
   // Media画像の情報を取得(Media作成、編集、閲覧時に使用)
@@ -72,7 +88,11 @@ class MediaAudioUtil
           'volume' => $media_audio->volume,
           'isLoop' => $media_audio->isLoop,
         ];
-        $media_audio_data[] = $tmp_media_audio_data;
+        $media_audio_id =  $media_audio->id;
+        $tmp_stereo_phonic_arrange_data = StereoPhonicArrangeUtil::getStereoPhonicArrangeData($media_audio_id);
+        $merged = $tmp_media_audio_data + $tmp_stereo_phonic_arrange_data;
+        $media_audio_data[] = $merged;
+        // $media_audio_data[] = $tmp_media_audio_data;
       }
 
     }

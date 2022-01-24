@@ -740,9 +740,8 @@ function _defineProperty(obj, key, value) {
       this.initSetting();
     }
 
-    if (this.getMode != 3) {
-      // 3:show以外(=createかeditなら)編集モードに設定
-      this.$refs.mediaAudio.validEditMode();
+    if (this.getMode != 3) {// 3:show以外(=createかeditなら)編集モードに設定
+      // this.$refs.mediaAudio.validEditMode();
     } // 全ての子コンポーネントが描画されてから実行する処理
 
 
@@ -2123,6 +2122,7 @@ function _defineProperty(obj, key, value) {
 
     };
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('stereoPhonicArrangeDefault', ['getStereoPhonicArrangeDefault'])),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), {}, (_objectSpread2 = {
     finishPlay: function finishPlay() {
       var audioDuration = this.audioPlayer.duration;
@@ -2244,17 +2244,17 @@ function _defineProperty(obj, key, value) {
       } // 新しい連想配列を用意
 
 
-      var audio = {}; // audio['id'] = tmpAudio['id'];
-
+      var audio = {};
       audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
       audio['audio_url'] = tmpAudio['audio_url'];
-      audio['thumbnail_url'] = tmpAudio['thumbnail_url']; // audio['isPlay'] = false;
-
-      audio['panningFlag'] = false, audio['panningModel'] = "HRTF", audio['pannerPositionX'] = 0, audio['pannerPositionY'] = 0, audio['isLoop'] = false;
+      audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
+      audio['isLoop'] = false;
       audio['duration'] = 0;
-      audio['volume'] = 0.5; // this.$emit('add-audio', audio);
+      audio['volume'] = 0.5; // 立体音響用のデフォルト設定を追加する
 
+      var stereoSetting = this.getStereoPhonicArrangeDefault;
+      Object.assign(audio, stereoSetting);
       this.addMediaAudiosObjectItem(audio);
     },
     dragEnter: function dragEnter() {
@@ -4270,11 +4270,14 @@ function _defineProperty(obj, key, value) {
       };
       return style;
     },
+    // panner_x:function(){ return this.diff_x / this.radius; },
     panner_x: function panner_x() {
-      return this.diff_x / this.radius;
+      return Math.round(100 * this.diff_x / this.radius) / 20;
     },
-    panner_y: function panner_y() {
-      return this.diff_y / this.radius;
+    // ★y軸方向の変化をWebAudioAPIで採用している右手系に合わせz軸方向に設定する
+    // panner_z:function(){ return this.diff_y / this.radius; },
+    panner_z: function panner_z() {
+      return Math.round(100 * this.diff_y / this.radius) / 20;
     }
   }),
   methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaAudios', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapMutations)('mediaAudios', ['updateMediaAudiosObjectItem'])), {}, {
@@ -4283,8 +4286,8 @@ function _defineProperty(obj, key, value) {
       this.audio = Object.assign({}, this.getMediaAudio);
     },
     initDiff: function initDiff() {
-      this.diff_x = this.audio['pannerPostionX'] ? this.audio['pannerPostionX'] * this.radius : 0;
-      this.diff_y = this.audio['pannerPostionY'] ? this.audio['pannerPostionY'] * this.radius : 0;
+      this.diff_x = this.audio['positionX'] ? this.audio['positionX'] / 5 * this.radius : 0;
+      this.diff_y = this.audio['positionZ'] ? this.audio['positionZ'] / 5 * this.radius : 0;
     },
     calcDiff: function calcDiff(e) {
       (0,_functions_calcDiffBetweenAandBHelper__WEBPACK_IMPORTED_MODULE_0__.setDistanceLimit)(this.radius);
@@ -4303,13 +4306,13 @@ function _defineProperty(obj, key, value) {
     updatePanner: function updatePanner() {
       this.updateMediaAudiosObjectItem({
         index: this.index,
-        key: "pannerPositionX",
+        key: "positionX",
         value: this.panner_x
       });
       this.updateMediaAudiosObjectItem({
         index: this.index,
-        key: "pannerPositionY",
-        value: this.panner_y
+        key: "positionZ",
+        value: this.panner_z
       });
     },
     removeCalcDiffEvent: function removeCalcDiffEvent() {
@@ -4529,16 +4532,19 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       isShowAudio: false,
-      isEditMode: false,
+      // isEditMode : false,
       longestAudioDuration: 0,
       isShowAudioSettings: [false, false, false, false, false],
       isShowPanningSettings: [false, false, false, false, false],
       isShowSterePhonicArrangeField: false
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
     mediaAudioNum: function mediaAudioNum() {
       return this.getMediaAudios.length;
+    },
+    isEditMode: function isEditMode() {
+      return this.getMode == 1 || this.getMode == 2 ? true : false;
     }
   }),
   methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['updateIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['addMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['deleteMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaAudios', ['updateMediaAudiosObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaSetting', ['updateMediaSettingObjectItem'])), {}, {
@@ -4617,9 +4623,7 @@ function _defineProperty(obj, key, value) {
       });
     },
     // 親コンポーネントから実行される
-    validEditMode: function validEditMode() {
-      this.isEditMode = true;
-    },
+    // validEditMode(){ this.isEditMode = true; },
     playAllAudio: function playAllAudio() {
       if (this.mediaAudioNum > 0) {
         this.$refs.mediaAudioPlayer.forEach(function (player) {
@@ -4815,8 +4819,7 @@ function _defineProperty(obj, key, value) {
       isPlay: false,
       ctx: "",
       inputNode: "",
-      panner: "",
-      isPan: false
+      panner: ""
     };
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
@@ -4833,15 +4836,15 @@ function _defineProperty(obj, key, value) {
       return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
     },
     panner_x: function panner_x() {
-      if (this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX']) {
-        return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionX'];
+      if (this.getMediaAudios[this.mediaAudioIndex]['positionX']) {
+        return this.getMediaAudios[this.mediaAudioIndex]['positionX'];
       } else {
         return 0;
       }
     },
-    panner_y: function panner_y() {
-      if (this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY']) {
-        return this.getMediaAudios[this.mediaAudioIndex]['pannerPositionY'];
+    panner_z: function panner_z() {
+      if (this.getMediaAudios[this.mediaAudioIndex]['positionZ']) {
+        return this.getMediaAudios[this.mediaAudioIndex]['positionZ'];
       } else {
         return 0;
       }
@@ -4892,14 +4895,21 @@ function _defineProperty(obj, key, value) {
       };
       var panner = new PannerNode(ctx, pannerOptions);
       panner.positionX.value = this.panner_x;
-      panner.positionY.value = this.panner_y;
+      panner.positionZ.value = this.panner_z;
       this.panner = panner;
     },
     updatePannerPositionX: function updatePannerPositionX() {
       this.panner.positionX.value = this.panner_x;
     },
-    updatePannerPositionY: function updatePannerPositionY() {
-      this.panner.positionY.value = this.panner_y;
+    updatePannerPositionZ: function updatePannerPositionZ() {
+      this.panner.positionZ.value = this.panner_z;
+    },
+    panningSwitch: function panningSwitch() {
+      if (this.panningFlag) {
+        this.panningOn();
+      } else {
+        this.panningOff();
+      }
     },
     panningOn: function panningOn() {
       console.log('panning on');
@@ -4925,7 +4935,7 @@ function _defineProperty(obj, key, value) {
         tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
         console.log('onload start');
 
-        if (this.panningFlag) {
+        if (tmpThis.panningFlag) {
           tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
         } else {
           tmpThis.inputNode.connect(tmpThis.ctx.destination);
@@ -4957,11 +4967,8 @@ function _defineProperty(obj, key, value) {
       this.updateLoopSetting(val);
     },
     panningFlag: function panningFlag(val) {
-      if (val == true) {
-        this.panningOn();
-      } else {
-        this.panningOff();
-      }
+      console.log('panning flag changed, value:' + val);
+      this.panningSwitch();
     },
     panningModel: function panningModel(val) {
       this.panner.panningModel = val;
@@ -4969,8 +4976,8 @@ function _defineProperty(obj, key, value) {
     panner_x: function panner_x() {
       this.updatePannerPositionX();
     },
-    panner_y: function panner_y() {
-      this.updatePannerPositionY();
+    panner_z: function panner_z() {
+      this.updatePannerPositionZ();
     }
   }
 });

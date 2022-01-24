@@ -43,8 +43,11 @@
         }
         return style;
       },
-      panner_x:function(){ return this.diff_x / this.radius; },
-      panner_y:function(){ return this.diff_y / this.radius; },
+      // panner_x:function(){ return this.diff_x / this.radius; },
+      panner_x:function(){ return Math.round(100*this.diff_x / this.radius) / 20; },
+      // ★y軸方向の変化をWebAudioAPIで採用している右手系に合わせz軸方向に設定する
+      // panner_z:function(){ return this.diff_y / this.radius; },
+      panner_z:function(){ return Math.round(100*this.diff_y / this.radius) / 20; },
     },
     methods : {
       ...mapMutations('mediaAudios', ['setTargetObjectIndex']),
@@ -54,8 +57,8 @@
         this.audio = Object.assign({},this.getMediaAudio);
       },
       initDiff(){
-        this.diff_x = this.audio['pannerPostionX'] ? this.audio['pannerPostionX']*this.radius : 0;
-        this.diff_y = this.audio['pannerPostionY'] ? this.audio['pannerPostionY']*this.radius : 0;
+        this.diff_x = this.audio['positionX'] ? this.audio['positionX']/5*this.radius : 0;
+        this.diff_y = this.audio['positionZ'] ? this.audio['positionZ']/5*this.radius : 0;
       },
       calcDiff(e){
         setDistanceLimit(this.radius);
@@ -72,8 +75,8 @@
         this.diff_y = event.detail.diff_y;
       },
       updatePanner(){
-        this.updateMediaAudiosObjectItem({index:this.index, key:"pannerPositionX", value:this.panner_x});
-        this.updateMediaAudiosObjectItem({index:this.index, key:"pannerPositionY", value:this.panner_y});
+        this.updateMediaAudiosObjectItem({index:this.index, key:"positionX", value:this.panner_x});
+        this.updateMediaAudiosObjectItem({index:this.index, key:"positionZ", value:this.panner_z});
       },
       removeCalcDiffEvent(){
         this.own_elem.removeEventListener('calcDiffBetweenAandB',this.updateDiffAndPanner, false);

@@ -137,7 +137,7 @@
     data : () => {
       return {
         isShowAudio : false,
-        isEditMode : false,
+        // isEditMode : false,
         longestAudioDuration : 0,
         isShowAudioSettings : [false,false,false,false,false,],
         isShowPanningSettings : [false,false,false,false,false,],
@@ -146,11 +146,15 @@
     },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
       mediaAudioNum : function(){
         return this.getMediaAudios.length;
-      }
+      },
+      isEditMode:function(){
+        return (this.getMode==1 || this.getMode==2) ? true : false;
+      },
     },
     methods : {
       ...mapMutations('mediaAudios', ['updateIsInitializedAudios']),
@@ -218,7 +222,7 @@
         this.updateMediaAudiosObjectItem({index:index, key:'panningModel', value:value});
       },
       // 親コンポーネントから実行される
-      validEditMode(){ this.isEditMode = true; },
+      // validEditMode(){ this.isEditMode = true; },
       playAllAudio(){ 
         if(this.mediaAudioNum>0){
           this.$refs.mediaAudioPlayer.forEach( player=>{player.play()} ) 

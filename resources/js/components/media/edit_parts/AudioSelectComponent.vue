@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 
@@ -128,6 +128,9 @@ export default {
       // userOwnAudioThumbnailUrls : [],
       // defaultAudioThumbnailUrls : []
     }
+  },
+  computed : {
+    ...mapGetters('stereoPhonicArrangeDefault', ['getStereoPhonicArrangeDefault']),
   },
   methods : {
     ...mapMutations('mediaAudios', ['deleteMediaAudiosObjectItem']),
@@ -249,21 +252,18 @@ export default {
 
       // 新しい連想配列を用意
       let audio = {};
-      // audio['id'] = tmpAudio['id'];
       audio['type'] = audio_type;
       audio['name'] = tmpAudio['name'];
       audio['audio_url'] = tmpAudio['audio_url'];
       audio['thumbnail_url'] = tmpAudio['thumbnail_url'];
-      // audio['isPlay'] = false;
-      audio['panningFlag'] = false,
-      audio['panningModel'] ="HRTF",
-      audio['pannerPositionX'] = 0,
-      audio['pannerPositionY'] = 0,
       audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5;
 
-      // this.$emit('add-audio', audio);
+      // 立体音響用のデフォルト設定を追加する
+      const stereoSetting = this.getStereoPhonicArrangeDefault;
+      Object.assign(audio, stereoSetting);
+      
       this.addMediaAudiosObjectItem(audio);
     },
     

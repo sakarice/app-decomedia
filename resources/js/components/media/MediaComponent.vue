@@ -397,7 +397,7 @@ export default {
       this.initSetting();
     }
     if(this.getMode!=3){ // 3:show以外(=createかeditなら)編集モードに設定
-      this.$refs.mediaAudio.validEditMode();
+      // this.$refs.mediaAudio.validEditMode();
     }
 
     // 全ての子コンポーネントが描画されてから実行する処理
