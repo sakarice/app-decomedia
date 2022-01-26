@@ -14,6 +14,9 @@
 
             <media-update-button v-show="isMyMedia && (mode==2)">
             </media-update-button>
+
+            <router-view name="switchToEditMode"></router-view>
+            <router-view name="switchToShowMode"></router-view>
         </div>
 
         <!-- 右側 -->

@@ -876,6 +876,9 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1270,7 +1273,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -1344,7 +1346,6 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
-//
 //
 //
 //
@@ -11513,7 +11514,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-3c9730e2] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-3c9730e2] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-3c9730e2] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-3c9730e2] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-3c9730e2] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-3c9730e2] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-3c9730e2]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-3c9730e2] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-3c9730e2]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-3c9730e2] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-3c9730e2] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-3c9730e2] {\r\n        margin: 5px 0px;\n}\n.header-center[data-v-3c9730e2] {\r\n        position: absolute;\r\n        left: 40%;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.header[data-v-3c9730e2] {\r\n  position: fixed;\r\n  top: 0;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(0, 0, 0, 1);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-3c9730e2] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-3c9730e2] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-3c9730e2] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-3c9730e2] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-3c9730e2] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-3c9730e2]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-3c9730e2] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-3c9730e2]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-3c9730e2] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-3c9730e2] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-3c9730e2] {\r\n        margin: 5px 0px;\n}\n.header-center[data-v-3c9730e2] {\r\n        position: absolute;\r\n        left: 40%;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11607,11 +11608,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../../css/button.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/button.css");
 // Imports
 
+
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-82371542] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-82371542]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.edit-mode-icon[data-v-82371542] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '閲覧モード';\n}\n.change-mode:hover .show-mode-icon[data-v-82371542] {\r\n  display: none;\n}\n.change-mode:hover .edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n  /* @import \"/resources/css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11637,7 +11641,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.change-mode[data-v-2d7d2ccc] {\r\n  position: absolute;\r\n  bottom: 15px;\r\n  left: 15px;\r\n  z-index: 3;\r\n  width: 90px;\r\n  height: 90px;\r\n  background-color: rgba(0,0,0,0.2);\r\n  border-radius: 50%;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);\n}\n.change-mode[data-v-2d7d2ccc]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.8);\n}\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display : none;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '編集モード';\n}\n.change-mode:hover .edit-mode-icon[data-v-2d7d2ccc] {\r\n  display: none;\n}\n.change-mode:hover .show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.change-mode:hover .action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n  /* @import \"../../../../css/button.css\"; */\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12992,7 +12996,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: end;\r\n  margin: 0 10px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:11px;\r\n  color: grey;\r\n  margin-top: 2px;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: end;\r\n  margin: 0 10px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:11px;\r\n  color: grey;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -20591,10 +20595,6 @@ var render = function () {
     [
       _c("judge-device-type"),
       _vm._v(" "),
-      _c("router-view", { attrs: { name: "switchToEditMode" } }),
-      _vm._v(" "),
-      _c("router-view", { attrs: { name: "switchToShowMode" } }),
-      _vm._v(" "),
       _c(
         "media-contents-field",
         { ref: "mediaContentsField", on: { click: _vm.closeModal } },
@@ -20923,6 +20923,10 @@ var render = function () {
             },
           ],
         }),
+        _vm._v(" "),
+        _c("router-view", { attrs: { name: "switchToEditMode" } }),
+        _vm._v(" "),
+        _c("router-view", { attrs: { name: "switchToShowMode" } }),
       ],
       1
     ),
@@ -21076,8 +21080,6 @@ var render = function () {
     },
     [
       _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
-        _c("i", { staticClass: "fas fa-tv fa-lg show-mode-icon" }),
-        _vm._v(" "),
         _c("i", { staticClass: "fas fa-pen fa-lg edit-mode-icon" }),
       ]),
       _vm._v(" "),
@@ -21116,8 +21118,6 @@ var render = function () {
     [
       _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
         _c("i", { staticClass: "fas fa-tv fa-lg show-mode-icon" }),
-        _vm._v(" "),
-        _c("i", { staticClass: "fas fa-pen fa-lg edit-mode-icon" }),
       ]),
       _vm._v(" "),
       _c("span", { staticClass: "action-trigger-subtitle" }),

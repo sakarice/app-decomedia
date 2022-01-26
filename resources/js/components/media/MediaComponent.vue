@@ -5,8 +5,8 @@
 
     <judge-device-type></judge-device-type>
 
-    <router-view name="switchToEditMode"></router-view>
-    <router-view name="switchToShowMode"></router-view>
+    <!-- <router-view name="switchToEditMode"></router-view>
+    <router-view name="switchToShowMode"></router-view> -->
 
         <media-contents-field @click="closeModal"
         ref="mediaContentsField">
