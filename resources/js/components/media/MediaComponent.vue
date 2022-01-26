@@ -51,14 +51,6 @@
         <!-- いいねアイコン -->
         <router-view name="dispMediaLike">
         </router-view>
-        <!-- Media作成者情報 -->
-        <router-view name="dispMediaOwnerInfo"
-        v-on:show-modal="showModal">
-        </router-view>
-        <!-- ユーザプロフィール -->
-        <router-view name="mediaOwnerInfo"
-          v-show="isShowModal['mediaOwnerInfo']">
-        </router-view>
         <!-- Media情報 -->
         <router-view name="dispMediaInfo"
         v-on:show-modal="showModal">        
@@ -444,9 +436,8 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-
-  #disp-media-owner-modal-wrapper {
-    color: white;
+  #disp-modal-wrapper {
+    width: auto;
   }
 
   .icon-wrapper {
