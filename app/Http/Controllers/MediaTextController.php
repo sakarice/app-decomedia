@@ -27,7 +27,7 @@ class MediaTextController extends Controller
             MediaTextUtil::updateMediaTextData($media_id, $request);
         }
         // 7.destroy
-        public static function destroy($media_id, $request){
+        public static function destroy($media_id){
             MediaText::where('media_id', $media_id)->delete();
         }
 

@@ -119,10 +119,8 @@ export default{
       name : 'show',
       components : {
         switchToEditMode : SwitchToEditMode,
-        mediaOwnerInfo : MediaOwnerInfo,
         mediaCommentMng : MediaCommentMng,
         dispMediaLike : DispMediaLike,
-        dispMediaOwnerInfo : DispMediaOwnerInfo,
         dispMediaInfo : DispMediaInfo,
         dispMediaComment : DispMediaComment,
       },

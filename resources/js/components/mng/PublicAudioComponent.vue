@@ -175,4 +175,12 @@ export default {
 
   .grey { color: grey;}
 
+
+  @media screen and (max-width:480px) {
+    .audio-list {
+      width: 24%;
+    }
+    
+  }
+
 </style>
