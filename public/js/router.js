@@ -1277,7 +1277,14 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])),
+  data: function data() {
+    return {};
+  },
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getIsMyMedia'])), {}, {
+    isShow: function isShow() {
+      return this.getIsLogin && this.getIsMyMedia ? true : false;
+    }
+  }),
   methods: {}
 });
 
@@ -1358,7 +1365,14 @@ function _defineProperty(obj, key, value) {
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])),
+  data: function data() {
+    return {};
+  },
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('media', ['getIsMyMedia'])), {}, {
+    isShow: function isShow() {
+      return this.getIsLogin && this.getIsMyMedia ? true : false;
+    }
+  }),
   methods: {}
 });
 
@@ -11615,7 +11629,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11641,7 +11655,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21072,20 +21086,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "router-link",
-    {
-      staticClass: "change-mode action-trigger-wrapper link-to-edit-mode",
-      attrs: { to: "/media/" + _vm.getMediaId + "/edit" },
-    },
-    [
-      _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
-        _c("i", { staticClass: "fas fa-pen fa-lg edit-mode-icon" }),
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "action-trigger-subtitle" }),
-    ]
-  )
+  return _vm.isShow
+    ? _c(
+        "router-link",
+        {
+          staticClass: "change-mode action-trigger-wrapper link-to-edit-mode",
+          attrs: { to: "/media/" + _vm.getMediaId + "/edit" },
+        },
+        [
+          _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
+            _c("i", { staticClass: "fas fa-pen fa-lg edit-mode-icon" }),
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "action-trigger-subtitle" }),
+        ]
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -21109,20 +21125,22 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "router-link",
-    {
-      staticClass: "change-mode action-trigger-wrapper link-to-show-media",
-      attrs: { to: "/media/" + _vm.getMediaId },
-    },
-    [
-      _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
-        _c("i", { staticClass: "fas fa-tv fa-lg show-mode-icon" }),
-      ]),
-      _vm._v(" "),
-      _c("span", { staticClass: "action-trigger-subtitle" }),
-    ]
-  )
+  return _vm.isShow
+    ? _c(
+        "router-link",
+        {
+          staticClass: "change-mode action-trigger-wrapper link-to-show-media",
+          attrs: { to: "/media/" + _vm.getMediaId },
+        },
+        [
+          _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
+            _c("i", { staticClass: "fas fa-tv fa-lg show-mode-icon" }),
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "action-trigger-subtitle" }),
+        ]
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="'/media/'+getMediaId" class="change-mode action-trigger-wrapper link-to-show-media">
+  <router-link v-if="isShow" :to="'/media/'+getMediaId" class="change-mode action-trigger-wrapper link-to-show-media">
     <div class="action-trigger mode-icon-wrapper">
       <i class="fas fa-tv fa-lg show-mode-icon"></i>
     </div>
@@ -11,10 +11,18 @@
 import { mapGetters } from 'vuex';
 
   export default {
+    data : ()=>{
+      return {}
+    },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('loginState', ['getIsLogin']),
+      ...mapGetters('media', ['getIsMyMedia']),
+      isShow:function(){
+        return this.getIsLogin && this.getIsMyMedia ? true:false
+      },
     },
-    methods : {}
+    methods : {},
   }
 
 </script>
