@@ -4928,6 +4928,7 @@ function _defineProperty(obj, key, value) {
       console.log('panning off');
       this.inputNode.disconnect();
       this.inputNode.connect(this.ctx.destination);
+      this.inputNode.connect();
     }
   },
   created: function created() {
@@ -4945,8 +4946,7 @@ function _defineProperty(obj, key, value) {
 
         if (tmpThis.panningFlag) {
           tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
-        } else {
-          tmpThis.inputNode.connect(tmpThis.ctx.destination);
+        } else {// tmpThis.inputNode.connect(tmpThis.ctx.destination);
         }
       };
 
