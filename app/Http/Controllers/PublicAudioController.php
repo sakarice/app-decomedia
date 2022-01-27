@@ -22,6 +22,7 @@ class PublicAudioController extends Controller
     public function index(){
         $public_audios = PublicAudio::get();
         $audios = array();
+        $count = 0;
         foreach($public_audios as $index => $public_audio){
             $tmpAudios = array();
             $tmpAudios += array('name' => $public_audio->name);
@@ -41,6 +42,9 @@ class PublicAudioController extends Controller
             }
             $tmpAudios += array('category' => $category);
             $audios[$index] = $tmpAudios;
+            $count = $count+1;
+            \Log::info($count);
+            if($count >= 3){ break;}
         };
         return ['audios' => $audios];
     }
