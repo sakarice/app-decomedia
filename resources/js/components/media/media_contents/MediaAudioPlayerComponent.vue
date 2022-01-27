@@ -99,6 +99,7 @@
         console.log('panning off');
         this.inputNode.disconnect();
         this.inputNode.connect(this.ctx.destination);
+        this.inputNode.connect();
       },
     },
     created : function(){
@@ -116,7 +117,7 @@
           if(tmpThis.panningFlag){
             tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
           } else {
-            tmpThis.inputNode.connect(tmpThis.ctx.destination);
+            // tmpThis.inputNode.connect(tmpThis.ctx.destination);
           }
         }
         tmpThis.setPlayerInfo();
