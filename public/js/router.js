@@ -2191,11 +2191,16 @@ function _defineProperty(obj, key, value) {
 
       this.isPlay = true;
       playTargetAudio['isPlay'] = true; // audioエレメントを初期化
+      // this.audioPlayer = new Audio(playTargetAudio['audio_url']);
 
-      this.audioPlayer = new Audio(playTargetAudio['audio_url']); // クロスオリジン設定をリクエストヘッダにを付与
+      this.audioPlayer.src = playTargetAudio['audio_url']; // クロスオリジン設定をリクエストヘッダにを付与
+      // this.audioPlayer.crossOrigin = "anonymous";
+      // this.audioPlayer.onloadstart = this.setUpWebAudio();
 
-      this.audioPlayer.crossOrigin = "anonymous";
-      this.audioPlayer.onloadstart = this.setUpWebAudio(); // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
+      if (this.isPlay == true) {
+        this.audioPlayer.play();
+      } // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
+
 
       var stopTargetAudio;
 
@@ -2215,7 +2220,6 @@ function _defineProperty(obj, key, value) {
     },
     finishAudio: function finishAudio(event) {
       var isFinish = event.target.ended;
-      alert(isFinish);
     },
     pauseAudio: function pauseAudio(type, index) {
       // オーディオを再生停止
@@ -2368,22 +2372,19 @@ function _defineProperty(obj, key, value) {
   }), _defineProperty(_objectSpread2, "setAudioCtx", function setAudioCtx() {
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     return new AudioContext();
-  }), _defineProperty(_objectSpread2, "setUpWebAudio", function setUpWebAudio() {
-    this.ctxs.forEach(function (ctx) {
-      ctx.close();
-    });
-    this.ctxs.length = 0;
-    this.audioInputNodes.length = 0;
-    this.ctxs.push(this.setAudioCtx());
-    this.audioInputNodes.push(this.ctxs[this.ctxs.length - 1].createMediaElementSource(this.audioPlayer));
-
-    for (var i = 0; i < this.ctxs.length; i++) {
-      this.audioInputNodes[i].connect(this.ctxs[i].destination);
-    }
-
-    if (this.isPlay == true) {
-      this.audioPlayer.play();
-    }
+  }), _defineProperty(_objectSpread2, "setUpWebAudio", function setUpWebAudio() {// this.ctxs.forEach((ctx)=>{
+    //   ctx.close();
+    // })
+    // this.ctxs.length = 0;
+    // this.audioInputNodes.length = 0;
+    // this.ctxs.push(this.setAudioCtx());
+    // this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
+    // for(let i=0; i<this.ctxs.length; i++){
+    //   this.audioInputNodes[i].connect(this.ctxs[i].destination);
+    // }
+    // if(this.isPlay==true){
+    //   this.audioPlayer.play();
+    // }
   }), _objectSpread2)),
   created: function created() {
     this.getUserOwnAudios();

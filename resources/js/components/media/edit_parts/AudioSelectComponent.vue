@@ -193,10 +193,15 @@ export default {
       playTargetAudio['isPlay'] = true;
 
       // audioエレメントを初期化
-      this.audioPlayer = new Audio(playTargetAudio['audio_url']);
+      // this.audioPlayer = new Audio(playTargetAudio['audio_url']);
+      this.audioPlayer.src = playTargetAudio['audio_url'];
       // クロスオリジン設定をリクエストヘッダにを付与
-      this.audioPlayer.crossOrigin = "anonymous";
-      this.audioPlayer.onloadstart = this.setUpWebAudio();
+      // this.audioPlayer.crossOrigin = "anonymous";
+      // this.audioPlayer.onloadstart = this.setUpWebAudio();
+      if(this.isPlay==true){
+        this.audioPlayer.play();
+      }
+
 
       // 一つ前に再生していたオーディオがあれば、再生中フラグを折る
       let stopTargetAudio;
@@ -213,10 +218,8 @@ export default {
       this.playAudioType = type;
       this.playAudioIndex = index;
     },
-
     finishAudio: function(event){
       let isFinish = event.target.ended;
-      alert(isFinish);
     },
     pauseAudio : function(type, index){
       // オーディオを再生停止
@@ -369,22 +372,22 @@ export default {
       return new AudioContext();
     },
     setUpWebAudio(){
-      this.ctxs.forEach((ctx)=>{
-        ctx.close();
-      })
-      this.ctxs.length = 0;
-      this.audioInputNodes.length = 0;
+      // this.ctxs.forEach((ctx)=>{
+      //   ctx.close();
+      // })
+      // this.ctxs.length = 0;
+      // this.audioInputNodes.length = 0;
 
-      this.ctxs.push(this.setAudioCtx());
-      this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
+      // this.ctxs.push(this.setAudioCtx());
+      // this.audioInputNodes.push(this.ctxs[this.ctxs.length-1].createMediaElementSource(this.audioPlayer));
 
-      for(let i=0; i<this.ctxs.length; i++){
-        this.audioInputNodes[i].connect(this.ctxs[i].destination);
-      }
+      // for(let i=0; i<this.ctxs.length; i++){
+      //   this.audioInputNodes[i].connect(this.ctxs[i].destination);
+      // }
 
-      if(this.isPlay==true){
-        this.audioPlayer.play();
-      }
+      // if(this.isPlay==true){
+      //   this.audioPlayer.play();
+      // }
     },
 
   },
