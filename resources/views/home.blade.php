@@ -56,13 +56,17 @@
     </section>
 
     <section id="quick-use-and-warning">
-        <p class="use-and-warning-message">
-            <span style="color:red">
-                ※メディアに移動すると音楽・動画が再生されます。<br>
-            </span>
+        <p class="use-message-title" style="font-weight:bold;">
+            《メディアの視聴》
+        </p>
+        <img class="headphone-img" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B33.png" alt="">
+        <p class="use-message">
             イヤホンやヘッドフォンを付け、<br>
             音量に注意してお楽しみください。
         </p>
+        <span class="warning-message">
+            (メディアに移動すると音楽・動画が再生されます。)<br>
+        </span>
     </section>
 
     <section id="about-app"></section>
@@ -76,9 +80,9 @@
         {{-- Mediaの一覧を表示 --}}
         <section class="recently-posted-medias">
             <h3 class="section-title recently-posted-title">最近の投稿</h3>
-            <span class="recently-posted-supplement-info">
+            {{-- <span class="recently-posted-supplement-info">
                 (サムネイルをタップすると再生画面に移動します)
-            </span>
+            </span> --}}
             <div class="media-preview-wrapper">
                 <media-preview-component
                 :csrf="{{json_encode(csrf_token())}}"
