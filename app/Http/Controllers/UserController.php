@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
 
 
 class UserController extends Controller
@@ -94,5 +96,13 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function isCheckGuest(){
+        $login_user_id = Auth::id();
+        $user_name = User::find($login_user_id)->name;
+        $isGuest = $user_name=='guest' ? true : false;
+        return ['isGuest' => $isGuest];
     }
 }
