@@ -28,10 +28,6 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <!-- ゲストログイン中に表示するメッセージ
-            <div v-if="getIsGuest" class="header-content-wrapper">
-                <span class="bg-green-yellow logged-in-as-guest-msg">ゲスト</span>
-            </div> -->
             <!-- ユーザアイコン -->
             <div class="header-content-wrapper column" v-if="getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
@@ -75,10 +71,6 @@ export default {
         ...mapGetters('loginState', ['getIsGuest']),
     },
     methods : {
-        // toUserProfile : function(){
-        //     console.log("/users/"+this.userInfo['userId']);
-        //     return "/users/" + this.userInfo['userId'];
-        // },
         openProfileModal(){
             this.isShowProfile = true;
         },
@@ -153,7 +145,6 @@ a:hover {
 }
 
 .logged-in-as-guest-msg {
-    /* padding: 0 8px; */
     color: greenyellow;
     font-size: 13px;
 }
