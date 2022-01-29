@@ -7,7 +7,7 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ゲストログイン -->
-            <div class="header-content-wrapper" v-if="!(getIsLogin)">
+            <div class="header-content-wrapper guest-login-wrapper" v-if="!(getIsLogin)">
                 <a class="guest-login header-content" href="/login/guest">ゲストログイン</a>
             </div>
             <!-- ゲストログイン中に表示する文言 -->
@@ -115,6 +115,15 @@ export default {
   opacity: 1;
 }
 
+.guest-login {
+    background-color: slategray;
+    border-radius: 2px;
+    padding: 0 10px;
+}
+.guest-login:hover {
+    color: white;
+}
+
 
 /* aタグ全体の設定 */
 a {
@@ -159,6 +168,16 @@ a:hover {
 @media screen and (max-width: 480px){
     .header-content {
         font-size: 0.8rem;
+    }
+
+    .guest-login-wrapper {
+        position: absolute;
+        top: 45px;
+        right: 3px;
+    }
+
+    .guest-login {
+        padding: 2px 8px;
     }
 
 }
