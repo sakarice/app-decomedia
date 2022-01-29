@@ -145,22 +145,18 @@ a:hover {
 }
 
 .logged-in-as-guest-msg {
-    color: greenyellow;
+    position: absolute;
+    top : 0;
+    left : calc(50% - 20px);
+    background-color: greenyellow;
+    color: black;
     font-size: 13px;
+    padding: 0 10px;
 }
 
 @media screen and (max-width: 480px){
     .header-content {
         font-size: 0.8rem;
-    }
-
-    .logged-in-as-guest-msg {
-        position: absolute;
-        top : 0;
-        left : calc(50% - 20px);
-        color: black;
-        background-color: greenyellow;
-        padding: 0 10px;
     }
 
 }
