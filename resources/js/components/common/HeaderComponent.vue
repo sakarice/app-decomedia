@@ -10,6 +10,9 @@
             <div class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="guest-login header-content" href="/login/guest">ゲストログイン</a>
             </div>
+            <!-- ゲストログイン中に表示する文言 -->
+            <span v-if="getIsGuest" class="logged-in-as-guest-msg">ゲスト</span>
+
             <!-- ログイン -->
             <div class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="login header-content" href="/login">ログイン</a>
@@ -33,7 +36,6 @@
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
-                <span v-if="getIsGuest" class="logged-in-as-guest-msg">ゲスト</span>
             </div>
             <!-- ユーザプロフィール -->
             <profile-component
