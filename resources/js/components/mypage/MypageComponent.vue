@@ -623,7 +623,6 @@ export default {
     right: 0; */
     font-size: 22px;
     padding: 7px 8px;
-    z-index: 30;
   }
 
   .media-action-btn-label{
@@ -642,7 +641,6 @@ export default {
     /* padding: 2px 15px; */
     font-size: 22px;
     padding: 7px 8px;
-    z-index: 30;
   }
   .select-mode-on-icon {
     font-size: 20px;
