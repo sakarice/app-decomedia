@@ -45,7 +45,8 @@ class LoginController extends Controller
         $password = 'guestGuest1';
 
         if(Auth::attempt(['email'=>$email, 'password'=>$password])){
-            return redirect()->route('mypage');
+            // return redirect()->route('/mypage');
+            return redirect('/mypage');
         }
 
         return redirect('/');
