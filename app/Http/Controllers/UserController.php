@@ -100,8 +100,8 @@ class UserController extends Controller
 
 
     public function isCheckGuest(){
-        $login_user_id = Auth::id();
-        $user_name = User::find($login_user_id)->name;
+        $login_user_id = Auth::id() ? Auth::id() : NULL;
+        $user_name = $login_user_id!=NULL ? User::find($login_user_id)->name : "";
         $isGuest = $user_name=='guest' ? true : false;
         return ['isGuest' => $isGuest];
     }
