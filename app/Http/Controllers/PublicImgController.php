@@ -22,7 +22,7 @@ class PublicImgController extends Controller
         $public_imgs = PublicImg::get();
         $img_file_datas = array();
         
-        $count = 0;
+        // $count = 0;
         foreach($public_imgs as $index => $public_img){
             $tmp_img_file_datas = array();
             $tmp_img_file_datas += array('id' => $public_img->id);
@@ -36,8 +36,8 @@ class PublicImgController extends Controller
             $tmp_img_file_datas += array('category' => $img_category);
             $img_file_datas[$index] = $tmp_img_file_datas;
 
-            $count = $count+1;
-            if($count>=3){ break;}
+            // $count = $count+1;
+            // if($count>=3){ break;}
         };
         return ['file_datas' => $img_file_datas];
     }
