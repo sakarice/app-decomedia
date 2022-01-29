@@ -23,13 +23,34 @@ Auth::routes();
 // ゲストログイン
 Route::get('/login/guest', 'App\Http\Controllers\Auth\LoginController@guestLogin');
 
+// ★ログイン不要
+// メディアの視聴
+Route::get('/media/{media_id}', function(){return view('medias.show');});
+
+// 入っているMediaが自分のMediaかチェック
+Route::post('/checkIsMyMedia', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
+
+// メディアへのコメント
+Route::get('/media/{media_id}/comment', 'App\Lib\MediaCommentUtil@show');
+// メディア画像
+Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
+// メディアテキスト
+Route::get('/mediaText/{mediaId}', 'App\Lib\MediaTextUtil@getMediaTextData');
+// メディア図形
+Route::get('/mediaFigures/{mediaId}', 'App\Lib\MediaFigureUtil@getMediaFigureData');
+// メディア音楽
+Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
+// メディア動画
+Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
+// コンテンツ描画エリア
+Route::get('/mediaContentsField/{mediaId}', 'App\Lib\MediaContentsFieldUtil@getMediaContentsFieldData');
+// メディア設定
+Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
 
 // ★ログイン認証必須ページ
 // ミドルウェアによるログインチェックをかませる
 Route::middleware('auth')->group(function(){
-    // 入っているMediaが自分のMediaかチェック
-        Route::post('/checkIsMyMedia', 'App\Http\Controllers\Ajax\Lib\MediaUtilAjax@judgeIsMyMedia');
     // マイページ
         Route::get('/mypage', 'App\Http\Controllers\MypageController@view');
         Route::get('/mypage/profile', 'App\Http\Controllers\MypageController@profile');
@@ -58,7 +79,6 @@ Route::middleware('auth')->group(function(){
         Route::post('/media/delete', 'App\Http\Controllers\MediaController@destroy');
         // Route::get('/media/{id}', 'App\Http\Controllers\MediaController@show');
     // メディアコメント
-        Route::get('/media/{media_id}/comment', 'App\Lib\MediaCommentUtil@show');
         Route::post('/media/{media_id}/comment/store', 'App\Lib\MediaCommentUtil@store');
         Route::post('/media/{media_id}/comment/delete', 'App\Lib\MediaCommentUtil@destroy');
 
@@ -81,20 +101,6 @@ Route::middleware('auth')->group(function(){
     // フォロー中ユーザ情報を取得する
         Route::get('/followings', 'App\Lib\FollowingUtil@show');
     
-    // メディア画像
-        Route::get('/mediaImg/{mediaId}', 'App\Lib\MediaImgUtil@getMediaImgData');
-    // メディアテキスト
-        Route::get('/mediaText/{mediaId}', 'App\Lib\MediaTextUtil@getMediaTextData');
-    // メディア図形
-        Route::get('/mediaFigures/{mediaId}', 'App\Lib\MediaFigureUtil@getMediaFigureData');
-    // メディア音楽
-        Route::get('/mediaAudios/{mediaId}', 'App\Lib\MediaAudioUtil@getMediaAudioData');
-    // メディア動画
-        Route::get('/mediaMovie/{mediaId}', 'App\Lib\MediaMovieUtil@getMediaMovieData');
-    // コンテンツ描画エリア
-        Route::get('/mediaContentsField/{mediaId}', 'App\Lib\MediaContentsFieldUtil@getMediaContentsFieldData');
-    // メディア設定
-        Route::get('/mediaSetting/{mediaId}', 'App\Lib\MediaSettingUtil@getMediaSettingData');
 
     // Ajax
         Route::get('/ajax/getUserOwnImgs', 'App\Http\Controllers\UserOwnImgController@index');

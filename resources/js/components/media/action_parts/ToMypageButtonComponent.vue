@@ -1,6 +1,6 @@
 <template>
 
-  <div class="action-trigger-wrapper mypage-icon-wrapper">
+  <div v-if="getIsLogin" class="action-trigger-wrapper mypage-icon-wrapper">
     <a class="action-trigger" href="/mypage">
       <i class="far fa-user fa-lg mypage-icon"></i>
     </a>
@@ -10,12 +10,16 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex';
+
   export default {
     props : [],
     data : () => {
       return {}
     },
-
+    computed : {
+      ...mapGetters('loginState',['getIsLogin']),
+    },
     methods : {},
   }
 
