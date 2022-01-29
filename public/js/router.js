@@ -1388,6 +1388,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+} //
 //
 //
 //
@@ -1398,12 +1451,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: [],
   data: function data() {
     return {};
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])),
   methods: {}
 });
 
@@ -5523,7 +5579,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaComments', ['getMediaComments'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('loginState', ['getIsLogin'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaSetting', ['getMediaSetting'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)('mediaComments', ['getMediaComments'])), {}, {
     comment_data: function comment_data() {
       var comment_datas = Object.assign(this.comment, this.user_info);
       comment_datas['comment'] = this.comment_text;
@@ -11680,7 +11736,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-icon[data-v-0be5d7b3] {\r\n    color: white;\n}\n.mypage-icon[data-v-0be5d7b3]:hover {\r\n    color: yellow;\n}\n@media screen and (max-width: 480px) {\n.mypage-icon-wrapper[data-v-0be5d7b3] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.mypage-icon[data-v-0be5d7b3] {\r\n    color: white;\n}\n.mypage-icon[data-v-0be5d7b3]:hover {\r\n    color: yellow;\n}\n@media screen and (max-width: 480px) {\n.mypage-icon-wrapper[data-v-0be5d7b3] {\r\n      display: none;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21163,7 +21219,15 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _vm.getIsLogin
+    ? _c("div", { staticClass: "action-trigger-wrapper mypage-icon-wrapper" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("span", { staticClass: "action-trigger-subtitle" }, [
+          _vm._v("マイページへ"),
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = [
   function () {
@@ -21171,17 +21235,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "action-trigger-wrapper mypage-icon-wrapper" },
-      [
-        _c("a", { staticClass: "action-trigger", attrs: { href: "/mypage" } }, [
-          _c("i", { staticClass: "far fa-user fa-lg mypage-icon" }),
-        ]),
-        _vm._v(" "),
-        _c("span", { staticClass: "action-trigger-subtitle" }, [
-          _vm._v("マイページへ"),
-        ]),
-      ]
+      "a",
+      { staticClass: "action-trigger", attrs: { href: "/mypage" } },
+      [_c("i", { staticClass: "far fa-user fa-lg mypage-icon" })]
     )
   },
 ]
@@ -24881,92 +24937,94 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "media-comment-add-wrapper flex hover-p" }, [
-    _c("div", { staticClass: "w100 flex j-center" }, [
-      _c(
-        "div",
-        {
-          directives: [
+  return _vm.getIsLogin
+    ? _c("div", { staticClass: "media-comment-add-wrapper flex hover-p" }, [
+        _c("div", { staticClass: "w100 flex j-center" }, [
+          _c(
+            "div",
             {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.isShowCommentInput,
-              expression: "isShowCommentInput",
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.isShowCommentInput,
+                  expression: "isShowCommentInput",
+                },
+              ],
+              staticClass:
+                "comment-input-wrapper w100 pt25 pb10 flex column j-center a-center border-r-3",
             },
-          ],
-          staticClass:
-            "comment-input-wrapper w100 pt25 pb10 flex column j-center a-center border-r-3",
-        },
-        [
-          _c("textarea", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.comment_text,
-                expression: "comment_text",
-              },
-            ],
-            staticClass: "mb10",
-            attrs: {
-              name: "",
-              id: "",
-              cols: "30",
-              rows: "3",
-              maxlength: "300",
-            },
-            domProps: { value: _vm.comment_text },
-            on: {
-              input: function ($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.comment_text = $event.target.value
-              },
-            },
-          }),
+            [
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comment_text,
+                    expression: "comment_text",
+                  },
+                ],
+                staticClass: "mb10",
+                attrs: {
+                  name: "",
+                  id: "",
+                  cols: "30",
+                  rows: "3",
+                  maxlength: "300",
+                },
+                domProps: { value: _vm.comment_text },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.comment_text = $event.target.value
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "button-wrapper flex" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "button cancel-btn mr5",
+                    on: { click: _vm.hideCommentInput },
+                  },
+                  [_vm._v("キャンセル")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "button submit-btn ml5",
+                    on: { click: _vm.storeCommentInDb },
+                  },
+                  [_vm._v("確定")]
+                ),
+              ]),
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "button-wrapper flex" }, [
-            _c(
-              "button",
-              {
-                staticClass: "button cancel-btn mr5",
-                on: { click: _vm.hideCommentInput },
-              },
-              [_vm._v("キャンセル")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "button submit-btn ml5",
-                on: { click: _vm.storeCommentInDb },
-              },
-              [_vm._v("確定")]
-            ),
-          ]),
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          directives: [
+          _c(
+            "div",
             {
-              name: "show",
-              rawName: "v-show",
-              value: !_vm.isShowCommentInput,
-              expression: "!isShowCommentInput",
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.isShowCommentInput,
+                  expression: "!isShowCommentInput",
+                },
+              ],
+              staticClass:
+                "add-icon-wrapper w90 mb10 border-r-3 flex j-center a-center",
+              on: { click: _vm.showCommentInput },
             },
-          ],
-          staticClass:
-            "add-icon-wrapper w90 mb10 border-r-3 flex j-center a-center",
-          on: { click: _vm.showCommentInput },
-        },
-        [_c("i", { staticClass: "fas fa-plus fa-2x lightgreen" })]
-      ),
-    ]),
-  ])
+            [_c("i", { staticClass: "fas fa-plus fa-2x lightgreen" })]
+          ),
+        ]),
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

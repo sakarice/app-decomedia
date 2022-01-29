@@ -1,5 +1,5 @@
 <template>
-  <div class="media-comment-add-wrapper flex hover-p">
+  <div v-if="getIsLogin" class="media-comment-add-wrapper flex hover-p">
     <!-- <div class="left-box w70px for-pc"></div> -->
     <div class="w100 flex j-center">
       <div class="comment-input-wrapper w100 pt25 pb10 flex column j-center a-center border-r-3"
@@ -45,6 +45,7 @@ export default{
     }
   },
   computed : {
+    ...mapGetters('loginState',['getIsLogin']),
     ...mapGetters('mediaSetting',['getMediaSetting']),
     ...mapGetters('mediaComments',['getMediaComments']),
     comment_data:function(){

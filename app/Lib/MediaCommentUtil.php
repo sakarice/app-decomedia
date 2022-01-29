@@ -20,10 +20,9 @@ class MediaCommentUtil
     "comment" => "comment",
   );
   
-  // 自分が入ったMediaの作成者をフォローしているか確認する。
   public static function show($media_id){
     $comments = MediaComment::where('media_id',$media_id)->get();
-    $my_user_id = Auth::user()->id;
+    $my_user_id = Auth::user() ? Auth::user()->id : null;
     foreach($comments as $comment){
       if($comment['user_id'] == $my_user_id){ // 自分のコメントか判定
         $comment['is_my_comment'] = true;
