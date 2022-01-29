@@ -4938,17 +4938,15 @@ function _defineProperty(obj, key, value) {
     var tmpThis = this;
     var setAudioData = new Promise(function (resolve, reject) {
       tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
-      tmpThis.player.crossOrigin = "anonymous";
-
-      tmpThis.player.onloadstart = function () {
-        tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
-        console.log('onload start');
-
-        if (tmpThis.panningFlag) {
-          tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
-        } else {// tmpThis.inputNode.connect(tmpThis.ctx.destination);
-        }
-      };
+      tmpThis.player.crossOrigin = "anonymous"; // tmpThis.player.onloadstart = function(){
+      //   tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
+      //   console.log('onload start');
+      //   if(tmpThis.panningFlag){
+      //     tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
+      //   } else {
+      //     // tmpThis.inputNode.connect(tmpThis.ctx.destination);
+      //   }
+      // }
 
       tmpThis.setPlayerInfo();
       resolve();
