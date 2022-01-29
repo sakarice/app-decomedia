@@ -149,7 +149,7 @@ a:hover {
 .logged-in-as-guest-msg {
     position: absolute;
     top : 0;
-    left : calc(50% - 20px);
+    left : calc(50% - 25px);
     background-color: greenyellow;
     color: black;
     font-size: 13px;
