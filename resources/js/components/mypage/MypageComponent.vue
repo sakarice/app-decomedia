@@ -1,22 +1,22 @@
 <template>
   <div class="mypage-content-wrapper">
     <!-- profile -->
-    <user-page-profile class="for-pc-tablet"></user-page-profile>
+    <!-- <user-page-profile class="for-pc-tablet"></user-page-profile> -->
 
     <!-- Media -->
     <div class="mypage-action-menu">
       <div class="menu-inner flex j-center a-end">
 
         <!-- メディア表示切り替えボタン -->
-        <div class="mypage-category media-disp-switch"
+        <div class="mypage-category media-disp-switch" @click="changeActiveCategory('media')"
          v-show="!isSelectMode" :class="{'isActive':isShowMedia}">
-          <i id="change-media-mode" class="fas fa-object-group" @click="changeActiveCategory('media')"></i>
+          <i id="change-media-mode" class="fas fa-object-group"></i>
           <span class="action-item-subtitle">メディア</span>
         </div>
         <!-- フォロー中/フォロワーユーザ表示切り替えボタン -->
-        <div class="mypage-category follow-user-disp-switch"
+        <div class="mypage-category follow-user-disp-switch" @click="changeActiveCategory('user')"
          v-show="!isSelectMode" :class="{'isActive':isShowUser}">
-          <i id="change-follow-user-mode" class="fas fa-user-friends" @click="changeActiveCategory('user')"></i>
+          <i id="change-follow-user-mode" class="fas fa-user-friends"></i>
           <span class="action-item-subtitle">ユーザー</span>
         </div>
 
@@ -53,7 +53,7 @@
       <!-- Media作成 -->
       <a class="action-btn-wrapper media-create link flex a-center" v-show="isShowMedia && !isSelectMode" href="/media/create">
         <i class="fas fa-plus media-create-icon"></i>
-        <span class="media-action-btn-label for-pc-tablet">作成</span>
+        <span class="media-action-btn-label">作成</span>
       </a>
       <!-- 選択モードの切り替えボタン -->
       <div class="action-btn-wrapper select-mode-on flex a-center" v-show="isShowMedia && !isSelectMode" @click="toggleSelectMode">
@@ -351,7 +351,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgba(0,0,0,0.3);
+  /* color: rgba(0,0,0,0.3); */
+  color: grey;
   font-size: 2em;
 }
 .mypage-category:hover {
@@ -399,7 +400,7 @@ export default {
 
 .action-item-subtitle {
   margin-top: 5px;
-  font-size:11px;
+  font-size:12px;
 }
 
 
@@ -458,7 +459,7 @@ export default {
 }
 
 .media-action-wrapper{
-  padding-top: 5px;
+  padding: 10px 0 40px 0;
 }
 
 .action-btn-wrapper {
@@ -467,7 +468,7 @@ export default {
   color: grey;
   font-size: 1.8em;
   border-radius: 2px;
-  box-shadow: 1.5px 1.5px 1px slategrey;
+  box-shadow: 0.5px 0.5px 2px slategrey;
 }
 .action-btn-wrapper:hover {
   cursor: pointer;
@@ -483,7 +484,7 @@ export default {
 }
 
 .select-mode-on {
-  background-color: rgb(240,245,245);
+  /* background-color: rgb(240,245,245); */
 }
 .select-mode-on:hover {
   color: blue;
@@ -524,6 +525,7 @@ export default {
 
   .action-item-subtitle {
     color:dimgrey;
+    font-size: 11px;
   }
  
 }
@@ -541,10 +543,14 @@ export default {
   }
 
   .menu-inner {
+    width: 100%;
     padding: 6px 10px 2px 10px;
-    background-color: rgb(245,245,245);
+    /* background-color: rgb(245,245,245); */
+    background-color: black;
+    border:none;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    justify-content: space-around;
   }
 
   .select-mode-item-wrapper {
@@ -575,15 +581,14 @@ export default {
     margin-top: 80px;
   }
 
-
   .section-title {
     font-size: 15px;
   }
 
-
   .mypage-category {
-    margin: 0 18px;
-    font-size: 1.7em;
+    /* margin: 0 18px; */
+    width: 45%;
+    font-size: 1.4em;
   }
 
   .mypage-content-wrapper {
@@ -591,7 +596,12 @@ export default {
   }
 
   .media-action-wrapper{
-    padding-top: 10px;
+    padding: 15px;
+    flex-direction: row-reverse;
+  }
+
+  .action-btn-wrapper {
+    /* flex-direction: column; */
   }
 
   .mypage-section {
@@ -602,13 +612,22 @@ export default {
     background-color: black;
   }
 
+  .action-item-subtitle {
+    margin-top: 0;
+    font-size: 10px;
+  }
+
   .media-create {
-    position: fixed;
+    /* position: fixed;
     bottom: 22px;
-    right: 0;
+    right: 0; */
     font-size: 22px;
     padding: 7px 8px;
     z-index: 30;
+  }
+
+  .media-action-btn-label{
+    font-size: 12px;
   }
 
   .liked-media-list {
@@ -620,14 +639,19 @@ export default {
   }
 
   .select-mode-on {
-    padding: 2px 15px;
+    /* padding: 2px 15px; */
+    font-size: 22px;
+    padding: 7px 8px;
+    z-index: 30;
   }
   .select-mode-on-icon {
     font-size: 20px;
   }
-  .select-mode-on-label {
-    font-size: 13px;
+
+  .isActive {
+    color: white;
   }
+
 
 
 }

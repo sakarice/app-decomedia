@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// ゲストログイン
+Route::get('/login/guest', 'App\Http\Controllers\Auth\LoginController@guestLogin');
+
+
 
 // ★ログイン認証必須ページ
 // ミドルウェアによるログインチェックをかませる
@@ -114,7 +118,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/checkIsLogin', function(){
         return ['isLogin' => Auth::check()];
     });
-
+// ログインユーザがゲストユーザかチェック
+    Route::get('/checkIsGuestLogin', 'App\Http\Controllers\UserController@isCheckGuest');
 
 // Home
     Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

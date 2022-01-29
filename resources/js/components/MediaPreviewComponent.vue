@@ -106,7 +106,7 @@ export default {
 <style scoped>
 
 .media-wrapper {
-  width: 100%;
+  width: 80%;
   padding-left: 0;
   max-width: 1200px;
   display: flex;

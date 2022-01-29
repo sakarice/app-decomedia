@@ -6,6 +6,13 @@
         </div>
         <!-- 右側 -->
         <div class="header-right">
+            <!-- ゲストログイン -->
+            <div class="header-content-wrapper" v-if="!(getIsLogin)">
+                <a class="guest-login header-content" href="/login/guest">ゲストログイン</a>
+            </div>
+            <!-- ゲストログイン中に表示する文言 -->
+            <span v-if="getIsGuest" class="logged-in-as-guest-msg">ゲスト</span>
+
             <!-- ログイン -->
             <div class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="login header-content" href="/login">ログイン</a>
@@ -24,7 +31,8 @@
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
             </div>
-            <div class="header-content-wrapper" v-if="getIsLogin">
+            <!-- ユーザアイコン -->
+            <div class="header-content-wrapper column" v-if="getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
@@ -62,12 +70,9 @@ export default {
     computed : {
         ...mapState('loginState', ['isLogin']),
         ...mapGetters('loginState', ['getIsLogin']),
+        ...mapGetters('loginState', ['getIsGuest']),
     },
     methods : {
-        // toUserProfile : function(){
-        //     console.log("/users/"+this.userInfo['userId']);
-        //     return "/users/" + this.userInfo['userId'];
-        // },
         openProfileModal(){
             this.isShowProfile = true;
         },
@@ -137,10 +142,25 @@ a:hover {
     color: white;
 }
 
-@media screen and (max-width: 400px){
+.column {
+    flex-direction: column;
+}
+
+.logged-in-as-guest-msg {
+    position: absolute;
+    top : 0;
+    left : calc(50% - 25px);
+    background-color: greenyellow;
+    color: black;
+    font-size: 13px;
+    padding: 0 10px;
+}
+
+@media screen and (max-width: 480px){
     .header-content {
         font-size: 0.8rem;
-    }    
+    }
+
 }
 
 
