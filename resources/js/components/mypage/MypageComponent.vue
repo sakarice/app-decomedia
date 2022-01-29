@@ -525,7 +525,7 @@ export default {
 
   .action-item-subtitle {
     color:dimgrey;
-    font-size: 13px;
+    font-size: 11px;
   }
  
 }
