@@ -92,34 +92,45 @@
       },
       panningOn(){
         console.log('panning on');
-        this.inputNode.disconnect();
+        this.setUpAudioContext();
+        this.setUpPanner(this.ctx);
+        this.inputNode = this.ctx.createMediaElementSource(this.player);
+        // this.inputNode.disconnect();
         this.inputNode.connect(this.panner).connect(this.ctx.destination);
       },
       panningOff(){
         console.log('panning off');
+        const cTime = this.player.currentTime;
         this.inputNode.disconnect();
-        this.inputNode.connect(this.ctx.destination);
-        this.inputNode.connect();
+        this.ctx.close();
+        this.player = new Audio(this.getMediaAudios[this.mediaAudioIndex]['audio_url']);
+        this.player.crossOrigin = "anonymous";
+        this.setPlayerInfo();
+        if(this.isPlay){
+          this.player.currentTime = cTime;
+          this.play();
+        }
+        // this.inputNode.connect(this.ctx.destination);
       },
     },
     created : function(){
       // Web Audio APIの準備
-      this.setUpAudioContext();
-      this.setUpPanner(this.ctx);
+      // this.setUpAudioContext();
+      // this.setUpPanner(this.ctx);
 
       let tmpThis = this;
       const setAudioData = new Promise((resolve,reject)=>{
         tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
         tmpThis.player.crossOrigin = "anonymous";
-        // tmpThis.player.onloadstart = function(){
-        //   tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
-        //   console.log('onload start');
-        //   if(tmpThis.panningFlag){
-        //     tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
-        //   } else {
-        //     // tmpThis.inputNode.connect(tmpThis.ctx.destination);
-        //   }
-        // }
+        tmpThis.player.onloadstart = function(){
+          // tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
+          // console.log('onload start');
+          // if(tmpThis.panningFlag){
+          //   tmpThis.inputNode.connect(tmpThis.panner).connect(tmpThis.ctx.destination);
+          // } else {
+          //   tmpThis.inputNode.connect(tmpThis.ctx.destination);
+          // }
+        }
         tmpThis.setPlayerInfo();
         resolve();
       });
