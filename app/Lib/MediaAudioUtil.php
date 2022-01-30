@@ -77,7 +77,11 @@ class MediaAudioUtil
         } else if($media_audio->audio_type == 2) {
           $audio_model = UserOwnAudio::where('id', $media_audio->audio_id)->first();
           $thumbnail_id = UserOwnAudioAudioThumbnail::where('audio_id', $audio_model->id)->first()->audio_thumbnail_id;
-          $thumbnail_url = UserOwnAudioThumbnail::find($thumbnail_id)->img_url;
+          if($thumbnail_id){
+            $thumbnail_url = UserOwnAudioThumbnail::find($thumbnail_id)->thumbnail_url;
+          } else {
+            $thumbnail_url = config('audioThumbnail.url');
+          }
         }
         $tmp_media_audio_data = [
           'id' => $media_audio->audio_id,
