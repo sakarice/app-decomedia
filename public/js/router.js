@@ -5005,8 +5005,10 @@ function _defineProperty(obj, key, value) {
     // this.setUpPanner(this.ctx);
     var tmpThis = this;
     var setAudioData = new Promise(function (resolve, reject) {
-      tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
+      // tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
+      tmpThis.player = new Audio();
       tmpThis.player.crossOrigin = "anonymous";
+      tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
 
       tmpThis.player.onloadstart = function () {// tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
         // console.log('onload start');
