@@ -235,11 +235,6 @@ class MediaUtil
       if(isset($request->audios[0])){
         MediaAudioController::update($media_id, $request);
       }
-      // media音楽
-      if(isset($request->texts[0])){
-        MediaTextController::update($media_id, $request);
-      }
-
       // コンテンツ描画エリア
       MediaContentsFieldController::update($media_id, $request->contents_field);
 
