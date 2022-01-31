@@ -79,7 +79,7 @@ class MediaTextUtil
     if($textNumDiff > 0){
       // 足りない分だけ空のレコードを追加
       for($i=0; $i<$textNumDiff; $i++){
-        MediaTextUtil::addEmptyMediaTextData($media_id);
+        $model = MediaTextUtil::addEmptyMediaTextData($media_id);
       }
     } else if($textNumDiff < 0){
       // 多い分だけレコードを削除
@@ -139,9 +139,12 @@ class MediaTextUtil
     $target_records = MediaText::where('media_id', $media_id)->get();
     foreach($req_datas as $index => $req_data){
       foreach(self::$NAME_PAIRS_IN_COLUMN_AND_PROPERTY as $column_name => $property_name){
+        if($column_name=='media_id'){
+          $target_records[$index]['media_id'] = $media_id;
+          continue;
+        }
         $target_records[$index][$column_name] = $req_data[$property_name];
       }
-      $target_records[$index]['media_id'] = $media_id;
       $target_records[$index]->save();
     }
   }
