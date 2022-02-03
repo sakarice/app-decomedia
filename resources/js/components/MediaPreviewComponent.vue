@@ -108,6 +108,8 @@ export default {
 .media-wrapper {
   width: 80%;
   padding-left: 0;
+  padding: 10px;
+  background-color: white;
   max-width: 1200px;
   display: flex;
   justify-content:flex-start;
