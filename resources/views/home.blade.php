@@ -34,9 +34,9 @@
         </div>
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
-        <div class="search-wrapper">
+        {{-- <div class="search-wrapper"> --}}
             {{-- 検索フォーム --}}
-            <div class="search-form-wrapper">
+            {{-- <div class="search-form-wrapper">
                 <form method="POST" class="search-form" action="/media/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
@@ -45,8 +45,8 @@
                     </button>
                 </form>
             </div>
-            <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p>
-        </div>
+            <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p> --}}
+        {{-- </div> --}}
         {{-- マイページへのリンク --}}
         <div class="link-wrapper">
             <span class="link-message">自分のメディアを作成する。</span>
