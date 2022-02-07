@@ -33,7 +33,7 @@ p {
 
 .sub-message {
   color: lightgray;
-;}
+}
 
 #about-app {
   margin: 5px;
@@ -122,7 +122,7 @@ p {
 }
 
 /* トップ */
-.top-message-wrapper {
+/* .top-message-wrapper {
   position: absolute;
   top: 10%;
   color: white;
@@ -131,9 +131,9 @@ p {
 
 .top-message {
   font-size: 50px;
-  /* text-align: center; */
+  font-family: "Yu Mincho Medium";
   margin-bottom: 0;
-}
+} */
 
 
 .search-wrapper {
