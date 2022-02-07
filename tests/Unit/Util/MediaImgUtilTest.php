@@ -145,7 +145,7 @@ class MediaImgUtilTest extends TestCase
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
-            'layer' => 1.1,
+            'layer' => 2,
         );
 
         // 3. 更新
@@ -158,7 +158,7 @@ class MediaImgUtilTest extends TestCase
             'width' => 1001,
             'height' => 1001,
             'opacity' => 1.1,
-            'img_layer' => 1.1,
+            'img_layer' => 2,
         ]);
     }
 
