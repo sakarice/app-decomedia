@@ -23,7 +23,7 @@
         </div>
         <!-- ゲストログイン＆コンテンツ作成画面へ移動 -->
         <div class="link-wrapper" v-if="!getIsLogin">
-            <span class="link-message">試しにコンテンツを作ってみる</span>
+            <span class="link-message">さっそく試してみる</span>
             <a class="link-to-mypage" href="/login/guest">ゲストとしてコンテンツ作成</a>
         </div>
     </div>
@@ -66,11 +66,15 @@ export default {
 </script>
 
 <style scoped>
+#home-top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 /* トップ */
 .top-message-wrapper {
-  position: absolute;
-  top: 10%;
   color: white;
   text-align: center;
   text-shadow: 2px 2px 5px grey;
@@ -91,12 +95,23 @@ export default {
     margin-top : 200px;
 }
 
+.link-wrapper {
+  /* position: absolute;
+  top: 85%; */
+  font-size: 20px;
+  height: 80px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 
 /* スマホ以上のサイズ(PC、タブレット */
 @media screen and (min-width: 481px) {
-  .top-message-wrapper {
+  /* .top-message-wrapper {
     left: 10%;
-  }
+  } */
 }
 
 /* タブレットサイズ */
@@ -105,7 +120,6 @@ export default {
 /* スマホサイズ */
 @media screen and (max-width: 480px) {
   .top-message-wrapper {
-    /* max-width: 400px; */
     width: 90%;
     font-size: 0.8rem;
     text-align: center;

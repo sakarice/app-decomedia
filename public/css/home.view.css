@@ -8,13 +8,10 @@ p {
   color: #090909;
 }
 
-#home-top {
+#home-top-wrapper {
   position: relative;
-  height: 100vh;
+  height: 90vh;
   width: 100%;
-  padding-bottom: 80px;
-  /* color: white; */
-  /* text-align: center; */
 
   display: flex;
   flex-direction: column;
@@ -192,7 +189,7 @@ p {
 }
 
 
-.link-wrapper {
+/* .link-wrapper {
   position: absolute;
   top: 85%;
   font-size: 20px;
@@ -201,7 +198,7 @@ p {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-}
+} */
 
 .link-to-mypage-button{
   border: none;
@@ -280,10 +277,9 @@ p {
   .top-message {
     font-size: 1.5rem;
   }
-  .link-wrapper {
-    /* 縦積みに */
+  /* .link-wrapper {
     flex-direction: column;
-  }
+  } */
   .about-app {
     width: 90%;
     margin: 0;

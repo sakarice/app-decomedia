@@ -18,7 +18,7 @@
 <body>
 <div id="app">
 
-    <section id="home-top">
+    <section id="home-top-wrapper">
 
         <home-top-component 
         :csrf="{{json_encode(csrf_token())}}">
