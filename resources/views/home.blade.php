@@ -16,9 +16,15 @@
 
 </head>
 <body>
-    <section id="home-top">
+<div id="app">
+
+    <section id="home-top-wrapper">
+
+        <home-top-component 
+        :csrf="{{json_encode(csrf_token())}}">
+        </home-top-component>
         {{-- タイトルコピー --}}
-        <div class="top-message-wrapper">
+        {{-- <div class="top-message-wrapper">
             <h2 class="top-message">
                 <span>創作に手が出せなかった</span><br>
                 <span>あなたへ</span>
@@ -31,12 +37,12 @@
                 ハードルを少しでも下げ、<br>
                 創作を楽しむきっかけを提供します
             </p>
-        </div>
+        </div> --}}
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
-        <div class="search-wrapper">
+        {{-- <div class="search-wrapper"> --}}
             {{-- 検索フォーム --}}
-            <div class="search-form-wrapper">
+            {{-- <div class="search-form-wrapper">
                 <form method="POST" class="search-form" action="/media/show/search/result">
                     @csrf
                     <input class="search-input" type="text" name="keyword" size="30" placeholder="検索ワード">
@@ -45,17 +51,17 @@
                     </button>
                 </form>
             </div>
-            <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p>
-        </div>
+            <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p> --}}
+        {{-- </div> --}}
         {{-- マイページへのリンク --}}
-        <div class="link-wrapper">
+        {{-- <div class="link-wrapper">
             <span class="link-message">自分のメディアを作成する。</span>
             <a class="link-to-mypage" href="/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
-        </div>
+        {{-- </div> --}} --}}
     </section>
 
-    <section id="quick-use-and-warning">
+    {{-- <section id="quick-use-and-warning">
         <p class="use-message-title" style="font-weight:bold;">
             《メディアの視聴》
         </p>
@@ -67,32 +73,35 @@
         <span class="warning-message">
             (メディアに移動すると音楽・動画が再生されます。)<br>
         </span>
-    </section>
+    </section> --}}
 
     <section id="about-app"></section>
 
-    <div id="app">
-        {{-- ヘッダー --}}
-        <header-component
-        :csrf="{{json_encode(csrf_token())}}">
-        </header-component>
+    {{-- <div id="app"> --}}
+    {{-- ヘッダー --}}
+    <header-component
+    :csrf="{{json_encode(csrf_token())}}">
+    </header-component>
 
-        {{-- Mediaの一覧を表示 --}}
-        <section class="recently-posted-medias">
-            <h3 class="section-title recently-posted-title">最近の投稿</h3>
-            {{-- <span class="recently-posted-supplement-info">
-                (サムネイルをタップすると再生画面に移動します)
-            </span> --}}
-            <div class="media-preview-wrapper">
-                <media-preview-component
-                :csrf="{{json_encode(csrf_token())}}"
-                :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
-                :is-show-cover="false">
-                </media-preview-component>
-            </div>
-        </section>
+    {{-- Mediaの一覧を表示 --}}
+    <section class="recently-posted-medias">
+        <h3 class="section-title recently-posted-title">
+            最近作られたコンテンツ(メディア)を視聴<br>
+        </h3>
+        <span class="media-watch-warning">※メディアに移動すると音楽・動画が再生されます</span>
+        {{-- <span class="recently-posted-supplement-info">
+            (サムネイルをタップすると再生画面に移動します)
+        </span> --}}
+        <div class="media-preview-wrapper">
+            <media-preview-component
+            :csrf="{{json_encode(csrf_token())}}"
+            :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
+            :is-show-cover="false">
+            </media-preview-component>
+        </div>
+    </section>
 
-    </div>
+</div>
 
     <script src="{{ mix('/js/app.js') }}"></script>
      

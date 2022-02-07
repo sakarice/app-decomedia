@@ -63,6 +63,7 @@
     z-index: 12;
     height: 60px;
     width: 60px;
+    border-radius: 50%;
 
     display: flex;
     justify-content: center;
@@ -71,7 +72,8 @@
 
 
   .change-disp-audio {
-    color: lightgrey;
+    /* color: lightgrey; */
+    color: yellow;
   }
 
   .change-disp-audio {
@@ -93,12 +95,10 @@
 
   @media screen and (min-width:481px){
     #change-disp-audio-wrapper {
-      border-radius: 50%;
       background-color: rgba(20,20,20,0.7);
     }
     #change-disp-audio-wrapper:hover {
       background-color: rgba(20,20,20,0.9);
-
     }
 
   }
@@ -107,6 +107,7 @@
 
   @media screen and (max-width:480px){
     #change-disp-audio-wrapper {
+      background-color: rgba(20,20,20,0.3);
       bottom: 50px;
       right: 7;
       width: 45px;

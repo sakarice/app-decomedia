@@ -7,9 +7,9 @@
         <!-- 右側 -->
         <div class="header-right">
             <!-- ゲストログイン -->
-            <div class="header-content-wrapper guest-login-wrapper" v-if="!(getIsLogin)">
+            <!-- <div class="header-content-wrapper guest-login-wrapper" v-if="!(getIsLogin)">
                 <a class="guest-login header-content" href="/login/guest">ゲストログイン</a>
-            </div>
+            </div> -->
             <!-- ゲストログイン中に表示する文言 -->
             <span v-if="getIsGuest" class="logged-in-as-guest-msg">ゲスト</span>
 
