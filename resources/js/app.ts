@@ -111,6 +111,7 @@ Vue.component('to-mypage-button-component', require('./components/media/action_p
 
 
 Vue.component('home-component', require('./components/home/HomeComponent.vue').default);
+Vue.component('home-top-component', require('./components/home/HomeTopComponent.vue').default);
 
 
 /**

@@ -16,9 +16,15 @@
 
 </head>
 <body>
+<div id="app">
+
     <section id="home-top">
+
+        <home-top-component 
+        :csrf="{{json_encode(csrf_token())}}">
+        </home-top-component>
         {{-- タイトルコピー --}}
-        <div class="top-message-wrapper">
+        {{-- <div class="top-message-wrapper">
             <h2 class="top-message">
                 <span>創作に手が出せなかった</span><br>
                 <span>あなたへ</span>
@@ -31,7 +37,7 @@
                 ハードルを少しでも下げ、<br>
                 創作を楽しむきっかけを提供します
             </p>
-        </div>
+        </div> --}}
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
         {{-- <div class="search-wrapper"> --}}
@@ -48,11 +54,11 @@
             <p class="sample-keywords">カフェ、雨、勉強、作業用、ロック、自然、chill、etc...</p> --}}
         {{-- </div> --}}
         {{-- マイページへのリンク --}}
-        <div class="link-wrapper">
+        {{-- <div class="link-wrapper">
             <span class="link-message">自分のメディアを作成する。</span>
             <a class="link-to-mypage" href="/mypage">マイページへ</a>
             {{-- <button class="link-to-mypage-button"></button> --}}
-        </div>
+        {{-- </div> --}} --}}
     </section>
 
     <section id="quick-use-and-warning">
@@ -71,28 +77,28 @@
 
     <section id="about-app"></section>
 
-    <div id="app">
-        {{-- ヘッダー --}}
-        <header-component
-        :csrf="{{json_encode(csrf_token())}}">
-        </header-component>
+    {{-- <div id="app"> --}}
+    {{-- ヘッダー --}}
+    <header-component
+    :csrf="{{json_encode(csrf_token())}}">
+    </header-component>
 
-        {{-- Mediaの一覧を表示 --}}
-        <section class="recently-posted-medias">
-            <h3 class="section-title recently-posted-title">最近の投稿</h3>
-            {{-- <span class="recently-posted-supplement-info">
-                (サムネイルをタップすると再生画面に移動します)
-            </span> --}}
-            <div class="media-preview-wrapper">
-                <media-preview-component
-                :csrf="{{json_encode(csrf_token())}}"
-                :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
-                :is-show-cover="false">
-                </media-preview-component>
-            </div>
-        </section>
+    {{-- Mediaの一覧を表示 --}}
+    <section class="recently-posted-medias">
+        <h3 class="section-title recently-posted-title">最近の投稿</h3>
+        {{-- <span class="recently-posted-supplement-info">
+            (サムネイルをタップすると再生画面に移動します)
+        </span> --}}
+        <div class="media-preview-wrapper">
+            <media-preview-component
+            :csrf="{{json_encode(csrf_token())}}"
+            :media-preview-infos='@json($mediaPreviewInfos,JSON_UNESCAPED_SLASHES)'
+            :is-show-cover="false">
+            </media-preview-component>
+        </div>
+    </section>
 
-    </div>
+</div>
 
     <script src="{{ mix('/js/app.js') }}"></script>
      
