@@ -24,7 +24,7 @@
         <!-- ゲストログイン＆コンテンツ作成画面へ移動 -->
         <div class="link-wrapper" v-if="!getIsLogin">
             <span class="link-message">試しにコンテンツを作ってみる</span>
-            <a class="link-to-mypage" href="/login/guest">ゲストログイン＆コンテンツ作成</a>
+            <a class="link-to-mypage" href="/login/guest">ゲストとしてコンテンツ作成</a>
         </div>
     </div>
 
