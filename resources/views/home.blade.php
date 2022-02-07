@@ -13,6 +13,15 @@
     {{-- <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"> --}}
 
     <title>Decomedia</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-219618733-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-219618733-1');
+</script>
 
 </head>
 <body>
@@ -85,6 +94,7 @@
 
     {{-- Mediaの一覧を表示 --}}
     <section class="recently-posted-medias">
+        {{-- <p class="sub-title">Medias</p> --}}
         <h3 class="section-title recently-posted-title">
             最近作られたコンテンツ(メディア)を視聴<br>
         </h3>
