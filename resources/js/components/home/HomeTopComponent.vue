@@ -26,6 +26,10 @@
             <span class="link-message">さっそく試してみる</span>
             <a class="link-to-mypage" href="/login/guest">ゲストとしてコンテンツ作成</a>
         </div>
+
+        <!-- <div class="media-watch-message">
+            他の人の作ったコンテンツ(メディア)を視聴する
+        </div> -->
     </div>
 
 </template>
@@ -104,6 +108,10 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.media-watch-message {
+  height: 80px;
 }
 
 

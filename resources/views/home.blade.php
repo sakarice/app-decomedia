@@ -61,7 +61,7 @@
         {{-- </div> --}} --}}
     </section>
 
-    <section id="quick-use-and-warning">
+    {{-- <section id="quick-use-and-warning">
         <p class="use-message-title" style="font-weight:bold;">
             《メディアの視聴》
         </p>
@@ -73,7 +73,7 @@
         <span class="warning-message">
             (メディアに移動すると音楽・動画が再生されます。)<br>
         </span>
-    </section>
+    </section> --}}
 
     <section id="about-app"></section>
 
@@ -85,7 +85,10 @@
 
     {{-- Mediaの一覧を表示 --}}
     <section class="recently-posted-medias">
-        <h3 class="section-title recently-posted-title">最近の投稿</h3>
+        <h3 class="section-title recently-posted-title">
+            最近作られたコンテンツ(メディア)を視聴<br>
+        </h3>
+        <span class="media-watch-warning">※メディアに移動すると音楽・動画が再生されます</span>
         {{-- <span class="recently-posted-supplement-info">
             (サムネイルをタップすると再生画面に移動します)
         </span> --}}

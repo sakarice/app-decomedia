@@ -226,7 +226,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 .recently-posted-supplement-info {
@@ -238,6 +238,13 @@ p {
 
 .section-title {
   text-align: center;
+  margin: 0;
+}
+
+.media-watch-warning {
+  color:red;
+  text-align: center;
+  margin-top: 5px;
 }
 
 .media-preview-wrapper {
