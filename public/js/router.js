@@ -5007,10 +5007,16 @@ function _defineProperty(obj, key, value) {
     var setAudioData = new Promise(function (resolve, reject) {
       // tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
       tmpThis.player = new Audio();
-      tmpThis.player.crossOrigin = "anonymous";
-      tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
-      tmpThis.setPlayerInfo();
-      resolve();
+      var setCrossOriginSetting = new Promise(function (resolve, reject) {
+        tmpThis.player.crossOrigin = "anonymous";
+        resolve();
+      });
+      setCrossOriginSetting.then(function () {
+        // tmpThis.player.crossOrigin = "anonymous";
+        tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+        tmpThis.setPlayerInfo();
+        resolve();
+      });
 
       tmpThis.player.onloadstart = function () {// tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
         // console.log('onload start');
