@@ -5007,13 +5007,10 @@ function _defineProperty(obj, key, value) {
     var setAudioData = new Promise(function (resolve, reject) {
       // tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
       tmpThis.player = new Audio();
-
-      tmpThis.player.onloadedmetadata = function () {
-        tmpThis.player.crossOrigin = "anonymous";
-        tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
-        tmpThis.setPlayerInfo();
-        resolve();
-      };
+      tmpThis.player.crossOrigin = "anonymous";
+      tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+      tmpThis.setPlayerInfo();
+      resolve();
 
       tmpThis.player.onloadstart = function () {// tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
         // console.log('onload start');
