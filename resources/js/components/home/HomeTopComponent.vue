@@ -96,15 +96,11 @@ export default {
     font-family: "Yu Mincho Medium";
     /* text-align: center; */
     overflow-wrap:break-word;
-    word-break: break-all;
+    word-break: keep-all;
 }
 
 .sub-catch-copy {
     font-family: serif;
-}
-
-.sub-message {
-    margin-top : 200px;
 }
 
 .link-wrapper {
