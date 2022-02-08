@@ -122,8 +122,12 @@
       const setAudioData = new Promise((resolve,reject)=>{
         // tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
         tmpThis.player = new Audio();
-        tmpThis.player.crossOrigin = "anonymous";
-        tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+        tmpThis.player.onloadedmetadata = function(){
+          tmpThis.player.crossOrigin = "anonymous";
+          tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+          tmpThis.setPlayerInfo();
+          resolve();
+        }
         tmpThis.player.onloadstart = function(){
           // tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
           // console.log('onload start');
@@ -133,8 +137,6 @@
           //   tmpThis.inputNode.connect(tmpThis.ctx.destination);
           // }
         }
-        tmpThis.setPlayerInfo();
-        resolve();
       });
       setAudioData.then(function(){
         tmpThis.player.addEventListener('loadedmetadata', function(){

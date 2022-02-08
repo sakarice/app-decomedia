@@ -2249,8 +2249,8 @@ function _defineProperty(obj, key, value) {
       playTargetAudio['isPlay'] = true; // audioエレメントを初期化
       // this.audioPlayer = new Audio(playTargetAudio['audio_url']);
 
+      this.audioPlayer.crossOrigin = "anonymous";
       this.audioPlayer.src = playTargetAudio['audio_url']; // クロスオリジン設定をリクエストヘッダにを付与
-      // this.audioPlayer.crossOrigin = "anonymous";
       // this.audioPlayer.onloadstart = this.setUpWebAudio();
 
       if (this.isPlay == true) {
@@ -5007,8 +5007,13 @@ function _defineProperty(obj, key, value) {
     var setAudioData = new Promise(function (resolve, reject) {
       // tmpThis.player = new Audio(tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url']);
       tmpThis.player = new Audio();
-      tmpThis.player.crossOrigin = "anonymous";
-      tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+
+      tmpThis.player.onloadedmetadata = function () {
+        tmpThis.player.crossOrigin = "anonymous";
+        tmpThis.player.src = tmpThis.getMediaAudios[tmpThis.mediaAudioIndex]['audio_url'];
+        tmpThis.setPlayerInfo();
+        resolve();
+      };
 
       tmpThis.player.onloadstart = function () {// tmpThis.inputNode = tmpThis.ctx.createMediaElementSource(tmpThis.player);
         // console.log('onload start');
@@ -5018,9 +5023,6 @@ function _defineProperty(obj, key, value) {
         //   tmpThis.inputNode.connect(tmpThis.ctx.destination);
         // }
       };
-
-      tmpThis.setPlayerInfo();
-      resolve();
     });
     setAudioData.then(function () {
       tmpThis.player.addEventListener('loadedmetadata', function () {

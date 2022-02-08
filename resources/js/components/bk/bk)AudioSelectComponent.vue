@@ -95,8 +95,8 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
-import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+import closeModalBar from '../media/change_display_parts/CloseModalBarComponent.vue'
+import closeModalIcon from '../media/change_display_parts/CloseModalIconComponent.vue'
 
 export default {
   components : {
