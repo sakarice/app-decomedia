@@ -13,7 +13,7 @@
                 <!-- 必要なのは「作ってみたい」という好奇心だけ。<br>
                 今こそクリエイティブを体験しよう。<br> -->
                 画像や音楽を「選んで配置する」だけ。<br>
-                1分でできるコンテンツ制作。<br>
+                1分でコンテンツを作ろう。<br>
             </p>
         </div>
 
@@ -136,6 +136,11 @@ export default {
   .top-message {
     font-size: 1.5rem;
   }
+
+  .sub-message {
+    margin-top : 160px;
+  }
+
   .link-wrapper {
     /* 縦積みに */
     flex-direction: column;
