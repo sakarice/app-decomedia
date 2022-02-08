@@ -194,9 +194,9 @@ export default {
 
       // audioエレメントを初期化
       // this.audioPlayer = new Audio(playTargetAudio['audio_url']);
+      this.audioPlayer.crossOrigin = "anonymous";
       this.audioPlayer.src = playTargetAudio['audio_url'];
       // クロスオリジン設定をリクエストヘッダにを付与
-      // this.audioPlayer.crossOrigin = "anonymous";
       // this.audioPlayer.onloadstart = this.setUpWebAudio();
       if(this.isPlay==true){
         this.audioPlayer.play();

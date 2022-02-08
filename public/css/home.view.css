@@ -222,11 +222,18 @@ p {
   text-decoration: none;
 }
 
+.sub-title{
+  font-family: "Cormolant", serif;
+  font-size: 11px;
+  text-align: center;
+  color: lightgray;
+  margin: 0;
+}
+
 .recently-posted-medias {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px 0;
 }
 
 .recently-posted-supplement-info {
@@ -238,13 +245,15 @@ p {
 
 .section-title {
   text-align: center;
-  margin: 0;
+  font-family: "Yu Gothic";
+  margin: 20px 0 0 0;
 }
 
 .media-watch-warning {
   color:red;
   text-align: center;
   margin-top: 5px;
+  margin-bottom: 20px;
 }
 
 .media-preview-wrapper {
