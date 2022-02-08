@@ -3,7 +3,7 @@
         <!-- {{-- タイトルコピー --}} -->
         <div class="top-message-wrapper">
             <h2 class="top-message">
-                <span>創作に手が出せなかったあなたへ</span><br>
+                <span>創作に手が出せなかった あなたへ</span><br>
             </h2>
             <!-- <h3 class="sub-catch-copy">
                 <span>画像や音楽を「選んで配置する」だけ。</span><br>
@@ -72,6 +72,7 @@ export default {
 <style scoped>
 #home-top {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -79,16 +80,23 @@ export default {
 
 /* トップ */
 .top-message-wrapper {
-  color: white;
-  text-align: center;
-  text-shadow: 2px 2px 5px grey;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 5px grey;
 }
 
 .top-message {
-  font-size: 50px;
-  font-family: "Yu Mincho Medium";
-  /* text-align: center; */
-  margin-bottom: 0;
+    margin-bottom: 0;
+    margin-top: 110px;
+    font-size: 50px;
+    font-family: "Yu Mincho Medium";
+    /* text-align: center; */
+    overflow-wrap:break-word;
+    word-break: break-all;
 }
 
 .sub-catch-copy {
