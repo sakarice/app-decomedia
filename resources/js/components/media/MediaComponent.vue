@@ -436,10 +436,6 @@ export default {
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
 
-  #disp-modal-wrapper {
-    width: auto;
-  }
-
   .icon-wrapper {
     padding: 12px;
 
