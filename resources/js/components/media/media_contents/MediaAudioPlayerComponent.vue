@@ -39,14 +39,14 @@
         return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
       },
       panner_x : function(){
-        if(this.getMediaAudios[this.mediaAudioIndex]['positionX']){
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionX'] != 0){
           return this.getMediaAudios[this.mediaAudioIndex]['positionX'];
         } else {
           return 0;
         }
       },
       panner_z : function(){
-        if(this.getMediaAudios[this.mediaAudioIndex]['positionZ']){
+        if(this.getMediaAudios[this.mediaAudioIndex]['positionZ'] != 0){
           return this.getMediaAudios[this.mediaAudioIndex]['positionZ'];
         } else {
           return 0;

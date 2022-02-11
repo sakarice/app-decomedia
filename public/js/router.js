@@ -2322,6 +2322,8 @@ function _defineProperty(obj, key, value) {
 
       var stereoSetting = this.getStereoPhonicArrangeDefault;
       Object.assign(audio, stereoSetting);
+      audio['positionX'] = Math.random() * 10 - 5;
+      audio['positionZ'] = Math.random() * 10 - 5;
       this.addMediaAudiosObjectItem(audio);
     },
     dragEnter: function dragEnter() {
@@ -4901,14 +4903,14 @@ function _defineProperty(obj, key, value) {
       return this.getMediaAudios[this.mediaAudioIndex]['panningModel'];
     },
     panner_x: function panner_x() {
-      if (this.getMediaAudios[this.mediaAudioIndex]['positionX']) {
+      if (this.getMediaAudios[this.mediaAudioIndex]['positionX'] != 0) {
         return this.getMediaAudios[this.mediaAudioIndex]['positionX'];
       } else {
         return 0;
       }
     },
     panner_z: function panner_z() {
-      if (this.getMediaAudios[this.mediaAudioIndex]['positionZ']) {
+      if (this.getMediaAudios[this.mediaAudioIndex]['positionZ'] != 0) {
         return this.getMediaAudios[this.mediaAudioIndex]['positionZ'];
       } else {
         return 0;
