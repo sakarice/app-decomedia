@@ -4582,6 +4582,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -21416,7 +21417,7 @@ var render = function () {
             expression: "!isShowAudio",
           },
         ],
-        staticClass: "fas fa-music fa-2x change-disp-audio",
+        staticClass: "fas fa-headphones-alt fa-2x change-disp-audio",
         on: {
           click: function ($event) {
             return _vm.changeDispAudioState()
@@ -24648,9 +24649,12 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "size-Adjust-box" }, [
-      _c("i", {
-        staticClass: "fas fa-headphones-alt fa-2x",
-        attrs: { id: "disp-panning-setting-icon" },
+      _c("img", {
+        staticStyle: { width: "40px" },
+        attrs: {
+          src: "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/sround1.svg",
+          alt: "",
+        },
       }),
     ])
   },

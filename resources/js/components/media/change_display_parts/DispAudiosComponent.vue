@@ -1,6 +1,6 @@
 <template>
   <div id="change-disp-audio-wrapper" v-show="isShowAudios">
-    <i @click="changeDispAudioState()" class="fas fa-music fa-2x change-disp-audio" v-show="!isShowAudio"></i>
+    <i @click="changeDispAudioState()" class="fas fa-headphones-alt fa-2x change-disp-audio" v-show="!isShowAudio"></i>
     <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
     <span class="audio-num">{{mediaAudioNum}}</span>
   </div>
