@@ -11770,7 +11770,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.sub-header[data-v-09bac18e] {\r\n  position: fixed;\r\n  top: 40px;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(253, 253, 255, 0.8);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-09bac18e] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-09bac18e] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-09bac18e] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-09bac18e] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-09bac18e] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-09bac18e]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-09bac18e] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-09bac18e]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-09bac18e] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-09bac18e] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (max-width:480px){\n.header-content[data-v-09bac18e] {\r\n        margin: 5px 0px;\n}\n.header-center[data-v-09bac18e] {\r\n        position: absolute;\r\n        left: 40%;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.sub-header[data-v-09bac18e] {\r\n  position: fixed;\r\n  top: 40px;\r\n  padding: 5px 0;\r\n  z-index: 10;\r\n  width: 100%;\r\n  background-color: rgba(253, 253, 255, 0.8);\r\n  display: flex;\r\n\r\n  justify-content: space-between;\r\n  align-items: center;\n}\n.header-block[data-v-09bac18e] {\r\n  display: flex;\r\n  justify-content: space-around;\n}\n.header-left[data-v-09bac18e] {\r\n  margin-left: 10px;\n}\n.header-center[data-v-09bac18e] {\r\n    margin: 0 10px;\n}\n.header-right[data-v-09bac18e] {\r\n  margin-right: 10px;\n}\n.header-content[data-v-09bac18e] {\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    color: white;\r\n    margin: 5px 20px;\r\n    opacity: 0.9;\n}\n.header-content[data-v-09bac18e]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* aタグ全体の設定 */\na[data-v-09bac18e] {\r\n    color: white;\r\n    text-decoration: none;\n}\na[data-v-09bac18e]:hover {\r\n    color: aquamarine;\n}\n.user-icon[data-v-09bac18e] {\r\n    background-color: white;\r\n    display: flex;\r\n    justify-content: center;\r\n    align-items: center;\r\n    width: 36px;\r\n    height: 36px;\r\n    padding: 2px;    \r\n    border-radius: 50%;\n}\n#profile-img[data-v-09bac18e] {\r\n    width: 30px;\r\n    height: 30px;\r\n    color: white;\n}\n@media screen and (min-width:481px){\n.header-left[data-v-09bac18e] {\r\n        min-width:100px;\n}\n.header-right[data-v-09bac18e] {\r\n        min-width:100px;\n}\n}\n@media screen and (max-width:480px){\n.header-content[data-v-09bac18e] {\r\n        margin: 5px 0px;\n}\n.header-center[data-v-09bac18e] {\r\n        position: absolute;\r\n        left: 40%;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11871,7 +11871,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.link-to-edit-mode[data-v-82371542] {\r\n  color: black;\n}\n.link-to-edit-mode[data-v-82371542]:hover {\r\n  color: rgb(0,130,255);\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11897,7 +11897,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.link-to-show-mode[data-v-2d7d2ccc] {\r\n  color:black;\n}\n.link-to-show-mode[data-v-2d7d2ccc]:hover {\r\n  color: rgb(0,130,255);\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11923,7 +11923,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.to-mypage-button-wrapper[data-v-0be5d7b3] {\r\n    color: black;\r\n    outline: 1px solid lightgrey;\r\n    padding: 1px 10px;\r\n    border-radius: 3px;\r\n    text-decoration: none;\n}\n.to-mypage-button-wrapper[data-v-0be5d7b3]:hover {\r\n    outline: 1px solid black;\n}\n.to-mypage-button[data-v-0be5d7b3] {\r\n    font-size: 15px;\n}\n@media screen and (max-width: 480px) {\n.mypage-icon-wrapper[data-v-0be5d7b3] {\r\n      display: none;\n}\n.to-mypage-button-wrapper[data-v-0be5d7b3] {\r\n    transform: scale(1);\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.to-mypage-button-wrapper[data-v-0be5d7b3] {\r\n    color: black;\r\n    outline: 1px solid lightgrey;\r\n    padding: 1px 10px;\r\n    border-radius: 3px;\r\n    text-decoration: none;\n}\n.to-mypage-button-wrapper[data-v-0be5d7b3]:hover {\r\n    outline: 1px solid black;\n}\n.to-mypage-button[data-v-0be5d7b3] {\r\n    font-size: 15px;\n}\n.to-mypage-button[data-v-0be5d7b3]::before {\r\n    content: \"<\";\r\n    margin-right: 5px;\n}\n@media screen and (max-width: 480px) {\n.mypage-icon-wrapper[data-v-0be5d7b3] {\r\n      display: none;\n}\n.to-mypage-button-wrapper[data-v-0be5d7b3] {\r\n    transform: scale(1);\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13252,7 +13252,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  margin: 0 15px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:11px;\r\n  color: grey;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".action-button-wrapper {\r\n  margin: 0 5px;\r\n}\r\n\r\n.action-button {\r\n  z-index: 1;\r\n  font-family: Inter,Noto Sans JP;\r\n  border-radius: 4px;\r\n  border: solid 1px grey;\r\n  box-shadow: 0.5px 0.5px 1px lightslategrey;\r\n}\r\n\r\n.action-button:hover {\r\n  background-color: aqua;\r\n}\r\n\r\n\r\n.action-trigger-wrapper {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  margin: 0 15px;\r\n  color: white;\r\n}\r\n.action-trigger {\r\n  padding: 2px;\r\n  border-radius: 50%;\r\n  transition: 0.13s;\r\n}\r\n.action-trigger:hover {\r\n  cursor: pointer;\r\n}\r\n\r\n.action-trigger-subtitle {\r\n  font-size:10px;\r\n  color: grey;\r\n}\r\n\r\n\r\n/* スマホ以外 */\r\n@media screen and (min-width: 481px) {\r\n\r\n}\r\n\r\n/* スマホ */\r\n@media screen and (max-width: 480px) {\r\n  .action-trigger-wrapper {\r\n    margin: 0 5px;\r\n  }\r\n  .action-trigger {\r\n    transform: scale(0.8);\r\n  }\r\n\r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21481,7 +21481,7 @@ var render = function () {
         },
         [
           _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
-            _c("i", { staticClass: "fas fa-pen fa-lg edit-mode-icon" }),
+            _c("i", { staticClass: "fas fa-pen edit-mode-icon" }),
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "action-trigger-subtitle" }),
@@ -21515,12 +21515,12 @@ var render = function () {
     ? _c(
         "router-link",
         {
-          staticClass: "change-mode action-trigger-wrapper link-to-show-media",
+          staticClass: "change-mode action-trigger-wrapper link-to-show-mode",
           attrs: { to: "/media/" + _vm.getMediaId },
         },
         [
           _c("div", { staticClass: "action-trigger mode-icon-wrapper" }, [
-            _c("i", { staticClass: "fas fa-tv fa-lg show-mode-icon" }),
+            _c("i", { staticClass: "fas fa-tv show-mode-icon" }),
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "action-trigger-subtitle" }),

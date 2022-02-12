@@ -1,7 +1,7 @@
 <template>
   <router-link v-if="isShow" :to="'/media/'+getMediaId+'/edit'" class="change-mode action-trigger-wrapper link-to-edit-mode">
     <div class="action-trigger mode-icon-wrapper">
-      <i class="fas fa-pen fa-lg edit-mode-icon"></i>
+      <i class="fas fa-pen edit-mode-icon"></i>
     </div>
     <span class="action-trigger-subtitle"></span>
   </router-link>
@@ -34,6 +34,13 @@ import { mapGetters } from 'vuex';
 .edit-mode-icon {
   display: inline-block;
 }
+.link-to-edit-mode {
+  color: black;
+}
+.link-to-edit-mode:hover {
+  color: rgb(0,130,255);
+}
+
 
 .action-trigger-subtitle::after {
   content: '編集モードへ';
