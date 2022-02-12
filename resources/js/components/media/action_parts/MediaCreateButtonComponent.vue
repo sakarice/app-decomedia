@@ -73,7 +73,6 @@
 .media-store-btn-wrapper {
   color: white;
   background-color: rgb(0,170,0);
-  box-shadow: 1px 1px 0px darkslategray;
   padding: 1px 10px;
   border-radius: 3px;
 }
@@ -94,7 +93,6 @@
 
   .media-store-btn-wrapper {
     transform: scale(1);
-    box-shadow: 0px 0px;
     padding: 0px 10px;
   }
 
