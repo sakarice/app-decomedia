@@ -171,6 +171,11 @@ a:hover {
 }
 
 @media screen and (max-width:480px){
+
+    .sub-header {
+        min-height: 40px;
+    }
+
     .header-content {
         margin: 5px 0px;
     }
