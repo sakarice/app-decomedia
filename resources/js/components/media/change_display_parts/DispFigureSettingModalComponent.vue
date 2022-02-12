@@ -16,16 +16,11 @@
 </script>
 
 <style scoped>
+@import "/resources/css/dispIconCommon.css";
 
   #disp-figure-setting-modal-wrapper {
     color: skyblue;
   }
 
-  .icon-wrapper {
-    padding: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
 </style>

@@ -435,14 +435,7 @@ export default {
 @import "/resources/css/mediaCommon.css";
 @import "/resources/css/mediaModals.css";
 @import "/resources/css/modalAnimation.css";
-
-  .icon-wrapper {
-    padding: 12px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+@import "/resources/css/dispIconCommon.css";
 
   .setting-icon {
     color : lightgrey;

@@ -35,7 +35,7 @@ body {
 
 #disp-modal-wrapper {
   z-index: 1;
-  background-color:#333333;
+  background-color:rgba(0,0,0,0.8);
 
   display: flex;
   justify-content: center;
@@ -80,9 +80,8 @@ body {
   #disp-modal-wrapper {
     width: auto;
     flex-direction: column;
-    padding: 8px 3px 8px 6px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    padding: 8px 0;
+    border-radius: 50px;
   }
   #disp-modal-zone {
     left: 0;
@@ -100,17 +99,16 @@ body {
 
   #disp-modal-zone {
     /* right: 0; */
-    bottom: 0;
-    width: 95%;
+    bottom: 1px;
+    width: 100%;
+    padding: 0 35px;
   }
 
   #disp-modal-wrapper {
     justify-content: flex-start;
-    padding: 5px 25px;
-    /* border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;   */
-    border-radius: 5px;
-    width: 80%;
+    padding: 0px 15px;
+    border-radius: 50px;
+    width: 100%;
     height: 50px;
     overflow-x: scroll;
   }

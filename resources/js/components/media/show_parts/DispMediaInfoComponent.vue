@@ -20,13 +20,7 @@
 </script>
 
 <style scoped>
-
-  .icon-wrapper {
-    padding: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+@import "/resources/css/dispIconCommon.css";
 
   #disp-media-info-wrapper {
     color: white;
