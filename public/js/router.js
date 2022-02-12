@@ -5377,7 +5377,7 @@ function _defineProperty(obj, key, value) {
       });
       this.updateMediaContentsFieldObjectItem({
         key: 'height',
-        value: Math.floor(window.innerHeight * 0.8)
+        value: Math.floor((window.innerHeight - 70) * 0.85)
       });
     }
   }
@@ -12492,7 +12492,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-wrapper[data-v-4aeb2870] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  /* width: 100%; */\n  height: 100%;\n  margin-top: 70px;\n  margin-bottom: 10px;\n}\n#media-contents-field[data-v-4aeb2870] {\n  overflow: hidden;\n  position: relative;\n  background-color: rgb(255,255,255);\n}\n@media screen and (max-width:480px) {\n#media-contents-field-wrapper[data-v-4aeb2870] {\n    margin-top: 45px;\n    margin-bottom: 55px;\n}\n#media-contents-field[data-v-4aeb2870] {\n    width: 95%;\n}\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-wrapper[data-v-4aeb2870] {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  /* width: 100%; */\n  height: 100%;\n  margin-top: 70px;\n  margin-bottom: 10px;\n}\n#media-contents-field[data-v-4aeb2870] {\n  overflow: hidden;\n  position: relative;\n  background-color: rgb(255,255,255);\n}\n@media screen and (max-width:480px) {\n#media-contents-field-wrapper[data-v-4aeb2870] {\n    margin-top: 85px;\n    margin-bottom: 55px;\n}\n#media-contents-field[data-v-4aeb2870] {\n    width: 95%;\n}\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

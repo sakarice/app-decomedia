@@ -95,7 +95,7 @@ import {mapGetters,mapMutations} from 'vuex';
       const mode = this.$route.path;
       if(mode.match(/create/)){
         this.updateMediaContentsFieldObjectItem({key:'width', value:Math.floor(window.innerWidth*0.9)});
-        this.updateMediaContentsFieldObjectItem({key:'height', value:Math.floor(window.innerHeight*0.8)});
+        this.updateMediaContentsFieldObjectItem({key:'height', value:Math.floor((window.innerHeight - 70)*0.85)});
       }
     },
   }
@@ -121,7 +121,7 @@ import {mapGetters,mapMutations} from 'vuex';
 
   @media screen and (max-width:480px) {
     #media-contents-field-wrapper {
-      margin-top: 45px;
+      margin-top: 85px;
       margin-bottom: 55px;
     }
 
