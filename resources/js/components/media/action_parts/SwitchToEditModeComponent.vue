@@ -36,7 +36,7 @@ import { mapGetters } from 'vuex';
 }
 .link-to-edit-mode {
   color: black;
-  padding: 5px;
+  padding: 1px 4px;
 }
 .link-to-edit-mode:hover {
   background-color: rgb(238,238,240);

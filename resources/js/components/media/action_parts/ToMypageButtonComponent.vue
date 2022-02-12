@@ -43,7 +43,7 @@
   }
 
   .to-mypage-button {
-    font-size: 15px;
+    font-size: 12px;
   }
   .to-mypage-button::before {
     content: "<";
