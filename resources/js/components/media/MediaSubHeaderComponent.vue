@@ -94,7 +94,6 @@ export default {
 .sub-header {
   position: fixed;
   top: 40px;
-  padding: 5px 0;
   z-index: 10;
   width: 100%;
   background-color: rgba(253, 253, 255, 0.8);
@@ -138,9 +137,6 @@ export default {
 a {
     color: white;
     text-decoration: none;
-}
-a:hover {
-    color: aquamarine;
 }
 
 .user-icon {
