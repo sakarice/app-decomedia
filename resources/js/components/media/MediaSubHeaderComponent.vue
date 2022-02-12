@@ -96,6 +96,7 @@ export default {
   top: 40px;
   z-index: 10;
   width: 100%;
+  min-height: 35px;
   background-color: rgba(253, 253, 255, 0.8);
   display: flex;
 
@@ -167,10 +168,6 @@ a {
 }
 
 @media screen and (max-width:480px){
-
-    .sub-header {
-        min-height: 40px;
-    }
 
     .header-content {
         margin: 5px 0px;
