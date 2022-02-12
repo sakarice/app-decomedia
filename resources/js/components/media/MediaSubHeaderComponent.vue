@@ -160,6 +160,16 @@ a:hover {
     color: white;
 }
 
+@media screen and (min-width:481px){
+    .header-left {
+        min-width:100px;
+    }
+
+    .header-right {
+        min-width:100px;
+    }    
+}
+
 @media screen and (max-width:480px){
     .header-content {
         margin: 5px 0px;
