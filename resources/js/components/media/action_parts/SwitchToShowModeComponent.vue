@@ -36,9 +36,10 @@ import { mapGetters } from 'vuex';
 }
 .link-to-show-mode {
   color:black;
+  padding: 5px;
 }
 .link-to-show-mode:hover {
-  color: rgb(0,130,255);
+  background-color: rgb(238,238,240);
 }
 
 .action-trigger-subtitle::after {
