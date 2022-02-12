@@ -2322,8 +2322,8 @@ function _defineProperty(obj, key, value) {
 
       var stereoSetting = this.getStereoPhonicArrangeDefault;
       Object.assign(audio, stereoSetting);
-      audio['positionX'] = Math.random() * 10 - 5;
-      audio['positionZ'] = Math.random() * 10 - 5;
+      audio['positionX'] = Math.random() * 4 - 2;
+      audio['positionZ'] = Math.random() * 4 - 2;
       this.addMediaAudiosObjectItem(audio);
     },
     dragEnter: function dragEnter() {

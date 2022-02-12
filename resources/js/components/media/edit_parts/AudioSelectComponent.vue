@@ -266,8 +266,8 @@ export default {
       // 立体音響用のデフォルト設定を追加する
       const stereoSetting = this.getStereoPhonicArrangeDefault;
       Object.assign(audio, stereoSetting);
-      audio['positionX'] = Math.random() * 10 - 5;
-      audio['positionZ'] = Math.random() * 10 - 5;
+      audio['positionX'] = Math.random() * 4 - 2;
+      audio['positionZ'] = Math.random() * 4 - 2;
       
       this.addMediaAudiosObjectItem(audio);
     },
