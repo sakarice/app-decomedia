@@ -164,19 +164,24 @@ a {
 
     .header-right {
         min-width:100px;
+        margin-right: 5px;
     }    
 }
 
 @media screen and (max-width:480px){
 
     .header-content {
-        margin: 5px 0px;
+        margin: 0;
     }
 
-    .header-center {
-        position: absolute;
-        left: 40%;
+    .header-left {
+        min-width:50px;
     }
+
+    .header-right {
+        min-width:50px;
+    }    
+
 
 }
 
