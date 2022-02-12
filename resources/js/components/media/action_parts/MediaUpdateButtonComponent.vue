@@ -2,9 +2,9 @@
 
     <div class="action-trigger-wrapper">
       <div class="action-trigger update-icon-wrapper" @click="updateMedia">
-        <i class="fas fa-check fa-lg update-icon"></i>
+        <!-- <i class="fas fa-check fa-lg update-icon"></i> -->
+        <span class="media-update-btn">更新</span>
       </div>
-      <span class="action-trigger-subtitle">更新</span>
     </div>
 
 </template>

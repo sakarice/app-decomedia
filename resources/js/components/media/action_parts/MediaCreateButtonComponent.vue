@@ -1,8 +1,8 @@
 <template>
 
     <div class="action-trigger-wrapper">
-      <div class="action-trigger media-store-button-wrapper" @click="createMedia">
-        <span class="media-store-button">保存</span>
+      <div class="action-trigger media-store-btn-wrapper" @click="createMedia">
+        <span class="media-store-btn">保存</span>
       </div>
     </div>
 
@@ -70,18 +70,18 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-.media-store-button-wrapper {
+.media-store-btn-wrapper {
   color: white;
   outline: 1px solid deepskyblue;
   padding: 1px 10px;
   border-radius: 3px;
 }
 
-.media-store-button-wrapper:hover {
+.media-store-btn-wrapper:hover {
   background-color: deepskyblue;
 }
 
-.media-store-button {
+.media-store-btn {
   font-size: 15px;
 }
 
@@ -91,7 +91,7 @@
     display: none;
   }
 
-  .media-store-button-wrapper {
+  .media-store-btn-wrapper {
     transform: scale(1);
   }
 
