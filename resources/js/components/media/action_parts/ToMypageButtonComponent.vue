@@ -1,10 +1,9 @@
 <template>
 
   <div v-if="getIsLogin" class="action-trigger-wrapper mypage-icon-wrapper">
-    <a class="action-trigger" href="/mypage">
-      <i class="far fa-user fa-lg mypage-icon"></i>
+    <a class="action-trigger to-mypage-button-wrapper" href="/mypage">
+      <span class="to-mypage-button">マイページへ</span>
     </a>
-    <span class="action-trigger-subtitle">マイページへ</span>
   </div>
 
 </template>
@@ -31,11 +30,24 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-  .mypage-icon {
-    color: white;
+  .to-mypage-button-wrapper {
+    color: black;
+    outline: 1px solid lightgrey;
+    padding: 1px 10px;
+    border-radius: 3px;
+    text-decoration: none;
   }
-  .mypage-icon:hover {
-    color: yellow;
+
+  .to-mypage-button-wrapper:hover {
+    outline: 1px solid black;
+  }
+
+  .to-mypage-button {
+    font-size: 12px;
+  }
+  .to-mypage-button::before {
+    content: "<";
+    margin-right: 5px;
   }
 
 
@@ -43,6 +55,11 @@
     .mypage-icon-wrapper {
       display: none;
     }
+
+  .to-mypage-button-wrapper {
+    transform: scale(1);
+  }
+
   }
 
 </style>

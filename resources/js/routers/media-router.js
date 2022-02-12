@@ -1,6 +1,7 @@
 
 import Media from '../components/media/MediaComponent.vue';
-import MediaHeader from '../components/media/MediaHeaderComponent.vue';
+import MediaHeader from '../components/media/header/MediaHeaderComponent.vue';
+import MediaSubHeader from '../components/media/header/MediaSubHeaderComponent.vue';
 import MediaOwnerInfo from '../components/media/show_parts/MediaOwnerInfoComponent.vue';
 import MediaCommentMng from '../components/media/media_contents/comment/MediaCommentMngComponent.vue';
 import SwitchToShowMode from '../components/media/action_parts/SwitchToShowModeComponent.vue';
@@ -52,6 +53,7 @@ export default{
   components : {
     default : Media,
     mediaHeader : MediaHeader,
+    mediaSubHeader : MediaSubHeader,
   },
   children : [
     {

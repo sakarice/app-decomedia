@@ -26,13 +26,10 @@ import { mapGetters } from 'vuex';
 </script>
 
 <style scoped>
+@import "/resources/css/dispIconCommon.css";
 
   .icon-wrapper {
     position: relative;
-    padding: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   #disp-media-comment-modal-wrapper {

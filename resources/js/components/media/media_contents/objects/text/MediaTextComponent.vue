@@ -1,5 +1,5 @@
 <template>
-  <!-- Media図形-->
+  <!-- Mediaテキスト-->
   <div :id="text_wrapper_with_index" class="obj text-wrapper"
   :class="{is_active : isActive, 'hover-blue' : getMode!=3}" :style="textWrapperStyle"
   @click.stop @mousedown.stop="moveTrigger($event)" @touchstart.stop="moveTrigger($event)">

@@ -29,6 +29,10 @@ export default {
   opacity: 1;
 }
 
+.logo {
+    font-family: cursive;
+}
+
 /* aタグ全体の設定 */
 a {
     color: white;
@@ -37,6 +41,7 @@ a {
 a:hover {
     color: aquamarine;
 }
+
 
 @media screen and (max-width:480px){
     .logo-wrapper {

@@ -1,7 +1,7 @@
 <template>
-  <router-link v-if="isShow" :to="'/media/'+getMediaId" class="change-mode action-trigger-wrapper link-to-show-media">
+  <router-link v-if="isShow" :to="'/media/'+getMediaId" class="change-mode action-trigger-wrapper link-to-show-mode">
     <div class="action-trigger mode-icon-wrapper">
-      <i class="fas fa-tv fa-lg show-mode-icon"></i>
+      <i class="fas fa-tv show-mode-icon"></i>
     </div>
     <span class="action-trigger-subtitle"></span>
   </router-link>
@@ -34,6 +34,13 @@ import { mapGetters } from 'vuex';
 .show-mode-icon {
   display: inline-block;
 }
+.link-to-show-mode {
+  color:black;
+  padding: 1px 4px;
+}
+.link-to-show-mode:hover {
+  background-color: rgb(238,238,240);
+}
 
 .action-trigger-subtitle::after {
   content: '閲覧モードへ';
@@ -44,6 +51,11 @@ import { mapGetters } from 'vuex';
     bottom: 45px;
     left: 5px;
   }
+  
+  .mode-icon-wrapper {
+    margin-bottom: -4px;
+  }
+  
 }
 
 </style>

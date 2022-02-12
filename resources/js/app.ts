@@ -33,7 +33,7 @@ Vue.component('header-component', require('./components/common/HeaderComponent.v
 Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
 
 // ■Mediaパーツ
-Vue.component('media-header-component', require('./components/media/MediaHeaderComponent.vue').default);
+Vue.component('media-header-component', require('./components/media/header/MediaHeaderComponent.vue').default);
 
 // ■マイページ用
 Vue.component('mypage-menu-bar-component', require('./components/mypage/MypageMenuBarComponent.vue').default);

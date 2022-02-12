@@ -1,0 +1,9 @@
+.icon-wrapper {
+  padding: 14px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon-wrapper:hover {
+  background-color: rgba(255,255,255,0.2);
+}

@@ -104,7 +104,8 @@
       <!-- 立体音響定位の設定画面を表示 -->
       <div class="all-audio-controller disp-panning-setting-wrapper" @click="dispSterePhonicArrangeField">
         <div class="size-Adjust-box">
-          <i id="disp-panning-setting-icon" class="fas fa-headphones-alt fa-2x"></i>
+          <!-- <i id="disp-panning-setting-icon" class="fas fa-headphones-alt fa-2x"></i> -->
+          <img style="width:40px" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/sround1.svg" alt="">
         </div>
       </div>
     </div>
