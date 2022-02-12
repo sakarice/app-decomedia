@@ -26,11 +26,9 @@
 /* スマホ以外 */
 @media screen and (min-width: 481px) {
   #select-modal {
-    top: 70px;
-    width: 470px;
-    height: 85vh;
-    /* border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;    */
+    top: 90px;
+    width: 450px;
+    height: 82vh;
     flex-flow: row;
   }
 
