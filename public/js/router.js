@@ -1031,7 +1031,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -11655,7 +11654,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.create-icon-wrapper[data-v-93079c06] {\r\n  box-shadow: 1px 1px 1px dimgrey;\r\n  padding: 5px 7px;\r\n  background-color: rgb(100,100,255);\r\n  opacity: 0.9;\n}\n.create-icon-wrapper[data-v-93079c06]:hover {\r\n  opacity: 1;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.media-store-button-wrapper[data-v-93079c06] {\r\n  color: white;\r\n  outline: 1px solid deepskyblue;\r\n  padding: 1px 10px;\r\n  border-radius: 3px;\n}\n.media-store-button-wrapper[data-v-93079c06]:hover {\r\n  background-color: deepskyblue;\n}\n.media-store-button[data-v-93079c06] {\r\n  font-size: 15px;\n}\r\n\r\n/* スマホ */\n@media screen and (max-width: 480px) {\n.for-pc-tablet[data-v-93079c06] {\r\n    display: none;\n}\n.media-store-button-wrapper[data-v-93079c06] {\r\n    transform: scale(1);\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21096,15 +21095,11 @@ var render = function () {
     _c(
       "div",
       {
-        staticClass: "action-trigger create-icon-wrapper",
+        staticClass: "action-trigger media-store-button-wrapper",
         on: { click: _vm.createMedia },
       },
-      [_c("i", { staticClass: "fas fa-check fa-lg create-icon" })]
+      [_c("span", { staticClass: "media-store-button" }, [_vm._v("保存")])]
     ),
-    _vm._v(" "),
-    _c("span", { staticClass: "action-trigger-subtitle for-pc-tablet" }, [
-      _vm._v("作成"),
-    ]),
   ])
 }
 var staticRenderFns = []

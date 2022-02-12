@@ -1,10 +1,9 @@
 <template>
 
     <div class="action-trigger-wrapper">
-      <div class="action-trigger create-icon-wrapper" @click="createMedia">
-        <i class="fas fa-check fa-lg create-icon"></i>
+      <div class="action-trigger media-store-button-wrapper" @click="createMedia">
+        <span class="media-store-button">保存</span>
       </div>
-      <span class="action-trigger-subtitle for-pc-tablet">作成</span>
     </div>
 
 </template>
@@ -71,15 +70,19 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-.create-icon-wrapper {
-  box-shadow: 1px 1px 1px dimgrey;
-  padding: 5px 7px;
-  background-color: rgb(100,100,255);
-  opacity: 0.9;
+.media-store-button-wrapper {
+  color: white;
+  outline: 1px solid deepskyblue;
+  padding: 1px 10px;
+  border-radius: 3px;
 }
 
-.create-icon-wrapper:hover {
-  opacity: 1;
+.media-store-button-wrapper:hover {
+  background-color: deepskyblue;
+}
+
+.media-store-button {
+  font-size: 15px;
 }
 
 /* スマホ */
@@ -87,8 +90,11 @@
   .for-pc-tablet {
     display: none;
   }
+
+  .media-store-button-wrapper {
+    transform: scale(1);
+  }
+
 }
-
-
 
 </style>
