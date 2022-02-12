@@ -94,6 +94,8 @@
 
   .media-store-btn-wrapper {
     transform: scale(1);
+    box-shadow: 0px 0px;
+    padding: 0px 10px;
   }
 
   .media-store-btn {
