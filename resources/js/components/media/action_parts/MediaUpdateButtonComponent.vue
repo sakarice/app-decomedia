@@ -69,14 +69,14 @@
 @import "/resources/css/button.css";
 
 .media-update-btn-wrapper {
-  color: white;
+  color: black;
   outline: 1px solid lawngreen;
   padding: 1px 10px;
   border-radius: 3px;
 }
 
 .media-update-btn-wrapper:hover {
-  background-color: rgb(0,220,0);
+  background-color: lawngreen;
 }
 
 .media-update-btn {

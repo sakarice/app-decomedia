@@ -71,7 +71,7 @@
 @import "/resources/css/button.css";
 
 .media-store-btn-wrapper {
-  color: white;
+  color: black;
   outline: 1px solid deepskyblue;
   padding: 1px 10px;
   border-radius: 3px;
