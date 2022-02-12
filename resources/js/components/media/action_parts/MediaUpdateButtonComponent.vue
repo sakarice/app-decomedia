@@ -1,8 +1,7 @@
 <template>
 
     <div class="action-trigger-wrapper">
-      <div class="action-trigger update-icon-wrapper" @click="updateMedia">
-        <!-- <i class="fas fa-check fa-lg update-icon"></i> -->
+      <div class="action-trigger media-update-btn-wrapper" @click="updateMedia">
         <span class="media-update-btn">更新</span>
       </div>
     </div>
@@ -69,12 +68,29 @@
 /* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */
 @import "/resources/css/button.css";
 
-.update-icon-wrapper:hover {
-  color: darkorange;
+.media-update-btn-wrapper {
+  color: white;
+  outline: 1px solid lawngreen;
+  padding: 1px 10px;
+  border-radius: 3px;
 }
 
-.update-trigger-subtitle {
-  margin-left: 7px;
+.media-update-btn-wrapper:hover {
+  background-color: rgb(0,220,0);
 }
+
+.media-update-btn {
+  font-size: 15px;
+}
+
+/* スマホ */
+@media screen and (max-width: 480px) {
+  .media-update-btn-wrapper {
+    transform: scale(1);
+  }
+
+}
+
+
 
 </style>
