@@ -96,6 +96,11 @@
     transform: scale(1);
   }
 
+  .media-store-btn {
+    font-size: 12px;
+  }
+
+
 }
 
 </style>

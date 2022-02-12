@@ -90,6 +90,11 @@
     transform: scale(1);
   }
 
+  .media-update-btn {
+    font-size: 12px;
+  }
+
+
 }
 
 
