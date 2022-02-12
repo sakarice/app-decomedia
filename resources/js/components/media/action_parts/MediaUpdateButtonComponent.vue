@@ -70,13 +70,14 @@
 
 .media-update-btn-wrapper {
   color: white;
-  background-color: black;
+  background-color: rgb(0,170,0);
+  box-shadow: 1px 1px 0px darkslategray;
   padding: 1px 10px;
   border-radius: 3px;
 }
 
 .media-update-btn-wrapper:hover {
-  background-color: lawngreen;
+  opacity: 0.9;
 }
 
 .media-update-btn {
