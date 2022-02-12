@@ -97,7 +97,7 @@
 
 <script>
 import { mapGetters, mapMutations} from 'vuex';
-import MediaHeader from './MediaHeaderComponent.vue';
+import MediaHeader from './header/MediaHeaderComponent.vue';
 import ImgSelect from './edit_parts/ImgSelectComponent.vue';
 import AudioSelect from './edit_parts/AudioSelectComponent.vue';
 import MovieSetting from './edit_parts/MovieSettingComponent.vue';
