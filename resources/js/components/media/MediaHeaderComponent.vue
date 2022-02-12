@@ -7,21 +7,11 @@
 
         <!-- 中央 -->
         <div class="header-block header-center">
-            <to-mypage-button></to-mypage-button>
-
-            <media-create-button v-show="(mode==1)">
-            </media-create-button>
-
-            <media-update-button v-show="isMyMedia && (mode==2)">
-            </media-update-button>
-
-            <router-view name="switchToEditMode"></router-view>
-            <router-view name="switchToShowMode"></router-view>
+            <span :v-if="getMediaSetting['name']" class="header-content media-name">{{getMediaSetting['name']}}</span>
         </div>
 
         <!-- 右側 -->
         <div class="header-block header-right">
-            <span :v-if="getMediaSetting['name']" class="header-content media-name">{{getMediaSetting['name']}}</span>
         </div>
     </div>
         
@@ -101,6 +91,7 @@ export default {
   padding: 5px 0;
   z-index: 10;
   width: 100%;
+  height: 40px;
   background-color: rgba(0, 0, 0, 1);
   display: flex;
 

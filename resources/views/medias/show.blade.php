@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{{ mix('css/app.css') }}">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <title>Document</title>
-  
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-219618733-1"></script>
   <script>
@@ -30,6 +30,7 @@
     </media-component> --}}
     <router-view></router-view>
     <router-view name="mediaHeader"></router-view>
+    <router-view name="mediaSubHeader"></router-view>
   </div>
 
   <script src="{{ mix('/js/app.js') }}"></script>
