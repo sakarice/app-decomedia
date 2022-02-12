@@ -45,6 +45,10 @@
   .to-mypage-button {
     font-size: 15px;
   }
+  .to-mypage-button::before {
+    content: "<";
+    margin-right: 5px;
+  }
 
 
   @media screen and (max-width: 480px) {
