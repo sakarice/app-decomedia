@@ -31,16 +31,15 @@
 @import "/resources/css/button.css";
 
   .to-mypage-button-wrapper {
-    color: white;
-    outline: 1px solid white;
+    color: black;
+    outline: 1px solid lightgrey;
     padding: 1px 10px;
     border-radius: 3px;
     text-decoration: none;
   }
 
   .to-mypage-button-wrapper:hover {
-    background-color: white;
-    color: black;
+    outline: 1px solid black;
   }
 
   .to-mypage-button {
