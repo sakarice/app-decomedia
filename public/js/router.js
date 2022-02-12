@@ -11871,7 +11871,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.link-to-edit-mode[data-v-82371542] {\r\n  color: black;\r\n  padding: 1px 4px;\n}\n.link-to-edit-mode[data-v-82371542]:hover {\r\n  background-color: rgb(238,238,240);\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.edit-mode-icon[data-v-82371542] {\r\n  display: inline-block;\n}\n.link-to-edit-mode[data-v-82371542] {\r\n  color: black;\r\n  padding: 1px 4px;\n}\n.link-to-edit-mode[data-v-82371542]:hover {\r\n  background-color: rgb(238,238,240);\n}\n.action-trigger-subtitle[data-v-82371542]::after {\r\n  content: '編集モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-82371542] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n.mode-icon-wrapper[data-v-82371542] {\r\n    margin-bottom: -4px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -11897,7 +11897,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_button_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.link-to-show-mode[data-v-2d7d2ccc] {\r\n  color:black;\r\n  padding: 1px 4px;\n}\n.link-to-show-mode[data-v-2d7d2ccc]:hover {\r\n  background-color: rgb(238,238,240);\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* ボタン共通のCSS。対象にはaction-buttonクラスを付けること */\n.show-mode-icon[data-v-2d7d2ccc] {\r\n  display: inline-block;\n}\n.link-to-show-mode[data-v-2d7d2ccc] {\r\n  color:black;\r\n  padding: 1px 4px;\n}\n.link-to-show-mode[data-v-2d7d2ccc]:hover {\r\n  background-color: rgb(238,238,240);\n}\n.action-trigger-subtitle[data-v-2d7d2ccc]::after {\r\n  content: '閲覧モードへ';\n}\n@media screen and (max-width:480px) {\n.change-mode[data-v-2d7d2ccc] {\r\n    bottom: 45px;\r\n    left: 5px;\n}\n.mode-icon-wrapper[data-v-2d7d2ccc] {\r\n    margin-bottom: -4px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

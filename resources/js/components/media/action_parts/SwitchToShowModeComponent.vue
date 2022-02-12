@@ -51,6 +51,11 @@ import { mapGetters } from 'vuex';
     bottom: 45px;
     left: 5px;
   }
+  
+  .mode-icon-wrapper {
+    margin-bottom: -4px;
+  }
+  
 }
 
 </style>
