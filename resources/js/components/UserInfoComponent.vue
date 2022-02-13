@@ -46,9 +46,9 @@ export default {
 @import "/resources/css/flexSetting.css";
 
 #user-info-wrapper  {
-  width: 70%;
+  width: 90%;
   max-width: 600px;
-  min-width: 300px;
+  min-width: 270px;
 }
 
 .img-wrapper {

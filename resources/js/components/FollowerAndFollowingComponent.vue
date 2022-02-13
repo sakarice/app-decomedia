@@ -1,5 +1,5 @@
 <template>
-  <section id="follower-and-following-wrapper">
+  <section id="follower-and-following-wrapper" class="flex column a-center">
     <!-- フォロワーかフォロー中ユーザどちらを表示するか選択するためのカテゴリ -->
     <div class="category-wrapper flex a-center j-center">
       <div id="category-follower" class="category-area w50 pt10 pb10 text-center"
@@ -13,7 +13,7 @@
     </div>
 
     <!-- フォロワーとフォロー中ユーザ一覧表示領域 -->
-    <div class="following-and-follower-area">
+    <div id="following-and-follower-area">
       <follower-list v-show="isShowFollower"></follower-list>
       <following-list v-show="!(isShowFollower)"></following-list>
     </div>
@@ -53,6 +53,7 @@ export default {
   margin-top: 20px;
 }
 .category-wrapper {
+  width: 100%;
   border-bottom: 1px solid lightgrey;
 }
 .category-area {
@@ -62,12 +63,21 @@ export default {
   background-color: rgb(248,248,248);
 }
 
-.category {
-}
+  #following-and-follower-area {
+    width: 95%;
+  }
+
 
 .isActive {
   font-weight: bold;
   border-bottom: 2px solid aquamarine;
+}
+
+@media screen and (max-width:480px) {
+  #follower-and-following-wrapper {
+    width: 100%;
+  }
+  
 }
 
 </style>

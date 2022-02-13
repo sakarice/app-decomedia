@@ -9,14 +9,14 @@
       <div class="mypage-category media-disp-switch flex a-center"
        @click="changeActiveCategory('media')"
         v-show="!isSelectMode" :class="{'isActive':isShowMedia}">
-        <i id="change-media-mode" class="fas fa-bullhorn mr15"></i>
+        <i id="change-media-mode" class="fas fa-bullhorn"></i>
         <span class="action-item-subtitle">メディア</span>
       </div>
       <!-- フォロー中/フォロワーユーザ表示切り替えボタン -->
       <div class="mypage-category follow-user-disp-switch flex a-center"
        @click="changeActiveCategory('user')"
         v-show="!isSelectMode" :class="{'isActive':isShowUser}">
-        <i id="change-follow-user-mode" class="fas fa-user-friends mr15"></i>
+        <i id="change-follow-user-mode" class="fas fa-user-friends"></i>
         <span class="action-item-subtitle">ユーザー</span>
       </div>
     </nav>
@@ -406,13 +406,11 @@ export default {
 #mypage-contents-wrapper {
   width: 80%;
   height: 100vh;
-  overflow-y: scroll;
 }
 
 
 .action-item-subtitle {
   font-size:16px;
-  font-family: monospace;
 }
 
 
@@ -435,7 +433,6 @@ export default {
 
 .select-mode-item-wrapper {
   position: absolute;
-  top: 100px;
   padding: 6px 10px 2px 10px;
   background-color: dimgray;
   color: aliceblue;
@@ -537,12 +534,13 @@ export default {
 
 /* スマホ以外 */
 @media screen and (min-width: 481px) {
-  body {
-    overflow-y: hidden;
-  }
 
   .for-mobile {
     display: none;
+  }
+
+  #mypage-contents-wrapper {
+    overflow-y: scroll;
   }
 
   .mypage-category {
@@ -551,7 +549,16 @@ export default {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
   }
- 
+
+  .select-mode-item-wrapper {
+    top: 100px;
+  }
+
+  .action-item-subtitle {
+    margin-left: 15px;
+    font-family: monospace;
+  }
+
 }
 
 
@@ -574,6 +581,22 @@ export default {
     border:none;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    justify-content: space-around;
+  }
+
+  #category-wrapper {
+    position: fixed;
+    left: 0;
+    bottom : 0;
+    height: auto;
+    width: 100%;
+    padding: 8px 10px 8px 10px;
+    background-color: black;
+    border:none;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    flex-direction: row;
+    align-items: center;
     justify-content: space-around;
   }
 
@@ -610,17 +633,19 @@ export default {
   }
 
   .mypage-category {
-    /* margin: 0 18px; */
+    flex-direction: column;
     width: 45%;
     font-size: 1.4em;
   }
 
   #mypage-wrapper {
     width: 90%;
+    margin-top: 70px;
+    align-items: center;
   }
 
   .media-action-wrapper{
-    padding: 15px;
+    padding: 3px;
     flex-direction: row-reverse;
   }
 
@@ -629,28 +654,32 @@ export default {
   }
 
   .mypage-section {
-    margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   .bg-black {
     background-color: black;
   }
 
   .action-item-subtitle {
-    margin-top: 0;
+    margin-top: 2px;
     font-size: 10px;
   }
 
   .media-create {
-    /* position: fixed;
-    bottom: 22px;
-    right: 0; */
-    font-size: 22px;
-    padding: 7px 8px;
+    position: fixed;
+    bottom: 62px;
+    right: -10px;
+    z-index: 11;
+    padding: 12px 14px;
+    border-radius: 50%;
   }
 
-  .media-action-btn-label{
-    font-size: 12px;
+  .media-create-icon {
+    font-size: 26px;
+  }
+
+  .to-create-media-label{
+    display: none;
   }
 
   .liked-media-list {
@@ -662,9 +691,8 @@ export default {
   }
 
   .select-mode-on {
-    /* padding: 2px 15px; */
-    font-size: 22px;
-    padding: 7px 8px;
+    padding: 1px 9px;
+    margin-right: 5px;
   }
   .select-mode-on-icon {
     font-size: 20px;
@@ -672,6 +700,10 @@ export default {
   .select-mode-on-icon {
     font-size: 12px;
     margin-top: 3px;
+  }
+
+  #mypage-contents-wrapper {
+    width: 100%
   }
 
   .isActive {
