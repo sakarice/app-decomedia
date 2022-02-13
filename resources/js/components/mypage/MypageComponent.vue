@@ -54,18 +54,17 @@
 
 
       <!-- メディアの操作ボタン -->
-      <span class="media-action-title for-pc-tablet" v-show="isShowMedia">メディア操作</span>
-      <div class="media-action-wrapper flex j-center a-center">
+      <div class="media-action-wrapper flex j-center a-start" :class="{'Transparent':(!isShowMedia || isSelectMode)}" >
+        <!-- 選択モードの切り替えボタン -->
+        <div class="action-btn-wrapper select-mode-on flex column a-center" @click="toggleSelectMode">
+          <i class="fas fa-check select-mode-on-icon"></i>
+          <span class="media-action-btn-label select-mode-on-label">{{selectModeButtonMessage}}</span>
+        </div>
         <!-- Media作成 -->
         <a class="action-btn-wrapper media-create link flex a-center" v-show="isShowMedia && !isSelectMode" href="/media/create">
           <i class="fas fa-plus media-create-icon"></i>
-          <span class="media-action-btn-label">作成</span>
+          <span class="media-action-btn-label to-create-media-label">新しいメディア</span>
         </a>
-        <!-- 選択モードの切り替えボタン -->
-        <div class="action-btn-wrapper select-mode-on flex a-center" v-show="isShowMedia && !isSelectMode" @click="toggleSelectMode">
-          <i class="fas fa-check-square select-mode-on-icon"></i>
-          <span class="media-action-btn-label select-mode-on-label">{{selectModeButtonMessage}}</span>
-        </div>
       </div>
 
       <!-- 作成済みMediaのプレビュー -->
@@ -318,6 +317,7 @@ export default {
 @import "/resources/css/FrequentlyUseStyle.css";
 @import "/resources/css/flexSetting.css";
 
+.Transparent { opacity: 0;}
 .bg-black { background-color: black;}
 .bg-lightgrey { background-color: rgb(252,252,252);}
 .white { color: white;}
@@ -356,9 +356,6 @@ export default {
 
 .mypage-action-menu {
   padding: 2px 0px;
-}
-.menu-inner{
-  border-bottom: 1px solid grey;
 }
 
 .mypage-category {
@@ -437,9 +434,8 @@ export default {
 }
 
 .select-mode-item-wrapper {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
+  position: absolute;
+  top: 100px;
   padding: 6px 10px 2px 10px;
   background-color: dimgray;
   color: aliceblue;
@@ -474,23 +470,23 @@ export default {
 }
 
 .media-action-wrapper{
-  padding: 10px 0 40px 0;
+  padding: 10px 0 25px 0;
+  justify-content: space-between;
 }
 
 .action-btn-wrapper {
-  padding: 6px 16px;
-  margin: 0 15px;
+  padding: 4px 18px;
   color: grey;
-  font-size: 1.8em;
   border-radius: 2px;
-  box-shadow: 0.5px 0.5px 2px slategrey;
+  box-shadow: 0.5px 0.5px 1px lightgrey;
 }
 .action-btn-wrapper:hover {
   cursor: pointer;
 }
 
 .media-create {
-  background-color: rgb(100,250,60);
+  background-color: rgb(100,250,250);
+  margin-right: 20px;
   color: black;
   text-decoration-line: none;
 }
@@ -498,19 +494,31 @@ export default {
   color: white;
 }
 
+.media-create-icon, .select-mode-on-icon {
+  font-size: 16px;
+}
+
 .select-mode-on {
-  /* background-color: rgb(240,245,245); */
+  border-radius: 0%;
+  box-shadow: 1px 1px 1px 1px lightgrey;
 }
 .select-mode-on:hover {
-  color: blue;
+  color: red;
 }
-.select-mode-on-icon{}
+.select-mode-on-label {
+  margin-top: 3px;
+  font-size: 12px;
+}
+
+.to-create-media-label {
+  margin-left: 7px;
+  margin-top: 3px;
+  font-size: 14px;
+  font-weight: bold;
+}
 
 .media-action-btn-label{
   color: black;
-  margin-left: 8px;
-  margin-top: 3px;
-  font-size: 14px;
 }
 
 .isActive {
@@ -660,6 +668,10 @@ export default {
   }
   .select-mode-on-icon {
     font-size: 20px;
+  }
+  .select-mode-on-icon {
+    font-size: 12px;
+    margin-top: 3px;
   }
 
   .isActive {
