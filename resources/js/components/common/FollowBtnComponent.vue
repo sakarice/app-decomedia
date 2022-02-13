@@ -70,8 +70,6 @@ export default{
 
 <style>
 
-@import "/resources/css/mediaEditModals.css";
-
 .follow-button {
   border: none;
   border-radius: 15px;

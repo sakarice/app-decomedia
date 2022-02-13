@@ -5,31 +5,26 @@
             <h2 class="top-message">
                 <span>創作に手が出せなかった あなたへ</span><br>
             </h2>
-            <!-- <h3 class="sub-catch-copy">
-                <span>画像や音楽を「選んで配置する」だけ。</span><br>
-                <span>1分でできるコンテンツ制作。</span><br>
-            </h3> -->
             <p class="sub-message">
-                <!-- 必要なのは「作ってみたい」という好奇心だけ。<br>
-                今こそクリエイティブを体験しよう。<br> -->
                 画像や音楽を「選んで配置する」だけ。<br>
-                1分でコンテンツを作ろう。<br>
+                3分で作れるあなただけのメディア。<br>
             </p>
         </div>
 
-        <!-- {{-- マイページへのリンク --}} -->
+        <!-- 通常ログイン後のリンク -->
         <div class="link-wrapper" v-if="getIsLogin">
-            <a class="link-to-mypage" href="/mypage">マイページへ</a>
+            <!-- {{-- メディア作成画面へのリンク --}} -->
+            <a class="link-btn" href="/media/create">メディア作成</a>
+            <span style="color:white; margin:0 15px">or</span>
+            <!-- {{-- マイページへのリンク --}} -->
+            <a class="link-btn" href="/mypage">マイページへ</a>
         </div>
+
         <!-- ゲストログイン＆コンテンツ作成画面へ移動 -->
         <div class="link-wrapper" v-if="!getIsLogin">
             <span class="link-message">さっそく試してみる</span>
-            <a class="link-to-mypage" href="/login/guest">ゲストとしてコンテンツ作成</a>
+            <a class="link-btn" href="/login/guest">ゲストとしてコンテンツ作成</a>
         </div>
-
-        <!-- <div class="media-watch-message">
-            他の人の作ったコンテンツ(メディア)を視聴する
-        </div> -->
     </div>
 
 </template>
@@ -60,7 +55,6 @@ export default {
             return getIsLogin ? "" : "";
         },
         message_2:function(){
-            // return getIsLogin ? "ゲストとしてメディアを作ってみる" : "ゲストとしてメディアを作ってみる";
             return getIsLogin ? "ゲストとしてメディアを作ってみる" : "ゲストとしてメディアを作ってみる";
         },
 
@@ -80,23 +74,22 @@ export default {
 
 /* トップ */
 .top-message-wrapper {
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
-    text-align: center;
-    text-shadow: 2px 2px 5px grey;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 5px grey;
 }
 
 .top-message {
-    margin-bottom: 0;
-    margin-top: 110px;
-    font-size: 50px;
-    font-family: "Yu Mincho Medium";
-    /* text-align: center; */
-    overflow-wrap:break-word;
-    word-break: keep-all;
+  margin-bottom: 0;
+  margin-top: 110px;
+  font-size: 50px;
+  font-family: "Yu Mincho Medium";
+  overflow-wrap:break-word;
+  word-break: keep-all;
 }
 
 .sub-catch-copy {
@@ -104,8 +97,6 @@ export default {
 }
 
 .link-wrapper {
-  /* position: absolute;
-  top: 85%; */
   font-size: 20px;
   height: 80px;
   display: flex;
@@ -121,9 +112,7 @@ export default {
 
 /* スマホ以上のサイズ(PC、タブレット */
 @media screen and (min-width: 481px) {
-  /* .top-message-wrapper {
-    left: 10%;
-  } */
+
 }
 
 /* タブレットサイズ */
@@ -146,7 +135,7 @@ export default {
   }
 
   .link-wrapper {
-    /* 縦積みに */
+    /* 縦積 */
     flex-direction: column;
   }
 

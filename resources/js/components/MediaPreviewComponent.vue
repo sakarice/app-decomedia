@@ -290,7 +290,7 @@ li {
 /* スマホのみ */
 @media screen and (max-width: 420px) {
   .media-wrapper {
-    width: 95%;
+    width: 100%;
   }
   .media-title {
     font-size: 13px;

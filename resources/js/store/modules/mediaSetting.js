@@ -8,7 +8,7 @@ const mediaSetting = {
     mediaSetting : {
       'id' : null,
       'isPublic' : true,  // 公開/非公開 デフォルトは公開
-      'name' : "",
+      'name' : "no title",
       'description' : "",
       'finish_time' : 0,
       'mediaBackgroundColor' : "#F2F2F2", // 若干グレー

@@ -13,7 +13,7 @@
 <body>
   {{-- <div class="header-wrapper"></div><br> --}}
 
-  <div class="contents-wrapper">
+  <div id="mypage-area">
 
     <div id="app">
       {{-- ヘッダー --}}
