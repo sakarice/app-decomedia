@@ -1,5 +1,5 @@
 <template>
-  <section id="user-info-wrapper" class="p15 flex">
+  <section id="user-info-wrapper" class="p15 flex a-center">
 
     <div class="left-box img-wrapper border-r-50per">
       <img :src="user_info['profile_img_url']" alt="?"
@@ -48,6 +48,7 @@ export default {
 #user-info-wrapper  {
   width: 70%;
   max-width: 600px;
+  min-width: 300px;
 }
 
 .img-wrapper {

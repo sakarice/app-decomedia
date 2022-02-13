@@ -11774,12 +11774,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! -!../../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!../../../css/mediaEditModals.css */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-11[0].rules[0].use[1]!./resources/css/mediaEditModals.css");
 // Imports
 
-
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.follow-button {\r\n  border: none;\r\n  border-radius: 15px;\r\n  padding: 5px 15px;\n}\n.following {\r\n  color: white;\r\n  background-color: black\n}\n.following::after {\r\n  content: \"フォロー中\";\n}\n.following:hover::after {\r\n  content: \"フォロー解除\";\r\n  color: tomato;\n}\n.not-following {\r\n  color: black;\r\n  background-color: rgb(240,250,250);\n}\n.not-following::after {\r\n  content: \"フォローする\";\n}\n.not-following:hover {\r\n  color: white;\r\n  background-color: rgba(0,0,0,1);\n}\r\n\r\n\r\n", ""]);
 // Exports

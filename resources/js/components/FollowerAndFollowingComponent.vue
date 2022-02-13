@@ -48,6 +48,8 @@ export default {
 @import "/resources/css/flexSetting.css";
 
 #follower-and-following-wrapper {
+  width: 90%;
+  max-width: 800px;
   margin-top: 20px;
 }
 .category-wrapper {
