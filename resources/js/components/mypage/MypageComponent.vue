@@ -588,6 +588,7 @@ export default {
     position: fixed;
     left: 0;
     bottom : 0;
+    z-index: 1;
     height: auto;
     width: 100%;
     padding: 8px 10px 8px 10px;
