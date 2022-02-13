@@ -530,7 +530,11 @@ export default {
 
   .audio-name {
     width: 80%;
+    height: 30px;
+    line-height: 30px;
     margin-left: 10px;
+    padding-left: 5px;
+    border-radius: 2px;
     font-size: 11px;
     white-space: nowrap;
   }
@@ -538,6 +542,7 @@ export default {
   .audio-name:hover {
     cursor: pointer;
     text-decoration: underline;
+    background-color: rgba(255,255,255,0.1);
   }
 
 
