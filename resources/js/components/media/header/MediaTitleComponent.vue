@@ -1,16 +1,13 @@
 <template>
     <div class="media-title-wrapper flex">
-        <div type="text" id="media-title" spellcheck="false"
-        :class="{'editable':contentEditable}"
-        :contenteditable="contentEditable"
+        <input type="text" id="media-title" spellcheck="false"
+        :class="{'editable':!isDisable}"
+        :disabled="isDisable"
+        :value="getMediaSetting['name']"
         @input="updateMediaTitle($event)"
         @keydown="checkAndBlockEnterInput">
-        {{getMediaSetting['name']}}
-        </div>
     </div>
-        
 </template>
-
 
 
 <script>
@@ -19,9 +16,6 @@ import { mapGetters,mapMutations } from 'vuex';
 export default {
     components : {
     },
-    props : [
-        'csrf',
-    ],
     data : () => {
         return {
             isMyMedia : false,
@@ -43,17 +37,14 @@ export default {
                 return 2;
             } else {return 3}
         },
-        contentEditable:function(){
-            return this.isMyMedia && this.mode!=3 ? true : false;
-        },
-
+        isDisable:function(){
+            return this.mode==3 || (this.mode==2 && !this.isMyMedia) ? true : false;
+        }
     },
     methods : {
         ...mapMutations('mediaSetting', ['updateMediaSettingObjectItem']),
         updateMediaTitle(event){
-            console.log('update media title');
-            const new_title = event.target.innerText;
-            console.log(new_title);
+            const new_title = event.target.value;
             this.updateMediaSettingObjectItem({key:'name', value:new_title});
         },
         checkIsMyMedia(){
@@ -69,12 +60,8 @@ export default {
         },
     },
     watch : {
-        doneGetMediaId : function(val){
-            this.checkIsMyMedia();
-        },
-
+        doneGetMediaId : function(val){this.checkIsMyMedia();},
     },
-
 }
 
 </script>
@@ -83,22 +70,23 @@ export default {
 @import '/resources/css/flexSetting.css';
 
 #media-title {
-    display: inline-block;
     color:white;
     padding: 0 5px;
     min-width: 140px;
     max-width: 350px;
-    border-radius: 2px;
+    border: none;
+    border-radius: 1px;
     white-space: nowrap;
     overflow-x: hidden;
 }
 
 .editable {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255,255,255,0.2);
     outline: 1px solid rgba(255,255,255,0.3);
 }
 .editable:hover {
     background-color: rgba(255,255,255,0.3);
+    cursor: pointer;
 }
 
 @media screen and (max-width:480px) {
