@@ -268,6 +268,11 @@ export default {
       audio['positionZ'] = Math.random() * 4 - 2;
       
       this.addMediaAudiosObjectItem(audio);
+
+      // オーディオ追加をイベントで知らせる
+      const event = new CustomEvent('addMediaAudio');
+      const target = document.getElementById('change-disp-audio-wrapper');
+      target.dispatchEvent(event);
     },
     
     dragEnter: function() {

@@ -94,8 +94,8 @@ import {mapGetters,mapMutations} from 'vuex';
       listener_elem.addEventListener('clearBgImg', this.clearBgImg, false);      
       const mode = this.$route.path;
       if(mode.match(/create/)){
-        this.updateMediaContentsFieldObjectItem({key:'width', value:Math.floor(window.innerWidth*0.9)});
-        this.updateMediaContentsFieldObjectItem({key:'height', value:Math.floor((window.innerHeight - 70)*0.85)});
+        this.updateMediaContentsFieldObjectItem({key:'width', value:Math.floor((window.innerWidth - 40)*0.9)});
+        this.updateMediaContentsFieldObjectItem({key:'height', value:Math.floor((window.innerHeight - 100)*0.8)});
       }
     },
   }
@@ -109,8 +109,6 @@ import {mapGetters,mapMutations} from 'vuex';
     align-items: center;
     /* width: 100%; */
     height: 100%;
-    margin-top: 70px;
-    margin-bottom: 10px;
   }
 
   #media-contents-field {
@@ -121,8 +119,8 @@ import {mapGetters,mapMutations} from 'vuex';
 
   @media screen and (max-width:480px) {
     #media-contents-field-wrapper {
-      margin-top: 85px;
-      margin-bottom: 55px;
+      /* margin-top: 85px;
+      margin-bottom: 55px; */
     }
 
     #media-contents-field {

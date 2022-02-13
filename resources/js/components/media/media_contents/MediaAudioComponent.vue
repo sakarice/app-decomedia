@@ -621,7 +621,7 @@
 /* スマホ以外 */
 @media screen and (min-width:481px) {
   #media-audio-wrapper{
-    top: 70px;
+    top: 10px;
     bottom: 80px;
     right: 0;
   }
