@@ -11,17 +11,15 @@
         <div id="contents-wrapper" class="contents-audio"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <div id="category-type">
-              <span @click="changeFileCategory"
-              class="category category-default"
-               :class="{active_category: isDefault}">
+            <div id="category-type" @click="changeFileCategory">
+              <span class="category category-default"
+              :class="{active_category: isDefault}">
                default
                </span>
-              <span @click="changeFileCategory"
-              class="category category-upload"
-               :class="{active_category: !isDefault}">
+              <span class="category category-upload"
+              :class="{active_category: !isDefault}">
                upload
-               </span>
+              </span>
             </div>
           </div>
 
@@ -426,6 +424,7 @@ export default {
     padding-left: 0;
     overflow-y: scroll;
   }
+
 
   .audio-category-wrapper {
     width: 85%;

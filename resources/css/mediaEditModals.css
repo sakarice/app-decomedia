@@ -20,20 +20,24 @@
 #category-type {
   display: flex;
   align-items: center;
-  color: rgba(200,200,200,1);
+  color: rgba(200,200,200,0.4);
+  border-radius: 10px;
+  background-color: rgba(200,200,200,0.1);
 }
-
-.category{
-  margin: 0 20px;
-}
-.category:hover{
+#category-type:hover {
   cursor: pointer;
 }
 
-.active_category {
-  color: white;
-  border-bottom: 1.5px solid;
+.category{
+  padding: 0 20px;
+  border-radius: 10px;
 }
+
+.active_category {
+  color: rgba(255,255,255,0.9);
+  background-color: rgba(255,255,255,0.3);
+}
+
 
 .isUpload {
   animation-name: change-toggle-left-to-right;
@@ -248,10 +252,6 @@
 
   #setting-wrapper {
     margin: 0;
-  }
-
-  .category{
-    margin: 0 10px;
   }
   
   
