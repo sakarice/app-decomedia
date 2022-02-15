@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/home.view.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {{-- <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"> --}}
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
     <title>Decomedia</title>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -96,8 +96,10 @@
     <section class="recently-posted-medias">
         {{-- <p class="sub-title">Medias</p> --}}
         <h3 class="section-title recently-posted-title">
-            最近作られたコンテンツ(メディア)を視聴<br>
-        </h3>
+            <i class="fas fa-headphones-alt headphone-icon"></i>
+            <span style="margin:0 5px">最近作られたコンテンツ(メディア)を視聴</span>
+            <i class="fas fa-headphones-alt headphone-icon"></i>
+        </h3><br>
         <span class="media-watch-warning">※メディアに移動すると音楽・動画が再生されます</span>
         {{-- <span class="recently-posted-supplement-info">
             (サムネイルをタップすると再生画面に移動します)

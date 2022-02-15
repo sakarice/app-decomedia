@@ -48,7 +48,19 @@
         const event = new CustomEvent('changeDispAudioState', {detail:false} );
         document.body.dispatchEvent(event);
         this.isShowAudio = false;
-      }
+      },
+      flashElem(){
+        console.log('flashElem');
+        const targetElem = document.getElementById('change-disp-audio-wrapper');
+        targetElem.classList.add('flash');
+        setTimeout(function(){
+          targetElem.classList.remove('flash');
+        }, 100);
+      },
+    },
+    mounted(){
+      const listenerElem = document.getElementById('change-disp-audio-wrapper');
+      listenerElem.addEventListener('addMediaAudio',this.flashElem,false);
     }
   }
 
@@ -68,6 +80,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    transition: background-color 0.5s;
+  }
+
+  #change-disp-audio-wrapper.flash {
+    background-color: greenyellow;
+    transition-duration: 0s;
   }
 
 
@@ -96,9 +115,10 @@
   @media screen and (min-width:481px){
     #change-disp-audio-wrapper {
       background-color: rgba(20,20,20,0.7);
+      opacity: 0.9;
     }
     #change-disp-audio-wrapper:hover {
-      background-color: rgba(20,20,20,0.9);
+      opacity: 1;
     }
 
   }

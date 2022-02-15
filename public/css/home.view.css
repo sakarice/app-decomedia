@@ -1,7 +1,7 @@
 
 body {
   margin: 0;
-  background-color: rgb(247,247,250);
+  background-color: rgb(238,238,244);
 }
 
 p {
@@ -242,6 +242,10 @@ p {
 .media-preview-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.headphone-icon {
+  color: limegreen;
 }
 
 

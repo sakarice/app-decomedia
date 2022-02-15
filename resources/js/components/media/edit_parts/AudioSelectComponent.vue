@@ -11,17 +11,15 @@
         <div id="contents-wrapper" class="contents-audio"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <div id="category-type">
-              <span @click="changeFileCategory"
-              class="category category-default"
-               :class="{active_category: isDefault}">
+            <div id="category-type" @click="changeFileCategory">
+              <span class="category category-default"
+              :class="{active_category: isDefault}">
                default
                </span>
-              <span @click="changeFileCategory"
-              class="category category-upload"
-               :class="{active_category: !isDefault}">
+              <span class="category category-upload"
+              :class="{active_category: !isDefault}">
                upload
-               </span>
+              </span>
             </div>
           </div>
 
@@ -270,6 +268,11 @@ export default {
       audio['positionZ'] = Math.random() * 4 - 2;
       
       this.addMediaAudiosObjectItem(audio);
+
+      // オーディオ追加をイベントで知らせる
+      const event = new CustomEvent('addMediaAudio');
+      const target = document.getElementById('change-disp-audio-wrapper');
+      target.dispatchEvent(event);
     },
     
     dragEnter: function() {
@@ -427,6 +430,7 @@ export default {
     overflow-y: scroll;
   }
 
+
   .audio-category-wrapper {
     width: 85%;
     display: flex;
@@ -530,7 +534,11 @@ export default {
 
   .audio-name {
     width: 80%;
+    height: 30px;
+    line-height: 30px;
     margin-left: 10px;
+    padding-left: 5px;
+    border-radius: 2px;
     font-size: 11px;
     white-space: nowrap;
   }
@@ -538,6 +546,7 @@ export default {
   .audio-name:hover {
     cursor: pointer;
     text-decoration: underline;
+    background-color: rgba(255,255,255,0.1);
   }
 
 

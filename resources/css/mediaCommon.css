@@ -7,11 +7,12 @@ body {
 
 #field {
   position: fixed;
-  top: 0;
+  top: 80px;
+  bottom: 0px;
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 
   /* モーダル内の要素の配置 */
   display: flex;
@@ -85,21 +86,25 @@ body {
   }
   #disp-modal-zone {
     left: 0;
-    top: 30%;
+    top: 10%;
   }
 
   
 }
 
 /* スマホ */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 480px) {  
   .for-pc-tablet {
     display: none;
   }
 
+  #field {
+    padding-bottom: 45px;
+  }
+
   #disp-modal-zone {
     /* right: 0; */
-    bottom: 7px;
+    bottom: 2px;
     width: 100%;
     padding: 0 35px;
   }

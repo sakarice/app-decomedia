@@ -11,14 +11,12 @@
         <div id="contents-wrapper" class="contents-img"
         @dragenter = "dragEnter">
           <div id="toggle-wrapper">
-            <div id="category-type">
-              <span @click="changeFileCategory"
-              class="category category-default"
+            <div id="category-type" @click="changeFileCategory">
+              <span class="category category-default"
                :class="{active_category: isDefault}">
                default
                </span>
-              <span @click="changeFileCategory"
-              class="category category-upload"
+              <span class="category category-upload"
                :class="{active_category: !isDefault}">
                upload
                </span>
