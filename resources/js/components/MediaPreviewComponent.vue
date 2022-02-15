@@ -1,5 +1,5 @@
 <template>
-  <ul class="media-wrapper">
+  <ul id="media-wrapper">
     <li v-for="(mediaPreviewInfo,index) in mediaPreviewInfos" :key="mediaPreviewInfo.id">
       <div class="preview-media" :id="mediaPreviewInfo['id']">
         <a class="media-link" :href="mediaShowLink(mediaPreviewInfo['id'])">
@@ -105,11 +105,11 @@ export default {
 
 <style scoped>
 
-.media-wrapper {
+#media-wrapper {
   width: 80%;
   padding-left: 0;
   padding: 10px;
-  background-color: white;
+  /* background-color: white; */
   max-width: 1200px;
   display: flex;
   justify-content:flex-start;
@@ -117,16 +117,20 @@ export default {
 }
 
 /* ★★flex-boxで横並び感覚を等間隔にした場合の設定 */
-/* .media-wrapper::after {
+/* #media-wrapper::after {
   display: block;
   content:"";
   width: 180px;
 } */
 
-li {
+#media-wrapper li {
   list-style: none;
-  width: 20%;
-  margin-bottom: 20px;
+  background-color: white;
+  width: 18%;
+  margin: 2px;
+  padding: 10px 5px 30px 5px;
+  box-shadow: 1px 1px 2px lightgrey;
+  border-radius: 3px;
 }
 
 .preview-media {
@@ -135,7 +139,8 @@ li {
   margin: 0 3px 5px 3px;
   opacity: 0.8;
   transition: 0.2s;
-  box-shadow: 1px 1px 2px dimgrey;
+  outline: 1px solid lightgrey;
+  border-radius: 5px;
 }
 
 .preview-media:hover {
@@ -264,7 +269,7 @@ li {
 
 .media-title {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.4rem;
   margin: 0 0;
   font-family: 'Yu Mincho';
@@ -289,8 +294,15 @@ li {
 
 /* スマホのみ */
 @media screen and (max-width: 420px) {
-  .media-wrapper {
+  #media-wrapper {
     width: 100%;
+    padding: 10px 2px;
+  }
+  #media-wrapper li{
+    width: 28%;
+    margin: 1px;
+    padding: 5px 3px 20px 3px;
+    border-radius: 3px;
   }
   .media-title {
     font-size: 13px;
