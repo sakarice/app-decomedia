@@ -244,6 +244,10 @@ p {
   justify-content: center;
 }
 
+.headphone-icon {
+  color: limegreen;
+}
+
 
 /* スマホ以上のサイズ(PC、タブレット */
 @media screen and (min-width: 481px) {
