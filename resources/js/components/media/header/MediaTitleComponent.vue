@@ -1,6 +1,6 @@
 <template>
     <div class="media-title-wrapper flex">
-        <input type="text" id="media-title" spellcheck="false"
+        <input type="text" id="media-title" class="nonEditable" spellcheck="false"
         :class="{'editable':!isDisable}"
         :disabled="isDisable"
         :value="getMediaSetting['name']"
@@ -80,6 +80,10 @@ export default {
     overflow-x: hidden;
 }
 
+.nonEditable {
+    background-color: rgba(0,0,0,1);
+}
+
 .editable {
     background-color: rgba(255,255,255,0.2);
     outline: 1px solid rgba(255,255,255,0.3);
@@ -88,6 +92,7 @@ export default {
     background-color: rgba(255,255,255,0.3);
     cursor: pointer;
 }
+
 
 @media screen and (max-width:480px) {
     #media-title {

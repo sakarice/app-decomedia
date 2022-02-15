@@ -12591,7 +12591,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-title[data-v-0b31bc3d] {\r\n    color:white;\r\n    padding: 0 5px;\r\n    min-width: 140px;\r\n    max-width: 350px;\r\n    border: none;\r\n    border-radius: 1px;\r\n    white-space: nowrap;\r\n    overflow-x: hidden;\n}\n.editable[data-v-0b31bc3d] {\r\n    background-color: rgba(255,255,255,0.2);\r\n    outline: 1px solid rgba(255,255,255,0.3);\n}\n.editable[data-v-0b31bc3d]:hover {\r\n    background-color: rgba(255,255,255,0.3);\r\n    cursor: pointer;\n}\n@media screen and (max-width:480px) {\n#media-title[data-v-0b31bc3d] {\r\n        max-width: 100px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-title[data-v-0b31bc3d] {\r\n    color:white;\r\n    padding: 0 5px;\r\n    min-width: 140px;\r\n    max-width: 350px;\r\n    border: none;\r\n    border-radius: 1px;\r\n    white-space: nowrap;\r\n    overflow-x: hidden;\n}\n.nonEditable[data-v-0b31bc3d] {\r\n    background-color: rgba(0,0,0,1);\n}\n.editable[data-v-0b31bc3d] {\r\n    background-color: rgba(255,255,255,0.2);\r\n    outline: 1px solid rgba(255,255,255,0.3);\n}\n.editable[data-v-0b31bc3d]:hover {\r\n    background-color: rgba(255,255,255,0.3);\r\n    cursor: pointer;\n}\n@media screen and (max-width:480px) {\n#media-title[data-v-0b31bc3d] {\r\n        max-width: 100px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24861,6 +24861,7 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "media-title-wrapper flex" }, [
     _c("input", {
+      staticClass: "nonEditable",
       class: { editable: !_vm.isDisable },
       attrs: {
         type: "text",
