@@ -1,12 +1,12 @@
 <template>
-    <div class="media-title-wrapper flex">
+    <nav class="media-title-wrapper flex">
         <input type="text" id="media-title" class="nonEditable" spellcheck="false"
         :class="{'editable':!isDisable}"
         :disabled="isDisable"
         :value="getMediaSetting['name']"
         @input="updateMediaTitle($event)"
         @keydown="checkAndBlockEnterInput">
-    </div>
+    </nav>
 </template>
 
 

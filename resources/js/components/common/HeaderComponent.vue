@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <header class="header">
         <!-- 左側 -->
         <div class="header-left">
             <home-link-component></home-link-component>
@@ -14,15 +14,15 @@
             <span v-if="getIsGuest" class="logged-in-as-guest-msg">ゲスト</span>
 
             <!-- ログイン -->
-            <div class="header-content-wrapper" v-if="!(getIsLogin)">
+            <nav class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="login header-content" href="/login">ログイン</a>
-            </div>
+            </nav>
             <!-- アカウント作成 -->
-            <div class="header-content-wrapper" v-if="!(getIsLogin)">
+            <nav class="header-content-wrapper" v-if="!(getIsLogin)">
                 <a class="signup header-content" href="/register">アカウント作成</a>
-            </div>
+            </nav>
             <!-- ログアウト -->
-            <div class="header-content-wrapper" v-if="getIsLogin">
+            <nav class="header-content-wrapper" v-if="getIsLogin">
                 <a class="logout header-content" href="/logout"
                 onclick="event.preventDefault();
                 document.getElementById('logout-form').submit();">ログアウト
@@ -30,21 +30,21 @@
                 <form id="logout-form" action="/logout" method="POST" class="d-none">
                     <input type="hidden" name="_token" v-bind:value="csrf">
                 </form>
-            </div>
+            </nav>
             <!-- ユーザアイコン -->
-            <div class="header-content-wrapper column" v-if="getIsLogin">
+            <nav class="header-content-wrapper column" v-if="getIsLogin">
                 <a class="user-icon header-content" v-on:click="openProfileModal()">
                     <img id="profile-img" src="/profile_img/user-solid.svg" alt="">
                 </a>
-            </div>
+            </nav>
             <!-- ユーザプロフィール -->
             <profile-component
             v-show="isShowProfile">
             </profile-component>
 
         </div>
-    </div>
-        
+    </header>
+
 </template>
 
 

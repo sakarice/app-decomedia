@@ -1,5 +1,5 @@
 <template>
-    <div class="sub-header">
+    <header class="sub-header">
         <!-- 左側 -->
         <div class="header-block header-left">
             <to-mypage-button></to-mypage-button>
@@ -19,7 +19,7 @@
             <media-update-button v-show="isMyMedia && (mode==2)">
             </media-update-button>
         </div>
-    </div>
+    </header>
         
 </template>
 

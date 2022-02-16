@@ -15,22 +15,13 @@ use Storage;
 class MypageController extends Controller
 {
     public function view(){
+        $getInfoNum = 5;
         $data = [
-            'createdMediaPreviewInfos' => MediaUtil::getCreatedMediaPreviewInfos(5)['createdMediaPreviewInfos'],
-            'likedMediaPreviewInfos' => MediaUtil::getLikedMediaPreviewInfos(5)['likedMediaPreviewInfos'],
+            'createdMediaPreviewInfos' => MediaUtil::getCreatedMediaPreviewInfos($getInfoNum)['createdMediaPreviewInfos'],
+            'likedMediaPreviewInfos' => MediaUtil::getLikedMediaPreviewInfos($getInfoNum)['likedMediaPreviewInfos'],
         ];
 
         return view('mypage.view', $data);
     }
-
-    // // プロフィール画面へユーザ情報を渡す
-    // public function profile(Request $request){
-    //     $user_id = Auth::user()->id;
-    //     $user = User::find($user_id);
-    //     $data = [
-    //         'user' => $user
-    //     ];
-    //     return view ('profile.view', $data);
-    // }
 
 }

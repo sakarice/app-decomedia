@@ -1,8 +1,8 @@
 <template>
     <!-- HOME画面へのリンク付きロゴ -->
-    <div class="header-content logo-wrapper">
+    <nav class="header-content logo-wrapper">
         <a class="logo" href="/home">Decomedia</a>
-    </div>
+    </nav>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <header class="header">
         <!-- 左側 -->
         <div class="header-block header-left">
             <home-link-component></home-link-component>
@@ -14,7 +14,7 @@
         <!-- 右側 -->
         <div class="header-block header-right">
         </div>
-    </div>
+    </header>
         
 </template>
 
