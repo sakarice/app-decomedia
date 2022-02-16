@@ -15,7 +15,7 @@
         <div class="link-wrapper" v-if="getIsLogin">
             <!-- {{-- メディア作成画面へのリンク --}} -->
             <a class="link-btn" href="/media/create">メディア作成</a>
-            <span style="color:white; margin:0 15px">or</span>
+            <span style="color:white; font-size:11px margin:0 15px;">または</span>
             <!-- {{-- マイページへのリンク --}} -->
             <a class="link-btn" href="/mypage">マイページへ</a>
         </div>
