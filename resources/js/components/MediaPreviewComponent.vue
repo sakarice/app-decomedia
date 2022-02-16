@@ -292,7 +292,7 @@ export default {
   color: aquamarine;
 }
 
-.media-title {
+.media-title {  
   text-align: center;
   font-size: 16px;
   line-height: 1.4rem;
@@ -310,7 +310,9 @@ export default {
 }
 
 .has-contents-icon {
-  font-size: 0.9em;
+  color: dimgray;
+  font-size: 0.8em;
+  margin-left: 7px;
 }
 
 
