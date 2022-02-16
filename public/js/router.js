@@ -21607,7 +21607,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "header-content logo-wrapper" }, [
+    return _c("nav", { staticClass: "header-content logo-wrapper" }, [
       _c("a", { staticClass: "logo", attrs: { href: "/home" } }, [
         _vm._v("Decomedia"),
       ]),
@@ -24748,7 +24748,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "header" }, [
+  return _c("header", { staticClass: "header" }, [
     _c(
       "div",
       { staticClass: "header-block header-left" },
@@ -24788,7 +24788,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "sub-header" }, [
+  return _c("header", { staticClass: "sub-header" }, [
     _c(
       "div",
       { staticClass: "header-block header-left" },
@@ -24859,7 +24859,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "media-title-wrapper flex" }, [
+  return _c("nav", { staticClass: "media-title-wrapper flex" }, [
     _c("input", {
       staticClass: "nonEditable",
       class: { editable: !_vm.isDisable },
