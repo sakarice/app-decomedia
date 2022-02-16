@@ -405,7 +405,7 @@ export default {
 
 #mypage-contents-wrapper {
   width: 80%;
-  height: 100vh;
+  height: calc(100vh - 90px);
 }
 
 
@@ -704,7 +704,8 @@ export default {
   }
 
   #mypage-contents-wrapper {
-    width: 100%
+    width: 100%;
+    height: auto;
   }
 
   .isActive {

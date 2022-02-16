@@ -30,6 +30,7 @@ const { functionsIn } = require('lodash');
 
 // ■ホーム画面用
 Vue.component('header-component', require('./components/common/HeaderComponent.vue').default);
+Vue.component('footer-component', require('./components/common/FooterComponent.vue').default);
 Vue.component('home-link-component', require('./components/media/action_parts/HomeLinkComponent.vue').default);
 
 // ■Mediaパーツ

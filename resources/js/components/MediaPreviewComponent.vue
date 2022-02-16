@@ -106,9 +106,9 @@ export default {
 <style scoped>
 
 #media-wrapper {
-  width: 80%;
+  width: 90%;
   padding-left: 0;
-  padding: 10px;
+  padding: 5px 1px;
   /* background-color: white; */
   max-width: 1200px;
   display: flex;
@@ -279,15 +279,13 @@ export default {
 
 /* タブレット、スマホ */
 @media screen and (max-width: 780px) {
-  li {
-    width: 33%;
-    margin-bottom: 10px;
+  #media-wrapper li {
+    width: 30%;
+    margin: 2px;
+    padding: 5px 2px 20px 2px;
   }
   .preview-media {
     margin: 0 2px 2px 2px;
-  }
-  .media-title {
-    font-size: 18px;
   }
   
 }
@@ -299,7 +297,7 @@ export default {
     padding: 10px 2px;
   }
   #media-wrapper li{
-    width: 28%;
+    width: 30%;
     margin: 1px;
     padding: 5px 3px 20px 3px;
     border-radius: 3px;
