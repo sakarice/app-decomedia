@@ -1,3 +1,11 @@
+/* リセットCSS。
+margin8pxを先に消しておくことで
+無駄な余白が生まれないようにする。
+ */
+* {
+  margin: 0px;
+  padding: 0px;
+}
 
 body {
   margin: 0;
@@ -119,19 +127,24 @@ p {
 }
 
 /* トップ */
-/* .top-message-wrapper {
-  position: absolute;
-  top: 10%;
+.top-message-wrapper {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: white;
+  text-align: center;
   text-shadow: 2px 2px 5px grey;
 }
 
 .top-message {
+  margin-bottom: 0;
+  margin-top: 110px;
   font-size: 50px;
   font-family: "Yu Mincho Medium";
-  margin-bottom: 0;
-} */
-
+  overflow-wrap:break-word;
+  word-break: keep-all;
+}
 
 .search-wrapper {
   position: absolute;
@@ -280,9 +293,11 @@ p {
   .top-message {
     font-size: 1.5rem;
   }
-  /* .link-wrapper {
-    flex-direction: column;
-  } */
+
+  .sub-message {
+    margin-top : 140px;
+  }
+
   .about-app {
     width: 90%;
     margin: 0;

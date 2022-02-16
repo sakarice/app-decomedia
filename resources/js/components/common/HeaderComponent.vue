@@ -84,6 +84,14 @@ export default {
 </script>
 
 <style scoped>
+/* リセットCSS。
+margin8pxを先に消しておくことで
+無駄な余白が生まれないようにする。
+ */
+* {
+  margin: 0px;
+  padding: 0px;
+}
 
 .header {
   position: fixed;

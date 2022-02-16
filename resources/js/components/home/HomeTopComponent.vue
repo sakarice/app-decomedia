@@ -1,21 +1,10 @@
 <template>
-    <div id="home-top">
-        <!-- {{-- タイトルコピー --}} -->
-        <div class="top-message-wrapper">
-            <h2 class="top-message">
-                <span>創作に手が出せなかった あなたへ</span><br>
-            </h2>
-            <p class="sub-message">
-                画像や音楽を「選んで配置する」だけ。<br>
-                3分で作れるあなただけのメディア。<br>
-            </p>
-        </div>
-
+    <div id="link-in-home-top">
         <!-- 通常ログイン後のリンク -->
         <div class="link-wrapper" v-if="getIsLogin">
             <!-- {{-- メディア作成画面へのリンク --}} -->
             <a class="link-btn" href="/media/create">メディア作成</a>
-            <span style="color:white; font-size:11px margin:0 15px;">または</span>
+            <span class="between-link">または</span>
             <!-- {{-- マイページへのリンク --}} -->
             <a class="link-btn" href="/mypage">マイページへ</a>
         </div>
@@ -26,18 +15,13 @@
             <a class="link-btn" href="/login/guest">ゲストとしてコンテンツ作成</a>
         </div>
     </div>
-
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
-import Overlay from '../common/OverlayComponent.vue'
-import Loading from '../common/LoadingComponent.vue'
 
 export default {
     components : {
-        Overlay,
-        Loading,
     },
     props : [],
     data : () => {
@@ -64,33 +48,6 @@ export default {
 </script>
 
 <style scoped>
-#home-top {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* トップ */
-.top-message-wrapper {
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: white;
-  text-align: center;
-  text-shadow: 2px 2px 5px grey;
-}
-
-.top-message {
-  margin-bottom: 0;
-  margin-top: 110px;
-  font-size: 50px;
-  font-family: "Yu Mincho Medium";
-  overflow-wrap:break-word;
-  word-break: keep-all;
-}
 
 .sub-catch-copy {
     font-family: serif;
@@ -103,6 +60,12 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.between-link {
+  color:white;
+  font-size:11px;
+  margin:10px;
 }
 
 .media-watch-message {
@@ -120,24 +83,11 @@ export default {
 
 /* スマホサイズ */
 @media screen and (max-width: 480px) {
-  .top-message-wrapper {
-    width: 90%;
-    font-size: 0.8rem;
-    text-align: center;
-  }
-
-  .top-message {
-    font-size: 1.5rem;
-  }
-
-  .sub-message {
-    margin-top : 140px;
-  }
-
   .link-wrapper {
     /* 縦積 */
     flex-direction: column;
     height: auto;
+    margin-top: 10px;
   }
 
 }
