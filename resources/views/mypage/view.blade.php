@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="{{ asset('css/mypage.view.css') }}">
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   <script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script> {{-- jquery --}}
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
   <title>Mypage</title>
 </head>
 <body>

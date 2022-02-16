@@ -1,38 +1,54 @@
 <template>
   <ul id="media-wrapper">
     <li v-for="(mediaPreviewInfo,index) in mediaPreviewInfos" :key="mediaPreviewInfo.id">
-      <div class="preview-media" :id="mediaPreviewInfo['id']">
-        <a class="media-link" :href="mediaShowLink(mediaPreviewInfo['id'])">
-          <div class="media-thumbnail-wrapper">
-            <img class="media-thumbnail" :src="mediaPreviewInfo['preview_img_url']" alt="">
+      <div class="upper-block">
+        <div class="preview-media" :id="mediaPreviewInfo['id']">
+          <a class="media-link" :href="mediaShowLink(mediaPreviewInfo['id'])">
+            <div class="media-thumbnail-wrapper">
+              <img class="media-thumbnail" :src="mediaPreviewInfo['preview_img_url']" alt="">
+            </div>
+          </a>
+
+          <div class="cover-menu" v-show="isShowCover">
+            <a :href="mediaShowLink(mediaPreviewInfo['id'])" class="cover-menu-link show-media">
+              <i class="fas fa-tv fa-lg show-mode-icon"></i>
+              <span class="link-title">閲覧</span>
+            </a>
+            <a :href="mediaEditLink(mediaPreviewInfo['id'])" class="cover-menu-link edit-media">
+              <i class="fas fa-pen fa-lg edit-mode-icon"></i>
+              <span class="link-title">編集</span>
+            </a>
           </div>
-        </a>
+          <i class="fas fa-trash del-icon" @click="deleteMedia(mediaPreviewInfo['id'])" v-show="isShowCover"></i>
 
-        <div class="cover-menu" v-show="isShowCover">
-          <a :href="mediaShowLink(mediaPreviewInfo['id'])" class="cover-menu-link show-media">
-            <i class="fas fa-tv fa-lg show-mode-icon"></i>
-            <span class="link-title">閲覧</span>
-          </a>
-          <a :href="mediaEditLink(mediaPreviewInfo['id'])" class="cover-menu-link edit-media">
-            <i class="fas fa-pen fa-lg edit-mode-icon"></i>
-            <span class="link-title">編集</span>
-          </a>
-        </div>
-        <i class="fas fa-trash del-icon" @click="deleteMedia(mediaPreviewInfo['id'])" v-show="isShowCover"></i>
+          <!-- Media選択用チェックボックス -->
+          <div class="check-box-cover" v-show="isSelectMode">
+            <input type="checkbox" class="media-select-check" name="" @change="changeIsCheckedMedia($event, index)">
+          </div>
 
-        <!-- Media選択用チェックボックス -->
-        <div class="check-box-cover" v-show="isSelectMode">
-          <input type="checkbox" class="media-select-check" name="" @change="changeIsCheckedMedia($event, index)">
-        </div>
+          <!-- 選択順 -->
+          <div class="selected-order-num-wrapper"
+          v-show="isSelectMode && mediaPreviewInfo['selectedOrderNum'] > 0">
+            <span class="selected-order-num">{{mediaPreviewInfo['selectedOrderNum']}}</span>
+          </div>
 
-        <!-- 選択順 -->
-        <div class="selected-order-num-wrapper"
-        v-show="isSelectMode && mediaPreviewInfo['selectedOrderNum'] > 0">
-          <span class="selected-order-num">{{mediaPreviewInfo['selectedOrderNum']}}</span>
         </div>
+        <p class="media-title">{{mediaPreviewInfo['name']}}</p>
 
       </div>
-      <p class="media-title">{{mediaPreviewInfo['name']}}</p>
+
+      <!-- 下段のブロック -->
+      <div class="bottom-block">
+        <div class="has-contents-wrapper">
+          <div v-if="mediaPreviewInfo['has_audio']" class="has-contents has-audio">
+            <i class="fas fa-headphones-alt has-contents-icon audio-icon"></i>
+          </div>
+          <div v-if="mediaPreviewInfo['has_movie']" class="has-contents has-movie">
+            <i class="fab fa-youtube has-contents-icon youtube-icon"></i>
+          </div>
+        </div>
+      </div>
+
     </li>
   </ul>  
 
@@ -128,9 +144,18 @@ export default {
   background-color: white;
   width: 18%;
   margin: 2px;
-  padding: 10px 5px 30px 5px;
+  padding: 5px 2px 0 2px;
   box-shadow: 1px 1px 2px lightgrey;
   border-radius: 3px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.upper-block, .bottom-block {
+  width: 100%;
 }
 
 .preview-media {
@@ -276,6 +301,18 @@ export default {
   overflow-wrap: break-word;
 }
 
+.has-contents-wrapper{
+  margin-top: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.has-contents-icon {
+  font-size: 0.9em;
+}
+
 
 /* タブレット、スマホ */
 @media screen and (max-width: 780px) {
@@ -299,9 +336,14 @@ export default {
   #media-wrapper li{
     width: 30%;
     margin: 1px;
-    padding: 5px 3px 20px 3px;
+    padding: 5px 3px 0px 3px;
     border-radius: 3px;
   }
+
+  .has-contents-wrapper {
+    padding: 0 3px;
+  }
+
   .media-title {
     font-size: 13px;
     color: rgba(100,100,100,1);
@@ -329,6 +371,8 @@ export default {
   .selected-order-num{
     font-size: 30px;
   }
+
+
 }
 
 
