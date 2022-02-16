@@ -3,7 +3,7 @@
 
     <div class="left-box img-wrapper border-r-50per">
       <img :src="user_info['profile_img_url']" alt="?"
-      class="profile_img w100 h100">
+      class="profile_img w100 h100 border-r-50per">
     </div>
 
     <div class="right-box pt3 flex column">
