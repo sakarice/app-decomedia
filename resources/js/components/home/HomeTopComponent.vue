@@ -131,12 +131,13 @@ export default {
   }
 
   .sub-message {
-    margin-top : 160px;
+    margin-top : 140px;
   }
 
   .link-wrapper {
     /* 縦積 */
     flex-direction: column;
+    height: auto;
   }
 
 }
