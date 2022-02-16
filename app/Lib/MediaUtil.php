@@ -122,12 +122,16 @@ class MediaUtil
   public static function getMediaPreviewInfo($media_id){
     $media_name = MediaSetting::where('media_id', $media_id)->first()->name;
     $media_img_url = MediaUtil::getMediaPreviewImgUrl($media_id);
+    $has_audio = MediaAudio::where('media_id',$media_id)->exists();
+    $has_movie = MediaMovie::where('media_id',$media_id)->exists();
 
     $mediaInfo = array(
         'id' => $media_id,
         'name' => $media_name,
         'preview_img_url' => $media_img_url,
         'selectedOrderNum' => 0,
+        'has_audio' => $has_audio,
+        'has_movie' => $has_movie,
     );
     return $mediaInfo;
   }
