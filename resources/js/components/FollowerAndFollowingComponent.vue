@@ -60,13 +60,15 @@ export default {
   /* padding : 10px 0; */
 }
 .category-area:hover {
-  background-color: rgb(248,248,248);
+  background-color: white;
+  cursor: pointer;
 }
 
-  #following-and-follower-area {
-    width: 95%;
-  }
+.category { border-radius: 0%;}
 
+#following-and-follower-area {
+  width: 95%;
+}
 
 .isActive {
   font-weight: bold;
