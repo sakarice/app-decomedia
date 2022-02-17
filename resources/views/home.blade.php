@@ -28,25 +28,20 @@
 <div id="app">
 
     <section id="home-top-wrapper">
+        <!-- {{-- タイトルコピー --}} -->
+        <div class="top-message-wrapper">
+            <h2 class="top-message">
+                <span>創作に手が出せなかった あなたへ</span><br>
+            </h2>
+            <p class="sub-message">
+                画像や音楽を「選んで配置する」だけ。<br>
+                3分で作れるあなただけのメディア。<br>
+            </p>
+        </div>
 
         <home-top-component 
         :csrf="{{json_encode(csrf_token())}}">
         </home-top-component>
-        {{-- タイトルコピー --}}
-        {{-- <div class="top-message-wrapper">
-            <h2 class="top-message">
-                <span>創作に手が出せなかった</span><br>
-                <span>あなたへ</span>
-            </h2>
-            <p class="sub-message">
-                0からコンテンツを作るのではなく、<br>
-                既にある画像や音楽、動画を組み合わせて<br>
-                メディアとして公開できるサービスです<br><br>
-                アイデアを形にするためのスキル・時間の<br>
-                ハードルを少しでも下げ、<br>
-                創作を楽しむきっかけを提供します
-            </p>
-        </div> --}}
 
         {{-- 検索ウィンドウとマイページへのリンク --}}
         {{-- <div class="search-wrapper"> --}}

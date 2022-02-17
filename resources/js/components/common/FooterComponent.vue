@@ -51,7 +51,7 @@ export default {
   background-color: rgba(0, 0, 0, 1);
   padding: 5px;
   margin-top: 50px;
-  width: 100%;
+  /* width: 100%; */
   height: 200px;
 }
 
