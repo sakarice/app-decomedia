@@ -19,6 +19,8 @@ import DispMediaSettingModal from '../components/media/change_display_parts/Disp
 import DispContentsFieldSettingModal from '../components/media/change_display_parts/DispMediaContentsFieldSettingModalComponent.vue';
 import DispTextSettingModal from '../components/media/change_display_parts/DispTextSettingModalComponent.vue';
 import DispFigureSettingModal from '../components/media/change_display_parts/DispFigureSettingModalComponent.vue';
+import DispTutorial from '../components/media/change_display_parts/DispTutorialComponent.vue';
+
 
 // メディア編集用コンポーネント
 import ImgSelect from '../components/media/edit_parts/ImgSelectComponent.vue';
@@ -46,6 +48,7 @@ import StereoPhonicArrange from '../components/media/media_contents/StereoPhonic
 // 編集中のローディング表示コンポーネント
 import Overlay from '../components/common/OverlayComponent.vue';
 import Loading from '../components/common/LoadingComponent.vue';
+import TutorialFlow from '../components/media/tutorial/TutorialFlowComponent';
 
 
 export default{
@@ -67,6 +70,8 @@ export default{
         dispContentsFieldSettingModal : DispContentsFieldSettingModal,
         dispTextSettingModal : DispTextSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
+        dispTutorial : DispTutorial,
+        tutorialFlow : TutorialFlow,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
         mediaTextFactory : MediaTextFactory,
@@ -97,6 +102,8 @@ export default{
         dispContentsFieldSettingModal : DispContentsFieldSettingModal,
         dispTextSettingModal : DispTextSettingModal,
         dispFigureSettingModal : DispFigureSettingModal,
+        dispTutorial : DispTutorial,
+        tutorialFlow : TutorialFlow,
         imgSelect : ImgSelect,
         mediaFigureFactory : MediaFigureFactory,
         mediaTextFactory : MediaTextFactory,

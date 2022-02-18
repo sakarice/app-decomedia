@@ -5,6 +5,8 @@
 
     <judge-device-type></judge-device-type>
 
+    <router-view name="tutorialFlow"></router-view>
+
     <!-- <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view> -->
 
