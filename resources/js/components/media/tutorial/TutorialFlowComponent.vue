@@ -14,26 +14,14 @@
           <i class="fas fa-chevron-left fa-2x white"></i>
         </div>
 
-        <!-- 説明用モーダル -->
-        <div id="tutorial-modal">
-          <!-- 上部のヘッダ -->
-          <div class="tutorial--modal--header">
-            <div class="page-wrapper">
-              <span class="page-index">{{page}}</span>
-            </div>
-            <p class="description-title">title</p>
-          </div>
-
-          <!-- 補足用画像 -->
-          <div class="tutorial--img--wrapper">
-            <img class="tutorial--img" src="https://cdn.pixabay.com/photo/2018/09/17/09/47/pixel-3683374_960_720.png" :alt="page">
-          </div>
-
-          <!-- 説明 -->
-          <div class="tutorial--description--wrapper">
-            <p class="description">this is tutorial {{page}}</p>
-          </div>
-        </div>
+      <ul id="tutorial-pages">
+        <li id="tutorial-page" v-for="(tutorial_info, index) in tutorial_infos" :key="index">
+          <tutorial-template v-show="page==index+1"
+          :page="index+1"
+          :tutorialInfo="tutorial_infos[index]">
+          </tutorial-template>
+        </li>
+      </ul>
 
         <!-- 進む -->
         <div class="next-wrapper" @click="next">
@@ -47,21 +35,46 @@
 
 <script>
 import overlay from '../../common/OverlayComponent.vue';
+import tutorialTemplate from './TutorialTemplateComponent.vue';
+import {mapGetters} from 'vuex';
+
 
   export default {
     components : {
       overlay,
+      tutorialTemplate,
     },
-    props : [
-      'message',
-    ],
+    props : [],
     data : () => {
       return {
         isShowTutorial : false,
         page : 1,
       }
     },
+    computed :{
+      tutorial_1:function(){ return this.$store.getters['tutorialInfo_1/getTutorialInfo']},
+      tutorial_2:function(){ return this.$store.getters['tutorialInfo_2/getTutorialInfo']},
+      tutorial_3:function(){ return this.$store.getters['tutorialInfo_3/getTutorialInfo']},
+
+
+      // 各ページ毎のチュートリアルの情報を1つの配列にまとめる
+      tutorial_infos:function(){
+        let infosArray = [];
+        infosArray.push(
+          this.tutorial_1,
+          this.tutorial_2,
+          this.tutorial_3,
+        );
+        return infosArray;
+      },
+      tutorial_info_num:function(){ return this.tutorial_infos.length},
+    },
     methods : {
+      showTutorial(){
+        this.isShowTutorial = true;
+        const showOverLay = new CustomEvent('showOverLay');
+        document.body.dispatchEvent(showOverLay);
+      },
       hideTutorial(){
         this.isShowTutorial = false;
         const hideOverLay = new CustomEvent('hideOverLay');
@@ -72,17 +85,21 @@ import overlay from '../../common/OverlayComponent.vue';
         console.log(this.page);
       },
       next(){
-        this.page = this.page<7 ? this.page+1 : this.page;
+        this.page = this.page<this.tutorial_info_num ? this.page+1 : this.page;
         console.log(this.page);
       }
     },
     created(){},
     mounted(){
       document.body.addEventListener('showTutorial', (e)=>{
-        this.isShowTutorial = true;
-        const showOverLay = new CustomEvent('showOverLay');
-        document.body.dispatchEvent(showOverLay);
+        this.showTutorial();
       });
+
+      document.addEventListener('keydown', (e)=>{
+        if(e.keyCode==27){
+          this.hideTutorial();
+        }
+      })
     }
 
   }
@@ -92,6 +109,13 @@ import overlay from '../../common/OverlayComponent.vue';
 
 
 <style scoped>
+
+ul, li {
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
 
 #tutorial-field {
   z-index: 20;
@@ -111,6 +135,7 @@ import overlay from '../../common/OverlayComponent.vue';
 #tutorial-contents-wrapper {
   z-index: 11;
   position: relative;
+  margin-top: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -144,51 +169,11 @@ import overlay from '../../common/OverlayComponent.vue';
   background-color: rgba(100,100,100,0.1);
 }
 
-#tutorial-modal {
-  width: 320px;
-  height: 380px;
-  /* background-color: rgba(50,50,80,0.9); */
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#tutorial-pages {
 }
 
-#tutorial-modal .tutorial--modal--header {
-  display: flex;
-  align-items: center;
-  width: 100%;
+#tutorial-page {
 }
-
-.page-wrapper {
-  background: linear-gradient(-225deg,
-  black, black 50%, white 50%, white);
-  width: 50px;
-  height: 50px;
-}
-
-.page-index {
-  color: skyblue;
-  font-size: 20px;
-  margin-left: 3px;
-}
-
-.description-title {
-  margin: 0;
-  font-size: 18px;
-}
-
-#tutorial-modal .tutorial--img--wrapper {
-  width: 90%;
-  height: 40%;
-  padding: 10px;
-}
-
-.tutorial--img {
-  width: 100%;
-  height: 100%;
-}
-
 
 
 .red {color: red;}

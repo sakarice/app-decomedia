@@ -1,46 +1,52 @@
 
 <template>
   <!-- <transition name="flowup" v-show="isShowTutorial"> -->
-    <div id="tutorial-field" v-show="isShowTutorial">
-      <div id="tutorial-contents-wrapper">
-        <div class="close-icon-wrapper" @click="hideTutorial">
-          <i class="fas fa-times fa-lg red"></i>
+    <!-- 説明用モーダル -->
+    <div id="tutorial-modal">
+      <!-- 上部のヘッダ -->
+      <div class="tutorial--modal--header">
+        <div class="page-wrapper">
+          <span class="page-index">{{page}}</span>
         </div>
+        <p class="description-title">{{tutorialInfo['title']}}</p>
+      </div>
+
+      <!-- 補足用画像 -->
+      <div class="tutorial--img--wrapper">
+        <img class="tutorial--img" :src="tutorialInfo['imgUrl']" :alt="page">
+      </div>
+
+      <!-- 説明 -->
+      <div class="tutorial--description--wrapper">
+        <p class="description">{{tutorialInfo['description']}}</p>
       </div>
     </div>
+
   <!-- </transition> -->
 </template>
 
 <script>
-import overlay from '../../common/OverlayComponent.vue';
+import {mapGetters} from 'vuex';
 
   export default {
     components : {
-      overlay,
     },
     props : [
-      'message',
+      'page',
+      'tutorialInfo',
     ],
     data : () => {
       return {
-        isShowTutorial : false,
       }
     },
+    computed : {
+      // ...mapGetters('tutorialInfo_1', ['getTutorialInfo']),
+      // tutorial_1:function(){ return this.$store.getters['tutorialInfo_1/getTutorialInfo']},
+    },
     methods : {
-      hideTutorial(){
-        this.isShowTutorial = false;
-        const hideOverLay = new CustomEvent('hideOverLay');
-        document.body.dispatchEvent(hideOverLay);
-      },
     },
     created(){},
-    mounted(){
-      document.body.addEventListener('showTutorial', (e)=>{
-        this.isShowTutorial = true;
-        const showOverLay = new CustomEvent('showOverLay');
-        document.body.dispatchEvent(showOverLay);
-      });
-    }
+    mounted(){},
 
   }
 
@@ -50,65 +56,58 @@ import overlay from '../../common/OverlayComponent.vue';
 
 <style scoped>
 
-#tutorial-field {
-  z-index: 20;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background-color: rgba(0,0,0,0.5); */
+#tutorial-modal {
+  width: 320px;
+  height: 380px;
+  /* background-color: rgba(50,50,80,0.9); */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  /* flex設定 */
+#tutorial-modal .tutorial--modal--header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
-#tutorial-contents-wrapper {
-  z-index: 11;
+.page-wrapper {
+  background: linear-gradient(-225deg,
+  black, black 50%, white 50%, white);
+  width: 50px;
+  height: 50px;
 }
 
-.close-icon-wrapper {
-  padding: 10px 15px;
-  background-color: rgba(0,0,0,0.7);
-  border-radius: 50%;
+.page-index {
+  color: skyblue;
+  font-size: 20px;
+  margin-left: 3px;
 }
 
-.close-icon-wrapper:hover {
-  cursor: pointer;
-  background-color: rgba(40,40,40,1);
+.description-title {
+  margin: 0;
+  font-size: 18px;
 }
 
-.red {
-  color: red;
+#tutorial-modal .tutorial--img--wrapper {
+  width: 90%;
+  height: 40%;
+  padding: 10px;
+}
+
+.tutorial--img {
+  width: 100%;
+  height: 100%;
+}
+
+.tutorial--description--wrapper {
+  margin-top: 20px;
 }
 
 
-@-webkit-keyframes gradation {
-  0% { color: #ff1493; }
-  50% { color: #7fff00; }
-  100% { color: #ff1493; }
-}
-@keyframes gradation {
-  0% { color: #ff1493; }
-  50% { color: #7fff00; }
-  100% { color: #ff1493; }
-}
-
-
-
-/* モーダル表示アニメーション */
-.flowup-enter-active, .flowup-leave-active {
-  opacity: 1;
-  transform: translate(0px, 0px);
-  transition: all 150ms;
-}
-
-.flowup-enter, .flowup-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
+.red {color: red;}
+.white {color:white;}
 
 
 </style>
