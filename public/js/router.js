@@ -1711,13 +1711,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      isShowTutorial: false
+    };
+  },
   methods: {
+    toggleTutorial: function toggleTutorial() {
+      if (this.isShowTutorial == false) {
+        this.showTutorial();
+        this.isShowTutorial = true;
+      } else if (this.isShowTutorial == true) {
+        this.hideTutorial();
+        this.isShowTutorial = false;
+      }
+    },
     showTutorial: function showTutorial() {
       var event = new CustomEvent('showTutorial');
-      console.log("showTutorial");
+      document.body.dispatchEvent(event);
+    },
+    hideTutorial: function hideTutorial() {
+      var event = new CustomEvent('hideTutorial');
       document.body.dispatchEvent(event);
     }
+  },
+  created: function created() {
+    var _this = this;
+
+    document.body.addEventListener('hideTutorialSelf', function (e) {
+      _this.isShowTutorial = false;
+    });
   }
 });
 
@@ -10923,7 +10948,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       isShowTutorial: false,
-      page: 1
+      page: 1,
+      showOverLayEvent: new CustomEvent('showOverLay'),
+      hideOverLayEvent: new CustomEvent('hideOverLay'),
+      hideTutorialSelfEvent: new CustomEvent('hideTutorialSelf')
     };
   },
   computed: {
@@ -10949,21 +10977,18 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showTutorial: function showTutorial() {
       this.isShowTutorial = true;
-      var showOverLay = new CustomEvent('showOverLay');
-      document.body.dispatchEvent(showOverLay);
+      document.body.dispatchEvent(this.showOverLayEvent);
     },
     hideTutorial: function hideTutorial() {
       this.isShowTutorial = false;
-      var hideOverLay = new CustomEvent('hideOverLay');
-      document.body.dispatchEvent(hideOverLay);
+      document.body.dispatchEvent(this.hideOverLayEvent);
+      document.body.dispatchEvent(this.hideTutorialSelfEvent);
     },
     back: function back() {
       this.page = this.page > 1 ? this.page - 1 : this.page;
-      console.log(this.page);
     },
     next: function next() {
       this.page = this.page < this.tutorial_info_num ? this.page + 1 : this.page;
-      console.log(this.page);
     }
   },
   created: function created() {},
@@ -10972,6 +10997,9 @@ __webpack_require__.r(__webpack_exports__);
 
     document.body.addEventListener('showTutorial', function (e) {
       _this.showTutorial();
+    });
+    document.body.addEventListener('hideTutorial', function (e) {
+      _this.hideTutorial();
     });
     document.addEventListener('keydown', function (e) {
       if (e.keyCode == 27) {
@@ -12511,7 +12539,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#disp-tutorial-icon-wrapper[data-v-78eea378] {\r\n  margin: 0 5px;\n}\n.lightgrey[data-v-78eea378]{\r\n  color: lightgrey;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#disp-tutorial-icon-wrapper[data-v-78eea378] {\r\n  margin: 0 10px;\r\n  padding: 10px 5px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: center;\r\n  align-items: center;\n}\n#disp-tutorial-icon-wrapper[data-v-78eea378]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(255,255,255,0.2);\n}\n.sub-text[data-v-78eea378] {\r\n  color:grey;\r\n  font-size:10px;\r\n  height:10px;\r\n  margin-top:2px;\n}\n.lightgrey[data-v-78eea378]{\r\n  color: lightgrey;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22860,12 +22888,11 @@ var render = function () {
   return _c(
     "div",
     {
-      staticClass: "icon-wrapper",
       attrs: { id: "disp-tutorial-icon-wrapper" },
       on: {
         click: function ($event) {
           $event.stopPropagation()
-          return _vm.showTutorial($event)
+          return _vm.toggleTutorial($event)
         },
       },
     },
@@ -22874,6 +22901,8 @@ var render = function () {
         staticClass:
           "fas fa-question-circle fa-lg disp-tutorial-icon lightgrey",
       }),
+      _vm._v(" "),
+      _c("span", { staticClass: "sub-text" }, [_vm._v("チュートリアル")]),
     ]
   )
 }

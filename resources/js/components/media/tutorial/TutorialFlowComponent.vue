@@ -49,13 +49,15 @@ import {mapGetters} from 'vuex';
       return {
         isShowTutorial : false,
         page : 1,
+        showOverLayEvent : new CustomEvent('showOverLay'),
+        hideOverLayEvent : new CustomEvent('hideOverLay'),
+        hideTutorialSelfEvent : new CustomEvent('hideTutorialSelf'),
       }
     },
     computed :{
       tutorial_1:function(){ return this.$store.getters['tutorialInfo_1/getTutorialInfo']},
       tutorial_2:function(){ return this.$store.getters['tutorialInfo_2/getTutorialInfo']},
       tutorial_3:function(){ return this.$store.getters['tutorialInfo_3/getTutorialInfo']},
-
 
       // 各ページ毎のチュートリアルの情報を1つの配列にまとめる
       tutorial_infos:function(){
@@ -72,27 +74,28 @@ import {mapGetters} from 'vuex';
     methods : {
       showTutorial(){
         this.isShowTutorial = true;
-        const showOverLay = new CustomEvent('showOverLay');
-        document.body.dispatchEvent(showOverLay);
+        document.body.dispatchEvent(this.showOverLayEvent);
       },
       hideTutorial(){
         this.isShowTutorial = false;
-        const hideOverLay = new CustomEvent('hideOverLay');
-        document.body.dispatchEvent(hideOverLay);
+        document.body.dispatchEvent(this.hideOverLayEvent);
+        document.body.dispatchEvent(this.hideTutorialSelfEvent);
       },
       back(){
         this.page = this.page>1 ? this.page-1 : this.page;
-        console.log(this.page);
       },
       next(){
         this.page = this.page<this.tutorial_info_num ? this.page+1 : this.page;
-        console.log(this.page);
       }
     },
-    created(){},
+    created(){
+    },
     mounted(){
       document.body.addEventListener('showTutorial', (e)=>{
         this.showTutorial();
+      });
+      document.body.addEventListener('hideTutorial', (e)=>{
+        this.hideTutorial();
       });
 
       document.addEventListener('keydown', (e)=>{
