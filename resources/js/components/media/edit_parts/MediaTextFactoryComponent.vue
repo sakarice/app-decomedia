@@ -8,7 +8,7 @@
           <!-- テキストプレビュー -->
           <div id="text-preview-wrapper" class="">
             <input
-            id="text-preview" class="m0" placeholder="テキストを入力してください"
+            id="text-preview" type="text" class="m0" placeholder="テキストを入力してください"
             :style="previewStyle" v-model="getTextData['text']">
           </div>
           <!-- 追加 -->
@@ -18,11 +18,11 @@
           </button>
 
           <!-- 詳細設定の表示・非表示切り替え -->
-          <div class="change-disp-detail flex a-center w100 mb20">
+          <!-- <div class="change-disp-detail flex a-center w100 mb20">
             <div class="horizontal-bar"></div>
             <span class="setting-label">設定</span>
             <div class="horizontal-bar"></div>
-          </div>
+          </div> -->
 
           <!-- 設定 -->
           <div class="setting-wrapper flex column a-center">
@@ -208,7 +208,8 @@ export default {
 
   .setting-wrapper {
     width: 100%;
-    padding-right: 10px;
+    padding: 20px 15px;
+    outline: 1px dashed dimgrey;
     overflow-y: scroll;
   }
   .setting {
@@ -325,7 +326,7 @@ export default {
   }
 
   .setting-wrapper {
-    max-height: 120px;
+    max-height: 170px;
   }
 
 }
