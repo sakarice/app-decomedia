@@ -6525,6 +6525,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -26711,11 +26712,12 @@ var render = function () {
           _c("div", { staticClass: "setting-type-color mt10" }, [
             _c(
               "div",
-              { staticClass: "flex j-s-between a-center fill-input-wrapper" },
+              {
+                staticClass:
+                  "flex j-s-between a-center fill-input-wrapper mb15",
+              },
               [
-                _c("div", { staticClass: "fill-flag" }, [
-                  _c("span", { staticClass: "label" }, [_vm._v("塗りつぶし")]),
-                  _vm._v(" "),
+                _c("label", { staticClass: "fill-flag m0" }, [
                   _c("input", {
                     attrs: { type: "checkbox" },
                     domProps: { checked: _vm.figureDatas["isDrawFill"] },
@@ -26731,10 +26733,12 @@ var render = function () {
                       },
                     },
                   }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "label" }, [_vm._v("塗りつぶし")]),
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "fill-color" }, [
-                  _c("span", { staticClass: "label" }, [_vm._v("色")]),
+                  _c("span", { staticClass: "label grey" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -26757,11 +26761,12 @@ var render = function () {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "flex j-s-between a-center stroke-input-wrapper" },
+              {
+                staticClass:
+                  "flex j-s-between a-center stroke-input-wrapper mb15",
+              },
               [
-                _c("div", { staticClass: "stroke-flag" }, [
-                  _c("span", { staticClass: "label" }, [_vm._v("枠線")]),
-                  _vm._v(" "),
+                _c("label", { staticClass: "stroke-flag m0" }, [
                   _c("input", {
                     attrs: { type: "checkbox" },
                     domProps: { checked: _vm.figureDatas["isDrawStroke"] },
@@ -26777,10 +26782,12 @@ var render = function () {
                       },
                     },
                   }),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "label" }, [_vm._v("枠線")]),
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "stroke-color" }, [
-                  _c("span", { staticClass: "label" }, [_vm._v("色")]),
+                  _c("span", { staticClass: "label grey" }, [_vm._v("色")]),
                   _vm._v(" "),
                   _c("input", {
                     attrs: { type: "color" },
@@ -26804,11 +26811,15 @@ var render = function () {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "opacity-input-wrapper mt10 mb15 flex a-center" },
+            {
+              staticClass:
+                "opacity-input-wrapper mt25 mb25 j-s-between flex a-center",
+            },
             [
-              _c("span", { staticClass: "label mr10" }, [_vm._v("透過度")]),
+              _c("span", { staticClass: "label w-auto" }, [_vm._v("透過度")]),
               _vm._v(" "),
               _c("input", {
+                staticClass: "w100px",
                 attrs: {
                   type: "range",
                   name: "opacity",
@@ -26822,6 +26833,26 @@ var render = function () {
                   mousedown: function ($event) {
                     $event.stopPropagation()
                   },
+                  input: function ($event) {
+                    return _vm.updateFigureData(
+                      "globalAlpha",
+                      $event.target.value
+                    )
+                  },
+                },
+              }),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "input-num w50px font-12",
+                attrs: {
+                  type: "number",
+                  name: "opacity",
+                  min: "0",
+                  max: "1",
+                  step: "0.05",
+                },
+                domProps: { value: _vm.figureDatas["globalAlpha"] },
+                on: {
                   input: function ($event) {
                     return _vm.updateFigureData(
                       "globalAlpha",
