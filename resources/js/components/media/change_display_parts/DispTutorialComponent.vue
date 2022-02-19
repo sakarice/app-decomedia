@@ -1,7 +1,7 @@
 <template>
   <div id="disp-tutorial-icon-wrapper" class="" v-on:click.stop="toggleTutorial">
     <i class="fas fa-question-circle fa-lg disp-tutorial-icon lightgrey"></i>
-    <span class="sub-text">チュートリアル</span>
+    <span class="sub-text">使い方</span>
   </div>
 </template>
 

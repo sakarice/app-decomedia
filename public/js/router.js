@@ -10936,6 +10936,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -11055,9 +11056,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
-  computed: {// ...mapGetters('tutorialInfo_1', ['getTutorialInfo']),
-    // tutorial_1:function(){ return this.$store.getters['tutorialInfo_1/getTutorialInfo']},
-  },
+  computed: {},
   methods: {},
   created: function created() {},
   mounted: function mounted() {}
@@ -13679,7 +13678,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-3fb39d14], li[data-v-3fb39d14] {\r\n  margin:0;\r\n  padding:0;\r\n  list-style: none;\n}\n#tutorial-field[data-v-3fb39d14] {\r\n  z-index: 20;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  /* background-color: rgba(0,0,0,0.5); */\r\n\r\n  /* flex設定 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n#tutorial-contents-wrapper[data-v-3fb39d14] {\r\n  z-index: 11;\r\n  position: relative;\r\n  margin-top: 80px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\n}\n.close-icon-wrapper[data-v-3fb39d14] {\r\n  position: absolute;\r\n  top: -50px;\r\n  left: 0;\r\n  display: inline-block;\r\n  padding: 10px 15px;\r\n  /* background-color: rgba(0,0,0,0.7); */\r\n  border-radius: 50%;\n}\n.close-icon-wrapper[data-v-3fb39d14]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(40,40,40,1);\n}\n.back-wrapper[data-v-3fb39d14], .next-wrapper[data-v-3fb39d14] {\r\n  margin: 7px;\r\n  padding: 100px 30px;\r\n  border-radius: 3px;\n}\n.back-wrapper[data-v-3fb39d14]:hover{\r\n  background-color: rgba(100,100,100,0.1);\n}\n.next-wrapper[data-v-3fb39d14]:hover{\r\n  background-color: rgba(100,100,100,0.1);\n}\n#tutorial-pages[data-v-3fb39d14] {\n}\n#tutorial-page[data-v-3fb39d14] {\n}\n.red[data-v-3fb39d14] {color: red;}\n.white[data-v-3fb39d14] {color:white;}\n@-webkit-keyframes gradation-data-v-3fb39d14 {\n0% { color: #ff1493;\n}\n50% { color: #7fff00;\n}\n100% { color: #ff1493;\n}\n}\n@keyframes gradation-data-v-3fb39d14 {\n0% { color: #ff1493;\n}\n50% { color: #7fff00;\n}\n100% { color: #ff1493;\n}\n}\r\n\r\n\r\n\r\n/* モーダル表示アニメーション */\n.flowup-enter-active[data-v-3fb39d14], .flowup-leave-active[data-v-3fb39d14] {\r\n  opacity: 1;\r\n  transform: translate(0px, 0px);\r\n  transition: all 150ms;\n}\n.flowup-enter[data-v-3fb39d14], .flowup-leave-to[data-v-3fb39d14] {\r\n  opacity: 0;\r\n  transform: translateY(20px);\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul[data-v-3fb39d14], li[data-v-3fb39d14] {\r\n  margin:0;\r\n  padding:0;\r\n  list-style: none;\n}\n#tutorial-field[data-v-3fb39d14] {\r\n  z-index: 20;\r\n  position: fixed;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\r\n  /* background-color: rgba(0,0,0,0.5); */\r\n\r\n  /* flex設定 */\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\n#tutorial-contents-wrapper[data-v-3fb39d14] {\r\n  z-index: 11;\r\n  position: relative;\r\n  margin-top: 80px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\n}\n.close-icon-wrapper[data-v-3fb39d14] {\r\n  position: absolute;\r\n  top: -50px;\r\n  left: 0;\r\n  display: inline-block;\r\n  padding: 10px 16px 8px 16px;\r\n  /* background-color: rgba(0,0,0,0.7); */\r\n  border-radius: 50%;\n}\n.close-icon-wrapper[data-v-3fb39d14]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(40,40,40,1);\n}\n.back-wrapper[data-v-3fb39d14], .next-wrapper[data-v-3fb39d14] {\r\n  margin: 7px;\r\n  padding: 100px 30px;\r\n  border-radius: 3px;\n}\n.back-wrapper[data-v-3fb39d14]:hover{\r\n  background-color: rgba(100,100,100,0.1);\n}\n.next-wrapper[data-v-3fb39d14]:hover{\r\n  background-color: rgba(100,100,100,0.1);\n}\n#tutorial-pages[data-v-3fb39d14] {\r\n  position:relative;  \r\n  display: flex;\r\n  width: 300px;\r\n  height: 400px;\n}\n.tutorial-page[data-v-3fb39d14] {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 100%;\n}\n.red[data-v-3fb39d14] {color: red;}\n.white[data-v-3fb39d14] {color:white;}\r\n\r\n\r\n/* \r\n@-webkit-keyframes gradation {\r\n  0% { color: #ff1493; }\r\n  50% { color: #7fff00; }\r\n  100% { color: #ff1493; }\r\n}\r\n@keyframes gradation {\r\n  0% { color: #ff1493; }\r\n  50% { color: #7fff00; }\r\n  100% { color: #ff1493; }\r\n} */\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -13702,7 +13701,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#tutorial-modal[data-v-2e03dbac] {\r\n  width: 320px;\r\n  height: 380px;\r\n  /* background-color: rgba(50,50,80,0.9); */\r\n  background-color: white;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n#tutorial-modal .tutorial--modal--header[data-v-2e03dbac] {\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\n}\n.page-wrapper[data-v-2e03dbac] {\r\n  background: linear-gradient(-225deg,\r\n  black, black 50%, white 50%, white);\r\n  width: 50px;\r\n  height: 50px;\n}\n.page-index[data-v-2e03dbac] {\r\n  color: skyblue;\r\n  font-size: 20px;\r\n  margin-left: 3px;\n}\n.description-title[data-v-2e03dbac] {\r\n  margin: 0;\r\n  font-size: 18px;\n}\n#tutorial-modal .tutorial--img--wrapper[data-v-2e03dbac] {\r\n  width: 90%;\r\n  height: 40%;\r\n  padding: 10px;\n}\n.tutorial--img[data-v-2e03dbac] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.tutorial--description--wrapper[data-v-2e03dbac] {\r\n  margin-top: 20px;\n}\n.red[data-v-2e03dbac] {color: red;}\n.white[data-v-2e03dbac] {color:white;}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#tutorial-modal[data-v-2e03dbac] {\r\n  /* width: 320px;\r\n  height: 380px; */\r\n  width: 100%;\r\n  height: 100%;\r\n  background-color: white;\r\n  border-radius: 2px;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\n}\n#tutorial-modal .tutorial--modal--header[data-v-2e03dbac] {\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\n}\n.page-wrapper[data-v-2e03dbac] {\r\n  background: linear-gradient(-225deg,\r\n  black, black 50%, white 50%, white);\r\n  width: 50px;\r\n  height: 50px;\n}\n.page-index[data-v-2e03dbac] {\r\n  color: skyblue;\r\n  font-size: 20px;\r\n  margin-left: 3px;\n}\n.description-title[data-v-2e03dbac] {\r\n  margin: 0;\r\n  font-size: 18px;\n}\n#tutorial-modal .tutorial--img--wrapper[data-v-2e03dbac] {\r\n  width: 90%;\r\n  height: 40%;\r\n  padding: 10px;\n}\n.tutorial--img[data-v-2e03dbac] {\r\n  width: 100%;\r\n  height: 100%;\n}\n.tutorial--description--wrapper[data-v-2e03dbac] {\r\n  margin-top: 20px;\n}\n.red[data-v-2e03dbac] {color: red;}\n.white[data-v-2e03dbac] {color:white;}\r\n\r\n\r\n\r\n/* モーダル表示アニメーション */\n.slidein-enter-active[data-v-2e03dbac], .slidein-leave-active[data-v-2e03dbac] {\r\n  opacity: 1;\r\n  transform: translate(0px, 0px);\r\n  transition: all 220ms;\n}\n.slidein-enter[data-v-2e03dbac], .slidein-leave-to[data-v-2e03dbac] {\r\n  opacity: 0;\r\n  transform: translateX(12px);\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -29415,7 +29414,7 @@ var render = function () {
           _vm._l(_vm.tutorial_infos, function (tutorial_info, index) {
             return _c(
               "li",
-              { key: index, attrs: { id: "tutorial-page" } },
+              { key: index, staticClass: "tutorial-page" },
               [
                 _c("tutorial-template", {
                   directives: [
@@ -29470,27 +29469,29 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "tutorial-modal" } }, [
-    _c("div", { staticClass: "tutorial--modal--header" }, [
-      _c("div", { staticClass: "page-wrapper" }, [
-        _c("span", { staticClass: "page-index" }, [_vm._v(_vm._s(_vm.page))]),
+  return _c("transition", { attrs: { name: "slidein" } }, [
+    _c("div", { attrs: { id: "tutorial-modal" } }, [
+      _c("div", { staticClass: "tutorial--modal--header" }, [
+        _c("div", { staticClass: "page-wrapper" }, [
+          _c("span", { staticClass: "page-index" }, [_vm._v(_vm._s(_vm.page))]),
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "description-title" }, [
+          _vm._v(_vm._s(_vm.tutorialInfo["title"])),
+        ]),
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "description-title" }, [
-        _vm._v(_vm._s(_vm.tutorialInfo["title"])),
+      _c("div", { staticClass: "tutorial--img--wrapper" }, [
+        _c("img", {
+          staticClass: "tutorial--img",
+          attrs: { src: _vm.tutorialInfo["imgUrl"], alt: _vm.page },
+        }),
       ]),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "tutorial--img--wrapper" }, [
-      _c("img", {
-        staticClass: "tutorial--img",
-        attrs: { src: _vm.tutorialInfo["imgUrl"], alt: _vm.page },
-      }),
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "tutorial--description--wrapper" }, [
-      _c("p", { staticClass: "description" }, [
-        _vm._v(_vm._s(_vm.tutorialInfo["description"])),
+      _vm._v(" "),
+      _c("div", { staticClass: "tutorial--description--wrapper" }, [
+        _c("p", { staticClass: "description" }, [
+          _vm._v(_vm._s(_vm.tutorialInfo["description"])),
+        ]),
       ]),
     ]),
   ])

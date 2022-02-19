@@ -1,6 +1,6 @@
 
 <template>
-  <!-- <transition name="flowup" v-show="isShowTutorial"> -->
+  <transition name="slidein">
     <!-- 説明用モーダル -->
     <div id="tutorial-modal">
       <!-- 上部のヘッダ -->
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-  <!-- </transition> -->
+  </transition>
 </template>
 
 <script>
@@ -40,8 +40,6 @@ import {mapGetters} from 'vuex';
       }
     },
     computed : {
-      // ...mapGetters('tutorialInfo_1', ['getTutorialInfo']),
-      // tutorial_1:function(){ return this.$store.getters['tutorialInfo_1/getTutorialInfo']},
     },
     methods : {
     },
@@ -53,14 +51,15 @@ import {mapGetters} from 'vuex';
 </script>
 
 
-
 <style scoped>
 
 #tutorial-modal {
-  width: 320px;
-  height: 380px;
-  /* background-color: rgba(50,50,80,0.9); */
+  /* width: 320px;
+  height: 380px; */
+  width: 100%;
+  height: 100%;
   background-color: white;
+  border-radius: 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,5 +108,18 @@ import {mapGetters} from 'vuex';
 .red {color: red;}
 .white {color:white;}
 
+
+
+/* モーダル表示アニメーション */
+.slidein-enter-active, .slidein-leave-active {
+  opacity: 1;
+  transform: translate(0px, 0px);
+  transition: all 220ms;
+}
+
+.slidein-enter, .slidein-leave-to {
+  opacity: 0;
+  transform: translateX(12px);
+}
 
 </style>

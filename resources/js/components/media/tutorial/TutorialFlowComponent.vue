@@ -15,8 +15,9 @@
         </div>
 
       <ul id="tutorial-pages">
-        <li id="tutorial-page" v-for="(tutorial_info, index) in tutorial_infos" :key="index">
-          <tutorial-template v-show="page==index+1"
+        <li class="tutorial-page" v-for="(tutorial_info, index) in tutorial_infos" :key="index">
+          <tutorial-template
+          v-show="page==index+1"
           :page="index+1"
           :tutorialInfo="tutorial_infos[index]">
           </tutorial-template>
@@ -149,7 +150,7 @@ ul, li {
   top: -50px;
   left: 0;
   display: inline-block;
-  padding: 10px 15px;
+  padding: 10px 16px 8px 16px;
   /* background-color: rgba(0,0,0,0.7); */
   border-radius: 50%;
 }
@@ -173,9 +174,16 @@ ul, li {
 }
 
 #tutorial-pages {
+  position:relative;  
+  display: flex;
+  width: 300px;
+  height: 400px;
 }
 
-#tutorial-page {
+.tutorial-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 
@@ -183,6 +191,7 @@ ul, li {
 .white {color:white;}
 
 
+/* 
 @-webkit-keyframes gradation {
   0% { color: #ff1493; }
   50% { color: #7fff00; }
@@ -192,21 +201,8 @@ ul, li {
   0% { color: #ff1493; }
   50% { color: #7fff00; }
   100% { color: #ff1493; }
-}
+} */
 
-
-
-/* モーダル表示アニメーション */
-.flowup-enter-active, .flowup-leave-active {
-  opacity: 1;
-  transform: translate(0px, 0px);
-  transition: all 150ms;
-}
-
-.flowup-enter, .flowup-leave-to {
-  opacity: 0;
-  transform: translateY(20px);
-}
 
 
 </style>
