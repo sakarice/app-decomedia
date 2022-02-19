@@ -17,13 +17,6 @@
             <span class="font-11 ml5">追加</span>
           </button>
 
-          <!-- 詳細設定の表示・非表示切り替え -->
-          <!-- <div class="change-disp-detail flex a-center w100 mb20">
-            <div class="horizontal-bar"></div>
-            <span class="setting-label">設定</span>
-            <div class="horizontal-bar"></div>
-          </div> -->
-
           <!-- 設定 -->
           <div class="setting-wrapper flex column a-center">
             <!-- フォントサイズ -->
@@ -260,25 +253,7 @@ export default {
     width : 150px;
   }
 
-  .change-disp-detail {
-    color: grey;
-    padding-right: 20px;
-  }
-
-  .setting-label {
-    width: 30px;
-    text-align: center;
-  }
-
-  .horizontal-bar {
-    background-color: rgb(200,200,200);
-    width: calc(50% - 30px/2);
-    height: 0.5px;
-    margin: 0;
-  }
-
-
-    /* トグル */
+  /* トグル */
   .toggle-outer{
     width: 38px;
     height: 17px;
