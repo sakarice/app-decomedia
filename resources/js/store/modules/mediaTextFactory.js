@@ -9,7 +9,7 @@ const mediaText = {
       type : 2,
       groupNo : null,
       id : 0,
-      text : "テキストtext",
+      text : "",
       top : 100,
       left : 100,
       width : 100,
