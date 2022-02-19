@@ -569,7 +569,7 @@ export default {
 
   .upload-label-text::after {
     content: "追加";
-    font-size: 12px;
+    font-size: 10px;
   }
 
   @media screen and (max-width: 480px) {
