@@ -7,17 +7,18 @@
 
           <!-- テキストプレビュー -->
           <div id="text-preview-wrapper" class="setting">
-            <h3 class="sub-title">プレビュー</h3>
+            <div class="flex a-center j-s-between">
+              <h3 class="sub-title preview-title">プレビュー</h3>
+              <!-- 追加 -->
+              <div id="media-text-add-wraper" class="mt3 flex column" @click="addText()">
+                <button class="add-text-button">+追加</button>
+              </div>              
+            </div>
+
             <input
             id="text-preview"
             :style="previewStyle" v-model="getTextData['text']">
-            <!-- 追加 -->
-            <div id="media-text-add-wraper" class="mt3 flex column" @click="addText()">
-              <div class="flex a-center">
-                <!-- <i class="fas fa-plus add-text-icon"></i> -->
-                <button class="add-text-button">+追加</button>
-              </div>
-            </div>
+
           </div>
 
           <!-- フォントサイズ -->
@@ -184,6 +185,12 @@ export default {
   .sub-sub-title {
     font-size: 13px;
     color: darkgrey;
+  }
+
+  .preview-title {
+    display: inline-block;
+    font-size: 12px;
+    color: grey;
   }
 
 

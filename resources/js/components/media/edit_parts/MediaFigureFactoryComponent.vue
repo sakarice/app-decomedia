@@ -1,16 +1,11 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-factory-wrapper" @click.stop @touchstart.stop>
-    <div class="item-frame">
+    <div class="item-frame flex column a-center">
 
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" :class="{'hidden':isMobile}" @mousedown.stop>
-        <i class="fas fa-times fa-3x close-icon" @click="closeModal()"></i>
-      </div>
-      <!-- 図形追加アイコン -->
-      <div class="add-icon-wrapper" @mousedown.stop @click="addMediaFigure()">
-        <i class="fas fa-plus fa-2x add-icon"></i>
-        <span class="add-text">追加</span>
+        <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
 
       <!-- 図形プレビュー -->
@@ -19,18 +14,29 @@
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>
         </div>
-        <canvas id="pre-canvas" @mousedown.stop @click="addMediaFigure()"></canvas>
+        <div class="canvas-wrapper pos-r flex j-center a-center" @mousedown.stop @click="addMediaFigure()">
+          <canvas id="pre-canvas"></canvas>
+          <div class="plus-icon-wrapper j-center a-center w100 h100">
+            <i class="fas fa-plus fa-3x plus-icon"></i>
+          </div>
+        </div>
         <div class="change-figure-type next-figure-type"
         @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
           <i class="fas fa-angle-double-right fa-2x"></i>
         </div>
       </div>
+      <!-- 図形追加アイコン -->
+      <div class="add-icon-wrapper w-auto m0 p10 flex j-center a-center" @mousedown.stop @click="addMediaFigure()">
+        <i class="fas fa-plus add-icon"></i>
+        <span class="add-text">追加</span>
+      </div>
+
 
       <!-- 詳細設定の表示・非表示切り替え -->
       <div class="change-disp-detail flex a-center j-center" @click="isShowDetail=!isShowDetail">
         <span :class="{'reverse-y':isShowDetail}">▼</span>
         <div class="horizontal-bar"></div>
-        <span>詳細</span>
+        <span>設定</span>
         <div class="horizontal-bar"></div>
         <span :class="{'reverse-y':isShowDetail}">▼</span>
       </div>
@@ -49,7 +55,7 @@
         <!-- カラー系の設定 -->
         <div class="setting-type-color mt10">
           <div class="flex j-s-between a-center fill-input-wrapper mb15">
-            <label class="fill-flag m0">
+            <label class="fill-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
               <span class="label">塗りつぶし</span>
             </label>
@@ -60,7 +66,7 @@
           </div>
 
           <div class="flex j-s-between a-center stroke-input-wrapper mb15">
-            <label class="stroke-flag m0">
+            <label class="stroke-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
               <span class="label">枠線</span>
             </label>
@@ -429,7 +435,6 @@
 }
 
 .item-frame {
-  /* background-color: rgba(240,240,250,1); */
 }
 .item-frame:hover{
   cursor: all-scroll;
@@ -451,6 +456,7 @@
 .media-figure-settings {
   padding: 15px 25px;
   max-height: 200px;
+  min-width: 300px;
   overflow-y: scroll;
 }
 
@@ -458,19 +464,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px;
-  margin-bottom: 5px;
+  padding: 5px 0px;
 }
 
 #pre-canvas {
   background-color: white;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   padding: 4px;
+  box-shadow: 1px 1px 2px 1px grey;
 }
-#pre-canvas:hover{
+
+.canvas-wrapper:hover {
   cursor: pointer;
-  outline: 2px solid orange;
 }
+.canvas-wrapper:hover #pre-canvas{
+  opacity: 0.3;
+}
+
+.canvas-wrapper:hover .plus-icon-wrapper{
+  display: inline-flex;
+}
+
+.plus-icon-wrapper {
+  display: none;
+  position:absolute;
+}
+.plus-icon {
+  color: orange;
+}
+
 
 .close-icon-wrapper {
   display: inline-block;
@@ -479,23 +501,29 @@
   right: 0px;
   z-index: 3;
   padding: 5px;
+  color:black;
 }
-.close-icon:hover {
+.close-icon-wrapper:hover {
   cursor: pointer;
+  background-color: grey;
 }
 
 .add-icon-wrapper {
-  position: absolute;
+  display: none;
   z-index: 3;
-  padding: 0px 4px;
-  color: darkorange;
+  margin-top: 0px;
+  padding: 5px 10px;
+  background-color: black;
+  border-radius: 2px;
 }
 .add-icon-wrapper:hover {
   cursor: pointer;
+  color: darkorange;
 }
+
 .add-text {
   font-size: 11px;
-  margin-left: 2px;
+  margin-left: 4px;
 }
 
 .setting-type-num,
@@ -528,6 +556,8 @@
   font-size: 13px;
 }
 
+.hover-pointer:hover { cursor:pointer; }
+
 .reverse-y {
   transform: scaleY(-1);
 }
@@ -548,12 +578,6 @@
     background-color: rgba(35,40,50,0.85);
     padding: 5px;
     border-radius: 6px;
-  }
-  .add-icon-wrapper {
-    display: inline-block;
-    position: absolute;
-    top: 80px;
-    left: 160px;
   }
   
 }
@@ -579,13 +603,6 @@
     border-radius: 5px;
     /* border-top-right-radius: 5px;
     border-top-left-radius: 5px; */
-  }
-
-  .add-icon-wrapper {
-    display: flex;
-    flex-direction: column;
-    top: 5px;
-    right: 20px;
   }
 
   .label {

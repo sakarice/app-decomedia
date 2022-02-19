@@ -3154,6 +3154,12 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3756,6 +3762,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 } //
+//
 //
 //
 //
@@ -12682,7 +12689,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-factory-wrapper[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-1a0b12a6] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-1a0b12a6] {\r\n  margin: 0 10px;\n}\n.change-figure-type[data-v-1a0b12a6]:hover {\r\n  cursor:pointer;\n}\n.back-figure-type[data-v-1a0b12a6]{\r\n  color: deepskyblue;\n}\n.next-figure-type[data-v-1a0b12a6]{\r\n  color: palevioletred;\n}\n.item-frame[data-v-1a0b12a6] {\r\n  /* background-color: rgba(240,240,250,1); */\n}\n.item-frame[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-1a0b12a6] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-1a0b12a6] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n  padding: 15px 25px;\r\n  max-height: 200px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-1a0b12a6]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 10px 0px;\r\n  margin-bottom: 5px;\n}\n#pre-canvas[data-v-1a0b12a6] {\r\n  background-color: white;\r\n  border-radius: 50%;\r\n  padding: 4px;\n}\n#pre-canvas[data-v-1a0b12a6]:hover{\r\n  cursor: pointer;\r\n  outline: 2px solid orange;\n}\n.close-icon-wrapper[data-v-1a0b12a6] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\n}\n.close-icon[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n  position: absolute;\r\n  z-index: 3;\r\n  padding: 0px 4px;\r\n  color: darkorange;\n}\n.add-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\n}\n.add-text[data-v-1a0b12a6] {\r\n  font-size: 11px;\r\n  margin-left: 2px;\n}\n.setting-type-num[data-v-1a0b12a6],\r\n.setting-type-color[data-v-1a0b12a6] {\r\n  margin-bottom: 15px;\n}\n.input-num[data-v-1a0b12a6] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-1a0b12a6] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-1a0b12a6]:hover { cursor: pointer;}\n.plus-btn[data-v-1a0b12a6] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-1a0b12a6] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.label[data-v-1a0b12a6] {\r\n  width: 50px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.reverse-y[data-v-1a0b12a6] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-1a0b12a6] {\r\n  display: none;\n}\n.grey[data-v-1a0b12a6] { color: grey;}\n@media screen and (min-width:481px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n    display: inline-block;\r\n    position: absolute;\r\n    top: 80px;\r\n    left: 160px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    z-index: 2;\r\n    bottom: 50px;  \r\n    max-height: 60vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n    max-height: 32vh;\n}\n.item-frame[data-v-1a0b12a6] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 5px;\r\n    /* border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px; */\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n    display: flex;\r\n    flex-direction: column;\r\n    top: 5px;\r\n    right: 20px;\n}\n.label[data-v-1a0b12a6] {\r\n    font-size: 11px;\n}\n.for-pc-tablet[data-v-1a0b12a6]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-factory-wrapper[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-1a0b12a6] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-1a0b12a6] {\r\n  margin: 0 10px;\n}\n.change-figure-type[data-v-1a0b12a6]:hover {\r\n  cursor:pointer;\n}\n.back-figure-type[data-v-1a0b12a6]{\r\n  color: deepskyblue;\n}\n.next-figure-type[data-v-1a0b12a6]{\r\n  color: palevioletred;\n}\n.item-frame[data-v-1a0b12a6] {\n}\n.item-frame[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-1a0b12a6] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-1a0b12a6] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n  padding: 15px 25px;\r\n  max-height: 200px;\r\n  min-width: 300px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-1a0b12a6]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\n}\n#pre-canvas[data-v-1a0b12a6] {\r\n  background-color: white;\r\n  /* border-radius: 50%; */\r\n  padding: 4px;\r\n  box-shadow: 1px 1px 2px 1px grey;\n}\n.canvas-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\n}\n.canvas-wrapper:hover #pre-canvas[data-v-1a0b12a6]{\r\n  opacity: 0.3;\n}\n.canvas-wrapper:hover .plus-icon-wrapper[data-v-1a0b12a6]{\r\n  display: inline-flex;\n}\n.plus-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  position:absolute;\n}\n.plus-icon[data-v-1a0b12a6] {\r\n  color: orange;\n}\n.close-icon-wrapper[data-v-1a0b12a6] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\r\n  color:black;\n}\n.close-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  background-color: grey;\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  z-index: 3;\r\n  margin-top: 0px;\r\n  padding: 5px 10px;\r\n  background-color: black;\r\n  border-radius: 2px;\n}\n.add-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  color: darkorange;\n}\n.add-text[data-v-1a0b12a6] {\r\n  font-size: 11px;\r\n  margin-left: 4px;\n}\n.setting-type-num[data-v-1a0b12a6],\r\n.setting-type-color[data-v-1a0b12a6] {\r\n  margin-bottom: 15px;\n}\n.input-num[data-v-1a0b12a6] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-1a0b12a6] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-1a0b12a6]:hover { cursor: pointer;}\n.plus-btn[data-v-1a0b12a6] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-1a0b12a6] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.label[data-v-1a0b12a6] {\r\n  width: 50px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.hover-pointer[data-v-1a0b12a6]:hover { cursor:pointer;\n}\n.reverse-y[data-v-1a0b12a6] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-1a0b12a6] {\r\n  display: none;\n}\n.grey[data-v-1a0b12a6] { color: grey;}\n@media screen and (min-width:481px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    z-index: 2;\r\n    bottom: 50px;  \r\n    max-height: 60vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n    max-height: 32vh;\n}\n.item-frame[data-v-1a0b12a6] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 5px;\r\n    /* border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px; */\n}\n.label[data-v-1a0b12a6] {\r\n    font-size: 11px;\n}\n.for-pc-tablet[data-v-1a0b12a6]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12749,7 +12756,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 3px;\r\n    background-color: orange;\r\n    color: white;\r\n    padding: 0 12px;\r\n    font-size: 16px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: darkorange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: darkorange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14] {\r\n    width : 100px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 20px;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n.add-text-icon[data-v-35d10c14] {\r\n    padding: 5px;\r\n    margin-right: 3px;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]{\r\n    border: 1px solid white;\r\n    border-radius: 3px;\r\n    background-color: orange;\r\n    color: white;\r\n    padding: 0 12px;\r\n    font-size: 16px;\n}\n.add-text-button[data-v-35d10c14]:hover{\r\n    background-color: darkorange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    background-color: darkorange;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 90%;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14] {\r\n    width : 100px;\n}\r\n\r\n\r\n    /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24003,7 +24010,7 @@ var render = function () {
       },
     },
     [
-      _c("div", { staticClass: "item-frame" }, [
+      _c("div", { staticClass: "item-frame flex column a-center" }, [
         _c(
           "div",
           {
@@ -24017,33 +24024,13 @@ var render = function () {
           },
           [
             _c("i", {
-              staticClass: "fas fa-times fa-3x close-icon",
+              staticClass: "fas fa-times fa-2x close-icon",
               on: {
                 click: function ($event) {
                   return _vm.closeModal()
                 },
               },
             }),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "add-icon-wrapper",
-            on: {
-              mousedown: function ($event) {
-                $event.stopPropagation()
-              },
-              click: function ($event) {
-                return _vm.addMediaFigure()
-              },
-            },
-          },
-          [
-            _c("i", { staticClass: "fas fa-plus fa-2x add-icon" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "add-text" }, [_vm._v("追加")]),
           ]
         ),
         _vm._v(" "),
@@ -24064,17 +24051,25 @@ var render = function () {
             [_c("i", { staticClass: "fas fa-angle-double-left fa-2x" })]
           ),
           _vm._v(" "),
-          _c("canvas", {
-            attrs: { id: "pre-canvas" },
-            on: {
-              mousedown: function ($event) {
-                $event.stopPropagation()
-              },
-              click: function ($event) {
-                return _vm.addMediaFigure()
+          _c(
+            "div",
+            {
+              staticClass: "canvas-wrapper pos-r flex j-center a-center",
+              on: {
+                mousedown: function ($event) {
+                  $event.stopPropagation()
+                },
+                click: function ($event) {
+                  return _vm.addMediaFigure()
+                },
               },
             },
-          }),
+            [
+              _c("canvas", { attrs: { id: "pre-canvas" } }),
+              _vm._v(" "),
+              _vm._m(0),
+            ]
+          ),
           _vm._v(" "),
           _c(
             "div",
@@ -24096,6 +24091,27 @@ var render = function () {
         _c(
           "div",
           {
+            staticClass:
+              "add-icon-wrapper w-auto m0 p10 flex j-center a-center",
+            on: {
+              mousedown: function ($event) {
+                $event.stopPropagation()
+              },
+              click: function ($event) {
+                return _vm.addMediaFigure()
+              },
+            },
+          },
+          [
+            _c("i", { staticClass: "fas fa-plus add-icon" }),
+            _vm._v(" "),
+            _c("span", { staticClass: "add-text" }, [_vm._v("追加")]),
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
             staticClass: "change-disp-detail flex a-center j-center",
             on: {
               click: function ($event) {
@@ -24110,7 +24126,7 @@ var render = function () {
             _vm._v(" "),
             _c("div", { staticClass: "horizontal-bar" }),
             _vm._v(" "),
-            _c("span", [_vm._v("詳細")]),
+            _c("span", [_vm._v("設定")]),
             _vm._v(" "),
             _c("div", { staticClass: "horizontal-bar" }),
             _vm._v(" "),
@@ -24180,7 +24196,7 @@ var render = function () {
                     "flex j-s-between a-center fill-input-wrapper mb15",
                 },
                 [
-                  _c("label", { staticClass: "fill-flag m0" }, [
+                  _c("label", { staticClass: "fill-flag m0 hover-pointer" }, [
                     _c("input", {
                       attrs: { type: "checkbox" },
                       domProps: { checked: _vm.getFigureData["isDrawFill"] },
@@ -24231,7 +24247,7 @@ var render = function () {
                     "flex j-s-between a-center stroke-input-wrapper mb15",
                 },
                 [
-                  _c("label", { staticClass: "stroke-flag m0" }, [
+                  _c("label", { staticClass: "stroke-flag m0 hover-pointer" }, [
                     _c("input", {
                       attrs: { type: "checkbox" },
                       domProps: { checked: _vm.getFigureData["isDrawStroke"] },
@@ -24477,7 +24493,7 @@ var render = function () {
                     "flex mb10 j-s-between a-center width-input-wrapper",
                 },
                 [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex a-center" }, [
                     _c("i", {
@@ -24524,7 +24540,7 @@ var render = function () {
                     "flex mb10 j-s-between a-center height-input-wrapper",
                 },
                 [
-                  _vm._m(1),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex a-center" }, [
                     _c("i", {
@@ -24574,6 +24590,16 @@ var render = function () {
   )
 }
 var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "plus-icon-wrapper j-center a-center w100 h100" },
+      [_c("i", { staticClass: "fas fa-plus fa-3x plus-icon" })]
+    )
+  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -24871,8 +24897,28 @@ var render = function () {
                   attrs: { id: "text-preview-wrapper" },
                 },
                 [
-                  _c("h3", { staticClass: "sub-title" }, [
-                    _vm._v("プレビュー"),
+                  _c("div", { staticClass: "flex a-center j-s-between" }, [
+                    _c("h3", { staticClass: "sub-title preview-title" }, [
+                      _vm._v("プレビュー"),
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "mt3 flex column",
+                        attrs: { id: "media-text-add-wraper" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.addText()
+                          },
+                        },
+                      },
+                      [
+                        _c("button", { staticClass: "add-text-button" }, [
+                          _vm._v("+追加"),
+                        ]),
+                      ]
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("input", {
@@ -24896,26 +24942,6 @@ var render = function () {
                       },
                     },
                   }),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "mt3 flex column",
-                      attrs: { id: "media-text-add-wraper" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.addText()
-                        },
-                      },
-                    },
-                    [
-                      _c("div", { staticClass: "flex a-center" }, [
-                        _c("button", { staticClass: "add-text-button" }, [
-                          _vm._v("+追加"),
-                        ]),
-                      ]),
-                    ]
-                  ),
                 ]
               ),
               _vm._v(" "),
