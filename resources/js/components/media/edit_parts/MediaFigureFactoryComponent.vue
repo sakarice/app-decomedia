@@ -39,7 +39,7 @@
       <div class="media-figure-settings" v-show="isShowDetail">
 
         <!-- 図形の種類 -->
-        <div class="flex j-s-between a-center type-input-wrapper">
+        <div class="flex j-s-between a-center type-input-wrapper mb20">
           <span class="label">種類</span>
           <select id="create-figure-type" name="種類" class="w80px" @input="updateFigureData({key:'type', value:$event.target.value})">
             <option v-for="figureType in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
@@ -48,32 +48,33 @@
 
         <!-- カラー系の設定 -->
         <div class="setting-type-color mt10">
-          <div class="flex j-s-between a-center fill-input-wrapper">
-            <div class="fill-flag">
-              <span class="label">塗りつぶし</span>
+          <div class="flex j-s-between a-center fill-input-wrapper mb15">
+            <label class="fill-flag m0">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
-            </div>
+              <span class="label">塗りつぶし</span>
+            </label>
             <div class="fill-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
             </div>
           </div>
 
-          <div class="flex j-s-between a-center stroke-input-wrapper">
-            <div class="stroke-flag">
-              <span class="label">枠線</span>
+          <div class="flex j-s-between a-center stroke-input-wrapper mb15">
+            <label class="stroke-flag m0">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
-            </div>
+              <span class="label">枠線</span>
+            </label>
             <div class="stroke-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
             </div>
           </div>
         </div>
 
-        <div class="opacity-input-wrapper mt10 mb15 flex a-center">
-          <span class="label mr10">透過度</span>
-          <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+        <div class="opacity-input-wrapper mt25 mb25 flex j-s-between a-center">
+          <span class="label w-auto">透過度</span>
+          <input type="range" class="w100px" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="number" class="input-num w50px font-12" :value="getFigureData['globalAlpha']" @input="updateFigureData({key:'globalAlpha', value:$event.target.value})" name="opacity" min="0" max="1" step="0.05">
         </div>
 
         <!-- 数値系の設定 -->
@@ -585,6 +586,10 @@
     flex-direction: column;
     top: 5px;
     right: 20px;
+  }
+
+  .label {
+    font-size: 11px;
   }
 
   .for-pc-tablet{
