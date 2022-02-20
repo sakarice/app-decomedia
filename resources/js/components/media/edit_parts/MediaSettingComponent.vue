@@ -24,7 +24,7 @@
           </div>
 
           <!-- メディア背景色設定 -->
-          <div id="media-bg-color-wraper" class="setting flex j-s-between a-end w90">
+          <div id="media-bg-color-wraper" class="setting-row flex j-s-between a-end w90">
             <h3 class="setting-title">枠外の色</h3>
             <label for="" class="m0">
               <input :value="getMediaSetting['mediaBackgroundColor']" @input="updateMediaSettingObjectItem({key:'mediaBackgroundColor', value:$event.target.value})" type="color" id="media-bg-color">
@@ -32,7 +32,7 @@
           </div>
 
           <!-- 公開/非公開設定 -->
-          <div id="media-is-public-wraper" class="setting flex j-s-between a-end w90">
+          <div id="media-is-public-wraper" class="setting-row flex j-s-between a-end w90">
             <div class="flex">
               <h3 class="setting-title">公開 / 非公開</h3>
               <i v-show="getMediaSetting['isPublic']" class="fas fa-door-open fa-lg public-state-icon open-icon"></i>
@@ -123,8 +123,10 @@ export default {
     padding: 3px 10px;
   }
 
-  .setting {
-    margin-bottom : 20px;
+  .setting-row {
+    margin-bottom : 30px;
+    padding-bottom: 3px;
+    border-bottom: 0.5px solid rgba(200,200,200,0.2);
   }
 
   .public-state-icon {
