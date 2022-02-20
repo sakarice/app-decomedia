@@ -3161,6 +3161,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -24067,7 +24072,8 @@ var render = function () {
           _c(
             "div",
             {
-              staticClass: "canvas-wrapper pos-r flex column j-center a-center",
+              staticClass:
+                "canvas-wrapper pos-r flex column j-center a-center mr15 ml15",
               on: {
                 mousedown: function ($event) {
                   $event.stopPropagation()

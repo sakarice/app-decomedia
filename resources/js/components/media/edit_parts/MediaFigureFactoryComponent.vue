@@ -12,11 +12,14 @@
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
+        <!-- 図形種類変更(一つ前) -->
         <div class="change-figure-type back-figure-type"
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>
         </div>
-        <div class="canvas-wrapper pos-r flex column j-center a-center" @mousedown.stop @click="addMediaFigure()">
+
+        <!-- 図形プレビュー -->
+        <div class="canvas-wrapper pos-r flex column j-center a-center mr15 ml15" @mousedown.stop @click="addMediaFigure()">
           <!-- プレビュー用キャンバス -->
           <canvas id="pre-canvas"></canvas>
           <!-- 追加アイコン -->
@@ -27,6 +30,8 @@
           <!-- (モバイル用)補足文 -->
           <p class="m0 mt5 font-11 grey for-mobile">タッチで追加</p>
         </div>
+
+        <!-- 図形種類変更(一つ後) -->
         <div class="change-figure-type next-figure-type"
         @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
           <i class="fas fa-angle-double-right fa-2x"></i>
