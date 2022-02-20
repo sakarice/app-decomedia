@@ -9,7 +9,7 @@
       </div>
 
       <!-- 図形プレビュー -->
-      <div class="figure-preview-wrapper">
+      <div class="figure-preview-wrapper mt15">
         <div class="change-figure-type back-figure-type"
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>
@@ -45,7 +45,7 @@
       <div class="media-figure-settings" v-show="isShowDetail">
 
         <!-- 図形の種類 -->
-        <div class="flex j-s-between a-center type-input-wrapper mb20">
+        <div class="setting-row flex j-s-between a-center type-input-wrapper">
           <span class="label">種類</span>
           <select id="create-figure-type" name="種類" class="w80px" @input="updateFigureData({key:'type', value:$event.target.value})">
             <option v-for="figureType in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
@@ -54,7 +54,7 @@
 
         <!-- カラー系の設定 -->
         <div class="setting-type-color mt10">
-          <div class="flex j-s-between a-center fill-input-wrapper mb15">
+          <div class="setting-row flex j-s-between a-center fill-input-wrapper">
             <label class="fill-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
               <span class="label">塗りつぶし</span>
@@ -65,7 +65,7 @@
             </div>
           </div>
 
-          <div class="flex j-s-between a-center stroke-input-wrapper mb15">
+          <div class="setting-row flex j-s-between a-end stroke-input-wrapper">
             <label class="stroke-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
               <span class="label">枠線</span>
@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div class="opacity-input-wrapper mt25 mb25 flex j-s-between a-center">
+        <div class="setting-row opacity-input-wrapper mt25 flex j-s-between a-end">
           <span class="label w-auto">透過度</span>
           <input type="range" class="w100px" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
           <input type="number" class="input-num w50px font-12" :value="getFigureData['globalAlpha']" @input="updateFigureData({key:'globalAlpha', value:$event.target.value})" name="opacity" min="0" max="1" step="0.05">
@@ -85,7 +85,7 @@
 
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="flex mb10 j-s-between a-center x-position-wrapper">
+          <div class="setting-row flex j-s-between a-end x-position-wrapper">
             <span class="label">位置(横)</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
@@ -94,7 +94,7 @@
             <input type="number" class="input-num" :value="getFigureData['left']" @input="updateFigureData({key:'left', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center y-position-wrapper">
+          <div class="setting-row flex j-s-between a-end y-position-wrapper">
             <span class="label">位置(縦)</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
@@ -103,7 +103,7 @@
             <input type="number" class="input-num" :value="getFigureData['top']" @input="updateFigureData({key:'top', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center degree-wrapper">
+          <div class="setting-row flex j-s-between a-end degree-wrapper">
             <span class="label">回転</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
@@ -112,7 +112,7 @@
             <input type="number" class="input-num" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center width-input-wrapper">
+          <div class="setting-row flex j-s-between a-end width-input-wrapper">
             <div class="w50px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
@@ -120,7 +120,7 @@
             </div>
             <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
           </div>
-          <div class="flex mb10 j-s-between a-center height-input-wrapper">
+          <div class="setting-row flex j-s-between a-end height-input-wrapper">
             <div class="w50px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
@@ -524,6 +524,12 @@
 .add-text {
   font-size: 11px;
   margin-left: 4px;
+}
+
+.setting-row {
+  border-bottom: 0.5px solid rgba(200,200,200,0.2);
+  padding-bottom: 3px;
+  margin-bottom: 17px;
 }
 
 .setting-type-num,

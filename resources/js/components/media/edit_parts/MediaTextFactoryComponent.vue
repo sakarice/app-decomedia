@@ -5,17 +5,19 @@
         <div id="media-text-setting-area" class="flex column a-start">
           <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
 
-          <!-- テキストプレビュー -->
-          <div id="text-preview-wrapper" class="">
-            <input
-            id="text-preview" type="text" class="m0" placeholder="テキストを入力してください"
-            :style="previewStyle" v-model="getTextData['text']">
+          <!-- テキストプレビュー&追加ボタン -->
+          <div id="preview-area" class="flex column a-start w100">
+            <div id="text-preview-wrapper" class="">
+              <input
+              id="text-preview" type="text" class="m0" placeholder="テキストを入力してください"
+              :style="previewStyle" v-model="getTextData['text']">
+            </div>
+            <!-- 追加 -->
+            <button id="media-text-add-wrapper" class="add-text-button j-center flex a-center" @click="addText()">
+              <i class="fas fa-plus fa-lg plus-icon"></i>
+              <span class="add-btn-label font-11 ml5">追加</span>
+            </button>
           </div>
-          <!-- 追加 -->
-          <button id="media-text-add-wrapper" class="add-text-button j-center flex a-center" @click="addText()">
-            <i class="fas fa-plus fa-lg plus-icon"></i>
-            <span class="font-11 ml5">追加</span>
-          </button>
 
           <!-- 設定 -->
           <div class="setting-wrapper flex column a-center">
@@ -179,11 +181,15 @@ export default {
     padding: 3px 10px;
   }
 
+  #preview-area {
+    margin: 0 0 30px 0;
+  }
+
   #media-text-add-wrapper {
     width: 95%;
     border-radius: 3px;
     padding: 5px 10px;
-    margin: 0 0 30px 0;
+    margin: 0;
     background-color: black;
   }
   .add-text-button:hover {
@@ -198,17 +204,21 @@ export default {
     color: white;
   }
 
+  .add-btn-label {
+    margin-top: 2px;
+  }
+
 
   .setting-wrapper {
     width: 100%;
     padding: 20px 15px;
-    outline: 1px dashed dimgrey;
+    outline: 1px dotted dimgrey;
     overflow-y: scroll;
   }
   .setting {
     margin-bottom : 30px;
     padding-bottom: 3px;
-    border-bottom: 1px solid dimgrey;
+    border-bottom: 0.5px solid rgba(200,200,200,0.2);
   }
 
   .sub-title {
@@ -293,15 +303,31 @@ export default {
 @media screen and (max-width:480px) {
   
   #area-wrapper {
-    padding: 20px;
+    padding: 10px;
+  }
+
+  #text-preview-wrapper {
+    width: 100%;
+  }
+
+  #media-text-add-wrapper {
+    width: 100%;
   }
   
   #media-text-setting-area {
     margin : 0;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  #preview-area {
+    margin: 0 0 20px 0;
+    align-items: center;
   }
 
   .setting-wrapper {
-    max-height: 170px;
+    max-height: 200px;
+    margin-bottom: 10px;
   }
 
 }

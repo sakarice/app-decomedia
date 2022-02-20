@@ -3844,6 +3844,8 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
 
 
 
@@ -12694,7 +12696,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-factory-wrapper[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-1a0b12a6] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-1a0b12a6] {\r\n  margin: 0 10px;\n}\n.change-figure-type[data-v-1a0b12a6]:hover {\r\n  cursor:pointer;\n}\n.back-figure-type[data-v-1a0b12a6]{\r\n  color: deepskyblue;\n}\n.next-figure-type[data-v-1a0b12a6]{\r\n  color: palevioletred;\n}\n.item-frame[data-v-1a0b12a6] {\n}\n.item-frame[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-1a0b12a6] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-1a0b12a6] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n  padding: 15px 25px;\r\n  max-height: 200px;\r\n  min-width: 300px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-1a0b12a6]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\n}\n#pre-canvas[data-v-1a0b12a6] {\r\n  background-color: white;\r\n  /* border-radius: 50%; */\r\n  padding: 4px;\r\n  box-shadow: 1px 1px 2px 1px grey;\n}\n.canvas-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\n}\n.canvas-wrapper:hover #pre-canvas[data-v-1a0b12a6]{\r\n  opacity: 0.3;\n}\n.canvas-wrapper:hover .plus-icon-wrapper[data-v-1a0b12a6]{\r\n  display: inline-flex;\n}\n.plus-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  position:absolute;\n}\n.plus-icon[data-v-1a0b12a6] {\r\n  color: orange;\n}\n.close-icon-wrapper[data-v-1a0b12a6] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\r\n  color:black;\n}\n.close-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  background-color: grey;\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  z-index: 3;\r\n  margin-top: 0px;\r\n  padding: 5px 10px;\r\n  background-color: black;\r\n  border-radius: 2px;\n}\n.add-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  color: darkorange;\n}\n.add-text[data-v-1a0b12a6] {\r\n  font-size: 11px;\r\n  margin-left: 4px;\n}\n.setting-type-num[data-v-1a0b12a6],\r\n.setting-type-color[data-v-1a0b12a6] {\r\n  margin-bottom: 15px;\n}\n.input-num[data-v-1a0b12a6] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-1a0b12a6] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-1a0b12a6]:hover { cursor: pointer;}\n.plus-btn[data-v-1a0b12a6] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-1a0b12a6] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.label[data-v-1a0b12a6] {\r\n  width: 50px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.hover-pointer[data-v-1a0b12a6]:hover { cursor:pointer;\n}\n.reverse-y[data-v-1a0b12a6] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-1a0b12a6] {\r\n  display: none;\n}\n.grey[data-v-1a0b12a6] { color: grey;}\n@media screen and (min-width:481px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    z-index: 2;\r\n    bottom: 50px;  \r\n    max-height: 60vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n    max-height: 32vh;\n}\n.item-frame[data-v-1a0b12a6] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 5px;\r\n    /* border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px; */\n}\n.label[data-v-1a0b12a6] {\r\n    font-size: 11px;\n}\n.for-pc-tablet[data-v-1a0b12a6]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n  position: absolute;\r\n  z-index: 30;\r\n  color: white;\n}\n#media-figure-factory-wrapper[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.area-for-move[data-v-1a0b12a6] {\r\n  position: absolute;\r\n  top: 0;\r\n  left: 0;\r\n  width: 100%;\r\n  height: 100%;\n}\n.change-figure-type[data-v-1a0b12a6] {\r\n  margin: 0 10px;\n}\n.change-figure-type[data-v-1a0b12a6]:hover {\r\n  cursor:pointer;\n}\n.back-figure-type[data-v-1a0b12a6]{\r\n  color: deepskyblue;\n}\n.next-figure-type[data-v-1a0b12a6]{\r\n  color: palevioletred;\n}\n.item-frame[data-v-1a0b12a6] {\n}\n.item-frame[data-v-1a0b12a6]:hover{\r\n  cursor: all-scroll;\n}\n.change-disp-detail[data-v-1a0b12a6] {\r\n  width: 100%;\r\n  margin: 10px 0;\n}\n.horizontal-bar[data-v-1a0b12a6] {\r\n  background-color: rgb(120,120,120);\r\n  width: 33%;\r\n  height: 0.5px;\r\n  margin: 0 5px;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n  padding: 15px 25px;\r\n  max-height: 200px;\r\n  min-width: 300px;\r\n  overflow-y: scroll;\n}\n.figure-preview-wrapper[data-v-1a0b12a6]{\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 5px 0px;\n}\n#pre-canvas[data-v-1a0b12a6] {\r\n  background-color: white;\r\n  /* border-radius: 50%; */\r\n  padding: 4px;\r\n  box-shadow: 1px 1px 2px 1px grey;\n}\n.canvas-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\n}\n.canvas-wrapper:hover #pre-canvas[data-v-1a0b12a6]{\r\n  opacity: 0.3;\n}\n.canvas-wrapper:hover .plus-icon-wrapper[data-v-1a0b12a6]{\r\n  display: inline-flex;\n}\n.plus-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  position:absolute;\n}\n.plus-icon[data-v-1a0b12a6] {\r\n  color: orange;\n}\n.close-icon-wrapper[data-v-1a0b12a6] {\r\n  display: inline-block;\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 0px;\r\n  z-index: 3;\r\n  padding: 5px;\r\n  color:black;\n}\n.close-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  background-color: grey;\n}\n.add-icon-wrapper[data-v-1a0b12a6] {\r\n  display: none;\r\n  z-index: 3;\r\n  margin-top: 0px;\r\n  padding: 5px 10px;\r\n  background-color: black;\r\n  border-radius: 2px;\n}\n.add-icon-wrapper[data-v-1a0b12a6]:hover {\r\n  cursor: pointer;\r\n  color: darkorange;\n}\n.add-text[data-v-1a0b12a6] {\r\n  font-size: 11px;\r\n  margin-left: 4px;\n}\n.setting-row[data-v-1a0b12a6] {\r\n  border-bottom: 0.5px solid rgba(200,200,200,0.2);\r\n  padding-bottom: 3px;\r\n  margin-bottom: 17px;\n}\n.setting-type-num[data-v-1a0b12a6],\r\n.setting-type-color[data-v-1a0b12a6] {\r\n  margin-bottom: 15px;\n}\n.input-num[data-v-1a0b12a6] {\r\n  width: 60px;\r\n  color: darkgray;\n}\n.btns[data-v-1a0b12a6] {\r\n  border-radius: 50%;\r\n  padding: 5px 4px;\n}\n.btns[data-v-1a0b12a6]:hover { cursor: pointer;}\n.plus-btn[data-v-1a0b12a6] {\r\n  color: palevioletred;\r\n  border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-1a0b12a6] {\r\n  color: deepskyblue;\r\n  border: 1.5px solid deepskyblue;\n}\n.label[data-v-1a0b12a6] {\r\n  width: 50px;\r\n  color: lightgrey;\r\n  font-size: 13px;\n}\n.hover-pointer[data-v-1a0b12a6]:hover { cursor:pointer;\n}\n.reverse-y[data-v-1a0b12a6] {\r\n  transform: scaleY(-1);\n}\n.hidden[data-v-1a0b12a6] {\r\n  display: none;\n}\n.grey[data-v-1a0b12a6] { color: grey;}\n@media screen and (min-width:481px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    left: 100px;\r\n    top: 100px;\r\n    width: 300px;\r\n    background-color: rgba(35,40,50,0.85);\r\n    padding: 5px;\r\n    border-radius: 6px;\n}\n}\n@media screen and (max-width:480px) {\n#media-figure-factory-wrapper[data-v-1a0b12a6]{\r\n    z-index: 2;\r\n    bottom: 50px;  \r\n    max-height: 60vh;\r\n    width: 100%;\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\n}\n.media-figure-settings[data-v-1a0b12a6] {\r\n    max-height: 32vh;\n}\n.item-frame[data-v-1a0b12a6] {\r\n    width:92%;\r\n    background-color: rgba(35,40,50,0.85);\r\n    border-radius: 5px;\r\n    /* border-top-right-radius: 5px;\r\n    border-top-left-radius: 5px; */\n}\n.label[data-v-1a0b12a6] {\r\n    font-size: 11px;\n}\n.for-pc-tablet[data-v-1a0b12a6]{\r\n    display: none;\n}\n}\r\n\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12761,7 +12763,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    margin: 0 0 30px 0;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 20px 15px;\r\n    outline: 1px dashed dimgrey;\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 1px solid dimgrey;\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    margin-top: 10px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 20px;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    max-height: 170px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 20px 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0 0 30px 0;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    margin: 0;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    margin-top: 2px;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 20px 15px;\r\n    outline: 1px dotted dimgrey;\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    margin-top: 10px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 10px;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 100%;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    width: 100%;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\r\n    flex-direction: column-reverse;\r\n    align-items: center;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0 0 20px 0;\r\n    align-items: center;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    max-height: 200px;\r\n    margin-bottom: 10px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24039,7 +24041,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "figure-preview-wrapper" }, [
+        _c("div", { staticClass: "figure-preview-wrapper mt15" }, [
           _c(
             "div",
             {
@@ -24159,7 +24161,7 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "flex j-s-between a-center type-input-wrapper mb20",
+                  "setting-row flex j-s-between a-center type-input-wrapper",
               },
               [
                 _c("span", { staticClass: "label" }, [_vm._v("種類")]),
@@ -24198,7 +24200,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex j-s-between a-center fill-input-wrapper mb15",
+                    "setting-row flex j-s-between a-center fill-input-wrapper",
                 },
                 [
                   _c("label", { staticClass: "fill-flag m0 hover-pointer" }, [
@@ -24249,7 +24251,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex j-s-between a-center stroke-input-wrapper mb15",
+                    "setting-row flex j-s-between a-end stroke-input-wrapper",
                 },
                 [
                   _c("label", { staticClass: "stroke-flag m0 hover-pointer" }, [
@@ -24299,7 +24301,7 @@ var render = function () {
               "div",
               {
                 staticClass:
-                  "opacity-input-wrapper mt25 mb25 flex j-s-between a-center",
+                  "setting-row opacity-input-wrapper mt25 flex j-s-between a-end",
               },
               [
                 _c("span", { staticClass: "label w-auto" }, [_vm._v("透過度")]),
@@ -24355,7 +24357,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex mb10 j-s-between a-center x-position-wrapper",
+                    "setting-row flex j-s-between a-end x-position-wrapper",
                 },
                 [
                   _c("span", { staticClass: "label" }, [_vm._v("位置(横)")]),
@@ -24402,7 +24404,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex mb10 j-s-between a-center y-position-wrapper",
+                    "setting-row flex j-s-between a-end y-position-wrapper",
                 },
                 [
                   _c("span", { staticClass: "label" }, [_vm._v("位置(縦)")]),
@@ -24448,7 +24450,8 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "flex mb10 j-s-between a-center degree-wrapper",
+                  staticClass:
+                    "setting-row flex j-s-between a-end degree-wrapper",
                 },
                 [
                   _c("span", { staticClass: "label" }, [_vm._v("回転")]),
@@ -24495,7 +24498,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex mb10 j-s-between a-center width-input-wrapper",
+                    "setting-row flex j-s-between a-end width-input-wrapper",
                 },
                 [
                   _vm._m(1),
@@ -24542,7 +24545,7 @@ var render = function () {
                 "div",
                 {
                   staticClass:
-                    "flex mb10 j-s-between a-center height-input-wrapper",
+                    "setting-row flex j-s-between a-end height-input-wrapper",
                 },
                 [
                   _vm._m(2),
@@ -24891,50 +24894,61 @@ var render = function () {
               attrs: { id: "media-text-setting-area" },
             },
             [
-              _c("div", { attrs: { id: "text-preview-wrapper" } }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.getTextData["text"],
-                      expression: "getTextData['text']",
-                    },
-                  ],
-                  staticClass: "m0",
-                  style: _vm.previewStyle,
-                  attrs: {
-                    id: "text-preview",
-                    type: "text",
-                    placeholder: "テキストを入力してください",
-                  },
-                  domProps: { value: _vm.getTextData["text"] },
-                  on: {
-                    input: function ($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.getTextData, "text", $event.target.value)
-                    },
-                  },
-                }),
-              ]),
-              _vm._v(" "),
               _c(
-                "button",
+                "div",
                 {
-                  staticClass: "add-text-button j-center flex a-center",
-                  attrs: { id: "media-text-add-wrapper" },
-                  on: {
-                    click: function ($event) {
-                      return _vm.addText()
-                    },
-                  },
+                  staticClass: "flex column a-start w100",
+                  attrs: { id: "preview-area" },
                 },
                 [
-                  _c("i", { staticClass: "fas fa-plus fa-lg plus-icon" }),
+                  _c("div", { attrs: { id: "text-preview-wrapper" } }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.getTextData["text"],
+                          expression: "getTextData['text']",
+                        },
+                      ],
+                      staticClass: "m0",
+                      style: _vm.previewStyle,
+                      attrs: {
+                        id: "text-preview",
+                        type: "text",
+                        placeholder: "テキストを入力してください",
+                      },
+                      domProps: { value: _vm.getTextData["text"] },
+                      on: {
+                        input: function ($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.getTextData, "text", $event.target.value)
+                        },
+                      },
+                    }),
+                  ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "font-11 ml5" }, [_vm._v("追加")]),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "add-text-button j-center flex a-center",
+                      attrs: { id: "media-text-add-wrapper" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.addText()
+                        },
+                      },
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-plus fa-lg plus-icon" }),
+                      _vm._v(" "),
+                      _c("span", { staticClass: "add-btn-label font-11 ml5" }, [
+                        _vm._v("追加"),
+                      ]),
+                    ]
+                  ),
                 ]
               ),
               _vm._v(" "),
