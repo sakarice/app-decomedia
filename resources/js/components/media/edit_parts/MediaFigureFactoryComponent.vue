@@ -16,13 +16,16 @@
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>
         </div>
-        <div class="canvas-wrapper pos-r flex j-center a-center" @mousedown.stop @click="addMediaFigure()">
+        <div class="canvas-wrapper pos-r flex column j-center a-center" @mousedown.stop @click="addMediaFigure()">
+          <!-- プレビュー用キャンバス -->
           <canvas id="pre-canvas"></canvas>
           <!-- 追加アイコン -->
-          <div class="plus-icon-wrapper column j-center a-center w100 h100">
-            <i class="fas fa-plus fa-3x plus-icon mt15"></i>
+          <div class="plus-icon-wrapper mt10 column j-center a-center w100 h100 for-pc-tablet">
+            <i class="fas fa-plus fa-3x plus-icon"></i>
             <span class="add-text font-11">追加</span>
           </div>
+          <!-- (モバイル用)補足文 -->
+          <p class="m0 mt5 font-11 grey for-mobile">タッチで追加</p>
         </div>
         <div class="change-figure-type next-figure-type"
         @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
@@ -590,6 +593,10 @@
     border-radius: 5px;
     /* border-top-right-radius: 5px;
     border-top-left-radius: 5px; */
+  }
+
+  .plus-icon-wrapper {
+    margin-top: 0;
   }
 
   .label {
