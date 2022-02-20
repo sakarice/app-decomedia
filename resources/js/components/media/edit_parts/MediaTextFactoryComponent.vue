@@ -247,8 +247,7 @@ export default {
 
   #text-preview-wrapper {
     width: 95%;
-    margin-top: 5px;
-    margin-bottom: 3px;
+    margin-top: 3px;
   }
 
   #text-preview {
@@ -343,14 +342,17 @@ export default {
   }
 
   #preview-area {
-    margin: 0 0 5px 0;
+    margin: 0;
+    padding: 0 5px;
+    background-color: rgb(30,140,210);
     flex-direction: row;
     align-items: center;
   }
 
   .setting-wrapper {
-    max-height: 200px;
-    margin-bottom: 25px;
+    outline: none;
+    max-height: 195px;
+    margin-bottom: 20px;
   }
 
 }
