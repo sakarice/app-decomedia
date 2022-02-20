@@ -128,8 +128,8 @@
   @media screen and (max-width:480px){
     #change-disp-audio-wrapper {
       background-color: rgba(20,20,20,0.3);
-      bottom: 50px;
-      right: 7;
+      bottom: 30px;
+      right: 0;
       width: 45px;
       height: 45px;
     }
