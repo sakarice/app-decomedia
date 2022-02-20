@@ -22026,12 +22026,12 @@ var render = function () {
               }),
               _vm._v(" "),
               _c("router-view", {
-                attrs: { name: "dispImgModal" },
+                attrs: { name: "dispAudioModal" },
                 on: { "show-modal": _vm.showModal },
               }),
               _vm._v(" "),
               _c("router-view", {
-                attrs: { name: "dispAudioModal" },
+                attrs: { name: "dispImgModal" },
                 on: { "show-modal": _vm.showModal },
               }),
               _vm._v(" "),
