@@ -8,6 +8,8 @@
         <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
 
+      <p class="font-13 darkgrey m0">図形作成</p>
+
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper mt15">
         <div class="change-figure-type back-figure-type"
@@ -551,6 +553,7 @@
 }
 
 .grey { color: grey;}
+.darkgrey { color: darkgrey;}
 
 
 
