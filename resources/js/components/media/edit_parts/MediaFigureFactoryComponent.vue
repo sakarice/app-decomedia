@@ -16,8 +16,10 @@
         </div>
         <div class="canvas-wrapper pos-r flex j-center a-center" @mousedown.stop @click="addMediaFigure()">
           <canvas id="pre-canvas"></canvas>
-          <div class="plus-icon-wrapper j-center a-center w100 h100">
-            <i class="fas fa-plus fa-3x plus-icon"></i>
+          <!-- 追加アイコン -->
+          <div class="plus-icon-wrapper column j-center a-center w100 h100">
+            <i class="fas fa-plus fa-3x plus-icon mt15"></i>
+            <span class="add-text font-11">追加</span>
           </div>
         </div>
         <div class="change-figure-type next-figure-type"
@@ -25,12 +27,6 @@
           <i class="fas fa-angle-double-right fa-2x"></i>
         </div>
       </div>
-      <!-- 図形追加アイコン -->
-      <div class="add-icon-wrapper w-auto m0 p10 flex j-center a-center" @mousedown.stop @click="addMediaFigure()">
-        <i class="fas fa-plus add-icon"></i>
-        <span class="add-text">追加</span>
-      </div>
-
 
       <!-- 詳細設定の表示・非表示切り替え -->
       <div class="change-disp-detail flex a-center j-center" @click="isShowDetail=!isShowDetail">
@@ -506,24 +502,6 @@
 .close-icon-wrapper:hover {
   cursor: pointer;
   background-color: grey;
-}
-
-.add-icon-wrapper {
-  display: none;
-  z-index: 3;
-  margin-top: 0px;
-  padding: 5px 10px;
-  background-color: black;
-  border-radius: 2px;
-}
-.add-icon-wrapper:hover {
-  cursor: pointer;
-  color: darkorange;
-}
-
-.add-text {
-  font-size: 11px;
-  margin-left: 4px;
 }
 
 .setting-row {
