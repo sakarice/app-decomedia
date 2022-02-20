@@ -25629,11 +25629,7 @@ var render = function () {
     _c(
       "div",
       { staticClass: "header-block header-center" },
-      [
-        _c("router-view", { attrs: { name: "dispTutorial" } }),
-        _vm._v(" "),
-        _c("media-title"),
-      ],
+      [_c("media-title")],
       1
     ),
     _vm._v(" "),

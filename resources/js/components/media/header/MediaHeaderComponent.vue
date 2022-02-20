@@ -8,7 +8,7 @@
         <!-- 中央 -->
         <div class="header-block header-center">
             <!-- <disp-tutorial></disp-tutorial> -->
-            <router-view name="dispTutorial"></router-view>
+            <!-- <router-view name="dispTutorial"></router-view> -->
             <media-title></media-title>
             <!-- <span :v-if="getMediaSetting['name']" class="header-content media-name">{{getMediaSetting['name']}}</span> -->
         </div>
