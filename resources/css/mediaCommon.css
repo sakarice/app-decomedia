@@ -81,7 +81,7 @@ body {
   #disp-modal-wrapper {
     width: auto;
     flex-direction: column;
-    padding: 8px 0;
+    padding: 20px 0;
     border-radius: 50px;
   }
   #disp-modal-zone {
