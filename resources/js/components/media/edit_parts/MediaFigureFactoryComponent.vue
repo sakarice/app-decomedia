@@ -8,7 +8,7 @@
         <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
 
-      <p class="font-11 darkgrey mt5 mb5">図形</p>
+      <p class="font-11 mt5 mb5">図形</p>
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">

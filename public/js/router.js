@@ -24042,7 +24042,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("p", { staticClass: "font-11 darkgrey mt5 mb5" }, [_vm._v("図形")]),
+        _c("p", { staticClass: "font-11 mt5 mb5" }, [_vm._v("図形")]),
         _vm._v(" "),
         _c("div", { staticClass: "figure-preview-wrapper" }, [
           _c(
