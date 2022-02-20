@@ -3646,7 +3646,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -12733,7 +12732,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_mediaEditModals_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-area[data-v-786c26ba] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-786c26ba]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-786c26ba] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-786c26ba] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-786c26ba] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n#media-setting-area[data-v-786c26ba] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-setting-area[data-v-786c26ba] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-setting-title[data-v-786c26ba]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n.setting[data-v-786c26ba] {\r\n    margin-bottom : 20px;\n}\n.public-state-icon[data-v-786c26ba] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-786c26ba]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-786c26ba] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-786c26ba] {\r\n    color: yellow;\n}\n.message-label[data-v-786c26ba] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-786c26ba] {\r\n    margin-bottom: 2px;\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.img-config-input[data-v-786c26ba] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-786c26ba]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-786c26ba] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-786c26ba] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-786c26ba] {\r\n    margin-left: 19px;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-786c26ba] {\r\n    padding: 20px;\n}\n#media-setting-area[data-v-786c26ba] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24670,14 +24669,18 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "setting", attrs: { id: "media-name-wraper" } },
+                {
+                  staticClass: "setting-block w90 mb20",
+                  attrs: { id: "media-name-wraper" },
+                },
                 [
                   _c("h3", { staticClass: "setting-title" }, [
                     _vm._v("Media名"),
                   ]),
                   _vm._v(" "),
-                  _c("label", { attrs: { for: "" } }, [
+                  _c("label", { staticClass: "w100 m0", attrs: { for: "" } }, [
                     _c("input", {
+                      staticClass: "w100",
                       attrs: {
                         type: "text",
                         id: "media-name",
@@ -24700,14 +24703,15 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting",
+                  staticClass: "setting-block w90 mb20",
                   attrs: { id: "media-description-wrapper" },
                 },
                 [
                   _c("h3", { staticClass: "setting-title" }, [_vm._v("説明")]),
                   _vm._v(" "),
-                  _c("label", { attrs: { for: "" } }, [
+                  _c("label", { staticClass: "w100 m0", attrs: { for: "" } }, [
                     _c("textarea", {
+                      staticClass: "w100",
                       attrs: {
                         type: "text",
                         id: "media-description",
@@ -24733,7 +24737,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting",
+                  staticClass: "setting flex j-s-between a-end w90",
                   attrs: { id: "media-bg-color-wraper" },
                 },
                 [
@@ -24741,7 +24745,7 @@ var render = function () {
                     _vm._v("枠外の色"),
                   ]),
                   _vm._v(" "),
-                  _c("label", { attrs: { for: "" } }, [
+                  _c("label", { staticClass: "m0", attrs: { for: "" } }, [
                     _c("input", {
                       attrs: { type: "color", id: "media-bg-color" },
                       domProps: {
@@ -24756,7 +24760,6 @@ var render = function () {
                         },
                       },
                     }),
-                    _vm._v("\n            カラー選択\n          "),
                   ]),
                 ]
               ),
@@ -24764,7 +24767,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting",
+                  staticClass: "setting flex j-s-between a-end w90",
                   attrs: { id: "media-is-public-wraper" },
                 },
                 [
@@ -24801,6 +24804,10 @@ var render = function () {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "flex a-center" }, [
+                    _c("span", { staticClass: "mr10 font-11 grey" }, [
+                      _vm._v(_vm._s(_vm.openState)),
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
                       {
@@ -24818,14 +24825,6 @@ var render = function () {
                           },
                         }),
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticStyle: { "margin-left": "10px", opacity: "0.7" },
-                      },
-                      [_vm._v(_vm._s(_vm.openState))]
                     ),
                   ]),
                 ]
