@@ -8,10 +8,10 @@
         <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
 
-      <p class="font-13 darkgrey m0">図形作成</p>
+      <p class="font-11 darkgrey mt5 mb5">図形</p>
 
       <!-- 図形プレビュー -->
-      <div class="figure-preview-wrapper mt15">
+      <div class="figure-preview-wrapper">
         <div class="change-figure-type back-figure-type"
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>

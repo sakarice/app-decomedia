@@ -3,7 +3,7 @@
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <!-- 項目名 -->
-        <p id="title-labal" class="title-labal font-11 darkgrey w90">テキスト作成</p>
+        <p id="title-labal" class="title-labal font-11 w90">テキスト</p>
 
         <div id="media-text-setting-area" class="flex column a-start">
           <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
@@ -171,7 +171,7 @@ export default {
 @import "/resources/css/googleJapaneseFontList.css";
 
   #title-labal {
-    margin: 5px 0 10px 0;
+    margin: 5px 0 15px 0;
     text-align: center;
   }
 
@@ -197,7 +197,6 @@ export default {
     width: 95%;
     border-radius: 3px;
     padding: 5px 10px;
-    margin: 0;
     background-color: black;
   }
   .add-text-button:hover {
@@ -313,11 +312,15 @@ export default {
 @media screen and (max-width:480px) {
 
   #title-labal {
-    margin: 0 0 5px 0;
+    margin: 0 0 15px 0;
   }
   
   #area-wrapper {
     padding: 5px 10px;
+  }
+
+  #text-preview {
+    font-size: 15px;
   }
 
   #text-preview-wrapper {
@@ -325,7 +328,12 @@ export default {
   }
 
   #media-text-add-wrapper {
-    width: 100%;
+    width: auto;
+    margin-left: 5px;
+  }
+
+  .add-btn-label {
+    display: none;
   }
   
   #media-text-setting-area {
@@ -335,13 +343,14 @@ export default {
   }
 
   #preview-area {
-    margin: 0 0 20px 0;
+    margin: 0 0 5px 0;
+    flex-direction: row;
     align-items: center;
   }
 
   .setting-wrapper {
-    max-height: 190px;
-    margin-bottom: 5px;
+    max-height: 200px;
+    margin-bottom: 25px;
   }
 
 }
