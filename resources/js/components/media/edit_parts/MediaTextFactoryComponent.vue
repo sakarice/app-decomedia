@@ -2,68 +2,79 @@
   <transition :name="transitionName">
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
+        <!-- 項目名 -->
+        <p id="title-labal" class="title-labal font-13 w90">テキスト</p>
+
         <div id="media-text-setting-area" class="flex column a-start">
-          <h2 id="media-text-setting-title">メディアテキスト設定</h2>
+          <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
 
-          <!-- テキストプレビュー -->
-          <div id="text-preview-wrapper" class="setting">
-            <h3 class="sub-title">プレビュー</h3>
-            <input
-            id="text-preview"
-            :style="previewStyle" v-model="getTextData['text']">
+          <!-- テキストプレビュー&追加ボタン -->
+          <div id="preview-area" class="flex column a-start w100">
+            <div id="text-preview-wrapper" class="w100">
+              <input
+              id="text-preview" type="text" class="m0" placeholder="テキストを入力してください"
+              :style="previewStyle" v-model="getTextData['text']">
+            </div>
             <!-- 追加 -->
-            <div id="media-text-add-wraper" class="mt3 flex column" @click="addText()">
+            <button id="media-text-add-wrapper" class="add-text-button j-center flex a-center mt3" @click="addText()">
+              <i class="fas fa-plus fa-lg plus-icon"></i>
+              <span class="add-btn-label font-11 ml5">追加</span>
+            </button>
+          </div>
+
+          <!-- 設定 -->
+          <div class="setting-wrapper flex column a-center">
+            <!-- フォントサイズ -->
+            <div id="font-size-wrapper" class="setting w100 flex j-s-between a-end">
+              <h3 class="sub-title mb0">サイズ</h3>
               <div class="flex a-center">
-                <!-- <i class="fas fa-plus add-text-icon"></i> -->
-                <button class="add-text-button">+追加</button>
+                <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('font_size')"></i>
+                <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('font_size')"></i>
               </div>
+              <input type="number" class="w60px" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
             </div>
-          </div>
 
-          <!-- フォントサイズ -->
-          <div id="font-size-wrapper" class="setting flex j-s-between a-center">
-            <h3 class="sub-title mr10 mb0">サイズ</h3>
-            <input type="number" class="mr10 w60px" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('font_size')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('font_size')"></i>
+            <!-- 色 -->
+            <div id="text-color-wrapper" class="setting w100 flex j-s-between a-end">
+              <h3 class="sub-title mb0">色</h3>
+              <input type="color" :value="getTextData['color']" @input="updateTextData({key:'color',value:$event.target.value})">
             </div>
-          </div>
 
-          <!-- 色 -->
-          <div id="text-color-wrapper" class="setting flex column">
-            <h3 class="sub-title">色</h3>
-            <input type="color" :value="getTextData['color']" @input="updateTextData({key:'color',value:$event.target.value})">
-          </div>
-
-          <!-- フォントスタイル(font-family) -->
-          <div id="font-style-wrapper" class="setting flex column">
-            <h3 class="sub-title">フォント</h3>
-            <div class="flex">
-              <div class="flex column mr5">
-              <h4 class="sub-sub-title">カテゴリ</h4>
-                <select id="font-category" v-model="selected_category">
-                  <option v-for="category in font_category" :value="category" :key="category.id">
-                    {{category}}
-                  </option>
-                </select>
-              </div>
+            <!-- フォントスタイル(font-family) -->
+            <div id="font-style-wrapper" class="setting w100 flex column">
+              <h3 class="sub-title">フォント</h3>
               <div class="flex column">
-                <h4 class="sub-sub-title">スタイル</h4>
-                <select id="" v-model="selected_font">
-                  <option v-for="option in font_options" :value="option.value" :key="option.id">
-                    {{option.name}}
-                  </option>
-                </select>
+
+                <div class="flex j-s-between a-end mb10">
+                <h4 class="sub-sub-title m0">カテゴリ</h4>
+                  <select id="font-category" v-model="selected_category">
+                    <option v-for="category in font_category" :value="category" :key="category.id">
+                      {{category}}
+                    </option>
+                  </select>
+                </div>
+                
+                <div class="flex j-s-between a-end mb5">
+                  <h4 class="sub-sub-title m0">スタイル</h4>
+                  <select id="font-style" v-model="selected_font">
+                    <option v-for="option in font_options" :value="option.value" :key="option.id">
+                      {{option.name}}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
+
+            <!-- 透過度 -->
+            <div id="opacity-wrapper" class="setting w100 flex j-s-between a-end">
+              <h3 class="sub-title mb0">透過度</h3>
+              <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
+              <input type="number" v-model="getTextData['opacity']" name="opacity" min="0" max="1" step="0.05">
+            </div>
+
           </div>
 
-          <!-- 透過度 -->
-          <div id="opacity-wrapper" class="setting flex column">
-            <h3 class="sub-title">透過度:</h3>
-            <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
-          </div>
+
 
 
         </div>
@@ -159,10 +170,15 @@ export default {
 @import "/resources/css/googleFontList.css";
 @import "/resources/css/googleJapaneseFontList.css";
 
+  #title-labal {
+    margin: 10px 0;
+    padding: 5px 0;
+    text-align: center;
+  }
+
   #media-text-setting-area {
-    margin: 20px 0;
+    margin: 0;
     width: 95%;
-    overflow-y: scroll;
   }
 
   #media-text-setting-title{
@@ -174,47 +190,68 @@ export default {
     padding: 3px 10px;
   }
 
+  #preview-area {
+    margin: 10px 0 30px 0;
+    width: 95%;
+  }
+
+  #media-text-add-wrapper {
+    border-radius: 3px;
+    padding: 5px 10px;
+    background-color: black;
+  }
+  .add-text-button:hover {
+    color: orange;
+  }
+  .add-text-button:focus{
+    border: none;
+    color: orange;
+  }
+  .add-text-button {
+    border: none;
+    color: white;
+  }
+
+  .add-btn-label {
+    margin-top: 2px;
+  }
+
+
+  .setting-wrapper {
+    width: 100%;
+    padding: 10px 5px;
+    /* outline: 1px dotted dimgrey; */
+    overflow-y: scroll;
+  }
   .setting {
-    margin-bottom : 20px;
+    margin-bottom : 30px;
+    padding-bottom: 3px;
+    border-bottom: 0.5px solid rgba(200,200,200,0.2);
   }
 
   .sub-title {
-    font-size: 15px;
+    font-size: 13px;
+    color: lightgrey;
   }
   .sub-sub-title {
+    display: inline-block;
     font-size: 13px;
     color: darkgrey;
   }
 
+  .preview-title {
+    display: inline-block;
+    font-size: 12px;
+    color: grey;
+  }
 
-  .add-text-icon {
-    padding: 5px;
-    margin-right: 3px;
-    color: orange;
-  }
-  .add-text-button{
-    border: 1px solid white;
-    border-radius: 3px;
-    background-color: orange;
-    color: white;
-    padding: 0 12px;
-    font-size: 16px;
-  }
-  .add-text-button:hover{
-    background-color: darkorange;
-  }
-  .add-text-button:focus{
-    background-color: darkorange;
-  }
 
   #text-preview-wrapper {
-    width: 90%;
+    outline : 1.5px solid blue;
   }
 
   #text-preview {
     width: 100%;
-    font-size: 18px;
-    margin-bottom: 3px;
   }
 
   #text-preview:hover {
@@ -226,12 +263,11 @@ export default {
     font-size: 15px;
   }
 
-  #font-category {
-    width : 100px;
+  #font-category, #font-style {
+    width : 150px;
   }
 
-
-    /* トグル */
+  /* トグル */
   .toggle-outer{
     width: 38px;
     height: 17px;
@@ -248,6 +284,10 @@ export default {
     background-color: white;
   }
 
+  .pos-abs {
+    position: absolute;
+  }
+
   .btns {
     border-radius: 50%;
     padding: 5px 4px;
@@ -262,17 +302,51 @@ export default {
     border: 1.5px solid deepskyblue;
   }
 
+  .darkgrey { color: darkgrey;}
+
 
 
 @media screen and (max-width:480px) {
+
+  #title-labal {
+    margin: 0 0 10px 0;
+  }
   
   #area-wrapper {
-    padding: 20px;
+    padding: 10px;
+  }
+
+  #text-preview {
+    font-size: 15px;
+  }
+
+  #media-text-add-wrapper {
+    margin-left: 5px;
+  }
+
+  .add-btn-label {
+    display: none;
   }
   
   #media-text-setting-area {
     margin : 0;
+    flex-direction: column-reverse;
+    align-items: center;
   }
+
+  #preview-area {
+    margin: 0;
+    /* background-color: rgb(30,140,210); */
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .setting-wrapper {
+    outline: none;
+    max-height: 195px;
+    margin-bottom: 20px;
+  }
+
 }
 
 </style>

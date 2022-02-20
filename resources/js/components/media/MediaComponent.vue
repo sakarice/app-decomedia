@@ -5,6 +5,8 @@
 
     <judge-device-type></judge-device-type>
 
+    <router-view name="tutorialFlow"></router-view>
+
     <!-- <router-view name="switchToEditMode"></router-view>
     <router-view name="switchToShowMode"></router-view> -->
 
@@ -59,13 +61,13 @@
         <router-view name="dispMediaComment"
         v-on:show-modal="showModal">
         </router-view>
-        <!-- 画像 -->
-        <router-view name="dispImgModal"
-        v-on:show-modal="showModal">        
-        </router-view>
         <!-- オーディオ -->
         <router-view name="dispAudioModal"
         v-on:show-modal="showModal">
+        </router-view>
+        <!-- 画像 -->
+        <router-view name="dispImgModal"
+        v-on:show-modal="showModal">        
         </router-view>
         <!-- 図形設定 -->
         <router-view name="dispFigureSettingModal"

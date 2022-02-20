@@ -229,6 +229,8 @@
   .w90{ width: 90%;}
   .w100{ width: 100%;}
 
+  .w-auto { width: auto;}
+
 
 
 
@@ -259,6 +261,9 @@
   .h80{ height: 80%;}
   .h90{ height: 90%;}
   .h100{ height: 100%;}
+
+  .h-auto { height: auto;}
+
 
 /***************************
   ポジション(position)

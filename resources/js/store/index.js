@@ -19,7 +19,11 @@ import mediaFigureFactory from './modules/mediaFigureFactory.js';
 import mediaFigures from './modules/mediaFigures.js';
 import selectedObjects from './modules/selectedObjects';
 import mediaComments from './modules/mediaComments';
-import stereoPhonicArrangeDefault from './modules/stereoPhonicArrangeDefault'
+import stereoPhonicArrangeDefault from './modules/stereoPhonicArrangeDefault';
+import tutorialInfo_1 from './modules/tutorial/tutorialInfo_1';
+import tutorialInfo_2 from './modules/tutorial/tutorialInfo_2';
+import tutorialInfo_3 from './modules/tutorial/tutorialInfo_3';
+import tutorialInfos from './modules/tutorial/tutorialInfos';
 
 Vue.use(Vuex);
 
@@ -44,6 +48,10 @@ const store = new Vuex.Store({
     selectedObjects,
     mediaComments,
     stereoPhonicArrangeDefault,
+    tutorialInfo_1,
+    tutorialInfo_2,
+    tutorialInfo_3,
+    tutorialInfos,
   }
 
 });

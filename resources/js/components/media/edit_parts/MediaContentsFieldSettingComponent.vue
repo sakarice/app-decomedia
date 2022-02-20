@@ -7,34 +7,33 @@
           <h2 id="media-contents-field-setting-title">メディアエリア設定</h2>
 
           <!-- メディア背景色設定 -->
-          <div id="media-bg-color-wraper" class="setting mb30">
+          <div id="media-bg-color-wraper" class="setting-row flex j-s-between a-end w90 mb30">
             <h3 class="setting-title">背景色</h3>
-            <label for="">
+            <label for="" class="m0">
               <input :value="getMediaContentsField['color']" @input="updateMediaContentsFieldObjectItem({key:'color', value:$event.target.value})" type="color" id="media-bg-color">
-              <span class="font-12">カラー</span>
             </label>
           </div>
           <!-- メディアエリアサイズ設定 -->
           <div id="media-size-wraper" class="setting w90 mb30">
             <h3 class="setting-title">サイズ</h3>
             <div class="flex column">
-              <div class="setting-width mb15 flex j-s-between a-end">
-                <h4 class="sub-sub-title mb0 w60px flex a-center">
+              <div class="setting-width setting-row mb15 flex j-s-between a-end">
+                <h4 class="sub-sub-title mb0 w60px flex a-end">
                   <i class="fas fa-arrows-alt-h icon"></i>
                   <span class="font-12">横幅</span>
                 </h4>
-                <div class="flex a-center">
+                <div class="flex a-end">
                   <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
                   <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
                 </div>
                 <input id="set-contents-area-frame-width" class="setting" :value="getMediaContentsField['width']" @input="updateStoreData('width',$event.target.value)" type="number" placeholder="横幅">
               </div>
-              <div class="setting-height mb15 flex j-s-between a-end">
-                <h4 class="sub-sub-title mb0 w60px flex a-center">
+              <div class="setting-height setting-row mb15 flex j-s-between a-end">
+                <h4 class="sub-sub-title mb0 w60px flex a-end">
                   <i class="fas fa-arrows-alt-v icon"></i>
                   <span class="font-12">縦幅</span>
                 </h4>
-                <div class="flex a-center">
+                <div class="flex a-end">
                   <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
                   <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
                 </div>
@@ -44,7 +43,7 @@
           </div>
 
           <!-- 背景画像設定 -->
-          <div id="media-bg-img-wraper" class="setting mb20">
+          <div id="media-bg-img-wraper" class="setting-row flex j-s-between a-end w90 mb20">
             <h3 class="setting-title">背景画像</h3>
             <span class="clear-bg-img cursor-p" @mousedown="clearBgImg()" @touchstart="clearBgImg()">削除する</span>
           </div>
@@ -125,6 +124,11 @@ export default {
     width: 60px;
   }
 
+  .setting-row {
+    border-bottom: 0.5px solid rgba(200,200,200,0.2);
+    padding-bottom: 3px;
+  }
+
   .sub-sub-title {
     font-size: 15px;
     color: lightgrey;
@@ -147,6 +151,7 @@ export default {
   .clear-bg-img {
     color: blue;
     text-decoration-line: underline;
+    height: 20px;
   }
 
   .message-label {
@@ -154,9 +159,9 @@ export default {
   }
 
   .setting-title {
-    margin-bottom: 5px;
-    /* font-weight: bold; */
-    font-size: 15px;
+    margin-bottom: 0;
+    font-size: 13px;
+    color: lightgrey;
   }
 
   .img-config-input {

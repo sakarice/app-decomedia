@@ -7,43 +7,42 @@
           <h2 id="media-setting-title">メディア設定</h2>
 
           <!-- メディア名設定 -->
-          <div id="media-name-wraper" class="setting">
+          <div id="media-name-wraper" class="setting-block w90 mb20">
             <h3 class="setting-title">Media名</h3>
-            <label for="">
-              <input :value="getMediaSetting['name']" @input="updateMediaSettingObjectItem({key:'name', value:$event.target.value})" type="text" id="media-name" placeholder="Media名">
+            <label for="" class="w100 m0">
+              <input class="w100" :value="getMediaSetting['name']" @input="updateMediaSettingObjectItem({key:'name', value:$event.target.value})" type="text" id="media-name" placeholder="Media名">
             </label>
           </div>
 
           <!-- メディアの説明文設定 -->
-          <div id="media-description-wrapper" class="setting">
+          <div id="media-description-wrapper" class="setting-block w90 mb20">
             <h3 class="setting-title">説明</h3>
-            <label for="">
+            <label for="" class="w100 m0">
               <!-- <input :value="mediaDescription" @input="updateMediaDescription" type="text"> -->
-              <textarea :value="getMediaSetting['description']" @input="updateMediaSettingObjectItem({key:'description', value:$event.target.value})" type="text" id="media-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
+              <textarea class="w100" :value="getMediaSetting['description']" @input="updateMediaSettingObjectItem({key:'description', value:$event.target.value})" type="text" id="media-description" rows="4" cols="30" maxlength="120" placeholder="説明文"></textarea>
             </label>
           </div>
 
           <!-- メディア背景色設定 -->
-          <div id="media-bg-color-wraper" class="setting">
+          <div id="media-bg-color-wraper" class="setting-row flex j-s-between a-end w90">
             <h3 class="setting-title">枠外の色</h3>
-            <label for="">
+            <label for="" class="m0">
               <input :value="getMediaSetting['mediaBackgroundColor']" @input="updateMediaSettingObjectItem({key:'mediaBackgroundColor', value:$event.target.value})" type="color" id="media-bg-color">
-              カラー選択
             </label>
           </div>
 
           <!-- 公開/非公開設定 -->
-          <div id="media-is-public-wraper" class="setting">
+          <div id="media-is-public-wraper" class="setting-row flex j-s-between a-end w90">
             <div class="flex">
               <h3 class="setting-title">公開 / 非公開</h3>
               <i v-show="getMediaSetting['isPublic']" class="fas fa-door-open fa-lg public-state-icon open-icon"></i>
               <i v-show="!(getMediaSetting['isPublic'])" class="fas fa-lock fa-lg public-state-icon lock-icon"></i>
             </div>
             <div class="flex a-center">
+              <span class="mr10 font-11 grey">{{openState}}</span>
               <div class="toggle-outer flex a-center" @click="changePublicState" :class="{'is-public-outer' : getMediaSetting['isPublic']}">
                 <div class="toggle-inner" :class="{'is-public-inner' : getMediaSetting['isPublic']}"></div>
               </div>
-              <span style="margin-left:10px;opacity:0.7">{{openState}}</span>
             </div>
           </div>
 
@@ -124,8 +123,10 @@ export default {
     padding: 3px 10px;
   }
 
-  .setting {
-    margin-bottom : 20px;
+  .setting-row {
+    margin-bottom : 30px;
+    padding-bottom: 3px;
+    border-bottom: 0.5px solid rgba(200,200,200,0.2);
   }
 
   .public-state-icon {
@@ -148,9 +149,9 @@ export default {
   }
 
   .setting-title {
-    margin-bottom: 5px;
-    /* font-weight: bold; */
-    font-size: 15px;
+    margin-bottom: 2px;
+    font-size: 13px;
+    color: lightgrey;
   }
 
   .img-config-input {

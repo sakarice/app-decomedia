@@ -13,33 +13,34 @@
 
         <!-- カラー系の設定 -->
         <div class="setting-type-color mt10">
-          <div class="flex j-s-between a-center fill-input-wrapper">
-            <div class="fill-flag">
-              <span class="label">塗りつぶし</span>
+          <div class="flex j-s-between a-center fill-input-wrapper mb15">
+            <label class="fill-flag m0">
               <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawFill']" @input="updateFigureData('isDrawFill',$event.target.checked)">
-            </div>
+              <span class="label">塗りつぶし</span>
+            </label>
             <div class="fill-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="figureDatas['fillColor']" @input="updateFigureData('fillColor', $event.target.value)">
             </div>
           </div>
 
-          <div class="flex j-s-between a-center stroke-input-wrapper">
-            <div class="stroke-flag">
-              <span class="label">枠線</span>
+          <div class="flex j-s-between a-center stroke-input-wrapper mb15">
+            <label class="stroke-flag m0">
               <input type="checkbox" @mousedown.stop :checked="figureDatas['isDrawStroke']" @input="updateFigureData('isDrawStroke',$event.target.checked)">
-            </div>
+              <span class="label">枠線</span>
+            </label>
             <div class="stroke-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="figureDatas['strokeColor']" @input="updateFigureData('strokeColor', $event.target.value)">
             </div>
           </div>
         </div>
 
         <!-- 透過度 -->
-        <div class="opacity-input-wrapper mt10 mb15 flex a-center">
-          <span class="label mr10">透過度</span>
-          <input type="range" :value="figureDatas['globalAlpha']" @mousedown.stop @input="updateFigureData('globalAlpha',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
+        <div class="opacity-input-wrapper mt25 mb25 j-s-between flex a-center">
+          <span class="label w-auto">透過度</span>
+          <input type="range" class="w100px" :value="figureDatas['globalAlpha']" @mousedown.stop @input="updateFigureData('globalAlpha',$event.target.value)" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="number" class="input-num w50px font-12" :value="figureDatas['globalAlpha']" @input="updateFigureData('globalAlpha', $event.target.value)" name="opacity" min="0" max="1" step="0.05">
         </div>
 
         <!-- 図形の種類 -->

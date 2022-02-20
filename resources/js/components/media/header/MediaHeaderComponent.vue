@@ -7,6 +7,8 @@
 
         <!-- 中央 -->
         <div class="header-block header-center">
+            <!-- <disp-tutorial></disp-tutorial> -->
+            <!-- <router-view name="dispTutorial"></router-view> -->
             <media-title></media-title>
             <!-- <span :v-if="getMediaSetting['name']" class="header-content media-name">{{getMediaSetting['name']}}</span> -->
         </div>
@@ -23,6 +25,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import MediaTitle from './MediaTitleComponent.vue';
+import DispTutorial from '../change_display_parts/DispTutorialComponent.vue'
 import HomeLink from '../action_parts/HomeLinkComponent.vue';
 import ToMypageButton from '../action_parts/ToMypageButtonComponent.vue';
 import MediaCreateButton from '../action_parts/MediaCreateButtonComponent.vue';
@@ -31,6 +34,7 @@ import MediaUpdateButton from '../action_parts/MediaUpdateButtonComponent.vue';
 export default {
     components : {
         MediaTitle,
+        DispTutorial,
         HomeLink,
         ToMypageButton,
         MediaCreateButton,

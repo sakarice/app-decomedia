@@ -1,25 +1,37 @@
 <template>
   <!-- Media図形-->
   <div id="media-figure-factory-wrapper" @click.stop @touchstart.stop>
-    <div class="item-frame">
+    <div class="item-frame flex column a-center">
 
       <!-- クローズアイコン -->
       <div class="close-icon-wrapper" :class="{'hidden':isMobile}" @mousedown.stop>
-        <i class="fas fa-times fa-3x close-icon" @click="closeModal()"></i>
+        <i class="fas fa-times fa-2x close-icon" @click="closeModal()"></i>
       </div>
-      <!-- 図形追加アイコン -->
-      <div class="add-icon-wrapper" @mousedown.stop @click="addMediaFigure()">
-        <i class="fas fa-plus fa-2x add-icon"></i>
-        <span class="add-text">追加</span>
-      </div>
+
+      <p class="font-11 mt5 mb5">図形</p>
 
       <!-- 図形プレビュー -->
       <div class="figure-preview-wrapper">
+        <!-- 図形種類変更(一つ前) -->
         <div class="change-figure-type back-figure-type"
         @mousedown="backFigureType()" @touchend="backFigureType()">
           <i class="fas fa-angle-double-left fa-2x"></i>
         </div>
-        <canvas id="pre-canvas" @mousedown.stop @click="addMediaFigure()"></canvas>
+
+        <!-- 図形プレビュー -->
+        <div class="canvas-wrapper pos-r flex column j-center a-center mr15 ml15" @mousedown.stop @click="addMediaFigure()">
+          <!-- プレビュー用キャンバス -->
+          <canvas id="pre-canvas"></canvas>
+          <!-- 追加アイコン -->
+          <div class="plus-icon-wrapper mt10 column j-center a-center w100 h100 for-pc-tablet">
+            <i class="fas fa-plus fa-3x plus-icon"></i>
+            <span class="add-text font-11">追加</span>
+          </div>
+          <!-- (モバイル用)補足文 -->
+          <p class="m0 mt5 font-11 grey for-mobile">タッチで追加</p>
+        </div>
+
+        <!-- 図形種類変更(一つ後) -->
         <div class="change-figure-type next-figure-type"
         @mousedown="goNextFigureType()" @touchend="goNextFigureType()">
           <i class="fas fa-angle-double-right fa-2x"></i>
@@ -30,7 +42,7 @@
       <div class="change-disp-detail flex a-center j-center" @click="isShowDetail=!isShowDetail">
         <span :class="{'reverse-y':isShowDetail}">▼</span>
         <div class="horizontal-bar"></div>
-        <span>詳細</span>
+        <span>設定</span>
         <div class="horizontal-bar"></div>
         <span :class="{'reverse-y':isShowDetail}">▼</span>
       </div>
@@ -39,7 +51,7 @@
       <div class="media-figure-settings" v-show="isShowDetail">
 
         <!-- 図形の種類 -->
-        <div class="flex j-s-between a-center type-input-wrapper">
+        <div class="setting-row flex j-s-between a-center type-input-wrapper">
           <span class="label">種類</span>
           <select id="create-figure-type" name="種類" class="w80px" @input="updateFigureData({key:'type', value:$event.target.value})">
             <option v-for="figureType in figureTypeList" :key="figureType['code']" :value="figureType['code']">{{figureType['name']}}</option>
@@ -48,37 +60,38 @@
 
         <!-- カラー系の設定 -->
         <div class="setting-type-color mt10">
-          <div class="flex j-s-between a-center fill-input-wrapper">
-            <div class="fill-flag">
-              <span class="label">塗りつぶし</span>
+          <div class="setting-row flex j-s-between a-center fill-input-wrapper">
+            <label class="fill-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawFill']" @input="updateFigureData({key:'isDrawFill',value:$event.target.checked})">
-            </div>
+              <span class="label">塗りつぶし</span>
+            </label>
             <div class="fill-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="getFigureData['fillColor']" @input="updateFigureData({key:'fillColor', value:$event.target.value})">
             </div>
           </div>
 
-          <div class="flex j-s-between a-center stroke-input-wrapper">
-            <div class="stroke-flag">
-              <span class="label">枠線</span>
+          <div class="setting-row flex j-s-between a-end stroke-input-wrapper">
+            <label class="stroke-flag m0 hover-pointer">
               <input type="checkbox" @mousedown.stop :checked="getFigureData['isDrawStroke']" @input="updateFigureData({key:'isDrawStroke',value:$event.target.checked})">
-            </div>
+              <span class="label">枠線</span>
+            </label>
             <div class="stroke-color">
-              <span class="label">色</span>
+              <span class="label grey">色</span>
               <input type="color" @mousedown.stop :value="getFigureData['strokeColor']" @input="updateFigureData({key:'strokeColor', value:$event.target.value})">
             </div>
           </div>
         </div>
 
-        <div class="opacity-input-wrapper mt10 mb15 flex a-center">
-          <span class="label mr10">透過度</span>
-          <input type="range" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+        <div class="setting-row opacity-input-wrapper mt25 flex j-s-between a-end">
+          <span class="label w-auto">透過度</span>
+          <input type="range" class="w100px" :value="getFigureData['globalAlpha']" @mousedown.stop @input="updateFigureData({key:'globalAlpha',value:$event.target.value})" name="opacity" id="" min="0" max="1" step="0.05">
+          <input type="number" class="input-num w50px font-12" :value="getFigureData['globalAlpha']" @input="updateFigureData({key:'globalAlpha', value:$event.target.value})" name="opacity" min="0" max="1" step="0.05">
         </div>
 
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="flex mb10 j-s-between a-center x-position-wrapper">
+          <div class="setting-row flex j-s-between a-end x-position-wrapper">
             <span class="label">位置(横)</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
@@ -87,7 +100,7 @@
             <input type="number" class="input-num" :value="getFigureData['left']" @input="updateFigureData({key:'left', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center y-position-wrapper">
+          <div class="setting-row flex j-s-between a-end y-position-wrapper">
             <span class="label">位置(縦)</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
@@ -96,7 +109,7 @@
             <input type="number" class="input-num" :value="getFigureData['top']" @input="updateFigureData({key:'top', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center degree-wrapper">
+          <div class="setting-row flex j-s-between a-end degree-wrapper">
             <span class="label">回転</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
@@ -105,7 +118,7 @@
             <input type="number" class="input-num" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
           </div>
 
-          <div class="flex mb10 j-s-between a-center width-input-wrapper">
+          <div class="setting-row flex j-s-between a-end width-input-wrapper">
             <div class="w50px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
@@ -113,7 +126,7 @@
             </div>
             <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
           </div>
-          <div class="flex mb10 j-s-between a-center height-input-wrapper">
+          <div class="setting-row flex j-s-between a-end height-input-wrapper">
             <div class="w50px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
@@ -428,7 +441,6 @@
 }
 
 .item-frame {
-  /* background-color: rgba(240,240,250,1); */
 }
 .item-frame:hover{
   cursor: all-scroll;
@@ -450,6 +462,7 @@
 .media-figure-settings {
   padding: 15px 25px;
   max-height: 200px;
+  min-width: 300px;
   overflow-y: scroll;
 }
 
@@ -457,19 +470,35 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px;
-  margin-bottom: 5px;
+  padding: 5px 0px;
 }
 
 #pre-canvas {
   background-color: white;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   padding: 4px;
+  box-shadow: 1px 1px 2px 1px grey;
 }
-#pre-canvas:hover{
+
+.canvas-wrapper:hover {
   cursor: pointer;
-  outline: 2px solid orange;
 }
+.canvas-wrapper:hover #pre-canvas{
+  opacity: 0.3;
+}
+
+.canvas-wrapper:hover .plus-icon-wrapper{
+  display: inline-flex;
+}
+
+.plus-icon-wrapper {
+  display: none;
+  position:absolute;
+}
+.plus-icon {
+  color: orange;
+}
+
 
 .close-icon-wrapper {
   display: inline-block;
@@ -478,23 +507,17 @@
   right: 0px;
   z-index: 3;
   padding: 5px;
+  color:black;
 }
-.close-icon:hover {
+.close-icon-wrapper:hover {
   cursor: pointer;
+  background-color: grey;
 }
 
-.add-icon-wrapper {
-  position: absolute;
-  z-index: 3;
-  padding: 0px 4px;
-  color: darkorange;
-}
-.add-icon-wrapper:hover {
-  cursor: pointer;
-}
-.add-text {
-  font-size: 11px;
-  margin-left: 2px;
+.setting-row {
+  border-bottom: 0.5px solid rgba(200,200,200,0.2);
+  padding-bottom: 3px;
+  margin-bottom: 17px;
 }
 
 .setting-type-num,
@@ -527,6 +550,8 @@
   font-size: 13px;
 }
 
+.hover-pointer:hover { cursor:pointer; }
+
 .reverse-y {
   transform: scaleY(-1);
 }
@@ -536,6 +561,7 @@
 }
 
 .grey { color: grey;}
+.darkgrey { color: darkgrey;}
 
 
 
@@ -547,12 +573,6 @@
     background-color: rgba(35,40,50,0.85);
     padding: 5px;
     border-radius: 6px;
-  }
-  .add-icon-wrapper {
-    display: inline-block;
-    position: absolute;
-    top: 80px;
-    left: 160px;
   }
   
 }
@@ -580,11 +600,12 @@
     border-top-left-radius: 5px; */
   }
 
-  .add-icon-wrapper {
-    display: flex;
-    flex-direction: column;
-    top: 5px;
-    right: 20px;
+  .plus-icon-wrapper {
+    margin-top: 0;
+  }
+
+  .label {
+    font-size: 11px;
   }
 
   .for-pc-tablet{
