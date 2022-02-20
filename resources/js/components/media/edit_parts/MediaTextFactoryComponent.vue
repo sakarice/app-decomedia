@@ -3,7 +3,7 @@
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <!-- 項目名 -->
-        <p id="title-labal" class="title-labal font-11 w90">テキスト</p>
+        <p id="title-labal" class="title-labal font-13 w90">テキスト</p>
 
         <div id="media-text-setting-area" class="flex column a-start">
           <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
@@ -16,7 +16,7 @@
               :style="previewStyle" v-model="getTextData['text']">
             </div>
             <!-- 追加 -->
-            <button id="media-text-add-wrapper" class="add-text-button j-center flex a-center" @click="addText()">
+            <button id="media-text-add-wrapper" class="add-text-button j-center flex a-center mt3" @click="addText()">
               <i class="fas fa-plus fa-lg plus-icon"></i>
               <span class="add-btn-label font-11 ml5">追加</span>
             </button>
@@ -171,7 +171,8 @@ export default {
 @import "/resources/css/googleJapaneseFontList.css";
 
   #title-labal {
-    margin: 5px 0 15px 0;
+    margin: 10px 0;
+    padding: 5px 0;
     text-align: center;
   }
 
@@ -190,7 +191,7 @@ export default {
   }
 
   #preview-area {
-    margin: 0 0 30px 0;
+    margin: 10px 0 30px 0;
     width: 95%;
   }
 
@@ -218,8 +219,8 @@ export default {
 
   .setting-wrapper {
     width: 100%;
-    padding: 20px 15px;
-    outline: 1px dotted dimgrey;
+    padding: 10px 5px;
+    /* outline: 1px dotted dimgrey; */
     overflow-y: scroll;
   }
   .setting {
@@ -246,13 +247,11 @@ export default {
 
 
   #text-preview-wrapper {
-    margin: 5px 0;
     outline : 1.5px solid blue;
   }
 
   #text-preview {
     width: 100%;
-    font-size: 18px;
   }
 
   #text-preview:hover {
@@ -310,11 +309,11 @@ export default {
 @media screen and (max-width:480px) {
 
   #title-labal {
-    margin: 0 0 15px 0;
+    margin: 0 0 10px 0;
   }
   
   #area-wrapper {
-    padding: 5px 10px;
+    padding: 10px;
   }
 
   #text-preview {

@@ -4078,6 +4078,10 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4092,6 +4096,7 @@ function _defineProperty(obj, key, value) {
   data: function data() {
     return {
       youtubeUrl: '',
+      isCreatedFrame: false,
       window_width: 0,
       window_height: 0
     };
@@ -4151,9 +4156,11 @@ function _defineProperty(obj, key, value) {
     createMovieFrame: function createMovieFrame() {
       // 親コンポーネントの動画フレーム作成メソッドを実行
       this.$emit('create-movie-frame');
+      this.isCreatedFrame = true;
     },
     deleteMovieFrame: function deleteMovieFrame() {
       this.$emit('delete-movie-frame');
+      this.isCreatedFrame = false;
     },
     changeLoopSetting: function changeLoopSetting() {
       this.updateMediaMovieObjectItem({
@@ -12770,7 +12777,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#title-labal[data-v-35d10c14] {\r\n    margin: 5px 0 15px 0;\r\n    text-align: center;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0 0 30px 0;\r\n    width: 95%;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    margin-top: 2px;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 20px 15px;\r\n    outline: 1px dotted dimgrey;\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    margin: 5px 0;\r\n    outline : 1.5px solid blue;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.darkgrey[data-v-35d10c14] { color: darkgrey;}\n@media screen and (max-width:480px) {\n#title-labal[data-v-35d10c14] {\r\n    margin: 0 0 15px 0;\n}\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 5px 10px;\n}\n#text-preview[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    margin-left: 5px;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    display: none;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\r\n    flex-direction: column-reverse;\r\n    align-items: center;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    /* background-color: rgb(30,140,210); */\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    outline: none;\r\n    max-height: 195px;\r\n    margin-bottom: 20px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#title-labal[data-v-35d10c14] {\r\n    margin: 10px 0;\r\n    padding: 5px 0;\r\n    text-align: center;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 10px 0 30px 0;\r\n    width: 95%;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    margin-top: 2px;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 10px 5px;\r\n    /* outline: 1px dotted dimgrey; */\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    outline : 1.5px solid blue;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.darkgrey[data-v-35d10c14] { color: darkgrey;}\n@media screen and (max-width:480px) {\n#title-labal[data-v-35d10c14] {\r\n    margin: 0 0 10px 0;\n}\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 10px;\n}\n#text-preview[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    margin-left: 5px;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    display: none;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\r\n    flex-direction: column-reverse;\r\n    align-items: center;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    /* background-color: rgb(30,140,210); */\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    outline: none;\r\n    max-height: 195px;\r\n    margin-bottom: 20px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -12802,7 +12809,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    font-weight: bold;\r\n    margin: 10px 0 30px 0;\r\n    background-color: orangered;\r\n    border-radius: 5px;\r\n    padding: 2px 10px;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width: 95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 30px;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 15px 5px;\n}\n.about-create-del .button[data-v-05ba1def] {\r\n    margin-right: 17px;\r\n    padding: 5px 18px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\r\n    box-shadow: 1px 1px 1px;\r\n    opacity: 0.7;\n}\n.about-create-del .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 15px;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 60px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n.btns[data-v-05ba1def] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-05ba1def]:hover { cursor: pointer;}\n.plus-btn[data-v-05ba1def] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-05ba1def] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n@media screen and (max-width:480px) {\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 20px;\n}\n}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#player-setting-title[data-v-05ba1def] {\r\n    margin: 10px 0;\r\n    padding: 5px 0;\r\n    text-align: center;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 10px 0;\r\n    width: 95%;\n}\n.about-yt-video-id[data-v-05ba1def] {\r\n    margin-bottom: 40px;\n}\n#youtube-url-input[data-v-05ba1def] {\r\n    width:95%;\n}\n.setting-block[data-v-05ba1def] {\r\n    width: 100%;\r\n    margin-bottom: 50px;\n}\n.setting-row[data-v-05ba1def] {\r\n    padding: 0 5px 3px 5px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.player-property-wrapper[data-v-05ba1def] {\r\n    /* outline: 1px dotted dimgrey; */\r\n    margin: 1px;\r\n    overflow-y: scroll;\n}\n.about-size .icon[data-v-05ba1def] {\r\n    width: 20px;\r\n    margin-right: 2px;\n}\n.setting-width[data-v-05ba1def],\r\n  .setting-height[data-v-05ba1def] {\r\n    margin: 0 5px 15px 5px;\n}\n.btn-wrapper .button[data-v-05ba1def] {\r\n    padding: 2px 5px;\r\n    color: white;\r\n    border: none;\r\n    border-radius: 2px;\n}\n.btn-wrapper .button[data-v-05ba1def]:hover{\r\n    opacity: 0.9;\n}\n.create-btn[data-v-05ba1def] {\r\n    background-color: orange;\n}\n.delete-btn[data-v-05ba1def] {\r\n    background-color: grey;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-05ba1def]{\r\n    width: 38px;\r\n    height: 19px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-05ba1def] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.setting-title[data-v-05ba1def] {\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.about-size input[data-v-05ba1def] {\r\n    width: 60px;\n}\n.is-loop-outer[data-v-05ba1def] {\r\n    background-color: rgb(70,140,250);\n}\n.is-loop-inner[data-v-05ba1def] {\r\n    margin-left: 19px;\n}\n.btns[data-v-05ba1def] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-05ba1def]:hover { cursor: pointer;}\n.plus-btn[data-v-05ba1def] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-05ba1def] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.grey[data-v-05ba1def] { color: grey;}\n@media screen and (max-width:480px) {\n#player-setting-title[data-v-05ba1def] {\r\n    margin: 0 0 10px 0;\n}\n#yt-setting-area[data-v-05ba1def] {\r\n    margin: 0;\r\n    align-items: center;\n}\n.player-property-wrapper[data-v-05ba1def] {\r\n    max-height: 140px;\n}\n#area-wrapper[data-v-05ba1def] {\r\n    padding: 10px;\n}\n.setting-block[data-v-05ba1def] {\r\n    margin-bottom: 20px;\n}\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24882,7 +24889,7 @@ var render = function () {
           _c(
             "p",
             {
-              staticClass: "title-labal font-11 w90",
+              staticClass: "title-labal font-13 w90",
               attrs: { id: "title-labal" },
             },
             [_vm._v("テキスト")]
@@ -24945,7 +24952,7 @@ var render = function () {
                   _c(
                     "button",
                     {
-                      staticClass: "add-text-button j-center flex a-center",
+                      staticClass: "add-text-button j-center flex a-center mt3",
                       attrs: { id: "media-text-add-wrapper" },
                       on: {
                         click: function ($event) {
@@ -25308,16 +25315,18 @@ var render = function () {
       [
         _c("div", { attrs: { id: "area-wrapper" } }, [
           _c(
+            "p",
+            { staticClass: "w100", attrs: { id: "player-setting-title" } },
+            [_vm._v("動画プレイヤー")]
+          ),
+          _vm._v(" "),
+          _c(
             "div",
             {
               staticClass: "flex column a-start",
               attrs: { id: "yt-setting-area" },
             },
             [
-              _c("p", { attrs: { id: "player-setting-title" } }, [
-                _vm._v("動画プレイヤー設定"),
-              ]),
-              _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "yt-setting-wrapper w100 flex column a-start" },
@@ -25326,20 +25335,67 @@ var render = function () {
                     "div",
                     { staticClass: "setting-block about-yt-video-id" },
                     [
-                      _c("h3", { staticClass: "setting-title" }, [
-                        _vm._v("youtube動画のURL"),
-                      ]),
-                      _vm._v(" "),
                       _c("input", {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.isCreatedFrame,
+                            expression: "!isCreatedFrame",
+                          },
+                        ],
                         attrs: {
                           id: "youtube-url-input",
                           type: "text",
                           size: "30",
-                          placeholder: "youtube movie URL",
+                          placeholder: "youtube動画のURLを入力して下さい",
                         },
                         domProps: { value: _vm.youtubeUrl },
                         on: { input: _vm.updateVideoId },
                       }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "btn-wrapper flex mt3" }, [
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.isCreatedFrame,
+                                expression: "!isCreatedFrame",
+                              },
+                            ],
+                            staticClass: "setting button create-btn",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.createMovieFrame },
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-plus fa-lg plus-icon mr5",
+                            }),
+                            _vm._v("動画プレイヤー作成\n              "),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.isCreatedFrame,
+                                expression: "isCreatedFrame",
+                              },
+                            ],
+                            staticClass: "setting button delete-btn",
+                            attrs: { type: "submit" },
+                            on: { click: _vm.deleteMovieFrame },
+                          },
+                          [_vm._v("動画プレイヤー削除")]
+                        ),
+                      ]),
                     ]
                   ),
                   _vm._v(" "),
@@ -25347,205 +25403,185 @@ var render = function () {
                     "div",
                     {
                       staticClass:
-                        "setting-block about-create-del flex column a-start",
+                        "player-property-wrapper flex column w100 p5 m1",
                     },
                     [
-                      _c("h3", { staticClass: "setting-title" }, [
-                        _vm._v("再生プレイヤー"),
+                      _c("div", { staticClass: "about-size w100 mb20" }, [
+                        _c("h3", { staticClass: "setting-title" }, [
+                          _vm._v("プレイヤーのサイズ"),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex column" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "setting-width setting-row flex j-s-between a-end",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "flex a-center",
+                                  staticStyle: { opacity: "0.7" },
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-arrows-alt-h icon",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("横幅")]),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "flex a-end" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-minus fa-lg btns minus-btn mr10",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.stopPropagation()
+                                      return _vm.minusOneValue("width")
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-plus fa-lg btns plus-btn ml10",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.stopPropagation()
+                                      return _vm.plusOneValue("width")
+                                    },
+                                  },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "setting",
+                                attrs: {
+                                  id: "set-movie-frame-width",
+                                  type: "number",
+                                  placeholder: "横幅",
+                                },
+                                domProps: { value: _vm.getMediaMovie["width"] },
+                                on: {
+                                  input: function ($event) {
+                                    return _vm.updateWidth($event)
+                                  },
+                                },
+                              }),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "setting-height setting-row flex j-s-between a-end",
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "flex a-end",
+                                  staticStyle: { opacity: "0.7" },
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-arrows-alt-v icon",
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", [_vm._v("縦幅")]),
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "flex a-end" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-minus fa-lg btns minus-btn mr10",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.stopPropagation()
+                                      return _vm.minusOneValue("height")
+                                    },
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-plus fa-lg btns plus-btn ml10",
+                                  on: {
+                                    click: function ($event) {
+                                      $event.stopPropagation()
+                                      return _vm.plusOneValue("height")
+                                    },
+                                  },
+                                }),
+                              ]),
+                              _vm._v(" "),
+                              _c("input", {
+                                staticClass: "setting",
+                                attrs: {
+                                  id: "set-movie-frame-height",
+                                  type: "number",
+                                  placeholder: "縦幅",
+                                },
+                                domProps: {
+                                  value: _vm.getMediaMovie["height"],
+                                },
+                                on: {
+                                  input: function ($event) {
+                                    return _vm.updateHeight($event)
+                                  },
+                                },
+                              }),
+                            ]
+                          ),
+                        ]),
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "setting button create-btn",
-                            attrs: { type: "submit" },
-                            on: { click: _vm.createMovieFrame },
-                          },
-                          [_vm._v("作成")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "setting button delete-btn",
-                            attrs: { type: "submit" },
-                            on: { click: _vm.deleteMovieFrame },
-                          },
-                          [_vm._v("削除")]
-                        ),
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "setting-row about-loop flex j-s-between a-end w100 mb20",
+                        },
+                        [
+                          _c("h3", { staticClass: "setting-title m0" }, [
+                            _vm._v("ループ再生"),
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "flex a-end" }, [
+                            _c("span", { staticClass: "mr5 font-11 grey" }, [
+                              _vm._v(_vm._s(_vm.loopOnOff)),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "toggle-outer flex a-end",
+                                class: {
+                                  "is-loop-outer": _vm.getMediaMovie["isLoop"],
+                                },
+                                on: { click: _vm.changeLoopSetting },
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "toggle-inner",
+                                  class: {
+                                    "is-loop-inner":
+                                      _vm.getMediaMovie["isLoop"],
+                                  },
+                                }),
+                              ]
+                            ),
+                          ]),
+                        ]
+                      ),
                     ]
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "setting-block about-size w90" }, [
-                    _c("h3", { staticClass: "setting-title" }, [
-                      _vm._v("サイズ"),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex column" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "setting-width flex j-s-between a-center",
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "flex a-center",
-                              staticStyle: { opacity: "0.7" },
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-arrows-alt-h icon",
-                              }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("横幅")]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "flex a-center" }, [
-                            _c("i", {
-                              staticClass:
-                                "fas fa-minus fa-lg btns minus-btn mr10",
-                              on: {
-                                click: function ($event) {
-                                  $event.stopPropagation()
-                                  return _vm.minusOneValue("width")
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass:
-                                "fas fa-plus fa-lg btns plus-btn ml10",
-                              on: {
-                                click: function ($event) {
-                                  $event.stopPropagation()
-                                  return _vm.plusOneValue("width")
-                                },
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "setting",
-                            attrs: {
-                              id: "set-movie-frame-width",
-                              type: "number",
-                              placeholder: "横幅",
-                            },
-                            domProps: { value: _vm.getMediaMovie["width"] },
-                            on: {
-                              input: function ($event) {
-                                return _vm.updateWidth($event)
-                              },
-                            },
-                          }),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "setting-height flex j-s-between a-center",
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "flex a-center",
-                              staticStyle: { opacity: "0.7" },
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "fas fa-arrows-alt-v icon",
-                              }),
-                              _vm._v(" "),
-                              _c("span", [_vm._v("縦幅")]),
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "flex a-center" }, [
-                            _c("i", {
-                              staticClass:
-                                "fas fa-minus fa-lg btns minus-btn mr10",
-                              on: {
-                                click: function ($event) {
-                                  $event.stopPropagation()
-                                  return _vm.minusOneValue("height")
-                                },
-                              },
-                            }),
-                            _vm._v(" "),
-                            _c("i", {
-                              staticClass:
-                                "fas fa-plus fa-lg btns plus-btn ml10",
-                              on: {
-                                click: function ($event) {
-                                  $event.stopPropagation()
-                                  return _vm.plusOneValue("height")
-                                },
-                              },
-                            }),
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "setting",
-                            attrs: {
-                              id: "set-movie-frame-height",
-                              type: "number",
-                              placeholder: "縦幅",
-                            },
-                            domProps: { value: _vm.getMediaMovie["height"] },
-                            on: {
-                              input: function ($event) {
-                                return _vm.updateHeight($event)
-                              },
-                            },
-                          }),
-                        ]
-                      ),
-                    ]),
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "setting-block about-loop" }, [
-                    _c("h3", { staticClass: "setting-title" }, [
-                      _vm._v("ループ"),
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex a-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "toggle-outer flex a-center",
-                          class: {
-                            "is-loop-outer": _vm.getMediaMovie["isLoop"],
-                          },
-                          on: { click: _vm.changeLoopSetting },
-                        },
-                        [
-                          _c("div", {
-                            staticClass: "toggle-inner",
-                            class: {
-                              "is-loop-inner": _vm.getMediaMovie["isLoop"],
-                            },
-                          }),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticStyle: { "margin-left": "5px", opacity: "0.7" },
-                        },
-                        [_vm._v(_vm._s(_vm.loopOnOff))]
-                      ),
-                    ]),
-                  ]),
                 ]
               ),
             ]
