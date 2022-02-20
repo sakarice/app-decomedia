@@ -2905,7 +2905,6 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
 
 
 
@@ -12676,7 +12675,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: rgb(40,40,40);\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#media-size-wraper input[data-v-3e8c78f2] {\r\n    width: 60px;\n}\n.sub-sub-title[data-v-3e8c78f2] {\r\n    font-size: 15px;\r\n    color: lightgrey;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.clear-bg-img[data-v-3e8c78f2] {\r\n    color: blue;\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 5px;\r\n    /* font-weight: bold; */\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n.cursor-p[data-v-3e8c78f2]:hover {\r\n    cursor: pointer;\n}\n.btns[data-v-3e8c78f2] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-3e8c78f2]:hover { cursor: pointer;}\n.plus-btn[data-v-3e8c78f2] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-3e8c78f2] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.icon[data-v-3e8c78f2] {\r\n    width: 20px;\r\n    text-align:center;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin: 20px 0;\r\n    width: 95%;\r\n    overflow-y: scroll;\n}\n#media-contents-field-setting-title[data-v-3e8c78f2]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: rgb(40,40,40);\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#media-size-wraper input[data-v-3e8c78f2] {\r\n    width: 60px;\n}\n.setting-row[data-v-3e8c78f2] {\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\r\n    padding-bottom: 3px;\n}\n.sub-sub-title[data-v-3e8c78f2] {\r\n    font-size: 15px;\r\n    color: lightgrey;\n}\n.public-state-icon[data-v-3e8c78f2] {\r\n    margin-left: 10px;\r\n    opacity: 0.5;\n}\n.public-state-icon[data-v-3e8c78f2]:hover {\r\n    opacity: 1;\n}\n.open-icon[data-v-3e8c78f2] {\r\n    color: lawngreen;\n}\n.lock-icon[data-v-3e8c78f2] {\r\n    color: yellow;\n}\n.clear-bg-img[data-v-3e8c78f2] {\r\n    color: blue;\r\n    -webkit-text-decoration-line: underline;\r\n            text-decoration-line: underline;\r\n    height: 20px;\n}\n.message-label[data-v-3e8c78f2] {\r\n    font-size: 10px;\n}\n.setting-title[data-v-3e8c78f2] {\r\n    margin-bottom: 0;\r\n    font-size: 15px;\n}\n.img-config-input[data-v-3e8c78f2] {\r\n    margin-bottom : 5px;\n}\r\n\r\n    /* トグル */\n.toggle-outer[data-v-3e8c78f2]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-3e8c78f2] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.is-public-outer[data-v-3e8c78f2] {\r\n    background-color: lawngreen;\n}\n.is-public-inner[data-v-3e8c78f2] {\r\n    margin-left: 19px;\n}\n.cursor-p[data-v-3e8c78f2]:hover {\r\n    cursor: pointer;\n}\n.btns[data-v-3e8c78f2] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-3e8c78f2]:hover { cursor: pointer;}\n.plus-btn[data-v-3e8c78f2] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-3e8c78f2] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.icon[data-v-3e8c78f2] {\r\n    width: 20px;\r\n    text-align:center;\n}\n@media screen and (max-width:480px) {\n#area-wrapper[data-v-3e8c78f2] {\r\n    padding: 20px;\n}\n#media-contents-field-setting-area[data-v-3e8c78f2] {\r\n    margin : 0;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23770,7 +23769,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting mb30",
+                  staticClass: "setting-row flex j-s-between a-end w90 mb30",
                   attrs: { id: "media-bg-color-wraper" },
                 },
                 [
@@ -23778,7 +23777,7 @@ var render = function () {
                     _vm._v("背景色"),
                   ]),
                   _vm._v(" "),
-                  _c("label", { attrs: { for: "" } }, [
+                  _c("label", { staticClass: "m0", attrs: { for: "" } }, [
                     _c("input", {
                       attrs: { type: "color", id: "media-bg-color" },
                       domProps: { value: _vm.getMediaContentsField["color"] },
@@ -23791,8 +23790,6 @@ var render = function () {
                         },
                       },
                     }),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "font-12" }, [_vm._v("カラー")]),
                   ]),
                 ]
               ),
@@ -23813,15 +23810,12 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "setting-width mb15 flex j-s-between a-end",
+                          "setting-width setting-row mb15 flex j-s-between a-end",
                       },
                       [
                         _c(
                           "h4",
-                          {
-                            staticClass:
-                              "sub-sub-title mb0 w60px flex a-center",
-                          },
+                          { staticClass: "sub-sub-title mb0 w60px flex a-end" },
                           [
                             _c("i", {
                               staticClass: "fas fa-arrows-alt-h icon",
@@ -23833,7 +23827,7 @@ var render = function () {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "flex a-center" }, [
+                        _c("div", { staticClass: "flex a-end" }, [
                           _c("i", {
                             staticClass:
                               "fas fa-minus fa-lg btns minus-btn mr10",
@@ -23882,15 +23876,12 @@ var render = function () {
                       "div",
                       {
                         staticClass:
-                          "setting-height mb15 flex j-s-between a-end",
+                          "setting-height setting-row mb15 flex j-s-between a-end",
                       },
                       [
                         _c(
                           "h4",
-                          {
-                            staticClass:
-                              "sub-sub-title mb0 w60px flex a-center",
-                          },
+                          { staticClass: "sub-sub-title mb0 w60px flex a-end" },
                           [
                             _c("i", {
                               staticClass: "fas fa-arrows-alt-v icon",
@@ -23902,7 +23893,7 @@ var render = function () {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "flex a-center" }, [
+                        _c("div", { staticClass: "flex a-end" }, [
                           _c("i", {
                             staticClass:
                               "fas fa-minus fa-lg btns minus-btn mr10",
@@ -23953,7 +23944,7 @@ var render = function () {
               _c(
                 "div",
                 {
-                  staticClass: "setting mb20",
+                  staticClass: "setting-row flex j-s-between a-end w90 mb20",
                   attrs: { id: "media-bg-img-wraper" },
                 },
                 [
