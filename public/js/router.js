@@ -12767,7 +12767,7 @@ ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleFontList_css__WEBPACK_IMPORTED_MODULE_4__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_googleJapaneseFontList_css__WEBPACK_IMPORTED_MODULE_5__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#title-labal[data-v-35d10c14] {\r\n    margin: 5px 0 15px 0;\r\n    text-align: center;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0 0 30px 0;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    margin-top: 2px;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 20px 15px;\r\n    outline: 1px dotted dimgrey;\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 95%;\r\n    margin-top: 3px;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\r\n    margin-bottom: 3px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.darkgrey[data-v-35d10c14] { color: darkgrey;}\n@media screen and (max-width:480px) {\n#title-labal[data-v-35d10c14] {\r\n    margin: 0 0 15px 0;\n}\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 5px 10px;\n}\n#text-preview[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    width: 100%;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    width: auto;\r\n    margin-left: 5px;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    display: none;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\r\n    flex-direction: column-reverse;\r\n    align-items: center;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    padding: 0 5px;\r\n    background-color: rgb(30,140,210);\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    outline: none;\r\n    max-height: 195px;\r\n    margin-bottom: 20px;\n}\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#title-labal[data-v-35d10c14] {\r\n    margin: 5px 0 15px 0;\r\n    text-align: center;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    width: 95%;\n}\n#media-text-setting-title[data-v-35d10c14]{\r\n    font-weight: bold;\r\n    font-size: 14px;\r\n    margin: 10px 0 30px 0;\r\n    background-color: lightslategrey;\r\n    border-radius: 5px;\r\n    padding: 3px 10px;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0 0 30px 0;\r\n    width: 95%;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    border-radius: 3px;\r\n    padding: 5px 10px;\r\n    background-color: black;\n}\n.add-text-button[data-v-35d10c14]:hover {\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14]:focus{\r\n    border: none;\r\n    color: orange;\n}\n.add-text-button[data-v-35d10c14] {\r\n    border: none;\r\n    color: white;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    margin-top: 2px;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    width: 100%;\r\n    padding: 20px 15px;\r\n    outline: 1px dotted dimgrey;\r\n    overflow-y: scroll;\n}\n.setting[data-v-35d10c14] {\r\n    margin-bottom : 30px;\r\n    padding-bottom: 3px;\r\n    border-bottom: 0.5px solid rgba(200,200,200,0.2);\n}\n.sub-title[data-v-35d10c14] {\r\n    font-size: 13px;\r\n    color: lightgrey;\n}\n.sub-sub-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 13px;\r\n    color: darkgrey;\n}\n.preview-title[data-v-35d10c14] {\r\n    display: inline-block;\r\n    font-size: 12px;\r\n    color: grey;\n}\n#text-preview-wrapper[data-v-35d10c14] {\r\n    margin: 5px 0;\r\n    outline : 1.5px solid blue;\n}\n#text-preview[data-v-35d10c14] {\r\n    width: 100%;\r\n    font-size: 18px;\n}\n#text-preview[data-v-35d10c14]:hover {\r\n    outline: 1px solid lightgreen;\n}\n.setting-title[data-v-35d10c14] {\r\n    margin-bottom: 5px;\r\n    font-size: 15px;\n}\n#font-category[data-v-35d10c14], #font-style[data-v-35d10c14] {\r\n    width : 150px;\n}\r\n\r\n  /* トグル */\n.toggle-outer[data-v-35d10c14]{\r\n    width: 38px;\r\n    height: 17px;\r\n    padding: 2px;\r\n    border-radius: 20px;\r\n    background-color: grey;\r\n    transition-duration: 0.4s;\n}\n.toggle-inner[data-v-35d10c14] {\r\n    width: 15px;\r\n    height: 15px;\r\n    border-radius: 50%;\r\n    background-color: white;\n}\n.pos-abs[data-v-35d10c14] {\r\n    position: absolute;\n}\n.btns[data-v-35d10c14] {\r\n    border-radius: 50%;\r\n    padding: 5px 4px;\n}\n.btns[data-v-35d10c14]:hover { cursor: pointer;}\n.plus-btn[data-v-35d10c14] {\r\n    color: palevioletred;\r\n    border: 1.5px solid palevioletred;\n}\n.minus-btn[data-v-35d10c14] {\r\n    color: deepskyblue;\r\n    border: 1.5px solid deepskyblue;\n}\n.darkgrey[data-v-35d10c14] { color: darkgrey;}\n@media screen and (max-width:480px) {\n#title-labal[data-v-35d10c14] {\r\n    margin: 0 0 15px 0;\n}\n#area-wrapper[data-v-35d10c14] {\r\n    padding: 5px 10px;\n}\n#text-preview[data-v-35d10c14] {\r\n    font-size: 15px;\n}\n#media-text-add-wrapper[data-v-35d10c14] {\r\n    margin-left: 5px;\n}\n.add-btn-label[data-v-35d10c14] {\r\n    display: none;\n}\n#media-text-setting-area[data-v-35d10c14] {\r\n    margin : 0;\r\n    flex-direction: column-reverse;\r\n    align-items: center;\n}\n#preview-area[data-v-35d10c14] {\r\n    margin: 0;\r\n    /* background-color: rgb(30,140,210); */\r\n    flex-direction: row;\r\n    align-items: center;\n}\n.setting-wrapper[data-v-35d10c14] {\r\n    outline: none;\r\n    max-height: 195px;\r\n    margin-bottom: 20px;\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24906,34 +24906,45 @@ var render = function () {
                   attrs: { id: "preview-area" },
                 },
                 [
-                  _c("div", { attrs: { id: "text-preview-wrapper" } }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.getTextData["text"],
-                          expression: "getTextData['text']",
+                  _c(
+                    "div",
+                    {
+                      staticClass: "w100",
+                      attrs: { id: "text-preview-wrapper" },
+                    },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.getTextData["text"],
+                            expression: "getTextData['text']",
+                          },
+                        ],
+                        staticClass: "m0",
+                        style: _vm.previewStyle,
+                        attrs: {
+                          id: "text-preview",
+                          type: "text",
+                          placeholder: "テキストを入力してください",
                         },
-                      ],
-                      staticClass: "m0",
-                      style: _vm.previewStyle,
-                      attrs: {
-                        id: "text-preview",
-                        type: "text",
-                        placeholder: "テキストを入力してください",
-                      },
-                      domProps: { value: _vm.getTextData["text"] },
-                      on: {
-                        input: function ($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.getTextData, "text", $event.target.value)
+                        domProps: { value: _vm.getTextData["text"] },
+                        on: {
+                          input: function ($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.getTextData,
+                              "text",
+                              $event.target.value
+                            )
+                          },
                         },
-                      },
-                    }),
-                  ]),
+                      }),
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "button",

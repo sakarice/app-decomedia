@@ -10,7 +10,7 @@
 
           <!-- テキストプレビュー&追加ボタン -->
           <div id="preview-area" class="flex column a-start w100">
-            <div id="text-preview-wrapper" class="">
+            <div id="text-preview-wrapper" class="w100">
               <input
               id="text-preview" type="text" class="m0" placeholder="テキストを入力してください"
               :style="previewStyle" v-model="getTextData['text']">
@@ -191,10 +191,10 @@ export default {
 
   #preview-area {
     margin: 0 0 30px 0;
+    width: 95%;
   }
 
   #media-text-add-wrapper {
-    width: 95%;
     border-radius: 3px;
     padding: 5px 10px;
     background-color: black;
@@ -246,14 +246,13 @@ export default {
 
 
   #text-preview-wrapper {
-    width: 95%;
-    margin-top: 3px;
+    margin: 5px 0;
+    outline : 1.5px solid blue;
   }
 
   #text-preview {
     width: 100%;
     font-size: 18px;
-    margin-bottom: 3px;
   }
 
   #text-preview:hover {
@@ -322,12 +321,7 @@ export default {
     font-size: 15px;
   }
 
-  #text-preview-wrapper {
-    width: 100%;
-  }
-
   #media-text-add-wrapper {
-    width: auto;
     margin-left: 5px;
   }
 
@@ -343,8 +337,7 @@ export default {
 
   #preview-area {
     margin: 0;
-    padding: 0 5px;
-    background-color: rgb(30,140,210);
+    /* background-color: rgb(30,140,210); */
     flex-direction: row;
     align-items: center;
   }
