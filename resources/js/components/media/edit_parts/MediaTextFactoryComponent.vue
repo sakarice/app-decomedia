@@ -2,6 +2,9 @@
   <transition :name="transitionName">
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
+        <!-- 項目名 -->
+        <p id="title-labal" class="title-labal font-11 darkgrey w90">テキスト作成</p>
+
         <div id="media-text-setting-area" class="flex column a-start">
           <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
 
@@ -167,8 +170,13 @@ export default {
 @import "/resources/css/googleFontList.css";
 @import "/resources/css/googleJapaneseFontList.css";
 
+  #title-labal {
+    margin: 5px 0 10px 0;
+    text-align: center;
+  }
+
   #media-text-setting-area {
-    margin: 20px 0;
+    margin: 0;
     width: 95%;
   }
 
@@ -240,7 +248,7 @@ export default {
 
   #text-preview-wrapper {
     width: 95%;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 3px;
   }
 
@@ -298,12 +306,18 @@ export default {
     border: 1.5px solid deepskyblue;
   }
 
+  .darkgrey { color: darkgrey;}
+
 
 
 @media screen and (max-width:480px) {
+
+  #title-labal {
+    margin: 0 0 5px 0;
+  }
   
   #area-wrapper {
-    padding: 10px;
+    padding: 5px 10px;
   }
 
   #text-preview-wrapper {
@@ -326,8 +340,8 @@ export default {
   }
 
   .setting-wrapper {
-    max-height: 200px;
-    margin-bottom: 10px;
+    max-height: 190px;
+    margin-bottom: 5px;
   }
 
 }
