@@ -245,11 +245,17 @@ p {
   margin: 20px 0 0 0;
 }
 
+.media-watch-warning-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
 .media-watch-warning {
   color:red;
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 20px;
 }
 
 .media-preview-wrapper {
@@ -309,6 +315,10 @@ p {
 
   .section-title {
     margin: 20px;
+  }
+
+  .media-watch-warning-wrapper {
+    flex-direction: column;
   }
   
 
