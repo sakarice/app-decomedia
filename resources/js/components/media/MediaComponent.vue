@@ -189,7 +189,7 @@
   import MediaContentsField from './media_contents/MediaContentsField.vue';
   import judgeDeviceType from '../common/JudgeDeviceType.vue';
   import MediaImgMng from './media_contents/objects/img/MediaImgMngComponent.vue';
-  import MediaAudio from './media_contents/MediaAudioComponent.vue';
+  import MediaAudio from './media_contents/audio/MediaAudioComponent.vue';
   import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
   import MediaSetting from './edit_parts/MediaSettingComponent.vue';
   import MediaFigureMng from './media_contents/objects/figure/MediaFigureMngComponent.vue';

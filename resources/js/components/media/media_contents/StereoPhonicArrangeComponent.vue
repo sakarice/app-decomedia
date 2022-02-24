@@ -3,9 +3,18 @@
     <div id="stereo-phonic-arrange-field" class="flex column"
     :style="fieldSize">
 
-      <!-- 閉じるボタン -->
-      <div class="hide-field-icon-wrapper flex a-center p5">
-        <i class="fas fa-times fa-2x hide-field-icon p10" @click="hideField"></i>
+      <div class="upper-menu pos-r flex j-center a-center p5">
+        <!-- 閉じるボタン -->
+        <i class="fas fa-times fa-2x hide-field-icon pos-a p10" @click="hideField"></i>
+        <!-- 立体音響設定トグル -->
+        <div class="flex a-center">
+          <switch-stereo-monaural-all-toggle></switch-stereo-monaural-all-toggle>
+        </div>
+      </div>
+
+      <!-- 設定画面表示切替ボタン -->
+      <div id="change-disp-setting-wrapper">
+        <i @click="changeDispSetting()" class="fas fa-cog fa-2x change-disp-setting"></i>
       </div>
 
       <!-- アイコン配置による定位設定エリア -->
@@ -29,17 +38,34 @@
         </div>
       </div>
 
+      <!-- 全オーディオのコントローラー -->
+      <!-- オーディオ再生・停止 -->
+      <div v-show="isEditMode" class="all-audio-controll-wrapper">
+        <play-all-audio></play-all-audio>
+        <pause-all-audio></pause-all-audio>
+        <change-master-volume></change-master-volume>
+      </div>
+
+
     </div>
   </div>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
-  import audioObject from './AudioObjectComponent.vue'
+  import audioObject from './audio/AudioObjectComponent.vue';
+  import switchStereoMonauralAllToggle from './audio/SwitchStereoMonauralAllToggleComponent.vue';
+  import playAllAudio from './audio/PlayAllAudioComponent.vue';
+  import pauseAllAudio from './audio/PauseAllAudioComponent.vue';
+  import changeMasterVolume from './audio/ChangeMasterVolumeComponent.vue';
 
   export default {
     components: {
       audioObject,
+      switchStereoMonauralAllToggle,
+      playAllAudio,
+      pauseAllAudio,
+      changeMasterVolume,
     },
     props : [
     ],
@@ -53,13 +79,17 @@
     },
     computed : {
       ...mapGetters('media', ['getMediaId']),
+      ...mapGetters('media', ['getMode']),
       ...mapGetters('mediaContentsField', ['getMediaContentsField']),
       ...mapGetters('mediaAudios', ['getIsInitializedAudios']),
       ...mapGetters('mediaAudios', ['getMediaAudios']),
+      isEditMode:function(){
+        return (this.getMode==1 || this.getMode==2) ? true : false;
+      },
       fieldSize:function(){
         const style = {
-          'width' : this.getMediaContentsField['width'] + "px",
-          'height' : this.getMediaContentsField['height'] + "px",
+          'width' : this.shorter + "px",
+          'height' : this.shorter + 50 + "px",
         }
         return style;
       },
@@ -103,6 +133,10 @@
         console.log('hide stereo arrange field');
         this.isShowField = false;
       },
+      changeDispSetting(){
+        const event = new CustomEvent('changeDispSetting' );
+        document.body.dispatchEvent(event);
+      },
       getCenterPosition(){
         this.center_x = window.innerWidth/2;
         this.center_y = window.innerHeight/2 + 70;
@@ -142,17 +176,37 @@
 }
 
 #stereo-phonic-arrange-field{
+  position: relative;
   background-color: rgba(50,50,50,0.8);
   border-radius: 5px;
 }
 
-.hide-field-icon-wrapper {
+.hide-field-icon {
   color: red;
+  top:10px;
+  left: 10px;
 }
 
 .hide-field-icon:hover {
   cursor: pointer;
 }
+
+#change-disp-setting-wrapper {
+  position: absolute;
+  bottom: 50px;
+  right: 10px;
+  z-index: 12;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.5s;
+}
+.change-disp-setting { color: white;}
 
 .arrange-field {
   outline: 3px solid white;
@@ -184,5 +238,19 @@
 .audio-icon-wrapper {
   outline: 1px solid black;
 }
+
+/* 全オーディオの再生停止コントローラー */
+.all-audio-controll-wrapper {
+  padding-bottom: 5px;
+  padding: 2px 0;
+  width: 100%;
+  background-color: black;
+  border-bottom-left-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+}
+
+
 
 </style>

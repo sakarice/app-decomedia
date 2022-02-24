@@ -101,7 +101,7 @@ import MediaHeader from './header/MediaHeaderComponent.vue';
 import ImgSelect from './edit_parts/ImgSelectComponent.vue';
 import AudioSelect from './edit_parts/AudioSelectComponent.vue';
 import MovieSetting from './edit_parts/MovieSettingComponent.vue';
-import MediaAudio from './media_contents/MediaAudioComponent.vue';
+import MediaAudio from './media_contents/audio/MediaAudioComponent.vue';
 import MediaSetting from './edit_parts/MediaSettingComponent.vue';
 import MediaMovie from './media_contents/objects/movie/MediaMovieComponent.vue';
 import Overlay from '../common/OverlayComponent.vue'

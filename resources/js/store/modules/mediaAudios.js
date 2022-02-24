@@ -17,13 +17,19 @@ const mediaAudios = {
     //   'volume' : 0.5,
     //   'isLoop': false,
     //   'duration' : 0,
+    //   'isPlay' : false,
     // },
+    masterVolume : 0.5,
     targetObjectIndex : 0,
   },
   getters : {
     getIsInitializedAudios : function(state){ return state.isInitialized; },
     getMediaAudios : function(state){ return state.mediaAudios; },
     getMediaAudio : function(state){ return state.mediaAudios[state.targetObjectIndex]},
+    getOneAudio : state=>(index)=>{
+      return state.mediaAudios[index];
+    },
+    getMasterVolume : function(state){ return state.masterVolume; },
   },
   mutations : {
     deleteMediaAudiosObjectItem(state, payload){
@@ -35,6 +41,7 @@ const mediaAudios = {
     updateIsInitializedAudios(state,payload){state.isInitialized = payload},
     updateMediaAudiosObjectItem(state, {index, key, value}){state.mediaAudios[index][key] = value;},
     setTargetObjectIndex(state, payload){ state.targetObjectIndex = payload },
+    updateMasterVolume(state,payload){state.masterVolume = payload},
   },
   actions : {}
 
