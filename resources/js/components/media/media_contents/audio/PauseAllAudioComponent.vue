@@ -41,13 +41,11 @@
   }
   .all-audio-controller:hover {
     background-color: rgb(50,50,50);
+    cursor: pointer;
   }
 
   #pause-all-icon {
     color: lightgrey;
-  }
-  #pause-all-icon:hover {
-    cursor: pointer;
   }
   
 </style>

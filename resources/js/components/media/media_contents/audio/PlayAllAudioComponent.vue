@@ -42,13 +42,11 @@
   }
   .all-audio-controller:hover {
     background-color: rgb(50,50,50);
+    cursor: pointer;
   }
 
   #play-all-icon {
     color: green;
-  }
-  #play-all-icon:hover {
-    cursor: pointer;
   }
   
 </style>

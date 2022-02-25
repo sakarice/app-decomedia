@@ -81,8 +81,8 @@
         panner.positionZ.value = this.panner_z;
         this.panner = panner;
       },
-      updatePannerPositionX(){ this.panner.positionX.value = this.panner_x;},
-      updatePannerPositionZ(){ this.panner.positionZ.value = this.panner_z;},
+      // updatePannerPositionX(){ this.panner.positionX.value = this.panner_x;},
+      // updatePannerPositionZ(){ this.panner.positionZ.value = this.panner_z;},
       panningSwitch(){
         if(this.panningFlag){
           this.panningOn();
@@ -166,8 +166,8 @@
       panningModel : function(val){
         this.panner.panningModel = val;
       },
-      panner_x : function(){ this.updatePannerPositionX();},
-      panner_z : function(){ this.updatePannerPositionZ();},
+      // panner_x : function(){ this.updatePannerPositionX();},
+      // panner_z : function(){ this.updatePannerPositionZ();},
     },
 
   }

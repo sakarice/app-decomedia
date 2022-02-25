@@ -1,6 +1,6 @@
 <template>
   <div :id="audio_obj_with_index" class="audio-obj pos-a border-r-50per flex column a-center"
-  :style="objTranslate" @mousedown.stop="calcDiff($event)" @touchstart.stop="calcDiff($event)">
+  :style="objTranslate" @mousedown.stop="calcDiff($event), judgeDelete($event)" @touchstart.stop="calcDiff($event), judgeDelete($event)">
     <!-- オーディオのアイコン -->
     <div class="audio-icon-wrapper border-r-50per">
       <img :src="audio['thumbnail_url']" class="w50px h50px border-r-50per" alt="?">
@@ -56,10 +56,10 @@
     methods : {
       ...mapMutations('mediaAudios', ['setTargetObjectIndex']),
       ...mapMutations('mediaAudios', ['updateMediaAudiosObjectItem']),
-      // getOneAudio(){
-      //   this.setTargetObjectIndex(this.index);
-      //   this.audio = Object.assign({},this.getMediaAudio);
-      // },
+      initAudioData(){
+        this.audio = Object.assign({},this.getOneAudio(this.index));
+        this.initDiff();
+      },
       play(){
         this.updateMediaAudiosObjectItem({index:this.index, key:'isPlay', value:true});
       },
@@ -71,13 +71,14 @@
         this.diff_y = this.audio['positionZ'] ? this.audio['positionZ']/5*this.radius : 0;
       },
       calcDiff(e){
-        setDistanceLimit(this.radius);
+        setDistanceLimit(this.radius * 1.42); // 右上のゴミ箱アイコンまで届くように正方形の範囲に
         calcDiffStart(e, this.own_elem, this.center_x, this.center_y);
-        this.own_elem.addEventListener('calcDiffBetweenAandB',this.updateDiffAndPanner, false);
+        this.own_elem.addEventListener('calcDiffBetweenAandB',this.moveActions, false);
         this.own_elem.addEventListener('calcDiffFinish',this.removeCalcDiffEvent, false);
       },
-      updateDiffAndPanner(event){
+      moveActions(event){
         this.updateDiff(event);
+        this.judgeDelete();
         this.updatePanner();
       },
       updateDiff(event){
@@ -89,19 +90,30 @@
         this.updateMediaAudiosObjectItem({index:this.index, key:"positionZ", value:this.panner_z});
       },
       removeCalcDiffEvent(){
-        this.own_elem.removeEventListener('calcDiffBetweenAandB',this.updateDiffAndPanner, false);
+        this.own_elem.removeEventListener('calcDiffBetweenAandB',this.moveActions, false);
         this.own_elem.removeEventListener('calcDiffFinish',this.removeCalcDiffEvent, false);
+      },
+      judgeDelete(){
+        this.$emit('moveObject', this.index, ...this.getOwnCenterAndRadius());
+      },
+      getOwnCenterAndRadius(){
+        const rect = this.own_elem.getBoundingClientRect();
+        const radius = Math.floor(rect.width) / 2;
+        const center_x = Math.floor(rect.left) + radius;
+        const center_y = Math.floor(rect.top) + radius;
+        return [center_x, center_y, radius];
       }
+
     },
-    watch : { 
+    watch : {
     },
     created(){
-      // this.getOneAudio();
-      this.audio = Object.assign({},this.getOneAudio(this.index));
+      this.initAudioData();
     },
     mounted(){
-      this.initDiff();
+      // this.initDiff();
       this.own_elem = document.getElementById(this.audio_obj_with_index);
+      document.body.addEventListener('deleteMediaAudio', this.initAudioData, false);
     }
 
   }

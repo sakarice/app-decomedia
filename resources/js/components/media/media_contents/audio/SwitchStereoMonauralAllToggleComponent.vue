@@ -41,17 +41,21 @@
 
 #toggle-area > .stereo-toggle-label {
   color: white;
-  margin: 0 7px 0 0;
+  font-size: 12px;
+  margin: 3px 12px 0 0;
 }
 
 .toggle-outer {
   width: 37px;
   height: 20px;
-  padding: 0 1px;
   border-radius: 15px;
   outline: 1px solid white;
   display: flex;
+  justify-content: center;
   align-items: center;
+  padding: 0 18px 0 0;
+
+  transition: all 0.2s;
 }
 
 .toggle-inner {
@@ -63,7 +67,7 @@
 }
 
 .j-end {
-  justify-content: end;
+  padding: 0 0 0 18px;
 }
 .bg-lime { background-color: lime;}
 

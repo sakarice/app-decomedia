@@ -326,7 +326,7 @@
 <style scoped>
 
   .disp-front {
-    z-index: 11;
+    z-index: 12;
   }
 
   /* 全オーディオの再生停止コントローラー */

@@ -37,6 +37,7 @@
   }
   .all-audio-controller:hover {
     background-color: rgb(50,50,50);
+    cursor: pointer;
   }
 
   .audio-vol-icon {

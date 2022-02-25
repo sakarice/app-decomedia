@@ -1,11 +1,10 @@
 <template>
   <div id="stereo-phonic-arrange-field-wrapper" v-show="isShowField">
-    <div id="stereo-phonic-arrange-field" class="flex column"
-    :style="fieldSize">
+    <div id="stereo-phonic-arrange-field" class="flex column">
 
-      <div class="upper-menu pos-r flex j-center a-center p5">
+      <div class="upper-menu pos-r flex j-center a-center p10">
         <!-- 閉じるボタン -->
-        <i class="fas fa-times fa-2x hide-field-icon pos-a p10" @click="hideField"></i>
+        <i class="fas fa-times fa-2x hide-field-icon" @click="hideField"></i>
         <!-- 立体音響設定トグル -->
         <div class="flex a-center">
           <switch-stereo-monaural-all-toggle></switch-stereo-monaural-all-toggle>
@@ -18,25 +17,7 @@
       </div>
 
       <!-- アイコン配置による定位設定エリア -->
-      <div class="arrange-field-area w100 h100 flex a-center j-center">
-        <div class="arrange-field border-r-50per flex a-center j-center"
-        :style="arrangeAreaSize">
-
-        <div></div>
-          <div class="arrange-object-wrapper pos-r w100 h100 border-r-50per">
-            <!-- 中心点 -->
-            <!-- <div class="center-point pos-a w10px h10px border-r-50per"></div> -->
-            <img src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B35.svg" alt=""
-            class="center-point pos-a w30px h30px border-r-50per">
-
-            <!-- オーディオのアイコン -->
-            <audio-object v-for="(audio, index) in getMediaAudios" :key="index"
-            :index="index" :center_x="center_x" :center_y="center_y" :radius="radius">
-            </audio-object>
-          </div>
-
-        </div>
-      </div>
+      <stereo-phonic-arrange-field></stereo-phonic-arrange-field>
 
       <!-- 全オーディオのコントローラー -->
       <!-- オーディオ再生・停止 -->
@@ -54,6 +35,7 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import audioObject from './audio/AudioObjectComponent.vue';
+  import stereoPhonicArrangeField from './StereoPhonicArrangeFieldComponent.vue';
   import switchStereoMonauralAllToggle from './audio/SwitchStereoMonauralAllToggleComponent.vue';
   import playAllAudio from './audio/PlayAllAudioComponent.vue';
   import pauseAllAudio from './audio/PauseAllAudioComponent.vue';
@@ -62,6 +44,7 @@
   export default {
     components: {
       audioObject,
+      stereoPhonicArrangeField,
       switchStereoMonauralAllToggle,
       playAllAudio,
       pauseAllAudio,
@@ -98,7 +81,7 @@
         const height = this.getMediaContentsField['height'];
         return width < height ? width : height;
       },
-      radius:function(){ return (this.shorter - 100)/2; },
+      radius:function(){ return (this.shorter - 50)/2; },
       arrangeAreaSize:function(){
         const style = {
           'width' : this.radius*2 + "px",
@@ -163,13 +146,11 @@
 @import "/resources/css/FrequentlyUseStyle.css";
 
 #stereo-phonic-arrange-field-wrapper{
+  z-index: 11;
   position: fixed;
   top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  margin-top: 70px;
-  margin-bottom: 10px;
+  bottom: 5px;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -177,18 +158,22 @@
 
 #stereo-phonic-arrange-field{
   position: relative;
-  background-color: rgba(50,50,50,0.8);
+  background-color: rgba(0,30,50,0.9);
   border-radius: 5px;
 }
 
 .hide-field-icon {
-  color: red;
-  top:10px;
-  left: 10px;
+  color: rgb(150,0,0);
+  position: absolute;
+  top : 0;
+  left : 0;
+  padding: 4px 8px;
+  border-top-left-radius: 5px;
 }
 
 .hide-field-icon:hover {
   cursor: pointer;
+  background-color: rgba(0,0,0,0.3);
 }
 
 #change-disp-setting-wrapper {
@@ -208,8 +193,23 @@
 }
 .change-disp-setting { color: white;}
 
+.arrange-field-area {
+  padding: 30px;
+}
+
 .arrange-field {
-  outline: 3px solid white;
+  outline:1px solid rgba(255,255,255,0.3);
+}
+
+.arrange-field::before {
+  content: "";
+  position: absolute;
+  top : 15%;
+  bottom: 15%;
+  left: 15%;
+  right: 15%;
+  outline:1px solid rgba(255,255,255,0.5);
+  border-radius: 50%;
 }
 
 .center-point {
@@ -226,9 +226,21 @@
   bottom: 30%;
   left: 30%;
   right: 30%;
-  outline: 2px solid greenyellow;
+  outline:1px solid rgba(255,255,255,0.7);
   border-radius: 50%;
 }
+
+.arrange-object-wrapper::after {
+  content: "";
+  position: absolute;
+  top : 50%;
+  bottom: 50%;
+  left: 50%;
+  right: 50%;
+  outline: 1px solid white;
+  border-radius: 50%;
+}
+
 
 .arrange-obj {
   top: calc(50% - 20px);
@@ -241,11 +253,10 @@
 
 /* 全オーディオの再生停止コントローラー */
 .all-audio-controll-wrapper {
-  padding-bottom: 5px;
   padding: 2px 0;
   width: 100%;
-  background-color: black;
-  border-bottom-left-radius: 5px;
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 2px;
 
   display: flex;
   justify-content: center;
