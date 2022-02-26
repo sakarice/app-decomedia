@@ -47,19 +47,20 @@
 
 .toggle-outer {
   width: 37px;
-  height: 15px;
+  height: 13px;
   border-radius: 15px;
   background-color: darkslategray;
   outline: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 18px 0 0;
+  padding: 0 21px 0 0;
 
   transition: all 0.2s;
 }
 
 .toggle-inner {
+  z-index: 1;
   width: 16px;
   height: 16px;
   /* background-color: lime; */
@@ -68,7 +69,7 @@
 }
 
 .j-end {
-  padding: 0 0 0 18px;
+  padding: 0 0 0 21px;
 }
 .bg-lime { background-color: lime;}
 

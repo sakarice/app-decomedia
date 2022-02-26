@@ -7,6 +7,13 @@
       <span v-if="isEditMode" class="media-audio-num">{{mediaAudioNum}}/{{maxAudioNum}}</span>
     </div>
 
+    <div v-show="isEditMode" class="change-disp-setting-wrapper" @click="hideAudio">
+      <!-- 閉じるボタン -->
+      <div class="hide-field-icon-wrapper flex a-center p5">
+        <i class="fas fa-times fa-2x hide-field-icon"></i>
+      </div>
+    </div>
+
       <!-- 選択したオーディオ一覧 -->
     <div id="media-audio-frame">
       <!-- オーディオのサムネと各種アイコン -->
@@ -22,16 +29,6 @@
             <div class="audio-player-wrapper">
               <img class="media-audio-thumbnail" :src="mediaAudio['thumbnail_url']">
             </div>
-
-            <!-- <monaural-audio
-            :mediaAudioIndex="index"
-            :ref="'monauralAudio'">
-            </monaural-audio>
-
-            <stereo-audio
-            :mediaAudioIndex="index"
-            :ref="'stereoAudio'">
-            </stereo-audio> -->
 
             <span class="audio-index">{{index+1}}</span>
           </div>
@@ -95,14 +92,6 @@
       </ul>
     </div>
 
-    <div v-show="isEditMode" class="all-audio-controll-wrapper">
-      <div class="all-audio-controller change-disp-setting-wrapper" @click="hideAudio">
-        <!-- 閉じるボタン -->
-        <div class="hide-field-icon-wrapper flex a-center p5">
-          <i class="fas fa-times fa-2x hide-field-icon p10"></i>
-        </div>
-      </div>
-    </div>
 
 
   </div>
@@ -258,16 +247,15 @@
   }
 
   /* 全オーディオの再生停止コントローラー */
-  .all-audio-controll-wrapper {
+  .change-disp-setting-wrapper {
     padding-bottom: 5px;
     padding: 2px 0;
     width: 100%;
-    /* height: 60px; */
     background-color: black;
     border-bottom-left-radius: 5px;
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   .size-Adjust-box {
@@ -281,18 +269,17 @@
     opacity: 1;
   }
 
-  .all-audio-controller {
+  .hide-field-icon-wrapper {
     color: ghostwhite;
-    min-width: 70px;
-    margin: 0 5px;
-    padding: 7px;
+    min-width: 50px;
+    padding: 5px;
     font-size: 11px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
-  .all-audio-controller:hover {
+  .hide-field-icon-wrapper:hover {
     background-color: rgb(50,50,50);
   }
 
@@ -307,7 +294,8 @@
   /* audio */
   #media-audio-wrapper {
     position: absolute;
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgba(0,0,0,1);
+    z-index: 13;
 
     width: 240px;
     border-top-left-radius: 5px;
@@ -639,7 +627,7 @@
     margin: 15px 0 0 10px;
   }
 
-  .all-audio-controll-wrapper {
+  .change-disp-setting-wrapper {
     overflow-x: scroll;
   }
 

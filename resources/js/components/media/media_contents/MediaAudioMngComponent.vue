@@ -178,7 +178,7 @@
 
 #stereo-phonic-arrange-field{
   position: relative;
-  background-color: rgba(0,30,50,0.9);
+  background-color: rgba(0,30,50,1);
   border-radius: 5px;
 }
 
@@ -200,6 +200,8 @@
   position: absolute;
   bottom: 50px;
   right: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   z-index: 12;
   height: 60px;
   width: 60px;
