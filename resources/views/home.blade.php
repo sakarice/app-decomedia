@@ -95,7 +95,10 @@
             <span style="margin:0 5px">最近作られたコンテンツ(メディア)を視聴</span>
             <i class="fas fa-headphones-alt headphone-icon"></i>
         </h3><br>
-        <span class="media-watch-warning">※メディアに移動すると音楽・動画が再生されます</span>
+        <p class="media-watch-warning-wrapper">
+            <span class="media-watch-warning">※メディアに移動すると</span>
+            <span class="media-watch-warning">音楽・動画が再生されます</span>
+        </p>
         {{-- <span class="recently-posted-supplement-info">
             (サムネイルをタップすると再生画面に移動します)
         </span> --}}

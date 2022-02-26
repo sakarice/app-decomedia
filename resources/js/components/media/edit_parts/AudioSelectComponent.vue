@@ -260,6 +260,8 @@ export default {
       audio['isLoop'] = false;
       audio['duration'] = 0;
       audio['volume'] = 0.5;
+      audio['isPlay'] = false;
+      audio['currentTime'] = 0;
 
       // 立体音響用のデフォルト設定を追加する
       const stereoSetting = this.getStereoPhonicArrangeDefault;

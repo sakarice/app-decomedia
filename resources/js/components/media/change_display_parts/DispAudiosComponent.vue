@@ -1,7 +1,9 @@
 <template>
   <div id="change-disp-audio-wrapper" v-show="isShowAudios">
-    <i @click="changeDispAudioState()" class="fas fa-headphones-alt fa-2x change-disp-audio" v-show="!isShowAudio"></i>
-    <i @click="changeDispAudioState()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i>
+    <!-- <i @click="changeDispSterePhonicArrangeField()" class="fas fa-headphones-alt fa-2x change-disp-audio" v-show="!isShowAudio"></i>
+    <i @click="changeDispSterePhonicArrangeField()" class="fas fa-times fa-2x change-disp-audio" v-show="isShowAudio"></i> -->
+    <img class="change-disp-audio" style="width:40px" src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/sround1.svg" alt=""
+     @click="changeDispSterePhonicArrangeField()">
     <span class="audio-num">{{mediaAudioNum}}</span>
   </div>
 </template>
@@ -39,9 +41,13 @@
       },
     },
     methods : {
-      changeDispAudioState(){
-        this.isShowAudio = !(this.isShowAudio);
-        const event = new CustomEvent('changeDispAudioState', {detail:this.isShowAudio} );
+      // changeDispAudioState(){
+      //   this.isShowAudio = !(this.isShowAudio);
+      //   const event = new CustomEvent('changeDispAudioState', {detail:this.isShowAudio} );
+      //   document.body.dispatchEvent(event);
+      // },
+      changeDispSterePhonicArrangeField(){
+        const event = new CustomEvent('changeDispStereoPhonicArrangeField');
         document.body.dispatchEvent(event);
       },
       hideAudios(){
@@ -90,10 +96,9 @@
   }
 
 
-  .change-disp-audio {
-    /* color: lightgrey; */
+  /* .change-disp-audio {
     color: yellow;
-  }
+  } */
 
   .change-disp-audio {
     cursor: pointer;

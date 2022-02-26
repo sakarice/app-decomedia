@@ -3,7 +3,7 @@ const stereoPhonicArrangeDefault = {
 
   state : {
     stereoPhonicArrangeDefault : {
-      panningFlag : false,
+      panningFlag : true,
       panningModel : "equalpower",
       positionX : 0,
       positionY : 0,
