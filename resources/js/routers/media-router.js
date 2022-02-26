@@ -42,7 +42,7 @@ import ImgProperty from '../components/media/media_contents/objects/img/ImgPrope
 import TextProperty from '../components/media/media_contents/objects/text/TextPropertyComponent.vue';
 
 // オーディオの立体音響の定位設定
-import StereoPhonicArrange from '../components/media/media_contents/StereoPhonicArrangeComponent.vue';
+import MediaAudioMng from '../components/media/media_contents/MediaAudioMngComponent.vue';
 
 
 // 編集中のローディング表示コンポーネント
@@ -82,7 +82,7 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         textProperty : TextProperty,
-        stereoPhonicArrange : StereoPhonicArrange,
+        mediaAudioMng : MediaAudioMng,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,
@@ -114,13 +114,12 @@ export default{
         figureUpdate : FigureUpdate,
         imgProperty : ImgProperty,
         textProperty : TextProperty,
-        stereoPhonicArrange : StereoPhonicArrange,
+        mediaAudioMng : MediaAudioMng,
         objectSelectMng : ObjectSelectMng,
         objectRotate : ObjectRotate,
         domResize : DomResize,
         overlay : Overlay,
         loading : Loading,
-        
       },
     },
     {

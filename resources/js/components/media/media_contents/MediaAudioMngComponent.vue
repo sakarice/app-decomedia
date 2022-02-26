@@ -19,6 +19,17 @@
       <!-- アイコン配置による定位設定エリア -->
       <stereo-phonic-arrange-field></stereo-phonic-arrange-field>
 
+      <li :id="index" v-for="(mediaAudio, index) in getMediaAudios" :key="index" style="list-style:none">
+        <monaural-audio :mediaAudioIndex="index">
+          <template #default></template>
+        </monaural-audio>
+
+        <stereo-audio :mediaAudioIndex="index">
+          <template #default></template>
+        </stereo-audio>
+      </li>
+
+
       <!-- 全オーディオのコントローラー -->
       <!-- オーディオ再生・停止 -->
       <div v-show="isEditMode" class="all-audio-controll-wrapper">
@@ -35,6 +46,8 @@
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import audioObject from './audio/AudioObjectComponent.vue';
+  import MonauralAudio from './audio/MonauralAudioComponent.vue';
+  import StereoAudio from './audio/StereoAudioComponent.vue';
   import stereoPhonicArrangeField from './StereoPhonicArrangeFieldComponent.vue';
   import switchStereoMonauralAllToggle from './audio/SwitchStereoMonauralAllToggleComponent.vue';
   import playAllAudio from './audio/PlayAllAudioComponent.vue';
@@ -44,6 +57,8 @@
   export default {
     components: {
       audioObject,
+      MonauralAudio,
+      StereoAudio,
       stereoPhonicArrangeField,
       switchStereoMonauralAllToggle,
       playAllAudio,
@@ -124,6 +139,11 @@
         this.center_x = window.innerWidth/2;
         this.center_y = window.innerHeight/2 + 70;
       },
+      playAllAudios(){
+        for(let i=0; i<this.getMediaAudios.length; i++){
+          this.updateMediaAudiosObjectItem({index:i, key:'isPlay', value:true});
+        }
+      },      
     },
     watch : { 
     },

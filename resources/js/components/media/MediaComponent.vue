@@ -44,7 +44,7 @@
         </media-audio>
 
         <!-- 立体音響の定位設定 -->
-        <router-view name="stereoPhonicArrange"></router-view>
+        <router-view name="mediaAudioMng"></router-view>
 
 
 
@@ -412,8 +412,9 @@ export default {
       console.log('initStatus:'+newVal)
       // オーディオ情報の読み込みが完了したらオーディオ再生開始
       if(newVal >= 4){ 
-        const play = ()=>{this.$refs.mediaAudio.playAllAudio();}
-        setTimeout(play, 10000); 
+        const event = new CustomEvent('finishInitAudioData');
+        const finishInitAudioData = ()=>{document.body.dispatchEvent(event);}
+        setTimeout(finishInitAudioData, 10000);
       }
 
       if(this.getMode==3 && newVal >= 62){ // =showモード

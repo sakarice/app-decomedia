@@ -1,6 +1,7 @@
 <script>
   import { mapGetters, mapMutations} from 'vuex';
   export default {
+    name : "MonauralAudio",
     props : [
       // storeから取得するオーディオオブジェクトのインデックス。
       'mediaAudioIndex'
@@ -30,6 +31,9 @@
       play(){ this.player.play(); },
       pause(){ this.player.pause(); },
       updateLoopSetting(loopSetting){ this.player.loop = loopSetting},
+      setDuration(duration){
+        this.updateMediaAudiosObjectItem({index:this.mediaAudioIndex, key:'duration', value:duration});
+      },
       finish(){ // 再生位置を終わりに設定して疑似的に再生終了を実現する
         this.player.currentTime = Math.floor(this.player.duration);
       },
@@ -55,8 +59,8 @@
       });
       setAudioData.then(function(){
         tmpThis.player.addEventListener('loadedmetadata', function(){
-          tmpThis.$emit('setMediaAudioDuration', tmpThis.mediaAudioIndex, tmpThis.player.duration);
-          tmpThis.$emit('taskAfterAudioAdded', tmpThis.mediaAudioIndex);
+          const duration = tmpThis.player.duration;
+          tmpThis.setDuration(duration);
         });
       })
     },
@@ -90,10 +94,11 @@
           }
         }
       },
-
     },
     render(){
-      return this.$scopedSlots.default({});
+      return this.$scopedSlots.default({
+        // player : player,
+      });
     },
 
   }
