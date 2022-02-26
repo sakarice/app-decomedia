@@ -27,6 +27,8 @@
           this.updateMediaAudiosObjectItem({index:i, key:'panningFlag', value:!this.isStereo});
         }
         this.isStereo = !this.isStereo;
+        const event = new CustomEvent('changeStereoMonaural', {detail:{isStereo:this.isStereo}});
+        document.body.dispatchEvent(event);
       },
     },
   }

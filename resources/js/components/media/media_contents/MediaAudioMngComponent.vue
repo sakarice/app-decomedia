@@ -143,7 +143,8 @@
         for(let i=0; i<this.getMediaAudios.length; i++){
           this.updateMediaAudiosObjectItem({index:i, key:'isPlay', value:true});
         }
-      },      
+      },
+      changeStereoMonaural(isStereo){this.isStereo = isStereo;},     
     },
     watch : { 
     },
@@ -283,7 +284,6 @@
   display: flex;
   justify-content: center;
 }
-
 
 
 </style>

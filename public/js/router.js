@@ -4833,6 +4833,9 @@ function _defineProperty(obj, key, value) {
           value: true
         });
       }
+    },
+    changeStereoMonaural: function changeStereoMonaural(isStereo) {
+      this.isStereo = isStereo;
     }
   }),
   watch: {},
@@ -5135,7 +5138,8 @@ function _defineProperty(obj, key, value) {
       center_x: 0,
       center_y: 0,
       isRegistDelEvent: false,
-      deleteAudioIndex: -1
+      deleteAudioIndex: -1,
+      isActive: true
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMode'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaContentsField', ['getMediaContentsField'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getIsInitializedAudios'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaAudios', ['getMediaAudios'])), {}, {
@@ -5222,14 +5226,19 @@ function _defineProperty(obj, key, value) {
       this.removeDelAudioEvent();
       var event = new CustomEvent('deleteMediaAudio');
       document.body.dispatchEvent(event);
+    },
+    changeStereoMonaural: function changeStereoMonaural(e) {
+      this.isActive = e.detail.isStereo;
     }
   }),
-  watch: {},
-  created: function created() {},
   mounted: function mounted() {
     this.getCenterPosition();
     var target = document.getElementById('arrange-field-area');
     target.addEventListener('mouseover', this.setTrashIconPosition, false);
+    document.body.addEventListener('changeStereoMonaural', this.changeStereoMonaural, false);
+  },
+  destroyed: function destroyed() {
+    document.body.removeEventListener('changeStereoMonaural', this.changeStereoMonaural, false);
   }
 });
 
@@ -6878,6 +6887,12 @@ function _defineProperty(obj, key, value) {
       }
 
       this.isStereo = !this.isStereo;
+      var event = new CustomEvent('changeStereoMonaural', {
+        detail: {
+          isStereo: this.isStereo
+        }
+      });
+      document.body.dispatchEvent(event);
     }
   })
 });
@@ -14036,7 +14051,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#stereo-phonic-arrange-field-wrapper[data-v-13e100c6]{\r\n  z-index: 11;\r\n  position: fixed;\r\n  top: 0;\r\n  bottom: 5px;\r\n  margin-top: 80px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n#stereo-phonic-arrange-field[data-v-13e100c6]{\r\n  position: relative;\r\n  background-color: rgba(0,30,50,1);\r\n  border-radius: 5px;\n}\n.hide-field-icon[data-v-13e100c6] {\r\n  color: rgb(150,0,0);\r\n  position: absolute;\r\n  top : 0;\r\n  left : 0;\r\n  padding: 4px 8px;\r\n  border-top-left-radius: 5px;\n}\n.hide-field-icon[data-v-13e100c6]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.3);\n}\n#change-disp-setting-wrapper[data-v-13e100c6] {\r\n  position: absolute;\r\n  bottom: 50px;\r\n  right: 10px;\r\n  margin-right: 10px;\r\n  margin-bottom: 10px;\r\n  z-index: 12;\r\n  height: 60px;\r\n  width: 60px;\r\n  border-radius: 50%;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n  transition: background-color 0.5s;\n}\n.change-disp-setting[data-v-13e100c6] { color: white;}\n.arrange-field-area[data-v-13e100c6] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-13e100c6] {\r\n  outline:1px solid rgba(255,255,255,0.3);\n}\n.arrange-field[data-v-13e100c6]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n.center-point[data-v-13e100c6] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-13e100c6]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-13e100c6]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.arrange-obj[data-v-13e100c6] {\r\n  top: calc(50% - 20px);\r\n  left: calc(50% - 20px);\n}\n.audio-icon-wrapper[data-v-13e100c6] {\r\n  outline: 1px solid black;\n}\r\n\r\n/* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-13e100c6] {\r\n  padding: 2px 0;\r\n  width: 100%;\r\n  background-color: rgba(0,0,0,0.3);\r\n  border-radius: 2px;\r\n\r\n  display: flex;\r\n  justify-content: center;\n}\r\n\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#stereo-phonic-arrange-field-wrapper[data-v-13e100c6]{\r\n  z-index: 11;\r\n  position: fixed;\r\n  top: 0;\r\n  bottom: 5px;\r\n  margin-top: 80px;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\n}\n#stereo-phonic-arrange-field[data-v-13e100c6]{\r\n  position: relative;\r\n  background-color: rgba(0,30,50,1);\r\n  border-radius: 5px;\n}\n.hide-field-icon[data-v-13e100c6] {\r\n  color: rgb(150,0,0);\r\n  position: absolute;\r\n  top : 0;\r\n  left : 0;\r\n  padding: 4px 8px;\r\n  border-top-left-radius: 5px;\n}\n.hide-field-icon[data-v-13e100c6]:hover {\r\n  cursor: pointer;\r\n  background-color: rgba(0,0,0,0.3);\n}\n#change-disp-setting-wrapper[data-v-13e100c6] {\r\n  position: absolute;\r\n  bottom: 50px;\r\n  right: 10px;\r\n  margin-right: 10px;\r\n  margin-bottom: 10px;\r\n  z-index: 12;\r\n  height: 60px;\r\n  width: 60px;\r\n  border-radius: 50%;\r\n\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n\r\n  transition: background-color 0.5s;\n}\n.change-disp-setting[data-v-13e100c6] { color: white;}\n.arrange-field-area[data-v-13e100c6] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-13e100c6] {\r\n  outline:1px solid rgba(255,255,255,0.3);\n}\n.arrange-field[data-v-13e100c6]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n.center-point[data-v-13e100c6] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-13e100c6]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-13e100c6]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.arrange-obj[data-v-13e100c6] {\r\n  top: calc(50% - 20px);\r\n  left: calc(50% - 20px);\n}\n.audio-icon-wrapper[data-v-13e100c6] {\r\n  outline: 1px solid black;\n}\r\n\r\n/* 全オーディオの再生停止コントローラー */\n.all-audio-controll-wrapper[data-v-13e100c6] {\r\n  padding: 2px 0;\r\n  width: 100%;\r\n  background-color: rgba(0,0,0,0.3);\r\n  border-radius: 2px;\r\n\r\n  display: flex;\r\n  justify-content: center;\n}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14088,7 +14103,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#arrange-field-area[data-v-7b56563c] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-7b56563c] {\r\n  outline:1px solid rgba(255,255,255,0.3);\r\n  opacity: 0.6;\n}\n.arrange-field[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n#trash-icon[data-v-7b56563c] {\r\n  top: 30px;\r\n  right: 30px;\r\n  width: 40px;\r\n  height: 40px;\r\n  padding: 7px;\r\n  font-size: 25px;\r\n  text-align: center;\r\n  color: slategrey;\r\n  background-color: rgba(255,255,255,0.1);\r\n  border-radius: 50%\n}\n.center-point[data-v-7b56563c] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-7b56563c]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.red[data-v-7b56563c] { outline : 1px solid red;}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#arrange-field-area[data-v-7b56563c] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-7b56563c] {\r\n  outline:1px solid rgba(255,255,255,0.3);\r\n  opacity: 0.1;\n}\n.arrange-field[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n#trash-icon[data-v-7b56563c] {\r\n  top: 30px;\r\n  right: 30px;\r\n  width: 40px;\r\n  height: 40px;\r\n  padding: 7px;\r\n  font-size: 25px;\r\n  text-align: center;\r\n  color: slategrey;\r\n  background-color: rgba(255,255,255,0.1);\r\n  border-radius: 50%\n}\n.center-point[data-v-7b56563c] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-7b56563c]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.red[data-v-7b56563c] { outline : 1px solid red;}\n.isActive[data-v-7b56563c] { opacity: 0.6;}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27855,6 +27870,7 @@ var render = function () {
         {
           staticClass:
             "arrange-field pos-r border-r-50per flex a-center j-center",
+          class: { isActive: _vm.isActive },
           style: _vm.arrangeAreaSize,
         },
         [_vm._m(0)]

@@ -7,7 +7,7 @@
     <i id="trash-icon" class="fas fa-trash pos-a hover-p" :class="{'red':isRegistDelEvent}" @click="getTrashIconRect"></i>
 
     <div class="arrange-field pos-r border-r-50per flex a-center j-center"
-    :style="arrangeAreaSize">
+    :style="arrangeAreaSize" :class="{'isActive':isActive}">
       <div class="arrange-object-wrapper pos-r w100 h100 border-r-50per">
         <!-- 中心点 -->
         <img src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B35.svg" alt=""
@@ -43,6 +43,7 @@
         center_y : 0,
         isRegistDelEvent : false,
         deleteAudioIndex : -1,
+        isActive : true,
       }
     },
     computed : {
@@ -131,18 +132,23 @@
         const event = new CustomEvent('deleteMediaAudio');
         document.body.dispatchEvent(event);
       },
+      changeStereoMonaural(e){
+        this.isActive = e.detail.isStereo;
+      }
 
 
-    },
-    watch : { 
-    },
-    created(){
     },
     mounted(){
       this.getCenterPosition();
       const target = document.getElementById('arrange-field-area');
       target.addEventListener('mouseover', this.setTrashIconPosition, false);
+
+      document.body.addEventListener('changeStereoMonaural', this.changeStereoMonaural, false)
+    },
+    destroyed(){
+      document.body.removeEventListener('changeStereoMonaural', this.changeStereoMonaural, false)
     }
+
 
   }
 
@@ -158,7 +164,7 @@
 
 .arrange-field {
   outline:1px solid rgba(255,255,255,0.3);
-  opacity: 0.6;
+  opacity: 0.1;
 }
 
 .arrange-field::before {
@@ -215,6 +221,8 @@
 }
 
 .red { outline : 1px solid red;}
+
+.isActive { opacity: 0.6;}
 
 
 </style>
