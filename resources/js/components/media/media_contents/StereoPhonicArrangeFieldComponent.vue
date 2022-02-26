@@ -12,14 +12,15 @@
         <!-- 中心点 -->
         <img src="https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B35.svg" alt=""
         class="center-point pos-a w30px h30px border-r-50per">
-
-        <!-- オーディオのアイコン -->
-        <audio-object v-for="(audio, index) in getMediaAudios" :key="index"
-        :index="index" :center_x="center_x" :center_y="center_y" :radius="radius"
-        @moveObject="judgeObjDelete" :class="{'red':(isRegistDelEvent&&(index==deleteAudioIndex))}">
-        </audio-object>
       </div>
     </div>
+
+    <!-- オーディオのアイコン -->
+    <audio-object v-for="(audio, index) in getMediaAudios" :key="index"
+    :index="index" :center_x="center_x" :center_y="center_y" :radius="radius"
+    @moveObject="judgeObjDelete" :class="{'red':(isRegistDelEvent&&(index==deleteAudioIndex))}">
+    </audio-object>
+
   </div>
 
 </template>
@@ -157,6 +158,7 @@
 
 .arrange-field {
   outline:1px solid rgba(255,255,255,0.3);
+  opacity: 0.6;
 }
 
 .arrange-field::before {

@@ -130,7 +130,7 @@
 }
 
 .audio-icon-wrapper {
-  outline: 1px solid black;
+  outline: 1px solid darkgrey;
 }
 
 .play-icon, .pause-icon {

@@ -47,9 +47,10 @@
 
 .toggle-outer {
   width: 37px;
-  height: 20px;
+  height: 15px;
   border-radius: 15px;
-  outline: 1px solid white;
+  background-color: darkslategray;
+  outline: 1px solid grey;
   display: flex;
   justify-content: center;
   align-items: center;

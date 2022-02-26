@@ -5093,6 +5093,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
 
 
 
@@ -14137,7 +14138,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#arrange-field-area[data-v-7b56563c] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-7b56563c] {\r\n  outline:1px solid rgba(255,255,255,0.3);\n}\n.arrange-field[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n#trash-icon[data-v-7b56563c] {\r\n  top: 30px;\r\n  right: 30px;\r\n  width: 40px;\r\n  height: 40px;\r\n  padding: 7px;\r\n  font-size: 25px;\r\n  text-align: center;\r\n  color: slategrey;\r\n  background-color: rgba(255,255,255,0.1);\r\n  border-radius: 50%\n}\n.center-point[data-v-7b56563c] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-7b56563c]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.red[data-v-7b56563c] { outline : 1px solid red;}\r\n\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#arrange-field-area[data-v-7b56563c] {\r\n  padding: 30px;\n}\n.arrange-field[data-v-7b56563c] {\r\n  outline:1px solid rgba(255,255,255,0.3);\r\n  opacity: 0.6;\n}\n.arrange-field[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 15%;\r\n  bottom: 15%;\r\n  left: 15%;\r\n  right: 15%;\r\n  outline:1px solid rgba(255,255,255,0.5);\r\n  border-radius: 50%;\n}\n#trash-icon[data-v-7b56563c] {\r\n  top: 30px;\r\n  right: 30px;\r\n  width: 40px;\r\n  height: 40px;\r\n  padding: 7px;\r\n  font-size: 25px;\r\n  text-align: center;\r\n  color: slategrey;\r\n  background-color: rgba(255,255,255,0.1);\r\n  border-radius: 50%\n}\n.center-point[data-v-7b56563c] {\r\n  background-color: greenyellow;\r\n  padding: 2px;\r\n  top: calc(50% - 15px);\r\n  left: calc(50% - 15px);\n}\n.arrange-object-wrapper[data-v-7b56563c]::before {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 30%;\r\n  bottom: 30%;\r\n  left: 30%;\r\n  right: 30%;\r\n  outline:1px solid rgba(255,255,255,0.7);\r\n  border-radius: 50%;\n}\n.arrange-object-wrapper[data-v-7b56563c]::after {\r\n  content: \"\";\r\n  position: absolute;\r\n  top : 50%;\r\n  bottom: 50%;\r\n  left: 50%;\r\n  right: 50%;\r\n  outline: 1px solid white;\r\n  border-radius: 50%;\n}\n.red[data-v-7b56563c] { outline : 1px solid red;}\r\n\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14166,7 +14167,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_flexSetting_css__WEBPACK_IMPORTED_MODULE_1__["default"]);
 ___CSS_LOADER_EXPORT___.i(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_11_0_rules_0_use_1_css_FrequentlyUseStyle_css__WEBPACK_IMPORTED_MODULE_2__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.audio-obj[data-v-403b9fd5] {\r\n  top: calc(50% - 20px);\r\n  left: calc(50% - 20px);\n}\n.audio-icon-wrapper[data-v-403b9fd5] {\r\n  outline: 1px solid black;\n}\n.play-icon[data-v-403b9fd5], .pause-icon[data-v-403b9fd5] {\r\n  color: rgb(0,255,0);\n}\n.play-icon[data-v-403b9fd5] {\r\n  top:4px;\r\n  left: 20px;\n}\n.pause-icon[data-v-403b9fd5] {\r\n  top:11px;\n}\n.white[data-v-403b9fd5] { color: white;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.audio-obj[data-v-403b9fd5] {\r\n  top: calc(50% - 20px);\r\n  left: calc(50% - 20px);\n}\n.audio-icon-wrapper[data-v-403b9fd5] {\r\n  outline: 1px solid darkgrey;\n}\n.play-icon[data-v-403b9fd5], .pause-icon[data-v-403b9fd5] {\r\n  color: rgb(0,255,0);\n}\n.play-icon[data-v-403b9fd5] {\r\n  top:4px;\r\n  left: 20px;\n}\n.pause-icon[data-v-403b9fd5] {\r\n  top:11px;\n}\n.white[data-v-403b9fd5] { color: white;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -14304,7 +14305,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n#toggle-area[data-v-55f92ac4]:hover {\r\n  cursor: pointer;\n}\n#toggle-area > .stereo-toggle-label[data-v-55f92ac4] {\r\n  color: white;\r\n  font-size: 12px;\r\n  margin: 3px 12px 0 0;\n}\n.toggle-outer[data-v-55f92ac4] {\r\n  width: 37px;\r\n  height: 20px;\r\n  border-radius: 15px;\r\n  outline: 1px solid white;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 0 18px 0 0;\r\n\r\n  transition: all 0.2s;\n}\n.toggle-inner[data-v-55f92ac4] {\r\n  width: 16px;\r\n  height: 16px;\r\n  /* background-color: lime; */\r\n  background-color: darkgrey;\r\n  border-radius: 50%;\n}\n.j-end[data-v-55f92ac4] {\r\n  padding: 0 0 0 18px;\n}\n.bg-lime[data-v-55f92ac4] { background-color: lime;}\r\n\r\n  \r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n#toggle-area[data-v-55f92ac4]:hover {\r\n  cursor: pointer;\n}\n#toggle-area > .stereo-toggle-label[data-v-55f92ac4] {\r\n  color: white;\r\n  font-size: 12px;\r\n  margin: 3px 12px 0 0;\n}\n.toggle-outer[data-v-55f92ac4] {\r\n  width: 37px;\r\n  height: 15px;\r\n  border-radius: 15px;\r\n  background-color: darkslategray;\r\n  outline: 1px solid grey;\r\n  display: flex;\r\n  justify-content: center;\r\n  align-items: center;\r\n  padding: 0 18px 0 0;\r\n\r\n  transition: all 0.2s;\n}\n.toggle-inner[data-v-55f92ac4] {\r\n  width: 16px;\r\n  height: 16px;\r\n  /* background-color: lime; */\r\n  background-color: darkgrey;\r\n  border-radius: 50%;\n}\n.j-end[data-v-55f92ac4] {\r\n  padding: 0 0 0 18px;\n}\n.bg-lime[data-v-55f92ac4] { background-color: lime;}\r\n\r\n  \r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27859,46 +27860,46 @@ var render = function () {
             "arrange-field pos-r border-r-50per flex a-center j-center",
           style: _vm.arrangeAreaSize,
         },
-        [
-          _c(
-            "div",
-            {
-              staticClass:
-                "arrange-object-wrapper pos-r w100 h100 border-r-50per",
-            },
-            [
-              _c("img", {
-                staticClass: "center-point pos-a w30px h30px border-r-50per",
-                attrs: {
-                  src: "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B35.svg",
-                  alt: "",
-                },
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.getMediaAudios, function (audio, index) {
-                return _c("audio-object", {
-                  key: index,
-                  class: {
-                    red: _vm.isRegistDelEvent && index == _vm.deleteAudioIndex,
-                  },
-                  attrs: {
-                    index: index,
-                    center_x: _vm.center_x,
-                    center_y: _vm.center_y,
-                    radius: _vm.radius,
-                  },
-                  on: { moveObject: _vm.judgeObjDelete },
-                })
-              }),
-            ],
-            2
-          ),
-        ]
+        [_vm._m(0)]
       ),
-    ]
+      _vm._v(" "),
+      _vm._l(_vm.getMediaAudios, function (audio, index) {
+        return _c("audio-object", {
+          key: index,
+          class: { red: _vm.isRegistDelEvent && index == _vm.deleteAudioIndex },
+          attrs: {
+            index: index,
+            center_x: _vm.center_x,
+            center_y: _vm.center_y,
+            radius: _vm.radius,
+          },
+          on: { moveObject: _vm.judgeObjDelete },
+        })
+      }),
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "arrange-object-wrapper pos-r w100 h100 border-r-50per" },
+      [
+        _c("img", {
+          staticClass: "center-point pos-a w30px h30px border-r-50per",
+          attrs: {
+            src: "https://app-decomedia-dev.s3.ap-northeast-1.amazonaws.com/app-decomedia/%E3%83%98%E3%83%83%E3%83%89%E3%83%95%E3%82%A9%E3%83%B3%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B35.svg",
+            alt: "",
+          },
+        }),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
