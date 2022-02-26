@@ -1,19 +1,20 @@
 <template>
   <div :id="audio_obj_with_index" class="audio-obj pos-a border-r-50per flex column a-center"
-  :style="objTranslate" @mousedown.stop="calcDiff($event), judgeDelete($event)" @touchstart.stop="calcDiff($event), judgeDelete($event)">
+  :style="objTranslate" @mousedown="calcDiff($event), judgeDelete($event)" @touchstart="calcDiff($event), judgeDelete($event)">
     <!-- オーディオのアイコン -->
     <div class="audio-icon-wrapper border-r-50per">
       <img :src="audio['thumbnail_url']" class="w50px h50px border-r-50per" alt="?">
     </div>
     <span class="pos-a font-11 white">{{index+1}}</span>
-    <i class="fas fa-caret-right fa-3x play-icon pos-a" v-on:click="play" v-show="!(isPlay)"></i>
-    <i class="fas fa-pause fa-2x pause-icon pos-a" v-on:click="pause" v-show="isPlay"></i>    
+    <i class="fas fa-caret-right fa-3x play-icon pos-a" @click="play" v-show="!(isPlay)"></i>
+    <i class="fas fa-pause fa-2x pause-icon pos-a" @click="pause" v-show="isPlay"></i>    
   </div>
 </template>
 
 <script>
   import { mapGetters, mapMutations } from 'vuex';
   import {setDistanceLimit, calcDiffStart} from '../../../../functions/calcDiffBetweenAandBHelper'
+  
 
   export default {
     components: {

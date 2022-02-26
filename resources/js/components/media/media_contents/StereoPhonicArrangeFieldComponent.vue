@@ -1,10 +1,10 @@
 <template>
 
   <!-- アイコン配置による定位設定エリア -->
-  <div id="arrange-field-area" class="w100 pos-r flex a-center j-center">
+  <div id="arrange-field-area" class="w100 pos-r flex a-center j-center" @mousedown.stop @touchstart.stop>
 
     <!-- ゴミ箱アイコン -->
-    <i id="trash-icon" class="fas fa-trash pos-a hover-p" :class="{'red':isRegistDelEvent}" @click="getTrashIconRect"></i>
+    <i id="trash-icon" class="fas fa-trash pos-a hover-p" :class="{'red':isRegistDelEvent}"></i>
 
     <div class="arrange-field pos-r border-r-50per flex a-center j-center"
     :style="arrangeAreaSize" :class="{'isActive':isActive}">
@@ -100,7 +100,8 @@
         const center_y = Math.floor(rect.top) + radius;
         setBaseObjInfo(center_x, center_y, radius);
         const target = document.getElementById('arrange-field-area');
-        target.removeEventListener('click', this.setTrashIconPosition, false);
+        target.removeEventListener('mousedown', this.setTrashIconPosition, false);
+        target.removeEventListener('touchstart', this.setTrashIconPosition, false);
       },
       getTrashIconRect(){
         const trashIcon = document.getElementById('trash-icon');
@@ -119,10 +120,12 @@
       },
       registDelAudioEvent(){
         document.body.addEventListener('mouseup', this.deleteAudio, false);
+        document.body.addEventListener('touchend', this.deleteAudio, false);
         this.isRegistDelEvent = true;
       },
       removeDelAudioEvent(){
         document.body.removeEventListener('mouseup', this.deleteAudio, false);
+        document.body.removeEventListener('touchend', this.deleteAudio, false);
         this.isRegistDelEvent = false;
         this.deleteAudioIndex = -1;
       },
@@ -141,7 +144,8 @@
     mounted(){
       this.getCenterPosition();
       const target = document.getElementById('arrange-field-area');
-      target.addEventListener('mouseover', this.setTrashIconPosition, false);
+      target.addEventListener('mousedown', this.setTrashIconPosition, false);
+      target.addEventListener('touchstart', this.setTrashIconPosition, false);
 
       document.body.addEventListener('changeStereoMonaural', this.changeStereoMonaural, false)
     },

@@ -5191,7 +5191,8 @@ function _defineProperty(obj, key, value) {
       var center_y = Math.floor(rect.top) + radius;
       (0,_functions_collisionDetectHelper__WEBPACK_IMPORTED_MODULE_1__.setBaseObjInfo)(center_x, center_y, radius);
       var target = document.getElementById('arrange-field-area');
-      target.removeEventListener('click', this.setTrashIconPosition, false);
+      target.removeEventListener('mousedown', this.setTrashIconPosition, false);
+      target.removeEventListener('touchstart', this.setTrashIconPosition, false);
     },
     getTrashIconRect: function getTrashIconRect() {
       var trashIcon = document.getElementById('trash-icon');
@@ -5214,10 +5215,12 @@ function _defineProperty(obj, key, value) {
     },
     registDelAudioEvent: function registDelAudioEvent() {
       document.body.addEventListener('mouseup', this.deleteAudio, false);
+      document.body.addEventListener('touchend', this.deleteAudio, false);
       this.isRegistDelEvent = true;
     },
     removeDelAudioEvent: function removeDelAudioEvent() {
       document.body.removeEventListener('mouseup', this.deleteAudio, false);
+      document.body.removeEventListener('touchend', this.deleteAudio, false);
       this.isRegistDelEvent = false;
       this.deleteAudioIndex = -1;
     },
@@ -5234,7 +5237,8 @@ function _defineProperty(obj, key, value) {
   mounted: function mounted() {
     this.getCenterPosition();
     var target = document.getElementById('arrange-field-area');
-    target.addEventListener('mouseover', this.setTrashIconPosition, false);
+    target.addEventListener('mousedown', this.setTrashIconPosition, false);
+    target.addEventListener('touchstart', this.setTrashIconPosition, false);
     document.body.addEventListener('changeStereoMonaural', this.changeStereoMonaural, false);
   },
   destroyed: function destroyed() {
@@ -27856,13 +27860,20 @@ var render = function () {
     {
       staticClass: "w100 pos-r flex a-center j-center",
       attrs: { id: "arrange-field-area" },
+      on: {
+        mousedown: function ($event) {
+          $event.stopPropagation()
+        },
+        touchstart: function ($event) {
+          $event.stopPropagation()
+        },
+      },
     },
     [
       _c("i", {
         staticClass: "fas fa-trash pos-a hover-p",
         class: { red: _vm.isRegistDelEvent },
         attrs: { id: "trash-icon" },
-        on: { click: _vm.getTrashIconRect },
       }),
       _vm._v(" "),
       _c(
@@ -27942,11 +27953,9 @@ var render = function () {
       attrs: { id: _vm.audio_obj_with_index },
       on: {
         mousedown: function ($event) {
-          $event.stopPropagation()
           _vm.calcDiff($event), _vm.judgeDelete($event)
         },
         touchstart: function ($event) {
-          $event.stopPropagation()
           _vm.calcDiff($event), _vm.judgeDelete($event)
         },
       },
