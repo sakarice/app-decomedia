@@ -40,7 +40,7 @@ return [
 
     'aws_bucket' => env('AWS_BUCKET', 'app-decomedia-dev'),
     'aws_default_region' => env('AWS_DEFAULT_REGION', 'ap-northeast-1'),
-    'aws_cloudFront_distribution' => env('aws_cloudFront_distribution', 'https://d32mvq5x1dj8b7.cloudfront.net')
+    'aws_cloudFront_distribution' => env('aws_cloudFront_distribution', 'https://d32mvq5x1dj8b7.cloudfront.net'),
 
     /*
     |--------------------------------------------------------------------------
