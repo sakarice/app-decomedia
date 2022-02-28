@@ -95,12 +95,14 @@ class MediaImgUtil
   public static function getMediaImgData($media_id){
     $send_media_imgs = array(); // リターン対象のデータ
     $img_url = "";
+    $url_prefix = config('aws_cloud_front.distribution')."/";
+
     if(MediaImg::where('media_id', $media_id)->exists()){
       $media_img_db_datas = MediaImg::where('media_id', $media_id)->get();
       foreach($media_img_db_datas as $index => $media_img_db_data){
         // メディア画像テーブルのデータ取得
         $media_img = array();
-        $img_url = MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_url;
+        $img_url = $url_prefix . MediaImgUtil::getMediaImgModel($media_img_db_data->img_id, $media_img_db_data->img_type)->img_path;
         $media_img['id'] = $media_img_db_data['id'];
         $media_img['url'] = $img_url;        
         foreach(self::$COLUMN_AND_PROPERTY_OF_MEDIA_IMG as $column_name => $property_name){

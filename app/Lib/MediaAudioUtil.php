@@ -61,6 +61,8 @@ class MediaAudioUtil
     $media_audio_data = array();
     if(MediaAudio::where('media_id', $media_id)->exists()){
       $media_audios = MediaAudio::where('media_id', $media_id)->get();
+      $url_prefix = config('aws_cloud_front.distribution')."/";
+
 
       // Media音楽の情報を連想配列として一つずつ取得し、配列に追加していく
       foreach($media_audios as $media_audio){
@@ -69,8 +71,8 @@ class MediaAudioUtil
         if($media_audio->audio_type == 1){
           $audio_model = PublicAudio::where('id', $media_audio->audio_id)->first();
           $thumbnail_id = PublicAudioAudioThumbnail::where('audio_id', $audio_model->id)->first()->audio_thumbnail_id;
-          if(isset(PublicAudioThumbnail::find($thumbnail_id)->img_url)){
-            $thumbnail_url = PublicAudioThumbnail::find($thumbnail_id)->img_url;
+          if(isset(PublicAudioThumbnail::find($thumbnail_id)->img_path)){
+            $thumbnail_url = $url_prefix . PublicAudioThumbnail::find($thumbnail_id)->img_path;
           } else {
             $thumbnail_url = config('audioThumbnail.url');
           }
@@ -78,7 +80,7 @@ class MediaAudioUtil
           $audio_model = UserOwnAudio::where('id', $media_audio->audio_id)->first();
           $thumbnail_id = UserOwnAudioAudioThumbnail::where('audio_id', $audio_model->id)->first()->audio_thumbnail_id;
           if($thumbnail_id){
-            $thumbnail_url = UserOwnAudioThumbnail::find($thumbnail_id)->thumbnail_url;
+            $thumbnail_url = $url_prefix . UserOwnAudioThumbnail::find($thumbnail_id)->thumbnail_path;
           } else {
             $thumbnail_url = config('audioThumbnail.url');
           }

@@ -22,16 +22,16 @@ class PublicAudioController extends Controller
     public function index(){
         $public_audios = PublicAudio::get();
         $audios = array();
+        $url_prefix = config('aws_cloud_front.distribution')."/";
         // $count = 0;
         foreach($public_audios as $index => $public_audio){
             $tmpAudios = array();
             $tmpAudios += array('name' => $public_audio->name);
             $tmpAudios += array('audio_id' => $public_audio->id);
-            $tmpAudios += array('audio_url' => $public_audio->audio_url);
+            $tmpAudios += array('audio_url' => $url_prefix . $public_audio->audio_path);
             $audio_thumbnail_id = PublicAudioAudioThumbnail::where('audio_id',$public_audio->id)->get()->first()->audio_thumbnail_id;
             if($audio_thumbnail_id){
-                $tmpAudios += array('thumbnail_url' => config('aws_cloud_front.distribution')."/".PublicAudioThumbnail::find($audio_thumbnail_id)->img_path);
-                \Log::info($tmpAudios['thumbnail_url']);
+                $tmpAudios += array('thumbnail_url' => $url_prefix . PublicAudioThumbnail::find($audio_thumbnail_id)->img_path);
             } else {
                 $tmpAudios += array('thumbnail_url' => "https://".config('app.aws_bucket').".s3.".config('app.aws_default_region').".amazonaws.com/public/img/audio_thumbnail/default/8%E5%88%86%E9%9F%B3%E7%AC%A6%E3%81%AE%E3%82%A2%E3%82%A4%E3%82%B3%E3%83%B3%E7%B4%A0%E6%9D%90+2.png");
             }

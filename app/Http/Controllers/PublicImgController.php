@@ -21,12 +21,13 @@ class PublicImgController extends Controller
         $owner_user_id = Auth::user()->id;
         $public_imgs = PublicImg::get();
         $img_file_datas = array();
+        $url_prefix = config('aws_cloud_front.distribution')."/";
         
         // $count = 0;
         foreach($public_imgs as $index => $public_img){
             $tmp_img_file_datas = array();
             $tmp_img_file_datas += array('id' => $public_img->id);
-            $tmp_img_file_datas += array('url' => $public_img->img_url);
+            $tmp_img_file_datas += array('url' => $url_prefix . $public_img->img_path);
             if(PublicImgImgCategory::where('img_id', $public_img->id)->exists()){
                 $img_category_id = PublicImgImgCategory::where('img_id', $public_img->id)->first()->category_id;
                 $img_category = ImgCategory::find($img_category_id)->category;
