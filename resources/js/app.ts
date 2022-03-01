@@ -78,6 +78,7 @@ Vue.component('media-audio-component', require('./components/media/media_content
 Vue.component('media-audio-player-component', require('./components/media/media_contents/audio/MediaAudioPlayerComponent.vue').default);
 Vue.component('stereo-audio-component', require('./components/media/media_contents/audio/StereoAudioComponent.vue').default);
 Vue.component('monaural-audio-component', require('./components/media/media_contents/audio/MonauralAudioComponent.vue').default);
+Vue.component('audio-player-common-component', require('./components/media/media_contents/audio/AudioPlayerCommonComponent.vue').default);
 
 Vue.component('media-img-mng-component', require('./components/media/media_contents/objects/img/MediaImgMngComponent.vue').default);
 Vue.component('media-img-component', require('./components/media/media_contents/objects/img/MediaImgComponent.vue').default);

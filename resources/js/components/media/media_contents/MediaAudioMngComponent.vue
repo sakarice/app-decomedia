@@ -25,7 +25,7 @@
         </monaural-audio>
 
         <stereo-audio :mediaAudioIndex="index">
-          <template #default></template>
+          <!-- <template #default></template> -->
         </stereo-audio>
       </li>
 

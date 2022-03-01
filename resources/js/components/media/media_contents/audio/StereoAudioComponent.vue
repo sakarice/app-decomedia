@@ -1,7 +1,20 @@
+<template>
+  <div>
+    <audio-player-common>
+      <!-- <template #default></template> -->
+    </audio-player-common>
+  </div>
+</template>
+
 <script>
   import { mapGetters, mapMutations} from 'vuex';
+  import AudioPlayerCommon from './AudioPlayerCommonComponent.vue'
+
   export default {
     name : "StereoAudio",
+    components : {
+      AudioPlayerCommon,
+    },
     props : [
       // storeから取得するオーディオオブジェクトのインデックス。
       'mediaAudioIndex'
@@ -128,11 +141,11 @@
             this.play();
           }
         }
-      },      
+      },
     },
-    render(){
-      return this.$scopedSlots.default({});
-    },
+    // render(){
+    //   return this.$scopedSlots.default({});
+    // },
 
   }
 
