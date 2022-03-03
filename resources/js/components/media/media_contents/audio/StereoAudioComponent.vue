@@ -1,7 +1,7 @@
 <template>
   <div>
     <audio-player-common>
-      <!-- <template #default></template> -->
+      <template #default></template>
     </audio-player-common>
   </div>
 </template>
