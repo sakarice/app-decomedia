@@ -3717,9 +3717,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 /* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
+/* harmony import */ var _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingLabelComponent.vue */ "./resources/js/components/media/edit_parts/SettingLabelComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -3859,6 +3860,8 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+
 
 
 
@@ -3867,7 +3870,8 @@ function _defineProperty(obj, key, value) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
     closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    settingLabel: _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: ['transitionName'],
   data: function data() {
@@ -3880,7 +3884,7 @@ function _defineProperty(obj, key, value) {
       options: ""
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('fontFamilyList', ['getFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('japaneseFontFamilyList', ['getJapaneseFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('media', ['getMediaId'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaTextFactory', ['getTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('fontFamilyList', ['getFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('japaneseFontFamilyList', ['getJapaneseFontFamilyList'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaSetting', ['getMediaSetting'])), {}, {
     font_options: function font_options() {
       if (this.selected_category == "normal") {
         return this.font_list;
@@ -3910,7 +3914,7 @@ function _defineProperty(obj, key, value) {
       });
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTextFactory', ['updateTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaTexts', ['addMediaTextsObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaTextFactory', ['updateTextData'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaTexts', ['addMediaTextsObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -27095,388 +27099,390 @@ var render = function () {
         },
       },
       [
-        _c("div", { attrs: { id: "area-wrapper" } }, [
-          _c(
-            "p",
-            {
-              staticClass: "title-labal font-13 w90",
-              attrs: { id: "title-labal" },
-            },
-            [_vm._v("テキスト")]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "flex column a-start",
-              attrs: { id: "media-text-setting-area" },
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "flex column a-start w100",
-                  attrs: { id: "preview-area" },
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "w100",
-                      attrs: { id: "text-preview-wrapper" },
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.getTextData["text"],
-                            expression: "getTextData['text']",
+        _c(
+          "div",
+          { attrs: { id: "area-wrapper" } },
+          [
+            _c("setting-label", { attrs: { labelName: "テキスト" } }),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "flex column a-start",
+                attrs: { id: "media-text-setting-area" },
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "flex column a-start w100",
+                    attrs: { id: "preview-area" },
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "w100",
+                        attrs: { id: "text-preview-wrapper" },
+                      },
+                      [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.getTextData["text"],
+                              expression: "getTextData['text']",
+                            },
+                          ],
+                          staticClass: "m0",
+                          style: _vm.previewStyle,
+                          attrs: {
+                            id: "text-preview",
+                            type: "text",
+                            placeholder: "テキストを入力してください",
                           },
-                        ],
-                        staticClass: "m0",
-                        style: _vm.previewStyle,
-                        attrs: {
-                          id: "text-preview",
-                          type: "text",
-                          placeholder: "テキストを入力してください",
-                        },
-                        domProps: { value: _vm.getTextData["text"] },
+                          domProps: { value: _vm.getTextData["text"] },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.getTextData,
+                                "text",
+                                $event.target.value
+                              )
+                            },
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "add-text-button j-center flex a-center mt3",
+                        attrs: { id: "media-text-add-wrapper" },
                         on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.getTextData,
-                              "text",
-                              $event.target.value
-                            )
+                          click: function ($event) {
+                            return _vm.addText()
                           },
-                        },
-                      }),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "add-text-button j-center flex a-center mt3",
-                      attrs: { id: "media-text-add-wrapper" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.addText()
                         },
                       },
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-plus fa-lg plus-icon" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "add-btn-label font-11 ml5" }, [
-                        _vm._v("追加"),
-                      ]),
-                    ]
-                  ),
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "setting-wrapper flex column a-center" },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "setting w100 flex j-s-between a-end",
-                      attrs: { id: "font-size-wrapper" },
-                    },
-                    [
-                      _c("h3", { staticClass: "sub-title mb0" }, [
-                        _vm._v("サイズ"),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "flex a-center" }, [
-                        _c("i", {
-                          staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      [
+                        _c("i", { staticClass: "fas fa-plus fa-lg plus-icon" }),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "add-btn-label font-11 ml5" },
+                          [_vm._v("追加")]
+                        ),
+                      ]
+                    ),
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "setting-wrapper flex column a-center" },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "setting w100 flex j-s-between a-end",
+                        attrs: { id: "font-size-wrapper" },
+                      },
+                      [
+                        _c("h3", { staticClass: "sub-title mb0" }, [
+                          _vm._v("サイズ"),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex a-center" }, [
+                          _c("i", {
+                            staticClass:
+                              "fas fa-minus fa-lg btns minus-btn mr10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.minusOneValue("font_size")
+                              },
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("i", {
+                            staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                            on: {
+                              click: function ($event) {
+                                $event.stopPropagation()
+                                return _vm.plusOneValue("font_size")
+                              },
+                            },
+                          }),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "w60px",
+                          attrs: { type: "number" },
+                          domProps: { value: _vm.getTextData["font_size"] },
                           on: {
-                            click: function ($event) {
+                            input: function ($event) {
+                              return _vm.updateTextData({
+                                key: "font_size",
+                                value: $event.target.value,
+                              })
+                            },
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "setting w100 flex j-s-between a-end",
+                        attrs: { id: "text-color-wrapper" },
+                      },
+                      [
+                        _c("h3", { staticClass: "sub-title mb0" }, [
+                          _vm._v("色"),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "color" },
+                          domProps: { value: _vm.getTextData["color"] },
+                          on: {
+                            input: function ($event) {
+                              return _vm.updateTextData({
+                                key: "color",
+                                value: $event.target.value,
+                              })
+                            },
+                          },
+                        }),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "setting w100 flex column",
+                        attrs: { id: "font-style-wrapper" },
+                      },
+                      [
+                        _c("h3", { staticClass: "sub-title" }, [
+                          _vm._v("フォント"),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex column" }, [
+                          _c(
+                            "div",
+                            { staticClass: "flex j-s-between a-end mb10" },
+                            [
+                              _c("h4", { staticClass: "sub-sub-title m0" }, [
+                                _vm._v("カテゴリ"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selected_category,
+                                      expression: "selected_category",
+                                    },
+                                  ],
+                                  attrs: { id: "font-category" },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.selected_category = $event.target
+                                        .multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                _vm._l(_vm.font_category, function (category) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: category.id,
+                                      domProps: { value: category },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(category) +
+                                          "\n                  "
+                                      ),
+                                    ]
+                                  )
+                                }),
+                                0
+                              ),
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "flex j-s-between a-end mb5" },
+                            [
+                              _c("h4", { staticClass: "sub-sub-title m0" }, [
+                                _vm._v("スタイル"),
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selected_font,
+                                      expression: "selected_font",
+                                    },
+                                  ],
+                                  attrs: { id: "font-style" },
+                                  on: {
+                                    change: function ($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call(
+                                          $event.target.options,
+                                          function (o) {
+                                            return o.selected
+                                          }
+                                        )
+                                        .map(function (o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.selected_font = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                  },
+                                },
+                                _vm._l(_vm.font_options, function (option) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: option.id,
+                                      domProps: { value: option.value },
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                    " +
+                                          _vm._s(option.name) +
+                                          "\n                  "
+                                      ),
+                                    ]
+                                  )
+                                }),
+                                0
+                              ),
+                            ]
+                          ),
+                        ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "setting w100 flex j-s-between a-end",
+                        attrs: { id: "opacity-wrapper" },
+                      },
+                      [
+                        _c("h3", { staticClass: "sub-title mb0" }, [
+                          _vm._v("透過度"),
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.getTextData["opacity"],
+                              expression: "getTextData['opacity']",
+                            },
+                          ],
+                          attrs: {
+                            type: "range",
+                            name: "opacity",
+                            min: "0",
+                            max: "1",
+                            step: "0.05",
+                          },
+                          domProps: { value: _vm.getTextData["opacity"] },
+                          on: {
+                            mousedown: function ($event) {
                               $event.stopPropagation()
-                              return _vm.minusOneValue("font_size")
+                            },
+                            __r: function ($event) {
+                              return _vm.$set(
+                                _vm.getTextData,
+                                "opacity",
+                                $event.target.value
+                              )
                             },
                           },
                         }),
                         _vm._v(" "),
-                        _c("i", {
-                          staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.getTextData["opacity"],
+                              expression: "getTextData['opacity']",
+                            },
+                          ],
+                          attrs: {
+                            type: "number",
+                            name: "opacity",
+                            min: "0",
+                            max: "1",
+                            step: "0.05",
+                          },
+                          domProps: { value: _vm.getTextData["opacity"] },
                           on: {
-                            click: function ($event) {
-                              $event.stopPropagation()
-                              return _vm.plusOneValue("font_size")
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.getTextData,
+                                "opacity",
+                                $event.target.value
+                              )
                             },
                           },
                         }),
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "w60px",
-                        attrs: { type: "number" },
-                        domProps: { value: _vm.getTextData["font_size"] },
-                        on: {
-                          input: function ($event) {
-                            return _vm.updateTextData({
-                              key: "font_size",
-                              value: $event.target.value,
-                            })
-                          },
-                        },
-                      }),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "setting w100 flex j-s-between a-end",
-                      attrs: { id: "text-color-wrapper" },
-                    },
-                    [
-                      _c("h3", { staticClass: "sub-title mb0" }, [
-                        _vm._v("色"),
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        attrs: { type: "color" },
-                        domProps: { value: _vm.getTextData["color"] },
-                        on: {
-                          input: function ($event) {
-                            return _vm.updateTextData({
-                              key: "color",
-                              value: $event.target.value,
-                            })
-                          },
-                        },
-                      }),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "setting w100 flex column",
-                      attrs: { id: "font-style-wrapper" },
-                    },
-                    [
-                      _c("h3", { staticClass: "sub-title" }, [
-                        _vm._v("フォント"),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "flex column" }, [
-                        _c(
-                          "div",
-                          { staticClass: "flex j-s-between a-end mb10" },
-                          [
-                            _c("h4", { staticClass: "sub-sub-title m0" }, [
-                              _vm._v("カテゴリ"),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selected_category,
-                                    expression: "selected_category",
-                                  },
-                                ],
-                                attrs: { id: "font-category" },
-                                on: {
-                                  change: function ($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call(
-                                        $event.target.options,
-                                        function (o) {
-                                          return o.selected
-                                        }
-                                      )
-                                      .map(function (o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.selected_category = $event.target
-                                      .multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  },
-                                },
-                              },
-                              _vm._l(_vm.font_category, function (category) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: category.id,
-                                    domProps: { value: category },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(category) +
-                                        "\n                  "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "flex j-s-between a-end mb5" },
-                          [
-                            _c("h4", { staticClass: "sub-sub-title m0" }, [
-                              _vm._v("スタイル"),
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selected_font,
-                                    expression: "selected_font",
-                                  },
-                                ],
-                                attrs: { id: "font-style" },
-                                on: {
-                                  change: function ($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call(
-                                        $event.target.options,
-                                        function (o) {
-                                          return o.selected
-                                        }
-                                      )
-                                      .map(function (o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.selected_font = $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  },
-                                },
-                              },
-                              _vm._l(_vm.font_options, function (option) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: option.id,
-                                    domProps: { value: option.value },
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                    " +
-                                        _vm._s(option.name) +
-                                        "\n                  "
-                                    ),
-                                  ]
-                                )
-                              }),
-                              0
-                            ),
-                          ]
-                        ),
-                      ]),
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "setting w100 flex j-s-between a-end",
-                      attrs: { id: "opacity-wrapper" },
-                    },
-                    [
-                      _c("h3", { staticClass: "sub-title mb0" }, [
-                        _vm._v("透過度"),
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.getTextData["opacity"],
-                            expression: "getTextData['opacity']",
-                          },
-                        ],
-                        attrs: {
-                          type: "range",
-                          name: "opacity",
-                          min: "0",
-                          max: "1",
-                          step: "0.05",
-                        },
-                        domProps: { value: _vm.getTextData["opacity"] },
-                        on: {
-                          mousedown: function ($event) {
-                            $event.stopPropagation()
-                          },
-                          __r: function ($event) {
-                            return _vm.$set(
-                              _vm.getTextData,
-                              "opacity",
-                              $event.target.value
-                            )
-                          },
-                        },
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.getTextData["opacity"],
-                            expression: "getTextData['opacity']",
-                          },
-                        ],
-                        attrs: {
-                          type: "number",
-                          name: "opacity",
-                          min: "0",
-                          max: "1",
-                          step: "0.05",
-                        },
-                        domProps: { value: _vm.getTextData["opacity"] },
-                        on: {
-                          input: function ($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.getTextData,
-                              "opacity",
-                              $event.target.value
-                            )
-                          },
-                        },
-                      }),
-                    ]
-                  ),
-                ]
-              ),
-            ]
-          ),
-        ]),
+                      ]
+                    ),
+                  ]
+                ),
+              ]
+            ),
+          ],
+          1
+        ),
         _vm._v(" "),
         _c("close-modal-bar", { staticClass: "for-mobile" }),
         _vm._v(" "),

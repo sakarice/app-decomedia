@@ -3,10 +3,11 @@
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
         <!-- 項目名 -->
-        <p id="title-labal" class="title-labal font-13 w90">テキスト</p>
+        <!-- <p id="title-labal" class="title-labal font-13 w90">テキスト</p> -->
+        <setting-label :labelName="'テキスト'"></setting-label>
+
 
         <div id="media-text-setting-area" class="flex column a-start">
-          <!-- <h2 id="media-text-setting-title">メディアテキスト設定</h2> -->
 
           <!-- テキストプレビュー&追加ボタン -->
           <div id="preview-area" class="flex column a-start w100">
@@ -90,11 +91,13 @@
 import { mapGetters, mapMutations } from 'vuex';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+import settingLabel from './SettingLabelComponent.vue'
 
 export default {
   components : {
     closeModalBar,
     closeModalIcon,
+    settingLabel,
   },
   props : [
     'transitionName',
