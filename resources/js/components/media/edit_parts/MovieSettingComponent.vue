@@ -3,7 +3,9 @@
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
 
-        <p id="player-setting-title" class="w100">動画プレイヤー</p>
+        <!-- <p id="player-setting-title" class="w100">動画プレイヤー</p> -->
+        <setting-label :labelName="'動画プレイヤー'"></setting-label>
+
         <div id="yt-setting-area" class="flex column a-start">
           <div class="yt-setting-wrapper w100 flex column a-start">
 
@@ -77,11 +79,13 @@
 import { mapGetters, mapMutations } from 'vuex';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
+import settingLabel from './SettingLabelComponent.vue'
 
 export default {
   components : {
     closeModalBar,
     closeModalIcon,
+    settingLabel,
   },
   props : [
     'transitionName',
