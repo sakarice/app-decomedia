@@ -3,7 +3,6 @@
     <div id="select-modal" @click.stop @touchstart.stop>
       <div id="area-wrapper">
 
-        <!-- <p id="player-setting-title" class="w100">動画プレイヤー</p> -->
         <setting-label :labelName="'動画プレイヤー'"></setting-label>
 
         <div id="yt-setting-area" class="flex column a-start">
