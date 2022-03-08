@@ -5,7 +5,8 @@
       <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue()"></i>
       <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue()"></i>
     </div>
-    <input type="number" class="w60px" :value="numValue" @input="updateValue($event.target.value)">
+    <input type="number" class="w60px" value='numValue' @input="updateValue($event.target.value)">
+    <slot name="test">test</slot>
   </div>
 </template>
 
