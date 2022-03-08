@@ -26,14 +26,9 @@
           <!-- 設定 -->
           <div class="setting-wrapper flex column a-center">
             <!-- フォントサイズ -->
-            <div id="font-size-wrapper" class="setting w100 flex j-s-between a-end">
-              <h3 class="sub-title mb0">サイズ</h3>
-              <div class="flex a-center">
-                <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('font_size')"></i>
-                <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('font_size')"></i>
-              </div>
-              <input type="number" class="w60px" :value="getTextData['font_size']" @input="updateTextData({key:'font_size', value:$event.target.value})">
-            </div>
+            <num-setting-template label="サイズ" :inputValue="getTextData['font_size']"
+            @decrease="minusOneValue('font_size')" @increase="plusOneValue('font_size')" @updateValue="updateTextProperty('font_size',$event)">
+            </num-setting-template>
 
             <!-- 色 -->
             <div id="text-color-wrapper" class="setting w100 flex j-s-between a-end">
@@ -89,12 +84,14 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import numSettingTemplate from './NumSettingTemplateComponent.vue';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 import settingLabel from './SettingLabelComponent.vue'
 
 export default {
   components : {
+    numSettingTemplate,
     closeModalBar,
     closeModalIcon,
     settingLabel,
@@ -154,6 +151,7 @@ export default {
       this.updateTextData({key:"left",value:Number(this.getTextData["left"]+20)})
       this.updateTextData({key:"top",value:Number(this.getTextData["top"]+20)})
     },
+    updateTextProperty(key,value){this.updateTextData({key:key, value:value});},
   },
   created(){
     this.selected_category = this.getTextData['font_category'];
@@ -291,19 +289,6 @@ export default {
     position: absolute;
   }
 
-  .btns {
-    border-radius: 50%;
-    padding: 5px 4px;
-  }
-  .btns:hover { cursor: pointer;}
-  .plus-btn {
-    color: palevioletred;
-    border: 1.5px solid palevioletred;
-  }
-  .minus-btn {
-    color: deepskyblue;
-    border: 1.5px solid deepskyblue;
-  }
 
   .darkgrey { color: darkgrey;}
 
