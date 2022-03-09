@@ -4222,14 +4222,14 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
-    decrease: function decrease() {
-      this.$emit('decrease');
+    pushMinusBtn: function pushMinusBtn() {
+      this.$emit('push-minus-btn');
     },
-    increase: function increase() {
-      this.$emit('increase');
+    pushPlusBtn: function pushPlusBtn() {
+      this.$emit('push-plus-btn');
     },
-    updateValue: function updateValue(value) {
-      this.$emit('updateValue', value);
+    inputed: function inputed(value) {
+      this.$emit('input-value', value);
     }
   }
 });
@@ -27383,13 +27383,13 @@ var render = function () {
                         inputValue: _vm.getTextData["font_size"],
                       },
                       on: {
-                        decrease: function ($event) {
+                        "push-minus-btn": function ($event) {
                           return _vm.minusOneValue("font_size")
                         },
-                        increase: function ($event) {
+                        "push-plus-btn": function ($event) {
                           return _vm.plusOneValue("font_size")
                         },
-                        updateValue: function ($event) {
+                        "input-value": function ($event) {
                           return _vm.updateTextProperty("font_size", $event)
                         },
                       },
@@ -28007,7 +28007,7 @@ var render = function () {
         on: {
           click: function ($event) {
             $event.stopPropagation()
-            return _vm.decrease()
+            return _vm.pushMinusBtn()
           },
         },
       }),
@@ -28017,7 +28017,7 @@ var render = function () {
         on: {
           click: function ($event) {
             $event.stopPropagation()
-            return _vm.increase()
+            return _vm.pushPlusBtn()
           },
         },
       }),
@@ -28029,7 +28029,7 @@ var render = function () {
       domProps: { value: _vm.inputValue },
       on: {
         input: function ($event) {
-          _vm.updateValue(Number($event.target.value))
+          _vm.inputed(Number($event.target.value))
         },
       },
     }),

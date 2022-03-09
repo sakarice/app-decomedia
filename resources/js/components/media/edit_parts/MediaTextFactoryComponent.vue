@@ -27,7 +27,7 @@
           <div class="setting-wrapper flex column a-center">
             <!-- フォントサイズ -->
             <num-setting-template label="サイズ" :inputValue="getTextData['font_size']"
-            @decrease="minusOneValue('font_size')" @increase="plusOneValue('font_size')" @updateValue="updateTextProperty('font_size',$event)">
+            @push-minus-btn="minusOneValue('font_size')" @push-plus-btn="plusOneValue('font_size')" @input-value="updateTextProperty('font_size',$event)">
             </num-setting-template>
 
             <!-- 色 -->

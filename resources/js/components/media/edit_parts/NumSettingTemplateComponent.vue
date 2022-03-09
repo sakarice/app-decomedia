@@ -2,10 +2,10 @@
   <div class="setting w100 flex j-s-between a-end">
     <h3 class="sub-title mb0">{{label}}</h3>
     <div class="flex a-center">
-      <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="decrease()"></i>
-      <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="increase()"></i>
+      <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="pushMinusBtn()"></i>
+      <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="pushPlusBtn()"></i>
     </div>
-    <input type="number" class="w60px" :value="inputValue" @input="updateValue(Number($event.target.value))">
+    <input type="number" class="w60px" :value="inputValue" @input="inputed(Number($event.target.value))">
   </div>
 </template>
 
@@ -21,14 +21,14 @@ export default {
     }
   },
   methods : {
-    decrease(){
-      this.$emit('decrease');
+    pushMinusBtn(){
+      this.$emit('push-minus-btn');
     },
-    increase(){
-      this.$emit('increase');
+    pushPlusBtn(){
+      this.$emit('push-plus-btn');
     },
-    updateValue(value){
-      this.$emit('updateValue', value);
+    inputed(value){
+      this.$emit('input-value', value);
     }
   },
 
