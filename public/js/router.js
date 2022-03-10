@@ -3967,10 +3967,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
-/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
-/* harmony import */ var _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SettingLabelComponent.vue */ "./resources/js/components/media/edit_parts/SettingLabelComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _NumSettingTemplateComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NumSettingTemplateComponent.vue */ "./resources/js/components/media/edit_parts/NumSettingTemplateComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../change_display_parts/CloseModalIconComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalIconComponent.vue");
+/* harmony import */ var _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SettingLabelComponent.vue */ "./resources/js/components/media/edit_parts/SettingLabelComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -4082,22 +4083,7 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
@@ -4106,9 +4092,10 @@ function _defineProperty(obj, key, value) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    settingLabel: _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    numSettingTemplate: _NumSettingTemplateComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    closeModalIcon: _change_display_parts_CloseModalIconComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    settingLabel: _SettingLabelComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: ['transitionName'],
   data: function data() {
@@ -4119,12 +4106,12 @@ function _defineProperty(obj, key, value) {
       window_height: 0
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaMovie', ['getMediaMovie'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapGetters)('mediaMovie', ['getMediaMovie'])), {}, {
     loopOnOff: function loopOnOff() {
       return this.getMediaMovie['isLoop'] ? "ON" : "OFF";
     }
   }),
-  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_4__.mapMutations)('mediaMovie', ['updateMediaMovieObjectItem'])), {}, {
     closeModal: function closeModal() {
       this.$emit('close-modal');
     },
@@ -4150,16 +4137,16 @@ function _defineProperty(obj, key, value) {
         value: Number(this.getMediaMovie[data_key] + 1)
       });
     },
-    updateWidth: function updateWidth(event) {
+    updateWidth: function updateWidth(value) {
       this.updateMediaMovieObjectItem({
         key: 'width',
-        value: Number(event.target.value)
+        value: value
       });
     },
-    updateHeight: function updateHeight(event) {
+    updateHeight: function updateHeight(value) {
       this.updateMediaMovieObjectItem({
         key: 'height',
-        value: Number(event.target.value)
+        value: value
       });
     },
     updateVideoId: function updateVideoId(event) {
@@ -27786,137 +27773,44 @@ var render = function () {
                             _vm._v("プレイヤーのサイズ"),
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "flex column" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "setting-width setting-row flex j-s-between a-end",
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "flex a-center",
-                                    staticStyle: { opacity: "0.7" },
+                          _c(
+                            "div",
+                            { staticClass: "flex column" },
+                            [
+                              _c("num-setting-template", {
+                                attrs: {
+                                  label: "横幅",
+                                  inputValue: _vm.getMediaMovie["width"],
+                                },
+                                on: {
+                                  "push-minus-btn": function ($event) {
+                                    return _vm.minusOneValue("width")
                                   },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-arrows-alt-h icon",
-                                    }),
-                                    _vm._v(" "),
-                                    _c("span", [_vm._v("横幅")]),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "flex a-end" }, [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-minus fa-lg btns minus-btn mr10",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.stopPropagation()
-                                        return _vm.minusOneValue("width")
-                                      },
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-plus fa-lg btns plus-btn ml10",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.stopPropagation()
-                                        return _vm.plusOneValue("width")
-                                      },
-                                    },
-                                  }),
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "setting",
-                                  attrs: {
-                                    id: "set-movie-frame-width",
-                                    type: "number",
-                                    placeholder: "横幅",
+                                  "push-plus-btn": function ($event) {
+                                    return _vm.plusOneValue("width")
                                   },
-                                  domProps: {
-                                    value: _vm.getMediaMovie["width"],
+                                  "input-value": _vm.updateWidth,
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c("num-setting-template", {
+                                attrs: {
+                                  label: "縦幅",
+                                  inputValue: _vm.getMediaMovie["height"],
+                                },
+                                on: {
+                                  "push-minus-btn": function ($event) {
+                                    return _vm.minusOneValue("height")
                                   },
-                                  on: {
-                                    input: function ($event) {
-                                      return _vm.updateWidth($event)
-                                    },
+                                  "push-plus-btn": function ($event) {
+                                    return _vm.plusOneValue("height")
                                   },
-                                }),
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "setting-height setting-row flex j-s-between a-end",
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass: "flex a-end",
-                                    staticStyle: { opacity: "0.7" },
-                                  },
-                                  [
-                                    _c("i", {
-                                      staticClass: "fas fa-arrows-alt-v icon",
-                                    }),
-                                    _vm._v(" "),
-                                    _c("span", [_vm._v("縦幅")]),
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("div", { staticClass: "flex a-end" }, [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-minus fa-lg btns minus-btn mr10",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.stopPropagation()
-                                        return _vm.minusOneValue("height")
-                                      },
-                                    },
-                                  }),
-                                  _vm._v(" "),
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-plus fa-lg btns plus-btn ml10",
-                                    on: {
-                                      click: function ($event) {
-                                        $event.stopPropagation()
-                                        return _vm.plusOneValue("height")
-                                      },
-                                    },
-                                  }),
-                                ]),
-                                _vm._v(" "),
-                                _c("input", {
-                                  staticClass: "setting",
-                                  attrs: {
-                                    id: "set-movie-frame-height",
-                                    type: "number",
-                                    placeholder: "縦幅",
-                                  },
-                                  domProps: {
-                                    value: _vm.getMediaMovie["height"],
-                                  },
-                                  on: {
-                                    input: function ($event) {
-                                      return _vm.updateHeight($event)
-                                    },
-                                  },
-                                }),
-                              ]
-                            ),
-                          ]),
+                                  "input-value": _vm.updateHeight,
+                                },
+                              }),
+                            ],
+                            1
+                          ),
                         ]),
                         _vm._v(" "),
                         _c(

@@ -26,28 +26,12 @@
               <div class="about-size w100 mb20">
                 <h3 class="setting-title">プレイヤーのサイズ</h3>
                 <div class="flex column">
-                  <div class="setting-width setting-row flex j-s-between a-end">
-                    <div class="flex a-center" style="opacity:0.7">
-                      <i class="fas fa-arrows-alt-h icon"></i>
-                      <span>横幅</span>
-                    </div>
-                    <div class="flex a-end">
-                      <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
-                      <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
-                    </div>
-                    <input id="set-movie-frame-width" class="setting" :value="getMediaMovie['width']" @input="updateWidth($event)" type="number" placeholder="横幅">
-                  </div>
-                  <div class="setting-height setting-row flex j-s-between a-end">
-                    <div class="flex a-end" style="opacity:0.7">
-                      <i class="fas fa-arrows-alt-v icon"></i>
-                      <span>縦幅</span>
-                    </div>
-                    <div class="flex a-end">
-                      <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
-                      <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
-                    </div>
-                    <input id="set-movie-frame-height" class="setting" :value="getMediaMovie['height']" @input="updateHeight($event)" type="number" placeholder="縦幅">
-                  </div>
+                  <num-setting-template label="横幅" :inputValue="getMediaMovie['width']"
+                  @push-minus-btn="minusOneValue('width')" @push-plus-btn="plusOneValue('width')" @input-value="updateWidth">
+                  </num-setting-template>
+                  <num-setting-template label="縦幅" :inputValue="getMediaMovie['height']"
+                  @push-minus-btn="minusOneValue('height')" @push-plus-btn="plusOneValue('height')" @input-value="updateHeight">
+                  </num-setting-template>
                 </div>
               </div>
               <!-- 動画のループ設定 -->
@@ -76,12 +60,14 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import numSettingTemplate from './NumSettingTemplateComponent.vue';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 import settingLabel from './SettingLabelComponent.vue'
 
 export default {
   components : {
+    numSettingTemplate,
     closeModalBar,
     closeModalIcon,
     settingLabel,
@@ -115,8 +101,8 @@ export default {
     },
     minusOneValue(data_key){this.updateMediaMovieObjectItem({key:data_key, value:Number(this.getMediaMovie[data_key]-1)})},
     plusOneValue(data_key){this.updateMediaMovieObjectItem({key:data_key, value:Number(this.getMediaMovie[data_key]+1)})},
-    updateWidth(event){ this.updateMediaMovieObjectItem({key:'width',value:Number(event.target.value)}) },
-    updateHeight(event){ this.updateMediaMovieObjectItem({key:'height',value:Number(event.target.value)}) },
+    updateWidth(value){ this.updateMediaMovieObjectItem({key:'width',value:value}) },
+    updateHeight(value){ this.updateMediaMovieObjectItem({key:'height',value:value}) },
     updateVideoId(event){
       let youtubeUrl = event.target.value;
       this.updateMediaMovieObjectItem({key:'videoId',value:this.extractVideoIdFromUrl(youtubeUrl)});
