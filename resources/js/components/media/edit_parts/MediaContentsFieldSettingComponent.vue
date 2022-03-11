@@ -17,28 +17,12 @@
           <div id="media-size-wraper" class="setting w90 mb30">
             <h3 class="setting-title">サイズ</h3>
             <div class="flex column">
-              <div class="setting-width setting-row mb15 flex j-s-between a-end">
-                <h4 class="sub-sub-title mb0 w60px flex a-end">
-                  <i class="fas fa-arrows-alt-h icon"></i>
-                  <span class="font-12">横幅</span>
-                </h4>
-                <div class="flex a-end">
-                  <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
-                  <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
-                </div>
-                <input id="set-contents-area-frame-width" class="setting" :value="getMediaContentsField['width']" @input="updateStoreData('width',$event.target.value)" type="number" placeholder="横幅">
-              </div>
-              <div class="setting-height setting-row mb15 flex j-s-between a-end">
-                <h4 class="sub-sub-title mb0 w60px flex a-end">
-                  <i class="fas fa-arrows-alt-v icon"></i>
-                  <span class="font-12">縦幅</span>
-                </h4>
-                <div class="flex a-end">
-                  <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
-                  <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
-                </div>
-                <input id="set-contents-area-height" class="setting" :value="getMediaContentsField['height']" @input="updateStoreData('height',$event.target.value)" type="number" placeholder="縦幅">
-              </div>
+              <num-setting-template label="横幅" :inputValue="getMediaContentsField['width']"
+              @push-minus-btn="minusOneValue('width')" @push-plus-btn="plusOneValue('width')" @input-value="updateStoreData('width',$event)">
+              </num-setting-template>
+              <num-setting-template label="縦幅" :inputValue="getMediaContentsField['height']"
+              @push-minus-btn="minusOneValue('height')" @push-plus-btn="plusOneValue('height')" @input-value="updateStoreData('height',$event)">
+              </num-setting-template>
             </div>
           </div>
 
@@ -60,11 +44,13 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
+import numSettingTemplate from './NumSettingTemplateComponent.vue';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
 
 export default {
   components : {
+    numSettingTemplate,
     closeModalBar,
     closeModalIcon,
   },
