@@ -91,50 +91,25 @@
 
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="setting-row flex j-s-between a-end x-position-wrapper">
-            <span class="label">位置(横)</span>
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('left')"></i>
-            </div>
-            <input type="number" class="input-num" :value="getFigureData['left']" @input="updateFigureData({key:'left', value:$event.target.value})">
-          </div>
+          <num-setting-template label="位置(横)" :inputValue="getFigureData['left']"
+          @push-minus-btn="minusOneValue('left')" @push-plus-btn="plusOneValue('left')" @input-value="updateFigureData('left',$event)">
+          </num-setting-template>
 
-          <div class="setting-row flex j-s-between a-end y-position-wrapper">
-            <span class="label">位置(縦)</span>
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('top')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('top')"></i>
-            </div>            
-            <input type="number" class="input-num" :value="getFigureData['top']" @input="updateFigureData({key:'top', value:$event.target.value})">
-          </div>
+          <num-setting-template label="位置(縦)" :inputValue="getFigureData['top']"
+          @push-minus-btn="minusOneValue('top')" @push-plus-btn="plusOneValue('top')" @input-value="updateFigureData('top',$event)">
+          </num-setting-template>
 
-          <div class="setting-row flex j-s-between a-end degree-wrapper">
-            <span class="label">回転</span>
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('degree')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('degree')"></i>
-            </div>
-            <input type="number" class="input-num" :value="getFigureData['degree']" @input="updateFigureData({key:'degree', value:$event.target.value})">
-          </div>
+          <num-setting-template label="回転" :inputValue="getFigureData['degree']"
+          @push-minus-btn="minusOneValue('degree')" @push-plus-btn="plusOneValue('degree')" @input-value="updateFigureData('degree',$event)">
+          </num-setting-template>
 
-          <div class="setting-row flex j-s-between a-end width-input-wrapper">
-            <div class="w50px"><span class="label">横幅</span><span class="font-11 grey">[px]:</span></div>
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('width')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('width')"></i>
-            </div>
-            <input type="number" class="input-num" :value="getFigureData['width']" @input="updateFigureData({key:'width', value:$event.target.value})">
-          </div>
-          <div class="setting-row flex j-s-between a-end height-input-wrapper">
-            <div class="w50px"><span class="label">縦幅</span><span class="font-11 grey">[px]:</span></div>
-            <div class="flex a-center">
-              <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('height')"></i>
-              <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('height')"></i>
-            </div>
-            <input type="number" class="input-num" :value="getFigureData['height']" @input="updateFigureData({key:'height', value:$event.target.value})">
-          </div>
+          <num-setting-template label="横幅" :inputValue="getFigureData['width']"
+          @push-minus-btn="minusOneValue('width')" @push-plus-btn="plusOneValue('width')" @input-value="updateFigureData('width',$event)">
+          </num-setting-template>
 
+          <num-setting-template label="縦幅" :inputValue="getFigureData['height']"
+          @push-minus-btn="minusOneValue('height')" @push-plus-btn="plusOneValue('height')" @input-value="updateFigureData('height',$event)">
+          </num-setting-template>
         </div>
 
 
@@ -149,10 +124,14 @@
 <script>
   import {moveStart} from '../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
+  import numSettingTemplate from './NumSettingTemplateComponent.vue';
   import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 
   export default {
-    components : {closeModalBar},
+    components : {
+      numSettingTemplate,
+      closeModalBar,
+    },
     data : ()=>{
       return {
 
