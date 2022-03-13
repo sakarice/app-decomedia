@@ -60,10 +60,10 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import numSettingTemplate from './NumSettingTemplateComponent.vue';
+import numSettingTemplate from './edit_items/NumSettingTemplateComponent.vue';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
-import settingLabel from './SettingLabelComponent.vue'
+import settingLabel from './edit_items/SettingLabelComponent.vue'
 
 export default {
   components : {

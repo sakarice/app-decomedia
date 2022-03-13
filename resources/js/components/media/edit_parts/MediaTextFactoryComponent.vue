@@ -62,11 +62,9 @@
             </div>
 
             <!-- 透過度 -->
-            <div id="opacity-wrapper" class="setting w100 flex j-s-between a-end">
-              <h3 class="sub-title mb0">透過度</h3>
-              <input type="range" v-model="getTextData['opacity']" @mousedown.stop name="opacity" min="0" max="1" step="0.05">
-              <input type="number" v-model="getTextData['opacity']" name="opacity" min="0" max="1" step="0.05">
-            </div>
+            <opacity-setting-template :initValue="getTextData['opacity']"
+             @value-updated="updateTextProperty('opacity',$event)">
+            </opacity-setting-template>
 
           </div>
 
@@ -84,14 +82,16 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import numSettingTemplate from './NumSettingTemplateComponent.vue';
+import numSettingTemplate from './edit_items/NumSettingTemplateComponent.vue';
+import opacitySettingTemplate from './edit_items/OpacitySettingTemplateComponent.vue';
 import closeModalBar from '../change_display_parts/CloseModalBarComponent.vue'
 import closeModalIcon from '../change_display_parts/CloseModalIconComponent.vue'
-import settingLabel from './SettingLabelComponent.vue'
+import settingLabel from './edit_items/SettingLabelComponent.vue'
 
 export default {
   components : {
     numSettingTemplate,
+    opacitySettingTemplate,
     closeModalBar,
     closeModalIcon,
     settingLabel,
