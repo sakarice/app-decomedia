@@ -53,14 +53,18 @@
 
         <!-- 数値系の設定 -->
         <div class="setting-type-num">
-          <div class="flex mb10 j-s-between a-center x-position-wrapper">
+          <num-setting-template label="位置(横)" :inputValue="figureDatas['left']"
+          @push-minus-btn="minusOneValue('left')" @push-plus-btn="plusOneValue('left')" @input-value="updateFigureData('left',$event)">
+          </num-setting-template>
+
+          <!-- <div class="flex mb10 j-s-between a-center x-position-wrapper">
             <span class="label">位置(横)</span>
             <div class="flex a-center">
               <i class="fas fa-minus fa-lg btns minus-btn mr10" @click.stop="minusOneValue('left')"></i>
               <i class="fas fa-plus fa-lg btns plus-btn ml10" @click.stop="plusOneValue('left')"></i>
             </div>
             <input type="number" class="input-num" :value="figureDatas['left']" @input="updateFigureData('left', $event.target.value)" min="-1000" max="10000">
-          </div>
+          </div> -->
 
           <div class="flex mb10 j-s-between a-center y-position-wrapper">
             <span class="label">位置(縦)</span>
@@ -119,11 +123,15 @@
 <script>
   import {moveStart} from '../../../../../functions/moveHelper'
   import { mapGetters, mapMutations } from 'vuex';
+  import numSettingTemplate from '../../../edit_parts/edit_items/NumSettingTemplateComponent.vue';
   import closeModalBar from '../../../change_display_parts/CloseModalBarComponent.vue'
 
 
   export default {
-    components : {closeModalBar},
+    components : {
+      numSettingTemplate,
+      closeModalBar
+    },
     data : ()=>{
       return {
         isShowEditor : false,

@@ -7594,8 +7594,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _functions_moveHelper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../functions/moveHelper */ "./resources/js/functions/moveHelper.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _edit_parts_edit_items_NumSettingTemplateComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../edit_parts/edit_items/NumSettingTemplateComponent.vue */ "./resources/js/components/media/edit_parts/edit_items/NumSettingTemplateComponent.vue");
+/* harmony import */ var _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../change_display_parts/CloseModalBarComponent.vue */ "./resources/js/components/media/change_display_parts/CloseModalBarComponent.vue");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -7765,6 +7766,11 @@ function _defineProperty(obj, key, value) {
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -7772,7 +7778,8 @@ function _defineProperty(obj, key, value) {
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    numSettingTemplate: _edit_parts_edit_items_NumSettingTemplateComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    closeModalBar: _change_display_parts_CloseModalBarComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -7801,7 +7808,7 @@ function _defineProperty(obj, key, value) {
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)('deviceType', ['getDeviceType'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('mediaFigures', ['getMediaFigure'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapGetters)('deviceType', ['getDeviceType'])), {}, {
     isMobile: function isMobile() {
       return this.getDeviceType == 2 ? true : false;
     },
@@ -7832,7 +7839,7 @@ function _defineProperty(obj, key, value) {
       this.responsiveAction();
     }
   },
-  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['setTargetObjectIndex'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['updateMediaFiguresObjectItem'])), (0,vuex__WEBPACK_IMPORTED_MODULE_3__.mapMutations)('mediaFigures', ['deleteMediaFiguresObjectItem'])), {}, {
     closeEditor: function closeEditor() {
       this.isShowEditor = false;
     },
@@ -29661,268 +29668,261 @@ var render = function () {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "setting-type-num" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex mb10 j-s-between a-center x-position-wrapper",
-              },
-              [
-                _c("span", { staticClass: "label" }, [_vm._v("位置(横)")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("left")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("left")
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["left"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("left", $event.target.value)
-                    },
+          _c(
+            "div",
+            { staticClass: "setting-type-num" },
+            [
+              _c("num-setting-template", {
+                attrs: {
+                  label: "位置(横)",
+                  inputValue: _vm.figureDatas["left"],
+                },
+                on: {
+                  "push-minus-btn": function ($event) {
+                    return _vm.minusOneValue("left")
                   },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex mb10 j-s-between a-center y-position-wrapper",
-              },
-              [
-                _c("span", { staticClass: "label" }, [_vm._v("位置(縦)")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("top")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("top")
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "-1000", max: "10000" },
-                  domProps: { value: _vm.figureDatas["top"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("top", $event.target.value)
-                    },
+                  "push-plus-btn": function ($event) {
+                    return _vm.plusOneValue("left")
                   },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flex mb10 j-s-between a-center degree-wrapper" },
-              [
-                _c("span", { staticClass: "label" }, [_vm._v("回転")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("degree")
-                      },
-                    },
-                  }),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("degree")
-                      },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number" },
-                  domProps: { value: _vm.figureDatas["degree"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("degree", $event.target.value)
-                    },
+                  "input-value": function ($event) {
+                    return _vm.updateFigureData("left", $event)
                   },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex mb10 j-s-between a-center width-input-wrapper",
-              },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("width")
-                      },
-                    },
-                  }),
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex mb10 j-s-between a-center y-position-wrapper",
+                },
+                [
+                  _c("span", { staticClass: "label" }, [_vm._v("位置(縦)")]),
                   _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("width")
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("top")
+                        },
                       },
-                    },
-                  }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["width"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("width", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex mb10 j-s-between a-center height-input-wrapper",
-              },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("height")
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("top")
+                        },
                       },
-                    },
-                  }),
+                    }),
+                  ]),
                   _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number", min: "-1000", max: "10000" },
+                    domProps: { value: _vm.figureDatas["top"] },
                     on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("height")
+                      input: function ($event) {
+                        return _vm.updateFigureData("top", $event.target.value)
                       },
                     },
                   }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "10000" },
-                  domProps: { value: _vm.figureDatas["height"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("height", $event.target.value)
-                    },
-                  },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex mb10 j-s-between a-center layer-input-wrapper",
-              },
-              [
-                _c("span", { staticClass: "label" }, [_vm._v("重ね順")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "flex a-center" }, [
-                  _c("i", {
-                    staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
-                    on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.minusOneValue("layer")
-                      },
-                    },
-                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "flex mb10 j-s-between a-center degree-wrapper",
+                },
+                [
+                  _c("span", { staticClass: "label" }, [_vm._v("回転")]),
                   _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("degree")
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("degree")
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number" },
+                    domProps: { value: _vm.figureDatas["degree"] },
                     on: {
-                      click: function ($event) {
-                        $event.stopPropagation()
-                        return _vm.plusOneValue("layer")
+                      input: function ($event) {
+                        return _vm.updateFigureData(
+                          "degree",
+                          $event.target.value
+                        )
                       },
                     },
                   }),
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "input-num",
-                  attrs: { type: "number", min: "0", max: "100" },
-                  domProps: { value: _vm.figureDatas["layer"] },
-                  on: {
-                    input: function ($event) {
-                      return _vm.updateFigureData("layer", $event.target.value)
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex mb10 j-s-between a-center width-input-wrapper",
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("width")
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("width")
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number", min: "0", max: "10000" },
+                    domProps: { value: _vm.figureDatas["width"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData(
+                          "width",
+                          $event.target.value
+                        )
+                      },
                     },
-                  },
-                }),
-              ]
-            ),
-          ]),
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex mb10 j-s-between a-center height-input-wrapper",
+                },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("height")
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("height")
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number", min: "0", max: "10000" },
+                    domProps: { value: _vm.figureDatas["height"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData(
+                          "height",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "flex mb10 j-s-between a-center layer-input-wrapper",
+                },
+                [
+                  _c("span", { staticClass: "label" }, [_vm._v("重ね順")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex a-center" }, [
+                    _c("i", {
+                      staticClass: "fas fa-minus fa-lg btns minus-btn mr10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.minusOneValue("layer")
+                        },
+                      },
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-plus fa-lg btns plus-btn ml10",
+                      on: {
+                        click: function ($event) {
+                          $event.stopPropagation()
+                          return _vm.plusOneValue("layer")
+                        },
+                      },
+                    }),
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "input-num",
+                    attrs: { type: "number", min: "0", max: "100" },
+                    domProps: { value: _vm.figureDatas["layer"] },
+                    on: {
+                      input: function ($event) {
+                        return _vm.updateFigureData(
+                          "layer",
+                          $event.target.value
+                        )
+                      },
+                    },
+                  }),
+                ]
+              ),
+            ],
+            1
+          ),
         ]),
       ]),
       _vm._v(" "),
